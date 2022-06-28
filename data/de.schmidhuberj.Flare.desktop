@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Icon=de.schmidhuberj.Flare
+Name=Flare
+StartupWMClass=Flare
+Exec=/app/bin/flare
+X-Purism-FormFactor=Workstation;Mobile;

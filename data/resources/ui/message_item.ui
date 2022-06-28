@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <requires lib="libadwaita" version="1.0"/>
+
+  <template class="FlMessageItem" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="hexpand">True</property>
+
+    <!-- Quote -->
+    <child>
+      <object class="GtkBox">
+        <binding name="visible">
+          <lookup name="has-quote" type="FlMessageItem"/>
+        </binding>
+        <child>
+          <object class="GtkLabel">
+            <style>
+              <class name="dim-label"/>
+              <class name="heading"/>
+            </style>
+            <binding name="label">
+              <lookup name="title">
+                <lookup name="sender">
+                  <lookup name="quote">
+                    <lookup name="message" type="FlMessageItem"/>
+                  </lookup>
+                </lookup>
+              </lookup>
+            </binding>
+            <property name="hexpand">True</property>
+            <property name="halign">start</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <style>
+              <class name="dim-label"/>
+            </style>
+            <binding name="label">
+              <lookup name="body">
+                <lookup name="quote">
+                  <lookup name="message" type="FlMessageItem"/>
+                </lookup>
+              </lookup>
+            </binding>
+            <property name="wrap-mode">word</property>
+            <property name="justify">left</property>
+            <property name="vexpand">False</property>
+            <property name="valign">start</property>
+            <property name="hexpand">True</property>
+            <property name="halign">start</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <!-- Message -->
+    <child>
+      <object class="AdwAvatar">
+        <binding name="visible">
+          <lookup name="show-name" type="FlMessageItem"/>
+        </binding>
+        <binding name="text">
+          <lookup name="title">
+            <lookup name="sender">
+              <lookup name="message" type="FlMessageItem"/>
+            </lookup>
+          </lookup>
+        </binding>
+        <property name="halign">start</property>
+        <property name="size">20</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <style>
+          <class name="heading"/>
+        </style>
+        <binding name="visible">
+          <lookup name="show-name" type="FlMessageItem"/>
+        </binding>
+        <binding name="label">
+          <lookup name="title">
+            <lookup name="sender">
+              <lookup name="message" type="FlMessageItem"/>
+            </lookup>
+          </lookup>
+        </binding>
+        <property name="hexpand">True</property>
+        <property name="halign">start</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <binding name="label">
+          <lookup name="body">
+            <lookup name="message" type="FlMessageItem"/>
+          </lookup>
+        </binding>
+        <property name="wrap-mode">word</property>
+        <property name="justify">left</property>
+        <property name="vexpand">False</property>
+        <property name="valign">start</property>
+        <property name="hexpand">True</property>
+        <property name="halign">start</property>
+      </object>
+    </child>
+
+    <!-- Pop-Down -->
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="hexpand">True</property>
+        <binding name="visible">
+          <lookup name="expanded" type="FlMessageItem"/>
+        </binding>
+        <child>
+          <object class="GtkButton">
+            <signal handler="handle_reply" swapped="true" name="clicked"/>
+            <property name="label" translatable="True">Reply</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

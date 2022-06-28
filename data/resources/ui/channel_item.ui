@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <requires lib="libadwaita" version="1.0"/>
+
+  <template class="FlChannelItem" parent="GtkBox">
+    <property name="spacing">5</property>
+    <child>
+      <object class="AdwAvatar">
+        <binding name="text">
+          <lookup name="title">
+            <lookup name="channel" type="FlChannelItem"/>
+          </lookup>
+        </binding>
+        <property name="halign">start</property>
+        <property name="size">25</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="hexpand">True</property>
+        <child>
+          <object class="GtkLabel">
+            <style>
+              <class name="title-3"/>
+            </style>
+            <property name="halign">start</property>
+            <property name="ellipsize">end</property>
+            <binding name="label">
+              <lookup name="title">
+                <lookup name="channel" type="FlChannelItem"/>
+              </lookup>
+            </binding>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="halign">start</property>
+            <property name="ellipsize">end</property>
+            <binding name="label">
+              <lookup name="body">
+                <lookup name="last-message">
+                  <lookup name="channel" type="FlChannelItem"/>
+                </lookup>
+              </lookup>
+            </binding>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

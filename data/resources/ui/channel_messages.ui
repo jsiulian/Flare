@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <requires lib="libadwaita" version="1.0"/>
+
+  <template class="FlChannelMessages" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="hexpand">True</property>
+    <property name="vexpand">True</property>
+
+    <!-- Message List -->
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="hscrollbar-policy">never</property>
+        <child>
+          <object class="GtkListBox" id="list">
+            <signal handler="handle_row_activated" swapped="true" name="row-activated"/>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkBox">
+        <property name="hexpand">True</property>
+        <property name="orientation">vertical</property>
+        <binding name="visible">
+          <closure function="is_some" type="gboolean">
+            <lookup name="active-channel" type="FlChannelMessages"/>
+          </closure>
+        </binding>
+
+        <!-- Quote -->
+        <child>
+          <object class="FlMessageItem">
+            <binding name="visible">
+              <closure function="is_some" type="gboolean">
+                <lookup name="reply-message" type="FlChannelMessages"/>
+              </closure>
+            </binding>
+            <binding name="message">
+              <lookup name="reply-message" type="FlChannelMessages"/>
+            </binding>
+            <property name="hexpand">True</property>
+          </object>
+        </child>
+        <!-- Entry Box -->
+        <child>
+          <object class="GtkEntry">
+            <signal name="activate" handler="send_message" swapped="true"/>
+            <property name="activates-default">True</property>
+            <property name="placeholder-text" translatable="True">Message</property>
+            <property name="secondary-icon-name">go-next-symbolic</property>
+            <property name="secondary-icon-activatable">True</property>
+            <property name="hexpand">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

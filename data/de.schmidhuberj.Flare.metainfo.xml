@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2022 Julian Schmidhuber -->
+<component type="desktop-application">
+  <id>de.schmidhuberj.Flare</id>
+  <project_license>GPL-3.0+</project_license>
+  <metadata_license>FSFAP</metadata_license>
+  <name>Flare</name>
+  <summary>A unofficial Signal GTK client.</summary>
+  <launchable type="desktop-id">de.schmidhuberj.Flare.desktop</launchable>
+  <content_rating type="oars-1.1"/>
+  <developer_name>Julian Schmidhuber</developer_name>
+  <translation type="gettext">de.schmidhuberj.Flare</translation>
+  <update_contact>flatpak@schmiddi.anonaddy.com</update_contact>
+
+  <url type="homepage">https://gitlab.com/Schmiddiii/flare</url>
+  <url type="bugtracker">https://gitlab.com/Schmiddiii/flare/-/issues</url>
+
+  <description>
+    <p>
+      A unofficial GTK client for the messaging application Signal.
+      This is a very simple application with many features missing compared to the official applications.
+    </p>
+    <ul>
+      <li>
+        Link device
+      </li>
+      <li>
+        Send messages
+      </li>
+      <li>
+        Receive messages
+      </li>
+      <li>
+        Reply to message
+      </li>
+      <li>
+        Encrypted storage
+      </li>
+    </ul>
+    <p>
+      Please note that using this application will probably worsen your security compared to using official Signal applications.
+      Use with care when handling sensitive data.
+      Look at the projects README for more information about security.
+    </p>
+  </description>
+  <releases>
+    <release version="v0.1.0" date="2022-06-20">
+      <description> 
+        <p>Initial Release.</p>
+      </description>
+    </release>
+  </releases>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Overview</caption>
+      <image>https://gitlab.com/Schmiddiii/flare/-/raw/master/data/screenshots/screenshot.png</image>
+    </screenshot>
+  </screenshots>
+
+  <provides>
+    <id>de.schmidhuberj.Flare</id>
+    <binary>flare</binary>
+  </provides>
+
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+    <value key="Purism::form_factor">mobile</value>
+  </custom>
+</component>
+

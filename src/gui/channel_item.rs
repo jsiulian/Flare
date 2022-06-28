@@ -1,0 +1,129 @@
+use gdk_pixbuf::glib::Object;
+
+use crate::backend::Channel;
+
+gtk::glib::wrapper! {
+    pub struct ChannelItem(ObjectSubclass<imp::ChannelItem>)
+        @extends gtk::Box, gtk::Widget,
+        @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
+            gtk::ConstraintTarget;
+}
+
+impl ChannelItem {
+    pub fn new(channel: &Channel) -> Self {
+        log::trace!("Initializing `ChannelItem`");
+        Object::new(&[("channel", channel)]).expect("Failed to create `ChannelItem`")
+    }
+}
+
+pub mod imp {
+    use std::cell::RefCell;
+
+    use gdk_pixbuf::glib::clone;
+    use gdk_pixbuf::glib::once_cell::sync::Lazy;
+    use gdk_pixbuf::glib::ParamFlags;
+    use gdk_pixbuf::glib::ParamSpec;
+    use gdk_pixbuf::glib::ParamSpecObject;
+    use gdk_pixbuf::glib::Value;
+    use glib::subclass::InitializingObject;
+    use gtk::glib;
+    use gtk::prelude::*;
+    use gtk::subclass::prelude::*;
+    use gtk::CompositeTemplate;
+
+    use crate::backend::Channel;
+    use crate::backend::Manager;
+
+    #[derive(CompositeTemplate, Default)]
+    #[template(resource = "/ui/channel_item.ui")]
+    pub struct ChannelItem {
+        channel: RefCell<Option<Channel>>,
+
+        manager: RefCell<Option<Manager>>,
+    }
+
+    #[glib::object_subclass]
+    impl ObjectSubclass for ChannelItem {
+        const NAME: &'static str = "FlChannelItem";
+        type Type = super::ChannelItem;
+        type ParentType = gtk::Box;
+
+        fn class_init(klass: &mut Self::Class) {
+            Self::bind_template(klass);
+        }
+
+        fn instance_init(obj: &InitializingObject<Self>) {
+            obj.init_template();
+        }
+    }
+
+    impl ObjectImpl for ChannelItem {
+        fn properties() -> &'static [ParamSpec] {
+            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
+                vec![
+                    ParamSpecObject::new(
+                        "manager",
+                        "manager",
+                        "manager",
+                        Manager::static_type(),
+                        ParamFlags::READWRITE,
+                    ),
+                    ParamSpecObject::new(
+                        "channel",
+                        "channel",
+                        "channel",
+                        Channel::static_type(),
+                        ParamFlags::READWRITE,
+                    ),
+                ]
+            });
+            PROPERTIES.as_ref()
+        }
+
+        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+            match pspec.name() {
+                "manager" => self.manager.borrow().as_ref().to_value(),
+                "channel" => self.channel.borrow().as_ref().to_value(),
+                _ => unimplemented!(),
+            }
+        }
+
+        fn set_property(&self, obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+            match pspec.name() {
+                "manager" => {
+                    let man = value
+                        .get::<Option<Manager>>()
+                        .expect("Property `manager` of `ChannelItem` has to be of type `Manager`");
+                    self.manager.replace(man);
+                }
+                "channel" => {
+                    let chan = value
+                        .get::<Option<Channel>>()
+                        .expect("Property `channel` of `ChannelItem` has to be of type `Channel`");
+                    if let Some(chan) = &chan {
+                        chan.connect_local(
+                            "message",
+                            false,
+                            clone!(@strong obj => move |_| {
+                                log::trace!("Channel got item, invalidate sort");
+                                obj
+                                    .parent()
+                                    .expect("`ChannelItem` to have a parent")
+                                    .dynamic_cast::<gtk::ListBoxRow>()
+                                    .expect("Parent of `ChannelItem` to be `ListBoxRow`")
+                                    .changed();
+                                None
+
+                            }),
+                        );
+                    }
+                    self.channel.replace(chan);
+                }
+                _ => unimplemented!(),
+            }
+        }
+    }
+
+    impl WidgetImpl for ChannelItem {}
+    impl BoxImpl for ChannelItem {}
+}

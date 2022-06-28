@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <requires lib="libadwaita" version="1.0"/>
+
+  <template class="FlChannelList" parent="GtkBox">
+    <property name="hexpand">True</property>
+    <property name="vexpand">True</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="hscrollbar-policy">never</property>
+        <child>
+          <object class="GtkListBox" id="list">
+            <property name="hexpand">True</property>
+            <signal handler="handle_row_activated" swapped="true" name="row-activated"/>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

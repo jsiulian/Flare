@@ -1,0 +1,11 @@
+option(
+  'profile',
+  type: 'combo',
+  choices: [
+    'default',
+    'development',
+    'screenshot'
+  ],
+  value: 'default',
+  description: 'The build profile for Flare. One of "default" or "development" or "screenshot".'
+)
