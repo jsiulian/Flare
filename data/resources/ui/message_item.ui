@@ -106,6 +106,24 @@
         <property name="halign">start</property>
       </object>
     </child>
+    <child>
+      <object class="GtkLabel">
+        <binding name="label">
+          <lookup name="reactions">
+            <lookup name="message" type="FlMessageItem"/>
+          </lookup>
+        </binding>
+        <binding name="visible">
+          <lookup name="has-reaction" type="FlMessageItem"/>
+        </binding>
+        <property name="wrap-mode">word</property>
+        <property name="justify">left</property>
+        <property name="vexpand">False</property>
+        <property name="valign">start</property>
+        <property name="hexpand">True</property>
+        <property name="halign">start</property>
+      </object>
+    </child>
 
     <!-- Pop-Down -->
     <child>
@@ -119,6 +137,17 @@
           <object class="GtkButton">
             <signal handler="handle_reply" swapped="true" name="clicked"/>
             <property name="label" translatable="True">Reply</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <signal handler="handle_react_open" swapped="true" name="clicked"/>
+            <property name="label" translatable="True">React</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEmojiChooser" id="emoji_chooser">
+            <signal handler="handle_react" swapped="true" name="emoji-picked"/>
           </object>
         </child>
       </object>

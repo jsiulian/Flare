@@ -2,6 +2,7 @@ use std::cell::RefCell;
 
 use gdk_pixbuf::{glib::Object, prelude::ObjectExt};
 use gio::subclass::prelude::ObjectSubclassIsExt;
+use libsignal_service::content::Reaction;
 use presage::prelude::{
     proto::{data_message::Quote, sync_message::Sent},
     Content, ContentBody, DataMessage, SyncMessage,
@@ -20,9 +21,10 @@ impl Message {
         text: S,
         channel: Channel,
         sender: Contact,
+        manager: &Manager,
     ) -> Self {
         log::trace!("Trying to build a message from text");
-        let s: Self = Object::new(&[]).expect("Failed to create `Message`");
+        let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Message`");
 
         let message = DataMessage {
             body: Some(text.as_ref().to_owned()),
@@ -64,6 +66,9 @@ impl Message {
                 s.imp().data.swap(&RefCell::new(Some(message.clone())));
                 s.imp().sender.swap(&RefCell::new(Some(contact)));
                 s.imp().channel.swap(&RefCell::new(Some(channel)));
+                s.imp()
+                    .reaction
+                    .swap(&RefCell::new(message.reaction.clone()));
             }
             ContentBody::SynchronizeMessage(SyncMessage { read: read_arr, .. })
                 if !read_arr.is_empty() =>
@@ -120,6 +125,45 @@ impl Message {
     pub(super) fn data(&self) -> Option<DataMessage> {
         self.imp().data.borrow().clone()
     }
+
+    pub(super) fn reaction(&self) -> Option<Reaction> {
+        self.imp().reaction.borrow().clone()
+    }
+
+    pub(super) fn react<S: AsRef<str>>(&self, reaction: S) {
+        *self.imp().reactions.borrow_mut() += reaction.as_ref();
+        self.notify("reactions");
+    }
+
+    pub async fn send_reaction<S: AsRef<str>>(&self, reaction: S) {
+        self.react(&reaction);
+        // TODO: Send
+        let reaction_struct = Reaction {
+            emoji: Some(reaction.as_ref().to_owned()),
+            remove: Some(false),
+            target_author_uuid: self
+                .property::<Option<Contact>>("sender")
+                .and_then(|s| s.address())
+                .and_then(|a| a.uuid)
+                .map(|u| u.to_string()),
+            target_sent_timestamp: self.timestamp(),
+        };
+
+        let timestamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .expect("Time went backwards")
+            .as_millis() as u64;
+
+        let message = DataMessage {
+            timestamp: Some(timestamp),
+            reaction: Some(reaction_struct),
+            ..Default::default()
+        };
+        self.channel()
+            .expect("Message to send reaction to to have channel")
+            .send_internal_message(message, timestamp)
+            .await;
+    }
 }
 
 mod imp {
@@ -132,6 +176,7 @@ mod imp {
         prelude::{StaticType, ToValue},
     };
     use gtk::glib;
+    use libsignal_service::content::Reaction;
     use presage::prelude::DataMessage;
     use std::cell::RefCell;
 
@@ -144,6 +189,9 @@ mod imp {
         pub(super) data: RefCell<Option<DataMessage>>,
 
         pub(super) quote: RefCell<Option<super::Message>>,
+
+        pub(super) reaction: RefCell<Option<Reaction>>,
+        pub(super) reactions: RefCell<String>,
 
         manager: RefCell<Option<Manager>>,
     }
@@ -189,6 +237,13 @@ mod imp {
                         super::Message::static_type(),
                         ParamFlags::READABLE,
                     ),
+                    ParamSpecString::new(
+                        "reactions",
+                        "reactions",
+                        "reactions",
+                        Some(""),
+                        ParamFlags::READABLE,
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
@@ -205,6 +260,7 @@ mod imp {
                     .map(|d| d.body.clone())
                     .flatten()
                     .to_value(),
+                "reactions" => self.reactions.borrow().to_value(),
                 "sent" => self
                     .data
                     .borrow()

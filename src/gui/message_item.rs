@@ -20,8 +20,10 @@ pub mod imp {
     use std::cell::Cell;
     use std::cell::RefCell;
 
+    use gdk_pixbuf::glib::clone;
     use gdk_pixbuf::glib::once_cell::sync::Lazy;
     use gdk_pixbuf::glib::subclass::Signal;
+    use gdk_pixbuf::glib::MainContext;
     use gdk_pixbuf::glib::ParamFlags;
     use gdk_pixbuf::glib::ParamSpec;
     use gdk_pixbuf::glib::ParamSpecBoolean;
@@ -39,6 +41,8 @@ pub mod imp {
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/message_item.ui")]
     pub struct MessageItem {
+        #[template_child]
+        emoji_chooser: TemplateChild<gtk::EmojiChooser>,
         message: RefCell<Option<Message>>,
         expanded: Cell<bool>,
         show_name: Cell<bool>,
@@ -74,6 +78,30 @@ pub mod imp {
                     .unwrap_or("".to_string())
             );
             obj.emit_by_name::<()>("reply", &[&msg]);
+        }
+
+        #[template_callback]
+        fn handle_react_open(&self) {
+            crate::trace!("Opening emoji dropdown",);
+            self.emoji_chooser.popup();
+        }
+
+        #[template_callback]
+        fn handle_react(&self, emoji: String) {
+            let obj = self.instance();
+            let msg = obj.property::<Message>("message");
+            crate::trace!(
+                "Reacting to message {} with {} (len: {})",
+                msg.property::<Option<String>>("body")
+                    .unwrap_or("".to_string()),
+                emoji,
+                emoji.chars().count()
+            );
+            let main_context = MainContext::default();
+            main_context.spawn_local(clone!(@strong msg => async move {
+                log::trace!("Sending message");
+                msg.send_reaction(&emoji.chars().next().unwrap_or_default().to_string()).await;
+            }));
         }
     }
 
@@ -116,6 +144,13 @@ pub mod imp {
                         false,
                         ParamFlags::READABLE,
                     ),
+                    ParamSpecBoolean::new(
+                        "has-reaction",
+                        "has-reaction",
+                        "has-reaction",
+                        false,
+                        ParamFlags::READABLE,
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
@@ -134,11 +169,18 @@ pub mod imp {
                     .map(|m| m.property::<Option<Message>>("quote").is_some())
                     .unwrap_or_default()
                     .to_value(),
+                "has-reaction" => self
+                    .message
+                    .borrow()
+                    .as_ref()
+                    .map(|m| m.property::<String>("reactions").len() > 0)
+                    .unwrap_or_default()
+                    .to_value(),
                 _ => unimplemented!(),
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let man = value
@@ -150,6 +192,15 @@ pub mod imp {
                     let msg = value
                         .get::<Option<Message>>()
                         .expect("Property `message` of `MessageItem` has to be of type `Message`");
+                    if let Some(msg) = &msg {
+                        msg.connect_notify_local(
+                            Some("reactions"),
+                            clone!(@strong obj => move |_, _| {
+                                log::trace!("MessageItem got reaction, updating `has-reaction`");
+                                obj.notify("has-reaction");
+                            }),
+                        );
+                    }
                     self.message.replace(msg);
                 }
                 "expanded" => {

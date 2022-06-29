@@ -51,17 +51,20 @@ pub mod imp {
             let obj = self.instance();
             if let Some(channel) = self.active_channel.borrow().as_ref() {
                 log::trace!("Constructing message");
+                let manager = self.instance().property::<Manager>("manager");
+
                 let msg = Message::from_text_channel_sender(
                     text,
                     channel.clone(),
-                    self.instance()
-                        .property::<Manager>("manager")
-                        .self_contact(),
+                    manager.self_contact(),
+                    &manager,
                 );
+
                 if let Some(quote) = obj.property::<Option<Message>>("reply-message") {
                     log::trace!("Adding quote to message");
                     msg.set_quote(quote);
                 }
+
                 let main_context = MainContext::default();
                 main_context.spawn_local(clone!(@strong msg, @strong channel => async move {
                     log::trace!("Sending message");

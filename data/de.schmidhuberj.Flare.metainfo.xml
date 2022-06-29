@@ -31,7 +31,10 @@
         Receive messages
       </li>
       <li>
-        Reply to message
+        Reply to a message
+      </li>
+      <li>
+        React to a message
       </li>
       <li>
         Encrypted storage

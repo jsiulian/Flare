@@ -6,6 +6,7 @@ use std::{
 
 use gdk_pixbuf::{glib::Object, prelude::ObjectExt};
 use gio::subclass::prelude::ObjectSubclassIsExt;
+use libsignal_service::proto::DataMessage;
 use presage::prelude::{GroupContextV2, GroupMasterKey, ServiceAddress};
 
 use super::{Contact, Manager, Message};
@@ -81,6 +82,30 @@ impl Channel {
             self.notify("last-message");
             self.emit_by_name::<()>("message", &[&message]);
         }
+        if let Some(reaction) = message.reaction() {
+            let reaction_emoji = reaction.emoji.unwrap_or("".to_string());
+            crate::trace!(
+                "Channel {} got new reaction: {}",
+                self.property::<String>("title"),
+                &reaction_emoji
+            );
+            let reacted_msg = self
+                .messages()
+                .into_iter()
+                .filter(|m| m.timestamp() == reaction.target_sent_timestamp)
+                .next();
+            if let Some(reacted_msg) = reacted_msg {
+                crate::trace!(
+                    "Reaction to message {}",
+                    reacted_msg
+                        .property::<Option<String>>("body")
+                        .unwrap_or("".to_string())
+                );
+                reacted_msg.react(&reaction_emoji);
+            } else {
+                crate::warn!("Message reacted to another message that could not be found",);
+            }
+        }
     }
 
     pub fn messages(&self) -> Vec<Message> {
@@ -100,13 +125,8 @@ impl Channel {
         }
     }
 
-    pub async fn send_message(&self, msg: Message) {
-        self.imp().messages.borrow_mut().push(msg.clone());
-        self.notify("last-message");
-        self.emit_by_name::<()>("message", &[&msg]);
-
+    pub(super) async fn send_internal_message(&self, mut data: DataMessage, timestamp: u64) {
         let manager = self.property::<Manager>("manager").internal();
-
         let receiver_contact = self
             .imp()
             .contact
@@ -115,44 +135,45 @@ impl Channel {
             .map(|c| c.address())
             .flatten();
         let receiver_group = self.imp().group.borrow();
+
+        if let Some(contact) = receiver_contact {
+            log::trace!("Sending to single contact");
+            // TODO: Error Handling
+            let _ = manager.send_message(contact, data, timestamp).await;
+        } else if let Some(group) = receiver_group.as_ref() {
+            let context = self.imp().group_context.borrow();
+            // TODO: Error Handling
+            data.group_v2 = context.clone();
+            let receiver_group_addresses = group
+                .members
+                .iter()
+                .map(|m| m.uuid)
+                .map(|u| manager.get_contact_by_id(u))
+                .filter(|u| matches!(u, Ok(Some(_))))
+                .map(|c| c.expect("Match Failed").expect("Match Failed").address)
+                .collect::<Vec<ServiceAddress>>();
+            let _ = manager
+                .send_message_to_group(receiver_group_addresses, data, timestamp)
+                .await;
+        }
+    }
+
+    pub async fn send_message(&self, msg: Message) {
+        self.imp().messages.borrow_mut().push(msg.clone());
+        self.notify("last-message");
+        self.emit_by_name::<()>("message", &[&msg]);
+
         crate::debug!(
             "Sending a message {} to channel {}",
             msg.property::<String>("body"),
             self.property::<String>("title")
         );
-        if let Some(mut data) = msg.data() {
-            if let Some(contact) = receiver_contact {
-                log::trace!("Sending to single contact");
-                // TODO: Error Handling
-                let _ = manager
-                    .send_message(
-                        contact,
-                        data,
-                        msg.timestamp()
-                            .expect("Timestep of message to send to be set"),
-                    )
-                    .await;
-            } else if let Some(group) = receiver_group.as_ref() {
-                let context = self.imp().group_context.borrow();
-                // TODO: Error Handling
-                data.group_v2 = context.clone();
-                let receiver_group_addresses = group
-                    .members
-                    .iter()
-                    .map(|m| m.uuid)
-                    .map(|u| manager.get_contact_by_id(u))
-                    .filter(|u| matches!(u, Ok(Some(_))))
-                    .map(|c| c.expect("Match Failed").expect("Match Failed").address)
-                    .collect::<Vec<ServiceAddress>>();
-                let _ = manager
-                    .send_message_to_group(
-                        receiver_group_addresses,
-                        data,
-                        msg.timestamp()
-                            .expect("Timestep of message to send to be set"),
-                    )
-                    .await;
-            }
+        if let Some(data) = msg.data() {
+            self.send_internal_message(
+                data,
+                msg.timestamp().expect("Messate to send to have timestamp"),
+            )
+            .await;
         }
     }
 }

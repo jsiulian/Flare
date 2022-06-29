@@ -4,13 +4,13 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use crate::storage::EncryptedSledConfigStore;
 use futures::StreamExt;
 use gdk_pixbuf::{
     glib::{clone, MainContext, Object, Priority},
     prelude::{Continue, ObjectExt},
 };
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use crate::storage::EncryptedSledConfigStore;
 use rand::Fill;
 
 use super::{Channel, Contact, Message};
@@ -24,9 +24,8 @@ gtk::glib::wrapper! {
     pub struct Manager(ObjectSubclass<imp::Manager>);
 }
 
-type ConfigStoreType = EncryptedSledConfigStore<
-    EncryptionCipher<ChaCha20Poly1305, CountingNonce<ChaCha20Poly1305>>,
->;
+type ConfigStoreType =
+    EncryptedSledConfigStore<EncryptionCipher<ChaCha20Poly1305, CountingNonce<ChaCha20Poly1305>>>;
 
 async fn encryption_password() -> Result<Vec<u8>, ManagerCreationError> {
     let schema = Schema::new(
@@ -174,7 +173,6 @@ impl Manager {
         let messages = self.internal().receive_messages().await?;
         futures::pin_mut!(messages);
         while let Some(msg) = messages.next().await {
-            log::debug!("Got a message. Converting it into own message type");
             let message = Message::from_content(msg, self).await;
             if let Some(channel) = message.channel() {
                 let mut channels = self.imp().channels.borrow_mut();
