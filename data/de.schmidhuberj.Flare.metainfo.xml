@@ -9,7 +9,7 @@
   <launchable type="desktop-id">de.schmidhuberj.Flare.desktop</launchable>
   <content_rating type="oars-1.1"/>
   <developer_name>Julian Schmidhuber</developer_name>
-  <translation type="gettext">de.schmidhuberj.Flare</translation>
+  <translation type="gettext">flare</translation>
   <update_contact>flatpak@schmiddi.anonaddy.com</update_contact>
 
   <url type="homepage">https://gitlab.com/Schmiddiii/flare</url>

@@ -1,0 +1,33 @@
+stages:
+  - build
+  - upload
+
+variables:
+  UPLOAD_URL_BASE: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${CI_PROJECT_NAME}/${CI_COMMIT_TAG}"
+  MESON_DIST: "build-release/meson-dist"
+  PROJ_NAME_VERSION: "${CI_PROJECT_NAME}-${CI_COMMIT_TAG}"
+
+build:
+  stage: build
+  image: archlinux:base-devel
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - pacman -Syu rustup meson gtk4 git cmake libadwaita --noconfirm
+    - rustup default stable
+    - meson build-release
+    - meson dist -C build-release
+  artifacts:
+    paths:
+      - ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz
+      - ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz.sha256sum
+
+upload:
+  stage: upload
+  image: curlimages/curl:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz "${UPLOAD_URL_BASE}/${PROJ_NAME_VERSION}.tar.xz"'
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${MESON_DIST}/${CI_PROJECT_NAME}-${CI_COMMIT_TAG}.tar.xz.sha256sum "${UPLOAD_URL_BASE}/${PROJ_NAME_VERSION}.tar.xz.sha256sum"'
+

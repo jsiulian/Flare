@@ -33,10 +33,15 @@ async fn encryption_password() -> Result<Vec<u8>, ManagerCreationError> {
         SchemaFlags::NONE,
         HashMap::from([("encryption", SchemaAttributeType::String)]),
     );
-    let stored = libsecret::password_lookup_future(Some(&schema), HashMap::new()).await?;
+    log::trace!("Looking up password from libsecret");
+    // Lookup with future is broken, see https://gitlab.gnome.org/GNOME/libsecret/-/issues/58
+    let stored =
+        libsecret::password_lookup_sync(Some(&schema), HashMap::new(), gio::Cancellable::NONE)?;
     if let Some(store) = stored {
+        log::trace!("Password already stored in libsecret");
         Ok(hex::decode(String::from(store)).expect("Stored password to be hex"))
     } else {
+        log::trace!("Generating password and storing it");
         let key_bytes: &mut [u8; 32] = &mut [0; 32];
         key_bytes
             .try_fill(&mut rand::thread_rng())

@@ -21,7 +21,7 @@ async-trait = "0.1"
 sled = "0.34"
 presage = { git = "https://github.com/Schmiddiii/presage.git" , rev = "1ff3b4cadb993b11cc201f5cf5739beb1e06c1c2" }
 libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "85be129f9dd847f181e6cccb72ba7def472db089" }
-libsecret = "0.1.4"
+libsecret = { version = "0.1.4", features = ["v0_19"] }
 rand = "0.8.5"
 chacha20poly1305 = "0.9.0"
 encrypted-sled = "0.2"
