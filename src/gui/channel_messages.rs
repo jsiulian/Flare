@@ -91,7 +91,7 @@ pub mod imp {
                     .property::<Option<String>>("body")
                     .unwrap_or("".to_string())
             );
-            msg.set_property("expanded", !msg.property::<bool>("expanded"));
+            msg.open_popup();
         }
     }
 

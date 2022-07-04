@@ -127,30 +127,31 @@
 
     <!-- Pop-Down -->
     <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <property name="hexpand">True</property>
-        <binding name="visible">
-          <lookup name="expanded" type="FlMessageItem"/>
-        </binding>
-        <child>
-          <object class="GtkButton">
-            <signal handler="handle_reply" swapped="true" name="clicked"/>
-            <property name="label" translatable="True">Reply</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton">
-            <signal handler="handle_react_open" swapped="true" name="clicked"/>
-            <property name="label" translatable="True">React</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkEmojiChooser" id="emoji_chooser">
-            <signal handler="handle_react" swapped="true" name="emoji-picked"/>
-          </object>
-        </child>
+      <object class="GtkPopoverMenu" id="msg_menu">
+        <property name="menu-model">message-menu</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkEmojiChooser" id="emoji_chooser">
+        <signal handler="handle_react" swapped="true" name="emoji-picked"/>
       </object>
     </child>
   </template>
+  <menu id='message-menu'>
+    <section>
+      <attribute name="display-hint">horizontal-buttons</attribute>
+      <item>
+        <attribute name='label' translatable='yes'>Reply</attribute>
+        <attribute name='action'>msg.reply</attribute>
+        <attribute name='verb-icon'>mail-reply-sender-symbolic</attribute>
+        <attribute name='icon'>mail-reply-sender-symbolic</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>React</attribute>
+        <attribute name='action'>msg.react</attribute>
+        <attribute name='verb-icon'>face-smile-symbolic</attribute>
+        <attribute name='icon'>face-smile-symbolic</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>

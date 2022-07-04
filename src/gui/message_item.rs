@@ -1,4 +1,9 @@
-use gdk_pixbuf::glib::Object;
+use gdk_pixbuf::{
+    glib::{self, clone, Object},
+    prelude::ActionMapExt,
+};
+use gio::{subclass::prelude::ObjectSubclassIsExt, SimpleAction, SimpleActionGroup};
+use gtk::traits::{PopoverExt, WidgetExt};
 
 use crate::backend::Message;
 
@@ -13,6 +18,27 @@ impl MessageItem {
     pub fn new(message: &Message) -> Self {
         log::trace!("Initializing `MessageItem`");
         Object::new(&[("message", message)]).expect("Failed to create `MessageItem`")
+    }
+
+    fn setup_actions(&self) {
+        let action_reply = SimpleAction::new("reply", None);
+        action_reply.connect_activate(clone!(@weak self as s => move |_, _| {
+            s.imp().handle_reply();
+        }));
+
+        let action_react = SimpleAction::new("react", None);
+        action_react.connect_activate(clone!(@weak self as s => move |_, _| {
+            s.imp().handle_react_open();
+        }));
+
+        let actions = SimpleActionGroup::new();
+        self.insert_action_group("msg", Some(&actions));
+        actions.add_action(&action_reply);
+        actions.add_action(&action_react);
+    }
+
+    pub fn open_popup(&self) {
+        self.imp().msg_menu.popup();
     }
 }
 
@@ -43,8 +69,10 @@ pub mod imp {
     pub struct MessageItem {
         #[template_child]
         emoji_chooser: TemplateChild<gtk::EmojiChooser>,
+        #[template_child]
+        pub(super) msg_menu: TemplateChild<gtk::PopoverMenu>,
+
         message: RefCell<Option<Message>>,
-        expanded: Cell<bool>,
         show_name: Cell<bool>,
 
         manager: RefCell<Option<Manager>>,
@@ -69,7 +97,7 @@ pub mod imp {
     #[gtk::template_callbacks]
     impl MessageItem {
         #[template_callback]
-        fn handle_reply(&self) {
+        pub(super) fn handle_reply(&self) {
             let obj = self.instance();
             let msg = obj.property::<Message>("message");
             crate::trace!(
@@ -81,7 +109,7 @@ pub mod imp {
         }
 
         #[template_callback]
-        fn handle_react_open(&self) {
+        pub(super) fn handle_react_open(&self) {
             crate::trace!("Opening emoji dropdown",);
             self.emoji_chooser.popup();
         }
@@ -106,6 +134,11 @@ pub mod imp {
     }
 
     impl ObjectImpl for MessageItem {
+        fn constructed(&self, obj: &Self::Type) {
+            self.parent_constructed(obj);
+            obj.setup_actions();
+        }
+
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
@@ -121,13 +154,6 @@ pub mod imp {
                         "message",
                         "message",
                         Message::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "expanded",
-                        "expanded",
-                        "expanded",
-                        false,
                         ParamFlags::READWRITE,
                     ),
                     ParamSpecBoolean::new(
@@ -160,7 +186,6 @@ pub mod imp {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "message" => self.message.borrow().as_ref().to_value(),
-                "expanded" => self.expanded.get().to_value(),
                 "show-name" => self.show_name.get().to_value(),
                 "has-quote" => self
                     .message
@@ -202,12 +227,6 @@ pub mod imp {
                         );
                     }
                     self.message.replace(msg);
-                }
-                "expanded" => {
-                    let exp = value
-                        .get::<bool>()
-                        .expect("Property `expanded` of `MessageItem` has to be of type `bool`");
-                    self.expanded.replace(exp);
                 }
                 "show-name" => {
                     let show = value

@@ -10,6 +10,7 @@ macro_rules! msg {
             $m,
             $s.dummy_channels().await[$j].clone(),
             $s.dummy_contacts()[$i].clone(),
+            $s
         )
     };
     ($s:expr, $m:expr, $i:expr) => {
