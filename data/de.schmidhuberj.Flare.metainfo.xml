@@ -47,6 +47,11 @@
     </p>
   </description>
   <releases>
+    <release version="v0.1.1" date="2022-07-05">
+      <description> 
+        <p>Small UI changes, change of license</p>
+      </description>
+    </release>
     <release version="v0.1.0" date="2022-06-20">
       <description> 
         <p>Initial Release.</p>
