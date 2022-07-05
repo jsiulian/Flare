@@ -212,9 +212,10 @@ impl Manager {
     }
 
     pub fn self_contact(&self) -> Contact {
+        let self_uuid = self.internal().uuid();
         self.list_contacts()
             .into_iter()
-            .find(|c| c.property::<bool>("is-self"))
+            .find(|c| c.address().and_then(|a| a.uuid) == Some(self_uuid))
             .expect("Self to be in the contacts")
     }
 
