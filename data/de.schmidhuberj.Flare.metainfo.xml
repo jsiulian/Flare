@@ -2,7 +2,7 @@
 <!-- Copyright 2022 Julian Schmidhuber -->
 <component type="desktop-application">
   <id>de.schmidhuberj.Flare</id>
-  <project_license>GPL-3.0+</project_license>
+  <project_license>AGPL-3.0</project_license>
   <metadata_license>FSFAP</metadata_license>
   <name>Flare</name>
   <summary>A unofficial Signal GTK client.</summary>
