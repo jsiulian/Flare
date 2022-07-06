@@ -11,6 +11,7 @@ use gdk_pixbuf::{
     prelude::{Continue, ObjectExt},
 };
 use gio::subclass::prelude::ObjectSubclassIsExt;
+use libsignal_service::ServiceAddress;
 use rand::Fill;
 
 use super::{Channel, Contact, Message};
@@ -212,11 +213,23 @@ impl Manager {
     }
 
     pub fn self_contact(&self) -> Contact {
-        let self_uuid = self.internal().uuid();
-        self.list_contacts()
-            .into_iter()
-            .find(|c| c.address().and_then(|a| a.uuid) == Some(self_uuid))
-            .expect("Self to be in the contacts")
+        let presage_contact = presage::prelude::Contact {
+            address: ServiceAddress {
+                uuid: Some(self.internal().uuid()),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        };
+        Contact::from_contact(presage_contact, self)
     }
 
     #[cfg(not(feature = "screenshot"))]
