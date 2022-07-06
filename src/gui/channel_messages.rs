@@ -44,6 +44,11 @@ pub mod imp {
     #[gtk::template_callbacks]
     impl ChannelMessages {
         #[template_callback]
+        fn send_message_icon(&self, _: gtk::EntryIconPosition, entry: gtk::Entry) {
+            self.send_message(entry);
+        }
+
+        #[template_callback]
         fn send_message(&self, entry: gtk::Entry) {
             log::trace!("Got callback to send message");
             let text = entry.text();

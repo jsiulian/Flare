@@ -4,7 +4,7 @@
   <requires lib="libadwaita" version="1.0"/>
 
   <template class="FlChannelList" parent="GtkBox">
-    <property name="hexpand">True</property>
+    <property name="hexpand">False</property>
     <property name="vexpand">True</property>
     <child>
       <object class="GtkScrolledWindow">

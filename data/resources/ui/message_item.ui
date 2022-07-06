@@ -44,6 +44,8 @@
                 </lookup>
               </lookup>
             </binding>
+            <property name="wrap">True</property>
+            <property name="xalign">0</property>
             <property name="wrap-mode">word</property>
             <property name="justify">left</property>
             <property name="vexpand">False</property>
@@ -98,6 +100,8 @@
             <lookup name="message" type="FlMessageItem"/>
           </lookup>
         </binding>
+        <property name="wrap">True</property>
+        <property name="xalign">0</property>
         <property name="wrap-mode">word</property>
         <property name="justify">left</property>
         <property name="vexpand">False</property>

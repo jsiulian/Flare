@@ -50,6 +50,8 @@
         <child>
           <object class="GtkEntry">
             <signal name="activate" handler="send_message" swapped="true"/>
+            <signal name="icon-press" handler="send_message_icon" swapped="true"/>
+            <property name="input-hints">spellcheck</property>
             <property name="activates-default">True</property>
             <property name="placeholder-text" translatable="True">Message</property>
             <property name="secondary-icon-name">go-next-symbolic</property>
