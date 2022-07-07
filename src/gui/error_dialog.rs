@@ -1,0 +1,145 @@
+use gdk_pixbuf::prelude::IsA;
+use gtk::glib::Object;
+
+use crate::ApplicationError;
+
+gtk::glib::wrapper! {
+    pub struct ErrorDialog(ObjectSubclass<imp::ErrorDialog>)
+        @extends gtk::Dialog, gtk::Window, gtk::Widget,
+        @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
+            gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
+}
+
+impl ErrorDialog {
+    pub fn new(error: ApplicationError, parent: &impl IsA<gtk::Window>) -> Self {
+        log::trace!("Initializing ErrorDialog");
+        log::error!("ErrorDialog displaying error: {}", error);
+        log::trace!("ErrorDialog full error: {:#?}", error);
+        Object::new(&[
+            ("error", &error.to_string()),
+            ("secondary-error", &error.more_information()),
+            ("should-report", &error.should_report()),
+            ("transient-for", &parent),
+        ])
+        .expect("Failed to create ErrorDialog")
+    }
+}
+
+pub mod imp {
+    use std::cell::Cell;
+    use std::cell::RefCell;
+
+    use gdk_pixbuf::glib::once_cell::sync::Lazy;
+    use gdk_pixbuf::glib::ParamFlags;
+    use gdk_pixbuf::glib::ParamSpec;
+    use gdk_pixbuf::glib::ParamSpecBoolean;
+    use gdk_pixbuf::glib::ParamSpecString;
+    use gdk_pixbuf::glib::Value;
+    use glib::subclass::InitializingObject;
+    use gtk::glib;
+    use gtk::prelude::*;
+    use gtk::subclass::prelude::*;
+    use gtk::CompositeTemplate;
+    use libadwaita::subclass::prelude::AdwApplicationWindowImpl;
+    use libadwaita::subclass::prelude::AdwWindowImpl;
+
+    #[derive(CompositeTemplate, Default)]
+    #[template(resource = "/ui/error_dialog.ui")]
+    pub struct ErrorDialog {
+        error: RefCell<Option<String>>,
+        secondary_error: RefCell<Option<String>>,
+        should_report: Cell<bool>,
+    }
+
+    #[glib::object_subclass]
+    impl ObjectSubclass for ErrorDialog {
+        const NAME: &'static str = "FlErrorDialog";
+        type Type = super::ErrorDialog;
+        type ParentType = gtk::Dialog;
+
+        fn class_init(klass: &mut Self::Class) {
+            Self::bind_template(klass);
+        }
+
+        fn instance_init(obj: &InitializingObject<Self>) {
+            obj.init_template();
+        }
+    }
+
+    impl ObjectImpl for ErrorDialog {
+        fn constructed(&self, obj: &Self::Type) {
+            log::trace!("Constructed ErrorDialog");
+            self.parent_constructed(obj);
+            obj.connect_response(|dialog, _| dialog.close());
+        }
+
+        fn properties() -> &'static [ParamSpec] {
+            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
+                vec![
+                    ParamSpecString::new(
+                        "error",
+                        "error",
+                        "error",
+                        None,
+                        ParamFlags::READWRITE | ParamFlags::CONSTRUCT_ONLY,
+                    ),
+                    ParamSpecString::new(
+                        "secondary-error",
+                        "secondary-error",
+                        "secondary-error",
+                        None,
+                        ParamFlags::READWRITE | ParamFlags::CONSTRUCT_ONLY,
+                    ),
+                    ParamSpecBoolean::new(
+                        "should-report",
+                        "should-report",
+                        "should-report",
+                        false,
+                        ParamFlags::READWRITE | ParamFlags::CONSTRUCT_ONLY,
+                    ),
+                ]
+            });
+            PROPERTIES.as_ref()
+        }
+
+        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+            match pspec.name() {
+                "error" => self.error.borrow().as_ref().to_value(),
+                "secondary-error" => self.secondary_error.borrow().as_ref().to_value(),
+                "should-report" => self.should_report.get().to_value(),
+                _ => unimplemented!(),
+            }
+        }
+
+        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+            match pspec.name() {
+                "error" => {
+                    let e = value
+                        .get::<Option<String>>()
+                        .expect("Property `error` of `ErrorDialog` has to be of type `String`");
+                    self.error.replace(e);
+                }
+                "secondary-error" => {
+                    let e = value.get::<Option<String>>().expect(
+                        "Property `secondary-error` of `ErrorDialog` has to be of type `String`",
+                    );
+                    self.secondary_error.replace(e);
+                }
+                "should-report" => {
+                    let r = value.get::<bool>().expect(
+                        "Property `should-report` of `ErrorDialog` has to be of type `bool`",
+                    );
+                    self.should_report.replace(r);
+                }
+                _ => unimplemented!(),
+            }
+        }
+    }
+
+    impl DialogImpl for ErrorDialog {}
+    impl WidgetImpl for ErrorDialog {}
+    impl WindowImpl for ErrorDialog {}
+    impl ApplicationWindowImpl for ErrorDialog {}
+    impl AdwWindowImpl for ErrorDialog {}
+    impl AdwApplicationWindowImpl for ErrorDialog {}
+}

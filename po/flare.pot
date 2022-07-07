@@ -1,21 +1,21 @@
-# English translations for Flare package.
-# Copyright (C) 2022 THE Flare'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the Flare package.
-# Julian Schmidhuber <translation@schmiddi.anonaddy.com>, 2022.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the flare package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.1.0\n"
+"Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-07 18:24+0200\n"
-"PO-Revision-Date: 2022-06-16 12:47+0200\n"
-"Last-Translator: Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
-"Language-Team: English\n"
-"Language: en_US\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/resources/ui/message_item.ui:148
 msgid "Reply"
@@ -27,11 +27,11 @@ msgstr ""
 
 #: data/resources/ui/window.ui:108
 msgid "About"
-msgstr "About"
+msgstr ""
 
 #: src/backend/channel.rs:277
 msgid "Note to self"
-msgstr "Note to self"
+msgstr ""
 
 #: src/backend/manager.rs:152
 msgid "You"
@@ -82,9 +82,3 @@ msgstr ""
 #: src/error.rs:106
 msgid "The application seems to be misconfigured"
 msgstr ""
-
-#~ msgid "Settings"
-#~ msgstr "Settings"
-
-#~ msgid "Message"
-#~ msgstr "Message"

@@ -6,9 +6,12 @@ mod config;
 use self::config::{APP_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_BYTES};
 
 mod backend;
+mod error;
 mod gui;
 mod hash_log;
 mod storage;
+
+pub use error::{ApplicationError, ConfigurationError};
 
 fn init_resources() {
     let gbytes = gtk::glib::Bytes::from_static(RESOURCES_BYTES);

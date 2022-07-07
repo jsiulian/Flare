@@ -38,6 +38,7 @@ pub mod imp {
     use libadwaita::subclass::prelude::AdwWindowImpl;
 
     use crate::backend::Manager;
+    use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::link_window::LinkWindow;
 
     #[derive(CompositeTemplate, Default)]
@@ -119,6 +120,7 @@ pub mod imp {
             crate::gui::channel_list::ChannelList::ensure_type();
             crate::gui::channel_messages::ChannelMessages::ensure_type();
             crate::gui::link_window::LinkWindow::ensure_type();
+            crate::gui::error_dialog::ErrorDialog::ensure_type();
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
         }
@@ -153,7 +155,7 @@ pub mod imp {
                 log::trace!("Setup manager for Window");
                 let manager = Manager::new();
                 obj.set_property("manager", Some(&manager));
-                manager.connect_local("link-qr-code", false, move |args| {
+                manager.connect_local("link-qr-code", false, clone!(@weak obj => @default-return None, move |args| {
                     let man = args[0]
                         .get::<Manager>()
                         .expect("First argument of signal `link-qr-code` of `Manager` to be `Manager`");
@@ -164,11 +166,18 @@ pub mod imp {
                     let window = LinkWindow::new(url, man, &obj);
                     window.show();
                     None
-                });
-                manager.init(&path).await.expect("Failed to set up manager");
+                }));
+
+                if let Err(e) = manager.init(&path).await {
+                    let dialog = ErrorDialog::new(e, &obj);
+                    dialog.show();
+                }
                 // TODO: Move init to after message receive
                 manager.init_channels().await;
-                manager.setup_receive_message_loop().await.expect("Receive loop failed");
+                if let Err(e) = manager.setup_receive_message_loop().await {
+                    let dialog = ErrorDialog::new(e, &obj);
+                    dialog.show();
+                }
             }));
         }
 
