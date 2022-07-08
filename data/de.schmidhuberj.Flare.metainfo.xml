@@ -20,6 +20,9 @@
       A unofficial GTK client for the messaging application Signal.
       This is a very simple application with many features missing compared to the official applications.
     </p>
+    <p>
+      Note: Currently receiving messages is broken. This is a upstream issue. See the README for more information.
+    </p>
     <ul>
       <li>
         Link device
@@ -47,6 +50,11 @@
     </p>
   </description>
   <releases>
+    <release version="v0.1.2" date="2022-07-08">
+      <description> 
+        <p>Bug fixing, error handling, russian and german translation, small UI updates</p>
+      </description>
+    </release>
     <release version="v0.1.1" date="2022-07-05">
       <description> 
         <p>Small UI changes, change of license</p>

@@ -1,6 +1,7 @@
 ## Dialog information 
 
 Title of the dialog: <!-- Insert the title of the shown dialog here -->
+
 Additional dialog data:
 <!-- The dialog should show additional data about the issue, put it in the backticks-->
 ```
