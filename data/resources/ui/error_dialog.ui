@@ -41,7 +41,7 @@
               <lookup name="should-report" type="FlErrorDialog"/>
             </binding>
             <property name="label" translatable="yes">Please consider reporting this error.</property>
-            <property name="uri">https://gitlab.com/Schmiddiii/flare/-/issues/new?issuable_template=error</property>
+            <property name="uri">https://gitlab.com/Schmiddiii/flare/-/issues/new?issuable_template=Error</property>
           </object>
         </child>
       </object>

@@ -5,7 +5,9 @@
 ## Additional information
 
 Installation method: <!-- Probably Flatpak -->
+
 Version: <!-- From the about page -->
+
 Additional information: <!-- Put any remaining information here -->
 
 ## Stacktrace
@@ -14,8 +16,11 @@ Additional information: <!-- Put any remaining information here -->
 <summary>Stacktrace:</summary>
 <!-- Run the program in the terminal using `RUST_LOG=flare=trace de.schmidhuberj.Flare` (assuming you have the Flatpak installed) and paste the generated output in the backticks.
 All of the sensitive data should be hashed, but please check that no sensitive data remained is in the logs. -->
+
 ```
 
 ```
+
 </details>
 
+/label ~bug
