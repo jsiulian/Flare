@@ -82,6 +82,8 @@ pub mod imp {
                     .license_type(gtk::License::Gpl30)
                     .logo_icon_name("icon")
                     .program_name("Flare")
+                    // Translators: Put your name contact info here if you want to be credited in
+                    // the about page.
                     .translator_credits(&gettextrs::gettext("translators"))
                     .version(crate::config::VERSION)
                     .website(env!("CARGO_PKG_HOMEPAGE"))

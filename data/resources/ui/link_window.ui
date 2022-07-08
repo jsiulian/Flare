@@ -5,7 +5,7 @@
 
   <template class="FlLinkWindow" parent="GtkDialog">
     <property name="can-focus">True</property>
-    <property name="title" translatable="True">Link Device</property>
+    <property name="title" translatable="yes">Link Device</property>
     <property name="default-height">500</property>
     <property name="default-width">600</property>
     <property name="use-header-bar">True</property>
@@ -13,7 +13,7 @@
 
     <child type="action">
       <object class="GtkButton" id="button_cancel">
-        <property name="label" translatable="True">Cancel</property>
+        <property name="label" translatable="yes">Cancel</property>
       </object>
     </child>
 
@@ -22,7 +22,7 @@
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkLabel">
-            <property name="label" translatable="True">Please scan this QR code with your primary device</property>
+            <property name="label" translatable="yes">Please scan this QR code with your primary device</property>
           </object>
         </child>
         <child>
@@ -31,7 +31,7 @@
         </child>
         <child>
           <object class="GtkLabel">
-            <property name="label" translatable="True">Please restart the application after this window closed</property>
+            <property name="label" translatable="yes">Please restart the application after this window closed</property>
           </object>
         </child>
       </object>

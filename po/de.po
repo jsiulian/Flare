@@ -1,7 +1,7 @@
-# Russian translations for Flare package.
+# English translations for Flare package.
 # Copyright (C) 2022 THE Flare'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Flare package.
-# David Lapshin <ddaudix@gmail.com>, 2022.
+# Julian Schmidhuber <translation@schmiddi.anonaddy.com>, 2022.
 #
 msgid ""
 msgstr ""
@@ -9,8 +9,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-08 14:15+0200\n"
 "PO-Revision-Date: 2022-06-16 12:47+0200\n"
-"Last-Translator: David Lapshin <ddaudix@gmail.com>\n"
-"Language-Team: Russian\n"
+"Last-Translator: Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
+"Language-Team: English\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: data/resources/ui/channel_messages.ui:56
 msgid "Message"
-msgstr "Сообщение"
+msgstr "Message"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
-msgstr ""
+msgstr "Fehler"
 
 #: data/resources/ui/error_dialog.ui:14
 msgid "Close"
@@ -39,94 +39,98 @@ msgstr ""
 
 #: data/resources/ui/link_window.ui:16
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device"
-msgstr ""
+msgstr "Bitte scannen Sie diesen QR-Code mit ihrem primären Gerät."
 
 #: data/resources/ui/link_window.ui:34
 msgid "Please restart the application after this window closed"
-msgstr ""
+msgstr "Bitte starten Sie die applikation neu nachdem sich das Fenster geschlossen hat."
 
 #: data/resources/ui/message_item.ui:148
 msgid "Reply"
-msgstr ""
+msgstr "Antworten"
 
 #: data/resources/ui/message_item.ui:154
 msgid "React"
-msgstr ""
+msgstr "Reagieren"
 
 #: data/resources/ui/window.ui:108
 msgid "About"
-msgstr "О Приложении"
+msgstr "Über"
 
 #: src/backend/channel.rs:277
 msgid "Note to self"
-msgstr "Заметка для себя"
+msgstr "Notiz an mich"
 
 #: src/backend/manager.rs:152
 msgid "You"
-msgstr ""
+msgstr "Du"
 
 #: src/error.rs:74
 msgid "I/O Error."
-msgstr ""
+msgstr "I/O Fehler."
 
 #: src/error.rs:79
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "Es scheint keine Internetverbindung vorhanden zu sein."
 
 #: src/error.rs:84
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "Kommunikation mit Libsecret ist fehlgeschlagen."
 
 #: src/error.rs:89
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"Die Datenbank hatte einen Fehler. Bitte starten Sie die Applikation neu "
+"oderlöschen Sie die Datenbank und verbinden Sie die Applikation erneut."
 
 #: src/error.rs:94
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"Sie scheinen nicht mehr von Signal authorisiert zu sein. Bitte löschen Sie "
+"die Datenbank und verbinden Sie die Applikation erneut."
 
 #: src/error.rs:99
 msgid "Sending a message failed"
-msgstr ""
+msgstr "Konnte Nachricht nicht senden"
 
 #: src/error.rs:104
 msgid "Receiving a message failed"
-msgstr ""
+msgstr "Konnte eine Nachricht nicht empfangen"
 
 #: src/error.rs:109
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"Etwas unerwartetes passierte mit Signal. Bitte versuchen Sie es später "
+"erneut."
 
 #: src/error.rs:114
 msgid "The application seems to be misconfigured"
-msgstr ""
+msgstr "Die Applikation scheint falsch konfiguriert zu sein"
 
 #: src/error.rs:125
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Bitte prüfe deine Internetverbindung."
 
 #: src/error.rs:131
 msgid "Please delete the database and relink the device"
 msgstr ""
+"Bitte löschen Sie die Datenbank und verknüpfen Sie die Applikation erneut."
 
 #: src/error.rs:138
 msgid "The database path at {} is no folder"
-msgstr ""
+msgstr "Der Datenbank Pfad bei {} ist kein Ordner"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
 #: src/gui/window.rs:87
 msgid "translators"
-msgstr ""
-
-#~ msgid "Settings"
-#~ msgstr "Параметры"
+msgstr "Julian Schmidhuber <translation@schmiddi.anonaddy.com>"

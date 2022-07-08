@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-07 18:24+0200\n"
+"POT-Creation-Date: 2022-07-08 14:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,38 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: data/resources/ui/channel_messages.ui:56
+msgid "Message"
+msgstr ""
+
+#: data/resources/ui/error_dialog.ui:8
+msgid "Error"
+msgstr ""
+
+#: data/resources/ui/error_dialog.ui:14
+msgid "Close"
+msgstr ""
+
+#: data/resources/ui/error_dialog.ui:43
+msgid "Please consider reporting this error."
+msgstr ""
+
+#: data/resources/ui/link_window.ui:8
+msgid "Link Device"
+msgstr ""
+
+#: data/resources/ui/link_window.ui:16
+msgid "Cancel"
+msgstr ""
+
+#: data/resources/ui/link_window.ui:25
+msgid "Please scan this QR code with your primary device"
+msgstr ""
+
+#: data/resources/ui/link_window.ui:34
+msgid "Please restart the application after this window closed"
+msgstr ""
 
 #: data/resources/ui/message_item.ui:148
 msgid "Reply"
@@ -37,48 +69,61 @@ msgstr ""
 msgid "You"
 msgstr ""
 
-#: src/gui/window.rs:84
-msgid "translators"
-msgstr ""
-
-#: src/error.rs:66
+#: src/error.rs:74
 msgid "I/O Error."
 msgstr ""
 
-#: src/error.rs:71
+#: src/error.rs:79
 msgid "There does not seem to be a connection to the internet available."
 msgstr ""
 
-#: src/error.rs:76
+#: src/error.rs:84
 msgid "The communication with Libsecret failed."
 msgstr ""
 
-#: src/error.rs:81
+#: src/error.rs:89
 msgid ""
 "The backend database failed. Please restart the application or delete the "
-"database and relink the application. If that fails, please report this."
+"database and relink the application."
 msgstr ""
 
-#: src/error.rs:86
+#: src/error.rs:94
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
 
-#: src/error.rs:91
+#: src/error.rs:99
 msgid "Sending a message failed"
 msgstr ""
 
-#: src/error.rs:96
+#: src/error.rs:104
 msgid "Receiving a message failed"
 msgstr ""
 
-#: src/error.rs:101
+#: src/error.rs:109
 msgid ""
-"Something unexpected happened with the signal backend. Please retry later "
-"and report if broken. "
+"Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 
-#: src/error.rs:106
+#: src/error.rs:114
 msgid "The application seems to be misconfigured"
+msgstr ""
+
+#: src/error.rs:125
+msgid "Please check your internet connection."
+msgstr ""
+
+#: src/error.rs:131
+msgid "Please delete the database and relink the device"
+msgstr ""
+
+#: src/error.rs:138
+msgid "The database path at {} is no folder"
+msgstr ""
+
+#. Translators: Put your name contact info here if you want to be credited in
+#. the about page.
+#: src/gui/window.rs:87
+msgid "translators"
 msgstr ""

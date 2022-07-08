@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-07 18:24+0200\n"
+"POT-Creation-Date: 2022-07-08 14:15+0200\n"
 "PO-Revision-Date: 2022-06-16 12:47+0200\n"
 "Last-Translator: Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
 "Language-Team: English\n"
@@ -17,13 +17,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: data/resources/ui/channel_messages.ui:56
+msgid "Message"
+msgstr "Message"
+
+#: data/resources/ui/error_dialog.ui:8
+msgid "Error"
+msgstr "Error"
+
+#: data/resources/ui/error_dialog.ui:14
+msgid "Close"
+msgstr "Close"
+
+#: data/resources/ui/error_dialog.ui:43
+msgid "Please consider reporting this error."
+msgstr "Please consider reporting this error."
+
+#: data/resources/ui/link_window.ui:8
+msgid "Link Device"
+msgstr "Link Device"
+
+#: data/resources/ui/link_window.ui:16
+msgid "Cancel"
+msgstr "Cancel"
+
+#: data/resources/ui/link_window.ui:25
+msgid "Please scan this QR code with your primary device"
+msgstr "Please scan this QR code with your primary device"
+
+#: data/resources/ui/link_window.ui:34
+msgid "Please restart the application after this window closed"
+msgstr "Please restart the application after this window closed"
+
 #: data/resources/ui/message_item.ui:148
 msgid "Reply"
-msgstr ""
+msgstr "Reply"
 
 #: data/resources/ui/message_item.ui:154
 msgid "React"
-msgstr ""
+msgstr "React"
 
 #: data/resources/ui/window.ui:108
 msgid "About"
@@ -35,56 +67,68 @@ msgstr "Note to self"
 
 #: src/backend/manager.rs:152
 msgid "You"
-msgstr ""
+msgstr "You"
 
-#: src/gui/window.rs:84
-msgid "translators"
-msgstr ""
-
-#: src/error.rs:66
+#: src/error.rs:74
 msgid "I/O Error."
-msgstr ""
+msgstr "I/O Error."
 
-#: src/error.rs:71
+#: src/error.rs:79
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "There does not seem to be a connection to the internet available."
 
-#: src/error.rs:76
+#: src/error.rs:84
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "The communication with Libsecret failed."
 
-#: src/error.rs:81
+#: src/error.rs:89
 msgid ""
 "The backend database failed. Please restart the application or delete the "
-"database and relink the application. If that fails, please report this."
+"database and relink the application."
 msgstr ""
+"The backend database failed. Please restart the application or delete the "
+"database and relink the application."
 
-#: src/error.rs:86
+#: src/error.rs:94
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"You do not seem to be authorized with Signal. Please delete the database and "
+"relink the application."
 
-#: src/error.rs:91
+#: src/error.rs:99
 msgid "Sending a message failed"
-msgstr ""
+msgstr "Sending a message failed"
 
-#: src/error.rs:96
+#: src/error.rs:104
 msgid "Receiving a message failed"
-msgstr ""
+msgstr "Receiving a message failed"
 
-#: src/error.rs:101
+#: src/error.rs:109
 msgid ""
-"Something unexpected happened with the signal backend. Please retry later "
-"and report if broken. "
+"Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"Something unexpected happened with the signal backend. Please retry later."
 
-#: src/error.rs:106
+#: src/error.rs:114
 msgid "The application seems to be misconfigured"
-msgstr ""
+msgstr "The application seems to be misconfigured"
 
-#~ msgid "Settings"
-#~ msgstr "Settings"
+#: src/error.rs:125
+msgid "Please check your internet connection."
+msgstr "Please check your internet connection."
 
-#~ msgid "Message"
-#~ msgstr "Message"
+#: src/error.rs:131
+msgid "Please delete the database and relink the device"
+msgstr "Please delete the database and relink the device"
+
+#: src/error.rs:138
+msgid "The database path at {} is no folder"
+msgstr "The database path at {} is no folder"
+
+#. Translators: Put your name contact info here if you want to be credited in
+#. the about page.
+#: src/gui/window.rs:87
+msgid "translators"
+msgstr "Julian Schmidhuber <translation@schmiddi.anonaddy.com>"

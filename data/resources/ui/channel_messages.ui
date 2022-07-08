@@ -53,7 +53,7 @@
             <signal name="icon-press" handler="send_message_icon" swapped="true"/>
             <property name="input-hints">spellcheck</property>
             <property name="activates-default">True</property>
-            <property name="placeholder-text" translatable="True">Message</property>
+            <property name="placeholder-text" translatable="yes">Message</property>
             <property name="secondary-icon-name">go-next-symbolic</property>
             <property name="secondary-icon-activatable">True</property>
             <property name="hexpand">True</property>

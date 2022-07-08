@@ -5,13 +5,13 @@
 
   <template class="FlErrorDialog" parent="GtkDialog">
     <property name="can-focus">True</property>
-    <property name="title" translatable="True">Error</property>
+    <property name="title" translatable="yes">Error</property>
     <property name="use-header-bar">True</property>
     <property name="destroy-with-parent">True</property>
 
     <child type="action">
       <object class="GtkButton" id="button_close">
-        <property name="label" translatable="True">Close</property>
+        <property name="label" translatable="yes">Close</property>
       </object>
     </child>
 
@@ -40,7 +40,7 @@
             <binding name="visible">
               <lookup name="should-report" type="FlErrorDialog"/>
             </binding>
-            <property name="label" translatable="True">Please consider reporting this error.</property>
+            <property name="label" translatable="yes">Please consider reporting this error.</property>
             <property name="uri">https://gitlab.com/Schmiddiii/flare/-/issues/new?issuable_template=error</property>
           </object>
         </child>
