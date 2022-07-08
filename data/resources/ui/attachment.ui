@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <requires lib="libadwaita" version="1.0"/>
+
+  <template class="FlAttachment" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="hexpand">True</property>
+    <property name="halign">start</property>
+
+    <!-- Quote -->
+    <child>
+      <object class="GtkPicture">
+        <property name="halign">start</property>
+        <!-- For some reason needed to display the image at all. I do not really know what to set these values to. -->
+        <property name="width-request">100</property>
+        <property name="height-request">100</property>
+        <binding name="paintable">
+          <lookup name="image">
+            <lookup name="attachment" type="FlAttachment"/>
+          </lookup>
+        </binding>
+      </object>
+    </child>
+  </template>
+</interface>

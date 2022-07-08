@@ -8,7 +8,7 @@ use presage::prelude::{
     Content, ContentBody, DataMessage, SyncMessage,
 };
 
-use crate::backend::{Channel, Contact};
+use crate::backend::{Attachment, Channel, Contact};
 
 use super::Manager;
 
@@ -69,6 +69,12 @@ impl Message {
                 s.imp()
                     .reaction
                     .swap(&RefCell::new(message.reaction.clone()));
+                let mut attachments = Vec::with_capacity(message.attachments.len());
+                for pointer in &message.attachments {
+                    let att = Attachment::from_pointer(&pointer, manager).await;
+                    attachments.push(att);
+                }
+                s.imp().attachments.swap(&RefCell::new(attachments));
             }
             ContentBody::SynchronizeMessage(SyncMessage { read: read_arr, .. })
                 if !read_arr.is_empty() =>
@@ -137,7 +143,6 @@ impl Message {
 
     pub async fn send_reaction<S: AsRef<str>>(&self, reaction: S) {
         self.react(&reaction);
-        // TODO: Send
         let reaction_struct = Reaction {
             emoji: Some(reaction.as_ref().to_owned()),
             remove: Some(false),
@@ -164,6 +169,10 @@ impl Message {
             .send_internal_message(message, timestamp)
             .await;
     }
+
+    pub fn attachments(&self) -> Vec<Attachment> {
+        self.imp().attachments.borrow().clone()
+    }
 }
 
 mod imp {
@@ -180,7 +189,7 @@ mod imp {
     use presage::prelude::DataMessage;
     use std::cell::RefCell;
 
-    use crate::backend::{Channel, Contact, Manager};
+    use crate::backend::{Attachment, Channel, Contact, Manager};
 
     #[derive(Default)]
     pub struct Message {
@@ -192,6 +201,8 @@ mod imp {
 
         pub(super) reaction: RefCell<Option<Reaction>>,
         pub(super) reactions: RefCell<String>,
+
+        pub(super) attachments: RefCell<Vec<Attachment>>,
 
         manager: RefCell<Option<Manager>>,
     }

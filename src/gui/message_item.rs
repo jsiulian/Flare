@@ -63,6 +63,7 @@ pub mod imp {
 
     use crate::backend::Manager;
     use crate::backend::Message;
+    use crate::gui::attachment::Attachment;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/message_item.ui")]
@@ -71,6 +72,8 @@ pub mod imp {
         emoji_chooser: TemplateChild<gtk::EmojiChooser>,
         #[template_child]
         pub(super) msg_menu: TemplateChild<gtk::PopoverMenu>,
+        #[template_child]
+        box_attachments: TemplateChild<gtk::Box>,
 
         message: RefCell<Option<Message>>,
         show_name: Cell<bool>,
@@ -225,6 +228,11 @@ pub mod imp {
                                 obj.notify("has-reaction");
                             }),
                         );
+                        for att in msg.attachments() {
+                            log::trace!("MessageItem got Attachment, adding to `box_attachments`");
+                            let att_widget = Attachment::new(&att);
+                            self.box_attachments.append(&att_widget);
+                        }
                     }
                     self.message.replace(msg);
                 }

@@ -5,5 +5,6 @@ mod link_window;
 mod message_item;
 mod window;
 mod error_dialog;
+mod attachment;
 
 pub use window::Window;

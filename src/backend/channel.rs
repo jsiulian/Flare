@@ -78,9 +78,6 @@ impl Channel {
                     crate::warn!("Message quotes another message that could not be found",);
                 }
             }
-            self.imp().messages.borrow_mut().push(message.clone());
-            self.notify("last-message");
-            self.emit_by_name::<()>("message", &[&message]);
         }
         if let Some(reaction) = message.reaction() {
             let reaction_emoji = reaction.emoji.unwrap_or("".to_string());
@@ -106,6 +103,9 @@ impl Channel {
                 crate::warn!("Message reacted to another message that could not be found",);
             }
         }
+        self.imp().messages.borrow_mut().push(message.clone());
+        self.notify("last-message");
+        self.emit_by_name::<()>("message", &[&message]);
     }
 
     pub fn messages(&self) -> Vec<Message> {
