@@ -4,5 +4,6 @@ mod channel_messages;
 mod link_window;
 mod message_item;
 mod window;
+mod error_dialog;
 
 pub use window::Window;

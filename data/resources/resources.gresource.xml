@@ -9,5 +9,6 @@
     <file preprocess="xml-stripblanks">ui/channel_messages.ui</file>
     <file preprocess="xml-stripblanks">ui/message_item.ui</file>
     <file preprocess="xml-stripblanks">ui/link_window.ui</file>
+    <file preprocess="xml-stripblanks">ui/error_dialog.ui</file>
   </gresource>
 </gresources>

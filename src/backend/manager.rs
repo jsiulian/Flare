@@ -1,8 +1,4 @@
-use std::{
-    cell::RefCell,
-    collections::HashMap,
-    path::{Path, PathBuf},
-};
+use std::{cell::RefCell, collections::HashMap, path::Path};
 
 use crate::storage::EncryptedSledConfigStore;
 use futures::StreamExt;
@@ -18,6 +14,7 @@ use super::{Channel, Contact, Message};
 
 use libsecret::{Schema, SchemaAttributeType, SchemaFlags};
 
+use crate::ApplicationError;
 use chacha20poly1305::ChaCha20Poly1305;
 use encrypted_sled::{CountingNonce, EncryptionCipher};
 
@@ -28,7 +25,7 @@ gtk::glib::wrapper! {
 type ConfigStoreType =
     EncryptedSledConfigStore<EncryptionCipher<ChaCha20Poly1305, CountingNonce<ChaCha20Poly1305>>>;
 
-async fn encryption_password() -> Result<Vec<u8>, ManagerCreationError> {
+async fn encryption_password() -> Result<Vec<u8>, ApplicationError> {
     let schema = Schema::new(
         crate::config::APP_ID,
         SchemaFlags::NONE,
@@ -60,7 +57,7 @@ async fn encryption_password() -> Result<Vec<u8>, ManagerCreationError> {
     }
 }
 
-async fn config_store<P: AsRef<Path>>(p: &P) -> Result<ConfigStoreType, ManagerCreationError> {
+async fn config_store<P: AsRef<Path>>(p: &P) -> Result<ConfigStoreType, ApplicationError> {
     let path = p.as_ref();
     log::trace!("Initialize config store at {}", path.to_string_lossy());
 
@@ -69,7 +66,9 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<ConfigStoreType, ManagerC
             "Store location already exists and is not a directory: {}",
             path.to_string_lossy()
         );
-        return Err(ManagerCreationError::PathNoFolder(path.to_owned()));
+        return Err(ApplicationError::ConfigurationError(
+            crate::ConfigurationError::DbPathNoFolder(path.to_owned()),
+        ));
     }
 
     let cipher = {
@@ -91,7 +90,7 @@ impl Manager {
     }
 
     #[cfg(not(feature = "screenshot"))]
-    pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ManagerCreationError> {
+    pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
         use futures::{channel::oneshot, future};
         let config_store = config_store(p).await?;
         log::trace!("Setting up the manager");
@@ -174,7 +173,7 @@ impl Manager {
     }
 
     #[cfg(not(feature = "screenshot"))]
-    pub async fn setup_receive_message_loop(&self) -> Result<(), presage::Error> {
+    pub async fn setup_receive_message_loop(&self) -> Result<(), ApplicationError> {
         log::debug!("Start receiving messages");
         let messages = self.internal().receive_messages().await?;
         futures::pin_mut!(messages);
@@ -242,18 +241,6 @@ impl Manager {
             channels.insert(channel.internal_hash(), channel);
         }
     }
-}
-
-#[derive(Debug, err_derive::Error)]
-pub enum ManagerCreationError {
-    #[error(display = "Provided path is not a folder")]
-    PathNoFolder(PathBuf),
-    #[error(display = "IO Error")]
-    IOError(#[error(source)] std::io::Error),
-    #[error(display = "Presage Error")]
-    Presage(#[error(source)] presage::Error),
-    #[error(display = "Libsecret Error")]
-    Libsecret(#[error(source)] gtk::glib::error::Error),
 }
 
 mod imp {

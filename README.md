@@ -4,6 +4,8 @@
 
 A unofficial Signal GTK client.
 
+__NOTE__: Currently receiving messages is broken. This is a upstream issue. See [here](https://github.com/whisperfish/presage/issues/62).
+
 ## Screenshot
 
 ![Overview](https://gitlab.com/Schmiddiii/flare/-/raw/master/data/screenshots/screenshot.png)

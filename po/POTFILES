@@ -1,9 +1,11 @@
-ui/channel_item.ui
-ui/channel_list.ui
-ui/channel_messages.ui
-ui/link_window.ui
-ui/message_item.ui
-ui/window.ui
+data/resources/ui/channel_item.ui
+data/resources/ui/channel_list.ui
+data/resources/ui/channel_messages.ui
+data/resources/ui/error_dialog.ui
+data/resources/ui/link_window.ui
+data/resources/ui/message_item.ui
+data/resources/ui/window.ui
+
 
 src/backend/channel.rs
 src/backend/contact.rs
@@ -11,12 +13,17 @@ src/backend/dummy.rs
 src/backend/manager.rs
 src/backend/message.rs
 src/backend/mod.rs
+src/config.rs.in
+src/error.rs
 src/gui/channel_item.rs
 src/gui/channel_list.rs
 src/gui/channel_messages.rs
+src/gui/error_dialog.rs
 src/gui/link_window.rs
 src/gui/message_item.rs
 src/gui/mod.rs
 src/gui/window.rs
 src/hash_log.rs
 src/main.rs
+src/storage/encrypted_sled.rs
+src/storage/mod.rs
