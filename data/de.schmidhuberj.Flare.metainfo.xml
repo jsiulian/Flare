@@ -37,6 +37,9 @@
         React to a message
       </li>
       <li>
+        Receiving attachments
+      </li>
+      <li>
         Encrypted storage
       </li>
     </ul>
@@ -49,7 +52,7 @@
   <releases>
     <release version="v0.1.3" date="2022-07-10">
       <description> 
-        <p>Fix message receiving</p>
+        <p>Fix message receiving, sending attachments</p>
       </description>
     </release>
     <release version="v0.1.2" date="2022-07-08">

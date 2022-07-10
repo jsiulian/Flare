@@ -15,11 +15,12 @@ A unofficial Signal GTK client.
 - Receiving messages
 - Replying to a message
 - Reacting to a message
+- Attachments (receiving)
 - Encrypted storage (As I am not a security-expert, I do not guarantee anything. Read the `Security`-section)
 
 ## Planned Features
 
-- Attachments
+- Attachments (sending)
 - The blocked features listed below once they are ready
 - Maybe once mature enough: Primary device
 
