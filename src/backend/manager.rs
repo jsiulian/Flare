@@ -182,7 +182,7 @@ impl Manager {
             if let Some(channel) = message.channel() {
                 let mut channels = self.imp().channels.borrow_mut();
                 crate::debug!("Got from channel: {}", channel.property::<String>("title"));
-                self.emit_by_name::<()>("message", &[&message]);
+                // self.emit_by_name::<()>("message", &[&message]);
                 if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
                     log::debug!("Message from a already existing channel");
                     stored_channel.new_message(message);
