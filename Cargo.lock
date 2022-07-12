@@ -1549,7 +1549,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service"
 version = "0.1.0"
-source = "git+https://github.com/Schmiddiii/libsignal-service-rs?branch=fix-message-receive#8d0336683ddbbbeca37f3907b090726bcdd37b70"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=1508fa8f3561e3807aa8d073ca05a61346ae5a82#1508fa8f3561e3807aa8d073ca05a61346ae5a82"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -1582,7 +1582,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service-hyper"
 version = "0.1.0"
-source = "git+https://github.com/Schmiddiii/libsignal-service-rs?branch=fix-message-receive#8d0336683ddbbbeca37f3907b090726bcdd37b70"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=1508fa8f3561e3807aa8d073ca05a61346ae5a82#1508fa8f3561e3807aa8d073ca05a61346ae5a82"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -2079,7 +2079,7 @@ checksum = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
 [[package]]
 name = "presage"
 version = "0.3.0"
-source = "git+https://github.com/Schmiddiii/presage.git?branch=fix-message-receive#a395fb4afe8e21726e4907e236078a0f95458474"
+source = "git+https://github.com/Schmiddiii/presage.git?rev=ae07bcb359b2e3f2d578ddfd29ff9d22c807c616#ae07bcb359b2e3f2d578ddfd29ff9d22c807c616"
 dependencies = [
  "async-trait",
  "base64 0.12.3",

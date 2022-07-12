@@ -2,7 +2,7 @@ use std::cell::RefCell;
 
 use gdk_pixbuf::{glib::Object, prelude::ObjectExt};
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use libsignal_service::content::Reaction;
+use libsignal_service::{content::Reaction, ServiceAddress};
 use presage::prelude::{
     proto::{data_message::Quote, sync_message::Sent},
     Content, ContentBody, DataMessage, SyncMessage,
@@ -43,6 +43,26 @@ impl Message {
         s
     }
 
+    async fn init_data(
+        &self,
+        message: &DataMessage,
+        contact: Contact,
+        channel: Channel,
+        manager: &Manager,
+    ) {
+        let obj = self.imp();
+        obj.data.swap(&RefCell::new(Some(message.clone())));
+        obj.sender.swap(&RefCell::new(Some(contact)));
+        obj.channel.swap(&RefCell::new(Some(channel)));
+        obj.reaction.swap(&RefCell::new(message.reaction.clone()));
+        let mut attachments = Vec::with_capacity(message.attachments.len());
+        for pointer in &message.attachments {
+            let att = Attachment::from_pointer(&pointer, manager).await;
+            attachments.push(att);
+        }
+        obj.attachments.swap(&RefCell::new(attachments));
+    }
+
     pub(super) async fn from_content(content: Content, manager: &Manager) -> Self {
         log::trace!("Trying to build a message from content");
         let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Message`");
@@ -50,31 +70,41 @@ impl Message {
         let body = &content.body;
 
         match body {
-            ContentBody::DataMessage(message)
-            | ContentBody::SynchronizeMessage(SyncMessage {
+            ContentBody::DataMessage(message) => {
+                let contact = Contact::from_service_address(&metadata.sender, manager);
+                let channel =
+                    Channel::from_contact_or_group(contact.clone(), &message.group_v2, manager)
+                        .await;
+                s.init_data(message, contact, channel, manager).await;
+            }
+            ContentBody::SynchronizeMessage(SyncMessage {
                 sent:
                     Some(Sent {
+                        destination_e164: e164,
+                        destination_uuid: uuid,
                         message: Some(message),
                         ..
                     }),
                 ..
             }) => {
                 let contact = Contact::from_service_address(&metadata.sender, manager);
-                let channel =
-                    Channel::from_contact_or_group(contact.clone(), &message.group_v2, manager)
-                        .await;
-                s.imp().data.swap(&RefCell::new(Some(message.clone())));
-                s.imp().sender.swap(&RefCell::new(Some(contact)));
-                s.imp().channel.swap(&RefCell::new(Some(channel)));
-                s.imp()
-                    .reaction
-                    .swap(&RefCell::new(message.reaction.clone()));
-                let mut attachments = Vec::with_capacity(message.attachments.len());
-                for pointer in &message.attachments {
-                    let att = Attachment::from_pointer(&pointer, manager).await;
-                    attachments.push(att);
-                }
-                s.imp().attachments.swap(&RefCell::new(attachments));
+                let destination_contact = if e164.is_some() || uuid.is_some() {
+                    let destination_address = ServiceAddress {
+                        uuid: uuid.clone().and_then(|u| u.parse().ok()),
+                        phonenumber: e164.clone().and_then(|e| e.parse().ok()),
+                        relay: None,
+                    };
+                    Contact::from_service_address(&destination_address, manager)
+                } else {
+                    contact.clone()
+                };
+                let channel = Channel::from_contact_or_group(
+                    destination_contact.clone(),
+                    &message.group_v2,
+                    manager,
+                )
+                .await;
+                s.init_data(message, contact, channel, manager).await;
             }
             ContentBody::SynchronizeMessage(SyncMessage { read: read_arr, .. })
                 if !read_arr.is_empty() =>

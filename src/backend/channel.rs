@@ -103,9 +103,12 @@ impl Channel {
                 crate::warn!("Message reacted to another message that could not be found",);
             }
         }
-        self.imp().messages.borrow_mut().push(message.clone());
-        self.notify("last-message");
-        self.emit_by_name::<()>("message", &[&message]);
+        if message.property::<Option<String>>("body").is_some() || !message.attachments().is_empty()
+        {
+            self.imp().messages.borrow_mut().push(message.clone());
+            self.notify("last-message");
+            self.emit_by_name::<()>("message", &[&message]);
+        }
     }
 
     pub fn messages(&self) -> Vec<Message> {
