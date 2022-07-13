@@ -173,6 +173,7 @@ pub mod imp {
                 if let Err(e) = manager.init(&path).await {
                     let dialog = ErrorDialog::new(e, &obj);
                     dialog.show();
+                    return;
                 }
                 // TODO: Move init to after message receive
                 manager.init_channels().await;
