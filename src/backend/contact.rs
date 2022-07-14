@@ -48,7 +48,7 @@ mod imp {
             once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject,
             ParamSpecString, Value,
         },
-        prelude::{StaticType, ToValue},
+        prelude::{ObjectExt, StaticType, ToValue},
     };
     use gtk::glib;
     use presage::prelude::phonenumber::Mode;
@@ -94,17 +94,21 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "is-self" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
-                        let name = &contact.name;
-                        if name.is_empty() {
-                            true.to_value()
-                        } else {
-                            false.to_value()
-                        }
+                        (contact.address.uuid
+                            == Some(
+                                self.manager
+                                    .borrow()
+                                    .as_ref()
+                                    .expect("`Manager` of `Contact` to be set up")
+                                    .internal()
+                                    .uuid(),
+                            ))
+                        .to_value()
                     } else {
                         false.to_value()
                     }
@@ -112,13 +116,19 @@ mod imp {
                 "title" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
                         let name = &contact.name;
-                        if name.is_empty() {
+                        if obj.property::<bool>("is-self") {
                             self.manager
                                 .borrow()
                                 .as_ref()
                                 .expect("`Manager` of `Contact` to be set up")
                                 .profile_name()
                                 .to_value()
+                        } else if name.is_empty() {
+                            if let Some(phone) = self.phonenumber.borrow().as_ref() {
+                                phone.format().mode(Mode::National).to_string().to_value()
+                            } else {
+                                "".to_value()
+                            }
                         } else {
                             name.to_value()
                         }
