@@ -17,4 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Maybe fix a crash where the application did not respond any more.
 - Maybe fix a crash when the sled database was locked causing the window not to open.
 
+### Refactor
+
+- Made external classes not access `Manager::internal`
+
 [Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.3...master

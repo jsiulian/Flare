@@ -16,7 +16,7 @@ impl Attachment {
             pointer.content_type.as_ref().unwrap_or(&"None".to_string())
         );
         let mut image = None;
-        if let Ok(bytes) = manager.internal().get_attachment(pointer).await {
+        if let Ok(bytes) = manager.get_attachment(pointer).await {
             match &pointer.content_type {
                 Some(t) if t.starts_with("image/") => {
                     log::trace!("Attachment is a image, converting to usable type");

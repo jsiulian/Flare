@@ -7,7 +7,13 @@ use gdk_pixbuf::{
     prelude::{Continue, ObjectExt},
 };
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use libsignal_service::ServiceAddress;
+use libsignal_service::{
+    content::ContentBody,
+    groups_v2::Group,
+    prelude::{GroupMasterKey, Uuid},
+    proto::{AttachmentPointer, DataMessage},
+    ServiceAddress,
+};
 use rand::Fill;
 
 use super::{Channel, Contact, Message};
@@ -168,7 +174,7 @@ impl Manager {
         //     .unwrap_or(gettextrs::gettext("No Name"))
     }
 
-    pub(super) fn internal(&self) -> presage::Manager<ConfigStoreType, presage::Registered> {
+    fn internal(&self) -> presage::Manager<ConfigStoreType, presage::Registered> {
         self.imp().internal()
     }
 
@@ -240,6 +246,55 @@ impl Manager {
             self.emit_by_name::<()>("channel", &[&channel]);
             channels.insert(channel.internal_hash(), channel);
         }
+    }
+}
+
+impl Manager {
+    pub(super) async fn get_group_v2(
+        &self,
+        master_key: GroupMasterKey,
+    ) -> Result<Group, presage::Error> {
+        self.internal().get_group_v2(master_key).await
+    }
+
+    pub(super) async fn send_message(
+        &self,
+        recipient_addr: impl Into<ServiceAddress>,
+        message: impl Into<ContentBody>,
+        timestamp: u64,
+    ) -> Result<(), presage::Error> {
+        self.internal()
+            .send_message(recipient_addr, message, timestamp)
+            .await
+    }
+
+    pub(super) async fn send_message_to_group(
+        &self,
+        recipient_addr: impl IntoIterator<Item = ServiceAddress>,
+        message: DataMessage,
+        timestamp: u64,
+    ) -> Result<(), presage::Error> {
+        self.internal()
+            .send_message_to_group(recipient_addr, message, timestamp)
+            .await
+    }
+
+    pub(super) fn get_contact_by_id(
+        &self,
+        id: Uuid,
+    ) -> Result<Option<presage::prelude::Contact>, presage::Error> {
+        self.internal().get_contact_by_id(id)
+    }
+
+    pub(super) async fn get_attachment(
+        &self,
+        attachment_pointer: &AttachmentPointer,
+    ) -> Result<Vec<u8>, presage::Error> {
+        self.internal().get_attachment(attachment_pointer).await
+    }
+
+    pub(super) fn uuid(&self) -> Uuid {
+        self.internal().uuid()
     }
 }
 

@@ -31,7 +31,7 @@ impl Channel {
                     .try_into()
                     .unwrap(),
             );
-            let group = manager.internal().get_group_v2(master_key).await;
+            let group = manager.get_group_v2(master_key).await;
             if let Ok(group) = group {
                 s.imp().group.swap(&RefCell::new(Some(group)));
                 s.imp()
@@ -129,7 +129,7 @@ impl Channel {
     }
 
     pub(super) async fn send_internal_message(&self, mut data: DataMessage, timestamp: u64) {
-        let manager = self.property::<Manager>("manager").internal();
+        let manager = self.property::<Manager>("manager");
         let receiver_contact = self
             .imp()
             .contact

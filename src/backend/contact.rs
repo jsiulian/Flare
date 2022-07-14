@@ -17,7 +17,7 @@ impl Contact {
             .phonenumber
             .swap(&RefCell::new(address.phonenumber.clone()));
         if let Some(uuid) = address.uuid {
-            let contact = manager.internal().get_contact_by_id(uuid);
+            let contact = manager.get_contact_by_id(uuid);
             s.imp().contact.swap(&RefCell::new(contact.ok().flatten()));
         }
         return s;
@@ -105,7 +105,6 @@ mod imp {
                                     .borrow()
                                     .as_ref()
                                     .expect("`Manager` of `Contact` to be set up")
-                                    .internal()
                                     .uuid(),
                             ))
                         .to_value()
