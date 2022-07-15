@@ -20,7 +20,7 @@ impl Contact {
             let contact = manager.get_contact_by_id(uuid);
             s.imp().contact.swap(&RefCell::new(contact.ok().flatten()));
         }
-        return s;
+        s
     }
 
     pub(super) fn from_contact(contact: presage::prelude::Contact, manager: &Manager) -> Self {
@@ -29,7 +29,7 @@ impl Contact {
             .phonenumber
             .swap(&RefCell::new(contact.address.phonenumber.clone()));
         s.imp().contact.swap(&RefCell::new(Some(contact)));
-        return s;
+        s
     }
 
     pub(super) fn address(&self) -> Option<ServiceAddress> {

@@ -102,9 +102,7 @@ pub mod imp {
                     return gtk::Ordering::Smaller;
                 } else if m1.is_none() && m2.is_some() {
                     return gtk::Ordering::Larger;
-                } else if m1.is_some() && m2.is_some() {
-                    let m1 = m1.expect("is_some failed");
-                    let m2 = m2.expect("is_some failed");
+                } else if let (Some(m1), Some(m2)) = (m1, m2) {
                     let s1 = m1.property::<u64>("sent");
                     let s2 = m2.property::<u64>("sent");
                     if s1 > s2 {
@@ -115,9 +113,9 @@ pub mod imp {
                 }
 
                 if c1.property::<String>("title") < c2.property::<String>("title") {
-                    return gtk::Ordering::Smaller;
+                    gtk::Ordering::Smaller
                 } else {
-                    return gtk::Ordering::Larger;
+                    gtk::Ordering::Larger
                 }
             });
         }

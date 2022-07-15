@@ -43,13 +43,13 @@ impl Channel {
         } else {
             s.imp().contact.swap(&RefCell::new(Some(contact)));
         }
-        return s;
+        s
     }
 
     pub(super) fn internal_hash(&self) -> u64 {
         let mut hasher = DefaultHasher::new();
         self.imp().hash(&mut hasher);
-        return hasher.finish();
+        hasher.finish()
     }
 
     pub(super) fn new_message(&self, message: Message) {
@@ -63,15 +63,14 @@ impl Channel {
                 let quoted_msg = self
                     .messages()
                     .into_iter()
-                    .filter(|m| m.timestamp() == Some(quote_timestamp))
-                    .next();
+                    .find(|m| m.timestamp() == Some(quote_timestamp));
                 if let Some(quoted_msg) = quoted_msg {
                     crate::trace!(
                         "Message {} quotes other message {}",
                         body,
                         quoted_msg
                             .property::<Option<String>>("body")
-                            .unwrap_or("".to_string())
+                            .unwrap_or_else(|| "".to_string())
                     );
                     message.set_quote(quoted_msg);
                 } else {
@@ -80,7 +79,7 @@ impl Channel {
             }
         }
         if let Some(reaction) = message.reaction() {
-            let reaction_emoji = reaction.emoji.unwrap_or("".to_string());
+            let reaction_emoji = reaction.emoji.unwrap_or_else(|| "".to_string());
             crate::trace!(
                 "Channel {} got new reaction: {}",
                 self.property::<String>("title"),
@@ -89,14 +88,13 @@ impl Channel {
             let reacted_msg = self
                 .messages()
                 .into_iter()
-                .filter(|m| m.timestamp() == reaction.target_sent_timestamp)
-                .next();
+                .find(|m| m.timestamp() == reaction.target_sent_timestamp);
             if let Some(reacted_msg) = reacted_msg {
                 crate::trace!(
                     "Reaction to message {}",
                     reacted_msg
                         .property::<Option<String>>("body")
-                        .unwrap_or("".to_string())
+                        .unwrap_or_else(|| "".to_string())
                 );
                 reacted_msg.react(&reaction_emoji);
             } else {
@@ -122,9 +120,9 @@ impl Channel {
                 && m.property::<Option<String>>("body") == msg.property::<Option<String>>("body")
         })?;
         if idx == 0 {
-            return None;
+            None
         } else {
-            return Some(messages[idx - 1].clone());
+            Some(messages[idx - 1].clone())
         }
     }
 
@@ -135,26 +133,30 @@ impl Channel {
             .contact
             .borrow()
             .as_ref()
-            .map(|c| c.address())
-            .flatten();
-        let receiver_group = self.imp().group.borrow();
+            .and_then(|c| c.address());
 
         if let Some(contact) = receiver_contact {
             log::trace!("Sending to single contact");
             // TODO: Error Handling
             let _ = manager.send_message(contact, data, timestamp).await;
-        } else if let Some(group) = receiver_group.as_ref() {
-            let context = self.imp().group_context.borrow();
-            // TODO: Error Handling
-            data.group_v2 = context.clone();
-            let receiver_group_addresses = group
-                .members
-                .iter()
-                .map(|m| m.uuid)
-                .map(|u| manager.get_contact_by_id(u))
-                .filter(|u| matches!(u, Ok(Some(_))))
-                .map(|c| c.expect("Match Failed").expect("Match Failed").address)
-                .collect::<Vec<ServiceAddress>>();
+        } else {
+            {
+                let context = self.imp().group_context.borrow();
+                // TODO: Error Handling
+                data.group_v2 = context.clone();
+            }
+            let receiver_group_addresses = if let Some(group) = self.imp().group.borrow().as_ref() {
+                group
+                    .members
+                    .iter()
+                    .map(|m| m.uuid)
+                    .map(|u| manager.get_contact_by_id(u))
+                    .filter(|u| matches!(u, Ok(Some(_))))
+                    .map(|c| c.expect("Match Failed").expect("Match Failed").address)
+                    .collect::<Vec<ServiceAddress>>()
+            } else {
+                return;
+            };
             let _ = manager
                 .send_message_to_group(receiver_group_addresses, data, timestamp)
                 .await;
@@ -215,10 +217,8 @@ mod imp {
                 .contact
                 .borrow()
                 .as_ref()
-                .map(|c| c.address())
-                .flatten()
-                .map(|a| a.uuid)
-                .flatten()
+                .and_then(|c| c.address())
+                .and_then(|a| a.uuid)
             {
                 uuid.hash(state);
             } else {

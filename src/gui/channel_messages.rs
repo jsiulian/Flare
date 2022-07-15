@@ -94,7 +94,7 @@ pub mod imp {
                 "Activated message: {}",
                 msg.property::<Message>("message")
                     .property::<Option<String>>("body")
-                    .unwrap_or("".to_string())
+                    .unwrap_or_else(|| "".to_string())
             );
             msg.open_popup();
         }

@@ -57,7 +57,7 @@ impl Message {
         obj.reaction.swap(&RefCell::new(message.reaction.clone()));
         let mut attachments = Vec::with_capacity(message.attachments.len());
         for pointer in &message.attachments {
-            let att = Attachment::from_pointer(&pointer, manager).await;
+            let att = Attachment::from_pointer(pointer, manager).await;
             attachments.push(att);
         }
         obj.attachments.swap(&RefCell::new(attachments));
@@ -129,7 +129,7 @@ impl Message {
                 log::warn!("Do not know what to do with the message: {:?}", content);
             }
         }
-        return s;
+        s
     }
 
     pub fn channel(&self) -> Option<Channel> {
@@ -298,16 +298,14 @@ mod imp {
                     .data
                     .borrow()
                     .as_ref()
-                    .map(|d| d.body.clone())
-                    .flatten()
+                    .and_then(|d| d.body.clone())
                     .to_value(),
                 "reactions" => self.reactions.borrow().to_value(),
                 "sent" => self
                     .data
                     .borrow()
                     .as_ref()
-                    .map(|d| d.timestamp)
-                    .flatten()
+                    .and_then(|d| d.timestamp)
                     .unwrap_or(0)
                     .to_value(),
                 "quote" => self.quote.borrow().to_value(),

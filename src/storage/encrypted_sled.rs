@@ -370,8 +370,8 @@ impl<E: encrypted_sled::Encryption> IdentityKeyStore for EncryptedSledConfigStor
             SignalProtocolError::InvalidState("failed to load presage state", e.to_string())
         })?;
         Ok(IdentityKeyPair::new(
-            IdentityKey::new(state.public_key),
-            state.private_key,
+            IdentityKey::new(state.public_key()),
+            state.private_key(),
         ))
     }
 
@@ -379,7 +379,7 @@ impl<E: encrypted_sled::Encryption> IdentityKeyStore for EncryptedSledConfigStor
         let state = self.load_state().map_err(|e| {
             SignalProtocolError::InvalidState("failed to load presage state", e.to_string())
         })?;
-        Ok(state.registration_id)
+        Ok(state.registration_id())
     }
 
     async fn save_identity(

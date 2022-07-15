@@ -106,7 +106,7 @@ pub mod imp {
             crate::trace!(
                 "Replying to message {}",
                 msg.property::<Option<String>>("body")
-                    .unwrap_or("".to_string())
+                    .unwrap_or_else(|| "".to_string())
             );
             obj.emit_by_name::<()>("reply", &[&msg]);
         }
@@ -124,7 +124,7 @@ pub mod imp {
             crate::trace!(
                 "Reacting to message {} with {} (len: {})",
                 msg.property::<Option<String>>("body")
-                    .unwrap_or("".to_string()),
+                    .unwrap_or_else(|| "".to_string()),
                 emoji,
                 emoji.chars().count()
             );
@@ -201,7 +201,7 @@ pub mod imp {
                     .message
                     .borrow()
                     .as_ref()
-                    .map(|m| m.property::<String>("reactions").len() > 0)
+                    .map(|m| !m.property::<String>("reactions").is_empty())
                     .unwrap_or_default()
                     .to_value(),
                 _ => unimplemented!(),

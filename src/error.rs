@@ -121,15 +121,12 @@ impl ApplicationError {
     pub fn more_information(&self) -> String {
         match self {
             ApplicationError::IOError(e) => format!("{:#?}", e),
-            ApplicationError::NoInternet => {
-                format!("{}", gettext("Please check your internet connection."))
-            }
+            ApplicationError::NoInternet => gettext("Please check your internet connection."),
             ApplicationError::Libsecret(e) => format!("{:#?}", e),
             ApplicationError::Db(e) => format!("{:#?}", e),
-            ApplicationError::UnauthorizedSignal => format!(
-                "{}",
+            ApplicationError::UnauthorizedSignal => {
                 gettext("Please delete the database and relink the device")
-            ),
+            }
             ApplicationError::SendFailed(e) => format!("{:#?}", e),
             ApplicationError::ReceiveFailed(e) => format!("{:#?}", e),
             ApplicationError::Presage(e) => format!("{:#?}", e),

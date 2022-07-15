@@ -90,6 +90,12 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<ConfigStoreType, Applicat
     Ok(EncryptedSledConfigStore::new(path, cipher)?)
 }
 
+impl std::default::Default for Manager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Manager {
     pub fn new() -> Manager {
         Object::new(&[]).expect("Failed to create `Manager` object.")
@@ -147,10 +153,8 @@ impl Manager {
     async fn sync_contacts(&self) -> Result<(), presage::Error> {
         log::trace!("Requesting contact sync");
         let _ = self.internal().request_contacts_sync().await?;
-        self.imp()
-            .profile
-            .borrow_mut()
-            .replace(self.internal().retrieve_profile().await?);
+        let profile = self.internal().retrieve_profile().await?;
+        self.imp().profile.borrow_mut().replace(profile);
         Ok(())
     }
 
@@ -239,11 +243,10 @@ impl Manager {
 
     #[cfg(not(feature = "screenshot"))]
     pub async fn init_channels(&self) {
-        let mut channels = self.imp().channels.borrow_mut();
-
         for contact in self.list_contacts() {
             let channel = Channel::from_contact_or_group(contact, &None, self).await;
             self.emit_by_name::<()>("channel", &[&channel]);
+            let mut channels = self.imp().channels.borrow_mut();
             channels.insert(channel.internal_hash(), channel);
         }
     }
