@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.1.4] - 2022-07-16
 ### Added
 
 - A few new GitLab templates for issues (e.g. for feature requests).
@@ -23,4 +25,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.3...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.4...master
+[0.1.4]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.3...0.1.4

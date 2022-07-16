@@ -50,6 +50,11 @@
     </p>
   </description>
   <releases>
+    <release version="v0.1.4" date="2022-07-16">
+      <description> 
+        <p>Fixed many bugs, including wrong association for messages to channels, wrongly displayed channel names as "Note to self" and a few crashes</p>
+      </description>
+    </release>
     <release version="v0.1.3" date="2022-07-10">
       <description> 
         <p>Fix message receiving, sending attachments</p>
