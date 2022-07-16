@@ -46,17 +46,34 @@
             <property name="hexpand">True</property>
           </object>
         </child>
+        <!-- Box for attachments -->
+        <child>
+          <object class="GtkBox" id="box_attachments">
+            <property name="orientation">vertical</property>
+            <property name="hexpand">True</property>
+          </object>
+        </child>
         <!-- Entry Box -->
         <child>
-          <object class="GtkEntry">
-            <signal name="activate" handler="send_message" swapped="true"/>
-            <signal name="icon-press" handler="send_message_icon" swapped="true"/>
-            <property name="input-hints">spellcheck</property>
-            <property name="activates-default">True</property>
-            <property name="placeholder-text" translatable="yes">Message</property>
-            <property name="secondary-icon-name">go-next-symbolic</property>
-            <property name="secondary-icon-activatable">True</property>
-            <property name="hexpand">True</property>
+          <object class="GtkBox">
+            <child>
+              <object class="GtkButton">
+                <signal name="clicked" handler="add_attachment" swapped="true"/>
+                <property name="icon-name">list-add-symbolic</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry">
+                <signal name="activate" handler="send_message" swapped="true"/>
+                <signal name="icon-press" handler="send_message_icon" swapped="true"/>
+                <property name="input-hints">spellcheck</property>
+                <property name="activates-default">True</property>
+                <property name="placeholder-text" translatable="yes">Message</property>
+                <property name="secondary-icon-name">go-next-symbolic</property>
+                <property name="secondary-icon-activatable">True</property>
+                <property name="hexpand">True</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

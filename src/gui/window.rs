@@ -153,7 +153,6 @@ pub mod imp {
                             .unwrap_or_else(|_| env::var("HOME").map(|s| s + "/.local/share/flare/").expect("Could not find $HOME")),
                     ),
                 );
-                // TODO: Error handling
                 log::trace!("Setup manager for Window");
                 let manager = Manager::new();
                 obj.set_property("manager", Some(&manager));

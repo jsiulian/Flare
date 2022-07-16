@@ -12,6 +12,7 @@ gtk::glib::wrapper! {
 
 impl Contact {
     pub(super) fn from_service_address(address: &ServiceAddress, manager: &Manager) -> Self {
+        log::trace!("Building a `Contact` from a `ServiceAddress`");
         let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Contact`");
         s.imp()
             .phonenumber
@@ -24,6 +25,7 @@ impl Contact {
     }
 
     pub(super) fn from_contact(contact: presage::prelude::Contact, manager: &Manager) -> Self {
+        log::trace!("Building a `Contact` from a `presage::prelude::Contact`");
         let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Contact`");
         s.imp()
             .phonenumber

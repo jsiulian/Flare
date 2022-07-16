@@ -64,6 +64,7 @@ pub mod imp {
     use crate::backend::Manager;
     use crate::backend::Message;
     use crate::gui::attachment::Attachment;
+    use crate::gui::error_dialog::ErrorDialog;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/message_item.ui")]
@@ -129,9 +130,18 @@ pub mod imp {
                 emoji.chars().count()
             );
             let main_context = MainContext::default();
-            main_context.spawn_local(clone!(@strong msg => async move {
+            let obj = self.instance();
+            main_context.spawn_local(clone!(@strong msg, @strong obj => async move {
                 log::trace!("Sending message");
-                msg.send_reaction(&emoji.chars().next().unwrap_or_default().to_string()).await;
+                if let Err(e) = msg.send_reaction(&emoji.chars().next().unwrap_or_default().to_string()).await {
+                    let root = obj
+                        .root()
+                        .expect("`MessageItem` to have a root")
+                        .dynamic_cast::<crate::gui::Window>()
+                        .expect("Root of `ChannelMessages` to be a `Window`.");
+                    let dialog = ErrorDialog::new(e, &root);
+                    dialog.show();
+                }
             }));
         }
     }

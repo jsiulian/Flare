@@ -17,15 +17,21 @@ pub mod imp {
     use gdk_pixbuf::glib::SignalHandlerId;
     use gdk_pixbuf::glib::Value;
     use glib::subclass::InitializingObject;
+    use gtk::builders::FileChooserNativeBuilder;
     use gtk::glib;
     use gtk::prelude::*;
     use gtk::subclass::prelude::*;
     use gtk::CompositeTemplate;
+    use gtk::FileChooserAction;
+    use gtk::FileFilter;
+    use gtk::ResponseType;
 
     use crate::backend::Channel;
     use crate::backend::Contact;
     use crate::backend::Manager;
     use crate::backend::Message;
+    use crate::gui::attachment::Attachment;
+    use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::message_item::MessageItem;
 
     #[derive(CompositeTemplate, Default)]
@@ -33,7 +39,10 @@ pub mod imp {
     pub struct ChannelMessages {
         #[template_child]
         pub(super) list: TemplateChild<gtk::ListBox>,
+        #[template_child]
+        box_attachments: TemplateChild<gtk::Box>,
 
+        attachments: RefCell<Vec<crate::backend::Attachment>>,
         reply_message: RefCell<Option<Message>>,
 
         manager: RefCell<Option<Manager>>,
@@ -48,11 +57,63 @@ pub mod imp {
             self.send_message(entry);
         }
 
+        fn append_attachment(&self, attachment: crate::backend::Attachment) {
+            let att_widget = Attachment::new(&attachment);
+            self.box_attachments.append(&att_widget);
+            self.attachments.borrow_mut().push(attachment);
+        }
+
+        #[template_callback]
+        fn add_attachment(&self) {
+            log::trace!("Requested to add a attachment");
+            let filter = FileFilter::new();
+            filter.add_mime_type("image/*");
+            let chooser = FileChooserNativeBuilder::new()
+                .transient_for(
+                    &self
+                        .instance()
+                        .root()
+                        .expect("`ChannelMessages` to have a root")
+                        .dynamic_cast::<crate::gui::Window>()
+                        .expect("Root of `ChannelMessages` to be a `Window`."),
+                )
+                .action(FileChooserAction::Open)
+                .filter(&filter)
+                .build();
+            let manager = self.instance().property::<Manager>("manager");
+            let obj = self.instance();
+            chooser.connect_response(
+                clone!(@strong chooser, @strong obj, @strong manager => move |_, action| {
+                    if action == ResponseType::Accept {
+                        log::trace!("User added an attachment");
+                        let file = chooser.file();
+                        if let Some(file) = file {
+                            let attachment = crate::backend::Attachment::from_file(file, &manager);
+                            obj.imp().append_attachment(attachment);
+                        }
+                    } else {
+                        log::trace!("User did not upload a attachment");
+                    }
+                }),
+            );
+            chooser.show();
+        }
+
         #[template_callback]
         fn send_message(&self, entry: gtk::Entry) {
             log::trace!("Got callback to send message");
             let text = entry.text();
             entry.set_text("");
+            let attachments = {
+                let mut att = self.attachments.borrow_mut();
+                let a = att.clone();
+                att.clear();
+                a
+            };
+            while let Some(child) = self.box_attachments.first_child() {
+                self.box_attachments.remove(&child);
+            }
+
             let obj = self.instance();
             if let Some(channel) = self.active_channel.borrow().as_ref() {
                 log::trace!("Constructing message");
@@ -71,10 +132,34 @@ pub mod imp {
                 }
 
                 let main_context = MainContext::default();
-                main_context.spawn_local(clone!(@strong msg, @strong channel => async move {
-                    log::trace!("Sending message");
-                    let _ = channel.send_message(msg).await;
-                }));
+                let obj = self.instance();
+                main_context.spawn_local(
+                    clone!(@strong msg, @strong channel, @strong attachments, @strong obj => async move {
+                        log::trace!("Adding attachments to message: {}", attachments.len());
+                        for att in attachments {
+                            if let Err(e) = msg.add_attachment(att).await {
+                                let root = obj
+                                    .root()
+                                    .expect("`MessageItem` to have a root")
+                                    .dynamic_cast::<crate::gui::Window>()
+                                    .expect("Root of `ChannelMessages` to be a `Window`.");
+                                let dialog = ErrorDialog::new(e, &root);
+                                dialog.show();
+                                return;
+                            }
+                        }
+                        log::trace!("Sending message");
+                        if let Err(e) = channel.send_message(msg).await {
+                            let root = obj
+                                .root()
+                                .expect("`MessageItem` to have a root")
+                                .dynamic_cast::<crate::gui::Window>()
+                                .expect("Root of `ChannelMessages` to be a `Window`.");
+                            let dialog = ErrorDialog::new(e, &root);
+                            dialog.show();
+                        }
+                    }),
+                );
             }
         }
 

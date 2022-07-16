@@ -171,7 +171,10 @@ impl Message {
         self.notify("reactions");
     }
 
-    pub async fn send_reaction<S: AsRef<str>>(&self, reaction: S) {
+    pub async fn send_reaction<S: AsRef<str>>(
+        &self,
+        reaction: S,
+    ) -> Result<(), crate::ApplicationError> {
         self.react(&reaction);
         let reaction_struct = Reaction {
             emoji: Some(reaction.as_ref().to_owned()),
@@ -197,11 +200,34 @@ impl Message {
         self.channel()
             .expect("Message to send reaction to to have channel")
             .send_internal_message(message, timestamp)
-            .await;
+            .await
     }
 
     pub fn attachments(&self) -> Vec<Attachment> {
         self.imp().attachments.borrow().clone()
+    }
+
+    pub async fn add_attachment(
+        &self,
+        attachment: Attachment,
+    ) -> Result<(), crate::ApplicationError> {
+        log::trace!("Adding a attachment to a message");
+        let manager = self.property::<Manager>("manager");
+        let upload_data = attachment.as_upload_attachment().await;
+        self.imp().attachments.borrow_mut().push(attachment);
+        // TODO: Error handling
+        log::trace!("Uploading the attachment");
+        let upload_attachments_result = manager.upload_attachments(vec![upload_data]).await?;
+
+        let pointer = upload_attachments_result
+            .first()
+            .expect("At least one attachment pointer should be available")
+            .as_ref()
+            .expect("Failed to upload attachments");
+        if let Some(data) = self.imp().data.borrow_mut().as_mut() {
+            data.attachments.push(pointer.clone());
+        }
+        Ok(())
     }
 }
 

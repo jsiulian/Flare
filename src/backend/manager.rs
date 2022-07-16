@@ -12,6 +12,7 @@ use libsignal_service::{
     groups_v2::Group,
     prelude::{GroupMasterKey, Uuid},
     proto::{AttachmentPointer, DataMessage},
+    sender::{AttachmentSpec, AttachmentUploadError},
     ServiceAddress,
 };
 use rand::Fill;
@@ -298,6 +299,13 @@ impl Manager {
 
     pub(super) fn uuid(&self) -> Uuid {
         self.internal().uuid()
+    }
+
+    pub async fn upload_attachments(
+        &self,
+        attachments: Vec<(AttachmentSpec, Vec<u8>)>,
+    ) -> Result<Vec<Result<AttachmentPointer, AttachmentUploadError>>, presage::Error> {
+        self.internal().upload_attachments(attachments).await
     }
 }
 

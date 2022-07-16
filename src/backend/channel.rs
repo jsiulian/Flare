@@ -21,6 +21,7 @@ impl Channel {
         group_context: &Option<GroupContextV2>,
         manager: &Manager,
     ) -> Self {
+        log::trace!("Trying to build a `Channel` from a `Contact` or `GroupContextV2`");
         let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Channel`");
         if let Some(group_context_v2) = group_context {
             let master_key = GroupMasterKey::new(
@@ -126,7 +127,11 @@ impl Channel {
         }
     }
 
-    pub(super) async fn send_internal_message(&self, mut data: DataMessage, timestamp: u64) {
+    pub(super) async fn send_internal_message(
+        &self,
+        mut data: DataMessage,
+        timestamp: u64,
+    ) -> Result<(), crate::ApplicationError> {
         let manager = self.property::<Manager>("manager");
         let receiver_contact = self
             .imp()
@@ -137,12 +142,10 @@ impl Channel {
 
         if let Some(contact) = receiver_contact {
             log::trace!("Sending to single contact");
-            // TODO: Error Handling
-            let _ = manager.send_message(contact, data, timestamp).await;
+            let _ = manager.send_message(contact, data, timestamp).await?;
         } else {
             {
                 let context = self.imp().group_context.borrow();
-                // TODO: Error Handling
                 data.group_v2 = context.clone();
             }
             let receiver_group_addresses = if let Some(group) = self.imp().group.borrow().as_ref() {
@@ -155,15 +158,16 @@ impl Channel {
                     .map(|c| c.expect("Match Failed").expect("Match Failed").address)
                     .collect::<Vec<ServiceAddress>>()
             } else {
-                return;
+                return Ok(());
             };
             let _ = manager
                 .send_message_to_group(receiver_group_addresses, data, timestamp)
-                .await;
+                .await?;
         }
+        Ok(())
     }
 
-    pub async fn send_message(&self, msg: Message) {
+    pub async fn send_message(&self, msg: Message) -> Result<(), crate::ApplicationError> {
         self.imp().messages.borrow_mut().push(msg.clone());
         self.notify("last-message");
         self.emit_by_name::<()>("message", &[&msg]);
@@ -178,8 +182,9 @@ impl Channel {
                 data,
                 msg.timestamp().expect("Messate to send to have timestamp"),
             )
-            .await;
+            .await?;
         }
+        Ok(())
     }
 }
 

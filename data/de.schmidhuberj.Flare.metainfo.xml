@@ -37,7 +37,7 @@
         React to a message
       </li>
       <li>
-        Receiving attachments
+        Sending and receiving attachments (currently image-only)
       </li>
       <li>
         Encrypted storage

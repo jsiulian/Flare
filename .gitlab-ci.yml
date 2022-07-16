@@ -21,6 +21,8 @@ build:
     paths:
       - ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz
       - ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz.sha256sum
+    expire_in: 1 week
+
 
 upload:
   stage: upload

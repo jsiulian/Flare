@@ -1,6 +1,10 @@
-use gdk::Texture;
-use gdk_pixbuf::glib::{Bytes, Object};
-use libsignal_service::proto::AttachmentPointer;
+use gdk::{prelude::TextureExt, Texture};
+use gdk_pixbuf::{
+    glib::{Bytes, Object},
+    prelude::{FileExt, ObjectExt},
+};
+use gio::File;
+use libsignal_service::{proto::AttachmentPointer, sender::AttachmentSpec};
 
 use super::Manager;
 
@@ -9,6 +13,47 @@ gtk::glib::wrapper! {
 }
 
 impl Attachment {
+    pub fn from_file(file: File, manager: &Manager) -> Self {
+        log::trace!("Trying to build a Attachment from a file");
+        Object::new(&[
+            ("manager", manager),
+            ("file", &file),
+            ("image", &Texture::from_file(&file).ok()),
+        ])
+        .expect("Failed to create `Attachment`")
+    }
+
+    pub(super) async fn as_upload_attachment(&self) -> (AttachmentSpec, Vec<u8>) {
+        let file = self.property::<File>("file");
+        let image = self.property::<Texture>("image");
+        let bytes = file
+            .load_bytes_future()
+            .await
+            .expect("Failed to read the file")
+            .0
+            .to_vec();
+        (
+            AttachmentSpec {
+                content_type: gio::content_type_guess(file.basename(), &bytes)
+                    .0
+                    .as_str()
+                    .to_owned(),
+                length: bytes.len(),
+                file_name: file
+                    .basename()
+                    .and_then(|f| f.file_name().map(|s| s.to_string_lossy().to_string())),
+                preview: None,
+                voice_note: None,
+                borderless: None,
+                width: image.width().try_into().ok(),
+                height: image.height().try_into().ok(),
+                caption: None,
+                blur_hash: None,
+            },
+            bytes,
+        )
+    }
+
     pub(super) async fn from_pointer(pointer: &AttachmentPointer, manager: &Manager) -> Self {
         log::trace!("Trying to build a Attachment from a pointer");
         log::trace!(
@@ -39,6 +84,7 @@ mod imp {
         glib::{once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecObject, Value},
         prelude::{StaticType, ToValue},
     };
+    use gio::File;
     use gtk::glib;
     use std::cell::RefCell;
 
@@ -47,6 +93,7 @@ mod imp {
     #[derive(Default)]
     pub struct Attachment {
         image: RefCell<Option<Texture>>,
+        file: RefCell<Option<File>>,
 
         manager: RefCell<Option<Manager>>,
     }
@@ -75,6 +122,13 @@ mod imp {
                         Texture::static_type(),
                         ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
                     ),
+                    ParamSpecObject::new(
+                        "file",
+                        "file",
+                        "file",
+                        File::static_type(),
+                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
@@ -84,6 +138,7 @@ mod imp {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "image" => self.image.borrow().as_ref().to_value(),
+                "file" => self.file.borrow().as_ref().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -103,6 +158,13 @@ mod imp {
                         .expect("Property `image` of `Message` has to be of type `Texture`");
 
                     self.image.replace(obj);
+                }
+                "file" => {
+                    let obj = value
+                        .get::<Option<File>>()
+                        .expect("Property `file` of `Message` has to be of type `File`");
+
+                    self.file.replace(obj);
                 }
                 _ => unimplemented!(),
             }
