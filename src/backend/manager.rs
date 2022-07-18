@@ -186,27 +186,36 @@ impl Manager {
     #[cfg(not(feature = "screenshot"))]
     pub async fn setup_receive_message_loop(&self) -> Result<(), ApplicationError> {
         log::debug!("Start receiving messages");
-        let messages = self.internal().receive_messages().await?;
-        futures::pin_mut!(messages);
-        while let Some(msg) = messages.next().await {
-            let message = Message::from_content(msg, self).await;
-            if let Some(channel) = message.channel() {
-                let mut channels = self.imp().channels.borrow_mut();
-                crate::debug!("Got from channel: {}", channel.property::<String>("title"));
-                // self.emit_by_name::<()>("message", &[&message]);
-                if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
-                    log::debug!("Message from a already existing channel");
-                    stored_channel.new_message(message);
+        'outer: loop {
+            let messages = self.internal().receive_messages().await?;
+            futures::pin_mut!(messages);
+            while let Some(msg) = messages.next().await {
+                let message = Message::from_content(msg, self).await;
+                if let Some(channel) = message.channel() {
+                    let mut channels = self.imp().channels.borrow_mut();
+                    crate::debug!("Got from channel: {}", channel.property::<String>("title"));
+                    // self.emit_by_name::<()>("message", &[&message]);
+                    if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
+                        log::debug!("Message from a already existing channel");
+                        if let Err(_) = stored_channel.new_message(message) {
+                            break 'outer;
+                        }
+                    } else {
+                        log::debug!("Got a message from a new channel");
+                        if let Err(_) = self.try_emit_by_name::<()>("channel", &[&channel]) {
+                            break 'outer;
+                        }
+                        if let Err(_) = channel.new_message(message) {
+                            break 'outer;
+                        }
+                        channels.insert(channel.internal_hash(), channel);
+                    }
                 } else {
-                    log::debug!("Got a message from a new channel");
-                    self.emit_by_name::<()>("channel", &[&channel]);
-                    channel.new_message(message);
-                    channels.insert(channel.internal_hash(), channel);
+                    log::trace!("Message is not associated with channel");
                 }
-            } else {
-                log::trace!("Message is not associated with channel");
+                log::debug!("Emitting message");
             }
-            log::debug!("Emitting message");
+            log::debug!("Websocket closed, trying again");
         }
         Ok(())
     }

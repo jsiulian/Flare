@@ -53,7 +53,7 @@ impl Channel {
         hasher.finish()
     }
 
-    pub(super) fn new_message(&self, message: Message) {
+    pub(super) fn new_message(&self, message: Message) -> Result<(), gtk::glib::error::BoolError> {
         if let Some(body) = message.property::<Option<String>>("body") {
             crate::trace!(
                 "Channel {} got new message: {}",
@@ -106,8 +106,9 @@ impl Channel {
         {
             self.imp().messages.borrow_mut().push(message.clone());
             self.notify("last-message");
-            self.emit_by_name::<()>("message", &[&message]);
+            self.try_emit_by_name::<()>("message", &[&message])?;
         }
+        Ok(())
     }
 
     pub fn messages(&self) -> Vec<Message> {
