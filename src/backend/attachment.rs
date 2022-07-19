@@ -1,9 +1,9 @@
 use gdk::{prelude::TextureExt, Texture};
 use gdk_pixbuf::{
-    glib::{Bytes, Object},
-    prelude::{FileExt, ObjectExt},
+    glib::{Bytes, Object, Priority},
+    prelude::{FileExt, IOStreamExt, ObjectExt, OutputStreamExt},
 };
-use gio::File;
+use gio::{subclass::prelude::ObjectSubclassIsExt, File, FileCreateFlags};
 use libsignal_service::{proto::AttachmentPointer, sender::AttachmentSpec};
 
 use super::Manager;
@@ -55,31 +55,59 @@ impl Attachment {
     }
 
     pub(super) async fn from_pointer(pointer: &AttachmentPointer, manager: &Manager) -> Self {
-        log::trace!("Trying to build a Attachment from a pointer");
+        crate::trace!("Trying to build a Attachment from a pointer",);
         log::trace!(
             "Attachment with content type: {}",
             pointer.content_type.as_ref().unwrap_or(&"None".to_string())
         );
         let mut image = None;
+        let mut raw = None;
+        let mut name = None;
+        if let Some(pointer_name) = &pointer.file_name {
+            name = Some(pointer_name.clone());
+        }
         if let Ok(bytes) = manager.get_attachment(pointer).await {
+            raw = Some(Bytes::from_owned(bytes));
+
             match &pointer.content_type {
                 Some(t) if t.starts_with("image/") => {
                     log::trace!("Attachment is a image, converting to usable type");
-                    let glib_bytes = Bytes::from_owned(bytes);
-                    image = Texture::from_bytes(&glib_bytes).ok();
+                    image = Texture::from_bytes(&raw.as_ref().expect("Raw bytes to be set")).ok();
+                    if name.is_none() {
+                        name = Some(format!("image.{}", &t[6..]));
+                    }
                 }
                 Some(t) => log::trace!("Currently unhandles attachment type: {}", t),
                 None => log::trace!("Attachment got no type"),
             }
         }
-        Object::new(&[("manager", manager), ("image", &image)])
-            .expect("Failed to create `Attachment`")
+        let s: Self = Object::new(&[("manager", manager), ("image", &image), ("name", &name)])
+            .expect("Failed to create `Attachment`");
+        *s.imp().raw.borrow_mut() = raw;
+        s
+    }
+
+    pub fn name(&self) -> Option<String> {
+        self.property::<Option<String>>("name")
+    }
+
+    pub async fn save_to_file(&self, file: &File) -> Result<(), gtk::glib::error::Error> {
+        log::trace!("Saving attachment to a file");
+        if let Some(raw) = self.imp().raw.borrow().as_ref() {
+            let file_io = file
+                .replace_readwrite_future(None, false, FileCreateFlags::NONE, Priority::default())
+                .await?;
+            let stream = file_io.output_stream();
+            stream.write_bytes_future(&raw, Priority::default()).await?;
+        }
+        Ok(())
     }
 }
 
 mod imp {
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gdk::Texture;
+    use gdk_pixbuf::glib::{Bytes, ParamSpecString};
     use gdk_pixbuf::{
         glib::{once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecObject, Value},
         prelude::{StaticType, ToValue},
@@ -94,6 +122,9 @@ mod imp {
     pub struct Attachment {
         image: RefCell<Option<Texture>>,
         file: RefCell<Option<File>>,
+        name: RefCell<Option<String>>,
+
+        pub(super) raw: RefCell<Option<Bytes>>,
 
         manager: RefCell<Option<Manager>>,
     }
@@ -129,6 +160,13 @@ mod imp {
                         File::static_type(),
                         ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
                     ),
+                    ParamSpecString::new(
+                        "name",
+                        "name",
+                        "name",
+                        None,
+                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
@@ -139,6 +177,7 @@ mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "image" => self.image.borrow().as_ref().to_value(),
                 "file" => self.file.borrow().as_ref().to_value(),
+                "name" => self.name.borrow().as_ref().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -165,6 +204,13 @@ mod imp {
                         .expect("Property `file` of `Message` has to be of type `File`");
 
                     self.file.replace(obj);
+                }
+                "name" => {
+                    let obj = value
+                        .get::<Option<String>>()
+                        .expect("Property `name` of `Message` has to be of type `String`");
+
+                    self.name.replace(obj);
                 }
                 _ => unimplemented!(),
             }

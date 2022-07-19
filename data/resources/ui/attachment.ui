@@ -4,11 +4,10 @@
   <requires lib="libadwaita" version="1.0"/>
 
   <template class="FlAttachment" parent="GtkBox">
-    <property name="orientation">vertical</property>
+    <property name="orientation">horizontal</property>
     <property name="hexpand">True</property>
     <property name="halign">start</property>
 
-    <!-- Quote -->
     <child>
       <object class="GtkPicture">
         <property name="halign">start</property>
@@ -20,6 +19,16 @@
             <lookup name="attachment" type="FlAttachment"/>
           </lookup>
         </binding>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <style>
+          <class name="flat"/>
+          <class name="circular"/>
+        </style>
+        <property name="icon-name">document-save-symbolic</property>
+        <signal name="clicked" handler="download" swapped="true"/>
       </object>
     </child>
   </template>
