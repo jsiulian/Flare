@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Upload attachments (currently image-only)
+- Download attachmenst
+
+### Fixed
+
+- Reply message not being cleared when sending a message
+- Reply message not being cleared when switching channels
 
 ## [0.1.4] - 2022-07-16
 ### Added

@@ -129,6 +129,7 @@ pub mod imp {
                 if let Some(quote) = obj.property::<Option<Message>>("reply-message") {
                     log::trace!("Adding quote to message");
                     msg.set_quote(quote);
+                    obj.set_property("reply-message", &None::<Message>);
                 }
 
                 let main_context = MainContext::default();
@@ -242,6 +243,16 @@ pub mod imp {
     }
 
     impl ObjectImpl for ChannelMessages {
+        fn constructed(&self, obj: &Self::Type) {
+            self.parent_constructed(obj);
+            obj.connect_notify_local(
+                Some("active-channel"),
+                clone!(@weak obj => move |_, _| {
+                    obj.set_property("reply-message", &None::<Message>);
+                }),
+            );
+        }
+
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![

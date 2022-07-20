@@ -267,7 +267,10 @@ impl Manager {
         &self,
         master_key: GroupMasterKey,
     ) -> Result<Group, presage::Error> {
-        self.internal().get_group_v2(master_key).await
+        log::trace!("`Manager::get_group_v2`start");
+        let r = self.internal().get_group_v2(master_key).await;
+        log::trace!("`Manager::get_group_v2`finished");
+        r
     }
 
     pub(super) async fn send_message(
@@ -276,9 +279,13 @@ impl Manager {
         message: impl Into<ContentBody>,
         timestamp: u64,
     ) -> Result<(), presage::Error> {
-        self.internal()
+        log::trace!("`Manager::send_message`start");
+        let r = self
+            .internal()
             .send_message(recipient_addr, message, timestamp)
-            .await
+            .await;
+        log::trace!("`Manager::send_message`finished");
+        r
     }
 
     pub(super) async fn send_message_to_group(
@@ -287,34 +294,50 @@ impl Manager {
         message: DataMessage,
         timestamp: u64,
     ) -> Result<(), presage::Error> {
-        self.internal()
+        log::trace!("`Manager::send_message_to_group` start");
+        let r = self
+            .internal()
             .send_message_to_group(recipient_addr, message, timestamp)
-            .await
+            .await;
+        log::trace!("`Manager::send_message_to_group` finish");
+        r
     }
 
     pub(super) fn get_contact_by_id(
         &self,
         id: Uuid,
     ) -> Result<Option<presage::prelude::Contact>, presage::Error> {
-        self.internal().get_contact_by_id(id)
+        log::trace!("`Manager::get_contact_by_id` start");
+        let r = self.internal().get_contact_by_id(id);
+        log::trace!("`Manager::get_contact_by_id` finished");
+        r
     }
 
     pub(super) async fn get_attachment(
         &self,
         attachment_pointer: &AttachmentPointer,
     ) -> Result<Vec<u8>, presage::Error> {
-        self.internal().get_attachment(attachment_pointer).await
+        log::trace!("`Manager::get_attachment` start");
+        let r = self.internal().get_attachment(attachment_pointer).await;
+        log::trace!("`Manager::get_attachment` finished");
+        r
     }
 
     pub(super) fn uuid(&self) -> Uuid {
-        self.internal().uuid()
+        log::trace!("`Manager::uuid` start");
+        let r = self.internal().uuid();
+        log::trace!("`Manager::uuid` finished");
+        r
     }
 
     pub async fn upload_attachments(
         &self,
         attachments: Vec<(AttachmentSpec, Vec<u8>)>,
     ) -> Result<Vec<Result<AttachmentPointer, AttachmentUploadError>>, presage::Error> {
-        self.internal().upload_attachments(attachments).await
+        log::trace!("`Manager::upload_attachment` start");
+        let r = self.internal().upload_attachments(attachments).await;
+        log::trace!("`Manager::upload_attachment` finished");
+        r
     }
 }
 
