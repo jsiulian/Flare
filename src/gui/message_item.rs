@@ -144,6 +144,11 @@ pub mod imp {
                 }
             }));
         }
+
+        #[template_callback(function)]
+        fn is_some(opt: Option<glib::Object>) -> bool {
+            opt.is_some()
+        }
     }
 
     impl ObjectImpl for MessageItem {
@@ -177,13 +182,6 @@ pub mod imp {
                         ParamFlags::READWRITE,
                     ),
                     ParamSpecBoolean::new(
-                        "has-quote",
-                        "has-quote",
-                        "has-quote",
-                        false,
-                        ParamFlags::READABLE,
-                    ),
-                    ParamSpecBoolean::new(
                         "has-reaction",
                         "has-reaction",
                         "has-reaction",
@@ -200,13 +198,6 @@ pub mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "message" => self.message.borrow().as_ref().to_value(),
                 "show-name" => self.show_name.get().to_value(),
-                "has-quote" => self
-                    .message
-                    .borrow()
-                    .as_ref()
-                    .map(|m| m.property::<Option<Message>>("quote").is_some())
-                    .unwrap_or_default()
-                    .to_value(),
                 "has-reaction" => self
                     .message
                     .borrow()

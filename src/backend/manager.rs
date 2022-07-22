@@ -324,10 +324,7 @@ impl Manager {
     }
 
     pub(super) fn uuid(&self) -> Uuid {
-        log::trace!("`Manager::uuid` start");
-        let r = self.internal().uuid();
-        log::trace!("`Manager::uuid` finished");
-        r
+        self.internal().uuid()
     }
 
     pub async fn upload_attachments(

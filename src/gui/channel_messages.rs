@@ -13,6 +13,7 @@ pub mod imp {
     use gdk_pixbuf::glib::MainContext;
     use gdk_pixbuf::glib::ParamFlags;
     use gdk_pixbuf::glib::ParamSpec;
+    use gdk_pixbuf::glib::ParamSpecBoolean;
     use gdk_pixbuf::glib::ParamSpecObject;
     use gdk_pixbuf::glib::SignalHandlerId;
     use gdk_pixbuf::glib::Value;
@@ -57,6 +58,26 @@ pub mod imp {
             self.send_message(entry);
         }
 
+        #[template_callback]
+        fn remove_reply(&self) {
+            log::trace!("Unsetting reply message");
+            self.instance()
+                .set_property("reply_message", None::<Message>);
+        }
+
+        #[template_callback]
+        fn remove_attachments(&self) {
+            log::trace!("Unsetting attachments");
+            {
+                let mut att = self.attachments.borrow_mut();
+                att.clear();
+                while let Some(child) = self.box_attachments.first_child() {
+                    self.box_attachments.remove(&child);
+                }
+            }
+            self.instance().notify("has-attachments");
+        }
+
         fn append_attachment(&self, attachment: crate::backend::Attachment) {
             let att_widget = Attachment::new(&attachment);
             self.box_attachments.append(&att_widget);
@@ -90,6 +111,7 @@ pub mod imp {
                         if let Some(file) = file {
                             let attachment = crate::backend::Attachment::from_file(file, &manager);
                             obj.imp().append_attachment(attachment);
+                            obj.notify("has-attachments");
                         }
                     } else {
                         log::trace!("User did not upload a attachment");
@@ -277,6 +299,13 @@ pub mod imp {
                         Message::static_type(),
                         ParamFlags::READWRITE,
                     ),
+                    ParamSpecBoolean::new(
+                        "has-attachments",
+                        "has-attachments",
+                        "has-attachments",
+                        false,
+                        ParamFlags::READABLE,
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
@@ -287,6 +316,7 @@ pub mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "active-channel" => self.active_channel.borrow().as_ref().to_value(),
                 "reply-message" => self.reply_message.borrow().as_ref().to_value(),
+                "has-attachments" => (!self.attachments.borrow().is_empty()).to_value(),
                 _ => unimplemented!(),
             }
         }
