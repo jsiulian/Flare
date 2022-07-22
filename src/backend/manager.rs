@@ -197,15 +197,15 @@ impl Manager {
                     // self.emit_by_name::<()>("message", &[&message]);
                     if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
                         log::debug!("Message from a already existing channel");
-                        if let Err(_) = stored_channel.new_message(message) {
+                        if stored_channel.new_message(message).is_err() {
                             break 'outer;
                         }
                     } else {
                         log::debug!("Got a message from a new channel");
-                        if let Err(_) = self.try_emit_by_name::<()>("channel", &[&channel]) {
+                        if self.try_emit_by_name::<()>("channel", &[&channel]).is_err() {
                             break 'outer;
                         }
-                        if let Err(_) = channel.new_message(message) {
+                        if channel.new_message(message).is_err() {
                             break 'outer;
                         }
                         channels.insert(channel.internal_hash(), channel);

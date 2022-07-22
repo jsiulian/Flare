@@ -72,7 +72,7 @@ impl Attachment {
             match &pointer.content_type {
                 Some(t) if t.starts_with("image/") => {
                     log::trace!("Attachment is a image, converting to usable type");
-                    image = Texture::from_bytes(&raw.as_ref().expect("Raw bytes to be set")).ok();
+                    image = Texture::from_bytes(raw.as_ref().expect("Raw bytes to be set")).ok();
                     if name.is_none() {
                         name = Some(format!("image.{}", &t[6..]));
                     }
@@ -93,10 +93,11 @@ impl Attachment {
 
     pub async fn save_to_file(&self, file: &File) -> Result<(), gtk::glib::error::Error> {
         log::trace!("Saving attachment to a file");
-        if let Some(raw) = self.imp().raw.borrow().as_ref() {
-            let file_io = file
-                .replace_readwrite_future(None, false, FileCreateFlags::NONE, Priority::default())
-                .await?;
+        let file_io = file
+            .replace_readwrite_future(None, false, FileCreateFlags::NONE, Priority::default())
+            .await?;
+        let data = { self.imp().raw.borrow().clone() };
+        if let Some(raw) = data {
             let stream = file_io.output_stream();
             stream.write_bytes_future(&raw, Priority::default()).await?;
         }
