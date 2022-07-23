@@ -7,17 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 
-- Upload attachments (currently image-only)
-- Download attachmenst
-- Remove reply message before sending a message
-- Remove attachments before sending a message
-- Improved UI for replies in the chat
+- Upload attachments (currently image-only).
+- Download attachmenst.
+- Remove reply message before sending a message.
+- Remove attachments before sending a message.
+- Improved UI for replies in the chat.
 
 ### Fixed
 
-- Reply message not being cleared when sending a message
-- Reply message not being cleared when switching channels
-- Replies not showing correctly
+- Reply message not being cleared when sending a message.
+- Reply message not being cleared when switching channels.
+- Replies not showing correctly.
+- Another attempt at fixing application freeze
+
+### Development
+
+- Fixed cargo clippy.
 
 ## [0.1.4] - 2022-07-16
 ### Added

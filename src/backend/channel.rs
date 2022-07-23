@@ -22,6 +22,7 @@ impl Channel {
         manager: &Manager,
     ) -> Self {
         log::trace!("Trying to build a `Channel` from a `Contact` or `GroupContextV2`");
+        let available_channels = manager.available_channels();
         let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Channel`");
         if let Some(group_context_v2) = group_context {
             let master_key = GroupMasterKey::new(
@@ -32,6 +33,11 @@ impl Channel {
                     .try_into()
                     .unwrap(),
             );
+            if let Some(channel) = available_channels.iter().find(|c| {
+                c.group_context().and_then(|c| c.master_key) == group_context_v2.master_key
+            }) {
+                return channel.clone();
+            }
             let group = manager.get_group_v2(master_key).await;
             if let Ok(group) = group {
                 s.imp().group.swap(&RefCell::new(Some(group)));
@@ -51,6 +57,10 @@ impl Channel {
         let mut hasher = DefaultHasher::new();
         self.imp().hash(&mut hasher);
         hasher.finish()
+    }
+
+    fn group_context(&self) -> Option<GroupContextV2> {
+        self.imp().group_context.borrow().clone()
     }
 
     pub(super) fn new_message(&self, message: Message) -> Result<(), gtk::glib::error::BoolError> {

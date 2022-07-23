@@ -7,6 +7,44 @@
     <property name="orientation">vertical</property>
     <property name="hexpand">True</property>
 
+    <!-- Avatar -->
+    <child>
+      <object class="AdwAvatar">
+        <binding name="visible">
+          <lookup name="show-name" type="FlMessageItem"/>
+        </binding>
+        <binding name="text">
+          <lookup name="title">
+            <lookup name="sender">
+              <lookup name="message" type="FlMessageItem"/>
+            </lookup>
+          </lookup>
+        </binding>
+        <property name="halign">start</property>
+        <property name="size">20</property>
+      </object>
+    </child>
+    <!-- Name -->
+    <child>
+      <object class="GtkLabel">
+        <style>
+          <class name="heading"/>
+        </style>
+        <binding name="visible">
+          <lookup name="show-name" type="FlMessageItem"/>
+        </binding>
+        <binding name="label">
+          <lookup name="title">
+            <lookup name="sender">
+              <lookup name="message" type="FlMessageItem"/>
+            </lookup>
+          </lookup>
+        </binding>
+        <property name="hexpand">True</property>
+        <property name="halign">start</property>
+      </object>
+    </child>
+
     <!-- Quote -->
     <child>
       <object class="GtkBox">
@@ -75,41 +113,6 @@
 
     <!-- Message -->
     <child>
-      <object class="AdwAvatar">
-        <binding name="visible">
-          <lookup name="show-name" type="FlMessageItem"/>
-        </binding>
-        <binding name="text">
-          <lookup name="title">
-            <lookup name="sender">
-              <lookup name="message" type="FlMessageItem"/>
-            </lookup>
-          </lookup>
-        </binding>
-        <property name="halign">start</property>
-        <property name="size">20</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel">
-        <style>
-          <class name="heading"/>
-        </style>
-        <binding name="visible">
-          <lookup name="show-name" type="FlMessageItem"/>
-        </binding>
-        <binding name="label">
-          <lookup name="title">
-            <lookup name="sender">
-              <lookup name="message" type="FlMessageItem"/>
-            </lookup>
-          </lookup>
-        </binding>
-        <property name="hexpand">True</property>
-        <property name="halign">start</property>
-      </object>
-    </child>
-    <child>
       <object class="GtkLabel">
         <binding name="label">
           <lookup name="body">
@@ -126,6 +129,7 @@
         <property name="halign">start</property>
       </object>
     </child>
+    <!-- Reactions -->
     <child>
       <object class="GtkLabel">
         <binding name="label">
@@ -144,6 +148,7 @@
         <property name="halign">start</property>
       </object>
     </child>
+    <!-- Attachments -->
     <child>
       <object class="GtkBox" id="box_attachments">
         <property name="orientation">vertical</property>

@@ -183,6 +183,10 @@ impl Manager {
         self.imp().internal()
     }
 
+    pub(super) fn available_channels(&self) -> Vec<Channel> {
+        self.imp().channels.borrow().values().cloned().collect()
+    }
+
     #[cfg(not(feature = "screenshot"))]
     pub async fn setup_receive_message_loop(&self) -> Result<(), ApplicationError> {
         log::debug!("Start receiving messages");
