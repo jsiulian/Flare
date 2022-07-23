@@ -1,9 +1,9 @@
 project(
   'flare',
   'rust',
-  version: '0.1.4',
+  version: '0.1.5',
   meson_version: '>= 0.59',
-  license: 'GPL-3.0-or-later',
+  license: 'AGPL-3.0-or-later',
 )
 
 i18n = import('i18n')

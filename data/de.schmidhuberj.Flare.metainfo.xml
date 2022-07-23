@@ -50,6 +50,11 @@
     </p>
   </description>
   <releases>
+    <release version="v0.1.5" date="2022-07-23">
+      <description> 
+        <p>Added ability to upload and download attachments, added ability to remove reply and attachments before sending, fixed some bugs mainly regarding reply messages</p>
+      </description>
+    </release>
     <release version="v0.1.4" date="2022-07-16">
       <description> 
         <p>Fixed many bugs, including wrong association for messages to channels, wrongly displayed channel names as "Note to self" and a few crashes</p>
