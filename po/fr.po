@@ -8,121 +8,129 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-08 14:15+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-07-24 08:21+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: data/resources/ui/channel_messages.ui:56
 msgid "Message"
-msgstr ""
+msgstr "Message"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 #: data/resources/ui/error_dialog.ui:14
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 #: data/resources/ui/error_dialog.ui:43
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "Pensez à signaler cette erreur."
 
 #: data/resources/ui/link_window.ui:8
 msgid "Link Device"
-msgstr ""
+msgstr "Lier l’appareil"
 
 #: data/resources/ui/link_window.ui:16
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device"
-msgstr ""
+msgstr "Veuillez scanner ce QR Code avec votre appareil primaire"
 
 #: data/resources/ui/link_window.ui:34
 msgid "Please restart the application after this window closed"
-msgstr ""
+msgstr "Veuillez redémarrer l’application après la fermeture de cette fenêtre"
 
 #: data/resources/ui/message_item.ui:148
 msgid "Reply"
-msgstr ""
+msgstr "Répondre"
 
 #: data/resources/ui/message_item.ui:154
 msgid "React"
-msgstr ""
+msgstr "Réagir"
 
 #: data/resources/ui/window.ui:108
 msgid "About"
-msgstr ""
+msgstr "À propos"
 
 #: src/backend/channel.rs:277
 msgid "Note to self"
-msgstr ""
+msgstr "Note à moi-même"
 
 #: src/backend/manager.rs:152
 msgid "You"
-msgstr ""
+msgstr "Vous"
 
 #: src/error.rs:74
 msgid "I/O Error."
-msgstr ""
+msgstr "I/O Erreur."
 
 #: src/error.rs:79
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "Il semblerait qu’aucune connexion internet ne soit disponible."
 
 #: src/error.rs:84
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "La communication avec Libsecret a échoué."
 
 #: src/error.rs:89
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"La base de données backend a échoué. Veuillez redémarrer l’application ou "
+"supprimer la base de données et lier à nouveau l’application."
 
 #: src/error.rs:94
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"Vous semblez ne pas être autorisé par Signal. Veuillez supprimer la base de "
+"données et lier à nouveau l’application."
 
 #: src/error.rs:99
 msgid "Sending a message failed"
-msgstr ""
+msgstr "Échec de l’envoi d’un message"
 
 #: src/error.rs:104
 msgid "Receiving a message failed"
-msgstr ""
+msgstr "Échec de la réception d’un message"
 
 #: src/error.rs:109
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"Quelque chose d’inattendu s’est produit avec le backend Signal. Veuillez "
+"réessayer plus tard."
 
 #: src/error.rs:114
 msgid "The application seems to be misconfigured"
-msgstr ""
+msgstr "L’application semble être mal configurée"
 
 #: src/error.rs:125
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Veuillez vérifier votre connexion internet."
 
 #: src/error.rs:131
 msgid "Please delete the database and relink the device"
-msgstr ""
+msgstr "Veuillez supprimer la base de données et lier à nouveau l’appareil"
 
 #: src/error.rs:138
 msgid "The database path at {} is no folder"
-msgstr ""
+msgstr "Le chemin de base de données à {} n’est pas un dossier"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
 #: src/gui/window.rs:87
 msgid "translators"
-msgstr ""
+msgstr "Irénée Thirion"
