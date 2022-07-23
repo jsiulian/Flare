@@ -8,25 +8,28 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-08 14:15+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-07-24 08:21+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
+"flare/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: data/resources/ui/channel_messages.ui:56
 msgid "Message"
-msgstr ""
+msgstr "Melding"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
-msgstr ""
+msgstr "Feil"
 
 #: data/resources/ui/error_dialog.ui:14
 msgid "Close"
-msgstr ""
+msgstr "Lukk"
 
 #: data/resources/ui/error_dialog.ui:43
 msgid "Please consider reporting this error."
@@ -38,7 +41,7 @@ msgstr ""
 
 #: data/resources/ui/link_window.ui:16
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device"
@@ -50,15 +53,15 @@ msgstr ""
 
 #: data/resources/ui/message_item.ui:148
 msgid "Reply"
-msgstr ""
+msgstr "Svar"
 
 #: data/resources/ui/message_item.ui:154
 msgid "React"
-msgstr ""
+msgstr "Reager"
 
 #: data/resources/ui/window.ui:108
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 #: src/backend/channel.rs:277
 msgid "Note to self"
