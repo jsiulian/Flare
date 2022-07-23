@@ -41,6 +41,10 @@ This application uses [presage](https://github.com/whisperfish/presage) internal
 - Avatars
 - Profile name instead of "You" in chats
 
+## Translation
+
+Flare can easily be translated for other languages, as it uses gettext. Please consider contributing translations using [Weblate](https://hosted.weblate.org/engage/flare/), as an alternative you can also open merge requests and I will notify you if updates are necessary.
+
 ## Donate
 
 Please consider donating to [Signal](https://signal.org/donate/) first as they run the servers in use and therefore have a high cost of actually providing this free service.

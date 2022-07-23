@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Weblate for translations
+
 ## [0.1.5] - 2022-07-23
 ### Added
 
@@ -20,8 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reply message not being cleared when sending a message.
 - Reply message not being cleared when switching channels.
 - Replies not showing correctly.
-- Another attempt at fixing application freeze
-- Non-adaptive UI in the error dialog
+- Another attempt at fixing application freeze.
+- Non-adaptive UI in the error dialog.
 
 ### Development
 
