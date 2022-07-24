@@ -63,7 +63,7 @@ msgstr "Reager"
 msgid "Unlink"
 msgstr ""
 
-#: data/resources/ui/window.ui:112
+#: data/resources/ui/window.ui:112 data/resources/ui/window.ui:108
 msgid "About"
 msgstr "Om"
 
@@ -71,7 +71,7 @@ msgstr "Om"
 msgid "Note to self"
 msgstr ""
 
-#: src/backend/manager.rs:173
+#: src/backend/manager.rs:173 src/backend/manager.rs:163
 msgid "You"
 msgstr ""
 
@@ -153,6 +153,6 @@ msgstr ""
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:116
+#: src/gui/window.rs:87
 msgid "translators"
-msgstr ""
+msgstr "Allan Nordhøy <epost@anotheragency.no>"
