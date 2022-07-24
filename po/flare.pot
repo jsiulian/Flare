@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-24 10:28+0200\n"
+"POT-Creation-Date: 2022-07-24 10:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,11 +42,11 @@ msgid "Cancel"
 msgstr ""
 
 #: data/resources/ui/link_window.ui:25
-msgid "Please scan this QR code with your primary device"
+msgid "Please scan this QR code with your primary device."
 msgstr ""
 
 #: data/resources/ui/link_window.ui:34
-msgid "Please restart the application after this window closed"
+msgid "Please restart the application after this window closed."
 msgstr ""
 
 #: data/resources/ui/message_item.ui:175

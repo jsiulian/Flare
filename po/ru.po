@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-24 10:28+0200\n"
+"POT-Creation-Date: 2022-07-24 10:32+0200\n"
 "PO-Revision-Date: 2022-06-16 12:47+0200\n"
 "Last-Translator: David Lapshin <ddaudix@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -42,12 +42,12 @@ msgid "Cancel"
 msgstr "Отмена"
 
 #: data/resources/ui/link_window.ui:25
-msgid "Please scan this QR code with your primary device"
+msgid "Please scan this QR code with your primary device."
 msgstr "Пожалуйста, отсканируйте этот QR-код на основном устройстве."
 
 #: data/resources/ui/link_window.ui:34
-msgid "Please restart the application after this window closed"
-msgstr "Пожалуйста, перезапустите приложение после закрытия этого окна"
+msgid "Please restart the application after this window closed."
+msgstr "Пожалуйста, перезапустите приложение после закрытия этого окна."
 
 #: data/resources/ui/message_item.ui:175
 msgid "Reply"

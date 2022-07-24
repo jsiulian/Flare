@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-24 10:28+0200\n"
+"POT-Creation-Date: 2022-07-24 10:32+0200\n"
 "PO-Revision-Date: 2022-07-24 08:21+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
@@ -43,12 +43,12 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: data/resources/ui/link_window.ui:25
-msgid "Please scan this QR code with your primary device"
-msgstr "Veuillez scanner ce QR Code avec votre appareil primaire"
+msgid "Please scan this QR code with your primary device."
+msgstr "Veuillez scanner ce QR Code avec votre appareil primaire."
 
 #: data/resources/ui/link_window.ui:34
-msgid "Please restart the application after this window closed"
-msgstr "Veuillez redémarrer l’application après la fermeture de cette fenêtre"
+msgid "Please restart the application after this window closed."
+msgstr "Veuillez redémarrer l’application après la fermeture de cette fenêtre."
 
 #: data/resources/ui/message_item.ui:175
 msgid "Reply"
