@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-08 14:15+0200\n"
+"POT-Creation-Date: 2022-07-24 10:28+0200\n"
 "PO-Revision-Date: 2022-07-24 08:21+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.14-dev\n"
 
-#: data/resources/ui/channel_messages.ui:56
+#: data/resources/ui/channel_messages.ui:102
 msgid "Message"
 msgstr "Melding"
 
@@ -31,7 +31,7 @@ msgstr "Feil"
 msgid "Close"
 msgstr "Lukk"
 
-#: data/resources/ui/error_dialog.ui:43
+#: data/resources/ui/error_dialog.ui:59
 msgid "Please consider reporting this error."
 msgstr ""
 
@@ -51,11 +51,11 @@ msgstr ""
 msgid "Please restart the application after this window closed"
 msgstr ""
 
-#: data/resources/ui/message_item.ui:148
+#: data/resources/ui/message_item.ui:175
 msgid "Reply"
 msgstr "Svar"
 
-#: data/resources/ui/message_item.ui:154
+#: data/resources/ui/message_item.ui:181
 msgid "React"
 msgstr "Reager"
 
@@ -63,11 +63,11 @@ msgstr "Reager"
 msgid "About"
 msgstr "Om"
 
-#: src/backend/channel.rs:277
+#: src/backend/channel.rs:296
 msgid "Note to self"
 msgstr ""
 
-#: src/backend/manager.rs:152
+#: src/backend/manager.rs:163
 msgid "You"
 msgstr ""
 
@@ -96,11 +96,11 @@ msgid ""
 msgstr ""
 
 #: src/error.rs:99
-msgid "Sending a message failed"
+msgid "Sending a message failed."
 msgstr ""
 
 #: src/error.rs:104
-msgid "Receiving a message failed"
+msgid "Receiving a message failed."
 msgstr ""
 
 #: src/error.rs:109
@@ -109,19 +109,19 @@ msgid ""
 msgstr ""
 
 #: src/error.rs:114
-msgid "The application seems to be misconfigured"
+msgid "The application seems to be misconfigured."
 msgstr ""
 
-#: src/error.rs:125
+#: src/error.rs:124
 msgid "Please check your internet connection."
 msgstr ""
 
-#: src/error.rs:131
-msgid "Please delete the database and relink the device"
+#: src/error.rs:128
+msgid "Please delete the database and relink the device."
 msgstr ""
 
-#: src/error.rs:138
-msgid "The database path at {} is no folder"
+#: src/error.rs:135
+msgid "The database path at {} is no folder."
 msgstr ""
 
 #. Translators: Put your name contact info here if you want to be credited in

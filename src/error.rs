@@ -96,12 +96,12 @@ impl std::fmt::Display for ApplicationError {
             ApplicationError::SendFailed(_) => writeln!(
                 f,
                 "{}",
-                gettext("Sending a message failed")
+                gettext("Sending a message failed.")
             ),
             ApplicationError::ReceiveFailed(_) => writeln!(
                 f,
                 "{}",
-                gettext("Receiving a message failed")
+                gettext("Receiving a message failed.")
             ),
             ApplicationError::Presage(_) => writeln!(
                 f,
@@ -111,7 +111,7 @@ impl std::fmt::Display for ApplicationError {
             ApplicationError::ConfigurationError(_) => writeln!(
                 f,
                 "{}",
-                gettext("The application seems to be misconfigured")
+                gettext("The application seems to be misconfigured.")
             ),
         }
     }
@@ -125,14 +125,14 @@ impl ApplicationError {
             ApplicationError::Libsecret(e) => format!("{:#?}", e),
             ApplicationError::Db(e) => format!("{:#?}", e),
             ApplicationError::UnauthorizedSignal => {
-                gettext("Please delete the database and relink the device")
+                gettext("Please delete the database and relink the device.")
             }
             ApplicationError::SendFailed(e) => format!("{:#?}", e),
             ApplicationError::ReceiveFailed(e) => format!("{:#?}", e),
             ApplicationError::Presage(e) => format!("{:#?}", e),
             ApplicationError::ConfigurationError(e) => match e {
                 ConfigurationError::DbPathNoFolder(p) => {
-                    let s = gettext("The database path at {} is no folder");
+                    let s = gettext("The database path at {} is no folder.");
                     s.replace("{}", &p.to_string_lossy())
                 }
             },
