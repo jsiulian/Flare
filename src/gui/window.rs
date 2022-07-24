@@ -61,6 +61,35 @@ pub mod imp {
             //     let settings = PreferencesWindow::new();
             //     settings.show();
             // });
+            log::trace!("Setting up unlink action");
+            let action_unlink = SimpleAction::new("unlink", None);
+            action_unlink.connect_activate(clone!(@weak obj => move |_, _| {
+                log::trace!("User requested to unlink the device");
+                // TODO: AdwMessageDialog
+                let dialog = gtk::MessageDialog::builder()
+                    .buttons(gtk::ButtonsType::OkCancel)
+                    .message_type(gtk::MessageType::Warning)
+                    .secondary_text(&gettextrs::gettext(
+                        "This will unlink this device and remove all locally saved data. This will also close the application such that it can be relinked when opening it again.",
+                    ))
+                    .text(&gettextrs::gettext("Are you sure?"))
+                    .transient_for(&obj)
+                    .build();
+                dialog.connect_response(clone!(@weak obj => move |dialog, response| {
+                    dialog.close();
+                    if response == gtk::ResponseType::Ok {
+                        log::info!("Unlinking device");
+                        if let Some(man) = obj.imp().manager.borrow().as_ref() {
+                            if let Err(e)= man.clear() {
+                                log::error!("Failed to clear db: {}", e);
+                            }
+                        }
+                        obj.close();
+                    }
+                }));
+                dialog.show();
+            }));
+
             log::trace!("Setting up about-page action");
             let action_about = SimpleAction::new("about", None);
             action_about.connect_activate(|_, _| {
@@ -95,6 +124,7 @@ pub mod imp {
             let actions = SimpleActionGroup::new();
             obj.insert_action_group("win", Some(&actions));
             actions.add_action(&action_settings);
+            actions.add_action(&action_unlink);
             actions.add_action(&action_about);
         }
 

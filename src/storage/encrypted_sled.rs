@@ -37,6 +37,11 @@ impl<E: encrypted_sled::Encryption> EncryptedSledConfigStore<E> {
         })
     }
 
+    pub fn clear(&self) -> Result<(), Error> {
+        log::trace!("Clearing config store");
+        Ok(self.db.read().expect("poisoned mutex").clear()?)
+    }
+
     pub fn get<K>(&self, key: K) -> Result<Option<IVec>, Error>
     where
         K: AsRef<str>,

@@ -102,6 +102,13 @@ impl Manager {
         Object::new(&[]).expect("Failed to create `Manager` object.")
     }
 
+    pub fn clear(&self) -> Result<(), ApplicationError> {
+        if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
+            config_store.clear()?;
+        }
+        Ok(())
+    }
+
     #[cfg(not(feature = "screenshot"))]
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
         use futures::{channel::oneshot, future};
@@ -125,7 +132,7 @@ impl Manager {
             let (provisioning_link_tx, provisioning_link_rx) = oneshot::channel();
             let (manager, _) = future::join(
                 presage::Manager::link_secondary_device(
-                    config_store,
+                    config_store.clone(),
                     presage::prelude::SignalServers::Production,
                     "flare".to_string(),
                     provisioning_link_tx,
@@ -146,6 +153,9 @@ impl Manager {
         };
 
         self.imp().internal.swap(&RefCell::new(Some(internal)));
+        self.imp()
+            .config_store
+            .swap(&RefCell::new(Some(config_store)));
 
         self.sync_contacts().await?;
         Ok(())
@@ -358,6 +368,7 @@ mod imp {
     pub struct Manager {
         pub(super) internal:
             RefCell<Option<presage::Manager<super::ConfigStoreType, presage::Registered>>>,
+        pub(super) config_store: RefCell<Option<super::ConfigStoreType>>,
         #[cfg(feature = "screenshot")]
         pub(in super::super) channels: RefCell<HashMap<u64, Channel>>,
         #[cfg(not(feature = "screenshot"))]

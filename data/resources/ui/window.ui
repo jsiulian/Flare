@@ -105,6 +105,10 @@
       <!--   <attribute name="action">win.settings</attribute> -->
       <!-- </item> -->
       <item>
+        <attribute name="label" translatable="yes">Unlink</attribute>
+        <attribute name="action">win.unlink</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">About</attribute>
         <attribute name="action">win.about</attribute>
       </item>
