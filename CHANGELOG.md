@@ -8,13 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Weblate for translations
+- Weblate for translations.
+- Ability to unlink device.
 
 ## [0.1.5] - 2022-07-23
 ### Added
 
 - Upload attachments (currently image-only).
-- Download attachmenst.
+- Download attachments.
 - Remove reply message before sending a message.
 - Remove attachments before sending a message.
 - Improved UI for replies in the chat.

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-24 10:32+0200\n"
+"POT-Creation-Date: 2022-07-25 10:32+0200\n"
 "PO-Revision-Date: 2022-06-16 12:47+0200\n"
 "Last-Translator: Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
 "Language-Team: English\n"
@@ -60,6 +60,10 @@ msgid "React"
 msgstr "Reagieren"
 
 #: data/resources/ui/window.ui:108
+msgid "Unlink"
+msgstr ""
+
+#: data/resources/ui/window.ui:112
 msgid "About"
 msgstr "Über"
 
@@ -67,7 +71,7 @@ msgstr "Über"
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:163
+#: src/backend/manager.rs:173
 msgid "You"
 msgstr "Du"
 
@@ -131,8 +135,19 @@ msgstr ""
 msgid "The database path at {} is no folder."
 msgstr "Der Datenbank Pfad bei {} ist kein Ordner."
 
+#: src/gui/window.rs:73
+msgid ""
+"This will unlink this device and remove all locally saved data. This will "
+"also close the application such that it can be relinked when opening it "
+"again."
+msgstr ""
+
+#: src/gui/window.rs:75
+msgid "Are you sure?"
+msgstr ""
+
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:87
+#: src/gui/window.rs:116
 msgid "translators"
 msgstr "Julian Schmidhuber <translation@schmiddi.anonaddy.com>"

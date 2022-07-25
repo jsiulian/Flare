@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-24 10:32+0200\n"
+"POT-Creation-Date: 2022-07-25 10:32+0200\n"
 "PO-Revision-Date: 2022-07-24 08:21+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -60,6 +60,10 @@ msgid "React"
 msgstr "Reager"
 
 #: data/resources/ui/window.ui:108
+msgid "Unlink"
+msgstr ""
+
+#: data/resources/ui/window.ui:112
 msgid "About"
 msgstr "Om"
 
@@ -67,7 +71,7 @@ msgstr "Om"
 msgid "Note to self"
 msgstr ""
 
-#: src/backend/manager.rs:163
+#: src/backend/manager.rs:173
 msgid "You"
 msgstr ""
 
@@ -124,8 +128,19 @@ msgstr ""
 msgid "The database path at {} is no folder."
 msgstr ""
 
+#: src/gui/window.rs:73
+msgid ""
+"This will unlink this device and remove all locally saved data. This will "
+"also close the application such that it can be relinked when opening it "
+"again."
+msgstr ""
+
+#: src/gui/window.rs:75
+msgid "Are you sure?"
+msgstr ""
+
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:87
+#: src/gui/window.rs:116
 msgid "translators"
 msgstr ""

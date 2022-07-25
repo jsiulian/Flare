@@ -1,6 +1,7 @@
 # Flare
 
 [![Matrix](https://img.shields.io/badge/Matrix-Join-brightgreen)](https://matrix.to/#/%23flare-signal:matrix.org)
+[![Translation status](https://hosted.weblate.org/widgets/flare/-/flare/svg-badge.svg)](https://hosted.weblate.org/engage/flare/)
 
 A unofficial Signal GTK client.
 
