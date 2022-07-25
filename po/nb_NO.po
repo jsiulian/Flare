@@ -33,11 +33,11 @@ msgstr "Lukk"
 
 #: data/resources/ui/error_dialog.ui:59
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "Du bør rapportere denne feilen."
 
 #: data/resources/ui/link_window.ui:8
 msgid "Link Device"
-msgstr ""
+msgstr "Tilknytt enhet"
 
 #: data/resources/ui/link_window.ui:16
 msgid "Cancel"
@@ -45,11 +45,11 @@ msgstr "Avbryt"
 
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device."
-msgstr ""
+msgstr "Skann denne QR-koden med din hovedenhet."
 
 #: data/resources/ui/link_window.ui:34
 msgid "Please restart the application after this window closed."
-msgstr ""
+msgstr "Start programmet på ny etter at dette vinduet er lukket."
 
 #: data/resources/ui/message_item.ui:175
 msgid "Reply"
@@ -61,7 +61,7 @@ msgstr "Reager"
 
 #: data/resources/ui/window.ui:108
 msgid "Unlink"
-msgstr ""
+msgstr "Opphev forbindelse"
 
 #: data/resources/ui/window.ui:112 data/resources/ui/window.ui:108
 msgid "About"
@@ -69,11 +69,11 @@ msgstr "Om"
 
 #: src/backend/channel.rs:296
 msgid "Note to self"
-msgstr ""
+msgstr "Selvpåminnelse"
 
 #: src/backend/manager.rs:173 src/backend/manager.rs:163
 msgid "You"
-msgstr ""
+msgstr "Deg"
 
 #: src/backend/message.rs:352
 msgid "Sent an image"
@@ -89,56 +89,62 @@ msgstr[1] ""
 
 #: src/error.rs:74
 msgid "I/O Error."
-msgstr ""
+msgstr "Inn/-utdatafeil."
 
 #: src/error.rs:79
+#, fuzzy
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "Mangler tilkobling til Internett."
 
 #: src/error.rs:84
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "Fikk ikke kontakt med libsecret."
 
 #: src/error.rs:89
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"Fikk ikke kontakt med bakende-databasen. Start programmet på ny eller slett "
+"databasen og forbind programmet igjen."
 
 #: src/error.rs:94
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"Det ser ikke ut til at du er innlogget med Signal. Slett databasen og "
+"forbind programmet igjen."
 
 #: src/error.rs:99
 msgid "Sending a message failed."
-msgstr ""
+msgstr "Kunne ikke sende melding."
 
 #: src/error.rs:104
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "Kunne ikke motta melding."
 
 #: src/error.rs:109
+#, fuzzy
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
-msgstr ""
+msgstr "Noe uventet gikk galt med Signal-bakenden. Prøv igjen senere."
 
 #: src/error.rs:114
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "Programmet er ikke satt opp riktig."
 
 #: src/error.rs:124
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Sjekk din tilkobling til Internett."
 
 #: src/error.rs:128
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "Slett databasen og forbind enheten igjen."
 
 #: src/error.rs:135
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "Databasestien {} er ikke en mappe."
 
 #: src/gui/window.rs:73
 msgid ""
@@ -146,10 +152,13 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Dette vil oppheve forbindelsen fra denne enheten og fjerne all lokalt lagret "
+"data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
+"åpner det på ny."
 
 #: src/gui/window.rs:75
 msgid "Are you sure?"
-msgstr ""
+msgstr "Er du sikker?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
