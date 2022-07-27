@@ -26,8 +26,15 @@ impl Message {
         log::trace!("Trying to build a message from text");
         let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Message`");
 
+        let text_owned = text.as_ref().to_owned();
+        let body = if text_owned.is_empty() {
+            None
+        } else {
+            Some(text_owned)
+        };
+
         let message = DataMessage {
-            body: Some(text.as_ref().to_owned()),
+            body,
             timestamp: Some(
                 std::time::SystemTime::now()
                     .duration_since(std::time::UNIX_EPOCH)
@@ -215,7 +222,6 @@ impl Message {
         let manager = self.property::<Manager>("manager");
         let upload_data = attachment.as_upload_attachment().await;
         self.imp().attachments.borrow_mut().push(attachment);
-        // TODO: Error handling
         log::trace!("Uploading the attachment");
         let upload_attachments_result = manager.upload_attachments(vec![upload_data]).await?;
 
@@ -238,7 +244,7 @@ mod imp {
             once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecObject, ParamSpecString,
             ParamSpecUInt64, Value,
         },
-        prelude::{StaticType, ToValue},
+        prelude::{ObjectExt, StaticType, ToValue},
     };
     use gtk::glib;
     use libsignal_service::content::Reaction;
@@ -311,12 +317,19 @@ mod imp {
                         Some(""),
                         ParamFlags::READABLE,
                     ),
+                    ParamSpecString::new(
+                        "textual-description",
+                        "textual-description",
+                        "textual-description",
+                        Some(""),
+                        ParamFlags::READABLE,
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "sender" => self.sender.borrow().as_ref().to_value(),
@@ -334,6 +347,31 @@ mod imp {
                     .and_then(|d| d.timestamp)
                     .unwrap_or(0)
                     .to_value(),
+                "textual-description" => {
+                    if let Some(body) = obj.property::<Option<String>>("body") {
+                        return body.to_value();
+                    } else {
+                        let attachments = self.attachments.borrow();
+
+                        if attachments.iter().all(|a| a.is_image()) {
+                            gettextrs::ngettext(
+                                "Sent an image",
+                                "Sent {} images",
+                                attachments.len() as u32,
+                            )
+                            .replace("{}", &attachments.len().to_string())
+                            .to_value()
+                        } else {
+                            gettextrs::ngettext(
+                                "Sent a file",
+                                "Sent {} files",
+                                attachments.len() as u32,
+                            )
+                            .replace("{}", &attachments.len().to_string())
+                            .to_value()
+                        }
+                    }
+                }
                 "quote" => self.quote.borrow().to_value(),
                 _ => unimplemented!(),
             }

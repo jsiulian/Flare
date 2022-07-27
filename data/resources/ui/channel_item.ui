@@ -35,17 +35,39 @@
             </binding>
           </object>
         </child>
+        <!-- Last message -->
         <child>
-          <object class="GtkLabel">
-            <property name="halign">start</property>
-            <property name="ellipsize">end</property>
-            <binding name="label">
-              <lookup name="body">
-                <lookup name="last-message">
-                  <lookup name="channel" type="FlChannelItem"/>
-                </lookup>
-              </lookup>
-            </binding>
+          <object class="GtkBox">
+            <property name="spacing">2</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="halign">start</property>
+                <binding name="label">
+                  <closure function="append_colon" type="gchararray">
+                    <lookup name="title">
+                      <lookup name="sender">
+                        <lookup name="last-message">
+                          <lookup name="channel" type="FlChannelItem"/>
+                        </lookup>
+                      </lookup>
+                    </lookup>
+                  </closure>
+                </binding>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="halign">start</property>
+                <property name="ellipsize">end</property>
+                <binding name="label">
+                  <lookup name="textual-description">
+                    <lookup name="last-message">
+                      <lookup name="channel" type="FlChannelItem"/>
+                    </lookup>
+                  </lookup>
+                </binding>
+              </object>
+            </child>
           </object>
         </child>
       </object>

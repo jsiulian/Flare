@@ -42,6 +42,14 @@ pub mod imp {
         manager: RefCell<Option<Manager>>,
     }
 
+    #[gtk::template_callbacks]
+    impl ChannelItem {
+        #[template_callback(function)]
+        pub(super) fn append_colon(s: String) -> String {
+            format!("{}: ", s)
+        }
+    }
+
     #[glib::object_subclass]
     impl ObjectSubclass for ChannelItem {
         const NAME: &'static str = "FlChannelItem";
@@ -50,6 +58,7 @@ pub mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
+            Self::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

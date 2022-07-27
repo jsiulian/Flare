@@ -185,7 +185,8 @@ impl Channel {
 
         crate::debug!(
             "Sending a message {} to channel {}",
-            msg.property::<String>("body"),
+            msg.property::<Option<String>>("body")
+                .unwrap_or_else(|| "(empty)".to_owned()),
             self.property::<String>("title")
         );
         if let Some(data) = msg.data() {

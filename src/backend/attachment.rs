@@ -18,14 +18,24 @@ impl Attachment {
         Object::new(&[
             ("manager", manager),
             ("file", &file),
+            (
+                "name",
+                &file
+                    .basename()
+                    .and_then(|f| f.file_name().map(|s| s.to_string_lossy().into_owned())),
+            ),
             ("image", &Texture::from_file(&file).ok()),
         ])
         .expect("Failed to create `Attachment`")
     }
 
+    pub fn is_image(&self) -> bool {
+        self.property::<bool>("is-image")
+    }
+
     pub(super) async fn as_upload_attachment(&self) -> (AttachmentSpec, Vec<u8>) {
         let file = self.property::<File>("file");
-        let image = self.property::<Texture>("image");
+        let image = self.property::<Option<Texture>>("image");
         let bytes = file
             .load_bytes_future()
             .await
@@ -45,8 +55,8 @@ impl Attachment {
                 preview: None,
                 voice_note: None,
                 borderless: None,
-                width: image.width().try_into().ok(),
-                height: image.height().try_into().ok(),
+                width: image.as_ref().and_then(|i| i.width().try_into().ok()),
+                height: image.as_ref().and_then(|i| i.height().try_into().ok()),
                 caption: None,
                 blur_hash: None,
             },
@@ -108,7 +118,8 @@ impl Attachment {
 mod imp {
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gdk::Texture;
-    use gdk_pixbuf::glib::{Bytes, ParamSpecString};
+    use gdk_pixbuf::glib::{Bytes, ParamSpecBoolean, ParamSpecString};
+    use gdk_pixbuf::prelude::ObjectExt;
     use gdk_pixbuf::{
         glib::{once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecObject, Value},
         prelude::{StaticType, ToValue},
@@ -168,17 +179,39 @@ mod imp {
                         None,
                         ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
                     ),
+                    ParamSpecBoolean::new(
+                        "is-image",
+                        "is-image",
+                        "is-image",
+                        false,
+                        ParamFlags::READABLE,
+                    ),
+                    ParamSpecBoolean::new(
+                        "is-file",
+                        "is-file",
+                        "is-file",
+                        false,
+                        ParamFlags::READABLE,
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "image" => self.image.borrow().as_ref().to_value(),
                 "file" => self.file.borrow().as_ref().to_value(),
                 "name" => self.name.borrow().as_ref().to_value(),
+                "is-image" => obj
+                    .property::<Option<Texture>>("image")
+                    .is_some()
+                    .to_value(),
+                "is-file" => obj
+                    .property::<Option<Texture>>("image")
+                    .is_none()
+                    .to_value(),
                 _ => unimplemented!(),
             }
         }

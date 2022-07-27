@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Weblate for translations.
 - Ability to unlink device.
+- Receive non-image attachments.
+- Send non-image attachments.
+- Display sender of last message in channel overview.
 
 ## [0.1.5] - 2022-07-23
 ### Added

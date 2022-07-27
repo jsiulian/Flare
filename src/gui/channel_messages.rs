@@ -24,7 +24,6 @@ pub mod imp {
     use gtk::subclass::prelude::*;
     use gtk::CompositeTemplate;
     use gtk::FileChooserAction;
-    use gtk::FileFilter;
     use gtk::ResponseType;
 
     use crate::backend::Channel;
@@ -87,8 +86,6 @@ pub mod imp {
         #[template_callback]
         fn add_attachment(&self) {
             log::trace!("Requested to add a attachment");
-            let filter = FileFilter::new();
-            filter.add_mime_type("image/*");
             let chooser = FileChooserNativeBuilder::new()
                 .transient_for(
                     &self
@@ -99,7 +96,6 @@ pub mod imp {
                         .expect("Root of `ChannelMessages` to be a `Window`."),
                 )
                 .action(FileChooserAction::Open)
-                .filter(&filter)
                 .build();
             let manager = self.instance().property::<Manager>("manager");
             let obj = self.instance();

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 10:32+0200\n"
+"POT-Creation-Date: 2022-07-27 16:33+0200\n"
 "PO-Revision-Date: 2022-06-16 12:47+0200\n"
 "Last-Translator: Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
 "Language-Team: English\n"
@@ -74,6 +74,18 @@ msgstr "Notiz an mich"
 #: src/backend/manager.rs:173
 msgid "You"
 msgstr "Du"
+
+#: src/backend/message.rs:352
+msgid "Sent an image"
+msgid_plural "Sent {} images"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/backend/message.rs:360
+msgid "Sent a file"
+msgid_plural "Sent {} files"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/error.rs:74
 msgid "I/O Error."
