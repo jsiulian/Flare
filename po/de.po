@@ -61,7 +61,7 @@ msgstr "Reagieren"
 
 #: data/resources/ui/window.ui:108
 msgid "Unlink"
-msgstr ""
+msgstr "Verbindung aufheben"
 
 #: data/resources/ui/window.ui:112
 msgid "About"
@@ -153,10 +153,13 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Dies wird die Verbindung zu deinem Gerät aufheben und alle lokal "
+"gespeicherten Daten löschen. Dies wird außerdem die Applikation schließen, "
+"sodass es nachdem erneuten öffnen neu verbunden werden kann."
 
 #: src/gui/window.rs:75
 msgid "Are you sure?"
-msgstr ""
+msgstr "Sind Sie sicher?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
