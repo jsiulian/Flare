@@ -8,14 +8,16 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-27 16:33+0200\n"
-"PO-Revision-Date: 2022-06-16 12:47+0200\n"
-"Last-Translator: David Lapshin <ddaudix@gmail.com>\n"
-"Language-Team: Russian\n"
-"Language: en_US\n"
+"PO-Revision-Date: 2022-07-28 22:19+0000\n"
+"Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
+"\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: data/resources/ui/channel_messages.ui:102
 msgid "Message"
@@ -59,7 +61,7 @@ msgstr "Отреагировать"
 
 #: data/resources/ui/window.ui:108
 msgid "Unlink"
-msgstr ""
+msgstr "Отвязать"
 
 #: data/resources/ui/window.ui:112
 msgid "About"
@@ -76,18 +78,18 @@ msgstr "Вы"
 #: src/backend/message.rs:352
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Отправить изображение"
+msgstr[1] "Отправить {} изображений"
 
 #: src/backend/message.rs:360
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Оправить файл"
+msgstr[1] "Отправить {} файлов"
 
 #: src/error.rs:74
 msgid "I/O Error."
-msgstr "Ошибка I/O"
+msgstr "Ошибка I/O."
 
 #: src/error.rs:79
 msgid "There does not seem to be a connection to the internet available."
@@ -150,10 +152,13 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Это отключит это устройство и удалит все локально сохраненные данные. Это "
+"также закроет приложение, чтобы его можно было повторно связать при "
+"повторном открытии."
 
 #: src/gui/window.rs:75
 msgid "Are you sure?"
-msgstr ""
+msgstr "Вы уверены?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
