@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-27 16:33+0200\n"
-"PO-Revision-Date: 2022-08-04 12:59+0200\n"
+"PO-Revision-Date: 2022-08-04 17:31+0200\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -158,7 +158,7 @@ msgstr ""
 
 #: src/gui/window.rs:75
 msgid "Are you sure?"
-msgstr "Bist du sicher"
+msgstr "Bist du sicher?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
