@@ -2,25 +2,26 @@
 # Copyright (C) 2022 THE Flare'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Flare package.
 # Julian Schmidhuber <translation@schmiddi.anonaddy.com>, 2022.
+# Jürgen Benvenuti <gastornis@posteo.org>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-27 16:33+0200\n"
-"PO-Revision-Date: 2022-07-28 22:19+0000\n"
-"Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
+"PO-Revision-Date: 2022-08-04 17:31+0200\n"
+"Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
+"Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: data/resources/ui/channel_messages.ui:102
 msgid "Message"
-msgstr "Message"
+msgstr "Nachricht"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -32,11 +33,11 @@ msgstr "Schließen"
 
 #: data/resources/ui/error_dialog.ui:59
 msgid "Please consider reporting this error."
-msgstr "Bitte erwägen Sie den Fehler zu melden."
+msgstr "Bitte erwäge, diesen Fehler zu melden."
 
 #: data/resources/ui/link_window.ui:8
 msgid "Link Device"
-msgstr "Verbinde dein Gerät"
+msgstr "Gerät koppeln"
 
 #: data/resources/ui/link_window.ui:16
 msgid "Cancel"
@@ -44,13 +45,12 @@ msgstr "Abbrechen"
 
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device."
-msgstr "Bitte scannen Sie diesen QR-Code mit ihrem primären Gerät."
+msgstr "Bitte scanne diesen QR-Code mit deinen Hauptgerät."
 
 #: data/resources/ui/link_window.ui:34
 msgid "Please restart the application after this window closed."
 msgstr ""
-"Bitte starten Sie die applikation neu nachdem sich das Fenster geschlossen "
-"hat."
+"Bitte starte die Anwendung neu, nachdem sich dieses Fenster geschlossen hat."
 
 #: data/resources/ui/message_item.ui:175
 msgid "Reply"
@@ -62,11 +62,11 @@ msgstr "Reagieren"
 
 #: data/resources/ui/window.ui:108
 msgid "Unlink"
-msgstr "Verbindung aufheben"
+msgstr "Entkoppeln"
 
 #: data/resources/ui/window.ui:112
 msgid "About"
-msgstr "Über"
+msgstr "Info"
 
 #: src/backend/channel.rs:296
 msgid "Note to self"
@@ -90,7 +90,7 @@ msgstr[1] "Hat {} Dateien gesendet"
 
 #: src/error.rs:74
 msgid "I/O Error."
-msgstr "I/O Fehler."
+msgstr "Ein-/Ausgabefehler."
 
 #: src/error.rs:79
 msgid "There does not seem to be a connection to the internet available."
@@ -98,42 +98,41 @@ msgstr "Es scheint keine Internetverbindung vorhanden zu sein."
 
 #: src/error.rs:84
 msgid "The communication with Libsecret failed."
-msgstr "Kommunikation mit Libsecret ist fehlgeschlagen."
+msgstr "Die Kommunikation mit Libsecret ist fehlgeschlagen."
 
 #: src/error.rs:89
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
-"Die Datenbank hatte einen Fehler. Bitte starten Sie die Applikation neu "
-"oderlöschen Sie die Datenbank und verbinden Sie die Applikation erneut."
+"In der Datenbank ist ein Fehler aufgetreten. Bitte starte die Anwendung neu "
+"oder lösche die Datenbank und kopple die Anwendung erneut."
 
 #: src/error.rs:94
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
-"Sie scheinen nicht mehr von Signal authorisiert zu sein. Bitte löschen Sie "
-"die Datenbank und verbinden Sie die Applikation erneut."
+"Du scheinst nicht von Signal autorisiert zu sein. Bitte lösche die Datenbank "
+"und kopple die Anwendung erneut."
 
 #: src/error.rs:99
 msgid "Sending a message failed."
-msgstr "Konnte eine Nachricht nicht senden."
+msgstr "Nachricht konnte nicht gesendet werden."
 
 #: src/error.rs:104
 msgid "Receiving a message failed."
-msgstr "Konnte eine Nachricht nicht empfangen."
+msgstr "Nachricht konnte nicht empfangen werden."
 
 #: src/error.rs:109
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
-"Etwas unerwartetes passierte mit Signal. Bitte versuchen Sie es später "
-"erneut."
+"Etwas Unerwartetes ist mit Signal passiert. Bitte versuche es später wieder."
 
 #: src/error.rs:114
 msgid "The application seems to be misconfigured."
-msgstr "Die Applikation scheint falsch konfiguriert zu sein."
+msgstr "Die Anwendung scheint falsch konfiguriert zu sein."
 
 #: src/error.rs:124
 msgid "Please check your internet connection."
@@ -141,12 +140,11 @@ msgstr "Bitte prüfe deine Internetverbindung."
 
 #: src/error.rs:128
 msgid "Please delete the database and relink the device."
-msgstr ""
-"Bitte löschen Sie die Datenbank und verknüpfen Sie die Applikation erneut."
+msgstr "Bitte lösche die Datenbank und kopple das Gerät erneut."
 
 #: src/error.rs:135
 msgid "The database path at {} is no folder."
-msgstr "Der Datenbank Pfad bei {} ist kein Ordner."
+msgstr "Der Datenbankpfad bei {} ist kein Ordner."
 
 #: src/gui/window.rs:73
 msgid ""
@@ -154,16 +152,18 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
-"Dies wird die Verbindung zu deinem Gerät aufheben und alle lokal "
-"gespeicherten Daten löschen. Dies wird außerdem die Applikation schließen, "
-"sodass es nachdem erneuten öffnen neu verbunden werden kann."
+"Dies wird dieses Gerät entkoppeln und alle lokal gespeicherten Daten "
+"löschen. Dies wird außerdem die Anwendung schließen, sodass es nach dem "
+"erneuten Öffnen neu gekoppelt werden kann."
 
 #: src/gui/window.rs:75
 msgid "Are you sure?"
-msgstr "Sind Sie sicher?"
+msgstr "Bist du sicher?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
 #: src/gui/window.rs:116
 msgid "translators"
-msgstr "Julian Schmidhuber <translation@schmiddi.anonaddy.com>"
+msgstr ""
+"Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
+"Jürgen Benvenuti <gastornis@posteo.org>, 2022"
