@@ -1,7 +1,6 @@
 use std::{cell::RefCell, collections::HashMap, path::Path};
 
 use crate::storage::EncryptedSledConfigStore;
-use futures::StreamExt;
 use gdk_pixbuf::{
     glib::{clone, MainContext, Object, Priority},
     prelude::{Continue, ObjectExt},
@@ -17,13 +16,15 @@ use libsignal_service::{
 };
 use rand::Fill;
 
-use super::{Channel, Contact, Message};
+use super::{manager_thread::ManagerThread, Channel, Contact, Message};
 
 use libsecret::{Schema, SchemaAttributeType, SchemaFlags};
 
 use crate::ApplicationError;
 use chacha20poly1305::ChaCha20Poly1305;
 use encrypted_sled::{CountingNonce, EncryptionCipher};
+
+const MESSAGE_BOUND: usize = 10;
 
 gtk::glib::wrapper! {
     pub struct Manager(ObjectSubclass<imp::Manager>);
@@ -111,46 +112,51 @@ impl Manager {
 
     #[cfg(not(feature = "screenshot"))]
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
-        use futures::{channel::oneshot, future};
+        use futures::channel::oneshot;
+        use futures::{select, FutureExt};
+        use tokio::sync::mpsc;
         let config_store = config_store(p).await?;
         log::trace!("Setting up the manager");
-        let internal = if let Ok(manager) = presage::Manager::load_registered(config_store.clone())
-        {
-            log::debug!("The configuration store is already valid, loading a registered account");
-            manager
-        } else {
-            log::debug!("The config store is not valid yet, linking with a secondary device");
-            let (send, receive) = MainContext::channel(Priority::default());
-            receive.attach(
-                None,
-                clone!(@strong self as s => move |url| {
-                    s.emit_by_name::<()>("link-qr-code", &[&url]);
-                    Continue(false)
-                }),
-            );
+        let (provisioning_link_tx, provisioning_link_rx) = oneshot::channel();
+        let (error_tx, error_rx) = oneshot::channel();
 
-            let (provisioning_link_tx, provisioning_link_rx) = oneshot::channel();
-            let (manager, _) = future::join(
-                presage::Manager::link_secondary_device(
-                    config_store.clone(),
-                    presage::prelude::SignalServers::Production,
-                    "flare".to_string(),
-                    provisioning_link_tx,
-                ),
-                async move {
-                    match provisioning_link_rx.await {
-                        Ok(url) => {
-                            log::trace!("Manager wants to show QR code, emitting signal");
-                            let _ = send.send(String::from(url));
-                        }
-                        Err(e) => log::error!("Error linking device: {e}"),
-                    }
-                },
-            )
-            .await;
-            self.emit_by_name::<()>("link-finish", &[]);
-            manager?
-        };
+        log::debug!("Start receiving messages");
+        let (send_content, mut receive_content) = mpsc::channel(MESSAGE_BOUND);
+        let (send_error, mut receive_error) = mpsc::channel(MESSAGE_BOUND);
+
+        let internal = ManagerThread::new(
+            config_store.clone(),
+            provisioning_link_tx,
+            error_tx,
+            send_content,
+            send_error,
+        )
+        .await;
+
+        let (send, receive) = MainContext::channel(Priority::default());
+        receive.attach(
+            None,
+            clone!(@strong self as s => move |url| {
+                s.emit_by_name::<()>("link-qr-code", &[&url]);
+                Continue(false)
+            }),
+        );
+
+        match error_rx.await {
+            Ok(err) => {
+                return Err(err.into());
+            }
+            Err(_e) => log::trace!("Manager setup successfull"),
+        }
+
+        match provisioning_link_rx.await {
+            Ok(url) => {
+                log::trace!("Manager wants to show QR code, emitting signal");
+                let _ = send.send(String::from(url));
+            }
+            Err(_e) => log::trace!("Manager is already linked"),
+        }
+        self.emit_by_name::<()>("link-finish", &[]);
 
         self.imp().internal.swap(&RefCell::new(Some(internal)));
         self.imp()
@@ -158,14 +164,55 @@ impl Manager {
             .swap(&RefCell::new(Some(config_store)));
 
         self.sync_contacts().await?;
+        self.init_channels().await;
+        'outer: loop {
+            select! {
+                error_opt = receive_error.recv().fuse() => {
+                    if error_opt.is_none() {
+                        break 'outer;
+                    }
+                    return Err(error_opt.unwrap().into());
+                }
+                msg_opt = receive_content.recv().fuse() => {
+                    if msg_opt.is_none() {
+                        break 'outer;
+                    }
+                    let msg = msg_opt.unwrap();
+                    let message = Message::from_content(msg, self).await;
+                    if let Some(channel) = message.channel() {
+                       let mut channels = self.imp().channels.borrow_mut();
+                        crate::debug!("Got from channel: {}", channel.property::<String>("title"));
+                        if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
+                            log::debug!("Message from a already existing channel");
+                            if stored_channel.new_message(message).is_err() {
+                                break 'outer;
+                            }
+                        } else {
+                            log::debug!("Got a message from a new channel");
+                            if self.try_emit_by_name::<()>("channel", &[&channel]).is_err() {
+                                break 'outer;
+                            }
+                            if channel.new_message(message).is_err() {
+                                break 'outer;
+                            }
+                            channels.insert(channel.internal_hash(), channel);
+                        }
+                    } else {
+                        log::trace!("Message is not associated with channel");
+                    }
+                    log::debug!("Emitting message");
+                }
+                complete => break,
+            };
+        }
         Ok(())
     }
 
     async fn sync_contacts(&self) -> Result<(), presage::Error> {
         log::trace!("Requesting contact sync");
         let _ = self.internal().request_contacts_sync().await?;
-        let profile = self.internal().retrieve_profile().await?;
-        self.imp().profile.borrow_mut().replace(profile);
+        // let profile = self.internal().retrieve_profile().await?;
+        // self.imp().profile.borrow_mut().replace(profile);
         Ok(())
     }
 
@@ -189,49 +236,12 @@ impl Manager {
         //     .unwrap_or(gettextrs::gettext("No Name"))
     }
 
-    fn internal(&self) -> presage::Manager<ConfigStoreType, presage::Registered> {
+    fn internal(&self) -> ManagerThread {
         self.imp().internal()
     }
 
     pub(super) fn available_channels(&self) -> Vec<Channel> {
         self.imp().channels.borrow().values().cloned().collect()
-    }
-
-    #[cfg(not(feature = "screenshot"))]
-    pub async fn setup_receive_message_loop(&self) -> Result<(), ApplicationError> {
-        log::debug!("Start receiving messages");
-        'outer: loop {
-            let messages = self.internal().receive_messages().await?;
-            futures::pin_mut!(messages);
-            while let Some(msg) = messages.next().await {
-                let message = Message::from_content(msg, self).await;
-                if let Some(channel) = message.channel() {
-                    let mut channels = self.imp().channels.borrow_mut();
-                    crate::debug!("Got from channel: {}", channel.property::<String>("title"));
-                    // self.emit_by_name::<()>("message", &[&message]);
-                    if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
-                        log::debug!("Message from a already existing channel");
-                        if stored_channel.new_message(message).is_err() {
-                            break 'outer;
-                        }
-                    } else {
-                        log::debug!("Got a message from a new channel");
-                        if self.try_emit_by_name::<()>("channel", &[&channel]).is_err() {
-                            break 'outer;
-                        }
-                        if channel.new_message(message).is_err() {
-                            break 'outer;
-                        }
-                        channels.insert(channel.internal_hash(), channel);
-                    }
-                } else {
-                    log::trace!("Message is not associated with channel");
-                }
-                log::debug!("Emitting message");
-            }
-            log::debug!("Websocket closed, trying again");
-        }
-        Ok(())
     }
 
     pub fn list_contacts(&self) -> Vec<Contact> {
@@ -248,7 +258,7 @@ impl Manager {
     pub fn self_contact(&self) -> Contact {
         let presage_contact = presage::prelude::Contact {
             address: ServiceAddress {
-                uuid: Some(self.internal().uuid()),
+                uuid: Some(self.uuid()),
                 phonenumber: None,
                 relay: None,
             },
@@ -359,27 +369,23 @@ mod imp {
         prelude::StaticType,
     };
     use gtk::glib;
-    use presage::libsignal_service::Profile;
     use std::{cell::RefCell, collections::HashMap};
 
-    use crate::backend::{Channel, Message};
+    use crate::backend::{manager_thread::ManagerThread, Channel, Message};
 
     #[derive(Default)]
     pub struct Manager {
-        pub(super) internal:
-            RefCell<Option<presage::Manager<super::ConfigStoreType, presage::Registered>>>,
+        pub(super) internal: RefCell<Option<ManagerThread>>,
         pub(super) config_store: RefCell<Option<super::ConfigStoreType>>,
         #[cfg(feature = "screenshot")]
         pub(in super::super) channels: RefCell<HashMap<u64, Channel>>,
         #[cfg(not(feature = "screenshot"))]
         pub(super) channels: RefCell<HashMap<u64, Channel>>,
-        pub(super) profile: RefCell<Option<Profile>>,
+        // pub(super) profile: RefCell<Option<Profile>>,
     }
 
     impl Manager {
-        pub(super) fn internal(
-            &self,
-        ) -> presage::Manager<super::ConfigStoreType, presage::Registered> {
+        pub(super) fn internal(&self) -> ManagerThread {
             self.internal
                 .borrow()
                 .as_ref()

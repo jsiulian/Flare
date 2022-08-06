@@ -204,12 +204,6 @@ pub mod imp {
                     dialog.show();
                     return;
                 }
-                // TODO: Move init to after message receive
-                manager.init_channels().await;
-                if let Err(e) = manager.setup_receive_message_loop().await {
-                    let dialog = ErrorDialog::new(e, &obj);
-                    dialog.show();
-                }
             }));
         }
 

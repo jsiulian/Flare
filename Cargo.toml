@@ -19,7 +19,8 @@ tokio = { version = "1.17.0", features = ["rt", "macros", "rt-multi-thread", "ti
 
 async-trait = "0.1"
 sled = "0.34"
-presage = { git = "https://github.com/whisperfish/presage.git", rev = "aa6e333d5400f4d6361552c4c40161790e1171d7" }
+# presage = { git = "https://github.com/whisperfish/presage.git", rev = "aa6e333d5400f4d6361552c4c40161790e1171d7" }
+presage = { path = "/mnt/hdd/Nextcloud/Programmieren/Programmieren/Rust/forks/presage" }
 libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "1508fa8f3561e3807aa8d073ca05a61346ae5a82" }
 libsecret = { version = "0.1.4", features = ["v0_19"] }
 rand = "0.8.5"
@@ -28,6 +29,7 @@ encrypted-sled = "0.2"
 hex = "0.4.3"
 serde = "1.0"
 serde_json = "1.0"
+url = "2.2.2"
 
 qrcode-generator = "4.1.6"
 
