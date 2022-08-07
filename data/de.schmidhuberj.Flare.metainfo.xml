@@ -37,7 +37,7 @@
         React to a message
       </li>
       <li>
-        Sending and receiving attachments (currently image-only)
+        Sending and receiving attachments
       </li>
       <li>
         Encrypted storage
@@ -50,6 +50,11 @@
     </p>
   </description>
   <releases>
+    <release version="v0.2.0" date="2022-08-07">
+      <description> 
+        <p>UI updates, more translations, bug fixing</p>
+      </description>
+    </release>
     <release version="v0.1.5" date="2022-07-23">
       <description> 
         <p>Added ability to upload and download attachments, added ability to remove reply and attachments before sending, fixed some bugs mainly regarding reply messages</p>
