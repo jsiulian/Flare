@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2022-08-07
+
 ### Added
 
 - Weblate for translations.
@@ -13,6 +15,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Receive non-image attachments.
 - Send non-image attachments.
 - Display sender of last message in channel overview.
+
+### Fixed
+
+- Another attempt at fixing the application freeze. Pretty sure it should work this time.
+
+### Internationalization
+
+- New Norwegian Bokmål (thanks [@kingu](https://gitlab.com/kingu))
+- New French (thanks [@rene-coty](https://gitlab.com/rene-coty))
+- Modified German (thanks [@gastornis](https://gitlab.com/gastornis))
+- Updated all the translations
 
 ## [0.1.5] - 2022-07-23
 ### Added
@@ -54,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.5...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.2.0...master
+[0.2.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.5...0.2.0
 [0.1.5]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.4...0.1.5
 [0.1.4]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.3...0.1.4
