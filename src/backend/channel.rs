@@ -153,7 +153,7 @@ impl Channel {
 
         if let Some(contact) = receiver_contact {
             log::trace!("Sending to single contact");
-            let _ = manager.send_message(contact, data, timestamp).await?;
+            manager.send_message(contact, data, timestamp).await?;
         } else {
             {
                 let context = self.imp().group_context.borrow();
@@ -171,7 +171,7 @@ impl Channel {
             } else {
                 return Ok(());
             };
-            let _ = manager
+            manager
                 .send_message_to_group(receiver_group_addresses, data, timestamp)
                 .await?;
         }

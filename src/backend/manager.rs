@@ -210,7 +210,7 @@ impl Manager {
 
     async fn sync_contacts(&self) -> Result<(), presage::Error> {
         log::trace!("Requesting contact sync");
-        let _ = self.internal().request_contacts_sync().await?;
+        self.internal().request_contacts_sync().await?;
         // let profile = self.internal().retrieve_profile().await?;
         // self.imp().profile.borrow_mut().replace(profile);
         Ok(())

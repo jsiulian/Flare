@@ -30,7 +30,7 @@ macro_rules! some_log {
 #[macro_export]
 macro_rules! trace {
     ( $l:expr, $( $x:expr ),* ) => {
-        crate::some_log!(trace, $l, $(
+        $crate::some_log!(trace, $l, $(
                 ($x)
         ),*);
     }
@@ -39,7 +39,7 @@ macro_rules! trace {
 #[macro_export]
 macro_rules! debug {
     ( $l:expr, $( $x:expr ),* ) => {
-        crate::some_log!(debug, $l, $(
+        $crate::some_log!(debug, $l, $(
                 ($x)
         ),*);
     }
@@ -48,7 +48,7 @@ macro_rules! debug {
 #[macro_export]
 macro_rules! info {
     ( $l:expr, $( $x:expr ),* ) => {
-        crate::some_log!(info, $l, $(
+        $crate::some_log!(info, $l, $(
                 ($x)
         ),*);
     }
@@ -57,7 +57,7 @@ macro_rules! info {
 #[macro_export]
 macro_rules! warn {
     ( $l:expr, $( $x:expr ),* ) => {
-        crate::some_log!(warn, $l, $(
+        $crate::some_log!(warn, $l, $(
                 ($x)
         ),*);
     }

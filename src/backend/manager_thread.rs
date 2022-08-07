@@ -29,13 +29,13 @@ enum Command {
     GetGroupV2(GroupMasterKey, oneshot::Sender<Result<Group, Error>>),
     SendMessage(
         ServiceAddress,
-        ContentBody,
+        Box<ContentBody>,
         u64,
         oneshot::Sender<Result<(), Error>>,
     ),
     SendMessageToGroup(
         Vec<ServiceAddress>,
-        DataMessage,
+        Box<DataMessage>,
         u64,
         oneshot::Sender<Result<(), Error>>,
     ),
@@ -62,12 +62,8 @@ impl Clone for ManagerThread {
     fn clone(&self) -> Self {
         Self {
             command_sender: self.command_sender.clone(),
-            uuid: self.uuid.clone(),
-            contacts: self
-                .contacts
-                .iter()
-                .map(|c| almost_clone_contact(c))
-                .collect(),
+            uuid: self.uuid,
+            contacts: self.contacts.iter().map(almost_clone_contact).collect(),
         }
     }
 }
@@ -140,7 +136,7 @@ impl ManagerThread {
     }
 
     pub fn get_contacts(&self) -> Result<impl Iterator<Item = Contact> + '_, Error> {
-        Ok(self.contacts.iter().map(|c| almost_clone_contact(c)))
+        Ok(self.contacts.iter().map(almost_clone_contact))
     }
 
     pub fn get_contact_by_id(&self, id: Uuid) -> Result<Option<Contact>, Error> {
@@ -148,7 +144,7 @@ impl ManagerThread {
             .contacts
             .iter()
             .filter(|c| c.address.uuid == Some(id))
-            .map(|c| almost_clone_contact(c))
+            .map(almost_clone_contact)
             .next())
     }
 
@@ -171,7 +167,7 @@ impl ManagerThread {
         self.command_sender
             .send(Command::SendMessage(
                 recipient_addr.into(),
-                message.into(),
+                Box::new(message.into()),
                 timestamp,
                 sender,
             ))
@@ -190,7 +186,7 @@ impl ManagerThread {
         self.command_sender
             .send(Command::SendMessageToGroup(
                 recipients.into_iter().collect(),
-                message.into(),
+                Box::new(message),
                 timestamp,
                 sender,
             ))
@@ -263,7 +259,7 @@ async fn command_loop<C: ConfigStore + 'static>(
                     select! {
                         msg = messages.next().fuse() => {
                             if let Some(msg) = msg {
-                                if let Err(_) = content.send(msg).await {
+                                if content.send(msg).await.is_err() {
                                     break 'outer;
                                 }
                             } else {
@@ -309,14 +305,14 @@ async fn handle_command<C: ConfigStore + 'static>(
         Command::SendMessage(recipient_address, message, timestamp, callback) => callback
             .send(
                 manager
-                    .send_message(recipient_address, message, timestamp)
+                    .send_message(recipient_address, *message, timestamp)
                     .await,
             )
             .expect("Callback sending failed"),
         Command::SendMessageToGroup(recipients, message, timestamp, callback) => callback
             .send(
                 manager
-                    .send_message_to_group(recipients, message, timestamp)
+                    .send_message_to_group(recipients, *message, timestamp)
                     .await,
             )
             .expect("Callback sending failed"),
@@ -337,10 +333,10 @@ fn almost_clone_contact(contact: &Contact) -> Contact {
         color: contact.color.clone(),
         verified: contact.verified.clone(),
         profile_key: contact.profile_key.clone(),
-        blocked: contact.blocked.clone(),
-        expire_timer: contact.expire_timer.clone(),
-        inbox_position: contact.inbox_position.clone(),
-        archived: contact.archived.clone(),
+        blocked: contact.blocked,
+        expire_timer: contact.expire_timer,
+        inbox_position: contact.inbox_position,
+        archived: contact.archived,
         avatar: None,
     }
 }
