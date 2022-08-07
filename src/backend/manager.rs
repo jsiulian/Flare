@@ -244,6 +244,7 @@ impl Manager {
         self.imp().channels.borrow().values().cloned().collect()
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub fn list_contacts(&self) -> Vec<Contact> {
         self.internal()
             .get_contacts()
@@ -347,6 +348,7 @@ impl Manager {
         r
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub(super) fn uuid(&self) -> Uuid {
         self.internal().uuid()
     }

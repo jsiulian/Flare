@@ -92,15 +92,17 @@ impl super::Manager {
     pub async fn init<P: AsRef<Path>>(
         &self,
         _p: &P,
-    ) -> Result<(), super::manager::ManagerCreationError> {
+    ) -> Result<(), crate::ApplicationError> {
         log::trace!("Init manager for screenshots");
+        self.init_channels().await;
+        self.setup_receive_message_loop().await?;
         Ok(())
     }
 
     #[cfg(feature = "screenshot")]
     pub async fn setup_receive_message_loop(&self) -> Result<(), presage::Error> {
         log::trace!("Setup receive loop for screenshots");
-        let channels = self.imp().channels.borrow_mut();
+        let channels = self.imp().channels.borrow();
 
         for msg in self.dummy_messages().await {
             self.emit_by_name::<()>("message", &[&msg]);
@@ -110,7 +112,7 @@ impl super::Manager {
                     .internal_hash(),
             ) {
                 log::debug!("Message from a already existing channel");
-                stored_channel.new_message(msg);
+                let _ = stored_channel.new_message(msg);
                 tokio::time::sleep(std::time::Duration::from_millis(10)).await;
             }
         }
@@ -118,7 +120,16 @@ impl super::Manager {
     }
 
     #[cfg(feature = "screenshot")]
+    pub(super) fn uuid(&self) -> Uuid {
+        Uuid::nil()
+    }
+
+    #[cfg(feature = "screenshot")]
     async fn dummy_messages(&self) -> Vec<Message> {
+        let msg_replied = msg!(self, "And what can that Flare-thing actually do?", 1);
+        let msg_reply = msg!(self, "Additionally, replying and reacting to messages should also be possible", 0);
+        msg_reply.set_quote(msg_replied.clone());
+        msg_reply.react("👍");
         vec![
             msg!(self, "Hello", 1),
             msg!(self, "Hi, how are you", 0),
@@ -132,10 +143,10 @@ impl super::Manager {
             msg!(self, "You have seriously not heared about Flare before?", 0),
             msg!(self, "Some people (the Flarers) believe that they are just some example data for a Signal client named Flare", 0),
             msg!(self, "That has to be the weirdest conspiracy theory I have ever heared of", 1),
-            msg!(self, "And what can that Flare-thing actually do?", 1),
+            msg_replied,
             msg!(self, "It is told to be a very simple GTK based signal client", 0),
             msg!(self, "As told, it only supports sending and receiving messages to contacts or groups", 0),
-            msg!(self, "Additionally, replying to messages should also be possible", 0),
+            msg_reply,
             msg!(self, "And some even think more features might come in the future", 0),
             msg!(self, "Wow. But does anybody actually believe in this?", 1),
             msg!(self, "Never going to give you up, never going to let you down, never going to ", 2, 2),
@@ -163,10 +174,10 @@ impl super::Manager {
 
     #[cfg(feature = "screenshot")]
     pub async fn init_channels(&self) {
-        let mut channels = self.imp().channels.borrow_mut();
 
         for channel in self.dummy_channels().await {
             self.emit_by_name::<()>("channel", &[&channel]);
+            let mut channels = self.imp().channels.borrow_mut();
             channels.insert(channel.internal_hash(), channel);
         }
     }

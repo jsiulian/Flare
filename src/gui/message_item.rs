@@ -141,6 +141,7 @@ pub mod imp {
                         .expect("Root of `ChannelMessages` to be a `Window`.");
                     let dialog = ErrorDialog::new(e, &root);
                     dialog.show();
+                    obj.notify("has-reaction");
                 }
             }));
         }
@@ -235,6 +236,7 @@ pub mod imp {
                             self.box_attachments.append(&att_widget);
                         }
                     }
+                    obj.notify("has-reaction");
                     self.message.replace(msg);
                 }
                 "show-name" => {
