@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-27 16:33+0200\n"
-"PO-Revision-Date: 2022-07-24 08:21+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
+"PO-Revision-Date: 2022-08-12 21:34+0200\n"
+"Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: data/resources/ui/channel_messages.ui:102
 msgid "Message"
@@ -60,7 +60,7 @@ msgstr "Réagir"
 
 #: data/resources/ui/window.ui:108
 msgid "Unlink"
-msgstr ""
+msgstr "Délier"
 
 #: data/resources/ui/window.ui:112
 msgid "About"
@@ -77,14 +77,14 @@ msgstr "Vous"
 #: src/backend/message.rs:352
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A envoyé une image"
+msgstr[1] "A envoyé {} images"
 
 #: src/backend/message.rs:360
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A envoyé un fichier"
+msgstr[1] "A envoyé {} fichiers"
 
 #: src/error.rs:74
 msgid "I/O Error."
@@ -151,10 +151,13 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Ceci va délier cet appareil et supprimer toutes les données enregistrées "
+"localement. Cela fermera aussi l’application pour qu’elle puisse être à "
+"nouveau reliée à l’ouverture."
 
 #: src/gui/window.rs:75
 msgid "Are you sure?"
-msgstr ""
+msgstr "Êtes-vous sûr ?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
