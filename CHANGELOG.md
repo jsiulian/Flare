@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Section in the README on installation
+
+### Changed
+
+- Small UI change with messages
+- Link to signal-notify renamed to messenger-notify
+
+## Fixed
+
+- Link-Window never popping up
+- Unlink not clearing all the data
+
 ## [0.2.0] - 2022-08-07
 
 ### Added

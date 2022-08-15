@@ -7,41 +7,47 @@
     <property name="orientation">vertical</property>
     <property name="hexpand">True</property>
 
-    <!-- Avatar -->
     <child>
-      <object class="AdwAvatar">
-        <binding name="visible">
-          <lookup name="show-name" type="FlMessageItem"/>
-        </binding>
-        <binding name="text">
-          <lookup name="title">
-            <lookup name="sender">
-              <lookup name="message" type="FlMessageItem"/>
-            </lookup>
-          </lookup>
-        </binding>
-        <property name="halign">start</property>
-        <property name="size">20</property>
-      </object>
-    </child>
-    <!-- Name -->
-    <child>
-      <object class="GtkLabel">
-        <style>
-          <class name="heading"/>
-        </style>
-        <binding name="visible">
-          <lookup name="show-name" type="FlMessageItem"/>
-        </binding>
-        <binding name="label">
-          <lookup name="title">
-            <lookup name="sender">
-              <lookup name="message" type="FlMessageItem"/>
-            </lookup>
-          </lookup>
-        </binding>
-        <property name="hexpand">True</property>
-        <property name="halign">start</property>
+      <object class="GtkBox">
+        <property name="orientation">horizontal</property>
+        <property name="spacing">5</property>
+        <!-- Avatar -->
+        <child>
+          <object class="AdwAvatar">
+            <binding name="visible">
+              <lookup name="show-name" type="FlMessageItem"/>
+            </binding>
+            <binding name="text">
+              <lookup name="title">
+                <lookup name="sender">
+                  <lookup name="message" type="FlMessageItem"/>
+                </lookup>
+              </lookup>
+            </binding>
+            <property name="halign">start</property>
+            <property name="size">20</property>
+          </object>
+        </child>
+        <!-- Name -->
+        <child>
+          <object class="GtkLabel">
+            <style>
+              <class name="heading"/>
+            </style>
+            <binding name="visible">
+              <lookup name="show-name" type="FlMessageItem"/>
+            </binding>
+            <binding name="label">
+              <lookup name="title">
+                <lookup name="sender">
+                  <lookup name="message" type="FlMessageItem"/>
+                </lookup>
+              </lookup>
+            </binding>
+            <property name="hexpand">True</property>
+            <property name="halign">start</property>
+          </object>
+        </child>
       </object>
     </child>
 
