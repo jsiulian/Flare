@@ -9,6 +9,19 @@ A unofficial Signal GTK client.
 
 ![Overview](https://gitlab.com/Schmiddiii/flare/-/raw/master/data/screenshots/screenshot.png)
 
+## Installation
+
+<table>
+  <tr>
+    <td>Flatpak</td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://flathub.org/apps/details/de.schmidhuberj.Flare'><img width='130' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+    </td>
+  </tr>
+</table>
+
 ## Features
 
 - Linking device
@@ -30,7 +43,7 @@ A unofficial Signal GTK client.
     - Calling
     - Paying
     - Majority of settings
-- Notifications (use something standalone for that, e.g. [signal-notify](https://gitlab.com/Schmiddiii/signal-notify))
+- Notifications (use something standalone for that, e.g. [messenger-notify](https://gitlab.com/Schmiddiii/messenger-notify))
 
 ## Blocked features
 

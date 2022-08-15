@@ -124,15 +124,6 @@ impl Manager {
         let (send_content, mut receive_content) = mpsc::channel(MESSAGE_BOUND);
         let (send_error, mut receive_error) = mpsc::channel(MESSAGE_BOUND);
 
-        let internal = ManagerThread::new(
-            config_store.clone(),
-            provisioning_link_tx,
-            error_tx,
-            send_content,
-            send_error,
-        )
-        .await;
-
         let (send, receive) = MainContext::channel(Priority::default());
         receive.attach(
             None,
@@ -142,6 +133,28 @@ impl Manager {
             }),
         );
 
+        let context = MainContext::default();
+        context.spawn_local(async move {
+            log::trace!("Awaiting for provisioning link");
+            match provisioning_link_rx.await {
+                Ok(url) => {
+                    log::trace!("Manager wants to show QR code, emitting signal");
+                    let _ = send.send(String::from(url));
+                }
+                Err(_e) => log::trace!("Manager is already linked"),
+            }
+        });
+
+        let internal = ManagerThread::new(
+            config_store.clone(),
+            provisioning_link_tx,
+            error_tx,
+            send_content,
+            send_error,
+        )
+        .await;
+
+        log::trace!("Awaiting for error link");
         match error_rx.await {
             Ok(err) => {
                 return Err(err.into());
@@ -149,13 +162,6 @@ impl Manager {
             Err(_e) => log::trace!("Manager setup successfull"),
         }
 
-        match provisioning_link_rx.await {
-            Ok(url) => {
-                log::trace!("Manager wants to show QR code, emitting signal");
-                let _ = send.send(String::from(url));
-            }
-            Err(_e) => log::trace!("Manager is already linked"),
-        }
         self.emit_by_name::<()>("link-finish", &[]);
 
         self.imp().internal.swap(&RefCell::new(Some(internal)));

@@ -13,14 +13,16 @@ gtk::glib::wrapper! {
 impl Contact {
     pub(super) fn from_service_address(address: &ServiceAddress, manager: &Manager) -> Self {
         log::trace!("Building a `Contact` from a `ServiceAddress`");
+        if let Some(uuid) = address.uuid {
+            if let Ok(Some(contact)) = manager.get_contact_by_id(uuid) {
+                return Self::from_contact(contact, manager);
+            }
+        }
+        log::trace!("Not in the contact list");
         let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Contact`");
         s.imp()
             .phonenumber
             .swap(&RefCell::new(address.phonenumber.clone()));
-        if let Some(uuid) = address.uuid {
-            let contact = manager.get_contact_by_id(uuid);
-            s.imp().contact.swap(&RefCell::new(contact.ok().flatten()));
-        }
         s
     }
 

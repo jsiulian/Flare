@@ -39,7 +39,16 @@ impl<E: encrypted_sled::Encryption> EncryptedSledConfigStore<E> {
 
     pub fn clear(&self) -> Result<(), Error> {
         log::trace!("Clearing config store");
-        Ok(self.db.read().expect("poisoned mutex").clear()?)
+        let db = self.db.read().expect("poisoned mutex");
+        db.clear()?;
+        db.flush()?;
+        let tree_sessions = db.open_tree(SLED_TREE_SESSIONS)?;
+        tree_sessions.clear()?;
+        tree_sessions.flush()?;
+        let tree_contacts = db.open_tree(SLED_KEY_CONTACTS)?;
+        tree_contacts.clear()?;
+        tree_contacts.flush()?;
+        Ok(())
     }
 
     pub fn get<K>(&self, key: K) -> Result<Option<IVec>, Error>
