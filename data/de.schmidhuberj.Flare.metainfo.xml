@@ -50,6 +50,11 @@
     </p>
   </description>
   <releases>
+    <release version="v0.2.1" date="2022-08-15">
+      <description> 
+        <p>Hotfix for not beeing able to link and unlink the device</p>
+      </description>
+    </release>
     <release version="v0.2.0" date="2022-08-07">
       <description> 
         <p>UI updates, more translations, bug fixing</p>
