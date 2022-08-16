@@ -17,10 +17,11 @@ gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
 futures = "0.3"
 tokio = { version = "1.17.0", features = ["rt", "macros", "rt-multi-thread", "time"] }
 
+presage = { git = "https://github.com/Schmiddiii/presage", rev = "d7a094f04774f445a77539608067be8a48fb1e5b" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "0f477049862da4d06dc27ca389c0edb3d38ce3c9" }
+
 async-trait = "0.1"
 sled = "0.34"
-presage = { git = "https://github.com/whisperfish/presage.git", rev = "aa6e333d5400f4d6361552c4c40161790e1171d7" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "1508fa8f3561e3807aa8d073ca05a61346ae5a82" }
 libsecret = { version = "0.1.4", features = ["v0_19"] }
 rand = "0.8.5"
 chacha20poly1305 = "0.9.0"

@@ -71,11 +71,12 @@ impl Clone for ManagerThread {
 impl ManagerThread {
     pub async fn new<C>(
         config_store: C,
+        device_name: String,
         link_callback: futures::channel::oneshot::Sender<url::Url>,
         error_callback: futures::channel::oneshot::Sender<Error>,
         content: mpsc::Sender<Content>,
         error: mpsc::Sender<Error>,
-    ) -> Self
+    ) -> Option<Self>
     where
         C: presage::ConfigStore + std::marker::Send + std::marker::Sync + 'static,
     {
@@ -84,40 +85,48 @@ impl ManagerThread {
             tokio::runtime::Runtime::new()
                 .expect("Failed to setup runtime")
                 .block_on(async move {
-                    let setup = setup_manager(config_store, link_callback).await;
+                    let setup = setup_manager(config_store, device_name, link_callback).await;
                     if let Ok(manager) = setup {
+                        log::trace!("Starting command loop");
                         drop(error_callback);
                         command_loop(&manager, receiver, content, error).await;
                     } else {
-                        error_callback
-                            .send(setup.err().unwrap())
-                            .expect("Failed to send error")
+                        let e = setup.err().unwrap();
+                        log::trace!("Got error: {}", e);
+                        error_callback.send(e).expect("Failed to send error")
                     }
                 });
         });
 
         let (sender_uuid, receiver_uuid) = oneshot::channel();
-        sender
-            .send(Command::Uuid(sender_uuid))
-            .await
-            .expect("Command sending failed");
-        let uuid = receiver_uuid.await.expect("Callback receiving failed");
+        if sender.send(Command::Uuid(sender_uuid)).await.is_err() {
+            return None;
+        }
+        let uuid = receiver_uuid.await;
 
         let (sender_contacts, receiver_contacts) = oneshot::channel();
-        sender
+        if sender
             .send(Command::GetContacts(sender_contacts))
             .await
-            .expect("Command sending failed");
-        let contacts = receiver_contacts.await.expect("Callback receiving failed");
-        if let Err(_e) = &contacts {
+            .is_err()
+        {
+            return None;
+        }
+        let contacts = receiver_contacts.await;
+
+        if uuid.is_err() || contacts.is_err() {
+            return None;
+        }
+
+        if let Err(_e) = &contacts.as_ref().unwrap() {
             // TODO: Error handling
             log::error!("Could not load contacts");
         }
-        Self {
+        Some(Self {
             command_sender: sender,
-            uuid,
-            contacts: contacts.unwrap_or_default(),
-        }
+            uuid: uuid.unwrap(),
+            contacts: contacts.unwrap().unwrap_or_default(),
+        })
     }
 }
 
@@ -222,6 +231,7 @@ impl ManagerThread {
 
 async fn setup_manager<C>(
     config_store: C,
+    name: String,
     link_callback: futures::channel::oneshot::Sender<url::Url>,
 ) -> Result<presage::Manager<C, presage::Registered>, Error>
 where
@@ -236,7 +246,7 @@ where
         presage::Manager::link_secondary_device(
             config_store.clone(),
             presage::prelude::SignalServers::Production,
-            "flare".to_string(),
+            name,
             link_callback,
         )
         .await
@@ -276,6 +286,7 @@ async fn command_loop<C: ConfigStore + 'static>(
                 }
             }
             Err(e) => {
+                log::trace!("Got error receiving: {}, {:?}", e, e);
                 error.send(e).await.expect("Callback sending failed");
                 break;
             }
@@ -288,6 +299,7 @@ async fn handle_command<C: ConfigStore + 'static>(
     manager: &Manager<C, Registered>,
     command: Command,
 ) {
+    log::trace!("Got command: {:?}", command);
     match command {
         Command::RequestContactsSync(callback) => callback
             .send(manager.request_contacts_sync().await)

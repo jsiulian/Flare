@@ -1,4 +1,6 @@
-use gtk::glib::Object;
+use gdk::subclass::prelude::ObjectSubclassIsExt;
+use gdk_pixbuf::{glib, prelude::SettingsExt};
+use gtk::{glib::Object, traits::GtkWindowExt};
 
 gtk::glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
@@ -11,6 +13,34 @@ impl Window {
     pub fn new(app: &gtk::Application) -> Self {
         log::trace!("Initializing window");
         Object::new(&[("application", app)]).expect("Failed to create Window")
+    }
+
+    fn save_window_size(&self) -> Result<(), glib::BoolError> {
+        let imp = self.imp();
+
+        let (width, height) = self.default_size();
+
+        imp.settings.set_int("window-width", width)?;
+        imp.settings.set_int("window-height", height)?;
+
+        imp.settings
+            .set_boolean("is-maximized", self.is_maximized())?;
+
+        Ok(())
+    }
+
+    fn load_window_size(&self) {
+        let imp = self.imp();
+
+        let width = imp.settings.int("window-width");
+        let height = imp.settings.int("window-height");
+        let is_maximized = imp.settings.boolean("is-maximized");
+
+        self.set_default_size(width, height);
+
+        if is_maximized {
+            self.maximize();
+        }
     }
 }
 
@@ -28,6 +58,7 @@ pub mod imp {
     use gdk_pixbuf::glib::ParamSpec;
     use gdk_pixbuf::glib::ParamSpecObject;
     use gdk_pixbuf::glib::Value;
+    use gio::Settings;
     use glib::subclass::InitializingObject;
     use gtk::builders::AboutDialogBuilder;
     use gtk::glib;
@@ -38,16 +69,30 @@ pub mod imp {
     use libadwaita::subclass::prelude::AdwWindowImpl;
 
     use crate::backend::Manager;
+    use crate::config::APP_ID;
     use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::link_window::LinkWindow;
+    use crate::gui::preferences_window::PreferencesWindow;
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate)]
     #[template(resource = "/ui/window.ui")]
     pub struct Window {
         #[template_child]
         leaflet: TemplateChild<libadwaita::Leaflet>,
 
         manager: RefCell<Option<Manager>>,
+
+        pub(super) settings: gio::Settings,
+    }
+
+    impl Default for Window {
+        fn default() -> Self {
+            Self {
+                leaflet: Default::default(),
+                manager: Default::default(),
+                settings: Settings::new(APP_ID),
+            }
+        }
     }
 
     #[gtk::template_callbacks]
@@ -56,11 +101,10 @@ pub mod imp {
             log::trace!("Setting up window actions");
             log::trace!("Setting up preferences-window action");
             let action_settings = SimpleAction::new("settings", None);
-            // TODO
-            // action_settings.connect_activate(|_, _| {
-            //     let settings = PreferencesWindow::new();
-            //     settings.show();
-            // });
+            action_settings.connect_activate(|_, _| {
+                let settings = PreferencesWindow::new();
+                settings.show();
+            });
             log::trace!("Setting up unlink action");
             let action_unlink = SimpleAction::new("unlink", None);
             action_unlink.connect_activate(clone!(@weak obj => move |_, _| {
@@ -173,6 +217,8 @@ pub mod imp {
                 obj.add_css_class("devel");
             }
 
+            obj.load_window_size();
+
             let main_context = MainContext::default();
             main_context.spawn_local(clone!(@strong obj => async move {
                 log::trace!("Constructing path for configuration");
@@ -241,7 +287,15 @@ pub mod imp {
     }
 
     impl WidgetImpl for Window {}
-    impl WindowImpl for Window {}
+    impl WindowImpl for Window {
+        fn close_request(&self, window: &Self::Type) -> gtk::Inhibit {
+            if let Err(err) = window.save_window_size() {
+                log::warn!("Failed to save window state, {}", &err);
+            }
+
+            self.parent_close_request(window)
+        }
+    }
     impl ApplicationWindowImpl for Window {}
     impl AdwWindowImpl for Window {}
     impl AdwApplicationWindowImpl for Window {}
