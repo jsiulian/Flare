@@ -3,7 +3,7 @@ use std::{cell::RefCell, collections::HashMap, path::Path};
 use crate::storage::EncryptedSledConfigStore;
 use gdk_pixbuf::{
     glib::{clone, MainContext, Object, Priority},
-    prelude::{Continue, ObjectExt},
+    prelude::{Cast, Continue, ObjectExt},
 };
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use libsignal_service::{
@@ -18,7 +18,10 @@ use rand::Fill;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
 
-use libsecret::{Schema, SchemaAttributeType, SchemaFlags};
+use libsecret::{
+    prelude::ServiceExtManual, traits::CollectionExt, Collection, CollectionFlags, Schema,
+    SchemaAttributeType, SchemaFlags, Service, ServiceFlags, COLLECTION_DEFAULT,
+};
 
 use crate::ApplicationError;
 use chacha20poly1305::ChaCha20Poly1305;
@@ -33,7 +36,27 @@ gtk::glib::wrapper! {
 type ConfigStoreType =
     EncryptedSledConfigStore<EncryptionCipher<ChaCha20Poly1305, CountingNonce<ChaCha20Poly1305>>>;
 
+// Similar to https://gitlab.gnome.org/GNOME/geary/-/blob/main/src/client/application/secret-mediator.vala#L112
+async fn ensure_secret_unlocked() -> Result<(), ApplicationError> {
+    log::trace!("Ensuring the default collection is unlocked");
+    let service = Service::get_future(ServiceFlags::OPEN_SESSION).await?;
+    let collection =
+        Collection::for_alias_future(Some(&service), &COLLECTION_DEFAULT, CollectionFlags::NONE)
+            .await?;
+    if collection.is_locked() {
+        log::trace!("Unlocking the default collection");
+        service
+            .unlock_future(&[collection
+                .dynamic_cast()
+                .expect("Failed to cast `Collection` to `DBusProxy`")])
+            .await?;
+    }
+    Ok(())
+}
+
 async fn encryption_password() -> Result<Vec<u8>, ApplicationError> {
+    ensure_secret_unlocked().await?;
+
     let schema = Schema::new(
         crate::config::APP_ID,
         SchemaFlags::NONE,
