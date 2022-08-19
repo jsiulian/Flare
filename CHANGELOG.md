@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Settings dialog.
+- Configurable device name.
+
+### Fixed
+
+- Crash on startup when presage failed.
+- Not unlocking the default libsecret collection at startup, see [#4].
+
 ## [0.2.1] - 2022-08-15
 
 ### Added
@@ -17,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Fixed
 
-- Link-Window never popping up
+- Link-Window never popping up, see [#5].
 - Unlink not clearing all the data
 
 ## [0.2.0] - 2022-08-07
@@ -86,3 +98,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.2.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.5...0.2.0
 [0.1.5]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.4...0.1.5
 [0.1.4]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.3...0.1.4
+
+[#4]: https://gitlab.com/Schmiddiii/flare/-/issues/4
+[#5]: https://gitlab.com/Schmiddiii/flare/-/issues/5

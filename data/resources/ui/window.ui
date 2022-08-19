@@ -100,10 +100,10 @@
   </template>
   <menu id="menubar">
     <section>
-      <!-- <item> -->
-      <!--   <attribute name="label" translatable="yes">Settings</attribute> -->
-      <!--   <attribute name="action">win.settings</attribute> -->
-      <!-- </item> -->
+      <item>
+        <attribute name="label" translatable="yes">Settings</attribute>
+        <attribute name="action">win.settings</attribute>
+      </item>
       <item>
         <attribute name="label" translatable="yes">Unlink</attribute>
         <attribute name="action">win.unlink</attribute>

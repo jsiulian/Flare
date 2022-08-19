@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 16:33+0200\n"
+"POT-Creation-Date: 2022-08-19 10:36+0200\n"
 "PO-Revision-Date: 2022-08-12 21:34+0200\n"
 "Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
@@ -50,13 +50,33 @@ msgstr "Veuillez scanner ce QR Code avec votre appareil primaire."
 msgid "Please restart the application after this window closed."
 msgstr "Veuillez redémarrer l’application après la fermeture de cette fenêtre."
 
-#: data/resources/ui/message_item.ui:175
+#: data/resources/ui/message_item.ui:181
 msgid "Reply"
 msgstr "Répondre"
 
-#: data/resources/ui/message_item.ui:181
+#: data/resources/ui/message_item.ui:187
 msgid "React"
 msgstr "Réagir"
+
+#: data/resources/ui/preferences_window.ui:9
+msgid "General"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:13
+msgid "Linking"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:16
+msgid "Device Name"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:17
+msgid "The device will need to be relinked to take effect."
+msgstr ""
+
+#: data/resources/ui/window.ui:104
+msgid "Settings"
+msgstr ""
 
 #: data/resources/ui/window.ui:108
 msgid "Unlink"
@@ -66,21 +86,21 @@ msgstr "Délier"
 msgid "About"
 msgstr "À propos"
 
-#: src/backend/channel.rs:296
+#: src/backend/channel.rs:297
 msgid "Note to self"
 msgstr "Note à moi-même"
 
-#: src/backend/manager.rs:173
+#: src/backend/manager.rs:240
 msgid "You"
 msgstr "Vous"
 
-#: src/backend/message.rs:352
+#: src/backend/message.rs:358
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "A envoyé une image"
 msgstr[1] "A envoyé {} images"
 
-#: src/backend/message.rs:360
+#: src/backend/message.rs:366
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "A envoyé un fichier"
@@ -145,7 +165,7 @@ msgstr "Veuillez supprimer la base de données et lier à nouveau l’appareil."
 msgid "The database path at {} is no folder."
 msgstr "Le chemin de base de données à {} n’est pas un dossier."
 
-#: src/gui/window.rs:73
+#: src/gui/window.rs:117
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -155,12 +175,12 @@ msgstr ""
 "localement. Cela fermera aussi l’application pour qu’elle puisse être à "
 "nouveau reliée à l’ouverture."
 
-#: src/gui/window.rs:75
+#: src/gui/window.rs:119
 msgid "Are you sure?"
 msgstr "Êtes-vous sûr ?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:116
+#: src/gui/window.rs:160
 msgid "translators"
 msgstr "Irénée Thirion"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 16:33+0200\n"
+"POT-Creation-Date: 2022-08-19 10:36+0200\n"
 "PO-Revision-Date: 2022-08-04 17:31+0200\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -52,13 +52,33 @@ msgid "Please restart the application after this window closed."
 msgstr ""
 "Bitte starte die Anwendung neu, nachdem sich dieses Fenster geschlossen hat."
 
-#: data/resources/ui/message_item.ui:175
+#: data/resources/ui/message_item.ui:181
 msgid "Reply"
 msgstr "Antworten"
 
-#: data/resources/ui/message_item.ui:181
+#: data/resources/ui/message_item.ui:187
 msgid "React"
 msgstr "Reagieren"
+
+#: data/resources/ui/preferences_window.ui:9
+msgid "General"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:13
+msgid "Linking"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:16
+msgid "Device Name"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:17
+msgid "The device will need to be relinked to take effect."
+msgstr ""
+
+#: data/resources/ui/window.ui:104
+msgid "Settings"
+msgstr ""
 
 #: data/resources/ui/window.ui:108
 msgid "Unlink"
@@ -68,21 +88,21 @@ msgstr "Entkoppeln"
 msgid "About"
 msgstr "Info"
 
-#: src/backend/channel.rs:296
+#: src/backend/channel.rs:297
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:173
+#: src/backend/manager.rs:240
 msgid "You"
 msgstr "Du"
 
-#: src/backend/message.rs:352
+#: src/backend/message.rs:358
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Hat ein Bild gesendet"
 msgstr[1] "Hat {} Bilder gesendet"
 
-#: src/backend/message.rs:360
+#: src/backend/message.rs:366
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"
@@ -146,7 +166,7 @@ msgstr "Bitte lösche die Datenbank und kopple das Gerät erneut."
 msgid "The database path at {} is no folder."
 msgstr "Der Datenbankpfad bei {} ist kein Ordner."
 
-#: src/gui/window.rs:73
+#: src/gui/window.rs:117
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -156,13 +176,13 @@ msgstr ""
 "löschen. Dies wird außerdem die Anwendung schließen, sodass es nach dem "
 "erneuten Öffnen neu gekoppelt werden kann."
 
-#: src/gui/window.rs:75
+#: src/gui/window.rs:119
 msgid "Are you sure?"
 msgstr "Bist du sicher?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:116
+#: src/gui/window.rs:160
 msgid "translators"
 msgstr ""
 "Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"

@@ -127,6 +127,7 @@ impl Manager {
     }
 
     pub fn clear(&self) -> Result<(), ApplicationError> {
+        log::trace!("Clearing the manager");
         if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
             config_store.clear()?;
         }
@@ -137,13 +138,19 @@ impl Manager {
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
         use futures::channel::oneshot;
         use futures::{select, FutureExt};
+        use gdk_pixbuf::prelude::SettingsExt;
         use tokio::sync::mpsc;
         let config_store = config_store(p).await?;
+
+        log::trace!("Setting up the config store");
+        self.imp()
+            .config_store
+            .swap(&RefCell::new(Some(config_store.clone())));
+
         log::trace!("Setting up the manager");
         let (provisioning_link_tx, provisioning_link_rx) = oneshot::channel();
         let (error_tx, error_rx) = oneshot::channel();
 
-        log::debug!("Start receiving messages");
         let (send_content, mut receive_content) = mpsc::channel(MESSAGE_BOUND);
         let (send_error, mut receive_error) = mpsc::channel(MESSAGE_BOUND);
 
@@ -169,7 +176,8 @@ impl Manager {
         });
 
         let internal = ManagerThread::new(
-            config_store.clone(),
+            config_store,
+            self.imp().settings.string("link-device-name").to_string(),
             provisioning_link_tx,
             error_tx,
             send_content,
@@ -177,23 +185,29 @@ impl Manager {
         )
         .await;
 
-        log::trace!("Awaiting for error link");
+        log::trace!("Awaiting for error linking");
         match error_rx.await {
             Ok(err) => {
+                log::error!("Got error linking device: {}", err);
                 return Err(err.into());
             }
             Err(_e) => log::trace!("Manager setup successfull"),
         }
 
-        self.emit_by_name::<()>("link-finish", &[]);
+        if internal.is_none() {
+            if let Some(error_opt) = receive_error.recv().await {
+                log::error!("Got error after linking device: {}", error_opt);
+                return Err(error_opt.into());
+            }
+        }
 
-        self.imp().internal.swap(&RefCell::new(Some(internal)));
-        self.imp()
-            .config_store
-            .swap(&RefCell::new(Some(config_store)));
+        self.imp().internal.swap(&RefCell::new(internal));
+
+        self.emit_by_name::<()>("link-finish", &[]);
 
         self.sync_contacts().await?;
         self.init_channels().await;
+        log::debug!("Start receiving messages");
         'outer: loop {
             select! {
                 error_opt = receive_error.recv().fuse() => {
@@ -399,12 +413,15 @@ mod imp {
         glib::{once_cell::sync::Lazy, subclass::Signal},
         prelude::StaticType,
     };
+    use gio::Settings;
     use gtk::glib;
     use std::{cell::RefCell, collections::HashMap};
 
-    use crate::backend::{manager_thread::ManagerThread, Channel, Message};
+    use crate::{
+        backend::{manager_thread::ManagerThread, Channel, Message},
+        config::APP_ID,
+    };
 
-    #[derive(Default)]
     pub struct Manager {
         pub(super) internal: RefCell<Option<ManagerThread>>,
         pub(super) config_store: RefCell<Option<super::ConfigStoreType>>,
@@ -413,6 +430,18 @@ mod imp {
         #[cfg(not(feature = "screenshot"))]
         pub(super) channels: RefCell<HashMap<u64, Channel>>,
         // pub(super) profile: RefCell<Option<Profile>>,
+        pub(super) settings: Settings,
+    }
+
+    impl Default for Manager {
+        fn default() -> Self {
+            Self {
+                internal: Default::default(),
+                config_store: Default::default(),
+                channels: Default::default(),
+                settings: Settings::new(APP_ID),
+            }
+        }
     }
 
     impl Manager {
