@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 16:33+0200\n"
+"POT-Creation-Date: 2022-08-19 10:36+0200\n"
 "PO-Revision-Date: 2022-07-28 22:19+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -51,37 +51,57 @@ msgstr "Skann denne QR-koden med din hovedenhet."
 msgid "Please restart the application after this window closed."
 msgstr "Start programmet på ny etter at dette vinduet er lukket."
 
-#: data/resources/ui/message_item.ui:175
+#: data/resources/ui/message_item.ui:181
 msgid "Reply"
 msgstr "Svar"
 
-#: data/resources/ui/message_item.ui:181
+#: data/resources/ui/message_item.ui:187
 msgid "React"
 msgstr "Reager"
+
+#: data/resources/ui/preferences_window.ui:9
+msgid "General"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:13
+msgid "Linking"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:16
+msgid "Device Name"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:17
+msgid "The device will need to be relinked to take effect."
+msgstr ""
+
+#: data/resources/ui/window.ui:104
+msgid "Settings"
+msgstr ""
 
 #: data/resources/ui/window.ui:108
 msgid "Unlink"
 msgstr "Opphev forbindelse"
 
-#: data/resources/ui/window.ui:112 data/resources/ui/window.ui:108
+#: data/resources/ui/window.ui:112
 msgid "About"
 msgstr "Om"
 
-#: src/backend/channel.rs:296
+#: src/backend/channel.rs:297
 msgid "Note to self"
 msgstr "Selvpåminnelse"
 
-#: src/backend/manager.rs:173 src/backend/manager.rs:163
+#: src/backend/manager.rs:240
 msgid "You"
 msgstr "Deg"
 
-#: src/backend/message.rs:352
+#: src/backend/message.rs:358
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Sendte et bilde"
 msgstr[1] "Sendte {} bilder"
 
-#: src/backend/message.rs:360
+#: src/backend/message.rs:366
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Sendte en fil"
@@ -146,7 +166,7 @@ msgstr "Slett databasen og forbind enheten igjen."
 msgid "The database path at {} is no folder."
 msgstr "Databasestien {} er ikke en mappe."
 
-#: src/gui/window.rs:73
+#: src/gui/window.rs:117
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -156,12 +176,12 @@ msgstr ""
 "data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
 "åpner det på ny."
 
-#: src/gui/window.rs:75
+#: src/gui/window.rs:119
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:87
+#: src/gui/window.rs:160
 msgid "translators"
 msgstr "Allan Nordhøy <epost@anotheragency.no>"

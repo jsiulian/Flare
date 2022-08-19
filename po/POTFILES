@@ -1,20 +1,27 @@
+# fd -t f -e ui . data/
+# fd -t f -e rs . src/
+
+data/resources/ui/attachment.ui
 data/resources/ui/channel_item.ui
 data/resources/ui/channel_list.ui
 data/resources/ui/channel_messages.ui
 data/resources/ui/error_dialog.ui
 data/resources/ui/link_window.ui
 data/resources/ui/message_item.ui
+data/resources/ui/preferences_window.ui
 data/resources/ui/window.ui
 
-
+src/backend/attachment.rs
 src/backend/channel.rs
 src/backend/contact.rs
 src/backend/dummy.rs
 src/backend/manager.rs
+src/backend/manager_thread.rs
 src/backend/message.rs
 src/backend/mod.rs
-src/config.rs.in
+src/config.rs
 src/error.rs
+src/gui/attachment.rs
 src/gui/channel_item.rs
 src/gui/channel_list.rs
 src/gui/channel_messages.rs
@@ -22,6 +29,7 @@ src/gui/error_dialog.rs
 src/gui/link_window.rs
 src/gui/message_item.rs
 src/gui/mod.rs
+src/gui/preferences_window.rs
 src/gui/window.rs
 src/hash_log.rs
 src/main.rs
