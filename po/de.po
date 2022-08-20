@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-19 10:36+0200\n"
+"POT-Creation-Date: 2022-08-20 13:59+0200\n"
 "PO-Revision-Date: 2022-08-20 09:19+0000\n"
 "Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -94,7 +94,7 @@ msgstr "Info"
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:240
+#: src/backend/manager.rs:263
 msgid "You"
 msgstr "Du"
 
@@ -105,6 +105,12 @@ msgstr[0] "Hat ein Bild gesendet"
 msgstr[1] "Hat {} Bilder gesendet"
 
 #: src/backend/message.rs:366
+msgid "Sent an video"
+msgid_plural "Sent {} videos"
+msgstr[0] "Hat ein Video gesendet"
+msgstr[1] "Hat {} Videos gesendet"
+
+#: src/backend/message.rs:374
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"

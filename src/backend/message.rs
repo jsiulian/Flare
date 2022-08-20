@@ -361,6 +361,14 @@ mod imp {
                             )
                             .replace("{}", &attachments.len().to_string())
                             .to_value()
+                        } else if attachments.iter().all(|a| a.is_video()) {
+                            gettextrs::ngettext(
+                                "Sent an video",
+                                "Sent {} videos",
+                                attachments.len() as u32,
+                            )
+                            .replace("{}", &attachments.len().to_string())
+                            .to_value()
                         } else {
                             gettextrs::ngettext(
                                 "Sent a file",

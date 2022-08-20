@@ -1,9 +1,12 @@
+use std::path::PathBuf;
+
 use gdk::{prelude::TextureExt, Texture};
 use gdk_pixbuf::{
     glib::{Bytes, Object, Priority},
     prelude::{FileExt, IOStreamExt, ObjectExt, OutputStreamExt},
 };
-use gio::{subclass::prelude::ObjectSubclassIsExt, File, FileCreateFlags};
+use gio::{subclass::prelude::ObjectSubclassIsExt, Cancellable, File, FileCreateFlags};
+use gtk::MediaFile;
 use libsignal_service::{proto::AttachmentPointer, sender::AttachmentSpec};
 
 use super::Manager;
@@ -15,6 +18,18 @@ gtk::glib::wrapper! {
 impl Attachment {
     pub fn from_file(file: File, manager: &Manager) -> Self {
         log::trace!("Trying to build a Attachment from a file");
+        let mime = gio::content_type_guess(file.basename(), &[])
+            .0
+            .as_str()
+            .to_owned();
+        let mut image = None;
+        if mime.starts_with("image/") {
+            image = Texture::from_file(&file).ok();
+        }
+        let mut video = None;
+        if mime.starts_with("video/") {
+            video = Some(MediaFile::for_file(&file))
+        }
         Object::new(&[
             ("manager", manager),
             ("file", &file),
@@ -24,13 +39,18 @@ impl Attachment {
                     .basename()
                     .and_then(|f| f.file_name().map(|s| s.to_string_lossy().into_owned())),
             ),
-            ("image", &Texture::from_file(&file).ok()),
+            ("image", &image),
+            ("video", &video),
         ])
         .expect("Failed to create `Attachment`")
     }
 
     pub fn is_image(&self) -> bool {
         self.property::<bool>("is-image")
+    }
+
+    pub fn is_video(&self) -> bool {
+        self.property::<bool>("is-video")
     }
 
     pub(super) async fn as_upload_attachment(&self) -> (AttachmentSpec, Vec<u8>) {
@@ -71,6 +91,7 @@ impl Attachment {
             pointer.content_type.as_ref().unwrap_or(&"None".to_string())
         );
         let mut image = None;
+        let mut video = None;
         let mut raw = None;
         let mut name = None;
         if let Some(pointer_name) = &pointer.file_name {
@@ -87,12 +108,37 @@ impl Attachment {
                         name = Some(format!("image.{}", &t[6..]));
                     }
                 }
+                Some(t) if t.starts_with("video/") => {
+                    log::trace!("Attachment is a video, converting to usable type");
+                    // TODO: Crashes, see <https://gitlab.gnome.org/GNOME/gtk/-/issues/4062>
+                    // let stream =
+                    //     MemoryInputStream::from_bytes(raw.as_ref().expect("Raw bytes to be set"));
+                    // TODO: Async
+                    let tmp = File::new_tmp(None::<PathBuf>).ok();
+                    if let Some((tmp_file, tmp_file_stream)) = tmp {
+                        let tmp_out = tmp_file_stream.output_stream();
+                        let _ = tmp_out.write_bytes(
+                            raw.as_ref().expect("Raw bytes to be set"),
+                            Cancellable::NONE,
+                        );
+                        let _ = tmp_out.flush(Cancellable::NONE);
+                        video = Some(MediaFile::for_file(&tmp_file));
+                        if name.is_none() {
+                            name = Some(format!("video.{}", &t[6..]));
+                        }
+                    }
+                }
                 Some(t) => log::trace!("Currently unhandles attachment type: {}", t),
                 None => log::trace!("Attachment got no type"),
             }
         }
-        let s: Self = Object::new(&[("manager", manager), ("image", &image), ("name", &name)])
-            .expect("Failed to create `Attachment`");
+        let s: Self = Object::new(&[
+            ("manager", manager),
+            ("image", &image),
+            ("name", &name),
+            ("video", &video),
+        ])
+        .expect("Failed to create `Attachment`");
         *s.imp().raw.borrow_mut() = raw;
         s
     }
@@ -125,7 +171,7 @@ mod imp {
         prelude::{StaticType, ToValue},
     };
     use gio::File;
-    use gtk::glib;
+    use gtk::{glib, MediaStream};
     use std::cell::RefCell;
 
     use crate::backend::Manager;
@@ -133,6 +179,7 @@ mod imp {
     #[derive(Default)]
     pub struct Attachment {
         image: RefCell<Option<Texture>>,
+        video: RefCell<Option<MediaStream>>,
         file: RefCell<Option<File>>,
         name: RefCell<Option<String>>,
 
@@ -166,6 +213,13 @@ mod imp {
                         ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
                     ),
                     ParamSpecObject::new(
+                        "video",
+                        "video",
+                        "video",
+                        MediaStream::static_type(),
+                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
+                    ),
+                    ParamSpecObject::new(
                         "file",
                         "file",
                         "file",
@@ -187,6 +241,13 @@ mod imp {
                         ParamFlags::READABLE,
                     ),
                     ParamSpecBoolean::new(
+                        "is-video",
+                        "is-video",
+                        "is-video",
+                        false,
+                        ParamFlags::READABLE,
+                    ),
+                    ParamSpecBoolean::new(
                         "is-file",
                         "is-file",
                         "is-file",
@@ -202,16 +263,20 @@ mod imp {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "image" => self.image.borrow().as_ref().to_value(),
+                "video" => self.video.borrow().as_ref().to_value(),
                 "file" => self.file.borrow().as_ref().to_value(),
                 "name" => self.name.borrow().as_ref().to_value(),
                 "is-image" => obj
                     .property::<Option<Texture>>("image")
                     .is_some()
                     .to_value(),
-                "is-file" => obj
-                    .property::<Option<Texture>>("image")
-                    .is_none()
+                "is-video" => obj
+                    .property::<Option<MediaStream>>("video")
+                    .is_some()
                     .to_value(),
+                "is-file" => (obj.property::<Option<Texture>>("image").is_none()
+                    && obj.property::<Option<MediaStream>>("video").is_none())
+                .to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -231,6 +296,13 @@ mod imp {
                         .expect("Property `image` of `Message` has to be of type `Texture`");
 
                     self.image.replace(obj);
+                }
+                "video" => {
+                    let obj = value
+                        .get::<Option<MediaStream>>()
+                        .expect("Property `video` of `Message` has to be of type `MediaStream`");
+
+                    self.video.replace(obj);
                 }
                 "file" => {
                     let obj = value

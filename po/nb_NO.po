@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-19 10:36+0200\n"
+"POT-Creation-Date: 2022-08-20 13:59+0200\n"
 "PO-Revision-Date: 2022-07-28 22:19+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -91,7 +91,7 @@ msgstr "Om"
 msgid "Note to self"
 msgstr "Selvpåminnelse"
 
-#: src/backend/manager.rs:240
+#: src/backend/manager.rs:263
 msgid "You"
 msgstr "Deg"
 
@@ -102,6 +102,12 @@ msgstr[0] "Sendte et bilde"
 msgstr[1] "Sendte {} bilder"
 
 #: src/backend/message.rs:366
+msgid "Sent an video"
+msgid_plural "Sent {} videos"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/backend/message.rs:374
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Sendte en fil"
