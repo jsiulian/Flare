@@ -73,19 +73,19 @@ msgstr "Отреагировать"
 
 #: data/resources/ui/preferences_window.ui:9
 msgid "General"
-msgstr ""
+msgstr "Общее"
 
 #: data/resources/ui/preferences_window.ui:13
 msgid "Linking"
-msgstr ""
+msgstr "Привазывание"
 
 #: data/resources/ui/preferences_window.ui:16
 msgid "Device Name"
-msgstr ""
+msgstr "Имя устройства"
 
 #: data/resources/ui/preferences_window.ui:17
 msgid "The device will need to be relinked to take effect."
-msgstr ""
+msgstr "Устройство должно быть перепривазано чтобы вступить в силу."
 
 #: data/resources/ui/preferences_window.ui:29
 msgid "Attachments"
@@ -132,8 +132,8 @@ msgstr[1] "Отправить {} изображений"
 #: src/backend/message.rs:366
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Отправлено видео"
+msgstr[1] "Отправлено {} видео"
 
 #: src/backend/message.rs:374
 msgid "Sent a file"
