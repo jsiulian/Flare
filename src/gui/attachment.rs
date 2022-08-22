@@ -24,6 +24,7 @@ pub mod imp {
     use gdk_pixbuf::glib::ParamSpec;
     use gdk_pixbuf::glib::ParamSpecObject;
     use gdk_pixbuf::glib::Value;
+    use gio::Settings;
     use glib::subclass::InitializingObject;
     use gtk::builders::FileChooserNativeBuilder;
     use gtk::glib;
@@ -34,6 +35,7 @@ pub mod imp {
     use gtk::ResponseType;
 
     use crate::backend::Manager;
+    use crate::config::APP_ID;
     use crate::gui::error_dialog::ErrorDialog;
 
     #[derive(CompositeTemplate, Default)]
@@ -46,6 +48,21 @@ pub mod imp {
 
     #[gtk::template_callbacks]
     impl Attachment {
+        #[template_callback(function)]
+        fn not(b: bool) -> bool {
+            !b
+        }
+
+        #[template_callback]
+        fn load(&self, _: gtk::Button) {
+            let context = glib::MainContext::default();
+            let obj = self.instance();
+            context.spawn_local(clone!(@strong obj => async move {
+                let attachment = obj.property::<crate::backend::Attachment>("attachment");
+                attachment.load().await
+            }));
+        }
+
         #[template_callback]
         fn download(&self, _: gtk::Button) {
             log::trace!("User requested to dowload attachment");
@@ -158,7 +175,21 @@ pub mod imp {
                     let att = value
                         .get::<Option<crate::backend::Attachment>>()
                         .expect("Property `attachment` of `Attachment` has to be of type `crate::backend::Attachment`");
+
+                    let settings = Settings::new(APP_ID);
+                    let autoload = att.is_some()
+                        && settings.boolean("autodownload-images")
+                        && att.as_ref().unwrap().is_image()
+                        || settings.boolean("autodownload-videos")
+                            && att.as_ref().unwrap().is_video()
+                        || settings.boolean("autodownload-files")
+                            && att.as_ref().unwrap().is_file();
+
                     self.attachment.replace(att);
+                    if autoload {
+                        log::trace!("Autodownloading attachment");
+                        self.load(gtk::Button::new());
+                    }
                 }
                 _ => unimplemented!(),
             }

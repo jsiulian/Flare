@@ -9,64 +9,127 @@
     <property name="halign">start</property>
 
     <child>
-      <object class="GtkPicture">
-        <property name="halign">start</property>
-        <!-- For some reason needed to display the image at all. I do not really know what to set these values to. -->
-        <property name="width-request">100</property>
-        <property name="height-request">100</property>
-        <binding name="visible">
-          <lookup name="is-image">
-            <lookup name="attachment" type="FlAttachment"/>
-          </lookup>
-        </binding>
-        <binding name="paintable">
-          <lookup name="image">
-            <lookup name="attachment" type="FlAttachment"/>
-          </lookup>
-        </binding>
-      </object>
-    </child>
-    <child>
-      <object class="GtkVideo">
-        <property name="halign">start</property>
-        <property name="width-request">100</property>
-        <property name="height-request">100</property>
-        <binding name="visible">
-          <lookup name="is-video">
-            <lookup name="attachment" type="FlAttachment"/>
-          </lookup>
-        </binding>
-        <binding name="media-stream">
-          <lookup name="video">
-            <lookup name="attachment" type="FlAttachment"/>
-          </lookup>
-        </binding>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel">
+      <object class="GtkBox">
+        <property name="orientation">horizontal</property>
+        <property name="hexpand">True</property>
         <property name="halign">start</property>
         <binding name="visible">
-          <lookup name="is-file">
-            <lookup name="attachment" type="FlAttachment"/>
-          </lookup>
+          <closure function="not" type="gboolean">
+            <lookup name="loaded">
+              <lookup name="attachment" type="FlAttachment"/>
+            </lookup>
+          </closure>
         </binding>
-        <binding name="label">
-          <lookup name="name">
-            <lookup name="attachment" type="FlAttachment"/>
-          </lookup>
-        </binding>
+
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Load image</property>
+            <binding name="visible">
+              <lookup name="is-image">
+                <lookup name="attachment" type="FlAttachment"/>
+              </lookup>
+            </binding>
+            <signal name="clicked" handler="load" swapped="true"/>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Load video</property>
+            <binding name="visible">
+              <lookup name="is-video">
+                <lookup name="attachment" type="FlAttachment"/>
+              </lookup>
+            </binding>
+            <signal name="clicked" handler="load" swapped="true"/>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Load file</property>
+            <binding name="visible">
+              <lookup name="is-file">
+                <lookup name="attachment" type="FlAttachment"/>
+              </lookup>
+            </binding>
+            <signal name="clicked" handler="load" swapped="true"/>
+          </object>
+        </child>
       </object>
     </child>
+
     <child>
-      <object class="GtkButton">
-        <style>
-          <class name="flat"/>
-          <class name="circular"/>
-        </style>
-        <property name="icon-name">document-save-symbolic</property>
-        <signal name="clicked" handler="download" swapped="true"/>
+      <object class="GtkBox">
+        <property name="orientation">horizontal</property>
+        <property name="hexpand">True</property>
+        <property name="halign">start</property>
+        <binding name="visible">
+          <lookup name="loaded">
+            <lookup name="attachment" type="FlAttachment"/>
+          </lookup>
+        </binding>
+
+        <child>
+          <object class="GtkPicture">
+            <property name="halign">start</property>
+            <!-- For some reason needed to display the image at all. I do not really know what to set these values to. -->
+            <property name="width-request">100</property>
+            <property name="height-request">100</property>
+            <binding name="visible">
+              <lookup name="is-image">
+                <lookup name="attachment" type="FlAttachment"/>
+              </lookup>
+            </binding>
+            <binding name="paintable">
+              <lookup name="image">
+                <lookup name="attachment" type="FlAttachment"/>
+              </lookup>
+            </binding>
+          </object>
+        </child>
+        <child>
+          <object class="GtkVideo">
+            <property name="halign">start</property>
+            <property name="width-request">100</property>
+            <property name="height-request">100</property>
+            <binding name="visible">
+              <lookup name="is-video">
+                <lookup name="attachment" type="FlAttachment"/>
+              </lookup>
+            </binding>
+            <binding name="media-stream">
+              <lookup name="video">
+                <lookup name="attachment" type="FlAttachment"/>
+              </lookup>
+            </binding>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="halign">start</property>
+            <binding name="visible">
+              <lookup name="is-file">
+                <lookup name="attachment" type="FlAttachment"/>
+              </lookup>
+            </binding>
+            <binding name="label">
+              <lookup name="name">
+                <lookup name="attachment" type="FlAttachment"/>
+              </lookup>
+            </binding>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <style>
+              <class name="flat"/>
+              <class name="circular"/>
+            </style>
+            <property name="icon-name">document-save-symbolic</property>
+            <signal name="clicked" handler="download" swapped="true"/>
+          </object>
+        </child>
       </object>
     </child>
+
   </template>
 </interface>

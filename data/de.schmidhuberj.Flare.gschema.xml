@@ -13,9 +13,23 @@
       <default>false</default>
       <summary>Window maximized state</summary>
     </key>
+
     <key name="link-device-name" type="s">
       <default>"Flare"</default>
       <summary>The device name when linking Flare. This requires the application to be re-linked.</summary>
+    </key>
+
+    <key name="autodownload-images" type="b">
+      <default>true</default>
+      <summary>Automatically download images</summary>
+    </key>
+    <key name="autodownload-videos" type="b">
+      <default>true</default>
+      <summary>Automatically download videos</summary>
+    </key>
+    <key name="autodownload-files" type="b">
+      <default>true</default>
+      <summary>Automatically download files</summary>
     </key>
   </schema>
 </schemalist>

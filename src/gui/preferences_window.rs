@@ -13,6 +13,12 @@ impl PreferencesWindow {
     }
 }
 
+impl Default for PreferencesWindow {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 pub mod imp {
     use gdk::gio::Settings;
     use gdk::gio::SettingsBindFlags;
@@ -30,6 +36,13 @@ pub mod imp {
         #[template_child]
         entry_device_name: TemplateChild<gtk::Entry>,
 
+        #[template_child]
+        switch_download_images: TemplateChild<gtk::Switch>,
+        #[template_child]
+        switch_download_videos: TemplateChild<gtk::Switch>,
+        #[template_child]
+        switch_download_files: TemplateChild<gtk::Switch>,
+
         settings: Settings,
     }
 
@@ -37,6 +50,30 @@ pub mod imp {
         fn init_settings(&self) {
             self.settings
                 .bind("link-device-name", &self.entry_device_name.get(), "text")
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
+            self.settings
+                .bind(
+                    "autodownload-images",
+                    &self.switch_download_images.get(),
+                    "state",
+                )
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
+            self.settings
+                .bind(
+                    "autodownload-videos",
+                    &self.switch_download_videos.get(),
+                    "state",
+                )
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
+            self.settings
+                .bind(
+                    "autodownload-files",
+                    &self.switch_download_files.get(),
+                    "state",
+                )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
         }
@@ -52,6 +89,9 @@ pub mod imp {
             Self {
                 settings: Settings::new(crate::config::APP_ID),
                 entry_device_name: TemplateChild::default(),
+                switch_download_images: TemplateChild::default(),
+                switch_download_videos: TemplateChild::default(),
+                switch_download_files: TemplateChild::default(),
             }
         }
 

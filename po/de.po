@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-20 13:59+0200\n"
+"POT-Creation-Date: 2022-08-22 17:08+0200\n"
 "PO-Revision-Date: 2022-08-20 09:19+0000\n"
 "Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -18,6 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.14-dev\n"
+
+#: data/resources/ui/attachment.ui:26
+msgid "Load image"
+msgstr ""
+
+#: data/resources/ui/attachment.ui:37
+msgid "Load video"
+msgstr ""
+
+#: data/resources/ui/attachment.ui:48
+msgid "Load file"
+msgstr ""
 
 #: data/resources/ui/channel_messages.ui:102
 msgid "Message"
@@ -77,6 +89,22 @@ msgid "The device will need to be relinked to take effect."
 msgstr ""
 "Das Gerät muss neu gekoppelt werden, damit diese Einstellung Auswirkungen "
 "hat."
+
+#: data/resources/ui/preferences_window.ui:29
+msgid "Attachments"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:32
+msgid "Dowload images automatically"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:41
+msgid "Dowload videos automatically"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:50
+msgid "Dowload files automatically"
+msgstr ""
 
 #: data/resources/ui/window.ui:104
 msgid "Settings"

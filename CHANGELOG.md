@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Settings dialog.
 - Configurable device name.
 - Basic video attachment support.
+- Lazy-loading of attachments including configuration on what to load when viewed and what to load on click.
 
 ### Fixed
 
