@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-22 17:08+0200\n"
-"PO-Revision-Date: 2022-07-28 22:19+0000\n"
+"PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
 "flare/nb_NO/>\n"
@@ -21,15 +21,15 @@ msgstr ""
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
-msgstr ""
+msgstr "Last inn bilde"
 
 #: data/resources/ui/attachment.ui:37
 msgid "Load video"
-msgstr ""
+msgstr "Last inn video"
 
 #: data/resources/ui/attachment.ui:48
 msgid "Load file"
-msgstr ""
+msgstr "Last inn fil"
 
 #: data/resources/ui/channel_messages.ui:102
 msgid "Message"
@@ -73,39 +73,41 @@ msgstr "Reager"
 
 #: data/resources/ui/preferences_window.ui:9
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #: data/resources/ui/preferences_window.ui:13
+#, fuzzy
 msgid "Linking"
-msgstr ""
+msgstr "Sammenkobling"
 
 #: data/resources/ui/preferences_window.ui:16
 msgid "Device Name"
-msgstr ""
+msgstr "Enhetsnavn"
 
 #: data/resources/ui/preferences_window.ui:17
+#, fuzzy
 msgid "The device will need to be relinked to take effect."
-msgstr ""
+msgstr "Enheten må sammenkobles igjen for å gjøre dette."
 
 #: data/resources/ui/preferences_window.ui:29
 msgid "Attachments"
-msgstr ""
+msgstr "Vedlegg"
 
 #: data/resources/ui/preferences_window.ui:32
 msgid "Dowload images automatically"
-msgstr ""
+msgstr "Last ned bilder automatisk"
 
 #: data/resources/ui/preferences_window.ui:41
 msgid "Dowload videos automatically"
-msgstr ""
+msgstr "Last ned videoer automatisk"
 
 #: data/resources/ui/preferences_window.ui:50
 msgid "Dowload files automatically"
-msgstr ""
+msgstr "Last ned filer automatisk"
 
 #: data/resources/ui/window.ui:104
 msgid "Settings"
-msgstr ""
+msgstr "Innstillinger"
 
 #: data/resources/ui/window.ui:108
 msgid "Unlink"
@@ -132,8 +134,8 @@ msgstr[1] "Sendte {} bilder"
 #: src/backend/message.rs:366
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Sendte en video"
+msgstr[1] "Sendte {} videoer"
 
 #: src/backend/message.rs:374
 msgid "Sent a file"
