@@ -8,27 +8,27 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-22 17:08+0200\n"
-"PO-Revision-Date: 2022-08-12 21:34+0200\n"
-"Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
+"PO-Revision-Date: 2022-08-24 21:15+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
-msgstr ""
+msgstr "Charger l’image"
 
 #: data/resources/ui/attachment.ui:37
 msgid "Load video"
-msgstr ""
+msgstr "Charger la vidéo"
 
 #: data/resources/ui/attachment.ui:48
 msgid "Load file"
-msgstr ""
+msgstr "Charger le fichier"
 
 #: data/resources/ui/channel_messages.ui:102
 msgid "Message"
@@ -72,39 +72,39 @@ msgstr "Réagir"
 
 #: data/resources/ui/preferences_window.ui:9
 msgid "General"
-msgstr ""
+msgstr "Général"
 
 #: data/resources/ui/preferences_window.ui:13
 msgid "Linking"
-msgstr ""
+msgstr "Liaison"
 
 #: data/resources/ui/preferences_window.ui:16
 msgid "Device Name"
-msgstr ""
+msgstr "Nom de l’appareil"
 
 #: data/resources/ui/preferences_window.ui:17
 msgid "The device will need to be relinked to take effect."
-msgstr ""
+msgstr "L’appareil devra être reconnecté pour prendre effet."
 
 #: data/resources/ui/preferences_window.ui:29
 msgid "Attachments"
-msgstr ""
+msgstr "Pièces-jointes"
 
 #: data/resources/ui/preferences_window.ui:32
 msgid "Dowload images automatically"
-msgstr ""
+msgstr "Télécharger les images automatiquement"
 
 #: data/resources/ui/preferences_window.ui:41
 msgid "Dowload videos automatically"
-msgstr ""
+msgstr "Télécharger les vidéos automatiquement"
 
 #: data/resources/ui/preferences_window.ui:50
 msgid "Dowload files automatically"
-msgstr ""
+msgstr "Télécharger les fichiers automatiquement"
 
 #: data/resources/ui/window.ui:104
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: data/resources/ui/window.ui:108
 msgid "Unlink"
@@ -131,8 +131,8 @@ msgstr[1] "A envoyé {} images"
 #: src/backend/message.rs:366
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A envoyé une vidéo"
+msgstr[1] "A envoyé {} vidéos"
 
 #: src/backend/message.rs:374
 msgid "Sent a file"
