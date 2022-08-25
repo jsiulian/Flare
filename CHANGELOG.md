@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2022-08-25
+
 ### Added
 
 - Settings dialog.
@@ -95,7 +97,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.2.1...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.0...master
+[0.3.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.2.1...0.3.0
 [0.2.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.2.0...0.2.1
 [0.2.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.5...0.2.0
 [0.1.5]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.4...0.1.5
