@@ -50,6 +50,11 @@
     </p>
   </description>
   <releases>
+    <release version="v0.3.1" date="2022-08-25">
+      <description> 
+        <p>Fix gschema not being installed</p>
+      </description>
+    </release>
     <release version="v0.3.0" date="2022-08-25">
       <description> 
         <p>Implemented device name for linking, added support for video attachment, configurable lazy-load attachments, bug fixes</p>

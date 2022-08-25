@@ -1,7 +1,7 @@
 project(
   'flare',
   'rust',
-  version: '0.3.0',
+  version: '0.3.1',
   meson_version: '>= 0.59',
   license: 'AGPL-3.0-or-later',
 )
@@ -60,6 +60,6 @@ subdir('src')
 
 gnome.post_install(
   gtk_update_icon_cache: true,
-  glib_compile_schemas: false,
+  glib_compile_schemas: true,
   update_desktop_database: true,
 )

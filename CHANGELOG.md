@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2022-08-25
+
+### Fixed
+
+- Gschema not being installed
+
 ## [0.3.0] - 2022-08-25
 
 ### Added
@@ -97,7 +103,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.0...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.1...master
+[0.3.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.0...0.3.1
 [0.3.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.2.1...0.3.0
 [0.2.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.2.0...0.2.1
 [0.2.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.1.5...0.2.0
