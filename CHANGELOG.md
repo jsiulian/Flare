@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Revert fix for [#4] which fixes a crash when no default collection is set up.
+
 ## [0.3.1] - 2022-08-25
 
 ### Fixed
@@ -25,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Crash on startup when presage failed.
 - Not unlocking the default libsecret collection at startup, see [#4].
+    - Update: Actually not fixed, even made worse.
 
 ## [0.2.1] - 2022-08-15
 

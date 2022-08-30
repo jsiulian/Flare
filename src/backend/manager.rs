@@ -37,6 +37,7 @@ type ConfigStoreType =
     EncryptedSledConfigStore<EncryptionCipher<ChaCha20Poly1305, CountingNonce<ChaCha20Poly1305>>>;
 
 // Similar to https://gitlab.gnome.org/GNOME/geary/-/blob/main/src/client/application/secret-mediator.vala#L112
+#[allow(dead_code)]
 async fn ensure_secret_unlocked() -> Result<(), ApplicationError> {
     log::trace!("Ensuring the default collection is unlocked");
     let service = Service::get_future(ServiceFlags::OPEN_SESSION).await?;
@@ -55,7 +56,8 @@ async fn ensure_secret_unlocked() -> Result<(), ApplicationError> {
 }
 
 async fn encryption_password() -> Result<Vec<u8>, ApplicationError> {
-    ensure_secret_unlocked().await?;
+    // TODO: Fix ensure_secret_unlocked
+    // ensure_secret_unlocked().await?;
 
     let schema = Schema::new(
         crate::config::APP_ID,
