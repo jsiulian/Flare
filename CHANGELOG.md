@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2] - 2022-08-30
+
 ### Fixed
 
 - Revert fix for [#4] which fixes a crash when no default collection is set up.
@@ -108,7 +110,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.1...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.2...master
+[0.3.2]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.1...0.3.2
 [0.3.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.0...0.3.1
 [0.3.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.2.1...0.3.0
 [0.2.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.2.0...0.2.1
