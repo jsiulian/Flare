@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-01 16:32+0200\n"
+"POT-Creation-Date: 2022-09-01 16:40+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -147,6 +147,23 @@ msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Vedlegg"
 
+#: data/resources/ui/window.ui:105
+#, fuzzy
+msgid "Settings"
+msgstr "Innstillinger"
+
+#: data/resources/ui/window.ui:109
+msgid "Unlink"
+msgstr "Opphev forbindelse"
+
+#: data/resources/ui/window.ui:113
+msgid "Keybindings"
+msgstr ""
+
+#: data/resources/ui/window.ui:117
+msgid "About"
+msgstr "Om"
+
 #: src/backend/channel.rs:297
 msgid "Note to self"
 msgstr "Selvpåminnelse"
@@ -251,9 +268,3 @@ msgstr "Er du sikker?"
 #: src/gui/window.rs:186
 msgid "translators"
 msgstr "Allan Nordhøy <epost@anotheragency.no>"
-
-#~ msgid "Unlink"
-#~ msgstr "Opphev forbindelse"
-
-#~ msgid "About"
-#~ msgstr "Om"

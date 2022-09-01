@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-01 16:32+0200\n"
+"POT-Creation-Date: 2022-09-01 16:40+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
@@ -144,6 +144,23 @@ msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Pièces-jointes"
 
+#: data/resources/ui/window.ui:105
+#, fuzzy
+msgid "Settings"
+msgstr "Paramètres"
+
+#: data/resources/ui/window.ui:109
+msgid "Unlink"
+msgstr "Délier"
+
+#: data/resources/ui/window.ui:113
+msgid "Keybindings"
+msgstr ""
+
+#: data/resources/ui/window.ui:117
+msgid "About"
+msgstr "À propos"
+
 #: src/backend/channel.rs:297
 msgid "Note to self"
 msgstr "Note à moi-même"
@@ -248,9 +265,3 @@ msgstr "Êtes-vous sûr ?"
 #: src/gui/window.rs:186
 msgid "translators"
 msgstr "Irénée Thirion"
-
-#~ msgid "Unlink"
-#~ msgstr "Délier"
-
-#~ msgid "About"
-#~ msgstr "À propos"
