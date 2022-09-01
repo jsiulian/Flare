@@ -11,12 +11,13 @@
       <object class="GtkBox">
         <property name="orientation">horizontal</property>
         <property name="spacing">5</property>
+        <property name="margin-top">5</property>
+        <binding name="visible">
+          <lookup name="show-name" type="FlMessageItem"/>
+        </binding>
         <!-- Avatar -->
         <child>
           <object class="AdwAvatar">
-            <binding name="visible">
-              <lookup name="show-name" type="FlMessageItem"/>
-            </binding>
             <binding name="text">
               <lookup name="title">
                 <lookup name="sender">
@@ -34,9 +35,6 @@
             <style>
               <class name="heading"/>
             </style>
-            <binding name="visible">
-              <lookup name="show-name" type="FlMessageItem"/>
-            </binding>
             <binding name="label">
               <lookup name="title">
                 <lookup name="sender">

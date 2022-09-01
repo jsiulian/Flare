@@ -398,6 +398,7 @@ impl Manager {
         self.internal().uuid()
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub async fn upload_attachments(
         &self,
         attachments: Vec<(AttachmentSpec, Vec<u8>)>,

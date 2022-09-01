@@ -39,13 +39,15 @@ fn main() {
 
     gtk::init().expect("Failed to initialize gtk");
     libadwaita::init();
-    let app = gtk::Application::builder().application_id(APP_ID).build();
+    let app = libadwaita::Application::builder()
+        .application_id(APP_ID)
+        .build();
 
     app.connect_activate(build_ui);
     app.run();
 }
 
-fn build_ui(app: &gtk::Application) {
+fn build_ui(app: &libadwaita::Application) {
     init_resources();
     let window = crate::gui::Window::new(app);
     init_icons(&window.display());

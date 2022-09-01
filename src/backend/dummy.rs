@@ -3,6 +3,8 @@ use gdk::prelude::ObjectExt;
 use gdk::subclass::prelude::ObjectSubclassIsExt;
 use presage::prelude::Uuid;
 use std::path::Path;
+use presage::prelude::{proto::AttachmentPointer, AttachmentSpec};
+use libsignal_service::sender::AttachmentUploadError;
 
 macro_rules! msg {
     ($s:expr, $m:expr, $i:expr, $j:expr) => {
@@ -113,7 +115,6 @@ impl super::Manager {
             ) {
                 log::debug!("Message from a already existing channel");
                 let _ = stored_channel.new_message(msg);
-                tokio::time::sleep(std::time::Duration::from_millis(10)).await;
             }
         }
         Ok(())
@@ -125,11 +126,25 @@ impl super::Manager {
     }
 
     #[cfg(feature = "screenshot")]
+    pub async fn upload_attachments(
+        &self,
+        attachments: Vec<(AttachmentSpec, Vec<u8>)>,
+    ) -> Result<Vec<Result<AttachmentPointer, AttachmentUploadError>>, presage::Error> {
+        Ok(vec![Ok(AttachmentPointer::default())])
+    }
+
+    #[cfg(feature = "screenshot")]
     async fn dummy_messages(&self) -> Vec<Message> {
         let msg_replied = msg!(self, "And what can that Flare-thing actually do?", 1);
         let msg_reply = msg!(self, "Additionally, replying and reacting to messages should also be possible", 0);
         msg_reply.set_quote(msg_replied.clone());
         msg_reply.react("👍");
+
+        let msg_screenshot = msg!(self, "", 0);
+        let screenshot_file = gio::File::for_uri("resource:///icon.png");
+        let attachment = crate::backend::Attachment::from_file(screenshot_file, self);
+        msg_screenshot.add_attachment(attachment).await.expect("Failed to add attachment");
+
         vec![
             msg!(self, "Hello", 1),
             msg!(self, "Hi, how are you", 0),
@@ -141,6 +156,7 @@ impl super::Manager {
             msg!(self, "I can't believe you are a Flarer", 0),
             msg!(self, "What is a Flarer", 1),
             msg!(self, "You have seriously not heared about Flare before?", 0),
+            msg_screenshot,
             msg!(self, "Some people (the Flarers) believe that they are just some example data for a Signal client named Flare", 0),
             msg!(self, "That has to be the weirdest conspiracy theory I have ever heared of", 1),
             msg_replied,

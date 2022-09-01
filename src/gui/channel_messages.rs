@@ -187,6 +187,11 @@ pub mod imp {
             opt.is_some()
         }
 
+        #[template_callback(function)]
+        fn is_none(opt: Option<glib::Object>) -> bool {
+            opt.is_none()
+        }
+
         #[template_callback]
         fn handle_row_activated(&self, row: gtk::ListBoxRow) {
             let msg = row

@@ -8,17 +8,16 @@
     <property name="hexpand">True</property>
     <property name="vexpand">True</property>
 
-    <!-- Message List -->
+    <!-- Status Page -->
     <child>
-      <object class="GtkScrolledWindow">
-        <property name="hscrollbar-policy">never</property>
-        <child>
-          <object class="GtkListBox" id="list">
-            <signal handler="handle_row_activated" swapped="true" name="row-activated"/>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-          </object>
-        </child>
+      <object class="AdwStatusPage">
+        <property name="description" translatable="yes">Select a channel</property>
+        <property name="icon-name">system-search-symbolic</property>
+        <binding name="visible">
+          <closure function="is_none" type="gboolean">
+            <lookup name="active-channel" type="FlChannelMessages"/>
+          </closure>
+        </binding>
       </object>
     </child>
 
@@ -31,6 +30,21 @@
             <lookup name="active-channel" type="FlChannelMessages"/>
           </closure>
         </binding>
+
+        <!-- Message List -->
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="hscrollbar-policy">never</property>
+            <child>
+              <object class="GtkListBox" id="list">
+                <signal handler="handle_row_activated" swapped="true" name="row-activated"/>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
 
         <!-- Quote -->
         <child>

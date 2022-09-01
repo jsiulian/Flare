@@ -10,7 +10,7 @@ gtk::glib::wrapper! {
 }
 
 impl Window {
-    pub fn new(app: &gtk::Application) -> Self {
+    pub fn new(app: &libadwaita::Application) -> Self {
         log::trace!("Initializing window");
         Object::new(&[("application", app)]).expect("Failed to create Window")
     }
@@ -65,6 +65,10 @@ pub mod imp {
     use gtk::prelude::*;
     use gtk::subclass::prelude::*;
     use gtk::CompositeTemplate;
+    use gtk::Shortcut;
+    use gtk::ShortcutAction;
+    use gtk::ShortcutController;
+    use gtk::ShortcutTrigger;
     use libadwaita::subclass::prelude::AdwApplicationWindowImpl;
     use libadwaita::subclass::prelude::AdwWindowImpl;
 
@@ -170,7 +174,7 @@ pub mod imp {
             actions.add_action(&action_settings);
             actions.add_action(&action_unlink);
             actions.add_action(&action_about);
-        }
+       }
 
         #[template_callback]
         fn handle_go_back(&self) {
