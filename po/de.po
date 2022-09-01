@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-01 16:40+0200\n"
-"PO-Revision-Date: 2022-08-23 15:22+0000\n"
+"PO-Revision-Date: 2022-09-02 15:17+0000\n"
 "Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
@@ -146,7 +146,6 @@ msgid "Upload attachment"
 msgstr "Anhänge hochladen"
 
 #: data/resources/ui/window.ui:105
-#, fuzzy
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -156,7 +155,7 @@ msgstr "Entkoppeln"
 
 #: data/resources/ui/window.ui:113
 msgid "Keybindings"
-msgstr ""
+msgstr "Tastaturkürzel"
 
 #: data/resources/ui/window.ui:117
 msgid "About"
