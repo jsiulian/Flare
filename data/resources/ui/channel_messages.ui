@@ -105,6 +105,17 @@
               <object class="GtkButton">
                 <signal name="clicked" handler="add_attachment" swapped="true"/>
                 <property name="icon-name">list-add-symbolic</property>
+                <child>
+                  <object class='GtkShortcutController'>
+                    <property name='scope'>managed</property>
+                    <child>
+                      <object class='GtkShortcut'>
+                        <property name='trigger'>&lt;Control&gt;plus</property>
+                        <property name='action'>activate</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
             <child>

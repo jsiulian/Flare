@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-22 17:08+0200\n"
+"POT-Creation-Date: 2022-09-01 16:32+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,11 @@ msgstr "Загрузить видео"
 msgid "Load file"
 msgstr "Загрузить файл"
 
-#: data/resources/ui/channel_messages.ui:102
+#: data/resources/ui/channel_messages.ui:14
+msgid "Select a channel"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:127
 msgid "Message"
 msgstr "Сообщение"
 
@@ -63,11 +67,11 @@ msgstr "Пожалуйста, отсканируйте этот QR-код на �
 msgid "Please restart the application after this window closed."
 msgstr "Пожалуйста, перезапустите приложение после закрытия этого окна."
 
-#: data/resources/ui/message_item.ui:181
+#: data/resources/ui/message_item.ui:179
 msgid "Reply"
 msgstr "Ответить"
 
-#: data/resources/ui/message_item.ui:187
+#: data/resources/ui/message_item.ui:185
 msgid "React"
 msgstr "Отреагировать"
 
@@ -103,23 +107,49 @@ msgstr "Загружать видео автоматически"
 msgid "Dowload files automatically"
 msgstr "Загружать файлы автоматически"
 
-#: data/resources/ui/window.ui:104
-msgid "Settings"
+#: data/resources/ui/shortcuts.ui:11
+#, fuzzy
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Общее"
+
+#: data/resources/ui/shortcuts.ui:14
+msgctxt "shortcut window"
+msgid "Show shortcuts"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:20
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Go to settings"
 msgstr "Параметры"
 
-#: data/resources/ui/window.ui:108
-msgid "Unlink"
-msgstr "Отвязать"
+#: data/resources/ui/shortcuts.ui:26
+msgctxt "shortcut window"
+msgid "Go to about page"
+msgstr ""
 
-#: data/resources/ui/window.ui:112
-msgid "About"
-msgstr "О Приложении"
+#: data/resources/ui/shortcuts.ui:34
+msgctxt "shortcut window"
+msgid "Channels"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:37
+msgctxt "shortcut window"
+msgid "Go to channel 1…9"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:43
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Upload attachment"
+msgstr "Вложения"
 
 #: src/backend/channel.rs:297
 msgid "Note to self"
 msgstr "Заметка для себя"
 
-#: src/backend/manager.rs:263
+#: src/backend/manager.rs:265
 msgid "You"
 msgstr "Вы"
 
@@ -200,7 +230,7 @@ msgstr "Пожалуйста, удалите базу данных и повто
 msgid "The database path at {} is no folder."
 msgstr "Путь к базе данных в {} не является папкой."
 
-#: src/gui/window.rs:117
+#: src/gui/window.rs:134
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -210,12 +240,18 @@ msgstr ""
 "также закроет приложение, чтобы его можно было повторно связать при "
 "повторном открытии."
 
-#: src/gui/window.rs:119
+#: src/gui/window.rs:136
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:160
+#: src/gui/window.rs:186
 msgid "translators"
 msgstr "Давид Лапшин <ddaudix@gmail.com>"
+
+#~ msgid "Unlink"
+#~ msgstr "Отвязать"
+
+#~ msgid "About"
+#~ msgstr "О Приложении"

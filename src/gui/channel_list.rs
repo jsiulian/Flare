@@ -1,5 +1,6 @@
 use gdk_pixbuf::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
+use gtk::traits::WidgetExt;
 
 use crate::{backend::Channel, gui::channel_item::ChannelItem};
 
@@ -18,6 +19,13 @@ impl ChannelList {
         );
         let widget = ChannelItem::new(&channel);
         self.imp().list.prepend(&widget);
+    }
+
+    pub fn activate_row(&self, i: i32) {
+        let row = self.imp().list.row_at_index(i);
+        if let Some(row) = row {
+            row.activate();
+        }
     }
 }
 

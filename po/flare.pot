@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-22 17:08+0200\n"
+"POT-Creation-Date: 2022-09-01 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
@@ -30,7 +30,11 @@ msgstr ""
 msgid "Load file"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:102
+#: data/resources/ui/channel_messages.ui:14
+msgid "Select a channel"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:127
 msgid "Message"
 msgstr ""
 
@@ -62,11 +66,11 @@ msgstr ""
 msgid "Please restart the application after this window closed."
 msgstr ""
 
-#: data/resources/ui/message_item.ui:181
+#: data/resources/ui/message_item.ui:179
 msgid "Reply"
 msgstr ""
 
-#: data/resources/ui/message_item.ui:187
+#: data/resources/ui/message_item.ui:185
 msgid "React"
 msgstr ""
 
@@ -102,23 +106,46 @@ msgstr ""
 msgid "Dowload files automatically"
 msgstr ""
 
-#: data/resources/ui/window.ui:104
-msgid "Settings"
+#: data/resources/ui/shortcuts.ui:11
+msgctxt "shortcut window"
+msgid "General"
 msgstr ""
 
-#: data/resources/ui/window.ui:108
-msgid "Unlink"
+#: data/resources/ui/shortcuts.ui:14
+msgctxt "shortcut window"
+msgid "Show shortcuts"
 msgstr ""
 
-#: data/resources/ui/window.ui:112
-msgid "About"
+#: data/resources/ui/shortcuts.ui:20
+msgctxt "shortcut window"
+msgid "Go to settings"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:26
+msgctxt "shortcut window"
+msgid "Go to about page"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:34
+msgctxt "shortcut window"
+msgid "Channels"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:37
+msgctxt "shortcut window"
+msgid "Go to channel 1…9"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:43
+msgctxt "shortcut window"
+msgid "Upload attachment"
 msgstr ""
 
 #: src/backend/channel.rs:297
 msgid "Note to self"
 msgstr ""
 
-#: src/backend/manager.rs:263
+#: src/backend/manager.rs:265
 msgid "You"
 msgstr ""
 
@@ -193,19 +220,19 @@ msgstr ""
 msgid "The database path at {} is no folder."
 msgstr ""
 
-#: src/gui/window.rs:117
+#: src/gui/window.rs:134
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
 
-#: src/gui/window.rs:119
+#: src/gui/window.rs:136
 msgid "Are you sure?"
 msgstr ""
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:160
+#: src/gui/window.rs:186
 msgid "translators"
 msgstr ""

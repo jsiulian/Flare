@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-22 17:08+0200\n"
+"POT-Creation-Date: 2022-09-01 16:32+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -31,7 +31,11 @@ msgstr "Last inn video"
 msgid "Load file"
 msgstr "Last inn fil"
 
-#: data/resources/ui/channel_messages.ui:102
+#: data/resources/ui/channel_messages.ui:14
+msgid "Select a channel"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:127
 msgid "Message"
 msgstr "Melding"
 
@@ -63,11 +67,11 @@ msgstr "Skann denne QR-koden med din hovedenhet."
 msgid "Please restart the application after this window closed."
 msgstr "Start programmet på ny etter at dette vinduet er lukket."
 
-#: data/resources/ui/message_item.ui:181
+#: data/resources/ui/message_item.ui:179
 msgid "Reply"
 msgstr "Svar"
 
-#: data/resources/ui/message_item.ui:187
+#: data/resources/ui/message_item.ui:185
 msgid "React"
 msgstr "Reager"
 
@@ -105,23 +109,49 @@ msgstr "Last ned videoer automatisk"
 msgid "Dowload files automatically"
 msgstr "Last ned filer automatisk"
 
-#: data/resources/ui/window.ui:104
-msgid "Settings"
+#: data/resources/ui/shortcuts.ui:11
+#, fuzzy
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Generelt"
+
+#: data/resources/ui/shortcuts.ui:14
+msgctxt "shortcut window"
+msgid "Show shortcuts"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:20
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Go to settings"
 msgstr "Innstillinger"
 
-#: data/resources/ui/window.ui:108
-msgid "Unlink"
-msgstr "Opphev forbindelse"
+#: data/resources/ui/shortcuts.ui:26
+msgctxt "shortcut window"
+msgid "Go to about page"
+msgstr ""
 
-#: data/resources/ui/window.ui:112
-msgid "About"
-msgstr "Om"
+#: data/resources/ui/shortcuts.ui:34
+msgctxt "shortcut window"
+msgid "Channels"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:37
+msgctxt "shortcut window"
+msgid "Go to channel 1…9"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:43
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Upload attachment"
+msgstr "Vedlegg"
 
 #: src/backend/channel.rs:297
 msgid "Note to self"
 msgstr "Selvpåminnelse"
 
-#: src/backend/manager.rs:263
+#: src/backend/manager.rs:265
 msgid "You"
 msgstr "Deg"
 
@@ -202,7 +232,7 @@ msgstr "Slett databasen og forbind enheten igjen."
 msgid "The database path at {} is no folder."
 msgstr "Databasestien {} er ikke en mappe."
 
-#: src/gui/window.rs:117
+#: src/gui/window.rs:134
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -212,12 +242,18 @@ msgstr ""
 "data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
 "åpner det på ny."
 
-#: src/gui/window.rs:119
+#: src/gui/window.rs:136
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:160
+#: src/gui/window.rs:186
 msgid "translators"
 msgstr "Allan Nordhøy <epost@anotheragency.no>"
+
+#~ msgid "Unlink"
+#~ msgstr "Opphev forbindelse"
+
+#~ msgid "About"
+#~ msgstr "Om"

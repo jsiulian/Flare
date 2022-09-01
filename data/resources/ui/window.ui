@@ -34,7 +34,7 @@
               </object>
             </child>
             <child>
-              <object class="FlChannelList" id="channel-list">
+              <object class="FlChannelList" id="channel_list">
                 <signal name="active-channel-changed" handler="handle_go_forward" swapped="true"/>
                 <binding name="manager">
                   <lookup name="manager" type="FlWindow"/>
@@ -73,7 +73,7 @@
                     <binding name="title">
                       <lookup name="title">
                         <lookup name="active-channel">
-                            channel-list
+                            channel_list
                         </lookup>
                       </lookup>
                     </binding>
@@ -88,7 +88,7 @@
                 </binding>
                 <binding name="active-channel">
                   <lookup name="active-channel">
-                      channel-list
+                      channel_list
                   </lookup>
                 </binding>
               </object>
@@ -108,6 +108,10 @@
       <item>
         <attribute name="label" translatable="yes">Unlink</attribute>
         <attribute name="action">win.unlink</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Keybindings</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">About</attribute>

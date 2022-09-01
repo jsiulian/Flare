@@ -1,5 +1,6 @@
 use gdk::subclass::prelude::ObjectSubclassIsExt;
 use gdk_pixbuf::{glib, prelude::SettingsExt};
+use gtk::prelude::GtkApplicationExt;
 use gtk::{glib::Object, traits::GtkWindowExt};
 
 gtk::glib::wrapper! {
@@ -12,6 +13,15 @@ gtk::glib::wrapper! {
 impl Window {
     pub fn new(app: &libadwaita::Application) -> Self {
         log::trace!("Initializing window");
+        app.set_accels_for_action("win.settings", &["<Control>comma"]);
+        app.set_accels_for_action("win.show-help-overlay", &["<Control>question"]);
+        app.set_accels_for_action("win.about", &["F1"]);
+        for i in 1..=9 {
+            app.set_accels_for_action(
+                &format!("channel-list.activate-channel({})", i),
+                &[&format!("<Control>{}", i)],
+            );
+        }
         Object::new(&[("application", app)]).expect("Failed to create Window")
     }
 
@@ -64,16 +74,15 @@ pub mod imp {
     use gtk::glib;
     use gtk::prelude::*;
     use gtk::subclass::prelude::*;
+    use gtk::Builder;
     use gtk::CompositeTemplate;
-    use gtk::Shortcut;
-    use gtk::ShortcutAction;
-    use gtk::ShortcutController;
-    use gtk::ShortcutTrigger;
+    use gtk::ShortcutsWindow;
     use libadwaita::subclass::prelude::AdwApplicationWindowImpl;
     use libadwaita::subclass::prelude::AdwWindowImpl;
 
     use crate::backend::Manager;
     use crate::config::APP_ID;
+    use crate::gui::channel_list::ChannelList;
     use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::link_window::LinkWindow;
     use crate::gui::preferences_window::PreferencesWindow;
@@ -84,6 +93,9 @@ pub mod imp {
         #[template_child]
         leaflet: TemplateChild<libadwaita::Leaflet>,
 
+        #[template_child]
+        channel_list: TemplateChild<ChannelList>,
+
         manager: RefCell<Option<Manager>>,
 
         pub(super) settings: gio::Settings,
@@ -93,6 +105,7 @@ pub mod imp {
         fn default() -> Self {
             Self {
                 leaflet: Default::default(),
+                channel_list: Default::default(),
                 manager: Default::default(),
                 settings: Settings::new(APP_ID),
             }
@@ -138,6 +151,15 @@ pub mod imp {
                 dialog.show();
             }));
 
+            let action_show_help_overlay = SimpleAction::new("show-help-overlay", None);
+            action_show_help_overlay.connect_activate(|_, _| {
+                let builder = Builder::from_resource("/ui/shortcuts.ui");
+                let shortcuts_window: ShortcutsWindow = builder
+                    .object("help_overlay")
+                    .expect("shortcuts.ui to have at least one object help_overlay");
+                shortcuts_window.show();
+            });
+
             log::trace!("Setting up about-page action");
             let action_about = SimpleAction::new("about", None);
             action_about.connect_activate(|_, _| {
@@ -173,8 +195,24 @@ pub mod imp {
             obj.insert_action_group("win", Some(&actions));
             actions.add_action(&action_settings);
             actions.add_action(&action_unlink);
+            actions.add_action(&action_show_help_overlay);
             actions.add_action(&action_about);
-       }
+
+            let action_activate_channel =
+                SimpleAction::new("activate-channel", Some(&i32::static_variant_type()));
+            action_activate_channel.connect_activate(
+                clone!(@strong self.channel_list as channel_list => move |_, parameter| {
+                    let parameter = parameter
+                        .expect("Could not get parameter.")
+                        .get::<i32>()
+                        .expect("The variant needs to be of type `i32`.");
+                    channel_list.activate_row(parameter - 1);
+                }),
+            );
+            let actions = SimpleActionGroup::new();
+            obj.insert_action_group("channel-list", Some(&actions));
+            actions.add_action(&action_activate_channel);
+        }
 
         #[template_callback]
         fn handle_go_back(&self) {
