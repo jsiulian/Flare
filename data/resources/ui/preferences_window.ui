@@ -17,6 +17,8 @@
                 <property name="subtitle" translatable="yes">The device will need to be relinked to take effect.</property>
                 <child>
                   <object class="GtkEntry" id="entry_device_name">
+                    <property name="valign">center</property>
+                    <property name="halign">center</property>
                   </object>
                 </child>
               </object>
@@ -32,6 +34,8 @@
                 <property name="title" translatable="yes">Dowload images automatically</property>
                 <child>
                   <object class="GtkSwitch" id="switch_download_images">
+                    <property name="valign">center</property>
+                    <property name="halign">center</property>
                   </object>
                 </child>
               </object>
@@ -41,6 +45,8 @@
                 <property name="title" translatable="yes">Dowload videos automatically</property>
                 <child>
                   <object class="GtkSwitch" id="switch_download_videos">
+                    <property name="valign">center</property>
+                    <property name="halign">center</property>
                   </object>
                 </child>
               </object>
@@ -50,6 +56,8 @@
                 <property name="title" translatable="yes">Dowload files automatically</property>
                 <child>
                   <object class="GtkSwitch" id="switch_download_files">
+                    <property name="valign">center</property>
+                    <property name="halign">center</property>
                   </object>
                 </child>
               </object>

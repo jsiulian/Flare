@@ -13,5 +13,6 @@
     <file preprocess="xml-stripblanks">ui/attachment.ui</file>
     <file preprocess="xml-stripblanks">ui/preferences_window.ui</file>
     <file preprocess="xml-stripblanks">ui/shortcuts.ui</file>
+    <file preprocess="xml-stripblanks">ui/text_entry.ui</file>
   </gresource>
 </gresources>

@@ -101,6 +101,11 @@
         <!-- Entry Box -->
         <child>
           <object class="GtkBox">
+            <property name="margin-top">5</property>
+            <property name="margin-bottom">5</property>
+            <property name="margin-start">5</property>
+            <property name="margin-end">5</property>
+            <property name="spacing">5</property>
             <child>
               <object class="GtkButton">
                 <signal name="clicked" handler="add_attachment" swapped="true"/>
@@ -119,15 +124,14 @@
               </object>
             </child>
             <child>
-              <object class="GtkEntry">
+              <object class="FlTextEntry" id="text_entry">
                 <signal name="activate" handler="send_message" swapped="true"/>
-                <signal name="icon-press" handler="send_message_icon" swapped="true"/>
-                <property name="input-hints">spellcheck</property>
-                <property name="activates-default">True</property>
-                <property name="placeholder-text" translatable="yes">Message</property>
-                <property name="secondary-icon-name">go-next-symbolic</property>
-                <property name="secondary-icon-activatable">True</property>
-                <property name="hexpand">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <signal name="clicked" handler="send_message" swapped="true"/>
+                <property name="icon-name">go-next-symbolic</property>
               </object>
             </child>
           </object>

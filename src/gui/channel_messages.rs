@@ -33,6 +33,7 @@ pub mod imp {
     use crate::gui::attachment::Attachment;
     use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::message_item::MessageItem;
+    use crate::gui::text_entry::TextEntry;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/channel_messages.ui")]
@@ -41,6 +42,8 @@ pub mod imp {
         pub(super) list: TemplateChild<gtk::ListBox>,
         #[template_child]
         box_attachments: TemplateChild<gtk::Box>,
+        #[template_child]
+        text_entry: TemplateChild<TextEntry>,
 
         attachments: RefCell<Vec<crate::backend::Attachment>>,
         reply_message: RefCell<Option<Message>>,
@@ -52,11 +55,6 @@ pub mod imp {
 
     #[gtk::template_callbacks]
     impl ChannelMessages {
-        #[template_callback]
-        fn send_message_icon(&self, _: gtk::EntryIconPosition, entry: gtk::Entry) {
-            self.send_message(entry);
-        }
-
         #[template_callback]
         fn remove_reply(&self) {
             log::trace!("Unsetting reply message");
@@ -118,10 +116,10 @@ pub mod imp {
         }
 
         #[template_callback]
-        fn send_message(&self, entry: gtk::Entry) {
+        fn send_message(&self) {
             log::trace!("Got callback to send message");
-            let text = entry.text();
-            entry.set_text("");
+            let text = self.text_entry.text();
+            self.text_entry.clear();
             let attachments = {
                 let mut att = self.attachments.borrow_mut();
                 let a = att.clone();
@@ -258,6 +256,7 @@ pub mod imp {
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
             MessageItem::ensure_type();
+            TextEntry::ensure_type();
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {
