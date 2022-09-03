@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Small UI updates
+- Moved from Entry to TextView which provides:
+    - Multi-Line editing
+    - Line Wrapping
 
 ### Fixed
 
