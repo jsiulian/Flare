@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-01 16:40+0200\n"
+"POT-Creation-Date: 2022-09-05 16:44+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
@@ -33,10 +33,6 @@ msgstr "Charger le fichier"
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
 msgstr ""
-
-#: data/resources/ui/channel_messages.ui:127
-msgid "Message"
-msgstr "Message"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -90,19 +86,19 @@ msgstr "Nom de l’appareil"
 msgid "The device will need to be relinked to take effect."
 msgstr "L’appareil devra être reconnecté pour prendre effet."
 
-#: data/resources/ui/preferences_window.ui:29
+#: data/resources/ui/preferences_window.ui:31
 msgid "Attachments"
 msgstr "Pièces-jointes"
 
-#: data/resources/ui/preferences_window.ui:32
+#: data/resources/ui/preferences_window.ui:34
 msgid "Dowload images automatically"
 msgstr "Télécharger les images automatiquement"
 
-#: data/resources/ui/preferences_window.ui:41
+#: data/resources/ui/preferences_window.ui:45
 msgid "Dowload videos automatically"
 msgstr "Télécharger les vidéos automatiquement"
 
-#: data/resources/ui/preferences_window.ui:50
+#: data/resources/ui/preferences_window.ui:56
 msgid "Dowload files automatically"
 msgstr "Télécharger les fichiers automatiquement"
 
@@ -143,6 +139,11 @@ msgstr ""
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Pièces-jointes"
+
+#: data/resources/ui/shortcuts.ui:49
+msgctxt "shortcut window"
+msgid "Focus the text input box"
+msgstr ""
 
 #: data/resources/ui/window.ui:105
 #, fuzzy
@@ -246,7 +247,7 @@ msgstr "Veuillez supprimer la base de données et lier à nouveau l’appareil."
 msgid "The database path at {} is no folder."
 msgstr "Le chemin de base de données à {} n’est pas un dossier."
 
-#: src/gui/window.rs:134
+#: src/gui/window.rs:139
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -256,12 +257,15 @@ msgstr ""
 "localement. Cela fermera aussi l’application pour qu’elle puisse être à "
 "nouveau reliée à l’ouverture."
 
-#: src/gui/window.rs:136
+#: src/gui/window.rs:141
 msgid "Are you sure?"
 msgstr "Êtes-vous sûr ?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:186
+#: src/gui/window.rs:191
 msgid "translators"
 msgstr "Irénée Thirion"
+
+#~ msgid "Message"
+#~ msgstr "Message"

@@ -1,8 +1,17 @@
+use gdk::subclass::prelude::ObjectSubclassIsExt;
+use gtk::traits::WidgetExt;
+
 gtk::glib::wrapper! {
     pub struct ChannelMessages(ObjectSubclass<imp::ChannelMessages>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget;
+}
+
+impl ChannelMessages {
+    pub fn focus_input(&self) {
+        self.imp().text_entry.grab_focus();
+    }
 }
 
 pub mod imp {
@@ -43,7 +52,7 @@ pub mod imp {
         #[template_child]
         box_attachments: TemplateChild<gtk::Box>,
         #[template_child]
-        text_entry: TemplateChild<TextEntry>,
+        pub(super) text_entry: TemplateChild<TextEntry>,
 
         attachments: RefCell<Vec<crate::backend::Attachment>>,
         reply_message: RefCell<Option<Message>>,

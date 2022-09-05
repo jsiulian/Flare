@@ -44,6 +44,12 @@
                 <property name="accelerator">&lt;Ctrl&gt;&amp;plus</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Focus the text input box</property>
+                <property name="accelerator">&lt;Ctrl&gt;&amp;i</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-01 16:40+0200\n"
+"POT-Creation-Date: 2022-09-05 16:44+0200\n"
 "PO-Revision-Date: 2022-09-02 15:17+0000\n"
 "Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -34,10 +34,6 @@ msgstr "Datei laden"
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
 msgstr "Wählen Sie einen Kanal aus"
-
-#: data/resources/ui/channel_messages.ui:127
-msgid "Message"
-msgstr "Nachricht"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -94,19 +90,19 @@ msgstr ""
 "Das Gerät muss neu gekoppelt werden, damit diese Einstellung Auswirkungen "
 "hat."
 
-#: data/resources/ui/preferences_window.ui:29
+#: data/resources/ui/preferences_window.ui:31
 msgid "Attachments"
 msgstr "Anhänge"
 
-#: data/resources/ui/preferences_window.ui:32
+#: data/resources/ui/preferences_window.ui:34
 msgid "Dowload images automatically"
 msgstr "Lade Bilder automatisch herunter"
 
-#: data/resources/ui/preferences_window.ui:41
+#: data/resources/ui/preferences_window.ui:45
 msgid "Dowload videos automatically"
 msgstr "Lade Videos automatisch herunter"
 
-#: data/resources/ui/preferences_window.ui:50
+#: data/resources/ui/preferences_window.ui:56
 msgid "Dowload files automatically"
 msgstr "Lade Dateien automatisch herunter"
 
@@ -144,6 +140,11 @@ msgstr "Zu Kanal 1...9 springen"
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Anhänge hochladen"
+
+#: data/resources/ui/shortcuts.ui:49
+msgctxt "shortcut window"
+msgid "Focus the text input box"
+msgstr "Die Texteingabe fokussieren"
 
 #: data/resources/ui/window.ui:105
 msgid "Settings"
@@ -245,7 +246,7 @@ msgstr "Bitte lösche die Datenbank und kopple das Gerät erneut."
 msgid "The database path at {} is no folder."
 msgstr "Der Datenbankpfad bei {} ist kein Ordner."
 
-#: src/gui/window.rs:134
+#: src/gui/window.rs:139
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -255,14 +256,17 @@ msgstr ""
 "löschen. Dies wird außerdem die Anwendung schließen, sodass es nach dem "
 "erneuten Öffnen neu gekoppelt werden kann."
 
-#: src/gui/window.rs:136
+#: src/gui/window.rs:141
 msgid "Are you sure?"
 msgstr "Bist du sicher?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:186
+#: src/gui/window.rs:191
 msgid "translators"
 msgstr ""
 "Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
 "Jürgen Benvenuti <gastornis@posteo.org>, 2022"
+
+#~ msgid "Message"
+#~ msgstr "Nachricht"

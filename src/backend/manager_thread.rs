@@ -237,7 +237,7 @@ async fn setup_manager<C>(
 where
     C: ConfigStore + 'static,
 {
-    let man = if let Ok(manager) = presage::Manager::load_registered(config_store.clone()) {
+    if let Ok(manager) = presage::Manager::load_registered(config_store.clone()) {
         log::debug!("The configuration store is already valid, loading a registered account");
         drop(link_callback);
         Ok(manager)
@@ -250,8 +250,7 @@ where
             link_callback,
         )
         .await
-    };
-    man
+    }
 }
 
 async fn command_loop<C: ConfigStore + 'static>(

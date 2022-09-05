@@ -82,7 +82,7 @@
               </object>
             </child>
             <child>
-              <object class="FlChannelMessages" id="channel-messages">
+              <object class="FlChannelMessages" id="channel_messages">
                 <binding name="manager">
                   <lookup name="manager" type="FlWindow"/>
                 </binding>

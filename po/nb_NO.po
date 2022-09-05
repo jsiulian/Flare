@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-01 16:40+0200\n"
+"POT-Creation-Date: 2022-09-05 16:44+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -34,10 +34,6 @@ msgstr "Last inn fil"
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
 msgstr ""
-
-#: data/resources/ui/channel_messages.ui:127
-msgid "Message"
-msgstr "Melding"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -93,19 +89,19 @@ msgstr "Enhetsnavn"
 msgid "The device will need to be relinked to take effect."
 msgstr "Enheten må sammenkobles igjen for å gjøre dette."
 
-#: data/resources/ui/preferences_window.ui:29
+#: data/resources/ui/preferences_window.ui:31
 msgid "Attachments"
 msgstr "Vedlegg"
 
-#: data/resources/ui/preferences_window.ui:32
+#: data/resources/ui/preferences_window.ui:34
 msgid "Dowload images automatically"
 msgstr "Last ned bilder automatisk"
 
-#: data/resources/ui/preferences_window.ui:41
+#: data/resources/ui/preferences_window.ui:45
 msgid "Dowload videos automatically"
 msgstr "Last ned videoer automatisk"
 
-#: data/resources/ui/preferences_window.ui:50
+#: data/resources/ui/preferences_window.ui:56
 msgid "Dowload files automatically"
 msgstr "Last ned filer automatisk"
 
@@ -146,6 +142,11 @@ msgstr ""
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Vedlegg"
+
+#: data/resources/ui/shortcuts.ui:49
+msgctxt "shortcut window"
+msgid "Focus the text input box"
+msgstr ""
 
 #: data/resources/ui/window.ui:105
 #, fuzzy
@@ -249,7 +250,7 @@ msgstr "Slett databasen og forbind enheten igjen."
 msgid "The database path at {} is no folder."
 msgstr "Databasestien {} er ikke en mappe."
 
-#: src/gui/window.rs:134
+#: src/gui/window.rs:139
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -259,12 +260,15 @@ msgstr ""
 "data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
 "åpner det på ny."
 
-#: src/gui/window.rs:136
+#: src/gui/window.rs:141
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:186
+#: src/gui/window.rs:191
 msgid "translators"
 msgstr "Allan Nordhøy <epost@anotheragency.no>"
+
+#~ msgid "Message"
+#~ msgstr "Melding"

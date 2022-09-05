@@ -16,6 +16,7 @@ impl Window {
         app.set_accels_for_action("win.settings", &["<Control>comma"]);
         app.set_accels_for_action("win.show-help-overlay", &["<Control>question"]);
         app.set_accels_for_action("win.about", &["F1"]);
+        app.set_accels_for_action("channel-messages.activate-input", &["<Control>i"]);
         for i in 1..=9 {
             app.set_accels_for_action(
                 &format!("channel-list.activate-channel({})", i),
@@ -83,6 +84,7 @@ pub mod imp {
     use crate::backend::Manager;
     use crate::config::APP_ID;
     use crate::gui::channel_list::ChannelList;
+    use crate::gui::channel_messages::ChannelMessages;
     use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::link_window::LinkWindow;
     use crate::gui::preferences_window::PreferencesWindow;
@@ -95,6 +97,8 @@ pub mod imp {
 
         #[template_child]
         channel_list: TemplateChild<ChannelList>,
+        #[template_child]
+        channel_messages: TemplateChild<ChannelMessages>,
 
         manager: RefCell<Option<Manager>>,
 
@@ -106,6 +110,7 @@ pub mod imp {
             Self {
                 leaflet: Default::default(),
                 channel_list: Default::default(),
+                channel_messages: Default::default(),
                 manager: Default::default(),
                 settings: Settings::new(APP_ID),
             }
@@ -197,6 +202,16 @@ pub mod imp {
             actions.add_action(&action_unlink);
             actions.add_action(&action_show_help_overlay);
             actions.add_action(&action_about);
+
+            let action_activate_input = SimpleAction::new("activate-input", None);
+            action_activate_input.connect_activate(
+                clone!(@strong self.channel_messages as channel_messages => move |_, _| {
+                    channel_messages.focus_input();
+                }),
+            );
+            let actions = SimpleActionGroup::new();
+            obj.insert_action_group("channel-messages", Some(&actions));
+            actions.add_action(&action_activate_input);
 
             let action_activate_channel =
                 SimpleAction::new("activate-channel", Some(&i32::static_variant_type()));

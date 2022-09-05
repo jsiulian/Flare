@@ -15,6 +15,7 @@ impl TextEntry {
         let (start_iter, end_iter) = buffer.bounds();
         buffer.text(&start_iter, &end_iter, true).to_string()
     }
+
     pub fn clear(&self) {
         let obj = self.imp();
         let buffer = &obj.buffer;
@@ -79,20 +80,16 @@ pub mod imp {
             }));
         }
         fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| vec![]);
+            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(Vec::new);
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                _ => unimplemented!(),
-            }
+        fn property(&self, _obj: &Self::Type, _id: usize, _pspec: &ParamSpec) -> Value {
+            unimplemented!()
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, _value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                _ => unimplemented!(),
-            }
+        fn set_property(&self, _obj: &Self::Type, _id: usize, _value: &Value, _pspec: &ParamSpec) {
+            unimplemented!()
         }
 
         fn signals() -> &'static [Signal] {
@@ -103,6 +100,11 @@ pub mod imp {
         }
     }
 
-    impl WidgetImpl for TextEntry {}
+    impl WidgetImpl for TextEntry {
+        fn grab_focus(&self, _widget: &Self::Type) -> bool {
+            log::trace!("TextEntry grabbed focus");
+            self.view.grab_focus()
+        }
+    }
     impl BoxImpl for TextEntry {}
 }
