@@ -5,7 +5,7 @@
   <project_license>AGPL-3.0</project_license>
   <metadata_license>FSFAP</metadata_license>
   <name>Flare</name>
-  <summary>A unofficial Signal GTK client.</summary>
+  <summary>A unofficial Signal GTK client</summary>
   <launchable type="desktop-id">de.schmidhuberj.Flare.desktop</launchable>
   <content_rating type="oars-1.1"/>
   <developer_name>Julian Schmidhuber</developer_name>
@@ -50,49 +50,71 @@
     </p>
   </description>
   <releases>
+    <release version="v0.3.3" date="2022-09-05">
+      <description> 
+        <p>Added:</p>
+        <ul>
+          <li>Keyboard shortcuts</li>
+        </ul>
+        <p>Changed:</p>
+        <ul>
+          <li>Small UI updates</li>
+          <li>Moved from Entry to TextView which provides multi-line editing and line wrapping</li>
+        </ul>
+        <p>Fixed:</p>
+        <ul>
+          <li>Fixed screenshot dummy</li>
+        </ul>
+      </description>
+    </release>
+    <release version="v0.3.2" date="2022-08-30">
+      <description> 
+        <p>Hotfix for crash without libsecret set up.</p>
+      </description>
+    </release>
     <release version="v0.3.1" date="2022-08-25">
       <description> 
-        <p>Fix gschema not being installed</p>
+        <p>Fix gschema not being installed.</p>
       </description>
     </release>
     <release version="v0.3.0" date="2022-08-25">
       <description> 
-        <p>Implemented device name for linking, added support for video attachment, configurable lazy-load attachments, bug fixes</p>
+        <p>Implemented device name for linking, added support for video attachment, configurable lazy-load attachments, bug fixes.</p>
       </description>
     </release>
     <release version="v0.2.1" date="2022-08-15">
       <description> 
-        <p>Hotfix for not beeing able to link and unlink the device</p>
+        <p>Hotfix for not beeing able to link and unlink the device.</p>
       </description>
     </release>
     <release version="v0.2.0" date="2022-08-07">
       <description> 
-        <p>UI updates, more translations, bug fixing</p>
+        <p>UI updates, more translations, bug fixing.</p>
       </description>
     </release>
     <release version="v0.1.5" date="2022-07-23">
       <description> 
-        <p>Added ability to upload and download attachments, added ability to remove reply and attachments before sending, fixed some bugs mainly regarding reply messages</p>
+        <p>Added ability to upload and download attachments, added ability to remove reply and attachments before sending, fixed some bugs mainly regarding reply messages.</p>
       </description>
     </release>
     <release version="v0.1.4" date="2022-07-16">
       <description> 
-        <p>Fixed many bugs, including wrong association for messages to channels, wrongly displayed channel names as "Note to self" and a few crashes</p>
+        <p>Fixed many bugs, including wrong association for messages to channels, wrongly displayed channel names as "Note to self" and a few crashes.</p>
       </description>
     </release>
     <release version="v0.1.3" date="2022-07-10">
       <description> 
-        <p>Fix message receiving, sending attachments</p>
+        <p>Fix message receiving, sending attachments.</p>
       </description>
     </release>
     <release version="v0.1.2" date="2022-07-08">
       <description> 
-        <p>Bug fixing, error handling, russian and german translation, small UI updates</p>
+        <p>Bug fixing, error handling, russian and german translation, small UI updates.</p>
       </description>
     </release>
     <release version="v0.1.1" date="2022-07-05">
       <description> 
-        <p>Small UI changes, change of license</p>
+        <p>Small UI changes, change of license.</p>
       </description>
     </release>
     <release version="v0.1.0" date="2022-06-20">
@@ -104,7 +126,7 @@
 
   <screenshots>
     <screenshot type="default">
-      <caption>Overview</caption>
+      <caption>Overview of the application</caption>
       <image>https://gitlab.com/Schmiddiii/flare/-/raw/master/data/screenshots/screenshot.png</image>
     </screenshot>
   </screenshots>
