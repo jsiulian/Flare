@@ -8,82 +8,84 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-07 17:34+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-09-08 16:16+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
-msgstr ""
+msgstr "Lataa kuva"
 
 #: data/resources/ui/attachment.ui:37
 msgid "Load video"
-msgstr ""
+msgstr "Lataa video"
 
 #: data/resources/ui/attachment.ui:48
 msgid "Load file"
-msgstr ""
+msgstr "Lataa tiedosto"
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
-msgstr ""
+msgstr "Valitse kanava"
 
 #: data/resources/ui/channel_messages.ui:87
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "Poista liite"
 
 #: data/resources/ui/channel_messages.ui:115
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "Lisää liite"
 
 #: data/resources/ui/channel_messages.ui:135
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "Viestin syöttö"
 
 #: data/resources/ui/channel_messages.ui:143
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Lähetä"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
-msgstr ""
+msgstr "Virhe"
 
 #: data/resources/ui/error_dialog.ui:14
 msgid "Close"
-msgstr ""
+msgstr "Sulje"
 
 #: data/resources/ui/error_dialog.ui:59
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "Harkitse tämän virheen ilmoittamista."
 
 #: data/resources/ui/link_window.ui:8
 msgid "Link Device"
-msgstr ""
+msgstr "Linkitä laite"
 
 #: data/resources/ui/link_window.ui:16
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device."
-msgstr ""
+msgstr "Tarkista tämä QR-koodi ensisijaisella laitteellasi."
 
 #: data/resources/ui/link_window.ui:34
 msgid "Please restart the application after this window closed."
-msgstr ""
+msgstr "Käynnistä sovellus uudelleen tämän ikkunan sulkemisen jälkeen."
 
 #: data/resources/ui/message_item.ui:179
 msgid "Reply"
-msgstr ""
+msgstr "Vastaa"
 
 #: data/resources/ui/message_item.ui:185
 msgid "React"
@@ -99,23 +101,23 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.ui:16
 msgid "Device Name"
-msgstr ""
+msgstr "Laitteen nimi"
 
 #: data/resources/ui/preferences_window.ui:17
 msgid "The device will need to be relinked to take effect."
-msgstr ""
+msgstr "Laite on kytkettävä uudelleen, jotta se tulee voimaan."
 
 #: data/resources/ui/preferences_window.ui:34
 msgid "Attachments"
-msgstr ""
+msgstr "Liitteet"
 
 #: data/resources/ui/preferences_window.ui:37
 msgid "Dowload images automatically"
-msgstr ""
+msgstr "Lataa kuvat automaattisesti"
 
 #: data/resources/ui/preferences_window.ui:51
 msgid "Dowload videos automatically"
-msgstr ""
+msgstr "Lataa videoita automaattisesti"
 
 #: data/resources/ui/preferences_window.ui:65
 msgid "Dowload files automatically"
@@ -168,7 +170,7 @@ msgstr ""
 
 #: data/resources/ui/window.ui:108
 msgid "Settings"
-msgstr ""
+msgstr "Asetukset"
 
 #: data/resources/ui/window.ui:112
 msgid "Unlink"
@@ -180,21 +182,21 @@ msgstr ""
 
 #: data/resources/ui/window.ui:120
 msgid "About"
-msgstr ""
+msgstr "Tietoja"
 
 #: src/backend/channel.rs:297
 msgid "Note to self"
-msgstr ""
+msgstr "Muistiinpano itselle"
 
 #: src/backend/manager.rs:265
 msgid "You"
-msgstr ""
+msgstr "Sinä"
 
 #: src/backend/message.rs:358
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Kuva lähetetty"
+msgstr[1] "{} kuvaa lähetetty"
 
 #: src/backend/message.rs:366
 msgid "Sent an video"
@@ -251,7 +253,7 @@ msgstr ""
 
 #: src/error.rs:124
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Tarkista internetyhteytesi."
 
 #: src/error.rs:128
 msgid "Please delete the database and relink the device."
@@ -270,7 +272,7 @@ msgstr ""
 
 #: src/gui/window.rs:141
 msgid "Are you sure?"
-msgstr ""
+msgstr "Oletko varma?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
