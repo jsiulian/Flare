@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-05 16:44+0200\n"
-"PO-Revision-Date: 2022-09-07 15:16+0000\n"
+"PO-Revision-Date: 2022-09-08 16:16+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/flare/flare/it/>"
 "\n"
@@ -38,22 +38,22 @@ msgstr "Seleziona un canale"
 #: data/resources/ui/channel_messages.ui:87
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "Rimuovi un allegato"
 
 #: data/resources/ui/channel_messages.ui:115
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "Aggiungi un allegato"
 
 #: data/resources/ui/channel_messages.ui:135
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "Inserimento del messaggio"
 
 #: data/resources/ui/channel_messages.ui:143
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Invia"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -166,7 +166,7 @@ msgstr "Focalizza la casella di immissione del testo"
 #: data/resources/ui/window.ui:33
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Menù"
 
 #: data/resources/ui/window.ui:108
 msgid "Settings"
