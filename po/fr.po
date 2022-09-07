@@ -165,7 +165,6 @@ msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Focaliser la zone de saisie de texte"
 
-<<<<<<< HEAD
 #: data/resources/ui/window.ui:33
 msgctxt "accessibility"
 msgid "Menu"
@@ -173,9 +172,6 @@ msgstr ""
 
 #: data/resources/ui/window.ui:108
 #, fuzzy
-=======
-#: data/resources/ui/window.ui:105
->>>>>>> 404ce7225cbb03c467a9d8410fa5eec1b6e2587a
 msgid "Settings"
 msgstr "Paramètres"
 
