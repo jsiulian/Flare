@@ -7,31 +7,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-07 17:34+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2022-09-05 16:44+0200\n"
+"PO-Revision-Date: 2022-09-07 15:16+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/flare/flare/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
-msgstr ""
+msgstr "Carica l’immagine"
 
 #: data/resources/ui/attachment.ui:37
 msgid "Load video"
-msgstr ""
+msgstr "Carica il video"
 
 #: data/resources/ui/attachment.ui:48
 msgid "Load file"
-msgstr ""
+msgstr "Carica il file"
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
-msgstr ""
+msgstr "Seleziona un canale"
 
 #: data/resources/ui/channel_messages.ui:87
 msgctxt "accessibility"
@@ -55,111 +57,111 @@ msgstr ""
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
-msgstr ""
+msgstr "Errore"
 
 #: data/resources/ui/error_dialog.ui:14
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #: data/resources/ui/error_dialog.ui:59
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "Si prega di considerare la possibilità di segnalare questo errore."
 
 #: data/resources/ui/link_window.ui:8
 msgid "Link Device"
-msgstr ""
+msgstr "Collega il dispositivo"
 
 #: data/resources/ui/link_window.ui:16
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device."
-msgstr ""
+msgstr "Scansiona questo codice QR con il tuo dispositivo principale."
 
 #: data/resources/ui/link_window.ui:34
 msgid "Please restart the application after this window closed."
-msgstr ""
+msgstr "Riavvia l'applicazione dopo la chiusura di questa finestra."
 
 #: data/resources/ui/message_item.ui:179
 msgid "Reply"
-msgstr ""
+msgstr "Rispondi"
 
 #: data/resources/ui/message_item.ui:185
 msgid "React"
-msgstr ""
+msgstr "Reagisci"
 
 #: data/resources/ui/preferences_window.ui:9
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #: data/resources/ui/preferences_window.ui:13
 msgid "Linking"
-msgstr ""
+msgstr "Collegamento"
 
 #: data/resources/ui/preferences_window.ui:16
 msgid "Device Name"
-msgstr ""
+msgstr "Nome del dispositivo"
 
 #: data/resources/ui/preferences_window.ui:17
 msgid "The device will need to be relinked to take effect."
-msgstr ""
+msgstr "Il dispositivo dovrà essere ricollegato per avere effetto."
 
 #: data/resources/ui/preferences_window.ui:34
 msgid "Attachments"
-msgstr ""
+msgstr "Allegati"
 
 #: data/resources/ui/preferences_window.ui:37
 msgid "Dowload images automatically"
-msgstr ""
+msgstr "Scarica automaticamente le immagini"
 
 #: data/resources/ui/preferences_window.ui:51
 msgid "Dowload videos automatically"
-msgstr ""
+msgstr "Scarica automaticamente i video"
 
 #: data/resources/ui/preferences_window.ui:65
 msgid "Dowload files automatically"
-msgstr ""
+msgstr "Scarica automaticamente i file"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "Mostra le scorciatoie"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "Vai alle impostazioni"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "Vai alla pagina di informazioni"
 
 #: data/resources/ui/shortcuts.ui:34
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "Canali"
 
 #: data/resources/ui/shortcuts.ui:37
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "Vai al canale 1...9"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "Carica l'allegato"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "Focalizza la casella di immissione del testo"
 
 #: data/resources/ui/window.ui:33
 msgctxt "accessibility"
@@ -168,98 +170,103 @@ msgstr ""
 
 #: data/resources/ui/window.ui:108
 msgid "Settings"
-msgstr ""
+msgstr "Impostazioni"
 
 #: data/resources/ui/window.ui:112
 msgid "Unlink"
-msgstr ""
+msgstr "Scollega"
 
 #: data/resources/ui/window.ui:116
 msgid "Keybindings"
-msgstr ""
+msgstr "Scorciatoie"
 
 #: data/resources/ui/window.ui:120
 msgid "About"
-msgstr ""
+msgstr "Informazioni"
 
 #: src/backend/channel.rs:297
 msgid "Note to self"
-msgstr ""
+msgstr "Nota per me"
 
 #: src/backend/manager.rs:265
 msgid "You"
-msgstr ""
+msgstr "Tu"
 
 #: src/backend/message.rs:358
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ha inviato un'immagine"
+msgstr[1] "Ha inviato {} immagini"
 
 #: src/backend/message.rs:366
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ha inviato un video"
+msgstr[1] "Ha inviato {} video"
 
 #: src/backend/message.rs:374
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ha inviato un file"
+msgstr[1] "Ha inviato {} file"
 
 #: src/error.rs:74
 msgid "I/O Error."
-msgstr ""
+msgstr "Errore di ingresso/uscita."
 
 #: src/error.rs:79
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "Non sembra essere disponibile una connessione a Internet."
 
 #: src/error.rs:84
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "La comunicazione con Libsecret è fallita."
 
 #: src/error.rs:89
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"La base di dati di backend non è riuscito. Riavvia l'applicazione o elimina "
+"la base di dati e ricollega l'applicazione."
 
 #: src/error.rs:94
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"L'utente non sembra essere autorizzato da Signal. Elimina la base di dati e "
+"ricollega l'applicazione."
 
 #: src/error.rs:99
 msgid "Sending a message failed."
-msgstr ""
+msgstr "L'invio di un messaggio non è riuscito."
 
 #: src/error.rs:104
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "La ricezione di un messaggio è fallita."
 
 #: src/error.rs:109
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"È successo qualcosa di imprevisto con il backend Signal. Riprova più tardi."
 
 #: src/error.rs:114
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "L'applicazione sembra essere mal configurata."
 
 #: src/error.rs:124
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Controllare la connessione a Internet."
 
 #: src/error.rs:128
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "Elimina la base di dati e ricollega il dispositivo."
 
 #: src/error.rs:135
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "Il percorso della base di dati in {} non è una cartella."
 
 #: src/gui/window.rs:139
 msgid ""
@@ -267,10 +274,13 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"In questo modo si scollega il dispositivo e si rimuovono tutti i dati "
+"salvati localmente. Inoltre, chiuderà l'applicazione in modo che possa "
+"essere ricollegata quando la si riapre."
 
 #: src/gui/window.rs:141
 msgid "Are you sure?"
-msgstr ""
+msgstr "Sei sicuro/sicura?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.

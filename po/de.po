@@ -119,15 +119,15 @@ msgstr "Anhänge"
 
 #: data/resources/ui/preferences_window.ui:37
 msgid "Dowload images automatically"
-msgstr "Lade Bilder automatisch herunter"
+msgstr "Bilder automatisch herunterladen"
 
 #: data/resources/ui/preferences_window.ui:51
 msgid "Dowload videos automatically"
-msgstr "Lade Videos automatisch herunter"
+msgstr "Videos automatisch herunterladen"
 
 #: data/resources/ui/preferences_window.ui:65
 msgid "Dowload files automatically"
-msgstr "Lade Dateien automatisch herunter"
+msgstr "Dateien automatisch herunterladen"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
