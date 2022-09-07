@@ -12,11 +12,14 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Linking</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwActionRow" id="row_device_name">
                 <property name="title" translatable="yes">Device Name</property>
                 <property name="subtitle" translatable="yes">The device will need to be relinked to take effect.</property>
                 <child>
                   <object class="GtkEntry" id="entry_device_name">
+                    <accessibility>
+                      <relation name="labelled-by">row_device_name</relation>
+                    </accessibility>
                     <property name="valign">center</property>
                     <property name="halign">center</property>
                   </object>
@@ -30,10 +33,13 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Attachments</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwActionRow" id="row_download_images">
                 <property name="title" translatable="yes">Dowload images automatically</property>
                 <child>
                   <object class="GtkSwitch" id="switch_download_images">
+                    <accessibility>
+                      <relation name="labelled-by">row_download_images</relation>
+                    </accessibility>
                     <property name="valign">center</property>
                     <property name="halign">center</property>
                   </object>
@@ -41,10 +47,13 @@
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwActionRow" id="row_download_videos">
                 <property name="title" translatable="yes">Dowload videos automatically</property>
                 <child>
                   <object class="GtkSwitch" id="switch_download_videos">
+                    <accessibility>
+                      <relation name="labelled-by">row_download_videos</relation>
+                    </accessibility>
                     <property name="valign">center</property>
                     <property name="halign">center</property>
                   </object>
@@ -52,10 +61,13 @@
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwActionRow" id="row_download_files">
                 <property name="title" translatable="yes">Dowload files automatically</property>
                 <child>
                   <object class="GtkSwitch" id="switch_download_files">
+                    <accessibility>
+                      <relation name="labelled-by">row_download_files</relation>
+                    </accessibility>
                     <property name="valign">center</property>
                     <property name="halign">center</property>
                   </object>

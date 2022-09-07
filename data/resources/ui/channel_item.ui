@@ -4,6 +4,10 @@
   <requires lib="libadwaita" version="1.0"/>
 
   <template class="FlChannelItem" parent="GtkBox">
+    <accessibility>
+      <relation name="labelled-by">label-name</relation>
+    </accessibility>
+
     <property name="spacing">5</property>
     <child>
       <object class="AdwAvatar">
@@ -22,7 +26,7 @@
         <property name="orientation">vertical</property>
         <property name="hexpand">True</property>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkLabel" id="label-name">
             <style>
               <class name="title-4"/>
             </style>

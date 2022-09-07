@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-05 16:44+0200\n"
+"POT-Creation-Date: 2022-09-07 17:34+0200\n"
 "PO-Revision-Date: 2022-09-02 15:17+0000\n"
 "Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -34,6 +34,29 @@ msgstr "Datei laden"
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
 msgstr "Wählen Sie einen Kanal aus"
+
+#: data/resources/ui/channel_messages.ui:87
+#, fuzzy
+msgctxt "accessibility"
+msgid "Remove an attachment"
+msgstr "Anhänge"
+
+#: data/resources/ui/channel_messages.ui:115
+#, fuzzy
+msgctxt "accessibility"
+msgid "Add an attachment"
+msgstr "Anhänge"
+
+#: data/resources/ui/channel_messages.ui:135
+#, fuzzy
+msgctxt "accessibility"
+msgid "Message input"
+msgstr "Nachricht"
+
+#: data/resources/ui/channel_messages.ui:143
+msgctxt "accessibility"
+msgid "Send"
+msgstr ""
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -90,19 +113,19 @@ msgstr ""
 "Das Gerät muss neu gekoppelt werden, damit diese Einstellung Auswirkungen "
 "hat."
 
-#: data/resources/ui/preferences_window.ui:31
+#: data/resources/ui/preferences_window.ui:34
 msgid "Attachments"
 msgstr "Anhänge"
 
-#: data/resources/ui/preferences_window.ui:34
+#: data/resources/ui/preferences_window.ui:37
 msgid "Dowload images automatically"
 msgstr "Lade Bilder automatisch herunter"
 
-#: data/resources/ui/preferences_window.ui:45
+#: data/resources/ui/preferences_window.ui:51
 msgid "Dowload videos automatically"
 msgstr "Lade Videos automatisch herunter"
 
-#: data/resources/ui/preferences_window.ui:56
+#: data/resources/ui/preferences_window.ui:65
 msgid "Dowload files automatically"
 msgstr "Lade Dateien automatisch herunter"
 
@@ -146,19 +169,24 @@ msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Die Texteingabe fokussieren"
 
-#: data/resources/ui/window.ui:105
+#: data/resources/ui/window.ui:33
+msgctxt "accessibility"
+msgid "Menu"
+msgstr ""
+
+#: data/resources/ui/window.ui:108
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: data/resources/ui/window.ui:109
+#: data/resources/ui/window.ui:112
 msgid "Unlink"
 msgstr "Entkoppeln"
 
-#: data/resources/ui/window.ui:113
+#: data/resources/ui/window.ui:116
 msgid "Keybindings"
 msgstr "Tastaturkürzel"
 
-#: data/resources/ui/window.ui:117
+#: data/resources/ui/window.ui:120
 msgid "About"
 msgstr "Info"
 
@@ -267,6 +295,3 @@ msgid "translators"
 msgstr ""
 "Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
 "Jürgen Benvenuti <gastornis@posteo.org>, 2022"
-
-#~ msgid "Message"
-#~ msgstr "Nachricht"

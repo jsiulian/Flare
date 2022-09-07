@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-05 16:44+0200\n"
+"POT-Creation-Date: 2022-09-07 17:34+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -33,6 +33,29 @@ msgstr "Last inn fil"
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:87
+#, fuzzy
+msgctxt "accessibility"
+msgid "Remove an attachment"
+msgstr "Vedlegg"
+
+#: data/resources/ui/channel_messages.ui:115
+#, fuzzy
+msgctxt "accessibility"
+msgid "Add an attachment"
+msgstr "Vedlegg"
+
+#: data/resources/ui/channel_messages.ui:135
+#, fuzzy
+msgctxt "accessibility"
+msgid "Message input"
+msgstr "Melding"
+
+#: data/resources/ui/channel_messages.ui:143
+msgctxt "accessibility"
+msgid "Send"
 msgstr ""
 
 #: data/resources/ui/error_dialog.ui:8
@@ -89,19 +112,19 @@ msgstr "Enhetsnavn"
 msgid "The device will need to be relinked to take effect."
 msgstr "Enheten må sammenkobles igjen for å gjøre dette."
 
-#: data/resources/ui/preferences_window.ui:31
+#: data/resources/ui/preferences_window.ui:34
 msgid "Attachments"
 msgstr "Vedlegg"
 
-#: data/resources/ui/preferences_window.ui:34
+#: data/resources/ui/preferences_window.ui:37
 msgid "Dowload images automatically"
 msgstr "Last ned bilder automatisk"
 
-#: data/resources/ui/preferences_window.ui:45
+#: data/resources/ui/preferences_window.ui:51
 msgid "Dowload videos automatically"
 msgstr "Last ned videoer automatisk"
 
-#: data/resources/ui/preferences_window.ui:56
+#: data/resources/ui/preferences_window.ui:65
 msgid "Dowload files automatically"
 msgstr "Last ned filer automatisk"
 
@@ -148,20 +171,25 @@ msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr ""
 
-#: data/resources/ui/window.ui:105
+#: data/resources/ui/window.ui:33
+msgctxt "accessibility"
+msgid "Menu"
+msgstr ""
+
+#: data/resources/ui/window.ui:108
 #, fuzzy
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: data/resources/ui/window.ui:109
+#: data/resources/ui/window.ui:112
 msgid "Unlink"
 msgstr "Opphev forbindelse"
 
-#: data/resources/ui/window.ui:113
+#: data/resources/ui/window.ui:116
 msgid "Keybindings"
 msgstr ""
 
-#: data/resources/ui/window.ui:117
+#: data/resources/ui/window.ui:120
 msgid "About"
 msgstr "Om"
 
@@ -269,6 +297,3 @@ msgstr "Er du sikker?"
 #: src/gui/window.rs:191
 msgid "translators"
 msgstr "Allan Nordhøy <epost@anotheragency.no>"
-
-#~ msgid "Message"
-#~ msgstr "Melding"

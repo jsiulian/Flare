@@ -83,6 +83,9 @@
             </binding>
             <child>
               <object class="GtkButton">
+                <accessibility>
+                  <property name="label" translatable="yes" context="accessibility">Remove an attachment</property>
+                </accessibility>
                 <style>
                   <class name="flat"/>
                 </style>
@@ -108,6 +111,9 @@
             <property name="spacing">5</property>
             <child>
               <object class="GtkButton">
+                <accessibility>
+                  <property name="label" translatable="yes" context="accessibility">Add an attachment</property>
+                </accessibility>
                 <signal name="clicked" handler="add_attachment" swapped="true"/>
                 <property name="icon-name">list-add-symbolic</property>
                 <child>
@@ -125,11 +131,17 @@
             </child>
             <child>
               <object class="FlTextEntry" id="text_entry">
+                <accessibility>
+                  <property name="label" translatable="yes" context="accessibility">Message input</property>
+                </accessibility>
                 <signal name="activate" handler="send_message" swapped="true"/>
               </object>
             </child>
             <child>
               <object class="GtkButton">
+                <accessibility>
+                  <property name="label" translatable="yes" context="accessibility">Send</property>
+                </accessibility>
                 <signal name="clicked" handler="send_message" swapped="true"/>
                 <property name="icon-name">go-next-symbolic</property>
               </object>

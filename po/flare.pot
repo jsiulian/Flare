@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-05 16:44+0200\n"
+"POT-Creation-Date: 2022-09-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,26 @@ msgstr ""
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:87
+msgctxt "accessibility"
+msgid "Remove an attachment"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:115
+msgctxt "accessibility"
+msgid "Add an attachment"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:135
+msgctxt "accessibility"
+msgid "Message input"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:143
+msgctxt "accessibility"
+msgid "Send"
 msgstr ""
 
 #: data/resources/ui/error_dialog.ui:8
@@ -86,19 +106,19 @@ msgstr ""
 msgid "The device will need to be relinked to take effect."
 msgstr ""
 
-#: data/resources/ui/preferences_window.ui:31
+#: data/resources/ui/preferences_window.ui:34
 msgid "Attachments"
 msgstr ""
 
-#: data/resources/ui/preferences_window.ui:34
+#: data/resources/ui/preferences_window.ui:37
 msgid "Dowload images automatically"
 msgstr ""
 
-#: data/resources/ui/preferences_window.ui:45
+#: data/resources/ui/preferences_window.ui:51
 msgid "Dowload videos automatically"
 msgstr ""
 
-#: data/resources/ui/preferences_window.ui:56
+#: data/resources/ui/preferences_window.ui:65
 msgid "Dowload files automatically"
 msgstr ""
 
@@ -142,19 +162,24 @@ msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr ""
 
-#: data/resources/ui/window.ui:105
+#: data/resources/ui/window.ui:33
+msgctxt "accessibility"
+msgid "Menu"
+msgstr ""
+
+#: data/resources/ui/window.ui:108
 msgid "Settings"
 msgstr ""
 
-#: data/resources/ui/window.ui:109
+#: data/resources/ui/window.ui:112
 msgid "Unlink"
 msgstr ""
 
-#: data/resources/ui/window.ui:113
+#: data/resources/ui/window.ui:116
 msgid "Keybindings"
 msgstr ""
 
-#: data/resources/ui/window.ui:117
+#: data/resources/ui/window.ui:120
 msgid "About"
 msgstr ""
 
