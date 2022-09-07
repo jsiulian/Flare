@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-07 17:34+0200\n"
-"PO-Revision-Date: 2022-09-02 15:17+0000\n"
+"PO-Revision-Date: 2022-09-07 15:56+0000\n"
 "Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
 "Language: de\n"
@@ -36,27 +36,24 @@ msgid "Select a channel"
 msgstr "Wählen Sie einen Kanal aus"
 
 #: data/resources/ui/channel_messages.ui:87
-#, fuzzy
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr "Anhänge"
+msgstr "Anhang entfernen"
 
 #: data/resources/ui/channel_messages.ui:115
-#, fuzzy
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr "Anhänge"
+msgstr "Anhang hinzufügen"
 
 #: data/resources/ui/channel_messages.ui:135
-#, fuzzy
 msgctxt "accessibility"
 msgid "Message input"
-msgstr "Nachricht"
+msgstr "Nachricht eigeben"
 
 #: data/resources/ui/channel_messages.ui:143
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Senden"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -172,7 +169,7 @@ msgstr "Die Texteingabe fokussieren"
 #: data/resources/ui/window.ui:33
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Menü"
 
 #: data/resources/ui/window.ui:108
 msgid "Settings"
