@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Accessibility (no idea how good it is)
 - Prevented sending empty messages
+- Display the time the message was sent.
 
 ### Fixed
 

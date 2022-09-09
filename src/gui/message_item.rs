@@ -119,6 +119,17 @@ pub mod imp {
         }
 
         #[template_callback]
+        pub(super) fn format_timestamp(&self, timestamp: u64) -> Option<String> {
+            let datetime =
+                glib::DateTime::from_unix_utc((timestamp / 1000).try_into().unwrap_or_default())
+                    .ok()
+                    .and_then(|d| d.to_local().ok());
+            datetime
+                .and_then(|d| d.format("%H:%M").ok())
+                .map(|s| s.into())
+        }
+
+        #[template_callback]
         fn handle_react(&self, emoji: String) {
             let obj = self.instance();
             let msg = obj.property::<Message>("message");

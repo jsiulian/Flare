@@ -23,6 +23,36 @@ impl Message {
         sender: Contact,
         manager: &Manager,
     ) -> Self {
+        Self::from_text_channel_sender_timestamp(
+            text,
+            channel,
+            sender,
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .expect("Time went backwards")
+                .as_millis() as u64,
+            manager,
+        )
+    }
+
+    #[cfg(feature = "screenshot")]
+    pub fn pub_from_text_channel_sender_timestamp<S: AsRef<str>>(
+        text: S,
+        channel: Channel,
+        sender: Contact,
+        timestamp: u64,
+        manager: &Manager,
+    ) -> Self {
+        Self::from_text_channel_sender_timestamp(text, channel, sender, timestamp, manager)
+    }
+
+    fn from_text_channel_sender_timestamp<S: AsRef<str>>(
+        text: S,
+        channel: Channel,
+        sender: Contact,
+        timestamp: u64,
+        manager: &Manager,
+    ) -> Self {
         log::trace!("Trying to build a message from text");
         let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Message`");
 
@@ -35,12 +65,7 @@ impl Message {
 
         let message = DataMessage {
             body,
-            timestamp: Some(
-                std::time::SystemTime::now()
-                    .duration_since(std::time::UNIX_EPOCH)
-                    .expect("Time went backwards")
-                    .as_millis() as u64,
-            ),
+            timestamp: Some(timestamp),
             ..Default::default()
         };
 
@@ -143,7 +168,7 @@ impl Message {
         self.imp().channel.borrow().clone()
     }
 
-    pub(super) fn timestamp(&self) -> Option<u64> {
+    pub fn timestamp(&self) -> Option<u64> {
         self.imp().data.borrow().clone().and_then(|d| d.timestamp)
     }
 

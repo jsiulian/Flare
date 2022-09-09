@@ -7,16 +7,17 @@ use presage::prelude::{proto::AttachmentPointer, AttachmentSpec};
 use libsignal_service::sender::AttachmentUploadError;
 
 macro_rules! msg {
-    ($s:expr, $m:expr, $i:expr, $j:expr) => {
-        Message::from_text_channel_sender(
+    ($s:expr, $m:expr, $i:expr, $j:expr, $t:expr) => {
+        Message::pub_from_text_channel_sender_timestamp(
             $m,
             $s.dummy_channels().await[$j].clone(),
             $s.dummy_contacts()[$i].clone(),
-            $s
+            $t * 1000 * 60,
+            $s,
         )
     };
-    ($s:expr, $m:expr, $i:expr) => {
-        msg!($s, $m, $i, 1)
+    ($s:expr, $m:expr, $i:expr, $t:expr) => {
+        msg!($s, $m, $i, 1, $t)
     };
 }
 
@@ -135,39 +136,40 @@ impl super::Manager {
 
     #[cfg(feature = "screenshot")]
     async fn dummy_messages(&self) -> Vec<Message> {
-        let msg_replied = msg!(self, "And what can that Flare-thing actually do?", 1);
-        let msg_reply = msg!(self, "Additionally, replying and reacting to messages should also be possible", 0);
+        let base_minute = 600;
+        let msg_replied = msg!(self, "And what can that Flare-thing actually do?", 1, 68 + base_minute);
+        let msg_reply = msg!(self, "Additionally, replying and reacting to messages should also be possible", 0, 70 + base_minute);
         msg_reply.set_quote(msg_replied.clone());
         msg_reply.react("👍");
 
-        let msg_screenshot = msg!(self, "", 0);
+        let msg_screenshot = msg!(self, "", 0, 66 + base_minute);
         let screenshot_file = gio::File::for_uri("resource:///icon.png");
         let attachment = crate::backend::Attachment::from_file(screenshot_file, self);
         msg_screenshot.add_attachment(attachment).await.expect("Failed to add attachment");
 
         vec![
-            msg!(self, "Hello", 1),
-            msg!(self, "Hi, how are you", 0),
-            msg!(self, "Pretty ok, but I somehow feel a little imaginary", 1),
-            msg!(self, "What do you mean?", 0),
-            msg!(self, "Like I was hard-coded in some application", 1),
-            msg!(self, "I know it is hard to understand", 1),
-            msg!(self, "I think I just exist exist to provide example data for some application", 1),
-            msg!(self, "I can't believe you are a Flarer", 0),
-            msg!(self, "What is a Flarer", 1),
-            msg!(self, "You have seriously not heared about Flare before?", 0),
+            msg!(self, "Hello", 1, 0 + base_minute),
+            msg!(self, "Hi, how are you", 0, 59 + base_minute),
+            msg!(self, "Pretty ok, but I somehow feel a little imaginary", 1, 60 + base_minute),
+            msg!(self, "What do you mean?", 0, 60 + base_minute),
+            msg!(self, "Like I was hard-coded in some application", 1, 60 + base_minute),
+            msg!(self, "I know it is hard to understand", 1, 60 + base_minute),
+            msg!(self, "I think I just exist exist to provide example data for some application", 1, 60 + base_minute),
+            msg!(self, "I can't believe you are a Flarer", 0, 65 + base_minute),
+            msg!(self, "What is a Flarer", 1, 65 + base_minute),
+            msg!(self, "You have seriously not heared about Flare before?", 0, 65 + base_minute),
             msg_screenshot,
-            msg!(self, "Some people (the Flarers) believe that they are just some example data for a Signal client named Flare", 0),
-            msg!(self, "That has to be the weirdest conspiracy theory I have ever heared of", 1),
+            msg!(self, "Some people (the Flarers) believe that they are just some example data for a Signal client named Flare", 0, 66 + base_minute),
+            msg!(self, "That has to be the weirdest conspiracy theory I have ever heared of", 1, 67 + base_minute),
             msg_replied,
-            msg!(self, "It is told to be a very simple GTK based signal client", 0),
-            msg!(self, "As told, it only supports sending and receiving messages to contacts or groups", 0),
+            msg!(self, "It is told to be a very simple GTK based signal client", 0, 69 + base_minute),
+            msg!(self, "As told, it only supports sending and receiving messages to contacts or groups", 0, 69 + base_minute),
             msg_reply,
-            msg!(self, "And some even think more features might come in the future", 0),
-            msg!(self, "Wow. But does anybody actually believe in this?", 1),
-            msg!(self, "Never going to give you up, never going to let you down, never going to ", 2, 2),
-            msg!(self, "Hello there", 3, 3),
-            msg!(self, "I doubt it.", 0),
+            msg!(self, "And some even think more features might come in the future", 0, 70 + base_minute),
+            msg!(self, "Wow. But does anybody actually believe in this?", 1, 70 + base_minute),
+            msg!(self, "Never going to give you up, never going to let you down, never going to ", 2, 2, base_minute),
+            msg!(self, "Hello there", 3, 3, base_minute),
+            msg!(self, "I doubt it.", 0, 71 + base_minute),
         ]
     }
 

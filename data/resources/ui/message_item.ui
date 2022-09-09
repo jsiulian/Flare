@@ -46,6 +46,29 @@
             <property name="halign">start</property>
           </object>
         </child>
+
+        <!-- Timestamp label -->
+        <child>
+          <object class="GtkLabel">
+            <style>
+              <class name="dim-label"/>
+              <class name="caption"/>
+            </style>
+            <!-- TODO -->
+            <binding name="label">
+              <closure function="format_timestamp" type="gchararray">
+                <lookup name="sent">
+                  <lookup name="message" type="FlMessageItem"/>
+                </lookup>
+              </closure>
+            </binding>
+            <property name="justify">right</property>
+            <property name="vexpand">False</property>
+            <property name="valign">start</property>
+            <property name="hexpand">False</property>
+            <property name="halign">end</property>
+          </object>
+        </child>
       </object>
     </child>
 
@@ -133,6 +156,7 @@
         <property name="halign">start</property>
       </object>
     </child>
+
     <!-- Reactions -->
     <child>
       <object class="GtkLabel">
@@ -152,6 +176,7 @@
         <property name="halign">start</property>
       </object>
     </child>
+
     <!-- Attachments -->
     <child>
       <object class="GtkBox" id="box_attachments">
