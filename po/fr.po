@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-05 16:44+0200\n"
-"PO-Revision-Date: 2022-09-07 15:16+0000\n"
+"PO-Revision-Date: 2022-09-08 16:16+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
@@ -35,27 +35,24 @@ msgid "Select a channel"
 msgstr "Sélectionnez une chaîne"
 
 #: data/resources/ui/channel_messages.ui:87
-#, fuzzy
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr "Pièces-jointes"
+msgstr "Retirer une pièce jointe"
 
 #: data/resources/ui/channel_messages.ui:115
-#, fuzzy
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr "Pièces-jointes"
+msgstr "Ajouter une pièce jointe"
 
 #: data/resources/ui/channel_messages.ui:135
-#, fuzzy
 msgctxt "accessibility"
 msgid "Message input"
-msgstr "Message"
+msgstr "Saisie du message"
 
 #: data/resources/ui/channel_messages.ui:143
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Envoyer"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -168,10 +165,9 @@ msgstr "Focaliser la zone de saisie de texte"
 #: data/resources/ui/window.ui:33
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: data/resources/ui/window.ui:108
-#, fuzzy
 msgid "Settings"
 msgstr "Paramètres"
 
