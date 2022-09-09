@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-07 17:34+0200\n"
+"POT-Creation-Date: 2022-09-09 16:11+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -86,11 +86,11 @@ msgstr "Skann denne QR-koden med din hovedenhet."
 msgid "Please restart the application after this window closed."
 msgstr "Start programmet på ny etter at dette vinduet er lukket."
 
-#: data/resources/ui/message_item.ui:179
+#: data/resources/ui/message_item.ui:204
 msgid "Reply"
 msgstr "Svar"
 
-#: data/resources/ui/message_item.ui:185
+#: data/resources/ui/message_item.ui:210
 msgid "React"
 msgstr "Reager"
 
@@ -201,19 +201,19 @@ msgstr "Selvpåminnelse"
 msgid "You"
 msgstr "Deg"
 
-#: src/backend/message.rs:358
+#: src/backend/message.rs:383
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Sendte et bilde"
 msgstr[1] "Sendte {} bilder"
 
-#: src/backend/message.rs:366
+#: src/backend/message.rs:391
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Sendte en video"
 msgstr[1] "Sendte {} videoer"
 
-#: src/backend/message.rs:374
+#: src/backend/message.rs:399
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Sendte en fil"
@@ -277,6 +277,12 @@ msgstr "Slett databasen og forbind enheten igjen."
 #: src/error.rs:135
 msgid "The database path at {} is no folder."
 msgstr "Databasestien {} er ikke en mappe."
+
+#. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
+#. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+#: src/gui/utility.rs:19
+msgid "%H:%M"
+msgstr ""
 
 #: src/gui/window.rs:139
 msgid ""

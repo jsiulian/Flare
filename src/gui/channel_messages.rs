@@ -43,6 +43,7 @@ pub mod imp {
     use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::message_item::MessageItem;
     use crate::gui::text_entry::TextEntry;
+    use crate::gui::utility::Utility;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/channel_messages.ui")]
@@ -195,26 +196,6 @@ pub mod imp {
             }
         }
 
-        #[template_callback(function)]
-        fn is_some(opt: Option<glib::Object>) -> bool {
-            opt.is_some()
-        }
-
-        #[template_callback(function)]
-        fn is_none(opt: Option<glib::Object>) -> bool {
-            opt.is_none()
-        }
-
-        #[template_callback(function)]
-        fn or(b1: bool, b2: bool) -> bool {
-            b1 || b2
-        }
-
-        #[template_callback(function)]
-        fn not(b1: bool) -> bool {
-            !b1
-        }
-
         #[template_callback]
         fn handle_row_activated(&self, row: gtk::ListBoxRow) {
             let msg = row
@@ -280,6 +261,7 @@ pub mod imp {
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
+            Utility::bind_template_callbacks(klass);
             MessageItem::ensure_type();
             TextEntry::ensure_type();
         }

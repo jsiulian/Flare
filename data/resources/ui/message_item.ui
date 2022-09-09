@@ -54,7 +54,6 @@
               <class name="dim-label"/>
               <class name="caption"/>
             </style>
-            <!-- TODO -->
             <binding name="label">
               <closure function="format_timestamp" type="gchararray">
                 <lookup name="sent">

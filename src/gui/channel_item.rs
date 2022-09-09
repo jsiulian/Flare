@@ -33,6 +33,7 @@ pub mod imp {
 
     use crate::backend::Channel;
     use crate::backend::Manager;
+    use crate::gui::utility::Utility;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/channel_item.ui")]
@@ -59,6 +60,7 @@ pub mod imp {
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
+            Utility::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

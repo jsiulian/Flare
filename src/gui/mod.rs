@@ -8,5 +8,6 @@ mod message_item;
 mod preferences_window;
 mod text_entry;
 mod window;
+mod utility;
 
 pub use window::Window;

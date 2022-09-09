@@ -7,8 +7,9 @@
     <accessibility>
       <relation name="labelled-by">label-name</relation>
     </accessibility>
-
     <property name="spacing">5</property>
+
+    <!-- Avatar -->
     <child>
       <object class="AdwAvatar">
         <binding name="text">
@@ -21,6 +22,7 @@
       </object>
     </child>
 
+    <!-- Channel name -->
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
@@ -39,10 +41,12 @@
             </binding>
           </object>
         </child>
+
         <!-- Last message -->
         <child>
           <object class="GtkBox">
             <property name="spacing">2</property>
+            <!-- Last message sender -->
             <child>
               <object class="GtkLabel">
                 <property name="halign">start</property>
@@ -59,6 +63,7 @@
                 </binding>
               </object>
             </child>
+            <!-- Last message content -->
             <child>
               <object class="GtkLabel">
                 <property name="halign">start</property>
@@ -74,6 +79,30 @@
             </child>
           </object>
         </child>
+      </object>
+    </child>
+
+    <!-- Timestamp -->
+    <child>
+      <object class="GtkLabel">
+        <style>
+          <class name="dim-label"/>
+          <class name="caption"/>
+        </style>
+        <binding name="label">
+          <closure function="format_timestamp" type="gchararray">
+            <lookup name="sent">
+              <lookup name="last-message">
+                <lookup name="channel" type="FlChannelItem"/>
+              </lookup>
+            </lookup>
+          </closure>
+        </binding>
+        <property name="justify">right</property>
+        <property name="vexpand">False</property>
+        <property name="valign">start</property>
+        <property name="hexpand">False</property>
+        <property name="halign">end</property>
       </object>
     </child>
   </template>

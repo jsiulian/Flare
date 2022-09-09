@@ -37,6 +37,7 @@ pub mod imp {
     use crate::backend::Manager;
     use crate::config::APP_ID;
     use crate::gui::error_dialog::ErrorDialog;
+    use crate::gui::utility::Utility;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/attachment.ui")]
@@ -48,11 +49,6 @@ pub mod imp {
 
     #[gtk::template_callbacks]
     impl Attachment {
-        #[template_callback(function)]
-        fn not(b: bool) -> bool {
-            !b
-        }
-
         #[template_callback]
         fn load(&self, _: gtk::Button) {
             let context = glib::MainContext::default();
@@ -125,6 +121,7 @@ pub mod imp {
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
+            Utility::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

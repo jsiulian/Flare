@@ -31,6 +31,7 @@ src/gui/link_window.rs
 src/gui/message_item.rs
 src/gui/mod.rs
 src/gui/preferences_window.rs
+src/gui/utility.rs
 src/gui/window.rs
 src/hash_log.rs
 src/main.rs

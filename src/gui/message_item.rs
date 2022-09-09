@@ -65,6 +65,7 @@ pub mod imp {
     use crate::backend::Message;
     use crate::gui::attachment::Attachment;
     use crate::gui::error_dialog::ErrorDialog;
+    use crate::gui::utility::Utility;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/message_item.ui")]
@@ -91,6 +92,7 @@ pub mod imp {
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
+            Utility::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {
@@ -119,17 +121,6 @@ pub mod imp {
         }
 
         #[template_callback]
-        pub(super) fn format_timestamp(&self, timestamp: u64) -> Option<String> {
-            let datetime =
-                glib::DateTime::from_unix_utc((timestamp / 1000).try_into().unwrap_or_default())
-                    .ok()
-                    .and_then(|d| d.to_local().ok());
-            datetime
-                .and_then(|d| d.format("%H:%M").ok())
-                .map(|s| s.into())
-        }
-
-        #[template_callback]
         fn handle_react(&self, emoji: String) {
             let obj = self.instance();
             let msg = obj.property::<Message>("message");
@@ -155,11 +146,6 @@ pub mod imp {
                     obj.notify("has-reaction");
                 }
             }));
-        }
-
-        #[template_callback(function)]
-        fn is_some(opt: Option<glib::Object>) -> bool {
-            opt.is_some()
         }
     }
 

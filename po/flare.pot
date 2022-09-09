@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-07 17:34+0200\n"
+"POT-Creation-Date: 2022-09-09 16:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,11 +82,11 @@ msgstr ""
 msgid "Please restart the application after this window closed."
 msgstr ""
 
-#: data/resources/ui/message_item.ui:179
+#: data/resources/ui/message_item.ui:204
 msgid "Reply"
 msgstr ""
 
-#: data/resources/ui/message_item.ui:185
+#: data/resources/ui/message_item.ui:210
 msgid "React"
 msgstr ""
 
@@ -191,19 +191,19 @@ msgstr ""
 msgid "You"
 msgstr ""
 
-#: src/backend/message.rs:358
+#: src/backend/message.rs:383
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/backend/message.rs:366
+#: src/backend/message.rs:391
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/backend/message.rs:374
+#: src/backend/message.rs:399
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] ""
@@ -260,6 +260,12 @@ msgstr ""
 
 #: src/error.rs:135
 msgid "The database path at {} is no folder."
+msgstr ""
+
+#. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
+#. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+#: src/gui/utility.rs:19
+msgid "%H:%M"
 msgstr ""
 
 #: src/gui/window.rs:139

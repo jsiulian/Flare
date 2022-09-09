@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-05 16:44+0200\n"
+"POT-Creation-Date: 2022-09-09 16:11+0200\n"
 "PO-Revision-Date: 2022-09-08 16:16+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
@@ -82,11 +82,11 @@ msgstr "Veuillez scanner ce code QR avec votre appareil principal."
 msgid "Please restart the application after this window closed."
 msgstr "Veuillez redémarrer l’application après la fermeture de cette fenêtre."
 
-#: data/resources/ui/message_item.ui:179
+#: data/resources/ui/message_item.ui:204
 msgid "Reply"
 msgstr "Répondre"
 
-#: data/resources/ui/message_item.ui:185
+#: data/resources/ui/message_item.ui:210
 msgid "React"
 msgstr "Réagir"
 
@@ -191,19 +191,19 @@ msgstr "Note à moi-même"
 msgid "You"
 msgstr "Vous"
 
-#: src/backend/message.rs:358
+#: src/backend/message.rs:383
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "A envoyé une image"
 msgstr[1] "A envoyé {} images"
 
-#: src/backend/message.rs:366
+#: src/backend/message.rs:391
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "A envoyé une vidéo"
 msgstr[1] "A envoyé {} vidéos"
 
-#: src/backend/message.rs:374
+#: src/backend/message.rs:399
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "A envoyé un fichier"
@@ -267,6 +267,12 @@ msgstr "Veuillez supprimer la base de données et lier à nouveau l’appareil."
 #: src/error.rs:135
 msgid "The database path at {} is no folder."
 msgstr "Le chemin de base de données à {} n’est pas un dossier."
+
+#. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
+#. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+#: src/gui/utility.rs:19
+msgid "%H:%M"
+msgstr ""
 
 #: src/gui/window.rs:139
 msgid ""

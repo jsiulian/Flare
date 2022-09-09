@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-07 17:34+0200\n"
+"POT-Creation-Date: 2022-09-09 16:11+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
@@ -86,11 +86,11 @@ msgstr "Пожалуйста, отсканируйте этот QR-код на �
 msgid "Please restart the application after this window closed."
 msgstr "Пожалуйста, перезапустите приложение после закрытия этого окна."
 
-#: data/resources/ui/message_item.ui:179
+#: data/resources/ui/message_item.ui:204
 msgid "Reply"
 msgstr "Ответить"
 
-#: data/resources/ui/message_item.ui:185
+#: data/resources/ui/message_item.ui:210
 msgid "React"
 msgstr "Отреагировать"
 
@@ -199,19 +199,19 @@ msgstr "Заметка для себя"
 msgid "You"
 msgstr "Вы"
 
-#: src/backend/message.rs:358
+#: src/backend/message.rs:383
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Отправить изображение"
 msgstr[1] "Отправить {} изображений"
 
-#: src/backend/message.rs:366
+#: src/backend/message.rs:391
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Отправлено видео"
 msgstr[1] "Отправлено {} видео"
 
-#: src/backend/message.rs:374
+#: src/backend/message.rs:399
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Оправить файл"
@@ -275,6 +275,12 @@ msgstr "Пожалуйста, удалите базу данных и повто
 #: src/error.rs:135
 msgid "The database path at {} is no folder."
 msgstr "Путь к базе данных в {} не является папкой."
+
+#. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
+#. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+#: src/gui/utility.rs:19
+msgid "%H:%M"
+msgstr ""
 
 #: src/gui/window.rs:139
 msgid ""

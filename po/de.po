@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-07 17:34+0200\n"
+"POT-Creation-Date: 2022-09-09 16:11+0200\n"
 "PO-Revision-Date: 2022-09-08 16:16+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -84,11 +84,11 @@ msgid "Please restart the application after this window closed."
 msgstr ""
 "Bitte starte die Anwendung neu, nachdem sich dieses Fenster geschlossen hat."
 
-#: data/resources/ui/message_item.ui:179
+#: data/resources/ui/message_item.ui:204
 msgid "Reply"
 msgstr "Antworten"
 
-#: data/resources/ui/message_item.ui:185
+#: data/resources/ui/message_item.ui:210
 msgid "React"
 msgstr "Reagieren"
 
@@ -195,19 +195,19 @@ msgstr "Notiz an mich"
 msgid "You"
 msgstr "Du"
 
-#: src/backend/message.rs:358
+#: src/backend/message.rs:383
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Hat ein Bild gesendet"
 msgstr[1] "Hat {} Bilder gesendet"
 
-#: src/backend/message.rs:366
+#: src/backend/message.rs:391
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Hat ein Video gesendet"
 msgstr[1] "Hat {} Videos gesendet"
 
-#: src/backend/message.rs:374
+#: src/backend/message.rs:399
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"
@@ -270,6 +270,12 @@ msgstr "Bitte lösche die Datenbank und kopple das Gerät erneut."
 #: src/error.rs:135
 msgid "The database path at {} is no folder."
 msgstr "Der Datenbankpfad bei {} ist kein Ordner."
+
+#. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
+#. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+#: src/gui/utility.rs:19
+msgid "%H:%M"
+msgstr "%H:%M"
 
 #: src/gui/window.rs:139
 msgid ""
