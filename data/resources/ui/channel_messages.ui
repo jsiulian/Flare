@@ -144,6 +144,14 @@
                 </accessibility>
                 <signal name="clicked" handler="send_message" swapped="true"/>
                 <property name="icon-name">go-next-symbolic</property>
+                <binding name="sensitive">
+                  <closure function="or" type="gboolean">
+                    <lookup name="has-attachments" type="FlChannelMessages"/>
+                    <closure function="not" type="gboolean">
+                      <lookup name="is-empty">text_entry</lookup>
+                    </closure>
+                  </closure>
+                </binding>
               </object>
             </child>
           </object>

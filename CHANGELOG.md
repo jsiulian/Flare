@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Accessibility (no idea how good it is)
+- Prevented sending empty messages
+
+### Fixed
+
+- Attachment list not hiding after sending message
 
 ## [0.3.3] - 2022-09-05
 

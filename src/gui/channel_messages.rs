@@ -135,6 +135,12 @@ pub mod imp {
                 att.clear();
                 a
             };
+            self.instance().notify("has-attachments");
+
+            if text.is_empty() && attachments.is_empty() {
+                log::warn!("Got requested to send empty message, skipping");
+            }
+
             while let Some(child) = self.box_attachments.first_child() {
                 self.box_attachments.remove(&child);
             }
@@ -197,6 +203,16 @@ pub mod imp {
         #[template_callback(function)]
         fn is_none(opt: Option<glib::Object>) -> bool {
             opt.is_none()
+        }
+
+        #[template_callback(function)]
+        fn or(b1: bool, b2: bool) -> bool {
+            b1 || b2
+        }
+
+        #[template_callback(function)]
+        fn not(b1: bool) -> bool {
+            !b1
         }
 
         #[template_callback]

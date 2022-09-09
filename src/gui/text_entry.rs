@@ -25,14 +25,14 @@ impl TextEntry {
 
 pub mod imp {
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gdk_pixbuf::glib::clone;
     use gdk_pixbuf::glib::subclass::Signal;
     use gdk_pixbuf::glib::{
         self, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, Value,
     };
-    use gdk_pixbuf::prelude::ObjectExt;
+    use gdk_pixbuf::glib::{clone, ParamFlags, ParamSpecBoolean};
+    use gdk_pixbuf::prelude::{ObjectExt, ToValue};
     use gtk::subclass::widget::{CompositeTemplate, WidgetClassSubclassExt};
-    use gtk::traits::WidgetExt;
+    use gtk::traits::{TextBufferExt, WidgetExt};
     use gtk::{
         prelude::{InitializingWidgetExt, StaticType},
         subclass::{prelude::BoxImpl, widget::WidgetImpl},
@@ -78,14 +78,33 @@ pub mod imp {
                     Inhibit(false)
                 }
             }));
+
+            self.buffer
+                .connect_text_notify(clone!(@weak obj => move |_| {
+                    obj.notify("is-empty");
+                }));
         }
         fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(Vec::new);
+            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
+                vec![ParamSpecBoolean::new(
+                    "is-empty",
+                    "is-empty",
+                    "is-empty",
+                    false,
+                    ParamFlags::READABLE,
+                )]
+            });
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, _pspec: &ParamSpec) -> Value {
-            unimplemented!()
+        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+            match pspec.name() {
+                "is-empty" => {
+                    let (start, end) = self.buffer.bounds();
+                    (start == end).to_value()
+                }
+                _ => unimplemented!(),
+            }
         }
 
         fn set_property(&self, _obj: &Self::Type, _id: usize, _value: &Value, _pspec: &ParamSpec) {
