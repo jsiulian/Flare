@@ -45,7 +45,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
                 phonenumber: None,
                 relay: None,
             },
-            name: "Imaginary Friend".to_string(),
+            name: "Developer".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -61,7 +61,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
                 phonenumber: None,
                 relay: None,
             },
-            name: "Rick Astley".to_string(),
+            name: "Officer".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -77,7 +77,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
                 phonenumber: None,
                 relay: None,
             },
-            name: "Obi-Wan Kenobi".to_string(),
+            name: "That WOW-Guy".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -137,39 +137,31 @@ impl super::Manager {
     #[cfg(feature = "screenshot")]
     async fn dummy_messages(&self) -> Vec<Message> {
         let base_minute = 600;
-        let msg_replied = msg!(self, "And what can that Flare-thing actually do?", 1, 68 + base_minute);
-        let msg_reply = msg!(self, "Additionally, replying and reacting to messages should also be possible", 0, 70 + base_minute);
+        let msg_replied = msg!(self, "Sounds interesting, can you tell me more?", 0, 2 + base_minute);
+        let msg_reply = msg!(self, "Additionally, replying and reacting to messages are also be possible", 1, 5 + base_minute);
         msg_reply.set_quote(msg_replied.clone());
         msg_reply.react("👍");
 
-        let msg_screenshot = msg!(self, "", 0, 66 + base_minute);
+        let msg_screenshot = msg!(self, "", 1, 4 + base_minute);
         let screenshot_file = gio::File::for_uri("resource:///icon.png");
         let attachment = crate::backend::Attachment::from_file(screenshot_file, self);
         msg_screenshot.add_attachment(attachment).await.expect("Failed to add attachment");
 
         vec![
-            msg!(self, "Hello", 1, 0 + base_minute),
-            msg!(self, "Hi, how are you", 0, 59 + base_minute),
-            msg!(self, "Pretty ok, but I somehow feel a little imaginary", 1, 60 + base_minute),
-            msg!(self, "What do you mean?", 0, 60 + base_minute),
-            msg!(self, "Like I was hard-coded in some application", 1, 60 + base_minute),
-            msg!(self, "I know it is hard to understand", 1, 60 + base_minute),
-            msg!(self, "I think I just exist exist to provide example data for some application", 1, 60 + base_minute),
-            msg!(self, "I can't believe you are a Flarer", 0, 65 + base_minute),
-            msg!(self, "What is a Flarer", 1, 65 + base_minute),
-            msg!(self, "You have seriously not heared about Flare before?", 0, 65 + base_minute),
-            msg_screenshot,
-            msg!(self, "Some people (the Flarers) believe that they are just some example data for a Signal client named Flare", 0, 66 + base_minute),
-            msg!(self, "That has to be the weirdest conspiracy theory I have ever heared of", 1, 67 + base_minute),
+            msg!(self, "Hello", 0, 0 + base_minute),
+            msg!(self, "Hello, may I present to you my application Flare?", 1, 1 + base_minute),
+            msg!(self, "It is an unofficial Signal client.", 1, 1 + base_minute),
             msg_replied,
-            msg!(self, "It is told to be a very simple GTK based signal client", 0, 69 + base_minute),
-            msg!(self, "As told, it only supports sending and receiving messages to contacts or groups", 0, 69 + base_minute),
+            msg!(self, "Well, it is a pretty simple application. As you can clearly see, it supports sending and receiving messages.", 1, 3 + base_minute),
+            msg!(self, "Pictures and other attachments can also be sent:", 1, 4 + base_minute),
+            msg_screenshot,
             msg_reply,
-            msg!(self, "And some even think more features might come in the future", 0, 70 + base_minute),
-            msg!(self, "Wow. But does anybody actually believe in this?", 1, 70 + base_minute),
-            msg!(self, "Never going to give you up, never going to let you down, never going to ", 2, 2, base_minute),
-            msg!(self, "Hello there", 3, 3, base_minute),
-            msg!(self, "I doubt it.", 0, 71 + base_minute),
+            msg!(self, "Looks pretty nice, where can I try it?", 0, 6 + base_minute),
+            msg!(self, "Just head over to Flathub and download it.", 1, 8 + base_minute),
+            msg!(self, "As the free space for this screenshot is almost over, I have just one more question: ", 1, 8 + base_minute),
+            msg!(self, "Why are you still reading this? In the time it took you to read it, you could have already downloaded it and set it up.", 1, 8 + base_minute),
+            msg!(self, "Thats gotta be the best application I've ever seen", 2, 2, 100),
+            msg!(self, "WOW", 3, 3, 200),
         ]
     }
 

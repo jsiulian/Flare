@@ -15,6 +15,11 @@ impl ChannelMessages {
 }
 
 pub mod imp {
+
+    // At least 4 minutes need to pass that for two messages from the same sender, the second one will
+    // also show avatar and sender title.
+    const MESSAGE_SENT_SHOW_NAME_DURATION: u64 = 4 * 60 * 1000;
+
     use std::cell::RefCell;
 
     use gdk_pixbuf::glib::clone;
@@ -229,14 +234,21 @@ pub mod imp {
             let message_sender_title = message
                 .property::<Option<Contact>>("sender")
                 .and_then(|s| s.property::<Option<String>>("title"));
-            let last_message_sender_title = obj
+            let last_message = obj
                 .property::<Option<Channel>>("active-channel")
-                .and_then(|c| c.previous_message_to(message))
+                .and_then(|c| c.previous_message_to(message));
+            let last_message_sender_title = last_message
+                .as_ref()
                 .and_then(|m| m.property::<Option<Contact>>("sender"))
                 .and_then(|s| s.property::<Option<String>>("title"));
+            let sent = message.property::<u64>("sent");
+            let last_message_sent = last_message
+                .map(|m| m.property::<u64>("sent"))
+                .unwrap_or_default();
             widget.set_property(
                 "show-name",
-                last_message_sender_title != message_sender_title,
+                last_message_sender_title != message_sender_title
+                    || sent > last_message_sent + MESSAGE_SENT_SHOW_NAME_DURATION,
             );
             widget.connect_local(
                 "reply",
