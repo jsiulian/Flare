@@ -38,12 +38,12 @@ msgstr "Wählen Sie einen Kanal aus"
 #: data/resources/ui/channel_messages.ui:60
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Antwort entfernen"
 
 #: data/resources/ui/channel_messages.ui:62
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Antwort entfernen"
 
 #: data/resources/ui/channel_messages.ui:92
 msgctxt "accessibility"
@@ -51,7 +51,6 @@ msgid "Remove an attachment"
 msgstr "Anhang entfernen"
 
 #: data/resources/ui/channel_messages.ui:94
-#, fuzzy
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Anhang entfernen"
@@ -62,7 +61,6 @@ msgid "Add an attachment"
 msgstr "Anhang hinzufügen"
 
 #: data/resources/ui/channel_messages.ui:124
-#, fuzzy
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Anhang hinzufügen"
@@ -73,7 +71,6 @@ msgid "Message input"
 msgstr "Nachricht eingeben"
 
 #: data/resources/ui/channel_messages.ui:146
-#, fuzzy
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Nachricht eingeben"
@@ -84,7 +81,6 @@ msgid "Send"
 msgstr "Senden"
 
 #: data/resources/ui/channel_messages.ui:154
-#, fuzzy
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Senden"
@@ -183,7 +179,7 @@ msgstr "Zur Information springen"
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "Menü öffnen"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
@@ -312,7 +308,7 @@ msgstr "Der Datenbankpfad bei {} ist kein Ordner."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:36
+#: src/gui/utility.rs:36 src/gui/utility.rs:34
 msgid "%H:%M"
 msgstr "%H:%M"
 
