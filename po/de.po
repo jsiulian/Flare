@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-09 16:11+0200\n"
+"POT-Creation-Date: 2022-09-11 17:25+0200\n"
 "PO-Revision-Date: 2022-09-08 16:16+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -35,23 +35,57 @@ msgstr "Datei laden"
 msgid "Select a channel"
 msgstr "Wählen Sie einen Kanal aus"
 
-#: data/resources/ui/channel_messages.ui:87
+#: data/resources/ui/channel_messages.ui:60
+msgctxt "accessibility"
+msgid "Remove the reply"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:62
+msgctxt "tooltip"
+msgid "Remove reply"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:92
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:115
+#: data/resources/ui/channel_messages.ui:94
+#, fuzzy
+msgctxt "tooltip"
+msgid "Remove attachment"
+msgstr "Anhang entfernen"
+
+#: data/resources/ui/channel_messages.ui:122
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:135
+#: data/resources/ui/channel_messages.ui:124
+#, fuzzy
+msgctxt "tooltip"
+msgid "Add attachment"
+msgstr "Anhang hinzufügen"
+
+#: data/resources/ui/channel_messages.ui:143
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:143
+#: data/resources/ui/channel_messages.ui:146
+#, fuzzy
+msgctxt "tooltip"
+msgid "Message input"
+msgstr "Nachricht eingeben"
+
+#: data/resources/ui/channel_messages.ui:152
 msgctxt "accessibility"
+msgid "Send"
+msgstr "Senden"
+
+#: data/resources/ui/channel_messages.ui:154
+#, fuzzy
+msgctxt "tooltip"
 msgid "Send"
 msgstr "Senden"
 
@@ -84,11 +118,11 @@ msgid "Please restart the application after this window closed."
 msgstr ""
 "Bitte starte die Anwendung neu, nachdem sich dieses Fenster geschlossen hat."
 
-#: data/resources/ui/message_item.ui:204
+#: data/resources/ui/message_item.ui:203
 msgid "Reply"
 msgstr "Antworten"
 
-#: data/resources/ui/message_item.ui:210
+#: data/resources/ui/message_item.ui:209
 msgid "React"
 msgstr "Reagieren"
 
@@ -146,44 +180,49 @@ msgctxt "shortcut window"
 msgid "Go to about page"
 msgstr "Zur Information springen"
 
-#: data/resources/ui/shortcuts.ui:34
+#: data/resources/ui/shortcuts.ui:32
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Channels"
 msgstr "Kanäle"
 
-#: data/resources/ui/shortcuts.ui:37
+#: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
 msgstr "Zu Kanal 1...9 springen"
 
-#: data/resources/ui/shortcuts.ui:43
+#: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Anhänge hochladen"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Die Texteingabe fokussieren"
 
-#: data/resources/ui/window.ui:33
+#: data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Menü"
 
-#: data/resources/ui/window.ui:108
+#: data/resources/ui/window.ui:111
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: data/resources/ui/window.ui:112
+#: data/resources/ui/window.ui:115
 msgid "Unlink"
 msgstr "Entkoppeln"
 
-#: data/resources/ui/window.ui:116
+#: data/resources/ui/window.ui:119
 msgid "Keybindings"
 msgstr "Tastaturkürzel"
 
-#: data/resources/ui/window.ui:120
+#: data/resources/ui/window.ui:123
 msgid "About"
 msgstr "Info"
 
@@ -273,7 +312,7 @@ msgstr "Der Datenbankpfad bei {} ist kein Ordner."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:19
+#: src/gui/utility.rs:34
 msgid "%H:%M"
 msgstr "%H:%M"
 

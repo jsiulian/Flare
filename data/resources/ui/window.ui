@@ -28,10 +28,13 @@
                 </property>
                 <child type="end">
                   <object class="GtkMenuButton">
-                    <property name="menu-model">menubar</property>
                     <accessibility>
                       <property name="label" translatable="yes" context="accessibility">Menu</property>
                     </accessibility>
+                    <property name="tooltip-text" context="tooltip">Menu</property>
+
+                    <property name="menu-model">menubar</property>
+                    <property name="primary">True</property>
                   </object>
                 </child>
               </object>

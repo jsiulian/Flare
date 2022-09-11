@@ -56,6 +56,11 @@
             </binding>
             <child>
               <object class="GtkButton">
+                <accessibility>
+                  <property name="label" translatable="yes" context="accessibility">Remove the reply</property>
+                </accessibility>
+                <property name="tooltip-text" translatable="yes" context="tooltip">Remove reply</property>
+
                 <style>
                   <class name="flat"/>
                 </style>
@@ -86,6 +91,8 @@
                 <accessibility>
                   <property name="label" translatable="yes" context="accessibility">Remove an attachment</property>
                 </accessibility>
+                <property name="tooltip-text" translatable="yes" context="tooltip">Remove attachment</property>
+
                 <style>
                   <class name="flat"/>
                 </style>
@@ -114,6 +121,7 @@
                 <accessibility>
                   <property name="label" translatable="yes" context="accessibility">Add an attachment</property>
                 </accessibility>
+                <property name="tooltip-text" translatable="yes" context="tooltip">Add attachment</property>
                 <signal name="clicked" handler="add_attachment" swapped="true"/>
                 <property name="icon-name">list-add-symbolic</property>
                 <child>
@@ -135,6 +143,7 @@
                   <property name="label" translatable="yes" context="accessibility">Message input</property>
                 </accessibility>
                 <signal name="activate" handler="send_message" swapped="true"/>
+                <property name="tooltip-text" translatable="yes" context="tooltip">Message input</property>
               </object>
             </child>
             <child>
@@ -142,6 +151,8 @@
                 <accessibility>
                   <property name="label" translatable="yes" context="accessibility">Send</property>
                 </accessibility>
+                <property name="tooltip-text" translatable="yes" context="tooltip">Send</property>
+
                 <signal name="clicked" handler="send_message" swapped="true"/>
                 <property name="icon-name">go-next-symbolic</property>
                 <binding name="sensitive">

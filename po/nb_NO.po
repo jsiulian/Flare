@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-09 16:11+0200\n"
+"POT-Creation-Date: 2022-09-11 17:25+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -35,26 +35,59 @@ msgstr "Last inn fil"
 msgid "Select a channel"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:87
+#: data/resources/ui/channel_messages.ui:60
+msgctxt "accessibility"
+msgid "Remove the reply"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:62
+msgctxt "tooltip"
+msgid "Remove reply"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:92
 #, fuzzy
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Vedlegg"
 
-#: data/resources/ui/channel_messages.ui:115
+#: data/resources/ui/channel_messages.ui:94
+#, fuzzy
+msgctxt "tooltip"
+msgid "Remove attachment"
+msgstr "Vedlegg"
+
+#: data/resources/ui/channel_messages.ui:122
 #, fuzzy
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Vedlegg"
 
-#: data/resources/ui/channel_messages.ui:135
+#: data/resources/ui/channel_messages.ui:124
+#, fuzzy
+msgctxt "tooltip"
+msgid "Add attachment"
+msgstr "Vedlegg"
+
+#: data/resources/ui/channel_messages.ui:143
 #, fuzzy
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Melding"
 
-#: data/resources/ui/channel_messages.ui:143
+#: data/resources/ui/channel_messages.ui:146
+#, fuzzy
+msgctxt "tooltip"
+msgid "Message input"
+msgstr "Melding"
+
+#: data/resources/ui/channel_messages.ui:152
 msgctxt "accessibility"
+msgid "Send"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:154
+msgctxt "tooltip"
 msgid "Send"
 msgstr ""
 
@@ -86,11 +119,11 @@ msgstr "Skann denne QR-koden med din hovedenhet."
 msgid "Please restart the application after this window closed."
 msgstr "Start programmet på ny etter at dette vinduet er lukket."
 
-#: data/resources/ui/message_item.ui:204
+#: data/resources/ui/message_item.ui:203
 msgid "Reply"
 msgstr "Svar"
 
-#: data/resources/ui/message_item.ui:210
+#: data/resources/ui/message_item.ui:209
 msgid "React"
 msgstr "Reager"
 
@@ -150,46 +183,51 @@ msgctxt "shortcut window"
 msgid "Go to about page"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:34
+#: data/resources/ui/shortcuts.ui:32
+msgctxt "shortcut window"
+msgid "Open menu"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Channels"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:37
+#: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:43
+#: data/resources/ui/shortcuts.ui:49
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Vedlegg"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr ""
 
-#: data/resources/ui/window.ui:33
+#: data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Menu"
 msgstr ""
 
-#: data/resources/ui/window.ui:108
+#: data/resources/ui/window.ui:111
 #, fuzzy
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: data/resources/ui/window.ui:112
+#: data/resources/ui/window.ui:115
 msgid "Unlink"
 msgstr "Opphev forbindelse"
 
-#: data/resources/ui/window.ui:116
+#: data/resources/ui/window.ui:119
 msgid "Keybindings"
 msgstr ""
 
-#: data/resources/ui/window.ui:120
+#: data/resources/ui/window.ui:123
 msgid "About"
 msgstr "Om"
 
@@ -280,7 +318,7 @@ msgstr "Databasestien {} er ikke en mappe."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:19
+#: src/gui/utility.rs:34
 msgid "%H:%M"
 msgstr ""
 
