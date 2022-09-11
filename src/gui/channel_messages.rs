@@ -353,7 +353,7 @@ pub mod imp {
                         "Property `active-channel` of `ChannelMessages` has to be of type `Channel`",
                     );
                     self.reset_messages();
-                    self.active_channel.replace(chan.clone());
+                    let previous_channel = self.active_channel.replace(chan.clone());
                     if let Some(channel) = &chan {
                         for msg in channel.messages() {
                             self.add_message(&msg);
@@ -362,8 +362,7 @@ pub mod imp {
                         let mut signal_handler = self.last_signal_handler.borrow_mut();
                         if let Some(sig) = signal_handler.take() {
                             glib::signal::signal_handler_disconnect(
-                                self.active_channel
-                                    .borrow()
+                                previous_channel
                                     .as_ref()
                                     .expect("A `active-channel` of `ChannelMessages`"),
                                 sig,

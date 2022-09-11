@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Attachment list not hiding after sending message
+- Minor glib warning
 
 ## [0.3.3] - 2022-09-05
 
