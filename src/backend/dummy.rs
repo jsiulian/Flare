@@ -5,6 +5,7 @@ use presage::prelude::Uuid;
 use std::path::Path;
 use presage::prelude::{proto::AttachmentPointer, AttachmentSpec};
 use libsignal_service::sender::AttachmentUploadError;
+use gtk::glib::DateTime;
 
 macro_rules! msg {
     ($s:expr, $m:expr, $i:expr, $j:expr, $t:expr) => {
@@ -136,7 +137,9 @@ impl super::Manager {
 
     #[cfg(feature = "screenshot")]
     async fn dummy_messages(&self) -> Vec<Message> {
-        let base_minute = 600;
+        let now = DateTime::now_utc().expect("Now to be expressable as DateTime");
+        let base_time = DateTime::from_utc(now.year(), now.month(), now.day_of_month(), 11, 0, 0.0).expect("Base time to be expressable as DateTime");
+        let base_minute: u64 = (base_time.to_unix() / 60).try_into().unwrap();
         let msg_replied = msg!(self, "Sounds interesting, can you tell me more?", 0, 2 + base_minute);
         let msg_reply = msg!(self, "Additionally, replying and reacting to messages are also be possible", 1, 5 + base_minute);
         msg_reply.set_quote(msg_replied.clone());
@@ -160,8 +163,8 @@ impl super::Manager {
             msg!(self, "Just head over to Flathub and download it.", 1, 8 + base_minute),
             msg!(self, "As the free space for this screenshot is almost over, I have just one more question: ", 1, 8 + base_minute),
             msg!(self, "Why are you still reading this? In the time it took you to read it, you could have already downloaded it and set it up.", 1, 8 + base_minute),
-            msg!(self, "Thats gotta be the best application I've ever seen", 2, 2, 100),
-            msg!(self, "WOW", 3, 3, 200),
+            msg!(self, "Thats gotta be the best application I've ever seen", 2, 2, base_minute - 100),
+            msg!(self, "WOW", 3, 3, base_minute - 200),
         ]
     }
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-11 17:25+0200\n"
+"POT-Creation-Date: 2022-09-12 11:05+0200\n"
 "PO-Revision-Date: 2022-09-10 23:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
@@ -309,9 +309,15 @@ msgstr "Le chemin de base de données à {} n’est pas un dossier."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:34
+#: src/gui/utility.rs:36
 msgid "%H:%M"
 msgstr "%H:%M"
+
+#. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
+#. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+#: src/gui/utility.rs:39
+msgid "%Y-%m-%d %H:%M"
+msgstr ""
 
 #: src/gui/window.rs:139
 msgid ""
