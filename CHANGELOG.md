@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Accessibility (no idea how good it is)
+- Message storage
 - Prevented sending empty messages
 - Display the time the message was sent.
 

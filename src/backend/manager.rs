@@ -3,14 +3,14 @@ use std::{cell::RefCell, collections::HashMap, path::Path};
 use crate::storage::EncryptedSledConfigStore;
 use gdk_pixbuf::{
     glib::{clone, MainContext, Object, Priority},
-    prelude::{Cast, Continue, ObjectExt},
+    prelude::{Cast, Continue, ObjectExt, SettingsExt},
 };
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use libsignal_service::{
-    content::ContentBody,
+    content::{ContentBody, Metadata},
     groups_v2::Group,
-    prelude::{GroupMasterKey, Uuid},
-    proto::{AttachmentPointer, DataMessage},
+    prelude::{Content, GroupMasterKey, Uuid},
+    proto::{AttachmentPointer, DataMessage, GroupContextV2},
     sender::{AttachmentSpec, AttachmentUploadError},
     ServiceAddress,
 };
@@ -26,6 +26,7 @@ use libsecret::{
 use crate::ApplicationError;
 use chacha20poly1305::ChaCha20Poly1305;
 use encrypted_sled::{CountingNonce, EncryptionCipher};
+use presage::{MessageIdentity, MessageStore};
 
 const MESSAGE_BOUND: usize = 10;
 
@@ -136,11 +137,71 @@ impl Manager {
         Ok(())
     }
 
+    pub fn save_message(&self, message: Content) -> Result<(), ApplicationError> {
+        log::trace!("Saving a message");
+        let mut borrow_mut = self.imp().config_store.borrow_mut();
+        if let Some(config_store) = borrow_mut.as_mut() {
+            config_store.save_message(message)?;
+        }
+        Ok(())
+    }
+
+    pub async fn message_by_id(
+        &self,
+        id: &MessageIdentity,
+    ) -> Result<Option<Message>, ApplicationError> {
+        crate::trace!("Querying message by id: {:?}", id);
+        let content = {
+            if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
+                let content = config_store.message_by_identity(id)?;
+                if let Some(content) = content {
+                    log::trace!("Found message");
+                    Ok::<_, ApplicationError>(Some(content))
+                } else {
+                    Ok(None)
+                }
+            } else {
+                log::warn!("Query message by id without config store being set up");
+                Ok(None)
+            }
+        }?;
+        if let Some(content) = content {
+            Ok(Some(Message::from_content(content, self).await))
+        } else {
+            Ok(None)
+        }
+    }
+
+    pub fn messages_by_contact(
+        &self,
+        contact: &Uuid,
+    ) -> Result<Vec<MessageIdentity>, ApplicationError> {
+        crate::trace!("Querying message by contact: {:?}", contact);
+        if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
+            Ok(config_store.messages_by_contact(contact)?)
+        } else {
+            log::warn!("Query messages by contact without config store being set up");
+            Ok(vec![])
+        }
+    }
+
+    pub fn messages_by_group(
+        &self,
+        group: &GroupContextV2,
+    ) -> Result<Vec<MessageIdentity>, ApplicationError> {
+        crate::trace!("Querying message by group: {:?}", group.master_key);
+        if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
+            Ok(config_store.messages_by_group(group)?)
+        } else {
+            log::warn!("Query messages by contact without config store being set up");
+            Ok(vec![])
+        }
+    }
+
     #[cfg(not(feature = "screenshot"))]
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
         use futures::channel::oneshot;
         use futures::{select, FutureExt};
-        use gdk_pixbuf::prelude::SettingsExt;
         use tokio::sync::mpsc;
         let config_store = config_store(p).await?;
 
@@ -225,22 +286,25 @@ impl Manager {
                     let msg = msg_opt.unwrap();
                     let message = Message::from_content(msg, self).await;
                     if let Some(channel) = message.channel() {
-                       let mut channels = self.imp().channels.borrow_mut();
-                        crate::debug!("Got from channel: {}", channel.property::<String>("title"));
-                        if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
-                            log::debug!("Message from a already existing channel");
-                            if stored_channel.new_message(message).is_err() {
-                                break 'outer;
+                        let channel = {
+                            let channels = self.imp().channels.borrow();
+                            crate::debug!("Got from channel: {}", channel.property::<String>("title"));
+                            if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
+                                log::debug!("Message from a already existing channel");
+                                stored_channel.clone()
+                            } else {
+                                drop(channels);
+                                log::debug!("Got a message from a new channel");
+                                if self.try_emit_by_name::<()>("channel", &[&channel]).is_err() {
+                                    break 'outer;
+                                }
+                                let mut channels_mut = self.imp().channels.borrow_mut();
+                                channels_mut.insert(channel.internal_hash(), channel.clone());
+                                channel
                             }
-                        } else {
-                            log::debug!("Got a message from a new channel");
-                            if self.try_emit_by_name::<()>("channel", &[&channel]).is_err() {
-                                break 'outer;
-                            }
-                            if channel.new_message(message).is_err() {
-                                break 'outer;
-                            }
-                            channels.insert(channel.internal_hash(), channel);
+                        };
+                        if channel.new_message(message).await.is_err() {
+                            break 'outer;
                         }
                     } else {
                         log::trace!("Message is not associated with channel");
@@ -323,11 +387,23 @@ impl Manager {
 
     #[cfg(not(feature = "screenshot"))]
     pub async fn init_channels(&self) {
+        let mut to_load = vec![];
         for contact in self.list_contacts() {
             let channel = Channel::from_contact_or_group(contact, &None, self).await;
             self.emit_by_name::<()>("channel", &[&channel]);
             let mut channels = self.imp().channels.borrow_mut();
+            to_load.push(channel.clone());
             channels.insert(channel.internal_hash(), channel);
+        }
+        for c in to_load {
+            c.load_last(
+                self.imp()
+                    .settings
+                    .int("messages-initial-load")
+                    .try_into()
+                    .unwrap_or(1),
+            )
+            .await;
         }
     }
 }
@@ -348,14 +424,30 @@ impl Manager {
         recipient_addr: impl Into<ServiceAddress>,
         message: impl Into<ContentBody>,
         timestamp: u64,
-    ) -> Result<(), presage::Error> {
+    ) -> Result<(), ApplicationError> {
         log::trace!("`Manager::send_message`start");
+        let meta = Metadata {
+            sender: ServiceAddress {
+                uuid: Some(self.uuid()),
+                phonenumber: None,
+                relay: None,
+            },
+            sender_device: 0,
+            timestamp,
+            needs_receipt: false,
+        };
+        let body = message.into();
         let r = self
             .internal()
-            .send_message(recipient_addr, message, timestamp)
+            .send_message(recipient_addr, body.clone(), timestamp)
             .await;
+        let msg = Content {
+            metadata: meta,
+            body,
+        };
+        self.save_message(msg)?;
         log::trace!("`Manager::send_message`finished");
-        r
+        Ok(r?)
     }
 
     pub(super) async fn send_message_to_group(
@@ -363,14 +455,29 @@ impl Manager {
         recipient_addr: impl IntoIterator<Item = ServiceAddress>,
         message: DataMessage,
         timestamp: u64,
-    ) -> Result<(), presage::Error> {
+    ) -> Result<(), ApplicationError> {
         log::trace!("`Manager::send_message_to_group` start");
+        let meta = Metadata {
+            sender: ServiceAddress {
+                uuid: Some(self.uuid()),
+                phonenumber: None,
+                relay: None,
+            },
+            sender_device: 0,
+            timestamp,
+            needs_receipt: false,
+        };
         let r = self
             .internal()
-            .send_message_to_group(recipient_addr, message, timestamp)
+            .send_message_to_group(recipient_addr, message.clone(), timestamp)
             .await;
+        let msg = Content {
+            metadata: meta,
+            body: ContentBody::DataMessage(message),
+        };
+        self.save_message(msg)?;
         log::trace!("`Manager::send_message_to_group` finish");
-        r
+        Ok(r?)
     }
 
     pub(super) fn get_contact_by_id(

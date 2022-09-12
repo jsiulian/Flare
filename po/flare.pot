@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-12 11:05+0200\n"
+"POT-Creation-Date: 2022-09-12 12:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,52 +34,56 @@ msgstr ""
 msgid "Select a channel"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:60
+#: data/resources/ui/channel_messages.ui:44
+msgid "Load more"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:72
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:62
+#: data/resources/ui/channel_messages.ui:74
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:92
+#: data/resources/ui/channel_messages.ui:104
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:94
+#: data/resources/ui/channel_messages.ui:106
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:122
+#: data/resources/ui/channel_messages.ui:134
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:124
+#: data/resources/ui/channel_messages.ui:136
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:143
+#: data/resources/ui/channel_messages.ui:155
 msgctxt "accessibility"
 msgid "Message input"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:146
+#: data/resources/ui/channel_messages.ui:158
 msgctxt "tooltip"
 msgid "Message input"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:152
+#: data/resources/ui/channel_messages.ui:164
 msgctxt "accessibility"
 msgid "Send"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:154
+#: data/resources/ui/channel_messages.ui:166
 msgctxt "tooltip"
 msgid "Send"
 msgstr ""
@@ -152,6 +156,23 @@ msgstr ""
 msgid "Dowload files automatically"
 msgstr ""
 
+#: data/resources/ui/preferences_window.ui:82
+msgid "Message Storage"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:85
+msgid "Messages to load on startup"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:86
+#: data/resources/ui/preferences_window.ui:102
+msgid "For each channel"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:101
+msgid "Messages to load on request"
+msgstr ""
+
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
@@ -197,6 +218,11 @@ msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr ""
 
+#: data/resources/ui/shortcuts.ui:61
+msgctxt "shortcut window"
+msgid "Load more messages"
+msgstr ""
+
 #: data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Menu"
@@ -218,27 +244,27 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/backend/channel.rs:297
+#: src/backend/channel.rs:398
 msgid "Note to self"
 msgstr ""
 
-#: src/backend/manager.rs:265
+#: src/backend/manager.rs:329
 msgid "You"
 msgstr ""
 
-#: src/backend/message.rs:383
+#: src/backend/message.rs:397
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/backend/message.rs:391
+#: src/backend/message.rs:405
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/backend/message.rs:399
+#: src/backend/message.rs:413
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] ""
@@ -309,19 +335,19 @@ msgstr ""
 msgid "%Y-%m-%d %H:%M"
 msgstr ""
 
-#: src/gui/window.rs:139
+#: src/gui/window.rs:140
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
 
-#: src/gui/window.rs:141
+#: src/gui/window.rs:142
 msgid "Are you sure?"
 msgstr ""
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:191
+#: src/gui/window.rs:192
 msgid "translators"
 msgstr ""

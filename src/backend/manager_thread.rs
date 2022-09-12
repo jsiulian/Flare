@@ -14,6 +14,7 @@ use libsignal_service::sender::AttachmentUploadError;
 use libsignal_service::ServiceAddress;
 use presage::ConfigStore;
 use presage::Manager;
+use presage::MessageStore;
 use presage::Registered;
 use tokio::sync::mpsc;
 use tokio::sync::oneshot;
@@ -78,7 +79,11 @@ impl ManagerThread {
         error: mpsc::Sender<Error>,
     ) -> Option<Self>
     where
-        C: presage::ConfigStore + std::marker::Send + std::marker::Sync + 'static,
+        C: presage::ConfigStore
+            + std::marker::Send
+            + std::marker::Sync
+            + 'static
+            + presage::MessageStore,
     {
         let (sender, receiver) = mpsc::channel(MESSAGE_BOUND);
         std::thread::spawn(move || {
@@ -253,14 +258,14 @@ where
     }
 }
 
-async fn command_loop<C: ConfigStore + 'static>(
+async fn command_loop<C: ConfigStore + 'static + MessageStore>(
     manager: &Manager<C, Registered>,
     mut receiver: mpsc::Receiver<Command>,
     content: mpsc::Sender<Content>,
     error: mpsc::Sender<Error>,
 ) {
     'outer: loop {
-        let msgs = manager.receive_messages().await;
+        let msgs = manager.receive_messages_store().await;
         match msgs {
             Ok(messages) => {
                 futures::pin_mut!(messages);

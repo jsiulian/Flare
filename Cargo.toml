@@ -16,8 +16,9 @@ gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
  
 futures = "0.3.24"
 tokio = { version = "1.20.1", features = ["rt", "macros", "rt-multi-thread", "time"] }
+async-recursion = "1.0.0"
 
-presage = { git = "https://github.com/whisperfish/presage", rev = "3e03d8882119aa370fe5c15dc9c2e31526aef0c4" }
+presage = { git = "https://github.com/Schmiddiii/presage", rev = "228af0d1f2ee3afcaad9814656795946a39b78c5" }
 libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "f9b54478c5413252e810089fd9648b6351bcc3bf" }
 
 async-trait = "0.1.57"

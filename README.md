@@ -30,6 +30,7 @@ A unofficial Signal GTK client.
 - Replying to a message
 - Reacting to a message
 - Attachments
+- Message storage
 - Encrypted storage (As I am not a security-expert, I do not guarantee anything. Read the `Security`-section)
 
 ## Planned Features
@@ -49,7 +50,6 @@ A unofficial Signal GTK client.
 
 This application uses [presage](https://github.com/whisperfish/presage) internally, the current features are not yet implemented for that.
 
-- Message storage
 - Listing groups
 - Avatars
 - Profile name instead of "You" in chats
@@ -70,7 +70,7 @@ After you have already donated to them and still have money left, consider donat
 
 ## Security
 
-To my knowledge, any data this application uses (contacts, linking credentials, ...) are stored encrypted in `~/.local/share/flare` (path will be different in Flatpaks). Messages sent and received by this application are not stored and only used in-memory.
+To my knowledge, any data this application uses (contacts, linking credentials, ...) are stored encrypted in `~/.local/share/flare` (path will be different in Flatpaks). Messages sent and received by this application are stored equivalently.
 
 Even though things are encrypted, I do not guarantee for the security of your data. This application will probably worsen the security compared to official Signal products. Use this application with care when handling sensitive data.
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-12 11:05+0200\n"
+"POT-Creation-Date: 2022-09-12 12:45+0200\n"
 "PO-Revision-Date: 2022-09-10 23:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/flare/flare/it/"
@@ -35,55 +35,60 @@ msgstr "Carica il file"
 msgid "Select a channel"
 msgstr "Seleziona un canale"
 
-#: data/resources/ui/channel_messages.ui:60
+#: data/resources/ui/channel_messages.ui:44
+#, fuzzy
+msgid "Load more"
+msgstr "Carica l’immagine"
+
+#: data/resources/ui/channel_messages.ui:72
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:62
+#: data/resources/ui/channel_messages.ui:74
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:92
+#: data/resources/ui/channel_messages.ui:104
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Rimuovi un allegato"
 
-#: data/resources/ui/channel_messages.ui:94
+#: data/resources/ui/channel_messages.ui:106
 #, fuzzy
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Rimuovi un allegato"
 
-#: data/resources/ui/channel_messages.ui:122
+#: data/resources/ui/channel_messages.ui:134
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Aggiungi un allegato"
 
-#: data/resources/ui/channel_messages.ui:124
+#: data/resources/ui/channel_messages.ui:136
 #, fuzzy
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Aggiungi un allegato"
 
-#: data/resources/ui/channel_messages.ui:143
+#: data/resources/ui/channel_messages.ui:155
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Inserimento del messaggio"
 
-#: data/resources/ui/channel_messages.ui:146
+#: data/resources/ui/channel_messages.ui:158
 #, fuzzy
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Inserimento del messaggio"
 
-#: data/resources/ui/channel_messages.ui:152
+#: data/resources/ui/channel_messages.ui:164
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Invia"
 
-#: data/resources/ui/channel_messages.ui:154
+#: data/resources/ui/channel_messages.ui:166
 #, fuzzy
 msgctxt "tooltip"
 msgid "Send"
@@ -157,6 +162,24 @@ msgstr "Scarica automaticamente i video"
 msgid "Dowload files automatically"
 msgstr "Scarica automaticamente i file"
 
+#: data/resources/ui/preferences_window.ui:82
+msgid "Message Storage"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:85
+msgid "Messages to load on startup"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:86
+#: data/resources/ui/preferences_window.ui:102
+#, fuzzy
+msgid "For each channel"
+msgstr "Seleziona un canale"
+
+#: data/resources/ui/preferences_window.ui:101
+msgid "Messages to load on request"
+msgstr ""
+
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
@@ -202,6 +225,12 @@ msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Focalizza la casella di immissione del testo"
 
+#: data/resources/ui/shortcuts.ui:61
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Load more messages"
+msgstr "Carica l’immagine"
+
 #: data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Menu"
@@ -223,27 +252,27 @@ msgstr "Scorciatoie"
 msgid "About"
 msgstr "Informazioni"
 
-#: src/backend/channel.rs:297
+#: src/backend/channel.rs:398
 msgid "Note to self"
 msgstr "Nota per me"
 
-#: src/backend/manager.rs:265
+#: src/backend/manager.rs:329
 msgid "You"
 msgstr "Tu"
 
-#: src/backend/message.rs:383
+#: src/backend/message.rs:397
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Ha inviato un'immagine"
 msgstr[1] "Ha inviato {} immagini"
 
-#: src/backend/message.rs:391
+#: src/backend/message.rs:405
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Ha inviato un video"
 msgstr[1] "Ha inviato {} video"
 
-#: src/backend/message.rs:399
+#: src/backend/message.rs:413
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Ha inviato un file"
@@ -319,7 +348,7 @@ msgstr "%H:%M"
 msgid "%Y-%m-%d %H:%M"
 msgstr ""
 
-#: src/gui/window.rs:139
+#: src/gui/window.rs:140
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -329,12 +358,12 @@ msgstr ""
 "salvati localmente. Inoltre, chiuderà l'applicazione in modo che possa "
 "essere ricollegata quando la si riapre."
 
-#: src/gui/window.rs:141
+#: src/gui/window.rs:142
 msgid "Are you sure?"
 msgstr "Sei sicuro/sicura?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:191
+#: src/gui/window.rs:192
 msgid "translators"
 msgstr ""

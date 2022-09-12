@@ -12,6 +12,10 @@ impl ChannelMessages {
     pub fn focus_input(&self) {
         self.imp().text_entry.grab_focus();
     }
+
+    pub fn load_more(&self) {
+        self.imp().handle_more();
+    }
 }
 
 pub mod imp {
@@ -31,6 +35,7 @@ pub mod imp {
     use gdk_pixbuf::glib::ParamSpecObject;
     use gdk_pixbuf::glib::SignalHandlerId;
     use gdk_pixbuf::glib::Value;
+    use gio::Settings;
     use glib::subclass::InitializingObject;
     use gtk::builders::FileChooserNativeBuilder;
     use gtk::glib;
@@ -44,13 +49,14 @@ pub mod imp {
     use crate::backend::Contact;
     use crate::backend::Manager;
     use crate::backend::Message;
+    use crate::config::APP_ID;
     use crate::gui::attachment::Attachment;
     use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::message_item::MessageItem;
     use crate::gui::text_entry::TextEntry;
     use crate::gui::utility::Utility;
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate)]
     #[template(resource = "/ui/channel_messages.ui")]
     pub struct ChannelMessages {
         #[template_child]
@@ -66,10 +72,48 @@ pub mod imp {
         manager: RefCell<Option<Manager>>,
         active_channel: RefCell<Option<Channel>>,
         last_signal_handler: RefCell<Option<SignalHandlerId>>,
+
+        pub(super) settings: Settings,
+    }
+
+    impl Default for ChannelMessages {
+        fn default() -> Self {
+            Self {
+                list: Default::default(),
+                box_attachments: Default::default(),
+                text_entry: Default::default(),
+                attachments: Default::default(),
+                reply_message: Default::default(),
+                manager: Default::default(),
+                active_channel: Default::default(),
+                last_signal_handler: Default::default(),
+                settings: Settings::new(APP_ID),
+            }
+        }
     }
 
     #[gtk::template_callbacks]
     impl ChannelMessages {
+        #[template_callback]
+        pub(super) fn handle_more(&self) {
+            log::trace!("More messages were requested in the UI");
+            let channel = self.active_channel.borrow();
+            if let Some(channel) = channel.as_ref() {
+                let obj = self.instance();
+                let ctx = glib::MainContext::default();
+                let to_load = self.settings.int("messages-request-load");
+                ctx.spawn_local(glib::clone!(@strong channel, @strong obj => async move {
+                    let mut msgs = channel.load_last(to_load.try_into().unwrap_or(1)).await;
+                    msgs.reverse();
+                    for msg in msgs {
+                        obj.imp().prepend_message(&msg);
+                    }
+                }));
+            } else {
+                log::warn!("More messages were requested while not being focused on a channel. This should not happen.");
+            }
+        }
+
         #[template_callback]
         fn remove_reply(&self) {
             log::trace!("Unsetting reply message");
@@ -231,14 +275,35 @@ pub mod imp {
             let widget = MessageItem::new(message);
             self.list.append(&widget);
             let obj = self.instance();
+            self.update_show_name_of(&widget);
+            widget.connect_local(
+                "reply",
+                false,
+                clone!(@strong obj => move |args| {
+                    let msg = args[1]
+                        .get::<Message>()
+                        .expect("Type of signal `reply` of `MessageItem` to be `Message`.");
+                    obj.set_property("reply-message", &msg);
+                    None
+                }),
+            );
+        }
+
+        fn update_show_name_of(&self, widget: &MessageItem) {
+            let obj = self.instance();
+            let message: Message = widget.property("message");
             let message_sender_title = message
                 .property::<Option<Contact>>("sender")
                 .and_then(|s| s.property::<Option<String>>("title"));
             let last_message = obj
                 .property::<Option<Channel>>("active-channel")
+<<<<<<< HEAD
+                .and_then(|c| c.previous_message_to(&message))
+=======
                 .and_then(|c| c.previous_message_to(message));
             let last_message_sender_title = last_message
                 .as_ref()
+>>>>>>> master
                 .and_then(|m| m.property::<Option<Contact>>("sender"))
                 .and_then(|s| s.property::<Option<String>>("title"));
             let sent = message.property::<u64>("sent");
@@ -250,6 +315,22 @@ pub mod imp {
                 last_message_sender_title != message_sender_title
                     || sent > last_message_sent + MESSAGE_SENT_SHOW_NAME_DURATION,
             );
+        }
+
+        fn prepend_message(&self, message: &Message) {
+            let widget = MessageItem::new(message);
+            self.list.insert(&widget, 0);
+            self.update_show_name_of(&widget);
+            if let Some(previous_first) = self.list.row_at_index(1) {
+                self.update_show_name_of(
+                    &previous_first
+                        .child()
+                        .expect("Message list row to have `MessageItem` child.")
+                        .dynamic_cast()
+                        .expect("Message list row to be `MessageItem`."),
+                );
+            }
+            let obj = self.instance();
             widget.connect_local(
                 "reply",
                 false,

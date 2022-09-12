@@ -3,9 +3,12 @@ use std::cell::RefCell;
 use gdk_pixbuf::{glib::Object, prelude::ObjectExt};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use libsignal_service::{content::Reaction, ServiceAddress};
-use presage::prelude::{
-    proto::{data_message::Quote, sync_message::Sent},
-    Content, ContentBody, DataMessage, SyncMessage,
+use presage::{
+    prelude::{
+        proto::{data_message::Quote, sync_message::Sent},
+        Content, ContentBody, DataMessage, SyncMessage,
+    },
+    MessageIdentity,
 };
 
 use crate::backend::{Attachment, Channel, Contact};
@@ -172,8 +175,8 @@ impl Message {
         self.imp().data.borrow().clone().and_then(|d| d.timestamp)
     }
 
-    pub(super) fn quote_timestamp(&self) -> Option<u64> {
-        self.data().and_then(|d| d.quote).and_then(|q| q.id)
+    pub(super) fn quote(&self) -> Option<Quote> {
+        self.data().and_then(|d| d.quote)
     }
 
     pub fn set_quote(&self, msg: Message) {
@@ -259,6 +262,17 @@ impl Message {
             data.attachments.push(pointer.clone());
         }
         Ok(())
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.property::<Option<String>>("body").is_none() && self.attachments().is_empty()
+    }
+
+    pub fn id(&self) -> Option<MessageIdentity> {
+        Some(MessageIdentity(
+            self.property::<Contact>("sender").address()?.uuid?,
+            self.timestamp()?,
+        ))
     }
 }
 

@@ -6,6 +6,7 @@ use std::{
 use async_trait::async_trait;
 use encrypted_sled::IVec;
 use libsignal_service::{
+    content::ContentBody,
     models::Contact,
     prelude::{
         protocol::{
@@ -13,17 +14,24 @@ use libsignal_service::{
             PreKeyStore, ProtocolAddress, SessionRecord, SessionStore, SessionStoreExt,
             SignalProtocolError, SignedPreKeyRecord, SignedPreKeyStore,
         },
-        Uuid,
+        ProtobufMessage, Uuid,
     },
+    proto::{sync_message::Sent, GroupContextV2, SyncMessage},
 };
 use log::{debug, trace, warn};
 
-use presage::{ConfigStore, ContactsStore, Error, Registered, StateStore};
+use presage::{
+    ConfigStore, ContactsStore, ContentProto, Error, MessageIdentity, MessageStore, Registered,
+    StateStore,
+};
 
 const SLED_KEY_REGISTRATION: &str = "registration";
 const SLED_KEY_CONTACTS: &str = "contacts";
 
 const SLED_TREE_SESSIONS: &str = "sessions";
+const SLED_TREE_MESSAGES: &str = "messages";
+const SLED_TREE_CONTACTS_TO_MESSAGES: &str = "contacts-to-messages";
+const SLED_TREE_GROUPS_TO_MESSAGES: &str = "groups-to-messages";
 
 #[derive(Debug, Clone)]
 pub struct EncryptedSledConfigStore<E> {
@@ -444,5 +452,134 @@ impl<E: encrypted_sled::Encryption> IdentityKeyStore for EncryptedSledConfigStor
             SignalProtocolError::InvalidState("get_identity", "failed to read identity".into())
         })?;
         Ok(buf.map(|ref b| IdentityKey::decode(b).unwrap()))
+    }
+}
+
+fn prefix_merge(_key: &[u8], old_value: Option<&[u8]>, merged_bytes: &[u8]) -> Option<Vec<u8>> {
+    let mut ret = merged_bytes.to_vec();
+
+    ret.extend_from_slice(old_value.unwrap_or_default());
+
+    Some(ret)
+}
+
+impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledConfigStore<E> {
+    fn save_message(&mut self, message: libsignal_service::prelude::Content) -> Result<(), Error> {
+        let id = MessageIdentity::try_from(&message)?;
+        log::trace!("Storing a message with id: {:?}", id);
+        let sender = id.0;
+        let timestamp = id.1;
+
+        let group_master_key = match message.body {
+            ContentBody::DataMessage(ref msg)
+            | ContentBody::SynchronizeMessage(SyncMessage {
+                sent:
+                    Some(Sent {
+                        message: Some(ref msg),
+                        ..
+                    }),
+                ..
+            }) => msg.group_v2.clone().and_then(|g| g.master_key),
+            _ => None,
+        };
+
+        let tree_messages = self
+            .db
+            .try_read()
+            .expect("poisoned mutex")
+            .open_tree(SLED_TREE_MESSAGES)?;
+        let tree_contacts_to_messages = self
+            .db
+            .try_read()
+            .expect("poisoned mutex")
+            .open_tree(SLED_TREE_CONTACTS_TO_MESSAGES)?;
+        let tree_groups_to_messages = self
+            .db
+            .try_read()
+            .expect("poisoned mutex")
+            .open_tree(SLED_TREE_GROUPS_TO_MESSAGES)?;
+        tree_contacts_to_messages.set_merge_operator(prefix_merge);
+        tree_groups_to_messages.set_merge_operator(prefix_merge);
+
+        let key_sender = sender.as_bytes();
+        let key_timestamp = timestamp.to_ne_bytes();
+        let key = [&key_sender[..], &key_timestamp[..]].concat();
+        let value = ContentProto::from_content(message);
+
+        tree_messages.insert(key, value.encode_to_vec())?;
+        let id_bytes: [u8; 24] = id.into();
+        if let Some(group) = group_master_key {
+            log::trace!("Storing message to group: {:?}", group);
+            tree_groups_to_messages.merge(group, id_bytes)?;
+        } else {
+            log::trace!("Storing message to contact: {:?}", sender);
+            tree_contacts_to_messages.merge(sender.as_bytes(), id_bytes)?;
+        }
+        Ok(())
+    }
+
+    fn messages(&self) -> Result<Vec<libsignal_service::prelude::Content>, Error> {
+        Ok(self
+            .db
+            .read()
+            .expect("poisoned mutex")
+            .open_tree(SLED_TREE_MESSAGES)?
+            .iter()
+            .filter_map(Result::ok)
+            .filter_map(|(_key, buf)| ContentProto::decode(&*buf).ok())
+            .map(|c| c.into_content())
+            .collect())
+    }
+
+    fn message_by_identity(
+        &self,
+        id: &MessageIdentity,
+    ) -> Result<Option<libsignal_service::prelude::Content>, Error> {
+        let sender = id.0;
+        let timestamp = id.1;
+
+        let tree = self
+            .db
+            .try_read()
+            .expect("poisoned mutex")
+            .open_tree(SLED_TREE_MESSAGES)?;
+        let key_sender = sender.as_bytes();
+        let key_timestamp = timestamp.to_ne_bytes();
+        let key = [&key_sender[..], &key_timestamp[..]].concat();
+        let val = tree.get(key)?;
+        if let Some(val) = val {
+            let proto = ContentProto::decode(&*val)?;
+            Ok(Some(proto.into_content()))
+        } else {
+            Ok(None)
+        }
+    }
+
+    fn messages_by_contact(&self, contact: &Uuid) -> Result<Vec<MessageIdentity>, Error> {
+        crate::trace!("Query messages by contact: {:?}", contact);
+        Ok(self
+            .db
+            .read()
+            .expect("poisoned mutex")
+            .open_tree(SLED_TREE_CONTACTS_TO_MESSAGES)?
+            .get(contact.as_bytes())?
+            .unwrap_or_default()
+            .chunks_exact(24)
+            .map(|c| MessageIdentity::from(<[u8; 24]>::try_from(c).unwrap()))
+            .collect())
+    }
+
+    fn messages_by_group(&self, group: &GroupContextV2) -> Result<Vec<MessageIdentity>, Error> {
+        crate::trace!("Query messages by group: {:?}", group.master_key());
+        Ok(self
+            .db
+            .read()
+            .expect("poisoned mutex")
+            .open_tree(SLED_TREE_GROUPS_TO_MESSAGES)?
+            .get(group.master_key())?
+            .unwrap_or_default()
+            .chunks_exact(24)
+            .map(|c| MessageIdentity::from(<[u8; 24]>::try_from(c).unwrap()))
+            .collect())
     }
 }
