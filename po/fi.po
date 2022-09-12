@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-12 12:52+0200\n"
-"PO-Revision-Date: 2022-09-08 16:16+0000\n"
+"PO-Revision-Date: 2022-09-13 13:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/"
-">\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,19 +36,18 @@ msgid "Select a channel"
 msgstr "Valitse kanava"
 
 #: data/resources/ui/channel_messages.ui:44
-#, fuzzy
 msgid "Load more"
-msgstr "Lataa kuva"
+msgstr "Lataa lisää"
 
 #: data/resources/ui/channel_messages.ui:72
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Poista vastaus"
 
 #: data/resources/ui/channel_messages.ui:74
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Poista vastaus"
 
 #: data/resources/ui/channel_messages.ui:104
 msgctxt "accessibility"
@@ -56,7 +55,6 @@ msgid "Remove an attachment"
 msgstr "Poista liite"
 
 #: data/resources/ui/channel_messages.ui:106
-#, fuzzy
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Poista liite"
@@ -67,7 +65,6 @@ msgid "Add an attachment"
 msgstr "Lisää liite"
 
 #: data/resources/ui/channel_messages.ui:136
-#, fuzzy
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Lisää liite"
@@ -78,7 +75,6 @@ msgid "Message input"
 msgstr "Viestin syöttö"
 
 #: data/resources/ui/channel_messages.ui:158
-#, fuzzy
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Viestin syöttö"
@@ -89,7 +85,6 @@ msgid "Send"
 msgstr "Lähetä"
 
 #: data/resources/ui/channel_messages.ui:166
-#, fuzzy
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Lähetä"
@@ -128,15 +123,15 @@ msgstr "Vastaa"
 
 #: data/resources/ui/message_item.ui:209
 msgid "React"
-msgstr ""
+msgstr "Reagoi"
 
 #: data/resources/ui/preferences_window.ui:9
 msgid "General"
-msgstr ""
+msgstr "Yleiset"
 
 #: data/resources/ui/preferences_window.ui:13
 msgid "Linking"
-msgstr ""
+msgstr "Linkitys"
 
 #: data/resources/ui/preferences_window.ui:16
 msgid "Device Name"
@@ -160,82 +155,80 @@ msgstr "Lataa videoita automaattisesti"
 
 #: data/resources/ui/preferences_window.ui:65
 msgid "Dowload files automatically"
-msgstr ""
+msgstr "Lataa tiedostot automaattisesti"
 
 #: data/resources/ui/preferences_window.ui:82
-#, fuzzy
 msgid "Message Storage"
-msgstr "Viestin syöttö"
+msgstr "Viestien tallennus"
 
 #: data/resources/ui/preferences_window.ui:85
 msgid "Number of messages to load on startup"
-msgstr ""
+msgstr "Käynnistyksen yhteydessä ladattavien viestien määrä"
 
 #: data/resources/ui/preferences_window.ui:86
 #: data/resources/ui/preferences_window.ui:102
 #, fuzzy
 msgid "Per channel"
-msgstr "Valitse kanava"
+msgstr "Kanavaa kohden"
 
 #: data/resources/ui/preferences_window.ui:101
 msgid "Number of messages to load on request"
-msgstr ""
+msgstr "Pyynnöstä ladattavien viestien määrä"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Yleiset"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "Näytä pikanäppäimet"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "Siirry asetuksiin"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "Siirry Tietoja-sivulle"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "Avaa valikko"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "Kanavat"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "Siirry kanavalle 1...9"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "Lataa liite"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "Tarkenna tekstinsyöttöruutu"
 
 #: data/resources/ui/shortcuts.ui:61
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr "Lataa kuva"
+msgstr "Lataa lisää viestejä"
 
 #: data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Valikko"
 
 #: data/resources/ui/window.ui:111
 msgid "Settings"
@@ -243,11 +236,11 @@ msgstr "Asetukset"
 
 #: data/resources/ui/window.ui:115
 msgid "Unlink"
-msgstr ""
+msgstr "Poista linkitys"
 
 #: data/resources/ui/window.ui:119
 msgid "Keybindings"
-msgstr ""
+msgstr "Näppäimistösidokset"
 
 #: data/resources/ui/window.ui:123
 msgid "About"
@@ -270,55 +263,61 @@ msgstr[1] "{} kuvaa lähetetty"
 #: src/backend/message.rs:405
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "On lähettänyt videon"
+msgstr[1] "On lähettänyt {} videota"
 
 #: src/backend/message.rs:413
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "On lähettänyt tiedoston"
+msgstr[1] "On lähettänyt {} tiedostoa"
 
 #: src/error.rs:74
 msgid "I/O Error."
-msgstr ""
+msgstr "Syöttö-/tulostevirhe."
 
 #: src/error.rs:79
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "Internet-yhteyttä ei näytä olevan saatavilla."
 
 #: src/error.rs:84
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "Yhteydenpito Libsecretin kanssa epäonnistui."
 
 #: src/error.rs:89
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"Taustatietokanta epäonnistui. Käynnistä sovellus uudelleen tai poista "
+"tietokanta ja linkitä sovellus uudelleen."
 
 #: src/error.rs:94
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"Sinulla ei näytä olevan valtuutusta Signaliin. Poista tietokanta ja linkitä "
+"sovellus uudelleen."
 
 #: src/error.rs:99
 msgid "Sending a message failed."
-msgstr ""
+msgstr "Viestin lähettäminen epäonnistui."
 
 #: src/error.rs:104
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "Viestin vastaanotto epäonnistui."
 
 #: src/error.rs:109
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"Jotain odottamatonta tapahtui signaalin taustajärjestelmän kanssa. Yritä "
+"myöhemmin uudelleen."
 
 #: src/error.rs:114
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "Sovellus näyttää olevan väärin konfiguroitu."
 
 #: src/error.rs:124
 msgid "Please check your internet connection."
@@ -326,23 +325,23 @@ msgstr "Tarkista internetyhteytesi."
 
 #: src/error.rs:128
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "Poista tietokanta ja yhdistä laite uudelleen."
 
 #: src/error.rs:135
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "Tietokannan polku kohdassa {} ei ole kansiota."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:36
 msgid "%H:%M"
-msgstr ""
+msgstr "%H.%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:39
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%d.%m.%Y %H.%M"
 
 #: src/gui/window.rs:140
 msgid ""
@@ -350,6 +349,9 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Tämä poistaa laitteen yhteyden ja poistaa kaikki paikallisesti tallennetut "
+"tiedot. Tämä sulkee myös sovelluksen niin, että se voidaan yhdistää "
+"uudelleen, kun se avataan uudelleen."
 
 #: src/gui/window.rs:142
 msgid "Are you sure?"
