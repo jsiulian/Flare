@@ -127,6 +127,7 @@ pub mod imp {
                 }
             });
         }
+
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![

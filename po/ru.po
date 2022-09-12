@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-12 11:05+0200\n"
+"POT-Creation-Date: 2022-09-12 12:45+0200\n"
 "PO-Revision-Date: 2022-08-24 21:15+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
@@ -35,58 +35,63 @@ msgstr "Загрузить файл"
 msgid "Select a channel"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:60
+#: data/resources/ui/channel_messages.ui:44
+#, fuzzy
+msgid "Load more"
+msgstr "Загрузить изображение"
+
+#: data/resources/ui/channel_messages.ui:72
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:62
+#: data/resources/ui/channel_messages.ui:74
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:92
+#: data/resources/ui/channel_messages.ui:104
 #, fuzzy
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Вложения"
 
-#: data/resources/ui/channel_messages.ui:94
+#: data/resources/ui/channel_messages.ui:106
 #, fuzzy
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Вложения"
 
-#: data/resources/ui/channel_messages.ui:122
+#: data/resources/ui/channel_messages.ui:134
 #, fuzzy
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Вложения"
 
-#: data/resources/ui/channel_messages.ui:124
+#: data/resources/ui/channel_messages.ui:136
 #, fuzzy
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Вложения"
 
-#: data/resources/ui/channel_messages.ui:143
+#: data/resources/ui/channel_messages.ui:155
 #, fuzzy
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Сообщение"
 
-#: data/resources/ui/channel_messages.ui:146
+#: data/resources/ui/channel_messages.ui:158
 #, fuzzy
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Сообщение"
 
-#: data/resources/ui/channel_messages.ui:152
+#: data/resources/ui/channel_messages.ui:164
 msgctxt "accessibility"
 msgid "Send"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:154
+#: data/resources/ui/channel_messages.ui:166
 msgctxt "tooltip"
 msgid "Send"
 msgstr ""
@@ -159,6 +164,24 @@ msgstr "Загружать видео автоматически"
 msgid "Dowload files automatically"
 msgstr "Загружать файлы автоматически"
 
+#: data/resources/ui/preferences_window.ui:82
+#, fuzzy
+msgid "Message Storage"
+msgstr "Сообщение"
+
+#: data/resources/ui/preferences_window.ui:85
+msgid "Messages to load on startup"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:86
+#: data/resources/ui/preferences_window.ui:102
+msgid "For each channel"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:101
+msgid "Messages to load on request"
+msgstr ""
+
 #: data/resources/ui/shortcuts.ui:11
 #, fuzzy
 msgctxt "shortcut window"
@@ -207,6 +230,12 @@ msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr ""
 
+#: data/resources/ui/shortcuts.ui:61
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Load more messages"
+msgstr "Загрузить изображение"
+
 #: data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Menu"
@@ -229,27 +258,27 @@ msgstr ""
 msgid "About"
 msgstr "О Приложении"
 
-#: src/backend/channel.rs:297
+#: src/backend/channel.rs:398
 msgid "Note to self"
 msgstr "Заметка для себя"
 
-#: src/backend/manager.rs:265
+#: src/backend/manager.rs:329
 msgid "You"
 msgstr "Вы"
 
-#: src/backend/message.rs:383
+#: src/backend/message.rs:397
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Отправить изображение"
 msgstr[1] "Отправить {} изображений"
 
-#: src/backend/message.rs:391
+#: src/backend/message.rs:405
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Отправлено видео"
 msgstr[1] "Отправлено {} видео"
 
-#: src/backend/message.rs:399
+#: src/backend/message.rs:413
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Оправить файл"
@@ -326,7 +355,7 @@ msgstr ""
 msgid "%Y-%m-%d %H:%M"
 msgstr ""
 
-#: src/gui/window.rs:139
+#: src/gui/window.rs:140
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -336,12 +365,12 @@ msgstr ""
 "также закроет приложение, чтобы его можно было повторно связать при "
 "повторном открытии."
 
-#: src/gui/window.rs:141
+#: src/gui/window.rs:142
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:191
+#: src/gui/window.rs:192
 msgid "translators"
 msgstr "Давид Лапшин <ddaudix@gmail.com>"

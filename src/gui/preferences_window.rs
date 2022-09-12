@@ -43,6 +43,11 @@ pub mod imp {
         #[template_child]
         switch_download_files: TemplateChild<gtk::Switch>,
 
+        #[template_child]
+        spin_initial_message_loading: TemplateChild<gtk::SpinButton>,
+        #[template_child]
+        spin_request_message_loading: TemplateChild<gtk::SpinButton>,
+
         settings: Settings,
     }
 
@@ -76,6 +81,22 @@ pub mod imp {
                 )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
+            self.settings
+                .bind(
+                    "messages-initial-load",
+                    &self.spin_initial_message_loading.get(),
+                    "value",
+                )
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
+            self.settings
+                .bind(
+                    "messages-request-load",
+                    &self.spin_request_message_loading.get(),
+                    "value",
+                )
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
         }
     }
 
@@ -92,6 +113,8 @@ pub mod imp {
                 switch_download_images: TemplateChild::default(),
                 switch_download_videos: TemplateChild::default(),
                 switch_download_files: TemplateChild::default(),
+                spin_initial_message_loading: TemplateChild::default(),
+                spin_request_message_loading: TemplateChild::default(),
             }
         }
 

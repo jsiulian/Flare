@@ -36,10 +36,22 @@
           <object class="GtkScrolledWindow">
             <property name="hscrollbar-policy">never</property>
             <child>
-              <object class="GtkListBox" id="list">
-                <signal handler="handle_row_activated" swapped="true" name="row-activated"/>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkButton">
+                    <signal handler="handle_more" swapped="true" name="clicked"/>
+                    <property name="label" translatable="yes">Load more</property>
+                    <property name="hexpand">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkListBox" id="list">
+                    <signal handler="handle_row_activated" swapped="true" name="row-activated"/>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

@@ -112,6 +112,18 @@ pub mod imp {
                         .get::<Option<Channel>>()
                         .expect("Property `channel` of `ChannelItem` has to be of type `Channel`");
                     if let Some(chan) = &chan {
+                        chan.connect_notify_local(
+                            Some("last-message"),
+                            clone!(@strong obj => move |_, _| {
+                                log::trace!("Channel got item, invalidate sort");
+                                obj
+                                    .parent()
+                                    .expect("`ChannelItem` to have a parent")
+                                    .dynamic_cast::<gtk::ListBoxRow>()
+                                    .expect("Parent of `ChannelItem` to be `ListBoxRow`")
+                                    .changed();
+                            }),
+                        );
                         chan.connect_local(
                             "message",
                             false,

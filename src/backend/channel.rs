@@ -7,9 +7,14 @@ use std::{
 use gdk_pixbuf::{glib::Object, prelude::ObjectExt};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use libsignal_service::proto::DataMessage;
-use presage::prelude::{GroupContextV2, GroupMasterKey, ServiceAddress};
+use presage::{
+    prelude::{GroupContextV2, GroupMasterKey, ServiceAddress},
+    MessageIdentity,
+};
 
 use super::{Contact, Manager, Message};
+
+const EMPTY_EMOJI: &String = &String::new();
 
 gtk::glib::wrapper! {
     pub struct Channel(ObjectSubclass<imp::Channel>);
@@ -38,19 +43,89 @@ impl Channel {
             }) {
                 return channel.clone();
             }
+
             let group = manager.get_group_v2(master_key).await;
             if let Ok(group) = group {
                 s.imp().group.swap(&RefCell::new(Some(group)));
+                s.imp().unloaded_messages.swap(&RefCell::new(
+                    manager
+                        .messages_by_group(group_context_v2)
+                        .unwrap_or_default(),
+                ));
                 s.imp()
                     .group_context
                     .swap(&RefCell::new(Some(group_context_v2.clone())));
+                s.imp().unloaded_messages.swap(&RefCell::new(
+                    manager
+                        .messages_by_group(group_context_v2)
+                        .unwrap_or_default(),
+                ));
             } else {
+                if let Some(ref uuid) = contact.address().and_then(|a| a.uuid) {
+                    s.imp().unloaded_messages.swap(&RefCell::new(
+                        manager.messages_by_contact(uuid).unwrap_or_default(),
+                    ));
+                }
                 s.imp().contact.swap(&RefCell::new(Some(contact)));
             }
         } else {
+            if let Some(ref uuid) = contact.address().and_then(|a| a.uuid) {
+                s.imp().unloaded_messages.swap(&RefCell::new(
+                    manager.messages_by_contact(uuid).unwrap_or_default(),
+                ));
+            }
+
             s.imp().contact.swap(&RefCell::new(Some(contact)));
         }
         s
+    }
+
+    #[async_recursion::async_recursion(?Send)]
+    pub async fn load_last(&self, number: usize) -> Vec<Message> {
+        log::trace!(
+            "Loading last messages for contact: {}",
+            self.property::<String>("title")
+        );
+        let to_load = {
+            let mut unloaded_msgs = self.imp().unloaded_messages.borrow_mut();
+            if unloaded_msgs.len() <= number {
+                unloaded_msgs.drain(..).collect::<Vec<_>>()
+            } else {
+                unloaded_msgs.drain(..number).collect::<Vec<_>>()
+            }
+        };
+
+        if to_load.is_empty() {
+            return vec![];
+        }
+
+        let mut empty = 0;
+        let mut results = vec![];
+        let manager = self.property::<Manager>("manager");
+        for msg_id in to_load {
+            if let Ok(Some(msg)) = manager.message_by_id(&msg_id).await {
+                if !msg.is_empty() {
+                    {
+                        let mut messages = self.imp().messages.borrow_mut();
+                        messages.insert(0, msg.clone());
+                    }
+                    results.insert(0, msg.clone());
+                    self.notify("last-message");
+                } else {
+                    empty += 1
+                }
+                // TODO: Error?
+                let _ = self.do_new_message(&msg).await;
+            }
+        }
+
+        let mut previous = if empty != 0 {
+            self.load_last(empty).await
+        } else {
+            vec![]
+        };
+        previous.append(&mut results);
+        previous
     }
 
     pub(super) fn internal_hash(&self) -> u64 {
@@ -63,34 +138,41 @@ impl Channel {
         self.imp().group_context.borrow().clone()
     }
 
-    pub(super) fn new_message(&self, message: Message) -> Result<(), gtk::glib::error::BoolError> {
+    pub(super) async fn do_new_message(
+        &self,
+        message: &Message,
+    ) -> Result<(), gtk::glib::error::BoolError> {
         if let Some(body) = message.property::<Option<String>>("body") {
             crate::trace!(
                 "Channel {} got new message: {}",
                 self.property::<String>("title"),
                 body
             );
-            if let Some(quote_timestamp) = message.quote_timestamp() {
-                let quoted_msg = self
-                    .messages()
-                    .into_iter()
-                    .find(|m| m.timestamp() == Some(quote_timestamp));
-                if let Some(quoted_msg) = quoted_msg {
-                    crate::trace!(
-                        "Message {} quotes other message {}",
-                        body,
-                        quoted_msg
-                            .property::<Option<String>>("body")
-                            .unwrap_or_else(|| "".to_string())
-                    );
-                    message.set_quote(quoted_msg);
-                } else {
-                    crate::warn!("Message quotes another message that could not be found",);
+            if let Some(quote) = message.quote() {
+                if let Ok(id) = MessageIdentity::try_from(&quote) {
+                    if let Ok(Some(quoted_msg)) =
+                        self.property::<Manager>("manager").message_by_id(&id).await
+                    {
+                        crate::trace!(
+                            "Message {} quotes other message {}",
+                            body,
+                            quoted_msg
+                                .property::<Option<String>>("body")
+                                .unwrap_or_else(|| "".to_string())
+                        );
+                        message.set_quote(quoted_msg);
+                    }
+                }
+            }
+            if let Some(id) = message.id() {
+                if let Some(reactions) = self.imp().pending_reactions.borrow_mut().remove(&id) {
+                    log::trace!("Adding pending reactions to message: {}", reactions);
+                    message.react(reactions);
                 }
             }
         }
         if let Some(reaction) = message.reaction() {
-            let reaction_emoji = reaction.emoji.unwrap_or_else(|| "".to_string());
+            let reaction_emoji = reaction.emoji.as_ref().unwrap_or(EMPTY_EMOJI);
             crate::trace!(
                 "Channel {} got new reaction: {}",
                 self.property::<String>("title"),
@@ -109,11 +191,27 @@ impl Channel {
                 );
                 reacted_msg.react(&reaction_emoji);
             } else {
-                crate::warn!("Message reacted to another message that could not be found",);
+                crate::trace!("Message reacted to another message that could not be found yet. Inserting into pending reactions", );
+                let mut pending_reactions = self.imp().pending_reactions.borrow_mut();
+                let entry = pending_reactions
+                    .entry(
+                        (&reaction)
+                            .try_into()
+                            .expect("Reacted message to have UUID"),
+                    )
+                    .or_insert_with(|| "".to_string());
+                entry.push_str(reaction_emoji);
             }
         }
-        if message.property::<Option<String>>("body").is_some() || !message.attachments().is_empty()
-        {
+        Ok(())
+    }
+
+    pub(super) async fn new_message(
+        &self,
+        message: Message,
+    ) -> Result<(), gtk::glib::error::BoolError> {
+        self.do_new_message(&message).await?;
+        if !message.is_empty() {
             self.imp().messages.borrow_mut().push(message.clone());
             self.notify("last-message");
             self.try_emit_by_name::<()>("message", &[&message])?;
@@ -213,8 +311,9 @@ mod imp {
     use presage::{
         libsignal_service::groups_v2::Group,
         prelude::{GroupContextV2, Uuid},
+        MessageIdentity,
     };
-    use std::cell::RefCell;
+    use std::{cell::RefCell, collections::HashMap};
 
     use crate::backend::{Contact, Manager, Message};
 
@@ -226,6 +325,8 @@ mod imp {
 
         pub(super) manager: RefCell<Option<Manager>>,
         pub(super) messages: RefCell<Vec<Message>>,
+        pub(super) unloaded_messages: RefCell<Vec<MessageIdentity>>,
+        pub(super) pending_reactions: RefCell<HashMap<MessageIdentity, String>>,
     }
 
     impl std::hash::Hash for Channel {

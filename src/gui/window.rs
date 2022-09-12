@@ -17,6 +17,7 @@ impl Window {
         app.set_accels_for_action("win.show-help-overlay", &["<Control>question"]);
         app.set_accels_for_action("win.about", &["F1"]);
         app.set_accels_for_action("channel-messages.activate-input", &["<Control>i"]);
+        app.set_accels_for_action("channel-messages.load-more", &["<Control>l"]);
         for i in 1..=9 {
             app.set_accels_for_action(
                 &format!("channel-list.activate-channel({})", i),
@@ -209,9 +210,16 @@ pub mod imp {
                     channel_messages.focus_input();
                 }),
             );
+            let action_load_more = SimpleAction::new("load-more", None);
+            action_load_more.connect_activate(
+                clone!(@strong self.channel_messages as channel_messages => move |_, _| {
+                    channel_messages.load_more();
+                }),
+            );
             let actions = SimpleActionGroup::new();
             obj.insert_action_group("channel-messages", Some(&actions));
             actions.add_action(&action_activate_input);
+            actions.add_action(&action_load_more);
 
             let action_activate_channel =
                 SimpleAction::new("activate-channel", Some(&i32::static_variant_type()));

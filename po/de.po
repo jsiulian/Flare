@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-12 11:05+0200\n"
+"POT-Creation-Date: 2022-09-12 12:45+0200\n"
 "PO-Revision-Date: 2022-09-08 16:16+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -35,52 +35,56 @@ msgstr "Datei laden"
 msgid "Select a channel"
 msgstr "Wählen Sie einen Kanal aus"
 
-#: data/resources/ui/channel_messages.ui:60
+#: data/resources/ui/channel_messages.ui:44
+msgid "Load more"
+msgstr "Mehr laden"
+
+#: data/resources/ui/channel_messages.ui:72
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Antwort entfernen"
 
-#: data/resources/ui/channel_messages.ui:62
+#: data/resources/ui/channel_messages.ui:74
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Antwort entfernen"
 
-#: data/resources/ui/channel_messages.ui:92
+#: data/resources/ui/channel_messages.ui:104
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:94
+#: data/resources/ui/channel_messages.ui:106
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:122
+#: data/resources/ui/channel_messages.ui:134
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:124
+#: data/resources/ui/channel_messages.ui:136
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:143
+#: data/resources/ui/channel_messages.ui:155
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:146
+#: data/resources/ui/channel_messages.ui:158
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:152
+#: data/resources/ui/channel_messages.ui:164
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Senden"
 
-#: data/resources/ui/channel_messages.ui:154
+#: data/resources/ui/channel_messages.ui:166
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Senden"
@@ -156,6 +160,23 @@ msgstr "Videos automatisch herunterladen"
 msgid "Dowload files automatically"
 msgstr "Dateien automatisch herunterladen"
 
+#: data/resources/ui/preferences_window.ui:82
+msgid "Message Storage"
+msgstr "Nachrichten-Speicher"
+
+#: data/resources/ui/preferences_window.ui:85
+msgid "Messages to load on startup"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:86
+#: data/resources/ui/preferences_window.ui:102
+msgid "For each channel"
+msgstr "Für jeden Kanal"
+
+#: data/resources/ui/preferences_window.ui:101
+msgid "Messages to load on request"
+msgstr ""
+
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
@@ -201,6 +222,11 @@ msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Die Texteingabe fokussieren"
 
+#: data/resources/ui/shortcuts.ui:61
+msgctxt "shortcut window"
+msgid "Load more messages"
+msgstr "Mehr Nachrichten laden"
+
 #: data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Menu"
@@ -222,27 +248,27 @@ msgstr "Tastaturkürzel"
 msgid "About"
 msgstr "Info"
 
-#: src/backend/channel.rs:297
+#: src/backend/channel.rs:398
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:265
+#: src/backend/manager.rs:329
 msgid "You"
 msgstr "Du"
 
-#: src/backend/message.rs:383
+#: src/backend/message.rs:397
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Hat ein Bild gesendet"
 msgstr[1] "Hat {} Bilder gesendet"
 
-#: src/backend/message.rs:391
+#: src/backend/message.rs:405
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Hat ein Video gesendet"
 msgstr[1] "Hat {} Videos gesendet"
 
-#: src/backend/message.rs:399
+#: src/backend/message.rs:413
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"
@@ -308,7 +334,7 @@ msgstr "Der Datenbankpfad bei {} ist kein Ordner."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:36 src/gui/utility.rs:34
+#: src/gui/utility.rs:36
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -318,7 +344,7 @@ msgstr "%H:%M"
 msgid "%Y-%m-%d %H:%M"
 msgstr ""
 
-#: src/gui/window.rs:139
+#: src/gui/window.rs:140
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -328,13 +354,13 @@ msgstr ""
 "löschen. Dies wird außerdem die Anwendung schließen, sodass es nach dem "
 "erneuten Öffnen neu gekoppelt werden kann."
 
-#: src/gui/window.rs:141
+#: src/gui/window.rs:142
 msgid "Are you sure?"
 msgstr "Bist du sicher?"
 
 #. Translators: Put your name contact info here if you want to be credited in
 #. the about page.
-#: src/gui/window.rs:191
+#: src/gui/window.rs:192
 msgid "translators"
 msgstr ""
 "Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"

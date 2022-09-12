@@ -56,6 +56,12 @@
                 <property name="accelerator">&lt;Ctrl&gt;&amp;i</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Load more messages</property>
+                <property name="accelerator">&lt;Ctrl&gt;&amp;l</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>
