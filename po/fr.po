@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-12 12:52+0200\n"
-"PO-Revision-Date: 2022-09-10 23:19+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2022-09-12 13:03+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -35,19 +35,18 @@ msgid "Select a channel"
 msgstr "Sélectionnez une chaîne"
 
 #: data/resources/ui/channel_messages.ui:44
-#, fuzzy
 msgid "Load more"
-msgstr "Charger l’image"
+msgstr "Charger plus"
 
 #: data/resources/ui/channel_messages.ui:72
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Supprimer la réponse"
 
 #: data/resources/ui/channel_messages.ui:74
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Supprimer la réponse"
 
 #: data/resources/ui/channel_messages.ui:104
 msgctxt "accessibility"
@@ -55,10 +54,9 @@ msgid "Remove an attachment"
 msgstr "Retirer une pièce jointe"
 
 #: data/resources/ui/channel_messages.ui:106
-#, fuzzy
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr "Retirer une pièce jointe"
+msgstr "Supprimer la pièce jointe"
 
 #: data/resources/ui/channel_messages.ui:134
 msgctxt "accessibility"
