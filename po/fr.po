@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-12 12:52+0200\n"
 "PO-Revision-Date: 2022-09-12 13:03+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -64,7 +64,6 @@ msgid "Add an attachment"
 msgstr "Ajouter une pièce jointe"
 
 #: data/resources/ui/channel_messages.ui:136
-#, fuzzy
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Ajouter une pièce jointe"
@@ -75,7 +74,6 @@ msgid "Message input"
 msgstr "Saisie du message"
 
 #: data/resources/ui/channel_messages.ui:158
-#, fuzzy
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Saisie du message"
@@ -86,7 +84,6 @@ msgid "Send"
 msgstr "Envoyer"
 
 #: data/resources/ui/channel_messages.ui:166
-#, fuzzy
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Envoyer"
@@ -160,23 +157,21 @@ msgid "Dowload files automatically"
 msgstr "Télécharger les fichiers automatiquement"
 
 #: data/resources/ui/preferences_window.ui:82
-#, fuzzy
 msgid "Message Storage"
-msgstr "Message"
+msgstr "Stockage des messages"
 
 #: data/resources/ui/preferences_window.ui:85
 msgid "Number of messages to load on startup"
-msgstr ""
+msgstr "Nombre de messages à charger au démarrage"
 
 #: data/resources/ui/preferences_window.ui:86
 #: data/resources/ui/preferences_window.ui:102
-#, fuzzy
 msgid "Per channel"
-msgstr "Sélectionnez une chaîne"
+msgstr "Par chaîne"
 
 #: data/resources/ui/preferences_window.ui:101
 msgid "Number of messages to load on request"
-msgstr ""
+msgstr "Nombre de messages à charger sur demande"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -201,7 +196,7 @@ msgstr "Aller à la page d'information"
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "Ouvrir le menu"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
@@ -224,10 +219,9 @@ msgid "Focus the text input box"
 msgstr "Focaliser la zone de saisie de texte"
 
 #: data/resources/ui/shortcuts.ui:61
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr "Charger l’image"
+msgstr "Charger plus de messages"
 
 #: data/resources/ui/window.ui:32
 msgctxt "accessibility"
@@ -345,7 +339,7 @@ msgstr "%H:%M"
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:39
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%d/%m/%Y %H:%M"
 
 #: src/gui/window.rs:140
 msgid ""
