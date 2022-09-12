@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-12 12:45+0200\n"
+"POT-Creation-Date: 2022-09-12 12:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -161,16 +161,16 @@ msgid "Message Storage"
 msgstr ""
 
 #: data/resources/ui/preferences_window.ui:85
-msgid "Messages to load on startup"
+msgid "Number of messages to load on startup"
 msgstr ""
 
 #: data/resources/ui/preferences_window.ui:86
 #: data/resources/ui/preferences_window.ui:102
-msgid "For each channel"
+msgid "Per channel"
 msgstr ""
 
 #: data/resources/ui/preferences_window.ui:101
-msgid "Messages to load on request"
+msgid "Number of messages to load on request"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11

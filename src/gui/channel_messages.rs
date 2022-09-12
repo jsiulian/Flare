@@ -297,13 +297,9 @@ pub mod imp {
                 .and_then(|s| s.property::<Option<String>>("title"));
             let last_message = obj
                 .property::<Option<Channel>>("active-channel")
-<<<<<<< HEAD
-                .and_then(|c| c.previous_message_to(&message))
-=======
-                .and_then(|c| c.previous_message_to(message));
+                .and_then(|c| c.previous_message_to(&message));
             let last_message_sender_title = last_message
                 .as_ref()
->>>>>>> master
                 .and_then(|m| m.property::<Option<Contact>>("sender"))
                 .and_then(|s| s.property::<Option<String>>("title"));
             let sent = message.property::<u64>("sent");

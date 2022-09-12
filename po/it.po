@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-12 12:45+0200\n"
+"POT-Creation-Date: 2022-09-12 12:52+0200\n"
 "PO-Revision-Date: 2022-09-10 23:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/flare/flare/it/"
@@ -167,17 +167,17 @@ msgid "Message Storage"
 msgstr ""
 
 #: data/resources/ui/preferences_window.ui:85
-msgid "Messages to load on startup"
+msgid "Number of messages to load on startup"
 msgstr ""
 
 #: data/resources/ui/preferences_window.ui:86
 #: data/resources/ui/preferences_window.ui:102
 #, fuzzy
-msgid "For each channel"
+msgid "Per channel"
 msgstr "Seleziona un canale"
 
 #: data/resources/ui/preferences_window.ui:101
-msgid "Messages to load on request"
+msgid "Number of messages to load on request"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
@@ -367,3 +367,7 @@ msgstr "Sei sicuro/sicura?"
 #: src/gui/window.rs:192
 msgid "translators"
 msgstr ""
+
+#, fuzzy
+#~ msgid "For each channel"
+#~ msgstr "Seleziona un canale"

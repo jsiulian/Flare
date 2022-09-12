@@ -82,8 +82,8 @@
             <property name="title" translatable="yes">Message Storage</property>
             <child>
               <object class="AdwActionRow" id="row_initial_message_loading">
-                <property name="title" translatable="yes">Messages to load on startup</property>
-                <property name="subtitle" translatable="yes">For each channel</property>
+                <property name="title" translatable="yes">Number of messages to load on startup</property>
+                <property name="subtitle" translatable="yes">Per channel</property>
                 <child>
                   <object class="GtkSpinButton" id="spin_initial_message_loading">
                     <accessibility>
@@ -98,8 +98,8 @@
             </child>
             <child>
               <object class="AdwActionRow" id="row_request_message_loading">
-                <property name="title" translatable="yes">Messages to load on request</property>
-                <property name="subtitle" translatable="yes">For each channel</property>
+                <property name="title" translatable="yes">Number of messages to load on request</property>
+                <property name="subtitle" translatable="yes">Per channel</property>
                 <child>
                   <object class="GtkSpinButton" id="spin_request_message_loading">
                     <accessibility>
