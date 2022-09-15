@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-12 12:52+0200\n"
-"PO-Revision-Date: 2022-08-24 21:15+0000\n"
+"PO-Revision-Date: 2022-09-16 08:33+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
@@ -33,68 +33,61 @@ msgstr "Загрузить файл"
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
-msgstr ""
+msgstr "Выберите канал"
 
 #: data/resources/ui/channel_messages.ui:44
-#, fuzzy
 msgid "Load more"
-msgstr "Загрузить изображение"
+msgstr "Загрузить больше"
 
 #: data/resources/ui/channel_messages.ui:72
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Удалить ответ"
 
 #: data/resources/ui/channel_messages.ui:74
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Удалить ответ"
 
 #: data/resources/ui/channel_messages.ui:104
-#, fuzzy
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr "Вложения"
+msgstr "Удалить вложение"
 
 #: data/resources/ui/channel_messages.ui:106
-#, fuzzy
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr "Вложения"
+msgstr "Удалить вложение"
 
 #: data/resources/ui/channel_messages.ui:134
-#, fuzzy
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr "Вложения"
+msgstr "Добавить вложение"
 
 #: data/resources/ui/channel_messages.ui:136
-#, fuzzy
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr "Вложения"
+msgstr "Добавить вложение"
 
 #: data/resources/ui/channel_messages.ui:155
-#, fuzzy
 msgctxt "accessibility"
 msgid "Message input"
-msgstr "Сообщение"
+msgstr "Ввод сообщения"
 
 #: data/resources/ui/channel_messages.ui:158
-#, fuzzy
 msgctxt "tooltip"
 msgid "Message input"
-msgstr "Сообщение"
+msgstr "Ввод сообщения"
 
 #: data/resources/ui/channel_messages.ui:164
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Отправить"
 
 #: data/resources/ui/channel_messages.ui:166
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "Отправить"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -165,22 +158,21 @@ msgid "Dowload files automatically"
 msgstr "Загружать файлы автоматически"
 
 #: data/resources/ui/preferences_window.ui:82
-#, fuzzy
 msgid "Message Storage"
-msgstr "Сообщение"
+msgstr "Хранилище сообщений"
 
 #: data/resources/ui/preferences_window.ui:85
 msgid "Number of messages to load on startup"
-msgstr ""
+msgstr "Количество сообщений для загрузки при запуске"
 
 #: data/resources/ui/preferences_window.ui:86
 #: data/resources/ui/preferences_window.ui:102
 msgid "Per channel"
-msgstr ""
+msgstr "На канал"
 
 #: data/resources/ui/preferences_window.ui:101
 msgid "Number of messages to load on request"
-msgstr ""
+msgstr "Количество сообщений для загрузке при запросе"
 
 #: data/resources/ui/shortcuts.ui:11
 #, fuzzy
@@ -191,58 +183,54 @@ msgstr "Общее"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "Показать комбинации клавиш"
 
 #: data/resources/ui/shortcuts.ui:20
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr "Параметры"
+msgstr "Перейти в параметры"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "Перейти на страницу \"О приложении\""
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "Открыть меню"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "Каналы"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "Перейти в канал 1…9"
 
 #: data/resources/ui/shortcuts.ui:49
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr "Вложения"
+msgstr "Загрузить вложение"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "Сфокусироваться на поле ввода"
 
 #: data/resources/ui/shortcuts.ui:61
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr "Загрузить изображение"
+msgstr "Загрузить больше сообщений"
 
 #: data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Меню"
 
 #: data/resources/ui/window.ui:111
-#, fuzzy
 msgid "Settings"
 msgstr "Параметры"
 
@@ -252,7 +240,7 @@ msgstr "Отвязать"
 
 #: data/resources/ui/window.ui:119
 msgid "Keybindings"
-msgstr ""
+msgstr "Комбинации клавиш"
 
 #: data/resources/ui/window.ui:123
 msgid "About"
@@ -346,14 +334,16 @@ msgstr "Путь к базе данных в {} не является папко
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:36
+#, fuzzy
 msgid "%H:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:39
+#, fuzzy
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%Y-%m-%d %H:%M"
 
 #: src/gui/window.rs:140
 msgid ""
