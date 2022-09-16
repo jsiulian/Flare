@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0]
+
 ### Added
 
 - Accessibility (no idea how good it is)
@@ -139,7 +141,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.3...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.4.0...master
+[0.4.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.3...0.4.0
 [0.3.3]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.2...0.3.3
 [0.3.2]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.1...0.3.2
 [0.3.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.0...0.3.1

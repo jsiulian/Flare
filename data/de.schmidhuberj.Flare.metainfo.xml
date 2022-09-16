@@ -51,6 +51,20 @@
     </p>
   </description>
   <releases>
+    <release version="v0.4.0" date="2022-09-16">
+      <p>Added</p>
+      <ul>
+        <li>Accessibility (no idea how good it is)</li>
+        <li>Message storage</li>
+        <li>Prevented sending empty messages</li>
+        <li>Display the time the message was sent.</li>
+      </ul>
+      <p>Fixed</p>
+      <ul>
+        <li>Attachment list not hiding after sending message</li>
+        <li>Minor glib warning</li>
+      </ul>
+    </release>
     <release version="v0.3.3" date="2022-09-05">
       <description> 
         <p>Added:</p>

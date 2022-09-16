@@ -1,7 +1,7 @@
 project(
   'flare',
   'rust',
-  version: '0.3.3',
+  version: '0.4.0',
   meson_version: '>= 0.59',
   license: 'AGPL-3.0-or-later',
 )
