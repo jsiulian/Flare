@@ -55,6 +55,16 @@ pub mod imp {
         manager: RefCell<Option<Manager>>,
     }
 
+    #[gtk::template_callbacks]
+    impl LinkWindow {
+        #[template_callback]
+        fn handle_clipboard(&self, _: gtk::Button) {
+            let obj = self.instance();
+            let clipboard = obj.display().clipboard();
+            clipboard.set_text(&obj.property::<String>("url"));
+        }
+    }
+
     #[glib::object_subclass]
     impl ObjectSubclass for LinkWindow {
         const NAME: &'static str = "FlLinkWindow";
@@ -63,6 +73,7 @@ pub mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
+            Self::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

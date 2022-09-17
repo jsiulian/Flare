@@ -30,6 +30,19 @@
           </object>
         </child>
         <child>
+          <object class="GtkButton" id="switch_show_url">
+            <accessibility>
+              <property name="label" translatable="yes" context="accessibility">Copy to clipboard</property>
+            </accessibility>
+            <property name="tooltip-text" context="tooltip">Copy to clipboard</property>
+
+            <property name="icon-name">edit-copy-symbolic</property>
+            <property name="hexpand">False</property>
+            <property name="halign">center</property>
+            <signal name="clicked" handler="handle_clipboard" swapped="true"/>
+          </object>
+        </child>
+        <child>
           <object class="GtkLabel">
             <property name="label" translatable="yes">Please restart the application after this window closed.</property>
           </object>
