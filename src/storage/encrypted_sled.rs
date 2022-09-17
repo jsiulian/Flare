@@ -99,7 +99,7 @@ impl<E: encrypted_sled::Encryption> EncryptedSledConfigStore<E> {
     {
         trace!("inserting u32 {}", key.as_ref());
         self.db
-            .try_write()
+            .write()
             .expect("poisoned mutex")
             .insert(key.as_ref(), &value.to_le_bytes())?;
         Ok(())
@@ -111,7 +111,7 @@ impl<E: encrypted_sled::Encryption> EncryptedSledConfigStore<E> {
     {
         trace!("removing {} from db", key.as_ref());
         self.db
-            .try_write()
+            .write()
             .expect("poisoned mutex")
             .remove(key.as_ref())?;
         Ok(())
@@ -148,7 +148,7 @@ impl<E: encrypted_sled::Encryption> StateStore<Registered> for EncryptedSledConf
     }
 
     fn save_state(&mut self, state: &Registered) -> Result<(), Error> {
-        let db = self.db.try_write().expect("poisoned mutex");
+        let db = self.db.write().expect("poisoned mutex");
         db.clear()?;
         db.insert(SLED_KEY_REGISTRATION, serde_json::to_vec(state)?)?;
         Ok(())
@@ -317,7 +317,7 @@ impl<E: encrypted_sled::Encryption> SessionStore for EncryptedSledConfigStore<E>
         let key = self.session_key(address);
         trace!("storing session for {:?} at {:?}", address, key);
         self.db
-            .try_write()
+            .write()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_SESSIONS)
             .unwrap()
@@ -357,7 +357,7 @@ where
         let key = self.session_key(address);
         trace!("deleting session with key: {}", key);
         self.db
-            .try_write()
+            .write()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_SESSIONS)
             .unwrap()

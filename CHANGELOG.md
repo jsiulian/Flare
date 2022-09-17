@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Button in the link window to copy link URL to clipboard ([#6])
+
+### Fixed
+
+- Maybe fixed rare crash in the backend thread
+
 ## [0.4.0]
 
 ### Added
@@ -13,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Accessibility (no idea how good it is)
 - Message storage
 - Prevented sending empty messages
-- Display the time the message was sent.
+- Display the time the message was sent
 
 ### Fixed
 
@@ -154,3 +162,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [#4]: https://gitlab.com/Schmiddiii/flare/-/issues/4
 [#5]: https://gitlab.com/Schmiddiii/flare/-/issues/5
+[#6]: https://gitlab.com/Schmiddiii/flare/-/issues/6
