@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Button in the link window to copy link URL to clipboard ([#6])
+- Group storage
 
 ### Fixed
 

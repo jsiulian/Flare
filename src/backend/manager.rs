@@ -300,6 +300,11 @@ impl Manager {
                                 }
                                 let mut channels_mut = self.imp().channels.borrow_mut();
                                 channels_mut.insert(channel.internal_hash(), channel.clone());
+                                if let Some(ctx) = channel.group_context() {
+                                    log::trace!("New channel is a group, inserting into store");
+                                    // TODO: Error?
+                                    let _ = self.insert_group(ctx);
+                                }
                                 channel
                             }
                         };
@@ -315,6 +320,22 @@ impl Manager {
             };
         }
         Ok(())
+    }
+
+    fn insert_group(&self, ctx: GroupContextV2) -> Result<(), ApplicationError> {
+        if let Some(key) = ctx.master_key {
+            self.store().save_group(&key)?
+        }
+        Ok(())
+    }
+
+    fn store(&self) -> ConfigStoreType {
+        self.imp()
+            .config_store
+            .borrow()
+            .as_ref()
+            .expect("Config store to be set up")
+            .clone()
     }
 
     async fn sync_contacts(&self) -> Result<(), presage::Error> {
@@ -387,6 +408,7 @@ impl Manager {
 
     #[cfg(not(feature = "screenshot"))]
     pub async fn init_channels(&self) {
+        let manager = self.internal();
         let mut to_load = vec![];
         for contact in self.list_contacts() {
             let channel = Channel::from_contact_or_group(contact, &None, self).await;
@@ -394,6 +416,26 @@ impl Manager {
             let mut channels = self.imp().channels.borrow_mut();
             to_load.push(channel.clone());
             channels.insert(channel.internal_hash(), channel);
+        }
+        // TODO: Error handling?
+        for key in self.store().get_groups().unwrap_or_default() {
+            let group = manager.get_group_v2(GroupMasterKey::new(key)).await;
+            if let Ok(group) = group {
+                let channel = Channel::from_group(
+                    group,
+                    &GroupContextV2 {
+                        master_key: Some(key.into()),
+                        revision: None,
+                        group_change: None,
+                    },
+                    self,
+                )
+                .await;
+                self.emit_by_name::<()>("channel", &[&channel]);
+                let mut channels = self.imp().channels.borrow_mut();
+                to_load.push(channel.clone());
+                channels.insert(channel.internal_hash(), channel);
+            }
         }
         for c in to_load {
             c.load_last(

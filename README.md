@@ -50,7 +50,6 @@ A unofficial Signal GTK client.
 
 This application uses [presage](https://github.com/whisperfish/presage) internally, the current features are not yet implemented for that.
 
-- Listing groups
 - Avatars
 - Profile name instead of "You" in chats
 
