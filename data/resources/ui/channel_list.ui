@@ -6,13 +6,29 @@
   <template class="FlChannelList" parent="GtkBox">
     <property name="hexpand">False</property>
     <property name="vexpand">True</property>
+    <property name="orientation">vertical</property>
+
+    <child>
+      <object class="GtkSearchEntry" id="search_entry">
+        <property name="tooltip-text" translatable="yes">Search</property>
+        <accessibility>
+          <property name="label" translatable="yes" context="accessibility">Search</property>
+        </accessibility>
+
+        <binding name="visible"><lookup name="search-enabled" type="FlChannelList"/></binding>
+
+        <signal name="search-changed" handler="search_changed" swapped="yes"/>
+        <signal name="stop-search" handler="search_stopped" swapped="yes"/>
+      </object>
+    </child>
+
     <child>
       <object class="GtkScrolledWindow">
         <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="GtkListBox" id="list">
+          <object class="GtkListView" id="list">
             <property name="hexpand">True</property>
-            <signal handler="handle_row_activated" swapped="true" name="row-activated"/>
+            <property name="vexpand">True</property>
           </object>
         </child>
       </object>

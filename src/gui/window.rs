@@ -24,6 +24,7 @@ impl Window {
                 &[&format!("<Control>{}", i)],
             );
         }
+        app.set_accels_for_action(&"channel-list.toggle-search", &[&"<Control>f"]);
         Object::new(&[("application", app)]).expect("Failed to create Window")
     }
 
@@ -229,12 +230,19 @@ pub mod imp {
                         .expect("Could not get parameter.")
                         .get::<i32>()
                         .expect("The variant needs to be of type `i32`.");
-                    channel_list.activate_row(parameter - 1);
+                    channel_list.activate_row((parameter - 1).try_into().unwrap_or_default());
+                }),
+            );
+            let action_toggle_search = SimpleAction::new("toggle-search", None);
+            action_toggle_search.connect_activate(
+                clone!(@strong self.channel_list as channel_list => move |_, _| {
+                    channel_list.toggle_search();
                 }),
             );
             let actions = SimpleActionGroup::new();
             obj.insert_action_group("channel-list", Some(&actions));
             actions.add_action(&action_activate_channel);
+            actions.add_action(&action_toggle_search);
         }
 
         #[template_callback]

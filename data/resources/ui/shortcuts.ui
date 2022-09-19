@@ -46,6 +46,12 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Search in channels</property>
+                <property name="accelerator">&lt;Ctrl&gt;&amp;f</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes" context="shortcut window">Upload attachment</property>
                 <property name="accelerator">&lt;Ctrl&gt;&amp;plus</property>
               </object>
