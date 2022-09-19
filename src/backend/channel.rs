@@ -6,7 +6,7 @@ use std::{
 
 use gdk_pixbuf::{glib::Object, prelude::ObjectExt};
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use libsignal_service::proto::DataMessage;
+use libsignal_service::{groups_v2::Group, proto::DataMessage};
 use presage::{
     prelude::{GroupContextV2, GroupMasterKey, ServiceAddress},
     MessageIdentity,
@@ -46,20 +46,7 @@ impl Channel {
 
             let group = manager.get_group_v2(master_key).await;
             if let Ok(group) = group {
-                s.imp().group.swap(&RefCell::new(Some(group)));
-                s.imp().unloaded_messages.swap(&RefCell::new(
-                    manager
-                        .messages_by_group(group_context_v2)
-                        .unwrap_or_default(),
-                ));
-                s.imp()
-                    .group_context
-                    .swap(&RefCell::new(Some(group_context_v2.clone())));
-                s.imp().unloaded_messages.swap(&RefCell::new(
-                    manager
-                        .messages_by_group(group_context_v2)
-                        .unwrap_or_default(),
-                ));
+                return Self::from_group(group, group_context_v2, manager).await;
             } else {
                 if let Some(ref uuid) = contact.address().and_then(|a| a.uuid) {
                     s.imp().unloaded_messages.swap(&RefCell::new(
@@ -77,6 +64,29 @@ impl Channel {
 
             s.imp().contact.swap(&RefCell::new(Some(contact)));
         }
+        s
+    }
+
+    pub(super) async fn from_group(
+        group: Group,
+        group_context_v2: &GroupContextV2,
+        manager: &Manager,
+    ) -> Self {
+        let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Channel`");
+        s.imp().group.swap(&RefCell::new(Some(group)));
+        s.imp().unloaded_messages.swap(&RefCell::new(
+            manager
+                .messages_by_group(group_context_v2)
+                .unwrap_or_default(),
+        ));
+        s.imp()
+            .group_context
+            .swap(&RefCell::new(Some(group_context_v2.clone())));
+        s.imp().unloaded_messages.swap(&RefCell::new(
+            manager
+                .messages_by_group(group_context_v2)
+                .unwrap_or_default(),
+        ));
         s
     }
 
@@ -134,7 +144,7 @@ impl Channel {
         hasher.finish()
     }
 
-    fn group_context(&self) -> Option<GroupContextV2> {
+    pub(super) fn group_context(&self) -> Option<GroupContextV2> {
         self.imp().group_context.borrow().clone()
     }
 

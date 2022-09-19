@@ -27,6 +27,7 @@ use presage::{
 
 const SLED_KEY_REGISTRATION: &str = "registration";
 const SLED_KEY_CONTACTS: &str = "contacts";
+const SLED_KEY_GROUPS: &str = "groups";
 
 const SLED_TREE_SESSIONS: &str = "sessions";
 const SLED_TREE_MESSAGES: &str = "messages";
@@ -38,7 +39,7 @@ pub struct EncryptedSledConfigStore<E> {
     db: Arc<RwLock<encrypted_sled::Db<E>>>,
 }
 
-impl<E: encrypted_sled::Encryption> EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> EncryptedSledConfigStore<E> {
     pub fn new(path: impl Into<PathBuf>, encryption: E) -> Result<Self, Error> {
         Ok(EncryptedSledConfigStore {
             db: Arc::new(RwLock::new(encrypted_sled::open(path.into(), encryption)?)),
@@ -87,10 +88,37 @@ impl<E: encrypted_sled::Encryption> EncryptedSledConfigStore<E> {
         trace!("inserting {}", key.as_ref());
         let _ = self
             .db
-            .try_write()
+            .write()
             .expect("poisoned mutex")
             .insert(key.as_ref(), value)?;
         Ok(())
+    }
+
+    fn merge<K, V>(&self, key: K, value: V) -> Result<(), Error>
+    where
+        K: AsRef<str>,
+        IVec: From<V>,
+    {
+        trace!("inserting {}", key.as_ref());
+        let db = self.db.write().expect("poisoned mutex");
+        db.set_merge_operator(prefix_merge);
+        db.merge(key.as_ref(), IVec::from(value))?;
+        Ok(())
+    }
+
+    pub fn save_group(&self, key: &[u8]) -> Result<(), Error> {
+        self.merge(SLED_KEY_GROUPS, key)
+    }
+
+    pub fn get_groups(&self) -> Result<Vec<[u8; 32]>, Error> {
+        Ok(self
+            .get(SLED_KEY_GROUPS)?
+            .as_ref()
+            .map(<sled::IVec as std::borrow::Borrow<[u8]>>::borrow)
+            .unwrap_or_default()
+            .chunks_exact(32)
+            .map(|buf| buf.try_into().expect("buf to have length 32"))
+            .collect())
     }
 
     fn insert_u32<S>(&self, key: S, value: u32) -> Result<(), Error>
@@ -155,7 +183,7 @@ impl<E: encrypted_sled::Encryption> StateStore<Registered> for EncryptedSledConf
     }
 }
 
-impl<E: encrypted_sled::Encryption> ConfigStore for EncryptedSledConfigStore<E>
+impl<E: encrypted_sled::Encryption + 'static> ConfigStore for EncryptedSledConfigStore<E>
 where
     E: std::marker::Send + std::marker::Sync + std::clone::Clone,
 {
@@ -220,7 +248,7 @@ impl<E: encrypted_sled::Encryption> ContactsStore for EncryptedSledConfigStore<E
 }
 
 #[async_trait(?Send)]
-impl<E: encrypted_sled::Encryption> PreKeyStore for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> PreKeyStore for EncryptedSledConfigStore<E> {
     async fn get_pre_key(
         &self,
         prekey_id: u32,
@@ -256,7 +284,7 @@ impl<E: encrypted_sled::Encryption> PreKeyStore for EncryptedSledConfigStore<E> 
 }
 
 #[async_trait(?Send)]
-impl<E: encrypted_sled::Encryption> SignedPreKeyStore for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> SignedPreKeyStore for EncryptedSledConfigStore<E> {
     async fn get_signed_pre_key(
         &self,
         signed_prekey_id: u32,
@@ -287,7 +315,7 @@ impl<E: encrypted_sled::Encryption> SignedPreKeyStore for EncryptedSledConfigSto
 }
 
 #[async_trait(?Send)]
-impl<E: encrypted_sled::Encryption> SessionStore for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> SessionStore for EncryptedSledConfigStore<E> {
     async fn load_session(
         &self,
         address: &ProtocolAddress,
@@ -298,7 +326,7 @@ impl<E: encrypted_sled::Encryption> SessionStore for EncryptedSledConfigStore<E>
 
         let buf = self
             .db
-            .try_read()
+            .read()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_SESSIONS)
             .unwrap()
@@ -328,7 +356,7 @@ impl<E: encrypted_sled::Encryption> SessionStore for EncryptedSledConfigStore<E>
 }
 
 #[async_trait]
-impl<E: encrypted_sled::Encryption> SessionStoreExt for EncryptedSledConfigStore<E>
+impl<E: encrypted_sled::Encryption + 'static> SessionStoreExt for EncryptedSledConfigStore<E>
 where
     E: std::marker::Send + std::marker::Sync + std::clone::Clone,
 {
@@ -369,7 +397,7 @@ where
     async fn delete_all_sessions(&self, _name: &str) -> Result<usize, SignalProtocolError> {
         let tree = self
             .db
-            .try_write()
+            .write()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_SESSIONS)
             .unwrap();
@@ -382,7 +410,7 @@ where
 }
 
 #[async_trait(?Send)]
-impl<E: encrypted_sled::Encryption> IdentityKeyStore for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> IdentityKeyStore for EncryptedSledConfigStore<E> {
     async fn get_identity_key_pair(
         &self,
         _ctx: Context,
@@ -485,17 +513,17 @@ impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledConf
 
         let tree_messages = self
             .db
-            .try_read()
+            .read()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_MESSAGES)?;
         let tree_contacts_to_messages = self
             .db
-            .try_read()
+            .read()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_CONTACTS_TO_MESSAGES)?;
         let tree_groups_to_messages = self
             .db
-            .try_read()
+            .read()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_GROUPS_TO_MESSAGES)?;
         tree_contacts_to_messages.set_merge_operator(prefix_merge);
@@ -540,7 +568,7 @@ impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledConf
 
         let tree = self
             .db
-            .try_read()
+            .read()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_MESSAGES)?;
         let key_sender = sender.as_bytes();
