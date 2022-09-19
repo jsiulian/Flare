@@ -1,7 +1,5 @@
 use gdk_pixbuf::glib::Object;
 
-use crate::backend::Channel;
-
 gtk::glib::wrapper! {
     pub struct ChannelItem(ObjectSubclass<imp::ChannelItem>)
         @extends gtk::Box, gtk::Widget,
@@ -10,16 +8,21 @@ gtk::glib::wrapper! {
 }
 
 impl ChannelItem {
-    pub fn new(channel: &Channel) -> Self {
+    pub fn new() -> Self {
         log::trace!("Initializing `ChannelItem`");
-        Object::new(&[("channel", channel)]).expect("Failed to create `ChannelItem`")
+        Object::new(&[]).expect("Failed to create `ChannelItem`")
+    }
+}
+
+impl Default for ChannelItem {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
 pub mod imp {
     use std::cell::RefCell;
 
-    use gdk_pixbuf::glib::clone;
     use gdk_pixbuf::glib::once_cell::sync::Lazy;
     use gdk_pixbuf::glib::ParamFlags;
     use gdk_pixbuf::glib::ParamSpec;
@@ -99,7 +102,7 @@ pub mod imp {
             }
         }
 
-        fn set_property(&self, obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let man = value
@@ -111,35 +114,6 @@ pub mod imp {
                     let chan = value
                         .get::<Option<Channel>>()
                         .expect("Property `channel` of `ChannelItem` has to be of type `Channel`");
-                    if let Some(chan) = &chan {
-                        chan.connect_notify_local(
-                            Some("last-message"),
-                            clone!(@strong obj => move |_, _| {
-                                log::trace!("Channel got item, invalidate sort");
-                                obj
-                                    .parent()
-                                    .expect("`ChannelItem` to have a parent")
-                                    .dynamic_cast::<gtk::ListBoxRow>()
-                                    .expect("Parent of `ChannelItem` to be `ListBoxRow`")
-                                    .changed();
-                            }),
-                        );
-                        chan.connect_local(
-                            "message",
-                            false,
-                            clone!(@strong obj => move |_| {
-                                log::trace!("Channel got item, invalidate sort");
-                                obj
-                                    .parent()
-                                    .expect("`ChannelItem` to have a parent")
-                                    .dynamic_cast::<gtk::ListBoxRow>()
-                                    .expect("Parent of `ChannelItem` to be `ListBoxRow`")
-                                    .changed();
-                                None
-
-                            }),
-                        );
-                    }
                     self.channel.replace(chan);
                 }
                 _ => unimplemented!(),
