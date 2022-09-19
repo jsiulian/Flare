@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Button in the link window to copy link URL to clipboard ([#6])
+- Search for the channel view ([#7])
 
 ### Fixed
 
@@ -163,3 +164,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#4]: https://gitlab.com/Schmiddiii/flare/-/issues/4
 [#5]: https://gitlab.com/Schmiddiii/flare/-/issues/5
 [#6]: https://gitlab.com/Schmiddiii/flare/-/issues/6
+[#7]: https://gitlab.com/Schmiddiii/flare/-/issues/7

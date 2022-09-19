@@ -26,6 +26,16 @@
                     <property name="title">Flare</property>
                   </object>
                 </property>
+                <child type="start">
+                  <object class="GtkToggleButton">
+                    <accessibility>
+                      <property name="label" translatable="yes" context="accessibility">Search</property>
+                    </accessibility>
+                    <property name="tooltip-text" context="tooltip">Search</property>
+                    <property name="icon-name">system-search-symbolic</property>
+                    <property name="active" bind-source="channel_list" bind-property="search-enabled" bind-flags="bidirectional"/>
+                  </object>
+                </child>
                 <child type="end">
                   <object class="GtkMenuButton">
                     <accessibility>

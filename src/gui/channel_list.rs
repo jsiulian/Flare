@@ -1,8 +1,12 @@
+use gdk::prelude::Cast;
+use gdk::prelude::ListModelExt;
 use gdk_pixbuf::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
+use gtk::traits::SorterExt;
 use gtk::traits::WidgetExt;
+use gtk::SorterChange;
 
-use crate::{backend::Channel, gui::channel_item::ChannelItem};
+use crate::backend::Channel;
 
 gtk::glib::wrapper! {
     pub struct ChannelList(ObjectSubclass<imp::ChannelList>)
@@ -17,19 +21,43 @@ impl ChannelList {
             "`ChannelList` got new `Channel`: {}",
             channel.property::<String>("title")
         );
-        let widget = ChannelItem::new(&channel);
-        self.imp().list.prepend(&widget);
+        self.imp().model.borrow().append(&channel);
+        self.imp().sorter.borrow().changed(SorterChange::Different);
+        let s = self.clone();
+        channel.connect_notify_local(Some("last-message"), move |_, _| {
+            log::trace!("Change sorter");
+            s.imp().sorter.borrow().changed(SorterChange::Different);
+        });
     }
 
-    pub fn activate_row(&self, i: i32) {
-        let row = self.imp().list.row_at_index(i);
-        if let Some(row) = row {
-            row.activate();
+    pub fn activate_row(&self, i: u32) {
+        let obj = self.imp();
+        let model = obj
+            .list
+            .model()
+            .expect("`ChannelList` list to have a model");
+        let channel = model
+            .item(i)
+            .expect("The item has to exist.")
+            .downcast::<Channel>()
+            .expect("The item has to be an `Channel`.");
+
+        self.set_property("active-channel", channel);
+    }
+
+    pub fn toggle_search(&self) {
+        let obj = self.imp();
+        if self.property("search-enabled") {
+            obj.search_entry.emit_stop_search();
+        } else {
+            self.set_property("search-enabled", true);
+            obj.search_entry.grab_focus();
         }
     }
 }
 
 pub mod imp {
+    use std::cell::Cell;
     use std::cell::RefCell;
 
     use gdk_pixbuf::glib::clone;
@@ -37,6 +65,7 @@ pub mod imp {
     use gdk_pixbuf::glib::subclass::Signal;
     use gdk_pixbuf::glib::ParamFlags;
     use gdk_pixbuf::glib::ParamSpec;
+    use gdk_pixbuf::glib::ParamSpecBoolean;
     use gdk_pixbuf::glib::ParamSpecObject;
     use gdk_pixbuf::glib::Value;
     use glib::subclass::InitializingObject;
@@ -44,6 +73,13 @@ pub mod imp {
     use gtk::prelude::*;
     use gtk::subclass::prelude::*;
     use gtk::CompositeTemplate;
+    use gtk::CustomFilter;
+    use gtk::CustomSorter;
+    use gtk::FilterChange;
+    use gtk::FilterListModel;
+    use gtk::SignalListItemFactory;
+    use gtk::SortListModel;
+    use gtk::Widget;
 
     use crate::backend::Channel;
     use crate::backend::Manager;
@@ -54,24 +90,31 @@ pub mod imp {
     #[template(resource = "/ui/channel_list.ui")]
     pub struct ChannelList {
         #[template_child]
-        pub(super) list: TemplateChild<gtk::ListBox>,
+        pub(super) list: TemplateChild<gtk::ListView>,
+        #[template_child]
+        pub(super) search_entry: TemplateChild<gtk::SearchEntry>,
+
+        pub(super) model: RefCell<gio::ListStore>,
+        pub(super) sorter: RefCell<gtk::CustomSorter>,
+        pub(super) filter: RefCell<gtk::CustomFilter>,
 
         manager: RefCell<Option<Manager>>,
         active_channel: RefCell<Option<Channel>>,
+        search_enabled: Cell<bool>,
     }
 
     #[gtk::template_callbacks]
     impl ChannelList {
         #[template_callback]
-        fn handle_row_activated(&self, row: gtk::ListBoxRow) {
-            let channel = row
-                .child()
-                .expect("`ListBoxRow` to have a child")
-                .dynamic_cast::<ChannelItem>()
-                .expect("`ListBoxRow` to have a `ChannelItem` child")
-                .property::<Channel>("channel");
-            crate::trace!("Activated channel: {}", channel.property::<String>("title"));
-            self.instance().set_property("active-channel", channel);
+        fn search_changed(&self) {
+            self.filter.borrow().changed(FilterChange::Different);
+        }
+
+        #[template_callback]
+        fn search_stopped(&self) {
+            self.instance().set_property("search-enabled", false);
+            self.search_entry.set_text("");
+            self.filter.borrow().changed(FilterChange::Different);
         }
     }
 
@@ -92,16 +135,25 @@ pub mod imp {
     }
 
     impl ObjectImpl for ChannelList {
-        fn constructed(&self, _obj: &Self::Type) {
-            self.list.set_sort_func(|l1, l2| {
+        fn constructed(&self, obj: &Self::Type) {
+            let model = gtk::gio::ListStore::new(Channel::static_type());
+            let filter =
+                CustomFilter::new(clone!(@strong self.search_entry as entry => move |obj| {
+                    let search = entry.text().to_string();
+                    let channel = obj
+                        .downcast_ref::<Channel>()
+                        .expect("The object needs to be of type `Channel`.");
+                    let title = channel.property::<String>("title");
+                    title.to_lowercase().contains(&search.to_lowercase())
+                }));
+            let filter_model = FilterListModel::new(Some(&model), Some(&filter));
+            let sorter = CustomSorter::new(|l1, l2| {
                 let c1 = l1
-                    .child()
-                    .expect("`ListBoxRow` of `ChannelList` to have a child")
-                    .property::<Channel>("channel");
+                    .downcast_ref::<Channel>()
+                    .expect("The object to be a channel");
                 let c2 = l2
-                    .child()
-                    .expect("`ListBoxRow` of `ChannelList` to have a child")
-                    .property::<Channel>("channel");
+                    .downcast_ref::<Channel>()
+                    .expect("The object to be a channel");
 
                 let m1 = c1.property::<Option<Message>>("last-message");
                 let m2 = c2.property::<Option<Message>>("last-message");
@@ -126,6 +178,31 @@ pub mod imp {
                     gtk::Ordering::Larger
                 }
             });
+            let sort_model = SortListModel::new(Some(&filter_model), Some(&sorter));
+
+            let selection_model = gtk::NoSelection::new(Some(&sort_model));
+            self.list.get().set_model(Some(&selection_model));
+
+            self.model.replace(model);
+            self.sorter.replace(sorter);
+            self.filter.replace(filter);
+
+            let factory = SignalListItemFactory::new();
+            factory.connect_setup(move |_, list_item| {
+                let channel_item = ChannelItem::new();
+                list_item.set_child(Some(&channel_item));
+
+                list_item
+                    .property_expression("item")
+                    .bind(&channel_item, "channel", Widget::NONE);
+            });
+            self.list.set_factory(Some(&factory));
+            self.list.set_single_click_activate(true);
+
+            self.list
+                .connect_activate(clone!(@strong obj => move |_list_view, position| {
+                    obj.activate_row(position);
+                }));
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -145,6 +222,13 @@ pub mod imp {
                         Channel::static_type(),
                         ParamFlags::READWRITE,
                     ),
+                    ParamSpecBoolean::new(
+                        "search-enabled",
+                        "search-enabled",
+                        "search-enabled",
+                        false,
+                        ParamFlags::READWRITE,
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
@@ -154,6 +238,7 @@ pub mod imp {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "active-channel" => self.active_channel.borrow().as_ref().to_value(),
+                "search-enabled" => self.search_enabled.get().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -189,6 +274,12 @@ pub mod imp {
                     );
                     obj.emit_by_name::<()>("active-channel-changed", &[&chan]);
                     self.active_channel.replace(chan);
+                }
+                "search-enabled" => {
+                    let search = value.get::<bool>().expect(
+                        "Property `search-enabled` of `ChannelList` has to be of type `bool`",
+                    );
+                    self.search_enabled.replace(search);
                 }
                 _ => unimplemented!(),
             }
