@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Maybe fixed rare crash in the backend thread
+- Fixed messages sent to contacts being wrongly stored to "Note to self" ([#8])
 
 ## [0.4.0]
 
@@ -166,3 +167,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#5]: https://gitlab.com/Schmiddiii/flare/-/issues/5
 [#6]: https://gitlab.com/Schmiddiii/flare/-/issues/6
 [#7]: https://gitlab.com/Schmiddiii/flare/-/issues/7
+[#7]: https://gitlab.com/Schmiddiii/flare/-/issues/8

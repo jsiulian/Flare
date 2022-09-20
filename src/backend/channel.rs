@@ -6,7 +6,7 @@ use std::{
 
 use gdk_pixbuf::{glib::Object, prelude::ObjectExt};
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use libsignal_service::{groups_v2::Group, proto::DataMessage};
+use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::DataMessage};
 use presage::{
     prelude::{GroupContextV2, GroupMasterKey, ServiceAddress},
     MessageIdentity,
@@ -92,12 +92,14 @@ impl Channel {
 
     #[async_recursion::async_recursion(?Send)]
     pub async fn load_last(&self, number: usize) -> Vec<Message> {
-        log::trace!(
-            "Loading last messages for contact: {}",
-            self.property::<String>("title")
-        );
         let to_load = {
             let mut unloaded_msgs = self.imp().unloaded_messages.borrow_mut();
+            crate::trace!(
+                "Loading last messages for channel: {} ({:?}). Got {} total unloaded messages.",
+                self.property::<String>("title"),
+                self.uuid(),
+                unloaded_msgs.len()
+            );
             if unloaded_msgs.len() <= number {
                 unloaded_msgs.drain(..).collect::<Vec<_>>()
             } else {
@@ -122,10 +124,19 @@ impl Channel {
                     results.insert(0, msg.clone());
                     self.notify("last-message");
                 } else {
+                    log::trace!(
+                        "Channel {} got empty message, skipping.",
+                        self.property::<String>("title")
+                    );
                     empty += 1
                 }
                 // TODO: Error?
                 let _ = self.do_new_message(&msg).await;
+            } else {
+                log::warn!(
+                    "Channel {} got message that could not be found, skipping.",
+                    self.property::<String>("title")
+                );
             }
         }
 
@@ -146,6 +157,15 @@ impl Channel {
 
     pub(super) fn group_context(&self) -> Option<GroupContextV2> {
         self.imp().group_context.borrow().clone()
+    }
+
+    fn uuid(&self) -> Option<Uuid> {
+        self.imp()
+            .contact
+            .borrow()
+            .as_ref()
+            .and_then(|c| c.address())
+            .and_then(|a| a.uuid)
     }
 
     pub(super) async fn do_new_message(

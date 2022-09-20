@@ -17,6 +17,7 @@ use libsignal_service::{
         ProtobufMessage, Uuid,
     },
     proto::{sync_message::Sent, GroupContextV2, SyncMessage},
+    ServiceAddress,
 };
 use log::{debug, trace, warn};
 
@@ -492,11 +493,20 @@ fn prefix_merge(_key: &[u8], old_value: Option<&[u8]>, merged_bytes: &[u8]) -> O
 }
 
 impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledConfigStore<E> {
-    fn save_message(&mut self, message: libsignal_service::prelude::Content) -> Result<(), Error> {
+    fn save_message(
+        &mut self,
+        message: libsignal_service::prelude::Content,
+        receiver: Option<impl Into<ServiceAddress>>,
+    ) -> Result<(), Error> {
         let id = MessageIdentity::try_from(&message)?;
-        log::trace!("Storing a message with id: {:?}", id);
-        let sender = id.0;
+        let store_uuid = if let Some(uuid) = receiver.map(|s| s.into()).and_then(|s| s.uuid) {
+            uuid
+        } else {
+            id.0
+        };
         let timestamp = id.1;
+
+        crate::trace!("Storing a message with id: {:?}", id);
 
         let group_master_key = match message.body {
             ContentBody::DataMessage(ref msg)
@@ -513,35 +523,34 @@ impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledConf
 
         let tree_messages = self
             .db
-            .read()
+            .try_read()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_MESSAGES)?;
         let tree_contacts_to_messages = self
             .db
-            .read()
+            .try_read()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_CONTACTS_TO_MESSAGES)?;
         let tree_groups_to_messages = self
             .db
-            .read()
+            .try_read()
             .expect("poisoned mutex")
             .open_tree(SLED_TREE_GROUPS_TO_MESSAGES)?;
         tree_contacts_to_messages.set_merge_operator(prefix_merge);
         tree_groups_to_messages.set_merge_operator(prefix_merge);
 
-        let key_sender = sender.as_bytes();
+        let key_uuid = store_uuid.as_bytes();
         let key_timestamp = timestamp.to_ne_bytes();
-        let key = [&key_sender[..], &key_timestamp[..]].concat();
+        let key = [&key_uuid[..], &key_timestamp[..]].concat();
         let value = ContentProto::from_content(message);
 
-        tree_messages.insert(key, value.encode_to_vec())?;
-        let id_bytes: [u8; 24] = id.into();
+        tree_messages.insert(key.clone(), value.encode_to_vec())?;
         if let Some(group) = group_master_key {
-            log::trace!("Storing message to group: {:?}", group);
-            tree_groups_to_messages.merge(group, id_bytes)?;
+            crate::trace!("Storing message to group: {:?}", group);
+            tree_groups_to_messages.merge(group, key)?;
         } else {
-            log::trace!("Storing message to contact: {:?}", sender);
-            tree_contacts_to_messages.merge(sender.as_bytes(), id_bytes)?;
+            crate::trace!("Storing message to contact: {:?}", store_uuid);
+            tree_contacts_to_messages.merge(store_uuid.as_bytes(), key)?;
         }
         Ok(())
     }

@@ -130,7 +130,7 @@ mod imp {
                             if let Some(phone) = self.phonenumber.borrow().as_ref() {
                                 phone.format().mode(Mode::National).to_string().to_value()
                             } else {
-                                "".to_value()
+                                contact.address.uuid.map(|u| u.to_string()).to_value()
                             }
                         } else {
                             name.to_value()
@@ -138,7 +138,7 @@ mod imp {
                     } else if let Some(phone) = self.phonenumber.borrow().as_ref() {
                         phone.format().mode(Mode::National).to_string().to_value()
                     } else {
-                        "".to_value()
+                        None::<String>.to_value()
                     }
                 }
                 _ => unimplemented!(),
