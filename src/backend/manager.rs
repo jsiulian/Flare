@@ -137,11 +137,15 @@ impl Manager {
         Ok(())
     }
 
-    pub fn save_message(&self, message: Content) -> Result<(), ApplicationError> {
+    pub fn save_message(
+        &self,
+        message: Content,
+        recipient: Option<impl Into<ServiceAddress>>,
+    ) -> Result<(), ApplicationError> {
         log::trace!("Saving a message");
         let mut borrow_mut = self.imp().config_store.borrow_mut();
         if let Some(config_store) = borrow_mut.as_mut() {
-            config_store.save_message(message)?;
+            config_store.save_message(message, recipient)?;
         }
         Ok(())
     }
@@ -155,7 +159,6 @@ impl Manager {
             if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
                 let content = config_store.message_by_identity(id)?;
                 if let Some(content) = content {
-                    log::trace!("Found message");
                     Ok::<_, ApplicationError>(Some(content))
                 } else {
                     Ok(None)
@@ -166,7 +169,12 @@ impl Manager {
             }
         }?;
         if let Some(content) = content {
-            Ok(Some(Message::from_content(content, self).await))
+            let msg = Message::from_content(content, self).await;
+            log::trace!(
+                "Found message: {}",
+                msg.property::<String>("textual-description")
+            );
+            Ok(Some(msg))
         } else {
             Ok(None)
         }
@@ -270,6 +278,7 @@ impl Manager {
 
         self.sync_contacts().await?;
         self.init_channels().await;
+        crate::info!("Own uuid: {:?}", self.uuid());
         log::debug!("Start receiving messages");
         'outer: loop {
             select! {
@@ -463,11 +472,11 @@ impl Manager {
 
     pub(super) async fn send_message(
         &self,
-        recipient_addr: impl Into<ServiceAddress>,
+        recipient_addr: impl Into<ServiceAddress> + std::clone::Clone,
         message: impl Into<ContentBody>,
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
-        log::trace!("`Manager::send_message`start");
+        log::trace!("`Manager::send_message` start");
         let meta = Metadata {
             sender: ServiceAddress {
                 uuid: Some(self.uuid()),
@@ -481,13 +490,13 @@ impl Manager {
         let body = message.into();
         let r = self
             .internal()
-            .send_message(recipient_addr, body.clone(), timestamp)
+            .send_message(recipient_addr.clone(), body.clone(), timestamp)
             .await;
         let msg = Content {
             metadata: meta,
             body,
         };
-        self.save_message(msg)?;
+        self.save_message(msg, Some(recipient_addr))?;
         log::trace!("`Manager::send_message`finished");
         Ok(r?)
     }
@@ -517,7 +526,7 @@ impl Manager {
             metadata: meta,
             body: ContentBody::DataMessage(message),
         };
-        self.save_message(msg)?;
+        self.save_message(msg, None::<ServiceAddress>)?;
         log::trace!("`Manager::send_message_to_group` finish");
         Ok(r?)
     }
