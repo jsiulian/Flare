@@ -24,7 +24,7 @@ impl Window {
                 &[&format!("<Control>{}", i)],
             );
         }
-        app.set_accels_for_action(&"channel-list.toggle-search", &[&"<Control>f"]);
+        app.set_accels_for_action("channel-list.toggle-search", &["<Control>f"]);
         Object::new(&[("application", app)]).expect("Failed to create Window")
     }
 
@@ -129,6 +129,35 @@ pub mod imp {
                 let settings = PreferencesWindow::new();
                 settings.show();
             });
+
+            let action_clear_messages = SimpleAction::new("clear-messages", None);
+            action_clear_messages.connect_activate(clone!(@weak obj => move |_, _| {
+                log::trace!("User requested to clear messages");
+                // TODO: AdwMessageDialog
+                let dialog = gtk::MessageDialog::builder()
+                    .buttons(gtk::ButtonsType::OkCancel)
+                    .message_type(gtk::MessageType::Warning)
+                    .secondary_text(&gettextrs::gettext(
+                        "This will clear all messages from the device. This will also close the application.",
+                    ))
+                    .text(&gettextrs::gettext("Are you sure?"))
+                    .transient_for(&obj)
+                    .build();
+                dialog.connect_response(clone!(@weak obj => move |dialog, response| {
+                    dialog.close();
+                    if response == gtk::ResponseType::Ok {
+                        log::info!("Clearing device");
+                        if let Some(man) = obj.imp().manager.borrow().as_ref() {
+                            if let Err(e)= man.clear_messages() {
+                                log::error!("Failed to clear db: {}", e);
+                            }
+                        }
+                        log::trace!("Closing the window after message clear");
+                        obj.close();
+                    }
+                }));
+                dialog.show();
+            }));
             log::trace!("Setting up unlink action");
             let action_unlink = SimpleAction::new("unlink", None);
             action_unlink.connect_activate(clone!(@weak obj => move |_, _| {
@@ -152,6 +181,7 @@ pub mod imp {
                                 log::error!("Failed to clear db: {}", e);
                             }
                         }
+                        log::trace!("Closing the window after unlink");
                         obj.close();
                     }
                 }));
@@ -201,6 +231,7 @@ pub mod imp {
             let actions = SimpleActionGroup::new();
             obj.insert_action_group("win", Some(&actions));
             actions.add_action(&action_settings);
+            actions.add_action(&action_clear_messages);
             actions.add_action(&action_unlink);
             actions.add_action(&action_show_help_overlay);
             actions.add_action(&action_about);

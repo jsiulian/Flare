@@ -26,7 +26,7 @@ use libsecret::{
 use crate::ApplicationError;
 use chacha20poly1305::ChaCha20Poly1305;
 use encrypted_sled::{CountingNonce, EncryptionCipher};
-use presage::{MessageIdentity, MessageStore};
+use presage::{MessageIdentity, MessageStore, Thread};
 
 const MESSAGE_BOUND: usize = 10;
 
@@ -137,6 +137,14 @@ impl Manager {
         Ok(())
     }
 
+    pub fn clear_messages(&self) -> Result<(), ApplicationError> {
+        log::trace!("Clearing messages from the manager");
+        if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
+            config_store.clear_messages()?;
+        }
+        Ok(())
+    }
+
     pub fn save_message(
         &self,
         message: Content,
@@ -180,29 +188,18 @@ impl Manager {
         }
     }
 
-    pub fn messages_by_contact(
+    pub fn messages_by_thread(
         &self,
-        contact: &Uuid,
-    ) -> Result<Vec<MessageIdentity>, ApplicationError> {
-        crate::trace!("Querying message by contact: {:?}", contact);
+        thread: &Thread,
+        from: Option<u64>,
+    ) -> Result<impl Iterator<Item = Content>, ApplicationError> {
+        crate::trace!("Querying message by thread: {:?}", thread);
         if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
-            Ok(config_store.messages_by_contact(contact)?)
+            Ok(config_store.messages_by_thread(thread, from)?)
         } else {
-            log::warn!("Query messages by contact without config store being set up");
-            Ok(vec![])
-        }
-    }
-
-    pub fn messages_by_group(
-        &self,
-        group: &GroupContextV2,
-    ) -> Result<Vec<MessageIdentity>, ApplicationError> {
-        crate::trace!("Querying message by group: {:?}", group.master_key);
-        if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
-            Ok(config_store.messages_by_group(group)?)
-        } else {
-            log::warn!("Query messages by contact without config store being set up");
-            Ok(vec![])
+            log::error!("Query messages by contact without config store being set up");
+            // TODO: Error?
+            panic!("Query messages by contact without config store being set up");
         }
     }
 
