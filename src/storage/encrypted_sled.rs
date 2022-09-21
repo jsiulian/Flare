@@ -234,6 +234,7 @@ impl<E: encrypted_sled::Encryption> ContactsStore for EncryptedSledConfigStore<E
                 warn!("skipping contact {:?} without uuid", contact);
             }
         }
+        tree.flush()?;
         debug!("saved contacts");
         Ok(())
     }

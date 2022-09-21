@@ -1,4 +1,4 @@
-use std::{cell::RefCell, collections::HashMap, path::Path};
+use std::{cell::RefCell, collections::HashMap, path::Path, time::Duration};
 
 use crate::storage::EncryptedSledConfigStore;
 use gdk_pixbuf::{
@@ -29,6 +29,7 @@ use encrypted_sled::{CountingNonce, EncryptionCipher};
 use presage::{MessageIdentity, MessageStore, Thread};
 
 const MESSAGE_BOUND: usize = 10;
+const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
 
 gtk::glib::wrapper! {
     pub struct Manager(ObjectSubclass<imp::Manager>);
@@ -274,11 +275,20 @@ impl Manager {
         self.emit_by_name::<()>("link-finish", &[]);
 
         self.sync_contacts().await?;
-        self.init_channels().await;
+
+        let mut channels_init = self.init_channels().await;
+
         crate::info!("Own uuid: {:?}", self.uuid());
         log::debug!("Start receiving messages");
         'outer: loop {
+            let mut init_channels_sleep =
+                gtk::glib::timeout_future(Duration::from_secs(INIT_CHANNELS_SLEEP_SECS)).fuse();
             select! {
+                () = &mut init_channels_sleep => {
+                    if !channels_init {
+                        channels_init = self.init_channels().await;
+                    }
+                }
                 error_opt = receive_error.recv().fuse() => {
                     if error_opt.is_none() {
                         break 'outer;
@@ -413,10 +423,13 @@ impl Manager {
     }
 
     #[cfg(not(feature = "screenshot"))]
-    pub async fn init_channels(&self) {
-        let manager = self.internal();
+    pub async fn init_channels(&self) -> bool {
+        log::trace!("Trying to initialize channels");
+        let mut manager = self.internal();
+        let _ = manager.sync_contacts().await;
         let mut to_load = vec![];
         for contact in self.list_contacts() {
+            log::trace!("Got a contact from the storage");
             let channel = Channel::from_contact_or_group(contact, &None, self).await;
             self.emit_by_name::<()>("channel", &[&channel]);
             let mut channels = self.imp().channels.borrow_mut();
@@ -443,6 +456,7 @@ impl Manager {
                 channels.insert(channel.internal_hash(), channel);
             }
         }
+        let something_loaded = !to_load.is_empty();
         for c in to_load {
             c.load_last(
                 self.imp()
@@ -453,6 +467,7 @@ impl Manager {
             )
             .await;
         }
+        something_loaded
     }
 }
 
