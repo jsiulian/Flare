@@ -49,8 +49,8 @@ pub mod imp {
     #[gtk::template_callbacks]
     impl ChannelItem {
         #[template_callback(function)]
-        pub(super) fn append_colon(s: String) -> String {
-            format!("{}: ", s)
+        pub(super) fn append_colon(s: Option<String>) -> String {
+            format!("{}: ", s.unwrap_or_default())
         }
     }
 

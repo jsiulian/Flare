@@ -116,7 +116,7 @@ impl super::Manager {
                     .internal_hash(),
             ) {
                 log::debug!("Message from a already existing channel");
-                let _ = stored_channel.new_message(msg);
+                let _ = stored_channel.new_message(msg).await;
             }
         }
         Ok(())

@@ -246,6 +246,11 @@ pub mod imp {
         }
 
         #[template_callback]
+        fn handle_search_clicked(&self) {
+            self.channel_list.toggle_search();
+        }
+
+        #[template_callback]
         fn handle_go_back(&self) {
             log::trace!("Go backward in the leaflet");
             self.leaflet.navigate(libadwaita::NavigationDirection::Back);
