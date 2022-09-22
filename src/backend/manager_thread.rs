@@ -1,3 +1,6 @@
+use std::sync::Arc;
+use std::sync::Mutex;
+
 use futures::select;
 use futures::FutureExt;
 use futures::StreamExt;
@@ -56,7 +59,7 @@ impl std::fmt::Debug for Command {
 pub struct ManagerThread {
     command_sender: mpsc::Sender<Command>,
     uuid: Uuid,
-    contacts: Vec<Contact>,
+    contacts: Arc<Mutex<Vec<Contact>>>,
 }
 
 impl Clone for ManagerThread {
@@ -64,7 +67,7 @@ impl Clone for ManagerThread {
         Self {
             command_sender: self.command_sender.clone(),
             uuid: self.uuid,
-            contacts: self.contacts.iter().map(almost_clone_contact).collect(),
+            contacts: self.contacts.clone(),
         }
     }
 }
@@ -130,12 +133,26 @@ impl ManagerThread {
         Some(Self {
             command_sender: sender,
             uuid: uuid.unwrap(),
-            contacts: contacts.unwrap().unwrap_or_default(),
+            contacts: Arc::new(Mutex::new(contacts.unwrap().unwrap_or_default())),
         })
     }
 }
 
 impl ManagerThread {
+    pub async fn sync_contacts(&mut self) -> Result<(), Error> {
+        let (sender_contacts, receiver_contacts) = oneshot::channel();
+        self.command_sender
+            .send(Command::GetContacts(sender_contacts))
+            .await
+            .expect("Command sending failed");
+        let contacts = receiver_contacts
+            .await
+            .expect("Callback receiving failed")?;
+        let mut c = self.contacts.lock().expect("Poisoned mutex");
+        *c = contacts;
+        log::info!("Synced contacts. Got {} contacts.", c.len());
+        Ok(())
+    }
     pub async fn request_contacts_sync(&self) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
@@ -150,12 +167,19 @@ impl ManagerThread {
     }
 
     pub fn get_contacts(&self) -> Result<impl Iterator<Item = Contact> + '_, Error> {
-        Ok(self.contacts.iter().map(almost_clone_contact))
+        let c = self.contacts.lock().expect("Poisoned mutex");
+        // Very weird way to counteract "returning borrowed c".
+        Ok(c.iter()
+            .map(almost_clone_contact)
+            .collect::<Vec<_>>()
+            .into_iter())
     }
 
     pub fn get_contact_by_id(&self, id: Uuid) -> Result<Option<Contact>, Error> {
         Ok(self
             .contacts
+            .lock()
+            .expect("Poisoned mutex")
             .iter()
             .filter(|c| c.address.uuid == Some(id))
             .map(almost_clone_contact)

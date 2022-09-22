@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Immediately sync contacts after linking, without application restart required.
+
+### BREAKING
+
+- Due to changes in the storage backend, your previously stored messages will be lost.
+
 ## [0.4.1]
 
 ### Added
