@@ -33,7 +33,8 @@
                     </accessibility>
                     <property name="tooltip-text" context="tooltip">Search</property>
                     <property name="icon-name">system-search-symbolic</property>
-                    <property name="active" bind-source="channel_list" bind-property="search-enabled" bind-flags="bidirectional"/>
+                    <property name="active" bind-source="channel_list" bind-property="search-enabled"/>
+                    <signal name="clicked" handler="handle_search_clicked" swapped="true"/>
                   </object>
                 </child>
                 <child type="end">

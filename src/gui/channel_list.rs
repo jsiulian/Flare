@@ -1,7 +1,11 @@
+use std::time::Duration;
+
 use gdk::prelude::Cast;
 use gdk::prelude::ListModelExt;
+use gdk_pixbuf::glib;
 use gdk_pixbuf::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
+use gtk::traits::AdjustmentExt;
 use gtk::traits::SorterExt;
 use gtk::traits::WidgetExt;
 use gtk::SorterChange;
@@ -21,13 +25,27 @@ impl ChannelList {
             "`ChannelList` got new `Channel`: {}",
             channel.property::<String>("title")
         );
-        self.imp().model.borrow().append(&channel);
-        self.imp().sorter.borrow().changed(SorterChange::Different);
+        let obj = self.imp();
+        obj.model.borrow().append(&channel);
+        obj.sorter.borrow().changed(SorterChange::Different);
+        self.scroll_up();
         let s = self.clone();
         channel.connect_notify_local(Some("last-message"), move |_, _| {
             log::trace!("Change sorter");
             s.imp().sorter.borrow().changed(SorterChange::Different);
+            s.scroll_up();
         });
+    }
+
+    pub fn scroll_up(&self) {
+        let ctx = glib::MainContext::default();
+        ctx.spawn_local(glib::clone!(@strong self as s => async move  {
+            // Need to sleep a little to make sure the scrolled window saw the changed
+            // child.
+            glib::timeout_future(Duration::from_millis(50)).await;
+            let adjustment = s.imp().scrolled_window.vadjustment();
+            adjustment.set_value(adjustment.lower());
+        }));
     }
 
     pub fn activate_row(&self, i: u32) {
@@ -90,6 +108,8 @@ pub mod imp {
     #[template(resource = "/ui/channel_list.ui")]
     pub struct ChannelList {
         #[template_child]
+        pub(super) scrolled_window: TemplateChild<gtk::ScrolledWindow>,
+        #[template_child]
         pub(super) list: TemplateChild<gtk::ListView>,
         #[template_child]
         pub(super) search_entry: TemplateChild<gtk::SearchEntry>,
@@ -108,6 +128,14 @@ pub mod imp {
         #[template_callback]
         fn search_changed(&self) {
             self.filter.borrow().changed(FilterChange::Different);
+            self.instance().scroll_up();
+        }
+
+        #[template_callback]
+        fn search_activate(&self) {
+            let obj = self.instance();
+            obj.activate_row(0);
+            obj.toggle_search();
         }
 
         #[template_callback]
@@ -115,6 +143,8 @@ pub mod imp {
             self.instance().set_property("search-enabled", false);
             self.search_entry.set_text("");
             self.filter.borrow().changed(FilterChange::Different);
+            self.list.grab_focus();
+            self.instance().scroll_up();
         }
     }
 

@@ -25,6 +25,7 @@ pub mod imp {
     const MESSAGE_SENT_SHOW_NAME_DURATION: u64 = 4 * 60 * 1000;
 
     use std::cell::RefCell;
+    use std::time::Duration;
 
     use gdk_pixbuf::glib::clone;
     use gdk_pixbuf::glib::once_cell::sync::Lazy;
@@ -62,6 +63,8 @@ pub mod imp {
         #[template_child]
         pub(super) list: TemplateChild<gtk::ListBox>,
         #[template_child]
+        pub(super) scrolled_window: TemplateChild<gtk::ScrolledWindow>,
+        #[template_child]
         box_attachments: TemplateChild<gtk::Box>,
         #[template_child]
         pub(super) text_entry: TemplateChild<TextEntry>,
@@ -80,6 +83,7 @@ pub mod imp {
         fn default() -> Self {
             Self {
                 list: Default::default(),
+                scrolled_window: Default::default(),
                 box_attachments: Default::default(),
                 text_entry: Default::default(),
                 attachments: Default::default(),
@@ -287,6 +291,16 @@ pub mod imp {
                     None
                 }),
             );
+            // Scroll to bottom
+            let ctx = glib::MainContext::default();
+            ctx.spawn_local(
+                clone!(@strong obj => async move  {
+                    // Need to sleep a little to make sure the scrolled window saw the changed
+                    // child.
+                    glib::timeout_future(Duration::from_millis(50)).await;
+                    let adjustment = obj.imp().scrolled_window.vadjustment();
+                    adjustment.set_value(adjustment.upper());
+                }));
         }
 
         fn update_show_name_of(&self, widget: &MessageItem) {

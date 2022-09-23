@@ -98,7 +98,6 @@ impl Channel {
                 thread,
                 first_timestamp
             );
-            // TODO: Skip already loaded messages?
             let iter = manager.messages_by_thread(&thread, first_timestamp);
             if iter.is_err() {
                 return vec![];
@@ -216,11 +215,14 @@ impl Channel {
         &self,
         message: Message,
     ) -> Result<(), gtk::glib::error::BoolError> {
+        log::trace!("Adding new message to channel");
         self.do_new_message(&message).await?;
         if !message.is_empty() {
             self.imp().messages.borrow_mut().push(message.clone());
             self.notify("last-message");
             self.try_emit_by_name::<()>("message", &[&message])?;
+        } else {
+            log::trace!("Channel skip adding empty message");
         }
         Ok(())
     }

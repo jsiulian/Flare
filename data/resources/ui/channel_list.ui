@@ -9,21 +9,25 @@
     <property name="orientation">vertical</property>
 
     <child>
-      <object class="GtkSearchEntry" id="search_entry">
-        <property name="tooltip-text" translatable="yes">Search</property>
-        <accessibility>
-          <property name="label" translatable="yes" context="accessibility">Search</property>
-        </accessibility>
+      <object class="GtkSearchBar">
+        <property name="search-mode-enabled" bind-source="FlChannelList" bind-property="search-enabled"/>
+        <child>
+          <object class="GtkSearchEntry" id="search_entry">
+            <property name="tooltip-text" translatable="yes">Search</property>
+            <accessibility>
+              <property name="label" translatable="yes" context="accessibility">Search</property>
+            </accessibility>
 
-        <binding name="visible"><lookup name="search-enabled" type="FlChannelList"/></binding>
-
-        <signal name="search-changed" handler="search_changed" swapped="yes"/>
-        <signal name="stop-search" handler="search_stopped" swapped="yes"/>
+            <signal name="search-changed" handler="search_changed" swapped="yes"/>
+            <signal name="stop-search" handler="search_stopped" swapped="yes"/>
+            <signal name="activate" handler="search_activate" swapped="yes"/>
+          </object>
+        </child>
       </object>
     </child>
 
     <child>
-      <object class="GtkScrolledWindow">
+      <object class="GtkScrolledWindow" id="scrolled_window">
         <property name="hscrollbar-policy">never</property>
         <child>
           <object class="GtkListView" id="list">
