@@ -73,7 +73,6 @@ pub mod imp {
     use gdk_pixbuf::glib::Value;
     use gio::Settings;
     use glib::subclass::InitializingObject;
-    use gtk::builders::AboutDialogBuilder;
     use gtk::glib;
     use gtk::prelude::*;
     use gtk::subclass::prelude::*;
@@ -82,6 +81,9 @@ pub mod imp {
     use gtk::ShortcutsWindow;
     use libadwaita::subclass::prelude::AdwApplicationWindowImpl;
     use libadwaita::subclass::prelude::AdwWindowImpl;
+    use libadwaita::traits::MessageDialogExt;
+    use libadwaita::AboutWindow;
+    use libadwaita::MessageDialog;
 
     use crate::backend::Manager;
     use crate::config::APP_ID;
@@ -133,26 +135,20 @@ pub mod imp {
             let action_clear_messages = SimpleAction::new("clear-messages", None);
             action_clear_messages.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("User requested to clear messages");
-                // TODO: AdwMessageDialog
-                let dialog = gtk::MessageDialog::builder()
-                    .buttons(gtk::ButtonsType::OkCancel)
-                    .message_type(gtk::MessageType::Warning)
-                    .secondary_text(&gettextrs::gettext(
-                        "This will clear all messages from the device. This will also close the application.",
-                    ))
-                    .text(&gettextrs::gettext("Are you sure?"))
-                    .transient_for(&obj)
-                    .build();
-                dialog.connect_response(clone!(@weak obj => move |dialog, response| {
-                    dialog.close();
-                    if response == gtk::ResponseType::Ok {
-                        log::info!("Clearing device");
+                let builder = Builder::from_resource("/ui/dialog_clear_messages.ui");
+                let dialog: MessageDialog = builder
+                    .object("dialog")
+                    .expect("dialog_clear_messages.ui to have at least one object dialog");
+                dialog.set_transient_for(Some(&obj));
+                dialog.connect_response(None, clone!(@weak obj => move |_dialog, response| {
+                    if response == "clear" {
+                        log::info!("Clear messages device");
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
                             if let Err(e)= man.clear_messages() {
                                 log::error!("Failed to clear db: {}", e);
                             }
                         }
-                        log::trace!("Closing the window after message clear");
+                        log::trace!("Closing the window after clear");
                         obj.close();
                     }
                 }));
@@ -162,19 +158,13 @@ pub mod imp {
             let action_unlink = SimpleAction::new("unlink", None);
             action_unlink.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("User requested to unlink the device");
-                // TODO: AdwMessageDialog
-                let dialog = gtk::MessageDialog::builder()
-                    .buttons(gtk::ButtonsType::OkCancel)
-                    .message_type(gtk::MessageType::Warning)
-                    .secondary_text(&gettextrs::gettext(
-                        "This will unlink this device and remove all locally saved data. This will also close the application such that it can be relinked when opening it again.",
-                    ))
-                    .text(&gettextrs::gettext("Are you sure?"))
-                    .transient_for(&obj)
-                    .build();
-                dialog.connect_response(clone!(@weak obj => move |dialog, response| {
-                    dialog.close();
-                    if response == gtk::ResponseType::Ok {
+                let builder = Builder::from_resource("/ui/dialog_unlink.ui");
+                let dialog: MessageDialog = builder
+                    .object("dialog")
+                    .expect("dialog_unlink.ui to have at least one object dialog");
+                dialog.set_transient_for(Some(&obj));
+                dialog.connect_response(None, clone!(@weak obj => move |_dialog, response| {
+                    if response == "unlink" {
                         log::info!("Unlinking device");
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
                             if let Err(e)= man.clear() {
@@ -200,31 +190,11 @@ pub mod imp {
             log::trace!("Setting up about-page action");
             let action_about = SimpleAction::new("about", None);
             action_about.connect_activate(|_, _| {
-                let about_dialog = AboutDialogBuilder::new()
-                    .authors(
-                        env!("CARGO_PKG_AUTHORS")
-                            .split(';')
-                            .map(|s| s.to_string())
-                            .collect(),
-                    )
-                    .comments(env!("CARGO_PKG_DESCRIPTION"))
-                    .copyright(
-                        include_str!("../../NOTICE")
-                            .to_string()
-                            .lines()
-                            .next()
-                            .unwrap_or_default(),
-                    )
-                    .license_type(gtk::License::Gpl30)
-                    .logo_icon_name("icon")
-                    .program_name("Flare")
-                    // Translators: Put your name contact info here if you want to be credited in
-                    // the about page.
-                    .translator_credits(&gettextrs::gettext("translators"))
-                    .version(crate::config::VERSION)
-                    .website(env!("CARGO_PKG_HOMEPAGE"))
-                    .build();
-                about_dialog.show();
+                let builder = Builder::from_resource("/ui/about.ui");
+                let about: AboutWindow = builder
+                    .object("about")
+                    .expect("about.ui to have at least one object about");
+                about.show();
             });
 
             log::trace!("Adding a action to the group");

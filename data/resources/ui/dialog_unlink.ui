@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="AdwMessageDialog" id="dialog">
+    <property name="heading" translatable="yes">Unlink</property>
+    <property name="body" translatable="yes">This will unlink this device and remove all locally saved data. This will also close the application such that it can be relinked when opening it again.</property>
+    <property name="default-response">cancel</property>
+    <property name="close-response">cancel</property>
+    <responses>
+      <response id="cancel" translatable="yes">Cancel</response>
+      <response id="unlink" translatable="yes" appearance="destructive">Unlink</response>
+    </responses>
+  </object>
+</interface>

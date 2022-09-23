@@ -2,7 +2,6 @@ use gdk::prelude::Cast;
 use gdk::prelude::ListModelExt;
 use gdk_pixbuf::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use gtk::traits::AdjustmentExt;
 use gtk::traits::SorterExt;
 use gtk::traits::WidgetExt;
 use gtk::SorterChange;

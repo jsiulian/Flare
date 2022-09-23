@@ -98,7 +98,6 @@ impl Channel {
                 thread,
                 first_timestamp
             );
-            // TODO: Skip already loaded messages?
             let iter = manager.messages_by_thread(&thread, first_timestamp);
             if iter.is_err() {
                 return vec![];
