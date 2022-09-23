@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-23 14:26+0200\n"
-"PO-Revision-Date: 2022-09-17 22:17+0000\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/"
-">\n"
+"PO-Revision-Date: 2022-09-25 02:18+0000\n"
+"Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,9 @@ msgstr ""
 
 #: data/resources/ui/about.ui:12
 msgid "translators"
-msgstr "Sabri Ünal <libreajans@gmail.com>"
+msgstr ""
+"Sabri Ünal <libreajans@gmail.com>\n"
+"Oğuz Ersen <oguz@ersen.moe>"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
@@ -37,12 +39,12 @@ msgstr "Dosya yükle"
 
 #: data/resources/ui/channel_list.ui:16
 msgid "Search"
-msgstr ""
+msgstr "Ara"
 
 #: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Ara"
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
@@ -103,19 +105,16 @@ msgid "Send"
 msgstr "Gönder"
 
 #: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:130
-#, fuzzy
 msgid "Clear messages"
-msgstr "Daha çok ileti yükle"
+msgstr "İletileri temizle"
 
 #: data/resources/ui/dialog_clear_messages.ui:5
-#, fuzzy
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
-"Bu işlem aygıtınızın kağını kaldıracak ve yerel olarak depolanmış tüm "
-"verileri kaldıracak. Bu işlem aynı zamanda uygulamayı tekrar açarken yeniden "
-"bağlanabilecek şekilde kapatacak."
+"Bu, yerel olarak depolanan tüm iletileri temizleyecek. Aynı zamanda "
+"uygulamayı da kapatacak."
 
 #: data/resources/ui/dialog_clear_messages.ui:9
 #: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
@@ -124,7 +123,7 @@ msgstr "İptal"
 
 #: data/resources/ui/dialog_clear_messages.ui:10
 msgid "Clear"
-msgstr ""
+msgstr "Temizle"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
 #: data/resources/ui/window.ui:126
@@ -137,7 +136,7 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
-"Bu işlem aygıtınızın kağını kaldıracak ve yerel olarak depolanmış tüm "
+"Bu işlem aygıtınızın bağını kaldıracak ve yerel olarak depolanan tüm "
 "verileri kaldıracak. Bu işlem aynı zamanda uygulamayı tekrar açarken yeniden "
 "bağlanabilecek şekilde kapatacak."
 
@@ -164,11 +163,11 @@ msgstr "Lütfen bu QR kodunu birincil aygıtınızla tarayın."
 #: data/resources/ui/link_window.ui:35
 msgctxt "accessibility"
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Panoya kopyala"
 
 #: data/resources/ui/link_window.ui:47
 msgid "Please wait until the contacts are displayed after linking."
-msgstr ""
+msgstr "Lütfen bağ kurulduktan sonra kişiler görüntülenene kadar bekleyin."
 
 #: data/resources/ui/message_item.ui:203
 msgid "Reply"
@@ -263,10 +262,9 @@ msgid "Go to channel 1…9"
 msgstr "1…9 arası kanala git"
 
 #: data/resources/ui/shortcuts.ui:49
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr "Kanal seç"
+msgstr "Kanallarda ara"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
