@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-12 12:52+0200\n"
+"POT-Creation-Date: 2022-09-23 14:26+0200\n"
 "PO-Revision-Date: 2022-09-13 13:19+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -18,6 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.14.1-dev\n"
+
+#: data/resources/ui/about.ui:12
+msgid "translators"
+msgstr "Allan Nordhøy <epost@anotheragency.no>"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
@@ -30,6 +34,15 @@ msgstr "Last inn video"
 #: data/resources/ui/attachment.ui:48
 msgid "Load file"
 msgstr "Last inn fil"
+
+#: data/resources/ui/channel_list.ui:16
+msgid "Search"
+msgstr ""
+
+#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:32
+msgctxt "accessibility"
+msgid "Search"
+msgstr ""
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
@@ -90,6 +103,45 @@ msgctxt "tooltip"
 msgid "Send"
 msgstr "Send"
 
+#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:130
+#, fuzzy
+msgid "Clear messages"
+msgstr "Last inn flere bilder"
+
+#: data/resources/ui/dialog_clear_messages.ui:5
+#, fuzzy
+msgid ""
+"This will clear all locally stored messages. This will also close the "
+"application."
+msgstr ""
+"Dette vil oppheve forbindelsen fra denne enheten og fjerne all lokalt lagret "
+"data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
+"åpner det på ny."
+
+#: data/resources/ui/dialog_clear_messages.ui:9
+#: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: data/resources/ui/dialog_clear_messages.ui:10
+msgid "Clear"
+msgstr ""
+
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
+#: data/resources/ui/window.ui:126
+msgid "Unlink"
+msgstr "Opphev forbindelse"
+
+#: data/resources/ui/dialog_unlink.ui:5
+msgid ""
+"This will unlink this device and remove all locally saved data. This will "
+"also close the application such that it can be relinked when opening it "
+"again."
+msgstr ""
+"Dette vil oppheve forbindelsen fra denne enheten og fjerne all lokalt lagret "
+"data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
+"åpner det på ny."
+
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
 msgstr "Feil"
@@ -106,17 +158,18 @@ msgstr "Du bør rapportere denne feilen."
 msgid "Link Device"
 msgstr "Tilknytt enhet"
 
-#: data/resources/ui/link_window.ui:16
-msgid "Cancel"
-msgstr "Avbryt"
-
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device."
 msgstr "Skann denne QR-koden med din hovedenhet."
 
-#: data/resources/ui/link_window.ui:34
-msgid "Please restart the application after this window closed."
-msgstr "Start programmet på ny etter at dette vinduet er lukket."
+#: data/resources/ui/link_window.ui:35
+msgctxt "accessibility"
+msgid "Copy to clipboard"
+msgstr ""
+
+#: data/resources/ui/link_window.ui:47
+msgid "Please wait until the contacts are displayed after linking."
+msgstr ""
 
 #: data/resources/ui/message_item.ui:203
 msgid "Reply"
@@ -215,47 +268,49 @@ msgid "Go to channel 1…9"
 msgstr "Gå til kanal 1…9"
 
 #: data/resources/ui/shortcuts.ui:49
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Search in channels"
+msgstr "Velg en kanal"
+
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Last opp vedlegg"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Fokuser på neste tekstinntastingsboks"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:67
 msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Last inn flere bilder"
 
-#: data/resources/ui/window.ui:32
+#: data/resources/ui/window.ui:43
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Meny"
 
-#: data/resources/ui/window.ui:111
+#: data/resources/ui/window.ui:122
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: data/resources/ui/window.ui:115
-msgid "Unlink"
-msgstr "Opphev forbindelse"
-
-#: data/resources/ui/window.ui:119
+#: data/resources/ui/window.ui:134
 #, fuzzy
 msgid "Keybindings"
 msgstr "Hurtigtaster"
 
-#: data/resources/ui/window.ui:123
+#: data/resources/ui/window.ui:138
 msgid "About"
 msgstr "Om"
 
-#: src/backend/channel.rs:398
+#: src/backend/channel.rs:405
 msgid "Note to self"
 msgstr "Selvpåminnelse"
 
-#: src/backend/manager.rs:329
+#: src/backend/manager.rs:366
 msgid "You"
 msgstr "Deg"
 
@@ -350,22 +405,8 @@ msgstr "%H %M"
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d %m %y. %H %M"
 
-#: src/gui/window.rs:140
-msgid ""
-"This will unlink this device and remove all locally saved data. This will "
-"also close the application such that it can be relinked when opening it "
-"again."
-msgstr ""
-"Dette vil oppheve forbindelsen fra denne enheten og fjerne all lokalt lagret "
-"data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
-"åpner det på ny."
+#~ msgid "Please restart the application after this window closed."
+#~ msgstr "Start programmet på ny etter at dette vinduet er lukket."
 
-#: src/gui/window.rs:142
-msgid "Are you sure?"
-msgstr "Er du sikker?"
-
-#. Translators: Put your name contact info here if you want to be credited in
-#. the about page.
-#: src/gui/window.rs:192
-msgid "translators"
-msgstr "Allan Nordhøy <epost@anotheragency.no>"
+#~ msgid "Are you sure?"
+#~ msgstr "Er du sikker?"

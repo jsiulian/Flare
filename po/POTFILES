@@ -1,16 +1,21 @@
 # fd -t f -e ui . data/
 # fd -t f -e rs . src/
 
+data/resources/ui/about.ui
 data/resources/ui/attachment.ui
 data/resources/ui/channel_item.ui
 data/resources/ui/channel_list.ui
 data/resources/ui/channel_messages.ui
+data/resources/ui/dialog_clear_messages.ui
+data/resources/ui/dialog_unlink.ui
 data/resources/ui/error_dialog.ui
 data/resources/ui/link_window.ui
 data/resources/ui/message_item.ui
 data/resources/ui/preferences_window.ui
 data/resources/ui/shortcuts.ui
+data/resources/ui/text_entry.ui
 data/resources/ui/window.ui
+
 
 src/backend/attachment.rs
 src/backend/channel.rs
@@ -31,6 +36,7 @@ src/gui/link_window.rs
 src/gui/message_item.rs
 src/gui/mod.rs
 src/gui/preferences_window.rs
+src/gui/text_entry.rs
 src/gui/utility.rs
 src/gui/window.rs
 src/hash_log.rs

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-12 12:52+0200\n"
+"POT-Creation-Date: 2022-09-23 14:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: data/resources/ui/about.ui:12
+msgid "translators"
+msgstr ""
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
@@ -28,6 +32,15 @@ msgstr ""
 
 #: data/resources/ui/attachment.ui:48
 msgid "Load file"
+msgstr ""
+
+#: data/resources/ui/channel_list.ui:16
+msgid "Search"
+msgstr ""
+
+#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:32
+msgctxt "accessibility"
+msgid "Search"
 msgstr ""
 
 #: data/resources/ui/channel_messages.ui:14
@@ -88,6 +101,37 @@ msgctxt "tooltip"
 msgid "Send"
 msgstr ""
 
+#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:130
+msgid "Clear messages"
+msgstr ""
+
+#: data/resources/ui/dialog_clear_messages.ui:5
+msgid ""
+"This will clear all locally stored messages. This will also close the "
+"application."
+msgstr ""
+
+#: data/resources/ui/dialog_clear_messages.ui:9
+#: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
+msgid "Cancel"
+msgstr ""
+
+#: data/resources/ui/dialog_clear_messages.ui:10
+msgid "Clear"
+msgstr ""
+
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
+#: data/resources/ui/window.ui:126
+msgid "Unlink"
+msgstr ""
+
+#: data/resources/ui/dialog_unlink.ui:5
+msgid ""
+"This will unlink this device and remove all locally saved data. This will "
+"also close the application such that it can be relinked when opening it "
+"again."
+msgstr ""
+
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
 msgstr ""
@@ -104,16 +148,17 @@ msgstr ""
 msgid "Link Device"
 msgstr ""
 
-#: data/resources/ui/link_window.ui:16
-msgid "Cancel"
-msgstr ""
-
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device."
 msgstr ""
 
-#: data/resources/ui/link_window.ui:34
-msgid "Please restart the application after this window closed."
+#: data/resources/ui/link_window.ui:35
+msgctxt "accessibility"
+msgid "Copy to clipboard"
+msgstr ""
+
+#: data/resources/ui/link_window.ui:47
+msgid "Please wait until the contacts are displayed after linking."
 msgstr ""
 
 #: data/resources/ui/message_item.ui:203
@@ -210,45 +255,46 @@ msgstr ""
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
-msgid "Upload attachment"
+msgid "Search in channels"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
-msgid "Focus the text input box"
+msgid "Upload attachment"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
+msgid "Focus the text input box"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:67
+msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr ""
 
-#: data/resources/ui/window.ui:32
+#: data/resources/ui/window.ui:43
 msgctxt "accessibility"
 msgid "Menu"
 msgstr ""
 
-#: data/resources/ui/window.ui:111
+#: data/resources/ui/window.ui:122
 msgid "Settings"
 msgstr ""
 
-#: data/resources/ui/window.ui:115
-msgid "Unlink"
-msgstr ""
-
-#: data/resources/ui/window.ui:119
+#: data/resources/ui/window.ui:134
 msgid "Keybindings"
 msgstr ""
 
-#: data/resources/ui/window.ui:123
+#: data/resources/ui/window.ui:138
 msgid "About"
 msgstr ""
 
-#: src/backend/channel.rs:398
+#: src/backend/channel.rs:405
 msgid "Note to self"
 msgstr ""
 
-#: src/backend/manager.rs:329
+#: src/backend/manager.rs:366
 msgid "You"
 msgstr ""
 
@@ -333,21 +379,4 @@ msgstr ""
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:39
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
-
-#: src/gui/window.rs:140
-msgid ""
-"This will unlink this device and remove all locally saved data. This will "
-"also close the application such that it can be relinked when opening it "
-"again."
-msgstr ""
-
-#: src/gui/window.rs:142
-msgid "Are you sure?"
-msgstr ""
-
-#. Translators: Put your name contact info here if you want to be credited in
-#. the about page.
-#: src/gui/window.rs:192
-msgid "translators"
 msgstr ""

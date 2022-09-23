@@ -7,17 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-12 12:52+0200\n"
+"POT-Creation-Date: 2022-09-23 14:26+0200\n"
 "PO-Revision-Date: 2022-09-23 06:18+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Weblate 4.14.1\n"
+
+#: data/resources/ui/about.ui:12
+msgid "translators"
+msgstr "Давид Лапшин <ddaudix@gmail.com>"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
@@ -30,6 +34,15 @@ msgstr "Загрузить видео"
 #: data/resources/ui/attachment.ui:48
 msgid "Load file"
 msgstr "Загрузить файл"
+
+#: data/resources/ui/channel_list.ui:16
+msgid "Search"
+msgstr ""
+
+#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:32
+msgctxt "accessibility"
+msgid "Search"
+msgstr ""
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
@@ -89,6 +102,45 @@ msgctxt "tooltip"
 msgid "Send"
 msgstr "Отправить"
 
+#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:130
+#, fuzzy
+msgid "Clear messages"
+msgstr "Загрузить больше сообщений"
+
+#: data/resources/ui/dialog_clear_messages.ui:5
+#, fuzzy
+msgid ""
+"This will clear all locally stored messages. This will also close the "
+"application."
+msgstr ""
+"Это отключит это устройство и удалит все локально сохраненные данные. Это "
+"также закроет приложение, чтобы его можно было повторно связать при "
+"повторном открытии."
+
+#: data/resources/ui/dialog_clear_messages.ui:9
+#: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
+msgid "Cancel"
+msgstr "Отмена"
+
+#: data/resources/ui/dialog_clear_messages.ui:10
+msgid "Clear"
+msgstr ""
+
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
+#: data/resources/ui/window.ui:126
+msgid "Unlink"
+msgstr "Отвязать"
+
+#: data/resources/ui/dialog_unlink.ui:5
+msgid ""
+"This will unlink this device and remove all locally saved data. This will "
+"also close the application such that it can be relinked when opening it "
+"again."
+msgstr ""
+"Это отключит это устройство и удалит все локально сохраненные данные. Это "
+"также закроет приложение, чтобы его можно было повторно связать при "
+"повторном открытии."
+
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
 msgstr "Ошибка"
@@ -105,17 +157,18 @@ msgstr "Пожалуйста, сообщите об этой ошибке."
 msgid "Link Device"
 msgstr "Привязать устройство"
 
-#: data/resources/ui/link_window.ui:16
-msgid "Cancel"
-msgstr "Отмена"
-
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device."
 msgstr "Пожалуйста, отсканируйте этот QR-код на основном устройстве."
 
-#: data/resources/ui/link_window.ui:34
-msgid "Please restart the application after this window closed."
-msgstr "Пожалуйста, перезапустите приложение после закрытия этого окна."
+#: data/resources/ui/link_window.ui:35
+msgctxt "accessibility"
+msgid "Copy to clipboard"
+msgstr ""
+
+#: data/resources/ui/link_window.ui:47
+msgid "Please wait until the contacts are displayed after linking."
+msgstr ""
 
 #: data/resources/ui/message_item.ui:203
 msgid "Reply"
@@ -210,46 +263,48 @@ msgid "Go to channel 1…9"
 msgstr "Перейти в канал 1…9"
 
 #: data/resources/ui/shortcuts.ui:49
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Search in channels"
+msgstr "Выберите канал"
+
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Загрузить вложение"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Сфокусироваться на поле ввода"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:67
 msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Загрузить больше сообщений"
 
-#: data/resources/ui/window.ui:32
+#: data/resources/ui/window.ui:43
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Меню"
 
-#: data/resources/ui/window.ui:111
+#: data/resources/ui/window.ui:122
 msgid "Settings"
 msgstr "Параметры"
 
-#: data/resources/ui/window.ui:115
-msgid "Unlink"
-msgstr "Отвязать"
-
-#: data/resources/ui/window.ui:119
+#: data/resources/ui/window.ui:134
 msgid "Keybindings"
 msgstr "Комбинации клавиш"
 
-#: data/resources/ui/window.ui:123
+#: data/resources/ui/window.ui:138
 msgid "About"
 msgstr "О Приложении"
 
-#: src/backend/channel.rs:398
+#: src/backend/channel.rs:405
 msgid "Note to self"
 msgstr "Заметка для себя"
 
-#: src/backend/manager.rs:329
+#: src/backend/manager.rs:366
 msgid "You"
 msgstr "Вы"
 
@@ -342,22 +397,8 @@ msgstr "%H:%M"
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
 
-#: src/gui/window.rs:140
-msgid ""
-"This will unlink this device and remove all locally saved data. This will "
-"also close the application such that it can be relinked when opening it "
-"again."
-msgstr ""
-"Это отключит это устройство и удалит все локально сохраненные данные. Это "
-"также закроет приложение, чтобы его можно было повторно связать при "
-"повторном открытии."
+#~ msgid "Please restart the application after this window closed."
+#~ msgstr "Пожалуйста, перезапустите приложение после закрытия этого окна."
 
-#: src/gui/window.rs:142
-msgid "Are you sure?"
-msgstr "Вы уверены?"
-
-#. Translators: Put your name contact info here if you want to be credited in
-#. the about page.
-#: src/gui/window.rs:192
-msgid "translators"
-msgstr "Давид Лапшин <ddaudix@gmail.com>"
+#~ msgid "Are you sure?"
+#~ msgstr "Вы уверены?"
