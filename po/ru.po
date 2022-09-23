@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-12 12:52+0200\n"
-"PO-Revision-Date: 2022-09-16 08:33+0000\n"
+"PO-Revision-Date: 2022-09-23 06:18+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
 "\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
@@ -175,7 +175,6 @@ msgid "Number of messages to load on request"
 msgstr "Количество сообщений для загрузке при запросе"
 
 #: data/resources/ui/shortcuts.ui:11
-#, fuzzy
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Общее"
@@ -334,14 +333,12 @@ msgstr "Путь к базе данных в {} не является папко
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:36
-#, fuzzy
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:39
-#, fuzzy
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
 

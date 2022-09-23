@@ -127,6 +127,10 @@
         <attribute name="action">win.unlink</attribute>
       </item>
       <item>
+        <attribute name="label" translatable="yes">Clear messages</attribute>
+        <attribute name="action">win.clear-messages</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">Keybindings</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>

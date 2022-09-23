@@ -1,4 +1,4 @@
-use std::{cell::RefCell, collections::HashMap, path::Path};
+use std::{cell::RefCell, collections::HashMap, path::Path, time::Duration};
 
 use crate::storage::EncryptedSledConfigStore;
 use gdk_pixbuf::{
@@ -26,9 +26,10 @@ use libsecret::{
 use crate::ApplicationError;
 use chacha20poly1305::ChaCha20Poly1305;
 use encrypted_sled::{CountingNonce, EncryptionCipher};
-use presage::{MessageIdentity, MessageStore};
+use presage::{MessageIdentity, MessageStore, Thread};
 
 const MESSAGE_BOUND: usize = 10;
+const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
 
 gtk::glib::wrapper! {
     pub struct Manager(ObjectSubclass<imp::Manager>);
@@ -137,6 +138,14 @@ impl Manager {
         Ok(())
     }
 
+    pub fn clear_messages(&self) -> Result<(), ApplicationError> {
+        log::trace!("Clearing messages from the manager");
+        if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
+            config_store.clear_messages()?;
+        }
+        Ok(())
+    }
+
     pub fn save_message(
         &self,
         message: Content,
@@ -180,29 +189,18 @@ impl Manager {
         }
     }
 
-    pub fn messages_by_contact(
+    pub fn messages_by_thread(
         &self,
-        contact: &Uuid,
-    ) -> Result<Vec<MessageIdentity>, ApplicationError> {
-        crate::trace!("Querying message by contact: {:?}", contact);
+        thread: &Thread,
+        from: Option<u64>,
+    ) -> Result<impl Iterator<Item = Content>, ApplicationError> {
+        crate::trace!("Querying message by thread: {:?}", thread);
         if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
-            Ok(config_store.messages_by_contact(contact)?)
+            Ok(config_store.messages_by_thread(thread, from)?)
         } else {
-            log::warn!("Query messages by contact without config store being set up");
-            Ok(vec![])
-        }
-    }
-
-    pub fn messages_by_group(
-        &self,
-        group: &GroupContextV2,
-    ) -> Result<Vec<MessageIdentity>, ApplicationError> {
-        crate::trace!("Querying message by group: {:?}", group.master_key);
-        if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
-            Ok(config_store.messages_by_group(group)?)
-        } else {
-            log::warn!("Query messages by contact without config store being set up");
-            Ok(vec![])
+            log::error!("Query messages by contact without config store being set up");
+            // TODO: Error?
+            panic!("Query messages by contact without config store being set up");
         }
     }
 
@@ -277,11 +275,20 @@ impl Manager {
         self.emit_by_name::<()>("link-finish", &[]);
 
         self.sync_contacts().await?;
-        self.init_channels().await;
+
+        let mut channels_init = self.init_channels().await;
+
         crate::info!("Own uuid: {:?}", self.uuid());
         log::debug!("Start receiving messages");
         'outer: loop {
+            let mut init_channels_sleep =
+                gtk::glib::timeout_future(Duration::from_secs(INIT_CHANNELS_SLEEP_SECS)).fuse();
             select! {
+                () = &mut init_channels_sleep => {
+                    if !channels_init {
+                        channels_init = self.init_channels().await;
+                    }
+                }
                 error_opt = receive_error.recv().fuse() => {
                     if error_opt.is_none() {
                         break 'outer;
@@ -416,10 +423,13 @@ impl Manager {
     }
 
     #[cfg(not(feature = "screenshot"))]
-    pub async fn init_channels(&self) {
-        let manager = self.internal();
+    pub async fn init_channels(&self) -> bool {
+        log::trace!("Trying to initialize channels");
+        let mut manager = self.internal();
+        let _ = manager.sync_contacts().await;
         let mut to_load = vec![];
         for contact in self.list_contacts() {
+            log::trace!("Got a contact from the storage");
             let channel = Channel::from_contact_or_group(contact, &None, self).await;
             self.emit_by_name::<()>("channel", &[&channel]);
             let mut channels = self.imp().channels.borrow_mut();
@@ -446,6 +456,7 @@ impl Manager {
                 channels.insert(channel.internal_hash(), channel);
             }
         }
+        let something_loaded = !to_load.is_empty();
         for c in to_load {
             c.load_last(
                 self.imp()
@@ -456,6 +467,7 @@ impl Manager {
             )
             .await;
         }
+        something_loaded
     }
 }
 

@@ -9,7 +9,7 @@ use gio::subclass::prelude::ObjectSubclassIsExt;
 use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::DataMessage};
 use presage::{
     prelude::{GroupContextV2, GroupMasterKey, ServiceAddress},
-    MessageIdentity,
+    MessageIdentity, Thread,
 };
 
 use super::{Contact, Manager, Message};
@@ -48,20 +48,9 @@ impl Channel {
             if let Ok(group) = group {
                 return Self::from_group(group, group_context_v2, manager).await;
             } else {
-                if let Some(ref uuid) = contact.address().and_then(|a| a.uuid) {
-                    s.imp().unloaded_messages.swap(&RefCell::new(
-                        manager.messages_by_contact(uuid).unwrap_or_default(),
-                    ));
-                }
                 s.imp().contact.swap(&RefCell::new(Some(contact)));
             }
         } else {
-            if let Some(ref uuid) = contact.address().and_then(|a| a.uuid) {
-                s.imp().unloaded_messages.swap(&RefCell::new(
-                    manager.messages_by_contact(uuid).unwrap_or_default(),
-                ));
-            }
-
             s.imp().contact.swap(&RefCell::new(Some(contact)));
         }
         s
@@ -74,79 +63,65 @@ impl Channel {
     ) -> Self {
         let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Channel`");
         s.imp().group.swap(&RefCell::new(Some(group)));
-        s.imp().unloaded_messages.swap(&RefCell::new(
-            manager
-                .messages_by_group(group_context_v2)
-                .unwrap_or_default(),
-        ));
         s.imp()
             .group_context
             .swap(&RefCell::new(Some(group_context_v2.clone())));
-        s.imp().unloaded_messages.swap(&RefCell::new(
-            manager
-                .messages_by_group(group_context_v2)
-                .unwrap_or_default(),
-        ));
         s
+    }
+
+    fn thread(&self) -> Option<Thread> {
+        if let Some(key) = self
+            .group_context()
+            .and_then(|c| c.master_key)
+            .and_then(|k| <[u8; 32]>::try_from(k).ok())
+        {
+            Some(Thread::Group(key))
+        } else {
+            Some(Thread::Contact(self.uuid()?))
+        }
     }
 
     #[async_recursion::async_recursion(?Send)]
     pub async fn load_last(&self, number: usize) -> Vec<Message> {
-        let to_load = {
-            let mut unloaded_msgs = self.imp().unloaded_messages.borrow_mut();
+        if let Some(thread) = self.thread() {
+            let mut results = vec![];
+            let manager = self.property::<Manager>("manager");
+            let messages_unborrowed = &self.imp().messages;
+            let first_timestamp = {
+                let msgs = messages_unborrowed.borrow();
+                msgs.get(0).and_then(|m| m.timestamp()).map(|t| t - 1)
+            };
             crate::trace!(
-                "Loading last messages for channel: {} ({:?}). Got {} total unloaded messages.",
+                "Loading {} last messages for channel: {} (Thread: {:?}). Needed earlier then {:?}",
+                number,
                 self.property::<String>("title"),
-                self.uuid(),
-                unloaded_msgs.len()
+                thread,
+                first_timestamp
             );
-            if unloaded_msgs.len() <= number {
-                unloaded_msgs.drain(..).collect::<Vec<_>>()
-            } else {
-                unloaded_msgs.drain(..number).collect::<Vec<_>>()
+            // TODO: Skip already loaded messages?
+            let iter = manager.messages_by_thread(&thread, first_timestamp);
+            if iter.is_err() {
+                return vec![];
             }
-        };
-
-        if to_load.is_empty() {
-            return vec![];
-        }
-
-        let mut empty = 0;
-        let mut results = vec![];
-        let manager = self.property::<Manager>("manager");
-        for msg_id in to_load {
-            if let Ok(Some(msg)) = manager.message_by_id(&msg_id).await {
+            for content in iter.unwrap() {
+                let msg = Message::from_content(content, &manager).await;
                 if !msg.is_empty() {
                     {
-                        let mut messages = self.imp().messages.borrow_mut();
+                        let mut messages = messages_unborrowed.borrow_mut();
                         messages.insert(0, msg.clone());
                     }
                     results.insert(0, msg.clone());
                     self.notify("last-message");
-                } else {
-                    log::trace!(
-                        "Channel {} got empty message, skipping.",
-                        self.property::<String>("title")
-                    );
-                    empty += 1
+                    let _ = self.do_new_message(&msg).await;
                 }
-                // TODO: Error?
-                let _ = self.do_new_message(&msg).await;
-            } else {
-                log::warn!(
-                    "Channel {} got message that could not be found, skipping.",
-                    self.property::<String>("title")
-                );
+                if results.len() == number {
+                    break;
+                }
             }
-        }
-
-        let mut previous = if empty != 0 {
-            self.load_last(empty).await
+            results
         } else {
             vec![]
-        };
-        previous.append(&mut results);
-        previous
+        }
     }
 
     pub(super) fn internal_hash(&self) -> u64 {
@@ -179,6 +154,7 @@ impl Channel {
                 body
             );
             if let Some(quote) = message.quote() {
+                log::trace!("Message claims to have a quote");
                 if let Ok(id) = MessageIdentity::try_from(&quote) {
                     if let Ok(Some(quoted_msg)) =
                         self.property::<Manager>("manager").message_by_id(&id).await
@@ -358,7 +334,6 @@ mod imp {
 
         pub(super) manager: RefCell<Option<Manager>>,
         pub(super) messages: RefCell<Vec<Message>>,
-        pub(super) unloaded_messages: RefCell<Vec<MessageIdentity>>,
         pub(super) pending_reactions: RefCell<HashMap<MessageIdentity, String>>,
     }
 
