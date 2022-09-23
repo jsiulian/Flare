@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-23 14:26+0200\n"
-"PO-Revision-Date: 2022-09-13 13:19+0000\n"
+"PO-Revision-Date: 2022-09-25 02:17+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
 "flare/nb_NO/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #: data/resources/ui/about.ui:12
 msgid "translators"
@@ -37,12 +37,12 @@ msgstr "Last inn fil"
 
 #: data/resources/ui/channel_list.ui:16
 msgid "Search"
-msgstr ""
+msgstr "Søk"
 
 #: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Søk"
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
@@ -125,7 +125,7 @@ msgstr "Avbryt"
 
 #: data/resources/ui/dialog_clear_messages.ui:10
 msgid "Clear"
-msgstr ""
+msgstr "Tøm"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
 #: data/resources/ui/window.ui:126
@@ -165,11 +165,12 @@ msgstr "Skann denne QR-koden med din hovedenhet."
 #: data/resources/ui/link_window.ui:35
 msgctxt "accessibility"
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopier til utklippstavlen"
 
 #: data/resources/ui/link_window.ui:47
+#, fuzzy
 msgid "Please wait until the contacts are displayed after linking."
-msgstr ""
+msgstr "Vent til kontaktene vises etter sammenlenking."
 
 #: data/resources/ui/message_item.ui:203
 msgid "Reply"
