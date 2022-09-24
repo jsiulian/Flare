@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-23 14:26+0200\n"
-"PO-Revision-Date: 2022-09-13 13:19+0000\n"
+"PO-Revision-Date: 2022-09-25 02:17+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #: data/resources/ui/about.ui:12
 msgid "translators"
@@ -36,12 +36,12 @@ msgstr "Charger le fichier"
 
 #: data/resources/ui/channel_list.ui:16
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 #: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
@@ -102,19 +102,16 @@ msgid "Send"
 msgstr "Envoyer"
 
 #: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:130
-#, fuzzy
 msgid "Clear messages"
-msgstr "Charger plus de messages"
+msgstr "Effacer les messages"
 
 #: data/resources/ui/dialog_clear_messages.ui:5
-#, fuzzy
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
-"Ceci va délier cet appareil et supprimer toutes les données enregistrées "
-"localement. Cela fermera aussi l’application pour qu’elle puisse être à "
-"nouveau reliée à l’ouverture."
+"Ceci effacera tous les messages stockés localement. Ceci fermera également "
+"l'application."
 
 #: data/resources/ui/dialog_clear_messages.ui:9
 #: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
@@ -123,7 +120,7 @@ msgstr "Annuler"
 
 #: data/resources/ui/dialog_clear_messages.ui:10
 msgid "Clear"
-msgstr ""
+msgstr "Effacer"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
 #: data/resources/ui/window.ui:126
@@ -163,11 +160,11 @@ msgstr "Veuillez scanner ce code QR avec votre appareil principal."
 #: data/resources/ui/link_window.ui:35
 msgctxt "accessibility"
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Copier dans le presse-papiers"
 
 #: data/resources/ui/link_window.ui:47
 msgid "Please wait until the contacts are displayed after linking."
-msgstr ""
+msgstr "Veuillez attendre que les contacts s'affichent après la liaison."
 
 #: data/resources/ui/message_item.ui:203
 msgid "Reply"
@@ -262,10 +259,9 @@ msgid "Go to channel 1…9"
 msgstr "Aller à la chaîne 1...9"
 
 #: data/resources/ui/shortcuts.ui:49
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr "Sélectionnez une chaîne"
+msgstr "Rechercher dans les chaînes"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
