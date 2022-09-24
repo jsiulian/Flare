@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-23 14:26+0200\n"
-"PO-Revision-Date: 2022-09-13 13:19+0000\n"
+"PO-Revision-Date: 2022-09-25 02:17+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/"
-">\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #: data/resources/ui/about.ui:12
 msgid "translators"
@@ -37,12 +37,12 @@ msgstr "Lataa tiedosto"
 
 #: data/resources/ui/channel_list.ui:16
 msgid "Search"
-msgstr ""
+msgstr "Hae"
 
 #: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:32
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Hae"
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
@@ -103,19 +103,16 @@ msgid "Send"
 msgstr "Lähetä"
 
 #: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:130
-#, fuzzy
 msgid "Clear messages"
-msgstr "Lataa lisää viestejä"
+msgstr "Tyhjennä viestit"
 
 #: data/resources/ui/dialog_clear_messages.ui:5
-#, fuzzy
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
-"Tämä poistaa laitteen yhteyden ja poistaa kaikki paikallisesti tallennetut "
-"tiedot. Tämä sulkee myös sovelluksen niin, että se voidaan yhdistää "
-"uudelleen, kun se avataan uudelleen."
+"Tämä tyhjentää kaikki paikallisesti tallennetut viestit. Tämä sulkee myös "
+"sovelluksen."
 
 #: data/resources/ui/dialog_clear_messages.ui:9
 #: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
@@ -124,7 +121,7 @@ msgstr "Peruuta"
 
 #: data/resources/ui/dialog_clear_messages.ui:10
 msgid "Clear"
-msgstr ""
+msgstr "Tyhjennä"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
 #: data/resources/ui/window.ui:126
@@ -164,11 +161,11 @@ msgstr "Tarkista tämä QR-koodi ensisijaisella laitteellasi."
 #: data/resources/ui/link_window.ui:35
 msgctxt "accessibility"
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopioi leikepöydälle"
 
 #: data/resources/ui/link_window.ui:47
 msgid "Please wait until the contacts are displayed after linking."
-msgstr ""
+msgstr "Odota, kunnes yhteystiedot näkyvät linkittämisen jälkeen."
 
 #: data/resources/ui/message_item.ui:203
 msgid "Reply"
@@ -264,10 +261,9 @@ msgid "Go to channel 1…9"
 msgstr "Siirry kanavalle 1...9"
 
 #: data/resources/ui/shortcuts.ui:49
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr "Valitse kanava"
+msgstr "Hae kanavista"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
