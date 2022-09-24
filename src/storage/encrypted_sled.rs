@@ -21,8 +21,7 @@ use libsignal_service::{
 use log::{debug, trace, warn};
 
 use presage::{
-    ConfigStore, ContactsStore, ContentProto, Error, MessageIdentity, MessageStore, Registered,
-    StateStore, Thread,
+    ConfigStore, ContactsStore, ContentProto, Error, MessageStore, Registered, StateStore, Thread,
 };
 
 const SLED_KEY_REGISTRATION: &str = "registration";
@@ -30,7 +29,6 @@ const SLED_KEY_CONTACTS: &str = "contacts";
 const SLED_KEY_GROUPS: &str = "groups";
 
 const SLED_TREE_SESSIONS: &str = "sessions";
-const SLED_TREE_MESSAGES: &str = "messages";
 const SLED_TREE_THREAD_PREFIX: &str = "thread";
 
 #[derive(Debug, Clone)]
@@ -523,56 +521,39 @@ impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledConf
     ) -> Result<(), Error> {
         let receiver = receiver.map(|s| s.into());
 
-        let id = MessageIdentity::try_from(&message)?;
         let thread = Thread::from_content_receiver(&message, receiver.as_ref())?;
-        let timestamp = id.1;
+        let timestamp = &message.metadata.timestamp.to_be_bytes();
+        log::trace!(
+            "Storing a message with thread: {:?}, timestamp: {}",
+            thread,
+            message.metadata.timestamp
+        );
 
-        log::trace!("Storing a message with id: {:?}", id);
-
-        let tree_messages = self
-            .db
-            .read()
-            .expect("poisoned mutex")
-            .open_tree(SLED_TREE_MESSAGES)?;
         let tree_thread = self
             .db
-            .read()
+            .try_read()
             .expect("poisoned mutex")
             .open_tree(thread_key(&thread))?;
 
-        let key: [u8; 24] = id.into();
         let value = ContentProto::from_content(message);
         let value_vec = value.encode_to_vec();
 
-        tree_messages.insert(key, value_vec.clone())?;
-        tree_thread.insert(timestamp.to_be_bytes(), value_vec)?;
+        tree_thread.insert(timestamp, value_vec)?;
         Ok(())
     }
 
-    fn messages(&self) -> Result<Vec<libsignal_service::prelude::Content>, Error> {
-        Ok(self
-            .db
-            .read()
-            .expect("poisoned mutex")
-            .open_tree(SLED_TREE_MESSAGES)?
-            .iter()
-            .filter_map(Result::ok)
-            .filter_map(|(_key, buf)| ContentProto::decode(&*buf).ok())
-            .map(|c| c.into_content())
-            .collect())
-    }
-
-    fn message_by_identity(
+    fn message(
         &self,
-        id: &MessageIdentity,
+        thread: &Thread,
+        timestamp: u64,
     ) -> Result<Option<libsignal_service::prelude::Content>, Error> {
-        let tree = self
+        let tree_thread = self
             .db
-            .read()
+            .try_read()
             .expect("poisoned mutex")
-            .open_tree(SLED_TREE_MESSAGES)?;
-        let key: [u8; 24] = id.clone().into();
-        let val = tree.get(key)?;
+            .open_tree(thread_key(thread))?;
+        // Big-Endian needed, otherwise wrong ordering in sled.
+        let val = tree_thread.get(timestamp.to_be_bytes())?;
         if let Some(val) = val {
             let proto = ContentProto::decode(&*val)?;
             Ok(Some(proto.into_content()))
@@ -581,11 +562,7 @@ impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledConf
         }
     }
 
-    fn messages_by_thread(
-        &self,
-        thread: &Thread,
-        from: Option<u64>,
-    ) -> Result<Self::MessagesIter, Error> {
+    fn messages(&self, thread: &Thread, from: Option<u64>) -> Result<Self::MessagesIter, Error> {
         let tree_thread = self
             .db
             .read()

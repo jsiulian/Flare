@@ -9,7 +9,7 @@ use gio::subclass::prelude::ObjectSubclassIsExt;
 use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::DataMessage};
 use presage::{
     prelude::{GroupContextV2, GroupMasterKey, ServiceAddress},
-    MessageIdentity, Thread,
+    Thread,
 };
 
 use super::{Contact, Manager, Message};
@@ -98,7 +98,7 @@ impl Channel {
                 thread,
                 first_timestamp
             );
-            let iter = manager.messages_by_thread(&thread, first_timestamp);
+            let iter = manager.messages(&thread, first_timestamp);
             if iter.is_err() {
                 return vec![];
             }
@@ -111,8 +111,8 @@ impl Channel {
                     }
                     results.insert(0, msg.clone());
                     self.notify("last-message");
-                    let _ = self.do_new_message(&msg).await;
                 }
+                let _ = self.do_new_message(&msg).await;
                 if results.len() == number {
                     break;
                 }
@@ -152,11 +152,13 @@ impl Channel {
                 self.property::<String>("title"),
                 body
             );
-            if let Some(quote) = message.quote() {
+            if let Some(quote) = message.quote().and_then(|q| q.id) {
                 log::trace!("Message claims to have a quote");
-                if let Ok(id) = MessageIdentity::try_from(&quote) {
-                    if let Ok(Some(quoted_msg)) =
-                        self.property::<Manager>("manager").message_by_id(&id).await
+                if let Some(thread) = self.thread() {
+                    if let Ok(Some(quoted_msg)) = self
+                        .property::<Manager>("manager")
+                        .message(&thread, quote)
+                        .await
                     {
                         crate::trace!(
                             "Message {} quotes other message {}",
@@ -169,7 +171,7 @@ impl Channel {
                     }
                 }
             }
-            if let Some(id) = message.id() {
+            if let Some(id) = message.timestamp() {
                 if let Some(reactions) = self.imp().pending_reactions.borrow_mut().remove(&id) {
                     log::trace!("Adding pending reactions to message: {}", reactions);
                     message.react(reactions);
@@ -200,9 +202,9 @@ impl Channel {
                 let mut pending_reactions = self.imp().pending_reactions.borrow_mut();
                 let entry = pending_reactions
                     .entry(
-                        (&reaction)
-                            .try_into()
-                            .expect("Reacted message to have UUID"),
+                        reaction
+                            .target_sent_timestamp
+                            .expect("Reacted message to have timestamp"),
                     )
                     .or_insert_with(|| "".to_string());
                 entry.push_str(reaction_emoji);
@@ -319,7 +321,6 @@ mod imp {
     use presage::{
         libsignal_service::groups_v2::Group,
         prelude::{GroupContextV2, Uuid},
-        MessageIdentity,
     };
     use std::{cell::RefCell, collections::HashMap};
 
@@ -333,7 +334,7 @@ mod imp {
 
         pub(super) manager: RefCell<Option<Manager>>,
         pub(super) messages: RefCell<Vec<Message>>,
-        pub(super) pending_reactions: RefCell<HashMap<MessageIdentity, String>>,
+        pub(super) pending_reactions: RefCell<HashMap<u64, String>>,
     }
 
     impl std::hash::Hash for Channel {
