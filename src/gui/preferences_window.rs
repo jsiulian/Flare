@@ -34,7 +34,7 @@ pub mod imp {
     #[template(resource = "/ui/preferences_window.ui")]
     pub struct PreferencesWindow {
         #[template_child]
-        entry_device_name: TemplateChild<gtk::Entry>,
+        entry_device_name: TemplateChild<libadwaita::EntryRow>,
 
         #[template_child]
         switch_download_images: TemplateChild<gtk::Switch>,

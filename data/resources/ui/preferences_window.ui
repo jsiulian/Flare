@@ -11,19 +11,10 @@
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Linking</property>
+            <property name="description" translatable="yes">The device will need to be relinked to take effect.</property>
             <child>
-              <object class="AdwActionRow" id="row_device_name">
+              <object class="AdwEntryRow" id="entry_device_name">
                 <property name="title" translatable="yes">Device Name</property>
-                <property name="subtitle" translatable="yes">The device will need to be relinked to take effect.</property>
-                <child>
-                  <object class="GtkEntry" id="entry_device_name">
-                    <accessibility>
-                      <relation name="labelled-by">row_device_name</relation>
-                    </accessibility>
-                    <property name="valign">center</property>
-                    <property name="halign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
