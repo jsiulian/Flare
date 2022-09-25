@@ -2075,7 +2075,7 @@ checksum = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
 [[package]]
 name = "presage"
 version = "0.3.0"
-source = "git+https://github.com/Schmiddiii/presage?rev=013f40053bf03af2d14a6eac38f88105ee074e75#013f40053bf03af2d14a6eac38f88105ee074e75"
+source = "git+https://github.com/whisperfish/presage?rev=de61481fee93a8bcfe568f1c1c4fd7024aaf9474#de61481fee93a8bcfe568f1c1c4fd7024aaf9474"
 dependencies = [
  "async-trait",
  "base64 0.12.3",
