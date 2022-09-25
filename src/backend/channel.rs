@@ -4,8 +4,9 @@ use std::{
     hash::{Hash, Hasher},
 };
 
-use gdk_pixbuf::{glib::Object, prelude::ObjectExt};
+use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
+use glib::Object;
 use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::DataMessage};
 use presage::{
     prelude::{GroupContextV2, GroupMasterKey, ServiceAddress},
@@ -309,20 +310,17 @@ impl Channel {
 }
 
 mod imp {
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gdk_pixbuf::{
-        glib::{
-            once_cell::sync::Lazy, subclass::Signal, ParamFlags, ParamSpec, ParamSpecObject,
-            ParamSpecString, Value,
-        },
-        prelude::{ObjectExt, StaticType, ToValue},
+    use std::{cell::RefCell, collections::HashMap};
+
+    use gdk::{prelude::*, subclass::prelude::*};
+    use glib::{
+        once_cell::sync::Lazy, subclass::Signal, ParamFlags, ParamSpec, ParamSpecObject,
+        ParamSpecString, Value,
     };
-    use gtk::glib;
     use presage::{
         libsignal_service::groups_v2::Group,
         prelude::{GroupContextV2, Uuid},
     };
-    use std::{cell::RefCell, collections::HashMap};
 
     use crate::backend::{Contact, Manager, Message};
 

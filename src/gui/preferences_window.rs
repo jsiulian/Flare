@@ -20,15 +20,10 @@ impl Default for PreferencesWindow {
 }
 
 pub mod imp {
-    use gdk::gio::Settings;
-    use gdk::gio::SettingsBindFlags;
+    use gio::{Settings, SettingsBindFlags};
     use glib::subclass::InitializingObject;
-    use gtk::glib;
-    use gtk::prelude::*;
-    use gtk::subclass::prelude::*;
-    use gtk::CompositeTemplate;
-    use libadwaita::subclass::prelude::AdwWindowImpl;
-    use libadwaita::subclass::prelude::PreferencesWindowImpl;
+    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use libadwaita::subclass::prelude::*;
 
     #[derive(CompositeTemplate)]
     #[template(resource = "/ui/preferences_window.ui")]

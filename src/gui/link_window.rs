@@ -1,5 +1,4 @@
-use gdk_pixbuf::prelude::IsA;
-use gtk::glib::Object;
+use glib::{prelude::IsA, Object};
 
 use crate::backend::Manager;
 
@@ -25,23 +24,14 @@ impl LinkWindow {
 pub mod imp {
     use std::cell::RefCell;
 
-    use gdk_pixbuf::glib::clone;
-    use gdk_pixbuf::glib::once_cell::sync::Lazy;
-    use gdk_pixbuf::glib::Bytes;
-    use gdk_pixbuf::glib::ParamFlags;
-    use gdk_pixbuf::glib::ParamSpec;
-    use gdk_pixbuf::glib::ParamSpecObject;
-    use gdk_pixbuf::glib::ParamSpecString;
-    use gdk_pixbuf::glib::Value;
     use gdk_pixbuf::Pixbuf;
     use gio::MemoryInputStream;
-    use glib::subclass::InitializingObject;
-    use gtk::glib;
-    use gtk::prelude::*;
-    use gtk::subclass::prelude::*;
-    use gtk::CompositeTemplate;
-    use libadwaita::subclass::prelude::AdwApplicationWindowImpl;
-    use libadwaita::subclass::prelude::AdwWindowImpl;
+    use glib::{
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, Bytes, ParamFlags, ParamSpec,
+        ParamSpecObject, ParamSpecString, Value,
+    };
+    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use libadwaita::subclass::prelude::*;
 
     use crate::backend::Manager;
 

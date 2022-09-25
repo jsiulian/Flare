@@ -1,7 +1,6 @@
-use gdk::subclass::prelude::ObjectSubclassIsExt;
-use gdk_pixbuf::{glib, prelude::SettingsExt};
-use gtk::prelude::GtkApplicationExt;
-use gtk::{glib::Object, traits::GtkWindowExt};
+use gdk::{prelude::SettingsExt, subclass::prelude::*};
+use glib::Object;
+use gtk::prelude::*;
 
 gtk::glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
@@ -58,40 +57,25 @@ impl Window {
 }
 
 pub mod imp {
-    use std::cell::RefCell;
-    use std::env;
-    use std::path::PathBuf;
+    use std::{cell::RefCell, env, path::PathBuf};
 
-    use gdk::gio::SimpleAction;
-    use gdk::gio::SimpleActionGroup;
-    use gdk_pixbuf::glib::clone;
-    use gdk_pixbuf::glib::once_cell::sync::Lazy;
-    use gdk_pixbuf::glib::MainContext;
-    use gdk_pixbuf::glib::ParamFlags;
-    use gdk_pixbuf::glib::ParamSpec;
-    use gdk_pixbuf::glib::ParamSpecObject;
-    use gdk_pixbuf::glib::Value;
-    use gio::Settings;
-    use glib::subclass::InitializingObject;
-    use gtk::glib;
-    use gtk::prelude::*;
-    use gtk::subclass::prelude::*;
-    use gtk::Builder;
-    use gtk::CompositeTemplate;
-    use gtk::ShortcutsWindow;
-    use libadwaita::subclass::prelude::AdwApplicationWindowImpl;
-    use libadwaita::subclass::prelude::AdwWindowImpl;
-    use libadwaita::traits::MessageDialogExt;
-    use libadwaita::AboutWindow;
-    use libadwaita::MessageDialog;
+    use gio::{Settings, SimpleAction, SimpleActionGroup};
+    use glib::{
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, MainContext, ParamFlags,
+        ParamSpec, ParamSpecObject, Value,
+    };
+    use gtk::{prelude::*, subclass::prelude::*, Builder, CompositeTemplate, ShortcutsWindow};
+    use libadwaita::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
 
-    use crate::backend::Manager;
-    use crate::config::APP_ID;
-    use crate::gui::channel_list::ChannelList;
-    use crate::gui::channel_messages::ChannelMessages;
-    use crate::gui::error_dialog::ErrorDialog;
-    use crate::gui::link_window::LinkWindow;
-    use crate::gui::preferences_window::PreferencesWindow;
+    use crate::{
+        backend::Manager,
+        config::APP_ID,
+        gui::{
+            channel_list::ChannelList, channel_messages::ChannelMessages,
+            error_dialog::ErrorDialog, link_window::LinkWindow,
+            preferences_window::PreferencesWindow,
+        },
+    };
 
     #[derive(CompositeTemplate)]
     #[template(resource = "/ui/window.ui")]

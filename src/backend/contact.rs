@@ -1,7 +1,7 @@
 use std::cell::RefCell;
 
-use gdk_pixbuf::glib::Object;
 use gio::subclass::prelude::ObjectSubclassIsExt;
+use glib::Object;
 use presage::prelude::ServiceAddress;
 
 use super::Manager;
@@ -46,17 +46,14 @@ impl Contact {
 }
 
 mod imp {
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gdk_pixbuf::{
-        glib::{
-            once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject,
-            ParamSpecString, Value,
-        },
-        prelude::{ObjectExt, StaticType, ToValue},
-    };
-    use gtk::glib;
-    use presage::prelude::phonenumber::Mode;
     use std::cell::RefCell;
+
+    use gdk::{prelude::*, subclass::prelude::*};
+    use glib::{
+        once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject,
+        ParamSpecString, Value,
+    };
+    use presage::prelude::phonenumber::Mode;
 
     use crate::backend::Manager;
 

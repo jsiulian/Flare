@@ -1,5 +1,5 @@
 use gdk::prelude::{ApplicationExt, ApplicationExtManual};
-use gtk::glib::IsA;
+use glib::IsA;
 use gtk::traits::{GtkWindowExt, WidgetExt};
 
 mod config;

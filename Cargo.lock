@@ -636,6 +636,7 @@ dependencies = [
  "gdk4",
  "gettext-rs",
  "gio",
+ "glib",
  "gtk4",
  "hex",
  "libadwaita",

@@ -1,14 +1,8 @@
 use std::time::Duration;
 
-use gdk::prelude::Cast;
-use gdk::prelude::ListModelExt;
-use gdk_pixbuf::glib;
-use gdk_pixbuf::prelude::ObjectExt;
+use gdk::prelude::*;
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use gtk::traits::AdjustmentExt;
-use gtk::traits::SorterExt;
-use gtk::traits::WidgetExt;
-use gtk::SorterChange;
+use gtk::{traits::*, SorterChange};
 
 use crate::backend::Channel;
 
@@ -78,31 +72,21 @@ pub mod imp {
     use std::cell::Cell;
     use std::cell::RefCell;
 
-    use gdk_pixbuf::glib::clone;
-    use gdk_pixbuf::glib::once_cell::sync::Lazy;
-    use gdk_pixbuf::glib::subclass::Signal;
-    use gdk_pixbuf::glib::ParamFlags;
-    use gdk_pixbuf::glib::ParamSpec;
-    use gdk_pixbuf::glib::ParamSpecBoolean;
-    use gdk_pixbuf::glib::ParamSpecObject;
-    use gdk_pixbuf::glib::Value;
-    use glib::subclass::InitializingObject;
-    use gtk::glib;
-    use gtk::prelude::*;
-    use gtk::subclass::prelude::*;
-    use gtk::CompositeTemplate;
-    use gtk::CustomFilter;
-    use gtk::CustomSorter;
-    use gtk::FilterChange;
-    use gtk::FilterListModel;
-    use gtk::SignalListItemFactory;
-    use gtk::SortListModel;
-    use gtk::Widget;
+    use glib::{
+        clone,
+        once_cell::sync::Lazy,
+        subclass::{InitializingObject, Signal},
+        ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
+    };
+    use gtk::{
+        prelude::*, subclass::prelude::*, CompositeTemplate, CustomFilter, CustomSorter,
+        FilterChange, FilterListModel, SignalListItemFactory, SortListModel, Widget,
+    };
 
-    use crate::backend::Channel;
-    use crate::backend::Manager;
-    use crate::backend::Message;
-    use crate::gui::channel_item::ChannelItem;
+    use crate::{
+        backend::{Channel, Manager, Message},
+        gui::channel_item::ChannelItem,
+    };
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/channel_list.ui")]

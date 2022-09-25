@@ -1,9 +1,9 @@
-use gdk_pixbuf::{
-    glib::{self, clone, Object},
-    prelude::ActionMapExt,
-};
 use gio::{subclass::prelude::ObjectSubclassIsExt, SimpleAction, SimpleActionGroup};
-use gtk::traits::{PopoverExt, WidgetExt};
+use glib::{clone, Object};
+use gtk::{
+    prelude::*,
+    traits::{PopoverExt, WidgetExt},
+};
 
 use crate::backend::Message;
 
@@ -43,29 +43,20 @@ impl MessageItem {
 }
 
 pub mod imp {
-    use std::cell::Cell;
-    use std::cell::RefCell;
+    use std::cell::{Cell, RefCell};
 
-    use gdk_pixbuf::glib::clone;
-    use gdk_pixbuf::glib::once_cell::sync::Lazy;
-    use gdk_pixbuf::glib::subclass::Signal;
-    use gdk_pixbuf::glib::MainContext;
-    use gdk_pixbuf::glib::ParamFlags;
-    use gdk_pixbuf::glib::ParamSpec;
-    use gdk_pixbuf::glib::ParamSpecBoolean;
-    use gdk_pixbuf::glib::ParamSpecObject;
-    use gdk_pixbuf::glib::Value;
-    use glib::subclass::InitializingObject;
-    use gtk::glib;
-    use gtk::prelude::*;
-    use gtk::subclass::prelude::*;
-    use gtk::CompositeTemplate;
+    use glib::{
+        clone,
+        once_cell::sync::Lazy,
+        subclass::{InitializingObject, Signal},
+        MainContext, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
+    };
+    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
-    use crate::backend::Manager;
-    use crate::backend::Message;
-    use crate::gui::attachment::Attachment;
-    use crate::gui::error_dialog::ErrorDialog;
-    use crate::gui::utility::Utility;
+    use crate::{
+        backend::{Manager, Message},
+        gui::{attachment::Attachment, error_dialog::ErrorDialog, utility::Utility},
+    };
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/message_item.ui")]

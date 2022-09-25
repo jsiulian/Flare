@@ -1,11 +1,11 @@
-use super::{Channel, Contact, Message};
-use gdk::prelude::ObjectExt;
-use gdk::subclass::prelude::ObjectSubclassIsExt;
-use presage::prelude::Uuid;
 use std::path::Path;
-use presage::prelude::{proto::AttachmentPointer, AttachmentSpec};
+
+use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
+use presage::prelude::*;
 use libsignal_service::sender::AttachmentUploadError;
-use gtk::glib::DateTime;
+use glib::DateTime;
+
+use super::{Channel, Contact, Message};
 
 macro_rules! msg {
     ($s:expr, $m:expr, $i:expr, $j:expr, $t:expr) => {

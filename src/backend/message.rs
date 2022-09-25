@@ -1,13 +1,12 @@
 use std::cell::RefCell;
 
-use gdk_pixbuf::{glib::Object, prelude::ObjectExt};
+use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
+use glib::Object;
 use libsignal_service::{content::Reaction, ServiceAddress};
-use presage::{
-    prelude::{
-        proto::{data_message::Quote, sync_message::Sent},
-        Content, ContentBody, DataMessage, SyncMessage,
-    },
+use presage::prelude::{
+    proto::{data_message::Quote, sync_message::Sent},
+    *,
 };
 
 use crate::backend::{Attachment, Channel, Contact};

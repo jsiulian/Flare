@@ -1,11 +1,14 @@
 use std::{cell::RefCell, collections::HashMap, path::Path, time::Duration};
 
-use crate::storage::EncryptedSledConfigStore;
-use gdk_pixbuf::{
-    glib::{clone, MainContext, Object, Priority},
-    prelude::{Cast, Continue, ObjectExt, SettingsExt},
-};
+use chacha20poly1305::ChaCha20Poly1305;
+use encrypted_sled::{CountingNonce, EncryptionCipher};
+use gdk::prelude::*;
 use gio::subclass::prelude::ObjectSubclassIsExt;
+use glib::{clone, MainContext, Object, Priority};
+use libsecret::{
+    prelude::ServiceExtManual, traits::CollectionExt, Collection, CollectionFlags, Schema,
+    SchemaAttributeType, SchemaFlags, Service, ServiceFlags, COLLECTION_DEFAULT,
+};
 use libsignal_service::{
     content::{ContentBody, Metadata},
     groups_v2::Group,
@@ -14,19 +17,12 @@ use libsignal_service::{
     sender::{AttachmentSpec, AttachmentUploadError},
     ServiceAddress,
 };
+use presage::{MessageStore, Thread};
 use rand::Fill;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
-
-use libsecret::{
-    prelude::ServiceExtManual, traits::CollectionExt, Collection, CollectionFlags, Schema,
-    SchemaAttributeType, SchemaFlags, Service, ServiceFlags, COLLECTION_DEFAULT,
-};
-
+use crate::storage::EncryptedSledConfigStore;
 use crate::ApplicationError;
-use chacha20poly1305::ChaCha20Poly1305;
-use encrypted_sled::{CountingNonce, EncryptionCipher};
-use presage::{MessageStore, Thread};
 
 const MESSAGE_BOUND: usize = 10;
 const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
@@ -586,14 +582,12 @@ impl Manager {
 }
 
 mod imp {
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gdk_pixbuf::{
-        glib::{once_cell::sync::Lazy, subclass::Signal},
-        prelude::StaticType,
-    };
-    use gio::Settings;
-    use gtk::glib;
     use std::{cell::RefCell, collections::HashMap};
+
+    use gdk::prelude::StaticType;
+    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
+    use gio::Settings;
+    use glib::{once_cell::sync::Lazy, subclass::Signal};
 
     use crate::{
         backend::{manager_thread::ManagerThread, Channel, Message},

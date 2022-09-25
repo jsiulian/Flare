@@ -1,11 +1,8 @@
 use std::path::PathBuf;
 
 use gdk::{prelude::TextureExt, Texture};
-use gdk_pixbuf::{
-    glib::{Bytes, Object, Priority},
-    prelude::{FileExt, IOStreamExt, ObjectExt, OutputStreamExt},
-};
-use gio::{subclass::prelude::ObjectSubclassIsExt, Cancellable, File, FileCreateFlags};
+use gio::{prelude::*, subclass::prelude::ObjectSubclassIsExt, Cancellable, File, FileCreateFlags};
+use glib::{Bytes, Object, Priority};
 use gtk::{MediaFile, MediaStream};
 use libsignal_service::{proto::AttachmentPointer, sender::AttachmentSpec};
 
@@ -189,18 +186,17 @@ impl Attachment {
 }
 
 mod imp {
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gdk::Texture;
-    use gdk_pixbuf::glib::{Bytes, ParamSpecBoolean, ParamSpecString};
-    use gdk_pixbuf::prelude::ObjectExt;
-    use gdk_pixbuf::{
-        glib::{once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecObject, Value},
-        prelude::{StaticType, ToValue},
-    };
-    use gio::File;
-    use gtk::{glib, MediaStream};
-    use libsignal_service::proto::AttachmentPointer;
     use std::cell::{Cell, RefCell};
+
+    use gdk::prelude::*;
+    use gdk::{subclass::prelude::*, Texture};
+    use gio::File;
+    use glib::{
+        once_cell::sync::Lazy, Bytes, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject,
+        ParamSpecString, Value,
+    };
+    use gtk::MediaStream;
+    use libsignal_service::proto::AttachmentPointer;
 
     use crate::backend::Manager;
 

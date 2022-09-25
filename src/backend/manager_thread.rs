@@ -1,28 +1,17 @@
-use std::sync::Arc;
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 
-use futures::select;
-use futures::FutureExt;
-use futures::StreamExt;
-use libsignal_service::content::ContentBody;
-use libsignal_service::groups_v2::Group;
-use libsignal_service::models::Contact;
-use libsignal_service::prelude::Content;
-use libsignal_service::prelude::GroupMasterKey;
-use libsignal_service::prelude::Uuid;
-use libsignal_service::proto::AttachmentPointer;
-use libsignal_service::proto::DataMessage;
-use libsignal_service::sender::AttachmentSpec;
-use libsignal_service::sender::AttachmentUploadError;
-use libsignal_service::ServiceAddress;
-use presage::ConfigStore;
-use presage::Manager;
-use presage::MessageStore;
-use presage::Registered;
-use tokio::sync::mpsc;
-use tokio::sync::oneshot;
-
-use presage::Error;
+use futures::{select, FutureExt, StreamExt};
+use libsignal_service::{
+    content::ContentBody,
+    groups_v2::Group,
+    models::Contact,
+    prelude::*,
+    proto::{AttachmentPointer, DataMessage},
+    sender::{AttachmentSpec, AttachmentUploadError},
+    ServiceAddress,
+};
+use presage::{ConfigStore, Error, Manager, MessageStore, Registered};
+use tokio::sync::{mpsc, oneshot};
 
 const MESSAGE_BOUND: usize = 10;
 

@@ -1,4 +1,4 @@
-use gdk_pixbuf::glib::Object;
+use glib::Object;
 
 gtk::glib::wrapper! {
     pub struct Attachment(ObjectSubclass<imp::Attachment>)
@@ -17,27 +17,21 @@ impl Attachment {
 pub mod imp {
     use std::cell::RefCell;
 
-    use gdk_pixbuf::glib::clone;
-    use gdk_pixbuf::glib::once_cell::sync::Lazy;
-    use gdk_pixbuf::glib::MainContext;
-    use gdk_pixbuf::glib::ParamFlags;
-    use gdk_pixbuf::glib::ParamSpec;
-    use gdk_pixbuf::glib::ParamSpecObject;
-    use gdk_pixbuf::glib::Value;
     use gio::Settings;
-    use glib::subclass::InitializingObject;
-    use gtk::builders::FileChooserNativeBuilder;
-    use gtk::glib;
-    use gtk::prelude::*;
-    use gtk::subclass::prelude::*;
-    use gtk::CompositeTemplate;
-    use gtk::FileChooserAction;
-    use gtk::ResponseType;
+    use glib::{
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, MainContext, ParamFlags,
+        ParamSpec, ParamSpecObject, Value,
+    };
+    use gtk::{
+        builders::FileChooserNativeBuilder, prelude::*, subclass::prelude::*, CompositeTemplate,
+        FileChooserAction, ResponseType,
+    };
 
-    use crate::backend::Manager;
-    use crate::config::APP_ID;
-    use crate::gui::error_dialog::ErrorDialog;
-    use crate::gui::utility::Utility;
+    use crate::{
+        backend::Manager,
+        config::APP_ID,
+        gui::{error_dialog::ErrorDialog, utility::Utility},
+    };
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/attachment.ui")]

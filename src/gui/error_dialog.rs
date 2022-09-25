@@ -1,5 +1,4 @@
-use gdk_pixbuf::prelude::IsA;
-use gtk::glib::Object;
+use glib::{prelude::IsA, Object};
 
 use crate::ApplicationError;
 
@@ -26,22 +25,15 @@ impl ErrorDialog {
 }
 
 pub mod imp {
-    use std::cell::Cell;
+    pub(crate) use std::cell::Cell;
     use std::cell::RefCell;
 
-    use gdk_pixbuf::glib::once_cell::sync::Lazy;
-    use gdk_pixbuf::glib::ParamFlags;
-    use gdk_pixbuf::glib::ParamSpec;
-    use gdk_pixbuf::glib::ParamSpecBoolean;
-    use gdk_pixbuf::glib::ParamSpecString;
-    use gdk_pixbuf::glib::Value;
-    use glib::subclass::InitializingObject;
-    use gtk::glib;
-    use gtk::prelude::*;
-    use gtk::subclass::prelude::*;
-    use gtk::CompositeTemplate;
-    use libadwaita::subclass::prelude::AdwApplicationWindowImpl;
-    use libadwaita::subclass::prelude::AdwWindowImpl;
+    use glib::{
+        once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
+        ParamSpecBoolean, ParamSpecString, Value,
+    };
+    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use libadwaita::subclass::prelude::*;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/error_dialog.ui")]

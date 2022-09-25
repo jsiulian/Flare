@@ -24,22 +24,25 @@ impl TextEntry {
 }
 
 pub mod imp {
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gdk_pixbuf::glib::subclass::Signal;
-    use gdk_pixbuf::glib::{
-        self, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, Value,
+    use gdk::{
+        prelude::{ObjectExt, ToValue},
+        subclass::prelude::{ObjectImpl, ObjectSubclass},
     };
-    use gdk_pixbuf::glib::{clone, ParamFlags, ParamSpecBoolean};
-    use gdk_pixbuf::prelude::{ObjectExt, ToValue};
-    use gtk::subclass::widget::{CompositeTemplate, WidgetClassSubclassExt};
-    use gtk::traits::{TextBufferExt, WidgetExt};
+    use glib::{
+        clone,
+        once_cell::sync::Lazy,
+        subclass::{InitializingObject, Signal},
+        ParamFlags, ParamSpec, ParamSpecBoolean, Value,
+    };
     use gtk::{
         prelude::{InitializingWidgetExt, StaticType},
-        subclass::{prelude::BoxImpl, widget::WidgetImpl},
-        CompositeTemplate,
+        subclass::{
+            prelude::BoxImpl,
+            widget::{CompositeTemplate, WidgetClassSubclassExt, WidgetImpl},
+        },
+        traits::{TextBufferExt, WidgetExt},
+        CompositeTemplate, Inhibit, TemplateChild, TextBuffer, TextView,
     };
-    use gtk::{Inhibit, TextView};
-    use gtk::{TemplateChild, TextBuffer};
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/text_entry.ui")]

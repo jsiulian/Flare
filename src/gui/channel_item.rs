@@ -1,4 +1,4 @@
-use gdk_pixbuf::glib::Object;
+use glib::Object;
 
 gtk::glib::wrapper! {
     pub struct ChannelItem(ObjectSubclass<imp::ChannelItem>)
@@ -23,20 +23,16 @@ impl Default for ChannelItem {
 pub mod imp {
     use std::cell::RefCell;
 
-    use gdk_pixbuf::glib::once_cell::sync::Lazy;
-    use gdk_pixbuf::glib::ParamFlags;
-    use gdk_pixbuf::glib::ParamSpec;
-    use gdk_pixbuf::glib::ParamSpecObject;
-    use gdk_pixbuf::glib::Value;
-    use glib::subclass::InitializingObject;
-    use gtk::glib;
-    use gtk::prelude::*;
-    use gtk::subclass::prelude::*;
-    use gtk::CompositeTemplate;
+    use glib::{
+        once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
+        ParamSpecObject, Value,
+    };
+    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
-    use crate::backend::Channel;
-    use crate::backend::Manager;
-    use crate::gui::utility::Utility;
+    use crate::{
+        backend::{Channel, Manager},
+        gui::utility::Utility,
+    };
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/channel_item.ui")]

@@ -24,38 +24,26 @@ pub mod imp {
     // also show avatar and sender title.
     const MESSAGE_SENT_SHOW_NAME_DURATION: u64 = 4 * 60 * 1000;
 
-    use std::cell::RefCell;
-    use std::time::Duration;
+    use std::{cell::RefCell, time::Duration};
 
-    use gdk_pixbuf::glib::clone;
-    use gdk_pixbuf::glib::once_cell::sync::Lazy;
-    use gdk_pixbuf::glib::MainContext;
-    use gdk_pixbuf::glib::ParamFlags;
-    use gdk_pixbuf::glib::ParamSpec;
-    use gdk_pixbuf::glib::ParamSpecBoolean;
-    use gdk_pixbuf::glib::ParamSpecObject;
-    use gdk_pixbuf::glib::SignalHandlerId;
-    use gdk_pixbuf::glib::Value;
     use gio::Settings;
-    use glib::subclass::InitializingObject;
-    use gtk::builders::FileChooserNativeBuilder;
-    use gtk::glib;
-    use gtk::prelude::*;
-    use gtk::subclass::prelude::*;
-    use gtk::CompositeTemplate;
-    use gtk::FileChooserAction;
-    use gtk::ResponseType;
+    use glib::{
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, MainContext, ParamFlags,
+        ParamSpec, ParamSpecBoolean, ParamSpecObject, SignalHandlerId, Value,
+    };
+    use gtk::{
+        builders::FileChooserNativeBuilder, prelude::*, subclass::prelude::*, CompositeTemplate,
+        FileChooserAction, ResponseType,
+    };
 
-    use crate::backend::Channel;
-    use crate::backend::Contact;
-    use crate::backend::Manager;
-    use crate::backend::Message;
-    use crate::config::APP_ID;
-    use crate::gui::attachment::Attachment;
-    use crate::gui::error_dialog::ErrorDialog;
-    use crate::gui::message_item::MessageItem;
-    use crate::gui::text_entry::TextEntry;
-    use crate::gui::utility::Utility;
+    use crate::{
+        backend::{Channel, Contact, Manager, Message},
+        config::APP_ID,
+        gui::{
+            attachment::Attachment, error_dialog::ErrorDialog, message_item::MessageItem,
+            text_entry::TextEntry, utility::Utility,
+        },
+    };
 
     #[derive(CompositeTemplate)]
     #[template(resource = "/ui/channel_messages.ui")]
@@ -293,14 +281,13 @@ pub mod imp {
             );
             // Scroll to bottom
             let ctx = glib::MainContext::default();
-            ctx.spawn_local(
-                clone!(@strong obj => async move  {
-                    // Need to sleep a little to make sure the scrolled window saw the changed
-                    // child.
-                    glib::timeout_future(Duration::from_millis(50)).await;
-                    let adjustment = obj.imp().scrolled_window.vadjustment();
-                    adjustment.set_value(adjustment.upper());
-                }));
+            ctx.spawn_local(clone!(@strong obj => async move  {
+                // Need to sleep a little to make sure the scrolled window saw the changed
+                // child.
+                glib::timeout_future(Duration::from_millis(50)).await;
+                let adjustment = obj.imp().scrolled_window.vadjustment();
+                adjustment.set_value(adjustment.upper());
+            }));
         }
 
         fn update_show_name_of(&self, widget: &MessageItem) {
