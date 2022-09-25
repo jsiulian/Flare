@@ -38,7 +38,7 @@ fn main() {
     init_internationalization().expect("Failed to initialize internationalization");
 
     gtk::init().expect("Failed to initialize gtk");
-    libadwaita::init();
+    libadwaita::init().expect("Failed to initializa libadwaita");
     let app = libadwaita::Application::builder()
         .application_id(APP_ID)
         .build();

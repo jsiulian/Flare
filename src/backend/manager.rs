@@ -26,7 +26,7 @@ use libsecret::{
 use crate::ApplicationError;
 use chacha20poly1305::ChaCha20Poly1305;
 use encrypted_sled::{CountingNonce, EncryptionCipher};
-use presage::{MessageIdentity, MessageStore, Thread};
+use presage::{MessageStore, Thread};
 
 const MESSAGE_BOUND: usize = 10;
 const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
@@ -159,14 +159,19 @@ impl Manager {
         Ok(())
     }
 
-    pub async fn message_by_id(
+    pub async fn message(
         &self,
-        id: &MessageIdentity,
+        thread: &Thread,
+        timestamp: u64,
     ) -> Result<Option<Message>, ApplicationError> {
-        crate::trace!("Querying message by id: {:?}", id);
+        crate::trace!(
+            "Querying message by thread: {:?}, timestamp: {}",
+            thread,
+            timestamp
+        );
         let content = {
             if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
-                let content = config_store.message_by_identity(id)?;
+                let content = config_store.message(thread, timestamp)?;
                 if let Some(content) = content {
                     Ok::<_, ApplicationError>(Some(content))
                 } else {
@@ -189,14 +194,14 @@ impl Manager {
         }
     }
 
-    pub fn messages_by_thread(
+    pub fn messages(
         &self,
         thread: &Thread,
         from: Option<u64>,
     ) -> Result<impl Iterator<Item = Content>, ApplicationError> {
-        crate::trace!("Querying message by thread: {:?}", thread);
+        crate::trace!("Querying message by thread: {:?}, from {:?}", thread, from);
         if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
-            Ok(config_store.messages_by_thread(thread, from)?)
+            Ok(config_store.messages(thread, from)?)
         } else {
             log::error!("Query messages by contact without config store being set up");
             // TODO: Error?

@@ -8,7 +8,6 @@ use presage::{
         proto::{data_message::Quote, sync_message::Sent},
         Content, ContentBody, DataMessage, SyncMessage,
     },
-    MessageIdentity,
 };
 
 use crate::backend::{Attachment, Channel, Contact};
@@ -266,13 +265,6 @@ impl Message {
 
     pub fn is_empty(&self) -> bool {
         self.property::<Option<String>>("body").is_none() && self.attachments().is_empty()
-    }
-
-    pub fn id(&self) -> Option<MessageIdentity> {
-        Some(MessageIdentity(
-            self.property::<Contact>("sender").address()?.uuid?,
-            self.timestamp()?,
-        ))
     }
 }
 
