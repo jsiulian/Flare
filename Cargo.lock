@@ -1505,9 +1505,9 @@ checksum = "c0f80d65747a3e43d1596c7c5492d95d5edddaabd45a7fcdb02b95f644164966"
 
 [[package]]
 name = "libsecret"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d4af5a2342942fa42d706a424e9f9914287fb8317132750fd73a241140ac38c1"
+checksum = "a15ed5dab9789d9c4caedf88457214d822cfbad5562b63f6c8f61597501f6b8b"
 dependencies = [
  "bitflags",
  "gio",
@@ -1519,9 +1519,9 @@ dependencies = [
 
 [[package]]
 name = "libsecret-sys"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b630bef24b542dc1609a14c56b9267c147dbef1ee7ad08fb1a852a07c17d492d"
+checksum = "77abfe0fd35152462d1736d11f5c1ba381f74535171b2138fed1604bcb803d2b"
 dependencies = [
  "gio-sys",
  "glib-sys",

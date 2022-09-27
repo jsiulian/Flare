@@ -25,7 +25,7 @@ libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs
 
 async-trait = "0.1.57"
 sled = "0.34.7"
-libsecret = { version = "0.1.4", features = ["v0_19"] }
+libsecret = { version = "0.1.5", features = ["v0_19"] }
 rand = "0.8.5"
 # Cannot update to 0.10.1 because of conflict with zeroize
 chacha20poly1305 = "0.9.1"

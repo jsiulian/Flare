@@ -35,17 +35,16 @@ type ConfigStoreType =
     EncryptedSledConfigStore<EncryptionCipher<ChaCha20Poly1305, CountingNonce<ChaCha20Poly1305>>>;
 
 // Similar to https://gitlab.gnome.org/GNOME/geary/-/blob/main/src/client/application/secret-mediator.vala#L112
-#[allow(dead_code)]
 async fn ensure_secret_unlocked() -> Result<(), ApplicationError> {
     log::trace!("Ensuring the default collection is unlocked");
     let service = Service::get_future(ServiceFlags::OPEN_SESSION).await?;
     let collection =
         Collection::for_alias_future(Some(&service), &COLLECTION_DEFAULT, CollectionFlags::NONE)
             .await?;
-    if collection.is_locked() {
+    if collection.is_some() && collection.as_ref().unwrap().is_locked() {
         log::trace!("Unlocking the default collection");
         service
-            .unlock_future(&[collection
+            .unlock_future(&[collection.unwrap()
                 .dynamic_cast()
                 .expect("Failed to cast `Collection` to `DBusProxy`")])
             .await?;
@@ -54,8 +53,7 @@ async fn ensure_secret_unlocked() -> Result<(), ApplicationError> {
 }
 
 async fn encryption_password() -> Result<Vec<u8>, ApplicationError> {
-    // TODO: Fix ensure_secret_unlocked
-    // ensure_secret_unlocked().await?;
+    ensure_secret_unlocked().await?;
 
     let schema = Schema::new(
         crate::config::APP_ID,

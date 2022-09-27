@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Fixed
 
 - Wrongly associated stored messages from other devices ([#12])
+- Possibly fixed [#4]
 
 ### BREAKING
 
