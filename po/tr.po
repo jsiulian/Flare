@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-27 16:42+0200\n"
-"PO-Revision-Date: 2022-09-25 02:18+0000\n"
+"PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -228,7 +228,7 @@ msgstr "İstek halinde yüklenecek ileti sayısı"
 
 #: data/resources/ui/preferences_window.ui:110
 msgid "Notifications"
-msgstr ""
+msgstr "Bildirimler"
 
 #: data/resources/ui/preferences_window.ui:111
 msgid ""
@@ -236,10 +236,13 @@ msgid ""
 "Flare is open, if you also want to be notified when this application is "
 "closed, consider using something like messenger-notify."
 msgstr ""
+"Yeni iletiler için bildirimler. Bu bildirimler yalnızca Flare açıkken "
+"çalışacaktır, bu uygulama kapatıldığında da bildirim almak istiyorsanız "
+"messenger-notify gibi bir şey kullanmayı düşünün."
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
-msgstr ""
+msgstr "Bildirim gönder"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
