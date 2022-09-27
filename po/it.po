@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-27 16:42+0200\n"
-"PO-Revision-Date: 2022-09-25 02:17+0000\n"
+"PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/flare/flare/it/"
-">\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/flare/flare/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -228,7 +228,7 @@ msgstr "Numero di messaggi da caricare su richiesta"
 
 #: data/resources/ui/preferences_window.ui:110
 msgid "Notifications"
-msgstr ""
+msgstr "Notifiche"
 
 #: data/resources/ui/preferences_window.ui:111
 msgid ""
@@ -236,10 +236,13 @@ msgid ""
 "Flare is open, if you also want to be notified when this application is "
 "closed, consider using something like messenger-notify."
 msgstr ""
+"Notifiche per i nuovi messaggi. Queste notifiche funzionano solo quando "
+"Flare è aperto; se si desidera ricevere una notifica anche quando "
+"l'applicazione viene chiusa, si può usare qualcosa come messenger-notify."
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
-msgstr ""
+msgstr "Invia notifiche"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
