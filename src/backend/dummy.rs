@@ -2,10 +2,12 @@ use std::path::Path;
 
 use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
 use presage::prelude::*;
-use libsignal_service::sender::AttachmentUploadError;
+use libsignal_service::{prelude::AttachmentPointer, sender::AttachmentUploadError, groups_v2::Group};
 use glib::DateTime;
 
 use super::{Channel, Contact, Message};
+
+const GROUP_ID: usize = 16;
 
 macro_rules! msg {
     ($s:expr, $m:expr, $i:expr, $j:expr, $t:expr) => {
@@ -46,7 +48,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
                 phonenumber: None,
                 relay: None,
             },
-            name: "Developer".to_string(),
+            name: "Arch Linux User".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -62,7 +64,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
                 phonenumber: None,
                 relay: None,
             },
-            name: "Officer".to_string(),
+            name: "Developer".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -78,7 +80,199 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
                 phonenumber: None,
                 relay: None,
             },
-            name: "That WOW-Guy".to_string(),
+            name: "Anakin Skywalker".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(4)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Terminator".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(5)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Friend".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(6)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Better Friend".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(7)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Best Friend".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(8)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Bestester Friend".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(9)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Ultra Friend".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(10)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Omega Friend".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(11)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "That guy again".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(12)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Enemy".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(13)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Rick".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(14)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Microsoft Support".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        presage::prelude::Contact {
+            address: presage::prelude::ServiceAddress {
+                uuid: Some(Uuid::from_u128(15)),
+                phonenumber: None,
+                relay: None,
+            },
+            name: "Who is this?".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -140,31 +334,42 @@ impl super::Manager {
         let now = DateTime::now_utc().expect("Now to be expressable as DateTime");
         let base_time = DateTime::from_utc(now.year(), now.month(), now.day_of_month(), 11, 0, 0.0).expect("Base time to be expressable as DateTime");
         let base_minute: u64 = (base_time.to_unix() / 60).try_into().unwrap();
-        let msg_replied = msg!(self, "Sounds interesting, can you tell me more?", 0, 2 + base_minute);
-        let msg_reply = msg!(self, "Additionally, replying and reacting to messages are also be possible", 1, 5 + base_minute);
-        msg_reply.set_quote(msg_replied.clone());
-        msg_reply.react("👍");
-
-        let msg_screenshot = msg!(self, "", 1, 4 + base_minute);
-        let screenshot_file = gio::File::for_uri("resource:///icon.png");
-        let attachment = crate::backend::Attachment::from_file(screenshot_file, self);
-        msg_screenshot.add_attachment(attachment).await.expect("Failed to add attachment");
-
+        // let msg_replied = msg!(self, "Sounds interesting, can you tell me more?", 0, 2 + base_minute);
+        // let msg_reply = msg!(self, "Additionally, replying and reacting to messages are also be possible", 1, 5 + base_minute);
+        // msg_reply.set_quote(msg_replied.clone());
+        // msg_reply.react("👍");
+        //
+        // let msg_screenshot = msg!(self, "", 1, 4 + base_minute);
+        // let screenshot_file = gio::File::for_uri("resource:///icon.png");
+        // let attachment = crate::backend::Attachment::from_file(screenshot_file, self);
+        // msg_screenshot.add_attachment(attachment).await.expect("Failed to add attachment");
         vec![
-            msg!(self, "Hello", 0, 0 + base_minute),
-            msg!(self, "Hello, may I present to you my application Flare?", 1, 1 + base_minute),
-            msg!(self, "It is an unofficial Signal client.", 1, 1 + base_minute),
-            msg_replied,
-            msg!(self, "Well, it is a pretty simple application. As you can clearly see, it supports sending and receiving messages.", 1, 3 + base_minute),
-            msg!(self, "Pictures and other attachments can also be sent:", 1, 4 + base_minute),
-            msg_screenshot,
-            msg_reply,
-            msg!(self, "Looks pretty nice, where can I try it?", 0, 6 + base_minute),
-            msg!(self, "Just head over to Flathub and download it.", 1, 8 + base_minute),
-            msg!(self, "As the free space for this screenshot is almost over, I have just one more question: ", 1, 8 + base_minute),
-            msg!(self, "Why are you still reading this? In the time it took you to read it, you could have already downloaded it and set it up.", 1, 8 + base_minute),
-            msg!(self, "Thats gotta be the best application I've ever seen", 2, 2, base_minute - 100),
-            msg!(self, "WOW", 3, 3, base_minute - 200),
+            msg!(self, "I use Arch btw", 1, 1, 0 + base_minute),
+            msg!(self, "Did you know Flare can also be used on mobile devices?", 2, GROUP_ID, 2 + base_minute),
+            msg!(self, "WHAT", 0, GROUP_ID, 4 + base_minute),
+            msg!(self, "Yes, you can just use it on any of your favorite mobile linux devices.", 2, GROUP_ID, 10 + base_minute),
+            msg!(self, "What is Flare?", 1, GROUP_ID, 15 + base_minute),
+            msg!(self, "It is an unofficial Signal client.", 2, GROUP_ID, 16 + base_minute),
+            msg!(self, "I don't think I need to go over all of the features again, look at the previous screenshots for more details.", 2, GROUP_ID, 16 + base_minute),
+            msg!(self, "Looks interesting. Might I will give it a shot on my PinePhone where I am running Arch btw.", 1, GROUP_ID, 20 + base_minute),
+            msg!(self, "Could you please stop? We all know that you are using Arch", 0, GROUP_ID, 21 + base_minute),
+            msg!(self, "But as an Arch User (btw), it is my holy duty to inform you that I am using Arch (btw) at least every second message.", 1, GROUP_ID, 21 + base_minute),
+            msg!(self, "Could we please continue this discussion in the next screenshot? Due to me also making a screenshot in a mobile formfactor, there is not that much space left.", 2, GROUP_ID, 20 + base_minute),
+
+            msg!(self, "I don't like sand", 3, 3, base_minute + 3),
+            msg!(self, "I'll be back", 4, 4, base_minute + 10),
+
+            msg!(self, "Here could be your meme", 5, 5, base_minute - 1),
+            msg!(self, "Here could be your meme", 6, 6, base_minute - 2),
+            msg!(self, "Here could be your meme", 7, 7, base_minute - 3),
+            msg!(self, "Here could be your meme", 8, 8, base_minute - 4),
+            msg!(self, "Here could be your meme", 9, 9, base_minute - 5),
+            msg!(self, "Here could be your meme", 10, 10, base_minute - 6),
+            msg!(self, "You again?", 0, 11, base_minute - 7),
+            msg!(self, "Here could be your meme", 12, 12, base_minute - 8),
+            msg!(self, "Imagine a Rick-Roll here.", 13, 13, base_minute - 9),
+            msg!(self, "Hello, you have 10 virus. Please click link.", 14, 14, base_minute - 9),
+            msg!(self, "Who is this?", 0, 15, base_minute - 50),
         ]
     }
 
@@ -182,12 +387,27 @@ impl super::Manager {
         for con in self.dummy_contacts() {
             result.push(Channel::from_contact_or_group(con, &None, self).await);
         }
+        result.push(Channel::from_group(Group {
+            title: "Mobile Linux Group".to_string(),
+            avatar: "".to_string(),
+            disappearing_messages_timer: None,
+            access_control: None,
+            version: 0,
+            members: vec![],
+            pending_members: vec![],
+            requesting_members: vec![],
+            invite_link_password: vec![],
+            description: None,
+        }, &GroupContextV2 {
+            master_key: Some(vec![2]),
+            revision: None,
+            group_change: None
+        }, self).await);
         result
     }
 
     #[cfg(feature = "screenshot")]
     pub async fn init_channels(&self) {
-
         for channel in self.dummy_channels().await {
             self.emit_by_name::<()>("channel", &[&channel]);
             let mut channels = self.imp().channels.borrow_mut();
