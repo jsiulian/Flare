@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-27 16:42+0200\n"
-"PO-Revision-Date: 2022-09-25 02:17+0000\n"
+"PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
 "Language: de\n"
@@ -231,7 +231,7 @@ msgstr "Anzahl der Nachrichten welche auf Anfrage geladen werden"
 
 #: data/resources/ui/preferences_window.ui:110
 msgid "Notifications"
-msgstr ""
+msgstr "Benachrichtigungen"
 
 #: data/resources/ui/preferences_window.ui:111
 msgid ""
@@ -239,10 +239,14 @@ msgid ""
 "Flare is open, if you also want to be notified when this application is "
 "closed, consider using something like messenger-notify."
 msgstr ""
+"Benachrichtigungen für neue Nachrichten. Diese Benachrichtigungen "
+"funktionieren nur wenn Flare geöffnet ist, wenn du auch benachrichtigt "
+"werden willst falls das Programm geschlossen ist, nutze beispielsweise "
+"messenger-notify."
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
-msgstr ""
+msgstr "Benachrichtigungen senden"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
