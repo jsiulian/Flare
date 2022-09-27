@@ -293,7 +293,7 @@ pub mod imp {
                     ),
                 );
                 log::trace!("Setup manager for Window");
-                let manager = Manager::new();
+                let manager = Manager::new(obj.property::<gio::Application>("application"));
                 obj.set_property("manager", Some(&manager));
                 manager.connect_local("link-qr-code", false, clone!(@weak obj => @default-return None, move |args| {
                     let man = args[0]

@@ -3,7 +3,7 @@ use std::{cell::RefCell, collections::HashMap, path::Path, time::Duration};
 use chacha20poly1305::ChaCha20Poly1305;
 use encrypted_sled::{CountingNonce, EncryptionCipher};
 use gdk::prelude::*;
-use gio::subclass::prelude::ObjectSubclassIsExt;
+use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
 use glib::{clone, MainContext, Object, Priority};
 use libsecret::{
     prelude::ServiceExtManual, traits::CollectionExt, Collection, CollectionFlags, Schema,
@@ -44,7 +44,8 @@ async fn ensure_secret_unlocked() -> Result<(), ApplicationError> {
     if collection.is_some() && collection.as_ref().unwrap().is_locked() {
         log::trace!("Unlocking the default collection");
         service
-            .unlock_future(&[collection.unwrap()
+            .unlock_future(&[collection
+                .unwrap()
                 .dynamic_cast()
                 .expect("Failed to cast `Collection` to `DBusProxy`")])
             .await?;
@@ -113,15 +114,24 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<ConfigStoreType, Applicat
     Ok(EncryptedSledConfigStore::new(path, cipher)?)
 }
 
-impl std::default::Default for Manager {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
 impl Manager {
-    pub fn new() -> Manager {
-        Object::new(&[]).expect("Failed to create `Manager` object.")
+    pub fn new(application: Application) -> Manager {
+        let s: Self = Object::new(&[]).expect("Failed to create `Manager` object.");
+        s.imp().application.borrow_mut().replace(application);
+        s
+    }
+
+    pub fn send_notification(&self, notification: &gio::Notification) {
+        if self.imp().settings.boolean("notifications") {
+            if let Some(application) = self.application() {
+                log::trace!("Sending a notification");
+                application.send_notification(None, notification);
+            }
+        }
+    }
+
+    pub fn application(&self) -> Option<Application> {
+        self.imp().application.borrow().clone()
     }
 
     pub fn clear(&self) -> Result<(), ApplicationError> {
@@ -584,7 +594,7 @@ mod imp {
 
     use gdk::prelude::StaticType;
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gio::Settings;
+    use gio::{Application, Settings};
     use glib::{once_cell::sync::Lazy, subclass::Signal};
 
     use crate::{
@@ -601,6 +611,7 @@ mod imp {
         pub(super) channels: RefCell<HashMap<u64, Channel>>,
         // pub(super) profile: RefCell<Option<Profile>>,
         pub(super) settings: Settings,
+        pub(super) application: RefCell<Option<Application>>,
     }
 
     impl Default for Manager {
@@ -610,6 +621,7 @@ mod imp {
                 config_store: Default::default(),
                 channels: Default::default(),
                 settings: Settings::new(APP_ID),
+                application: Default::default(),
             }
         }
     }
