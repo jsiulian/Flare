@@ -43,6 +43,9 @@ pub mod imp {
         #[template_child]
         spin_request_message_loading: TemplateChild<gtk::SpinButton>,
 
+        #[template_child]
+        switch_notifications: TemplateChild<gtk::Switch>,
+
         settings: Settings,
     }
 
@@ -92,6 +95,10 @@ pub mod imp {
                 )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
+            self.settings
+                .bind("notifications", &self.switch_notifications.get(), "state")
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
         }
     }
 
@@ -110,6 +117,7 @@ pub mod imp {
                 switch_download_files: TemplateChild::default(),
                 spin_initial_message_loading: TemplateChild::default(),
                 spin_request_message_loading: TemplateChild::default(),
+                switch_notifications: TemplateChild::default(),
             }
         }
 

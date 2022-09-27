@@ -1,6 +1,7 @@
 use std::cell::RefCell;
 
 use gdk::prelude::ObjectExt;
+use gdk_pixbuf::Pixbuf;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
 use libsignal_service::{content::Reaction, ServiceAddress};
@@ -18,6 +19,21 @@ gtk::glib::wrapper! {
 }
 
 impl Message {
+    pub fn send_notification(&self) {
+        let sender = self.property::<Contact>("sender");
+        if sender.property::<bool>("is-self") {
+            // Skip notifications for messages sent from self.
+            return;
+        }
+
+        let notification = gio::Notification::new(&sender.property::<String>("title"));
+        notification.set_body(Some(&self.property::<String>("textual-description")));
+        let icon = Pixbuf::from_resource("/icon.png").expect("Flare to have an application icon");
+        notification.set_icon(&icon);
+        self.property::<Manager>("manager")
+            .send_notification(&notification);
+    }
+
     pub fn from_text_channel_sender<S: AsRef<str>>(
         text: S,
         channel: Channel,

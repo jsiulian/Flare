@@ -223,6 +223,7 @@ impl Channel {
         if !message.is_empty() {
             self.imp().messages.borrow_mut().push(message.clone());
             self.notify("last-message");
+            message.send_notification();
             self.try_emit_by_name::<()>("message", &[&message])?;
         } else {
             log::trace!("Channel skip adding empty message");
