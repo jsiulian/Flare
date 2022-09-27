@@ -55,7 +55,11 @@ This application uses [presage](https://github.com/whisperfish/presage) internal
 
 ## Translation
 
-Flare can easily be translated for other languages, as it uses gettext. Please consider contributing translations using [Weblate](https://hosted.weblate.org/engage/flare/), as an alternative you can also open merge requests and I will notify you if updates are necessary.
+Flare can easily be translated for other languages, as it uses gettext. Please consider contributing translations using [Weblate](https://hosted.weblate.org/engage/flare/), as an alternative you can also open merge requests and I will notify you if updates are necessary. Thanks to Weblate for free hosting and all the translators for their great work keeping the translations up-to-date.
+
+<a href="https://hosted.weblate.org/engage/flare/">
+<img src="https://hosted.weblate.org/widgets/flare/-/flare/multi-auto.svg" alt="Translation status" />
+</a>
 
 ## Donate
 
