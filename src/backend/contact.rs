@@ -23,6 +23,7 @@ impl Contact {
         s.imp()
             .phonenumber
             .swap(&RefCell::new(address.phonenumber.clone()));
+        s.imp().address.swap(&RefCell::new(Some(address.clone())));
         s
     }
 
@@ -32,6 +33,9 @@ impl Contact {
         s.imp()
             .phonenumber
             .swap(&RefCell::new(contact.address.phonenumber.clone()));
+        s.imp()
+            .address
+            .swap(&RefCell::new(Some(contact.address.clone())));
         s.imp().contact.swap(&RefCell::new(Some(contact)));
         s
     }
@@ -61,6 +65,7 @@ mod imp {
     pub struct Contact {
         pub(super) contact: RefCell<Option<presage::prelude::Contact>>,
         pub(super) phonenumber: RefCell<Option<presage::prelude::PhoneNumber>>,
+        pub(super) address: RefCell<Option<presage::prelude::ServiceAddress>>,
 
         manager: RefCell<Option<Manager>>,
     }
@@ -134,6 +139,13 @@ mod imp {
                         }
                     } else if let Some(phone) = self.phonenumber.borrow().as_ref() {
                         phone.format().mode(Mode::National).to_string().to_value()
+                    } else if let Some(address) = self.address.borrow().as_ref() {
+                        address
+                            .phonenumber
+                            .as_ref()
+                            .map(|p| p.format().mode(Mode::National).to_string())
+                            .or_else(|| address.uuid.map(|u| u.to_string()))
+                            .to_value()
                     } else {
                         None::<String>.to_value()
                     }
