@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Immediately sync contacts after linking, without application restart required.
 - Show UUID for unknown contacts (without name, phone numbers) instead of empty string.
+- Notification support
 
 ### Changed
 

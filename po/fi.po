@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-23 14:26+0200\n"
+"POT-Creation-Date: 2022-09-27 16:42+0200\n"
 "PO-Revision-Date: 2022-09-25 02:17+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/>"
-"\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/"
+">\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,56 +48,56 @@ msgstr "Hae"
 msgid "Select a channel"
 msgstr "Valitse kanava"
 
-#: data/resources/ui/channel_messages.ui:44
+#: data/resources/ui/channel_messages.ui:48
 msgid "Load more"
 msgstr "Lataa lisää"
 
-#: data/resources/ui/channel_messages.ui:72
+#: data/resources/ui/channel_messages.ui:76
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Poista vastaus"
 
-#: data/resources/ui/channel_messages.ui:74
+#: data/resources/ui/channel_messages.ui:78
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Poista vastaus"
 
-#: data/resources/ui/channel_messages.ui:104
+#: data/resources/ui/channel_messages.ui:108
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Poista liite"
 
-#: data/resources/ui/channel_messages.ui:106
+#: data/resources/ui/channel_messages.ui:110
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Poista liite"
 
-#: data/resources/ui/channel_messages.ui:134
+#: data/resources/ui/channel_messages.ui:138
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Lisää liite"
 
-#: data/resources/ui/channel_messages.ui:136
+#: data/resources/ui/channel_messages.ui:140
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Lisää liite"
 
-#: data/resources/ui/channel_messages.ui:155
+#: data/resources/ui/channel_messages.ui:159
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Viestin syöttö"
 
-#: data/resources/ui/channel_messages.ui:158
+#: data/resources/ui/channel_messages.ui:162
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Viestin syöttö"
 
-#: data/resources/ui/channel_messages.ui:164
+#: data/resources/ui/channel_messages.ui:168
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Lähetä"
 
-#: data/resources/ui/channel_messages.ui:166
+#: data/resources/ui/channel_messages.ui:170
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Lähetä"
@@ -183,47 +183,62 @@ msgstr "Yleiset"
 msgid "Linking"
 msgstr "Linkitys"
 
-#: data/resources/ui/preferences_window.ui:16
-msgid "Device Name"
-msgstr "Laitteen nimi"
-
-#: data/resources/ui/preferences_window.ui:17
+#: data/resources/ui/preferences_window.ui:14
 msgid "The device will need to be relinked to take effect."
 msgstr "Laite on kytkettävä uudelleen, jotta se tulee voimaan."
 
-#: data/resources/ui/preferences_window.ui:34
+#: data/resources/ui/preferences_window.ui:17
+msgid "Device Name"
+msgstr "Laitteen nimi"
+
+#: data/resources/ui/preferences_window.ui:25
 msgid "Attachments"
 msgstr "Liitteet"
 
-#: data/resources/ui/preferences_window.ui:37
+#: data/resources/ui/preferences_window.ui:28
 msgid "Dowload images automatically"
 msgstr "Lataa kuvat automaattisesti"
 
-#: data/resources/ui/preferences_window.ui:51
+#: data/resources/ui/preferences_window.ui:42
 msgid "Dowload videos automatically"
 msgstr "Lataa videoita automaattisesti"
 
-#: data/resources/ui/preferences_window.ui:65
+#: data/resources/ui/preferences_window.ui:56
 msgid "Dowload files automatically"
 msgstr "Lataa tiedostot automaattisesti"
 
-#: data/resources/ui/preferences_window.ui:82
+#: data/resources/ui/preferences_window.ui:73
 msgid "Message Storage"
 msgstr "Viestien tallennus"
 
-#: data/resources/ui/preferences_window.ui:85
+#: data/resources/ui/preferences_window.ui:76
 msgid "Number of messages to load on startup"
 msgstr "Käynnistyksen yhteydessä ladattavien viestien määrä"
 
-#: data/resources/ui/preferences_window.ui:86
-#: data/resources/ui/preferences_window.ui:102
+#: data/resources/ui/preferences_window.ui:77
+#: data/resources/ui/preferences_window.ui:93
 #, fuzzy
 msgid "Per channel"
 msgstr "Kanavaa kohden"
 
-#: data/resources/ui/preferences_window.ui:101
+#: data/resources/ui/preferences_window.ui:92
 msgid "Number of messages to load on request"
 msgstr "Pyynnöstä ladattavien viestien määrä"
+
+#: data/resources/ui/preferences_window.ui:110
+msgid "Notifications"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:111
+msgid ""
+"Notifications for new messages. These notifications will only work while "
+"Flare is open, if you also want to be notified when this application is "
+"closed, consider using something like messenger-notify."
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:114
+msgid "Send notifications"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -301,23 +316,23 @@ msgstr "Tietoja"
 msgid "Note to self"
 msgstr "Muistiinpano itselle"
 
-#: src/backend/manager.rs:366
+#: src/backend/manager.rs:375
 msgid "You"
 msgstr "Sinä"
 
-#: src/backend/message.rs:397
+#: src/backend/message.rs:404
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Kuva lähetetty"
 msgstr[1] "{} kuvaa lähetetty"
 
-#: src/backend/message.rs:405
+#: src/backend/message.rs:412
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "On lähettänyt videon"
 msgstr[1] "On lähettänyt {} videota"
 
-#: src/backend/message.rs:413
+#: src/backend/message.rs:420
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "On lähettänyt tiedoston"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-23 14:26+0200\n"
+"POT-Creation-Date: 2022-09-27 16:42+0200\n"
 "PO-Revision-Date: 2022-09-25 02:17+0000\n"
 "Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -50,56 +50,56 @@ msgstr "Suchen"
 msgid "Select a channel"
 msgstr "Wählen Sie einen Kanal aus"
 
-#: data/resources/ui/channel_messages.ui:44
+#: data/resources/ui/channel_messages.ui:48
 msgid "Load more"
 msgstr "Mehr laden"
 
-#: data/resources/ui/channel_messages.ui:72
+#: data/resources/ui/channel_messages.ui:76
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Antwort entfernen"
 
-#: data/resources/ui/channel_messages.ui:74
+#: data/resources/ui/channel_messages.ui:78
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Antwort entfernen"
 
-#: data/resources/ui/channel_messages.ui:104
+#: data/resources/ui/channel_messages.ui:108
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:106
+#: data/resources/ui/channel_messages.ui:110
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:134
+#: data/resources/ui/channel_messages.ui:138
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:136
+#: data/resources/ui/channel_messages.ui:140
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:155
+#: data/resources/ui/channel_messages.ui:159
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:158
+#: data/resources/ui/channel_messages.ui:162
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:164
+#: data/resources/ui/channel_messages.ui:168
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Senden"
 
-#: data/resources/ui/channel_messages.ui:166
+#: data/resources/ui/channel_messages.ui:170
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Senden"
@@ -167,7 +167,8 @@ msgstr "Kopieren"
 
 #: data/resources/ui/link_window.ui:47
 msgid "Please wait until the contacts are displayed after linking."
-msgstr "Bitte warte Sie nach dem Verknüpfen bis Ihre Kontakte angezeigt werden."
+msgstr ""
+"Bitte warte Sie nach dem Verknüpfen bis Ihre Kontakte angezeigt werden."
 
 #: data/resources/ui/message_item.ui:203
 msgid "Reply"
@@ -185,48 +186,63 @@ msgstr "Allgemein"
 msgid "Linking"
 msgstr "Koppelung"
 
-#: data/resources/ui/preferences_window.ui:16
-msgid "Device Name"
-msgstr "Name des Gerätes"
-
-#: data/resources/ui/preferences_window.ui:17
+#: data/resources/ui/preferences_window.ui:14
 msgid "The device will need to be relinked to take effect."
 msgstr ""
 "Das Gerät muss neu gekoppelt werden, damit diese Einstellung Auswirkungen "
 "hat."
 
-#: data/resources/ui/preferences_window.ui:34
+#: data/resources/ui/preferences_window.ui:17
+msgid "Device Name"
+msgstr "Name des Gerätes"
+
+#: data/resources/ui/preferences_window.ui:25
 msgid "Attachments"
 msgstr "Anhänge"
 
-#: data/resources/ui/preferences_window.ui:37
+#: data/resources/ui/preferences_window.ui:28
 msgid "Dowload images automatically"
 msgstr "Bilder automatisch herunterladen"
 
-#: data/resources/ui/preferences_window.ui:51
+#: data/resources/ui/preferences_window.ui:42
 msgid "Dowload videos automatically"
 msgstr "Videos automatisch herunterladen"
 
-#: data/resources/ui/preferences_window.ui:65
+#: data/resources/ui/preferences_window.ui:56
 msgid "Dowload files automatically"
 msgstr "Dateien automatisch herunterladen"
 
-#: data/resources/ui/preferences_window.ui:82
+#: data/resources/ui/preferences_window.ui:73
 msgid "Message Storage"
 msgstr "Nachrichten-Speicher"
 
-#: data/resources/ui/preferences_window.ui:85
+#: data/resources/ui/preferences_window.ui:76
 msgid "Number of messages to load on startup"
 msgstr "Anzahl der Nachrichten, welche bei Applikationsstart geladen werden"
 
-#: data/resources/ui/preferences_window.ui:86
-#: data/resources/ui/preferences_window.ui:102
+#: data/resources/ui/preferences_window.ui:77
+#: data/resources/ui/preferences_window.ui:93
 msgid "Per channel"
 msgstr "Pro Kanal"
 
-#: data/resources/ui/preferences_window.ui:101
+#: data/resources/ui/preferences_window.ui:92
 msgid "Number of messages to load on request"
 msgstr "Anzahl der Nachrichten welche auf Anfrage geladen werden"
+
+#: data/resources/ui/preferences_window.ui:110
+msgid "Notifications"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:111
+msgid ""
+"Notifications for new messages. These notifications will only work while "
+"Flare is open, if you also want to be notified when this application is "
+"closed, consider using something like messenger-notify."
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:114
+msgid "Send notifications"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -304,23 +320,23 @@ msgstr "Info"
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:366
+#: src/backend/manager.rs:375
 msgid "You"
 msgstr "Du"
 
-#: src/backend/message.rs:397
+#: src/backend/message.rs:404
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Hat ein Bild gesendet"
 msgstr[1] "Hat {} Bilder gesendet"
 
-#: src/backend/message.rs:405
+#: src/backend/message.rs:412
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Hat ein Video gesendet"
 msgstr[1] "Hat {} Videos gesendet"
 
-#: src/backend/message.rs:413
+#: src/backend/message.rs:420
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"

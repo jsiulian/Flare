@@ -32,6 +32,8 @@ A unofficial Signal GTK client.
 - Attachments
 - Message storage
 - Encrypted storage (As I am not a security-expert, I do not guarantee anything. Read the `Security`-section)
+- Notifications (To also get notifications while the application is closed, use something standalone, e.g. [messenger-notify](https://gitlab.com/Schmiddiii/messenger-notify))
+
 
 ## Planned Features
 
@@ -44,8 +46,6 @@ A unofficial Signal GTK client.
     - Calling
     - Paying
     - Majority of settings
-- Notifications (use something standalone for that, e.g. [messenger-notify](https://gitlab.com/Schmiddiii/messenger-notify))
-
 ## Blocked features
 
 This application uses [presage](https://github.com/whisperfish/presage) internally, the current features are not yet implemented for that.
