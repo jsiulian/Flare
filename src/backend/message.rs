@@ -21,13 +21,14 @@ gtk::glib::wrapper! {
 impl Message {
     pub fn send_notification(&self) {
         let sender = self.property::<Contact>("sender");
-        if sender.property::<bool>("is-self") {
-            // Skip notifications for messages sent from self.
+        let body = self.property::<String>("textual-description");
+        if sender.property::<bool>("is-self") || body.is_empty(){
+            // Skip notifications for messages sent from self or empty messages.
             return;
         }
 
         let notification = gio::Notification::new(&sender.property::<String>("title"));
-        notification.set_body(Some(&self.property::<String>("textual-description")));
+        notification.set_body(Some(&body));
         let icon = Pixbuf::from_resource("/icon.png").expect("Flare to have an application icon");
         notification.set_icon(&icon);
         self.property::<Manager>("manager")
