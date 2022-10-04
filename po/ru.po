@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-27 16:42+0200\n"
+"POT-Creation-Date: 2022-10-04 15:49+0200\n"
 "PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Weblate 4.14.1\n"
 
-#: data/resources/ui/about.ui:12
-msgid "translators"
+#: data/resources/ui/about.ui:14
+msgid "translator-credits"
 msgstr "Давид Лапшин <ddaudix@gmail.com>"
 
 #: data/resources/ui/attachment.ui:26
@@ -324,19 +324,19 @@ msgstr "Заметка для себя"
 msgid "You"
 msgstr "Вы"
 
-#: src/backend/message.rs:404
+#: src/backend/message.rs:405
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Отправить изображение"
 msgstr[1] "Отправить {} изображений"
 
-#: src/backend/message.rs:412
+#: src/backend/message.rs:413
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Отправлено видео"
 msgstr[1] "Отправлено {} видео"
 
-#: src/backend/message.rs:420
+#: src/backend/message.rs:421
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Оправить файл"

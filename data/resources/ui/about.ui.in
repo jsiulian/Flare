@@ -3,15 +3,20 @@
   <object class="AdwAboutWindow" id="about">
     <property name="application-icon">icon</property>
     <property name="application-name">Flare</property>
-    <property name="comments">A unofficial Signal GTK client.</property>
-    <property name="copyright">© 2022 Julian Schmidhuber</property>
-    <property name="developer-name">Julian Schmidhuber</property>
-    <property name="issue-url">https://gitlab.com/Schmiddiii/flare/-/issues</property>
-    <property name="license-type">GTK_LICENSE_AGPL_3_0_ONLY</property>
-    <property name="support-url">https://matrix.to/#/%23flare-signal:matrix.org</property>
-    <property name="translator-credits" translatable="yes">translators</property>
-    <property name="website">https://gitlab.com/Schmiddiii/flare</property>
     <property name="version">@VERSION@</property>
+    <property name="comments">A unofficial Signal GTK client.</property>
+
+    <property name="issue-url">https://gitlab.com/Schmiddiii/flare/-/issues</property>
+    <property name="support-url">https://matrix.to/#/%23flare-signal:matrix.org</property>
+    <property name="website">https://gitlab.com/Schmiddiii/flare</property>
+
+    <property name="developer-name">Julian Schmidhuber</property>
+    <property name="translator-credits" translatable="yes">translator-credits</property>
+    <property name="artists">David Lapshin &lt;ddaudix@gmail.com&gt;</property>
+
+    <property name="copyright">© 2022 Julian Schmidhuber</property>
+    <property name="license-type">GTK_LICENSE_AGPL_3_0_ONLY</property>
+
     <property name="release-notes">
       &lt;p&gt;Added&lt;/p&gt;
       &lt;ul&gt;

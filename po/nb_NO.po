@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-27 16:42+0200\n"
+"POT-Creation-Date: 2022-10-04 15:49+0200\n"
 "PO-Revision-Date: 2022-09-25 02:17+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.14.1\n"
 
-#: data/resources/ui/about.ui:12
-msgid "translators"
+#: data/resources/ui/about.ui:14
+msgid "translator-credits"
 msgstr "Allan Nordhøy <epost@anotheragency.no>"
 
 #: data/resources/ui/attachment.ui:26
@@ -330,19 +330,19 @@ msgstr "Selvpåminnelse"
 msgid "You"
 msgstr "Deg"
 
-#: src/backend/message.rs:404
+#: src/backend/message.rs:405
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Sendte et bilde"
 msgstr[1] "Sendte {} bilder"
 
-#: src/backend/message.rs:412
+#: src/backend/message.rs:413
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Sendte en video"
 msgstr[1] "Sendte {} videoer"
 
-#: src/backend/message.rs:420
+#: src/backend/message.rs:421
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Sendte en fil"
