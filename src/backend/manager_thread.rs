@@ -10,7 +10,7 @@ use libsignal_service::{
     sender::{AttachmentSpec, AttachmentUploadError},
     ServiceAddress,
 };
-use presage::{ConfigStore, Error, Manager, MessageStore, Registered};
+use presage::{Error, Manager, MessageStore, Registered, Store};
 use tokio::sync::{mpsc, oneshot};
 
 const MESSAGE_BOUND: usize = 10;
@@ -71,11 +71,7 @@ impl ManagerThread {
         error: mpsc::Sender<Error>,
     ) -> Option<Self>
     where
-        C: presage::ConfigStore
-            + std::marker::Send
-            + std::marker::Sync
-            + 'static
-            + presage::MessageStore,
+        C: presage::Store + std::marker::Send + std::marker::Sync + 'static + presage::MessageStore,
     {
         let (sender, receiver) = mpsc::channel(MESSAGE_BOUND);
         std::thread::spawn(move || {
@@ -83,10 +79,10 @@ impl ManagerThread {
                 .expect("Failed to setup runtime")
                 .block_on(async move {
                     let setup = setup_manager(config_store, device_name, link_callback).await;
-                    if let Ok(manager) = setup {
+                    if let Ok(mut manager) = setup {
                         log::trace!("Starting command loop");
                         drop(error_callback);
-                        command_loop(&manager, receiver, content, error).await;
+                        command_loop(&mut manager, receiver, content, error).await;
                     } else {
                         let e = setup.err().unwrap();
                         log::trace!("Got error: {}", e);
@@ -253,7 +249,7 @@ async fn setup_manager<C>(
     link_callback: futures::channel::oneshot::Sender<url::Url>,
 ) -> Result<presage::Manager<C, presage::Registered>, Error>
 where
-    C: ConfigStore + 'static,
+    C: Store + 'static,
 {
     if let Ok(manager) = presage::Manager::load_registered(config_store.clone()) {
         log::debug!("The configuration store is already valid, loading a registered account");
@@ -271,14 +267,14 @@ where
     }
 }
 
-async fn command_loop<C: ConfigStore + 'static + MessageStore>(
-    manager: &Manager<C, Registered>,
+async fn command_loop<C: Store + 'static + MessageStore>(
+    manager: &mut Manager<C, Registered>,
     mut receiver: mpsc::Receiver<Command>,
     content: mpsc::Sender<Content>,
     error: mpsc::Sender<Error>,
 ) {
     'outer: loop {
-        let msgs = manager.receive_messages_store().await;
+        let msgs = manager.receive_messages().await;
         match msgs {
             Ok(messages) => {
                 futures::pin_mut!(messages);
@@ -312,8 +308,8 @@ async fn command_loop<C: ConfigStore + 'static + MessageStore>(
     }
 }
 
-async fn handle_command<C: ConfigStore + 'static>(
-    manager: &Manager<C, Registered>,
+async fn handle_command<C: Store + 'static>(
+    manager: &mut Manager<C, Registered>,
     command: Command,
 ) {
     log::trace!("Got command: {:?}", command);

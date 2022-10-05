@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Wrongly associated stored messages from other devices ([#12])
 - Possibly fixed [#4]
+- (Upstream) Fixed duplicate messages to other third-party Signal clients
 
 ### BREAKING
 

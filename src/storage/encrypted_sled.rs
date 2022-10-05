@@ -12,16 +12,16 @@ use libsignal_service::{
         protocol::{
             Context, Direction, IdentityKey, IdentityKeyPair, IdentityKeyStore, PreKeyRecord,
             PreKeyStore, ProtocolAddress, SessionRecord, SessionStore, SessionStoreExt,
-            SignalProtocolError, SignedPreKeyRecord, SignedPreKeyStore,
+            SignalProtocolError, SignedPreKeyId, SignedPreKeyRecord, SignedPreKeyStore,
         },
         ProtobufMessage, Uuid,
     },
-    ServiceAddress,
 };
+use libsignal_service::{prelude::protocol::PreKeyId, push_service::DEFAULT_DEVICE_ID};
 use log::{debug, trace, warn};
 
 use presage::{
-    ConfigStore, ContactsStore, ContentProto, Error, MessageStore, Registered, StateStore, Thread,
+    ContactsStore, ContentProto, Error, MessageStore, Registered, StateStore, Store, Thread,
 };
 
 const SLED_KEY_REGISTRATION: &str = "registration";
@@ -32,13 +32,13 @@ const SLED_TREE_SESSIONS: &str = "sessions";
 const SLED_TREE_THREAD_PREFIX: &str = "thread";
 
 #[derive(Debug, Clone)]
-pub struct EncryptedSledConfigStore<E> {
+pub struct EncryptedSledStore<E> {
     db: Arc<RwLock<encrypted_sled::Db<E>>>,
 }
 
-impl<E: encrypted_sled::Encryption + 'static> EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> EncryptedSledStore<E> {
     pub fn new(path: impl Into<PathBuf>, encryption: E) -> Result<Self, Error> {
-        Ok(EncryptedSledConfigStore {
+        Ok(EncryptedSledStore {
             db: Arc::new(RwLock::new(encrypted_sled::open(path.into(), encryption)?)),
         })
     }
@@ -159,14 +159,13 @@ impl<E: encrypted_sled::Encryption + 'static> EncryptedSledConfigStore<E> {
         Ok(())
     }
 
-    fn prekey_key(&self, id: u32) -> String {
+    fn prekey_key(&self, id: PreKeyId) -> String {
         format!("prekey-{:09}", id)
     }
 
-    fn signed_prekey_key(&self, id: u32) -> String {
+    fn signed_prekey_key(&self, id: SignedPreKeyId) -> String {
         format!("signed-prekey-{:09}", id)
     }
-
     fn session_key(&self, addr: &ProtocolAddress) -> String {
         format!("session-{}", addr)
     }
@@ -180,7 +179,7 @@ impl<E: encrypted_sled::Encryption + 'static> EncryptedSledConfigStore<E> {
     }
 }
 
-impl<E: encrypted_sled::Encryption> StateStore<Registered> for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption> StateStore<Registered> for EncryptedSledStore<E> {
     fn load_state(&self) -> Result<Registered, Error> {
         let db = self.db.read().expect("poisoned mutex");
         let data = db
@@ -197,7 +196,7 @@ impl<E: encrypted_sled::Encryption> StateStore<Registered> for EncryptedSledConf
     }
 }
 
-impl<E: encrypted_sled::Encryption + 'static> ConfigStore for EncryptedSledConfigStore<E>
+impl<E: encrypted_sled::Encryption + 'static> Store for EncryptedSledStore<E>
 where
     E: std::marker::Send + std::marker::Sync + std::clone::Clone,
 {
@@ -218,7 +217,7 @@ where
     }
 }
 
-impl<E: encrypted_sled::Encryption> ContactsStore for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption> ContactsStore for EncryptedSledStore<E> {
     fn save_contacts(&mut self, contacts: impl Iterator<Item = Contact>) -> Result<(), Error> {
         let tree = self
             .db
@@ -263,10 +262,10 @@ impl<E: encrypted_sled::Encryption> ContactsStore for EncryptedSledConfigStore<E
 }
 
 #[async_trait(?Send)]
-impl<E: encrypted_sled::Encryption + 'static> PreKeyStore for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> PreKeyStore for EncryptedSledStore<E> {
     async fn get_pre_key(
         &self,
-        prekey_id: u32,
+        prekey_id: PreKeyId,
         _ctx: Context,
     ) -> Result<PreKeyRecord, SignalProtocolError> {
         let buf = self
@@ -278,7 +277,7 @@ impl<E: encrypted_sled::Encryption + 'static> PreKeyStore for EncryptedSledConfi
 
     async fn save_pre_key(
         &mut self,
-        prekey_id: u32,
+        prekey_id: PreKeyId,
         record: &PreKeyRecord,
         _ctx: Context,
     ) -> Result<(), SignalProtocolError> {
@@ -289,7 +288,7 @@ impl<E: encrypted_sled::Encryption + 'static> PreKeyStore for EncryptedSledConfi
 
     async fn remove_pre_key(
         &mut self,
-        prekey_id: u32,
+        prekey_id: PreKeyId,
         _ctx: Context,
     ) -> Result<(), SignalProtocolError> {
         self.remove(self.prekey_key(prekey_id))
@@ -299,10 +298,10 @@ impl<E: encrypted_sled::Encryption + 'static> PreKeyStore for EncryptedSledConfi
 }
 
 #[async_trait(?Send)]
-impl<E: encrypted_sled::Encryption + 'static> SignedPreKeyStore for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> SignedPreKeyStore for EncryptedSledStore<E> {
     async fn get_signed_pre_key(
         &self,
-        signed_prekey_id: u32,
+        signed_prekey_id: SignedPreKeyId,
         _ctx: Context,
     ) -> Result<SignedPreKeyRecord, SignalProtocolError> {
         let buf = self
@@ -314,7 +313,7 @@ impl<E: encrypted_sled::Encryption + 'static> SignedPreKeyStore for EncryptedSle
 
     async fn save_signed_pre_key(
         &mut self,
-        signed_prekey_id: u32,
+        signed_prekey_id: SignedPreKeyId,
         record: &SignedPreKeyRecord,
         _ctx: Context,
     ) -> Result<(), SignalProtocolError> {
@@ -330,7 +329,7 @@ impl<E: encrypted_sled::Encryption + 'static> SignedPreKeyStore for EncryptedSle
 }
 
 #[async_trait(?Send)]
-impl<E: encrypted_sled::Encryption + 'static> SessionStore for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> SessionStore for EncryptedSledStore<E> {
     async fn load_session(
         &self,
         address: &ProtocolAddress,
@@ -371,7 +370,7 @@ impl<E: encrypted_sled::Encryption + 'static> SessionStore for EncryptedSledConf
 }
 
 #[async_trait]
-impl<E: encrypted_sled::Encryption + 'static> SessionStoreExt for EncryptedSledConfigStore<E>
+impl<E: encrypted_sled::Encryption + 'static> SessionStoreExt for EncryptedSledStore<E>
 where
     E: std::marker::Send + std::marker::Sync + std::clone::Clone,
 {
@@ -392,6 +391,7 @@ where
                 let device_id = key_str.strip_prefix(&session_prefix)?;
                 device_id.parse().ok()
             })
+            .filter(|d| *d != DEFAULT_DEVICE_ID)
             .collect();
         Ok(session_ids)
     }
@@ -425,7 +425,7 @@ where
 }
 
 #[async_trait(?Send)]
-impl<E: encrypted_sled::Encryption + 'static> IdentityKeyStore for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> IdentityKeyStore for EncryptedSledStore<E> {
     async fn get_identity_key_pair(
         &self,
         _ctx: Context,
@@ -512,34 +512,36 @@ fn thread_key(t: &Thread) -> Vec<u8> {
     bytes
 }
 
-impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledConfigStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledStore<E> {
     type MessagesIter = SledMessagesIter<E>;
-    fn save_message(
-        &mut self,
-        message: libsignal_service::prelude::Content,
-        receiver: Option<impl Into<ServiceAddress>>,
-    ) -> Result<(), Error> {
-        let receiver = receiver.map(|s| s.into());
 
-        let thread = Thread::from_content_receiver(&message, receiver.as_ref())?;
-        let timestamp = &message.metadata.timestamp.to_be_bytes();
+    fn save_message(&mut self, thread: &Thread, message: Content) -> Result<(), Error> {
         log::trace!(
             "Storing a message with thread: {:?}, timestamp: {}",
             thread,
-            message.metadata.timestamp
+            message.metadata.timestamp,
         );
 
         let tree_thread = self
             .db
-            .try_read()
+            .read()
             .expect("poisoned mutex")
-            .open_tree(thread_key(&thread))?;
+            .open_tree(thread_key(thread))?;
 
-        let value = ContentProto::from_content(message);
-        let value_vec = value.encode_to_vec();
-
-        tree_thread.insert(timestamp, value_vec)?;
+        let timestamp_bytes = message.metadata.timestamp.to_be_bytes();
+        let proto: ContentProto = message.into();
+        tree_thread.insert(timestamp_bytes, proto.encode_to_vec())?;
         Ok(())
+    }
+
+    fn delete_message(&mut self, thread: &Thread, timestamp: u64) -> Result<bool, Error> {
+        Ok(self
+            .db
+            .read()
+            .expect("poisoned mutex")
+            .open_tree(thread_key(thread))?
+            .remove(timestamp.to_be_bytes())?
+            .is_some())
     }
 
     fn message(
@@ -549,14 +551,15 @@ impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledConf
     ) -> Result<Option<libsignal_service::prelude::Content>, Error> {
         let tree_thread = self
             .db
-            .try_read()
+            .read()
             .expect("poisoned mutex")
             .open_tree(thread_key(thread))?;
         // Big-Endian needed, otherwise wrong ordering in sled.
         let val = tree_thread.get(timestamp.to_be_bytes())?;
         if let Some(val) = val {
-            let proto = ContentProto::decode(&*val)?;
-            Ok(Some(proto.into_content()))
+            let proto = ContentProto::decode(&val[..])?;
+            let content = proto.try_into()?;
+            Ok(Some(content))
         } else {
             Ok(None)
         }
@@ -586,6 +589,6 @@ impl<E: encrypted_sled::Encryption + 'static> Iterator for SledMessagesIter<E> {
     fn next(&mut self) -> Option<Self::Item> {
         let ivec = self.0.next()?.ok()?.1;
         let proto = ContentProto::decode(&*ivec).ok()?;
-        Some(proto.into_content())
+        proto.try_into().ok()
     }
 }

@@ -20,8 +20,8 @@ futures = "0.3.24"
 tokio = { version = "1.20.1", features = ["rt", "macros", "rt-multi-thread", "time"] }
 async-recursion = "1.0.0"
 
-presage = { git = "https://github.com/whisperfish/presage", rev = "de61481fee93a8bcfe568f1c1c4fd7024aaf9474" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "refs/pull/156/head" }
+presage = { git = "https://github.com/whisperfish/presage.git", rev = "8825ed321ab6e14264499d39a0eeee2b77693aea" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "72503de963331e3afd28ab837965af7ca7203b80" }
 
 async-trait = "0.1.57"
 sled = "0.34.7"

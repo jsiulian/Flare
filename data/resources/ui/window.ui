@@ -46,6 +46,7 @@
 
                     <property name="menu-model">menubar</property>
                     <property name="primary">True</property>
+                    <property name="icon-name">open-menu-symbolic</property>
                   </object>
                 </child>
               </object>

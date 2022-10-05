@@ -10,7 +10,7 @@ use libsecret::{
     SchemaAttributeType, SchemaFlags, Service, ServiceFlags, COLLECTION_DEFAULT,
 };
 use libsignal_service::{
-    content::{ContentBody, Metadata},
+    content::ContentBody,
     groups_v2::Group,
     prelude::{Content, GroupMasterKey, Uuid},
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
@@ -21,7 +21,7 @@ use presage::{MessageStore, Thread};
 use rand::Fill;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
-use crate::storage::EncryptedSledConfigStore;
+use crate::storage::EncryptedSledStore;
 use crate::ApplicationError;
 
 const MESSAGE_BOUND: usize = 10;
@@ -31,8 +31,8 @@ gtk::glib::wrapper! {
     pub struct Manager(ObjectSubclass<imp::Manager>);
 }
 
-type ConfigStoreType =
-    EncryptedSledConfigStore<EncryptionCipher<ChaCha20Poly1305, CountingNonce<ChaCha20Poly1305>>>;
+type StoreType =
+    EncryptedSledStore<EncryptionCipher<ChaCha20Poly1305, CountingNonce<ChaCha20Poly1305>>>;
 
 // Similar to https://gitlab.gnome.org/GNOME/geary/-/blob/main/src/client/application/secret-mediator.vala#L112
 async fn ensure_secret_unlocked() -> Result<(), ApplicationError> {
@@ -87,7 +87,7 @@ async fn encryption_password() -> Result<Vec<u8>, ApplicationError> {
     }
 }
 
-async fn config_store<P: AsRef<Path>>(p: &P) -> Result<ConfigStoreType, ApplicationError> {
+async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationError> {
     let path = p.as_ref();
     log::trace!("Initialize config store at {}", path.to_string_lossy());
 
@@ -111,7 +111,7 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<ConfigStoreType, Applicat
             encrypted_sled::EncryptionMode::default(),
         )
     };
-    Ok(EncryptedSledConfigStore::new(path, cipher)?)
+    Ok(EncryptedSledStore::new(path, cipher)?)
 }
 
 impl Manager {
@@ -146,19 +146,6 @@ impl Manager {
         log::trace!("Clearing messages from the manager");
         if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
             config_store.clear_messages()?;
-        }
-        Ok(())
-    }
-
-    pub fn save_message(
-        &self,
-        message: Content,
-        recipient: Option<impl Into<ServiceAddress>>,
-    ) -> Result<(), ApplicationError> {
-        log::trace!("Saving a message");
-        let mut borrow_mut = self.imp().config_store.borrow_mut();
-        if let Some(config_store) = borrow_mut.as_mut() {
-            config_store.save_message(message, recipient)?;
         }
         Ok(())
     }
@@ -354,12 +341,12 @@ impl Manager {
         Ok(())
     }
 
-    fn store(&self) -> ConfigStoreType {
+    fn store(&self) -> StoreType {
         self.imp()
             .config_store
             .borrow()
             .as_ref()
-            .expect("Config store to be set up")
+            .expect(" store to be set up")
             .clone()
     }
 
@@ -498,26 +485,11 @@ impl Manager {
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
         log::trace!("`Manager::send_message` start");
-        let meta = Metadata {
-            sender: ServiceAddress {
-                uuid: Some(self.uuid()),
-                phonenumber: None,
-                relay: None,
-            },
-            sender_device: 0,
-            timestamp,
-            needs_receipt: false,
-        };
         let body = message.into();
         let r = self
             .internal()
             .send_message(recipient_addr.clone(), body.clone(), timestamp)
             .await;
-        let msg = Content {
-            metadata: meta,
-            body,
-        };
-        self.save_message(msg, Some(recipient_addr))?;
         log::trace!("`Manager::send_message`finished");
         Ok(r?)
     }
@@ -529,25 +501,10 @@ impl Manager {
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
         log::trace!("`Manager::send_message_to_group` start");
-        let meta = Metadata {
-            sender: ServiceAddress {
-                uuid: Some(self.uuid()),
-                phonenumber: None,
-                relay: None,
-            },
-            sender_device: 0,
-            timestamp,
-            needs_receipt: false,
-        };
         let r = self
             .internal()
             .send_message_to_group(recipient_addr, message.clone(), timestamp)
             .await;
-        let msg = Content {
-            metadata: meta,
-            body: ContentBody::DataMessage(message),
-        };
-        self.save_message(msg, None::<ServiceAddress>)?;
         log::trace!("`Manager::send_message_to_group` finish");
         Ok(r?)
     }
@@ -604,7 +561,7 @@ mod imp {
 
     pub struct Manager {
         pub(super) internal: RefCell<Option<ManagerThread>>,
-        pub(super) config_store: RefCell<Option<super::ConfigStoreType>>,
+        pub(super) config_store: RefCell<Option<super::StoreType>>,
         #[cfg(feature = "screenshot")]
         pub(in super::super) channels: RefCell<HashMap<u64, Channel>>,
         #[cfg(not(feature = "screenshot"))]
