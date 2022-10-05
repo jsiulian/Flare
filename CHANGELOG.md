@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0]
+
 ### Added
 
 - Immediately sync contacts after linking, without application restart required.
@@ -18,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use new libadwaita widgets (about dialog, message dialog, entry row)
 - New message storage backend
 
-## Fixed
+### Fixed
 
 - Wrongly associated stored messages from other devices ([#12])
 - Possibly fixed [#4]
@@ -176,7 +178,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.4.1...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.0...master
+[0.5.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.4.1...0.5.0
 [0.4.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.4.0...0.4.1
 [0.4.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.3...0.4.0
 [0.3.3]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.2...0.3.3

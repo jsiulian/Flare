@@ -18,17 +18,28 @@
     <property name="license-type">GTK_LICENSE_AGPL_3_0_ONLY</property>
 
     <property name="release-notes">
-      &lt;p&gt;Added&lt;/p&gt;
-      &lt;ul&gt;
-        &lt;li&gt;Button in the link window to copy link URL to clipboard&lt;/li&gt;
-        &lt;li&gt;Group storage&lt;/li&gt;
-        &lt;li&gt;Search for the channel view&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;p&gt;Fixed&lt;/p&gt;
-      &lt;ul&gt;
-      &lt;li&gt;Maybe fixed rare crash in the backend thread&lt;/li&gt;
-      &lt;li&gt;Fixed messages sent to contacts being wrongly stored to &quot;Note to self&quot;&lt;/li&gt;
-      &lt;/ul&gt;
+&lt;p&gt;Added&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Immediately sync contacts after linking, without application restart required.&lt;/li&gt;
+&lt;li&gt;Show UUID for unknown contacts (without name, phone numbers) instead of empty string.&lt;/li&gt;
+&lt;li&gt;Notification support.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Changed&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Many UI updates.&lt;/li&gt;
+&lt;li&gt;Use new libadwaita widgets (about dialog, message dialog, entry row).&lt;/li&gt;
+&lt;li&gt;New message storage backend.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Fixed&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Wrongly associated stored messages from other devices.&lt;/li&gt;
+&lt;li&gt;Possibly fixed libsecret-related issues.&lt;/li&gt;
+&lt;li&gt;(Upstream) Fixed duplicate messages to other third-party Signal clients.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;BREAKING&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Due to changes in the storage backend, your previously stored messages will be lost.&lt;/li&gt;
+&lt;/ul&gt;
     </property>
   </object>
 </interface>
