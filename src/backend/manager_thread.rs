@@ -13,6 +13,8 @@ use libsignal_service::{
 use presage::{Error, Manager, MessageStore, Registered, Store};
 use tokio::sync::{mpsc, oneshot};
 
+use crate::ApplicationError;
+
 const MESSAGE_BOUND: usize = 10;
 
 enum Command {
@@ -68,27 +70,41 @@ impl ManagerThread {
         link_callback: futures::channel::oneshot::Sender<url::Url>,
         error_callback: futures::channel::oneshot::Sender<Error>,
         content: mpsc::Sender<Content>,
-        error: mpsc::Sender<Error>,
+        error: mpsc::Sender<ApplicationError>,
     ) -> Option<Self>
     where
         C: presage::Store + std::marker::Send + std::marker::Sync + 'static + presage::MessageStore,
     {
         let (sender, receiver) = mpsc::channel(MESSAGE_BOUND);
         std::thread::spawn(move || {
-            tokio::runtime::Runtime::new()
-                .expect("Failed to setup runtime")
-                .block_on(async move {
-                    let setup = setup_manager(config_store, device_name, link_callback).await;
-                    if let Ok(mut manager) = setup {
-                        log::trace!("Starting command loop");
-                        drop(error_callback);
-                        command_loop(&mut manager, receiver, content, error).await;
-                    } else {
-                        let e = setup.err().unwrap();
-                        log::trace!("Got error: {}", e);
-                        error_callback.send(e).expect("Failed to send error")
-                    }
-                });
+            let error_clone = error.clone();
+            let panic = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                tokio::runtime::Runtime::new()
+                    .expect("Failed to setup runtime")
+                    .block_on(async move {
+                        let setup = setup_manager(config_store, device_name, link_callback).await;
+                        if let Ok(mut manager) = setup {
+                            log::trace!("Starting command loop");
+                            drop(error_callback);
+                            command_loop(&mut manager, receiver, content, error).await;
+                        } else {
+                            let e = setup.err().unwrap();
+                            log::trace!("Got error: {}", e);
+                            error_callback.send(e).expect("Failed to send error")
+                        }
+                    });
+            }));
+            if let Err(_e) = panic {
+                log::error!("Manager-thread paniced");
+                tokio::runtime::Runtime::new()
+                    .expect("Failed to setup runtime")
+                    .block_on(async move {
+                        error_clone
+                            .send(ApplicationError::ManagerThreadPanic)
+                            .await
+                            .expect("Failed to send error");
+                    });
+            }
         });
 
         let (sender_uuid, receiver_uuid) = oneshot::channel();
@@ -271,7 +287,7 @@ async fn command_loop<C: Store + 'static + MessageStore>(
     manager: &mut Manager<C, Registered>,
     mut receiver: mpsc::Receiver<Command>,
     content: mpsc::Sender<Content>,
-    error: mpsc::Sender<Error>,
+    error: mpsc::Sender<ApplicationError>,
 ) {
     'outer: loop {
         let msgs = manager.receive_messages().await;
@@ -300,7 +316,7 @@ async fn command_loop<C: Store + 'static + MessageStore>(
             }
             Err(e) => {
                 log::trace!("Got error receiving: {}, {:?}", e, e);
-                error.send(e).await.expect("Callback sending failed");
+                error.send(e.into()).await.expect("Callback sending failed");
                 break;
             }
         }

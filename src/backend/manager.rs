@@ -262,7 +262,7 @@ impl Manager {
         if internal.is_none() {
             if let Some(error_opt) = receive_error.recv().await {
                 log::error!("Got error after linking device: {}", error_opt);
-                return Err(error_opt.into());
+                return Err(error_opt);
             }
         }
 
@@ -289,7 +289,7 @@ impl Manager {
                     if error_opt.is_none() {
                         break 'outer;
                     }
-                    return Err(error_opt.unwrap().into());
+                    return Err(error_opt.unwrap());
                 }
                 msg_opt = receive_content.recv().fuse() => {
                     if msg_opt.is_none() {

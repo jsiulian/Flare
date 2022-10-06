@@ -20,6 +20,7 @@ pub enum ApplicationError {
     ReceiveFailed(libsignal_service::receiver::MessageReceiverError),
     Presage(presage::Error),
     ConfigurationError(ConfigurationError),
+    ManagerThreadPanic,
 }
 
 impl From<p::Error> for ApplicationError {
@@ -113,6 +114,11 @@ impl std::fmt::Display for ApplicationError {
                 "{}",
                 gettext("The application seems to be misconfigured.")
             ),
+            ApplicationError::ManagerThreadPanic => writeln!(
+                f,
+                "{}",
+                gettext("A part of the application crashed.")
+            ),
         }
     }
 }
@@ -136,6 +142,9 @@ impl ApplicationError {
                     s.replace("{}", &p.to_string_lossy())
                 }
             },
+            ApplicationError::ManagerThreadPanic => {
+                gettext("Please restart the application with logging and report this issue.")
+            }
         }
     }
 
@@ -150,6 +159,7 @@ impl ApplicationError {
             ApplicationError::ReceiveFailed(_) => false,
             ApplicationError::Presage(_) => true,
             ApplicationError::ConfigurationError(_) => false,
+            ApplicationError::ManagerThreadPanic => true,
         }
     }
 }
