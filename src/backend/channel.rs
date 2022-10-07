@@ -147,6 +147,26 @@ impl Channel {
         &self,
         message: &Message,
     ) -> Result<(), gtk::glib::error::BoolError> {
+        let all_messages = self.messages();
+        let last_message = all_messages.last();
+        if message.timestamp() == last_message.as_ref().and_then(|m| m.timestamp())
+            && message
+                .property::<Option<Contact>>("sender")
+                .and_then(|c| c.address())
+                .and_then(|a| a.uuid)
+                == last_message.as_ref().and_then(|m| {
+                    m.property::<Option<Contact>>("sender")
+                        .and_then(|c| c.address())
+                        .and_then(|a| a.uuid)
+                })
+        {
+            crate::info!(
+                "Channel {} got a duplicate message. Ignoring the second one.",
+                self.property::<String>("title")
+            );
+            return Ok(());
+        }
+
         if let Some(body) = message.property::<Option<String>>("body") {
             crate::trace!(
                 "Channel {} got new message: {}",

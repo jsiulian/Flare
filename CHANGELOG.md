@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Show backend thread panics.
+- UI improvements for the channel list ([#20])
+
+### Fixed
+
+- Fixed duplicate message receiving
 
 ## [0.5.0]
 
@@ -205,3 +210,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#11]: https://gitlab.com/Schmiddiii/flare/-/issues/11
 [#12]: https://gitlab.com/Schmiddiii/flare/-/issues/12
 [#13]: https://gitlab.com/Schmiddiii/flare/-/issues/13
+[#20]: https://gitlab.com/Schmiddiii/flare/-/issues/20
