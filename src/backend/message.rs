@@ -396,7 +396,7 @@ mod imp {
                     .to_value(),
                 "textual-description" => {
                     if let Some(body) = obj.property::<Option<String>>("body") {
-                        body.to_value()
+                        body.lines().next().unwrap_or_default().to_value()
                     } else {
                         let attachments = self.attachments.borrow();
 

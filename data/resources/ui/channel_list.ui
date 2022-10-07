@@ -8,6 +8,9 @@
     <property name="vexpand">True</property>
     <property name="orientation">vertical</property>
 
+    <property name="margin-start">7</property>
+    <property name="margin-end">7</property>
+
     <child>
       <object class="GtkSearchBar">
         <property name="search-mode-enabled" bind-source="FlChannelList" bind-property="search-enabled"/>

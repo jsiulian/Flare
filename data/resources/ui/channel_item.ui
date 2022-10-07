@@ -25,6 +25,9 @@
     <!-- Channel name -->
     <child>
       <object class="GtkBox">
+        <property name="margin-start">7</property>
+        <property name="margin-end">7</property>
+
         <property name="orientation">vertical</property>
         <property name="hexpand">True</property>
         <child>
@@ -45,6 +48,14 @@
         <!-- Last message -->
         <child>
           <object class="GtkBox">
+            <binding name="visible">
+              <closure function="is_some" type="gboolean">
+                <lookup name="last-message">
+                  <lookup name="channel" type="FlChannelItem"/>
+                </lookup>
+              </closure>
+            </binding>
+
             <property name="spacing">2</property>
             <!-- Last message sender -->
             <child>
