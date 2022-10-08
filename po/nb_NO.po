@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-04 15:49+0200\n"
-"PO-Revision-Date: 2022-09-25 02:17+0000\n"
+"PO-Revision-Date: 2022-10-10 18:02+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
 "flare/nb_NO/>\n"
@@ -233,18 +233,22 @@ msgstr "Antall meldinger å laste inn ved forespørsel"
 
 #: data/resources/ui/preferences_window.ui:110
 msgid "Notifications"
-msgstr ""
+msgstr "Merknader"
 
 #: data/resources/ui/preferences_window.ui:111
+#, fuzzy
 msgid ""
 "Notifications for new messages. These notifications will only work while "
 "Flare is open, if you also want to be notified when this application is "
 "closed, consider using something like messenger-notify."
 msgstr ""
+"Merknader for nye meldinger. Disse fungerer kun når Flare er åpent. Hvis du "
+"også vil ha merknader når Flare er lukket må du bruke noe ala messenger-"
+"notify."
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
-msgstr ""
+msgstr "Send merknader"
 
 #: data/resources/ui/shortcuts.ui:11
 #, fuzzy
