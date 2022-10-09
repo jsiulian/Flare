@@ -118,16 +118,26 @@
             </binding>
           </object>
         </child>
-        <child>
-          <object class="GtkButton">
-            <style>
-              <class name="flat"/>
-              <class name="circular"/>
-            </style>
-            <property name="icon-name">document-save-symbolic</property>
-            <signal name="clicked" handler="download" swapped="true"/>
-          </object>
-        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <style>
+          <class name="flat"/>
+          <class name="circular"/>
+        </style>
+        <property name="icon-name">document-open-symbolic</property>
+        <signal name="clicked" handler="open" swapped="true"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <style>
+          <class name="flat"/>
+          <class name="circular"/>
+        </style>
+        <property name="icon-name">document-save-symbolic</property>
+        <signal name="clicked" handler="download" swapped="true"/>
       </object>
     </child>
 

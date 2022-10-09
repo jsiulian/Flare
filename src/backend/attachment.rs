@@ -118,11 +118,31 @@ impl Attachment {
         let mut video = None;
         let mut raw = None;
         let mut name = None;
+        let mut file = None;
+
+        // Populate name if set.
         if let Some(pointer_name) = &pointer.file_name {
             name = Some(pointer_name.clone());
         }
+
         if let Ok(bytes) = manager.get_attachment(pointer).await {
             raw = Some(Bytes::from_owned(bytes));
+
+            // TODO: Crashes, see <https://gitlab.gnome.org/GNOME/gtk/-/issues/4062>
+            // let stream =
+            //     MemoryInputStream::from_bytes(raw.as_ref().expect("Raw bytes to be set"));
+            // TODO: Async
+            // Write to file.
+            let tmp = File::new_tmp(None::<PathBuf>).ok();
+            if let Some((tmp_file, tmp_file_stream)) = tmp {
+                let tmp_out = tmp_file_stream.output_stream();
+                let _ = tmp_out.write_bytes(
+                    raw.as_ref().expect("Raw bytes to be set"),
+                    Cancellable::NONE,
+                );
+                let _ = tmp_out.flush(Cancellable::NONE);
+                file = Some(tmp_file);
+            }
 
             match &pointer.content_type {
                 Some(t) if t.starts_with("image/") => {
@@ -134,19 +154,8 @@ impl Attachment {
                 }
                 Some(t) if t.starts_with("video/") => {
                     log::trace!("Attachment is a video, converting to usable type");
-                    // TODO: Crashes, see <https://gitlab.gnome.org/GNOME/gtk/-/issues/4062>
-                    // let stream =
-                    //     MemoryInputStream::from_bytes(raw.as_ref().expect("Raw bytes to be set"));
-                    // TODO: Async
-                    let tmp = File::new_tmp(None::<PathBuf>).ok();
-                    if let Some((tmp_file, tmp_file_stream)) = tmp {
-                        let tmp_out = tmp_file_stream.output_stream();
-                        let _ = tmp_out.write_bytes(
-                            raw.as_ref().expect("Raw bytes to be set"),
-                            Cancellable::NONE,
-                        );
-                        let _ = tmp_out.flush(Cancellable::NONE);
-                        video = Some(MediaFile::for_file(&tmp_file));
+                    if let Some(tmp_file) = file.as_ref() {
+                        video = Some(MediaFile::for_file(tmp_file));
                         if name.is_none() {
                             name = Some(format!("video.{}", &t[6..]));
                         }
@@ -157,6 +166,7 @@ impl Attachment {
             }
         }
 
+        self.set_property("file", file);
         self.set_property("image", image);
         self.set_property("video", video);
         self.set_property("name", name);
@@ -169,6 +179,10 @@ impl Attachment {
 
     pub fn name(&self) -> Option<String> {
         self.property::<Option<String>>("name")
+    }
+
+    pub fn open_file(&self) -> Option<std::fs::File> {
+        self.property::<Option<File>>("file").and_then(|f| f.path()).and_then(|p| std::fs::File::open(p).ok())
     }
 
     pub async fn save_to_file(&self, file: &File) -> Result<(), gtk::glib::error::Error> {

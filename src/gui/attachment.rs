@@ -53,19 +53,41 @@ pub mod imp {
             }));
         }
 
+        fn window(&self) -> crate::gui::window::Window {
+            self.instance()
+                .root()
+                .expect("`Attachment` to have a root")
+                .dynamic_cast::<crate::gui::Window>()
+                .expect("Root of `Attachment` to be a `Window`.")
+        }
+
+        #[template_callback]
+        fn open(&self, _: gtk::Button) {
+            log::trace!("User requested to open attachment");
+            if let Some(file) = self
+                .attachment
+                .borrow()
+                .as_ref()
+                .and_then(|a| a.open_file())
+            {
+                let obj = self.instance();
+                let ctx = glib::MainContext::default();
+                ctx.spawn_local(clone!(@weak obj => async move {
+                    let identifier = ashpd::WindowIdentifier::from_native(&obj.native().unwrap()).await;
+
+                    if let Err(e) = ashpd::desktop::open_uri::open_file(&identifier, &file, false, false).await {
+                        log::error!("Failed to open file: {}", e);
+                    }
+                }));
+            }
+        }
+
         #[template_callback]
         fn download(&self, _: gtk::Button) {
             log::trace!("User requested to dowload attachment");
             if let Some(attachment) = self.attachment.borrow().as_ref() {
                 let chooser = FileChooserNativeBuilder::new()
-                    .transient_for(
-                        &self
-                            .instance()
-                            .root()
-                            .expect("`Attachment` to have a root")
-                            .dynamic_cast::<crate::gui::Window>()
-                            .expect("Root of `Attachment` to be a `Window`."),
-                    )
+                    .transient_for(&self.window())
                     .action(FileChooserAction::Save)
                     .build();
                 if let Some(name) = attachment.name() {
