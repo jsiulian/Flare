@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.1]
+
 ### Added
 
 - Clickable links in text messages. ([#24])
@@ -196,6 +198,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated presage to official repository.
 
 [Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.0...master
+[0.5.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.0...0.5.1
 [0.5.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.4.1...0.5.0
 [0.4.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.4.0...0.4.1
 [0.4.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.3.3...0.4.0
