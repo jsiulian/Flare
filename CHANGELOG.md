@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Clickable links in text messages. ([#24])
 - Open image in default program. ([#22])
+- Contributing guidelines
 
 ### Changed
 
