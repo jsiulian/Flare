@@ -44,6 +44,8 @@ impl MessageItem {
 
 pub mod imp {
     use std::cell::{Cell, RefCell};
+    use regex::Regex;
+    use lazy_static::lazy_static;
 
     use glib::{
         clone,
@@ -93,6 +95,14 @@ pub mod imp {
 
     #[gtk::template_callbacks]
     impl MessageItem {
+        #[template_callback(function)]
+        fn markup_urls(s: Option<String>) -> Option<String> {
+            lazy_static! {
+                static ref RE: Regex = Regex::new(r#"(?P<l>[a-z]*://[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))"#).unwrap();
+            }
+            s.map(|s| RE.replace_all(&s, r#"<a href="$l">$l</a>"#).to_string())
+        }
+
         #[template_callback]
         pub(super) fn handle_reply(&self) {
             let obj = self.instance();

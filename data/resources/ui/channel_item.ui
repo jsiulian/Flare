@@ -17,6 +17,7 @@
             <lookup name="channel" type="FlChannelItem"/>
           </lookup>
         </binding>
+        <property name="show-initials">True</property>
         <property name="halign">start</property>
         <property name="size">25</property>
       </object>

@@ -18,6 +18,7 @@
         <!-- Avatar -->
         <child>
           <object class="AdwAvatar">
+            <property name="show-initials">True</property>
             <binding name="text">
               <lookup name="title">
                 <lookup name="sender">
@@ -141,9 +142,11 @@
     <child>
       <object class="GtkLabel">
         <binding name="label">
-          <lookup name="body">
-            <lookup name="message" type="FlMessageItem"/>
-          </lookup>
+          <closure function="markup_urls" type="gchararray">
+            <lookup name="body">
+              <lookup name="message" type="FlMessageItem"/>
+            </lookup>
+          </closure>
         </binding>
         <property name="wrap">True</property>
         <property name="xalign">0</property>
@@ -153,6 +156,8 @@
         <property name="valign">start</property>
         <property name="hexpand">True</property>
         <property name="halign">start</property>
+        <property name="use-markup">True</property>
+        <property name="selectable">True</property>
       </object>
     </child>
 
