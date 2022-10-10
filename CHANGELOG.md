@@ -17,7 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Show backend thread panics.
 - UI improvements for the channel list. ([#20])
 - Display user initials in profile pictures. ([#26])
-- Downloading attachments now defaults to the downloads directory. ([#22])
 
 ### Fixed
 

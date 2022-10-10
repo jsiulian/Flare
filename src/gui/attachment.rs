@@ -71,6 +71,7 @@ pub mod imp {
                 .and_then(|a| a.open_file())
             {
                 let obj = self.instance();
+
                 let ctx = glib::MainContext::default();
                 ctx.spawn_local(clone!(@weak obj => async move {
                     let identifier = ashpd::WindowIdentifier::from_native(&obj.native().unwrap()).await;
@@ -94,7 +95,12 @@ pub mod imp {
                     crate::trace!("Setting filename to {:?}", &name);
                     chooser.set_current_name(&name);
                 }
-                let _ = chooser.set_current_folder(glib::user_special_dir(glib::UserDirectory::Downloads).map(|p| gio::File::for_path(&p)).as_ref());
+                // TODO: Does not work inside Flatpak.
+                // let _ = chooser.set_current_folder(
+                //     glib::user_special_dir(glib::UserDirectory::Downloads)
+                //         .map(|p| gio::File::for_path(&p))
+                //         .as_ref(),
+                // );
 
                 let obj = self.instance();
                 chooser.connect_response(

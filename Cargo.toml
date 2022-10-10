@@ -13,7 +13,7 @@ gdk = { version = "0.4.8", package = "gdk4" }
 gdk-pixbuf = "0.15.11"
 glib = "0.15.12"
 libadwaita = { version = "0.2.0-alpha.2", features = ["v1_2"]}
-ashpd = { version = "0.3.2", features = ["feature_gtk4"] }
+ashpd = { version = "0.3.2", features = ["feature_gtk4", "log"] }
 
 gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
  
@@ -44,6 +44,8 @@ log = "0.4.17"
 env_logger = "0.9.0"
 
 err-derive = "0.3.1"
+
+tracing = { version = "0.1.37", features = ["log-always"] }
 
 [features]
 default = []

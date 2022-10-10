@@ -125,6 +125,14 @@ impl Attachment {
             name = Some(pointer_name.clone());
         }
 
+        if name == None {
+            match &pointer.content_type {
+                Some(t) if t.starts_with("image/") => name = Some(format!("image.{}", &t[6..])),
+                Some(t) if t.starts_with("video/") => name = Some(format!("video.{}", &t[6..])),
+                _ => {}
+            }
+        }
+
         if let Ok(bytes) = manager.get_attachment(pointer).await {
             raw = Some(Bytes::from_owned(bytes));
 
@@ -141,24 +149,37 @@ impl Attachment {
                     Cancellable::NONE,
                 );
                 let _ = tmp_out.flush(Cancellable::NONE);
-                file = Some(tmp_file);
+                if let Some(name) = name.as_ref() {
+                    let renamed_file = tmp_file.set_display_name(
+                        &format!(
+                            "{}.{}",
+                            tmp_file
+                                .basename()
+                                .map(|b| b.display().to_string())
+                                .unwrap_or_default(),
+                            name,
+                        ),
+                        None::<&gio::Cancellable>,
+                    );
+                    if let Ok(renamed_file) = renamed_file {
+                        file = Some(renamed_file);
+                    } else {
+                        file = Some(tmp_file);
+                    }
+                } else {
+                    file = Some(tmp_file);
+                }
             }
 
             match &pointer.content_type {
                 Some(t) if t.starts_with("image/") => {
                     log::trace!("Attachment is a image, converting to usable type");
                     image = Texture::from_bytes(raw.as_ref().expect("Raw bytes to be set")).ok();
-                    if name.is_none() {
-                        name = Some(format!("image.{}", &t[6..]));
-                    }
                 }
                 Some(t) if t.starts_with("video/") => {
                     log::trace!("Attachment is a video, converting to usable type");
                     if let Some(tmp_file) = file.as_ref() {
                         video = Some(MediaFile::for_file(tmp_file));
-                        if name.is_none() {
-                            name = Some(format!("video.{}", &t[6..]));
-                        }
                     }
                 }
                 Some(t) => log::trace!("Currently unhandles attachment type: {}", t),
@@ -181,8 +202,14 @@ impl Attachment {
         self.property::<Option<String>>("name")
     }
 
+    pub fn uri(&self) -> Option<glib::GString> {
+        self.property::<Option<File>>("file").map(|f| f.uri())
+    }
+
     pub fn open_file(&self) -> Option<std::fs::File> {
-        self.property::<Option<File>>("file").and_then(|f| f.path()).and_then(|p| std::fs::File::open(p).ok())
+        self.property::<Option<File>>("file")
+            .and_then(|f| f.path())
+            .and_then(|p| std::fs::File::open(p).ok())
     }
 
     pub async fn save_to_file(&self, file: &File) -> Result<(), gtk::glib::error::Error> {
