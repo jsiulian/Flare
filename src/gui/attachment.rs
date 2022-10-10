@@ -94,6 +94,7 @@ pub mod imp {
                     crate::trace!("Setting filename to {:?}", &name);
                     chooser.set_current_name(&name);
                 }
+                let _ = chooser.set_current_folder(glib::user_special_dir(glib::UserDirectory::Downloads).map(|p| gio::File::for_path(&p)).as_ref());
 
                 let obj = self.instance();
                 chooser.connect_response(

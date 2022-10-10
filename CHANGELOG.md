@@ -6,15 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Clickable links in text messages. ([#24])
+- Open image in default program. ([#22])
+
 ### Changed
 
 - Show backend thread panics.
-- UI improvements for the channel list ([#20])
+- UI improvements for the channel list. ([#20])
+- Display user initials in profile pictures. ([#26])
+- Downloading attachments now defaults to the downloads directory. ([#22])
 
 ### Fixed
 
-- Fixed duplicate message receiving
-- Wrapping for extremely long words
+- Fixed duplicate message receiving.
+- Wrapping for extremely long words.
 
 ## [0.5.0]
 
@@ -211,4 +218,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#11]: https://gitlab.com/Schmiddiii/flare/-/issues/11
 [#12]: https://gitlab.com/Schmiddiii/flare/-/issues/12
 [#13]: https://gitlab.com/Schmiddiii/flare/-/issues/13
+[#14]: https://gitlab.com/Schmiddiii/flare/-/issues/14
+[#15]: https://gitlab.com/Schmiddiii/flare/-/issues/15
+[#16]: https://gitlab.com/Schmiddiii/flare/-/issues/16
+[#17]: https://gitlab.com/Schmiddiii/flare/-/issues/17
+[#18]: https://gitlab.com/Schmiddiii/flare/-/issues/18
+[#19]: https://gitlab.com/Schmiddiii/flare/-/issues/19
 [#20]: https://gitlab.com/Schmiddiii/flare/-/issues/20
+[#21]: https://gitlab.com/Schmiddiii/flare/-/issues/21
+[#22]: https://gitlab.com/Schmiddiii/flare/-/issues/22
+[#23]: https://gitlab.com/Schmiddiii/flare/-/issues/23
+[#24]: https://gitlab.com/Schmiddiii/flare/-/issues/24
+[#25]: https://gitlab.com/Schmiddiii/flare/-/issues/25
+[#26]: https://gitlab.com/Schmiddiii/flare/-/issues/26
