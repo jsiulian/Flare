@@ -100,7 +100,8 @@ pub mod imp {
             lazy_static! {
                 static ref RE: Regex = Regex::new(r#"(?P<l>[a-z]*://[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))"#).unwrap();
             }
-            s.map(|s| RE.replace_all(&s, r#"<a href="$l">$l</a>"#).to_string())
+            let regexed = s.map(|s| RE.replace_all(&s, r#"<a href="$l">$l</a>"#).to_string());
+            regexed.map(|s| s.replace('&', "&amp;"))
         }
 
         #[template_callback]
