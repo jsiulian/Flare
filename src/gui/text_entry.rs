@@ -40,7 +40,7 @@ pub mod imp {
             prelude::BoxImpl,
             widget::{CompositeTemplate, WidgetClassSubclassExt, WidgetImpl},
         },
-        traits::{TextBufferExt, WidgetExt},
+        traits::{TextBufferExt, TextViewExt, WidgetExt},
         CompositeTemplate, Inhibit, TemplateChild, TextBuffer, TextView,
     };
 
@@ -82,6 +82,46 @@ pub mod imp {
                 }
             }));
 
+            self.view
+                .connect_paste_clipboard(clone!(@weak obj => move |entry| {
+                    let ctx = glib::MainContext::default();
+                    let clipboard = obj.clipboard();
+                    let formats = clipboard.formats();
+
+                    // We only handle files and supported images.
+                    ctx.spawn_local(clone!(@weak entry => async move {
+                        if formats.contains_type(gio::File::static_type()) {
+                            entry.stop_signal_emission_by_name("paste-clipboard");
+                            match clipboard
+                                .read_value_future(gio::File::static_type(), glib::PRIORITY_DEFAULT)
+                                .await
+                            {
+                                Ok(value) => match value.get::<gio::File>() {
+                                    Ok(file) => {
+                                        obj.emit_by_name::<()>("paste-file", &[&file]);
+                                    }
+                                    Err(error) => log::warn!("Could not get file from value: {error:?}"),
+                                },
+                                Err(error) => log::warn!("Could not get file from the clipboard: {error:?}"),
+                            }
+                        } else if formats.contains_type(gdk::Texture::static_type()) {
+                            entry.stop_signal_emission_by_name("paste-clipboard");
+                            match clipboard
+                                .read_value_future(gdk::Texture::static_type(), glib::PRIORITY_DEFAULT)
+                                .await
+                            {
+                                Ok(value) => match value.get::<gdk::Texture>() {
+                                    Ok(texture) => {
+                                        obj.emit_by_name::<()>("paste-texture", &[&texture]);
+                                    }
+                                    Err(error) => log::warn!("Could not get file from value: {error:?}"),
+                                },
+                                Err(error) => log::warn!("Could not get file from the clipboard: {error:?}"),
+                            }
+                        }
+                    }));
+                }));
+
             self.buffer
                 .connect_text_notify(clone!(@weak obj => move |_| {
                     obj.notify("is-empty");
@@ -116,7 +156,21 @@ pub mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder("activate", &[], <()>::static_type().into()).build()]
+                vec![
+                    Signal::builder("activate", &[], <()>::static_type().into()).build(),
+                    Signal::builder(
+                        "paste-file",
+                        &[gio::File::static_type().into()],
+                        <()>::static_type().into(),
+                    )
+                    .build(),
+                    Signal::builder(
+                        "paste-texture",
+                        &[gdk::Texture::static_type().into()],
+                        <()>::static_type().into(),
+                    )
+                    .build(),
+                ]
             });
             SIGNALS.as_ref()
         }

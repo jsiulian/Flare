@@ -44,6 +44,23 @@ impl Attachment {
         .expect("Failed to create `Attachment`")
     }
 
+    pub fn from_texture(texture: Texture, manager: &Manager) -> Self {
+        let (file, tmp_file_stream) =
+            File::new_tmp(None::<PathBuf>).expect("Failed to create temporary file");
+        let tmp_out = tmp_file_stream.output_stream();
+        let _ = tmp_out.write_bytes(&texture.save_to_png_bytes(), Cancellable::NONE);
+
+        Object::new(&[
+            ("manager", manager),
+            ("file", &file),
+            ("name", &"image.png"),
+            ("image", &texture),
+            ("loaded", &true),
+            ("content-type", &"image/png"),
+        ])
+        .expect("Failed to create `Attachment`")
+    }
+
     pub fn is_image(&self) -> bool {
         self.property::<bool>("is-image")
     }
@@ -67,14 +84,19 @@ impl Attachment {
             .to_vec();
         (
             AttachmentSpec {
-                content_type: gio::content_type_guess(file.basename(), &bytes)
-                    .0
-                    .as_str()
-                    .to_owned(),
+                content_type: self
+                    .property::<Option<String>>("content-type")
+                    .unwrap_or_else(|| {
+                        gio::content_type_guess(file.basename(), &bytes)
+                            .0
+                            .as_str()
+                            .to_owned()
+                    }),
                 length: bytes.len(),
-                file_name: file
-                    .basename()
-                    .and_then(|f| f.file_name().map(|s| s.to_string_lossy().to_string())),
+                file_name: self.name().or_else(|| {
+                    file.basename()
+                        .and_then(|f| f.file_name().map(|s| s.to_string_lossy().to_string()))
+                }),
                 preview: None,
                 voice_note: None,
                 borderless: None,

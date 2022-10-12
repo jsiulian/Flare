@@ -133,6 +133,26 @@ pub mod imp {
         }
 
         #[template_callback]
+        fn paste_file(&self, file: gio::File) {
+            log::trace!("`ChannelMessages` got file as attachment.");
+            let obj = self.instance();
+            let manager = obj.property::<Manager>("manager");
+            let attachment = crate::backend::Attachment::from_file(file, &manager);
+            self.append_attachment(attachment);
+            obj.notify("has-attachments");
+        }
+
+        #[template_callback]
+        fn paste_texture(&self, texture: gdk::Texture) {
+            log::trace!("`ChannelMessages` got texture as attachment.");
+            let obj = self.instance();
+            let manager = obj.property::<Manager>("manager");
+            let attachment = crate::backend::Attachment::from_texture(texture, &manager);
+            self.append_attachment(attachment);
+            obj.notify("has-attachments");
+        }
+
+        #[template_callback]
         fn add_attachment(&self) {
             log::trace!("Requested to add a attachment");
             let chooser = FileChooserNativeBuilder::new()
@@ -146,23 +166,18 @@ pub mod imp {
                 )
                 .action(FileChooserAction::Open)
                 .build();
-            let manager = self.instance().property::<Manager>("manager");
             let obj = self.instance();
-            chooser.connect_response(
-                clone!(@strong chooser, @strong obj, @strong manager => move |_, action| {
-                    if action == ResponseType::Accept {
-                        log::trace!("User added an attachment");
-                        let file = chooser.file();
-                        if let Some(file) = file {
-                            let attachment = crate::backend::Attachment::from_file(file, &manager);
-                            obj.imp().append_attachment(attachment);
-                            obj.notify("has-attachments");
-                        }
-                    } else {
-                        log::trace!("User did not upload a attachment");
+            chooser.connect_response(clone!(@strong chooser, @strong obj => move |_, action| {
+                if action == ResponseType::Accept {
+                    log::trace!("User added an attachment");
+                    let file = chooser.file();
+                    if let Some(file) = file {
+                        obj.imp().paste_file(file);
                     }
-                }),
-            );
+                } else {
+                    log::trace!("User did not upload a attachment");
+                }
+            }));
             chooser.show();
         }
 

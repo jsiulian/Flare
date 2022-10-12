@@ -166,6 +166,8 @@
                   <property name="label" translatable="yes" context="accessibility">Message input</property>
                 </accessibility>
                 <signal name="activate" handler="send_message" swapped="true"/>
+                <signal name="paste-file" handler="paste_file" swapped="true"/>
+                <signal name="paste-texture" handler="paste_texture" swapped="true"/>
                 <property name="tooltip-text" translatable="yes" context="tooltip">Message input</property>
               </object>
             </child>
