@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Pasting files and images into the text entry ([#19])
+
 ### Fixed
 
 - Fixed showing messages with "&"

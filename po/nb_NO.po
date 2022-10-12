@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-04 15:49+0200\n"
+"POT-Creation-Date: 2022-10-12 13:46+0200\n"
 "PO-Revision-Date: 2022-10-10 18:02+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -35,11 +35,11 @@ msgstr "Last inn video"
 msgid "Load file"
 msgstr "Last inn fil"
 
-#: data/resources/ui/channel_list.ui:16
+#: data/resources/ui/channel_list.ui:19
 msgid "Search"
 msgstr "Søk"
 
-#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:32
+#: data/resources/ui/channel_list.ui:21 data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Søk"
@@ -48,62 +48,62 @@ msgstr "Søk"
 msgid "Select a channel"
 msgstr "Velg en kanal"
 
-#: data/resources/ui/channel_messages.ui:48
+#: data/resources/ui/channel_messages.ui:51
 #, fuzzy
 msgid "Load more"
 msgstr "Last inn mer"
 
-#: data/resources/ui/channel_messages.ui:76
+#: data/resources/ui/channel_messages.ui:79
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Fjern svaret"
 
-#: data/resources/ui/channel_messages.ui:78
+#: data/resources/ui/channel_messages.ui:81
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Fjern svar"
 
-#: data/resources/ui/channel_messages.ui:108
+#: data/resources/ui/channel_messages.ui:111
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Fjern et vedlegg"
 
-#: data/resources/ui/channel_messages.ui:110
+#: data/resources/ui/channel_messages.ui:113
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Fjern vedlegg"
 
-#: data/resources/ui/channel_messages.ui:138
+#: data/resources/ui/channel_messages.ui:145
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Legg til et vedlegg"
 
-#: data/resources/ui/channel_messages.ui:140
+#: data/resources/ui/channel_messages.ui:147
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Legg til vedlegg"
 
-#: data/resources/ui/channel_messages.ui:159
+#: data/resources/ui/channel_messages.ui:166
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Meldingsinndata"
 
-#: data/resources/ui/channel_messages.ui:162
+#: data/resources/ui/channel_messages.ui:171
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Meldingsinndata"
 
-#: data/resources/ui/channel_messages.ui:168
+#: data/resources/ui/channel_messages.ui:177
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Send"
 
-#: data/resources/ui/channel_messages.ui:170
+#: data/resources/ui/channel_messages.ui:179
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Send"
 
-#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:130
+#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:135
 #, fuzzy
 msgid "Clear messages"
 msgstr "Last inn flere bilder"
@@ -128,7 +128,7 @@ msgid "Clear"
 msgstr "Tøm"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
-#: data/resources/ui/window.ui:126
+#: data/resources/ui/window.ui:131
 msgid "Unlink"
 msgstr "Opphev forbindelse"
 
@@ -172,11 +172,11 @@ msgstr "Kopier til utklippstavlen"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Vent til kontaktene vises etter sammenlenking."
 
-#: data/resources/ui/message_item.ui:203
+#: data/resources/ui/message_item.ui:208
 msgid "Reply"
 msgstr "Svar"
 
-#: data/resources/ui/message_item.ui:209
+#: data/resources/ui/message_item.ui:214
 msgid "React"
 msgstr "Reager"
 
@@ -308,29 +308,29 @@ msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Last inn flere bilder"
 
-#: data/resources/ui/window.ui:43
+#: data/resources/ui/window.ui:47
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Meny"
 
-#: data/resources/ui/window.ui:122
+#: data/resources/ui/window.ui:127
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: data/resources/ui/window.ui:134
+#: data/resources/ui/window.ui:139
 #, fuzzy
 msgid "Keybindings"
 msgstr "Hurtigtaster"
 
-#: data/resources/ui/window.ui:138
+#: data/resources/ui/window.ui:143
 msgid "About"
 msgstr "Om"
 
-#: src/backend/channel.rs:405
+#: src/backend/channel.rs:425
 msgid "Note to self"
 msgstr "Selvpåminnelse"
 
-#: src/backend/manager.rs:375
+#: src/backend/manager.rs:362
 msgid "You"
 msgstr "Deg"
 
@@ -352,20 +352,20 @@ msgid_plural "Sent {} files"
 msgstr[0] "Sendte en fil"
 msgstr[1] "Sendte {} filer"
 
-#: src/error.rs:74
+#: src/error.rs:75
 msgid "I/O Error."
 msgstr "Inn/-utdatafeil."
 
-#: src/error.rs:79
+#: src/error.rs:80
 #, fuzzy
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Mangler tilkobling til Internett."
 
-#: src/error.rs:84
+#: src/error.rs:85
 msgid "The communication with Libsecret failed."
 msgstr "Fikk ikke kontakt med libsecret."
 
-#: src/error.rs:89
+#: src/error.rs:90
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -373,7 +373,7 @@ msgstr ""
 "Fikk ikke kontakt med bakende-databasen. Start programmet på ny eller slett "
 "databasen og forbind programmet igjen."
 
-#: src/error.rs:94
+#: src/error.rs:95
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -381,35 +381,44 @@ msgstr ""
 "Det ser ikke ut til at du er innlogget med Signal. Slett databasen og "
 "forbind programmet igjen."
 
-#: src/error.rs:99
+#: src/error.rs:100
 msgid "Sending a message failed."
 msgstr "Kunne ikke sende melding."
 
-#: src/error.rs:104
+#: src/error.rs:105
 msgid "Receiving a message failed."
 msgstr "Kunne ikke motta melding."
 
-#: src/error.rs:109
+#: src/error.rs:110
 #, fuzzy
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr "Noe uventet gikk galt med Signal-bakenden. Prøv igjen senere."
 
-#: src/error.rs:114
+#: src/error.rs:115
 msgid "The application seems to be misconfigured."
 msgstr "Programmet er ikke satt opp riktig."
 
-#: src/error.rs:124
+#: src/error.rs:120
+msgid "A part of the application crashed."
+msgstr ""
+
+#: src/error.rs:130
 msgid "Please check your internet connection."
 msgstr "Sjekk din tilkobling til Internett."
 
-#: src/error.rs:128
+#: src/error.rs:134
 msgid "Please delete the database and relink the device."
 msgstr "Slett databasen og forbind enheten igjen."
 
-#: src/error.rs:135
+#: src/error.rs:141
 msgid "The database path at {} is no folder."
 msgstr "Databasestien {} er ikke en mappe."
+
+#: src/error.rs:146
+#, fuzzy
+msgid "Please restart the application with logging and report this issue."
+msgstr "Start programmet på ny etter at dette vinduet er lukket."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
@@ -424,9 +433,6 @@ msgstr "%H %M"
 #, fuzzy
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d %m %y. %H %M"
-
-#~ msgid "Please restart the application after this window closed."
-#~ msgstr "Start programmet på ny etter at dette vinduet er lukket."
 
 #~ msgid "Are you sure?"
 #~ msgstr "Er du sikker?"
