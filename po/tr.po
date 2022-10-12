@@ -126,6 +126,7 @@ msgid "Clear"
 msgstr "Temizle"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
+#: data/resources/ui/dialog_unlink.ui:10
 msgid "Unlink"
 msgstr "Bağı Kaldır"
 
@@ -323,11 +324,11 @@ msgstr "Kısayollar"
 msgid "About"
 msgstr "Hakkında"
 
-#: src/backend/channel.rs:439
+#: src/backend/channel.rs:439 src/backend/channel.rs:425
 msgid "Note to self"
 msgstr "Kendime not"
 
-#: src/backend/manager.rs:365
+#: src/backend/manager.rs:365 src/backend/manager.rs:362
 msgid "You"
 msgstr "Siz"
 
@@ -347,19 +348,19 @@ msgstr ""
 msgid "Is busy."
 msgstr ""
 
-#: src/backend/message/text_message.rs:231
+#: src/backend/message/text_message.rs:231 src/backend/message.rs:405
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Görüntü gönderildi"
 msgstr[1] "{} görüntü gönderildi"
 
-#: src/backend/message/text_message.rs:234
+#: src/backend/message/text_message.rs:234 src/backend/message.rs:413
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Video gönderildi"
 msgstr[1] "{} video gönderildi"
 
-#: src/backend/message/text_message.rs:237
+#: src/backend/message/text_message.rs:237 src/backend/message.rs:421
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Dosya gönderildi"
@@ -414,7 +415,7 @@ msgstr "Uygulama yanlış yapılandırılmış görünüyor."
 
 #: src/error.rs:120
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Uygulamanın bir bölümü çöktü."
 
 #: src/error.rs:130
 msgid "Please check your internet connection."
@@ -429,9 +430,9 @@ msgid "The database path at {} is no folder."
 msgstr "{} adresindeki veritabanı yolu klasör değil."
 
 #: src/error.rs:146
-#, fuzzy
 msgid "Please restart the application with logging and report this issue."
-msgstr "Lütfen bu pencere kapandıktan sonra uygulamayı yeniden başlatın."
+msgstr ""
+"Lütfen uygulamayı günlük kaydı ile yeniden başlatın ve bu sorunu bildirin."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
