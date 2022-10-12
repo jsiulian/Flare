@@ -126,6 +126,7 @@ msgid "Clear"
 msgstr "Löschen"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
+#: data/resources/ui/dialog_unlink.ui:10
 msgid "Unlink"
 msgstr "Entkoppeln"
 
@@ -327,11 +328,11 @@ msgstr "Tastaturkürzel"
 msgid "About"
 msgstr "Info"
 
-#: src/backend/channel.rs:439
+#: src/backend/channel.rs:439 src/backend/channel.rs:425
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:365
+#: src/backend/manager.rs:365 src/backend/manager.rs:362
 msgid "You"
 msgstr "Du"
 
@@ -351,19 +352,19 @@ msgstr ""
 msgid "Is busy."
 msgstr ""
 
-#: src/backend/message/text_message.rs:231
+#: src/backend/message/text_message.rs:231 src/backend/message.rs:405
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Hat ein Bild gesendet"
 msgstr[1] "Hat {} Bilder gesendet"
 
-#: src/backend/message/text_message.rs:234
+#: src/backend/message/text_message.rs:234 src/backend/message.rs:413
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Hat ein Video gesendet"
 msgstr[1] "Hat {} Videos gesendet"
 
-#: src/backend/message/text_message.rs:237
+#: src/backend/message/text_message.rs:237 src/backend/message.rs:421
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"
@@ -417,7 +418,7 @@ msgstr "Die Anwendung scheint falsch konfiguriert zu sein."
 
 #: src/error.rs:120
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Ein Teil der Anwendung ist abgestürzt."
 
 #: src/error.rs:130
 msgid "Please check your internet connection."
@@ -432,10 +433,9 @@ msgid "The database path at {} is no folder."
 msgstr "Der Datenbankpfad bei {} ist kein Ordner."
 
 #: src/error.rs:146
-#, fuzzy
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
-"Bitte starte die Anwendung neu, nachdem sich dieses Fenster geschlossen hat."
+"Bitte starten Sie diese Anwendung neu mit Logs und melden Sie diesen Fehler."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
