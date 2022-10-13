@@ -8,6 +8,34 @@ use libsignal_service::{proto::AttachmentPointer, sender::AttachmentSpec};
 
 use super::Manager;
 
+#[derive(Debug, Hash, Eq, PartialEq, Clone, Copy, glib::Enum)]
+#[repr(u32)]
+#[enum_type(name = "FlAttachmentType")]
+pub enum AttachmentType {
+    Image,
+    Video,
+    File,
+}
+
+impl Default for AttachmentType {
+    fn default() -> Self {
+        AttachmentType::File
+    }
+}
+
+impl AttachmentType {
+    fn from_content_type<S: AsRef<str>>(content: S) -> Self {
+        let content = content.as_ref();
+        if content.starts_with("image/") {
+            Self::Image
+        } else if content.starts_with("video/") {
+            Self::Video
+        } else {
+            Self::File
+        }
+    }
+}
+
 gtk::glib::wrapper! {
     pub struct Attachment(ObjectSubclass<imp::Attachment>);
 }
@@ -61,16 +89,28 @@ impl Attachment {
         .expect("Failed to create `Attachment`")
     }
 
+    pub fn manager(&self) -> Manager {
+        self.property("manager")
+    }
+
+    pub fn content_type(&self) -> Option<String> {
+        self.property("content-type")
+    }
+
+    pub fn attachment_type(&self) -> AttachmentType {
+        self.property::<AttachmentType>("type")
+    }
+
     pub fn is_image(&self) -> bool {
-        self.property::<bool>("is-image")
+        self.attachment_type() == AttachmentType::Image
     }
 
     pub fn is_video(&self) -> bool {
-        self.property::<bool>("is-video")
+        self.attachment_type() == AttachmentType::Video
     }
 
     pub fn is_file(&self) -> bool {
-        self.property::<bool>("is-file")
+        self.attachment_type() == AttachmentType::File
     }
 
     pub(super) async fn as_upload_attachment(&self) -> (AttachmentSpec, Vec<u8>) {
@@ -84,14 +124,12 @@ impl Attachment {
             .to_vec();
         (
             AttachmentSpec {
-                content_type: self
-                    .property::<Option<String>>("content-type")
-                    .unwrap_or_else(|| {
-                        gio::content_type_guess(file.basename(), &bytes)
-                            .0
-                            .as_str()
-                            .to_owned()
-                    }),
+                content_type: self.content_type().unwrap_or_else(|| {
+                    gio::content_type_guess(file.basename(), &bytes)
+                        .0
+                        .as_str()
+                        .to_owned()
+                }),
                 length: bytes.len(),
                 file_name: self.name().or_else(|| {
                     file.basename()
@@ -134,7 +172,7 @@ impl Attachment {
             return;
         }
         let pointer = pointer_opt.as_ref().unwrap();
-        let manager = self.property::<Manager>("manager");
+        let manager = self.manager();
 
         let mut image = None;
         let mut video = None;
@@ -213,6 +251,7 @@ impl Attachment {
         self.set_property("image", image);
         self.set_property("video", video);
         self.set_property("name", name);
+        self.notify("type");
         self.notify("is-image");
         self.notify("is-video");
         self.notify("is-file");
@@ -254,6 +293,7 @@ mod imp {
     use gdk::prelude::*;
     use gdk::{subclass::prelude::*, Texture};
     use gio::File;
+    use glib::ParamSpecEnum;
     use glib::{
         once_cell::sync::Lazy, Bytes, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject,
         ParamSpecString, Value,
@@ -261,6 +301,7 @@ mod imp {
     use gtk::MediaStream;
     use libsignal_service::proto::AttachmentPointer;
 
+    use crate::backend::attachment::AttachmentType;
     use crate::backend::Manager;
 
     #[derive(Default)]
@@ -318,6 +359,35 @@ mod imp {
                         File::static_type(),
                         ParamFlags::READWRITE,
                     ),
+                    ParamSpecEnum::new(
+                        "type",
+                        "type",
+                        "type",
+                        AttachmentType::static_type(),
+                        AttachmentType::default() as i32,
+                        ParamFlags::READABLE,
+                    ),
+                    ParamSpecBoolean::new(
+                        "is-image",
+                        "is-image",
+                        "is-image",
+                        false,
+                        ParamFlags::READWRITE,
+                    ),
+                    ParamSpecBoolean::new(
+                        "is-video",
+                        "is-video",
+                        "is-video",
+                        false,
+                        ParamFlags::READWRITE,
+                    ),
+                    ParamSpecBoolean::new(
+                        "is-file",
+                        "is-file",
+                        "is-file",
+                        false,
+                        ParamFlags::READWRITE,
+                    ),
                     ParamSpecString::new("name", "name", "name", None, ParamFlags::READWRITE),
                     ParamSpecString::new(
                         "content-type",
@@ -325,27 +395,6 @@ mod imp {
                         "content-type",
                         None,
                         ParamFlags::READWRITE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "is-image",
-                        "is-image",
-                        "is-image",
-                        false,
-                        ParamFlags::READABLE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "is-video",
-                        "is-video",
-                        "is-video",
-                        false,
-                        ParamFlags::READABLE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "is-file",
-                        "is-file",
-                        "is-file",
-                        false,
-                        ParamFlags::READABLE,
                     ),
                     ParamSpecBoolean::new(
                         "loaded",
@@ -366,20 +415,15 @@ mod imp {
                 "video" => self.video.borrow().as_ref().to_value(),
                 "file" => self.file.borrow().as_ref().to_value(),
                 "name" => self.name.borrow().as_ref().to_value(),
-                "is-image" => obj
-                    .property::<Option<String>>("content-type")
-                    .map(|s| s.starts_with("image/"))
+                "type" => obj
+                    .content_type()
+                    .map(|s| AttachmentType::from_content_type(&s))
                     .unwrap_or_default()
                     .to_value(),
+                "is-image" => obj.is_image().to_value(),
+                "is-video" => obj.is_video().to_value(),
+                "is-file" => obj.is_file().to_value(),
                 "content-type" => self.content_type.borrow().as_ref().to_value(),
-                "is-video" => obj
-                    .property::<Option<String>>("content-type")
-                    .map(|s| s.starts_with("video/"))
-                    .unwrap_or_default()
-                    .to_value(),
-                "is-file" => (!(obj.property::<bool>("is-image")
-                    || obj.property::<bool>("is-video")))
-                .to_value(),
                 "loaded" => self.loaded.get().to_value(),
                 _ => unimplemented!(),
             }

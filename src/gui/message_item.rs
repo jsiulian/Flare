@@ -20,6 +20,10 @@ impl MessageItem {
         Object::new(&[("message", message)]).expect("Failed to create `MessageItem`")
     }
 
+    pub fn message(&self) -> Message {
+        self.property("message")
+    }
+
     fn setup_actions(&self) {
         let action_reply = SimpleAction::new("reply", None);
         action_reply.connect_activate(clone!(@weak self as s => move |_, _| {
@@ -43,19 +47,20 @@ impl MessageItem {
 }
 
 pub mod imp {
-    use std::cell::{Cell, RefCell};
-    use regex::Regex;
     use lazy_static::lazy_static;
+    use regex::Regex;
+    use std::cell::{Cell, RefCell};
 
     use glib::{
         clone,
         once_cell::sync::Lazy,
         subclass::{InitializingObject, Signal},
-        MainContext, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
+        ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
     use crate::{
+        gspawn,
         backend::{Manager, Message},
         gui::{attachment::Attachment, error_dialog::ErrorDialog, utility::Utility},
     };
@@ -107,11 +112,10 @@ pub mod imp {
         #[template_callback]
         pub(super) fn handle_reply(&self) {
             let obj = self.instance();
-            let msg = obj.property::<Message>("message");
+            let msg = obj.message();
             crate::trace!(
                 "Replying to message {}",
-                msg.property::<Option<String>>("body")
-                    .unwrap_or_else(|| "".to_string())
+                msg.body().unwrap_or_else(|| "".to_string())
             );
             obj.emit_by_name::<()>("reply", &[&msg]);
         }
@@ -125,17 +129,15 @@ pub mod imp {
         #[template_callback]
         fn handle_react(&self, emoji: String) {
             let obj = self.instance();
-            let msg = obj.property::<Message>("message");
+            let msg = obj.message();
             crate::trace!(
                 "Reacting to message {} with {} (len: {})",
-                msg.property::<Option<String>>("body")
-                    .unwrap_or_else(|| "".to_string()),
+                msg.body().unwrap_or_else(|| "".to_string()),
                 emoji,
                 emoji.chars().count()
             );
-            let main_context = MainContext::default();
             let obj = self.instance();
-            main_context.spawn_local(clone!(@strong msg, @strong obj => async move {
+            gspawn!(clone!(@strong msg, @strong obj => async move {
                 log::trace!("Sending message");
                 if let Err(e) = msg.send_reaction(&emoji.chars().next().unwrap_or_default().to_string()).await {
                     let root = obj
@@ -202,7 +204,7 @@ pub mod imp {
                     .message
                     .borrow()
                     .as_ref()
-                    .map(|m| !m.property::<String>("reactions").is_empty())
+                    .map(|m| !m.reactions().is_empty())
                     .unwrap_or_default()
                     .to_value(),
                 _ => unimplemented!(),

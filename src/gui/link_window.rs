@@ -1,4 +1,4 @@
-use glib::{prelude::IsA, Object};
+use glib::{prelude::IsA, Object, ObjectExt};
 
 use crate::backend::Manager;
 
@@ -18,6 +18,10 @@ impl LinkWindow {
             ("transient-for", &parent),
         ])
         .expect("Failed to create LinkWindow")
+    }
+
+    pub fn url(&self) -> String {
+        self.property("url")
     }
 }
 
@@ -51,7 +55,7 @@ pub mod imp {
         fn handle_clipboard(&self, _: gtk::Button) {
             let obj = self.instance();
             let clipboard = obj.display().clipboard();
-            clipboard.set_text(&obj.property::<String>("url"));
+            clipboard.set_text(&obj.url());
         }
     }
 

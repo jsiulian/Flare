@@ -61,8 +61,8 @@ pub mod imp {
 
     use gio::{Settings, SimpleAction, SimpleActionGroup};
     use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, MainContext, ParamFlags,
-        ParamSpec, ParamSpecObject, Value,
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
+        ParamSpecObject, Value,
     };
     use gtk::{prelude::*, subclass::prelude::*, Builder, CompositeTemplate, ShortcutsWindow};
     use libadwaita::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
@@ -70,6 +70,7 @@ pub mod imp {
     use crate::{
         backend::Manager,
         config::APP_ID,
+        gspawn,
         gui::{
             channel_list::ChannelList, channel_messages::ChannelMessages,
             error_dialog::ErrorDialog, link_window::LinkWindow,
@@ -282,11 +283,10 @@ pub mod imp {
 
             obj.load_window_size();
 
-            let main_context = MainContext::default();
-            main_context.spawn_local(clone!(@strong obj => async move {
+            gspawn!(clone!(@strong obj => async move {
                 log::trace!("Constructing path for configuration");
                 let path = PathBuf::from(
-                    env::var("FLARE_DATA_PATH").unwrap_or_else(|_| 
+                    env::var("FLARE_DATA_PATH").unwrap_or_else(|_|
                         env::var("XDG_DATA_HOME")
                             .map(|s| s + "/flare/")
                             .unwrap_or_else(|_| env::var("HOME").map(|s| s + "/.local/share/flare/").expect("Could not find $HOME")),

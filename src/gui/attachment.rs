@@ -1,4 +1,4 @@
-use glib::Object;
+use glib::{Object, ObjectExt};
 
 gtk::glib::wrapper! {
     pub struct Attachment(ObjectSubclass<imp::Attachment>)
@@ -12,6 +12,10 @@ impl Attachment {
         log::trace!("Initializing `Attachment`");
         Object::new(&[("attachment", attachment)]).expect("Failed to create `Attachment`")
     }
+
+    pub fn attachment(&self) -> crate::backend::Attachment {
+        self.property("attachment")
+    }
 }
 
 pub mod imp {
@@ -19,8 +23,8 @@ pub mod imp {
 
     use gio::Settings;
     use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, MainContext, ParamFlags,
-        ParamSpec, ParamSpecObject, Value,
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
+        ParamSpecObject, Value,
     };
     use gtk::{
         builders::FileChooserNativeBuilder, prelude::*, subclass::prelude::*, CompositeTemplate,
@@ -30,6 +34,7 @@ pub mod imp {
     use crate::{
         backend::Manager,
         config::APP_ID,
+        gspawn,
         gui::{error_dialog::ErrorDialog, utility::Utility},
     };
 
@@ -45,10 +50,9 @@ pub mod imp {
     impl Attachment {
         #[template_callback]
         fn load(&self, _: gtk::Button) {
-            let context = glib::MainContext::default();
             let obj = self.instance();
-            context.spawn_local(clone!(@strong obj => async move {
-                let attachment = obj.property::<crate::backend::Attachment>("attachment");
+            gspawn!(clone!(@strong obj => async move {
+                let attachment = obj.attachment();
                 attachment.load().await
             }));
         }
@@ -72,8 +76,7 @@ pub mod imp {
             {
                 let obj = self.instance();
 
-                let ctx = glib::MainContext::default();
-                ctx.spawn_local(clone!(@weak obj => async move {
+                gspawn!(clone!(@weak obj => async move {
                     let identifier = ashpd::WindowIdentifier::from_native(&obj.native().unwrap()).await;
 
                     if let Err(e) = ashpd::desktop::open_uri::open_file(&identifier, &file, false, false).await {
@@ -109,14 +112,9 @@ pub mod imp {
                             log::trace!("User downloads attachment");
                             let file = chooser.file();
                             if let Some(file) = file {
-                                let main_context = MainContext::default();
-                                main_context.spawn_local(clone!(@strong attachment, @strong obj => async move {
+                                gspawn!(clone!(@strong attachment, @strong obj => async move {
                                     if let Err(e) = attachment.save_to_file(&file).await {
-                                        let root = obj
-                                            .root()
-                                            .expect("`Attachment` to have a root")
-                                            .dynamic_cast::<crate::gui::Window>()
-                                            .expect("Root of `Attachment` to be a `Window`.");
+                                        let root = obj.imp().window();
                                         let dialog = ErrorDialog::new(e.into(), &root);
                                         dialog.show();
                                     }

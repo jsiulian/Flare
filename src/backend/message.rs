@@ -19,20 +19,43 @@ gtk::glib::wrapper! {
 }
 
 impl Message {
+    pub fn manager(&self) -> Manager {
+        self.property("manager")
+    }
+
+    pub fn sender(&self) -> Contact {
+        self.property("sender")
+    }
+
+    pub fn textual_description(&self) -> String {
+        self.property("textual-description")
+    }
+
+    pub fn body(&self) -> Option<String> {
+        self.property("body")
+    }
+
+    pub fn sent(&self) -> u64 {
+        self.property("sent")
+    }
+
+    pub fn reactions(&self) -> String {
+        self.property("reactions")
+    }
+
     pub fn send_notification(&self) {
-        let sender = self.property::<Contact>("sender");
-        let body = self.property::<String>("textual-description");
-        if sender.property::<bool>("is-self") || body.is_empty(){
+        let sender = self.sender();
+        let body = self.textual_description();
+        if sender.is_self() || body.is_empty() {
             // Skip notifications for messages sent from self or empty messages.
             return;
         }
 
-        let notification = gio::Notification::new(&sender.property::<String>("title"));
+        let notification = gio::Notification::new(&sender.title());
         notification.set_body(Some(&body));
         let icon = Pixbuf::from_resource("/icon.png").expect("Flare to have an application icon");
         notification.set_icon(&icon);
-        self.property::<Manager>("manager")
-            .send_notification(&notification);
+        self.manager().send_notification(&notification);
     }
 
     pub fn from_text_channel_sender<S: AsRef<str>>(
@@ -201,7 +224,7 @@ impl Message {
                 id: msg.timestamp(),
                 author_e164: sender.as_ref().and_then(|a| a.e164()),
                 author_uuid: sender.as_ref().and_then(|a| a.uuid).map(|u| u.to_string()),
-                text: msg.property::<Option<String>>("body"),
+                text: msg.body(),
                 ..Default::default()
             });
         }
@@ -230,8 +253,8 @@ impl Message {
             emoji: Some(reaction.as_ref().to_owned()),
             remove: Some(false),
             target_author_uuid: self
-                .property::<Option<Contact>>("sender")
-                .and_then(|s| s.address())
+                .sender()
+                .address()
                 .and_then(|a| a.uuid)
                 .map(|u| u.to_string()),
             target_sent_timestamp: self.timestamp(),
@@ -262,7 +285,7 @@ impl Message {
         attachment: Attachment,
     ) -> Result<(), crate::ApplicationError> {
         log::trace!("Adding a attachment to a message");
-        let manager = self.property::<Manager>("manager");
+        let manager = self.manager();
         let upload_data = attachment.as_upload_attachment().await;
         self.imp().attachments.borrow_mut().push(attachment);
         log::trace!("Uploading the attachment");
@@ -280,7 +303,7 @@ impl Message {
     }
 
     pub fn is_empty(&self) -> bool {
-        self.property::<Option<String>>("body").is_none() && self.attachments().is_empty()
+        self.body().is_none() && self.attachments().is_empty()
     }
 }
 
@@ -291,7 +314,7 @@ mod imp {
             once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecObject, ParamSpecString,
             ParamSpecUInt64, Value,
         },
-        prelude::{ObjectExt, StaticType, ToValue},
+        prelude::{StaticType, ToValue},
     };
     use gtk::glib;
     use libsignal_service::content::Reaction;
@@ -395,7 +418,7 @@ mod imp {
                     .unwrap_or(0)
                     .to_value(),
                 "textual-description" => {
-                    if let Some(body) = obj.property::<Option<String>>("body") {
+                    if let Some(body) = obj.body() {
                         body.lines().next().unwrap_or_default().to_value()
                     } else {
                         let attachments = self.attachments.borrow();

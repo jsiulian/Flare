@@ -4,7 +4,7 @@ use gdk::prelude::*;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use gtk::{traits::*, SorterChange};
 
-use crate::backend::Channel;
+use crate::{backend::Channel, gspawn};
 
 gtk::glib::wrapper! {
     pub struct ChannelList(ObjectSubclass<imp::ChannelList>)
@@ -15,10 +15,7 @@ gtk::glib::wrapper! {
 
 impl ChannelList {
     fn add_channel(&self, channel: Channel) {
-        crate::trace!(
-            "`ChannelList` got new `Channel`: {}",
-            channel.property::<String>("title")
-        );
+        crate::trace!("`ChannelList` got new `Channel`: {}", channel.title());
         let obj = self.imp();
         obj.model.borrow().append(&channel);
         obj.sorter.borrow().changed(SorterChange::Different);
@@ -32,8 +29,7 @@ impl ChannelList {
     }
 
     pub fn scroll_up(&self) {
-        let ctx = glib::MainContext::default();
-        ctx.spawn_local(glib::clone!(@strong self as s => async move  {
+        gspawn!(glib::clone!(@strong self as s => async move  {
             // Need to sleep a little to make sure the scrolled window saw the changed
             // child.
             glib::timeout_future(Duration::from_millis(50)).await;
@@ -59,12 +55,20 @@ impl ChannelList {
 
     pub fn toggle_search(&self) {
         let obj = self.imp();
-        if self.property("search-enabled") {
+        if self.search_enabled() {
             obj.search_entry.emit_stop_search();
         } else {
-            self.set_property("search-enabled", true);
+            self.set_search_enabled(true);
             obj.search_entry.grab_focus();
         }
+    }
+
+    pub fn search_enabled(&self) -> bool {
+        self.property("search-enabled")
+    }
+
+    pub fn set_search_enabled(&self, enabled: bool) {
+        self.set_property("search-enabled", enabled)
     }
 }
 
@@ -84,7 +88,7 @@ pub mod imp {
     };
 
     use crate::{
-        backend::{Channel, Manager, Message},
+        backend::{Channel, Manager},
         gui::channel_item::ChannelItem,
     };
 
@@ -124,7 +128,7 @@ pub mod imp {
 
         #[template_callback]
         fn search_stopped(&self) {
-            self.instance().set_property("search-enabled", false);
+            self.instance().set_search_enabled(false);
             self.search_entry.set_text("");
             self.filter.borrow().changed(FilterChange::Different);
             self.list.grab_focus();
@@ -157,7 +161,7 @@ pub mod imp {
                     let channel = obj
                         .downcast_ref::<Channel>()
                         .expect("The object needs to be of type `Channel`.");
-                    let title = channel.property::<String>("title");
+                    let title = channel.title();
                     title.to_lowercase().contains(&search.to_lowercase())
                 }));
             let filter_model = FilterListModel::new(Some(&model), Some(&filter));
@@ -169,16 +173,16 @@ pub mod imp {
                     .downcast_ref::<Channel>()
                     .expect("The object to be a channel");
 
-                let m1 = c1.property::<Option<Message>>("last-message");
-                let m2 = c2.property::<Option<Message>>("last-message");
+                let m1 = c1.last_message();
+                let m2 = c2.last_message();
 
                 if m1.is_some() && m2.is_none() {
                     return gtk::Ordering::Smaller;
                 } else if m1.is_none() && m2.is_some() {
                     return gtk::Ordering::Larger;
                 } else if let (Some(m1), Some(m2)) = (m1, m2) {
-                    let s1 = m1.property::<u64>("sent");
-                    let s2 = m2.property::<u64>("sent");
+                    let s1 = m1.sent();
+                    let s2 = m2.sent();
                     if s1 > s2 {
                         return gtk::Ordering::Smaller;
                     } else {
@@ -186,7 +190,7 @@ pub mod imp {
                     }
                 }
 
-                if c1.property::<String>("title") < c2.property::<String>("title") {
+                if c1.title() < c2.title() {
                     gtk::Ordering::Smaller
                 } else {
                     gtk::Ordering::Larger

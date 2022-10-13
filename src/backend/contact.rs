@@ -1,7 +1,7 @@
 use std::cell::RefCell;
 
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use glib::Object;
+use glib::{Object, ObjectExt};
 use presage::prelude::ServiceAddress;
 
 use super::Manager;
@@ -38,6 +38,18 @@ impl Contact {
             .swap(&RefCell::new(Some(contact.address.clone())));
         s.imp().contact.swap(&RefCell::new(Some(contact)));
         s
+    }
+
+    pub fn manager(&self) -> Manager {
+        self.property("manager")
+    }
+
+    pub fn is_self(&self) -> bool {
+        self.property("is-self")
+    }
+
+    pub fn title(&self) -> String {
+        self.property("title")
     }
 
     pub(super) fn address(&self) -> Option<ServiceAddress> {
@@ -105,15 +117,7 @@ mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "is-self" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
-                        (contact.address.uuid
-                            == Some(
-                                self.manager
-                                    .borrow()
-                                    .as_ref()
-                                    .expect("`Manager` of `Contact` to be set up")
-                                    .uuid(),
-                            ))
-                        .to_value()
+                        (contact.address.uuid == Some(obj.manager().uuid())).to_value()
                     } else {
                         false.to_value()
                     }
@@ -121,13 +125,8 @@ mod imp {
                 "title" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
                         let name = &contact.name;
-                        if obj.property::<bool>("is-self") {
-                            self.manager
-                                .borrow()
-                                .as_ref()
-                                .expect("`Manager` of `Contact` to be set up")
-                                .profile_name()
-                                .to_value()
+                        if obj.is_self() {
+                            obj.manager().profile_name().to_value()
                         } else if name.is_empty() {
                             if let Some(phone) = self.phonenumber.borrow().as_ref() {
                                 phone.format().mode(Mode::National).to_string().to_value()

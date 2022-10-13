@@ -1,5 +1,8 @@
 use gdk::subclass::prelude::ObjectSubclassIsExt;
+use glib::ObjectExt;
 use gtk::traits::WidgetExt;
+
+use crate::backend::{Channel, Manager, Message};
 
 gtk::glib::wrapper! {
     pub struct ChannelMessages(ObjectSubclass<imp::ChannelMessages>)
@@ -16,6 +19,22 @@ impl ChannelMessages {
     pub fn load_more(&self) {
         self.imp().handle_more();
     }
+
+    pub fn manager(&self) -> Manager {
+        self.property("manager")
+    }
+
+    pub fn reply_message(&self) -> Option<Message> {
+        self.property("reply-message")
+    }
+
+    pub fn set_reply_message(&self, msg: &Option<Message>) {
+        self.set_property("reply-message", msg)
+    }
+
+    pub fn active_channel(&self) -> Option<Channel> {
+        self.property("active-channel")
+    }
 }
 
 pub mod imp {
@@ -28,8 +47,8 @@ pub mod imp {
 
     use gio::Settings;
     use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, MainContext, ParamFlags,
-        ParamSpec, ParamSpecBoolean, ParamSpecObject, SignalHandlerId, Value,
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
+        ParamSpecBoolean, ParamSpecObject, SignalHandlerId, Value,
     };
     use gtk::{
         builders::FileChooserNativeBuilder, prelude::*, subclass::prelude::*, CompositeTemplate,
@@ -37,8 +56,9 @@ pub mod imp {
     };
 
     use crate::{
-        backend::{Channel, Contact, Manager, Message},
+        backend::{Channel, Manager, Message},
         config::APP_ID,
+        gspawn,
         gui::{
             attachment::Attachment, error_dialog::ErrorDialog, message_item::MessageItem,
             text_entry::TextEntry, utility::Utility,
@@ -92,9 +112,8 @@ pub mod imp {
             let channel = self.active_channel.borrow();
             if let Some(channel) = channel.as_ref() {
                 let obj = self.instance();
-                let ctx = glib::MainContext::default();
                 let to_load = self.settings.int("messages-request-load");
-                ctx.spawn_local(glib::clone!(@strong channel, @strong obj => async move {
+                gspawn!(glib::clone!(@strong channel, @strong obj => async move {
                     let mut msgs = channel.load_last(to_load.try_into().unwrap_or(1)).await;
                     msgs.reverse();
                     for msg in msgs {
@@ -109,8 +128,7 @@ pub mod imp {
         #[template_callback]
         fn remove_reply(&self) {
             log::trace!("Unsetting reply message");
-            self.instance()
-                .set_property("reply_message", None::<Message>);
+            self.instance().set_reply_message(&None);
         }
 
         #[template_callback]
@@ -136,7 +154,7 @@ pub mod imp {
         fn paste_file(&self, file: gio::File) {
             log::trace!("`ChannelMessages` got file as attachment.");
             let obj = self.instance();
-            let manager = obj.property::<Manager>("manager");
+            let manager = obj.manager();
             let attachment = crate::backend::Attachment::from_file(file, &manager);
             self.append_attachment(attachment);
             obj.notify("has-attachments");
@@ -146,7 +164,7 @@ pub mod imp {
         fn paste_texture(&self, texture: gdk::Texture) {
             log::trace!("`ChannelMessages` got texture as attachment.");
             let obj = self.instance();
-            let manager = obj.property::<Manager>("manager");
+            let manager = obj.manager();
             let attachment = crate::backend::Attachment::from_texture(texture, &manager);
             self.append_attachment(attachment);
             obj.notify("has-attachments");
@@ -205,7 +223,7 @@ pub mod imp {
             let obj = self.instance();
             if let Some(channel) = self.active_channel.borrow().as_ref() {
                 log::trace!("Constructing message");
-                let manager = self.instance().property::<Manager>("manager");
+                let manager = self.instance().manager();
 
                 let msg = Message::from_text_channel_sender(
                     text,
@@ -214,15 +232,14 @@ pub mod imp {
                     &manager,
                 );
 
-                if let Some(quote) = obj.property::<Option<Message>>("reply-message") {
+                if let Some(quote) = obj.reply_message() {
                     log::trace!("Adding quote to message");
                     msg.set_quote(quote);
-                    obj.set_property("reply-message", &None::<Message>);
+                    obj.set_reply_message(&None);
                 }
 
-                let main_context = MainContext::default();
                 let obj = self.instance();
-                main_context.spawn_local(
+                gspawn!(
                     clone!(@strong msg, @strong channel, @strong attachments, @strong obj => async move {
                         log::trace!("Adding attachments to message: {}", attachments.len());
                         for att in attachments {
@@ -247,7 +264,7 @@ pub mod imp {
                             let dialog = ErrorDialog::new(e, &root);
                             dialog.show();
                         }
-                    }),
+                    })
                 );
             }
         }
@@ -261,9 +278,7 @@ pub mod imp {
                 .expect("`ListBoxRow` to have a `MessageItem` child");
             crate::trace!(
                 "Activated message: {}",
-                msg.property::<Message>("message")
-                    .property::<Option<String>>("body")
-                    .unwrap_or_else(|| "".to_string())
+                msg.message().body().unwrap_or_else(|| "".to_string())
             );
             msg.open_popup();
         }
@@ -271,8 +286,7 @@ pub mod imp {
 
     impl ChannelMessages {
         fn reset_messages(&self) {
-            self.instance()
-                .set_property("reply-message", &None::<Message>);
+            self.instance().set_reply_message(&None);
             while let Some(child) = self.list.first_child() {
                 self.list.remove(&child);
             }
@@ -290,13 +304,12 @@ pub mod imp {
                     let msg = args[1]
                         .get::<Message>()
                         .expect("Type of signal `reply` of `MessageItem` to be `Message`.");
-                    obj.set_property("reply-message", &msg);
+                    obj.set_reply_message(&Some(msg));
                     None
                 }),
             );
             // Scroll to bottom
-            let ctx = glib::MainContext::default();
-            ctx.spawn_local(clone!(@strong obj => async move  {
+            gspawn!(clone!(@strong obj => async move  {
                 // Need to sleep a little to make sure the scrolled window saw the changed
                 // child.
                 glib::timeout_future(Duration::from_millis(50)).await;
@@ -307,24 +320,17 @@ pub mod imp {
 
         fn update_show_name_of(&self, widget: &MessageItem) {
             let obj = self.instance();
-            let message: Message = widget.property("message");
-            let message_sender_title = message
-                .property::<Option<Contact>>("sender")
-                .and_then(|s| s.property::<Option<String>>("title"));
+            let message: Message = widget.message();
+            let message_sender_title = message.sender().title();
             let last_message = obj
-                .property::<Option<Channel>>("active-channel")
+                .active_channel()
                 .and_then(|c| c.previous_message_to(&message));
-            let last_message_sender_title = last_message
-                .as_ref()
-                .and_then(|m| m.property::<Option<Contact>>("sender"))
-                .and_then(|s| s.property::<Option<String>>("title"));
-            let sent = message.property::<u64>("sent");
-            let last_message_sent = last_message
-                .map(|m| m.property::<u64>("sent"))
-                .unwrap_or_default();
+            let last_message_sender_title = last_message.as_ref().map(|m| m.sender().title());
+            let sent = message.sent();
+            let last_message_sent = last_message.map(|m| m.sent()).unwrap_or_default();
             widget.set_property(
                 "show-name",
-                last_message_sender_title != message_sender_title
+                last_message_sender_title != Some(message_sender_title)
                     || sent > last_message_sent + MESSAGE_SENT_SHOW_NAME_DURATION,
             );
         }
@@ -350,7 +356,7 @@ pub mod imp {
                     let msg = args[1]
                         .get::<Message>()
                         .expect("Type of signal `reply` of `MessageItem` to be `Message`.");
-                    obj.set_property("reply-message", &msg);
+                    obj.set_reply_message(&Some(msg));
                     None
                 }),
             );
@@ -382,7 +388,7 @@ pub mod imp {
             obj.connect_notify_local(
                 Some("active-channel"),
                 clone!(@weak obj => move |_, _| {
-                    obj.set_property("reply-message", &None::<Message>);
+                    obj.set_reply_message(&None);
                 }),
             );
         }

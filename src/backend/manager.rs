@@ -21,8 +21,7 @@ use presage::{MessageStore, Thread};
 use rand::Fill;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
-use crate::storage::EncryptedSledStore;
-use crate::ApplicationError;
+use crate::{storage::EncryptedSledStore, ApplicationError, gspawn};
 
 const MESSAGE_BOUND: usize = 10;
 const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
@@ -228,8 +227,7 @@ impl Manager {
             }),
         );
 
-        let context = MainContext::default();
-        context.spawn_local(async move {
+        gspawn!(async move {
             log::trace!("Awaiting for provisioning link");
             match provisioning_link_rx.await {
                 Ok(url) => {

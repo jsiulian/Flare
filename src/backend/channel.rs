@@ -82,11 +82,23 @@ impl Channel {
         }
     }
 
+    pub fn manager(&self) -> Manager {
+        self.property("manager")
+    }
+
+    pub fn last_message(&self) -> Option<Message> {
+        self.property("last-message")
+    }
+
+    pub fn title(&self) -> String {
+        self.property("title")
+    }
+
     #[async_recursion::async_recursion(?Send)]
     pub async fn load_last(&self, number: usize) -> Vec<Message> {
         if let Some(thread) = self.thread() {
             let mut results = vec![];
-            let manager = self.property::<Manager>("manager");
+            let manager = self.manager();
             let messages_unborrowed = &self.imp().messages;
             let first_timestamp = {
                 let msgs = messages_unborrowed.borrow();
@@ -95,7 +107,7 @@ impl Channel {
             crate::trace!(
                 "Loading {} last messages for channel: {} (Thread: {:?}). Needed earlier then {:?}",
                 number,
-                self.property::<String>("title"),
+                self.title(),
                 thread,
                 first_timestamp
             );
@@ -162,25 +174,17 @@ impl Channel {
         {
             crate::info!(
                 "Channel {} got a duplicate message. Ignoring the second one.",
-                self.property::<String>("title")
+                self.title()
             );
             return Ok(());
         }
 
         if let Some(body) = message.property::<Option<String>>("body") {
-            crate::trace!(
-                "Channel {} got new message: {}",
-                self.property::<String>("title"),
-                body
-            );
+            crate::trace!("Channel {} got new message: {}", self.title(), body);
             if let Some(quote) = message.quote().and_then(|q| q.id) {
                 log::trace!("Message claims to have a quote");
                 if let Some(thread) = self.thread() {
-                    if let Ok(Some(quoted_msg)) = self
-                        .property::<Manager>("manager")
-                        .message(&thread, quote)
-                        .await
-                    {
+                    if let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await {
                         crate::trace!(
                             "Message {} quotes other message {}",
                             body,
@@ -203,7 +207,7 @@ impl Channel {
             let reaction_emoji = reaction.emoji.as_ref().unwrap_or(EMPTY_EMOJI);
             crate::trace!(
                 "Channel {} got new reaction: {}",
-                self.property::<String>("title"),
+                self.title(),
                 &reaction_emoji
             );
             let reacted_msg = self
@@ -273,7 +277,7 @@ impl Channel {
         mut data: DataMessage,
         timestamp: u64,
     ) -> Result<(), crate::ApplicationError> {
-        let manager = self.property::<Manager>("manager");
+        let manager = self.manager();
         let receiver_contact = self
             .imp()
             .contact
@@ -317,7 +321,7 @@ impl Channel {
             "Sending a message {} to channel {}",
             msg.property::<Option<String>>("body")
                 .unwrap_or_else(|| "(empty)".to_owned()),
-            self.property::<String>("title")
+            self.title()
         );
         if let Some(data) = msg.data() {
             self.send_internal_message(
@@ -424,7 +428,7 @@ mod imp {
                         if contact.property::<bool>("is-self") {
                             gettextrs::gettext("Note to self")
                         } else {
-                            contact.property::<String>("title")
+                            contact.title()
                         }
                     } else {
                         "".to_string()

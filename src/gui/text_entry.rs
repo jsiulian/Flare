@@ -24,6 +24,7 @@ impl TextEntry {
 }
 
 pub mod imp {
+    use crate::gspawn;
     use gdk::{
         prelude::{ObjectExt, ToValue},
         subclass::prelude::{ObjectImpl, ObjectSubclass},
@@ -84,12 +85,11 @@ pub mod imp {
 
             self.view
                 .connect_paste_clipboard(clone!(@weak obj => move |entry| {
-                    let ctx = glib::MainContext::default();
                     let clipboard = obj.clipboard();
                     let formats = clipboard.formats();
 
                     // We only handle files and supported images.
-                    ctx.spawn_local(clone!(@weak entry => async move {
+                    gspawn!(clone!(@weak entry => async move {
                         if formats.contains_type(gio::File::static_type()) {
                             entry.stop_signal_emission_by_name("paste-clipboard");
                             match clipboard
