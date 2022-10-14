@@ -9,5 +9,6 @@ mod preferences_window;
 mod text_entry;
 mod window;
 mod utility;
+mod call_message_item;
 
 pub use window::Window;

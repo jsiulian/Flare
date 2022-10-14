@@ -2,7 +2,7 @@ use gdk::subclass::prelude::ObjectSubclassIsExt;
 use glib::ObjectExt;
 use gtk::traits::WidgetExt;
 
-use crate::backend::{Channel, Manager, Message};
+use crate::backend::{message::TextMessage, Channel, Manager};
 
 gtk::glib::wrapper! {
     pub struct ChannelMessages(ObjectSubclass<imp::ChannelMessages>)
@@ -24,11 +24,11 @@ impl ChannelMessages {
         self.property("manager")
     }
 
-    pub fn reply_message(&self) -> Option<Message> {
+    pub fn reply_message(&self) -> Option<TextMessage> {
         self.property("reply-message")
     }
 
-    pub fn set_reply_message(&self, msg: &Option<Message>) {
+    pub fn set_reply_message(&self, msg: &Option<TextMessage>) {
         self.set_property("reply-message", msg)
     }
 
@@ -56,12 +56,15 @@ pub mod imp {
     };
 
     use crate::{
-        backend::{Channel, Manager, Message},
+        backend::{
+            message::{CallMessage, DisplayMessage, MessageExt, TextMessage},
+            Channel, Manager,
+        },
         config::APP_ID,
         gspawn,
         gui::{
-            attachment::Attachment, error_dialog::ErrorDialog, message_item::MessageItem,
-            text_entry::TextEntry, utility::Utility,
+            attachment::Attachment, call_message_item::CallMessageItem, error_dialog::ErrorDialog,
+            message_item::MessageItem, text_entry::TextEntry, utility::Utility,
         },
     };
 
@@ -78,7 +81,7 @@ pub mod imp {
         pub(super) text_entry: TemplateChild<TextEntry>,
 
         attachments: RefCell<Vec<crate::backend::Attachment>>,
-        reply_message: RefCell<Option<Message>>,
+        reply_message: RefCell<Option<TextMessage>>,
 
         manager: RefCell<Option<Manager>>,
         active_channel: RefCell<Option<Channel>>,
@@ -225,7 +228,7 @@ pub mod imp {
                 log::trace!("Constructing message");
                 let manager = self.instance().manager();
 
-                let msg = Message::from_text_channel_sender(
+                let msg = TextMessage::from_text_channel_sender(
                     text,
                     channel.clone(),
                     manager.self_contact(),
@@ -234,7 +237,7 @@ pub mod imp {
 
                 if let Some(quote) = obj.reply_message() {
                     log::trace!("Adding quote to message");
-                    msg.set_quote(quote);
+                    msg.set_quote(&quote);
                     obj.set_reply_message(&None);
                 }
 
@@ -246,7 +249,7 @@ pub mod imp {
                             if let Err(e) = msg.add_attachment(att).await {
                                 let root = obj
                                     .root()
-                                    .expect("`MessageItem` to have a root")
+                                    .expect("`ChannelMessages` to have a root")
                                     .dynamic_cast::<crate::gui::Window>()
                                     .expect("Root of `ChannelMessages` to be a `Window`.");
                                 let dialog = ErrorDialog::new(e, &root);
@@ -255,10 +258,10 @@ pub mod imp {
                             }
                         }
                         log::trace!("Sending message");
-                        if let Err(e) = channel.send_message(msg).await {
+                        if let Err(e) = channel.send_message(msg.upcast()).await {
                             let root = obj
                                 .root()
-                                .expect("`MessageItem` to have a root")
+                                .expect("`ChannelMessages` to have a root")
                                 .dynamic_cast::<crate::gui::Window>()
                                 .expect("Root of `ChannelMessages` to be a `Window`.");
                             let dialog = ErrorDialog::new(e, &root);
@@ -292,22 +295,30 @@ pub mod imp {
             }
         }
 
-        fn add_message(&self, message: &Message) {
-            let widget = MessageItem::new(message);
-            self.list.append(&widget);
+        fn add_message(&self, message: &DisplayMessage) {
             let obj = self.instance();
-            self.update_show_name_of(&widget);
-            widget.connect_local(
-                "reply",
-                false,
-                clone!(@strong obj => move |args| {
-                    let msg = args[1]
-                        .get::<Message>()
-                        .expect("Type of signal `reply` of `MessageItem` to be `Message`.");
-                    obj.set_reply_message(&Some(msg));
-                    None
-                }),
-            );
+            if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
+                let widget = MessageItem::new(message);
+                self.list.append(&widget);
+                self.update_show_name_of(&widget);
+                widget.connect_local(
+                    "reply",
+                    false,
+                    clone!(@strong obj => move |args| {
+                        let msg = args[1]
+                            .get::<TextMessage>()
+                            .expect("Type of signal `reply` of `MessageItem` to be `TextMessage`.");
+                        obj.set_reply_message(&Some(msg));
+                        None
+                    }),
+                );
+            } else if let Some(message) = message.dynamic_cast_ref::<CallMessage>() {
+                let widget = CallMessageItem::new(message);
+                self.list.append(&widget);
+            } else {
+                log::warn!("`ChannelMessages` was asked to display an unknown `DisplayMessage`");
+            }
+
             // Scroll to bottom
             gspawn!(clone!(@strong obj => async move  {
                 // Need to sleep a little to make sure the scrolled window saw the changed
@@ -320,7 +331,7 @@ pub mod imp {
 
         fn update_show_name_of(&self, widget: &MessageItem) {
             let obj = self.instance();
-            let message: Message = widget.message();
+            let message: DisplayMessage = widget.message().upcast();
             let message_sender_title = message.sender().title();
             let last_message = obj
                 .active_channel()
@@ -335,31 +346,39 @@ pub mod imp {
             );
         }
 
-        fn prepend_message(&self, message: &Message) {
-            let widget = MessageItem::new(message);
-            self.list.insert(&widget, 0);
-            self.update_show_name_of(&widget);
-            if let Some(previous_first) = self.list.row_at_index(1) {
-                self.update_show_name_of(
-                    &previous_first
-                        .child()
-                        .expect("Message list row to have `MessageItem` child.")
-                        .dynamic_cast()
-                        .expect("Message list row to be `MessageItem`."),
-                );
-            }
+        fn prepend_message(&self, message: &DisplayMessage) {
             let obj = self.instance();
-            widget.connect_local(
-                "reply",
-                false,
-                clone!(@strong obj => move |args| {
-                    let msg = args[1]
-                        .get::<Message>()
-                        .expect("Type of signal `reply` of `MessageItem` to be `Message`.");
-                    obj.set_reply_message(&Some(msg));
-                    None
-                }),
-            );
+            if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
+                let widget = MessageItem::new(message);
+                self.list.insert(&widget, 0);
+                self.update_show_name_of(&widget);
+                widget.connect_local(
+                    "reply",
+                    false,
+                    clone!(@strong obj => move |args| {
+                        let msg = args[1]
+                            .get::<TextMessage>()
+                            .expect("Type of signal `reply` of `MessageItem` to be `TextMessage`.");
+                        obj.set_reply_message(&Some(msg));
+                        None
+                    }),
+                );
+            } else if let Some(message) = message.dynamic_cast_ref::<CallMessage>() {
+                let widget = CallMessageItem::new(message);
+                self.list.append(&widget);
+            } else {
+                log::warn!("`ChannelMessages` was asked to display an unknown `DisplayMessage`");
+            }
+
+            if let Some(previous_first) = self.list.row_at_index(1) {
+                if let Some(previous_first) = previous_first
+                    .child()
+                    .expect("Message list row to have a child")
+                    .dynamic_cast_ref::<MessageItem>()
+                {
+                    self.update_show_name_of(previous_first);
+                }
+            }
         }
     }
 
@@ -414,7 +433,7 @@ pub mod imp {
                         "reply-message",
                         "reply-message",
                         "reply-message",
-                        Message::static_type(),
+                        TextMessage::static_type(),
                         ParamFlags::READWRITE,
                     ),
                     ParamSpecBoolean::new(
@@ -469,7 +488,7 @@ pub mod imp {
                         }
                         signal_handler.replace(
                                 channel.connect_local("message", false, clone!(@strong obj => move |args| {
-                                    let msg = args[1].get::<Message>().expect("Type of signal `message` of `Channel` to be `Message`");
+                                    let msg = args[1].get::<DisplayMessage>().expect("Type of signal `message` of `Channel` to be `DisplayMessage`");
                                     obj.imp().add_message(&msg);
                                     None
                                 }))
@@ -477,8 +496,8 @@ pub mod imp {
                     }
                 }
                 "reply-message" => {
-                    let msg = value.get::<Option<Message>>().expect(
-                        "Property `reply-message` of `ChannelMessages` has to be of type `Message`",
+                    let msg = value.get::<Option<TextMessage>>().expect(
+                        "Property `reply-message` of `ChannelMessages` has to be of type `TextMessage`",
                     );
                     self.reply_message.replace(msg);
                 }

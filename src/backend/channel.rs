@@ -6,14 +6,16 @@ use std::{
 
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use glib::Object;
+use glib::{Cast, Object};
 use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::DataMessage};
 use presage::{
     prelude::{GroupContextV2, GroupMasterKey, ServiceAddress},
     Thread,
 };
 
-use super::{Contact, Manager, Message};
+use crate::backend::message::{DisplayMessage, MessageExt, TextMessage};
+
+use super::{message::ReactionMessage, Contact, Manager, Message};
 
 const EMPTY_EMOJI: &String = &String::new();
 
@@ -95,14 +97,14 @@ impl Channel {
     }
 
     #[async_recursion::async_recursion(?Send)]
-    pub async fn load_last(&self, number: usize) -> Vec<Message> {
+    pub async fn load_last(&self, number: usize) -> Vec<DisplayMessage> {
         if let Some(thread) = self.thread() {
             let mut results = vec![];
             let manager = self.manager();
             let messages_unborrowed = &self.imp().messages;
             let first_timestamp = {
                 let msgs = messages_unborrowed.borrow();
-                msgs.get(0).and_then(|m| m.timestamp()).map(|t| t - 1)
+                msgs.get(0).map(|m| m.sent() - 1)
             };
             crate::trace!(
                 "Loading {} last messages for channel: {} (Thread: {:?}). Needed earlier then {:?}",
@@ -117,15 +119,18 @@ impl Channel {
             }
             for content in iter.unwrap() {
                 let msg = Message::from_content(content, &manager).await;
-                if !msg.is_empty() {
-                    {
-                        let mut messages = messages_unborrowed.borrow_mut();
-                        messages.insert(0, msg.clone());
+                if let Some(msg) = msg {
+                    if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
+                        {
+                            let mut messages = messages_unborrowed.borrow_mut();
+                            messages.insert(0, msg.clone());
+                        }
+                        results.insert(0, msg.clone());
+                        self.notify("last-message");
                     }
-                    results.insert(0, msg.clone());
-                    self.notify("last-message");
+                    let _ = self.do_new_message(&msg).await;
                 }
-                let _ = self.do_new_message(&msg).await;
+
                 if results.len() == number {
                     break;
                 }
@@ -161,16 +166,11 @@ impl Channel {
     ) -> Result<(), gtk::glib::error::BoolError> {
         let all_messages = self.messages();
         let last_message = all_messages.last();
-        if message.timestamp() == last_message.as_ref().and_then(|m| m.timestamp())
-            && message
-                .property::<Option<Contact>>("sender")
-                .and_then(|c| c.address())
-                .and_then(|a| a.uuid)
-                == last_message.as_ref().and_then(|m| {
-                    m.property::<Option<Contact>>("sender")
-                        .and_then(|c| c.address())
-                        .and_then(|a| a.uuid)
-                })
+        if Some(message.sent()) == last_message.as_ref().map(|m| m.sent())
+            && message.sender().address().and_then(|a| a.uuid)
+                == last_message
+                    .as_ref()
+                    .and_then(|m| m.sender().address().and_then(|a| a.uuid))
         {
             crate::info!(
                 "Channel {} got a duplicate message. Ignoring the second one.",
@@ -179,31 +179,38 @@ impl Channel {
             return Ok(());
         }
 
-        if let Some(body) = message.property::<Option<String>>("body") {
-            crate::trace!("Channel {} got new message: {}", self.title(), body);
-            if let Some(quote) = message.quote().and_then(|q| q.id) {
-                log::trace!("Message claims to have a quote");
-                if let Some(thread) = self.thread() {
-                    if let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await {
-                        crate::trace!(
-                            "Message {} quotes other message {}",
-                            body,
-                            quoted_msg
-                                .property::<Option<String>>("body")
-                                .unwrap_or_else(|| "".to_string())
-                        );
-                        message.set_quote(quoted_msg);
+        if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
+            if let Some(body) = message.property::<Option<String>>("body") {
+                crate::trace!("Channel {} got new message: {}", self.title(), body);
+                if let Some(quote) = message.quote().and_then(|q| q.id) {
+                    log::trace!("Message claims to have a quote");
+                    if let Some(thread) = self.thread() {
+                        if let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await {
+                            if let Some(quoted_msg) = quoted_msg.dynamic_cast_ref::<TextMessage>() {
+                                crate::trace!(
+                                    "Message {} quotes other message {}",
+                                    body,
+                                    quoted_msg
+                                        .property::<Option<String>>("body")
+                                        .unwrap_or_else(|| "".to_string())
+                                );
+                                message.set_quote(quoted_msg);
+                            }
+                        }
                     }
                 }
-            }
-            if let Some(id) = message.timestamp() {
+                let id = message.sent();
                 if let Some(reactions) = self.imp().pending_reactions.borrow_mut().remove(&id) {
                     log::trace!("Adding pending reactions to message: {}", reactions);
                     message.react(reactions);
                 }
             }
         }
-        if let Some(reaction) = message.reaction() {
+
+        if let Some(reaction) = message
+            .dynamic_cast_ref::<ReactionMessage>()
+            .map(|r| r.reaction())
+        {
             let reaction_emoji = reaction.emoji.as_ref().unwrap_or(EMPTY_EMOJI);
             crate::trace!(
                 "Channel {} got new reaction: {}",
@@ -213,17 +220,21 @@ impl Channel {
             let reacted_msg = self
                 .messages()
                 .into_iter()
-                .find(|m| m.timestamp() == reaction.target_sent_timestamp);
+                .find(|m| Some(m.sent()) == reaction.target_sent_timestamp);
             if let Some(reacted_msg) = reacted_msg {
-                crate::trace!(
-                    "Reaction to message {}",
-                    reacted_msg
-                        .property::<Option<String>>("body")
-                        .unwrap_or_else(|| "".to_string())
-                );
-                reacted_msg.react(&reaction_emoji);
+                if let Some(reacted_msg) = reacted_msg.dynamic_cast_ref::<TextMessage>() {
+                    crate::trace!(
+                        "Reaction to message {}",
+                        reacted_msg
+                            .property::<Option<String>>("body")
+                            .unwrap_or_else(|| "".to_string())
+                    );
+                    reacted_msg.react(&reaction_emoji);
+                } else {
+                    log::warn!("Reaction message for a non-TextMessage");
+                }
             } else {
-                crate::trace!("Message reacted to another message that could not be found yet. Inserting into pending reactions", );
+                log::trace!("Message reacted to another message that could not be found yet. Inserting into pending reactions");
                 let mut pending_reactions = self.imp().pending_reactions.borrow_mut();
                 let entry = pending_reactions
                     .entry(
@@ -244,7 +255,7 @@ impl Channel {
     ) -> Result<(), gtk::glib::error::BoolError> {
         log::trace!("Adding new message to channel");
         self.do_new_message(&message).await?;
-        if !message.is_empty() {
+        if let Some(message) = message.dynamic_cast_ref::<DisplayMessage>() {
             self.imp().messages.borrow_mut().push(message.clone());
             self.notify("last-message");
             message.send_notification();
@@ -255,14 +266,14 @@ impl Channel {
         Ok(())
     }
 
-    pub fn messages(&self) -> Vec<Message> {
+    pub fn messages(&self) -> Vec<DisplayMessage> {
         self.imp().messages.borrow().clone()
     }
 
-    pub fn previous_message_to(&self, msg: &Message) -> Option<Message> {
+    pub fn previous_message_to(&self, msg: &DisplayMessage) -> Option<DisplayMessage> {
         let messages = self.messages();
         let idx = messages.iter().position(|m| {
-            m.timestamp() == msg.timestamp()
+            m.sent() == msg.sent()
                 && m.property::<Option<String>>("body") == msg.property::<Option<String>>("body")
         })?;
         if idx == 0 {
@@ -313,7 +324,10 @@ impl Channel {
     }
 
     pub async fn send_message(&self, msg: Message) -> Result<(), crate::ApplicationError> {
-        self.imp().messages.borrow_mut().push(msg.clone());
+        if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
+            self.imp().messages.borrow_mut().push(msg.clone());
+        }
+
         self.notify("last-message");
         self.emit_by_name::<()>("message", &[&msg]);
 
@@ -323,12 +337,8 @@ impl Channel {
                 .unwrap_or_else(|| "(empty)".to_owned()),
             self.title()
         );
-        if let Some(data) = msg.data() {
-            self.send_internal_message(
-                data,
-                msg.timestamp().expect("Messate to send to have timestamp"),
-            )
-            .await?;
+        if let Some(data) = msg.internal_data() {
+            self.send_internal_message(data, msg.sent()).await?;
         }
         Ok(())
     }
@@ -347,7 +357,7 @@ mod imp {
         prelude::{GroupContextV2, Uuid},
     };
 
-    use crate::backend::{Contact, Manager, Message};
+    use crate::backend::{message::DisplayMessage, Contact, Manager};
 
     #[derive(Default)]
     pub struct Channel {
@@ -356,7 +366,7 @@ mod imp {
         pub(super) group_context: RefCell<Option<GroupContextV2>>,
 
         pub(super) manager: RefCell<Option<Manager>>,
-        pub(super) messages: RefCell<Vec<Message>>,
+        pub(super) messages: RefCell<Vec<DisplayMessage>>,
         pub(super) pending_reactions: RefCell<HashMap<u64, String>>,
     }
 
@@ -408,7 +418,7 @@ mod imp {
                         "last-message",
                         "last-message",
                         "last-message",
-                        Message::static_type(),
+                        DisplayMessage::static_type(),
                         ParamFlags::READABLE,
                     ),
                     ParamSpecString::new("title", "title", "title", None, ParamFlags::READABLE),
@@ -457,7 +467,7 @@ mod imp {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
                 vec![Signal::builder(
                     "message",
-                    &[Message::static_type().into()],
+                    &[DisplayMessage::static_type().into()],
                     <()>::static_type().into(),
                 )
                 .build()]

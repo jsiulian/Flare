@@ -73,8 +73,7 @@ impl ChannelList {
 }
 
 pub mod imp {
-    use std::cell::Cell;
-    use std::cell::RefCell;
+    use std::cell::{Cell, RefCell};
 
     use glib::{
         clone,
@@ -88,7 +87,7 @@ pub mod imp {
     };
 
     use crate::{
-        backend::{Channel, Manager},
+        backend::{message::MessageExt, Channel, Manager},
         gui::channel_item::ChannelItem,
     };
 

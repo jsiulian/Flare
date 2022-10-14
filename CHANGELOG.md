@@ -10,14 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Pasting files and images into the text entry ([#19])
 - Unlink without deleting messages
+- Messages and notifications for calls
 
 ### Fixed
 
-- Fixed showing messages with "&"
+- Fixed showing messages with "&", "<" or ">"
 
 ### Chores
 
 - Refactored GTK properties
+- Greatly refactored messages
 
 ## [0.5.1]
 

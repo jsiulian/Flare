@@ -3,7 +3,7 @@ mod channel;
 mod contact;
 mod manager;
 mod manager_thread;
-mod message;
+pub mod message;
 
 pub use attachment::Attachment;
 pub use channel::Channel;

@@ -299,9 +299,11 @@ async fn command_loop<C: Store + 'static + MessageStore>(
                         msg = messages.next().fuse() => {
                             if let Some(msg) = msg {
                                 if content.send(msg).await.is_err() {
+                                    log::info!("Failed to send message to `Manager`, exiting");
                                     break 'outer;
                                 }
                             } else {
+                                log::error!("Message stream finished. Restarting commad loop.");
                                 break;
                             }
                         },
@@ -310,18 +312,22 @@ async fn command_loop<C: Store + 'static + MessageStore>(
                                 handle_command(manager, cmd).await;
                             }
                         },
-                        complete => break,
+                        complete => {
+                            log::trace!("Command loop complete. Restarting command loop.");
+                            break
+                        },
                     }
                 }
             }
             Err(e) => {
-                log::trace!("Got error receiving: {}, {:?}", e, e);
+                log::error!("Got error receiving: {}, {:?}", e, e);
                 error.send(e.into()).await.expect("Callback sending failed");
                 break;
             }
         }
         log::debug!("Websocket closed, trying again");
     }
+    log::info!("Exiting `ManagerThread::command_loop`");
 }
 
 async fn handle_command<C: Store + 'static>(

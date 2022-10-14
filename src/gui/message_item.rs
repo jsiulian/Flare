@@ -5,7 +5,7 @@ use gtk::{
     traits::{PopoverExt, WidgetExt},
 };
 
-use crate::backend::Message;
+use crate::backend::message::TextMessage;
 
 gtk::glib::wrapper! {
     pub struct MessageItem(ObjectSubclass<imp::MessageItem>)
@@ -15,12 +15,12 @@ gtk::glib::wrapper! {
 }
 
 impl MessageItem {
-    pub fn new(message: &Message) -> Self {
+    pub fn new(message: &TextMessage) -> Self {
         log::trace!("Initializing `MessageItem`");
         Object::new(&[("message", message)]).expect("Failed to create `MessageItem`")
     }
 
-    pub fn message(&self) -> Message {
+    pub fn message(&self) -> TextMessage {
         self.property("message")
     }
 
@@ -60,8 +60,8 @@ pub mod imp {
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
     use crate::{
+        backend::{message::TextMessage, Manager},
         gspawn,
-        backend::{Manager, Message},
         gui::{attachment::Attachment, error_dialog::ErrorDialog, utility::Utility},
     };
 
@@ -75,7 +75,7 @@ pub mod imp {
         #[template_child]
         box_attachments: TemplateChild<gtk::Box>,
 
-        message: RefCell<Option<Message>>,
+        message: RefCell<Option<TextMessage>>,
         show_name: Cell<bool>,
 
         manager: RefCell<Option<Manager>>,
@@ -105,18 +105,20 @@ pub mod imp {
             lazy_static! {
                 static ref RE: Regex = Regex::new(r#"(?P<l>[a-z]*://[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))"#).unwrap();
             }
-            let regexed = s.map(|s| RE.replace_all(&s, r#"<a href="$l">$l</a>"#).to_string());
-            regexed.map(|s| s.replace('&', "&amp;"))
+            let s = s.map(|s| {
+                s.replace('&', "&amp;")
+                    .replace('<', "&lt;")
+                    .replace('>', "&gt;")
+            });
+            s.map(|s| RE.replace_all(&s, r#"<a href="$l">$l</a>"#).to_string())
         }
 
         #[template_callback]
         pub(super) fn handle_reply(&self) {
             let obj = self.instance();
             let msg = obj.message();
-            crate::trace!(
-                "Replying to message {}",
-                msg.body().unwrap_or_else(|| "".to_string())
-            );
+            // TODO: Log message
+            crate::trace!("Replying to a message",);
             obj.emit_by_name::<()>("reply", &[&msg]);
         }
 
@@ -147,8 +149,8 @@ pub mod imp {
                         .expect("Root of `ChannelMessages` to be a `Window`.");
                     let dialog = ErrorDialog::new(e, &root);
                     dialog.show();
-                    obj.notify("has-reaction");
                 }
+                obj.notify("has-reaction");
             }));
         }
     }
@@ -173,7 +175,7 @@ pub mod imp {
                         "message",
                         "message",
                         "message",
-                        Message::static_type(),
+                        TextMessage::static_type(),
                         ParamFlags::READWRITE,
                     ),
                     ParamSpecBoolean::new(
@@ -221,7 +223,7 @@ pub mod imp {
                 }
                 "message" => {
                     let msg = value
-                        .get::<Option<Message>>()
+                        .get::<Option<TextMessage>>()
                         .expect("Property `message` of `MessageItem` has to be of type `Message`");
                     if let Some(msg) = &msg {
                         msg.connect_notify_local(
@@ -254,7 +256,7 @@ pub mod imp {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
                 vec![Signal::builder(
                     "reply",
-                    &[Message::static_type().into()],
+                    &[TextMessage::static_type().into()],
                     <()>::static_type().into(),
                 )
                 .build()]

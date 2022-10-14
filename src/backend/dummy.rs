@@ -2,26 +2,41 @@ use std::path::Path;
 
 use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
 use presage::prelude::*;
+use presage::prelude::content::CallMessage as PreCallMessage;
 use libsignal_service::{prelude::AttachmentPointer, sender::AttachmentUploadError, groups_v2::Group};
-use glib::DateTime;
+use presage::prelude::proto::call_message::{Offer, Hangup};
+use glib::{DateTime, Cast};
 
-use super::{Channel, Contact, Message};
+use super::{Channel, Contact, message::{CallMessage, TextMessage, MessageExt, Message}};
 
 const GROUP_ID: usize = 16;
 
 macro_rules! msg {
     ($s:expr, $m:expr, $i:expr, $j:expr, $t:expr) => {
-        Message::pub_from_text_channel_sender_timestamp(
+        TextMessage::pub_from_text_channel_sender_timestamp(
             $m,
             $s.dummy_channels().await[$j].clone(),
             $s.dummy_contacts()[$i].clone(),
             $t * 1000 * 60,
             $s,
-        )
+        ).upcast::<Message>()
     };
     ($s:expr, $m:expr, $i:expr, $t:expr) => {
         msg!($s, $m, $i, 1, $t)
     };
+}
+
+macro_rules! call_msg {
+    ($s:expr, $m:expr, $i:expr, $t:expr) => {{
+        let c = $s.dummy_contacts()[$i].clone();
+        CallMessage::from_call(
+            &c,
+            &Channel::from_contact_or_group(c.clone(), &None, $s).await,
+            $t * 1000 * 60,
+            $s,
+            $m,
+        ).expect("`CallMessage` to be valid").upcast::<Message>()
+    }};
 }
 
 pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
@@ -306,7 +321,6 @@ impl super::Manager {
             self.emit_by_name::<()>("message", &[&msg]);
             if let Some(stored_channel) = channels.get(
                 &msg.channel()
-                    .expect("Screenshot message to have channel")
                     .internal_hash(),
             ) {
                 log::debug!("Message from a already existing channel");
@@ -355,7 +369,14 @@ impl super::Manager {
             msg!(self, "Could you please stop? We all know that you are using Arch", 0, GROUP_ID, 21 + base_minute),
             msg!(self, "But as an Arch User (btw), it is my holy duty to inform you that I am using Arch (btw) at least every second message.", 1, GROUP_ID, 21 + base_minute),
             msg!(self, "Could we please continue this discussion in the next screenshot? Due to me also making a screenshot in a mobile formfactor, there is not that much space left.", 2, GROUP_ID, 20 + base_minute),
-
+            call_msg!(self, PreCallMessage {
+                offer: Some(Offer::default()),
+                ..Default::default()
+            }, 2, 30 + base_minute),
+            call_msg!(self, PreCallMessage {
+                hangup: Some(Hangup::default()),
+                ..Default::default()
+            }, 2, 30 + base_minute),
             msg!(self, "I don't like sand", 3, 3, base_minute + 3),
             msg!(self, "I'll be back", 4, 4, base_minute + 10),
 

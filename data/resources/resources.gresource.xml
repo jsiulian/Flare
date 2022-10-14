@@ -17,5 +17,6 @@
     <file preprocess="xml-stripblanks">ui/about.ui</file>
     <file preprocess="xml-stripblanks">ui/dialog_unlink.ui</file>
     <file preprocess="xml-stripblanks">ui/dialog_clear_messages.ui</file>
+    <file preprocess="xml-stripblanks">ui/call_message_item.ui</file>
   </gresource>
 </gresources>

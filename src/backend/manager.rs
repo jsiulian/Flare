@@ -21,7 +21,7 @@ use presage::{MessageStore, Thread};
 use rand::Fill;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
-use crate::{storage::EncryptedSledStore, ApplicationError, gspawn};
+use crate::{gspawn, storage::EncryptedSledStore, ApplicationError};
 
 const MESSAGE_BOUND: usize = 10;
 const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
@@ -174,11 +174,11 @@ impl Manager {
         }?;
         if let Some(content) = content {
             let msg = Message::from_content(content, self).await;
+            // TODO: Log message
             log::trace!(
-                "Found message: {}",
-                msg.property::<String>("textual-description")
+                "Found message queried",
             );
-            Ok(Some(msg))
+            Ok(msg)
         } else {
             Ok(None)
         }
@@ -204,6 +204,8 @@ impl Manager {
         use futures::channel::oneshot;
         use futures::{select, FutureExt};
         use tokio::sync::mpsc;
+
+        use crate::backend::message::MessageExt;
         let config_store = config_store(p).await?;
 
         log::trace!("Setting up the config store");
@@ -295,34 +297,37 @@ impl Manager {
                     }
                     let msg = msg_opt.unwrap();
                     let message = Message::from_content(msg, self).await;
-                    if let Some(channel) = message.channel() {
-                        let channel = {
-                            let channels = self.imp().channels.borrow();
-                            crate::debug!("Got from channel: {}", channel.property::<String>("title"));
-                            if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
-                                log::debug!("Message from a already existing channel");
-                                stored_channel.clone()
-                            } else {
-                                drop(channels);
-                                log::debug!("Got a message from a new channel");
-                                if self.try_emit_by_name::<()>("channel", &[&channel]).is_err() {
-                                    break 'outer;
-                                }
-                                let mut channels_mut = self.imp().channels.borrow_mut();
-                                channels_mut.insert(channel.internal_hash(), channel.clone());
-                                if let Some(ctx) = channel.group_context() {
-                                    log::trace!("New channel is a group, inserting into store");
-                                    // TODO: Error?
-                                    let _ = self.insert_group(ctx);
-                                }
-                                channel
+                    if message.is_none() {
+                        log::trace!("Manager ignoring empty message");
+                        continue;
+                    }
+                    let message = message.unwrap();
+
+                    let channel = message.channel();
+                    let channel = {
+                        let channels = self.imp().channels.borrow();
+                        crate::debug!("Got from channel: {}", channel.property::<String>("title"));
+                        if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
+                            log::debug!("Message from a already existing channel");
+                            stored_channel.clone()
+                        } else {
+                            drop(channels);
+                            log::debug!("Got a message from a new channel");
+                            if self.try_emit_by_name::<()>("channel", &[&channel]).is_err() {
+                                break 'outer;
                             }
-                        };
-                        if channel.new_message(message).await.is_err() {
-                            break 'outer;
+                            let mut channels_mut = self.imp().channels.borrow_mut();
+                            channels_mut.insert(channel.internal_hash(), channel.clone());
+                            if let Some(ctx) = channel.group_context() {
+                                log::trace!("New channel is a group, inserting into store");
+                                // TODO: Error?
+                                let _ = self.insert_group(ctx);
+                            }
+                            channel
                         }
-                    } else {
-                        log::trace!("Message is not associated with channel");
+                    };
+                    if channel.new_message(message).await.is_err() {
+                        break 'outer;
                     }
                     log::debug!("Emitting message");
                 }
