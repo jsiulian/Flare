@@ -9,10 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Pasting files and images into the text entry ([#19])
+- Unlink without deleting messages
 
 ### Fixed
 
 - Fixed showing messages with "&"
+
+### Chores
+
+- Refactored GTK properties
 
 ## [0.5.1]
 

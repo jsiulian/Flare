@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 13:46+0200\n"
+"POT-Creation-Date: 2022-10-14 11:10+0200\n"
 "PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/"
@@ -123,8 +123,7 @@ msgstr "Peruuta"
 msgid "Clear"
 msgstr "Tyhjennä"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
-#: data/resources/ui/window.ui:131
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
 msgid "Unlink"
 msgstr "Poista linkitys"
 
@@ -137,6 +136,14 @@ msgstr ""
 "Tämä poistaa laitteen yhteyden ja poistaa kaikki paikallisesti tallennetut "
 "tiedot. Tämä sulkee myös sovelluksen niin, että se voidaan yhdistää "
 "uudelleen, kun se avataan uudelleen."
+
+#: data/resources/ui/dialog_unlink.ui:10
+msgid "Unlink and delete all messages"
+msgstr ""
+
+#: data/resources/ui/dialog_unlink.ui:11
+msgid "Unlink but keep messages"
+msgstr ""
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -315,27 +322,27 @@ msgstr "Näppäimistösidokset"
 msgid "About"
 msgstr "Tietoja"
 
-#: src/backend/channel.rs:425
+#: src/backend/channel.rs:429
 msgid "Note to self"
 msgstr "Muistiinpano itselle"
 
-#: src/backend/manager.rs:362
+#: src/backend/manager.rs:360
 msgid "You"
 msgstr "Sinä"
 
-#: src/backend/message.rs:405
+#: src/backend/message.rs:428
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Kuva lähetetty"
 msgstr[1] "{} kuvaa lähetetty"
 
-#: src/backend/message.rs:413
+#: src/backend/message.rs:436
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "On lähettänyt videon"
 msgstr[1] "On lähettänyt {} videota"
 
-#: src/backend/message.rs:421
+#: src/backend/message.rs:444
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "On lähettänyt tiedoston"

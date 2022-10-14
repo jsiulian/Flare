@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 13:46+0200\n"
+"POT-Creation-Date: 2022-10-14 11:10+0200\n"
 "PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
@@ -122,8 +122,7 @@ msgstr "Отмена"
 msgid "Clear"
 msgstr "Очистить"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
-#: data/resources/ui/window.ui:131
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
 msgid "Unlink"
 msgstr "Отвязать"
 
@@ -136,6 +135,14 @@ msgstr ""
 "Это отключит это устройство и удалит все локально сохраненные данные. Это "
 "также закроет приложение, чтобы его можно было повторно связать при "
 "повторном открытии."
+
+#: data/resources/ui/dialog_unlink.ui:10
+msgid "Unlink and delete all messages"
+msgstr ""
+
+#: data/resources/ui/dialog_unlink.ui:11
+msgid "Unlink but keep messages"
+msgstr ""
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -316,27 +323,27 @@ msgstr "Комбинации клавиш"
 msgid "About"
 msgstr "О Приложении"
 
-#: src/backend/channel.rs:425
+#: src/backend/channel.rs:429
 msgid "Note to self"
 msgstr "Заметка для себя"
 
-#: src/backend/manager.rs:362
+#: src/backend/manager.rs:360
 msgid "You"
 msgstr "Вы"
 
-#: src/backend/message.rs:405
+#: src/backend/message.rs:428
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Отправить изображение"
 msgstr[1] "Отправить {} изображений"
 
-#: src/backend/message.rs:413
+#: src/backend/message.rs:436
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Отправлено видео"
 msgstr[1] "Отправлено {} видео"
 
-#: src/backend/message.rs:421
+#: src/backend/message.rs:444
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Оправить файл"

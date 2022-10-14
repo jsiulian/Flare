@@ -55,7 +55,6 @@ impl<E: encrypted_sled::Encryption + 'static> EncryptedSledStore<E> {
         tree_contacts.clear()?;
         tree_contacts.flush()?;
         drop(db);
-        self.clear_messages()?;
         Ok(())
     }
 

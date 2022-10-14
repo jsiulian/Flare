@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 13:46+0200\n"
+"POT-Creation-Date: 2022-10-14 11:10+0200\n"
 "PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -125,8 +125,7 @@ msgstr "Abbrechen"
 msgid "Clear"
 msgstr "Löschen"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
-#: data/resources/ui/window.ui:131
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
 msgid "Unlink"
 msgstr "Entkoppeln"
 
@@ -139,6 +138,14 @@ msgstr ""
 "Dies wird dieses Gerät entkoppeln und alle lokal gespeicherten Daten "
 "löschen. Dies wird außerdem die Anwendung schließen, sodass es nach dem "
 "erneuten Öffnen neu gekoppelt werden kann."
+
+#: data/resources/ui/dialog_unlink.ui:10
+msgid "Unlink and delete all messages"
+msgstr ""
+
+#: data/resources/ui/dialog_unlink.ui:11
+msgid "Unlink but keep messages"
+msgstr ""
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -320,27 +327,27 @@ msgstr "Tastaturkürzel"
 msgid "About"
 msgstr "Info"
 
-#: src/backend/channel.rs:425
+#: src/backend/channel.rs:429
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:362
+#: src/backend/manager.rs:360
 msgid "You"
 msgstr "Du"
 
-#: src/backend/message.rs:405
+#: src/backend/message.rs:428
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Hat ein Bild gesendet"
 msgstr[1] "Hat {} Bilder gesendet"
 
-#: src/backend/message.rs:413
+#: src/backend/message.rs:436
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Hat ein Video gesendet"
 msgstr[1] "Hat {} Videos gesendet"
 
-#: src/backend/message.rs:421
+#: src/backend/message.rs:444
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"

@@ -7,7 +7,8 @@
     <property name="close-response">cancel</property>
     <responses>
       <response id="cancel" translatable="yes">Cancel</response>
-      <response id="unlink" translatable="yes" appearance="destructive">Unlink</response>
+      <response id="unlink-delete" translatable="yes" appearance="destructive">Unlink and delete all messages</response>
+      <response id="unlink-keep" translatable="yes" appearance="destructive">Unlink but keep messages</response>
     </responses>
   </object>
 </interface>

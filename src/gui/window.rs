@@ -149,10 +149,22 @@ pub mod imp {
                     .expect("dialog_unlink.ui to have at least one object dialog");
                 dialog.set_transient_for(Some(&obj));
                 dialog.connect_response(None, clone!(@weak obj => move |_dialog, response| {
-                    if response == "unlink" {
+                    if response == "unlink-keep" {
                         log::info!("Unlinking device");
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
                             if let Err(e)= man.clear() {
+                                log::error!("Failed to clear db: {}", e);
+                            }
+                        }
+                        log::trace!("Closing the window after unlink");
+                        obj.close();
+                    } else if response == "unlink-delete" {
+                        log::info!("Unlinking device");
+                        if let Some(man) = obj.imp().manager.borrow().as_ref() {
+                            if let Err(e)= man.clear() {
+                                log::error!("Failed to clear db: {}", e);
+                            }
+                            if let Err(e) = man.clear_messages() {
                                 log::error!("Failed to clear db: {}", e);
                             }
                         }

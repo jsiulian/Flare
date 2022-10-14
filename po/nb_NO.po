@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 13:46+0200\n"
+"POT-Creation-Date: 2022-10-14 11:10+0200\n"
 "PO-Revision-Date: 2022-10-10 18:02+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -127,8 +127,7 @@ msgstr "Avbryt"
 msgid "Clear"
 msgstr "Tøm"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/dialog_unlink.ui:10
-#: data/resources/ui/window.ui:131
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
 msgid "Unlink"
 msgstr "Opphev forbindelse"
 
@@ -141,6 +140,14 @@ msgstr ""
 "Dette vil oppheve forbindelsen fra denne enheten og fjerne all lokalt lagret "
 "data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
 "åpner det på ny."
+
+#: data/resources/ui/dialog_unlink.ui:10
+msgid "Unlink and delete all messages"
+msgstr ""
+
+#: data/resources/ui/dialog_unlink.ui:11
+msgid "Unlink but keep messages"
+msgstr ""
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -326,27 +333,27 @@ msgstr "Hurtigtaster"
 msgid "About"
 msgstr "Om"
 
-#: src/backend/channel.rs:425
+#: src/backend/channel.rs:429
 msgid "Note to self"
 msgstr "Selvpåminnelse"
 
-#: src/backend/manager.rs:362
+#: src/backend/manager.rs:360
 msgid "You"
 msgstr "Deg"
 
-#: src/backend/message.rs:405
+#: src/backend/message.rs:428
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Sendte et bilde"
 msgstr[1] "Sendte {} bilder"
 
-#: src/backend/message.rs:413
+#: src/backend/message.rs:436
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Sendte en video"
 msgstr[1] "Sendte {} videoer"
 
-#: src/backend/message.rs:421
+#: src/backend/message.rs:444
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Sendte en fil"
