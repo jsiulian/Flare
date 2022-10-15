@@ -124,6 +124,7 @@ msgid "Clear"
 msgstr "Cancella"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
+#: data/resources/ui/dialog_unlink.ui:10
 msgid "Unlink"
 msgstr "Scollega"
 
@@ -323,11 +324,11 @@ msgstr "Scorciatoie"
 msgid "About"
 msgstr "Informazioni"
 
-#: src/backend/channel.rs:439
+#: src/backend/channel.rs:439 src/backend/channel.rs:425
 msgid "Note to self"
 msgstr "Nota per me"
 
-#: src/backend/manager.rs:365
+#: src/backend/manager.rs:365 src/backend/manager.rs:362
 msgid "You"
 msgstr "Tu"
 
@@ -347,19 +348,19 @@ msgstr ""
 msgid "Is busy."
 msgstr ""
 
-#: src/backend/message/text_message.rs:231
+#: src/backend/message/text_message.rs:231 src/backend/message.rs:405
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Ha inviato un'immagine"
 msgstr[1] "Ha inviato {} immagini"
 
-#: src/backend/message/text_message.rs:234
+#: src/backend/message/text_message.rs:234 src/backend/message.rs:413
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Ha inviato un video"
 msgstr[1] "Ha inviato {} video"
 
-#: src/backend/message/text_message.rs:237
+#: src/backend/message/text_message.rs:237 src/backend/message.rs:421
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Ha inviato un file"
@@ -413,7 +414,7 @@ msgstr "L'applicazione sembra essere mal configurata."
 
 #: src/error.rs:120
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Una parte dell'applicazione si è arrestata in modo anomalo."
 
 #: src/error.rs:130
 msgid "Please check your internet connection."
