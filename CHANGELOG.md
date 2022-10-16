@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.2]
+
 ### Added
 
 - Pasting files and images into the text entry ([#19])
@@ -212,7 +214,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.0...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.2...master
+[0.5.2]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.1...0.5.2
 [0.5.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.0...0.5.1
 [0.5.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.4.1...0.5.0
 [0.4.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.4.0...0.4.1

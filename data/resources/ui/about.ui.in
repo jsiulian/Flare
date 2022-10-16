@@ -18,22 +18,20 @@
     <property name="license-type">GTK_LICENSE_AGPL_3_0_ONLY</property>
 
     <property name="release-notes">
-      &lt;p&gt;Added&lt;/p&gt;
+      &lt;p&gt;Added:&lt;/p&gt;
       &lt;ul&gt;
-        &lt;li&gt;Clickable links in text messages.&lt;/li&gt;
-        &lt;li&gt;Open image in default program.&lt;/li&gt;
-      &lt;li&gt;Contributing guidelines&lt;/li&gt;
+        &lt;li&gt;Pasting files and images into the text entry.&lt;/li&gt;
+        &lt;li&gt;Unlink without deleting messages.&lt;/li&gt;
+        &lt;li&gt;Messages and notifications for calls.&lt;/li&gt;
       &lt;/ul&gt;
-      &lt;p&gt;Changed&lt;/p&gt;
+      &lt;p&gt;Fixed:&lt;/p&gt;
       &lt;ul&gt;
-        &lt;li&gt;Show backend thread panics.&lt;/li&gt;
-        &lt;li&gt;UI improvements for the channel list.&lt;/li&gt;
-        &lt;li&gt;Display user initials in profile pictures.&lt;/li&gt;
+        &lt;li&gt;Fixed showing messages with &amp;quot;&amp;amp;&amp;quot;, &amp;quot;&amp;lt;&amp;quot; or &amp;quot;&amp;gt;&amp;quot;.&lt;/li&gt;
       &lt;/ul&gt;
-      &lt;p&gt;Fixed&lt;/p&gt;
+      &lt;p&gt;Chores:&lt;/p&gt;
       &lt;ul&gt;
-        &lt;li&gt;Fixed duplicate message receiving.&lt;/li&gt;
-        &lt;li&gt;Wrapping for extremely long words.&lt;/li&gt;
+        &lt;li&gt;Refactored GTK properties.&lt;/li&gt;
+        &lt;li&gt;Greatly refactored messages.&lt;/li&gt;
       &lt;/ul&gt;
     </property>
   </object>
