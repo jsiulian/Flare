@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-14 11:10+0200\n"
+"POT-Creation-Date: 2022-10-16 11:19+0200\n"
 "PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/"
@@ -322,27 +322,43 @@ msgstr "Näppäimistösidokset"
 msgid "About"
 msgstr "Tietoja"
 
-#: src/backend/channel.rs:429
+#: src/backend/channel.rs:439
 msgid "Note to self"
 msgstr "Muistiinpano itselle"
 
-#: src/backend/manager.rs:360
+#: src/backend/manager.rs:365
 msgid "You"
 msgstr "Sinä"
 
-#: src/backend/message.rs:428
+#: src/backend/message/call_message.rs:109
+msgid "Started calling."
+msgstr ""
+
+#: src/backend/message/call_message.rs:110
+msgid "Answered a call."
+msgstr ""
+
+#: src/backend/message/call_message.rs:111
+msgid "Hanged up."
+msgstr ""
+
+#: src/backend/message/call_message.rs:112
+msgid "Is busy."
+msgstr ""
+
+#: src/backend/message/text_message.rs:231
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Kuva lähetetty"
 msgstr[1] "{} kuvaa lähetetty"
 
-#: src/backend/message.rs:436
+#: src/backend/message/text_message.rs:234
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "On lähettänyt videon"
 msgstr[1] "On lähettänyt {} videota"
 
-#: src/backend/message.rs:444
+#: src/backend/message/text_message.rs:237
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "On lähettänyt tiedoston"

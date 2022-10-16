@@ -3,6 +3,7 @@
 
 data/resources/ui/about.ui
 data/resources/ui/attachment.ui
+data/resources/ui/call_message_item.ui
 data/resources/ui/channel_item.ui
 data/resources/ui/channel_list.ui
 data/resources/ui/channel_messages.ui
@@ -23,11 +24,16 @@ src/backend/contact.rs
 src/backend/dummy.rs
 src/backend/manager.rs
 src/backend/manager_thread.rs
-src/backend/message.rs
+src/backend/message/call_message.rs
+src/backend/message/display_message.rs
+src/backend/message/mod.rs
+src/backend/message/reaction_message.rs
+src/backend/message/text_message.rs
 src/backend/mod.rs
 src/config.rs
 src/error.rs
 src/gui/attachment.rs
+src/gui/call_message_item.rs
 src/gui/channel_item.rs
 src/gui/channel_list.rs
 src/gui/channel_messages.rs
@@ -43,3 +49,4 @@ src/hash_log.rs
 src/main.rs
 src/storage/encrypted_sled.rs
 src/storage/mod.rs
+src/utils.rs

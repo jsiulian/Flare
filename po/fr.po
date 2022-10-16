@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-14 11:10+0200\n"
+"POT-Creation-Date: 2022-10-16 11:19+0200\n"
 "PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
@@ -321,27 +321,43 @@ msgstr "Raccourcis clavier"
 msgid "About"
 msgstr "À propos"
 
-#: src/backend/channel.rs:429
+#: src/backend/channel.rs:439
 msgid "Note to self"
 msgstr "Note à moi-même"
 
-#: src/backend/manager.rs:360
+#: src/backend/manager.rs:365
 msgid "You"
 msgstr "Vous"
 
-#: src/backend/message.rs:428
+#: src/backend/message/call_message.rs:109
+msgid "Started calling."
+msgstr ""
+
+#: src/backend/message/call_message.rs:110
+msgid "Answered a call."
+msgstr ""
+
+#: src/backend/message/call_message.rs:111
+msgid "Hanged up."
+msgstr ""
+
+#: src/backend/message/call_message.rs:112
+msgid "Is busy."
+msgstr ""
+
+#: src/backend/message/text_message.rs:231
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "A envoyé une image"
 msgstr[1] "A envoyé {} images"
 
-#: src/backend/message.rs:436
+#: src/backend/message/text_message.rs:234
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "A envoyé une vidéo"
 msgstr[1] "A envoyé {} vidéos"
 
-#: src/backend/message.rs:444
+#: src/backend/message/text_message.rs:237
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "A envoyé un fichier"
