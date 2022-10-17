@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-16 11:19+0200\n"
-"PO-Revision-Date: 2022-09-28 19:19+0000\n"
-"Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
+"PO-Revision-Date: 2022-10-16 17:49+0200\n"
+"Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: data/resources/ui/about.ui:14
 msgid "translator-credits"
@@ -48,11 +48,11 @@ msgstr "Suchen"
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
-msgstr "Wählen Sie einen Kanal aus"
+msgstr "Einen Kanal auswählen"
 
 #: data/resources/ui/channel_messages.ui:51
 msgid "Load more"
-msgstr "Mehr laden"
+msgstr "Weitere laden"
 
 #: data/resources/ui/channel_messages.ui:79
 msgctxt "accessibility"
@@ -113,8 +113,8 @@ msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
-"Dies wird alle auf dem Gerät vorhandenen Nachrichten löschen und das Program "
-"schließen."
+"Dies wird alle auf dem Gerät vorhandenen Nachrichten löschen und die "
+"Anwendung schließen."
 
 #: data/resources/ui/dialog_clear_messages.ui:9
 #: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
@@ -142,11 +142,11 @@ msgstr ""
 
 #: data/resources/ui/dialog_unlink.ui:10
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "Entkoppeln und alle Nachrichten löschen"
 
 #: data/resources/ui/dialog_unlink.ui:11
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "Entkoppeln, aber Nachrichten behalten"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -166,17 +166,16 @@ msgstr "Gerät koppeln"
 
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device."
-msgstr "Bitte scanne diesen QR-Code mit deinen Hauptgerät."
+msgstr "Bitte scanne diesen QR-Code mit deinem Hauptgerät."
 
 #: data/resources/ui/link_window.ui:35
 msgctxt "accessibility"
 msgid "Copy to clipboard"
-msgstr "Kopieren"
+msgstr "In die Zwischenablage kopieren"
 
 #: data/resources/ui/link_window.ui:47
 msgid "Please wait until the contacts are displayed after linking."
-msgstr ""
-"Bitte warte Sie nach dem Verknüpfen bis Ihre Kontakte angezeigt werden."
+msgstr "Bitte warte nach dem Koppeln, bis deine Kontakte angezeigt werden."
 
 #: data/resources/ui/message_item.ui:208
 msgid "Reply"
@@ -197,8 +196,7 @@ msgstr "Koppelung"
 #: data/resources/ui/preferences_window.ui:14
 msgid "The device will need to be relinked to take effect."
 msgstr ""
-"Das Gerät muss neu gekoppelt werden, damit diese Einstellung Auswirkungen "
-"hat."
+"Das Gerät muss neu gekoppelt werden, damit diese Einstellung wirksam wird."
 
 #: data/resources/ui/preferences_window.ui:17
 msgid "Device Name"
@@ -226,7 +224,7 @@ msgstr "Nachrichten-Speicher"
 
 #: data/resources/ui/preferences_window.ui:76
 msgid "Number of messages to load on startup"
-msgstr "Anzahl der Nachrichten, welche bei Applikationsstart geladen werden"
+msgstr "Anzahl der Nachrichten, welche bei Anwendungsstart geladen werden"
 
 #: data/resources/ui/preferences_window.ui:77
 #: data/resources/ui/preferences_window.ui:93
@@ -235,7 +233,7 @@ msgstr "Pro Kanal"
 
 #: data/resources/ui/preferences_window.ui:92
 msgid "Number of messages to load on request"
-msgstr "Anzahl der Nachrichten welche auf Anfrage geladen werden"
+msgstr "Anzahl der Nachrichten, welche auf Anfrage geladen werden"
 
 #: data/resources/ui/preferences_window.ui:110
 msgid "Notifications"
@@ -248,8 +246,8 @@ msgid ""
 "closed, consider using something like messenger-notify."
 msgstr ""
 "Benachrichtigungen für neue Nachrichten. Diese Benachrichtigungen "
-"funktionieren nur wenn Flare geöffnet ist, wenn du auch benachrichtigt "
-"werden willst falls das Programm geschlossen ist, nutze beispielsweise "
+"funktionieren nur, wenn Flare geöffnet ist. Wenn du auch benachrichtigt "
+"werden willst, wenn das Programm geschlossen ist, nutze beispielsweise "
 "messenger-notify."
 
 #: data/resources/ui/preferences_window.ui:114
@@ -274,7 +272,7 @@ msgstr "Zu den Einstellungen springen"
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr "Zur Information springen"
+msgstr "Zu Info springen"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -289,7 +287,7 @@ msgstr "Kanäle"
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr "Zu Kanal 1...9 springen"
+msgstr "Zu Kanal 1…9 springen"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
@@ -299,7 +297,7 @@ msgstr "In den Kanälen suchen"
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr "Anhänge hochladen"
+msgstr "Anhang hochladen"
 
 #: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
@@ -309,7 +307,7 @@ msgstr "Die Texteingabe fokussieren"
 #: data/resources/ui/shortcuts.ui:67
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr "Mehr Nachrichten laden"
+msgstr "Weitere Nachrichten laden"
 
 #: data/resources/ui/window.ui:47
 msgctxt "accessibility"
@@ -338,19 +336,19 @@ msgstr "Du"
 
 #: src/backend/message/call_message.rs:109
 msgid "Started calling."
-msgstr ""
+msgstr "Anruf wurde begonnen."
 
 #: src/backend/message/call_message.rs:110
 msgid "Answered a call."
-msgstr ""
+msgstr "Ein Anruf wurde beantwortet."
 
 #: src/backend/message/call_message.rs:111
 msgid "Hanged up."
-msgstr ""
+msgstr "Aufgelegt."
 
 #: src/backend/message/call_message.rs:112
 msgid "Is busy."
-msgstr ""
+msgstr "Besetzt."
 
 #: src/backend/message/text_message.rs:231 src/backend/message.rs:405
 msgid "Sent an image"
@@ -435,7 +433,7 @@ msgstr "Der Datenbankpfad bei {} ist kein Ordner."
 #: src/error.rs:146
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
-"Bitte starten Sie diese Anwendung neu mit Logs und melden Sie diesen Fehler."
+"Bitte starte die Anwendung neu mit Protokollierung und melde dieses Problem."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
