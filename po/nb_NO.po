@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-16 11:19+0200\n"
-"PO-Revision-Date: 2022-10-10 18:02+0000\n"
+"PO-Revision-Date: 2022-10-18 13:05+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
 "flare/nb_NO/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.15-dev\n"
 
 #: data/resources/ui/about.ui:14
 msgid "translator-credits"
@@ -142,12 +142,14 @@ msgstr ""
 "åpner det på ny."
 
 #: data/resources/ui/dialog_unlink.ui:10
+#, fuzzy
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "Opphev lenking og slett alle meldinger"
 
 #: data/resources/ui/dialog_unlink.ui:11
+#, fuzzy
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "Opphev lenking, men behold meldinger"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -342,20 +344,22 @@ msgid "You"
 msgstr "Deg"
 
 #: src/backend/message/call_message.rs:109
+#, fuzzy
 msgid "Started calling."
-msgstr ""
+msgstr "Anrop startet."
 
 #: src/backend/message/call_message.rs:110
+#, fuzzy
 msgid "Answered a call."
-msgstr ""
+msgstr "Besvarte et anrop."
 
 #: src/backend/message/call_message.rs:111
 msgid "Hanged up."
-msgstr ""
+msgstr "La på."
 
 #: src/backend/message/call_message.rs:112
 msgid "Is busy."
-msgstr ""
+msgstr "Er opptatt."
 
 #: src/backend/message/text_message.rs:231
 msgid "Sent an image"
@@ -424,7 +428,7 @@ msgstr "Programmet er ikke satt opp riktig."
 
 #: src/error.rs:120
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "En del av programmet krasjet."
 
 #: src/error.rs:130
 msgid "Please check your internet connection."
