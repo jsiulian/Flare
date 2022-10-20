@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-16 11:19+0200\n"
-"PO-Revision-Date: 2022-09-28 19:19+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
+"PO-Revision-Date: 2022-10-21 20:03+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.14.2-dev\n"
 
 #: data/resources/ui/about.ui:14
 msgid "translator-credits"
@@ -139,11 +139,11 @@ msgstr ""
 
 #: data/resources/ui/dialog_unlink.ui:10
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "Délier et supprimer tous les messages"
 
 #: data/resources/ui/dialog_unlink.ui:11
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "Délier mais garder les messages"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -332,19 +332,19 @@ msgstr "Vous"
 
 #: src/backend/message/call_message.rs:109
 msgid "Started calling."
-msgstr ""
+msgstr "Appel commencé."
 
 #: src/backend/message/call_message.rs:110
 msgid "Answered a call."
-msgstr ""
+msgstr "A répondu à un appel."
 
 #: src/backend/message/call_message.rs:111
 msgid "Hanged up."
-msgstr ""
+msgstr "A raccroché."
 
 #: src/backend/message/call_message.rs:112
 msgid "Is busy."
-msgstr ""
+msgstr "Occupé."
 
 #: src/backend/message/text_message.rs:231 src/backend/message.rs:405
 msgid "Sent an image"
