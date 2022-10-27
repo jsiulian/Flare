@@ -129,14 +129,14 @@
       <description>
         <p>Added:</p>
         <ul>
-          <li>Button in the link window to copy link URL to clipboard ([#6](https://gitlab.com/Schmiddiii/flare/-/issues/6)).</li>
+          <li>Button in the link window to copy link URL to clipboard.</li>
           <li>Group storage.</li>
-          <li>Search for the channel view ([#7](https://gitlab.com/Schmiddiii/flare/-/issues/7)).</li>
+          <li>Search for the channel view.</li>
         </ul>
         <p>Fixed:</p>
         <ul>
           <li>Maybe fixed rare crash in the backend thread.</li>
-          <li>Fixed messages sent to contacts being wrongly stored to &quot;Note to self&quot; ([#8](https://gitlab.com/Schmiddiii/flare/-/issues/8)).</li>
+          <li>Fixed messages sent to contacts being wrongly stored to &quot;Note to self&quot;.</li>
         </ul>
       </description>
     </release>
