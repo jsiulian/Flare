@@ -17,7 +17,7 @@ use libsignal_service::{
     sender::{AttachmentSpec, AttachmentUploadError},
     ServiceAddress,
 };
-use presage::{MessageStore, Thread};
+use presage::{MessageStore, Store, Thread};
 use rand::Fill;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
@@ -135,7 +135,7 @@ impl Manager {
 
     pub fn clear(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing the manager");
-        if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
+        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
             config_store.clear()?;
         }
         Ok(())
@@ -143,7 +143,7 @@ impl Manager {
 
     pub fn clear_messages(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing messages from the manager");
-        if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
+        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
             config_store.clear_messages()?;
         }
         Ok(())
@@ -175,9 +175,7 @@ impl Manager {
         if let Some(content) = content {
             let msg = Message::from_content(content, self).await;
             // TODO: Log message
-            log::trace!(
-                "Found message queried",
-            );
+            log::trace!("Found message queried",);
             Ok(msg)
         } else {
             Ok(None)

@@ -43,21 +43,6 @@ impl<E: encrypted_sled::Encryption + 'static> EncryptedSledStore<E> {
         })
     }
 
-    pub fn clear(&self) -> Result<(), Error> {
-        log::trace!("Clearing config store");
-        let db = self.db.read().expect("poisoned mutex");
-        db.clear()?;
-        db.flush()?;
-        let tree_sessions = db.open_tree(SLED_TREE_SESSIONS)?;
-        tree_sessions.clear()?;
-        tree_sessions.flush()?;
-        let tree_contacts = db.open_tree(SLED_KEY_CONTACTS)?;
-        tree_contacts.clear()?;
-        tree_contacts.flush()?;
-        drop(db);
-        Ok(())
-    }
-
     pub fn clear_messages(&self) -> Result<(), Error> {
         let db = self.db.read().expect("poisoned mutex");
         for name in db.tree_names().expect("Failed to get tree names") {
@@ -199,6 +184,21 @@ impl<E: encrypted_sled::Encryption + 'static> Store for EncryptedSledStore<E>
 where
     E: std::marker::Send + std::marker::Sync + std::clone::Clone,
 {
+    fn clear(&mut self) -> Result<(), Error> {
+        log::trace!("Clearing config store");
+        let db = self.db.read().expect("poisoned mutex");
+        db.clear()?;
+        db.flush()?;
+        let tree_sessions = db.open_tree(SLED_TREE_SESSIONS)?;
+        tree_sessions.clear()?;
+        tree_sessions.flush()?;
+        let tree_contacts = db.open_tree(SLED_KEY_CONTACTS)?;
+        tree_contacts.clear()?;
+        tree_contacts.flush()?;
+        drop(db);
+        Ok(())
+    }
+
     fn pre_keys_offset_id(&self) -> Result<u32, Error> {
         Ok(self.get_u32("pre_keys_offset_id")?.unwrap_or(0))
     }
@@ -225,7 +225,7 @@ impl<E: encrypted_sled::Encryption> ContactsStore for EncryptedSledStore<E> {
             .open_tree(SLED_KEY_CONTACTS)?;
         for contact in contacts {
             if let Some(uuid) = contact.address.uuid {
-                tree.insert(uuid.to_string(), serde_json::to_vec(&contact)?)?;
+                tree.insert(uuid, serde_json::to_vec(&contact)?)?;
             } else {
                 warn!("skipping contact {:?} without uuid", contact);
             }
@@ -250,7 +250,7 @@ impl<E: encrypted_sled::Encryption> ContactsStore for EncryptedSledStore<E> {
     fn contact_by_id(&self, id: Uuid) -> Result<Option<Contact>, Error> {
         let db = self.db.read().expect("poisoned mutex");
         Ok(
-            if let Some(buf) = db.open_tree(SLED_KEY_CONTACTS)?.get(id.to_string())? {
+            if let Some(buf) = db.open_tree(SLED_KEY_CONTACTS)?.get(id)? {
                 let contact = serde_json::from_slice(&buf)?;
                 Some(contact)
             } else {

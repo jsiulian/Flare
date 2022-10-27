@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Updated certificate of Signal servers (upstream, [#32])
+
 ## [0.5.2]
 
 ### Added
@@ -252,3 +256,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#24]: https://gitlab.com/Schmiddiii/flare/-/issues/24
 [#25]: https://gitlab.com/Schmiddiii/flare/-/issues/25
 [#26]: https://gitlab.com/Schmiddiii/flare/-/issues/26
+[#27]: https://gitlab.com/Schmiddiii/flare/-/issues/27
+[#28]: https://gitlab.com/Schmiddiii/flare/-/issues/28
+[#29]: https://gitlab.com/Schmiddiii/flare/-/issues/29
+[#30]: https://gitlab.com/Schmiddiii/flare/-/issues/30
+[#31]: https://gitlab.com/Schmiddiii/flare/-/issues/31
+[#32]: https://gitlab.com/Schmiddiii/flare/-/issues/32

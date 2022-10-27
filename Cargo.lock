@@ -1791,14 +1791,14 @@ dependencies = [
  "sha2 0.9.9",
  "subtle",
  "thiserror",
- "uuid 1.1.2",
+ "uuid",
  "x25519-dalek",
 ]
 
 [[package]]
 name = "libsignal-service"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=72503de963331e3afd28ab837965af7ca7203b80#72503de963331e3afd28ab837965af7ca7203b80"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=8666ba56f47e405aaf8ed243be6e2ad1b5ad68c1#8666ba56f47e405aaf8ed243be6e2ad1b5ad68c1"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -1824,14 +1824,14 @@ dependencies = [
  "sha2 0.10.6",
  "thiserror",
  "url",
- "uuid 0.8.2",
+ "uuid",
  "zkgroup",
 ]
 
 [[package]]
 name = "libsignal-service-hyper"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=72503de963331e3afd28ab837965af7ca7203b80#72503de963331e3afd28ab837965af7ca7203b80"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=8666ba56f47e405aaf8ed243be6e2ad1b5ad68c1#8666ba56f47e405aaf8ed243be6e2ad1b5ad68c1"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -2378,7 +2378,7 @@ checksum = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
 [[package]]
 name = "presage"
 version = "0.4.0"
-source = "git+https://github.com/whisperfish/presage.git?rev=8825ed321ab6e14264499d39a0eeee2b77693aea#8825ed321ab6e14264499d39a0eeee2b77693aea"
+source = "git+https://github.com/whisperfish/presage.git?rev=8263262f1e3fe15dbcd4dab0c86d3c00d3dc369c#8263262f1e3fe15dbcd4dab0c86d3c00d3dc369c"
 dependencies = [
  "async-trait",
  "base64 0.12.3",
@@ -3432,18 +3432,12 @@ checksum = "5190c9442dcdaf0ddd50f37420417d219ae5261bbf5db120d0f9bab996c9cba1"
 
 [[package]]
 name = "uuid"
-version = "0.8.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc5cf98d8186244414c848017f0e2676b3fcb46807f6668a97dfe67359a3c4b7"
-dependencies = [
- "serde",
-]
-
-[[package]]
-name = "uuid"
 version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dd6469f4314d5f1ffec476e05f17cc9a78bc7a27a6a857842170bdf8d6f98d2f"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "version-compare"
