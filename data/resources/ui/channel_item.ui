@@ -34,7 +34,7 @@
         <child>
           <object class="GtkLabel" id="label-name">
             <style>
-              <class name="title-4"/>
+              <class name="heading"/>
             </style>
             <property name="halign">start</property>
             <property name="ellipsize">end</property>

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.5.3]
 
+### Changed
+
+- Slight UI update to channel list
+
 ### HOTFIX
 
 - Updated certificate of Signal servers (upstream, [#32])
