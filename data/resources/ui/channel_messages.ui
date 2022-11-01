@@ -13,6 +13,8 @@
       <object class="AdwStatusPage">
         <property name="description" translatable="yes">Select a channel</property>
         <property name="icon-name">system-search-symbolic</property>
+        <property name="vexpand">True</property>
+        <property name="hexpand">True</property>
         <binding name="visible">
           <closure function="is_none" type="gboolean">
             <lookup name="active-channel" type="FlChannelMessages"/>
