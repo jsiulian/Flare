@@ -274,16 +274,17 @@ pub mod imp {
 
         #[template_callback]
         fn handle_row_activated(&self, row: gtk::ListBoxRow) {
-            let msg = row
+            if let Ok(msg) = row
                 .child()
                 .expect("`ListBoxRow` to have a child")
                 .dynamic_cast::<MessageItem>()
-                .expect("`ListBoxRow` to have a `MessageItem` child");
-            crate::trace!(
-                "Activated message: {}",
-                msg.message().body().unwrap_or_else(|| "".to_string())
-            );
-            msg.open_popup();
+            {
+                crate::trace!(
+                    "Activated message: {}",
+                    msg.message().body().unwrap_or_else(|| "".to_string())
+                );
+                msg.open_popup();
+            }
         }
     }
 
