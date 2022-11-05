@@ -103,13 +103,9 @@ pub mod imp {
         #[template_callback(function)]
         fn markup_urls(s: Option<String>) -> Option<String> {
             lazy_static! {
-                static ref RE: Regex = Regex::new(r#"(?P<l>[a-z]*://[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))"#).unwrap();
+                static ref RE: Regex = Regex::new(r#"(?P<l>[a-z]*://[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=;]*))"#).unwrap();
             }
-            let s = s.map(|s| {
-                s.replace('&', "&amp;")
-                    .replace('<', "&lt;")
-                    .replace('>', "&gt;")
-            });
+            let s = s.map(|s| glib::markup_escape_text(&s));
             s.map(|s| RE.replace_all(&s, r#"<a href="$l">$l</a>"#).to_string())
         }
 

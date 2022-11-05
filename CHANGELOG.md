@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Crash when clicking on call message
+- URLs containing "&" not being displayed
 
 ## [0.5.3]
 
