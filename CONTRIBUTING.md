@@ -25,7 +25,7 @@ Issues are a good way to tell me problems you are having with the applications o
 
 - Use the correct template: This project defines a few different templates (e.g. "Feature Request", "Error") that you can use for different types of issues. Please only use the default template if you think no other template matches.
 - Fill out all information in the template: For me to re-create your setup, it is important that you fill out all information that is asked for in the issue (e.g. your current version, or how you installed it).
-- Fill out the logs if you think they are relevant: If the issue template asks for logs and you think that might help, please consider adding them. But note that logs can contain sensitive information. Please look through the logs and censor things before pasting into the template. If you don't feel comfortable censoring your own logs, you can also send me a Matrix direct message to @schmiddi:matrix.org if I ask for logs.
+- Fill out the logs if you think they are relevant: If the issue template asks for logs and you think that might help, please consider adding them. But note that logs can contain sensitive information. Please look through the logs and censor things before pasting into the template (also take a look [here](https://gitlab.com/whisperfish/whisperfish/-/wikis/home#censor-your-logs) on what and how to censor). If you don't feel comfortable censoring your own logs, you can also send me a Matrix direct message to `@schmiddi:matrix.org` if I ask for logs.
 - Check for duplicated issues: Try to use the search-feature if you can find similar issues like you are having. If there is already such an issue, consider giving it a thumbs-up or commenting more details on that issue, but don't create a new issue.
 - Know how to write a good issue: Read e.g. <https://wiredcraft.com/blog/how-we-write-our-github-issues/> (also applies pretty much got GitLab)
 
@@ -47,13 +47,14 @@ RUST_LOG=flare=trace ./build/target/debug/flare # Run your locally compiled appl
 
 The following documentation might help:
 
-- [GTK Book](https://gtk-rs.org/gtk4-rs/stable/latest/book/): General GTK-development
-- [presage](https://whisperfish.github.io/presage/presage/): The backend library used to interact with Signal
+- [GTK Book](https://gtk-rs.org/gtk4-rs/stable/latest/book/): General GTK-development.
+- [presage](https://whisperfish.github.io/presage/presage/): The backend library used to interact with Signal.
 
 ### Things to keep in mind
 
-- Make sure the code passes some basic checks (`cargo check`)
-- Make sure the code is properly formatted (`cargo fmt`) 
-- Reach out to me for bigger changes, either in an issue or via Matrix
-- Fill out the GitLab merge request template
-- Optional but encouraged: Check for new warnings in `cargo clippy`
+- Make sure the code passes some basic checks (`cargo check`).
+- Make sure the code is properly formatted (`cargo fmt`).
+- Reach out to me for bigger changes, either in an issue or via Matrix.
+- Fill out the GitLab merge request template.
+- Optional but encouraged: Check for new warnings in `cargo clippy`.
+- Always feel free to ask questions or request some help.

@@ -14,11 +14,13 @@ A unofficial Signal GTK client.
 <table>
   <tr>
     <td>Flatpak</td>
-  </tr>
-  <tr>
     <td>
       <a href='https://flathub.org/apps/details/de.schmidhuberj.Flare'><img width='130' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
     </td>
+  </tr>
+  <tr>
+    <td>Self Compile</td>
+    <td>See [Compilation](https://gitlab.com/Schmiddiii/flare/-/blob/master/CONTRIBUTING.md#compilation).</td>
   </tr>
 </table>
 
@@ -34,7 +36,6 @@ A unofficial Signal GTK client.
 - Encrypted storage (As I am not a security-expert, I do not guarantee anything. Read the `Security`-section)
 - Notifications (To also get notifications while the application is closed, use something standalone, e.g. [messenger-notify](https://gitlab.com/Schmiddiii/messenger-notify))
 
-
 ## Planned Features
 
 - The blocked features listed below once they are ready
@@ -42,16 +43,23 @@ A unofficial Signal GTK client.
 
 ## Not planned features
 
+Some features are not planned by me as I will not use them. But if someone is interested in contributing them, I am open for adding them.
+
 - Full compatibility with the official Signal products, including:
     - Calling
     - Paying
     - Majority of settings
+
 ## Blocked features
 
 This application uses [presage](https://github.com/whisperfish/presage) internally, the current features are not yet implemented for that.
 
 - Avatars
-- Profile name instead of "You" in chats
+- Profile names
+- Some Group features
+    - Group invites (you will need to be added to the group, not invited)
+    - Group management
+- Contact discovery
 
 ## Translation
 
@@ -60,6 +68,14 @@ Flare can easily be translated for other languages, as it uses gettext. Please c
 <a href="https://hosted.weblate.org/engage/flare/">
 <img src="https://hosted.weblate.org/widgets/flare/-/flare/multi-auto.svg" alt="Translation status" />
 </a>
+
+## Contributing
+
+This project is open to contributions. Please refer to [CONTRIBUTING.md](https://gitlab.com/Schmiddiii/flare/-/blob/master/CONTRIBUTING.md) for more information.
+
+## Code of Conduct
+
+This project follows [GNOME's Code of Conduct](https://wiki.gnome.org/Foundation/CodeOfConduct).
 
 ## Donate
 
