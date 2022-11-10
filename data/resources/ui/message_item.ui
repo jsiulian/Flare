@@ -45,6 +45,7 @@
             </binding>
             <property name="hexpand">True</property>
             <property name="halign">start</property>
+            <property name="ellipsize">end</property>
           </object>
         </child>
 

@@ -62,6 +62,7 @@
             <child>
               <object class="GtkLabel">
                 <property name="halign">start</property>
+                <property name="ellipsize">end</property>
                 <binding name="label">
                   <closure function="append_colon" type="gchararray">
                     <lookup name="title">
