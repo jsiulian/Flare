@@ -18,10 +18,17 @@
     <property name="license-type">GTK_LICENSE_AGPL_3_0_ONLY</property>
 
     <property name="release-notes">
-        &lt;p&gt;HOTFIX:&lt;/p&gt;
-        &lt;ul&gt;
-        &lt;li&gt;Updated certificate of Signal servers&lt;/li&gt;
-        &lt;/ul&gt;
+      &lt;p&gt;Changed&lt;/p&gt;
+      &lt;ul&gt;
+      &lt;li&gt;Slight UI update to channel list&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;p&gt;Fixed&lt;/p&gt;
+      &lt;ul&gt;
+      &lt;li&gt;Crash when clicking on call message&lt;/li&gt;
+      &lt;li&gt;URLs containing &quot;&amp;amp;&quot; not being displayed&lt;/li&gt;
+      &lt;li&gt;Fixed some (hopefully all) duplicate messages&lt;/li&gt;
+      &lt;li&gt;Fixed receiving messages from certain groups&lt;/li&gt;
+      &lt;/ul&gt;
     </property>
   </object>
 </interface>
