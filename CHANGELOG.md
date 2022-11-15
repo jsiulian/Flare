@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Crash when clicking on call message
 - URLs containing "&" not being displayed
 - Fixed some (hopefully all) duplicate messages
+- Fixed receiving messages from certain groups
 
 ## [0.5.3]
 

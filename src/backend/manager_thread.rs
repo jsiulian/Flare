@@ -343,7 +343,11 @@ async fn handle_command<C: Store + 'static>(
             .send(manager.uuid())
             .expect("Callback sending failed"),
         Command::GetContacts(callback) => callback
-            .send(manager.get_contacts().map(|c| c.collect()))
+            .send(
+                manager
+                    .get_contacts()
+                    .map(|c| c.filter_map(|o| o.ok()).collect()),
+            )
             .expect("Callback sending failed"),
         Command::GetGroupV2(master_key, callback) => callback
             .send(manager.get_group_v2(master_key).await)

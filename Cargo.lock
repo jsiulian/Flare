@@ -15,6 +15,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b613b8e1e3cf911a086f53f03bf286f52fd7a7258e4fa606f0ef220d39d8877"
 dependencies = [
  "generic-array",
+ "rand_core 0.6.4",
 ]
 
 [[package]]
@@ -267,6 +268,12 @@ name = "base64"
 version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "904dfeac50f3cdaba28fc6f57fdcddb75f49ed61346676a78c4ffe55877802fd"
+
+[[package]]
+name = "base64ct"
+version = "1.5.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b645a089122eccb6111b4f81cbc1a49f5900ac4666bb93ac027feaecf15607bf"
 
 [[package]]
 name = "bincode"
@@ -872,6 +879,12 @@ dependencies = [
  "libc",
  "winapi",
 ]
+
+[[package]]
+name = "fs_extra"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2022715d62ab30faffd124d40b76f4134a550a87792276512b18d63272333394"
 
 [[package]]
 name = "futures"
@@ -1798,7 +1811,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=8666ba56f47e405aaf8ed243be6e2ad1b5ad68c1#8666ba56f47e405aaf8ed243be6e2ad1b5ad68c1"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=0e851d867a33e74008335a4174da8a8c47faba33#0e851d867a33e74008335a4174da8a8c47faba33"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -1831,7 +1844,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service-hyper"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=8666ba56f47e405aaf8ed243be6e2ad1b5ad68c1#8666ba56f47e405aaf8ed243be6e2ad1b5ad68c1"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=0e851d867a33e74008335a4174da8a8c47faba33#0e851d867a33e74008335a4174da8a8c47faba33"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -1908,6 +1921,25 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "62bb907fe88d54d8d9ce32a3cceab4218ed2f6b7d35617cafe9adf84e43919cb"
 dependencies = [
  "libc",
+]
+
+[[package]]
+name = "matrix-sdk-store-encryption"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9ddee75c3cca58f3a323283dc4e849d19d52988903f907ed0fb53dcad5d6fd25"
+dependencies = [
+ "blake3",
+ "chacha20poly1305",
+ "displaydoc",
+ "hmac 0.12.1",
+ "pbkdf2",
+ "rand 0.8.5",
+ "serde",
+ "serde_json",
+ "sha2 0.10.6",
+ "thiserror",
+ "zeroize",
 ]
 
 [[package]]
@@ -2227,6 +2259,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "password-hash"
+version = "0.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7676374caaee8a325c9e7a2ae557f216c5563a171d6997b0ef8a65af35147700"
+dependencies = [
+ "base64ct",
+ "rand_core 0.6.4",
+ "subtle",
+]
+
+[[package]]
+name = "pbkdf2"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "83a0692ec44e4cf1ef28ca317f14f8f07da2d95ec3fa01f86e4467b725e60917"
+dependencies = [
+ "digest 0.10.5",
+ "hmac 0.12.1",
+ "password-hash",
+ "sha2 0.10.6",
+]
+
+[[package]]
 name = "percent-encoding"
 version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2378,21 +2433,24 @@ checksum = "eb9f9e6e233e5c4a35559a617bf40a4ec447db2e84c20b55a6f83167b7e57872"
 [[package]]
 name = "presage"
 version = "0.4.0"
-source = "git+https://github.com/whisperfish/presage.git?rev=8263262f1e3fe15dbcd4dab0c86d3c00d3dc369c#8263262f1e3fe15dbcd4dab0c86d3c00d3dc369c"
+source = "git+https://github.com/whisperfish/presage.git?rev=faef7072b4b6d37971e7411bc3bba8a8a6c24517#faef7072b4b6d37971e7411bc3bba8a8a6c24517"
 dependencies = [
  "async-trait",
  "base64 0.12.3",
  "bytes",
+ "fs_extra",
  "futures",
  "hex",
  "libsignal-service",
  "libsignal-service-hyper",
  "log",
+ "matrix-sdk-store-encryption",
  "prost 0.10.4",
  "prost-build 0.10.4",
  "rand 0.7.3",
  "serde",
  "serde_json",
+ "sha2 0.10.6",
  "sled",
  "thiserror",
  "url",

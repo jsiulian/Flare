@@ -11,13 +11,16 @@ use libsignal_service::{
     prelude::{
         protocol::{
             Context, Direction, IdentityKey, IdentityKeyPair, IdentityKeyStore, PreKeyRecord,
-            PreKeyStore, ProtocolAddress, SessionRecord, SessionStore, SessionStoreExt,
-            SignalProtocolError, SignedPreKeyId, SignedPreKeyRecord, SignedPreKeyStore,
+            PreKeyStore, ProtocolAddress, SenderKeyRecord, SessionRecord, SessionStore,
+            SessionStoreExt, SignalProtocolError, SignedPreKeyId, SignedPreKeyRecord,
+            SignedPreKeyStore,
         },
         ProtobufMessage, Uuid,
     },
 };
-use libsignal_service::{prelude::protocol::PreKeyId, push_service::DEFAULT_DEVICE_ID};
+use libsignal_service::{
+    prelude::protocol::PreKeyId, prelude::protocol::SenderKeyStore, push_service::DEFAULT_DEVICE_ID,
+};
 use log::{debug, trace, warn};
 
 use presage::{
@@ -30,6 +33,7 @@ const SLED_KEY_GROUPS: &str = "groups";
 
 const SLED_TREE_SESSIONS: &str = "sessions";
 const SLED_TREE_THREAD_PREFIX: &str = "thread";
+const SLED_TREE_SENDER_KEYS: &str = "sender_keys";
 
 #[derive(Debug, Clone)]
 pub struct EncryptedSledStore<E> {
@@ -216,7 +220,19 @@ where
     }
 }
 
-impl<E: encrypted_sled::Encryption> ContactsStore for EncryptedSledStore<E> {
+impl<E: encrypted_sled::Encryption + 'static> ContactsStore for EncryptedSledStore<E> {
+    type ContactsIter = SledContactsIter<E>;
+
+    fn clear_contacts(&mut self) -> Result<(), Error> {
+        let tree = self
+            .db
+            .write()
+            .expect("poisoned mutex")
+            .open_tree(SLED_KEY_CONTACTS)?;
+        tree.clear()?;
+        Ok(())
+    }
+
     fn save_contacts(&mut self, contacts: impl Iterator<Item = Contact>) -> Result<(), Error> {
         let tree = self
             .db
@@ -235,16 +251,14 @@ impl<E: encrypted_sled::Encryption> ContactsStore for EncryptedSledStore<E> {
         Ok(())
     }
 
-    fn contacts(&self) -> Result<Vec<Contact>, Error> {
-        Ok(self
+    fn contacts(&self) -> Result<Self::ContactsIter, Error> {
+        let iter = self
             .db
             .read()
             .expect("poisoned mutex")
             .open_tree(SLED_KEY_CONTACTS)?
-            .iter()
-            .filter_map(Result::ok)
-            .filter_map(|(_key, buf)| serde_json::from_slice(&buf).ok())
-            .collect())
+            .iter();
+        Ok(SledContactsIter(iter))
     }
 
     fn contact_by_id(&self, id: Uuid) -> Result<Option<Contact>, Error> {
@@ -257,6 +271,20 @@ impl<E: encrypted_sled::Encryption> ContactsStore for EncryptedSledStore<E> {
                 None
             },
         )
+    }
+}
+
+pub struct SledContactsIter<E>(encrypted_sled::Iter<E>);
+
+impl<E: encrypted_sled::Encryption + 'static> Iterator for SledContactsIter<E> {
+    type Item = Result<Contact, presage::Error>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0
+            .next()?
+            .map_err(Error::from)
+            .and_then(|data| serde_json::from_slice(&data.1).map_err(Error::from))
+            .into()
     }
 }
 
@@ -497,6 +525,59 @@ impl<E: encrypted_sled::Encryption + 'static> IdentityKeyStore for EncryptedSled
     }
 }
 
+#[async_trait(?Send)]
+impl<E: encrypted_sled::Encryption + 'static> SenderKeyStore for EncryptedSledStore<E> {
+    async fn store_sender_key(
+        &mut self,
+        sender: &ProtocolAddress,
+        distribution_id: Uuid,
+        record: &SenderKeyRecord,
+        _ctx: Context,
+    ) -> Result<(), SignalProtocolError> {
+        crate::trace!("Storing sender key: {:?}", sender);
+        let key = format!(
+            "{}.{}/{}",
+            sender.name(),
+            sender.device_id(),
+            distribution_id
+        );
+        let tree = self
+            .db
+            .write()
+            .expect("poisoned mutex")
+            .open_tree(SLED_TREE_SENDER_KEYS)
+            .unwrap();
+        tree.insert(&key, record.serialize()?)
+            .map_err(|e| SignalProtocolError::InvalidState("presage error", e.to_string()))
+            .map(|_| ())
+    }
+
+    async fn load_sender_key(
+        &mut self,
+        sender: &ProtocolAddress,
+        distribution_id: Uuid,
+        _ctx: Context,
+    ) -> Result<Option<SenderKeyRecord>, SignalProtocolError> {
+        crate::trace!("Loading sender key: {:?}", sender);
+        let key = format!(
+            "{}.{}/{}",
+            sender.name(),
+            sender.device_id(),
+            distribution_id
+        );
+        let tree = self
+            .db
+            .write()
+            .expect("poisoned mutex")
+            .open_tree(SLED_TREE_SENDER_KEYS)
+            .unwrap();
+        tree.get(&key)
+            .map_err(|e| SignalProtocolError::InvalidState("presage error", e.to_string()))?
+            .map(|b| SenderKeyRecord::deserialize(&*b))
+            .transpose()
+    }
+}
+
 fn prefix_merge(_key: &[u8], old_value: Option<&[u8]>, merged_bytes: &[u8]) -> Option<Vec<u8>> {
     let mut ret = merged_bytes.to_vec();
 
@@ -507,7 +588,11 @@ fn prefix_merge(_key: &[u8], old_value: Option<&[u8]>, merged_bytes: &[u8]) -> O
 
 fn thread_key(t: &Thread) -> Vec<u8> {
     let mut bytes = SLED_TREE_THREAD_PREFIX.as_bytes().to_owned();
-    bytes.append(&mut t.into());
+    let mut bytes_thread = match t {
+        Thread::Contact(u) => u.as_bytes().to_vec(),
+        Thread::Group(g) => g.to_vec(),
+    };
+    bytes.append(&mut bytes_thread);
     bytes
 }
 
@@ -582,12 +667,16 @@ impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledStor
 pub struct SledMessagesIter<E>(std::iter::Rev<encrypted_sled::Iter<E>>);
 
 impl<E: encrypted_sled::Encryption + 'static> Iterator for SledMessagesIter<E> {
-    // TODO: If error, throw away the rest. Maybe return Result<Content, Error>?
-    type Item = Content;
+    type Item = Result<Content, presage::Error>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        let ivec = self.0.next()?.ok()?.1;
-        let proto = ContentProto::decode(&*ivec).ok()?;
-        proto.try_into().ok()
+        // let ivec = self.0.next()?.ok()?.1;
+        // let proto = ContentProto::decode(&*ivec).ok()?;
+        // proto.try_into().ok()
+        self.0
+            .next()?
+            .map_err(Error::from)
+            .and_then(|data| ContentProto::decode(&*data.1).map_err(Error::from))
+            .map_or_else(|e| Some(Err(e)), |p| Some(p.try_into()))
     }
 }
