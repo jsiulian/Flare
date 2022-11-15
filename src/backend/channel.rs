@@ -164,21 +164,6 @@ impl Channel {
         &self,
         message: &Message,
     ) -> Result<(), gtk::glib::error::BoolError> {
-        let all_messages = self.messages();
-        let last_message = all_messages.last();
-        if Some(message.sent()) == last_message.as_ref().map(|m| m.sent())
-            && message.sender().address().and_then(|a| a.uuid)
-                == last_message
-                    .as_ref()
-                    .and_then(|m| m.sender().address().and_then(|a| a.uuid))
-        {
-            crate::info!(
-                "Channel {} got a duplicate message. Ignoring the second one.",
-                self.title()
-            );
-            return Ok(());
-        }
-
         if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
             if let Some(body) = message.property::<Option<String>>("body") {
                 crate::trace!("Channel {} got new message: {}", self.title(), body);
@@ -254,6 +239,20 @@ impl Channel {
         message: Message,
     ) -> Result<(), gtk::glib::error::BoolError> {
         log::trace!("Adding new message to channel");
+
+        // Check if message is duplicate
+        if self.messages().iter().rev().any(|m| {
+            message.sent() == m.sent()
+                && message.sender().address().and_then(|a| a.uuid)
+                    == m.sender().address().and_then(|a| a.uuid)
+        }) {
+            crate::info!(
+                "Channel {} got a duplicate message. Ignoring the second one.",
+                self.title()
+            );
+            return Ok(());
+        }
+
         self.do_new_message(&message).await?;
         if let Some(message) = message.dynamic_cast_ref::<DisplayMessage>() {
             self.imp().messages.borrow_mut().push(message.clone());
