@@ -16,11 +16,8 @@ use glib::{
     Object,
 };
 use gtk::{glib, prelude::*};
-use libsignal_service::{
-    content::ContentBody,
-    prelude::Content,
-    proto::{sync_message::Sent, DataMessage, SyncMessage},
-    ServiceAddress,
+use presage::prelude::{
+    content::sync_message::Sent, Content, ContentBody, DataMessage, ServiceAddress, SyncMessage,
 };
 use std::cell::{RefCell, RefMut};
 

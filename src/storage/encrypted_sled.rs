@@ -5,25 +5,23 @@ use std::{
 
 use async_trait::async_trait;
 use encrypted_sled::IVec;
-use libsignal_service::{
-    content::Content,
-    models::Contact,
-    prelude::{
-        protocol::{
-            Context, Direction, IdentityKey, IdentityKeyPair, IdentityKeyStore, PreKeyRecord,
-            PreKeyStore, ProtocolAddress, SenderKeyRecord, SessionRecord, SessionStore,
-            SessionStoreExt, SignalProtocolError, SignedPreKeyId, SignedPreKeyRecord,
-            SignedPreKeyStore,
-        },
-        ProtobufMessage, Uuid,
+use libsignal_service::prelude::{
+    protocol::{
+        Context, Direction, IdentityKey, IdentityKeyPair, IdentityKeyStore, PreKeyRecord,
+        PreKeyStore, ProtocolAddress, SenderKeyRecord, SessionRecord, SessionStore,
+        SessionStoreExt, SignalProtocolError, SignedPreKeyId, SignedPreKeyRecord,
+        SignedPreKeyStore,
     },
+    ProtobufMessage,
 };
 use libsignal_service::{
     prelude::protocol::PreKeyId, prelude::protocol::SenderKeyStore, push_service::DEFAULT_DEVICE_ID,
 };
 use log::{debug, trace, warn};
+use presage::prelude::Uuid;
 
 use presage::{
+    prelude::{Contact, Content},
     ContactsStore, ContentProto, Error, MessageStore, Registered, StateStore, Store, Thread,
 };
 
@@ -628,11 +626,7 @@ impl<E: encrypted_sled::Encryption + 'static> MessageStore for EncryptedSledStor
             .is_some())
     }
 
-    fn message(
-        &self,
-        thread: &Thread,
-        timestamp: u64,
-    ) -> Result<Option<libsignal_service::prelude::Content>, Error> {
+    fn message(&self, thread: &Thread, timestamp: u64) -> Result<Option<Content>, Error> {
         let tree_thread = self
             .db
             .read()

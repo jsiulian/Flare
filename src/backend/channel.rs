@@ -7,9 +7,9 @@ use std::{
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Cast, Object};
-use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::DataMessage};
+use libsignal_service::groups_v2::Group;
 use presage::{
-    prelude::{GroupContextV2, GroupMasterKey, ServiceAddress},
+    prelude::{DataMessage, GroupContextV2, GroupMasterKey, ServiceAddress, Uuid},
     Thread,
 };
 
@@ -351,10 +351,8 @@ mod imp {
         once_cell::sync::Lazy, subclass::Signal, ParamFlags, ParamSpec, ParamSpecObject,
         ParamSpecString, Value,
     };
-    use presage::{
-        libsignal_service::groups_v2::Group,
-        prelude::{GroupContextV2, Uuid},
-    };
+    use libsignal_service::groups_v2::Group;
+    use presage::prelude::{GroupContextV2, Uuid};
 
     use crate::backend::{message::DisplayMessage, Contact, Manager};
 

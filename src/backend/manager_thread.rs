@@ -1,16 +1,11 @@
 use std::sync::{Arc, Mutex};
 
 use futures::{select, FutureExt, StreamExt};
-use libsignal_service::{
-    content::ContentBody,
-    groups_v2::Group,
-    models::Contact,
-    prelude::*,
-    proto::{AttachmentPointer, DataMessage},
-    sender::{AttachmentSpec, AttachmentUploadError},
-    ServiceAddress,
+use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
+use presage::{
+    prelude::{content::*, AttachmentSpec, Contact, ContentBody, DataMessage, ServiceAddress, *},
+    Error, Manager, MessageStore, Registered, Store,
 };
-use presage::{Error, Manager, MessageStore, Registered, Store};
 use tokio::sync::{mpsc, oneshot};
 
 use crate::ApplicationError;

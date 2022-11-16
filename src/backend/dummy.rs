@@ -1,13 +1,18 @@
 use std::path::Path;
 
 use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
-use presage::prelude::*;
-use presage::prelude::content::CallMessage as PreCallMessage;
-use libsignal_service::{prelude::AttachmentPointer, sender::AttachmentUploadError, groups_v2::Group};
-use presage::prelude::proto::call_message::{Offer, Hangup};
-use glib::{DateTime, Cast};
+use glib::{Cast, DateTime};
+use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
+use presage::prelude::{
+    content::{AttachmentPointer, CallMessage as PreCallMessage},
+    proto::call_message::{Hangup, Offer},
+    *,
+};
 
-use super::{Channel, Contact, message::{CallMessage, TextMessage, MessageExt, Message}};
+use super::{
+    message::{CallMessage, Message, MessageExt, TextMessage},
+    Channel, Contact,
+};
 
 const GROUP_ID: usize = 16;
 
@@ -19,7 +24,8 @@ macro_rules! msg {
             $s.dummy_contacts()[$i].clone(),
             $t * 1000 * 60,
             $s,
-        ).upcast::<Message>()
+        )
+        .upcast::<Message>()
     };
     ($s:expr, $m:expr, $i:expr, $t:expr) => {
         msg!($s, $m, $i, 1, $t)
@@ -35,7 +41,9 @@ macro_rules! call_msg {
             $t * 1000 * 60,
             $s,
             $m,
-        ).expect("`CallMessage` to be valid").upcast::<Message>()
+        )
+        .expect("`CallMessage` to be valid")
+        .upcast::<Message>()
     }};
 }
 
@@ -302,10 +310,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
 
 impl super::Manager {
     #[cfg(feature = "screenshot")]
-    pub async fn init<P: AsRef<Path>>(
-        &self,
-        _p: &P,
-    ) -> Result<(), crate::ApplicationError> {
+    pub async fn init<P: AsRef<Path>>(&self, _p: &P) -> Result<(), crate::ApplicationError> {
         log::trace!("Init manager for screenshots");
         self.init_channels().await;
         self.setup_receive_message_loop().await?;
@@ -319,10 +324,7 @@ impl super::Manager {
 
         for msg in self.dummy_messages().await {
             self.emit_by_name::<()>("message", &[&msg]);
-            if let Some(stored_channel) = channels.get(
-                &msg.channel()
-                    .internal_hash(),
-            ) {
+            if let Some(stored_channel) = channels.get(&msg.channel().internal_hash()) {
                 log::debug!("Message from a already existing channel");
                 let _ = stored_channel.new_message(msg).await;
             }
@@ -346,7 +348,8 @@ impl super::Manager {
     #[cfg(feature = "screenshot")]
     async fn dummy_messages(&self) -> Vec<Message> {
         let now = DateTime::now_utc().expect("Now to be expressable as DateTime");
-        let base_time = DateTime::from_utc(now.year(), now.month(), now.day_of_month(), 11, 0, 0.0).expect("Base time to be expressable as DateTime");
+        let base_time = DateTime::from_utc(now.year(), now.month(), now.day_of_month(), 11, 0, 0.0)
+            .expect("Base time to be expressable as DateTime");
         let base_minute: u64 = (base_time.to_unix() / 60).try_into().unwrap();
         // let msg_replied = msg!(self, "Sounds interesting, can you tell me more?", 0, 2 + base_minute);
         // let msg_reply = msg!(self, "Additionally, replying and reacting to messages are also be possible", 1, 5 + base_minute);
@@ -408,22 +411,29 @@ impl super::Manager {
         for con in self.dummy_contacts() {
             result.push(Channel::from_contact_or_group(con, &None, self).await);
         }
-        result.push(Channel::from_group(Group {
-            title: "Mobile Linux Group".to_string(),
-            avatar: "".to_string(),
-            disappearing_messages_timer: None,
-            access_control: None,
-            version: 0,
-            members: vec![],
-            pending_members: vec![],
-            requesting_members: vec![],
-            invite_link_password: vec![],
-            description: None,
-        }, &GroupContextV2 {
-            master_key: Some(vec![2]),
-            revision: None,
-            group_change: None
-        }, self).await);
+        result.push(
+            Channel::from_group(
+                Group {
+                    title: "Mobile Linux Group".to_string(),
+                    avatar: "".to_string(),
+                    disappearing_messages_timer: None,
+                    access_control: None,
+                    version: 0,
+                    members: vec![],
+                    pending_members: vec![],
+                    requesting_members: vec![],
+                    invite_link_password: vec![],
+                    description: None,
+                },
+                &GroupContextV2 {
+                    master_key: Some(vec![2]),
+                    revision: None,
+                    group_change: None,
+                },
+                self,
+            )
+            .await,
+        );
         result
     }
 

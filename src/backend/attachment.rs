@@ -4,7 +4,7 @@ use gdk::{prelude::TextureExt, Texture};
 use gio::{prelude::*, subclass::prelude::ObjectSubclassIsExt, Cancellable, File, FileCreateFlags};
 use glib::{Bytes, Object, Priority};
 use gtk::{MediaFile, MediaStream};
-use libsignal_service::{proto::AttachmentPointer, sender::AttachmentSpec};
+use presage::prelude::{content::AttachmentPointer, AttachmentSpec};
 
 use super::Manager;
 
@@ -299,7 +299,7 @@ mod imp {
         ParamSpecString, Value,
     };
     use gtk::MediaStream;
-    use libsignal_service::proto::AttachmentPointer;
+    use presage::prelude::content::AttachmentPointer;
 
     use crate::backend::attachment::AttachmentType;
     use crate::backend::Manager;

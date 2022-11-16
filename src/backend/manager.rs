@@ -10,14 +10,15 @@ use libsecret::{
     SchemaAttributeType, SchemaFlags, Service, ServiceFlags, COLLECTION_DEFAULT,
 };
 use libsignal_service::{
-    content::ContentBody,
-    groups_v2::Group,
-    prelude::{Content, GroupMasterKey, Uuid},
-    proto::{AttachmentPointer, DataMessage, GroupContextV2},
-    sender::{AttachmentSpec, AttachmentUploadError},
-    ServiceAddress,
+    groups_v2::Group, proto::AttachmentPointer, sender::AttachmentUploadError,
 };
-use presage::{MessageStore, Store, Thread};
+use presage::{
+    prelude::{
+        content::{DataMessage, GroupContextV2},
+        AttachmentSpec, Content, ContentBody, GroupMasterKey, ServiceAddress, Uuid,
+    },
+    MessageStore, Store, Thread,
+};
 use rand::Fill;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};

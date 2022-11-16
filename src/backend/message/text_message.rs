@@ -3,7 +3,7 @@ use std::cell::RefCell;
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
-use libsignal_service::content::Reaction;
+use presage::prelude::content::Reaction;
 use presage::prelude::{proto::data_message::Quote, *};
 
 use crate::backend::{Attachment, Channel, Contact};

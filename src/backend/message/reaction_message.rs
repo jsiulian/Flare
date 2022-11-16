@@ -2,7 +2,7 @@ use std::cell::RefCell;
 
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
-use libsignal_service::content::Reaction;
+use presage::prelude::content::Reaction;
 use presage::prelude::*;
 
 use crate::backend::{Channel, Contact};
@@ -56,7 +56,7 @@ impl ReactionMessage {
 mod imp {
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gtk::glib;
-    use libsignal_service::content::Reaction;
+    use presage::prelude::content::Reaction;
     use std::cell::RefCell;
 
     use crate::backend::{message::MessageImpl, Message};
