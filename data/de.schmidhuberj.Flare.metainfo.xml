@@ -51,6 +51,14 @@
     </p>
   </description>
   <releases>
+    <release version="v0.5.5" date="2022-11-16">
+      <description>
+        <p>HOTFIX</p>
+        <ul>
+        <li>Fix linking not working</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.5.4" date="2022-11-15">
       <description>
         <p>Changed</p>
