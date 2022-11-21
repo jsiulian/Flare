@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-16 11:19+0200\n"
-"PO-Revision-Date: 2022-11-21 12:48+0000\n"
+"PO-Revision-Date: 2022-11-22 13:47+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
 "\n"
@@ -142,7 +142,7 @@ msgstr "Отвязать и удалить все сообщения"
 
 #: data/resources/ui/dialog_unlink.ui:11
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "Отвязать но оставить сообщения"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -333,19 +333,19 @@ msgstr "Вы"
 
 #: src/backend/message/call_message.rs:109
 msgid "Started calling."
-msgstr ""
+msgstr "Начат звонок."
 
 #: src/backend/message/call_message.rs:110
 msgid "Answered a call."
-msgstr ""
+msgstr "Звонок отвечен."
 
 #: src/backend/message/call_message.rs:111
 msgid "Hanged up."
-msgstr ""
+msgstr "На проводе."
 
 #: src/backend/message/call_message.rs:112
 msgid "Is busy."
-msgstr ""
+msgstr "Занят."
 
 #: src/backend/message/text_message.rs:231
 msgid "Sent an image"
@@ -414,7 +414,7 @@ msgstr "Кажется приложение неправильно настро�
 
 #: src/error.rs:120
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Часть приложения вылетела."
 
 #: src/error.rs:130
 msgid "Please check your internet connection."
@@ -429,9 +429,9 @@ msgid "The database path at {} is no folder."
 msgstr "Путь к базе данных в {} не является папкой."
 
 #: src/error.rs:146
-#, fuzzy
 msgid "Please restart the application with logging and report this issue."
-msgstr "Пожалуйста, перезапустите приложение после закрытия этого окна."
+msgstr ""
+"Пожалуйста, перезапустите приложение с логами и сообщите об этой ошибке."
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
