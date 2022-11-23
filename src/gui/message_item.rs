@@ -224,7 +224,7 @@ pub mod imp {
                     if let Some(msg) = &msg {
                         msg.connect_notify_local(
                             Some("reactions"),
-                            clone!(@strong obj => move |_, _| {
+                            clone!(@weak obj => move |_, _| {
                                 log::trace!("MessageItem got reaction, updating `has-reaction`");
                                 obj.notify("has-reaction");
                             }),
