@@ -107,7 +107,7 @@ pub mod imp {
 
                 let obj = self.instance();
                 chooser.connect_response(
-                    clone!(@strong chooser, @strong attachment, @strong obj => move |_, action| {
+                    clone!(@weak chooser, @weak attachment, @weak obj => move |_, action| {
                         if action == ResponseType::Accept {
                             log::trace!("User downloads attachment");
                             let file = chooser.file();

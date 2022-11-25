@@ -229,6 +229,11 @@ pub mod imp {
                                 obj.notify("has-reaction");
                             }),
                         );
+                        // Clear attachments
+                        while let Some(at) = self.box_attachments.first_child() {
+                            self.box_attachments.remove(&at);
+                        }
+                        // Set attachments
                         for att in msg.attachments() {
                             log::trace!("MessageItem got Attachment, adding to `box_attachments`");
                             let att_widget = Attachment::new(&att);

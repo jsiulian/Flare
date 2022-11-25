@@ -6,11 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed memory leak.
+- Fixed displayed reply message not clearing attachments when changing reply.
+
+## [0.5.5] - 2022-11-16
+
 ### HOTFIX
 
 - Fix linking not working 
 
-## [0.5.4]
+## [0.5.4] - 2022-11-15
 
 ### Changed
 
@@ -23,13 +30,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed some (hopefully all) duplicate messages
 - Fixed receiving messages from certain groups
 
-## [0.5.3]
+## [0.5.3] - 2022-10-27
 
 ### HOTFIX
 
 - Updated certificate of Signal servers (upstream, [#32])
 
-## [0.5.2]
+## [0.5.2] - 2022-10-16
 
 ### Added
 
@@ -46,7 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactored GTK properties
 - Greatly refactored messages
 
-## [0.5.1]
+## [0.5.1] - 2022-10-10
 
 ### Added
 
@@ -65,7 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed duplicate message receiving.
 - Wrapping for extremely long words.
 
-## [0.5.0]
+## [0.5.0] - 2022-10-05
 
 ### Added
 
@@ -89,7 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Due to changes in the storage backend, your previously stored messages will be lost.
 
-## [0.4.1]
+## [0.4.1] - 2022-09-20
 
 ### Added
 
@@ -102,7 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Maybe fixed rare crash in the backend thread
 - Fixed messages sent to contacts being wrongly stored to "Note to self" ([#8])
 
-## [0.4.0]
+## [0.4.0] - 2022-09-16
 
 ### Added
 
@@ -237,7 +244,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.4...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.5...master
+[0.5.5]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.4...0.5.5
 [0.5.4]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.3...0.5.4
 [0.5.3]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.2...0.5.3
 [0.5.2]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.1...0.5.2
