@@ -38,19 +38,18 @@ impl ChannelList {
         }));
     }
 
-    pub fn activate_row(&self, i: u32) {
+    pub fn activate_row(&self, i: u32) -> bool {
         let obj = self.imp();
         let model = obj
             .list
             .model()
             .expect("`ChannelList` list to have a model");
-        let channel = model
-            .item(i)
-            .expect("The item has to exist.")
-            .downcast::<Channel>()
-            .expect("The item has to be an `Channel`.");
-
-        self.set_property("active-channel", channel);
+        if let Some(channel) = model.item(i).and_then(|c| c.downcast::<Channel>().ok()) {
+            self.set_property("active-channel", channel);
+            true
+        } else {
+            false
+        }
     }
 
     pub fn toggle_search(&self) {
@@ -121,8 +120,9 @@ pub mod imp {
         #[template_callback]
         fn search_activate(&self) {
             let obj = self.instance();
-            obj.activate_row(0);
-            obj.toggle_search();
+            if obj.activate_row(0) {
+                obj.toggle_search();
+            }
         }
 
         #[template_callback]

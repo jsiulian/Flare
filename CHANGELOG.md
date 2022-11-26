@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed memory leak.
 - Fixed displayed reply message not clearing attachments when changing reply.
+- Fixed crash when searching non-existing channel.
 
 ## [0.5.5] - 2022-11-16
 
