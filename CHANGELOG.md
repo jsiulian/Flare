@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.6] - 2022-12-03
+
 ### Fixed
 
 - Fixed memory leak.
@@ -245,7 +247,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.5...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.6...master
+[0.5.6]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.5...0.5.6
 [0.5.5]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.4...0.5.5
 [0.5.4]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.3...0.5.4
 [0.5.3]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.2...0.5.3
