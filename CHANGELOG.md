@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed application freeze when there are many initial messages
+- Fixed incorrect ordering of new messages
+
 ## [0.5.6] - 2022-12-03
 
 ### Fixed

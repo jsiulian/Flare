@@ -64,7 +64,7 @@ impl ManagerThread {
         device_name: String,
         link_callback: futures::channel::oneshot::Sender<url::Url>,
         error_callback: futures::channel::oneshot::Sender<Error>,
-        content: mpsc::Sender<Content>,
+        content: mpsc::UnboundedSender<Content>,
         error: mpsc::Sender<ApplicationError>,
     ) -> Option<Self>
     where
@@ -281,7 +281,7 @@ where
 async fn command_loop<C: Store + 'static + MessageStore>(
     manager: &mut Manager<C, Registered>,
     mut receiver: mpsc::Receiver<Command>,
-    content: mpsc::Sender<Content>,
+    content: mpsc::UnboundedSender<Content>,
     error: mpsc::Sender<ApplicationError>,
 ) {
     'outer: loop {
@@ -293,12 +293,12 @@ async fn command_loop<C: Store + 'static + MessageStore>(
                     select! {
                         msg = messages.next().fuse() => {
                             if let Some(msg) = msg {
-                                if content.send(msg).await.is_err() {
+                                if content.send(msg).is_err() {
                                     log::info!("Failed to send message to `Manager`, exiting");
                                     break 'outer;
                                 }
                             } else {
-                                log::error!("Message stream finished. Restarting commad loop.");
+                                log::error!("Message stream finished. Restarting command loop.");
                                 break;
                             }
                         },

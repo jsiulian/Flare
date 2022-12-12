@@ -255,7 +255,12 @@ impl Channel {
 
         self.do_new_message(&message).await?;
         if let Some(message) = message.dynamic_cast_ref::<DisplayMessage>() {
-            self.imp().messages.borrow_mut().push(message.clone());
+            let mut msgs = self.imp().messages.borrow_mut();
+            let insert_pos = msgs
+                .binary_search_by_key(&message.sent(), |m| m.sent())
+                .expect_err("Message already exists in binary search, but did not exist before");
+            msgs.insert(insert_pos, message.clone());
+            drop(msgs);
             self.notify("last-message");
             message.send_notification();
             self.try_emit_by_name::<()>("message", &[&message])?;

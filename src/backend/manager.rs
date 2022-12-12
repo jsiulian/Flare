@@ -216,7 +216,7 @@ impl Manager {
         let (provisioning_link_tx, provisioning_link_rx) = oneshot::channel();
         let (error_tx, error_rx) = oneshot::channel();
 
-        let (send_content, mut receive_content) = mpsc::channel(MESSAGE_BOUND);
+        let (send_content, mut receive_content) = mpsc::unbounded_channel();
         let (send_error, mut receive_error) = mpsc::channel(MESSAGE_BOUND);
 
         let (send, receive) = MainContext::channel(Priority::default());
@@ -436,8 +436,10 @@ impl Manager {
         }
         // TODO: Error handling?
         for key in self.store().get_groups().unwrap_or_default() {
-            let group = manager.get_group_v2(GroupMasterKey::new(key)).await;
+            crate::trace!("Got group by key {:?}", key);
+            let group = self.get_group_v2(GroupMasterKey::new(key)).await;
             if let Ok(group) = group {
+                log::trace!("Has some group");
                 let channel = Channel::from_group(
                     group,
                     &GroupContextV2 {
