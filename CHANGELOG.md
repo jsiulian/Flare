@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.7] - 2022-12-17
+
 ### Fixed
 
 - Fixed application freeze when there are many initial messages

@@ -51,6 +51,15 @@
     </p>
   </description>
   <releases>
+    <release version="v0.5.7" date="2022-12-17">
+      <description>
+        <p>Fixed</p>
+        <ul>
+        <li>Fixed application freeze when there are many initial messages</li>
+        <li>Fixed incorrect ordering of new messages</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.5.6" date="2022-12-03">
       <description>
         <p>Fixed</p>
