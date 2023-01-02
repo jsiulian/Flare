@@ -1,4 +1,13 @@
 use gdk::glib::Object;
+use glib::clone;
+use gtk::prelude::WidgetExt;
+use gdk_pixbuf::Pixbuf;
+use gio::prelude::ApplicationExt;
+use ashpd::desktop::background;
+
+use gettextrs::gettext;
+
+use crate::gspawn;
 
 gtk::glib::wrapper! {
     pub struct PreferencesWindow(ObjectSubclass<imp::PreferencesWindow>)
@@ -7,9 +16,48 @@ gtk::glib::wrapper! {
             gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
 
+#[gtk::template_callbacks]
 impl PreferencesWindow {
     pub fn new() -> Self {
         Object::new(&[]).expect("Failed to create PreferencesWindow")
+    }
+
+    async fn request_background(&self) -> ashpd::Result<()> {
+        let identifier = ashpd::WindowIdentifier::from_native(
+            &self.native().unwrap()
+        ).await;
+        let _ = background::request(
+            &identifier,
+            &gettext("Watch for new messages while closed"),
+            true,
+            Some(&["flare", "--gapplication-service"]),
+            false,
+        )
+        .await?;
+
+        Ok(())
+    }
+
+    #[template_callback]
+    fn on_background_switch_state_set(&self, state: bool) -> bool {
+        let app =  gio::Application::default().unwrap();
+        if state {
+            gspawn!(clone!(@weak self as this => async move {
+                match this.request_background().await {
+                    Ok(_) => {},
+                    Err(err) => log::warn!("Failed to request background mode, {}", &err)
+                }
+            }));
+        } else {
+            let title = gettext("Background permission");
+            let body = gettext("Use settings to remove permissions");
+            let notification = gio::Notification::new(&title);
+            notification.set_body(Some(body.as_str()));
+            let icon = Pixbuf::from_resource("/icon.png").expect("Flare to have an application icon");
+            notification.set_icon(&icon);
+            app.send_notification(None, &notification);
+        }
+        false
     }
 }
 
@@ -45,6 +93,8 @@ pub mod imp {
 
         #[template_child]
         switch_notifications: TemplateChild<gtk::Switch>,
+        #[template_child]
+        switch_background: TemplateChild<gtk::Switch>,
 
         settings: Settings,
     }
@@ -99,6 +149,10 @@ pub mod imp {
                 .bind("notifications", &self.switch_notifications.get(), "state")
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
+            self.settings
+                .bind("run-in-background", &self.switch_background.get(), "state")
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
         }
     }
 
@@ -118,11 +172,13 @@ pub mod imp {
                 spin_initial_message_loading: TemplateChild::default(),
                 spin_request_message_loading: TemplateChild::default(),
                 switch_notifications: TemplateChild::default(),
+                switch_background: TemplateChild::default(),
             }
         }
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
+            klass.bind_template_instance_callbacks();
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

@@ -108,7 +108,7 @@
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Notifications</property>
-            <property name="description" translatable="yes">Notifications for new messages. These notifications will only work while Flare is open, if you also want to be notified when this application is closed, consider using something like messenger-notify.</property>
+            <property name="description" translatable="yes">Notifications for new messages.</property>
             <child>
               <object class="AdwActionRow" id="row_notifications">
                 <property name="title" translatable="yes">Send notifications</property>
@@ -119,6 +119,22 @@
                     </accessibility>
                     <property name="valign">center</property>
                     <property name="halign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="row_background">
+                <property name="title" translatable="yes">Watch for new messages while closed</property>
+                <property name="sensitive" bind-source="switch_notifications" bind-property="state" bind-flags="sync-create" />
+                <child>
+                  <object class="GtkSwitch" id="switch_background">
+                    <accessibility>
+                      <relation name="labelled-by">row_background</relation>
+                    </accessibility>
+                    <property name="valign">center</property>
+                    <property name="halign">center</property>
+                    <signal name="state-set" handler="on_background_switch_state_set" swapped="yes"/>
                   </object>
                 </child>
               </object>
