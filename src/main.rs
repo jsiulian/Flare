@@ -2,6 +2,8 @@ use gdk::prelude::{ApplicationExt, ApplicationExtManual};
 use glib::IsA;
 use gtk::traits::{GtkWindowExt, WidgetExt};
 
+use std::path::Path;
+
 mod config;
 use self::config::{APP_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_BYTES};
 
@@ -37,6 +39,13 @@ fn init_internationalization() -> Result<(), Box<dyn std::error::Error>> {
 fn main() {
     env_logger::init();
     init_internationalization().expect("Failed to initialize internationalization");
+
+    if utils::is_flatpak() {
+        if let Some(xdg_runtime_dir) = glib::getenv("XDG_RUNTIME_DIR") {
+            let path = Path::new(&xdg_runtime_dir).join("app").join(APP_ID);
+            let _ = glib::setenv("TMPDIR", path, true);
+        }
+    }
 
     gtk::init().expect("Failed to initialize gtk");
     libadwaita::init().expect("Failed to initializa libadwaita");
