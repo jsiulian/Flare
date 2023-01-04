@@ -1,5 +1,8 @@
 use gdk::prelude::{ApplicationExt, ApplicationExtManual};
+use gtk::prelude::{SettingsExtManual};
 use glib::IsA;
+use gio::{Settings, SettingsBindFlags, ApplicationFlags};
+use gio::prelude::SettingsExt;
 use gtk::traits::{GtkWindowExt, WidgetExt};
 
 use std::path::Path;
@@ -53,13 +56,39 @@ fn main() {
         .application_id(APP_ID)
         .build();
 
-    app.connect_activate(build_ui);
+
+    // Do not start as a service if setting not set
+    // Background portal may have created a .desktop file in ~/.config/autostart
+    if app.flags() & ApplicationFlags::IS_SERVICE == ApplicationFlags::IS_SERVICE {
+        let settings = Settings::new(APP_ID);
+        let run_in_background = settings.boolean("run-in-background");
+        if !run_in_background {
+            return;
+        }
+    }
+
+    match app.register(gio::Cancellable::NONE) {
+        Ok(_) => {},
+        Err(err) => log::warn!("Registration error, {}", err)
+    }
+
+    if !app.is_remote() {
+        build_ui(&app);
+    }
+
     app.run();
 }
 
 fn build_ui(app: &libadwaita::Application) {
     init_resources();
+    let settings = Settings::new(APP_ID);
     let window = crate::gui::Window::new(app);
+    settings
+        .bind("run-in-background", &window, "hide-on-close")
+        .flags(SettingsBindFlags::DEFAULT)
+        .build();
     init_icons(&window.display());
-    window.present();
+    app.connect_activate(move |_| {
+        window.present();
+    });
 }

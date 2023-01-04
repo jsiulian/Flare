@@ -45,6 +45,10 @@
       <default>false</default>
       <summary>Send notifications</summary>
     </key>
+    <key name="run-in-background" type="b">
+      <default>false</default>
+      <summary>Run in background when closed</summary>
+    </key>
   </schema>
 </schemalist>
 
