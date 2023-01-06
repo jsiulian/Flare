@@ -14,6 +14,7 @@ gdk-pixbuf = "0.15.11"
 glib = "0.15.12"
 libadwaita = { version = "0.2.0-alpha.2", features = ["v1_2"]}
 ashpd = { version = "0.3.2", features = ["feature_gtk4", "log"] }
+zbus = "2.3.2"
 
 gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
  

@@ -15,7 +15,8 @@
         "--device=dri",
         "--share=network",
         "--talk-name=org.freedesktop.secrets",
-        "--talk-name=org.freedesktop.portal.FileChooser"
+        "--talk-name=org.freedesktop.portal.FileChooser",
+        "--system-talk-name=org.freedesktop.login1"
     ],
     "build-options": {
         "append-path": "/usr/lib/sdk/rust-stable/bin",

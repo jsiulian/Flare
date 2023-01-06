@@ -307,6 +307,10 @@ async fn command_loop<C: Store + 'static + MessageStore>(
                                 handle_command(manager, cmd).await;
                             }
                         },
+                        _ = crate::utils::await_suspend_wakeup_online().fuse() => {
+                            log::trace!("Waking up from suspend. Restarting command loop.");
+                            break;
+                        },
                         complete => {
                             log::trace!("Command loop complete. Restarting command loop.");
                             break

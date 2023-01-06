@@ -1,8 +1,8 @@
 use gdk::prelude::{ApplicationExt, ApplicationExtManual};
-use gtk::prelude::{SettingsExtManual};
-use glib::IsA;
-use gio::{Settings, SettingsBindFlags, ApplicationFlags};
 use gio::prelude::SettingsExt;
+use gio::{ApplicationFlags, Settings, SettingsBindFlags};
+use glib::IsA;
+use gtk::prelude::SettingsExtManual;
 use gtk::traits::{GtkWindowExt, WidgetExt};
 
 use std::path::Path;
@@ -14,6 +14,7 @@ mod backend;
 mod error;
 mod gui;
 mod hash_log;
+mod login1;
 mod storage;
 mod utils;
 
@@ -56,7 +57,6 @@ fn main() {
         .application_id(APP_ID)
         .build();
 
-
     // Do not start as a service if setting not set
     // Background portal may have created a .desktop file in ~/.config/autostart
     if app.flags() & ApplicationFlags::IS_SERVICE == ApplicationFlags::IS_SERVICE {
@@ -68,8 +68,8 @@ fn main() {
     }
 
     match app.register(gio::Cancellable::NONE) {
-        Ok(_) => {},
-        Err(err) => log::warn!("Registration error, {}", err)
+        Ok(_) => {}
+        Err(err) => log::warn!("Registration error, {}", err),
     }
 
     if !app.is_remote() {
