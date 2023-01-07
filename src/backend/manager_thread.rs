@@ -321,7 +321,7 @@ async fn command_loop<C: Store + 'static + MessageStore>(
             Err(e) => {
                 log::error!("Got error receiving: {}, {:?}", e, e);
                 error.send(e.into()).await.expect("Callback sending failed");
-                break;
+                tokio::time::sleep(std::time::Duration::from_secs(15)).await;
             }
         }
         log::debug!("Websocket closed, trying again");
