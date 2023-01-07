@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-16 11:19+0200\n"
+"POT-Creation-Date: 2023-01-07 11:11+0100\n"
 "PO-Revision-Date: 2022-10-16 17:49+0200\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -37,11 +37,11 @@ msgstr "Video laden"
 msgid "Load file"
 msgstr "Datei laden"
 
-#: data/resources/ui/channel_list.ui:19
+#: data/resources/ui/channel_list.ui:16
 msgid "Search"
 msgstr "Suchen"
 
-#: data/resources/ui/channel_list.ui:21 data/resources/ui/window.ui:36
+#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Suchen"
@@ -50,56 +50,56 @@ msgstr "Suchen"
 msgid "Select a channel"
 msgstr "Einen Kanal auswählen"
 
-#: data/resources/ui/channel_messages.ui:51
+#: data/resources/ui/channel_messages.ui:53
 msgid "Load more"
 msgstr "Weitere laden"
 
-#: data/resources/ui/channel_messages.ui:79
+#: data/resources/ui/channel_messages.ui:81
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Antwort entfernen"
 
-#: data/resources/ui/channel_messages.ui:81
+#: data/resources/ui/channel_messages.ui:83
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Antwort entfernen"
 
-#: data/resources/ui/channel_messages.ui:111
+#: data/resources/ui/channel_messages.ui:113
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:113
+#: data/resources/ui/channel_messages.ui:115
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:145
+#: data/resources/ui/channel_messages.ui:147
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:147
+#: data/resources/ui/channel_messages.ui:149
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:166
+#: data/resources/ui/channel_messages.ui:168
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:171
+#: data/resources/ui/channel_messages.ui:173
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:177
+#: data/resources/ui/channel_messages.ui:179
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Senden"
 
-#: data/resources/ui/channel_messages.ui:179
+#: data/resources/ui/channel_messages.ui:181
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Senden"
@@ -126,7 +126,6 @@ msgid "Clear"
 msgstr "Löschen"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
-#: data/resources/ui/dialog_unlink.ui:10
 msgid "Unlink"
 msgstr "Entkoppeln"
 
@@ -177,11 +176,11 @@ msgstr "In die Zwischenablage kopieren"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Bitte warte nach dem Koppeln, bis deine Kontakte angezeigt werden."
 
-#: data/resources/ui/message_item.ui:208
+#: data/resources/ui/message_item.ui:209
 msgid "Reply"
 msgstr "Antworten"
 
-#: data/resources/ui/message_item.ui:214
+#: data/resources/ui/message_item.ui:215
 msgid "React"
 msgstr "Reagieren"
 
@@ -240,19 +239,17 @@ msgid "Notifications"
 msgstr "Benachrichtigungen"
 
 #: data/resources/ui/preferences_window.ui:111
-msgid ""
-"Notifications for new messages. These notifications will only work while "
-"Flare is open, if you also want to be notified when this application is "
-"closed, consider using something like messenger-notify."
-msgstr ""
-"Benachrichtigungen für neue Nachrichten. Diese Benachrichtigungen "
-"funktionieren nur, wenn Flare geöffnet ist. Wenn du auch benachrichtigt "
-"werden willst, wenn das Programm geschlossen ist, nutze beispielsweise "
-"messenger-notify."
+#, fuzzy
+msgid "Notifications for new messages."
+msgstr "Weitere Nachrichten laden"
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
 msgstr "Benachrichtigungen senden"
+
+#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:31
+msgid "Watch for new messages while closed"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -326,11 +323,11 @@ msgstr "Tastaturkürzel"
 msgid "About"
 msgstr "Info"
 
-#: src/backend/channel.rs:439 src/backend/channel.rs:425
+#: src/backend/channel.rs:441
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:365 src/backend/manager.rs:362
+#: src/backend/manager.rs:364
 msgid "You"
 msgstr "Du"
 
@@ -350,19 +347,19 @@ msgstr "Aufgelegt."
 msgid "Is busy."
 msgstr "Besetzt."
 
-#: src/backend/message/text_message.rs:231 src/backend/message.rs:405
+#: src/backend/message/text_message.rs:231
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Hat ein Bild gesendet"
 msgstr[1] "Hat {} Bilder gesendet"
 
-#: src/backend/message/text_message.rs:234 src/backend/message.rs:413
+#: src/backend/message/text_message.rs:234
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Hat ein Video gesendet"
 msgstr[1] "Hat {} Videos gesendet"
 
-#: src/backend/message/text_message.rs:237 src/backend/message.rs:421
+#: src/backend/message/text_message.rs:237
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"
@@ -435,6 +432,14 @@ msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Bitte starte die Anwendung neu mit Protokollierung und melde dieses Problem."
 
+#: src/gui/preferences_window.rs:52
+msgid "Background permission"
+msgstr ""
+
+#: src/gui/preferences_window.rs:53
+msgid "Use settings to remove permissions"
+msgstr ""
+
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:36
@@ -446,6 +451,16 @@ msgstr "%H:%M"
 #: src/gui/utility.rs:39
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d.%m.%Y %H:%M"
+
+#~ msgid ""
+#~ "Notifications for new messages. These notifications will only work while "
+#~ "Flare is open, if you also want to be notified when this application is "
+#~ "closed, consider using something like messenger-notify."
+#~ msgstr ""
+#~ "Benachrichtigungen für neue Nachrichten. Diese Benachrichtigungen "
+#~ "funktionieren nur, wenn Flare geöffnet ist. Wenn du auch benachrichtigt "
+#~ "werden willst, wenn das Programm geschlossen ist, nutze beispielsweise "
+#~ "messenger-notify."
 
 #~ msgid "Are you sure?"
 #~ msgstr "Bist du sicher?"

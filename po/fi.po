@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-16 11:19+0200\n"
+"POT-Creation-Date: 2023-01-07 11:11+0100\n"
 "PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/"
@@ -35,11 +35,11 @@ msgstr "Lataa video"
 msgid "Load file"
 msgstr "Lataa tiedosto"
 
-#: data/resources/ui/channel_list.ui:19
+#: data/resources/ui/channel_list.ui:16
 msgid "Search"
 msgstr "Hae"
 
-#: data/resources/ui/channel_list.ui:21 data/resources/ui/window.ui:36
+#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Hae"
@@ -48,56 +48,56 @@ msgstr "Hae"
 msgid "Select a channel"
 msgstr "Valitse kanava"
 
-#: data/resources/ui/channel_messages.ui:51
+#: data/resources/ui/channel_messages.ui:53
 msgid "Load more"
 msgstr "Lataa lisää"
 
-#: data/resources/ui/channel_messages.ui:79
+#: data/resources/ui/channel_messages.ui:81
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Poista vastaus"
 
-#: data/resources/ui/channel_messages.ui:81
+#: data/resources/ui/channel_messages.ui:83
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Poista vastaus"
 
-#: data/resources/ui/channel_messages.ui:111
+#: data/resources/ui/channel_messages.ui:113
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Poista liite"
 
-#: data/resources/ui/channel_messages.ui:113
+#: data/resources/ui/channel_messages.ui:115
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Poista liite"
 
-#: data/resources/ui/channel_messages.ui:145
+#: data/resources/ui/channel_messages.ui:147
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Lisää liite"
 
-#: data/resources/ui/channel_messages.ui:147
+#: data/resources/ui/channel_messages.ui:149
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Lisää liite"
 
-#: data/resources/ui/channel_messages.ui:166
+#: data/resources/ui/channel_messages.ui:168
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Viestin syöttö"
 
-#: data/resources/ui/channel_messages.ui:171
+#: data/resources/ui/channel_messages.ui:173
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Viestin syöttö"
 
-#: data/resources/ui/channel_messages.ui:177
+#: data/resources/ui/channel_messages.ui:179
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Lähetä"
 
-#: data/resources/ui/channel_messages.ui:179
+#: data/resources/ui/channel_messages.ui:181
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Lähetä"
@@ -174,11 +174,11 @@ msgstr "Kopioi leikepöydälle"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Odota, kunnes yhteystiedot näkyvät linkittämisen jälkeen."
 
-#: data/resources/ui/message_item.ui:208
+#: data/resources/ui/message_item.ui:209
 msgid "Reply"
 msgstr "Vastaa"
 
-#: data/resources/ui/message_item.ui:214
+#: data/resources/ui/message_item.ui:215
 msgid "React"
 msgstr "Reagoi"
 
@@ -237,18 +237,17 @@ msgid "Notifications"
 msgstr "Ilmoitukset"
 
 #: data/resources/ui/preferences_window.ui:111
-msgid ""
-"Notifications for new messages. These notifications will only work while "
-"Flare is open, if you also want to be notified when this application is "
-"closed, consider using something like messenger-notify."
-msgstr ""
-"Ilmoitukset uusista viesteistä. Nämä ilmoitukset toimivat vain, kun Flare on "
-"auki. Jos haluat saada ilmoituksen myös silloin, kun sovellus suljetaan, "
-"harkitse esimerkiksi messenger-notify-ohjelman käyttöä."
+#, fuzzy
+msgid "Notifications for new messages."
+msgstr "Lataa lisää viestejä"
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
 msgstr "Lähetä ilmoituksia"
+
+#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:31
+msgid "Watch for new messages while closed"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -322,11 +321,11 @@ msgstr "Näppäimistösidokset"
 msgid "About"
 msgstr "Tietoja"
 
-#: src/backend/channel.rs:439
+#: src/backend/channel.rs:441
 msgid "Note to self"
 msgstr "Muistiinpano itselle"
 
-#: src/backend/manager.rs:365
+#: src/backend/manager.rs:364
 msgid "You"
 msgstr "Sinä"
 
@@ -432,6 +431,14 @@ msgstr "Tietokannan polku kohdassa {} ei ole kansiota."
 msgid "Please restart the application with logging and report this issue."
 msgstr "Käynnistä sovellus uudelleen tämän ikkunan sulkemisen jälkeen."
 
+#: src/gui/preferences_window.rs:52
+msgid "Background permission"
+msgstr ""
+
+#: src/gui/preferences_window.rs:53
+msgid "Use settings to remove permissions"
+msgstr ""
+
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:36
@@ -443,6 +450,15 @@ msgstr "%H.%M"
 #: src/gui/utility.rs:39
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d.%m.%Y %H.%M"
+
+#~ msgid ""
+#~ "Notifications for new messages. These notifications will only work while "
+#~ "Flare is open, if you also want to be notified when this application is "
+#~ "closed, consider using something like messenger-notify."
+#~ msgstr ""
+#~ "Ilmoitukset uusista viesteistä. Nämä ilmoitukset toimivat vain, kun Flare "
+#~ "on auki. Jos haluat saada ilmoituksen myös silloin, kun sovellus "
+#~ "suljetaan, harkitse esimerkiksi messenger-notify-ohjelman käyttöä."
 
 #~ msgid "Are you sure?"
 #~ msgstr "Oletko varma?"

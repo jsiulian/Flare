@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-16 11:19+0200\n"
+"POT-Creation-Date: 2023-01-07 11:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,11 +34,11 @@ msgstr ""
 msgid "Load file"
 msgstr ""
 
-#: data/resources/ui/channel_list.ui:19
+#: data/resources/ui/channel_list.ui:16
 msgid "Search"
 msgstr ""
 
-#: data/resources/ui/channel_list.ui:21 data/resources/ui/window.ui:36
+#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Search"
 msgstr ""
@@ -47,56 +47,56 @@ msgstr ""
 msgid "Select a channel"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:51
+#: data/resources/ui/channel_messages.ui:53
 msgid "Load more"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:79
+#: data/resources/ui/channel_messages.ui:81
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:81
+#: data/resources/ui/channel_messages.ui:83
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:111
+#: data/resources/ui/channel_messages.ui:113
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:113
+#: data/resources/ui/channel_messages.ui:115
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:145
+#: data/resources/ui/channel_messages.ui:147
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:147
+#: data/resources/ui/channel_messages.ui:149
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:166
+#: data/resources/ui/channel_messages.ui:168
 msgctxt "accessibility"
 msgid "Message input"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:171
+#: data/resources/ui/channel_messages.ui:173
 msgctxt "tooltip"
 msgid "Message input"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:177
+#: data/resources/ui/channel_messages.ui:179
 msgctxt "accessibility"
 msgid "Send"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:179
+#: data/resources/ui/channel_messages.ui:181
 msgctxt "tooltip"
 msgid "Send"
 msgstr ""
@@ -168,11 +168,11 @@ msgstr ""
 msgid "Please wait until the contacts are displayed after linking."
 msgstr ""
 
-#: data/resources/ui/message_item.ui:208
+#: data/resources/ui/message_item.ui:209
 msgid "Reply"
 msgstr ""
 
-#: data/resources/ui/message_item.ui:214
+#: data/resources/ui/message_item.ui:215
 msgid "React"
 msgstr ""
 
@@ -230,14 +230,15 @@ msgid "Notifications"
 msgstr ""
 
 #: data/resources/ui/preferences_window.ui:111
-msgid ""
-"Notifications for new messages. These notifications will only work while "
-"Flare is open, if you also want to be notified when this application is "
-"closed, consider using something like messenger-notify."
+msgid "Notifications for new messages."
 msgstr ""
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:31
+msgid "Watch for new messages while closed"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
@@ -312,11 +313,11 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/backend/channel.rs:439
+#: src/backend/channel.rs:441
 msgid "Note to self"
 msgstr ""
 
-#: src/backend/manager.rs:365
+#: src/backend/manager.rs:364
 msgid "You"
 msgstr ""
 
@@ -413,6 +414,14 @@ msgstr ""
 
 #: src/error.rs:146
 msgid "Please restart the application with logging and report this issue."
+msgstr ""
+
+#: src/gui/preferences_window.rs:52
+msgid "Background permission"
+msgstr ""
+
+#: src/gui/preferences_window.rs:53
+msgid "Use settings to remove permissions"
 msgstr ""
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,

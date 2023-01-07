@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-16 11:19+0200\n"
+"POT-Creation-Date: 2023-01-07 11:11+0100\n"
 "PO-Revision-Date: 2022-10-21 20:03+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
@@ -34,11 +34,11 @@ msgstr "Charger la vidéo"
 msgid "Load file"
 msgstr "Charger le fichier"
 
-#: data/resources/ui/channel_list.ui:19
+#: data/resources/ui/channel_list.ui:16
 msgid "Search"
 msgstr "Recherche"
 
-#: data/resources/ui/channel_list.ui:21 data/resources/ui/window.ui:36
+#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Recherche"
@@ -47,56 +47,56 @@ msgstr "Recherche"
 msgid "Select a channel"
 msgstr "Sélectionnez une chaîne"
 
-#: data/resources/ui/channel_messages.ui:51
+#: data/resources/ui/channel_messages.ui:53
 msgid "Load more"
 msgstr "Charger plus"
 
-#: data/resources/ui/channel_messages.ui:79
+#: data/resources/ui/channel_messages.ui:81
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Supprimer la réponse"
 
-#: data/resources/ui/channel_messages.ui:81
+#: data/resources/ui/channel_messages.ui:83
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Supprimer la réponse"
 
-#: data/resources/ui/channel_messages.ui:111
+#: data/resources/ui/channel_messages.ui:113
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Retirer une pièce jointe"
 
-#: data/resources/ui/channel_messages.ui:113
+#: data/resources/ui/channel_messages.ui:115
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Retirer la pièce jointe"
 
-#: data/resources/ui/channel_messages.ui:145
+#: data/resources/ui/channel_messages.ui:147
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Ajouter une pièce jointe"
 
-#: data/resources/ui/channel_messages.ui:147
+#: data/resources/ui/channel_messages.ui:149
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Ajouter une pièce jointe"
 
-#: data/resources/ui/channel_messages.ui:166
+#: data/resources/ui/channel_messages.ui:168
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Saisie du message"
 
-#: data/resources/ui/channel_messages.ui:171
+#: data/resources/ui/channel_messages.ui:173
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Saisie du message"
 
-#: data/resources/ui/channel_messages.ui:177
+#: data/resources/ui/channel_messages.ui:179
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Envoyer"
 
-#: data/resources/ui/channel_messages.ui:179
+#: data/resources/ui/channel_messages.ui:181
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Envoyer"
@@ -123,7 +123,6 @@ msgid "Clear"
 msgstr "Effacer"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
-#: data/resources/ui/dialog_unlink.ui:10
 msgid "Unlink"
 msgstr "Délier"
 
@@ -174,11 +173,11 @@ msgstr "Copier dans le presse-papiers"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Veuillez attendre que les contacts s'affichent après la liaison."
 
-#: data/resources/ui/message_item.ui:208
+#: data/resources/ui/message_item.ui:209
 msgid "Reply"
 msgstr "Répondre"
 
-#: data/resources/ui/message_item.ui:214
+#: data/resources/ui/message_item.ui:215
 msgid "React"
 msgstr "Réagir"
 
@@ -236,19 +235,17 @@ msgid "Notifications"
 msgstr "Notifications"
 
 #: data/resources/ui/preferences_window.ui:111
-msgid ""
-"Notifications for new messages. These notifications will only work while "
-"Flare is open, if you also want to be notified when this application is "
-"closed, consider using something like messenger-notify."
-msgstr ""
-"Notifications pour les nouveaux messages. Ces notifications ne "
-"fonctionneront que pendant que Flare est ouvert, si vous souhaitez être "
-"également notifié⋅e quand l’application est fermée, envisagez d’utiliser "
-"messenger-notify."
+#, fuzzy
+msgid "Notifications for new messages."
+msgstr "Charger plus de messages"
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
 msgstr "Envoyer des notifications"
+
+#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:31
+msgid "Watch for new messages while closed"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -322,11 +319,11 @@ msgstr "Raccourcis clavier"
 msgid "About"
 msgstr "À propos"
 
-#: src/backend/channel.rs:439 src/backend/channel.rs:425
+#: src/backend/channel.rs:441
 msgid "Note to self"
 msgstr "Note à moi-même"
 
-#: src/backend/manager.rs:365 src/backend/manager.rs:362
+#: src/backend/manager.rs:364
 msgid "You"
 msgstr "Vous"
 
@@ -346,19 +343,19 @@ msgstr "A raccroché."
 msgid "Is busy."
 msgstr "Occupé."
 
-#: src/backend/message/text_message.rs:231 src/backend/message.rs:405
+#: src/backend/message/text_message.rs:231
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "A envoyé une image"
 msgstr[1] "A envoyé {} images"
 
-#: src/backend/message/text_message.rs:234 src/backend/message.rs:413
+#: src/backend/message/text_message.rs:234
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "A envoyé une vidéo"
 msgstr[1] "A envoyé {} vidéos"
 
-#: src/backend/message/text_message.rs:237 src/backend/message.rs:421
+#: src/backend/message/text_message.rs:237
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "A envoyé un fichier"
@@ -433,6 +430,14 @@ msgstr ""
 "Veuillez redémarrer l'application avec la journalisation et signaler ce "
 "problème."
 
+#: src/gui/preferences_window.rs:52
+msgid "Background permission"
+msgstr ""
+
+#: src/gui/preferences_window.rs:53
+msgid "Use settings to remove permissions"
+msgstr ""
+
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:36
@@ -444,6 +449,16 @@ msgstr "%H:%M"
 #: src/gui/utility.rs:39
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d/%m/%Y %H:%M"
+
+#~ msgid ""
+#~ "Notifications for new messages. These notifications will only work while "
+#~ "Flare is open, if you also want to be notified when this application is "
+#~ "closed, consider using something like messenger-notify."
+#~ msgstr ""
+#~ "Notifications pour les nouveaux messages. Ces notifications ne "
+#~ "fonctionneront que pendant que Flare est ouvert, si vous souhaitez être "
+#~ "également notifié⋅e quand l’application est fermée, envisagez d’utiliser "
+#~ "messenger-notify."
 
 #~ msgid "Are you sure?"
 #~ msgstr "Êtes-vous sûr·e ?"

@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-16 11:19+0200\n"
+"POT-Creation-Date: 2023-01-07 11:11+0100\n"
 "PO-Revision-Date: 2022-11-22 13:47+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,11 +35,11 @@ msgstr "Загрузить видео"
 msgid "Load file"
 msgstr "Загрузить файл"
 
-#: data/resources/ui/channel_list.ui:19
+#: data/resources/ui/channel_list.ui:16
 msgid "Search"
 msgstr "Поиск"
 
-#: data/resources/ui/channel_list.ui:21 data/resources/ui/window.ui:36
+#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Поиск"
@@ -48,56 +48,56 @@ msgstr "Поиск"
 msgid "Select a channel"
 msgstr "Выберите канал"
 
-#: data/resources/ui/channel_messages.ui:51
+#: data/resources/ui/channel_messages.ui:53
 msgid "Load more"
 msgstr "Загрузить больше"
 
-#: data/resources/ui/channel_messages.ui:79
+#: data/resources/ui/channel_messages.ui:81
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Удалить ответ"
 
-#: data/resources/ui/channel_messages.ui:81
+#: data/resources/ui/channel_messages.ui:83
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Удалить ответ"
 
-#: data/resources/ui/channel_messages.ui:111
+#: data/resources/ui/channel_messages.ui:113
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Удалить вложение"
 
-#: data/resources/ui/channel_messages.ui:113
+#: data/resources/ui/channel_messages.ui:115
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Удалить вложение"
 
-#: data/resources/ui/channel_messages.ui:145
+#: data/resources/ui/channel_messages.ui:147
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Добавить вложение"
 
-#: data/resources/ui/channel_messages.ui:147
+#: data/resources/ui/channel_messages.ui:149
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Добавить вложение"
 
-#: data/resources/ui/channel_messages.ui:166
+#: data/resources/ui/channel_messages.ui:168
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Ввод сообщения"
 
-#: data/resources/ui/channel_messages.ui:171
+#: data/resources/ui/channel_messages.ui:173
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Ввод сообщения"
 
-#: data/resources/ui/channel_messages.ui:177
+#: data/resources/ui/channel_messages.ui:179
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Отправить"
 
-#: data/resources/ui/channel_messages.ui:179
+#: data/resources/ui/channel_messages.ui:181
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Отправить"
@@ -175,11 +175,11 @@ msgstr ""
 "Пожалуйста подождите до тех пор пока контакты не будут отображены после "
 "привязывания."
 
-#: data/resources/ui/message_item.ui:208
+#: data/resources/ui/message_item.ui:209
 msgid "Reply"
 msgstr "Ответить"
 
-#: data/resources/ui/message_item.ui:214
+#: data/resources/ui/message_item.ui:215
 msgid "React"
 msgstr "Отреагировать"
 
@@ -237,19 +237,17 @@ msgid "Notifications"
 msgstr "Уведомления"
 
 #: data/resources/ui/preferences_window.ui:111
-msgid ""
-"Notifications for new messages. These notifications will only work while "
-"Flare is open, if you also want to be notified when this application is "
-"closed, consider using something like messenger-notify."
-msgstr ""
-"Уведомления для новых сообщений. Эти уведомления будут работать только когда "
-"Flare открыт, если вы хотите получать уведомление в то время как приложение "
-"закрыто, рассмотрите возможность использования чего-то вроде messenger-"
-"notify."
+#, fuzzy
+msgid "Notifications for new messages."
+msgstr "Загрузить больше сообщений"
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
 msgstr "Отправлять уведомления"
+
+#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:31
+msgid "Watch for new messages while closed"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -323,11 +321,11 @@ msgstr "Комбинации клавиш"
 msgid "About"
 msgstr "О Приложении"
 
-#: src/backend/channel.rs:439
+#: src/backend/channel.rs:441
 msgid "Note to self"
 msgstr "Заметка для себя"
 
-#: src/backend/manager.rs:365
+#: src/backend/manager.rs:364
 msgid "You"
 msgstr "Вы"
 
@@ -433,6 +431,14 @@ msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Пожалуйста, перезапустите приложение с логами и сообщите об этой ошибке."
 
+#: src/gui/preferences_window.rs:52
+msgid "Background permission"
+msgstr ""
+
+#: src/gui/preferences_window.rs:53
+msgid "Use settings to remove permissions"
+msgstr ""
+
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:36
@@ -444,6 +450,16 @@ msgstr "%H:%M"
 #: src/gui/utility.rs:39
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
+
+#~ msgid ""
+#~ "Notifications for new messages. These notifications will only work while "
+#~ "Flare is open, if you also want to be notified when this application is "
+#~ "closed, consider using something like messenger-notify."
+#~ msgstr ""
+#~ "Уведомления для новых сообщений. Эти уведомления будут работать только "
+#~ "когда Flare открыт, если вы хотите получать уведомление в то время как "
+#~ "приложение закрыто, рассмотрите возможность использования чего-то вроде "
+#~ "messenger-notify."
 
 #~ msgid "Are you sure?"
 #~ msgstr "Вы уверены?"

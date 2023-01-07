@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-16 11:19+0200\n"
+"POT-Creation-Date: 2023-01-07 11:11+0100\n"
 "PO-Revision-Date: 2022-10-17 07:14+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/>"
-"\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/"
+">\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,11 +37,11 @@ msgstr "Video yükle"
 msgid "Load file"
 msgstr "Dosya yükle"
 
-#: data/resources/ui/channel_list.ui:19
+#: data/resources/ui/channel_list.ui:16
 msgid "Search"
 msgstr "Ara"
 
-#: data/resources/ui/channel_list.ui:21 data/resources/ui/window.ui:36
+#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Ara"
@@ -50,56 +50,56 @@ msgstr "Ara"
 msgid "Select a channel"
 msgstr "Kanal seç"
 
-#: data/resources/ui/channel_messages.ui:51
+#: data/resources/ui/channel_messages.ui:53
 msgid "Load more"
 msgstr "Daha çoğunu yükle"
 
-#: data/resources/ui/channel_messages.ui:79
+#: data/resources/ui/channel_messages.ui:81
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Cevabı kaldır"
 
-#: data/resources/ui/channel_messages.ui:81
+#: data/resources/ui/channel_messages.ui:83
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Cevabı kaldır"
 
-#: data/resources/ui/channel_messages.ui:111
+#: data/resources/ui/channel_messages.ui:113
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Eki kaldır"
 
-#: data/resources/ui/channel_messages.ui:113
+#: data/resources/ui/channel_messages.ui:115
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Eki kaldır"
 
-#: data/resources/ui/channel_messages.ui:145
+#: data/resources/ui/channel_messages.ui:147
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Ek ekle"
 
-#: data/resources/ui/channel_messages.ui:147
+#: data/resources/ui/channel_messages.ui:149
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Ek ekle"
 
-#: data/resources/ui/channel_messages.ui:166
+#: data/resources/ui/channel_messages.ui:168
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "ileti girdisi"
 
-#: data/resources/ui/channel_messages.ui:171
+#: data/resources/ui/channel_messages.ui:173
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "ileti girdisi"
 
-#: data/resources/ui/channel_messages.ui:177
+#: data/resources/ui/channel_messages.ui:179
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Gönder"
 
-#: data/resources/ui/channel_messages.ui:179
+#: data/resources/ui/channel_messages.ui:181
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Gönder"
@@ -126,7 +126,6 @@ msgid "Clear"
 msgstr "Temizle"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
-#: data/resources/ui/dialog_unlink.ui:10
 msgid "Unlink"
 msgstr "Bağı Kaldır"
 
@@ -177,11 +176,11 @@ msgstr "Panoya kopyala"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Lütfen bağ kurulduktan sonra kişiler görüntülenene kadar bekleyin."
 
-#: data/resources/ui/message_item.ui:208
+#: data/resources/ui/message_item.ui:209
 msgid "Reply"
 msgstr "Cevapla"
 
-#: data/resources/ui/message_item.ui:214
+#: data/resources/ui/message_item.ui:215
 msgid "React"
 msgstr "Tepki ver"
 
@@ -239,18 +238,17 @@ msgid "Notifications"
 msgstr "Bildirimler"
 
 #: data/resources/ui/preferences_window.ui:111
-msgid ""
-"Notifications for new messages. These notifications will only work while "
-"Flare is open, if you also want to be notified when this application is "
-"closed, consider using something like messenger-notify."
-msgstr ""
-"Yeni iletiler için bildirimler. Bu bildirimler yalnızca Flare açıkken "
-"çalışacaktır, bu uygulama kapatıldığında da bildirim almak istiyorsanız "
-"messenger-notify gibi bir şey kullanmayı düşünün."
+#, fuzzy
+msgid "Notifications for new messages."
+msgstr "Daha çok ileti yükle"
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
 msgstr "Bildirim gönder"
+
+#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:31
+msgid "Watch for new messages while closed"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -324,11 +322,11 @@ msgstr "Kısayollar"
 msgid "About"
 msgstr "Hakkında"
 
-#: src/backend/channel.rs:439 src/backend/channel.rs:425
+#: src/backend/channel.rs:441
 msgid "Note to self"
 msgstr "Kendime not"
 
-#: src/backend/manager.rs:365 src/backend/manager.rs:362
+#: src/backend/manager.rs:364
 msgid "You"
 msgstr "Siz"
 
@@ -348,19 +346,19 @@ msgstr "Kapatıldı."
 msgid "Is busy."
 msgstr "meşgul."
 
-#: src/backend/message/text_message.rs:231 src/backend/message.rs:405
+#: src/backend/message/text_message.rs:231
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Görüntü gönderildi"
 msgstr[1] "{} görüntü gönderildi"
 
-#: src/backend/message/text_message.rs:234 src/backend/message.rs:413
+#: src/backend/message/text_message.rs:234
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Video gönderildi"
 msgstr[1] "{} video gönderildi"
 
-#: src/backend/message/text_message.rs:237 src/backend/message.rs:421
+#: src/backend/message/text_message.rs:237
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Dosya gönderildi"
@@ -434,6 +432,14 @@ msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Lütfen uygulamayı günlük kaydı ile yeniden başlatın ve bu sorunu bildirin."
 
+#: src/gui/preferences_window.rs:52
+msgid "Background permission"
+msgstr ""
+
+#: src/gui/preferences_window.rs:53
+msgid "Use settings to remove permissions"
+msgstr ""
+
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:36
@@ -445,6 +451,15 @@ msgstr "%H:%M"
 #: src/gui/utility.rs:39
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
+
+#~ msgid ""
+#~ "Notifications for new messages. These notifications will only work while "
+#~ "Flare is open, if you also want to be notified when this application is "
+#~ "closed, consider using something like messenger-notify."
+#~ msgstr ""
+#~ "Yeni iletiler için bildirimler. Bu bildirimler yalnızca Flare açıkken "
+#~ "çalışacaktır, bu uygulama kapatıldığında da bildirim almak istiyorsanız "
+#~ "messenger-notify gibi bir şey kullanmayı düşünün."
 
 #~ msgid "Are you sure?"
 #~ msgstr "Emin misin?"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-16 11:19+0200\n"
+"POT-Creation-Date: 2023-01-07 11:11+0100\n"
 "PO-Revision-Date: 2022-10-18 13:05+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -35,11 +35,11 @@ msgstr "Last inn video"
 msgid "Load file"
 msgstr "Last inn fil"
 
-#: data/resources/ui/channel_list.ui:19
+#: data/resources/ui/channel_list.ui:16
 msgid "Search"
 msgstr "Søk"
 
-#: data/resources/ui/channel_list.ui:21 data/resources/ui/window.ui:36
+#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Søk"
@@ -48,57 +48,57 @@ msgstr "Søk"
 msgid "Select a channel"
 msgstr "Velg en kanal"
 
-#: data/resources/ui/channel_messages.ui:51
+#: data/resources/ui/channel_messages.ui:53
 #, fuzzy
 msgid "Load more"
 msgstr "Last inn mer"
 
-#: data/resources/ui/channel_messages.ui:79
+#: data/resources/ui/channel_messages.ui:81
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Fjern svaret"
 
-#: data/resources/ui/channel_messages.ui:81
+#: data/resources/ui/channel_messages.ui:83
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Fjern svar"
 
-#: data/resources/ui/channel_messages.ui:111
+#: data/resources/ui/channel_messages.ui:113
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Fjern et vedlegg"
 
-#: data/resources/ui/channel_messages.ui:113
+#: data/resources/ui/channel_messages.ui:115
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Fjern vedlegg"
 
-#: data/resources/ui/channel_messages.ui:145
+#: data/resources/ui/channel_messages.ui:147
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Legg til et vedlegg"
 
-#: data/resources/ui/channel_messages.ui:147
+#: data/resources/ui/channel_messages.ui:149
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Legg til vedlegg"
 
-#: data/resources/ui/channel_messages.ui:166
+#: data/resources/ui/channel_messages.ui:168
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Meldingsinndata"
 
-#: data/resources/ui/channel_messages.ui:171
+#: data/resources/ui/channel_messages.ui:173
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Meldingsinndata"
 
-#: data/resources/ui/channel_messages.ui:177
+#: data/resources/ui/channel_messages.ui:179
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Send"
 
-#: data/resources/ui/channel_messages.ui:179
+#: data/resources/ui/channel_messages.ui:181
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Send"
@@ -181,11 +181,11 @@ msgstr "Kopier til utklippstavlen"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Vent til kontaktene vises etter sammenlenking."
 
-#: data/resources/ui/message_item.ui:208
+#: data/resources/ui/message_item.ui:209
 msgid "Reply"
 msgstr "Svar"
 
-#: data/resources/ui/message_item.ui:214
+#: data/resources/ui/message_item.ui:215
 msgid "React"
 msgstr "Reager"
 
@@ -246,18 +246,16 @@ msgstr "Merknader"
 
 #: data/resources/ui/preferences_window.ui:111
 #, fuzzy
-msgid ""
-"Notifications for new messages. These notifications will only work while "
-"Flare is open, if you also want to be notified when this application is "
-"closed, consider using something like messenger-notify."
-msgstr ""
-"Merknader for nye meldinger. Disse fungerer kun når Flare er åpent. Hvis du "
-"også vil ha merknader når Flare er lukket må du bruke noe ala messenger-"
-"notify."
+msgid "Notifications for new messages."
+msgstr "Last inn flere bilder"
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
 msgstr "Send merknader"
+
+#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:31
+msgid "Watch for new messages while closed"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
 #, fuzzy
@@ -335,11 +333,11 @@ msgstr "Hurtigtaster"
 msgid "About"
 msgstr "Om"
 
-#: src/backend/channel.rs:439
+#: src/backend/channel.rs:441
 msgid "Note to self"
 msgstr "Selvpåminnelse"
 
-#: src/backend/manager.rs:365
+#: src/backend/manager.rs:364
 msgid "You"
 msgstr "Deg"
 
@@ -447,6 +445,14 @@ msgstr "Databasestien {} er ikke en mappe."
 msgid "Please restart the application with logging and report this issue."
 msgstr "Start programmet på ny etter at dette vinduet er lukket."
 
+#: src/gui/preferences_window.rs:52
+msgid "Background permission"
+msgstr ""
+
+#: src/gui/preferences_window.rs:53
+msgid "Use settings to remove permissions"
+msgstr ""
+
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:36
@@ -460,6 +466,16 @@ msgstr "%H %M"
 #, fuzzy
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d %m %y. %H %M"
+
+#, fuzzy
+#~ msgid ""
+#~ "Notifications for new messages. These notifications will only work while "
+#~ "Flare is open, if you also want to be notified when this application is "
+#~ "closed, consider using something like messenger-notify."
+#~ msgstr ""
+#~ "Merknader for nye meldinger. Disse fungerer kun når Flare er åpent. Hvis "
+#~ "du også vil ha merknader når Flare er lukket må du bruke noe ala "
+#~ "messenger-notify."
 
 #~ msgid "Are you sure?"
 #~ msgstr "Er du sikker?"

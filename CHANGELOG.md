@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Ability to receive messages in the background.
+
+### Fixed
+
+- Fixed restarting the backend after suspend.
+
 ## [0.5.7] - 2022-12-17
 
 ### Fixed
