@@ -320,7 +320,12 @@ async fn command_loop<C: Store + 'static + MessageStore>(
             }
             Err(e) => {
                 log::error!("Got error receiving: {}, {:?}", e, e);
-                error.send(e.into()).await.expect("Callback sending failed");
+                let e = e.into();
+                // Don't send no-internet errors, Flare is able to handle them automatically.
+                // TODO: Think about maybe handling if the application is not in the background?
+                if !matches!(e, ApplicationError::NoInternet) {
+                    error.send(e).await.expect("Callback sending failed");
+                }
                 tokio::time::sleep(std::time::Duration::from_secs(15)).await;
             }
         }
