@@ -130,7 +130,7 @@ pub mod imp {
             let msg = obj.message();
             crate::trace!(
                 "Reacting to message {} with {} (len: {})",
-                msg.body().unwrap_or_else(|| "".to_string()),
+                msg.body().unwrap_or_default(),
                 emoji,
                 emoji.chars().count()
             );

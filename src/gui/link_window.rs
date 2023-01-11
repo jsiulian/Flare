@@ -137,7 +137,7 @@ pub mod imp {
 
                     if let Some(url) = url.as_ref() {
                         let bytes_vec = qrcode_generator::to_png_to_vec(
-                            &url,
+                            url,
                             qrcode_generator::QrCodeEcc::Low,
                             1024,
                         )

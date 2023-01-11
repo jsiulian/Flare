@@ -177,7 +177,7 @@ impl Channel {
                                     body,
                                     quoted_msg
                                         .property::<Option<String>>("body")
-                                        .unwrap_or_else(|| "".to_string())
+                                        .unwrap_or_default()
                                 );
                                 message.set_quote(quoted_msg);
                             }
@@ -212,9 +212,9 @@ impl Channel {
                         "Reaction to message {}",
                         reacted_msg
                             .property::<Option<String>>("body")
-                            .unwrap_or_else(|| "".to_string())
+                            .unwrap_or_default()
                     );
-                    reacted_msg.react(&reaction_emoji);
+                    reacted_msg.react(reaction_emoji);
                 } else {
                     log::warn!("Reaction message for a non-TextMessage");
                 }

@@ -281,7 +281,7 @@ pub mod imp {
             {
                 crate::trace!(
                     "Activated message: {}",
-                    msg.message().body().unwrap_or_else(|| "".to_string())
+                    msg.message().body().unwrap_or_default()
                 );
                 msg.open_popup();
             }

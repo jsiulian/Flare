@@ -185,7 +185,7 @@ impl Attachment {
             name = Some(pointer_name.clone());
         }
 
-        if name == None {
+        if name.is_none() {
             match &pointer.content_type {
                 Some(t) if t.starts_with("image/") => name = Some(format!("image.{}", &t[6..])),
                 Some(t) if t.starts_with("video/") => name = Some(format!("video.{}", &t[6..])),
@@ -417,7 +417,7 @@ mod imp {
                 "name" => self.name.borrow().as_ref().to_value(),
                 "type" => obj
                     .content_type()
-                    .map(|s| AttachmentType::from_content_type(&s))
+                    .map(AttachmentType::from_content_type)
                     .unwrap_or_default()
                     .to_value(),
                 "is-image" => obj.is_image().to_value(),
