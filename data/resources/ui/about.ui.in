@@ -4,7 +4,7 @@
     <property name="application-icon">icon</property>
     <property name="application-name">Flare</property>
     <property name="version">@VERSION@</property>
-    <property name="comments">A unofficial Signal GTK client.</property>
+    <property name="comments">An unofficial Signal GTK client.</property>
 
     <property name="issue-url">https://gitlab.com/Schmiddiii/flare/-/issues</property>
     <property name="support-url">https://matrix.to/#/%23flare-signal:matrix.org</property>

@@ -5,7 +5,7 @@
          xmlns="http://usefulinc.com/ns/doap#">
 
   <name xml:lang="en">Flare</name>
-  <shortdesc xml:lang="en">A unofficial Signal GTK client</shortdesc>
+  <shortdesc xml:lang="en">An unofficial Signal GTK client</shortdesc>
   <homepage rdf:resource="https://apps.gnome.org" />
   <bug-database rdf:resource="https://gitlab.com/Schmiddiii/flare/-/issues"/>
   <programming-language>Rust</programming-language>

@@ -1,6 +1,6 @@
 [package]
 name = "flare"
-description = "A unofficial Signal GTK client."
+description = "An unofficial Signal GTK client."
 version = "0.5.7"
 edition = "2021"
 

@@ -5,7 +5,7 @@
   <project_license>AGPL-3.0</project_license>
   <metadata_license>FSFAP</metadata_license>
   <name>Flare</name>
-  <summary>A unofficial Signal GTK client</summary>
+  <summary>An unofficial Signal GTK client</summary>
   <launchable type="desktop-id">de.schmidhuberj.Flare.desktop</launchable>
   <content_rating type="oars-1.1"/>
   <developer_name>Julian Schmidhuber</developer_name>
@@ -18,7 +18,7 @@
 
   <description>
     <p>
-      A unofficial GTK client for the messaging application Signal.
+      An unofficial GTK client for the messaging application Signal.
       This is a very simple application with many features missing compared to the official applications.
     </p>
     <ul>
