@@ -51,6 +51,19 @@
     </p>
   </description>
   <releases>
+    <release version="v0.6.0" date="2023-01-13">
+      <description>
+        <p>Added</p>
+        <ul>
+        <li>Ability to receive messages in the background.</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+        <li>Fixed restarting the backend after suspend.</li>
+        <li>Fixed grammar error in the project description.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.5.7" date="2022-12-17">
       <description>
         <p>Fixed</p>
