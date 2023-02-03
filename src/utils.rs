@@ -1,3 +1,4 @@
+use gtk::gio;
 use gio::prelude::FileExt;
 
 #[macro_export]

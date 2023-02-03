@@ -1,3 +1,4 @@
+use gtk::glib;
 use glib::Object;
 use gtk::prelude::*;
 
@@ -13,7 +14,7 @@ gtk::glib::wrapper! {
 impl CallMessageItem {
     pub fn new(message: &CallMessage) -> Self {
         log::trace!("Initializing `CallMessageItem`");
-        Object::new(&[("message", message)]).expect("Failed to create `CallMessageItem`")
+        Object::new::<Self>(&[("message", message)])
     }
 
     pub fn message(&self) -> CallMessage {
@@ -24,6 +25,7 @@ impl CallMessageItem {
 pub mod imp {
     use std::cell::RefCell;
 
+    use gtk::glib;
     use glib::{
         once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
         ParamSpecObject, Value,
@@ -60,8 +62,8 @@ pub mod imp {
     }
 
     impl ObjectImpl for CallMessageItem {
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -86,7 +88,7 @@ pub mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "message" => self.message.borrow().as_ref().to_value(),
@@ -94,7 +96,7 @@ pub mod imp {
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let man = value.get::<Option<Manager>>().expect(

@@ -1,3 +1,4 @@
+use gtk::glib;
 use glib::{Object, ObjectExt};
 
 gtk::glib::wrapper! {
@@ -10,7 +11,7 @@ gtk::glib::wrapper! {
 impl Attachment {
     pub fn new(attachment: &crate::backend::Attachment) -> Self {
         log::trace!("Initializing `Attachment`");
-        Object::new(&[("attachment", attachment)]).expect("Failed to create `Attachment`")
+        Object::new::<Self>(&[("attachment", attachment)])
     }
 
     pub fn attachment(&self) -> crate::backend::Attachment {
@@ -21,6 +22,7 @@ impl Attachment {
 pub mod imp {
     use std::cell::RefCell;
 
+    use gtk::{glib, gio};
     use gio::Settings;
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
@@ -30,6 +32,7 @@ pub mod imp {
         builders::FileChooserNativeBuilder, prelude::*, subclass::prelude::*, CompositeTemplate,
         FileChooserAction, ResponseType,
     };
+    use ashpd::{WindowIdentifier, desktop::open_uri::OpenFileRequest};
 
     use crate::{
         backend::Manager,
@@ -77,9 +80,12 @@ pub mod imp {
                 let obj = self.instance();
 
                 gspawn!(clone!(@weak obj => async move {
-                    let identifier = ashpd::WindowIdentifier::from_native(&obj.native().unwrap()).await;
-
-                    if let Err(e) = ashpd::desktop::open_uri::open_file(&identifier, &file, false, false).await {
+                    let identifier = WindowIdentifier::from_native(&obj.native().unwrap()).await;
+                    if let Err(e) = OpenFileRequest::default()
+                                        .ask(false)
+                                        .identifier(identifier)
+                                        .build_file(&file)
+                                        .await {
                         log::error!("Failed to open file: {}", e);
                     }
                 }));
@@ -173,7 +179,7 @@ pub mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "attachment" => self.attachment.borrow().as_ref().to_value(),
@@ -181,7 +187,7 @@ pub mod imp {
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let man = value

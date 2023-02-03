@@ -1,10 +1,11 @@
+use gtk::{gdk, glib};
 use gdk::subclass::prelude::ObjectSubclassIsExt;
 use glib::ObjectExt;
 use gtk::traits::WidgetExt;
 
 use crate::backend::{message::TextMessage, Channel, Manager};
 
-gtk::glib::wrapper! {
+glib::wrapper! {
     pub struct ChannelMessages(ObjectSubclass<imp::ChannelMessages>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -45,6 +46,7 @@ pub mod imp {
 
     use std::{cell::RefCell, time::Duration};
 
+    use gtk::{glib, gio};
     use gio::Settings;
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
@@ -403,12 +405,12 @@ pub mod imp {
     }
 
     impl ObjectImpl for ChannelMessages {
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
-            obj.connect_notify_local(
+        fn constructed(&self) {
+            self.parent_constructed();
+            self.instance().connect_notify_local(
                 Some("active-channel"),
-                clone!(@weak obj => move |_, _| {
-                    obj.set_reply_message(&None);
+                clone!(@weak self as obj => move |_, _| {
+                    obj.instance().set_reply_message(&None);
                 }),
             );
         }
@@ -449,7 +451,7 @@ pub mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "active-channel" => self.active_channel.borrow().as_ref().to_value(),
@@ -459,7 +461,7 @@ pub mod imp {
             }
         }
 
-        fn set_property(&self, obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let man = value.get::<Option<Manager>>().expect(
@@ -488,9 +490,9 @@ pub mod imp {
                             );
                         }
                         signal_handler.replace(
-                                channel.connect_local("message", false, clone!(@strong obj => move |args| {
+                                channel.connect_local("message", false, clone!(@weak self as obj  => @default-return None, move |args| {
                                     let msg = args[1].get::<DisplayMessage>().expect("Type of signal `message` of `Channel` to be `DisplayMessage`");
-                                    obj.imp().add_message(&msg);
+                                    obj.add_message(&msg);
                                     None
                                 }))
                         );

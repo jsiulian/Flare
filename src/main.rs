@@ -1,3 +1,4 @@
+use gtk::{gdk, gio, glib};
 use gdk::prelude::{ApplicationExt, ApplicationExtManual};
 use gio::prelude::SettingsExt;
 use gio::{ApplicationFlags, Settings, SettingsBindFlags};

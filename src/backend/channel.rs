@@ -4,6 +4,7 @@ use std::{
     hash::{Hash, Hasher},
 };
 
+use gtk::{gdk, gio, glib};
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Cast, Object};
@@ -31,7 +32,7 @@ impl Channel {
     ) -> Self {
         log::trace!("Trying to build a `Channel` from a `Contact` or `GroupContextV2`");
         let available_channels = manager.available_channels();
-        let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Channel`");
+        let s: Self = Object::new::<Self>(&[("manager", manager)]);
         if let Some(group_context_v2) = group_context {
             let master_key = GroupMasterKey::new(
                 group_context_v2
@@ -64,7 +65,7 @@ impl Channel {
         group_context_v2: &GroupContextV2,
         manager: &Manager,
     ) -> Self {
-        let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Channel`");
+        let s: Self = Object::new::<Self>(&[("manager", manager)]);
         s.imp().group.swap(&RefCell::new(Some(group)));
         s.imp()
             .group_context
@@ -263,7 +264,7 @@ impl Channel {
             drop(msgs);
             self.notify("last-message");
             message.send_notification();
-            self.try_emit_by_name::<()>("message", &[&message])?;
+            self.emit_by_name::<()>("message", &[&message]);
         } else {
             log::trace!("Channel skip adding empty message");
         }
@@ -351,6 +352,7 @@ impl Channel {
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
+    use gtk::{gdk, glib};
     use gdk::{prelude::*, subclass::prelude::*};
     use glib::{
         once_cell::sync::Lazy, subclass::Signal, ParamFlags, ParamSpec, ParamSpecObject,
@@ -429,7 +431,7 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "last-message" => self.messages.borrow().last().to_value(),
@@ -452,7 +454,7 @@ mod imp {
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let obj = value
@@ -467,12 +469,11 @@ mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder(
-                    "message",
-                    &[DisplayMessage::static_type().into()],
-                    <()>::static_type().into(),
-                )
-                .build()]
+                vec![
+                    Signal::builder("message")
+                        .param_types([DisplayMessage::static_type()])
+                        .build()
+                ]
             });
             SIGNALS.as_ref()
         }

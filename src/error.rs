@@ -1,5 +1,6 @@
 use libsignal_service as lss;
 use presage as p;
+use gtk::glib;
 
 const FAILED_TO_LOOK_UP_ADDRESS: &str = "failed to lookup address information";
 
@@ -13,7 +14,7 @@ pub enum ConfigurationError {
 pub enum ApplicationError {
     IOError(std::io::Error),
     NoInternet,
-    Libsecret(gdk::glib::error::Error),
+    Libsecret(glib::error::Error),
     Db(sled::Error),
     UnauthorizedSignal,
     SendFailed(libsignal_service::sender::MessageSenderError),
@@ -52,8 +53,8 @@ impl From<std::io::Error> for ApplicationError {
     }
 }
 
-impl From<gdk::glib::error::Error> for ApplicationError {
-    fn from(e: gdk::glib::error::Error) -> Self {
+impl From<glib::error::Error> for ApplicationError {
+    fn from(e: glib::error::Error) -> Self {
         ApplicationError::Libsecret(e)
     }
 }

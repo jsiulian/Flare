@@ -1,5 +1,6 @@
 use std::path::PathBuf;
 
+use gtk::{gdk, gio, glib};
 use gdk::{prelude::TextureExt, Texture};
 use gio::{prelude::*, subclass::prelude::ObjectSubclassIsExt, Cancellable, File, FileCreateFlags};
 use glib::{Bytes, Object, Priority};
@@ -55,7 +56,7 @@ impl Attachment {
         if mime.starts_with("video/") {
             video = Some(MediaFile::for_file(&file))
         }
-        Object::new(&[
+        Object::new::<Self>(&[
             ("manager", manager),
             ("file", &file),
             (
@@ -69,7 +70,6 @@ impl Attachment {
             ("loaded", &true),
             ("content-type", &mime),
         ])
-        .expect("Failed to create `Attachment`")
     }
 
     pub fn from_texture(texture: Texture, manager: &Manager) -> Self {
@@ -78,7 +78,7 @@ impl Attachment {
         let tmp_out = tmp_file_stream.output_stream();
         let _ = tmp_out.write_bytes(&texture.save_to_png_bytes(), Cancellable::NONE);
 
-        Object::new(&[
+        Object::new::<Self>(&[
             ("manager", manager),
             ("file", &file),
             ("name", &"image.png"),
@@ -86,7 +86,6 @@ impl Attachment {
             ("loaded", &true),
             ("content-type", &"image/png"),
         ])
-        .expect("Failed to create `Attachment`")
     }
 
     pub fn manager(&self) -> Manager {
@@ -153,15 +152,14 @@ impl Attachment {
             "Attachment with content type: {}",
             pointer.content_type.as_ref().unwrap_or(&"None".to_string())
         );
-        let s: Self = Object::new(&[
+        let s: Self = Object::new::<Self>(&[
             ("manager", manager),
             ("image", &None::<Texture>),
             ("name", &None::<String>),
             ("video", &None::<MediaStream>),
             ("loaded", &false),
             ("content-type", &pointer.content_type.as_ref()),
-        ])
-        .expect("Failed to create `Attachment`");
+        ]);
         *s.imp().pointer.borrow_mut() = Some(pointer.clone());
         s
     }
@@ -290,6 +288,7 @@ impl Attachment {
 mod imp {
     use std::cell::{Cell, RefCell};
 
+    use gtk::{gdk, gio, glib};
     use gdk::prelude::*;
     use gdk::{subclass::prelude::*, Texture};
     use gio::File;
@@ -408,28 +407,30 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "image" => self.image.borrow().as_ref().to_value(),
                 "video" => self.video.borrow().as_ref().to_value(),
                 "file" => self.file.borrow().as_ref().to_value(),
                 "name" => self.name.borrow().as_ref().to_value(),
-                "type" => obj
-                    .content_type()
+                "type" => self
+                    .content_type
+                    .borrow()
+                    .as_ref()
                     .map(AttachmentType::from_content_type)
                     .unwrap_or_default()
                     .to_value(),
-                "is-image" => obj.is_image().to_value(),
-                "is-video" => obj.is_video().to_value(),
-                "is-file" => obj.is_file().to_value(),
+                "is-image" => self.instance().is_image().to_value(),
+                "is-video" => self.instance().is_video().to_value(),
+                "is-file" => self.instance().is_file().to_value(),
                 "content-type" => self.content_type.borrow().as_ref().to_value(),
                 "loaded" => self.loaded.get().to_value(),
                 _ => unimplemented!(),
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let obj = value

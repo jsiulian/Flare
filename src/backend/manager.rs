@@ -2,6 +2,7 @@ use std::{cell::RefCell, collections::HashMap, path::Path, time::Duration};
 
 use chacha20poly1305::ChaCha20Poly1305;
 use encrypted_sled::{CountingNonce, EncryptionCipher};
+use gtk::{gdk, gio, glib};
 use gdk::prelude::*;
 use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
 use glib::{clone, MainContext, Object, Priority};
@@ -116,7 +117,7 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationErr
 
 impl Manager {
     pub fn new(application: Application) -> Manager {
-        let s: Self = Object::new(&[]).expect("Failed to create `Manager` object.");
+        let s: Self = Object::new::<Self>(&[]);
         s.imp().application.borrow_mut().replace(application);
         s
     }
@@ -312,9 +313,7 @@ impl Manager {
                         } else {
                             drop(channels);
                             log::debug!("Got a message from a new channel");
-                            if self.try_emit_by_name::<()>("channel", &[&channel]).is_err() {
-                                break 'outer;
-                            }
+                            self.emit_by_name::<()>("channel", &[&channel]);
                             let mut channels_mut = self.imp().channels.borrow_mut();
                             channels_mut.insert(channel.internal_hash(), channel.clone());
                             if let Some(ctx) = channel.group_context() {
@@ -553,6 +552,7 @@ impl Manager {
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
+    use gtk::{gdk, glib, gio};
     use gdk::prelude::StaticType;
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gio::{Application, Settings};
@@ -607,25 +607,17 @@ mod imp {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
                 vec![
-                    Signal::builder(
-                        "message",
-                        &[Message::static_type().into()],
-                        <()>::static_type().into(),
-                    )
-                    .build(),
-                    Signal::builder(
-                        "channel",
-                        &[Channel::static_type().into()],
-                        <()>::static_type().into(),
-                    )
-                    .build(),
-                    Signal::builder(
-                        "link-qr-code",
-                        &[String::static_type().into()],
-                        <()>::static_type().into(),
-                    )
-                    .build(),
-                    Signal::builder("link-finish", &[], <()>::static_type().into()).build(),
+                    Signal::builder("message")
+                        .param_types([Message::static_type()])
+                        .build(),
+                    Signal::builder("channel")
+                        .param_types([Channel::static_type()])
+                        .build(),
+                    Signal::builder("link-qr-code")
+                        .param_types([String::static_type()])
+                        .build(),
+                    Signal::builder("link-finish")
+                        .build(),
                 ]
             });
             SIGNALS.as_ref()

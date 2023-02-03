@@ -1,5 +1,6 @@
 use std::cell::RefCell;
 
+use gtk::{gio, glib};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
 use presage::prelude::content::Reaction;
@@ -21,13 +22,12 @@ impl ReactionMessage {
         manager: &Manager,
         reaction: Reaction,
     ) -> Self {
-        let s: Self = Object::new(&[
+        let s: Self = Object::new::<Self>(&[
             ("sender", sender),
             ("channel", channel),
             ("sent", &timestamp),
             ("manager", manager),
-        ])
-        .expect("Failed to initialize ReactionMessage");
+        ]);
         s.imp().reaction.swap(&RefCell::new(Some(reaction)));
         s
     }

@@ -1,5 +1,5 @@
-use gdk_pixbuf::Pixbuf;
-use gtk::{glib, prelude::*, subclass::prelude::*};
+use gtk::{gdk, glib, gio, prelude::*, subclass::prelude::*};
+use gdk::gdk_pixbuf::Pixbuf;
 
 use super::{Message, MessageExt, MessageImpl};
 
@@ -126,7 +126,6 @@ mod imp {
 
         fn set_property(
             &self,
-            _obj: &Self::Type,
             _id: usize,
             _value: &glib::Value,
             _pspec: &glib::ParamSpec,
@@ -134,9 +133,9 @@ mod imp {
             unimplemented!()
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
-                "textual-description" => obj.textual_description().to_value(),
+                "textual-description" => self.instance().textual_description().to_value(),
                 _ => unimplemented!(),
             }
         }

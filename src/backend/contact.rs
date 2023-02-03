@@ -1,5 +1,6 @@
 use std::cell::RefCell;
 
+use gtk::{gio, glib};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Object, ObjectExt};
 use presage::prelude::ServiceAddress;
@@ -19,7 +20,7 @@ impl Contact {
             }
         }
         log::trace!("Not in the contact list");
-        let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Contact`");
+        let s: Self = Object::new::<Self>(&[("manager", manager)]);
         s.imp()
             .phonenumber
             .swap(&RefCell::new(address.phonenumber.clone()));
@@ -29,7 +30,7 @@ impl Contact {
 
     pub(super) fn from_contact(contact: presage::prelude::Contact, manager: &Manager) -> Self {
         log::trace!("Building a `Contact` from a `presage::prelude::Contact`");
-        let s: Self = Object::new(&[("manager", manager)]).expect("Failed to create `Contact`");
+        let s: Self = Object::new::<Self>(&[("manager", manager)]);
         s.imp()
             .phonenumber
             .swap(&RefCell::new(contact.address.phonenumber.clone()));
@@ -64,6 +65,7 @@ impl Contact {
 mod imp {
     use std::cell::RefCell;
 
+    use gtk::{gdk, glib};
     use gdk::{prelude::*, subclass::prelude::*};
     use glib::{
         once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject,
@@ -112,12 +114,12 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "is-self" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
-                        (contact.address.uuid == Some(obj.manager().uuid())).to_value()
+                        (contact.address.uuid == Some(self.manager.borrow().as_ref().unwrap().uuid())).to_value()
                     } else {
                         false.to_value()
                     }
@@ -125,8 +127,13 @@ mod imp {
                 "title" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
                         let name = &contact.name;
-                        if obj.is_self() {
-                            obj.manager().profile_name().to_value()
+                        if self.instance().is_self() {
+                            self.manager
+                                .borrow()
+                                .as_ref()
+                                .unwrap()
+                                .profile_name()
+                                .to_value()
                         } else if name.is_empty() {
                             if let Some(phone) = self.phonenumber.borrow().as_ref() {
                                 phone.format().mode(Mode::National).to_string().to_value()
@@ -153,7 +160,7 @@ mod imp {
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let obj = value

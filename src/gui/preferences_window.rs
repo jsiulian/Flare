@@ -1,15 +1,15 @@
-use gdk::glib::Object;
-use glib::clone;
-use gtk::prelude::WidgetExt;
-use gdk_pixbuf::Pixbuf;
+use gtk::{gdk, glib, gio};
+use glib::{Object, clone};
+use gdk::gdk_pixbuf::Pixbuf;
 use gio::prelude::ApplicationExt;
-use ashpd::desktop::background;
+use gtk::prelude::WidgetExt;
+use ashpd::{WindowIdentifier, desktop::background::BackgroundRequest};
 
 use gettextrs::gettext;
 
 use crate::gspawn;
 
-gtk::glib::wrapper! {
+glib::wrapper! {
     pub struct PreferencesWindow(ObjectSubclass<imp::PreferencesWindow>)
         @extends libadwaita::PreferencesWindow, libadwaita::Window, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -19,22 +19,19 @@ gtk::glib::wrapper! {
 #[gtk::template_callbacks]
 impl PreferencesWindow {
     pub fn new() -> Self {
-        Object::new(&[]).expect("Failed to create PreferencesWindow")
+        Object::new::<Self>(&[])
     }
 
     async fn request_background(&self) -> ashpd::Result<()> {
-        let identifier = ashpd::WindowIdentifier::from_native(
-            &self.native().unwrap()
-        ).await;
-        let _ = background::request(
-            &identifier,
-            &gettext("Watch for new messages while closed"),
-            true,
-            Some(&["flare", "--gapplication-service"]),
-            false,
-        )
-        .await?;
-
+        let identifier = WindowIdentifier::from_native(&self.native().unwrap()).await;
+        let _ = BackgroundRequest::default()
+                    .reason(Some(gettext("Watch for new messages while closed").as_str()))
+                    .auto_start(true)
+                    .identifier(identifier)
+                    .command(&["flare", "--gapplication-service"])
+                    .dbus_activatable(false)
+                    .build()
+                    .await?;
         Ok(())
     }
 
@@ -68,6 +65,7 @@ impl Default for PreferencesWindow {
 }
 
 pub mod imp {
+    use gtk::{glib, gio};
     use gio::{Settings, SettingsBindFlags};
     use glib::subclass::InitializingObject;
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
@@ -187,8 +185,8 @@ pub mod imp {
     }
 
     impl ObjectImpl for PreferencesWindow {
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
             self.init_settings();
         }
     }

@@ -1,5 +1,6 @@
 use std::cell::RefCell;
 
+use gtk::{gdk, glib, gio};
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
@@ -55,14 +56,13 @@ impl CallMessage {
         call: PreCallMessage,
     ) -> Option<Self> {
         let call_type = CallMessageType::try_from(&call).ok()?;
-        let s: Self = Object::new(&[
+        let s: Self = Object::new::<Self>(&[
             ("sender", sender),
             ("channel", channel),
             ("sent", &timestamp),
             ("manager", manager),
             ("call-type", &call_type),
-        ])
-        .expect("Failed to initialize ReactionMessage");
+        ]);
         s.imp().call.swap(&RefCell::new(Some(call)));
         Some(s)
     }
@@ -74,7 +74,7 @@ impl CallMessage {
 
 mod imp {
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gdk_pixbuf::{
+    use gdk::gdk_pixbuf::{
         glib::{once_cell::sync::Lazy, ParamFlags, ParamSpec, Value},
         prelude::{StaticType, ToValue},
     };
@@ -130,14 +130,14 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self,_id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "call-type" => self.call_type.borrow().to_value(),
                 _ => unimplemented!(),
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "call-type" => {
                     let obj = value.get::<CallMessageType>().expect(

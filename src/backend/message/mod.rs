@@ -46,13 +46,12 @@ impl Message {
                 if message.body.is_none() && message.attachments.is_empty() {
                     return None;
                 }
-                let s: TextMessage = Object::new(&[
+                let s: TextMessage = Object::new::<TextMessage>(&[
                     ("manager", manager),
                     ("sender", &contact),
                     ("channel", &channel),
                     ("sent", &timestamp),
-                ])
-                .expect("Failed to create `Message`");
+                ]);
                 s.init_data(message, manager).await;
                 Some(s.upcast())
             }
@@ -85,13 +84,12 @@ impl Message {
                     manager,
                 )
                 .await;
-                let s: TextMessage = Object::new(&[
+                let s: TextMessage = Object::new::<TextMessage>(&[
                     ("manager", manager),
                     ("sender", &contact),
                     ("channel", &channel),
                     ("sent", &timestamp),
-                ])
-                .expect("Failed to create `Message`");
+                ]);
                 s.init_data(message, manager).await;
                 Some(s.upcast())
             }
@@ -303,7 +301,7 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "sender" => self.sender.borrow().as_ref().to_value(),
@@ -313,7 +311,7 @@ mod imp {
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let obj = value

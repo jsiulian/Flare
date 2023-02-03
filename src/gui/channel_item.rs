@@ -1,6 +1,7 @@
+use gtk::glib;
 use glib::Object;
 
-gtk::glib::wrapper! {
+glib::wrapper! {
     pub struct ChannelItem(ObjectSubclass<imp::ChannelItem>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -10,7 +11,7 @@ gtk::glib::wrapper! {
 impl ChannelItem {
     pub fn new() -> Self {
         log::trace!("Initializing `ChannelItem`");
-        Object::new(&[]).expect("Failed to create `ChannelItem`")
+        Object::new::<Self>(&[])
     }
 }
 
@@ -23,6 +24,7 @@ impl Default for ChannelItem {
 pub mod imp {
     use std::cell::RefCell;
 
+    use gtk::glib;
     use glib::{
         once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
         ParamSpecObject, Value,
@@ -90,7 +92,7 @@ pub mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "channel" => self.channel.borrow().as_ref().to_value(),
@@ -98,7 +100,7 @@ pub mod imp {
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let man = value
