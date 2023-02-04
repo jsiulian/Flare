@@ -1,3 +1,4 @@
+use gtk::{glib, gio};
 use gio::{subclass::prelude::ObjectSubclassIsExt, SimpleAction, SimpleActionGroup};
 use glib::{clone, Object};
 use gtk::{
@@ -7,7 +8,7 @@ use gtk::{
 
 use crate::backend::message::TextMessage;
 
-gtk::glib::wrapper! {
+glib::wrapper! {
     pub struct MessageItem(ObjectSubclass<imp::MessageItem>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -17,7 +18,7 @@ gtk::glib::wrapper! {
 impl MessageItem {
     pub fn new(message: &TextMessage) -> Self {
         log::trace!("Initializing `MessageItem`");
-        Object::new(&[("message", message)]).expect("Failed to create `MessageItem`")
+        Object::new::<Self>(&[("message", message)])
     }
 
     pub fn message(&self) -> TextMessage {
@@ -51,6 +52,7 @@ pub mod imp {
     use regex::Regex;
     use std::cell::{Cell, RefCell};
 
+    use gtk::glib;
     use glib::{
         clone,
         once_cell::sync::Lazy,
@@ -152,9 +154,9 @@ pub mod imp {
     }
 
     impl ObjectImpl for MessageItem {
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
-            obj.setup_actions();
+        fn constructed(&self) {
+            self.parent_constructed();
+            self.instance().setup_actions();
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -193,7 +195,7 @@ pub mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "message" => self.message.borrow().as_ref().to_value(),
@@ -209,7 +211,8 @@ pub mod imp {
             }
         }
 
-        fn set_property(&self, obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
+            let instance = self.instance();
             match pspec.name() {
                 "manager" => {
                     let man = value
@@ -224,7 +227,7 @@ pub mod imp {
                     if let Some(msg) = &msg {
                         msg.connect_notify_local(
                             Some("reactions"),
-                            clone!(@weak obj => move |_, _| {
+                            clone!(@weak instance as obj => move |_, _| {
                                 log::trace!("MessageItem got reaction, updating `has-reaction`");
                                 obj.notify("has-reaction");
                             }),
@@ -240,7 +243,7 @@ pub mod imp {
                             self.box_attachments.append(&att_widget);
                         }
                     }
-                    obj.notify("has-reaction");
+                    instance.notify("has-reaction");
                     self.message.replace(msg);
                 }
                 "show-name" => {
@@ -255,12 +258,11 @@ pub mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder(
-                    "reply",
-                    &[TextMessage::static_type().into()],
-                    <()>::static_type().into(),
-                )
-                .build()]
+                vec![
+                    Signal::builder("reply")
+                        .param_types([TextMessage::static_type()])
+                        .build()
+                ]
             });
             SIGNALS.as_ref()
         }

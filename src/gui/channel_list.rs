@@ -1,12 +1,14 @@
 use std::time::Duration;
 
+use gtk::{gdk, gio, glib};
 use gdk::prelude::*;
+use gtk::prelude::*;
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use gtk::{traits::*, SorterChange};
+use gtk::{SorterChange};
 
 use crate::{backend::Channel, gspawn};
 
-gtk::glib::wrapper! {
+glib::wrapper! {
     pub struct ChannelList(ObjectSubclass<imp::ChannelList>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -74,6 +76,7 @@ impl ChannelList {
 pub mod imp {
     use std::cell::{Cell, RefCell};
 
+    use gtk::{gio, glib};
     use glib::{
         clone,
         once_cell::sync::Lazy,
@@ -152,7 +155,7 @@ pub mod imp {
     }
 
     impl ObjectImpl for ChannelList {
-        fn constructed(&self, obj: &Self::Type) {
+        fn constructed(&self) {
             let model = gtk::gio::ListStore::new(Channel::static_type());
             let filter =
                 CustomFilter::new(clone!(@strong self.search_entry as entry => move |obj| {
@@ -205,7 +208,8 @@ pub mod imp {
             self.filter.replace(filter);
 
             let factory = SignalListItemFactory::new();
-            factory.connect_setup(move |_, list_item| {
+            factory.connect_setup(move |_, object| {
+                let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
                 let channel_item = ChannelItem::new();
                 list_item.set_child(Some(&channel_item));
 
@@ -217,8 +221,8 @@ pub mod imp {
             self.list.set_single_click_activate(true);
 
             self.list
-                .connect_activate(clone!(@strong obj => move |_list_view, position| {
-                    obj.activate_row(position);
+                .connect_activate(clone!(@weak self as obj => move |_list_view, position| {
+                    obj.instance().activate_row(position);
                 }));
         }
 
@@ -251,7 +255,7 @@ pub mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "active-channel" => self.active_channel.borrow().as_ref().to_value(),
@@ -260,7 +264,7 @@ pub mod imp {
             }
         }
 
-        fn set_property(&self, obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let man = value
@@ -274,11 +278,11 @@ pub mod imp {
                         man.connect_local(
                             "channel",
                             false,
-                            clone!(@strong obj => move |args| {
+                            clone!(@weak self as obj => @default-return None, move |args| {
                                 let channel = args[1]
                                     .get::<Channel>()
                                     .expect("Type of `channel` signal of `Manager` to be `Channel`");
-                                obj.add_channel(channel);
+                                obj.instance().add_channel(channel);
                                 None
                             }),
                         );
@@ -289,7 +293,7 @@ pub mod imp {
                     let chan = value.get::<Option<Channel>>().expect(
                         "Property `active-channel` of `ChannelList` has to be of type `Channel`",
                     );
-                    obj.emit_by_name::<()>("active-channel-changed", &[&chan]);
+                    self.instance().emit_by_name::<()>("active-channel-changed", &[&chan]);
                     self.active_channel.replace(chan);
                 }
                 "search-enabled" => {
@@ -304,12 +308,11 @@ pub mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder(
-                    "active-channel-changed",
-                    &[Channel::static_type().into()],
-                    <()>::static_type().into(),
-                )
-                .build()]
+                vec![
+                    Signal::builder("active-channel-changed")
+                        .param_types([Channel::static_type()])
+                        .build()
+                ]
             });
             SIGNALS.as_ref()
         }

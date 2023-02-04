@@ -1,4 +1,5 @@
-use gdk::subclass::prelude::ObjectSubclassIsExt;
+use gtk::glib;
+use glib::subclass::prelude::{ObjectSubclassIsExt};
 use gtk::traits::TextBufferExt;
 
 gtk::glib::wrapper! {
@@ -25,9 +26,10 @@ impl TextEntry {
 
 pub mod imp {
     use crate::gspawn;
-    use gdk::{
+    use gtk::{gdk, gio, glib};
+    use glib::{
         prelude::{ObjectExt, ToValue},
-        subclass::prelude::{ObjectImpl, ObjectSubclass},
+        subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassExt},
     };
     use glib::{
         clone,
@@ -70,7 +72,8 @@ pub mod imp {
     }
 
     impl ObjectImpl for TextEntry {
-        fn constructed(&self, obj: &Self::Type) {
+        fn constructed(&self) {
+            let obj = self.obj();
             let key_events = gtk::EventControllerKey::new();
             self.view.add_controller(&key_events);
             key_events
@@ -140,7 +143,7 @@ pub mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "is-empty" => {
                     let (start, end) = self.buffer.bounds();
@@ -150,26 +153,21 @@ pub mod imp {
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, _value: &Value, _pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, _value: &Value, _pspec: &ParamSpec) {
             unimplemented!()
         }
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
                 vec![
-                    Signal::builder("activate", &[], <()>::static_type().into()).build(),
-                    Signal::builder(
-                        "paste-file",
-                        &[gio::File::static_type().into()],
-                        <()>::static_type().into(),
-                    )
-                    .build(),
-                    Signal::builder(
-                        "paste-texture",
-                        &[gdk::Texture::static_type().into()],
-                        <()>::static_type().into(),
-                    )
-                    .build(),
+                    Signal::builder("activate")
+                        .build(),
+                    Signal::builder("paste-file")
+                        .param_types([gio::File::static_type()])
+                        .build(),
+                    Signal::builder("paste-texture")
+                        .param_types([gdk::Texture::static_type()])
+                        .build(),
                 ]
             });
             SIGNALS.as_ref()
@@ -177,7 +175,7 @@ pub mod imp {
     }
 
     impl WidgetImpl for TextEntry {
-        fn grab_focus(&self, _widget: &Self::Type) -> bool {
+        fn grab_focus(&self) -> bool {
             log::trace!("TextEntry grabbed focus");
             self.view.grab_focus()
         }

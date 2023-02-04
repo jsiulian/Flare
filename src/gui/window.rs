@@ -1,8 +1,8 @@
-use gdk::{prelude::SettingsExt, subclass::prelude::*};
+use gdk::{glib, prelude::SettingsExt, subclass::prelude::*};
 use glib::Object;
 use gtk::prelude::*;
 
-gtk::glib::wrapper! {
+glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
         @extends libadwaita::ApplicationWindow, gtk::ApplicationWindow, libadwaita::Window, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -24,7 +24,7 @@ impl Window {
             );
         }
         app.set_accels_for_action("channel-list.toggle-search", &["<Control>f"]);
-        Object::new(&[("application", app)]).expect("Failed to create Window")
+        Object::new::<Self>(&[("application", app)])
     }
 
     fn save_window_size(&self) -> Result<(), glib::BoolError> {
@@ -59,6 +59,7 @@ impl Window {
 pub mod imp {
     use std::{cell::RefCell, env, path::PathBuf};
 
+    use gtk::{gio, glib};
     use gio::{Settings, SimpleAction, SimpleActionGroup};
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
@@ -108,9 +109,10 @@ pub mod imp {
 
     #[gtk::template_callbacks]
     impl Window {
-        fn setup_actions(&self, obj: &super::Window) {
+        fn setup_actions(&self) {
             log::trace!("Setting up window actions");
             log::trace!("Setting up preferences-window action");
+            let obj = self.obj();
             let action_settings = SimpleAction::new("settings", None);
             action_settings.connect_activate(|_, _| {
                 let settings = PreferencesWindow::new();
@@ -283,10 +285,11 @@ pub mod imp {
     }
 
     impl ObjectImpl for Window {
-        fn constructed(&self, obj: &Self::Type) {
+        fn constructed(&self) {
             log::trace!("Constructed window");
-            self.parent_constructed(obj);
-            self.setup_actions(obj);
+            let obj = self.obj();
+            self.parent_constructed();
+            obj.imp().setup_actions();
 
             // Devel Profile
             if crate::config::PROFILE == "Devel" {
@@ -340,14 +343,14 @@ pub mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 _ => unimplemented!(),
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "manager" => {
                     let obj = value
@@ -363,12 +366,12 @@ pub mod imp {
 
     impl WidgetImpl for Window {}
     impl WindowImpl for Window {
-        fn close_request(&self, window: &Self::Type) -> gtk::Inhibit {
-            if let Err(err) = window.save_window_size() {
+        fn close_request(&self) -> gtk::Inhibit {
+            if let Err(err) = self.instance().save_window_size() {
                 log::warn!("Failed to save window state, {}", &err);
             }
 
-            self.parent_close_request(window)
+            self.parent_close_request()
         }
     }
     impl ApplicationWindowImpl for Window {}

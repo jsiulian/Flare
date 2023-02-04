@@ -1,8 +1,9 @@
+use gtk::glib;
 use glib::{prelude::IsA, Object};
 
 use crate::ApplicationError;
 
-gtk::glib::wrapper! {
+glib::wrapper! {
     pub struct ErrorDialog(ObjectSubclass<imp::ErrorDialog>)
         @extends gtk::Dialog, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -14,13 +15,12 @@ impl ErrorDialog {
         log::trace!("Initializing ErrorDialog");
         log::error!("ErrorDialog displaying error: {}", error);
         log::trace!("ErrorDialog full error: {:#?}", error);
-        Object::new(&[
+        Object::new::<Self>(&[
             ("error", &error.to_string()),
             ("secondary-error", &error.more_information()),
             ("should-report", &error.should_report()),
             ("transient-for", &parent),
         ])
-        .expect("Failed to create ErrorDialog")
     }
 }
 
@@ -28,6 +28,7 @@ pub mod imp {
     pub(crate) use std::cell::Cell;
     use std::cell::RefCell;
 
+    use gtk::glib;
     use glib::{
         once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
         ParamSpecBoolean, ParamSpecString, Value,
@@ -59,10 +60,10 @@ pub mod imp {
     }
 
     impl ObjectImpl for ErrorDialog {
-        fn constructed(&self, obj: &Self::Type) {
+        fn constructed(&self) {
             log::trace!("Constructed ErrorDialog");
-            self.parent_constructed(obj);
-            obj.connect_response(|dialog, _| dialog.close());
+            self.parent_constructed();
+            self.instance().connect_response(|dialog, _| dialog.close());
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -94,7 +95,7 @@ pub mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "error" => self.error.borrow().as_ref().to_value(),
                 "secondary-error" => self.secondary_error.borrow().as_ref().to_value(),
@@ -103,7 +104,7 @@ pub mod imp {
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
             match pspec.name() {
                 "error" => {
                     let e = value

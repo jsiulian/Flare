@@ -1,4 +1,4 @@
-use gdk::glib::{DateTime, Object};
+use gtk::glib::{DateTime, Object};
 
 pub struct Utility {}
 

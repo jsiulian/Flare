@@ -1,8 +1,9 @@
+use gtk::glib;
 use glib::{prelude::IsA, Object, ObjectExt};
 
 use crate::backend::Manager;
 
-gtk::glib::wrapper! {
+glib::wrapper! {
     pub struct LinkWindow(ObjectSubclass<imp::LinkWindow>)
         @extends gtk::Dialog, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -12,12 +13,11 @@ gtk::glib::wrapper! {
 impl LinkWindow {
     pub fn new(url: String, manager: Manager, parent: &impl IsA<gtk::Window>) -> Self {
         log::trace!("Initializing link window");
-        Object::new(&[
+        Object::new::<Self>(&[
             ("url", &url),
             ("manager", &manager),
             ("transient-for", &parent),
         ])
-        .expect("Failed to create LinkWindow")
     }
 
     pub fn url(&self) -> String {
@@ -28,7 +28,8 @@ impl LinkWindow {
 pub mod imp {
     use std::cell::RefCell;
 
-    use gdk_pixbuf::Pixbuf;
+    use gtk::{gdk, glib, gio};
+    use gdk::gdk_pixbuf::Pixbuf;
     use gio::MemoryInputStream;
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, Bytes, ParamFlags, ParamSpec,
@@ -54,7 +55,7 @@ pub mod imp {
         #[template_callback]
         fn handle_clipboard(&self, _: gtk::Button) {
             let obj = self.instance();
-            let clipboard = obj.display().clipboard();
+            let clipboard = obj.clipboard();
             clipboard.set_text(&obj.url());
         }
     }
@@ -76,11 +77,11 @@ pub mod imp {
     }
 
     impl ObjectImpl for LinkWindow {
-        fn constructed(&self, obj: &Self::Type) {
+        fn constructed(&self) {
             log::trace!("Constructed LinkWindow");
-            self.parent_constructed(obj);
+            self.parent_constructed();
             // TODO: Cancel manager?
-            obj.connect_response(|dialog, _| dialog.close());
+            self.instance().connect_response(|dialog, _| dialog.close());
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -105,7 +106,7 @@ pub mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "url" => self.url.borrow().as_ref().to_value(),
@@ -113,7 +114,8 @@ pub mod imp {
             }
         }
 
-        fn set_property(&self, obj: &Self::Type, _id: usize, value: &Value, pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
+            let instance = self.instance();
             match pspec.name() {
                 "manager" => {
                     let man = value
@@ -124,7 +126,7 @@ pub mod imp {
                         man.connect_local(
                             "link-finish",
                             false,
-                            clone!(@strong obj => move |_| {obj.emit_close(); None}),
+                            clone!(@strong instance as obj => move |_| {obj.emit_close(); None}),
                         );
                     }
 

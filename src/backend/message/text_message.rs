@@ -1,5 +1,6 @@
 use std::cell::RefCell;
 
+use gtk::{gdk, gio, glib};
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
@@ -64,13 +65,12 @@ impl TextMessage {
         manager: &Manager,
     ) -> Self {
         log::trace!("Trying to build a message from text");
-        let s: Self = Object::new(&[
+        let s: Self = Object::new::<Self>(&[
             ("manager", manager),
             ("channel", &channel),
             ("sender", &sender),
             ("sent", &timestamp),
-        ])
-        .expect("Failed to create `Message`");
+        ]);
 
         let text_owned = text.as_ref().to_owned();
         let body = if text_owned.is_empty() {
@@ -187,13 +187,14 @@ impl TextMessage {
 
 mod imp {
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gdk_pixbuf::{
-        glib::{
-            once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecObject, ParamSpecString, Value,
-        },
+    use gdk::gdk_pixbuf::{
         prelude::{StaticType, ToValue},
     };
     use gtk::glib;
+    use glib::{
+        subclass::prelude::ObjectSubclassExt,
+        once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecObject, ParamSpecString, Value
+    };
     use std::cell::RefCell;
 
     use crate::backend::{
@@ -266,16 +267,17 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
+            let instance = self.instance();
             match pspec.name() {
-                "body" => obj.internal_data().and_then(|d| d.body).to_value(),
+                "body" => instance.internal_data().and_then(|d| d.body).to_value(),
                 "reactions" => self.reactions.borrow().to_value(),
                 "quote" => self.quote.borrow().to_value(),
                 _ => unimplemented!(),
             }
         }
 
-        fn set_property(&self, _obj: &Self::Type, _id: usize, _value: &Value, _pspec: &ParamSpec) {
+        fn set_property(&self, _id: usize, _value: &Value, _pspec: &ParamSpec) {
             unimplemented!();
         }
     }
