@@ -35,12 +35,19 @@ If you feel comfortable enough writing code, you can also submit your changes di
 
 ### Compilation
 
+Before compiling Flare, you will need to install the required settings-file. This will need to be done before first compilation and every time `data/de.schmidhuberj.Flare.gschema.xml` changes:
+
+```bash
+sudo cp data/de.schmidhuberj.Flare.gschema.xml /usr/share/glib-2.0/schemas/   # Path may differ depending on distribution
+sudo glib-compile-schemas /usr/share/glib-2.0/schemas/   # Path may differ depending on distribution
+```
+
 Compile Flare using the following commands
 
-```
-meson build -Dprofile=development # Run once before all changes you make
-meson compile -C build # Run every time you want to test your changes
-RUST_LOG=flare=trace ./build/target/debug/flare # Run your locally compiled application with some logging
+```bash
+meson build -Dprofile=development   # Run once before all changes you make. Substitute "development" for "default" for compiling for release.
+meson compile -C build   # Run every time you want to test your changes
+RUST_LOG=flare=trace ./build/target/debug/flare   # Run your locally compiled application with some logging
 ```
 
 ### Some useful documentation
