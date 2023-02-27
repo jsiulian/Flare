@@ -4,10 +4,10 @@ use std::{
     hash::{Hash, Hasher},
 };
 
-use gtk::{gdk, gio, glib};
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Cast, Object};
+use gtk::{gdk, gio, glib};
 use libsignal_service::groups_v2::Group;
 use presage::{
     prelude::{DataMessage, GroupContextV2, GroupMasterKey, ServiceAddress, Uuid},
@@ -32,7 +32,9 @@ impl Channel {
     ) -> Self {
         log::trace!("Trying to build a `Channel` from a `Contact` or `GroupContextV2`");
         let available_channels = manager.available_channels();
-        let s: Self = Object::new::<Self>(&[("manager", manager)]);
+        let s: Self = Object::builder::<Self>()
+            .property("manager", manager)
+            .build();
         if let Some(group_context_v2) = group_context {
             let master_key = GroupMasterKey::new(
                 group_context_v2
@@ -65,7 +67,9 @@ impl Channel {
         group_context_v2: &GroupContextV2,
         manager: &Manager,
     ) -> Self {
-        let s: Self = Object::new::<Self>(&[("manager", manager)]);
+        let s: Self = Object::builder::<Self>()
+            .property("manager", manager)
+            .build();
         s.imp().group.swap(&RefCell::new(Some(group)));
         s.imp()
             .group_context
@@ -352,12 +356,11 @@ impl Channel {
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
-    use gtk::{gdk, glib};
     use gdk::{prelude::*, subclass::prelude::*};
     use glib::{
-        once_cell::sync::Lazy, subclass::Signal, ParamFlags, ParamSpec, ParamSpecObject,
-        ParamSpecString, Value,
+        once_cell::sync::Lazy, subclass::Signal, ParamSpec, ParamSpecObject, ParamSpecString, Value,
     };
+    use gtk::{gdk, glib};
     use libsignal_service::groups_v2::Group;
     use presage::prelude::{GroupContextV2, Uuid};
 
@@ -411,21 +414,13 @@ mod imp {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
-                    ),
-                    ParamSpecObject::new(
-                        "last-message",
-                        "last-message",
-                        "last-message",
-                        DisplayMessage::static_type(),
-                        ParamFlags::READABLE,
-                    ),
-                    ParamSpecString::new("title", "title", "title", None, ParamFlags::READABLE),
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecObject::builder::<DisplayMessage>("last-message")
+                        .read_only()
+                        .build(),
+                    ParamSpecString::builder("title").read_only().build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -469,11 +464,9 @@ mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![
-                    Signal::builder("message")
-                        .param_types([DisplayMessage::static_type()])
-                        .build()
-                ]
+                vec![Signal::builder("message")
+                    .param_types([DisplayMessage::static_type()])
+                    .build()]
             });
             SIGNALS.as_ref()
         }

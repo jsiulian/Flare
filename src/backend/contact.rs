@@ -1,8 +1,8 @@
 use std::cell::RefCell;
 
-use gtk::{gio, glib};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Object, ObjectExt};
+use gtk::{gio, glib};
 use presage::prelude::ServiceAddress;
 
 use super::Manager;
@@ -20,7 +20,9 @@ impl Contact {
             }
         }
         log::trace!("Not in the contact list");
-        let s: Self = Object::new::<Self>(&[("manager", manager)]);
+        let s: Self = Object::builder::<Self>()
+            .property("manager", manager)
+            .build();
         s.imp()
             .phonenumber
             .swap(&RefCell::new(address.phonenumber.clone()));
@@ -30,7 +32,9 @@ impl Contact {
 
     pub(super) fn from_contact(contact: presage::prelude::Contact, manager: &Manager) -> Self {
         log::trace!("Building a `Contact` from a `presage::prelude::Contact`");
-        let s: Self = Object::new::<Self>(&[("manager", manager)]);
+        let s: Self = Object::builder::<Self>()
+            .property("manager", manager)
+            .build();
         s.imp()
             .phonenumber
             .swap(&RefCell::new(contact.address.phonenumber.clone()));
@@ -65,12 +69,11 @@ impl Contact {
 mod imp {
     use std::cell::RefCell;
 
-    use gtk::{gdk, glib};
     use gdk::{prelude::*, subclass::prelude::*};
     use glib::{
-        once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject,
-        ParamSpecString, Value,
+        once_cell::sync::Lazy, ParamSpec, ParamSpecBoolean, ParamSpecObject, ParamSpecString, Value,
     };
+    use gtk::{gdk, glib};
     use presage::prelude::phonenumber::Mode;
 
     use crate::backend::Manager;
@@ -94,21 +97,11 @@ mod imp {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
-                    ),
-                    ParamSpecBoolean::new(
-                        "is-self",
-                        "is-self",
-                        "is-self",
-                        false,
-                        ParamFlags::READABLE,
-                    ),
-                    ParamSpecString::new("title", "title", "title", None, ParamFlags::READABLE),
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecBoolean::builder("is-self").read_only().build(),
+                    ParamSpecString::builder("title").read_only().build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -119,7 +112,9 @@ mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "is-self" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
-                        (contact.address.uuid == Some(self.manager.borrow().as_ref().unwrap().uuid())).to_value()
+                        (contact.address.uuid
+                            == Some(self.manager.borrow().as_ref().unwrap().uuid()))
+                        .to_value()
                     } else {
                         false.to_value()
                     }
@@ -127,7 +122,7 @@ mod imp {
                 "title" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
                         let name = &contact.name;
-                        if self.instance().is_self() {
+                        if self.obj().is_self() {
                             self.manager
                                 .borrow()
                                 .as_ref()

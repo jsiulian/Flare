@@ -1,9 +1,9 @@
 use std::path::PathBuf;
 
-use gtk::{gdk, gio, glib};
 use gdk::{prelude::TextureExt, Texture};
 use gio::{prelude::*, subclass::prelude::ObjectSubclassIsExt, Cancellable, File, FileCreateFlags};
 use glib::{Bytes, Object, Priority};
+use gtk::{gdk, gio, glib};
 use gtk::{MediaFile, MediaStream};
 use presage::prelude::{content::AttachmentPointer, AttachmentSpec};
 
@@ -56,20 +56,20 @@ impl Attachment {
         if mime.starts_with("video/") {
             video = Some(MediaFile::for_file(&file))
         }
-        Object::new::<Self>(&[
-            ("manager", manager),
-            ("file", &file),
-            (
+        Object::builder::<Self>()
+            .property("manager", manager)
+            .property("file", &file)
+            .property(
                 "name",
                 &file
                     .basename()
                     .and_then(|f| f.file_name().map(|s| s.to_string_lossy().into_owned())),
-            ),
-            ("image", &image),
-            ("video", &video),
-            ("loaded", &true),
-            ("content-type", &mime),
-        ])
+            )
+            .property("image", &image)
+            .property("video", &video)
+            .property("loaded", &true)
+            .property("content-type", &mime)
+            .build()
     }
 
     pub fn from_texture(texture: Texture, manager: &Manager) -> Self {
@@ -78,14 +78,14 @@ impl Attachment {
         let tmp_out = tmp_file_stream.output_stream();
         let _ = tmp_out.write_bytes(&texture.save_to_png_bytes(), Cancellable::NONE);
 
-        Object::new::<Self>(&[
-            ("manager", manager),
-            ("file", &file),
-            ("name", &"image.png"),
-            ("image", &texture),
-            ("loaded", &true),
-            ("content-type", &"image/png"),
-        ])
+        Object::builder::<Self>()
+            .property("manager", manager)
+            .property("file", &file)
+            .property("name", &"image.png")
+            .property("image", &texture)
+            .property("loaded", &true)
+            .property("content-type", &"image/png")
+            .build()
     }
 
     pub fn manager(&self) -> Manager {
@@ -152,14 +152,14 @@ impl Attachment {
             "Attachment with content type: {}",
             pointer.content_type.as_ref().unwrap_or(&"None".to_string())
         );
-        let s: Self = Object::new::<Self>(&[
-            ("manager", manager),
-            ("image", &None::<Texture>),
-            ("name", &None::<String>),
-            ("video", &None::<MediaStream>),
-            ("loaded", &false),
-            ("content-type", &pointer.content_type.as_ref()),
-        ]);
+        let s: Self = Object::builder::<Self>()
+            .property("manager", manager)
+            .property("image", &None::<Texture>)
+            .property("name", &None::<String>)
+            .property("video", &None::<MediaStream>)
+            .property("loaded", &false)
+            .property("content-type", &pointer.content_type.as_ref())
+            .build();
         *s.imp().pointer.borrow_mut() = Some(pointer.clone());
         s
     }
@@ -288,16 +288,16 @@ impl Attachment {
 mod imp {
     use std::cell::{Cell, RefCell};
 
-    use gtk::{gdk, gio, glib};
     use gdk::prelude::*;
     use gdk::{subclass::prelude::*, Texture};
     use gio::File;
     use glib::ParamSpecEnum;
     use glib::{
-        once_cell::sync::Lazy, Bytes, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject,
+        once_cell::sync::Lazy, Bytes, ParamSpec, ParamSpecBoolean, ParamSpecObject,
         ParamSpecString, Value,
     };
     use gtk::MediaStream;
+    use gtk::{gdk, gio, glib};
     use presage::prelude::content::AttachmentPointer;
 
     use crate::backend::attachment::AttachmentType;
@@ -330,78 +330,22 @@ mod imp {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
-                    ),
-                    ParamSpecObject::new(
-                        "image",
-                        "image",
-                        "image",
-                        Texture::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecObject::new(
-                        "video",
-                        "video",
-                        "video",
-                        MediaStream::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecObject::new(
-                        "file",
-                        "file",
-                        "file",
-                        File::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecEnum::new(
-                        "type",
-                        "type",
-                        "type",
-                        AttachmentType::static_type(),
-                        AttachmentType::default() as i32,
-                        ParamFlags::READABLE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "is-image",
-                        "is-image",
-                        "is-image",
-                        false,
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "is-video",
-                        "is-video",
-                        "is-video",
-                        false,
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "is-file",
-                        "is-file",
-                        "is-file",
-                        false,
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecString::new("name", "name", "name", None, ParamFlags::READWRITE),
-                    ParamSpecString::new(
-                        "content-type",
-                        "content-type",
-                        "content-type",
-                        None,
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "loaded",
-                        "loaded",
-                        "loaded",
-                        false,
-                        ParamFlags::READWRITE,
-                    ),
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecObject::builder::<Texture>("image").build(),
+                    ParamSpecObject::builder::<MediaStream>("video").build(),
+                    ParamSpecObject::builder::<File>("file").build(),
+                    ParamSpecEnum::builder::<AttachmentType>("type")
+                        .read_only()
+                        .default_value(AttachmentType::default())
+                        .build(),
+                    ParamSpecBoolean::builder("is-image").build(),
+                    ParamSpecBoolean::builder("is-video").build(),
+                    ParamSpecBoolean::builder("is-file").build(),
+                    ParamSpecString::builder("name").build(),
+                    ParamSpecString::builder("content-type").build(),
+                    ParamSpecBoolean::builder("loaded").build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -421,9 +365,9 @@ mod imp {
                     .map(AttachmentType::from_content_type)
                     .unwrap_or_default()
                     .to_value(),
-                "is-image" => self.instance().is_image().to_value(),
-                "is-video" => self.instance().is_video().to_value(),
-                "is-file" => self.instance().is_file().to_value(),
+                "is-image" => self.obj().is_image().to_value(),
+                "is-video" => self.obj().is_video().to_value(),
+                "is-file" => self.obj().is_file().to_value(),
                 "content-type" => self.content_type.borrow().as_ref().to_value(),
                 "loaded" => self.loaded.get().to_value(),
                 _ => unimplemented!(),

@@ -1,10 +1,9 @@
 use std::time::Duration;
 
-use gtk::{gdk, gio, glib};
-use gdk::prelude::*;
-use gtk::prelude::*;
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use gtk::{SorterChange};
+use gtk::prelude::*;
+use gtk::SorterChange;
+use gtk::{gio, glib};
 
 use crate::{backend::Channel, gspawn};
 
@@ -76,13 +75,13 @@ impl ChannelList {
 pub mod imp {
     use std::cell::{Cell, RefCell};
 
-    use gtk::{gio, glib};
     use glib::{
         clone,
         once_cell::sync::Lazy,
         subclass::{InitializingObject, Signal},
-        ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
+        ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
+    use gtk::{gio, glib};
     use gtk::{
         prelude::*, subclass::prelude::*, CompositeTemplate, CustomFilter, CustomSorter,
         FilterChange, FilterListModel, SignalListItemFactory, SortListModel, Widget,
@@ -117,12 +116,12 @@ pub mod imp {
         #[template_callback]
         fn search_changed(&self) {
             self.filter.borrow().changed(FilterChange::Different);
-            self.instance().scroll_up();
+            self.obj().scroll_up();
         }
 
         #[template_callback]
         fn search_activate(&self) {
-            let obj = self.instance();
+            let obj = self.obj();
             if obj.activate_row(0) {
                 obj.toggle_search();
             }
@@ -130,11 +129,11 @@ pub mod imp {
 
         #[template_callback]
         fn search_stopped(&self) {
-            self.instance().set_search_enabled(false);
+            self.obj().set_search_enabled(false);
             self.search_entry.set_text("");
             self.filter.borrow().changed(FilterChange::Different);
             self.list.grab_focus();
-            self.instance().scroll_up();
+            self.obj().scroll_up();
         }
     }
 
@@ -166,7 +165,7 @@ pub mod imp {
                     let title = channel.title();
                     title.to_lowercase().contains(&search.to_lowercase())
                 }));
-            let filter_model = FilterListModel::new(Some(&model), Some(&filter));
+            let filter_model = FilterListModel::new(Some(model.clone()), Some(filter.clone()));
             let sorter = CustomSorter::new(|l1, l2| {
                 let c1 = l1
                     .downcast_ref::<Channel>()
@@ -198,9 +197,9 @@ pub mod imp {
                     gtk::Ordering::Larger
                 }
             });
-            let sort_model = SortListModel::new(Some(&filter_model), Some(&sorter));
+            let sort_model = SortListModel::new(Some(filter_model), Some(sorter.clone()));
 
-            let selection_model = gtk::NoSelection::new(Some(&sort_model));
+            let selection_model = gtk::NoSelection::new(Some(sort_model));
             self.list.get().set_model(Some(&selection_model));
 
             self.model.replace(model);
@@ -222,34 +221,16 @@ pub mod imp {
 
             self.list
                 .connect_activate(clone!(@weak self as obj => move |_list_view, position| {
-                    obj.instance().activate_row(position);
+                    obj.obj().activate_row(position);
                 }));
         }
 
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecObject::new(
-                        "active-channel",
-                        "active-channel",
-                        "active-channel",
-                        Channel::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "search-enabled",
-                        "search-enabled",
-                        "search-enabled",
-                        false,
-                        ParamFlags::READWRITE,
-                    ),
+                    ParamSpecObject::builder::<Manager>("manager").build(),
+                    ParamSpecObject::builder::<Channel>("active-channel").build(),
+                    ParamSpecBoolean::builder("search-enabled").build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -282,7 +263,7 @@ pub mod imp {
                                 let channel = args[1]
                                     .get::<Channel>()
                                     .expect("Type of `channel` signal of `Manager` to be `Channel`");
-                                obj.instance().add_channel(channel);
+                                obj.obj().add_channel(channel);
                                 None
                             }),
                         );
@@ -293,7 +274,8 @@ pub mod imp {
                     let chan = value.get::<Option<Channel>>().expect(
                         "Property `active-channel` of `ChannelList` has to be of type `Channel`",
                     );
-                    self.instance().emit_by_name::<()>("active-channel-changed", &[&chan]);
+                    self.obj()
+                        .emit_by_name::<()>("active-channel-changed", &[&chan]);
                     self.active_channel.replace(chan);
                 }
                 "search-enabled" => {
@@ -308,11 +290,9 @@ pub mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![
-                    Signal::builder("active-channel-changed")
-                        .param_types([Channel::static_type()])
-                        .build()
-                ]
+                vec![Signal::builder("active-channel-changed")
+                    .param_types([Channel::static_type()])
+                    .build()]
             });
             SIGNALS.as_ref()
         }

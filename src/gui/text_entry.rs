@@ -1,5 +1,5 @@
+use glib::subclass::prelude::ObjectSubclassIsExt;
 use gtk::glib;
-use glib::subclass::prelude::{ObjectSubclassIsExt};
 use gtk::traits::TextBufferExt;
 
 gtk::glib::wrapper! {
@@ -26,19 +26,20 @@ impl TextEntry {
 
 pub mod imp {
     use crate::gspawn;
-    use gtk::{gdk, gio, glib};
-    use glib::{
-        prelude::{ObjectExt, ToValue},
-        subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassExt},
-    };
+    use gdk::prelude::ParamSpecBuilderExt;
     use glib::{
         clone,
         once_cell::sync::Lazy,
         subclass::{InitializingObject, Signal},
-        ParamFlags, ParamSpec, ParamSpecBoolean, Value,
+        ParamSpec, ParamSpecBoolean, Value,
     };
+    use glib::{
+        prelude::{ObjectExt, ToValue},
+        subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassExt},
+    };
+    use gtk::{gdk, gio, glib, subclass::widget::CompositeTemplateInitializingExt};
     use gtk::{
-        prelude::{InitializingWidgetExt, StaticType},
+        prelude::StaticType,
         subclass::{
             prelude::BoxImpl,
             widget::{CompositeTemplate, WidgetClassSubclassExt, WidgetImpl},
@@ -75,7 +76,6 @@ pub mod imp {
         fn constructed(&self) {
             let obj = self.obj();
             let key_events = gtk::EventControllerKey::new();
-            self.view.add_controller(&key_events);
             key_events
                 .connect_key_pressed(clone!(@weak obj => @default-return Inhibit(false), move |_, key, _, modifier| {
                 if !modifier.contains(gdk::ModifierType::SHIFT_MASK) && (key == gdk::Key::Return || key == gdk::Key::KP_Enter) {
@@ -85,6 +85,7 @@ pub mod imp {
                     Inhibit(false)
                 }
             }));
+            self.view.add_controller(key_events);
 
             self.view
                 .connect_paste_clipboard(clone!(@weak obj => move |entry| {
@@ -131,15 +132,8 @@ pub mod imp {
                 }));
         }
         fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![ParamSpecBoolean::new(
-                    "is-empty",
-                    "is-empty",
-                    "is-empty",
-                    false,
-                    ParamFlags::READABLE,
-                )]
-            });
+            static PROPERTIES: Lazy<Vec<ParamSpec>> =
+                Lazy::new(|| vec![ParamSpecBoolean::builder("is-empty").read_only().build()]);
             PROPERTIES.as_ref()
         }
 
@@ -160,8 +154,7 @@ pub mod imp {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
                 vec![
-                    Signal::builder("activate")
-                        .build(),
+                    Signal::builder("activate").build(),
                     Signal::builder("paste-file")
                         .param_types([gio::File::static_type()])
                         .build(),

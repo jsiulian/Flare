@@ -1,6 +1,6 @@
-use gtk::{glib, gio};
 use gio::{subclass::prelude::ObjectSubclassIsExt, SimpleAction, SimpleActionGroup};
 use glib::{clone, Object};
+use gtk::{gio, glib};
 use gtk::{
     prelude::*,
     traits::{PopoverExt, WidgetExt},
@@ -18,7 +18,9 @@ glib::wrapper! {
 impl MessageItem {
     pub fn new(message: &TextMessage) -> Self {
         log::trace!("Initializing `MessageItem`");
-        Object::new::<Self>(&[("message", message)])
+        Object::builder::<Self>()
+            .property("message", message)
+            .build()
     }
 
     pub fn message(&self) -> TextMessage {
@@ -52,13 +54,13 @@ pub mod imp {
     use regex::Regex;
     use std::cell::{Cell, RefCell};
 
-    use gtk::glib;
     use glib::{
         clone,
         once_cell::sync::Lazy,
         subclass::{InitializingObject, Signal},
-        ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
+        ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
+    use gtk::glib;
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
     use crate::{
@@ -113,7 +115,7 @@ pub mod imp {
 
         #[template_callback]
         pub(super) fn handle_reply(&self) {
-            let obj = self.instance();
+            let obj = self.obj();
             let msg = obj.message();
             // TODO: Log message
             crate::trace!("Replying to a message",);
@@ -128,7 +130,7 @@ pub mod imp {
 
         #[template_callback]
         fn handle_react(&self, emoji: String) {
-            let obj = self.instance();
+            let obj = self.obj();
             let msg = obj.message();
             crate::trace!(
                 "Reacting to message {} with {} (len: {})",
@@ -136,7 +138,7 @@ pub mod imp {
                 emoji,
                 emoji.chars().count()
             );
-            let obj = self.instance();
+            let obj = self.obj();
             gspawn!(clone!(@strong msg, @strong obj => async move {
                 log::trace!("Sending message");
                 if let Err(e) = msg.send_reaction(&emoji.chars().next().unwrap_or_default().to_string()).await {
@@ -156,40 +158,22 @@ pub mod imp {
     impl ObjectImpl for MessageItem {
         fn constructed(&self) {
             self.parent_constructed();
-            self.instance().setup_actions();
+            self.obj().setup_actions();
         }
 
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecObject::new(
-                        "message",
-                        "message",
-                        "message",
-                        TextMessage::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "show-name",
-                        "show-name",
-                        "show-name",
-                        true,
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "has-reaction",
-                        "has-reaction",
-                        "has-reaction",
-                        false,
-                        ParamFlags::READABLE,
-                    ),
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecObject::builder::<TextMessage>("message").build(),
+                    ParamSpecBoolean::builder("show-name")
+                        .default_value(true)
+                        .build(),
+                    ParamSpecBoolean::builder("has-reaction")
+                        .read_only()
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -212,7 +196,7 @@ pub mod imp {
         }
 
         fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            let instance = self.instance();
+            let instance = self.obj();
             match pspec.name() {
                 "manager" => {
                     let man = value
@@ -258,11 +242,9 @@ pub mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![
-                    Signal::builder("reply")
-                        .param_types([TextMessage::static_type()])
-                        .build()
-                ]
+                vec![Signal::builder("reply")
+                    .param_types([TextMessage::static_type()])
+                    .build()]
             });
             SIGNALS.as_ref()
         }

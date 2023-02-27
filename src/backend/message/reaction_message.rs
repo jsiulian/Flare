@@ -1,8 +1,8 @@
 use std::cell::RefCell;
 
-use gtk::{gio, glib};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
+use gtk::{gio, glib};
 use presage::prelude::content::Reaction;
 use presage::prelude::*;
 
@@ -22,12 +22,12 @@ impl ReactionMessage {
         manager: &Manager,
         reaction: Reaction,
     ) -> Self {
-        let s: Self = Object::new::<Self>(&[
-            ("sender", sender),
-            ("channel", channel),
-            ("sent", &timestamp),
-            ("manager", manager),
-        ]);
+        let s: Self = Object::builder::<Self>()
+            .property("sender", sender)
+            .property("channel", channel)
+            .property("sent", &timestamp)
+            .property("manager", manager)
+            .build();
         s.imp().reaction.swap(&RefCell::new(Some(reaction)));
         s
     }

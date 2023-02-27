@@ -2,10 +2,10 @@ use std::{cell::RefCell, collections::HashMap, path::Path, time::Duration};
 
 use chacha20poly1305::ChaCha20Poly1305;
 use encrypted_sled::{CountingNonce, EncryptionCipher};
-use gtk::{gdk, gio, glib};
 use gdk::prelude::*;
 use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
 use glib::{clone, MainContext, Object, Priority};
+use gtk::{gdk, gio, glib};
 use libsecret::{
     prelude::ServiceExtManual, traits::CollectionExt, Collection, CollectionFlags, Schema,
     SchemaAttributeType, SchemaFlags, Service, ServiceFlags, COLLECTION_DEFAULT,
@@ -117,7 +117,7 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationErr
 
 impl Manager {
     pub fn new(application: Application) -> Manager {
-        let s: Self = Object::new::<Self>(&[]);
+        let s: Self = Object::new::<Self>();
         s.imp().application.borrow_mut().replace(application);
         s
     }
@@ -552,11 +552,11 @@ impl Manager {
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
-    use gtk::{gdk, glib, gio};
     use gdk::prelude::StaticType;
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gio::{Application, Settings};
     use glib::{once_cell::sync::Lazy, subclass::Signal};
+    use gtk::{gdk, gio, glib};
 
     use crate::{
         backend::{manager_thread::ManagerThread, Channel, Message},
@@ -616,8 +616,7 @@ mod imp {
                     Signal::builder("link-qr-code")
                         .param_types([String::static_type()])
                         .build(),
-                    Signal::builder("link-finish")
-                        .build(),
+                    Signal::builder("link-finish").build(),
                 ]
             });
             SIGNALS.as_ref()

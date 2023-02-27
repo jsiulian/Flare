@@ -1,5 +1,5 @@
-use gtk::glib;
 use glib::{prelude::IsA, Object};
+use gtk::glib;
 
 use crate::ApplicationError;
 
@@ -15,12 +15,12 @@ impl ErrorDialog {
         log::trace!("Initializing ErrorDialog");
         log::error!("ErrorDialog displaying error: {}", error);
         log::trace!("ErrorDialog full error: {:#?}", error);
-        Object::new::<Self>(&[
-            ("error", &error.to_string()),
-            ("secondary-error", &error.more_information()),
-            ("should-report", &error.should_report()),
-            ("transient-for", &parent),
-        ])
+        Object::builder::<Self>()
+            .property("error", &error.to_string())
+            .property("secondary-error", &error.more_information())
+            .property("should-report", &error.should_report())
+            .property("transient-for", &parent)
+            .build()
     }
 }
 
@@ -28,11 +28,11 @@ pub mod imp {
     pub(crate) use std::cell::Cell;
     use std::cell::RefCell;
 
-    use gtk::glib;
     use glib::{
-        once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
-        ParamSpecBoolean, ParamSpecString, Value,
+        once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecBoolean,
+        ParamSpecString, Value,
     };
+    use gtk::glib;
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
     use libadwaita::subclass::prelude::*;
 
@@ -63,33 +63,19 @@ pub mod imp {
         fn constructed(&self) {
             log::trace!("Constructed ErrorDialog");
             self.parent_constructed();
-            self.instance().connect_response(|dialog, _| dialog.close());
+            self.obj().connect_response(|dialog, _| dialog.close());
         }
 
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecString::new(
-                        "error",
-                        "error",
-                        "error",
-                        None,
-                        ParamFlags::READWRITE | ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    ParamSpecString::new(
-                        "secondary-error",
-                        "secondary-error",
-                        "secondary-error",
-                        None,
-                        ParamFlags::READWRITE | ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    ParamSpecBoolean::new(
-                        "should-report",
-                        "should-report",
-                        "should-report",
-                        false,
-                        ParamFlags::READWRITE | ParamFlags::CONSTRUCT_ONLY,
-                    ),
+                    ParamSpecString::builder("error").construct_only().build(),
+                    ParamSpecString::builder("secondary-error")
+                        .construct_only()
+                        .build(),
+                    ParamSpecBoolean::builder("should-report")
+                        .construct_only()
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()

@@ -1,5 +1,5 @@
-use gtk::glib;
 use glib::{Object, ObjectExt};
+use gtk::glib;
 
 gtk::glib::wrapper! {
     pub struct Attachment(ObjectSubclass<imp::Attachment>)
@@ -11,7 +11,9 @@ gtk::glib::wrapper! {
 impl Attachment {
     pub fn new(attachment: &crate::backend::Attachment) -> Self {
         log::trace!("Initializing `Attachment`");
-        Object::new::<Self>(&[("attachment", attachment)])
+        Object::builder::<Self>()
+            .property("attachment", attachment)
+            .build()
     }
 
     pub fn attachment(&self) -> crate::backend::Attachment {
@@ -22,17 +24,16 @@ impl Attachment {
 pub mod imp {
     use std::cell::RefCell;
 
-    use gtk::{glib, gio};
+    use ashpd::{desktop::open_uri::OpenFileRequest, WindowIdentifier};
     use gio::Settings;
     use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
-        ParamSpecObject, Value,
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject,
+        Value,
     };
+    use gtk::{gio, glib, FileChooserNative};
     use gtk::{
-        builders::FileChooserNativeBuilder, prelude::*, subclass::prelude::*, CompositeTemplate,
-        FileChooserAction, ResponseType,
+        prelude::*, subclass::prelude::*, CompositeTemplate, FileChooserAction, ResponseType,
     };
-    use ashpd::{WindowIdentifier, desktop::open_uri::OpenFileRequest};
 
     use crate::{
         backend::Manager,
@@ -53,7 +54,7 @@ pub mod imp {
     impl Attachment {
         #[template_callback]
         fn load(&self, _: gtk::Button) {
-            let obj = self.instance();
+            let obj = self.obj();
             gspawn!(clone!(@strong obj => async move {
                 let attachment = obj.attachment();
                 attachment.load().await
@@ -61,7 +62,7 @@ pub mod imp {
         }
 
         fn window(&self) -> crate::gui::window::Window {
-            self.instance()
+            self.obj()
                 .root()
                 .expect("`Attachment` to have a root")
                 .dynamic_cast::<crate::gui::Window>()
@@ -77,7 +78,7 @@ pub mod imp {
                 .as_ref()
                 .and_then(|a| a.open_file())
             {
-                let obj = self.instance();
+                let obj = self.obj();
 
                 gspawn!(clone!(@weak obj => async move {
                     let identifier = WindowIdentifier::from_native(&obj.native().unwrap()).await;
@@ -96,7 +97,7 @@ pub mod imp {
         fn download(&self, _: gtk::Button) {
             log::trace!("User requested to dowload attachment");
             if let Some(attachment) = self.attachment.borrow().as_ref() {
-                let chooser = FileChooserNativeBuilder::new()
+                let chooser = FileChooserNative::builder()
                     .transient_for(&self.window())
                     .action(FileChooserAction::Save)
                     .build();
@@ -111,7 +112,7 @@ pub mod imp {
                 //         .as_ref(),
                 // );
 
-                let obj = self.instance();
+                let obj = self.obj();
                 chooser.connect_response(
                     clone!(@weak chooser, @weak attachment, @weak obj => move |_, action| {
                         if action == ResponseType::Accept {
@@ -160,20 +161,10 @@ pub mod imp {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecObject::new(
-                        "attachment",
-                        "attachment",
-                        "attachment",
-                        crate::backend::Attachment::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecObject::builder::<crate::backend::Attachment>("attachment").build(),
                 ]
             });
             PROPERTIES.as_ref()

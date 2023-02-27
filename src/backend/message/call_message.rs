@@ -1,9 +1,9 @@
 use std::cell::RefCell;
 
-use gtk::{gdk, glib, gio};
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
+use gtk::{gdk, gio, glib};
 use presage::prelude::content::CallMessage as PreCallMessage;
 
 use crate::backend::{Channel, Contact};
@@ -56,13 +56,13 @@ impl CallMessage {
         call: PreCallMessage,
     ) -> Option<Self> {
         let call_type = CallMessageType::try_from(&call).ok()?;
-        let s: Self = Object::new::<Self>(&[
-            ("sender", sender),
-            ("channel", channel),
-            ("sent", &timestamp),
-            ("manager", manager),
-            ("call-type", &call_type),
-        ]);
+        let s: Self = Object::builder::<Self>()
+            .property("sender", sender)
+            .property("channel", channel)
+            .property("sent", &timestamp)
+            .property("manager", manager)
+            .property("call-type", &call_type)
+            .build();
         s.imp().call.swap(&RefCell::new(Some(call)));
         Some(s)
     }
@@ -74,9 +74,12 @@ impl CallMessage {
 
 mod imp {
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gdk::gdk_pixbuf::{
-        glib::{once_cell::sync::Lazy, ParamFlags, ParamSpec, Value},
-        prelude::{StaticType, ToValue},
+    use gdk::{
+        gdk_pixbuf::{
+            glib::{once_cell::sync::Lazy, ParamSpec, Value},
+            prelude::ToValue,
+        },
+        prelude::ParamSpecBuilderExt,
     };
     use glib::ParamSpecEnum;
     use gtk::glib;
@@ -118,19 +121,15 @@ mod imp {
     impl ObjectImpl for CallMessage {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![ParamSpecEnum::new(
-                    "call-type",
-                    "call-type",
-                    "call-type",
-                    CallMessageType::static_type(),
-                    CallMessageType::default() as i32,
-                    ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
-                )]
+                vec![ParamSpecEnum::builder("call-type")
+                    .default_value(CallMessageType::default())
+                    .construct_only()
+                    .build()]
             });
             PROPERTIES.as_ref()
         }
 
-        fn property(&self,_id: usize, pspec: &ParamSpec) -> Value {
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "call-type" => self.call_type.borrow().to_value(),
                 _ => unimplemented!(),

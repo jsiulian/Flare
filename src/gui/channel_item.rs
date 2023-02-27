@@ -1,5 +1,5 @@
-use gtk::glib;
 use glib::Object;
+use gtk::glib;
 
 glib::wrapper! {
     pub struct ChannelItem(ObjectSubclass<imp::ChannelItem>)
@@ -11,7 +11,7 @@ glib::wrapper! {
 impl ChannelItem {
     pub fn new() -> Self {
         log::trace!("Initializing `ChannelItem`");
-        Object::new::<Self>(&[])
+        Object::builder::<Self>().build()
     }
 }
 
@@ -24,11 +24,10 @@ impl Default for ChannelItem {
 pub mod imp {
     use std::cell::RefCell;
 
-    use gtk::glib;
     use glib::{
-        once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
-        ParamSpecObject, Value,
+        once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject, Value,
     };
+    use gtk::glib;
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
     use crate::{
@@ -73,20 +72,10 @@ pub mod imp {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecObject::new(
-                        "channel",
-                        "channel",
-                        "channel",
-                        Channel::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecObject::builder::<Channel>("channel").build(),
                 ]
             });
             PROPERTIES.as_ref()
