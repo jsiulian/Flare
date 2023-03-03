@@ -1,9 +1,7 @@
-use std::sync::{Arc, Mutex};
-
 use futures::{select, FutureExt, StreamExt};
 use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
 use presage::{
-    prelude::{content::*, AttachmentSpec, Contact, ContentBody, DataMessage, ServiceAddress, *},
+    prelude::{content::*, AttachmentSpec, ContentBody, DataMessage, ServiceAddress, *},
     Error, Manager, MessageStore, Registered, Store,
 };
 use tokio::sync::{mpsc, oneshot};
@@ -13,10 +11,8 @@ use crate::ApplicationError;
 const MESSAGE_BOUND: usize = 10;
 
 enum Command {
-    RequestContactsSync(oneshot::Sender<Result<(), Error>>),
     Uuid(oneshot::Sender<Uuid>),
-    GetContacts(oneshot::Sender<Result<Vec<Contact>, Error>>),
-    GetGroupV2(GroupMasterKey, oneshot::Sender<Result<Group, Error>>),
+    GetGroupV2(Vec<u8>, oneshot::Sender<Result<Option<Group>, Error>>),
     SendMessage(
         ServiceAddress,
         Box<ContentBody>,
@@ -24,7 +20,7 @@ enum Command {
         oneshot::Sender<Result<(), Error>>,
     ),
     SendMessageToGroup(
-        Vec<ServiceAddress>,
+        Vec<u8>,
         Box<DataMessage>,
         u64,
         oneshot::Sender<Result<(), Error>>,
@@ -45,7 +41,6 @@ impl std::fmt::Debug for Command {
 pub struct ManagerThread {
     command_sender: mpsc::Sender<Command>,
     uuid: Uuid,
-    contacts: Arc<Mutex<Vec<Contact>>>,
 }
 
 impl Clone for ManagerThread {
@@ -53,7 +48,6 @@ impl Clone for ManagerThread {
         Self {
             command_sender: self.command_sender.clone(),
             uuid: self.uuid,
-            contacts: self.contacts.clone(),
         }
     }
 }
@@ -108,81 +102,23 @@ impl ManagerThread {
         }
         let uuid = receiver_uuid.await;
 
-        let (sender_contacts, receiver_contacts) = oneshot::channel();
-        if sender
-            .send(Command::GetContacts(sender_contacts))
-            .await
-            .is_err()
-        {
-            return None;
-        }
-        let contacts = receiver_contacts.await;
-
-        if uuid.is_err() || contacts.is_err() {
+        if uuid.is_err() {
             return None;
         }
 
-        if let Err(_e) = &contacts.as_ref().unwrap() {
-            // TODO: Error handling
-            log::error!("Could not load contacts");
-        }
         Some(Self {
             command_sender: sender,
             uuid: uuid.unwrap(),
-            contacts: Arc::new(Mutex::new(contacts.unwrap().unwrap_or_default())),
         })
     }
 }
 
 impl ManagerThread {
-    pub async fn sync_contacts(&mut self) -> Result<(), Error> {
-        let (sender_contacts, receiver_contacts) = oneshot::channel();
-        self.command_sender
-            .send(Command::GetContacts(sender_contacts))
-            .await
-            .expect("Command sending failed");
-        let contacts = receiver_contacts
-            .await
-            .expect("Callback receiving failed")?;
-        let mut c = self.contacts.lock().expect("Poisoned mutex");
-        *c = contacts;
-        log::info!("Synced contacts. Got {} contacts.", c.len());
-        Ok(())
-    }
-    pub async fn request_contacts_sync(&self) -> Result<(), Error> {
-        let (sender, receiver) = oneshot::channel();
-        self.command_sender
-            .send(Command::RequestContactsSync(sender))
-            .await
-            .expect("Command sending failed");
-        receiver.await.expect("Callback receiving failed")
-    }
-
     pub fn uuid(&self) -> Uuid {
         self.uuid
     }
 
-    pub fn get_contacts(&self) -> Result<impl Iterator<Item = Contact> + '_, Error> {
-        let c = self.contacts.lock().expect("Poisoned mutex");
-        // Very weird way to counteract "returning borrowed c".
-        Ok(c.iter()
-            .map(almost_clone_contact)
-            .collect::<Vec<_>>()
-            .into_iter())
-    }
-
-    pub fn get_contact_by_id(&self, id: Uuid) -> Result<Option<Contact>, Error> {
-        Ok(self
-            .contacts
-            .lock()
-            .expect("Poisoned mutex")
-            .iter()
-            .filter(|c| c.address.uuid == Some(id))
-            .map(almost_clone_contact)
-            .next())
-    }
-
-    pub async fn get_group_v2(&self, group_master_key: GroupMasterKey) -> Result<Group, Error> {
+    pub async fn get_group_v2(&self, group_master_key: Vec<u8>) -> Result<Option<Group>, Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
             .send(Command::GetGroupV2(group_master_key, sender))
@@ -212,14 +148,14 @@ impl ManagerThread {
 
     pub async fn send_message_to_group(
         &self,
-        recipients: impl IntoIterator<Item = ServiceAddress>,
+        group_key: Vec<u8>,
         message: DataMessage,
         timestamp: u64,
     ) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
             .send(Command::SendMessageToGroup(
-                recipients.into_iter().collect(),
+                group_key,
                 Box::new(message),
                 timestamp,
                 sender,
@@ -340,21 +276,11 @@ async fn handle_command<C: Store + 'static>(
 ) {
     log::trace!("Got command: {:?}", command);
     match command {
-        Command::RequestContactsSync(callback) => callback
-            .send(manager.request_contacts_sync().await)
-            .expect("Callback sending failed"),
         Command::Uuid(callback) => callback
             .send(manager.uuid())
             .expect("Callback sending failed"),
-        Command::GetContacts(callback) => callback
-            .send(
-                manager
-                    .get_contacts()
-                    .map(|c| c.filter_map(|o| o.ok()).collect()),
-            )
-            .expect("Callback sending failed"),
         Command::GetGroupV2(master_key, callback) => callback
-            .send(manager.get_group_v2(master_key).await)
+            .send(manager.group(&master_key[..]))
             .map_err(|_| ())
             .expect("Callback sending failed"),
         Command::SendMessage(recipient_address, message, timestamp, callback) => callback
@@ -364,10 +290,10 @@ async fn handle_command<C: Store + 'static>(
                     .await,
             )
             .expect("Callback sending failed"),
-        Command::SendMessageToGroup(recipients, message, timestamp, callback) => callback
+        Command::SendMessageToGroup(group_key, message, timestamp, callback) => callback
             .send(
                 manager
-                    .send_message_to_group(recipients, *message, timestamp)
+                    .send_message_to_group(&group_key[..], *message, timestamp)
                     .await,
             )
             .expect("Callback sending failed"),
@@ -377,21 +303,5 @@ async fn handle_command<C: Store + 'static>(
         Command::UploadAttachments(attachments, callback) => callback
             .send(manager.upload_attachments(attachments).await)
             .expect("Callback sending failed"),
-    }
-}
-
-// TODO: Clone attachment
-fn almost_clone_contact(contact: &Contact) -> Contact {
-    Contact {
-        address: contact.address.clone(),
-        name: contact.name.clone(),
-        color: contact.color.clone(),
-        verified: contact.verified.clone(),
-        profile_key: contact.profile_key.clone(),
-        blocked: contact.blocked,
-        expire_timer: contact.expire_timer,
-        inbox_position: contact.inbox_position,
-        archived: contact.archived,
-        avatar: None,
     }
 }

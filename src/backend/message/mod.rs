@@ -70,9 +70,13 @@ impl Message {
                 }
                 let destination_contact = if e164.is_some() || uuid.is_some() {
                     let destination_address = ServiceAddress {
-                        uuid: uuid.clone().and_then(|u| u.parse().ok()),
-                        phonenumber: e164.clone().and_then(|e| e.parse().ok()),
-                        relay: None,
+                        // TODO: Change reaction message to UUID
+                        uuid: uuid
+                            .clone()
+                            .unwrap_or_default()
+                            .parse()
+                            .ok()
+                            .expect("Failed to parse UUID"),
                     };
                     Contact::from_service_address(&destination_address, manager)
                 } else {
@@ -120,9 +124,13 @@ impl Message {
             }) if message.reaction.is_some() => {
                 let destination_contact = if e164.is_some() || uuid.is_some() {
                     let destination_address = ServiceAddress {
-                        uuid: uuid.clone().and_then(|u| u.parse().ok()),
-                        phonenumber: e164.clone().and_then(|e| e.parse().ok()),
-                        relay: None,
+                        // TODO: Change reaction message to UUID
+                        uuid: uuid
+                            .clone()
+                            .unwrap_or_default()
+                            .parse()
+                            .ok()
+                            .expect("Failed to parse UUID"),
                     };
                     Contact::from_service_address(&destination_address, manager)
                 } else {

@@ -1,90 +1,65 @@
 use std::{cell::RefCell, collections::HashMap, path::Path, time::Duration};
 
-use chacha20poly1305::ChaCha20Poly1305;
-use encrypted_sled::{CountingNonce, EncryptionCipher};
 use gdk::prelude::*;
 use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
 use glib::{clone, MainContext, Object, Priority};
 use gtk::{gdk, gio, glib};
-use libsecret::{
-    prelude::ServiceExtManual, traits::CollectionExt, Collection, CollectionFlags, Schema,
-    SchemaAttributeType, SchemaFlags, Service, ServiceFlags, COLLECTION_DEFAULT,
-};
 use libsignal_service::{
     groups_v2::Group, proto::AttachmentPointer, sender::AttachmentUploadError,
 };
+use oo7::Keyring;
 use presage::{
     prelude::{
         content::{DataMessage, GroupContextV2},
-        AttachmentSpec, Content, ContentBody, GroupMasterKey, ServiceAddress, Uuid,
+        AttachmentSpec, Content, ContentBody, ServiceAddress, Uuid,
     },
-    MessageStore, Store, Thread,
+    ContactsStore, GroupsStore, MessageStore, MigrationConflictStrategy, Store, Thread,
 };
-use rand::Fill;
+use rand::distributions::DistString;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
-use crate::{gspawn, storage::EncryptedSledStore, ApplicationError};
+use crate::{gspawn, tspawn, ApplicationError};
 
 const MESSAGE_BOUND: usize = 10;
 const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
+const SCHEMA_ATTRIBUTE: &str = "xdg:schema";
+const ATTRIBUTE_PASSWORD: (&str, &str) = ("type", "password");
+const SECRET_LENGTH: usize = 64;
 
 gtk::glib::wrapper! {
     pub struct Manager(ObjectSubclass<imp::Manager>);
 }
 
-type StoreType =
-    EncryptedSledStore<EncryptionCipher<ChaCha20Poly1305, CountingNonce<ChaCha20Poly1305>>>;
+type StoreType = presage::SledStore;
 
-// Similar to https://gitlab.gnome.org/GNOME/geary/-/blob/main/src/client/application/secret-mediator.vala#L112
-async fn ensure_secret_unlocked() -> Result<(), ApplicationError> {
-    log::trace!("Ensuring the default collection is unlocked");
-    let service = Service::get_future(ServiceFlags::OPEN_SESSION).await?;
-    let collection =
-        Collection::for_alias_future(Some(&service), &COLLECTION_DEFAULT, CollectionFlags::NONE)
-            .await?;
-    if collection.is_some() && collection.as_ref().unwrap().is_locked() {
-        log::trace!("Unlocking the default collection");
-        service
-            .unlock_future(&[collection
-                .unwrap()
-                .dynamic_cast()
-                .expect("Failed to cast `Collection` to `DBusProxy`")])
-            .await?;
-    }
-    Ok(())
-}
+async fn encryption_password() -> Result<String, ApplicationError> {
+    let keyring = Keyring::new().await?;
+    keyring.unlock().await?;
+    let attributes = HashMap::from([
+        (SCHEMA_ATTRIBUTE, crate::config::APP_ID),
+        ATTRIBUTE_PASSWORD,
+    ]);
 
-async fn encryption_password() -> Result<Vec<u8>, ApplicationError> {
-    ensure_secret_unlocked().await?;
-
-    let schema = Schema::new(
-        crate::config::APP_ID,
-        SchemaFlags::NONE,
-        HashMap::from([("encryption", SchemaAttributeType::String)]),
-    );
     log::trace!("Looking up password from libsecret");
-    // Lookup with future is broken, see https://gitlab.gnome.org/GNOME/libsecret/-/issues/58
-    let stored =
-        libsecret::password_lookup_sync(Some(&schema), HashMap::new(), gio::Cancellable::NONE)?;
-    if let Some(store) = stored {
-        log::trace!("Password already stored in libsecret");
-        Ok(hex::decode(String::from(store)).expect("Stored password to be hex"))
+    let items = keyring.search_items(attributes.clone()).await?;
+    let item = items.first();
+
+    if let Some(item) = item {
+        log::trace!("Password found");
+        let secret_bytes = item.secret().await?;
+        // Should normally not be lossy, but just in case
+        let secret = String::from_utf8_lossy(&secret_bytes).to_owned();
+        Ok(secret.to_string())
     } else {
-        log::trace!("Generating password and storing it");
-        let key_bytes: &mut [u8; 32] = &mut [0; 32];
-        key_bytes
-            .try_fill(&mut rand::thread_rng())
-            .expect("Failed to generate random values");
-        let key_str = hex::encode(&key_bytes);
-        libsecret::password_store_future(
-            Some(&schema),
-            HashMap::new(),
-            None,
-            "Encryption password",
-            &key_str,
-        )
-        .await?;
-        Ok(key_bytes.to_vec())
+        log::trace!("Password not found, creating password");
+        let distribution = rand::distributions::Standard {};
+        let secret = distribution.sample_string(&mut rand::thread_rng(), SECRET_LENGTH);
+        let secret_bytes = secret.as_bytes();
+        log::trace!("Storing password");
+        keyring
+            .create_item("Flare: Encryption password", attributes, secret_bytes, true)
+            .await?;
+        Ok(secret)
     }
 }
 
@@ -102,17 +77,14 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationErr
         ));
     }
 
-    let cipher = {
-        use chacha20poly1305::{Key, Nonce};
-        let mut key = Key::default();
-        key.copy_from_slice(&encryption_password().await?);
-        encrypted_sled::EncryptionCipher::<ChaCha20Poly1305, _>::new(
-            key,
-            encrypted_sled::CountingNonce::new(Nonce::default()),
-            encrypted_sled::EncryptionMode::default(),
-        )
-    };
-    Ok(EncryptedSledStore::new(path, cipher)?)
+    let passphrase = tspawn!(async { encryption_password().await })
+        .await
+        .expect("Failed tokio join")?;
+    Ok(presage::SledStore::open_with_passphrase(
+        path,
+        Some(&passphrase),
+        MigrationConflictStrategy::BackupAndDrop,
+    )?)
 }
 
 impl Manager {
@@ -145,8 +117,9 @@ impl Manager {
 
     pub fn clear_messages(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing messages from the manager");
-        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
-            config_store.clear_messages()?;
+        // TODO: Implement upstream.
+        if let Some(_config_store) = self.imp().config_store.borrow_mut().as_mut() {
+            // config_store.clear_messages()?;
         }
         Ok(())
     }
@@ -270,7 +243,7 @@ impl Manager {
 
         self.emit_by_name::<()>("link-finish", &[]);
 
-        self.sync_contacts().await?;
+        // self.sync_contacts().await?;
 
         let mut channels_init = self.init_channels().await;
 
@@ -316,11 +289,6 @@ impl Manager {
                             self.emit_by_name::<()>("channel", &[&channel]);
                             let mut channels_mut = self.imp().channels.borrow_mut();
                             channels_mut.insert(channel.internal_hash(), channel.clone());
-                            if let Some(ctx) = channel.group_context() {
-                                log::trace!("New channel is a group, inserting into store");
-                                // TODO: Error?
-                                let _ = self.insert_group(ctx);
-                            }
                             channel
                         }
                     };
@@ -335,13 +303,6 @@ impl Manager {
         Ok(())
     }
 
-    fn insert_group(&self, ctx: GroupContextV2) -> Result<(), ApplicationError> {
-        if let Some(key) = ctx.master_key {
-            self.store().save_group(&key)?
-        }
-        Ok(())
-    }
-
     fn store(&self) -> StoreType {
         self.imp()
             .config_store
@@ -349,14 +310,6 @@ impl Manager {
             .as_ref()
             .expect(" store to be set up")
             .clone()
-    }
-
-    async fn sync_contacts(&self) -> Result<(), presage::Error> {
-        log::trace!("Requesting contact sync");
-        self.internal().request_contacts_sync().await?;
-        // let profile = self.internal().retrieve_profile().await?;
-        // self.imp().profile.borrow_mut().replace(profile);
-        Ok(())
     }
 
     pub(super) fn profile_name(&self) -> String {
@@ -389,23 +342,23 @@ impl Manager {
 
     #[cfg(not(feature = "screenshot"))]
     pub fn list_contacts(&self) -> Vec<Contact> {
-        self.internal()
-            .get_contacts()
-            .map(|c| {
-                c.filter(|c| !c.blocked && !c.archived)
-                    .map(|c| Contact::from_contact(c, self))
-                    .collect::<Vec<Contact>>()
+        self.store()
+            .contacts()
+            .map(|i| {
+                i.inspect(|c| log::info!("Got {:#?}", c))
+                    .filter_map(|c| {
+                        c.ok()
+                            .filter(|c| !c.blocked && !c.archived)
+                            .map(|c| Contact::from_contact(c, self))
+                    })
+                    .collect()
             })
             .unwrap_or_default()
     }
 
     pub fn self_contact(&self) -> Contact {
         let presage_contact = presage::prelude::Contact {
-            address: ServiceAddress {
-                uuid: Some(self.uuid()),
-                phonenumber: None,
-                relay: None,
-            },
+            address: ServiceAddress { uuid: self.uuid() },
             name: "".to_string(),
             color: None,
             verified: Default::default(),
@@ -422,9 +375,8 @@ impl Manager {
     #[cfg(not(feature = "screenshot"))]
     pub async fn init_channels(&self) -> bool {
         log::trace!("Trying to initialize channels");
-        let mut manager = self.internal();
-        let _ = manager.sync_contacts().await;
         let mut to_load = vec![];
+
         for contact in self.list_contacts() {
             log::trace!("Got a contact from the storage");
             let channel = Channel::from_contact_or_group(contact, &None, self).await;
@@ -433,12 +385,12 @@ impl Manager {
             to_load.push(channel.clone());
             channels.insert(channel.internal_hash(), channel);
         }
+
         // TODO: Error handling?
-        for key in self.store().get_groups().unwrap_or_default() {
-            crate::trace!("Got group by key {:?}", key);
-            let group = self.get_group_v2(GroupMasterKey::new(key)).await;
-            if let Ok(group) = group {
-                log::trace!("Has some group");
+        if let Ok(groups) = self.store().groups() {
+            for val in groups {
+                let Ok((key, group)) = val else { break };
+                crate::trace!("Got group by key {:?}", key);
                 let channel = Channel::from_group(
                     group,
                     &GroupContextV2 {
@@ -473,8 +425,8 @@ impl Manager {
 impl Manager {
     pub(super) async fn get_group_v2(
         &self,
-        master_key: GroupMasterKey,
-    ) -> Result<Group, presage::Error> {
+        master_key: Vec<u8>,
+    ) -> Result<Option<Group>, presage::Error> {
         log::trace!("`Manager::get_group_v2`start");
         let r = self.internal().get_group_v2(master_key).await;
         log::trace!("`Manager::get_group_v2`finished");
@@ -499,14 +451,14 @@ impl Manager {
 
     pub(super) async fn send_message_to_group(
         &self,
-        recipient_addr: impl IntoIterator<Item = ServiceAddress>,
+        group_key: Vec<u8>,
         message: DataMessage,
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
         log::trace!("`Manager::send_message_to_group` start");
         let r = self
             .internal()
-            .send_message_to_group(recipient_addr, message.clone(), timestamp)
+            .send_message_to_group(group_key, message.clone(), timestamp)
             .await;
         log::trace!("`Manager::send_message_to_group` finish");
         Ok(r?)
@@ -517,7 +469,7 @@ impl Manager {
         id: Uuid,
     ) -> Result<Option<presage::prelude::Contact>, presage::Error> {
         log::trace!("`Manager::get_contact_by_id` start");
-        let r = self.internal().get_contact_by_id(id);
+        let r = self.store().contact_by_id(id);
         log::trace!("`Manager::get_contact_by_id` finished");
         r
     }

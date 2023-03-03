@@ -21,20 +21,21 @@ async-recursion = "1.0.2"
 regex = "1.7.0"
 lazy_static = "1.4.0"
 
-presage = { git = "https://github.com/whisperfish/presage.git", rev = "fd483c7c543760665b30d95ba131dfae42b45370" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "456bf6eb2e4454ce35bdb4ca75b8dba7941c2923" }
+presage = { git = "https://github.com/whisperfish/presage.git", rev = "8bf37c3973fbdf3b64b92c51c327feeb23209e93" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "26ff8bb6c500d9c4aee5f8510e536f61b5656850" }
 
 async-trait = "0.1.64"
 sled = "0.34.7"
-libsecret = { version = "0.3.0", features = ["v0_19"] }
+oo7 = { version = "0.1.0-beta.3", default-features = false, features = ["tokio", "native_crypto"] }
 rand = "0.8.5"
-# Cannot update to 0.10.1 because of conflict with zeroize
-chacha20poly1305 = "0.9.1"
+zeroize = "1.5.7"
+chacha20poly1305 = "0.10.1"
 encrypted-sled = "0.2.0"
 hex = "0.4.3"
 serde = "1.0"
 serde_json = "1.0.93"
 url = "2.3.1"
+once_cell = "1.17.1"
 
 qrcode-generator = "4.1.7"
 
@@ -50,4 +51,7 @@ default = []
 screenshot = []
 
 [patch.crates-io]
-"curve25519-dalek" = { git = 'https://github.com/signalapp/curve25519-dalek', branch = 'lizard2' }
+"curve25519-dalek" = { git = 'https://github.com/Schmiddiii/curve25519-dalek', rev = '1b9f81352bb659999a46af961f069d635ca432d3' }
+
+[patch."https://github.com/signalapp/curve25519-dalek"]
+"curve25519-dalek" = { git = 'https://github.com/Schmiddiii/curve25519-dalek', rev = '1b9f81352bb659999a46af961f069d635ca432d3' }

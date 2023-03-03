@@ -14,18 +14,17 @@ gtk::glib::wrapper! {
 impl Contact {
     pub(super) fn from_service_address(address: &ServiceAddress, manager: &Manager) -> Self {
         log::trace!("Building a `Contact` from a `ServiceAddress`");
-        if let Some(uuid) = address.uuid {
-            if let Ok(Some(contact)) = manager.get_contact_by_id(uuid) {
-                return Self::from_contact(contact, manager);
-            }
+        if let Ok(Some(contact)) = manager.get_contact_by_id(address.uuid) {
+            return Self::from_contact(contact, manager);
         }
         log::trace!("Not in the contact list");
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
             .build();
-        s.imp()
-            .phonenumber
-            .swap(&RefCell::new(address.phonenumber.clone()));
+        // TODO: No phone number anymore.
+        // s.imp()
+        //     .phonenumber
+        //     .swap(&RefCell::new(address.phonenumber.clone()));
         s.imp().address.swap(&RefCell::new(Some(address.clone())));
         s
     }
@@ -35,9 +34,10 @@ impl Contact {
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
             .build();
-        s.imp()
-            .phonenumber
-            .swap(&RefCell::new(contact.address.phonenumber.clone()));
+        // TODO: No phone number anymore.
+        // s.imp()
+        //     .phonenumber
+        //     .swap(&RefCell::new(contact.address.phonenumber.clone()));
         s.imp()
             .address
             .swap(&RefCell::new(Some(contact.address.clone())));
@@ -112,9 +112,8 @@ mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "is-self" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
-                        (contact.address.uuid
-                            == Some(self.manager.borrow().as_ref().unwrap().uuid()))
-                        .to_value()
+                        (contact.address.uuid == self.manager.borrow().as_ref().unwrap().uuid())
+                            .to_value()
                     } else {
                         false.to_value()
                     }
@@ -133,7 +132,7 @@ mod imp {
                             if let Some(phone) = self.phonenumber.borrow().as_ref() {
                                 phone.format().mode(Mode::National).to_string().to_value()
                             } else {
-                                contact.address.uuid.map(|u| u.to_string()).to_value()
+                                contact.address.uuid.to_string().to_value()
                             }
                         } else {
                             name.to_value()
@@ -141,12 +140,7 @@ mod imp {
                     } else if let Some(phone) = self.phonenumber.borrow().as_ref() {
                         phone.format().mode(Mode::National).to_string().to_value()
                     } else if let Some(address) = self.address.borrow().as_ref() {
-                        address
-                            .phonenumber
-                            .as_ref()
-                            .map(|p| p.format().mode(Mode::National).to_string())
-                            .or_else(|| address.uuid.map(|u| u.to_string()))
-                            .to_value()
+                        address.uuid.to_string().to_value()
                     } else {
                         None::<String>.to_value()
                     }
