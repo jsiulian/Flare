@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-07 11:11+0100\n"
-"PO-Revision-Date: 2023-03-04 10:38+0000\n"
+"PO-Revision-Date: 2023-03-05 11:38+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
 "Language: nl\n"
@@ -28,101 +28,103 @@ msgstr "Afbeelding laden"
 
 #: data/resources/ui/attachment.ui:37
 msgid "Load video"
-msgstr ""
+msgstr "Video laden"
 
 #: data/resources/ui/attachment.ui:48
 msgid "Load file"
-msgstr ""
+msgstr "Bestand laden"
 
 #: data/resources/ui/channel_list.ui:16
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 #: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 #: data/resources/ui/channel_messages.ui:14
 msgid "Select a channel"
-msgstr ""
+msgstr "Kies een kanaal"
 
 #: data/resources/ui/channel_messages.ui:53
 msgid "Load more"
-msgstr ""
+msgstr "Meer laden"
 
 #: data/resources/ui/channel_messages.ui:81
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Antwoord wissen"
 
 #: data/resources/ui/channel_messages.ui:83
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Antwoord wissen"
 
 #: data/resources/ui/channel_messages.ui:113
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "Bijlage verwijderen"
 
 #: data/resources/ui/channel_messages.ui:115
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "Bijlage verwijderen"
 
 #: data/resources/ui/channel_messages.ui:147
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "Bijlage toevoegen"
 
 #: data/resources/ui/channel_messages.ui:149
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "Bijlage toevoegen"
 
 #: data/resources/ui/channel_messages.ui:168
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "Voer een bericht in"
 
 #: data/resources/ui/channel_messages.ui:173
 msgctxt "tooltip"
 msgid "Message input"
-msgstr ""
+msgstr "Voer een bericht in"
 
 #: data/resources/ui/channel_messages.ui:179
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Versturen"
 
 #: data/resources/ui/channel_messages.ui:181
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "Versturen"
 
 #: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:135
 msgid "Clear messages"
-msgstr ""
+msgstr "Berichten verwijderen"
 
 #: data/resources/ui/dialog_clear_messages.ui:5
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
+"Hierdoor worden alle lokaal opgeslagen berichten verwijderd en de toepassing "
+"afgesloten."
 
 #: data/resources/ui/dialog_clear_messages.ui:9
 #: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: data/resources/ui/dialog_clear_messages.ui:10
 msgid "Clear"
-msgstr ""
+msgstr "Verwijderen"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
 msgid "Unlink"
-msgstr ""
+msgstr "Ontkoppelen"
 
 #: data/resources/ui/dialog_unlink.ui:5
 msgid ""
@@ -130,308 +132,316 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Hierdoor wordt het apparaat ontkoppeld en alle lokale gegevens verwijderd. "
+"Na het verwijderen wordt de toepassing afgesloten en kan deze opnieuw worden "
+"gekoppeld."
 
 #: data/resources/ui/dialog_unlink.ui:10
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "Ontkoppelen en berichten verwijderen"
 
 #: data/resources/ui/dialog_unlink.ui:11
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "Ontkoppelen en berichten bewaren"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
-msgstr ""
+msgstr "Foutmelding"
 
 #: data/resources/ui/error_dialog.ui:14
 msgid "Close"
-msgstr ""
+msgstr "Sluiten"
 
 #: data/resources/ui/error_dialog.ui:59
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "Gelieve deze fout te melden."
 
 #: data/resources/ui/link_window.ui:8
 msgid "Link Device"
-msgstr ""
+msgstr "Apparaat koppelen"
 
 #: data/resources/ui/link_window.ui:25
 msgid "Please scan this QR code with your primary device."
-msgstr ""
+msgstr "Scan deze QR-code met behulp van uw hoofdapparaat."
 
 #: data/resources/ui/link_window.ui:35
 msgctxt "accessibility"
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopiëren naar klembord"
 
 #: data/resources/ui/link_window.ui:47
 msgid "Please wait until the contacts are displayed after linking."
-msgstr ""
+msgstr "Wacht na het koppelen tot contactpersoonsynchronisatie is afgerond."
 
 #: data/resources/ui/message_item.ui:209
 msgid "Reply"
-msgstr ""
+msgstr "Beantwoorden"
 
 #: data/resources/ui/message_item.ui:215
 msgid "React"
-msgstr ""
+msgstr "Reageren"
 
 #: data/resources/ui/preferences_window.ui:9
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #: data/resources/ui/preferences_window.ui:13
 msgid "Linking"
-msgstr ""
+msgstr "Koppelen"
 
 #: data/resources/ui/preferences_window.ui:14
 msgid "The device will need to be relinked to take effect."
-msgstr ""
+msgstr "Herkoppel het apparaat om de wijzigingen toe te passen."
 
 #: data/resources/ui/preferences_window.ui:17
 msgid "Device Name"
-msgstr ""
+msgstr "Apparaatnaam"
 
 #: data/resources/ui/preferences_window.ui:25
 msgid "Attachments"
-msgstr ""
+msgstr "Bijlagen"
 
 #: data/resources/ui/preferences_window.ui:28
 msgid "Dowload images automatically"
-msgstr ""
+msgstr "Afbeeldingen automatisch ophalen"
 
 #: data/resources/ui/preferences_window.ui:42
 msgid "Dowload videos automatically"
-msgstr ""
+msgstr "Video's automatisch ophalen"
 
 #: data/resources/ui/preferences_window.ui:56
 msgid "Dowload files automatically"
-msgstr ""
+msgstr "Bestanden automatisch ophalen"
 
 #: data/resources/ui/preferences_window.ui:73
 msgid "Message Storage"
-msgstr ""
+msgstr "Berichtopslag"
 
 #: data/resources/ui/preferences_window.ui:76
 msgid "Number of messages to load on startup"
-msgstr ""
+msgstr "Aantal te tonen berichten na opstarten"
 
 #: data/resources/ui/preferences_window.ui:77
 #: data/resources/ui/preferences_window.ui:93
 msgid "Per channel"
-msgstr ""
+msgstr "Per kanaal"
 
 #: data/resources/ui/preferences_window.ui:92
 msgid "Number of messages to load on request"
-msgstr ""
+msgstr "Aantal op verzoek te tonen berichten"
 
 #: data/resources/ui/preferences_window.ui:110
 msgid "Notifications"
-msgstr ""
+msgstr "Meldingen"
 
 #: data/resources/ui/preferences_window.ui:111
 msgid "Notifications for new messages."
-msgstr ""
+msgstr "Toon meldingen bij nieuwe berichten."
 
 #: data/resources/ui/preferences_window.ui:114
 msgid "Send notifications"
-msgstr ""
+msgstr "Leesbewijzen"
 
 #: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:31
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "Meldingen tonen als Flare op de achtergrond wordt uitgevoerd"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "Sneltoetsen tonen"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "Voorkeuren openen"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "Pagina ‘Over’ tonen"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "Menu openen"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "Kanalen"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "Ga naar kanaal 1…9"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "Kanalen doorzoeken"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "Bijlage toevoegen"
 
 #: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "Invoerveld focussen"
 
 #: data/resources/ui/shortcuts.ui:67
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr ""
+msgstr "Meer berichten laden"
 
 #: data/resources/ui/window.ui:47
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: data/resources/ui/window.ui:127
 msgid "Settings"
-msgstr ""
+msgstr "Voorkeuren"
 
 #: data/resources/ui/window.ui:139
 msgid "Keybindings"
-msgstr ""
+msgstr "Sneltoetsen"
 
 #: data/resources/ui/window.ui:143
 msgid "About"
-msgstr ""
+msgstr "Over"
 
 #: src/backend/channel.rs:441
 msgid "Note to self"
-msgstr ""
+msgstr "Herinnering aan mezelf"
 
 #: src/backend/manager.rs:364
 msgid "You"
-msgstr ""
+msgstr "Ik"
 
 #: src/backend/message/call_message.rs:109
 msgid "Started calling."
-msgstr ""
+msgstr "De oproep is gestart."
 
 #: src/backend/message/call_message.rs:110
 msgid "Answered a call."
-msgstr ""
+msgstr "De oproep is beantwoord."
 
 #: src/backend/message/call_message.rs:111
 msgid "Hanged up."
-msgstr ""
+msgstr "Het gesprek is beëindigd."
 
 #: src/backend/message/call_message.rs:112
 msgid "Is busy."
-msgstr ""
+msgstr "Is bezig."
 
 #: src/backend/message/text_message.rs:231
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Er is één afbeelding verstuurd"
+msgstr[1] "Er zijn {} afbeeldingen verstuurd"
 
 #: src/backend/message/text_message.rs:234
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Er is één video verstuurd"
+msgstr[1] "Er zijn {} video's verstuurd"
 
 #: src/backend/message/text_message.rs:237
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Er is één bestand verstuurd"
+msgstr[1] "Er zijn {} bestanden verstuurd"
 
 #: src/error.rs:75
 msgid "I/O Error."
-msgstr ""
+msgstr "I/O-fout."
 
 #: src/error.rs:80
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "Er lijkt geen verbinding met het internet te zijn."
 
 #: src/error.rs:85
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "De communicatie met Libsecret is mislukt."
 
 #: src/error.rs:90
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"De backend-databank is beschadigd. Herstart de toepassing of verwijder de "
+"databank en herkoppel de toepassing."
 
 #: src/error.rs:95
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"U lijkt niet bevoegd te zijn. Verwijder de databank en herkoppel de "
+"toepassing."
 
 #: src/error.rs:100
 msgid "Sending a message failed."
-msgstr ""
+msgstr "Het bericht kan niet worden verstuurd."
 
 #: src/error.rs:105
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "Het bericht kan niet worden ontvangen."
 
 #: src/error.rs:110
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
-msgstr ""
+msgstr "Er is iets misgegaan met het Signal-backend. Probeer het later opnieuw."
 
 #: src/error.rs:115
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "De toepassing lijkt niet goed te zijn ingesteld."
 
 #: src/error.rs:120
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Een deel van de toepassing is gecrasht."
 
 #: src/error.rs:130
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Controleer uw internetverbinding."
 
 #: src/error.rs:134
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "Verwijder de databank en herkoppel het apparaat."
 
 #: src/error.rs:141
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "De databanklocatie, {}, is geen map."
 
 #: src/error.rs:146
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
+"Schakel de foutopsporing in, herstart de toepassing en meld dit probleem."
 
 #: src/gui/preferences_window.rs:52
 msgid "Background permission"
-msgstr ""
+msgstr "Achtergrondrecht"
 
 #: src/gui/preferences_window.rs:53
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "Beheer de rechten in de voorkeuren"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:36
 msgid "%H:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:39
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%Y-%m-%d %H:%M"
