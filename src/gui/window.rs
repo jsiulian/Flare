@@ -133,7 +133,7 @@ pub mod imp {
                     if response == "clear" {
                         log::info!("Clear messages device");
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
-                            if let Err(e)= man.clear_messages() {
+                            if let Err(e) = man.clear_messages() {
                                 log::error!("Failed to clear db: {}", e);
                             }
                         }
@@ -156,7 +156,7 @@ pub mod imp {
                     if response == "unlink-keep" {
                         log::info!("Unlinking device");
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
-                            if let Err(e)= man.clear() {
+                            if let Err(e) = man.clear() {
                                 log::error!("Failed to clear db: {}", e);
                             }
                         }
@@ -165,7 +165,13 @@ pub mod imp {
                     } else if response == "unlink-delete" {
                         log::info!("Unlinking device");
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
-                            if let Err(e)= man.clear() {
+                            if let Err(e) = man.clear() {
+                                log::error!("Failed to clear db: {}", e);
+                            }
+                            if let Err(e) = man.clear_contacts() {
+                                log::error!("Failed to clear db: {}", e);
+                            }
+                            if let Err(e) = man.clear_groups() {
                                 log::error!("Failed to clear db: {}", e);
                             }
                             if let Err(e) = man.clear_messages() {

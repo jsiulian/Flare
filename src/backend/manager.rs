@@ -117,9 +117,24 @@ impl Manager {
 
     pub fn clear_messages(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing messages from the manager");
-        // TODO: Implement upstream.
-        if let Some(_config_store) = self.imp().config_store.borrow_mut().as_mut() {
-            // config_store.clear_messages()?;
+        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
+            config_store.clear_messages()?;
+        }
+        Ok(())
+    }
+
+    pub fn clear_contacts(&self) -> Result<(), ApplicationError> {
+        log::trace!("Clearing contacts from the manager");
+        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
+            config_store.clear_contacts()?;
+        }
+        Ok(())
+    }
+
+    pub fn clear_groups(&self) -> Result<(), ApplicationError> {
+        log::trace!("Clearing groups from the manager");
+        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
+            config_store.clear_groups()?;
         }
         Ok(())
     }
