@@ -1,7 +1,7 @@
 use std::path::Path;
 
 use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
-use glib::{Cast, DateTime};
+use gtk::glib::{Cast, DateTime};
 use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
 use presage::prelude::{
     content::{AttachmentPointer, CallMessage as PreCallMessage},
@@ -367,19 +367,19 @@ impl super::Manager {
             msg!(self, "Yes, you can just use it on any of your favorite mobile linux devices.", 2, GROUP_ID, 10 + base_minute),
             msg!(self, "What is Flare?", 1, GROUP_ID, 15 + base_minute),
             msg!(self, "It is an unofficial Signal client.", 2, GROUP_ID, 16 + base_minute),
-            msg!(self, "I don't think I need to go over all of the features again, look at the previous screenshots for more details.", 2, GROUP_ID, 16 + base_minute),
+            msg!(self, "I don't think I need to go over all of the features again, look at the previous screenshots for more details.", 2, GROUP_ID, 17 + base_minute),
             msg!(self, "Looks interesting. Might I will give it a shot on my PinePhone where I am running Arch btw.", 1, GROUP_ID, 20 + base_minute),
             msg!(self, "Could you please stop? We all know that you are using Arch", 0, GROUP_ID, 21 + base_minute),
-            msg!(self, "But as an Arch User (btw), it is my holy duty to inform you that I am using Arch (btw) at least every second message.", 1, GROUP_ID, 21 + base_minute),
-            msg!(self, "Could we please continue this discussion in the next screenshot? Due to me also making a screenshot in a mobile formfactor, there is not that much space left.", 2, GROUP_ID, 20 + base_minute),
+            msg!(self, "But as an Arch User (btw), it is my holy duty to inform you that I am using Arch (btw) at least every second message.", 1, GROUP_ID, 22 + base_minute),
+            msg!(self, "Could we please continue this discussion in the next screenshot? Due to me also making a screenshot in a mobile formfactor, there is not that much space left.", 2, GROUP_ID, 23 + base_minute),
             call_msg!(self, PreCallMessage {
                 offer: Some(Offer::default()),
                 ..Default::default()
-            }, 2, 30 + base_minute),
+            }, 2, 21 + base_minute),
             call_msg!(self, PreCallMessage {
                 hangup: Some(Hangup::default()),
                 ..Default::default()
-            }, 2, 30 + base_minute),
+            }, 2, 22 + base_minute),
             msg!(self, "I don't like sand", 3, 3, base_minute + 3),
             msg!(self, "I'll be back", 4, 4, base_minute + 10),
 
