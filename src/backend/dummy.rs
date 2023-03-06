@@ -351,15 +351,43 @@ impl super::Manager {
         let base_time = DateTime::from_utc(now.year(), now.month(), now.day_of_month(), 11, 0, 0.0)
             .expect("Base time to be expressable as DateTime");
         let base_minute: u64 = (base_time.to_unix() / 60).try_into().unwrap();
-        // let msg_replied = msg!(self, "Sounds interesting, can you tell me more?", 0, 2 + base_minute);
-        // let msg_reply = msg!(self, "Additionally, replying and reacting to messages are also be possible", 1, 5 + base_minute);
-        // msg_reply.set_quote(msg_replied.clone());
-        // msg_reply.react("👍");
-        //
-        // let msg_screenshot = msg!(self, "", 1, 4 + base_minute);
-        // let screenshot_file = gio::File::for_uri("resource:///icon.png");
-        // let attachment = crate::backend::Attachment::from_file(screenshot_file, self);
-        // msg_screenshot.add_attachment(attachment).await.expect("Failed to add attachment");
+
+        let msg_replied = msg!(
+            self,
+            "I don't think I need to go over all of the features again, look at the previous screenshots for more details.",
+            2,
+            GROUP_ID,
+            18 + base_minute
+        );
+        let msg_reply = msg!(
+            self,
+            "Looks interesting. Might I will give it a shot on my PinePhone where I am running Arch btw.",
+            2,
+            GROUP_ID,
+            20 + base_minute
+        );
+        msg_reply
+            .clone()
+            .downcast::<TextMessage>()
+            .unwrap()
+            .set_quote(&msg_replied.clone().downcast::<TextMessage>().unwrap());
+        msg_reply
+            .clone()
+            .downcast::<TextMessage>()
+            .unwrap()
+            .react("👍");
+
+        let msg_screenshot = msg!(self, "", 2, GROUP_ID, 17 + base_minute);
+        let screenshot_file = gtk::gio::File::for_uri("resource:///icon.png");
+        let attachment = crate::backend::Attachment::from_file(screenshot_file, self);
+        msg_screenshot
+            .clone()
+            .downcast::<TextMessage>()
+            .unwrap()
+            .add_attachment(attachment)
+            .await
+            .expect("Failed to add attachment");
+
         vec![
             msg!(self, "I use Arch btw", 1, 1, 0 + base_minute),
             msg!(self, "Did you know Flare can also be used on mobile devices?", 2, GROUP_ID, 2 + base_minute),
@@ -367,8 +395,10 @@ impl super::Manager {
             msg!(self, "Yes, you can just use it on any of your favorite mobile linux devices.", 2, GROUP_ID, 10 + base_minute),
             msg!(self, "What is Flare?", 1, GROUP_ID, 15 + base_minute),
             msg!(self, "It is an unofficial Signal client.", 2, GROUP_ID, 16 + base_minute),
-            msg!(self, "I don't think I need to go over all of the features again, look at the previous screenshots for more details.", 2, GROUP_ID, 17 + base_minute),
-            msg!(self, "Looks interesting. Might I will give it a shot on my PinePhone where I am running Arch btw.", 1, GROUP_ID, 20 + base_minute),
+            msg_screenshot,
+            msg!(self, "I don't think I need to go over all of the features again, look at the previous screenshots for more details.", 2, GROUP_ID, 18 + base_minute),
+            msg_replied,
+            msg_reply,
             msg!(self, "Could you please stop? We all know that you are using Arch", 0, GROUP_ID, 21 + base_minute),
             msg!(self, "But as an Arch User (btw), it is my holy duty to inform you that I am using Arch (btw) at least every second message.", 1, GROUP_ID, 22 + base_minute),
             msg!(self, "Could we please continue this discussion in the next screenshot? Due to me also making a screenshot in a mobile formfactor, there is not that much space left.", 2, GROUP_ID, 23 + base_minute),
