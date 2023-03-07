@@ -21,11 +21,7 @@ impl Contact {
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
             .build();
-        // TODO: No phone number anymore.
-        // s.imp()
-        //     .phonenumber
-        //     .swap(&RefCell::new(address.phonenumber.clone()));
-        s.imp().address.swap(&RefCell::new(Some(address.clone())));
+        s.imp().uuid.swap(&RefCell::new(Some(address.uuid.clone())));
         s
     }
 
@@ -34,13 +30,10 @@ impl Contact {
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
             .build();
-        // TODO: No phone number anymore.
-        // s.imp()
-        //     .phonenumber
-        //     .swap(&RefCell::new(contact.address.phonenumber.clone()));
         s.imp()
-            .address
-            .swap(&RefCell::new(Some(contact.address.clone())));
+            .phonenumber
+            .swap(&RefCell::new(contact.phone_number.clone()));
+        s.imp().uuid.swap(&RefCell::new(Some(contact.uuid.clone())));
         s.imp().contact.swap(&RefCell::new(Some(contact)));
         s
     }
@@ -62,7 +55,9 @@ impl Contact {
             .contact
             .borrow()
             .as_ref()
-            .map(|c| c.address.clone())
+            .map(|c| ServiceAddress {
+                uuid: c.uuid.clone(),
+            })
     }
 }
 
@@ -74,6 +69,7 @@ mod imp {
         once_cell::sync::Lazy, ParamSpec, ParamSpecBoolean, ParamSpecObject, ParamSpecString, Value,
     };
     use gtk::{gdk, glib};
+    use libsignal_service::prelude::Uuid;
     use presage::prelude::phonenumber::Mode;
 
     use crate::backend::Manager;
@@ -82,7 +78,7 @@ mod imp {
     pub struct Contact {
         pub(super) contact: RefCell<Option<presage::prelude::Contact>>,
         pub(super) phonenumber: RefCell<Option<presage::prelude::PhoneNumber>>,
-        pub(super) address: RefCell<Option<presage::prelude::ServiceAddress>>,
+        pub(super) uuid: RefCell<Option<Uuid>>,
 
         manager: RefCell<Option<Manager>>,
     }
@@ -112,8 +108,7 @@ mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "is-self" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
-                        (contact.address.uuid == self.manager.borrow().as_ref().unwrap().uuid())
-                            .to_value()
+                        (contact.uuid == self.manager.borrow().as_ref().unwrap().uuid()).to_value()
                     } else {
                         false.to_value()
                     }
@@ -132,15 +127,15 @@ mod imp {
                             if let Some(phone) = self.phonenumber.borrow().as_ref() {
                                 phone.format().mode(Mode::National).to_string().to_value()
                             } else {
-                                contact.address.uuid.to_string().to_value()
+                                contact.uuid.to_string().to_value()
                             }
                         } else {
                             name.to_value()
                         }
                     } else if let Some(phone) = self.phonenumber.borrow().as_ref() {
                         phone.format().mode(Mode::National).to_string().to_value()
-                    } else if let Some(address) = self.address.borrow().as_ref() {
-                        address.uuid.to_string().to_value()
+                    } else if let Some(uuid) = self.uuid.borrow().as_ref() {
+                        uuid.to_string().to_value()
                     } else {
                         None::<String>.to_value()
                     }

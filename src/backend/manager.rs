@@ -107,10 +107,10 @@ impl Manager {
         self.imp().application.borrow().clone()
     }
 
-    pub fn clear(&self) -> Result<(), ApplicationError> {
+    pub fn clear_registration(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing the manager");
         if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
-            config_store.clear()?;
+            config_store.clear_registration()?;
         }
         Ok(())
     }
@@ -373,7 +373,9 @@ impl Manager {
 
     pub fn self_contact(&self) -> Contact {
         let presage_contact = presage::prelude::Contact {
-            address: ServiceAddress { uuid: self.uuid() },
+            uuid: self.uuid(),
+            // TODO: Get own phone number?
+            phone_number: None,
             name: "".to_string(),
             color: None,
             verified: Default::default(),

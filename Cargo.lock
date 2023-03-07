@@ -2001,7 +2001,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=26ff8bb6c500d9c4aee5f8510e536f61b5656850#26ff8bb6c500d9c4aee5f8510e536f61b5656850"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=964810f962c1b1c6530f749394f07aea731b6a74#964810f962c1b1c6530f749394f07aea731b6a74"
 dependencies = [
  "aes 0.7.5",
  "aes-gcm",
@@ -2034,7 +2034,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service-hyper"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=26ff8bb6c500d9c4aee5f8510e536f61b5656850#26ff8bb6c500d9c4aee5f8510e536f61b5656850"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=964810f962c1b1c6530f749394f07aea731b6a74#964810f962c1b1c6530f749394f07aea731b6a74"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -2723,7 +2723,7 @@ checksum = "5b40af805b3121feab8a3c29f04d8ad262fa8e0561883e7653e024ae4479e6de"
 [[package]]
 name = "presage"
 version = "0.5.0-dev"
-source = "git+https://github.com/Schmiddiii/presage.git?rev=20fd76783c4c1b344519f14b82a29f655ff1104c#20fd76783c4c1b344519f14b82a29f655ff1104c"
+source = "git+https://github.com/Schmiddiii/presage.git?rev=5f202d6fb4ff02eb071bb1c1cf8f995607c09f39#5f202d6fb4ff02eb071bb1c1cf8f995607c09f39"
 dependencies = [
  "async-trait",
  "base64 0.12.3",
