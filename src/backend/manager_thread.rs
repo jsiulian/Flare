@@ -10,6 +10,8 @@ use crate::ApplicationError;
 
 const MESSAGE_BOUND: usize = 10;
 
+// TODO: Reconsider ignoring in the future, but probably does not make any huge difference.
+#[allow(clippy::large_enum_variant)]
 enum Command {
     Uuid(oneshot::Sender<Uuid>),
     GetGroupV2(Vec<u8>, oneshot::Sender<Result<Option<Group>, Error>>),
@@ -68,20 +70,18 @@ impl ManagerThread {
         std::thread::spawn(move || {
             let error_clone = error.clone();
             let panic = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-                tokio::runtime::Runtime::new()
-                    .expect("Failed to setup runtime")
-                    .block_on(async move {
-                        let setup = setup_manager(config_store, device_name, link_callback).await;
-                        if let Ok(mut manager) = setup {
-                            log::trace!("Starting command loop");
-                            drop(error_callback);
-                            command_loop(&mut manager, receiver, content, error).await;
-                        } else {
-                            let e = setup.err().unwrap();
-                            log::trace!("Got error: {}", e);
-                            error_callback.send(e).expect("Failed to send error")
-                        }
-                    });
+                crate::TOKIO_RUNTIME.block_on(async move {
+                    let setup = setup_manager(config_store, device_name, link_callback).await;
+                    if let Ok(mut manager) = setup {
+                        log::trace!("Starting command loop");
+                        drop(error_callback);
+                        command_loop(&mut manager, receiver, content, error).await;
+                    } else {
+                        let e = setup.err().unwrap();
+                        log::trace!("Got error: {}", e);
+                        error_callback.send(e).expect("Failed to send error")
+                    }
+                });
             }));
             if let Err(_e) = panic {
                 log::error!("Manager-thread paniced");

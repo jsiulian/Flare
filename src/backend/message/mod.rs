@@ -75,7 +75,6 @@ impl Message {
                             .clone()
                             .unwrap_or_default()
                             .parse()
-                            .ok()
                             .expect("Failed to parse UUID"),
                     };
                     Contact::from_service_address(&destination_address, manager)
@@ -129,7 +128,6 @@ impl Message {
                             .clone()
                             .unwrap_or_default()
                             .parse()
-                            .ok()
                             .expect("Failed to parse UUID"),
                     };
                     Contact::from_service_address(&destination_address, manager)

@@ -17,7 +17,6 @@ mod error;
 mod gui;
 mod hash_log;
 mod login1;
-// mod storage;
 mod utils;
 
 pub use error::{ApplicationError, ConfigurationError};

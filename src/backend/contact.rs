@@ -21,7 +21,7 @@ impl Contact {
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
             .build();
-        s.imp().uuid.swap(&RefCell::new(Some(address.uuid.clone())));
+        s.imp().uuid.swap(&RefCell::new(Some(address.uuid)));
         s
     }
 
@@ -33,7 +33,7 @@ impl Contact {
         s.imp()
             .phonenumber
             .swap(&RefCell::new(contact.phone_number.clone()));
-        s.imp().uuid.swap(&RefCell::new(Some(contact.uuid.clone())));
+        s.imp().uuid.swap(&RefCell::new(Some(contact.uuid)));
         s.imp().contact.swap(&RefCell::new(Some(contact)));
         s
     }
@@ -55,9 +55,7 @@ impl Contact {
             .contact
             .borrow()
             .as_ref()
-            .map(|c| ServiceAddress {
-                uuid: c.uuid.clone(),
-            })
+            .map(|c| ServiceAddress { uuid: c.uuid })
     }
 }
 

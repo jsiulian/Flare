@@ -157,7 +157,7 @@ impl Channel {
             .borrow()
             .as_ref()
             .and_then(|c| c.address())
-            .and_then(|a| Some(a.uuid))
+            .map(|a| a.uuid)
     }
 
     pub(super) async fn do_new_message(
@@ -243,8 +243,8 @@ impl Channel {
         // Check if message is duplicate
         if self.messages().iter().rev().any(|m| {
             message.sent() == m.sent()
-                && message.sender().address().and_then(|a| Some(a.uuid))
-                    == m.sender().address().and_then(|a| Some(a.uuid))
+                && message.sender().address().map(|a| a.uuid)
+                    == m.sender().address().map(|a| a.uuid)
         }) {
             crate::info!(
                 "Channel {} got a duplicate message. Ignoring the second one.",
@@ -304,7 +304,7 @@ impl Channel {
             log::trace!("Sending to single contact");
             manager.send_message(contact, data, timestamp).await?;
         } else {
-            let context = self.imp().group_context.borrow();
+            let context = self.imp().group_context.borrow().clone();
             data.group_v2 = context.clone();
             // TODO: Can this be `None`?
             if let Some(key) = context.as_ref().and_then(|c| c.master_key.clone()) {
@@ -366,7 +366,7 @@ mod imp {
                 .borrow()
                 .as_ref()
                 .and_then(|c| c.address())
-                .and_then(|a| Some(a.uuid))
+                .map(|a| a.uuid)
             {
                 uuid.hash(state);
             } else {

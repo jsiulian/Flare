@@ -109,10 +109,7 @@ impl TextMessage {
             let sender = msg.sender().address();
             data.quote = Some(Quote {
                 id: Some(msg.sent()),
-                author_uuid: sender
-                    .as_ref()
-                    .and_then(|a| Some(a.uuid))
-                    .map(|u| u.to_string()),
+                author_uuid: sender.as_ref().map(|a| a.uuid).map(|u| u.to_string()),
                 text: msg.body(),
                 ..Default::default()
             });
@@ -136,7 +133,7 @@ impl TextMessage {
             target_author_uuid: self
                 .sender()
                 .address()
-                .and_then(|a| Some(a.uuid))
+                .map(|a| a.uuid)
                 .map(|u| u.to_string()),
             target_sent_timestamp: Some(self.sent()),
         };

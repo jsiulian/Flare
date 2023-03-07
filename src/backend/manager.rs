@@ -48,8 +48,8 @@ async fn encryption_password() -> Result<String, ApplicationError> {
         log::trace!("Password found");
         let secret_bytes = item.secret().await?;
         // Should normally not be lossy, but just in case
-        let secret = String::from_utf8_lossy(&secret_bytes).to_owned();
-        Ok(secret.to_string())
+        let secret = String::from_utf8_lossy(&secret_bytes).into_owned();
+        Ok(secret)
     } else {
         log::trace!("Password not found, creating password");
         let distribution = rand::distributions::Standard {};
