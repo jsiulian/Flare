@@ -1,4 +1,4 @@
-use std::{cell::RefCell, collections::HashMap, path::Path, time::Duration};
+use std::{cell::RefCell, collections::HashMap, io::Write, path::Path, time::Duration};
 
 use gdk::prelude::*;
 use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
@@ -25,6 +25,7 @@ const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
 const SCHEMA_ATTRIBUTE: &str = "xdg:schema";
 const ATTRIBUTE_PASSWORD: (&str, &str) = ("type", "password");
 const SECRET_LENGTH: usize = 64;
+const STORE_VERSION_FILE: &str = "store_version";
 
 gtk::glib::wrapper! {
     pub struct Manager(ObjectSubclass<imp::Manager>);
@@ -77,14 +78,28 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationErr
         ));
     }
 
+    let path_store_version = path.join(STORE_VERSION_FILE);
+    if path.exists() && !path_store_version.exists() {
+        log::info!("Migrating from old store to new store. Removing old store");
+        std::fs::remove_dir_all(path)?;
+    }
+
     let passphrase = tspawn!(async { encryption_password().await })
         .await
         .expect("Failed tokio join")?;
-    Ok(presage::SledStore::open_with_passphrase(
+    let store = Ok(presage::SledStore::open_with_passphrase(
         path,
         Some(&passphrase),
         MigrationConflictStrategy::BackupAndDrop,
-    )?)
+    )?);
+
+    if !path_store_version.exists() {
+        log::info!("Creating file to specify the new store version.");
+        let mut file = std::fs::File::create(path_store_version)?;
+        file.write_all(b"1")?;
+    }
+
+    store
 }
 
 impl Manager {
