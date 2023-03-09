@@ -21,7 +21,7 @@ async-recursion = "1.0.2"
 regex = "1.7.0"
 lazy_static = "1.4.0"
 
-presage = { git = "https://github.com/Schmiddiii/presage.git", rev = "5f202d6fb4ff02eb071bb1c1cf8f995607c09f39" }
+presage = { git = "https://github.com/whisperfish/presage.git", rev = "11cd90b02e182af3e65b5844289747b0fec15698" }
 libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "964810f962c1b1c6530f749394f07aea731b6a74" }
 
 async-trait = "0.1.64"

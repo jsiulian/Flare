@@ -1,4 +1,4 @@
-use std::{cell::RefCell, collections::HashMap, io::Write, path::Path, time::Duration};
+use std::{cell::RefCell, collections::HashMap, io::Write, ops::Bound, path::Path, time::Duration};
 
 use gdk::prelude::*;
 use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
@@ -194,7 +194,16 @@ impl Manager {
     ) -> Result<impl Iterator<Item = Content>, ApplicationError> {
         crate::trace!("Querying message by thread: {:?}, from {:?}", thread, from);
         if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
-            Ok(config_store.messages(thread, from)?.filter_map(|o| o.ok()))
+            Ok(config_store
+                .messages(
+                    thread,
+                    (
+                        Bound::Unbounded,
+                        from.map(Bound::Excluded).unwrap_or(Bound::Unbounded),
+                    ),
+                )?
+                .rev()
+                .filter_map(|o| o.ok()))
         } else {
             log::error!("Query messages by contact without config store being set up");
             // TODO: Error?
