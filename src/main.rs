@@ -1,10 +1,11 @@
-use gtk::{gdk, gio, glib};
 use gdk::prelude::{ApplicationExt, ApplicationExtManual};
 use gio::prelude::SettingsExt;
 use gio::{ApplicationFlags, Settings, SettingsBindFlags};
 use glib::IsA;
 use gtk::prelude::SettingsExtManual;
 use gtk::traits::{GtkWindowExt, WidgetExt};
+use gtk::{gdk, gio, glib};
+use once_cell::sync::Lazy;
 
 use std::path::Path;
 
@@ -16,10 +17,12 @@ mod error;
 mod gui;
 mod hash_log;
 mod login1;
-mod storage;
 mod utils;
 
 pub use error::{ApplicationError, ConfigurationError};
+
+pub static TOKIO_RUNTIME: Lazy<tokio::runtime::Runtime> =
+    Lazy::new(|| tokio::runtime::Runtime::new().unwrap());
 
 fn init_resources() {
     let gbytes = gtk::glib::Bytes::from_static(RESOURCES_BYTES);

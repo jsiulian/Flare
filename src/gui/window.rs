@@ -24,7 +24,9 @@ impl Window {
             );
         }
         app.set_accels_for_action("channel-list.toggle-search", &["<Control>f"]);
-        Object::new::<Self>(&[("application", app)])
+        Object::builder::<Self>()
+            .property("application", app)
+            .build()
     }
 
     fn save_window_size(&self) -> Result<(), glib::BoolError> {
@@ -59,12 +61,12 @@ impl Window {
 pub mod imp {
     use std::{cell::RefCell, env, path::PathBuf};
 
-    use gtk::{gio, glib};
     use gio::{Settings, SimpleAction, SimpleActionGroup};
     use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
-        ParamSpecObject, Value,
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject,
+        Value,
     };
+    use gtk::{gio, glib};
     use gtk::{prelude::*, subclass::prelude::*, Builder, CompositeTemplate, ShortcutsWindow};
     use libadwaita::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
 
@@ -131,7 +133,7 @@ pub mod imp {
                     if response == "clear" {
                         log::info!("Clear messages device");
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
-                            if let Err(e)= man.clear_messages() {
+                            if let Err(e) = man.clear_messages() {
                                 log::error!("Failed to clear db: {}", e);
                             }
                         }
@@ -154,7 +156,7 @@ pub mod imp {
                     if response == "unlink-keep" {
                         log::info!("Unlinking device");
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
-                            if let Err(e)= man.clear() {
+                            if let Err(e) = man.clear_registration() {
                                 log::error!("Failed to clear db: {}", e);
                             }
                         }
@@ -163,7 +165,13 @@ pub mod imp {
                     } else if response == "unlink-delete" {
                         log::info!("Unlinking device");
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
-                            if let Err(e)= man.clear() {
+                            if let Err(e) = man.clear_registration() {
+                                log::error!("Failed to clear db: {}", e);
+                            }
+                            if let Err(e) = man.clear_contacts() {
+                                log::error!("Failed to clear db: {}", e);
+                            }
+                            if let Err(e) = man.clear_groups() {
                                 log::error!("Failed to clear db: {}", e);
                             }
                             if let Err(e) = man.clear_messages() {
@@ -331,15 +339,8 @@ pub mod imp {
         }
 
         fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![ParamSpecObject::new(
-                    "manager",
-                    "manager",
-                    "manager",
-                    Manager::static_type(),
-                    ParamFlags::READWRITE,
-                )]
-            });
+            static PROPERTIES: Lazy<Vec<ParamSpec>> =
+                Lazy::new(|| vec![ParamSpecObject::builder::<Manager>("manager").build()]);
             PROPERTIES.as_ref()
         }
 
@@ -367,7 +368,7 @@ pub mod imp {
     impl WidgetImpl for Window {}
     impl WindowImpl for Window {
         fn close_request(&self) -> gtk::Inhibit {
-            if let Err(err) = self.instance().save_window_size() {
+            if let Err(err) = self.obj().save_window_size() {
                 log::warn!("Failed to save window state, {}", &err);
             }
 

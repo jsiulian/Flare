@@ -1,9 +1,9 @@
 use std::cell::RefCell;
 
-use gtk::{gdk, gio, glib};
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
+use gtk::{gdk, gio, glib};
 use presage::prelude::content::Reaction;
 use presage::prelude::{proto::data_message::Quote, *};
 
@@ -65,12 +65,12 @@ impl TextMessage {
         manager: &Manager,
     ) -> Self {
         log::trace!("Trying to build a message from text");
-        let s: Self = Object::new::<Self>(&[
-            ("manager", manager),
-            ("channel", &channel),
-            ("sender", &sender),
-            ("sent", &timestamp),
-        ]);
+        let s: Self = Object::builder::<Self>()
+            .property("manager", manager)
+            .property("channel", &channel)
+            .property("sender", &sender)
+            .property("sent", &timestamp)
+            .build();
 
         let text_owned = text.as_ref().to_owned();
         let body = if text_owned.is_empty() {
@@ -109,8 +109,7 @@ impl TextMessage {
             let sender = msg.sender().address();
             data.quote = Some(Quote {
                 id: Some(msg.sent()),
-                author_e164: sender.as_ref().and_then(|a| a.e164()),
-                author_uuid: sender.as_ref().and_then(|a| a.uuid).map(|u| u.to_string()),
+                author_uuid: sender.as_ref().map(|a| a.uuid).map(|u| u.to_string()),
                 text: msg.body(),
                 ..Default::default()
             });
@@ -134,7 +133,7 @@ impl TextMessage {
             target_author_uuid: self
                 .sender()
                 .address()
-                .and_then(|a| a.uuid)
+                .map(|a| a.uuid)
                 .map(|u| u.to_string()),
             target_sent_timestamp: Some(self.sent()),
         };
@@ -186,15 +185,14 @@ impl TextMessage {
 }
 
 mod imp {
+    use gdk::gdk_pixbuf::prelude::ToValue;
+    use gdk::prelude::ParamSpecBuilderExt;
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gdk::gdk_pixbuf::{
-        prelude::{StaticType, ToValue},
+    use glib::{
+        once_cell::sync::Lazy, subclass::prelude::ObjectSubclassExt, ParamSpec, ParamSpecObject,
+        ParamSpecString, Value,
     };
     use gtk::glib;
-    use glib::{
-        subclass::prelude::ObjectSubclassExt,
-        once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecObject, ParamSpecString, Value
-    };
     use std::cell::RefCell;
 
     use crate::backend::{
@@ -247,28 +245,21 @@ mod imp {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecString::new("body", "body", "body", None, ParamFlags::READABLE),
-                    ParamSpecObject::new(
-                        "quote",
-                        "quote",
-                        "quote",
-                        super::TextMessage::static_type(),
-                        ParamFlags::READABLE,
-                    ),
-                    ParamSpecString::new(
-                        "reactions",
-                        "reactions",
-                        "reactions",
-                        Some(""),
-                        ParamFlags::READABLE,
-                    ),
+                    ParamSpecString::builder("body").read_only().build(),
+                    ParamSpecObject::builder::<super::TextMessage>("quote")
+                        .read_only()
+                        .build(),
+                    ParamSpecString::builder("reactions")
+                        .default_value(Some(""))
+                        .read_only()
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()
         }
 
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            let instance = self.instance();
+            let instance = self.obj();
             match pspec.name() {
                 "body" => instance.internal_data().and_then(|d| d.body).to_value(),
                 "reactions" => self.reactions.borrow().to_value(),

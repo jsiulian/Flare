@@ -1,9 +1,9 @@
-use gtk::{gdk, glib, gio};
-use glib::{Object, clone};
+use ashpd::{desktop::background::BackgroundRequest, WindowIdentifier};
 use gdk::gdk_pixbuf::Pixbuf;
 use gio::prelude::ApplicationExt;
+use glib::{clone, Object};
 use gtk::prelude::WidgetExt;
-use ashpd::{WindowIdentifier, desktop::background::BackgroundRequest};
+use gtk::{gdk, gio, glib};
 
 use gettextrs::gettext;
 
@@ -19,25 +19,27 @@ glib::wrapper! {
 #[gtk::template_callbacks]
 impl PreferencesWindow {
     pub fn new() -> Self {
-        Object::new::<Self>(&[])
+        Object::builder::<Self>().build()
     }
 
     async fn request_background(&self) -> ashpd::Result<()> {
         let identifier = WindowIdentifier::from_native(&self.native().unwrap()).await;
         let _ = BackgroundRequest::default()
-                    .reason(Some(gettext("Watch for new messages while closed").as_str()))
-                    .auto_start(true)
-                    .identifier(identifier)
-                    .command(&["flare", "--gapplication-service"])
-                    .dbus_activatable(false)
-                    .build()
-                    .await?;
+            .reason(Some(
+                gettext("Watch for new messages while closed").as_str(),
+            ))
+            .auto_start(true)
+            .identifier(identifier)
+            .command(&["flare", "--gapplication-service"])
+            .dbus_activatable(false)
+            .build()
+            .await?;
         Ok(())
     }
 
     #[template_callback]
     fn on_background_switch_state_set(&self, state: bool) -> bool {
-        let app =  gio::Application::default().unwrap();
+        let app = gio::Application::default().unwrap();
         if state {
             gspawn!(clone!(@weak self as this => async move {
                 match this.request_background().await {
@@ -50,7 +52,8 @@ impl PreferencesWindow {
             let body = gettext("Use settings to remove permissions");
             let notification = gio::Notification::new(&title);
             notification.set_body(Some(body.as_str()));
-            let icon = Pixbuf::from_resource("/icon.png").expect("Flare to have an application icon");
+            let icon =
+                Pixbuf::from_resource("/icon.png").expect("Flare to have an application icon");
             notification.set_icon(&icon);
             app.send_notification(None, &notification);
         }
@@ -65,9 +68,9 @@ impl Default for PreferencesWindow {
 }
 
 pub mod imp {
-    use gtk::{glib, gio};
     use gio::{Settings, SettingsBindFlags};
     use glib::subclass::InitializingObject;
+    use gtk::{gio, glib};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
     use libadwaita::subclass::prelude::*;
 

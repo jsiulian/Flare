@@ -1,7 +1,7 @@
-use gtk::{gdk, glib};
 use gdk::subclass::prelude::ObjectSubclassIsExt;
 use glib::ObjectExt;
 use gtk::traits::WidgetExt;
+use gtk::{gdk, glib};
 
 use crate::backend::{message::TextMessage, Channel, Manager};
 
@@ -46,15 +46,14 @@ pub mod imp {
 
     use std::{cell::RefCell, time::Duration};
 
-    use gtk::{glib, gio};
     use gio::Settings;
     use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamFlags, ParamSpec,
-        ParamSpecBoolean, ParamSpecObject, SignalHandlerId, Value,
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecBoolean,
+        ParamSpecObject, SignalHandlerId, Value,
     };
+    use gtk::{gio, glib, FileChooserNative};
     use gtk::{
-        builders::FileChooserNativeBuilder, prelude::*, subclass::prelude::*, CompositeTemplate,
-        FileChooserAction, ResponseType,
+        prelude::*, subclass::prelude::*, CompositeTemplate, FileChooserAction, ResponseType,
     };
 
     use crate::{
@@ -116,7 +115,7 @@ pub mod imp {
             log::trace!("More messages were requested in the UI");
             let channel = self.active_channel.borrow();
             if let Some(channel) = channel.as_ref() {
-                let obj = self.instance();
+                let obj = self.obj();
                 let to_load = self.settings.int("messages-request-load");
                 gspawn!(glib::clone!(@strong channel, @strong obj => async move {
                     let mut msgs = channel.load_last(to_load.try_into().unwrap_or(1)).await;
@@ -133,7 +132,7 @@ pub mod imp {
         #[template_callback]
         fn remove_reply(&self) {
             log::trace!("Unsetting reply message");
-            self.instance().set_reply_message(&None);
+            self.obj().set_reply_message(&None);
         }
 
         #[template_callback]
@@ -146,7 +145,7 @@ pub mod imp {
                     self.box_attachments.remove(&child);
                 }
             }
-            self.instance().notify("has-attachments");
+            self.obj().notify("has-attachments");
         }
 
         fn append_attachment(&self, attachment: crate::backend::Attachment) {
@@ -158,7 +157,7 @@ pub mod imp {
         #[template_callback]
         fn paste_file(&self, file: gio::File) {
             log::trace!("`ChannelMessages` got file as attachment.");
-            let obj = self.instance();
+            let obj = self.obj();
             let manager = obj.manager();
             let attachment = crate::backend::Attachment::from_file(file, &manager);
             self.append_attachment(attachment);
@@ -168,7 +167,7 @@ pub mod imp {
         #[template_callback]
         fn paste_texture(&self, texture: gdk::Texture) {
             log::trace!("`ChannelMessages` got texture as attachment.");
-            let obj = self.instance();
+            let obj = self.obj();
             let manager = obj.manager();
             let attachment = crate::backend::Attachment::from_texture(texture, &manager);
             self.append_attachment(attachment);
@@ -178,10 +177,10 @@ pub mod imp {
         #[template_callback]
         fn add_attachment(&self) {
             log::trace!("Requested to add a attachment");
-            let chooser = FileChooserNativeBuilder::new()
+            let chooser = FileChooserNative::builder()
                 .transient_for(
                     &self
-                        .instance()
+                        .obj()
                         .root()
                         .expect("`ChannelMessages` to have a root")
                         .dynamic_cast::<crate::gui::Window>()
@@ -189,7 +188,7 @@ pub mod imp {
                 )
                 .action(FileChooserAction::Open)
                 .build();
-            let obj = self.instance();
+            let obj = self.obj();
             chooser.connect_response(clone!(@strong chooser, @strong obj => move |_, action| {
                 if action == ResponseType::Accept {
                     log::trace!("User added an attachment");
@@ -215,7 +214,7 @@ pub mod imp {
                 att.clear();
                 a
             };
-            self.instance().notify("has-attachments");
+            self.obj().notify("has-attachments");
 
             if text.is_empty() && attachments.is_empty() {
                 log::warn!("Got requested to send empty message, skipping");
@@ -225,10 +224,10 @@ pub mod imp {
                 self.box_attachments.remove(&child);
             }
 
-            let obj = self.instance();
+            let obj = self.obj();
             if let Some(channel) = self.active_channel.borrow().as_ref() {
                 log::trace!("Constructing message");
-                let manager = self.instance().manager();
+                let manager = self.obj().manager();
 
                 let msg = TextMessage::from_text_channel_sender(
                     text,
@@ -243,7 +242,7 @@ pub mod imp {
                     obj.set_reply_message(&None);
                 }
 
-                let obj = self.instance();
+                let obj = self.obj();
                 gspawn!(
                     clone!(@strong msg, @strong channel, @strong attachments, @strong obj => async move {
                         log::trace!("Adding attachments to message: {}", attachments.len());
@@ -292,14 +291,14 @@ pub mod imp {
 
     impl ChannelMessages {
         fn reset_messages(&self) {
-            self.instance().set_reply_message(&None);
+            self.obj().set_reply_message(&None);
             while let Some(child) = self.list.first_child() {
                 self.list.remove(&child);
             }
         }
 
         fn add_message(&self, message: &DisplayMessage) {
-            let obj = self.instance();
+            let obj = self.obj();
             if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
                 let widget = MessageItem::new(message);
                 self.list.append(&widget);
@@ -333,7 +332,7 @@ pub mod imp {
         }
 
         fn update_show_name_of(&self, widget: &MessageItem) {
-            let obj = self.instance();
+            let obj = self.obj();
             let message: DisplayMessage = widget.message().upcast();
             let message_sender_title = message.sender().title();
             let last_message = obj
@@ -350,7 +349,7 @@ pub mod imp {
         }
 
         fn prepend_message(&self, message: &DisplayMessage) {
-            let obj = self.instance();
+            let obj = self.obj();
             if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
                 let widget = MessageItem::new(message);
                 self.list.insert(&widget, 0);
@@ -407,10 +406,10 @@ pub mod imp {
     impl ObjectImpl for ChannelMessages {
         fn constructed(&self) {
             self.parent_constructed();
-            self.instance().connect_notify_local(
+            self.obj().connect_notify_local(
                 Some("active-channel"),
                 clone!(@weak self as obj => move |_, _| {
-                    obj.instance().set_reply_message(&None);
+                    obj.obj().set_reply_message(&None);
                 }),
             );
         }
@@ -418,34 +417,10 @@ pub mod imp {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecObject::new(
-                        "active-channel",
-                        "active-channel",
-                        "active-channel",
-                        Channel::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecObject::new(
-                        "reply-message",
-                        "reply-message",
-                        "reply-message",
-                        TextMessage::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecBoolean::new(
-                        "has-attachments",
-                        "has-attachments",
-                        "has-attachments",
-                        false,
-                        ParamFlags::READABLE,
-                    ),
+                    ParamSpecObject::builder::<Manager>("manager").build(),
+                    ParamSpecObject::builder::<Channel>("active-channel").build(),
+                    ParamSpecObject::builder::<TextMessage>("reply-message").build(),
+                    ParamSpecBoolean::builder("has-attachments").build(),
                 ]
             });
             PROPERTIES.as_ref()

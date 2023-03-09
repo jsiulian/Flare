@@ -1,5 +1,5 @@
-use gtk::{gdk, glib, gio, prelude::*, subclass::prelude::*};
 use gdk::gdk_pixbuf::Pixbuf;
+use gtk::{gdk, gio, glib, prelude::*, subclass::prelude::*};
 
 use super::{Message, MessageExt, MessageImpl};
 
@@ -74,7 +74,7 @@ mod imp {
     use glib::{
         once_cell::sync::Lazy,
         subclass::types::{ClassStruct, ObjectSubclass},
-        ParamFlags, ParamSpec, ParamSpecString,
+        ParamSpec, ParamSpecString,
     };
 
     use crate::backend::{message::MessageImpl, Message};
@@ -112,30 +112,21 @@ mod imp {
     impl ObjectImpl for DisplayMessage {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![ParamSpecString::new(
-                    "textual-description",
-                    "textual-description",
-                    "textual-description",
-                    None,
-                    ParamFlags::READABLE,
-                )]
+                vec![ParamSpecString::builder("textual-description")
+                    .read_only()
+                    .build()]
             });
 
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            _id: usize,
-            _value: &glib::Value,
-            _pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, _value: &glib::Value, _pspec: &glib::ParamSpec) {
             unimplemented!()
         }
 
         fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
-                "textual-description" => self.instance().textual_description().to_value(),
+                "textual-description" => self.obj().textual_description().to_value(),
                 _ => unimplemented!(),
             }
         }

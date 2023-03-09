@@ -4,13 +4,13 @@ use std::{
     hash::{Hash, Hasher},
 };
 
-use gtk::{gdk, gio, glib};
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Cast, Object};
+use gtk::{gdk, gio, glib};
 use libsignal_service::groups_v2::Group;
 use presage::{
-    prelude::{DataMessage, GroupContextV2, GroupMasterKey, ServiceAddress, Uuid},
+    prelude::{DataMessage, GroupContextV2, Uuid},
     Thread,
 };
 
@@ -32,24 +32,21 @@ impl Channel {
     ) -> Self {
         log::trace!("Trying to build a `Channel` from a `Contact` or `GroupContextV2`");
         let available_channels = manager.available_channels();
-        let s: Self = Object::new::<Self>(&[("manager", manager)]);
+        let s: Self = Object::builder::<Self>()
+            .property("manager", manager)
+            .build();
         if let Some(group_context_v2) = group_context {
-            let master_key = GroupMasterKey::new(
-                group_context_v2
-                    .master_key
-                    .clone()
-                    .unwrap()
-                    .try_into()
-                    .unwrap(),
-            );
             if let Some(channel) = available_channels.iter().find(|c| {
                 c.group_context().and_then(|c| c.master_key) == group_context_v2.master_key
             }) {
                 return channel.clone();
             }
 
-            let group = manager.get_group_v2(master_key).await;
-            if let Ok(group) = group {
+            // TODO: Can be `None`?
+            let group = manager
+                .get_group_v2(group_context_v2.master_key.clone().unwrap_or_default())
+                .await;
+            if let Ok(Some(group)) = group {
                 return Self::from_group(group, group_context_v2, manager).await;
             } else {
                 s.imp().contact.swap(&RefCell::new(Some(contact)));
@@ -65,7 +62,9 @@ impl Channel {
         group_context_v2: &GroupContextV2,
         manager: &Manager,
     ) -> Self {
-        let s: Self = Object::new::<Self>(&[("manager", manager)]);
+        let s: Self = Object::builder::<Self>()
+            .property("manager", manager)
+            .build();
         s.imp().group.swap(&RefCell::new(Some(group)));
         s.imp()
             .group_context
@@ -158,7 +157,7 @@ impl Channel {
             .borrow()
             .as_ref()
             .and_then(|c| c.address())
-            .and_then(|a| a.uuid)
+            .map(|a| a.uuid)
     }
 
     pub(super) async fn do_new_message(
@@ -244,8 +243,8 @@ impl Channel {
         // Check if message is duplicate
         if self.messages().iter().rev().any(|m| {
             message.sent() == m.sent()
-                && message.sender().address().and_then(|a| a.uuid)
-                    == m.sender().address().and_then(|a| a.uuid)
+                && message.sender().address().map(|a| a.uuid)
+                    == m.sender().address().map(|a| a.uuid)
         }) {
             crate::info!(
                 "Channel {} got a duplicate message. Ignoring the second one.",
@@ -305,25 +304,12 @@ impl Channel {
             log::trace!("Sending to single contact");
             manager.send_message(contact, data, timestamp).await?;
         } else {
-            {
-                let context = self.imp().group_context.borrow();
-                data.group_v2 = context.clone();
+            let context = self.imp().group_context.borrow().clone();
+            data.group_v2 = context.clone();
+            // TODO: Can this be `None`?
+            if let Some(key) = context.as_ref().and_then(|c| c.master_key.clone()) {
+                manager.send_message_to_group(key, data, timestamp).await?;
             }
-            let receiver_group_addresses = if let Some(group) = self.imp().group.borrow().as_ref() {
-                group
-                    .members
-                    .iter()
-                    .map(|m| m.uuid)
-                    .map(|u| manager.get_contact_by_id(u))
-                    .filter(|u| matches!(u, Ok(Some(_))))
-                    .map(|c| c.expect("Match Failed").expect("Match Failed").address)
-                    .collect::<Vec<ServiceAddress>>()
-            } else {
-                return Ok(());
-            };
-            manager
-                .send_message_to_group(receiver_group_addresses, data, timestamp)
-                .await?;
         }
         Ok(())
     }
@@ -352,12 +338,11 @@ impl Channel {
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
-    use gtk::{gdk, glib};
     use gdk::{prelude::*, subclass::prelude::*};
     use glib::{
-        once_cell::sync::Lazy, subclass::Signal, ParamFlags, ParamSpec, ParamSpecObject,
-        ParamSpecString, Value,
+        once_cell::sync::Lazy, subclass::Signal, ParamSpec, ParamSpecObject, ParamSpecString, Value,
     };
+    use gtk::{gdk, glib};
     use libsignal_service::groups_v2::Group;
     use presage::prelude::{GroupContextV2, Uuid};
 
@@ -381,7 +366,7 @@ mod imp {
                 .borrow()
                 .as_ref()
                 .and_then(|c| c.address())
-                .and_then(|a| a.uuid)
+                .map(|a| a.uuid)
             {
                 uuid.hash(state);
             } else {
@@ -411,21 +396,13 @@ mod imp {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
-                    ),
-                    ParamSpecObject::new(
-                        "last-message",
-                        "last-message",
-                        "last-message",
-                        DisplayMessage::static_type(),
-                        ParamFlags::READABLE,
-                    ),
-                    ParamSpecString::new("title", "title", "title", None, ParamFlags::READABLE),
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecObject::builder::<DisplayMessage>("last-message")
+                        .read_only()
+                        .build(),
+                    ParamSpecString::builder("title").read_only().build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -469,11 +446,9 @@ mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![
-                    Signal::builder("message")
-                        .param_types([DisplayMessage::static_type()])
-                        .build()
-                ]
+                vec![Signal::builder("message")
+                    .param_types([DisplayMessage::static_type()])
+                    .build()]
             });
             SIGNALS.as_ref()
         }

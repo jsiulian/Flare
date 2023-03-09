@@ -1,8 +1,8 @@
 use std::cell::RefCell;
 
-use gtk::{gio, glib};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Object, ObjectExt};
+use gtk::{gio, glib};
 use presage::prelude::ServiceAddress;
 
 use super::Manager;
@@ -14,29 +14,26 @@ gtk::glib::wrapper! {
 impl Contact {
     pub(super) fn from_service_address(address: &ServiceAddress, manager: &Manager) -> Self {
         log::trace!("Building a `Contact` from a `ServiceAddress`");
-        if let Some(uuid) = address.uuid {
-            if let Ok(Some(contact)) = manager.get_contact_by_id(uuid) {
-                return Self::from_contact(contact, manager);
-            }
+        if let Ok(Some(contact)) = manager.get_contact_by_id(address.uuid) {
+            return Self::from_contact(contact, manager);
         }
         log::trace!("Not in the contact list");
-        let s: Self = Object::new::<Self>(&[("manager", manager)]);
-        s.imp()
-            .phonenumber
-            .swap(&RefCell::new(address.phonenumber.clone()));
-        s.imp().address.swap(&RefCell::new(Some(address.clone())));
+        let s: Self = Object::builder::<Self>()
+            .property("manager", manager)
+            .build();
+        s.imp().uuid.swap(&RefCell::new(Some(address.uuid)));
         s
     }
 
     pub(super) fn from_contact(contact: presage::prelude::Contact, manager: &Manager) -> Self {
         log::trace!("Building a `Contact` from a `presage::prelude::Contact`");
-        let s: Self = Object::new::<Self>(&[("manager", manager)]);
+        let s: Self = Object::builder::<Self>()
+            .property("manager", manager)
+            .build();
         s.imp()
             .phonenumber
-            .swap(&RefCell::new(contact.address.phonenumber.clone()));
-        s.imp()
-            .address
-            .swap(&RefCell::new(Some(contact.address.clone())));
+            .swap(&RefCell::new(contact.phone_number.clone()));
+        s.imp().uuid.swap(&RefCell::new(Some(contact.uuid)));
         s.imp().contact.swap(&RefCell::new(Some(contact)));
         s
     }
@@ -58,19 +55,19 @@ impl Contact {
             .contact
             .borrow()
             .as_ref()
-            .map(|c| c.address.clone())
+            .map(|c| ServiceAddress { uuid: c.uuid })
     }
 }
 
 mod imp {
     use std::cell::RefCell;
 
-    use gtk::{gdk, glib};
     use gdk::{prelude::*, subclass::prelude::*};
     use glib::{
-        once_cell::sync::Lazy, ParamFlags, ParamSpec, ParamSpecBoolean, ParamSpecObject,
-        ParamSpecString, Value,
+        once_cell::sync::Lazy, ParamSpec, ParamSpecBoolean, ParamSpecObject, ParamSpecString, Value,
     };
+    use gtk::{gdk, glib};
+    use libsignal_service::prelude::Uuid;
     use presage::prelude::phonenumber::Mode;
 
     use crate::backend::Manager;
@@ -79,7 +76,7 @@ mod imp {
     pub struct Contact {
         pub(super) contact: RefCell<Option<presage::prelude::Contact>>,
         pub(super) phonenumber: RefCell<Option<presage::prelude::PhoneNumber>>,
-        pub(super) address: RefCell<Option<presage::prelude::ServiceAddress>>,
+        pub(super) uuid: RefCell<Option<Uuid>>,
 
         manager: RefCell<Option<Manager>>,
     }
@@ -94,21 +91,11 @@ mod imp {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
-                    ),
-                    ParamSpecBoolean::new(
-                        "is-self",
-                        "is-self",
-                        "is-self",
-                        false,
-                        ParamFlags::READABLE,
-                    ),
-                    ParamSpecString::new("title", "title", "title", None, ParamFlags::READABLE),
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecBoolean::builder("is-self").read_only().build(),
+                    ParamSpecString::builder("title").read_only().build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -119,7 +106,7 @@ mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "is-self" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
-                        (contact.address.uuid == Some(self.manager.borrow().as_ref().unwrap().uuid())).to_value()
+                        (contact.uuid == self.manager.borrow().as_ref().unwrap().uuid()).to_value()
                     } else {
                         false.to_value()
                     }
@@ -127,7 +114,7 @@ mod imp {
                 "title" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
                         let name = &contact.name;
-                        if self.instance().is_self() {
+                        if self.obj().is_self() {
                             self.manager
                                 .borrow()
                                 .as_ref()
@@ -138,20 +125,15 @@ mod imp {
                             if let Some(phone) = self.phonenumber.borrow().as_ref() {
                                 phone.format().mode(Mode::National).to_string().to_value()
                             } else {
-                                contact.address.uuid.map(|u| u.to_string()).to_value()
+                                contact.uuid.to_string().to_value()
                             }
                         } else {
                             name.to_value()
                         }
                     } else if let Some(phone) = self.phonenumber.borrow().as_ref() {
                         phone.format().mode(Mode::National).to_string().to_value()
-                    } else if let Some(address) = self.address.borrow().as_ref() {
-                        address
-                            .phonenumber
-                            .as_ref()
-                            .map(|p| p.format().mode(Mode::National).to_string())
-                            .or_else(|| address.uuid.map(|u| u.to_string()))
-                            .to_value()
+                    } else if let Some(uuid) = self.uuid.borrow().as_ref() {
+                        uuid.to_string().to_value()
                     } else {
                         None::<String>.to_value()
                     }

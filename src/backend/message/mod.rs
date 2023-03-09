@@ -46,12 +46,12 @@ impl Message {
                 if message.body.is_none() && message.attachments.is_empty() {
                     return None;
                 }
-                let s: TextMessage = Object::new::<TextMessage>(&[
-                    ("manager", manager),
-                    ("sender", &contact),
-                    ("channel", &channel),
-                    ("sent", &timestamp),
-                ]);
+                let s: TextMessage = Object::builder::<TextMessage>()
+                    .property("manager", manager)
+                    .property("sender", &contact)
+                    .property("channel", &channel)
+                    .property("sent", &timestamp)
+                    .build();
                 s.init_data(message, manager).await;
                 Some(s.upcast())
             }
@@ -70,9 +70,12 @@ impl Message {
                 }
                 let destination_contact = if e164.is_some() || uuid.is_some() {
                     let destination_address = ServiceAddress {
-                        uuid: uuid.clone().and_then(|u| u.parse().ok()),
-                        phonenumber: e164.clone().and_then(|e| e.parse().ok()),
-                        relay: None,
+                        // TODO: Change reaction message to UUID
+                        uuid: uuid
+                            .clone()
+                            .unwrap_or_default()
+                            .parse()
+                            .expect("Failed to parse UUID"),
                     };
                     Contact::from_service_address(&destination_address, manager)
                 } else {
@@ -84,12 +87,12 @@ impl Message {
                     manager,
                 )
                 .await;
-                let s: TextMessage = Object::new::<TextMessage>(&[
-                    ("manager", manager),
-                    ("sender", &contact),
-                    ("channel", &channel),
-                    ("sent", &timestamp),
-                ]);
+                let s: TextMessage = Object::builder::<TextMessage>()
+                    .property("manager", manager)
+                    .property("sender", &contact)
+                    .property("channel", &channel)
+                    .property("sent", &timestamp)
+                    .build();
                 s.init_data(message, manager).await;
                 Some(s.upcast())
             }
@@ -120,9 +123,12 @@ impl Message {
             }) if message.reaction.is_some() => {
                 let destination_contact = if e164.is_some() || uuid.is_some() {
                     let destination_address = ServiceAddress {
-                        uuid: uuid.clone().and_then(|u| u.parse().ok()),
-                        phonenumber: e164.clone().and_then(|e| e.parse().ok()),
-                        relay: None,
+                        // TODO: Change reaction message to UUID
+                        uuid: uuid
+                            .clone()
+                            .unwrap_or_default()
+                            .parse()
+                            .expect("Failed to parse UUID"),
                     };
                     Contact::from_service_address(&destination_address, manager)
                 } else {
@@ -236,8 +242,8 @@ mod imp {
     use std::cell::{Cell, RefCell};
 
     use glib::{
-        once_cell::sync::Lazy, subclass::types::ObjectSubclass, ParamFlags, ParamSpec,
-        ParamSpecObject, ParamSpecUInt64, Value,
+        once_cell::sync::Lazy, subclass::types::ObjectSubclass, ParamSpec, ParamSpecObject,
+        ParamSpecUInt64, Value,
     };
 
     use crate::backend::Manager;
@@ -266,36 +272,16 @@ mod imp {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
-                    ),
-                    ParamSpecObject::new(
-                        "sender",
-                        "sender",
-                        "sender",
-                        Contact::static_type(),
-                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
-                    ),
-                    ParamSpecObject::new(
-                        "channel",
-                        "channel",
-                        "channel",
-                        Channel::static_type(),
-                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
-                    ),
-                    ParamSpecUInt64::new(
-                        "sent",
-                        "sent",
-                        "sent",
-                        0,
-                        u64::MAX,
-                        1,
-                        ParamFlags::READWRITE.union(ParamFlags::CONSTRUCT_ONLY),
-                    ),
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecObject::builder::<Contact>("sender")
+                        .construct_only()
+                        .build(),
+                    ParamSpecObject::builder::<Channel>("channel")
+                        .construct_only()
+                        .build(),
+                    ParamSpecUInt64::builder("sent").construct_only().build(),
                 ]
             });
             PROPERTIES.as_ref()

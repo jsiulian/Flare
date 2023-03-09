@@ -89,10 +89,22 @@ After you have already donated to them and still have money left, consider donat
 
 ## Security
 
-To my knowledge, any data this application uses (contacts, linking credentials, ...) are stored encrypted in `~/.local/share/flare` (path will be different in Flatpaks). Messages sent and received by this application are stored equivalently.
+To my knowledge, most data (see below) this application uses (contacts, linking credentials, ...) are stored encrypted in `~/.local/share/flare` (path will be different in Flatpaks). Messages sent and received by this application are stored equivalently.
 
 Even though things are encrypted, I do not guarantee for the security of your data. This application will probably worsen the security compared to official Signal products. Use this application with care when handling sensitive data.
 
+### Encrypted
+
+- Linking credentials
+- Contact and group details
+- Message contents
+
+### Not Encrypted
+
+- Number of contacts and groups
+- Number of messages in a chat (but without information on what specific chat; does not only include "visible" messages but also messages to synchronize between clients)
+- Message timestamps
+
 ### More detailed notes on encryption
 
-This application stores data using [encrypted-sled](https://crates.io/crates/encrypted-sled) using [chacha20poly135](https://crates.io/crates/chacha20poly1305) encryption. The encryption key is 32 byte (= 256 bit) and is stored and retrieved using [libsecret](https://crates.io/crates/libsecret).
+This application stores data using [sled](https://crates.io/crates/sled) using [matrix-sdk-store-encryption](https://crates.io/crates/matrix-sdk-store-encryption) encryption. The passphrase for the encryption is stored and retrieved using [libsecret](https://crates.io/crates/libsecret).

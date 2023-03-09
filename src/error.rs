@@ -1,6 +1,6 @@
+use gtk::glib;
 use libsignal_service as lss;
 use presage as p;
-use gtk::glib;
 
 const FAILED_TO_LOOK_UP_ADDRESS: &str = "failed to lookup address information";
 
@@ -14,11 +14,12 @@ pub enum ConfigurationError {
 pub enum ApplicationError {
     IOError(std::io::Error),
     NoInternet,
-    Libsecret(glib::error::Error),
+    Glib(glib::Error),
+    Libsecret(oo7::Error),
     Db(sled::Error),
     UnauthorizedSignal,
     SendFailed(libsignal_service::sender::MessageSenderError),
-    ReceiveFailed(libsignal_service::receiver::MessageReceiverError),
+    ReceiveFailed(libsignal_service::push_service::ServiceError),
     Presage(presage::Error),
     ConfigurationError(ConfigurationError),
     ManagerThreadPanic,
@@ -31,16 +32,20 @@ impl From<p::Error> for ApplicationError {
                 ApplicationError::UnauthorizedSignal
             }
             p::Error::DbError(e) => ApplicationError::Db(e),
-            p::Error::MessageSenderError(lss::sender::MessageSenderError::NetworkFailure {
-                recipient: _,
-            }) => ApplicationError::NoInternet,
+            // TODO: Never happens?
+            // p::Error::MessageSenderError(lss::sender::MessageSenderError::NetworkFailure {
+            //     recipient: _,
+            // }) => ApplicationError::NoInternet,
             p::Error::MessageSenderError(lss::sender::MessageSenderError::ServiceError(
                 p::prelude::content::ServiceError::SendError { reason: e },
             )) if e.contains(FAILED_TO_LOOK_UP_ADDRESS) => ApplicationError::NoInternet,
-            p::Error::MessageReceiverError(lss::receiver::MessageReceiverError::ServiceError(
-                p::prelude::content::ServiceError::WsError { reason: e },
-            )) if e.contains(FAILED_TO_LOOK_UP_ADDRESS) => ApplicationError::NoInternet,
-            p::Error::MessageReceiverError(e) => ApplicationError::ReceiveFailed(e),
+            p::Error::ServiceError(p::prelude::content::ServiceError::SendError { reason: e })
+                if e.contains(FAILED_TO_LOOK_UP_ADDRESS) =>
+            {
+                ApplicationError::NoInternet
+            }
+            // TODO: Is there a new version?
+            // p::Error::MessageReceiverError(e) => ApplicationError::ReceiveFailed(e),
             p::Error::MessageSenderError(e) => ApplicationError::SendFailed(e),
             _ => ApplicationError::Presage(e),
         }
@@ -53,9 +58,15 @@ impl From<std::io::Error> for ApplicationError {
     }
 }
 
-impl From<glib::error::Error> for ApplicationError {
-    fn from(e: glib::error::Error) -> Self {
+impl From<oo7::Error> for ApplicationError {
+    fn from(e: oo7::Error) -> Self {
         ApplicationError::Libsecret(e)
+    }
+}
+
+impl From<glib::Error> for ApplicationError {
+    fn from(e: glib::Error) -> Self {
+        ApplicationError::Glib(e)
     }
 }
 
@@ -79,6 +90,11 @@ impl std::fmt::Display for ApplicationError {
                 f,
                 "{}",
                 gettext("There does not seem to be a connection to the internet available.")
+            ),
+            ApplicationError::Glib(_) => writeln!(
+                f,
+                "{}",
+                gettext("Something glib-related failed.")
             ),
             ApplicationError::Libsecret(_) => writeln!(
                 f,
@@ -129,6 +145,7 @@ impl ApplicationError {
         match self {
             ApplicationError::IOError(e) => format!("{:#?}", e),
             ApplicationError::NoInternet => gettext("Please check your internet connection."),
+            ApplicationError::Glib(e) => format!("{:#?}", e),
             ApplicationError::Libsecret(e) => format!("{:#?}", e),
             ApplicationError::Db(e) => format!("{:#?}", e),
             ApplicationError::UnauthorizedSignal => {
@@ -153,6 +170,7 @@ impl ApplicationError {
         match self {
             ApplicationError::IOError(_) => false,
             ApplicationError::NoInternet => false,
+            ApplicationError::Glib(_) => true,
             ApplicationError::Libsecret(_) => false,
             ApplicationError::Db(_) => true,
             ApplicationError::UnauthorizedSignal => false,

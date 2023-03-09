@@ -1,5 +1,5 @@
-use gtk::glib;
 use glib::{prelude::IsA, Object, ObjectExt};
+use gtk::glib;
 
 use crate::backend::Manager;
 
@@ -13,11 +13,11 @@ glib::wrapper! {
 impl LinkWindow {
     pub fn new(url: String, manager: Manager, parent: &impl IsA<gtk::Window>) -> Self {
         log::trace!("Initializing link window");
-        Object::new::<Self>(&[
-            ("url", &url),
-            ("manager", &manager),
-            ("transient-for", &parent),
-        ])
+        Object::builder::<Self>()
+            .property("url", &url)
+            .property("manager", &manager)
+            .property("transient-for", &parent)
+            .build()
     }
 
     pub fn url(&self) -> String {
@@ -28,13 +28,13 @@ impl LinkWindow {
 pub mod imp {
     use std::cell::RefCell;
 
-    use gtk::{gdk, glib, gio};
     use gdk::gdk_pixbuf::Pixbuf;
     use gio::MemoryInputStream;
     use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, Bytes, ParamFlags, ParamSpec,
+        clone, once_cell::sync::Lazy, subclass::InitializingObject, Bytes, ParamSpec,
         ParamSpecObject, ParamSpecString, Value,
     };
+    use gtk::{gdk, gio, glib};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
     use libadwaita::subclass::prelude::*;
 
@@ -54,7 +54,7 @@ pub mod imp {
     impl LinkWindow {
         #[template_callback]
         fn handle_clipboard(&self, _: gtk::Button) {
-            let obj = self.instance();
+            let obj = self.obj();
             let clipboard = obj.clipboard();
             clipboard.set_text(&obj.url());
         }
@@ -81,26 +81,16 @@ pub mod imp {
             log::trace!("Constructed LinkWindow");
             self.parent_constructed();
             // TODO: Cancel manager?
-            self.instance().connect_response(|dialog, _| dialog.close());
+            self.obj().connect_response(|dialog, _| dialog.close());
         }
 
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
-                    ParamSpecObject::new(
-                        "manager",
-                        "manager",
-                        "manager",
-                        Manager::static_type(),
-                        ParamFlags::READWRITE,
-                    ),
-                    ParamSpecString::new(
-                        "url",
-                        "url",
-                        "url",
-                        None,
-                        ParamFlags::READWRITE | ParamFlags::CONSTRUCT_ONLY,
-                    ),
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecString::builder("url").construct_only().build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -115,7 +105,7 @@ pub mod imp {
         }
 
         fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            let instance = self.instance();
+            let instance = self.obj();
             match pspec.name() {
                 "manager" => {
                     let man = value
