@@ -1,7 +1,7 @@
 use std::path::Path;
 
 use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
-use glib::{Cast, DateTime};
+use gtk::glib::{Cast, DateTime};
 use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
 use presage::prelude::{
     content::{AttachmentPointer, CallMessage as PreCallMessage},
@@ -50,11 +50,8 @@ macro_rules! call_msg {
 pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
     vec![
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(0)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(0),
+            phone_number: None,
             name: "".to_string(),
             color: None,
             verified: Default::default(),
@@ -66,11 +63,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(1)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(1),
+            phone_number: None,
             name: "Arch Linux User".to_string(),
             color: None,
             verified: Default::default(),
@@ -82,11 +76,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(2)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(2),
+            phone_number: None,
             name: "Developer".to_string(),
             color: None,
             verified: Default::default(),
@@ -98,11 +89,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(3)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(3),
+            phone_number: None,
             name: "Anakin Skywalker".to_string(),
             color: None,
             verified: Default::default(),
@@ -114,11 +102,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(4)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(4),
+            phone_number: None,
             name: "Terminator".to_string(),
             color: None,
             verified: Default::default(),
@@ -130,11 +115,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(5)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(5),
+            phone_number: None,
             name: "Friend".to_string(),
             color: None,
             verified: Default::default(),
@@ -146,11 +128,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(6)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(6),
+            phone_number: None,
             name: "Better Friend".to_string(),
             color: None,
             verified: Default::default(),
@@ -162,11 +141,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(7)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(7),
+            phone_number: None,
             name: "Best Friend".to_string(),
             color: None,
             verified: Default::default(),
@@ -178,11 +154,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(8)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(8),
+            phone_number: None,
             name: "Bestester Friend".to_string(),
             color: None,
             verified: Default::default(),
@@ -194,11 +167,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(9)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(9),
+            phone_number: None,
             name: "Ultra Friend".to_string(),
             color: None,
             verified: Default::default(),
@@ -210,11 +180,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(10)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(10),
+            phone_number: None,
             name: "Omega Friend".to_string(),
             color: None,
             verified: Default::default(),
@@ -226,11 +193,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(11)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(11),
+            phone_number: None,
             name: "That guy again".to_string(),
             color: None,
             verified: Default::default(),
@@ -242,11 +206,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(12)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(12),
+            phone_number: None,
             name: "Enemy".to_string(),
             color: None,
             verified: Default::default(),
@@ -258,11 +219,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(13)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(13),
+            phone_number: None,
             name: "Rick".to_string(),
             color: None,
             verified: Default::default(),
@@ -274,11 +232,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(14)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(14),
+            phone_number: None,
             name: "Microsoft Support".to_string(),
             color: None,
             verified: Default::default(),
@@ -290,11 +245,8 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             avatar: None,
         },
         presage::prelude::Contact {
-            address: presage::prelude::ServiceAddress {
-                uuid: Some(Uuid::from_u128(15)),
-                phonenumber: None,
-                relay: None,
-            },
+            uuid: Uuid::from_u128(15),
+            phone_number: None,
             name: "Who is this?".to_string(),
             color: None,
             verified: Default::default(),
@@ -418,7 +370,7 @@ impl super::Manager {
                     avatar: "".to_string(),
                     disappearing_messages_timer: None,
                     access_control: None,
-                    version: 0,
+                    revision: 0,
                     members: vec![],
                     pending_members: vec![],
                     requesting_members: vec![],
