@@ -6,6 +6,12 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+# Optimize matrix-sdk-store-encryption, as otherwise opening the store takes 6 seconds.
+[profile.dev.package.matrix-sdk-store-encryption]
+opt-level = 3
+[profile.dev.package.sha2]
+opt-level = 3
+
 [dependencies]
 gtk = { version = "0.6.2", package = "gtk4", features = ["v4_8"]}
 gdk = { version = "0.6.2", package = "gdk4" }
