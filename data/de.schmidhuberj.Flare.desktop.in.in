@@ -8,3 +8,4 @@ StartupNotify=true
 DBusActivatable=true
 X-Purism-FormFactor=Workstation;Mobile;
 X-GNOME-UsesNotifications=true
+X-Phosh-UsesFeedback=true
