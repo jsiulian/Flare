@@ -20,7 +20,11 @@ impl DisplayMessage {
         notification.set_body(body.as_deref());
         let icon = Pixbuf::from_resource("/icon.png").expect("Flare to have an application icon");
         notification.set_icon(&icon);
-        self.manager().send_notification(&notification);
+
+        let manager = self.manager();
+        crate::gspawn!(async move {
+            manager.send_notification(&notification).await;
+        });
     }
 }
 

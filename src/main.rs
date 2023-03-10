@@ -13,10 +13,10 @@ mod config;
 use self::config::{APP_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_BYTES};
 
 mod backend;
+mod dbus;
 mod error;
 mod gui;
 mod hash_log;
-mod login1;
 mod utils;
 
 pub use error::{ApplicationError, ConfigurationError};

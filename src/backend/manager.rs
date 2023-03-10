@@ -18,7 +18,7 @@ use presage::{
 use rand::distributions::DistString;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
-use crate::{gspawn, tspawn, ApplicationError};
+use crate::{dbus::Feedbackd, gspawn, tspawn, ApplicationError};
 
 const MESSAGE_BOUND: usize = 10;
 const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
@@ -109,17 +109,25 @@ impl Manager {
         s
     }
 
-    pub fn send_notification(&self, notification: &gio::Notification) {
+    pub async fn send_notification(&self, notification: &gio::Notification) {
         if self.imp().settings.boolean("notifications") {
             if let Some(application) = self.application() {
                 log::trace!("Sending a notification");
                 application.send_notification(None, notification);
+                if let Some(feedbackd) = self.feedbackd() {
+                    // Ignore errors creating feedback
+                    let _ = crate::tspawn!(async move { feedbackd.feedback().await }).await;
+                }
             }
         }
     }
 
     pub fn application(&self) -> Option<Application> {
         self.imp().application.borrow().clone()
+    }
+
+    pub fn feedbackd(&self) -> Option<Feedbackd> {
+        self.imp().feedbackd.borrow().clone()
     }
 
     pub fn clear_registration(&self) -> Result<(), ApplicationError> {
@@ -218,6 +226,7 @@ impl Manager {
         use tokio::sync::mpsc;
 
         use crate::backend::message::MessageExt;
+
         let config_store = config_store(p).await?;
 
         log::trace!("Setting up the config store");
@@ -268,7 +277,7 @@ impl Manager {
                 log::error!("Got error linking device: {}", err);
                 return Err(err.into());
             }
-            Err(_e) => log::trace!("Manager setup successfull"),
+            Err(_e) => log::trace!("Manager setup successful"),
         }
 
         if internal.is_none() {
@@ -278,7 +287,16 @@ impl Manager {
             }
         }
 
+        let feedbackd = crate::tspawn!(async { Feedbackd::new().await })
+            .await
+            .map(|e| e.ok())
+            .ok()
+            .flatten();
+        if feedbackd.is_none() {
+            log::info!("Feedbackd not available, there will not be feedback for notifications");
+        }
         self.imp().internal.swap(&RefCell::new(internal));
+        self.imp().feedbackd.swap(&RefCell::new(feedbackd));
 
         self.emit_by_name::<()>("link-finish", &[]);
 
@@ -551,6 +569,7 @@ mod imp {
     use glib::{once_cell::sync::Lazy, subclass::Signal};
     use gtk::{gdk, gio, glib};
 
+    use crate::dbus::Feedbackd;
     use crate::{
         backend::{manager_thread::ManagerThread, Channel, Message},
         config::APP_ID,
@@ -566,6 +585,8 @@ mod imp {
         // pub(super) profile: RefCell<Option<Profile>>,
         pub(super) settings: Settings,
         pub(super) application: RefCell<Option<Application>>,
+
+        pub(super) feedbackd: RefCell<Option<Feedbackd>>,
     }
 
     impl Default for Manager {
@@ -576,6 +597,7 @@ mod imp {
                 channels: Default::default(),
                 settings: Settings::new(APP_ID),
                 application: Default::default(),
+                feedbackd: Default::default(),
             }
         }
     }

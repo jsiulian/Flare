@@ -36,7 +36,7 @@ pub async fn await_online() {
 }
 
 pub async fn await_suspend_wakeup() -> ashpd::Result<()> {
-    let login1 = crate::login1::Login1::new().await?;
+    let login1 = crate::dbus::Login1::new().await?;
 
     log::trace!("Awaiting sleep change.");
     while login1.receive_sleep().await? {
