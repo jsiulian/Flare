@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### BREAKING
+
+- Due to a new storage for data, a relink is required on first startup
+
+### Added
+
+- Experimental integration with feedbackd
+
+### Chores
+
+- Updated all dependencies
+
 ## [0.6.0] - 2023-01-13
 
 ### Added
@@ -265,7 +277,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.6...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.6.0...master
+[0.6.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.6...0.6.0
 [0.5.6]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.5...0.5.6
 [0.5.5]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.4...0.5.5
 [0.5.4]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.3...0.5.4
