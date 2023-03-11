@@ -32,7 +32,7 @@ libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs
 
 async-trait = "0.1.64"
 sled = "0.34.7"
-oo7 = { version = "0.1.0-beta.3", default-features = false, features = ["tokio", "native_crypto"] }
+oo7 = { version = "0.1.0-beta.3", default-features = false, features = ["native_crypto", "async-std"] }
 rand = "0.8.5"
 zeroize = "1.5.7"
 chacha20poly1305 = "0.10.1"
