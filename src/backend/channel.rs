@@ -14,7 +14,10 @@ use presage::{
     Thread,
 };
 
-use crate::backend::message::{DisplayMessage, MessageExt, TextMessage};
+use crate::{
+    backend::message::{DisplayMessage, MessageExt, TextMessage},
+    ApplicationError,
+};
 
 use super::{message::ReactionMessage, Contact, Manager, Message};
 
@@ -158,6 +161,16 @@ impl Channel {
             .as_ref()
             .and_then(|c| c.address())
             .map(|a| a.uuid)
+    }
+
+    pub async fn send_identity_reset(&self) -> Result<(), ApplicationError> {
+        log::trace!("Sending identity reset");
+        let ts = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .expect("Time went backwards")
+            .as_millis() as u64;
+        let Some(uuid) = self.uuid() else {return Ok(())};
+        self.manager().send_identity_reset(uuid, ts).await
     }
 
     pub(super) async fn do_new_message(

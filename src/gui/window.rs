@@ -204,6 +204,14 @@ pub mod imp {
                 about.show();
             });
 
+            log::trace!("Setting up identity-reset action");
+            let action_identity_reset = SimpleAction::new("identity-reset", None);
+            action_identity_reset.connect_activate(clone!(@weak obj => move |_, _| {
+                log::trace!("Requested identity reset");
+                let Some(channel) = obj.imp().channel_messages.active_channel() else {return};
+                gspawn!(async move {channel.send_identity_reset().await});
+            }));
+
             log::trace!("Adding a action to the group");
             let actions = SimpleActionGroup::new();
             obj.insert_action_group("win", Some(&actions));
@@ -212,6 +220,7 @@ pub mod imp {
             actions.add_action(&action_unlink);
             actions.add_action(&action_show_help_overlay);
             actions.add_action(&action_about);
+            actions.add_action(&action_identity_reset);
 
             let action_activate_input = SimpleAction::new("activate-input", None);
             action_activate_input.connect_activate(

@@ -508,6 +508,20 @@ impl Manager {
         Ok(r?)
     }
 
+    pub(super) async fn send_identity_reset(
+        &self,
+        recipient_addr: impl Into<ServiceAddress> + std::clone::Clone,
+        timestamp: u64,
+    ) -> Result<(), ApplicationError> {
+        log::trace!("`Manager::send_identity_reset` start");
+        let r = self
+            .internal()
+            .send_identity_reset(recipient_addr.clone(), timestamp)
+            .await;
+        log::trace!("`Manager::send_identity_reset` finished");
+        Ok(r?)
+    }
+
     pub(super) async fn send_message_to_group(
         &self,
         group_key: Vec<u8>,
