@@ -335,7 +335,7 @@ msgid "Answered a call."
 msgstr "De oproep is beantwoord."
 
 #: src/backend/message/call_message.rs:111
-msgid "Hanged up."
+msgid "Hung up."
 msgstr "Het gesprek is beëindigd."
 
 #: src/backend/message/call_message.rs:112

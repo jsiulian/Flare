@@ -111,7 +111,7 @@ mod imp {
             match obj.call_type() {
                 CallMessageType::Offer => Some(gettextrs::gettext("Started calling.")),
                 CallMessageType::Answer => Some(gettextrs::gettext("Answered a call.")),
-                CallMessageType::Hangup => Some(gettextrs::gettext("Hanged up.")),
+                CallMessageType::Hangup => Some(gettextrs::gettext("Hung up.")),
                 CallMessageType::Busy => Some(gettextrs::gettext("Is busy.")),
             }
         }
