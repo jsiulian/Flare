@@ -338,7 +338,7 @@ msgid "Answered a call."
 msgstr "Bir arama yanıtlandı."
 
 #: src/backend/message/call_message.rs:111
-msgid "Hanged up."
+msgid "Hung up."
 msgstr "Kapatıldı."
 
 #: src/backend/message/call_message.rs:112

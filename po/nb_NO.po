@@ -352,7 +352,7 @@ msgid "Answered a call."
 msgstr "Besvarte et anrop."
 
 #: src/backend/message/call_message.rs:111
-msgid "Hanged up."
+msgid "Hung up."
 msgstr "La på."
 
 #: src/backend/message/call_message.rs:112

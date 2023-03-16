@@ -330,7 +330,7 @@ msgid "Answered a call."
 msgstr ""
 
 #: src/backend/message/call_message.rs:111
-msgid "Hanged up."
+msgid "Hung up."
 msgstr ""
 
 #: src/backend/message/call_message.rs:112

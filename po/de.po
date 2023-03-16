@@ -339,7 +339,7 @@ msgid "Answered a call."
 msgstr "Ein Anruf wurde beantwortet."
 
 #: src/backend/message/call_message.rs:111
-msgid "Hanged up."
+msgid "Hung up."
 msgstr "Aufgelegt."
 
 #: src/backend/message/call_message.rs:112
