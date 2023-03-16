@@ -1,11 +1,15 @@
-use std::cell::RefCell;
+use std::{cell::RefCell};
 
+use gdk::glib::clone;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Object, ObjectExt};
 use gtk::{gio, glib};
+use libsignal_service::prelude::{Uuid};
 use presage::prelude::ServiceAddress;
 
-use super::Manager;
+use crate::gspawn;
+
+use super::{Manager, Channel};
 
 gtk::glib::wrapper! {
     pub struct Contact(ObjectSubclass<imp::Contact>);
@@ -50,6 +54,59 @@ impl Contact {
         self.property("title")
     }
 
+    pub fn channel(&self) -> Option<Channel> {
+        self.property("channel")
+    }
+
+    pub fn set_channel(&self, channel: Option<&Channel>) {
+        self.set_property("channel", channel);
+        gspawn!(clone!(@weak self as s => async move {
+            s.update_profile_name().await
+        }));
+    }
+
+    async fn update_profile_name(&self) {
+        let obj = self.imp();
+        let manager = self.manager();
+        let uuid = self.uuid();
+
+        let profile_key = {
+            let contact = obj.contact.borrow();
+            let channel = self.channel();
+
+            // Don't do anything if contact is self of contact has well-defined name
+            if self.is_self() || contact.as_ref().map(|c| !c.name.is_empty()).unwrap_or_default() {
+                return;
+            }
+
+            if let Some(group) = channel.and_then(|c| c.group()) {
+                group.members
+                    .iter()
+                    .filter(|m| m.uuid == uuid)
+                    .map(|c| c.profile_key)
+                    .next()
+            } else {
+                contact.as_ref()
+                    .and_then(|c| c.profile_key().ok())
+            }
+        };
+
+        if let Some(key) = profile_key {
+            // TODO: Error handling?
+            let profile = manager.retrieve_profile_by_uuid(uuid, key).await.ok();
+            obj.profile.replace(profile);
+            self.notify("title");
+        }
+    }
+
+    pub fn uuid(&self) -> Uuid {
+        if let Some(a) = self.address() {
+            a.uuid
+        } else {
+            (*self.imp().uuid.borrow()).unwrap_or_default()
+        }
+    }
+
     pub(super) fn address(&self) -> Option<ServiceAddress> {
         self.imp()
             .contact
@@ -68,17 +125,20 @@ mod imp {
     };
     use gtk::{gdk, glib};
     use libsignal_service::prelude::Uuid;
+    use libsignal_service::Profile;
     use presage::prelude::phonenumber::Mode;
 
-    use crate::backend::Manager;
+    use crate::backend::{Channel, Manager};
 
     #[derive(Default)]
     pub struct Contact {
         pub(super) contact: RefCell<Option<presage::prelude::Contact>>,
         pub(super) phonenumber: RefCell<Option<presage::prelude::PhoneNumber>>,
         pub(super) uuid: RefCell<Option<Uuid>>,
+        pub(super) profile: RefCell<Option<Profile>>,
 
         manager: RefCell<Option<Manager>>,
+        channel: RefCell<Option<Channel>>,
     }
 
     #[glib::object_subclass]
@@ -94,6 +154,7 @@ mod imp {
                     ParamSpecObject::builder::<Manager>("manager")
                         .construct_only()
                         .build(),
+                    ParamSpecObject::builder::<Channel>("channel").build(),
                     ParamSpecBoolean::builder("is-self").read_only().build(),
                     ParamSpecString::builder("title").read_only().build(),
                 ]
@@ -104,6 +165,7 @@ mod imp {
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
+                "channel" => self.channel.borrow().as_ref().to_value(),
                 "is-self" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
                         (contact.uuid == self.manager.borrow().as_ref().unwrap().uuid()).to_value()
@@ -112,31 +174,37 @@ mod imp {
                     }
                 }
                 "title" => {
-                    if let Some(contact) = self.contact.borrow().as_ref() {
-                        let name = &contact.name;
-                        if self.obj().is_self() {
-                            self.manager
-                                .borrow()
-                                .as_ref()
-                                .unwrap()
-                                .profile_name()
-                                .to_value()
-                        } else if name.is_empty() {
-                            if let Some(phone) = self.phonenumber.borrow().as_ref() {
-                                phone.format().mode(Mode::National).to_string().to_value()
-                            } else {
-                                contact.uuid.to_string().to_value()
-                            }
-                        } else {
-                            name.to_value()
-                        }
-                    } else if let Some(phone) = self.phonenumber.borrow().as_ref() {
-                        phone.format().mode(Mode::National).to_string().to_value()
-                    } else if let Some(uuid) = self.uuid.borrow().as_ref() {
-                        uuid.to_string().to_value()
-                    } else {
-                        None::<String>.to_value()
+                    let contact = self.contact.borrow();
+                    let profile = self.profile.borrow();
+                    let phonenumber = self.phonenumber.borrow();
+                    let uuid = self.uuid.borrow();
+                    if self.obj().is_self() {
+                        return self.manager
+                            .borrow()
+                            .as_ref()
+                            .unwrap()
+                            .profile_name()
+                            .to_value()
                     }
+
+                    let contact_title = contact.as_ref()
+                        .and_then(|c| if c.name.is_empty() {None} else {Some(c.name.clone())});
+                    let profile_title = profile.as_ref()
+                        .and_then(|p| p.name.as_ref())
+                        .map(|p| if let Some(family_name) = &p.family_name {
+                            format!("{} {}", p.given_name, family_name)
+                        } else {
+                            p.given_name.clone()
+                        });
+                    let phonenumber_title = phonenumber.as_ref()
+                        .map(|p| p.format().mode(Mode::National).to_string());
+                    let uuid_title = uuid.map(|u| u.to_string());
+
+                    contact_title
+                    .or(profile_title)
+                    .or(phonenumber_title)
+                    .or(uuid_title)
+                    .to_value()
                 }
                 _ => unimplemented!(),
             }
@@ -150,6 +218,13 @@ mod imp {
                         .expect("Property `manager` of `Contact` has to be of type `Manager`");
 
                     self.manager.replace(obj);
+                }
+                "channel" => {
+                    let obj = value
+                        .get::<Option<Channel>>()
+                        .expect("Property `channel` of `Contact` has to be of type `Channel`");
+
+                    self.channel.replace(obj);
                 }
                 _ => unimplemented!(),
             }
