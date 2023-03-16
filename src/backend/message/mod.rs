@@ -43,6 +43,7 @@ impl Message {
                 let channel =
                     Channel::from_contact_or_group(contact.clone(), &message.group_v2, manager)
                         .await;
+                contact.set_channel(Some(&channel));
                 if message.body.is_none() && message.attachments.is_empty() {
                     return None;
                 }
@@ -87,6 +88,7 @@ impl Message {
                     manager,
                 )
                 .await;
+                contact.set_channel(Some(&channel));
                 let s: TextMessage = Object::builder::<TextMessage>()
                     .property("manager", manager)
                     .property("sender", &contact)
@@ -100,6 +102,7 @@ impl Message {
                 let channel =
                     Channel::from_contact_or_group(contact.clone(), &message.group_v2, manager)
                         .await;
+                contact.set_channel(Some(&channel));
                 Some(
                     ReactionMessage::from_reaction(
                         &contact,
@@ -140,6 +143,7 @@ impl Message {
                     manager,
                 )
                 .await;
+                contact.set_channel(Some(&channel));
                 Some(
                     ReactionMessage::from_reaction(
                         &contact,
@@ -166,6 +170,7 @@ impl Message {
             ContentBody::CallMessage(c) => {
                 // TODO: Group calls?
                 let channel = Channel::from_contact_or_group(contact.clone(), &None, manager).await;
+                contact.set_channel(Some(&channel));
                 CallMessage::from_call(&contact, &channel, timestamp, manager, c.clone())
                     .map(|c| c.upcast())
             }

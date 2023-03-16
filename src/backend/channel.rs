@@ -4,7 +4,7 @@ use std::{
     hash::{Hash, Hasher},
 };
 
-use gdk::prelude::ObjectExt;
+use gdk::{glib::clone, prelude::ObjectExt};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Cast, Object};
 use gtk::{gdk, gio, glib};
@@ -49,9 +49,17 @@ impl Channel {
             if let Ok(Some(group)) = group {
                 return Self::from_group(group, group_context_v2, manager).await;
             } else {
+                contact.connect_notify_local(
+                    Some("title"),
+                    clone!(@weak s => move |_, _| s.notify("title")),
+                );
                 s.imp().contact.swap(&RefCell::new(Some(contact)));
             }
         } else {
+            contact.connect_notify_local(
+                Some("title"),
+                clone!(@weak s => move |_, _| s.notify("title")),
+            );
             s.imp().contact.swap(&RefCell::new(Some(contact)));
         }
         s
@@ -149,6 +157,10 @@ impl Channel {
 
     pub(super) fn group_context(&self) -> Option<GroupContextV2> {
         self.imp().group_context.borrow().clone()
+    }
+
+    pub fn group(&self) -> Option<Group> {
+        self.imp().group.borrow().clone()
     }
 
     fn uuid(&self) -> Option<Uuid> {
