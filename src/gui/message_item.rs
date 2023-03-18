@@ -38,10 +38,16 @@ impl MessageItem {
             s.imp().handle_react_open();
         }));
 
+       let action_copy = SimpleAction::new("copy", None);
+        action_copy.connect_activate(clone!(@weak self as s => move |_, _| {
+            s.imp().handle_copy();
+        }));
+
         let actions = SimpleActionGroup::new();
         self.insert_action_group("msg", Some(&actions));
         actions.add_action(&action_reply);
         actions.add_action(&action_react);
+        actions.add_action(&action_copy);
     }
 
     pub fn open_popup(&self) {
@@ -152,6 +158,19 @@ pub mod imp {
                 }
                 obj.notify("has-reaction");
             }));
+        }
+
+        #[template_callback]
+        pub(super) fn handle_copy(&self) {
+            let obj = self.obj();
+            let display = gdk::Display::default().expect("there should be a display");
+            let clipboard = display.clipboard();
+            let msg = obj.message();
+            // TODO: Log message
+            crate::trace!("Copying message to clipboard",);
+            if let Some(text) = msg.body() {
+                clipboard.set_text(&text)
+            }
         }
     }
 
