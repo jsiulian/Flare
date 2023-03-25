@@ -85,7 +85,7 @@ pub mod imp {
                     if let Err(e) = OpenFileRequest::default()
                                         .ask(false)
                                         .identifier(identifier)
-                                        .build_file(&file)
+                                        .send_file(&file)
                                         .await {
                         log::error!("Failed to open file: {}", e);
                     }

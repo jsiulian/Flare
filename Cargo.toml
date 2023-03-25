@@ -16,7 +16,7 @@ opt-level = 3
 gtk = { version = "0.6.2", package = "gtk4", features = ["v4_8"]}
 gdk = { version = "0.6.2", package = "gdk4" }
 libadwaita = { version = "0.3.1", features = ["v1_2"]}
-ashpd = { version = "0.4.0-alpha.4", features = ["gtk4"]}
+ashpd = { version = "0.4.0", features = ["gtk4"]}
 zbus = "3.10.0"
 
 gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
@@ -32,7 +32,7 @@ libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs
 
 async-trait = "0.1.64"
 sled = "0.34.7"
-oo7 = { version = "0.1.0-beta.3", default-features = false, features = ["native_crypto", "async-std"] }
+oo7 = { version = "0.1.0", default-features = false, features = ["native_crypto", "async-std"] }
 rand = "0.8.5"
 zeroize = "1.5.7"
 chacha20poly1305 = "0.10.1"

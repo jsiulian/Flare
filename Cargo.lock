@@ -126,9 +126,9 @@ checksum = "8da52d66c7071e2e3fa2a1e5c6d088fec47b593032b254f5e980de8ea54454d6"
 
 [[package]]
 name = "ashpd"
-version = "0.4.0-alpha.4"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3a03db93e3739203252bfe98ad0b31d4039a978c46c5673f5bf0e0c4ac2b42be"
+checksum = "31688b40eb5d739049f721d8405c33d3796b3f51f2bea84421a542dafe397e41"
 dependencies = [
  "async-std",
  "enumflags2",
@@ -834,7 +834,16 @@ version = "4.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ca3aa72a6f96ea37bbc5aa912f6788242832f75369bdfdadcb0e38423f100059"
 dependencies = [
- "dirs-sys",
+ "dirs-sys 0.3.7",
+]
+
+[[package]]
+name = "dirs"
+version = "5.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dece029acd3353e3a58ac2e3eb3c8d6c35827a892edc6cc4138ef9c33df46ecd"
+dependencies = [
+ "dirs-sys 0.4.0",
 ]
 
 [[package]]
@@ -846,6 +855,17 @@ dependencies = [
  "libc",
  "redox_users",
  "winapi",
+]
+
+[[package]]
+name = "dirs-sys"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "04414300db88f70d74c5ff54e50f9e1d1737d9a5b90f53fcf2e95ca2a9ab554b"
+dependencies = [
+ "libc",
+ "redox_users",
+ "windows-sys 0.45.0",
 ]
 
 [[package]]
@@ -2137,7 +2157,7 @@ dependencies = [
  "chacha20poly1305 0.9.1",
  "displaydoc",
  "hmac 0.12.1",
- "pbkdf2",
+ "pbkdf2 0.11.0",
  "rand 0.8.5",
  "serde",
  "serde_json",
@@ -2428,9 +2448,9 @@ checksum = "44d11de466f4a3006fe8a5e7ec84e93b79c70cb992ae0aa0eb631ad2df8abfe2"
 
 [[package]]
 name = "oo7"
-version = "0.1.0-beta.3"
+version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c82bf340132fbbb0d03040dae4b0b53aee24c7b74ea59f5dfd65552542ba6ddc"
+checksum = "21f12a058b75ac86a0289c3f83d5ddecb627878510421c31b7b19503c096d186"
 dependencies = [
  "aes 0.8.2",
  "async-global-executor",
@@ -2439,14 +2459,14 @@ dependencies = [
  "cbc",
  "cipher 0.4.4",
  "digest 0.10.6",
- "dirs",
+ "dirs 5.0.0",
  "futures-util",
  "hkdf 0.12.3",
  "hmac 0.12.1",
  "num",
  "num-bigint-dig",
  "once_cell",
- "pbkdf2",
+ "pbkdf2 0.12.1",
  "rand 0.8.5",
  "serde",
  "sha2 0.10.6",
@@ -2554,6 +2574,16 @@ dependencies = [
  "hmac 0.12.1",
  "password-hash",
  "sha2 0.10.6",
+]
+
+[[package]]
+name = "pbkdf2"
+version = "0.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f0ca0b5a68607598bf3bad68f32227a8164f6254833f84eafaac409cd6746c31"
+dependencies = [
+ "digest 0.10.6",
+ "hmac 0.12.1",
 ]
 
 [[package]]
@@ -3992,7 +4022,7 @@ dependencies = [
  "async-trait",
  "byteorder",
  "derivative",
- "dirs",
+ "dirs 4.0.0",
  "enumflags2",
  "event-listener",
  "futures-core",
