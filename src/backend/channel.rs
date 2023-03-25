@@ -327,13 +327,6 @@ impl Channel {
     }
 
     pub async fn send_message(&self, msg: Message) -> Result<(), crate::ApplicationError> {
-        if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
-            self.imp().messages.borrow_mut().push(msg.clone());
-        }
-
-        self.notify("last-message");
-        self.emit_by_name::<()>("message", &[&msg]);
-
         crate::debug!(
             "Sending a message {} to channel {}",
             msg.property::<Option<String>>("body")
@@ -343,6 +336,15 @@ impl Channel {
         if let Some(data) = msg.internal_data() {
             self.send_internal_message(data, msg.sent()).await?;
         }
+
+        log::trace!("Inserting successfully sent message to message list");
+        if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
+            self.imp().messages.borrow_mut().push(msg.clone());
+        }
+
+        self.notify("last-message");
+        self.emit_by_name::<()>("message", &[&msg]);
+
         Ok(())
     }
 }

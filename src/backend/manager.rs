@@ -452,11 +452,12 @@ impl Manager {
             for val in groups {
                 let Ok((key, group)) = val else { break };
                 crate::trace!("Got group by key {:?}", key);
+                let revision = group.revision;
                 let channel = Channel::from_group(
                     group,
                     &GroupContextV2 {
                         master_key: Some(key.into()),
-                        revision: None,
+                        revision: Some(revision),
                         group_change: None,
                     },
                     self,
