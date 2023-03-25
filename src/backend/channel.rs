@@ -31,6 +31,7 @@ impl Channel {
         manager: &Manager,
     ) -> Self {
         log::trace!("Trying to build a `Channel` from a `Contact` or `GroupContextV2`");
+        log::info!("Group Context: {:#?}", group_context);
         let available_channels = manager.available_channels();
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
@@ -70,6 +71,7 @@ impl Channel {
         group_context_v2: &GroupContextV2,
         manager: &Manager,
     ) -> Self {
+        log::info!("Further Group Context: {:#?}", group_context_v2);
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
             .build();
