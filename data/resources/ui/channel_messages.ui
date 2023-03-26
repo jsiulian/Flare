@@ -7,6 +7,9 @@
     <property name="orientation">vertical</property>
     <property name="hexpand">True</property>
     <property name="vexpand">True</property>
+    <style>
+      <class name="channel-messages"/>
+    </style>
 
     <!-- Status Page -->
     <child>
@@ -39,30 +42,38 @@
         <!-- Message List -->
         <child>
           <object class="GtkScrolledWindow" id="scrolled_window">
-            <property name="margin-top">7</property>
-            <property name="margin-bottom">7</property>
-            <property name="margin-start">7</property>
-            <property name="margin-end">7</property>
+            <property name="vexpand">True</property>
             <property name="hscrollbar-policy">never</property>
-            <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkButton">
-                    <signal handler="handle_more" swapped="true" name="clicked"/>
-                    <property name="label" translatable="yes">Load more</property>
-                    <property name="hexpand">True</property>
+            <property name="child">
+              <object class="AdwClamp">
+                <property name="vexpand">True</property>
+                <property name="hexpand">True</property>
+                <property name="maximum-size">750</property>
+                <property name="tightening-threshold">550</property>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkButton">
+                        <signal handler="handle_more" swapped="true" name="clicked"/>
+                        <property name="label" translatable="yes">Load more</property>
+                        <property name="hexpand">False</property>
+                        <property name="halign">center</property>
+                        <property name="margin-top">6</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBox" id="list">
+                        <signal handler="handle_row_activated" swapped="true" name="row-activated"/>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="selection-mode">none</property>
+                      </object>
+                    </child>
                   </object>
-                </child>
-                <child>
-                  <object class="GtkListBox" id="list">
-                    <signal handler="handle_row_activated" swapped="true" name="row-activated"/>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                  </object>
-                </child>
+                </property>
               </object>
-            </child>
+            </property>
           </object>
         </child>
 
@@ -95,7 +106,7 @@
                   <lookup name="reply-message" type="FlChannelMessages"/>
                 </binding>
                 <property name="hexpand">True</property>
-                <property name="show-name">True</property>
+                <property name="show-header">True</property>
               </object>
             </child>
           </object>
@@ -136,11 +147,13 @@
         <!-- Entry Box -->
         <child>
           <object class="GtkBox">
-            <property name="margin-top">5</property>
-            <property name="margin-bottom">5</property>
-            <property name="margin-start">5</property>
-            <property name="margin-end">5</property>
-            <property name="spacing">5</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+            <property name="margin-start">6</property>
+            <property name="margin-end">6</property>
+            <style>
+              <class name="linked"/>
+            </style>
             <child>
               <object class="GtkButton">
                 <accessibility>
@@ -148,7 +161,7 @@
                 </accessibility>
                 <property name="tooltip-text" translatable="yes" context="tooltip">Add attachment</property>
                 <signal name="clicked" handler="add_attachment" swapped="true"/>
-                <property name="icon-name">list-add-symbolic</property>
+                <property name="icon-name">mail-attachment-symbolic</property>
                 <child>
                   <object class='GtkShortcutController'>
                     <property name='scope'>managed</property>
@@ -179,9 +192,12 @@
                   <property name="label" translatable="yes" context="accessibility">Send</property>
                 </accessibility>
                 <property name="tooltip-text" translatable="yes" context="tooltip">Send</property>
+                <property name="label" translatable="yes">Send</property>
 
                 <signal name="clicked" handler="send_message" swapped="true"/>
-                <property name="icon-name">go-next-symbolic</property>
+                <style>
+                  <class name="suggested-action"/>
+                </style>
                 <binding name="sensitive">
                   <closure function="or" type="gboolean">
                     <lookup name="has-attachments" type="FlChannelMessages"/>
