@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Notifications for group messages now display the name of the group instead of just the name of the sender.
 - Messages must now be successfully sent before displaying in a chat.
+- UI got revamped.
 
 ### Chores
 
