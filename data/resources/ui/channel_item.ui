@@ -3,11 +3,15 @@
   <requires lib="gtk+" version="3.24"/>
   <requires lib="libadwaita" version="1.0"/>
 
-  <template class="FlChannelItem" parent="GtkBox">
+  <template class="FlChannelItem" parent="GtkGrid">
     <accessibility>
       <relation name="labelled-by">label-name</relation>
     </accessibility>
-    <property name="spacing">5</property>
+    <property name="margin-bottom">6</property>
+    <property name="margin-top">6</property>
+    <property name="hexpand">False</property>
+    <property name="hexpand-set">True</property>
+    <property name="column-spacing">12</property>
 
     <!-- Avatar -->
     <child>
@@ -18,80 +22,80 @@
           </lookup>
         </binding>
         <property name="show-initials">True</property>
-        <property name="halign">start</property>
-        <property name="size">25</property>
+        <property name="size">32</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">0</property>
+          <property name="row-span">2</property>
+        </layout>
       </object>
     </child>
 
     <!-- Channel name -->
     <child>
-      <object class="GtkBox">
-        <property name="margin-start">7</property>
-        <property name="margin-end">7</property>
-
-        <property name="orientation">vertical</property>
+      <object class="GtkLabel" id="label-name">
+        <style>
+          <class name="heading"/>
+        </style>
+        <property name="halign">start</property>
         <property name="hexpand">True</property>
-        <child>
-          <object class="GtkLabel" id="label-name">
-            <style>
-              <class name="heading"/>
-            </style>
-            <property name="halign">start</property>
-            <property name="ellipsize">end</property>
-            <binding name="label">
-              <lookup name="title">
-                <lookup name="channel" type="FlChannelItem"/>
-              </lookup>
-            </binding>
-          </object>
-        </child>
+        <property name="ellipsize">end</property>
+        <binding name="label">
+          <lookup name="title">
+            <lookup name="channel" type="FlChannelItem"/>
+          </lookup>
+        </binding>
 
-        <!-- Last message -->
-        <child>
-          <object class="GtkBox">
-            <binding name="visible">
-              <closure function="is_some" type="gboolean">
-                <lookup name="last-message">
-                  <lookup name="channel" type="FlChannelItem"/>
-                </lookup>
-              </closure>
-            </binding>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
 
-            <property name="spacing">2</property>
-            <!-- Last message sender -->
-            <child>
-              <object class="GtkLabel">
-                <property name="halign">start</property>
-                <property name="ellipsize">end</property>
-                <binding name="label">
-                  <closure function="append_colon" type="gchararray">
-                    <lookup name="title">
-                      <lookup name="sender">
-                        <lookup name="last-message">
-                          <lookup name="channel" type="FlChannelItem"/>
-                        </lookup>
-                      </lookup>
-                    </lookup>
-                  </closure>
-                </binding>
-              </object>
-            </child>
-            <!-- Last message content -->
-            <child>
-              <object class="GtkLabel">
-                <property name="halign">start</property>
-                <property name="ellipsize">end</property>
-                <binding name="label">
-                  <lookup name="textual-description">
-                    <lookup name="last-message">
-                      <lookup name="channel" type="FlChannelItem"/>
-                    </lookup>
-                  </lookup>
-                </binding>
-              </object>
-            </child>
-          </object>
-        </child>
+    <!-- Last message sender -->
+    <!-- <child> -->
+    <!--   <object class="GtkLabel"> -->
+    <!--     <property name="halign">start</property> -->
+    <!--     <property name="ellipsize">end</property> -->
+    <!--     <binding name="label"> -->
+    <!--       <closure function="append_colon" type="gchararray"> -->
+    <!--         <lookup name="title"> -->
+    <!--           <lookup name="sender"> -->
+    <!--             <lookup name="last-message"> -->
+    <!--               <lookup name="channel" type="FlChannelItem"/> -->
+    <!--             </lookup> -->
+    <!--           </lookup> -->
+    <!--         </lookup> -->
+    <!--       </closure> -->
+    <!--     </binding> -->
+    <!--     <layout> -->
+    <!--       <property name="column">1</property> -->
+    <!--       <property name="row">1</property> -->
+    <!--     </layout> -->
+    <!--   </object> -->
+    <!-- </child> -->
+
+    <!-- Last message content -->
+    <child>
+      <object class="GtkLabel">
+        <property name="halign">start</property>
+        <property name="ellipsize">end</property>
+        <binding name="label">
+          <lookup name="textual-description">
+            <lookup name="last-message">
+              <lookup name="channel" type="FlChannelItem"/>
+            </lookup>
+          </lookup>
+        </binding>
+        <style>
+          <class name="dim-label"/>
+        </style>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">1</property>
+          <property name="column-span">2</property>
+        </layout>
       </object>
     </child>
 
@@ -116,6 +120,10 @@
         <property name="valign">start</property>
         <property name="hexpand">False</property>
         <property name="halign">end</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="row">0</property>
+        </layout>
       </object>
     </child>
   </template>
