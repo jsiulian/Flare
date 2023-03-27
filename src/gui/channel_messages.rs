@@ -367,7 +367,7 @@ pub mod imp {
                 );
             } else if let Some(message) = message.dynamic_cast_ref::<CallMessage>() {
                 let widget = CallMessageItem::new(message);
-                self.list.append(&widget);
+                self.list.insert(&widget, 0);
             } else {
                 log::warn!("`ChannelMessages` was asked to display an unknown `DisplayMessage`");
             }
