@@ -342,7 +342,7 @@ pub mod imp {
             let sent = message.sent();
             let last_message_sent = last_message.map(|m| m.sent()).unwrap_or_default();
             widget.set_property(
-                "show-name",
+                "show-header",
                 last_message_sender_title != Some(message_sender_title)
                     || sent > last_message_sent + MESSAGE_SENT_SHOW_NAME_DURATION,
             );
@@ -367,7 +367,7 @@ pub mod imp {
                 );
             } else if let Some(message) = message.dynamic_cast_ref::<CallMessage>() {
                 let widget = CallMessageItem::new(message);
-                self.list.append(&widget);
+                self.list.insert(&widget, 0);
             } else {
                 log::warn!("`ChannelMessages` was asked to display an unknown `DisplayMessage`");
             }

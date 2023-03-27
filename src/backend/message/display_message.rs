@@ -10,14 +10,26 @@ glib::wrapper! {
 impl DisplayMessage {
     pub fn send_notification(&self) {
         let sender = self.sender();
+        let channel = self.channel();
         let body = self.textual_description();
         if sender.is_self() || body.is_none() || body.as_ref().unwrap().is_empty() {
             // Skip notifications for messages sent from self or empty messages.
             return;
         }
-
-        let notification = gio::Notification::new(&sender.title());
-        notification.set_body(body.as_deref());
+        let notification_title;
+        let notification_body;
+        if channel.group_context().is_some() {
+            notification_title = channel.title().to_string();
+            notification_body = format!("{}: {}",
+                                        sender.title().to_string(),
+                                        body.as_ref().unwrap().to_string());
+        }
+        else {
+            notification_title = sender.title().to_string();
+            notification_body = body.as_ref().unwrap().to_string();
+        }
+        let notification = gio::Notification::new(&notification_title);
+        notification.set_body(Some(&notification_body));
         let icon = Pixbuf::from_resource("/icon.png").expect("Flare to have an application icon");
         notification.set_icon(&icon);
 

@@ -13,10 +13,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Experimental integration with feedbackd
+- Showing profile names
+- Copy action in message menu
+
+### Changed
+
+- Notifications for group messages now display the name of the group instead of just the name of the sender.
+- Messages must now be successfully sent before displaying in a chat.
+- UI got revamped.
 
 ### Chores
 
 - Updated all dependencies
+
+### Fixed
+
+- Fixed not setting revision for groups.
 
 ## [0.6.0] - 2023-01-13
 

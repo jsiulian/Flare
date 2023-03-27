@@ -38,21 +38,48 @@ impl MessageItem {
             s.imp().handle_react_open();
         }));
 
+       let action_copy = SimpleAction::new("copy", None);
+        action_copy.connect_activate(clone!(@weak self as s => move |_, _| {
+            s.imp().handle_copy();
+        }));
+
         let actions = SimpleActionGroup::new();
         self.insert_action_group("msg", Some(&actions));
         actions.add_action(&action_reply);
         actions.add_action(&action_react);
+        actions.add_action(&action_copy);
     }
 
     pub fn open_popup(&self) {
         self.imp().msg_menu.popup();
+    }
+
+    pub fn show_header(&self) -> bool {
+        let imp = self.imp();
+        imp.avatar.is_visible() && imp.header.is_visible()
+    }
+
+    /// Set whether this item should show its header.
+    pub fn set_show_header(&self, visible: bool) {
+        let imp = self.imp();
+
+        imp.avatar.set_visible(visible);
+        imp.header.set_visible(visible);
+
+        if let Some(list_item) = self.parent() {
+            if visible && !list_item.has_css_class("has-header") {
+                list_item.add_css_class("has-header");
+            } else if !visible && list_item.has_css_class("has-header") {
+                list_item.remove_css_class("has-header");
+            }
+        }
     }
 }
 
 pub mod imp {
     use lazy_static::lazy_static;
     use regex::Regex;
-    use std::cell::{Cell, RefCell};
+    use std::cell::{RefCell};
 
     use glib::{
         clone,
@@ -73,6 +100,10 @@ pub mod imp {
     #[template(resource = "/ui/message_item.ui")]
     pub struct MessageItem {
         #[template_child]
+        pub(super) avatar: TemplateChild<libadwaita::Avatar>,
+        #[template_child]
+        pub(super) header: TemplateChild<gtk::Box>,
+        #[template_child]
         emoji_chooser: TemplateChild<gtk::EmojiChooser>,
         #[template_child]
         pub(super) msg_menu: TemplateChild<gtk::PopoverMenu>,
@@ -80,7 +111,6 @@ pub mod imp {
         box_attachments: TemplateChild<gtk::Box>,
 
         message: RefCell<Option<TextMessage>>,
-        show_name: Cell<bool>,
 
         manager: RefCell<Option<Manager>>,
     }
@@ -153,6 +183,19 @@ pub mod imp {
                 obj.notify("has-reaction");
             }));
         }
+
+        #[template_callback]
+        pub(super) fn handle_copy(&self) {
+            let obj = self.obj();
+            let display = gdk::Display::default().expect("there should be a display");
+            let clipboard = display.clipboard();
+            let msg = obj.message();
+            // TODO: Log message
+            crate::trace!("Copying message to clipboard",);
+            if let Some(text) = msg.body() {
+                clipboard.set_text(&text)
+            }
+        }
     }
 
     impl ObjectImpl for MessageItem {
@@ -168,7 +211,7 @@ pub mod imp {
                         .construct_only()
                         .build(),
                     ParamSpecObject::builder::<TextMessage>("message").build(),
-                    ParamSpecBoolean::builder("show-name")
+                    ParamSpecBoolean::builder("show-header")
                         .default_value(true)
                         .build(),
                     ParamSpecBoolean::builder("has-reaction")
@@ -183,7 +226,7 @@ pub mod imp {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "message" => self.message.borrow().as_ref().to_value(),
-                "show-name" => self.show_name.get().to_value(),
+                "show-header" => self.obj().show_header().to_value(),
                 "has-reaction" => self
                     .message
                     .borrow()
@@ -230,11 +273,8 @@ pub mod imp {
                     instance.notify("has-reaction");
                     self.message.replace(msg);
                 }
-                "show-name" => {
-                    let show = value
-                        .get::<bool>()
-                        .expect("Property `show-name` of `MessageItem` has to be of type `bool`");
-                    self.show_name.replace(show);
+                "show-header" => {
+                    self.obj().set_show_header(value.get().unwrap())
                 }
                 _ => unimplemented!(),
             }

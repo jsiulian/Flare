@@ -24,6 +24,11 @@ impl Utility {
         opt.is_none()
     }
 
+    #[template_callback]
+    fn not_empty(s: Option<String>) -> bool {
+        s.map(|s| !s.is_empty()).unwrap_or_default()
+    }
+
     #[template_callback(function)]
     pub(super) fn format_timestamp(timestamp: u64) -> Option<String> {
         let datetime = DateTime::from_unix_utc((timestamp / 1000).try_into().unwrap_or_default())

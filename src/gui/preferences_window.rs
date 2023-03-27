@@ -32,7 +32,7 @@ impl PreferencesWindow {
             .identifier(identifier)
             .command(&["flare", "--gapplication-service"])
             .dbus_activatable(false)
-            .build()
+            .send()
             .await?;
         Ok(())
     }

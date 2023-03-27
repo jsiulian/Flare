@@ -4,8 +4,9 @@ use gio::{ApplicationFlags, Settings, SettingsBindFlags};
 use glib::IsA;
 use gtk::prelude::SettingsExtManual;
 use gtk::traits::{GtkWindowExt, WidgetExt};
-use gtk::{gdk, gio, glib};
+use gtk::{gdk, gio, glib, CssProvider, StyleContext};
 use once_cell::sync::Lazy;
+use gdk::Display;
 
 use std::path::Path;
 
@@ -42,6 +43,18 @@ fn init_internationalization() -> Result<(), Box<dyn std::error::Error>> {
     gettextrs::bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR)?;
     gettextrs::textdomain(GETTEXT_PACKAGE)?;
     Ok(())
+}
+
+fn load_css() {
+    let provider = CssProvider::new();
+    provider.load_from_resource("/de/schmidhuberj/Flare/style.css");
+
+    // Add the provider to the default screen
+    StyleContext::add_provider_for_display(
+        &Display::default().expect("Could not connect to a display."),
+        &provider,
+        gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
+    );
 }
 
 fn main() {
@@ -91,6 +104,7 @@ fn build_ui(app: &libadwaita::Application) {
         .bind("run-in-background", &window, "hide-on-close")
         .flags(SettingsBindFlags::DEFAULT)
         .build();
+    load_css();
     init_icons(&window.display());
     app.connect_activate(move |_| {
         window.present();

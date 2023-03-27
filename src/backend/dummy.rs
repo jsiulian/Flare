@@ -373,9 +373,9 @@ impl super::Manager {
             msg!(self, "Here could be your meme", 10, 10, base_minute - 6),
             msg!(self, "You again?", 0, 11, base_minute - 7),
             msg!(self, "Here could be your meme", 12, 12, base_minute - 8),
-            msg!(self, "Imagine a Rick-Roll here.", 13, 13, base_minute - 9),
-            msg!(self, "Hello, you have 10 virus. Please click link.", 14, 14, base_minute - 9),
-            msg!(self, "Who is this?", 0, 15, base_minute - 50),
+            msg!(self, "Imagine a Rick-Roll here.", 13, 13, base_minute - 2860),
+            msg!(self, "Hello, you have 10 virus. Please click link.", 14, 14, base_minute - 2870),
+            msg!(self, "Who is this?", 0, 15, base_minute - 2880),
         ]
     }
 

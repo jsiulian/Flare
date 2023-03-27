@@ -1,5 +1,7 @@
 use futures::{select, FutureExt, StreamExt};
-use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
+use libsignal_service::{
+    groups_v2::Group, prelude::ProfileKey, sender::AttachmentUploadError, Profile,
+};
 use presage::{
     prelude::{content::*, AttachmentSpec, ContentBody, DataMessage, ServiceAddress, *},
     Error, Manager, MessageStore, Registered, Store,
@@ -14,6 +16,7 @@ const MESSAGE_BOUND: usize = 10;
 #[allow(clippy::large_enum_variant)]
 enum Command {
     Uuid(oneshot::Sender<Uuid>),
+    RetrieveProfileByUuid(Uuid, ProfileKey, oneshot::Sender<Result<Profile, Error>>),
     GetGroupV2(Vec<u8>, oneshot::Sender<Result<Option<Group>, Error>>),
     SendIdentityReset(ServiceAddress, u64, oneshot::Sender<Result<(), Error>>),
     SendMessage(
@@ -117,6 +120,19 @@ impl ManagerThread {
 impl ManagerThread {
     pub fn uuid(&self) -> Uuid {
         self.uuid
+    }
+
+    pub async fn retrieve_profile_by_uuid(
+        &self,
+        uuid: Uuid,
+        profile_key: ProfileKey,
+    ) -> Result<Profile, Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::RetrieveProfileByUuid(uuid, profile_key, sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
     }
 
     pub async fn get_group_v2(&self, group_master_key: Vec<u8>) -> Result<Option<Group>, Error> {
@@ -296,6 +312,9 @@ async fn handle_command<C: Store + 'static>(
     match command {
         Command::Uuid(callback) => callback
             .send(manager.uuid())
+            .expect("Callback sending failed"),
+        Command::RetrieveProfileByUuid(uuid, profile_key, callback) => callback
+            .send(manager.retrieve_profile_by_uuid(uuid, profile_key).await)
             .expect("Callback sending failed"),
         Command::GetGroupV2(master_key, callback) => callback
             .send(manager.group(&master_key[..]))

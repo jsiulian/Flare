@@ -55,7 +55,7 @@ pub mod imp {
     impl ObjectSubclass for ChannelItem {
         const NAME: &'static str = "FlChannelItem";
         type Type = super::ChannelItem;
-        type ParentType = gtk::Box;
+        type ParentType = gtk::Grid;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
@@ -109,5 +109,5 @@ pub mod imp {
     }
 
     impl WidgetImpl for ChannelItem {}
-    impl BoxImpl for ChannelItem {}
+    impl GridImpl for ChannelItem {}
 }

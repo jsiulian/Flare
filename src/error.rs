@@ -32,10 +32,11 @@ impl From<p::Error> for ApplicationError {
                 ApplicationError::UnauthorizedSignal
             }
             p::Error::DbError(e) => ApplicationError::Db(e),
-            // TODO: Never happens?
-            // p::Error::MessageSenderError(lss::sender::MessageSenderError::NetworkFailure {
-            //     recipient: _,
-            // }) => ApplicationError::NoInternet,
+            p::Error::ServiceError(p::prelude::content::ServiceError::WsError { reason: e })
+                if e.contains(FAILED_TO_LOOK_UP_ADDRESS) =>
+            {
+                ApplicationError::NoInternet
+            }
             p::Error::MessageSenderError(lss::sender::MessageSenderError::ServiceError(
                 p::prelude::content::ServiceError::SendError { reason: e },
             )) if e.contains(FAILED_TO_LOOK_UP_ADDRESS) => ApplicationError::NoInternet,
@@ -44,8 +45,6 @@ impl From<p::Error> for ApplicationError {
             {
                 ApplicationError::NoInternet
             }
-            // TODO: Is there a new version?
-            // p::Error::MessageReceiverError(e) => ApplicationError::ReceiveFailed(e),
             p::Error::MessageSenderError(e) => ApplicationError::SendFailed(e),
             _ => ApplicationError::Presage(e),
         }

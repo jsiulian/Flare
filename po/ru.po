@@ -337,7 +337,7 @@ msgid "Answered a call."
 msgstr "Звонок отвечен."
 
 #: src/backend/message/call_message.rs:111
-msgid "Hanged up."
+msgid "Hung up."
 msgstr "На проводе."
 
 #: src/backend/message/call_message.rs:112

@@ -4,7 +4,7 @@ use std::{
     hash::{Hash, Hasher},
 };
 
-use gdk::prelude::ObjectExt;
+use gdk::{glib::clone, prelude::ObjectExt};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Cast, Object};
 use gtk::{gdk, gio, glib};
@@ -52,9 +52,17 @@ impl Channel {
             if let Ok(Some(group)) = group {
                 return Self::from_group(group, group_context_v2, manager).await;
             } else {
+                contact.connect_notify_local(
+                    Some("title"),
+                    clone!(@weak s => move |_, _| s.notify("title")),
+                );
                 s.imp().contact.swap(&RefCell::new(Some(contact)));
             }
         } else {
+            contact.connect_notify_local(
+                Some("title"),
+                clone!(@weak s => move |_, _| s.notify("title")),
+            );
             s.imp().contact.swap(&RefCell::new(Some(contact)));
         }
         s
@@ -152,6 +160,10 @@ impl Channel {
 
     pub(super) fn group_context(&self) -> Option<GroupContextV2> {
         self.imp().group_context.borrow().clone()
+    }
+
+    pub fn group(&self) -> Option<Group> {
+        self.imp().group.borrow().clone()
     }
 
     fn uuid(&self) -> Option<Uuid> {
@@ -328,13 +340,6 @@ impl Channel {
     }
 
     pub async fn send_message(&self, msg: Message) -> Result<(), crate::ApplicationError> {
-        if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
-            self.imp().messages.borrow_mut().push(msg.clone());
-        }
-
-        self.notify("last-message");
-        self.emit_by_name::<()>("message", &[&msg]);
-
         crate::debug!(
             "Sending a message {} to channel {}",
             msg.property::<Option<String>>("body")
@@ -344,6 +349,15 @@ impl Channel {
         if let Some(data) = msg.internal_data() {
             self.send_internal_message(data, msg.sent()).await?;
         }
+
+        log::trace!("Inserting successfully sent message to message list");
+        if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
+            self.imp().messages.borrow_mut().push(msg.clone());
+        }
+
+        self.notify("last-message");
+        self.emit_by_name::<()>("message", &[&msg]);
+
         Ok(())
     }
 }

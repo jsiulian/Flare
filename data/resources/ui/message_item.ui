@@ -4,201 +4,222 @@
   <requires lib="libadwaita" version="1.0"/>
 
   <template class="FlMessageItem" parent="GtkBox">
-    <property name="orientation">vertical</property>
-    <property name="hexpand">True</property>
+    <property name="spacing">12</property>
+    <property name="margin-top">3</property>
+    <property name="margin-bottom">3</property>
 
+    <!-- Avatar -->
     <child>
-      <object class="GtkBox">
-        <property name="orientation">horizontal</property>
-        <property name="spacing">5</property>
-        <property name="margin-top">5</property>
-        <binding name="visible">
-          <lookup name="show-name" type="FlMessageItem"/>
+      <object class="AdwAvatar" id="avatar">
+        <property name="show-initials">True</property>
+        <binding name="text">
+          <lookup name="title">
+            <lookup name="sender">
+              <lookup name="message" type="FlMessageItem"/>
+            </lookup>
+          </lookup>
         </binding>
-        <!-- Avatar -->
-        <child>
-          <object class="AdwAvatar">
-            <property name="show-initials">True</property>
-            <binding name="text">
-              <lookup name="title">
-                <lookup name="sender">
-                  <lookup name="message" type="FlMessageItem"/>
-                </lookup>
-              </lookup>
-            </binding>
-            <property name="halign">start</property>
-            <property name="size">20</property>
-          </object>
-        </child>
-        <!-- Name -->
-        <child>
-          <object class="GtkLabel">
-            <style>
-              <class name="heading"/>
-            </style>
-            <binding name="label">
-              <lookup name="title">
-                <lookup name="sender">
-                  <lookup name="message" type="FlMessageItem"/>
-                </lookup>
-              </lookup>
-            </binding>
-            <property name="hexpand">True</property>
-            <property name="halign">start</property>
-            <property name="ellipsize">end</property>
-          </object>
-        </child>
-
-        <!-- Timestamp label -->
-        <child>
-          <object class="GtkLabel">
-            <style>
-              <class name="dim-label"/>
-              <class name="caption"/>
-            </style>
-            <binding name="label">
-              <closure function="format_timestamp" type="gchararray">
-                <lookup name="sent">
-                  <lookup name="message" type="FlMessageItem"/>
-                </lookup>
-              </closure>
-            </binding>
-            <property name="justify">right</property>
-            <property name="vexpand">False</property>
-            <property name="valign">start</property>
-            <property name="hexpand">False</property>
-            <property name="halign">end</property>
-          </object>
-        </child>
+        <property name="valign">start</property>
+        <property name="size">32</property>
       </object>
     </child>
 
-    <!-- Quote -->
     <child>
-      <object class="GtkBox">
-        <binding name="visible">
-          <closure function="is_some" type="gboolean">
-            <lookup name="quote">
-              <lookup name="message" type="FlMessageItem"/>
-            </lookup>
-          </closure>
-        </binding>
+      <object class="GtkBox" id="box">
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <style>
+          <class name="message-bubble"/>
+        </style>
+
         <child>
-          <object class="GtkSeparator">
-            <style>
-              <class name="spacer"/>
-            </style>
-          </object>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
+          <!-- Header -->
+          <object class="GtkBox" id="header">
+            <property name="orientation">horizontal</property>
+
+            <!-- Name -->
             <child>
               <object class="GtkLabel">
                 <style>
-                  <class name="dim-label"/>
                   <class name="heading"/>
                 </style>
                 <binding name="label">
                   <lookup name="title">
                     <lookup name="sender">
-                      <lookup name="quote">
-                        <lookup name="message" type="FlMessageItem"/>
-                      </lookup>
-                    </lookup>
-                  </lookup>
-                </binding>
-                <property name="hexpand">True</property>
-                <property name="halign">start</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <style>
-                  <class name="dim-label"/>
-                </style>
-                <binding name="label">
-                  <lookup name="body">
-                    <lookup name="quote">
                       <lookup name="message" type="FlMessageItem"/>
                     </lookup>
                   </lookup>
                 </binding>
-                <property name="wrap">True</property>
-                <property name="xalign">0</property>
-                <property name="wrap-mode">word-char</property>
-                <property name="justify">left</property>
-                <property name="vexpand">False</property>
-                <property name="valign">start</property>
                 <property name="hexpand">True</property>
                 <property name="halign">start</property>
+                <property name="ellipsize">end</property>
+              </object>
+            </child>
+
+            <!-- Timestamp label -->
+            <child>
+              <object class="GtkLabel">
+                <style>
+                  <class name="dim-label"/>
+                  <class name="caption"/>
+                </style>
+                <binding name="label">
+                  <closure function="format_timestamp" type="gchararray">
+                    <lookup name="sent">
+                      <lookup name="message" type="FlMessageItem"/>
+                    </lookup>
+                  </closure>
+                </binding>
+                <property name="justify">right</property>
+                <property name="vexpand">False</property>
+                <property name="valign">start</property>
+                <property name="hexpand">False</property>
+                <property name="halign">end</property>
               </object>
             </child>
           </object>
         </child>
-      </object>
-    </child>
 
-    <!-- Message -->
-    <child>
-      <object class="GtkLabel">
-        <binding name="label">
-          <closure function="markup_urls" type="gchararray">
-            <lookup name="body">
-              <lookup name="message" type="FlMessageItem"/>
-            </lookup>
-          </closure>
-        </binding>
-        <property name="wrap">True</property>
-        <property name="xalign">0</property>
-        <property name="wrap-mode">word-char</property>
-        <property name="justify">left</property>
-        <property name="vexpand">False</property>
-        <property name="valign">start</property>
-        <property name="hexpand">True</property>
-        <property name="halign">start</property>
-        <property name="use-markup">True</property>
-        <property name="selectable">True</property>
-      </object>
-    </child>
+        <!-- Quote -->
+        <child>
+          <object class="GtkBox" id="quote">
+            <style>
+              <class name="quote"/>
+            </style>
+            <binding name="visible">
+              <closure function="is_some" type="gboolean">
+                <lookup name="quote">
+                  <lookup name="message" type="FlMessageItem"/>
+                </lookup>
+              </closure>
+            </binding>
+            <child>
+              <object class="GtkSeparator">
+                <style>
+                  <class name="spacer"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <style>
+                      <class name="dim-label"/>
+                      <class name="heading"/>
+                    </style>
+                    <binding name="label">
+                      <lookup name="title">
+                        <lookup name="sender">
+                          <lookup name="quote">
+                            <lookup name="message" type="FlMessageItem"/>
+                          </lookup>
+                        </lookup>
+                      </lookup>
+                    </binding>
+                    <property name="hexpand">True</property>
+                    <property name="halign">start</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                    <binding name="label">
+                      <lookup name="body">
+                        <lookup name="quote">
+                          <lookup name="message" type="FlMessageItem"/>
+                        </lookup>
+                      </lookup>
+                    </binding>
+                    <property name="wrap">True</property>
+                    <property name="xalign">0</property>
+                    <property name="wrap-mode">word-char</property>
+                    <property name="justify">left</property>
+                    <property name="vexpand">False</property>
+                    <property name="valign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="halign">start</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
 
-    <!-- Reactions -->
-    <child>
-      <object class="GtkLabel">
-        <binding name="label">
-          <lookup name="reactions">
-            <lookup name="message" type="FlMessageItem"/>
-          </lookup>
-        </binding>
-        <binding name="visible">
-          <lookup name="has-reaction" type="FlMessageItem"/>
-        </binding>
-        <property name="wrap-mode">word</property>
-        <property name="justify">left</property>
-        <property name="vexpand">False</property>
-        <property name="valign">start</property>
-        <property name="hexpand">True</property>
-        <property name="halign">start</property>
-      </object>
-    </child>
+        <!-- Message -->
+        <child>
+          <object class="GtkLabel">
+            <binding name="label">
+              <closure function="markup_urls" type="gchararray">
+                <lookup name="body">
+                  <lookup name="message" type="FlMessageItem"/>
+                </lookup>
+              </closure>
+            </binding>
+            <binding name="visible">
+              <closure function="not_empty" type="gboolean">
+                <lookup name="body">
+                  <lookup name="message" type="FlMessageItem"/>
+                </lookup>
+              </closure>
+            </binding>
+            <property name="wrap">True</property>
+            <property name="xalign">0</property>
+            <property name="wrap-mode">word-char</property>
+            <property name="justify">left</property>
+            <property name="vexpand">False</property>
+            <property name="valign">start</property>
+            <property name="hexpand">True</property>
+            <property name="halign">start</property>
+            <property name="use-markup">True</property>
+          </object>
+        </child>
 
-    <!-- Attachments -->
-    <child>
-      <object class="GtkBox" id="box_attachments">
-        <property name="orientation">vertical</property>
-        <property name="hexpand">True</property>
-      </object>
-    </child>
+        <!-- Reactions -->
+        <child>
+          <object class="GtkLabel" id="reactions">
+            <binding name="label">
+              <lookup name="reactions">
+                <lookup name="message" type="FlMessageItem"/>
+              </lookup>
+            </binding>
+            <binding name="visible">
+              <lookup name="has-reaction" type="FlMessageItem"/>
+            </binding>
+            <style>
+              <class name="reaction"/>
+            </style>
+            <property name="wrap-mode">word</property>
+            <property name="justify">left</property>
+            <property name="vexpand">False</property>
+            <property name="valign">start</property>
+            <property name="hexpand">True</property>
+            <property name="halign">start</property>
+          </object>
+        </child>
 
-    <!-- Pop-Down -->
-    <child>
-      <object class="GtkPopoverMenu" id="msg_menu">
-        <property name="menu-model">message-menu</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkEmojiChooser" id="emoji_chooser">
-        <signal handler="handle_react" swapped="true" name="emoji-picked"/>
+        <!-- Attachments -->
+        <child>
+          <object class="GtkBox" id="box_attachments">
+            <property name="orientation">vertical</property>
+            <property name="hexpand">True</property>
+          </object>
+        </child>
+
+        <!-- Pop-Down -->
+        <child>
+          <object class="GtkPopoverMenu" id="msg_menu">
+            <property name="menu-model">message-menu</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEmojiChooser" id="emoji_chooser">
+            <signal handler="handle_react" swapped="true" name="emoji-picked"/>
+          </object>
+        </child>
       </object>
     </child>
   </template>
@@ -216,6 +237,12 @@
         <attribute name='action'>msg.react</attribute>
         <attribute name='verb-icon'>face-smile-symbolic</attribute>
         <attribute name='icon'>face-smile-symbolic</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>Copy</attribute>
+        <attribute name='action'>msg.copy</attribute>
+        <attribute name='verb-icon'>edit-copy-symbolic</attribute>
+        <attribute name='icon'>edit-copy-symbolic</attribute>
       </item>
     </section>
   </menu>

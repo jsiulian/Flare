@@ -5,7 +5,8 @@ use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
 use glib::{clone, MainContext, Object, Priority};
 use gtk::{gdk, gio, glib};
 use libsignal_service::{
-    groups_v2::Group, proto::AttachmentPointer, sender::AttachmentUploadError,
+    groups_v2::Group, prelude::ProfileKey, proto::AttachmentPointer, sender::AttachmentUploadError,
+    Profile,
 };
 use oo7::Keyring;
 use presage::{
@@ -438,7 +439,8 @@ impl Manager {
 
         for contact in self.list_contacts() {
             log::trace!("Got a contact from the storage");
-            let channel = Channel::from_contact_or_group(contact, &None, self).await;
+            let channel = Channel::from_contact_or_group(contact.clone(), &None, self).await;
+            contact.set_channel(Some(&channel));
             self.emit_by_name::<()>("channel", &[&channel]);
             let mut channels = self.imp().channels.borrow_mut();
             to_load.push(channel.clone());
@@ -450,11 +452,12 @@ impl Manager {
             for val in groups {
                 let Ok((key, group)) = val else { break };
                 crate::trace!("Got group by key {:?}", key);
+                let revision = group.revision;
                 let channel = Channel::from_group(
                     group,
                     &GroupContextV2 {
                         master_key: Some(key.into()),
-                        revision: None,
+                        revision: Some(revision),
                         group_change: None,
                     },
                     self,
@@ -489,6 +492,20 @@ impl Manager {
         log::trace!("`Manager::get_group_v2`start");
         let r = self.internal().get_group_v2(master_key).await;
         log::trace!("`Manager::get_group_v2`finished");
+        r
+    }
+
+    pub(super) async fn retrieve_profile_by_uuid(
+        &self,
+        uuid: Uuid,
+        profile_key: ProfileKey,
+    ) -> Result<Profile, presage::Error> {
+        log::trace!("`Manager::retrieve_profile_by_uuid` start");
+        let r = self
+            .internal()
+            .retrieve_profile_by_uuid(uuid, profile_key)
+            .await;
+        log::trace!("`Manager::retrieve_profile_by_uuid` finished");
         r
     }
 
