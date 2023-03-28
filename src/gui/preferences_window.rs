@@ -97,6 +97,9 @@ pub mod imp {
         #[template_child]
         switch_background: TemplateChild<gtk::Switch>,
 
+        #[template_child]
+        switch_messages_selectable: TemplateChild<gtk::Switch>,
+
         settings: Settings,
     }
 
@@ -154,6 +157,15 @@ pub mod imp {
                 .bind("run-in-background", &self.switch_background.get(), "state")
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
+
+            self.settings
+                .bind(
+                    "messages-selectable",
+                    &self.switch_messages_selectable.get(),
+                    "state",
+                )
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
         }
     }
 
@@ -174,6 +186,7 @@ pub mod imp {
                 spin_request_message_loading: TemplateChild::default(),
                 switch_notifications: TemplateChild::default(),
                 switch_background: TemplateChild::default(),
+                switch_messages_selectable: TemplateChild::default(),
             }
         }
 

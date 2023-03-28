@@ -141,6 +141,26 @@
             </child>
           </object>
         </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Other</property>
+            <child>
+              <object class="AdwActionRow" id="row_messages_selectable">
+                <property name="title" translatable="yes">Selectable Message Text</property>
+                <property name="subtitle" translatable="yes">Selectable text can interfere with swipe-gestures on touch-screens.</property>
+                <child>
+                  <object class="GtkSwitch" id="switch_messages_selectable">
+                    <accessibility>
+                      <relation name="labelled-by">row_messages_selectable</relation>
+                    </accessibility>
+                    <property name="valign">center</property>
+                    <property name="halign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </template>

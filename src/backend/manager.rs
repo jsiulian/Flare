@@ -1,6 +1,6 @@
 use std::{cell::RefCell, collections::HashMap, io::Write, ops::Bound, path::Path, time::Duration};
 
-use gdk::prelude::*;
+use gdk::{gio::Settings, prelude::*};
 use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
 use glib::{clone, MainContext, Object, Priority};
 use gtk::{gdk, gio, glib};
@@ -108,6 +108,10 @@ impl Manager {
         let s: Self = Object::new::<Self>();
         s.imp().application.borrow_mut().replace(application);
         s
+    }
+
+    pub fn settings(&self) -> Settings {
+        self.imp().settings.clone()
     }
 
     pub async fn send_notification(&self, notification: &gio::Notification) {

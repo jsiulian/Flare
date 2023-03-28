@@ -151,7 +151,7 @@
 
         <!-- Message -->
         <child>
-          <object class="GtkLabel">
+          <object class="GtkLabel" id="label_message">
             <binding name="label">
               <closure function="markup_urls" type="gchararray">
                 <lookup name="body">

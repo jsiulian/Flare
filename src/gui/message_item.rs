@@ -7,6 +7,7 @@ use gtk::{
 };
 
 use crate::backend::message::TextMessage;
+use crate::backend::Manager;
 
 glib::wrapper! {
     pub struct MessageItem(ObjectSubclass<imp::MessageItem>)
@@ -18,13 +19,19 @@ glib::wrapper! {
 impl MessageItem {
     pub fn new(message: &TextMessage) -> Self {
         log::trace!("Initializing `MessageItem`");
-        Object::builder::<Self>()
+        let s = Object::builder::<Self>()
             .property("message", message)
-            .build()
+            .build();
+        s.init_label_selectable();
+        s
     }
 
     pub fn message(&self) -> TextMessage {
         self.property("message")
+    }
+
+    pub fn manager(&self) -> Manager {
+        self.message().property("manager")
     }
 
     fn setup_actions(&self) {
@@ -38,7 +45,7 @@ impl MessageItem {
             s.imp().handle_react_open();
         }));
 
-       let action_copy = SimpleAction::new("copy", None);
+        let action_copy = SimpleAction::new("copy", None);
         action_copy.connect_activate(clone!(@weak self as s => move |_, _| {
             s.imp().handle_copy();
         }));
@@ -48,6 +55,16 @@ impl MessageItem {
         actions.add_action(&action_reply);
         actions.add_action(&action_react);
         actions.add_action(&action_copy);
+    }
+
+    fn init_label_selectable(&self) {
+        let manager = self.manager();
+        let settings = manager.settings();
+        let label = &self.imp().label_message;
+
+        settings
+            .bind("messages-selectable", &**label, "selectable")
+            .build();
     }
 
     pub fn open_popup(&self) {
@@ -79,7 +96,7 @@ impl MessageItem {
 pub mod imp {
     use lazy_static::lazy_static;
     use regex::Regex;
-    use std::cell::{RefCell};
+    use std::cell::RefCell;
 
     use glib::{
         clone,
@@ -109,6 +126,8 @@ pub mod imp {
         pub(super) msg_menu: TemplateChild<gtk::PopoverMenu>,
         #[template_child]
         box_attachments: TemplateChild<gtk::Box>,
+        #[template_child]
+        pub(super) label_message: TemplateChild<gtk::Label>,
 
         message: RefCell<Option<TextMessage>>,
 
@@ -273,9 +292,7 @@ pub mod imp {
                     instance.notify("has-reaction");
                     self.message.replace(msg);
                 }
-                "show-header" => {
-                    self.obj().set_show_header(value.get().unwrap())
-                }
+                "show-header" => self.obj().set_show_header(value.get().unwrap()),
                 _ => unimplemented!(),
             }
         }

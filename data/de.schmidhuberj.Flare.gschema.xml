@@ -49,6 +49,11 @@
       <default>false</default>
       <summary>Run in background when closed</summary>
     </key>
+
+    <key name="messages-selectable" type="b">
+      <default>false</default>
+      <summary>Can messages be selected</summary>
+    </key>
   </schema>
 </schemalist>
 
