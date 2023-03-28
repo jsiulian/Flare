@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-28 12:58+0200\n"
-"PO-Revision-Date: 2023-03-19 14:39+0000\n"
+"PO-Revision-Date: 2023-03-29 19:39+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.2-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/resources/ui/about.ui:14
 msgid "translator-credits"
@@ -38,16 +38,16 @@ msgstr "Bestand laden"
 
 #: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:163
 msgid "Channel Information"
-msgstr ""
+msgstr "Kanaalinformatie"
 
 #: data/resources/ui/channel_info_dialog.ui:33
 msgctxt "accessibility"
 msgid "Reset Identity"
-msgstr ""
+msgstr "Identiteit resetten"
 
 #: data/resources/ui/channel_info_dialog.ui:35
 msgid "Reset Identity"
-msgstr ""
+msgstr "Identiteit resetten"
 
 #: data/resources/ui/channel_info_dialog.ui:51
 #: data/resources/ui/error_dialog.ui:14
@@ -122,7 +122,6 @@ msgid "Send"
 msgstr "Versturen"
 
 #: data/resources/ui/channel_messages.ui:195
-#, fuzzy
 msgid "Send"
 msgstr "Versturen"
 
@@ -204,7 +203,7 @@ msgstr "Reageren"
 
 #: data/resources/ui/message_item.ui:242
 msgid "Copy"
-msgstr ""
+msgstr "Kopiëren"
 
 #: data/resources/ui/preferences_window.ui:9
 msgid "General"
@@ -394,9 +393,8 @@ msgid "There does not seem to be a connection to the internet available."
 msgstr "Er lijkt geen verbinding met het internet te zijn."
 
 #: src/error.rs:96
-#, fuzzy
 msgid "Something glib-related failed."
-msgstr "Het bericht kan niet worden verstuurd."
+msgstr "Er is iets mis gegaan gerelateerd aan GLib."
 
 #: src/error.rs:101
 msgid "The communication with Libsecret failed."
