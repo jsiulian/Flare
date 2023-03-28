@@ -14,7 +14,10 @@ use presage::{
     Thread,
 };
 
-use crate::backend::message::{DisplayMessage, MessageExt, TextMessage};
+use crate::{
+    backend::message::{DisplayMessage, MessageExt, TextMessage},
+    ApplicationError,
+};
 
 use super::{message::ReactionMessage, Contact, Manager, Message};
 
@@ -170,6 +173,16 @@ impl Channel {
             .as_ref()
             .and_then(|c| c.address())
             .map(|a| a.uuid)
+    }
+
+    pub async fn send_identity_reset(&self) -> Result<(), ApplicationError> {
+        log::trace!("Sending identity reset");
+        let ts = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .expect("Time went backwards")
+            .as_millis() as u64;
+        let Some(uuid) = self.uuid() else {return Ok(())};
+        self.manager().send_identity_reset(uuid, ts).await
     }
 
     pub(super) async fn do_new_message(
@@ -352,7 +365,7 @@ impl Channel {
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
-    use gdk::{prelude::*, subclass::prelude::*};
+    use gdk::{glib::ParamSpecBoolean, prelude::*, subclass::prelude::*};
     use glib::{
         once_cell::sync::Lazy, subclass::Signal, ParamSpec, ParamSpecObject, ParamSpecString, Value,
     };
@@ -417,6 +430,7 @@ mod imp {
                         .read_only()
                         .build(),
                     ParamSpecString::builder("title").read_only().build(),
+                    ParamSpecBoolean::builder("is-contact").read_only().build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -441,6 +455,7 @@ mod imp {
 
                     title.to_value()
                 }
+                "is-contact" => self.contact.borrow().as_ref().is_some().to_value(),
                 _ => unimplemented!(),
             }
         }

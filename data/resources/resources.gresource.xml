@@ -18,6 +18,7 @@
     <file preprocess="xml-stripblanks">ui/dialog_unlink.ui</file>
     <file preprocess="xml-stripblanks">ui/dialog_clear_messages.ui</file>
     <file preprocess="xml-stripblanks">ui/call_message_item.ui</file>
+    <file preprocess="xml-stripblanks">ui/channel_info_dialog.ui</file>
   </gresource>
   <gresource prefix="/de/schmidhuberj/Flare/">
     <file compressed="true">style.css</file>

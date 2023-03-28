@@ -2,6 +2,8 @@ use gdk::{glib, prelude::SettingsExt, subclass::prelude::*};
 use glib::Object;
 use gtk::prelude::*;
 
+use crate::backend::Manager;
+
 glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
         @extends libadwaita::ApplicationWindow, gtk::ApplicationWindow, libadwaita::Window, gtk::Window, gtk::Widget,
@@ -56,11 +58,16 @@ impl Window {
             self.maximize();
         }
     }
+
+    fn manager(&self) -> Manager {
+        self.property("manager")
+    }
 }
 
 pub mod imp {
     use std::{cell::RefCell, env, path::PathBuf};
 
+    use gdk::glib::BindingFlags;
     use gio::{Settings, SimpleAction, SimpleActionGroup};
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject,
@@ -70,6 +77,8 @@ pub mod imp {
     use gtk::{prelude::*, subclass::prelude::*, Builder, CompositeTemplate, ShortcutsWindow};
     use libadwaita::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
 
+    use crate::backend::Channel;
+    use crate::gui::channel_info_dialog::ChannelInfoDialog;
     use crate::{
         backend::Manager,
         config::APP_ID,
@@ -204,6 +213,21 @@ pub mod imp {
                 about.show();
             });
 
+            log::trace!("Setting up channel information action");
+            let action_channel_information = SimpleAction::new("channel-information", None);
+            action_channel_information.connect_activate(clone!(@weak obj => move |_, _| {
+                log::trace!("Requested channel info");
+                let Some(channel) = obj.imp().channel_messages.active_channel() else {return};
+                let channel_info = ChannelInfoDialog::new(&channel, &obj.manager(), &obj);
+                channel_info.show();
+            }));
+
+            self.channel_messages
+                .bind_property("active-channel", &action_channel_information, "enabled")
+                .transform_to(|_, c: Option<Channel>| Some(c.is_some()))
+                .flags(BindingFlags::SYNC_CREATE)
+                .build();
+
             log::trace!("Adding a action to the group");
             let actions = SimpleActionGroup::new();
             obj.insert_action_group("win", Some(&actions));
@@ -212,6 +236,7 @@ pub mod imp {
             actions.add_action(&action_unlink);
             actions.add_action(&action_show_help_overlay);
             actions.add_action(&action_about);
+            actions.add_action(&action_channel_information);
 
             let action_activate_input = SimpleAction::new("activate-input", None);
             action_activate_input.connect_activate(

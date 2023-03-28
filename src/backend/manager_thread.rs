@@ -18,6 +18,7 @@ enum Command {
     Uuid(oneshot::Sender<Uuid>),
     RetrieveProfileByUuid(Uuid, ProfileKey, oneshot::Sender<Result<Profile, Error>>),
     GetGroupV2(Vec<u8>, oneshot::Sender<Result<Option<Group>, Error>>),
+    SendIdentityReset(ServiceAddress, u64, oneshot::Sender<Result<(), Error>>),
     SendMessage(
         ServiceAddress,
         Box<ContentBody>,
@@ -154,6 +155,23 @@ impl ManagerThread {
             .send(Command::SendMessage(
                 recipient_addr.into(),
                 Box::new(message.into()),
+                timestamp,
+                sender,
+            ))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
+
+    pub async fn send_identity_reset(
+        &self,
+        recipient_addr: impl Into<ServiceAddress>,
+        timestamp: u64,
+    ) -> Result<(), Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::SendIdentityReset(
+                recipient_addr.into(),
                 timestamp,
                 sender,
             ))
@@ -301,6 +319,13 @@ async fn handle_command<C: Store + 'static>(
         Command::GetGroupV2(master_key, callback) => callback
             .send(manager.group(&master_key[..]))
             .map_err(|_| ())
+            .expect("Callback sending failed"),
+        Command::SendIdentityReset(recipient_address, timestamp, callback) => callback
+            .send(
+                manager
+                    .send_identity_reset(&recipient_address, timestamp)
+                    .await,
+            )
             .expect("Callback sending failed"),
         Command::SendMessage(recipient_address, message, timestamp, callback) => callback
             .send(
