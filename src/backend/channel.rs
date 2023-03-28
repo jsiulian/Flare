@@ -365,7 +365,7 @@ impl Channel {
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
-    use gdk::{prelude::*, subclass::prelude::*};
+    use gdk::{glib::ParamSpecBoolean, prelude::*, subclass::prelude::*};
     use glib::{
         once_cell::sync::Lazy, subclass::Signal, ParamSpec, ParamSpecObject, ParamSpecString, Value,
     };
@@ -430,6 +430,7 @@ mod imp {
                         .read_only()
                         .build(),
                     ParamSpecString::builder("title").read_only().build(),
+                    ParamSpecBoolean::builder("is-contact").read_only().build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -454,6 +455,7 @@ mod imp {
 
                     title.to_value()
                 }
+                "is-contact" => self.contact.borrow().as_ref().is_some().to_value(),
                 _ => unimplemented!(),
             }
         }

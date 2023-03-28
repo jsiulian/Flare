@@ -160,8 +160,8 @@
   <menu id="menubar-channel">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Identity Reset</attribute>
-        <attribute name="action">win.identity-reset</attribute>
+        <attribute name="label" translatable="yes">Channel Information</attribute>
+        <attribute name="action">win.channel-information</attribute>
       </item>
     </section>
   </menu>
