@@ -4,6 +4,7 @@
 data/resources/ui/about.ui
 data/resources/ui/attachment.ui
 data/resources/ui/call_message_item.ui
+data/resources/ui/channel_info_dialog.ui
 data/resources/ui/channel_item.ui
 data/resources/ui/channel_list.ui
 data/resources/ui/channel_messages.ui
@@ -31,9 +32,13 @@ src/backend/message/reaction_message.rs
 src/backend/message/text_message.rs
 src/backend/mod.rs
 src/config.rs
+src/dbus/feedbackd.rs
+src/dbus/login1.rs
+src/dbus/mod.rs
 src/error.rs
 src/gui/attachment.rs
 src/gui/call_message_item.rs
+src/gui/channel_info_dialog.rs
 src/gui/channel_item.rs
 src/gui/channel_list.rs
 src/gui/channel_messages.rs
@@ -47,6 +52,4 @@ src/gui/utility.rs
 src/gui/window.rs
 src/hash_log.rs
 src/main.rs
-src/storage/encrypted_sled.rs
-src/storage/mod.rs
 src/utils.rs

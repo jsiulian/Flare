@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-07 11:11+0100\n"
+"POT-Creation-Date: 2023-03-28 12:58+0200\n"
 "PO-Revision-Date: 2023-03-19 14:39+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
@@ -36,6 +36,24 @@ msgstr "Video laden"
 msgid "Load file"
 msgstr "Bestand laden"
 
+#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:163
+msgid "Channel Information"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.ui:33
+msgctxt "accessibility"
+msgid "Reset Identity"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.ui:35
+msgid "Reset Identity"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.ui:51
+#: data/resources/ui/error_dialog.ui:14
+msgid "Close"
+msgstr "Sluiten"
+
 #: data/resources/ui/channel_list.ui:16
 msgid "Search"
 msgstr "Zoeken"
@@ -45,65 +63,70 @@ msgctxt "accessibility"
 msgid "Search"
 msgstr "Zoeken"
 
-#: data/resources/ui/channel_messages.ui:14
+#: data/resources/ui/channel_messages.ui:17
 msgid "Select a channel"
 msgstr "Kies een kanaal"
 
-#: data/resources/ui/channel_messages.ui:53
+#: data/resources/ui/channel_messages.ui:59
 msgid "Load more"
 msgstr "Meer laden"
 
-#: data/resources/ui/channel_messages.ui:81
+#: data/resources/ui/channel_messages.ui:92
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Antwoord wissen"
 
-#: data/resources/ui/channel_messages.ui:83
+#: data/resources/ui/channel_messages.ui:94
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Antwoord wissen"
 
-#: data/resources/ui/channel_messages.ui:113
+#: data/resources/ui/channel_messages.ui:124
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Bijlage verwijderen"
 
-#: data/resources/ui/channel_messages.ui:115
+#: data/resources/ui/channel_messages.ui:126
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Bijlage verwijderen"
 
-#: data/resources/ui/channel_messages.ui:147
+#: data/resources/ui/channel_messages.ui:160
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Bijlage toevoegen"
 
-#: data/resources/ui/channel_messages.ui:149
+#: data/resources/ui/channel_messages.ui:162
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Bijlage toevoegen"
 
-#: data/resources/ui/channel_messages.ui:168
-msgctxt "accessibility"
-msgid "Message input"
-msgstr "Voer een bericht in"
-
-#: data/resources/ui/channel_messages.ui:173
-msgctxt "tooltip"
-msgid "Message input"
-msgstr "Voer een bericht in"
-
-#: data/resources/ui/channel_messages.ui:179
-msgctxt "accessibility"
-msgid "Send"
-msgstr "Versturen"
-
 #: data/resources/ui/channel_messages.ui:181
+msgctxt "accessibility"
+msgid "Message input"
+msgstr "Voer een bericht in"
+
+#: data/resources/ui/channel_messages.ui:186
+msgctxt "tooltip"
+msgid "Message input"
+msgstr "Voer een bericht in"
+
+#: data/resources/ui/channel_messages.ui:192
+msgctxt "accessibility"
+msgid "Send"
+msgstr "Versturen"
+
+#: data/resources/ui/channel_messages.ui:194
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Versturen"
 
-#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:135
+#: data/resources/ui/channel_messages.ui:195
+#, fuzzy
+msgid "Send"
+msgstr "Versturen"
+
+#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:147
 msgid "Clear messages"
 msgstr "Berichten verwijderen"
 
@@ -124,7 +147,7 @@ msgstr "Annuleren"
 msgid "Clear"
 msgstr "Verwijderen"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:143
 msgid "Unlink"
 msgstr "Ontkoppelen"
 
@@ -150,10 +173,6 @@ msgstr "Ontkoppelen en berichten bewaren"
 msgid "Error"
 msgstr "Foutmelding"
 
-#: data/resources/ui/error_dialog.ui:14
-msgid "Close"
-msgstr "Sluiten"
-
 #: data/resources/ui/error_dialog.ui:59
 msgid "Please consider reporting this error."
 msgstr "Gelieve deze fout te melden."
@@ -175,13 +194,17 @@ msgstr "Kopiëren naar klembord"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Wacht na het koppelen tot contactpersoonsynchronisatie is afgerond."
 
-#: data/resources/ui/message_item.ui:209
+#: data/resources/ui/message_item.ui:230
 msgid "Reply"
 msgstr "Beantwoorden"
 
-#: data/resources/ui/message_item.ui:215
+#: data/resources/ui/message_item.ui:236
 msgid "React"
 msgstr "Reageren"
+
+#: data/resources/ui/message_item.ui:242
+msgid "Copy"
+msgstr ""
 
 #: data/resources/ui/preferences_window.ui:9
 msgid "General"
@@ -244,7 +267,7 @@ msgstr "Toon meldingen bij nieuwe berichten"
 msgid "Send notifications"
 msgstr "Leesbewijzen"
 
-#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:31
+#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Meldingen tonen als Flare op de achtergrond wordt uitgevoerd"
 
@@ -303,78 +326,83 @@ msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Meer berichten laden"
 
-#: data/resources/ui/window.ui:47
+#: data/resources/ui/window.ui:47 data/resources/ui/window.ui:107
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Menu"
 
-#: data/resources/ui/window.ui:127
+#: data/resources/ui/window.ui:139
 msgid "Settings"
 msgstr "Instellingen"
 
-#: data/resources/ui/window.ui:139
+#: data/resources/ui/window.ui:151
 msgid "Keybindings"
 msgstr "Sneltoetsen"
 
-#: data/resources/ui/window.ui:143
+#: data/resources/ui/window.ui:155
 msgid "About"
 msgstr "Over"
 
-#: src/backend/channel.rs:441
+#: src/backend/channel.rs:448
 msgid "Note to self"
 msgstr "Herinnering aan mezelf"
 
-#: src/backend/manager.rs:364
+#: src/backend/manager.rs:374
 msgid "You"
 msgstr "Ik"
 
-#: src/backend/message/call_message.rs:109
+#: src/backend/message/call_message.rs:112
 msgid "Started calling."
 msgstr "Oproep gestart"
 
-#: src/backend/message/call_message.rs:110
+#: src/backend/message/call_message.rs:113
 msgid "Answered a call."
 msgstr "Oproep beantwoord"
 
-#: src/backend/message/call_message.rs:111
+#: src/backend/message/call_message.rs:114
 msgid "Hung up."
 msgstr "Gesprek beëindigd"
 
-#: src/backend/message/call_message.rs:112
+#: src/backend/message/call_message.rs:115
 msgid "Is busy."
 msgstr "Is bezig"
 
-#: src/backend/message/text_message.rs:231
+#: src/backend/message/text_message.rs:230
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Er is één afbeelding verstuurd"
 msgstr[1] "Er zijn {} afbeeldingen verstuurd"
 
-#: src/backend/message/text_message.rs:234
+#: src/backend/message/text_message.rs:233
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Er is één video verstuurd"
 msgstr[1] "Er zijn {} video's verstuurd"
 
-#: src/backend/message/text_message.rs:237
+#: src/backend/message/text_message.rs:236
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Er is één bestand verstuurd"
 msgstr[1] "Er zijn {} bestanden verstuurd"
 
-#: src/error.rs:75
+#: src/error.rs:86
 msgid "I/O Error."
 msgstr "I/O-fout"
 
-#: src/error.rs:80
+#: src/error.rs:91
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Er lijkt geen verbinding met het internet te zijn."
 
-#: src/error.rs:85
+#: src/error.rs:96
+#, fuzzy
+msgid "Something glib-related failed."
+msgstr "Het bericht kan niet worden verstuurd."
+
+#: src/error.rs:101
 msgid "The communication with Libsecret failed."
 msgstr "De communicatie met Libsecret is mislukt."
 
-#: src/error.rs:90
+#: src/error.rs:106
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -382,66 +410,67 @@ msgstr ""
 "De backend-database is beschadigd. Herstart de app of verwijder de database "
 "en herkoppel de app."
 
-#: src/error.rs:95
+#: src/error.rs:111
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
 "U lijkt niet bevoegd te zijn. Verwijder de database en herkoppel de app."
 
-#: src/error.rs:100
+#: src/error.rs:116
 msgid "Sending a message failed."
 msgstr "Het bericht kan niet worden verstuurd."
 
-#: src/error.rs:105
+#: src/error.rs:121
 msgid "Receiving a message failed."
 msgstr "Het bericht kan niet worden ontvangen."
 
-#: src/error.rs:110
+#: src/error.rs:126
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
-msgstr "Er is iets misgegaan met het Signal-backend. Probeer het later opnieuw."
+msgstr ""
+"Er is iets misgegaan met het Signal-backend. Probeer het later opnieuw."
 
-#: src/error.rs:115
+#: src/error.rs:131
 msgid "The application seems to be misconfigured."
 msgstr "De app lijkt niet goed te zijn ingesteld."
 
-#: src/error.rs:120
+#: src/error.rs:136
 msgid "A part of the application crashed."
 msgstr "Een deel van de app is gecrasht."
 
-#: src/error.rs:130
+#: src/error.rs:146
 msgid "Please check your internet connection."
 msgstr "Controleer uw internetverbinding."
 
-#: src/error.rs:134
+#: src/error.rs:151
 msgid "Please delete the database and relink the device."
 msgstr "Verwijder de database en herkoppel het apparaat."
 
-#: src/error.rs:141
+#: src/error.rs:158
 msgid "The database path at {} is no folder."
 msgstr "De databaselocatie, {}, is geen map."
 
-#: src/error.rs:146
+#: src/error.rs:163
 msgid "Please restart the application with logging and report this issue."
 msgstr "Schakel de foutopsporing in, herstart de app en meld dit probleem."
 
-#: src/gui/preferences_window.rs:52
+#: src/gui/preferences_window.rs:51
 msgid "Background permission"
 msgstr "Achtergrondrecht"
 
-#: src/gui/preferences_window.rs:53
+#: src/gui/preferences_window.rs:52
 msgid "Use settings to remove permissions"
 msgstr "Beheer de rechten in de voorkeuren"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:36
+#: src/gui/utility.rs:41
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:39
+#: src/gui/utility.rs:44
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"

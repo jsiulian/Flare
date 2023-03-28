@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-07 11:11+0100\n"
+"POT-Creation-Date: 2023-03-28 12:58+0200\n"
 "PO-Revision-Date: 2023-01-08 13:49+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
@@ -34,6 +34,24 @@ msgstr "Charger la vidéo"
 msgid "Load file"
 msgstr "Charger le fichier"
 
+#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:163
+msgid "Channel Information"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.ui:33
+msgctxt "accessibility"
+msgid "Reset Identity"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.ui:35
+msgid "Reset Identity"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.ui:51
+#: data/resources/ui/error_dialog.ui:14
+msgid "Close"
+msgstr "Fermer"
+
 #: data/resources/ui/channel_list.ui:16
 msgid "Search"
 msgstr "Recherche"
@@ -43,65 +61,70 @@ msgctxt "accessibility"
 msgid "Search"
 msgstr "Recherche"
 
-#: data/resources/ui/channel_messages.ui:14
+#: data/resources/ui/channel_messages.ui:17
 msgid "Select a channel"
 msgstr "Sélectionnez une chaîne"
 
-#: data/resources/ui/channel_messages.ui:53
+#: data/resources/ui/channel_messages.ui:59
 msgid "Load more"
 msgstr "Charger plus"
 
-#: data/resources/ui/channel_messages.ui:81
+#: data/resources/ui/channel_messages.ui:92
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Supprimer la réponse"
 
-#: data/resources/ui/channel_messages.ui:83
+#: data/resources/ui/channel_messages.ui:94
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Supprimer la réponse"
 
-#: data/resources/ui/channel_messages.ui:113
+#: data/resources/ui/channel_messages.ui:124
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Retirer une pièce jointe"
 
-#: data/resources/ui/channel_messages.ui:115
+#: data/resources/ui/channel_messages.ui:126
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Retirer la pièce jointe"
 
-#: data/resources/ui/channel_messages.ui:147
+#: data/resources/ui/channel_messages.ui:160
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Ajouter une pièce jointe"
 
-#: data/resources/ui/channel_messages.ui:149
+#: data/resources/ui/channel_messages.ui:162
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Ajouter une pièce jointe"
 
-#: data/resources/ui/channel_messages.ui:168
-msgctxt "accessibility"
-msgid "Message input"
-msgstr "Saisie du message"
-
-#: data/resources/ui/channel_messages.ui:173
-msgctxt "tooltip"
-msgid "Message input"
-msgstr "Saisie du message"
-
-#: data/resources/ui/channel_messages.ui:179
-msgctxt "accessibility"
-msgid "Send"
-msgstr "Envoyer"
-
 #: data/resources/ui/channel_messages.ui:181
+msgctxt "accessibility"
+msgid "Message input"
+msgstr "Saisie du message"
+
+#: data/resources/ui/channel_messages.ui:186
+msgctxt "tooltip"
+msgid "Message input"
+msgstr "Saisie du message"
+
+#: data/resources/ui/channel_messages.ui:192
+msgctxt "accessibility"
+msgid "Send"
+msgstr "Envoyer"
+
+#: data/resources/ui/channel_messages.ui:194
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Envoyer"
 
-#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:135
+#: data/resources/ui/channel_messages.ui:195
+#, fuzzy
+msgid "Send"
+msgstr "Envoyer"
+
+#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:147
 msgid "Clear messages"
 msgstr "Effacer les messages"
 
@@ -122,7 +145,7 @@ msgstr "Annuler"
 msgid "Clear"
 msgstr "Effacer"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:131
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:143
 msgid "Unlink"
 msgstr "Délier"
 
@@ -148,10 +171,6 @@ msgstr "Délier mais garder les messages"
 msgid "Error"
 msgstr "Erreur"
 
-#: data/resources/ui/error_dialog.ui:14
-msgid "Close"
-msgstr "Fermer"
-
 #: data/resources/ui/error_dialog.ui:59
 msgid "Please consider reporting this error."
 msgstr "Pensez à signaler cette erreur."
@@ -173,13 +192,17 @@ msgstr "Copier dans le presse-papiers"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Veuillez attendre que les contacts s'affichent après la liaison."
 
-#: data/resources/ui/message_item.ui:209
+#: data/resources/ui/message_item.ui:230
 msgid "Reply"
 msgstr "Répondre"
 
-#: data/resources/ui/message_item.ui:215
+#: data/resources/ui/message_item.ui:236
 msgid "React"
 msgstr "Réagir"
+
+#: data/resources/ui/message_item.ui:242
+msgid "Copy"
+msgstr ""
 
 #: data/resources/ui/preferences_window.ui:9
 msgid "General"
@@ -242,7 +265,7 @@ msgstr "Notifications pour les nouveaux messages."
 msgid "Send notifications"
 msgstr "Envoyer des notifications"
 
-#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:31
+#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Surveiller les nouveaux messages pendant la fermeture"
 
@@ -301,78 +324,83 @@ msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Charger plus de messages"
 
-#: data/resources/ui/window.ui:47
+#: data/resources/ui/window.ui:47 data/resources/ui/window.ui:107
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Menu"
 
-#: data/resources/ui/window.ui:127
+#: data/resources/ui/window.ui:139
 msgid "Settings"
 msgstr "Paramètres"
 
-#: data/resources/ui/window.ui:139
+#: data/resources/ui/window.ui:151
 msgid "Keybindings"
 msgstr "Raccourcis clavier"
 
-#: data/resources/ui/window.ui:143
+#: data/resources/ui/window.ui:155
 msgid "About"
 msgstr "À propos"
 
-#: src/backend/channel.rs:441
+#: src/backend/channel.rs:448
 msgid "Note to self"
 msgstr "Note à moi-même"
 
-#: src/backend/manager.rs:364
+#: src/backend/manager.rs:374
 msgid "You"
 msgstr "Vous"
 
-#: src/backend/message/call_message.rs:109
+#: src/backend/message/call_message.rs:112
 msgid "Started calling."
 msgstr "Appel commencé."
 
-#: src/backend/message/call_message.rs:110
+#: src/backend/message/call_message.rs:113
 msgid "Answered a call."
 msgstr "A répondu à un appel."
 
-#: src/backend/message/call_message.rs:111
+#: src/backend/message/call_message.rs:114
 msgid "Hung up."
 msgstr "A raccroché."
 
-#: src/backend/message/call_message.rs:112
+#: src/backend/message/call_message.rs:115
 msgid "Is busy."
 msgstr "Occupé."
 
-#: src/backend/message/text_message.rs:231
+#: src/backend/message/text_message.rs:230
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "A envoyé une image"
 msgstr[1] "A envoyé {} images"
 
-#: src/backend/message/text_message.rs:234
+#: src/backend/message/text_message.rs:233
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "A envoyé une vidéo"
 msgstr[1] "A envoyé {} vidéos"
 
-#: src/backend/message/text_message.rs:237
+#: src/backend/message/text_message.rs:236
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "A envoyé un fichier"
 msgstr[1] "A envoyé {} fichiers"
 
-#: src/error.rs:75
+#: src/error.rs:86
 msgid "I/O Error."
 msgstr "Erreur de saisie/sortie."
 
-#: src/error.rs:80
+#: src/error.rs:91
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Il semblerait qu’aucune connexion internet ne soit disponible."
 
-#: src/error.rs:85
+#: src/error.rs:96
+#, fuzzy
+msgid "Something glib-related failed."
+msgstr "Échec de l’envoi d’un message."
+
+#: src/error.rs:101
 msgid "The communication with Libsecret failed."
 msgstr "La communication avec Libsecret a échoué."
 
-#: src/error.rs:90
+#: src/error.rs:106
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -380,7 +408,7 @@ msgstr ""
 "La base de données backend a échoué. Veuillez redémarrer l’application ou "
 "supprimer la base de données et lier à nouveau l’application."
 
-#: src/error.rs:95
+#: src/error.rs:111
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -388,64 +416,64 @@ msgstr ""
 "Vous semblez ne pas être autorisé par Signal. Veuillez supprimer la base de "
 "données et lier à nouveau l’application."
 
-#: src/error.rs:100
+#: src/error.rs:116
 msgid "Sending a message failed."
 msgstr "Échec de l’envoi d’un message."
 
-#: src/error.rs:105
+#: src/error.rs:121
 msgid "Receiving a message failed."
 msgstr "Échec de la réception d’un message."
 
-#: src/error.rs:110
+#: src/error.rs:126
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 "Quelque chose d’inattendu s’est produit avec le backend Signal. Veuillez "
 "réessayer plus tard."
 
-#: src/error.rs:115
+#: src/error.rs:131
 msgid "The application seems to be misconfigured."
 msgstr "L’application semble être mal configurée."
 
-#: src/error.rs:120
+#: src/error.rs:136
 msgid "A part of the application crashed."
 msgstr "Une partie de l'application a planté."
 
-#: src/error.rs:130
+#: src/error.rs:146
 msgid "Please check your internet connection."
 msgstr "Veuillez vérifier votre connexion internet."
 
-#: src/error.rs:134
+#: src/error.rs:151
 msgid "Please delete the database and relink the device."
 msgstr "Veuillez supprimer la base de données et lier à nouveau l’appareil."
 
-#: src/error.rs:141
+#: src/error.rs:158
 msgid "The database path at {} is no folder."
 msgstr "Le chemin de base de données à {} n’est pas un dossier."
 
-#: src/error.rs:146
+#: src/error.rs:163
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Veuillez redémarrer l'application avec la journalisation et signaler ce "
 "problème."
 
-#: src/gui/preferences_window.rs:52
+#: src/gui/preferences_window.rs:51
 msgid "Background permission"
 msgstr "Autorisation d’arrière-plan"
 
-#: src/gui/preferences_window.rs:53
+#: src/gui/preferences_window.rs:52
 msgid "Use settings to remove permissions"
 msgstr "Utiliser les paramètres pour retirer les permissions"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:36
+#: src/gui/utility.rs:41
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:39
+#: src/gui/utility.rs:44
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d/%m/%Y %H:%M"
 
