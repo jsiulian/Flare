@@ -89,7 +89,7 @@ pub mod imp {
 
     use crate::{
         backend::{message::MessageExt, Channel, Manager},
-        gui::channel_item::ChannelItem,
+        gui::{channel_item::ChannelItem, utility::Utility},
     };
 
     #[derive(CompositeTemplate, Default)]
@@ -146,6 +146,7 @@ pub mod imp {
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
+            Utility::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

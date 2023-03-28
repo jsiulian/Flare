@@ -1,9 +1,15 @@
+use gdk::gio;
 use gtk::glib::{DateTime, Object};
 
 pub struct Utility {}
 
 #[gtk::template_callbacks(functions)]
 impl Utility {
+    #[template_callback]
+    fn network_monitor() -> gio::NetworkMonitor {
+        gio::NetworkMonitor::default()
+    }
+
     #[template_callback]
     fn not(b: bool) -> bool {
         !b
@@ -12,6 +18,11 @@ impl Utility {
     #[template_callback(function)]
     fn or(b1: bool, b2: bool) -> bool {
         b1 || b2
+    }
+
+    #[template_callback(function)]
+    fn and(b1: bool, b2: bool) -> bool {
+        b1 && b2
     }
 
     #[template_callback]

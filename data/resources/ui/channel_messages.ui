@@ -11,6 +11,20 @@
       <class name="channel-messages"/>
     </style>
 
+    <!-- Offline Indicator -->
+    <child>
+      <object class="AdwBanner">
+        <property name="title" translatable="yes">Offline</property>
+        <binding name="revealed">
+          <closure function="not" type="gboolean">
+            <lookup name="network-available" type="GNetworkMonitor">
+              <closure function="network_monitor" type="GNetworkMonitor"/>
+            </lookup>
+          </closure>
+        </binding>
+      </object>
+    </child>
+
     <!-- Status Page -->
     <child>
       <object class="AdwStatusPage">
@@ -199,11 +213,16 @@
                   <class name="suggested-action"/>
                 </style>
                 <binding name="sensitive">
-                  <closure function="or" type="gboolean">
-                    <lookup name="has-attachments" type="FlChannelMessages"/>
-                    <closure function="not" type="gboolean">
-                      <lookup name="is-empty">text_entry</lookup>
+                  <closure function="and" type="gboolean">
+                    <closure function="or" type="gboolean">
+                      <lookup name="has-attachments" type="FlChannelMessages"/>
+                      <closure function="not" type="gboolean">
+                        <lookup name="is-empty">text_entry</lookup>
+                      </closure>
                     </closure>
+                    <lookup name="network-available" type="GNetworkMonitor">
+                      <closure function="network_monitor" type="GNetworkMonitor"/>
+                    </lookup>
                   </closure>
                 </binding>
               </object>

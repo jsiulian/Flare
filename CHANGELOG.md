@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Showing profile names.
 - Copy action in message menu.
 - Initial channel information dialog with identity reset.
+- Show offline status in GUI.
 
 ### Changed
 
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed not setting revision for groups.
+- Prevent sending messages while offline.
 
 ### Chores
 

@@ -2,11 +2,26 @@
 <interface>
   <requires lib="gtk+" version="3.24"/>
   <requires lib="libadwaita" version="1.0"/>
+  <requires lib="gio" version="2.32"/>
 
   <template class="FlChannelList" parent="GtkBox">
     <property name="hexpand">False</property>
     <property name="vexpand">True</property>
     <property name="orientation">vertical</property>
+
+    <!-- Offline Indicator -->
+    <child>
+      <object class="AdwBanner">
+        <property name="title" translatable="yes">Offline</property>
+        <binding name="revealed">
+          <closure function="not" type="gboolean">
+            <lookup name="network-available" type="GNetworkMonitor">
+              <closure function="network_monitor" type="GNetworkMonitor"/>
+            </lookup>
+          </closure>
+        </binding>
+      </object>
+    </child>
 
     <child>
       <object class="GtkSearchBar">
