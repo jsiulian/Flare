@@ -51,6 +51,37 @@
     </p>
   </description>
   <releases>
+    <release version="v0.7.0" date="2023-03-29">
+      <description>
+        <p>BREAKING</p>
+        <ul>
+          <li>Due to a new storage for data, a relink is required on first startup</li>
+        </ul>
+        <p>Added</p>
+        <ul>
+          <li>Integration with feedbackd.</li>
+          <li>Showing profile names.</li>
+          <li>Copy action in message menu.</li>
+          <li>Initial channel information dialog with identity reset.</li>
+          <li>Show offline status in GUI.</li>
+        </ul>
+        <p>Changed</p>
+        <ul>
+          <li>Notifications for group messages now display the name of the group instead of just the name of the sender.</li>
+          <li>Messages must now be successfully sent before displaying in a chat.</li>
+          <li>UI got revamped.</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+          <li>Fixed not setting revision for groups.</li>
+          <li>Prevent sending messages while offline.</li>
+        </ul>
+        <p>Chores</p>
+        <ul>
+          <li>Updated all dependencies.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.6.0" date="2023-01-13">
       <description>
         <p>Added</p>
