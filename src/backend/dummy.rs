@@ -14,7 +14,7 @@ use super::{
     Channel, Contact,
 };
 
-const GROUP_ID: usize = 16;
+const GROUP_ID: usize = 6;
 
 macro_rules! msg {
     ($s:expr, $m:expr, $i:expr, $j:expr, $t:expr) => {
@@ -91,7 +91,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(3),
             phone_number: None,
-            name: "Anakin Skywalker".to_string(),
+            name: "Johnny".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -104,7 +104,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(4),
             phone_number: None,
-            name: "Terminator".to_string(),
+            name: "Gandalf".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -117,137 +117,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(5),
             phone_number: None,
-            name: "Friend".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        presage::prelude::Contact {
-            uuid: Uuid::from_u128(6),
-            phone_number: None,
-            name: "Better Friend".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        presage::prelude::Contact {
-            uuid: Uuid::from_u128(7),
-            phone_number: None,
-            name: "Best Friend".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        presage::prelude::Contact {
-            uuid: Uuid::from_u128(8),
-            phone_number: None,
-            name: "Bestester Friend".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        presage::prelude::Contact {
-            uuid: Uuid::from_u128(9),
-            phone_number: None,
-            name: "Ultra Friend".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        presage::prelude::Contact {
-            uuid: Uuid::from_u128(10),
-            phone_number: None,
-            name: "Omega Friend".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        presage::prelude::Contact {
-            uuid: Uuid::from_u128(11),
-            phone_number: None,
-            name: "That guy again".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        presage::prelude::Contact {
-            uuid: Uuid::from_u128(12),
-            phone_number: None,
-            name: "Enemy".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        presage::prelude::Contact {
-            uuid: Uuid::from_u128(13),
-            phone_number: None,
-            name: "Rick".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        presage::prelude::Contact {
-            uuid: Uuid::from_u128(14),
-            phone_number: None,
-            name: "Microsoft Support".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        presage::prelude::Contact {
-            uuid: Uuid::from_u128(15),
-            phone_number: None,
-            name: "Who is this?".to_string(),
+            name: "Vader".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -306,17 +176,17 @@ impl super::Manager {
 
         let msg_replied = msg!(
             self,
-            "I don't think I need to go over all of the features again, look at the previous screenshots for more details.",
+            "Flare has now got a fresh new UI.",
             2,
             GROUP_ID,
             18 + base_minute
         );
         let msg_reply = msg!(
             self,
-            "Looks interesting. Might I will give it a shot on my PinePhone where I am running Arch btw.",
-            2,
+            "Looks really good. Nice work.",
+            0,
             GROUP_ID,
-            20 + base_minute
+            25 + base_minute
         );
         msg_reply
             .clone()
@@ -329,7 +199,7 @@ impl super::Manager {
             .unwrap()
             .react("👍");
 
-        let msg_screenshot = msg!(self, "", 2, GROUP_ID, 17 + base_minute);
+        let msg_screenshot = msg!(self, "", 2, GROUP_ID, 19 + base_minute);
         let screenshot_file = gtk::gio::File::for_uri("resource:///icon.png");
         let attachment = crate::backend::Attachment::from_file(screenshot_file, self);
         msg_screenshot
@@ -341,41 +211,36 @@ impl super::Manager {
             .expect("Failed to add attachment");
 
         vec![
-            msg!(self, "I use Arch btw", 1, 1, 0 + base_minute),
-            msg!(self, "Did you know Flare can also be used on mobile devices?", 2, GROUP_ID, 2 + base_minute),
-            msg!(self, "WHAT", 0, GROUP_ID, 4 + base_minute),
-            msg!(self, "Yes, you can just use it on any of your favorite mobile linux devices.", 2, GROUP_ID, 10 + base_minute),
-            msg!(self, "What is Flare?", 1, GROUP_ID, 15 + base_minute),
-            msg!(self, "It is an unofficial Signal client.", 2, GROUP_ID, 16 + base_minute),
-            msg_screenshot,
-            msg!(self, "I don't think I need to go over all of the features again, look at the previous screenshots for more details.", 2, GROUP_ID, 18 + base_minute),
             msg_replied,
             msg_reply,
-            msg!(self, "Could you please stop? We all know that you are using Arch", 0, GROUP_ID, 21 + base_minute),
-            msg!(self, "But as an Arch User (btw), it is my holy duty to inform you that I am using Arch (btw) at least every second message.", 1, GROUP_ID, 22 + base_minute),
-            msg!(self, "Could we please continue this discussion in the next screenshot? Due to me also making a screenshot in a mobile formfactor, there is not that much space left.", 2, GROUP_ID, 23 + base_minute),
-            call_msg!(self, PreCallMessage {
-                offer: Some(Offer::default()),
-                ..Default::default()
-            }, 2, 21 + base_minute),
-            call_msg!(self, PreCallMessage {
-                hangup: Some(Hangup::default()),
-                ..Default::default()
-            }, 2, 22 + base_minute),
-            msg!(self, "I don't like sand", 3, 3, base_minute + 3),
-            msg!(self, "I'll be back", 4, 4, base_minute + 10),
-
-            msg!(self, "Here could be your meme", 5, 5, base_minute - 1),
-            msg!(self, "Here could be your meme", 6, 6, base_minute - 2),
-            msg!(self, "Here could be your meme", 7, 7, base_minute - 3),
-            msg!(self, "Here could be your meme", 8, 8, base_minute - 4),
-            msg!(self, "Here could be your meme", 9, 9, base_minute - 5),
-            msg!(self, "Here could be your meme", 10, 10, base_minute - 6),
-            msg!(self, "You again?", 0, 11, base_minute - 7),
-            msg!(self, "Here could be your meme", 12, 12, base_minute - 8),
-            msg!(self, "Imagine a Rick-Roll here.", 13, 13, base_minute - 2860),
-            msg!(self, "Hello, you have 10 virus. Please click link.", 14, 14, base_minute - 2870),
-            msg!(self, "Who is this?", 0, 15, base_minute - 2880),
+            msg_screenshot,
+            msg!(self, "Nice indeed.", 1, GROUP_ID, 27 + base_minute),
+            call_msg!(
+                self,
+                PreCallMessage {
+                    offer: Some(Offer::default()),
+                    ..Default::default()
+                },
+                2,
+                base_minute - 100
+            ),
+            call_msg!(
+                self,
+                PreCallMessage {
+                    hangup: Some(Hangup::default()),
+                    ..Default::default()
+                },
+                2,
+                base_minute - 99
+            ),
+            msg!(self, "Thats not all. In addition to that, Flare now support profile names (no more phone-number contacts). Additionally, Flare now integrates with feedbackd.", 2, GROUP_ID, 30 + base_minute),
+            msg!(self, "And as always, of course, a few bug fixes, overall improvements and dependency updates. For all changes, see the changelog.", 2, GROUP_ID, 32 + base_minute),
+            msg!(self, "Due to one dependency update, you will need to relink your device after the update.", 2, GROUP_ID, 33 + base_minute),
+            msg!(self, "Thanks for the warning", 1, GROUP_ID, 35 + base_minute),
+            msg!(self, "Here's Johnny", 3, 3, 1 + base_minute),
+            msg!(self, "Flee you fools", 4, 4, 2 + base_minute),
+            msg!(self, "I am your father", 5, 5, 3 + base_minute),
+            msg!(self, "Don't you dare say it!", 0, 1, 3 + base_minute),
         ]
     }
 

@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Experimental integration with feedbackd.
+- Integration with feedbackd.
 - Showing profile names.
 - Copy action in message menu.
 - Initial channel information dialog with identity reset.
