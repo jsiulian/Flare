@@ -4,11 +4,13 @@
   <id>de.schmidhuberj.Flare</id>
   <project_license>AGPL-3.0</project_license>
   <metadata_license>FSFAP</metadata_license>
+  <!-- Translators: Flare name in metainfo. -->
   <name>Flare</name>
+  <!-- Translators: Flare summary in metainfo. -->
   <summary>An unofficial Signal GTK client</summary>
   <launchable type="desktop-id">de.schmidhuberj.Flare.desktop</launchable>
   <content_rating type="oars-1.1"/>
-  <developer_name>Julian Schmidhuber</developer_name>
+  <developer_name translate="no">Julian Schmidhuber</developer_name>
   <translation type="gettext">flare</translation>
   <update_contact>flatpak@schmiddi.anonaddy.com</update_contact>
 
@@ -17,33 +19,42 @@
   <url type="contact">https://matrix.to/#/#flare-signal:matrix.org</url>
 
   <description>
+    <!-- Translators: Description of Flare in metainfo. -->
     <p>
       An unofficial GTK client for the messaging application Signal.
       This is a very simple application with many features missing compared to the official applications.
     </p>
     <ul>
+      <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
         Link device
       </li>
+      <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
         Send messages
       </li>
+      <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
         Receive messages
       </li>
+      <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
         Reply to a message
       </li>
+      <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
         React to a message
       </li>
+      <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
         Sending and receiving attachments
       </li>
+      <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
         Encrypted storage
       </li>
     </ul>
+    <!-- Translators: Description of Flare in metainfo: Security note -->
     <p>
       Please note that using this application will probably worsen your security compared to using official Signal applications.
       Use with care when handling sensitive data.
@@ -335,6 +346,20 @@
     <id>de.schmidhuberj.Flare</id>
     <binary>flare</binary>
   </provides>
+
+
+  <requires>
+    <internet>first-run</internet>
+  </requires>
+  <recommends>
+    <internet>always</internet>
+  </recommends>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+    <display_length compare="ge">small</display_length>
+  </supports>
 
   <custom>
     <value key="Purism::form_factor">workstation</value>

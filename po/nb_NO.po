@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 12:58+0200\n"
+"POT-Creation-Date: 2023-04-01 16:50+0200\n"
 "PO-Revision-Date: 2022-10-18 13:05+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -53,75 +53,80 @@ msgstr ""
 msgid "Close"
 msgstr "Lukk"
 
-#: data/resources/ui/channel_list.ui:16
+#: data/resources/ui/channel_list.ui:15
+#: data/resources/ui/channel_messages.ui:17
+msgid "Offline"
+msgstr ""
+
+#: data/resources/ui/channel_list.ui:31
 msgid "Search"
 msgstr "Søk"
 
-#: data/resources/ui/channel_list.ui:18 data/resources/ui/window.ui:36
+#: data/resources/ui/channel_list.ui:33 data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Søk"
 
-#: data/resources/ui/channel_messages.ui:17
+#: data/resources/ui/channel_messages.ui:31
 msgid "Select a channel"
 msgstr "Velg en kanal"
 
-#: data/resources/ui/channel_messages.ui:59
+#: data/resources/ui/channel_messages.ui:73
 #, fuzzy
 msgid "Load more"
 msgstr "Last inn mer"
 
-#: data/resources/ui/channel_messages.ui:92
+#: data/resources/ui/channel_messages.ui:106
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Fjern svaret"
 
-#: data/resources/ui/channel_messages.ui:94
+#: data/resources/ui/channel_messages.ui:108
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Fjern svar"
 
-#: data/resources/ui/channel_messages.ui:124
+#: data/resources/ui/channel_messages.ui:138
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Fjern et vedlegg"
 
-#: data/resources/ui/channel_messages.ui:126
+#: data/resources/ui/channel_messages.ui:140
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Fjern vedlegg"
 
-#: data/resources/ui/channel_messages.ui:160
+#: data/resources/ui/channel_messages.ui:174
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Legg til et vedlegg"
 
-#: data/resources/ui/channel_messages.ui:162
+#: data/resources/ui/channel_messages.ui:176
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Legg til vedlegg"
 
-#: data/resources/ui/channel_messages.ui:181
-msgctxt "accessibility"
-msgid "Message input"
-msgstr "Meldingsinndata"
-
-#: data/resources/ui/channel_messages.ui:186
-msgctxt "tooltip"
-msgid "Message input"
-msgstr "Meldingsinndata"
-
-#: data/resources/ui/channel_messages.ui:192
-msgctxt "accessibility"
-msgid "Send"
-msgstr "Send"
-
-#: data/resources/ui/channel_messages.ui:194
-msgctxt "tooltip"
-msgid "Send"
-msgstr "Send"
-
 #: data/resources/ui/channel_messages.ui:195
+msgctxt "accessibility"
+msgid "Message input"
+msgstr "Meldingsinndata"
+
+#: data/resources/ui/channel_messages.ui:200
+msgctxt "tooltip"
+msgid "Message input"
+msgstr "Meldingsinndata"
+
+#: data/resources/ui/channel_messages.ui:206
+msgctxt "accessibility"
+msgid "Send"
+msgstr "Send"
+
+#: data/resources/ui/channel_messages.ui:208
+msgctxt "tooltip"
+msgid "Send"
+msgstr "Send"
+
+#: data/resources/ui/channel_messages.ui:209
 #, fuzzy
 msgid "Send"
 msgstr "Send"
@@ -273,11 +278,24 @@ msgid "Notifications for new messages."
 msgstr "Last inn flere bilder"
 
 #: data/resources/ui/preferences_window.ui:114
+#: data/de.schmidhuberj.Flare.gschema.xml:46
 msgid "Send notifications"
 msgstr "Send merknader"
 
 #: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:146
+msgid "Other"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:149
+msgid "Selectable Message Text"
+msgstr ""
+
+#: data/resources/ui/preferences_window.ui:150
+msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
@@ -360,7 +378,7 @@ msgstr "Om"
 msgid "Note to self"
 msgstr "Selvpåminnelse"
 
-#: src/backend/manager.rs:374
+#: src/backend/manager.rs:378
 msgid "You"
 msgstr "Deg"
 
@@ -483,17 +501,548 @@ msgstr ""
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:41
+#: src/gui/utility.rs:52
 #, fuzzy
 msgid "%H:%M"
 msgstr "%H %M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:44
+#: src/gui/utility.rs:55
 #, fuzzy
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d %m %y. %H %M"
+
+#. Translators: Flare name in metainfo.
+#: data/de.schmidhuberj.Flare.desktop.in.in:5
+#: data/de.schmidhuberj.Flare.metainfo.xml:8
+msgid "Flare"
+msgstr ""
+
+#. Translators: Flare summary in metainfo.
+#: data/de.schmidhuberj.Flare.metainfo.xml:10
+msgid "An unofficial Signal GTK client"
+msgstr ""
+
+#. Translators: Description of Flare in metainfo.
+#: data/de.schmidhuberj.Flare.metainfo.xml:23
+msgid ""
+"An unofficial GTK client for the messaging application Signal. This is a "
+"very simple application with many features missing compared to the official "
+"applications."
+msgstr ""
+
+#. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:29
+#, fuzzy
+msgid "Link device"
+msgstr "Tilknytt enhet"
+
+#. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:33
+#, fuzzy
+msgid "Send messages"
+msgstr "Last inn flere bilder"
+
+#. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:37
+#, fuzzy
+msgid "Receive messages"
+msgstr "Last inn flere bilder"
+
+#. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:41
+#, fuzzy
+msgid "Reply to a message"
+msgstr "Last inn flere bilder"
+
+#. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:45
+#, fuzzy
+msgid "React to a message"
+msgstr "Last inn flere bilder"
+
+#. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:49
+msgid "Sending and receiving attachments"
+msgstr ""
+
+#. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:53
+msgid "Encrypted storage"
+msgstr ""
+
+#. Translators: Description of Flare in metainfo: Security note
+#: data/de.schmidhuberj.Flare.metainfo.xml:58
+msgid ""
+"Please note that using this application will probably worsen your security "
+"compared to using official Signal applications. Use with care when handling "
+"sensitive data. Look at the projects README for more information about "
+"security."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:67
+#: data/de.schmidhuberj.Flare.metainfo.xml:138
+msgid "HOTFIX"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:69
+msgid "Fix outgoing 1-to-1 messages stored incorrectly."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:75
+msgid "BREAKING"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:77
+msgid "Due to a new storage for data, a relink is required on first startup"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:79
+#: data/de.schmidhuberj.Flare.metainfo.xml:106
+msgid "Added"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:81
+msgid "Integration with feedbackd."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:82
+msgid "Showing profile names."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:83
+msgid "Copy action in message menu."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:84
+msgid "Initial channel information dialog with identity reset."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:85
+msgid "Show offline status in GUI."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:87
+#: data/de.schmidhuberj.Flare.metainfo.xml:146
+#, fuzzy
+msgid "Changed"
+msgstr "Kanaler"
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:89
+msgid ""
+"Notifications for group messages now display the name of the group instead "
+"of just the name of the sender."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:90
+msgid "Messages must now be successfully sent before displaying in a chat."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:91
+msgid "UI got revamped."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:93
+#: data/de.schmidhuberj.Flare.metainfo.xml:110
+#: data/de.schmidhuberj.Flare.metainfo.xml:119
+#: data/de.schmidhuberj.Flare.metainfo.xml:128
+#: data/de.schmidhuberj.Flare.metainfo.xml:150
+msgid "Fixed"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:95
+msgid "Fixed not setting revision for groups."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:96
+msgid "Prevent sending messages while offline."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:98
+msgid "Chores"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:100
+msgid "Updated all dependencies."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:108
+msgid "Ability to receive messages in the background."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:112
+msgid "Fixed restarting the backend after suspend."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:113
+msgid "Fixed grammar error in the project description."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:121
+msgid "Fixed application freeze when there are many initial messages"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:122
+msgid "Fixed incorrect ordering of new messages"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:130
+msgid "Fixed memory leak."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:131
+msgid ""
+"Fixed displayed reply message not clearing attachments when changing reply."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:132
+msgid "Fixed crash when searching non-existing channel."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:140
+msgid "Fix linking not working"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:148
+msgid "Slight UI update to channel list"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:152
+msgid "Crash when clicking on call message"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:153
+msgid "URLs containing \"&amp;\" not being displayed"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:154
+msgid "Fixed some (hopefully all) duplicate messages"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:155
+msgid "Fixed receiving messages from certain groups"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:161
+msgid "HOTFIX:"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:163
+msgid "Updated certificate of Signal servers"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:169
+#: data/de.schmidhuberj.Flare.metainfo.xml:188
+#: data/de.schmidhuberj.Flare.metainfo.xml:209
+#: data/de.schmidhuberj.Flare.metainfo.xml:235
+#: data/de.schmidhuberj.Flare.metainfo.xml:250
+#: data/de.schmidhuberj.Flare.metainfo.xml:266
+msgid "Added:"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:171
+msgid "Pasting files and images into the text entry."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:172
+#, fuzzy
+msgid "Unlink without deleting messages."
+msgstr "Opphev lenking, men behold meldinger"
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:173
+#, fuzzy
+msgid "Messages and notifications for calls."
+msgstr "Send merknader"
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:175
+#: data/de.schmidhuberj.Flare.metainfo.xml:200
+#: data/de.schmidhuberj.Flare.metainfo.xml:221
+#: data/de.schmidhuberj.Flare.metainfo.xml:241
+#: data/de.schmidhuberj.Flare.metainfo.xml:257
+#: data/de.schmidhuberj.Flare.metainfo.xml:275
+msgid "Fixed:"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:177
+msgid "Fixed showing messages with \"&amp;\", \"&lt;\" or \"&gt;\"."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:179
+msgid "Chores:"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:181
+msgid "Refactored GTK properties."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:182
+#, fuzzy
+msgid "Greatly refactored messages."
+msgstr "Last inn flere bilder"
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:190
+msgid "Clickable links in text messages."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:191
+msgid "Open image in default program."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:192
+msgid "Contributing guidelines"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:194
+#: data/de.schmidhuberj.Flare.metainfo.xml:215
+#: data/de.schmidhuberj.Flare.metainfo.xml:270
+#, fuzzy
+msgid "Changed:"
+msgstr "Kanaler"
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:196
+msgid "Show backend thread panics."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:197
+msgid "UI improvements for the channel list."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:198
+msgid "Display user initials in profile pictures."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:202
+msgid "Fixed duplicate message receiving."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:203
+msgid "Wrapping for extremely long words."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:211
+msgid ""
+"Immediately sync contacts after linking, without application restart "
+"required."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:212
+msgid ""
+"Show UUID for unknown contacts (without name, phone numbers) instead of "
+"empty string."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:213
+#, fuzzy
+msgid "Notification support."
+msgstr "Merknader"
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:217
+msgid "Many UI updates."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:218
+msgid "Use new libadwaita widgets (about dialog, message dialog, entry row)."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:219
+#, fuzzy
+msgid "New message storage backend."
+msgstr "Meldingslagring"
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:223
+msgid "Wrongly associated stored messages from other devices."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:224
+msgid "Possibly fixed libsecret-related issue."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:225
+msgid ""
+"(Upstream) Fixed duplicate messages to other third-party Signal clients."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:227
+msgid "BREAKING:"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:229
+msgid ""
+"Due to changes in the storage backend, your previously stored messages will "
+"be lost."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:237
+msgid "Button in the link window to copy link URL to clipboard."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:238
+msgid "Group storage."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:239
+#, fuzzy
+msgid "Search for the channel view."
+msgstr "Velg en kanal"
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:243
+msgid "Maybe fixed rare crash in the backend thread."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:244
+msgid ""
+"Fixed messages sent to contacts being wrongly stored to \"Note to self\"."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:252
+msgid "Accessibility (no idea how good it is)."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:253
+#, fuzzy
+msgid "Message storage."
+msgstr "Meldingslagring"
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:254
+msgid "Prevented sending empty messages."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:255
+msgid "Display the time the message was sent."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:259
+msgid "Attachment list not hiding after sending message."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:260
+msgid "Minor glib warning."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:268
+#, fuzzy
+msgid "Keyboard shortcuts."
+msgstr "Vis snarveier"
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:272
+msgid "Small UI updates."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:273
+msgid ""
+"Moved from Entry to TextView which provides multi-line editing and line "
+"wrapping."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:277
+msgid "Fixed screenshot dummy."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:283
+msgid "Hotfix for crash without libsecret set up."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:288
+msgid "Fix gschema not being installed."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:293
+msgid ""
+"Implemented device name for linking, added support for video attachment, "
+"configurable lazy-load attachments, bug fixes."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:298
+msgid "Hotfix for not beeing able to link and unlink the device."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:303
+msgid "UI updates, more translations, bug fixing."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:308
+msgid ""
+"Added ability to upload and download attachments, added ability to remove "
+"reply and attachments before sending, fixed some bugs mainly regarding reply "
+"messages."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:313
+msgid ""
+"Fixed many bugs, including wrong association for messages to channels, "
+"wrongly displayed channel names as \"Note to self\" and a few crashes."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:318
+msgid "Fix message receiving, sending attachments."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:323
+msgid ""
+"Bug fixing, error handling, russian and german translation, small UI updates."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:328
+msgid "Small UI changes, change of license."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:333
+msgid "Initial Release."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml:340
+#, fuzzy
+msgid "Overview of the application"
+msgstr "En del av programmet krasjet."
+
+#: data/de.schmidhuberj.Flare.gschema.xml:6
+msgid "Window width"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:10
+msgid "Window height"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:14
+msgid "Window maximized state"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:19
+msgid ""
+"The device name when linking Flare. This requires the application to be re-"
+"linked."
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:24
+msgid "Automatically download images"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:28
+msgid "Automatically download videos"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:32
+msgid "Automatically download files"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:37
+#, fuzzy
+msgid "The amount of messages to load on startup for each channel"
+msgstr "Antall meldinger å vise ved oppstart"
+
+#: data/de.schmidhuberj.Flare.gschema.xml:41
+#, fuzzy
+msgid "The amount of messages to load on request for each channel"
+msgstr "Antall meldinger å laste inn ved forespørsel"
+
+#: data/de.schmidhuberj.Flare.gschema.xml:50
+msgid "Run in background when closed"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:55
+msgid "Can messages be selected"
+msgstr ""
 
 #, fuzzy
 #~ msgid ""

@@ -4,6 +4,7 @@ Icon=de.schmidhuberj.Flare
 Name=Flare
 StartupWMClass=Flare
 Exec=@bindir@/flare
+Categories=Network;Chat;
 StartupNotify=true
 DBusActivatable=true
 X-Purism-FormFactor=Workstation;Mobile;
