@@ -53,7 +53,7 @@
   <releases>
     <release version="v0.7.1" date="2023-04-01">
       <description>
-        <h3>HOTFIX</h3>
+        <p>HOTFIX</p>
         <ul>
           <li>Fix outgoing 1-to-1 messages stored incorrectly.</li>
         </ul>
