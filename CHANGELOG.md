@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.1] - 2023-04-01
+
+### HOTFIX
+
+- Fix outgoing 1-to-1 messages stored incorrectly.
+
 ## [0.7.0] - 2023-03-29
 
 ### BREAKING
@@ -294,7 +300,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.7.0...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.7.1...master
+[0.7.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.7.0...0.7.1
 [0.7.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.6.0...0.7.0
 [0.6.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.6...0.6.0
 [0.5.6]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.5...0.5.6
