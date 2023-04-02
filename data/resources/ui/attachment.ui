@@ -126,6 +126,12 @@
           <class name="flat"/>
           <class name="circular"/>
         </style>
+
+        <accessibility>
+          <property name="label" translatable="yes" context="accessibility">Open with…</property>
+        </accessibility>
+        <property name="tooltip-text" context="tooltip">Open with…</property>
+
         <property name="icon-name">document-open-symbolic</property>
         <signal name="clicked" handler="open" swapped="true"/>
       </object>
@@ -136,6 +142,12 @@
           <class name="flat"/>
           <class name="circular"/>
         </style>
+
+        <accessibility>
+          <property name="label" translatable="yes" context="accessibility">Download</property>
+        </accessibility>
+        <property name="tooltip-text" context="tooltip">Download</property>
+
         <property name="icon-name">document-save-symbolic</property>
         <signal name="clicked" handler="download" swapped="true"/>
       </object>

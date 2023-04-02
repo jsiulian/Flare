@@ -109,8 +109,7 @@
                     <property name="tooltip-text" context="tooltip">Menu</property>
 
                     <property name="menu-model">menubar-channel</property>
-                    <property name="primary">True</property>
-                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="icon-name">view-more-symbolic</property>
                   </object>
                 </child>
               </object>
