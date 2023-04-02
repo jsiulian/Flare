@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-01 16:50+0200\n"
-"PO-Revision-Date: 2023-03-29 19:39+0000\n"
+"PO-Revision-Date: 2023-04-04 07:41+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
 "Language: nl\n"
@@ -57,7 +57,7 @@ msgstr "Sluiten"
 #: data/resources/ui/channel_list.ui:15
 #: data/resources/ui/channel_messages.ui:17
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 #: data/resources/ui/channel_list.ui:31
 msgid "Search"
@@ -278,15 +278,16 @@ msgstr "Meldingen tonen als Flare op de achtergrond wordt uitgevoerd"
 
 #: data/resources/ui/preferences_window.ui:146
 msgid "Other"
-msgstr ""
+msgstr "Overig"
 
 #: data/resources/ui/preferences_window.ui:149
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Selecteerbare berichttekst"
 
 #: data/resources/ui/preferences_window.ui:150
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
+"Selecteerbare tekst kan interfereren met veegbewegingen op aanraakschermen"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -495,12 +496,12 @@ msgstr "%Y-%m-%d %H:%M"
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "An unofficial Signal GTK client"
-msgstr ""
+msgstr "Onofficiële GTK-app voor Signal"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:23
@@ -509,46 +510,44 @@ msgid ""
 "very simple application with many features missing compared to the official "
 "applications."
 msgstr ""
+"Een onofficiële GTK-app voor de berichtenapplicatie Signal. Dit is een zeer "
+"eenvoudige app met veel ontbrekende functionaliteit in vergelijking met de "
+"officiële apps."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:29
-#, fuzzy
 msgid "Link device"
 msgstr "Apparaat koppelen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:33
-#, fuzzy
 msgid "Send messages"
-msgstr "Berichten verwijderen"
+msgstr "Berichten versturen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:37
-#, fuzzy
 msgid "Receive messages"
-msgstr "Berichten verwijderen"
+msgstr "Berichten ontvangen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:41
-#, fuzzy
 msgid "Reply to a message"
-msgstr "Berichten verwijderen"
+msgstr "Berichten beantwoorden"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:45
-#, fuzzy
 msgid "React to a message"
-msgstr "Berichten verwijderen"
+msgstr "Reageren op berichten"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:49
 msgid "Sending and receiving attachments"
-msgstr ""
+msgstr "Bijlagen versturen en ontvangen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:53
 msgid "Encrypted storage"
-msgstr ""
+msgstr "Versleutelde opslag"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:58
@@ -558,68 +557,77 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Houd er rekening mee dat het gebruik van deze app waarschijnlijk uw "
+"veiligheid zal verslechteren in vergelijking met het gebruik van officiële "
+"Signal-apps. Wees voorzichtig bij het omgaan met gevoelige gegevens. Bekijk "
+"de README van het project voor meer informatie over beveiliging."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:67
 #: data/de.schmidhuberj.Flare.metainfo.xml:138
 msgid "HOTFIX"
-msgstr ""
+msgstr "HOTFIX"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:69
 msgid "Fix outgoing 1-to-1 messages stored incorrectly."
-msgstr ""
+msgstr "Probleemoplossing voor verkeerd opgeslagen privéberichten"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:75
 msgid "BREAKING"
-msgstr ""
+msgstr "BREKEND"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:77
 msgid "Due to a new storage for data, a relink is required on first startup"
 msgstr ""
+"Vanwege een nieuwe gegevensopslag is bij de eerste keer opstarten een "
+"herkoppeling vereist"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:79
 #: data/de.schmidhuberj.Flare.metainfo.xml:106
 msgid "Added"
-msgstr ""
+msgstr "Toegevoegd"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:81
 msgid "Integration with feedbackd."
-msgstr ""
+msgstr "Integratie met feedbackd"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:82
 msgid "Showing profile names."
-msgstr ""
+msgstr "Profielnamen worden weergegeven"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:83
 msgid "Copy action in message menu."
-msgstr ""
+msgstr "Kopieeractie in berichtmenu"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:84
 msgid "Initial channel information dialog with identity reset."
-msgstr ""
+msgstr "Initiële dialoog voor kanaalinfo met identiteitsreset"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:85
 msgid "Show offline status in GUI."
-msgstr ""
+msgstr "Offline-status aan interface toegevoegd"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:87
 #: data/de.schmidhuberj.Flare.metainfo.xml:146
-#, fuzzy
 msgid "Changed"
-msgstr "Kanalen"
+msgstr "Gewijzigd"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:89
 msgid ""
 "Notifications for group messages now display the name of the group instead "
 "of just the name of the sender."
 msgstr ""
+"Meldingen voor groepsberichten tonen nu de groepsnaam naast de naam van de "
+"verzender"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:90
 msgid "Messages must now be successfully sent before displaying in a chat."
 msgstr ""
+"Berichten moeten nu succesvol zijn verstuurd voor deze worden weergegeven in "
+"een gesprek"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:91
 msgid "UI got revamped."
-msgstr ""
+msgstr "Interface is vernieuwd"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:93
 #: data/de.schmidhuberj.Flare.metainfo.xml:110
@@ -627,27 +635,27 @@ msgstr ""
 #: data/de.schmidhuberj.Flare.metainfo.xml:128
 #: data/de.schmidhuberj.Flare.metainfo.xml:150
 msgid "Fixed"
-msgstr ""
+msgstr "Foutoplossingen"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:95
 msgid "Fixed not setting revision for groups."
-msgstr ""
+msgstr "Fout waarbij herzieningen voor groepen niet werden ingesteld opgelost"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:96
 msgid "Prevent sending messages while offline."
-msgstr ""
+msgstr "Voorkomen dat offline berichten worden verstuurd"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:98
 msgid "Chores"
-msgstr ""
+msgstr "Klusjes"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:100
 msgid "Updated all dependencies."
-msgstr ""
+msgstr "Alle afhankelijkheden bijgewerkt"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:108
 msgid "Ability to receive messages in the background."
-msgstr ""
+msgstr "Mogelijkheid om berichten op de achtergrond te ontvangen"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:112
 msgid "Fixed restarting the backend after suspend."
@@ -667,7 +675,7 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:130
 msgid "Fixed memory leak."
-msgstr ""
+msgstr "Geheugenlek opgelost"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:131
 msgid ""
@@ -704,7 +712,7 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:161
 msgid "HOTFIX:"
-msgstr ""
+msgstr "HOTFIX"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:163
 msgid "Updated certificate of Signal servers"
@@ -717,7 +725,7 @@ msgstr ""
 #: data/de.schmidhuberj.Flare.metainfo.xml:250
 #: data/de.schmidhuberj.Flare.metainfo.xml:266
 msgid "Added:"
-msgstr ""
+msgstr "Toegevoegd"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:171
 msgid "Pasting files and images into the text entry."
@@ -740,7 +748,7 @@ msgstr "Leesbewijzen"
 #: data/de.schmidhuberj.Flare.metainfo.xml:257
 #: data/de.schmidhuberj.Flare.metainfo.xml:275
 msgid "Fixed:"
-msgstr ""
+msgstr "Foutoplossingen"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:177
 msgid "Fixed showing messages with \"&amp;\", \"&lt;\" or \"&gt;\"."
@@ -748,7 +756,7 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:179
 msgid "Chores:"
-msgstr ""
+msgstr "Klusjes"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:181
 msgid "Refactored GTK properties."
@@ -769,14 +777,13 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:192
 msgid "Contributing guidelines"
-msgstr ""
+msgstr "Bijdrage-richtlijnen"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:194
 #: data/de.schmidhuberj.Flare.metainfo.xml:215
 #: data/de.schmidhuberj.Flare.metainfo.xml:270
-#, fuzzy
 msgid "Changed:"
-msgstr "Kanalen"
+msgstr "Gewijzigd"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:196
 msgid "Show backend thread panics."
@@ -811,9 +818,8 @@ msgid ""
 msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:213
-#, fuzzy
 msgid "Notification support."
-msgstr "Meldingen"
+msgstr "Ondersteuning voor meldingen"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:217
 msgid "Many UI updates."
@@ -843,7 +849,7 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:227
 msgid "BREAKING:"
-msgstr ""
+msgstr "BREKEND"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:229
 msgid ""
@@ -857,7 +863,7 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:238
 msgid "Group storage."
-msgstr ""
+msgstr "Groepsopslag"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:239
 #, fuzzy
@@ -878,7 +884,6 @@ msgid "Accessibility (no idea how good it is)."
 msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:253
-#, fuzzy
 msgid "Message storage."
 msgstr "Berichtopslag"
 
@@ -899,9 +904,8 @@ msgid "Minor glib warning."
 msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:268
-#, fuzzy
 msgid "Keyboard shortcuts."
-msgstr "Sneltoetsen tonen"
+msgstr "Sneltoetsen"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:272
 msgid "Small UI updates."
@@ -967,57 +971,56 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:333
 msgid "Initial Release."
-msgstr ""
+msgstr "Initiële uitgave"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:340
-#, fuzzy
 msgid "Overview of the application"
-msgstr "Een deel van de app is gecrasht."
+msgstr "Overzicht van de app"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Vensterbreedte"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Vensterhoogte"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Maximalisatiestaat van venster"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"De apparaatnaam bij het koppelen van Flare. Dit vereist dat de app opnieuw "
+"wordt gekoppeld."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Afbeeldingen automatisch downloaden"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Video's automatisch downloaden"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download files"
-msgstr ""
+msgstr "Bestanden automatisch downloaden"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:37
-#, fuzzy
 msgid "The amount of messages to load on startup for each channel"
-msgstr "Aantal te tonen berichten na opstarten"
+msgstr "Aantal te laden berichten bij opstarten van elk kanaal"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
-#, fuzzy
 msgid "The amount of messages to load on request for each channel"
-msgstr "Aantal op verzoek te tonen berichten"
+msgstr "Aantal te laden berichten bij aanvraag van elk kanaal"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Op achtergrond uitvoeren wanneer gesloten"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:55
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Of berichten geselecteerd kunnen worden"
