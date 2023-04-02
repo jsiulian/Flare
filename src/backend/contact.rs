@@ -1,15 +1,15 @@
-use std::{cell::RefCell};
+use std::cell::RefCell;
 
 use gdk::glib::clone;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Object, ObjectExt};
 use gtk::{gio, glib};
-use libsignal_service::prelude::{Uuid};
+use libsignal_service::prelude::Uuid;
 use presage::prelude::ServiceAddress;
 
 use crate::gspawn;
 
-use super::{Manager, Channel};
+use super::{Channel, Manager};
 
 gtk::glib::wrapper! {
     pub struct Contact(ObjectSubclass<imp::Contact>);
@@ -50,6 +50,15 @@ impl Contact {
         self.property("is-self")
     }
 
+    pub fn is_blocked(&self) -> bool {
+        self.imp()
+            .contact
+            .borrow()
+            .as_ref()
+            .map(|c| c.blocked)
+            .unwrap_or_default()
+    }
+
     pub fn title(&self) -> String {
         self.property("title")
     }
@@ -75,19 +84,24 @@ impl Contact {
             let channel = self.channel();
 
             // Don't do anything if contact is self of contact has well-defined name
-            if self.is_self() || contact.as_ref().map(|c| !c.name.is_empty()).unwrap_or_default() {
+            if self.is_self()
+                || contact
+                    .as_ref()
+                    .map(|c| !c.name.is_empty())
+                    .unwrap_or_default()
+            {
                 return;
             }
 
             if let Some(group) = channel.and_then(|c| c.group()) {
-                group.members
+                group
+                    .members
                     .iter()
                     .filter(|m| m.uuid == uuid)
                     .map(|c| c.profile_key)
                     .next()
             } else {
-                contact.as_ref()
-                    .and_then(|c| c.profile_key().ok())
+                contact.as_ref().and_then(|c| c.profile_key().ok())
             }
         };
 
@@ -179,32 +193,39 @@ mod imp {
                     let phonenumber = self.phonenumber.borrow();
                     let uuid = self.uuid.borrow();
                     if self.obj().is_self() {
-                        return self.manager
+                        return self
+                            .manager
                             .borrow()
                             .as_ref()
                             .unwrap()
                             .profile_name()
-                            .to_value()
+                            .to_value();
                     }
 
-                    let contact_title = contact.as_ref()
-                        .and_then(|c| if c.name.is_empty() {None} else {Some(c.name.clone())});
-                    let profile_title = profile.as_ref()
-                        .and_then(|p| p.name.as_ref())
-                        .map(|p| if let Some(family_name) = &p.family_name {
+                    let contact_title = contact.as_ref().and_then(|c| {
+                        if c.name.is_empty() {
+                            None
+                        } else {
+                            Some(c.name.clone())
+                        }
+                    });
+                    let profile_title = profile.as_ref().and_then(|p| p.name.as_ref()).map(|p| {
+                        if let Some(family_name) = &p.family_name {
                             format!("{} {}", p.given_name, family_name)
                         } else {
                             p.given_name.clone()
-                        });
-                    let phonenumber_title = phonenumber.as_ref()
+                        }
+                    });
+                    let phonenumber_title = phonenumber
+                        .as_ref()
                         .map(|p| p.format().mode(Mode::National).to_string());
                     let uuid_title = uuid.map(|u| u.to_string());
 
                     contact_title
-                    .or(profile_title)
-                    .or(phonenumber_title)
-                    .or(uuid_title)
-                    .to_value()
+                        .or(profile_title)
+                        .or(phonenumber_title)
+                        .or(uuid_title)
+                        .to_value()
                 }
                 _ => unimplemented!(),
             }

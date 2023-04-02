@@ -35,6 +35,11 @@ impl Message {
         let metadata = &content.metadata;
         let contact = Contact::from_service_address(&metadata.sender, manager);
 
+        if contact.is_blocked() {
+            log::debug!("Got message from a blocked contact. Ignoring");
+            return None;
+        }
+
         let body = &content.body;
         let timestamp = metadata.timestamp;
 

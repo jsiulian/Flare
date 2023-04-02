@@ -297,6 +297,16 @@ pub mod imp {
             }
         }
 
+        fn add_all_messages(&self, messages: impl IntoIterator<Item = DisplayMessage> + 'static) {
+            gspawn!(clone!(@weak self as s => async move {
+                for m in messages {
+                    s.add_message(&m);
+                    // Give the GUI some time to show the message.
+                    glib::timeout_future(Duration::from_millis(5)).await;
+                }
+            }));
+        }
+
         fn add_message(&self, message: &DisplayMessage) {
             let obj = self.obj();
             if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
@@ -451,9 +461,7 @@ pub mod imp {
                     self.reset_messages();
                     let previous_channel = self.active_channel.replace(chan.clone());
                     if let Some(channel) = &chan {
-                        for msg in channel.messages() {
-                            self.add_message(&msg);
-                        }
+                        self.add_all_messages(channel.messages());
 
                         let mut signal_handler = self.last_signal_handler.borrow_mut();
                         if let Some(sig) = signal_handler.take() {
