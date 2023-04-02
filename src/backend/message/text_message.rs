@@ -4,6 +4,7 @@ use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
 use gtk::{gdk, gio, glib};
+use libsignal_service::proto::data_message::Delete;
 use presage::prelude::content::Reaction;
 use presage::prelude::{proto::data_message::Quote, *};
 
@@ -122,6 +123,41 @@ impl TextMessage {
         self.notify("reactions");
     }
 
+    pub async fn delete(&self) -> Result<(), crate::ApplicationError> {
+        crate::trace!("Delete a message with timestamp: {}", self.sent());
+        let delete = Delete {
+            target_sent_timestamp: Some(self.sent()),
+        };
+
+        let timestamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .expect("Time went backwards")
+            .as_millis() as u64;
+
+        let message = DataMessage {
+            timestamp: Some(timestamp),
+            delete: Some(delete),
+            ..Default::default()
+        };
+        self.channel()
+            .send_internal_message(message, timestamp)
+            .await?;
+
+        self.mark_as_deleted();
+        self.channel().notify("last-message");
+
+        Ok(())
+    }
+
+    pub fn mark_as_deleted(&self) {
+        // TODO: Does not delete message from memory.
+        self.set_property("is-deleted", true);
+    }
+
+    pub fn is_deleted(&self) -> bool {
+        self.property("is-deleted")
+    }
+
     pub async fn send_reaction<S: AsRef<str>>(
         &self,
         reaction: S,
@@ -186,6 +222,7 @@ impl TextMessage {
 
 mod imp {
     use gdk::gdk_pixbuf::prelude::ToValue;
+    use gdk::glib::ParamSpecBoolean;
     use gdk::prelude::ParamSpecBuilderExt;
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use glib::{
@@ -207,6 +244,8 @@ mod imp {
         pub(super) reactions: RefCell<String>,
 
         pub(super) attachments: RefCell<Vec<Attachment>>,
+
+        pub(super) is_deleted: RefCell<bool>,
     }
 
     #[glib::object_subclass]
@@ -253,6 +292,7 @@ mod imp {
                         .default_value(Some(""))
                         .read_only()
                         .build(),
+                    ParamSpecBoolean::builder("is-deleted").build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -264,12 +304,22 @@ mod imp {
                 "body" => instance.internal_data().and_then(|d| d.body).to_value(),
                 "reactions" => self.reactions.borrow().to_value(),
                 "quote" => self.quote.borrow().to_value(),
+                "is-deleted" => self.is_deleted.borrow().to_value(),
                 _ => unimplemented!(),
             }
         }
 
-        fn set_property(&self, _id: usize, _value: &Value, _pspec: &ParamSpec) {
-            unimplemented!();
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
+            match pspec.name() {
+                "is-deleted" => {
+                    let obj = value
+                        .get::<bool>()
+                        .expect("Property `is-deleted` of `TextMessage` has to be of type `bool`");
+
+                    self.is_deleted.replace(obj);
+                }
+                _ => unimplemented!(),
+            }
         }
     }
 }
