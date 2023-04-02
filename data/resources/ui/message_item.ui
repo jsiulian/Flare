@@ -8,6 +8,14 @@
     <property name="margin-top">3</property>
     <property name="margin-bottom">3</property>
 
+    <binding name="visible">
+      <closure function="not" type="gboolean">
+        <lookup name="is-deleted">
+          <lookup name="message" type="FlMessageItem"/>
+        </lookup>
+      </closure>
+    </binding>
+
     <!-- Avatar -->
     <child>
       <object class="AdwAvatar" id="avatar">
@@ -237,6 +245,13 @@
         <attribute name='action'>msg.react</attribute>
         <attribute name='verb-icon'>face-smile-symbolic</attribute>
         <attribute name='icon'>face-smile-symbolic</attribute>
+      </item>
+      <item>
+        <attribute name='label' translatable='yes'>Delete</attribute>
+        <attribute name='action'>msg.delete</attribute>
+        <attribute name='verb-icon'>user-trash-symbolic</attribute>
+        <attribute name='icon'>user-trash-symbolic</attribute>
+        <attribute name='hidden-when'>action-disabled</attribute>
       </item>
       <item>
         <attribute name='label' translatable='yes'>Copy</attribute>

@@ -1,3 +1,4 @@
+use gdk::glib::BindingFlags;
 use gio::{subclass::prelude::ObjectSubclassIsExt, SimpleAction, SimpleActionGroup};
 use glib::{clone, Object};
 use gtk::{gio, glib};
@@ -6,7 +7,7 @@ use gtk::{
     traits::{PopoverExt, WidgetExt},
 };
 
-use crate::backend::message::TextMessage;
+use crate::backend::message::{MessageExt, TextMessage};
 use crate::backend::Manager;
 
 glib::wrapper! {
@@ -45,6 +46,11 @@ impl MessageItem {
             s.imp().handle_react_open();
         }));
 
+        let action_delete = SimpleAction::new("delete", None);
+        action_delete.connect_activate(clone!(@weak self as s => move |_, _| {
+            s.imp().handle_delete();
+        }));
+
         let action_copy = SimpleAction::new("copy", None);
         action_copy.connect_activate(clone!(@weak self as s => move |_, _| {
             s.imp().handle_copy();
@@ -54,7 +60,13 @@ impl MessageItem {
         self.insert_action_group("msg", Some(&actions));
         actions.add_action(&action_reply);
         actions.add_action(&action_react);
+        actions.add_action(&action_delete);
         actions.add_action(&action_copy);
+
+        self.bind_property("message", &action_delete, "enabled")
+            .transform_to(|_, msg: Option<TextMessage>| msg.map(|m| m.sender().is_self()))
+            .flags(BindingFlags::SYNC_CREATE)
+            .build();
     }
 
     fn init_label_selectable(&self) {
@@ -169,6 +181,14 @@ pub mod imp {
             // TODO: Log message
             crate::trace!("Replying to a message",);
             obj.emit_by_name::<()>("reply", &[&msg]);
+        }
+
+        #[template_callback]
+        pub(super) fn handle_delete(&self) {
+            let obj = self.obj();
+            let msg = obj.message();
+
+            gspawn!(async move { msg.delete().await });
         }
 
         #[template_callback]

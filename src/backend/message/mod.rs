@@ -1,9 +1,11 @@
 mod call_message;
+mod deletion_message;
 mod display_message;
 mod reaction_message;
 mod text_message;
 
 pub use call_message::CallMessage;
+pub use deletion_message::DeletionMessage;
 pub use display_message::DisplayMessage;
 pub use reaction_message::ReactionMessage;
 pub use text_message::TextMessage;
@@ -44,7 +46,9 @@ impl Message {
         let timestamp = metadata.timestamp;
 
         match body {
-            ContentBody::DataMessage(message) if message.reaction.is_none() => {
+            ContentBody::DataMessage(message)
+                if message.reaction.is_none() && message.delete.is_none() =>
+            {
                 let channel =
                     Channel::from_contact_or_group(contact.clone(), &message.group_v2, manager)
                         .await;
@@ -70,7 +74,7 @@ impl Message {
                         ..
                     }),
                 ..
-            }) if message.reaction.is_none() => {
+            }) if message.reaction.is_none() && message.delete.is_none() => {
                 if message.body.is_none() && message.attachments.is_empty() {
                     return None;
                 }
@@ -160,6 +164,63 @@ impl Message {
                     .upcast(),
                 )
             }
+            ContentBody::DataMessage(message) if message.delete.is_some() => {
+                log::trace!("Got a deletion message");
+                let channel =
+                    Channel::from_contact_or_group(contact.clone(), &message.group_v2, manager)
+                        .await;
+                Some(
+                    DeletionMessage::from_delete(
+                        &contact,
+                        &channel,
+                        timestamp,
+                        manager,
+                        message.delete.as_ref().unwrap().clone(),
+                    )
+                    .upcast(),
+                )
+            }
+            ContentBody::SynchronizeMessage(SyncMessage {
+                sent:
+                    Some(Sent {
+                        destination_e164: e164,
+                        destination_uuid: uuid,
+                        message: Some(message),
+                        ..
+                    }),
+                ..
+            }) if message.delete.is_some() => {
+                log::trace!("Got a deletion message");
+                let destination_contact = if e164.is_some() || uuid.is_some() {
+                    let destination_address = ServiceAddress {
+                        // TODO: Change reaction message to UUID (upstream)
+                        uuid: uuid
+                            .clone()
+                            .unwrap_or_default()
+                            .parse()
+                            .expect("Failed to parse UUID"),
+                    };
+                    Contact::from_service_address(&destination_address, manager)
+                } else {
+                    contact.clone()
+                };
+                let channel = Channel::from_contact_or_group(
+                    destination_contact.clone(),
+                    &message.group_v2,
+                    manager,
+                )
+                .await;
+                Some(
+                    DeletionMessage::from_delete(
+                        &contact,
+                        &channel,
+                        timestamp,
+                        manager,
+                        message.delete.as_ref().unwrap().clone(),
+                    )
+                    .upcast(),
+                )
+            }
             ContentBody::SynchronizeMessage(SyncMessage { read: read_arr, .. })
                 if !read_arr.is_empty() =>
             {
@@ -180,7 +241,7 @@ impl Message {
                     .map(|c| c.upcast())
             }
             ContentBody::TypingMessage(_) => {
-                log::trace!("Got currently unhandled call-message");
+                log::trace!("Got currently unhandled typing-message");
                 None
             }
             ContentBody::ReceiptMessage(_) => {

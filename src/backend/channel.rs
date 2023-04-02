@@ -19,7 +19,10 @@ use crate::{
     ApplicationError,
 };
 
-use super::{message::ReactionMessage, Contact, Manager, Message};
+use super::{
+    message::{DeletionMessage, ReactionMessage},
+    Contact, Manager, Message,
+};
 
 const EMPTY_EMOJI: &String = &String::new();
 
@@ -256,6 +259,37 @@ impl Channel {
                 entry.push_str(reaction_emoji);
             }
         }
+
+        if let Some(deletion) = message
+            .dynamic_cast_ref::<DeletionMessage>()
+            .map(|r| r.deletion())
+        {
+            crate::trace!(
+                "Channel {} got a delete message for timestamp: {}",
+                self.title(),
+                &deletion.target_sent_timestamp()
+            );
+            let deleted_msg = self
+                .messages()
+                .into_iter()
+                .find(|m| Some(m.sent()) == deletion.target_sent_timestamp);
+            if let Some(deleted_msg) = deleted_msg {
+                if let Some(deleted_msg) = deleted_msg.dynamic_cast_ref::<TextMessage>() {
+                    crate::trace!(
+                        "Deletion to message {}",
+                        deleted_msg
+                            .property::<Option<String>>("body")
+                            .unwrap_or_default()
+                    );
+                    deleted_msg.mark_as_deleted();
+                    self.notify("last-message");
+                } else {
+                    log::warn!("Deletion message for a non-TextMessage");
+                }
+            } else {
+                log::trace!("Deletion message aimed at a unloaded message. Will be ignored");
+            }
+        }
         Ok(())
     }
 
@@ -341,10 +375,11 @@ impl Channel {
 
     pub async fn send_message(&self, msg: Message) -> Result<(), crate::ApplicationError> {
         crate::debug!(
-            "Sending a message {} to channel {}",
+            "Sending a message {} to channel {} (timestamp {})",
             msg.property::<Option<String>>("body")
                 .unwrap_or_else(|| "(empty)".to_owned()),
-            self.title()
+            self.title(),
+            msg.sent()
         );
         if let Some(data) = msg.internal_data() {
             self.send_internal_message(data, msg.sent()).await?;
@@ -373,7 +408,10 @@ mod imp {
     use libsignal_service::groups_v2::Group;
     use presage::prelude::{GroupContextV2, Uuid};
 
-    use crate::backend::{message::DisplayMessage, Contact, Manager};
+    use crate::backend::{
+        message::{DisplayMessage, TextMessage},
+        Contact, Manager,
+    };
 
     #[derive(Default)]
     pub struct Channel {
@@ -439,7 +477,20 @@ mod imp {
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
-                "last-message" => self.messages.borrow().last().to_value(),
+                "last-message" => self
+                    .messages
+                    .borrow()
+                    .iter()
+                    .rev()
+                    .filter(|m| {
+                        !(*m)
+                            .clone()
+                            .downcast::<TextMessage>()
+                            .map(|m| m.is_deleted())
+                            .unwrap_or(false)
+                    })
+                    .next()
+                    .to_value(),
                 "title" => {
                     let title = if let Some(group) = self.group.borrow().as_ref() {
                         group.title.clone()
