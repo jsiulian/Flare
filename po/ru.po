@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-04 13:08+0200\n"
-"PO-Revision-Date: 2023-03-31 07:37+0000\n"
+"PO-Revision-Date: 2023-04-05 19:52+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,12 +38,12 @@ msgstr "Загрузить файл"
 #: data/resources/ui/attachment.ui:131
 msgctxt "accessibility"
 msgid "Open with…"
-msgstr ""
+msgstr "Открыть с помощью…"
 
 #: data/resources/ui/attachment.ui:147
 msgctxt "accessibility"
 msgid "Download"
-msgstr ""
+msgstr "Загрузить"
 
 #: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:162
 msgid "Channel Information"
@@ -66,7 +66,7 @@ msgstr "Закрыть"
 #: data/resources/ui/channel_list.ui:15
 #: data/resources/ui/channel_messages.ui:17
 msgid "Offline"
-msgstr ""
+msgstr "Оффлайн"
 
 #: data/resources/ui/channel_list.ui:31
 msgid "Search"
@@ -218,7 +218,7 @@ msgstr "Отреагировать"
 
 #: data/resources/ui/message_item.ui:250
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: data/resources/ui/message_item.ui:257
 msgid "Copy"
@@ -292,15 +292,16 @@ msgstr "Следить за новыми сообщениями в закрыт�
 
 #: data/resources/ui/preferences_window.ui:146
 msgid "Other"
-msgstr ""
+msgstr "Другое"
 
 #: data/resources/ui/preferences_window.ui:149
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Выбираемый текст сообщения"
 
 #: data/resources/ui/preferences_window.ui:150
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
+"Выделяемый текст может мешать жестам пролистывания на сенсорных экранах."
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -512,12 +513,12 @@ msgstr "%Y-%m-%d %H:%M"
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "An unofficial Signal GTK client"
-msgstr ""
+msgstr "Неофициальный GTK клиент Signal"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:23
@@ -526,46 +527,44 @@ msgid ""
 "very simple application with many features missing compared to the official "
 "applications."
 msgstr ""
+"Неофициальный GTK-клиент для приложения обмена сообщениями Signal. Это очень "
+"простое приложение, в котором отсутствуют многие функции по сравнению с "
+"официальными приложениями."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:29
-#, fuzzy
 msgid "Link device"
-msgstr "Привязать устройство"
+msgstr "Привязка устройства"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:33
-#, fuzzy
 msgid "Send messages"
-msgstr "Очистить сообщения"
+msgstr "Отправка сообщений"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:37
-#, fuzzy
 msgid "Receive messages"
-msgstr "Очистить сообщения"
+msgstr "Получение сообщений"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:41
-#, fuzzy
 msgid "Reply to a message"
-msgstr "Очистить сообщения"
+msgstr "Ответ на сообщение"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:45
-#, fuzzy
 msgid "React to a message"
-msgstr "Очистить сообщения"
+msgstr "Реакция на сообщение"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:49
 msgid "Sending and receiving attachments"
-msgstr ""
+msgstr "Отправка и получение вложений"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:53
 msgid "Encrypted storage"
-msgstr ""
+msgstr "Зашифрованное хранилище"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:58
@@ -575,59 +574,63 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Обратите внимание, что использование этого приложения, вероятно, ухудшит "
+"вашу безопасность по сравнению с использованием официальных приложений "
+"Signal. Используйте его с осторожностью при работе с конфиденциальными "
+"данными. Дополнительную информацию о безопасности можно найти в README "
+"проекта."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:340
-#, fuzzy
 msgid "Overview of the application"
-msgstr "Часть приложения вылетела."
+msgstr "Обзор приложения"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Ширина окна"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Высота окна"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Развернутое состояние окна"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Имя устройства при связывании Flare. Это требует повторного связывания "
+"приложения."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Автоматически загружать изображения"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Автоматически загружать видео"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download files"
-msgstr ""
+msgstr "Автоматически загружать файлы"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:37
-#, fuzzy
 msgid "The amount of messages to load on startup for each channel"
-msgstr "Количество сообщений для загрузки при запуске"
+msgstr "Количество сообщений, загружаемых при запуске для каждого канала"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
-#, fuzzy
 msgid "The amount of messages to load on request for each channel"
-msgstr "Количество сообщений для загрузке при запросе"
+msgstr "Количество сообщений, загружаемых по запросу для каждого канала"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Работать в фоновом режиме при закрытии"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:55
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Можно ли выбирать сообщения"
 
 #, fuzzy
 #~ msgid "Changed"
