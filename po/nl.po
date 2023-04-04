@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-01 16:50+0200\n"
+"POT-Creation-Date: 2023-04-04 13:08+0200\n"
 "PO-Revision-Date: 2023-04-04 07:41+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
@@ -36,7 +36,17 @@ msgstr "Video laden"
 msgid "Load file"
 msgstr "Bestand laden"
 
-#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:163
+#: data/resources/ui/attachment.ui:131
+msgctxt "accessibility"
+msgid "Open with…"
+msgstr ""
+
+#: data/resources/ui/attachment.ui:147
+msgctxt "accessibility"
+msgid "Download"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:162
 msgid "Channel Information"
 msgstr "Kanaalinformatie"
 
@@ -130,7 +140,7 @@ msgstr "Versturen"
 msgid "Send"
 msgstr "Versturen"
 
-#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:147
+#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:146
 msgid "Clear messages"
 msgstr "Berichten verwijderen"
 
@@ -151,7 +161,7 @@ msgstr "Annuleren"
 msgid "Clear"
 msgstr "Verwijderen"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:143
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:142
 msgid "Unlink"
 msgstr "Ontkoppelen"
 
@@ -198,15 +208,19 @@ msgstr "Kopiëren naar klembord"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Wacht na het koppelen tot contactpersoonsynchronisatie is afgerond."
 
-#: data/resources/ui/message_item.ui:230
+#: data/resources/ui/message_item.ui:238
 msgid "Reply"
 msgstr "Beantwoorden"
 
-#: data/resources/ui/message_item.ui:236
+#: data/resources/ui/message_item.ui:244
 msgid "React"
 msgstr "Reageren"
 
-#: data/resources/ui/message_item.ui:242
+#: data/resources/ui/message_item.ui:250
+msgid "Delete"
+msgstr ""
+
+#: data/resources/ui/message_item.ui:257
 msgid "Copy"
 msgstr "Kopiëren"
 
@@ -349,19 +363,19 @@ msgctxt "accessibility"
 msgid "Menu"
 msgstr "Menu"
 
-#: data/resources/ui/window.ui:139
+#: data/resources/ui/window.ui:138
 msgid "Settings"
 msgstr "Instellingen"
 
-#: data/resources/ui/window.ui:151
+#: data/resources/ui/window.ui:150
 msgid "Keybindings"
 msgstr "Sneltoetsen"
 
-#: data/resources/ui/window.ui:155
+#: data/resources/ui/window.ui:154
 msgid "About"
 msgstr "Over"
 
-#: src/backend/channel.rs:448
+#: src/backend/channel.rs:499
 msgid "Note to self"
 msgstr "Herinnering aan mezelf"
 
@@ -385,19 +399,19 @@ msgstr "Gesprek beëindigd"
 msgid "Is busy."
 msgstr "Is bezig"
 
-#: src/backend/message/text_message.rs:230
+#: src/backend/message/text_message.rs:269
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Er is één afbeelding verstuurd"
 msgstr[1] "Er zijn {} afbeeldingen verstuurd"
 
-#: src/backend/message/text_message.rs:233
+#: src/backend/message/text_message.rs:272
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Er is één video verstuurd"
 msgstr[1] "Er zijn {} video's verstuurd"
 
-#: src/backend/message/text_message.rs:236
+#: src/backend/message/text_message.rs:275
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Er is één bestand verstuurd"
@@ -562,417 +576,6 @@ msgstr ""
 "Signal-apps. Wees voorzichtig bij het omgaan met gevoelige gegevens. Bekijk "
 "de README van het project voor meer informatie over beveiliging."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:67
-#: data/de.schmidhuberj.Flare.metainfo.xml:138
-msgid "HOTFIX"
-msgstr "HOTFIX"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:69
-msgid "Fix outgoing 1-to-1 messages stored incorrectly."
-msgstr "Probleemoplossing voor verkeerd opgeslagen privéberichten"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:75
-msgid "BREAKING"
-msgstr "BREKEND"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:77
-msgid "Due to a new storage for data, a relink is required on first startup"
-msgstr ""
-"Vanwege een nieuwe gegevensopslag is bij de eerste keer opstarten een "
-"herkoppeling vereist"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:79
-#: data/de.schmidhuberj.Flare.metainfo.xml:106
-msgid "Added"
-msgstr "Toegevoegd"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:81
-msgid "Integration with feedbackd."
-msgstr "Integratie met feedbackd"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:82
-msgid "Showing profile names."
-msgstr "Profielnamen worden weergegeven"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:83
-msgid "Copy action in message menu."
-msgstr "Kopieeractie in berichtmenu"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:84
-msgid "Initial channel information dialog with identity reset."
-msgstr "Initiële dialoog voor kanaalinfo met identiteitsreset"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:85
-msgid "Show offline status in GUI."
-msgstr "Offline-status aan interface toegevoegd"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:87
-#: data/de.schmidhuberj.Flare.metainfo.xml:146
-msgid "Changed"
-msgstr "Gewijzigd"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:89
-msgid ""
-"Notifications for group messages now display the name of the group instead "
-"of just the name of the sender."
-msgstr ""
-"Meldingen voor groepsberichten tonen nu de groepsnaam naast de naam van de "
-"verzender"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:90
-msgid "Messages must now be successfully sent before displaying in a chat."
-msgstr ""
-"Berichten moeten nu succesvol zijn verstuurd voor deze worden weergegeven in "
-"een gesprek"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:91
-msgid "UI got revamped."
-msgstr "Interface is vernieuwd"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:93
-#: data/de.schmidhuberj.Flare.metainfo.xml:110
-#: data/de.schmidhuberj.Flare.metainfo.xml:119
-#: data/de.schmidhuberj.Flare.metainfo.xml:128
-#: data/de.schmidhuberj.Flare.metainfo.xml:150
-msgid "Fixed"
-msgstr "Foutoplossingen"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:95
-msgid "Fixed not setting revision for groups."
-msgstr "Fout waarbij herzieningen voor groepen niet werden ingesteld opgelost"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:96
-msgid "Prevent sending messages while offline."
-msgstr "Voorkomen dat offline berichten worden verstuurd"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:98
-msgid "Chores"
-msgstr "Klusjes"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:100
-msgid "Updated all dependencies."
-msgstr "Alle afhankelijkheden bijgewerkt"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:108
-msgid "Ability to receive messages in the background."
-msgstr "Mogelijkheid om berichten op de achtergrond te ontvangen"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:112
-msgid "Fixed restarting the backend after suspend."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:113
-msgid "Fixed grammar error in the project description."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:121
-msgid "Fixed application freeze when there are many initial messages"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:122
-msgid "Fixed incorrect ordering of new messages"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:130
-msgid "Fixed memory leak."
-msgstr "Geheugenlek opgelost"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:131
-msgid ""
-"Fixed displayed reply message not clearing attachments when changing reply."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:132
-msgid "Fixed crash when searching non-existing channel."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:140
-msgid "Fix linking not working"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:148
-msgid "Slight UI update to channel list"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:152
-msgid "Crash when clicking on call message"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:153
-msgid "URLs containing \"&amp;\" not being displayed"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:154
-msgid "Fixed some (hopefully all) duplicate messages"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:155
-msgid "Fixed receiving messages from certain groups"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:161
-msgid "HOTFIX:"
-msgstr "HOTFIX"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:163
-msgid "Updated certificate of Signal servers"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:169
-#: data/de.schmidhuberj.Flare.metainfo.xml:188
-#: data/de.schmidhuberj.Flare.metainfo.xml:209
-#: data/de.schmidhuberj.Flare.metainfo.xml:235
-#: data/de.schmidhuberj.Flare.metainfo.xml:250
-#: data/de.schmidhuberj.Flare.metainfo.xml:266
-msgid "Added:"
-msgstr "Toegevoegd"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:171
-msgid "Pasting files and images into the text entry."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:172
-#, fuzzy
-msgid "Unlink without deleting messages."
-msgstr "Ontkoppelen en berichten bewaren"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:173
-#, fuzzy
-msgid "Messages and notifications for calls."
-msgstr "Leesbewijzen"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:175
-#: data/de.schmidhuberj.Flare.metainfo.xml:200
-#: data/de.schmidhuberj.Flare.metainfo.xml:221
-#: data/de.schmidhuberj.Flare.metainfo.xml:241
-#: data/de.schmidhuberj.Flare.metainfo.xml:257
-#: data/de.schmidhuberj.Flare.metainfo.xml:275
-msgid "Fixed:"
-msgstr "Foutoplossingen"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:177
-msgid "Fixed showing messages with \"&amp;\", \"&lt;\" or \"&gt;\"."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:179
-msgid "Chores:"
-msgstr "Klusjes"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:181
-msgid "Refactored GTK properties."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:182
-#, fuzzy
-msgid "Greatly refactored messages."
-msgstr "Berichten verwijderen"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:190
-msgid "Clickable links in text messages."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:191
-msgid "Open image in default program."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:192
-msgid "Contributing guidelines"
-msgstr "Bijdrage-richtlijnen"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:194
-#: data/de.schmidhuberj.Flare.metainfo.xml:215
-#: data/de.schmidhuberj.Flare.metainfo.xml:270
-msgid "Changed:"
-msgstr "Gewijzigd"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:196
-msgid "Show backend thread panics."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:197
-msgid "UI improvements for the channel list."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:198
-msgid "Display user initials in profile pictures."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:202
-msgid "Fixed duplicate message receiving."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:203
-msgid "Wrapping for extremely long words."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:211
-msgid ""
-"Immediately sync contacts after linking, without application restart "
-"required."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:212
-msgid ""
-"Show UUID for unknown contacts (without name, phone numbers) instead of "
-"empty string."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:213
-msgid "Notification support."
-msgstr "Ondersteuning voor meldingen"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:217
-msgid "Many UI updates."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:218
-msgid "Use new libadwaita widgets (about dialog, message dialog, entry row)."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:219
-#, fuzzy
-msgid "New message storage backend."
-msgstr "Berichtopslag"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:223
-msgid "Wrongly associated stored messages from other devices."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:224
-msgid "Possibly fixed libsecret-related issue."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:225
-msgid ""
-"(Upstream) Fixed duplicate messages to other third-party Signal clients."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:227
-msgid "BREAKING:"
-msgstr "BREKEND"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:229
-msgid ""
-"Due to changes in the storage backend, your previously stored messages will "
-"be lost."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:237
-msgid "Button in the link window to copy link URL to clipboard."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:238
-msgid "Group storage."
-msgstr "Groepsopslag"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:239
-#, fuzzy
-msgid "Search for the channel view."
-msgstr "Kanalen doorzoeken"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:243
-msgid "Maybe fixed rare crash in the backend thread."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:244
-msgid ""
-"Fixed messages sent to contacts being wrongly stored to \"Note to self\"."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:252
-msgid "Accessibility (no idea how good it is)."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:253
-msgid "Message storage."
-msgstr "Berichtopslag"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:254
-msgid "Prevented sending empty messages."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:255
-msgid "Display the time the message was sent."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:259
-msgid "Attachment list not hiding after sending message."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:260
-msgid "Minor glib warning."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:268
-msgid "Keyboard shortcuts."
-msgstr "Sneltoetsen"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:272
-msgid "Small UI updates."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:273
-msgid ""
-"Moved from Entry to TextView which provides multi-line editing and line "
-"wrapping."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:277
-msgid "Fixed screenshot dummy."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:283
-msgid "Hotfix for crash without libsecret set up."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:288
-msgid "Fix gschema not being installed."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:293
-msgid ""
-"Implemented device name for linking, added support for video attachment, "
-"configurable lazy-load attachments, bug fixes."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:298
-msgid "Hotfix for not beeing able to link and unlink the device."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:303
-msgid "UI updates, more translations, bug fixing."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:308
-msgid ""
-"Added ability to upload and download attachments, added ability to remove "
-"reply and attachments before sending, fixed some bugs mainly regarding reply "
-"messages."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:313
-msgid ""
-"Fixed many bugs, including wrong association for messages to channels, "
-"wrongly displayed channel names as \"Note to self\" and a few crashes."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:318
-msgid "Fix message receiving, sending attachments."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:323
-msgid ""
-"Bug fixing, error handling, russian and german translation, small UI updates."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:328
-msgid "Small UI changes, change of license."
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml:333
-msgid "Initial Release."
-msgstr "Initiële uitgave"
-
 #: data/de.schmidhuberj.Flare.metainfo.xml:340
 msgid "Overview of the application"
 msgstr "Overzicht van de app"
@@ -1024,3 +627,131 @@ msgstr "Op achtergrond uitvoeren wanneer gesloten"
 #: data/de.schmidhuberj.Flare.gschema.xml:55
 msgid "Can messages be selected"
 msgstr "Of berichten geselecteerd kunnen worden"
+
+#~ msgid "HOTFIX"
+#~ msgstr "HOTFIX"
+
+#~ msgid "Fix outgoing 1-to-1 messages stored incorrectly."
+#~ msgstr "Probleemoplossing voor verkeerd opgeslagen privéberichten"
+
+#~ msgid "BREAKING"
+#~ msgstr "BREKEND"
+
+#~ msgid "Due to a new storage for data, a relink is required on first startup"
+#~ msgstr ""
+#~ "Vanwege een nieuwe gegevensopslag is bij de eerste keer opstarten een "
+#~ "herkoppeling vereist"
+
+#~ msgid "Added"
+#~ msgstr "Toegevoegd"
+
+#~ msgid "Integration with feedbackd."
+#~ msgstr "Integratie met feedbackd"
+
+#~ msgid "Showing profile names."
+#~ msgstr "Profielnamen worden weergegeven"
+
+#~ msgid "Copy action in message menu."
+#~ msgstr "Kopieeractie in berichtmenu"
+
+#~ msgid "Initial channel information dialog with identity reset."
+#~ msgstr "Initiële dialoog voor kanaalinfo met identiteitsreset"
+
+#~ msgid "Show offline status in GUI."
+#~ msgstr "Offline-status aan interface toegevoegd"
+
+#~ msgid "Changed"
+#~ msgstr "Gewijzigd"
+
+#~ msgid ""
+#~ "Notifications for group messages now display the name of the group "
+#~ "instead of just the name of the sender."
+#~ msgstr ""
+#~ "Meldingen voor groepsberichten tonen nu de groepsnaam naast de naam van "
+#~ "de verzender"
+
+#~ msgid "Messages must now be successfully sent before displaying in a chat."
+#~ msgstr ""
+#~ "Berichten moeten nu succesvol zijn verstuurd voor deze worden weergegeven "
+#~ "in een gesprek"
+
+#~ msgid "UI got revamped."
+#~ msgstr "Interface is vernieuwd"
+
+#~ msgid "Fixed"
+#~ msgstr "Foutoplossingen"
+
+#~ msgid "Fixed not setting revision for groups."
+#~ msgstr ""
+#~ "Fout waarbij herzieningen voor groepen niet werden ingesteld opgelost"
+
+#~ msgid "Prevent sending messages while offline."
+#~ msgstr "Voorkomen dat offline berichten worden verstuurd"
+
+#~ msgid "Chores"
+#~ msgstr "Klusjes"
+
+#~ msgid "Updated all dependencies."
+#~ msgstr "Alle afhankelijkheden bijgewerkt"
+
+#~ msgid "Ability to receive messages in the background."
+#~ msgstr "Mogelijkheid om berichten op de achtergrond te ontvangen"
+
+#~ msgid "Fixed memory leak."
+#~ msgstr "Geheugenlek opgelost"
+
+#~ msgid "HOTFIX:"
+#~ msgstr "HOTFIX"
+
+#~ msgid "Added:"
+#~ msgstr "Toegevoegd"
+
+#, fuzzy
+#~ msgid "Unlink without deleting messages."
+#~ msgstr "Ontkoppelen en berichten bewaren"
+
+#, fuzzy
+#~ msgid "Messages and notifications for calls."
+#~ msgstr "Leesbewijzen"
+
+#~ msgid "Fixed:"
+#~ msgstr "Foutoplossingen"
+
+#~ msgid "Chores:"
+#~ msgstr "Klusjes"
+
+#, fuzzy
+#~ msgid "Greatly refactored messages."
+#~ msgstr "Berichten verwijderen"
+
+#~ msgid "Contributing guidelines"
+#~ msgstr "Bijdrage-richtlijnen"
+
+#~ msgid "Changed:"
+#~ msgstr "Gewijzigd"
+
+#~ msgid "Notification support."
+#~ msgstr "Ondersteuning voor meldingen"
+
+#, fuzzy
+#~ msgid "New message storage backend."
+#~ msgstr "Berichtopslag"
+
+#~ msgid "BREAKING:"
+#~ msgstr "BREKEND"
+
+#~ msgid "Group storage."
+#~ msgstr "Groepsopslag"
+
+#, fuzzy
+#~ msgid "Search for the channel view."
+#~ msgstr "Kanalen doorzoeken"
+
+#~ msgid "Message storage."
+#~ msgstr "Berichtopslag"
+
+#~ msgid "Keyboard shortcuts."
+#~ msgstr "Sneltoetsen"
+
+#~ msgid "Initial Release."
+#~ msgstr "Initiële uitgave"
