@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-04 13:08+0200\n"
-"PO-Revision-Date: 2023-04-04 07:41+0000\n"
+"PO-Revision-Date: 2023-04-05 19:52+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
 "Language: nl\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Heimen Stoffels <vistausss@fastmail.com>\n"
-"Philip Goto <philip.goto@gmail.com>"
+"Philip Goto https://flipflop97.github.io/"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
@@ -39,12 +39,12 @@ msgstr "Bestand laden"
 #: data/resources/ui/attachment.ui:131
 msgctxt "accessibility"
 msgid "Open with…"
-msgstr ""
+msgstr "Openen met…"
 
 #: data/resources/ui/attachment.ui:147
 msgctxt "accessibility"
 msgid "Download"
-msgstr ""
+msgstr "Downloaden"
 
 #: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:162
 msgid "Channel Information"
@@ -218,7 +218,7 @@ msgstr "Reageren"
 
 #: data/resources/ui/message_item.ui:250
 msgid "Delete"
-msgstr ""
+msgstr "Verwijderen"
 
 #: data/resources/ui/message_item.ui:257
 msgid "Copy"
