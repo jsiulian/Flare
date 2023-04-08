@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.2] - 2023-04-08
+
 ### Added
 
 - Message deletion.
@@ -309,7 +311,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.7.1...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.7.2...master
+[0.7.2]: https://gitlab.com/Schmiddiii/flare/-/compare/0.7.1...0.7.2
 [0.7.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.7.0...0.7.1
 [0.7.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.6.0...0.7.0
 [0.6.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.5.6...0.6.0

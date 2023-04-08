@@ -65,6 +65,20 @@
     </p>
   </description>
   <releases>
+    <release version="v0.7.2" date="2023-04-08">
+      <description translate="no">
+        <p>Added</p>
+        <ul>
+          <li>Message deletion.</li>
+        </ul>
+        <p>Changed</p>
+        <ul>
+          <li>Updated application icon and emblem.</li>
+          <li>Don't receive messages from blocked contacts anymore.</li>
+        </ul>
+      </description>
+    </release>
+  <releases>
     <release version="v0.7.1" date="2023-04-01">
       <description translate="no">
         <p>HOTFIX</p>
