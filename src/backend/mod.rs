@@ -4,6 +4,7 @@ mod contact;
 mod manager;
 mod manager_thread;
 pub mod message;
+pub mod timeline;
 
 pub use attachment::Attachment;
 pub use channel::Channel;

@@ -77,11 +77,20 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkListBox" id="list">
-                        <signal handler="handle_row_activated" swapped="true" name="row-activated"/>
+                      <object class="GtkListView" id="list_view">
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
-                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="message-list"/>
+                        </style>
+
+                        <binding name="model">
+                          <closure function="no_selection" type="GtkSelectionModel">
+                            <lookup name="timeline">
+                              <lookup name="active-channel" type="FlChannelMessages"/>
+                            </lookup>
+                          </closure>
+                        </binding>
                       </object>
                     </child>
                   </object>
@@ -120,7 +129,7 @@
                   <lookup name="reply-message" type="FlChannelMessages"/>
                 </binding>
                 <property name="hexpand">True</property>
-                <property name="show-header">True</property>
+                <property name="force-show-header">True</property>
               </object>
             </child>
           </object>

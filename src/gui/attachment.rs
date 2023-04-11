@@ -55,7 +55,7 @@ pub mod imp {
         #[template_callback]
         fn load(&self, _: gtk::Button) {
             let obj = self.obj();
-            gspawn!(clone!(@strong obj => async move {
+            gspawn!(clone!(@weak obj => async move {
                 let attachment = obj.attachment();
                 attachment.load().await
             }));
@@ -119,7 +119,7 @@ pub mod imp {
                             log::trace!("User downloads attachment");
                             let file = chooser.file();
                             if let Some(file) = file {
-                                gspawn!(clone!(@strong attachment, @strong obj => async move {
+                                gspawn!(clone!(@weak attachment, @weak obj => async move {
                                     if let Err(e) = attachment.save_to_file(&file).await {
                                         let root = obj.imp().window();
                                         let dialog = ErrorDialog::new(e.into(), &root);

@@ -407,13 +407,12 @@ impl Manager {
         self.store()
             .contacts()
             .map(|i| {
-                i.inspect(|c| log::info!("Got {:#?}", c))
-                    .filter_map(|c| {
-                        c.ok()
-                            .filter(|c| !c.blocked && !c.archived)
-                            .map(|c| Contact::from_contact(c, self))
-                    })
-                    .collect()
+                i.filter_map(|c| {
+                    c.ok()
+                        .filter(|c| !c.blocked && !c.archived)
+                        .map(|c| Contact::from_contact(c, self))
+                })
+                .collect()
             })
             .unwrap_or_default()
     }

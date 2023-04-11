@@ -308,6 +308,7 @@ pub mod imp {
             crate::gui::channel_messages::ChannelMessages::ensure_type();
             crate::gui::link_window::LinkWindow::ensure_type();
             crate::gui::error_dialog::ErrorDialog::ensure_type();
+            crate::backend::timeline::TimelineItem::ensure_type();
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
         }

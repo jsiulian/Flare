@@ -4,6 +4,10 @@
   <requires lib="libadwaita" version="1.0"/>
 
   <template class="FlMessageItem" parent="GtkBox">
+    <style>
+      <class name="message-item"/>
+    </style>
+
     <property name="spacing">12</property>
     <property name="margin-top">3</property>
     <property name="margin-bottom">3</property>
@@ -19,7 +23,6 @@
     <!-- Avatar -->
     <child>
       <object class="AdwAvatar" id="avatar">
-        <property name="show-initials">True</property>
         <binding name="text">
           <lookup name="title">
             <lookup name="sender">
@@ -27,13 +30,14 @@
             </lookup>
           </lookup>
         </binding>
+        <property name="show-initials">True</property>
         <property name="valign">start</property>
         <property name="size">32</property>
       </object>
     </child>
 
     <child>
-      <object class="GtkBox" id="box">
+      <object class="GtkBox" id="message_box">
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <style>
@@ -73,7 +77,7 @@
                 </style>
                 <binding name="label">
                   <closure function="format_timestamp" type="gchararray">
-                    <lookup name="sent">
+                    <lookup name="timestamp">
                       <lookup name="message" type="FlMessageItem"/>
                     </lookup>
                   </closure>

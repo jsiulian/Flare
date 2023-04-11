@@ -1,10 +1,12 @@
+use crate::backend::timeline::{TimelineItem, TimelineItemImpl};
+
 use gdk::gdk_pixbuf::Pixbuf;
 use gtk::{gdk, gio, glib, prelude::*, subclass::prelude::*};
 
 use super::{Message, MessageExt, MessageImpl};
 
 glib::wrapper! {
-    pub struct DisplayMessage(ObjectSubclass<imp::DisplayMessage>) @extends Message;
+    pub struct DisplayMessage(ObjectSubclass<imp::DisplayMessage>) @extends Message, TimelineItem;
 }
 
 impl DisplayMessage {
@@ -20,11 +22,12 @@ impl DisplayMessage {
         let notification_body;
         if channel.group_context().is_some() {
             notification_title = channel.title().to_string();
-            notification_body = format!("{}: {}",
-                                        sender.title().to_string(),
-                                        body.as_ref().unwrap().to_string());
-        }
-        else {
+            notification_body = format!(
+                "{}: {}",
+                sender.title().to_string(),
+                body.as_ref().unwrap().to_string()
+            );
+        } else {
             notification_title = sender.title().to_string();
             notification_body = body.as_ref().unwrap().to_string();
         }
@@ -65,8 +68,8 @@ pub trait DisplayMessageImpl: ObjectImpl {
 
 unsafe impl<T> IsSubclassable<T> for DisplayMessage
 where
-    T: DisplayMessageImpl + MessageImpl,
-    T::Type: IsA<DisplayMessage>,
+    T: DisplayMessageImpl + MessageImpl + TimelineItemImpl,
+    T::Type: IsA<DisplayMessage> + IsA<Message> + IsA<TimelineItem>,
 {
     fn class_init(class: &mut glib::Class<Self>) {
         Self::parent_class_init::<T>(class.upcast_ref_mut());
@@ -99,7 +102,7 @@ mod imp {
 
     #[repr(C)]
     pub struct DisplayMessageClass {
-        pub parent_class: glib::object::ObjectClass,
+        pub parent_class: glib::Class<Message>,
         pub textual_description: fn(&super::DisplayMessage) -> Option<String>,
     }
 
@@ -145,6 +148,13 @@ mod imp {
                 "textual-description" => self.obj().textual_description().to_value(),
                 _ => unimplemented!(),
             }
+        }
+    }
+
+    impl TimelineItemImpl for DisplayMessage {
+        fn update_show_header(&self, obj: &Self::Type, previous: Option<&TimelineItem>) {
+            let upcast = obj.upcast_ref::<Message>();
+            upcast.imp().update_show_header(upcast, previous);
         }
     }
 

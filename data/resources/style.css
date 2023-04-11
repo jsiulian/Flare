@@ -1,4 +1,4 @@
-.channel-messages row:not(.has-header) {
+.message-list .message-item:not(.has-header) {
   margin-left: 44px;
 }
 

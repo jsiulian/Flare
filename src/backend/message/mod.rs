@@ -25,10 +25,14 @@ use std::cell::{RefCell, RefMut};
 
 use crate::backend::Channel;
 
-use super::{Contact, Manager};
+use super::{
+    timeline::{TimelineItem, TimelineItemImpl},
+    Contact, Manager,
+};
 
 glib::wrapper! {
-    pub struct Message(ObjectSubclass<imp::Message>);
+    pub struct Message(ObjectSubclass<imp::Message>)
+    @extends TimelineItem;
 }
 
 impl Message {
@@ -60,7 +64,7 @@ impl Message {
                     .property("manager", manager)
                     .property("sender", &contact)
                     .property("channel", &channel)
-                    .property("sent", &timestamp)
+                    .property("timestamp", &timestamp)
                     .build();
                 s.init_data(message, manager).await;
                 Some(s.upcast())
@@ -102,7 +106,7 @@ impl Message {
                     .property("manager", manager)
                     .property("sender", &contact)
                     .property("channel", &channel)
-                    .property("sent", &timestamp)
+                    .property("timestamp", &timestamp)
                     .build();
                 s.init_data(message, manager).await;
                 Some(s.upcast())
@@ -295,10 +299,6 @@ pub trait MessageExt: std::marker::Sized + glib::ObjectExt {
         self.property("channel")
     }
 
-    fn sent(&self) -> u64 {
-        self.property("sent")
-    }
-
     fn manager(&self) -> Manager {
         self.property("manager")
     }
@@ -307,17 +307,22 @@ pub trait MessageExt: std::marker::Sized + glib::ObjectExt {
 impl<O: IsA<Message>> MessageExt for O {}
 
 pub trait MessageImpl: ObjectImpl {}
-unsafe impl<T: MessageImpl> IsSubclassable<T> for Message {}
+
+unsafe impl<T> IsSubclassable<T> for Message
+where
+    T: MessageImpl + TimelineItemImpl,
+    T::Type: IsA<Message> + IsA<TimelineItem>,
+{
+}
 
 mod imp {
-    use std::cell::{Cell, RefCell};
+    use std::cell::RefCell;
 
     use glib::{
-        once_cell::sync::Lazy, subclass::types::ObjectSubclass, ParamSpec, ParamSpecObject,
-        ParamSpecUInt64, Value,
+        once_cell::sync::Lazy, subclass::types::ObjectSubclass, ParamSpec, ParamSpecObject, Value,
     };
 
-    use crate::backend::Manager;
+    use crate::backend::{timeline::TimelineItemExt, Manager};
 
     use super::*;
 
@@ -325,7 +330,6 @@ mod imp {
     pub struct Message {
         sender: RefCell<Option<Contact>>,
         channel: RefCell<Option<Channel>>,
-        sent: Cell<u64>,
 
         pub(super) data: RefCell<Option<DataMessage>>,
 
@@ -336,7 +340,7 @@ mod imp {
     impl ObjectSubclass for Message {
         const NAME: &'static str = "FlMessage";
         type Type = super::Message;
-        type ParentType = glib::Object;
+        type ParentType = TimelineItem;
     }
 
     impl ObjectImpl for Message {
@@ -352,7 +356,6 @@ mod imp {
                     ParamSpecObject::builder::<Channel>("channel")
                         .construct_only()
                         .build(),
-                    ParamSpecUInt64::builder("sent").construct_only().build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -363,7 +366,6 @@ mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "sender" => self.sender.borrow().as_ref().to_value(),
                 "channel" => self.channel.borrow().as_ref().to_value(),
-                "sent" => self.sent.get().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -391,14 +393,24 @@ mod imp {
 
                     self.channel.replace(Some(obj));
                 }
-                "sent" => {
-                    let obj = value
-                        .get::<u64>()
-                        .expect("Property `sent` of `Message` has to be of type `u64`");
-
-                    self.sent.set(obj);
-                }
                 _ => unimplemented!(),
+            }
+        }
+    }
+
+    // At least 4 minutes need to pass that for two messages from the same sender, the second one will
+    // also show avatar and sender title.
+    const MESSAGE_SENT_SHOW_NAME_DURATION: u64 = 4 * 60 * 1000;
+
+    impl TimelineItemImpl for Message {
+        fn update_show_header(&self, obj: &Self::Type, previous: Option<&TimelineItem>) {
+            if let Some(msg) = previous.and_then(|p| p.downcast_ref::<super::Message>()) {
+                obj.set_show_header(
+                    obj.sender().uuid() != msg.sender().uuid()
+                        || obj.timestamp() >= msg.timestamp() + MESSAGE_SENT_SHOW_NAME_DURATION,
+                );
+            } else {
+                obj.set_show_header(true);
             }
         }
     }

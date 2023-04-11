@@ -8,6 +8,7 @@ use gtk::{
 };
 
 use crate::backend::message::{MessageExt, TextMessage};
+use crate::backend::timeline::timeline_item::TimelineItemExt;
 use crate::backend::Manager;
 
 glib::wrapper! {
@@ -24,6 +25,7 @@ impl MessageItem {
             .property("message", message)
             .build();
         s.init_label_selectable();
+        s.setup_showheader();
         s
     }
 
@@ -69,6 +71,27 @@ impl MessageItem {
             .build();
     }
 
+    fn setup_click(&self) {
+        let gesture = gtk::GestureClick::new();
+        gesture.connect_released(clone!(@weak self as s => move |gesture, _, _, _| {
+            gesture.set_state(gtk::EventSequenceState::Claimed);
+            s.open_popup();
+        }));
+        self.imp().message_box.add_controller(gesture);
+    }
+
+    fn setup_showheader(&self) {
+        self.message().connect_notify_local(
+            Some("show-header"),
+            clone!(@weak self as s => move |_, _| s.set_show_header()),
+        );
+        self.connect_notify_local(
+            Some("force-show-header"),
+            clone!(@weak self as s => move |_, _| s.set_show_header()),
+        );
+        self.set_show_header();
+    }
+
     fn init_label_selectable(&self) {
         let manager = self.manager();
         let settings = manager.settings();
@@ -83,24 +106,17 @@ impl MessageItem {
         self.imp().msg_menu.popup();
     }
 
-    pub fn show_header(&self) -> bool {
-        let imp = self.imp();
-        imp.avatar.is_visible() && imp.header.is_visible()
-    }
-
     /// Set whether this item should show its header.
-    pub fn set_show_header(&self, visible: bool) {
-        let imp = self.imp();
+    pub fn set_show_header(&self) {
+        let visible = self.message().show_header() || self.property("force-show-header");
 
-        imp.avatar.set_visible(visible);
-        imp.header.set_visible(visible);
+        self.imp().avatar.set_visible(visible);
+        self.imp().header.set_visible(visible);
 
-        if let Some(list_item) = self.parent() {
-            if visible && !list_item.has_css_class("has-header") {
-                list_item.add_css_class("has-header");
-            } else if !visible && list_item.has_css_class("has-header") {
-                list_item.remove_css_class("has-header");
-            }
+        if visible && !self.has_css_class("has-header") {
+            self.add_css_class("has-header");
+        } else if !visible && self.has_css_class("has-header") {
+            self.remove_css_class("has-header");
         }
     }
 }
@@ -108,7 +124,7 @@ impl MessageItem {
 pub mod imp {
     use lazy_static::lazy_static;
     use regex::Regex;
-    use std::cell::RefCell;
+    use std::cell::{Cell, RefCell};
 
     use glib::{
         clone,
@@ -140,10 +156,14 @@ pub mod imp {
         box_attachments: TemplateChild<gtk::Box>,
         #[template_child]
         pub(super) label_message: TemplateChild<gtk::Label>,
+        #[template_child]
+        pub(super) message_box: TemplateChild<gtk::Box>,
 
         message: RefCell<Option<TextMessage>>,
 
         manager: RefCell<Option<Manager>>,
+
+        force_show_header: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -241,6 +261,7 @@ pub mod imp {
         fn constructed(&self) {
             self.parent_constructed();
             self.obj().setup_actions();
+            self.obj().setup_click();
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -250,7 +271,7 @@ pub mod imp {
                         .construct_only()
                         .build(),
                     ParamSpecObject::builder::<TextMessage>("message").build(),
-                    ParamSpecBoolean::builder("show-header")
+                    ParamSpecBoolean::builder("force-show-header")
                         .default_value(true)
                         .build(),
                     ParamSpecBoolean::builder("has-reaction")
@@ -265,7 +286,6 @@ pub mod imp {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "message" => self.message.borrow().as_ref().to_value(),
-                "show-header" => self.obj().show_header().to_value(),
                 "has-reaction" => self
                     .message
                     .borrow()
@@ -273,6 +293,7 @@ pub mod imp {
                     .map(|m| !m.reactions().is_empty())
                     .unwrap_or_default()
                     .to_value(),
+                "force-show-header" => self.force_show_header.get().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -312,7 +333,12 @@ pub mod imp {
                     instance.notify("has-reaction");
                     self.message.replace(msg);
                 }
-                "show-header" => self.obj().set_show_header(value.get().unwrap()),
+                "force-show-header" => {
+                    let b = value.get::<bool>().expect(
+                        "Property `force-show-header` of `MessageItem` has to be of type `bool`",
+                    );
+                    self.force_show_header.replace(b);
+                }
                 _ => unimplemented!(),
             }
         }

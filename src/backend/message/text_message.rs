@@ -8,12 +8,13 @@ use libsignal_service::proto::data_message::Delete;
 use presage::prelude::content::Reaction;
 use presage::prelude::{proto::data_message::Quote, *};
 
+use crate::backend::timeline::{TimelineItem, TimelineItemExt};
 use crate::backend::{Attachment, Channel, Contact};
 
 use super::{DisplayMessage, Manager, Message, MessageExt};
 
 gtk::glib::wrapper! {
-    pub struct TextMessage(ObjectSubclass<imp::TextMessage>) @extends Message, DisplayMessage;
+    pub struct TextMessage(ObjectSubclass<imp::TextMessage>) @extends Message, DisplayMessage, TimelineItem;
 }
 
 impl TextMessage {
@@ -70,7 +71,7 @@ impl TextMessage {
             .property("manager", manager)
             .property("channel", &channel)
             .property("sender", &sender)
-            .property("sent", &timestamp)
+            .property("timestamp", &timestamp)
             .build();
 
         let text_owned = text.as_ref().to_owned();
@@ -87,6 +88,7 @@ impl TextMessage {
         };
 
         s.set_internal_data(Some(message));
+        log::info!("Just created TextMessage has {} references.", s.ref_count());
         s
     }
 
@@ -109,7 +111,7 @@ impl TextMessage {
         if let Some(mut data) = self.internal_data_mut().as_mut() {
             let sender = msg.sender().address();
             data.quote = Some(Quote {
-                id: Some(msg.sent()),
+                id: Some(msg.timestamp()),
                 author_uuid: sender.as_ref().map(|a| a.uuid).map(|u| u.to_string()),
                 text: msg.body(),
                 ..Default::default()
@@ -124,9 +126,9 @@ impl TextMessage {
     }
 
     pub async fn delete(&self) -> Result<(), crate::ApplicationError> {
-        crate::trace!("Delete a message with timestamp: {}", self.sent());
+        crate::trace!("Delete a message with timestamp: {}", self.timestamp());
         let delete = Delete {
-            target_sent_timestamp: Some(self.sent()),
+            target_sent_timestamp: Some(self.timestamp()),
         };
 
         let timestamp = std::time::SystemTime::now()
@@ -171,7 +173,7 @@ impl TextMessage {
                 .address()
                 .map(|a| a.uuid)
                 .map(|u| u.to_string()),
-            target_sent_timestamp: Some(self.sent()),
+            target_sent_timestamp: Some(self.timestamp()),
         };
 
         let timestamp = std::time::SystemTime::now()
@@ -224,17 +226,21 @@ mod imp {
     use gdk::gdk_pixbuf::prelude::ToValue;
     use gdk::glib::ParamSpecBoolean;
     use gdk::prelude::ParamSpecBuilderExt;
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
+    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassIsExt};
     use glib::{
         once_cell::sync::Lazy, subclass::prelude::ObjectSubclassExt, ParamSpec, ParamSpecObject,
         ParamSpecString, Value,
     };
-    use gtk::glib;
+    use gtk::{glib, prelude::Cast};
     use std::cell::RefCell;
 
     use crate::backend::{
         message::{display_message::DisplayMessageImpl, DisplayMessage, MessageExt, MessageImpl},
         Attachment,
+    };
+    use crate::backend::{
+        timeline::{TimelineItem, TimelineItemImpl},
+        Message,
     };
 
     #[derive(Default)]
@@ -253,6 +259,13 @@ mod imp {
         const NAME: &'static str = "FlTextMessage";
         type Type = super::TextMessage;
         type ParentType = DisplayMessage;
+    }
+
+    impl TimelineItemImpl for TextMessage {
+        fn update_show_header(&self, obj: &Self::Type, previous: Option<&TimelineItem>) {
+            let upcast = obj.upcast_ref::<Message>();
+            upcast.imp().update_show_header(upcast, previous);
+        }
     }
 
     impl DisplayMessageImpl for TextMessage {

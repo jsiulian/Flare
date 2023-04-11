@@ -88,7 +88,7 @@ pub mod imp {
     };
 
     use crate::{
-        backend::{message::MessageExt, Channel, Manager},
+        backend::{timeline::timeline_item::TimelineItemExt, Channel, Manager},
         gui::{channel_item::ChannelItem, utility::Utility},
     };
 
@@ -183,8 +183,8 @@ pub mod imp {
                 } else if m1.is_none() && m2.is_some() {
                     return gtk::Ordering::Larger;
                 } else if let (Some(m1), Some(m2)) = (m1, m2) {
-                    let s1 = m1.sent();
-                    let s2 = m2.sent();
+                    let s1 = m1.timestamp();
+                    let s2 = m2.timestamp();
                     if s1 > s2 {
                         return gtk::Ordering::Smaller;
                     } else {

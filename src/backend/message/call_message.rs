@@ -1,3 +1,4 @@
+use crate::backend::timeline::TimelineItem;
 use std::cell::RefCell;
 
 use gdk::prelude::ObjectExt;
@@ -44,7 +45,7 @@ impl TryFrom<&PreCallMessage> for CallMessageType {
 }
 
 gtk::glib::wrapper! {
-    pub struct CallMessage(ObjectSubclass<imp::CallMessage>) @extends Message, DisplayMessage;
+    pub struct CallMessage(ObjectSubclass<imp::CallMessage>) @extends Message, DisplayMessage, TimelineItem;
 }
 
 impl CallMessage {
@@ -59,7 +60,7 @@ impl CallMessage {
         let s: Self = Object::builder::<Self>()
             .property("sender", sender)
             .property("channel", channel)
-            .property("sent", &timestamp)
+            .property("timestamp", &timestamp)
             .property("manager", manager)
             .property("call-type", &call_type)
             .build();
@@ -73,7 +74,7 @@ impl CallMessage {
 }
 
 mod imp {
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
+    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassIsExt};
     use gdk::{
         gdk_pixbuf::{
             glib::{once_cell::sync::Lazy, ParamSpec, Value},
@@ -82,13 +83,15 @@ mod imp {
         prelude::ParamSpecBuilderExt,
     };
     use glib::ParamSpecEnum;
-    use gtk::glib;
+    use gtk::{glib, prelude::Cast};
     use presage::prelude::content::CallMessage as PreCallMessage;
     use std::cell::RefCell;
 
     use crate::backend::message::{
         display_message::DisplayMessageImpl, DisplayMessage, MessageImpl,
     };
+    use crate::backend::timeline::{TimelineItem, TimelineItemImpl};
+    use crate::backend::Message;
 
     use super::CallMessageType;
 
@@ -116,6 +119,14 @@ mod imp {
             }
         }
     }
+
+    impl TimelineItemImpl for CallMessage {
+        fn update_show_header(&self, obj: &Self::Type, previous: Option<&TimelineItem>) {
+            let upcast = obj.upcast_ref::<Message>();
+            upcast.imp().update_show_header(upcast, previous);
+        }
+    }
+
     impl MessageImpl for CallMessage {}
 
     impl ObjectImpl for CallMessage {

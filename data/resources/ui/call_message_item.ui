@@ -73,7 +73,7 @@
         </style>
         <binding name="label">
           <closure function="format_timestamp" type="gchararray">
-            <lookup name="sent">
+            <lookup name="timestamp">
               <lookup name="message" type="FlMessageItem"/>
             </lookup>
           </closure>
