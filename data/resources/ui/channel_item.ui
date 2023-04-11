@@ -108,7 +108,7 @@
         </style>
         <binding name="label">
           <closure function="format_timestamp" type="gchararray">
-            <lookup name="sent">
+            <lookup name="timestamp">
               <lookup name="last-message">
                 <lookup name="channel" type="FlChannelItem"/>
               </lookup>

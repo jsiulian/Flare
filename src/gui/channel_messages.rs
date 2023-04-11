@@ -1,9 +1,16 @@
+use gdk::glib::clone;
+use gdk::prelude::Cast;
 use gdk::subclass::prelude::ObjectSubclassIsExt;
 use glib::ObjectExt;
-use gtk::traits::WidgetExt;
+use gtk::traits::{AdjustmentExt, WidgetExt};
 use gtk::{gdk, glib};
 
+use crate::backend::message::CallMessage;
+use crate::backend::timeline::TimelineItem;
 use crate::backend::{message::TextMessage, Channel, Manager};
+
+use super::call_message_item::CallMessageItem;
+use super::message_item::MessageItem;
 
 glib::wrapper! {
     pub struct ChannelMessages(ObjectSubclass<imp::ChannelMessages>)
@@ -36,36 +43,79 @@ impl ChannelMessages {
     pub fn active_channel(&self) -> Option<Channel> {
         self.property("active-channel")
     }
+
+    pub fn sticky(&self) -> bool {
+        self.property("sticky")
+    }
+
+    pub fn set_sticky(&self, val: bool) {
+        self.set_property("sticky", val)
+    }
+
+    fn setup_autoscroll(&self) {
+        let adj = self.imp().scrolled_window.vadjustment();
+        adj.connect_value_changed(clone!(@weak self as s => move |adj| {
+            s.set_sticky(adj.value() + adj.page_size() >= adj.upper());
+        }));
+        adj.connect_upper_notify(clone!(@weak self as s => move |_adj| {
+            if s.sticky() {
+                s.scroll_down();
+            }
+        }));
+    }
+
+    fn scroll_down(&self) {
+        self.imp()
+            .scrolled_window
+            .emit_by_name::<bool>("scroll-child", &[&gtk::ScrollType::End, &false]);
+    }
+
+    fn timeline_item_to_widget(&self, item: &TimelineItem) -> Option<gtk::Widget> {
+        if let Some(message) = item.dynamic_cast_ref::<TextMessage>() {
+            let widget = MessageItem::new(message);
+            widget.connect_local(
+                "reply",
+                false,
+                clone!(@strong self as s => move |args| {
+                    let msg = args[1]
+                        .get::<TextMessage>()
+                        .expect("Type of signal `reply` of `MessageItem` to be `TextMessage`.");
+                    s.set_reply_message(&Some(msg));
+                    None
+                }),
+            );
+            Some(widget.dynamic_cast().unwrap())
+        } else if let Some(message) = item.dynamic_cast_ref::<CallMessage>() {
+            let widget = CallMessageItem::new(message);
+            Some(widget.dynamic_cast().unwrap())
+        } else {
+            log::warn!("`ChannelMessages` was asked to display an unknown `TimelineItem`");
+            None
+        }
+    }
 }
 
 pub mod imp {
-
-    // At least 4 minutes need to pass that for two messages from the same sender, the second one will
-    // also show avatar and sender title.
-    const MESSAGE_SENT_SHOW_NAME_DURATION: u64 = 4 * 60 * 1000;
-
-    use std::{cell::RefCell, time::Duration};
+    use std::cell::{Cell, RefCell};
 
     use gio::Settings;
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecBoolean,
-        ParamSpecObject, SignalHandlerId, Value,
+        ParamSpecObject, Value,
     };
-    use gtk::{gio, glib, FileChooserNative};
+    use gtk::{gio, glib, FileChooserNative, SignalListItemFactory};
     use gtk::{
         prelude::*, subclass::prelude::*, CompositeTemplate, FileChooserAction, ResponseType,
     };
 
+    use crate::backend::timeline::{Timeline, TimelineItem};
     use crate::{
-        backend::{
-            message::{CallMessage, DisplayMessage, MessageExt, TextMessage},
-            Channel, Manager,
-        },
+        backend::{message::TextMessage, Channel, Manager},
         config::APP_ID,
         gspawn,
         gui::{
-            attachment::Attachment, call_message_item::CallMessageItem, error_dialog::ErrorDialog,
-            message_item::MessageItem, text_entry::TextEntry, utility::Utility,
+            attachment::Attachment, error_dialog::ErrorDialog, message_item::MessageItem,
+            text_entry::TextEntry, utility::Utility,
         },
     };
 
@@ -73,20 +123,21 @@ pub mod imp {
     #[template(resource = "/ui/channel_messages.ui")]
     pub struct ChannelMessages {
         #[template_child]
-        pub(super) list: TemplateChild<gtk::ListBox>,
-        #[template_child]
         pub(super) scrolled_window: TemplateChild<gtk::ScrolledWindow>,
         #[template_child]
         box_attachments: TemplateChild<gtk::Box>,
         #[template_child]
         pub(super) text_entry: TemplateChild<TextEntry>,
+        #[template_child]
+        pub(super) list_view: TemplateChild<gtk::ListView>,
 
         attachments: RefCell<Vec<crate::backend::Attachment>>,
         reply_message: RefCell<Option<TextMessage>>,
 
         manager: RefCell<Option<Manager>>,
         active_channel: RefCell<Option<Channel>>,
-        last_signal_handler: RefCell<Option<SignalHandlerId>>,
+
+        sticky: Cell<bool>,
 
         pub(super) settings: Settings,
     }
@@ -94,15 +145,15 @@ pub mod imp {
     impl Default for ChannelMessages {
         fn default() -> Self {
             Self {
-                list: Default::default(),
                 scrolled_window: Default::default(),
                 box_attachments: Default::default(),
                 text_entry: Default::default(),
                 attachments: Default::default(),
                 reply_message: Default::default(),
+                list_view: Default::default(),
                 manager: Default::default(),
                 active_channel: Default::default(),
-                last_signal_handler: Default::default(),
+                sticky: Default::default(),
                 settings: Settings::new(APP_ID),
             }
         }
@@ -110,6 +161,11 @@ pub mod imp {
 
     #[gtk::template_callbacks]
     impl ChannelMessages {
+        #[template_callback(function)]
+        fn no_selection(timeline: Option<Timeline>) -> gtk::SelectionModel {
+            gtk::NoSelection::new(timeline).into()
+        }
+
         #[template_callback]
         pub(super) fn handle_more(&self) {
             log::trace!("More messages were requested in the UI");
@@ -117,12 +173,8 @@ pub mod imp {
             if let Some(channel) = channel.as_ref() {
                 let obj = self.obj();
                 let to_load = self.settings.int("messages-request-load");
-                gspawn!(glib::clone!(@strong channel, @strong obj => async move {
-                    let mut msgs = channel.load_last(to_load.try_into().unwrap_or(1)).await;
-                    msgs.reverse();
-                    for msg in msgs {
-                        obj.imp().prepend_message(&msg);
-                    }
+                gspawn!(glib::clone!(@weak channel, @weak obj => async move {
+                    channel.load_last(to_load.try_into().unwrap_or(1)).await;
                 }));
             } else {
                 log::warn!("More messages were requested while not being focused on a channel. This should not happen.");
@@ -189,7 +241,7 @@ pub mod imp {
                 .action(FileChooserAction::Open)
                 .build();
             let obj = self.obj();
-            chooser.connect_response(clone!(@strong chooser, @strong obj => move |_, action| {
+            chooser.connect_response(clone!(@weak chooser, @weak obj => move |_, action| {
                 if action == ResponseType::Accept {
                     log::trace!("User added an attachment");
                     let file = chooser.file();
@@ -244,7 +296,7 @@ pub mod imp {
 
                 let obj = self.obj();
                 gspawn!(
-                    clone!(@strong msg, @strong channel, @strong attachments, @strong obj => async move {
+                    clone!(@weak msg, @weak channel, @strong attachments, @weak obj => async move {
                         log::trace!("Adding attachments to message: {}", attachments.len());
                         for att in attachments {
                             if let Err(e) = msg.add_attachment(att).await {
@@ -290,107 +342,23 @@ pub mod imp {
     }
 
     impl ChannelMessages {
-        fn reset_messages(&self) {
-            self.obj().set_reply_message(&None);
-            while let Some(child) = self.list.first_child() {
-                self.list.remove(&child);
-            }
-        }
-
-        fn add_all_messages(&self, messages: impl IntoIterator<Item = DisplayMessage> + 'static) {
-            gspawn!(clone!(@weak self as s => async move {
-                for m in messages {
-                    s.add_message(&m);
-                    // Give the GUI some time to show the message.
-                    glib::timeout_future(Duration::from_millis(5)).await;
-                }
+        fn construct_list_view(&self) {
+            let obj = self.obj();
+            let factory = SignalListItemFactory::new();
+            factory.connect_bind(clone!(@weak obj => move |_, object| {
+                let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
+                let list_item_item = list_item.item();
+                let timeline_item = list_item_item
+                    .and_downcast_ref::<TimelineItem>()
+                    .expect("'Timeline' to only contain 'TimelineItem's");
+                list_item.set_child(obj.timeline_item_to_widget(timeline_item).as_ref());
             }));
-        }
+            factory.connect_unbind(move |_, object| {
+                let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
+                list_item.set_child(None::<&gtk::Label>);
+            });
 
-        fn add_message(&self, message: &DisplayMessage) {
-            let obj = self.obj();
-            if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
-                let widget = MessageItem::new(message);
-                self.list.append(&widget);
-                self.update_show_name_of(&widget);
-                widget.connect_local(
-                    "reply",
-                    false,
-                    clone!(@strong obj => move |args| {
-                        let msg = args[1]
-                            .get::<TextMessage>()
-                            .expect("Type of signal `reply` of `MessageItem` to be `TextMessage`.");
-                        obj.set_reply_message(&Some(msg));
-                        None
-                    }),
-                );
-            } else if let Some(message) = message.dynamic_cast_ref::<CallMessage>() {
-                let widget = CallMessageItem::new(message);
-                self.list.append(&widget);
-            } else {
-                log::warn!("`ChannelMessages` was asked to display an unknown `DisplayMessage`");
-            }
-
-            // Scroll to bottom
-            gspawn!(clone!(@strong obj => async move  {
-                // Need to sleep a little to make sure the scrolled window saw the changed
-                // child.
-                glib::timeout_future(Duration::from_millis(50)).await;
-                let adjustment = obj.imp().scrolled_window.vadjustment();
-                adjustment.set_value(adjustment.upper());
-            }));
-        }
-
-        fn update_show_name_of(&self, widget: &MessageItem) {
-            let obj = self.obj();
-            let message: DisplayMessage = widget.message().upcast();
-            let message_sender_title = message.sender().title();
-            let last_message = obj
-                .active_channel()
-                .and_then(|c| c.previous_message_to(&message));
-            let last_message_sender_title = last_message.as_ref().map(|m| m.sender().title());
-            let sent = message.sent();
-            let last_message_sent = last_message.map(|m| m.sent()).unwrap_or_default();
-            widget.set_property(
-                "show-header",
-                last_message_sender_title != Some(message_sender_title)
-                    || sent > last_message_sent + MESSAGE_SENT_SHOW_NAME_DURATION,
-            );
-        }
-
-        fn prepend_message(&self, message: &DisplayMessage) {
-            let obj = self.obj();
-            if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
-                let widget = MessageItem::new(message);
-                self.list.insert(&widget, 0);
-                self.update_show_name_of(&widget);
-                widget.connect_local(
-                    "reply",
-                    false,
-                    clone!(@strong obj => move |args| {
-                        let msg = args[1]
-                            .get::<TextMessage>()
-                            .expect("Type of signal `reply` of `MessageItem` to be `TextMessage`.");
-                        obj.set_reply_message(&Some(msg));
-                        None
-                    }),
-                );
-            } else if let Some(message) = message.dynamic_cast_ref::<CallMessage>() {
-                let widget = CallMessageItem::new(message);
-                self.list.insert(&widget, 0);
-            } else {
-                log::warn!("`ChannelMessages` was asked to display an unknown `DisplayMessage`");
-            }
-
-            if let Some(previous_first) = self.list.row_at_index(1) {
-                if let Some(previous_first) = previous_first
-                    .child()
-                    .expect("Message list row to have a child")
-                    .dynamic_cast_ref::<MessageItem>()
-                {
-                    self.update_show_name_of(previous_first);
-                }
-            }
+            self.list_view.set_factory(Some(&factory));
         }
     }
 
@@ -422,6 +390,8 @@ pub mod imp {
                     obj.obj().set_reply_message(&None);
                 }),
             );
+            self.obj().setup_autoscroll();
+            self.construct_list_view();
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -431,6 +401,9 @@ pub mod imp {
                     ParamSpecObject::builder::<Channel>("active-channel").build(),
                     ParamSpecObject::builder::<TextMessage>("reply-message").build(),
                     ParamSpecBoolean::builder("has-attachments").build(),
+                    ParamSpecBoolean::builder("sticky")
+                        .default_value(true)
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -442,6 +415,7 @@ pub mod imp {
                 "active-channel" => self.active_channel.borrow().as_ref().to_value(),
                 "reply-message" => self.reply_message.borrow().as_ref().to_value(),
                 "has-attachments" => (!self.attachments.borrow().is_empty()).to_value(),
+                "sticky" => self.sticky.get().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -458,27 +432,9 @@ pub mod imp {
                     let chan = value.get::<Option<Channel>>().expect(
                         "Property `active-channel` of `ChannelMessages` has to be of type `Channel`",
                     );
-                    self.reset_messages();
-                    let previous_channel = self.active_channel.replace(chan.clone());
-                    if let Some(channel) = &chan {
-                        self.add_all_messages(channel.messages());
-
-                        let mut signal_handler = self.last_signal_handler.borrow_mut();
-                        if let Some(sig) = signal_handler.take() {
-                            glib::signal::signal_handler_disconnect(
-                                previous_channel
-                                    .as_ref()
-                                    .expect("A `active-channel` of `ChannelMessages`"),
-                                sig,
-                            );
-                        }
-                        signal_handler.replace(
-                                channel.connect_local("message", false, clone!(@weak self as obj  => @default-return None, move |args| {
-                                    let msg = args[1].get::<DisplayMessage>().expect("Type of signal `message` of `Channel` to be `DisplayMessage`");
-                                    obj.add_message(&msg);
-                                    None
-                                }))
-                        );
+                    let old = self.active_channel.replace(chan);
+                    if let Some(old) = old {
+                        old.trim_old();
                     }
                 }
                 "reply-message" => {
@@ -486,6 +442,12 @@ pub mod imp {
                         "Property `reply-message` of `ChannelMessages` has to be of type `TextMessage`",
                     );
                     self.reply_message.replace(msg);
+                }
+                "sticky" => {
+                    let s = value
+                        .get::<bool>()
+                        .expect("Property `sticky` of `ChannelMessages` has to be of type `bool`");
+                    self.sticky.replace(s);
                 }
                 _ => unimplemented!(),
             }

@@ -6,12 +6,12 @@ use gtk::{gio, glib};
 use presage::prelude::content::Reaction;
 use presage::prelude::*;
 
-use crate::backend::{Channel, Contact};
+use crate::backend::{timeline::TimelineItem, Channel, Contact};
 
 use super::{Manager, Message};
 
 gtk::glib::wrapper! {
-    pub struct ReactionMessage(ObjectSubclass<imp::ReactionMessage>) @extends Message;
+    pub struct ReactionMessage(ObjectSubclass<imp::ReactionMessage>) @extends Message, TimelineItem;
 }
 
 impl ReactionMessage {
@@ -25,7 +25,7 @@ impl ReactionMessage {
         let s: Self = Object::builder::<Self>()
             .property("sender", sender)
             .property("channel", channel)
-            .property("sent", &timestamp)
+            .property("timestamp", &timestamp)
             .property("manager", manager)
             .build();
         s.imp().reaction.swap(&RefCell::new(Some(reaction)));
@@ -59,7 +59,7 @@ mod imp {
     use presage::prelude::content::Reaction;
     use std::cell::RefCell;
 
-    use crate::backend::{message::MessageImpl, Message};
+    use crate::backend::{message::MessageImpl, timeline::TimelineItemImpl, Message};
 
     #[derive(Default)]
     pub struct ReactionMessage {
@@ -72,6 +72,8 @@ mod imp {
         type Type = super::ReactionMessage;
         type ParentType = Message;
     }
+
+    impl TimelineItemImpl for ReactionMessage {}
 
     impl MessageImpl for ReactionMessage {}
 

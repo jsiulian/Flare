@@ -15,7 +15,10 @@ use presage::{
 };
 
 use crate::{
-    backend::message::{DisplayMessage, MessageExt, TextMessage},
+    backend::{
+        message::{DisplayMessage, MessageExt, TextMessage},
+        timeline::{TimelineItem, TimelineItemExt},
+    },
     ApplicationError,
 };
 
@@ -110,16 +113,18 @@ impl Channel {
         self.property("title")
     }
 
-    #[async_recursion::async_recursion(?Send)]
-    pub async fn load_last(&self, number: usize) -> Vec<DisplayMessage> {
+    pub async fn load_last(&self, number: usize) {
         if let Some(thread) = self.thread() {
             let mut results = vec![];
             let manager = self.manager();
-            let messages_unborrowed = &self.imp().messages;
-            let first_timestamp = {
-                let msgs = messages_unborrowed.borrow();
-                msgs.get(0).map(|m| m.sent() - 1)
-            };
+            let first_timestamp = self
+                .imp()
+                .timeline
+                .borrow()
+                .iter_forwards()
+                .filter(|i| i.is::<DisplayMessage>())
+                .map(|m| m.timestamp())
+                .next();
             crate::trace!(
                 "Loading {} last messages for channel: {} (Thread: {:?}). Needed earlier then {:?}",
                 number,
@@ -129,19 +134,16 @@ impl Channel {
             );
             let iter = manager.messages(&thread, first_timestamp);
             if iter.is_err() {
-                return vec![];
+                log::error!("Failed to load last messages: {}", iter.err().unwrap());
+                return;
             }
             for content in iter.unwrap() {
                 let msg = Message::from_content(content, &manager).await;
                 if let Some(msg) = msg {
                     if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
-                        {
-                            let mut messages = messages_unborrowed.borrow_mut();
-                            messages.insert(0, msg.clone());
-                        }
                         results.insert(0, msg.clone());
-                        self.notify("last-message");
                     }
+
                     let _ = self.do_new_message(&msg).await;
                 }
 
@@ -149,10 +151,22 @@ impl Channel {
                     break;
                 }
             }
-            results
-        } else {
-            vec![]
+
+            self.imp().timeline.borrow().prepend(
+                results
+                    .into_iter()
+                    .map(|i| {
+                        i.dynamic_cast::<TimelineItem>()
+                            .expect("A 'DisplayMessage' to be a 'TimelineItem'")
+                    })
+                    .collect(),
+            );
+            self.notify("last-message");
         }
+    }
+
+    pub fn trim_old(&self) {
+        self.imp().timeline.borrow().trim_old()
     }
 
     pub(super) fn internal_hash(&self) -> u64 {
@@ -212,7 +226,7 @@ impl Channel {
                         }
                     }
                 }
-                let id = message.sent();
+                let id = message.timestamp();
                 if let Some(reactions) = self.imp().pending_reactions.borrow_mut().remove(&id) {
                     log::trace!("Adding pending reactions to message: {}", reactions);
                     message.react(reactions);
@@ -230,10 +244,19 @@ impl Channel {
                 self.title(),
                 &reaction_emoji
             );
+
+            if reaction.target_sent_timestamp.is_none() {
+                log::warn!("Got reaction message but without a sent timestamp. Aborting reaction");
+                return Ok(());
+            }
+
             let reacted_msg = self
-                .messages()
-                .into_iter()
-                .find(|m| Some(m.sent()) == reaction.target_sent_timestamp);
+                .imp()
+                .timeline
+                .borrow()
+                .get_by_timestamp(reaction.target_sent_timestamp.unwrap())
+                .and_then(|o| o.dynamic_cast::<DisplayMessage>().ok());
+
             if let Some(reacted_msg) = reacted_msg {
                 if let Some(reacted_msg) = reacted_msg.dynamic_cast_ref::<TextMessage>() {
                     crate::trace!(
@@ -269,10 +292,18 @@ impl Channel {
                 self.title(),
                 &deletion.target_sent_timestamp()
             );
+
+            if deletion.target_sent_timestamp.is_none() {
+                log::warn!("Got deletion message but without a sent timestamp. Aborting deletion.");
+                return Ok(());
+            }
+
             let deleted_msg = self
-                .messages()
-                .into_iter()
-                .find(|m| Some(m.sent()) == deletion.target_sent_timestamp);
+                .imp()
+                .timeline
+                .borrow()
+                .get_by_timestamp(deletion.target_sent_timestamp.unwrap())
+                .and_then(|o| o.dynamic_cast::<DisplayMessage>().ok());
             if let Some(deleted_msg) = deleted_msg {
                 if let Some(deleted_msg) = deleted_msg.dynamic_cast_ref::<TextMessage>() {
                     crate::trace!(
@@ -299,27 +330,15 @@ impl Channel {
     ) -> Result<(), gtk::glib::error::BoolError> {
         log::trace!("Adding new message to channel");
 
-        // Check if message is duplicate
-        if self.messages().iter().rev().any(|m| {
-            message.sent() == m.sent()
-                && message.sender().address().map(|a| a.uuid)
-                    == m.sender().address().map(|a| a.uuid)
-        }) {
-            crate::info!(
-                "Channel {} got a duplicate message. Ignoring the second one.",
-                self.title()
-            );
-            return Ok(());
-        }
-
         self.do_new_message(&message).await?;
         if let Some(message) = message.dynamic_cast_ref::<DisplayMessage>() {
-            let mut msgs = self.imp().messages.borrow_mut();
-            let insert_pos = msgs
-                .binary_search_by_key(&message.sent(), |m| m.sent())
-                .expect_err("Message already exists in binary search, but did not exist before");
-            msgs.insert(insert_pos, message.clone());
-            drop(msgs);
+            self.imp().timeline.borrow().append(
+                message
+                    .clone()
+                    .dynamic_cast::<TimelineItem>()
+                    .expect("A 'DisplayMessage' to be a 'TimelineItem'"),
+            );
+
             self.notify("last-message");
             message.send_notification();
             self.emit_by_name::<()>("message", &[&message]);
@@ -330,20 +349,8 @@ impl Channel {
     }
 
     pub fn messages(&self) -> Vec<DisplayMessage> {
-        self.imp().messages.borrow().clone()
-    }
-
-    pub fn previous_message_to(&self, msg: &DisplayMessage) -> Option<DisplayMessage> {
-        let messages = self.messages();
-        let idx = messages.iter().position(|m| {
-            m.sent() == msg.sent()
-                && m.property::<Option<String>>("body") == msg.property::<Option<String>>("body")
-        })?;
-        if idx == 0 {
-            None
-        } else {
-            Some(messages[idx - 1].clone())
-        }
+        // self.imp().messages.borrow().clone()
+        vec![]
     }
 
     pub(super) async fn send_internal_message(
@@ -379,15 +386,19 @@ impl Channel {
             msg.property::<Option<String>>("body")
                 .unwrap_or_else(|| "(empty)".to_owned()),
             self.title(),
-            msg.sent()
+            msg.timestamp()
         );
         if let Some(data) = msg.internal_data() {
-            self.send_internal_message(data, msg.sent()).await?;
+            self.send_internal_message(data, msg.timestamp()).await?;
         }
 
         log::trace!("Inserting successfully sent message to message list");
         if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
-            self.imp().messages.borrow_mut().push(msg.clone());
+            self.imp().timeline.borrow().append(
+                msg.clone()
+                    .dynamic_cast::<TimelineItem>()
+                    .expect("A 'DisplayMessage' to be a 'TimelineItem'"),
+            );
         }
 
         self.notify("last-message");
@@ -410,6 +421,7 @@ mod imp {
 
     use crate::backend::{
         message::{DisplayMessage, TextMessage},
+        timeline::Timeline,
         Contact, Manager,
     };
 
@@ -420,7 +432,7 @@ mod imp {
         pub(super) group_context: RefCell<Option<GroupContextV2>>,
 
         pub(super) manager: RefCell<Option<Manager>>,
-        pub(super) messages: RefCell<Vec<DisplayMessage>>,
+        pub(super) timeline: RefCell<Timeline>,
         pub(super) pending_reactions: RefCell<HashMap<u64, String>>,
     }
 
@@ -464,6 +476,9 @@ mod imp {
                     ParamSpecObject::builder::<Manager>("manager")
                         .construct_only()
                         .build(),
+                    ParamSpecObject::builder::<Timeline>("timeline")
+                        .read_only()
+                        .build(),
                     ParamSpecObject::builder::<DisplayMessage>("last-message")
                         .read_only()
                         .build(),
@@ -477,11 +492,13 @@ mod imp {
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
+                "timeline" => self.timeline.borrow().to_value(),
                 "last-message" => self
-                    .messages
+                    .timeline
                     .borrow()
-                    .iter()
-                    .rev()
+                    .iter_backwards()
+                    .filter(|i| i.is::<DisplayMessage>())
+                    .map(|m| m.dynamic_cast::<DisplayMessage>().unwrap())
                     .filter(|m| {
                         !(*m)
                             .clone()
