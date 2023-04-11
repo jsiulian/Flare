@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Rewrote the message list to be a ListView.
+- Slight fix for the icon.
+
 ## [0.7.2] - 2023-04-08
 
 ### Added
