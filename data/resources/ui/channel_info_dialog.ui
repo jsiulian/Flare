@@ -30,9 +30,9 @@
         <child>
           <object class="GtkButton">
             <accessibility>
-              <property name="label" translatable="yes" context="accessibility">Reset Identity</property>
+              <property name="label" translatable="yes" context="accessibility">Reset Session</property>
             </accessibility>
-            <property name="label" translatable="yes">Reset Identity</property>
+            <property name="label" translatable="yes">Reset Session</property>
 
             <binding name="visible">
               <lookup name="is-contact" type="FlChannel">
@@ -40,7 +40,7 @@
               </lookup>
             </binding>
 
-            <signal name="clicked" handler="reset_identity" swapped="true"/>
+            <signal name="clicked" handler="reset_session" swapped="true"/>
           </object>
         </child>
 

@@ -3,6 +3,7 @@ use libsignal_service as lss;
 use presage as p;
 
 const FAILED_TO_LOOK_UP_ADDRESS: &str = "failed to lookup address information";
+type PresageError = presage::Error<presage_store_sled::SledStoreError>;
 
 #[derive(Debug, err_derive::Error)]
 pub enum ConfigurationError {
@@ -16,22 +17,22 @@ pub enum ApplicationError {
     NoInternet,
     Glib(glib::Error),
     Libsecret(oo7::Error),
-    Db(sled::Error),
+    Db(presage_store_sled::SledStoreError),
     UnauthorizedSignal,
     SendFailed(libsignal_service::sender::MessageSenderError),
     ReceiveFailed(libsignal_service::push_service::ServiceError),
-    Presage(presage::Error),
+    Presage(PresageError),
     ConfigurationError(ConfigurationError),
     ManagerThreadPanic,
 }
 
-impl From<p::Error> for ApplicationError {
-    fn from(e: p::Error) -> Self {
+impl From<PresageError> for ApplicationError {
+    fn from(e: PresageError) -> Self {
         match e {
             p::Error::ServiceError(p::prelude::content::ServiceError::Unauthorized) => {
                 ApplicationError::UnauthorizedSignal
             }
-            p::Error::DbError(e) => ApplicationError::Db(e),
+            p::Error::Store(e) => ApplicationError::Db(e),
             p::Error::ServiceError(p::prelude::content::ServiceError::WsError { reason: e })
                 if e.contains(FAILED_TO_LOOK_UP_ADDRESS) =>
             {
@@ -69,8 +70,8 @@ impl From<glib::Error> for ApplicationError {
     }
 }
 
-impl From<sled::Error> for ApplicationError {
-    fn from(e: sled::Error) -> Self {
+impl From<presage_store_sled::SledStoreError> for ApplicationError {
+    fn from(e: presage_store_sled::SledStoreError) -> Self {
         ApplicationError::Db(e)
     }
 }

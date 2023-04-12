@@ -14,8 +14,9 @@ use presage::{
         content::{DataMessage, GroupContextV2},
         AttachmentSpec, Content, ContentBody, ServiceAddress, Uuid,
     },
-    ContactsStore, GroupsStore, MessageStore, MigrationConflictStrategy, Store, Thread,
+    Store, Thread,
 };
+use presage_store_sled::MigrationConflictStrategy;
 use rand::distributions::DistString;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
@@ -32,7 +33,8 @@ gtk::glib::wrapper! {
     pub struct Manager(ObjectSubclass<imp::Manager>);
 }
 
-type StoreType = presage::SledStore;
+type StoreType = presage_store_sled::SledStore;
+type PresageError = presage::Error<presage_store_sled::SledStoreError>;
 
 async fn encryption_password() -> Result<String, ApplicationError> {
     let keyring = Keyring::new().await?;
@@ -88,7 +90,7 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationErr
     let passphrase = tspawn!(async { encryption_password().await })
         .await
         .expect("Failed tokio join")?;
-    let store = Ok(presage::SledStore::open_with_passphrase(
+    let store = Ok(presage_store_sled::SledStore::open_with_passphrase(
         path,
         Some(&passphrase),
         MigrationConflictStrategy::BackupAndDrop,
@@ -491,7 +493,7 @@ impl Manager {
     pub(super) async fn get_group_v2(
         &self,
         master_key: Vec<u8>,
-    ) -> Result<Option<Group>, presage::Error> {
+    ) -> Result<Option<Group>, PresageError> {
         log::trace!("`Manager::get_group_v2`start");
         let r = self.internal().get_group_v2(master_key).await;
         log::trace!("`Manager::get_group_v2`finished");
@@ -502,7 +504,7 @@ impl Manager {
         &self,
         uuid: Uuid,
         profile_key: ProfileKey,
-    ) -> Result<Profile, presage::Error> {
+    ) -> Result<Profile, PresageError> {
         log::trace!("`Manager::retrieve_profile_by_uuid` start");
         let r = self
             .internal()
@@ -528,17 +530,17 @@ impl Manager {
         Ok(r?)
     }
 
-    pub(super) async fn send_identity_reset(
+    pub(super) async fn send_session_reset(
         &self,
         recipient_addr: impl Into<ServiceAddress> + std::clone::Clone,
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
-        log::trace!("`Manager::send_identity_reset` start");
+        log::trace!("`Manager::send_session_reset` start");
         let r = self
             .internal()
-            .send_identity_reset(recipient_addr.clone(), timestamp)
+            .send_session_reset(recipient_addr.clone(), timestamp)
             .await;
-        log::trace!("`Manager::send_identity_reset` finished");
+        log::trace!("`Manager::send_session_reset` finished");
         Ok(r?)
     }
 
@@ -560,21 +562,21 @@ impl Manager {
     pub(super) fn get_contact_by_id(
         &self,
         id: Uuid,
-    ) -> Result<Option<presage::prelude::Contact>, presage::Error> {
+    ) -> Result<Option<presage::prelude::Contact>, PresageError> {
         log::trace!("`Manager::get_contact_by_id` start");
         let r = self.store().contact_by_id(id);
         log::trace!("`Manager::get_contact_by_id` finished");
-        r
+        Ok(r?)
     }
 
     pub(super) async fn get_attachment(
         &self,
         attachment_pointer: &AttachmentPointer,
-    ) -> Result<Vec<u8>, presage::Error> {
+    ) -> Result<Vec<u8>, PresageError> {
         log::trace!("`Manager::get_attachment` start");
         let r = self.internal().get_attachment(attachment_pointer).await;
         log::trace!("`Manager::get_attachment` finished");
-        r
+        Ok(r?)
     }
 
     #[cfg(not(feature = "screenshot"))]
@@ -586,11 +588,11 @@ impl Manager {
     pub async fn upload_attachments(
         &self,
         attachments: Vec<(AttachmentSpec, Vec<u8>)>,
-    ) -> Result<Vec<Result<AttachmentPointer, AttachmentUploadError>>, presage::Error> {
+    ) -> Result<Vec<Result<AttachmentPointer, AttachmentUploadError>>, PresageError> {
         log::trace!("`Manager::upload_attachment` start");
         let r = self.internal().upload_attachments(attachments).await;
         log::trace!("`Manager::upload_attachment` finished");
-        r
+        Ok(r?)
     }
 }
 

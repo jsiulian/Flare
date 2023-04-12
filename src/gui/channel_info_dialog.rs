@@ -50,11 +50,11 @@ pub mod imp {
     #[gtk::template_callbacks]
     impl ChannelInfoDialog {
         #[template_callback]
-        fn reset_identity(&self) {
+        fn reset_session(&self) {
             let obj = self.obj();
             let channel = obj.channel();
-            crate::trace!("Resetting identity of channel {}", channel.title());
-            gspawn!(async move { channel.send_identity_reset().await });
+            crate::trace!("Resetting session of channel {}", channel.title());
+            gspawn!(async move { channel.send_session_reset().await });
         }
     }
 

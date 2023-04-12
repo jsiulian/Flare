@@ -192,14 +192,14 @@ impl Channel {
             .map(|a| a.uuid)
     }
 
-    pub async fn send_identity_reset(&self) -> Result<(), ApplicationError> {
-        log::trace!("Sending identity reset");
+    pub async fn send_session_reset(&self) -> Result<(), ApplicationError> {
+        log::trace!("Sending session reset");
         let ts = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
             .expect("Time went backwards")
             .as_millis() as u64;
         let Some(uuid) = self.uuid() else {return Ok(())};
-        self.manager().send_identity_reset(uuid, ts).await
+        self.manager().send_session_reset(uuid, ts).await
     }
 
     pub(super) async fn do_new_message(

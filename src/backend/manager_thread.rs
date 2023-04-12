@@ -4,13 +4,16 @@ use libsignal_service::{
 };
 use presage::{
     prelude::{content::*, AttachmentSpec, ContentBody, DataMessage, ServiceAddress, *},
-    Error, Manager, MessageStore, Registered, Store,
+    Manager, Registered,
 };
+use presage_store_sled::SledStore as Store;
 use tokio::sync::{mpsc, oneshot};
 
 use crate::ApplicationError;
 
 const MESSAGE_BOUND: usize = 10;
+
+type Error = presage::Error<presage_store_sled::SledStoreError>;
 
 // TODO: Reconsider ignoring in the future, but probably does not make any huge difference.
 #[allow(clippy::large_enum_variant)]
@@ -18,7 +21,7 @@ enum Command {
     Uuid(oneshot::Sender<Uuid>),
     RetrieveProfileByUuid(Uuid, ProfileKey, oneshot::Sender<Result<Profile, Error>>),
     GetGroupV2(Vec<u8>, oneshot::Sender<Result<Option<Group>, Error>>),
-    SendIdentityReset(ServiceAddress, u64, oneshot::Sender<Result<(), Error>>),
+    SendSessionReset(ServiceAddress, u64, oneshot::Sender<Result<(), Error>>),
     SendMessage(
         ServiceAddress,
         Box<ContentBody>,
@@ -59,17 +62,14 @@ impl Clone for ManagerThread {
 }
 
 impl ManagerThread {
-    pub async fn new<C>(
-        config_store: C,
+    pub async fn new(
+        config_store: Store,
         device_name: String,
         link_callback: futures::channel::oneshot::Sender<url::Url>,
         error_callback: futures::channel::oneshot::Sender<Error>,
         content: mpsc::UnboundedSender<Content>,
         error: mpsc::Sender<ApplicationError>,
-    ) -> Option<Self>
-    where
-        C: presage::Store + std::marker::Send + std::marker::Sync + 'static + presage::MessageStore,
-    {
+    ) -> Option<Self> {
         let (sender, receiver) = mpsc::channel(MESSAGE_BOUND);
         std::thread::spawn(move || {
             let error_clone = error.clone();
@@ -163,14 +163,14 @@ impl ManagerThread {
         receiver.await.expect("Callback receiving failed")
     }
 
-    pub async fn send_identity_reset(
+    pub async fn send_session_reset(
         &self,
         recipient_addr: impl Into<ServiceAddress>,
         timestamp: u64,
     ) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
-            .send(Command::SendIdentityReset(
+            .send(Command::SendSessionReset(
                 recipient_addr.into(),
                 timestamp,
                 sender,
@@ -224,14 +224,11 @@ impl ManagerThread {
     }
 }
 
-async fn setup_manager<C>(
-    config_store: C,
+async fn setup_manager(
+    config_store: Store,
     name: String,
     link_callback: futures::channel::oneshot::Sender<url::Url>,
-) -> Result<presage::Manager<C, presage::Registered>, Error>
-where
-    C: Store + 'static,
-{
+) -> Result<presage::Manager<Store, presage::Registered>, Error> {
     if let Ok(manager) = presage::Manager::load_registered(config_store.clone()) {
         log::debug!("The configuration store is already valid, loading a registered account");
         drop(link_callback);
@@ -248,8 +245,8 @@ where
     }
 }
 
-async fn command_loop<C: Store + 'static + MessageStore>(
-    manager: &mut Manager<C, Registered>,
+async fn command_loop(
+    manager: &mut Manager<Store, Registered>,
     mut receiver: mpsc::Receiver<Command>,
     content: mpsc::UnboundedSender<Content>,
     error: mpsc::Sender<ApplicationError>,
@@ -304,10 +301,7 @@ async fn command_loop<C: Store + 'static + MessageStore>(
     log::info!("Exiting `ManagerThread::command_loop`");
 }
 
-async fn handle_command<C: Store + 'static>(
-    manager: &mut Manager<C, Registered>,
-    command: Command,
-) {
+async fn handle_command(manager: &mut Manager<Store, Registered>, command: Command) {
     log::trace!("Got command: {:?}", command);
     match command {
         Command::Uuid(callback) => callback
@@ -320,10 +314,10 @@ async fn handle_command<C: Store + 'static>(
             .send(manager.group(&master_key[..]))
             .map_err(|_| ())
             .expect("Callback sending failed"),
-        Command::SendIdentityReset(recipient_address, timestamp, callback) => callback
+        Command::SendSessionReset(recipient_address, timestamp, callback) => callback
             .send(
                 manager
-                    .send_identity_reset(&recipient_address, timestamp)
+                    .send_session_reset(&recipient_address, timestamp)
                     .await,
             )
             .expect("Callback sending failed"),
