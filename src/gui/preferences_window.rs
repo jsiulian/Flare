@@ -113,7 +113,7 @@ pub mod imp {
                 .bind(
                     "autodownload-images",
                     &self.switch_download_images.get(),
-                    "state",
+                    "active",
                 )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
@@ -121,7 +121,7 @@ pub mod imp {
                 .bind(
                     "autodownload-videos",
                     &self.switch_download_videos.get(),
-                    "state",
+                    "active",
                 )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
@@ -129,7 +129,7 @@ pub mod imp {
                 .bind(
                     "autodownload-files",
                     &self.switch_download_files.get(),
-                    "state",
+                    "active",
                 )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
@@ -162,7 +162,7 @@ pub mod imp {
                 .bind(
                     "messages-selectable",
                     &self.switch_messages_selectable.get(),
-                    "state",
+                    "active",
                 )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
