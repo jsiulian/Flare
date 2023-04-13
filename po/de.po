@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-04 13:08+0200\n"
-"PO-Revision-Date: 2023-04-11 13:50+0000\n"
+"PO-Revision-Date: 2023-04-14 16:49+0000\n"
 "Last-Translator: Leo Moser <leomoser99@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
 "Language: de\n"
@@ -23,7 +23,8 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
-"Jürgen Benvenuti <gastornis@posteo.org>, 2022"
+"Jürgen Benvenuti <gastornis@posteo.org>, 2022\n"
+"Leo Moser <leomoser99@gmail.com>, 2023"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
@@ -138,7 +139,6 @@ msgid "Send"
 msgstr "Senden"
 
 #: data/resources/ui/channel_messages.ui:209
-#, fuzzy
 msgid "Send"
 msgstr "Senden"
 
@@ -295,7 +295,7 @@ msgstr "Empfange Benachrichtigungen im Hintergrund"
 
 #: data/resources/ui/preferences_window.ui:146
 msgid "Other"
-msgstr ""
+msgstr "Andere"
 
 #: data/resources/ui/preferences_window.ui:149
 msgid "Selectable Message Text"
@@ -429,9 +429,8 @@ msgid "There does not seem to be a connection to the internet available."
 msgstr "Es scheint keine Internetverbindung vorhanden zu sein."
 
 #: src/error.rs:96
-#, fuzzy
 msgid "Something glib-related failed."
-msgstr "Nachricht konnte nicht gesendet werden."
+msgstr "Etwas glib-bezogenes ist fehlgeschlagen."
 
 #: src/error.rs:101
 msgid "The communication with Libsecret failed."
@@ -516,12 +515,12 @@ msgstr "%d.%m.%Y %H:%M"
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "An unofficial Signal GTK client"
-msgstr ""
+msgstr "Ein inoffizieller Signal GTK-Client"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:23
@@ -530,46 +529,44 @@ msgid ""
 "very simple application with many features missing compared to the official "
 "applications."
 msgstr ""
+"Ein inoffizieller GTK-Client für die Messaging-Anwendung Signal. Es handelt "
+"sich um eine sehr einfache Anwendung mit vielen fehlenden Funktionen im "
+"Vergleich zu den offiziellen Anwendungen."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:29
-#, fuzzy
 msgid "Link device"
 msgstr "Gerät koppeln"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:33
-#, fuzzy
 msgid "Send messages"
-msgstr "Nachrichten löschen"
+msgstr "Nachrichten senden"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:37
-#, fuzzy
 msgid "Receive messages"
-msgstr "Nachrichten löschen"
+msgstr "Nachrichten empfangen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:41
-#, fuzzy
 msgid "Reply to a message"
-msgstr "Nachrichten löschen"
+msgstr "Auf eine Nachricht antworten"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:45
-#, fuzzy
 msgid "React to a message"
-msgstr "Nachrichten löschen"
+msgstr "Auf eine Nachricht reagieren"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:49
 msgid "Sending and receiving attachments"
-msgstr ""
+msgstr "Senden und Empfangen von Anhängen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:53
 msgid "Encrypted storage"
-msgstr ""
+msgstr "Verschlüsselte Datenspeicherung"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:58
@@ -579,51 +576,57 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Bitte beachten Sie, dass die Verwendung dieser Anwendung Ihre Sicherheit im "
+"Vergleich zur Verwendung offizieller Signal-Anwendungen wahrscheinlich "
+"verschlechtert. Seien Sie vorsichtig im Umgang mit sensiblen Daten. In der "
+"README des Projekts finden Sie weitere Informationen zur Sicherheit."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:340
-#, fuzzy
 msgid "Overview of the application"
-msgstr "Ein Teil der Anwendung ist abgestürzt."
+msgstr "Übersicht der Anwendung"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Fensterbreite"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Fensterhöhe"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Maximierter Zustand des Fensters"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Der Gerätename beim Verknüpfen von Flare. Dies erfordert, dass die Anwendung "
+"neu gekoppelt wird."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Bilder automatisch herunterladen"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Videos automatisch herunterladen"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download files"
-msgstr ""
+msgstr "Dateien automatisch herunterladen"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:37
-#, fuzzy
 msgid "The amount of messages to load on startup for each channel"
-msgstr "Anzahl der Nachrichten, welche bei Anwendungsstart geladen werden"
+msgstr ""
+"Anzahl der Nachrichten, welche bei Anwendungsstart für jeden Kanal geladen "
+"werden"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
-#, fuzzy
 msgid "The amount of messages to load on request for each channel"
-msgstr "Anzahl der Nachrichten, welche auf Anfrage geladen werden"
+msgstr ""
+"Anzahl der Nachrichten, welche auf Anfrage für jeden Kanal geladen werden"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Run in background when closed"
@@ -631,7 +634,7 @@ msgstr "Nach dem Schließen im Hintergrund ausführen"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:55
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Nachrichten können ausgewählt werden"
 
 #, fuzzy
 #~ msgid "Changed"
