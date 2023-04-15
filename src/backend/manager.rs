@@ -23,6 +23,7 @@ use super::{manager_thread::ManagerThread, Channel, Contact, Message};
 use crate::{dbus::Feedbackd, gspawn, tspawn, ApplicationError};
 
 const MESSAGE_BOUND: usize = 10;
+const MESSAGES_INITIAL_LOAD: usize = 10;
 const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
 const SCHEMA_ATTRIBUTE: &str = "xdg:schema";
 const ATTRIBUTE_PASSWORD: (&str, &str) = ("type", "password");
@@ -476,14 +477,7 @@ impl Manager {
         }
         let something_loaded = !to_load.is_empty();
         for c in to_load {
-            c.load_last(
-                self.imp()
-                    .settings
-                    .int("messages-initial-load")
-                    .try_into()
-                    .unwrap_or(1),
-            )
-            .await;
+            c.load_last(MESSAGES_INITIAL_LOAD).await;
         }
         something_loaded
     }

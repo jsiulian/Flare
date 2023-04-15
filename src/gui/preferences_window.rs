@@ -88,11 +88,6 @@ pub mod imp {
         switch_download_files: TemplateChild<gtk::Switch>,
 
         #[template_child]
-        spin_initial_message_loading: TemplateChild<gtk::SpinButton>,
-        #[template_child]
-        spin_request_message_loading: TemplateChild<gtk::SpinButton>,
-
-        #[template_child]
         switch_notifications: TemplateChild<gtk::Switch>,
         #[template_child]
         switch_background: TemplateChild<gtk::Switch>,
@@ -134,22 +129,6 @@ pub mod imp {
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
             self.settings
-                .bind(
-                    "messages-initial-load",
-                    &self.spin_initial_message_loading.get(),
-                    "value",
-                )
-                .flags(SettingsBindFlags::DEFAULT)
-                .build();
-            self.settings
-                .bind(
-                    "messages-request-load",
-                    &self.spin_request_message_loading.get(),
-                    "value",
-                )
-                .flags(SettingsBindFlags::DEFAULT)
-                .build();
-            self.settings
                 .bind("notifications", &self.switch_notifications.get(), "state")
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
@@ -182,8 +161,6 @@ pub mod imp {
                 switch_download_images: TemplateChild::default(),
                 switch_download_videos: TemplateChild::default(),
                 switch_download_files: TemplateChild::default(),
-                spin_initial_message_loading: TemplateChild::default(),
-                spin_request_message_loading: TemplateChild::default(),
                 switch_notifications: TemplateChild::default(),
                 switch_background: TemplateChild::default(),
                 switch_messages_selectable: TemplateChild::default(),

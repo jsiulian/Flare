@@ -53,36 +53,42 @@
           </closure>
         </binding>
 
+        <child>
+          <object class="GtkSpinner">
+            <property name="spinning">TRUE</property>
+            <binding name="visible">
+              <lookup name="loading" type="FlChannelMessages"/>
+            </binding>
+          </object>
+        </child>
+
         <!-- Message List -->
         <child>
           <object class="GtkScrolledWindow" id="scrolled_window">
             <property name="vexpand">True</property>
             <property name="hscrollbar-policy">never</property>
-            <property name="child">
-              <object class="AdwClamp">
-                <property name="vexpand">True</property>
-                <property name="hexpand">True</property>
-                <property name="maximum-size">750</property>
-                <property name="tightening-threshold">550</property>
-                <property name="child">
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkButton">
-                        <signal handler="handle_more" swapped="true" name="clicked"/>
-                        <property name="label" translatable="yes">Load more</property>
-                        <property name="hexpand">False</property>
-                        <property name="halign">center</property>
-                        <property name="margin-top">6</property>
-                      </object>
-                    </child>
+
+            <signal name="edge-overshot" handler="handle_edge_reached" swapped="true"/>
+
+            <child>
+              <object class="GtkViewport">
+                <property name="valign">end</property>
+                <child>
+                  <object class="AdwClamp">
+                    <property name="vexpand">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="valign">end</property>
+                    <property name="maximum-size">750</property>
+                    <property name="tightening-threshold">550</property>
                     <child>
                       <object class="GtkListView" id="list_view">
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
                         <style>
                           <class name="message-list"/>
                         </style>
+
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">False</property>
+                        <property name="valign">end</property>
 
                         <binding name="model">
                           <closure function="no_selection" type="GtkSelectionModel">
@@ -94,9 +100,9 @@
                       </object>
                     </child>
                   </object>
-                </property>
+                </child>
               </object>
-            </property>
+            </child>
           </object>
         </child>
 
