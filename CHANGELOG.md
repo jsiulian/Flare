@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rewrote the message list to be a ListView.
 - Slight fix for the icon.
 
+### Fixed
+
+- Switches in the settings having inconsistent activation.
+
 ## [0.7.2] - 2023-04-08
 
 ### Added

@@ -12,6 +12,8 @@ use crate::backend::{message::TextMessage, Channel, Manager};
 use super::call_message_item::CallMessageItem;
 use super::message_item::MessageItem;
 
+const MESSAGES_REQUEST_LOAD: usize = 10;
+
 glib::wrapper! {
     pub struct ChannelMessages(ObjectSubclass<imp::ChannelMessages>)
         @extends gtk::Box, gtk::Widget,
@@ -52,6 +54,25 @@ impl ChannelMessages {
         self.set_property("sticky", val)
     }
 
+    pub fn loading(&self) -> bool {
+        self.property("loading")
+    }
+
+    pub fn set_loading(&self, val: bool) {
+        self.set_property("loading", val)
+    }
+
+    /// If the screen is not yet fully filled with messages, fill it.
+    /// If the screen was just filled, scroll down.
+    fn load_if_screen_not_filled(&self) {
+        let adj = self.imp().scrolled_window.vadjustment();
+        if self.active_channel().is_some() && adj.upper() <= adj.page_size() {
+            self.imp().handle_more();
+        } else {
+            self.scroll_down();
+        }
+    }
+
     fn setup_autoscroll(&self) {
         let adj = self.imp().scrolled_window.vadjustment();
         adj.connect_value_changed(clone!(@weak self as s => move |adj| {
@@ -61,6 +82,9 @@ impl ChannelMessages {
             if s.sticky() {
                 s.scroll_down();
             }
+        }));
+        adj.connect_changed(clone!(@weak self as s => move |_adj| {
+            s.load_if_screen_not_filled();
         }));
     }
 
@@ -98,12 +122,11 @@ impl ChannelMessages {
 pub mod imp {
     use std::cell::{Cell, RefCell};
 
-    use gio::Settings;
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecBoolean,
         ParamSpecObject, Value,
     };
-    use gtk::{gio, glib, FileChooserNative, SignalListItemFactory};
+    use gtk::{gio, glib, FileChooserNative, PositionType, SignalListItemFactory};
     use gtk::{
         prelude::*, subclass::prelude::*, CompositeTemplate, FileChooserAction, ResponseType,
     };
@@ -111,7 +134,6 @@ pub mod imp {
     use crate::backend::timeline::{Timeline, TimelineItem};
     use crate::{
         backend::{message::TextMessage, Channel, Manager},
-        config::APP_ID,
         gspawn,
         gui::{
             attachment::Attachment, error_dialog::ErrorDialog, message_item::MessageItem,
@@ -119,7 +141,7 @@ pub mod imp {
         },
     };
 
-    #[derive(CompositeTemplate)]
+    #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/channel_messages.ui")]
     pub struct ChannelMessages {
         #[template_child]
@@ -138,25 +160,7 @@ pub mod imp {
         active_channel: RefCell<Option<Channel>>,
 
         sticky: Cell<bool>,
-
-        pub(super) settings: Settings,
-    }
-
-    impl Default for ChannelMessages {
-        fn default() -> Self {
-            Self {
-                scrolled_window: Default::default(),
-                box_attachments: Default::default(),
-                text_entry: Default::default(),
-                attachments: Default::default(),
-                reply_message: Default::default(),
-                list_view: Default::default(),
-                manager: Default::default(),
-                active_channel: Default::default(),
-                sticky: Default::default(),
-                settings: Settings::new(APP_ID),
-            }
-        }
+        loading: Cell<bool>,
     }
 
     #[gtk::template_callbacks]
@@ -167,14 +171,22 @@ pub mod imp {
         }
 
         #[template_callback]
+        fn handle_edge_reached(&self, position: PositionType) {
+            if position == PositionType::Top {
+                self.handle_more()
+            }
+        }
+
+        #[template_callback]
         pub(super) fn handle_more(&self) {
             log::trace!("More messages were requested in the UI");
             let channel = self.active_channel.borrow();
             if let Some(channel) = channel.as_ref() {
                 let obj = self.obj();
-                let to_load = self.settings.int("messages-request-load");
                 gspawn!(glib::clone!(@weak channel, @weak obj => async move {
-                    channel.load_last(to_load.try_into().unwrap_or(1)).await;
+                    obj.set_loading(true);
+                    channel.load_last(super::MESSAGES_REQUEST_LOAD).await;
+                    obj.set_loading(false);
                 }));
             } else {
                 log::warn!("More messages were requested while not being focused on a channel. This should not happen.");
@@ -404,6 +416,7 @@ pub mod imp {
                     ParamSpecBoolean::builder("sticky")
                         .default_value(true)
                         .build(),
+                    ParamSpecBoolean::builder("loading").build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -416,6 +429,7 @@ pub mod imp {
                 "reply-message" => self.reply_message.borrow().as_ref().to_value(),
                 "has-attachments" => (!self.attachments.borrow().is_empty()).to_value(),
                 "sticky" => self.sticky.get().to_value(),
+                "loading" => self.loading.get().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -448,6 +462,12 @@ pub mod imp {
                         .get::<bool>()
                         .expect("Property `sticky` of `ChannelMessages` has to be of type `bool`");
                     self.sticky.replace(s);
+                }
+                "loading" => {
+                    let l = value
+                        .get::<bool>()
+                        .expect("Property `loading` of `ChannelMessages` has to be of type `bool`");
+                    self.loading.replace(l);
                 }
                 _ => unimplemented!(),
             }

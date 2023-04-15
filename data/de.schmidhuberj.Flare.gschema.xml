@@ -32,15 +32,6 @@
       <summary>Automatically download files</summary>
     </key>
 
-    <key name="messages-initial-load" type="i">
-      <default>1</default>
-      <summary>The amount of messages to load on startup for each channel</summary>
-    </key>
-    <key name="messages-request-load" type="i">
-      <default>10</default>
-      <summary>The amount of messages to load on request for each channel</summary>
-    </key>
-
     <key name="notifications" type="b">
       <default>false</default>
       <summary>Send notifications</summary>

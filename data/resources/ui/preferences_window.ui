@@ -70,43 +70,6 @@
 
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">Message Storage</property>
-            <child>
-              <object class="AdwActionRow" id="row_initial_message_loading">
-                <property name="title" translatable="yes">Number of messages to load on startup</property>
-                <property name="subtitle" translatable="yes">Per channel</property>
-                <child>
-                  <object class="GtkSpinButton" id="spin_initial_message_loading">
-                    <accessibility>
-                      <relation name="labelled-by">row_initial_message_loading</relation>
-                    </accessibility>
-                    <property name="adjustment">adj_initial_message_loading</property>
-                    <property name="valign">center</property>
-                    <property name="halign">center</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwActionRow" id="row_request_message_loading">
-                <property name="title" translatable="yes">Number of messages to load on request</property>
-                <property name="subtitle" translatable="yes">Per channel</property>
-                <child>
-                  <object class="GtkSpinButton" id="spin_request_message_loading">
-                    <accessibility>
-                      <relation name="labelled-by">row_request_message_loading</relation>
-                    </accessibility>
-                    <property name="adjustment">adj_request_message_loading</property>
-                    <property name="valign">center</property>
-                    <property name="halign">center</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Notifications</property>
             <property name="description" translatable="yes">Notifications for new messages.</property>
             <child>
