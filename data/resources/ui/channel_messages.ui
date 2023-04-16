@@ -71,34 +71,27 @@
             <signal name="edge-overshot" handler="handle_edge_reached" swapped="true"/>
 
             <child>
-              <object class="GtkViewport">
-                <property name="valign">end</property>
+              <object class="AdwClampScrollable">
+                <property name="vexpand">False</property>
+                <property name="hexpand">True</property>
+                <property name="maximum-size">750</property>
+                <property name="tightening-threshold">550</property>
                 <child>
-                  <object class="AdwClamp">
-                    <property name="vexpand">False</property>
+                  <object class="GtkListView" id="list_view">
+                    <style>
+                      <class name="message-list"/>
+                    </style>
+
                     <property name="hexpand">True</property>
-                    <property name="valign">end</property>
-                    <property name="maximum-size">750</property>
-                    <property name="tightening-threshold">550</property>
-                    <child>
-                      <object class="GtkListView" id="list_view">
-                        <style>
-                          <class name="message-list"/>
-                        </style>
+                    <property name="vexpand">False</property>
 
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">False</property>
-                        <property name="valign">end</property>
-
-                        <binding name="model">
-                          <closure function="no_selection" type="GtkSelectionModel">
-                            <lookup name="timeline">
-                              <lookup name="active-channel" type="FlChannelMessages"/>
-                            </lookup>
-                          </closure>
-                        </binding>
-                      </object>
-                    </child>
+                    <binding name="model">
+                      <closure function="no_selection" type="GtkSelectionModel">
+                        <lookup name="timeline">
+                          <lookup name="active-channel" type="FlChannelMessages"/>
+                        </lookup>
+                      </closure>
+                    </binding>
                   </object>
                 </child>
               </object>
