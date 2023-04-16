@@ -86,6 +86,12 @@ impl ChannelMessages {
         adj.connect_changed(clone!(@weak self as s => move |_adj| {
             s.load_if_screen_not_filled();
         }));
+        self.connect_notify_local(
+            Some("active-channel"),
+            clone!(@weak self as s => move |_, _| {
+                s.load_if_screen_not_filled();
+            }),
+        );
     }
 
     fn scroll_down(&self) {
