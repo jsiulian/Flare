@@ -129,11 +129,11 @@ pub mod imp {
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
             self.settings
-                .bind("notifications", &self.switch_notifications.get(), "state")
+                .bind("notifications", &self.switch_notifications.get(), "active")
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
             self.settings
-                .bind("run-in-background", &self.switch_background.get(), "state")
+                .bind("run-in-background", &self.switch_background.get(), "active")
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
 
