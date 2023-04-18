@@ -88,7 +88,6 @@ impl TextMessage {
         };
 
         s.set_internal_data(Some(message));
-        log::info!("Just created TextMessage has {} references.", s.ref_count());
         s
     }
 

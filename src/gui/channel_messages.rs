@@ -259,7 +259,7 @@ pub mod imp {
                 .action(FileChooserAction::Open)
                 .build();
             let obj = self.obj();
-            chooser.connect_response(clone!(@weak chooser, @weak obj => move |_, action| {
+            chooser.connect_response(clone!(@strong chooser, @strong obj => move |_, action| {
                 if action == ResponseType::Accept {
                     log::trace!("User added an attachment");
                     let file = chooser.file();
@@ -314,7 +314,7 @@ pub mod imp {
 
                 let obj = self.obj();
                 gspawn!(
-                    clone!(@weak msg, @weak channel, @strong attachments, @weak obj => async move {
+                    clone!(@strong msg, @strong channel, @strong attachments, @strong obj => async move {
                         log::trace!("Adding attachments to message: {}", attachments.len());
                         for att in attachments {
                             if let Err(e) = msg.add_attachment(att).await {
