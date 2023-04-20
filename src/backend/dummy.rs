@@ -8,13 +8,16 @@ use presage::prelude::{
     proto::call_message::{Hangup, Offer},
     *,
 };
+use presage::Thread;
 
 use super::{
     message::{CallMessage, Message, MessageExt, TextMessage},
     Channel, Contact,
 };
+use crate::error::ApplicationError;
 
 const GROUP_ID: usize = 6;
+type PresageError = presage::Error<presage_store_sled::SledStoreError>;
 
 macro_rules! msg {
     ($s:expr, $m:expr, $i:expr, $j:expr, $t:expr) => {
@@ -140,7 +143,7 @@ impl super::Manager {
     }
 
     #[cfg(feature = "screenshot")]
-    pub async fn setup_receive_message_loop(&self) -> Result<(), presage::Error> {
+    pub async fn setup_receive_message_loop(&self) -> Result<(), PresageError> {
         log::trace!("Setup receive loop for screenshots");
         let channels = self.imp().channels.borrow();
 
@@ -155,6 +158,15 @@ impl super::Manager {
     }
 
     #[cfg(feature = "screenshot")]
+    pub fn messages(
+        &self,
+        thread: &Thread,
+        from: Option<u64>,
+    ) -> Result<impl Iterator<Item = Content>, ApplicationError> {
+        Ok(std::iter::empty())
+    }
+
+    #[cfg(feature = "screenshot")]
     pub(super) fn uuid(&self) -> Uuid {
         Uuid::nil()
     }
@@ -163,7 +175,7 @@ impl super::Manager {
     pub async fn upload_attachments(
         &self,
         attachments: Vec<(AttachmentSpec, Vec<u8>)>,
-    ) -> Result<Vec<Result<AttachmentPointer, AttachmentUploadError>>, presage::Error> {
+    ) -> Result<Vec<Result<AttachmentPointer, AttachmentUploadError>>, PresageError> {
         Ok(vec![Ok(AttachmentPointer::default())])
     }
 

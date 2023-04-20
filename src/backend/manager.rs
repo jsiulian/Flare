@@ -203,6 +203,7 @@ impl Manager {
         }
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub fn messages(
         &self,
         thread: &Thread,
