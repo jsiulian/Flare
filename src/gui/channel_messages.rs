@@ -95,9 +95,13 @@ impl ChannelMessages {
     }
 
     fn scroll_down(&self) {
-        self.imp()
-            .scrolled_window
-            .emit_by_name::<bool>("scroll-child", &[&gtk::ScrollType::End, &false]);
+        crate::gspawn!(glib::clone!(@strong self as s => async move  {
+            // XXX: Need to sleep to prevent segfault: <https://gitlab.gnome.org/GNOME/gtk/-/issues/5763>
+            glib::timeout_future(std::time::Duration::from_millis(100)).await;
+            s.imp()
+                .scrolled_window
+                .emit_by_name::<bool>("scroll-child", &[&gtk::ScrollType::End, &false]);
+        }));
     }
 
     fn timeline_item_to_widget(&self, item: &TimelineItem) -> Option<gtk::Widget> {
