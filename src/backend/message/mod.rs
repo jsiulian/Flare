@@ -64,7 +64,7 @@ impl Message {
                     .property("manager", manager)
                     .property("sender", &contact)
                     .property("channel", &channel)
-                    .property("timestamp", &timestamp)
+                    .property("timestamp", timestamp)
                     .build();
                 s.init_data(message, manager).await;
                 Some(s.upcast())
@@ -106,7 +106,7 @@ impl Message {
                     .property("manager", manager)
                     .property("sender", &contact)
                     .property("channel", &channel)
-                    .property("timestamp", &timestamp)
+                    .property("timestamp", timestamp)
                     .build();
                 s.init_data(message, manager).await;
                 Some(s.upcast())

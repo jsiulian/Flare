@@ -499,14 +499,13 @@ mod imp {
                     .iter_backwards()
                     .filter(|i| i.is::<DisplayMessage>())
                     .map(|m| m.dynamic_cast::<DisplayMessage>().unwrap())
-                    .filter(|m| {
+                    .find(|m| {
                         !(*m)
                             .clone()
                             .downcast::<TextMessage>()
                             .map(|m| m.is_deleted())
                             .unwrap_or(false)
                     })
-                    .next()
                     .to_value(),
                 "title" => {
                     let title = if let Some(group) = self.group.borrow().as_ref() {

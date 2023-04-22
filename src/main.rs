@@ -1,12 +1,12 @@
 use gdk::prelude::{ApplicationExt, ApplicationExtManual};
+use gdk::Display;
 use gio::prelude::SettingsExt;
 use gio::{ApplicationFlags, Settings, SettingsBindFlags};
 use glib::IsA;
 use gtk::prelude::SettingsExtManual;
 use gtk::traits::{GtkWindowExt, WidgetExt};
-use gtk::{gdk, gio, glib, CssProvider, StyleContext};
+use gtk::{gdk, gio, glib, CssProvider};
 use once_cell::sync::Lazy;
-use gdk::Display;
 
 use std::path::Path;
 
@@ -50,7 +50,7 @@ fn load_css() {
     provider.load_from_resource("/de/schmidhuberj/Flare/style.css");
 
     // Add the provider to the default screen
-    StyleContext::add_provider_for_display(
+    gtk::style_context_add_provider_for_display(
         &Display::default().expect("Could not connect to a display."),
         &provider,
         gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,

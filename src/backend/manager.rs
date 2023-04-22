@@ -567,7 +567,7 @@ impl Manager {
         log::trace!("`Manager::get_attachment` start");
         let r = self.internal().get_attachment(attachment_pointer).await;
         log::trace!("`Manager::get_attachment` finished");
-        Ok(r?)
+        r
     }
 
     #[cfg(not(feature = "screenshot"))]
@@ -583,7 +583,7 @@ impl Manager {
         log::trace!("`Manager::upload_attachment` start");
         let r = self.internal().upload_attachments(attachments).await;
         log::trace!("`Manager::upload_attachment` finished");
-        Ok(r?)
+        r
     }
 }
 

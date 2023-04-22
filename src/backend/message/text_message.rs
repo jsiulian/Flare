@@ -71,7 +71,7 @@ impl TextMessage {
             .property("manager", manager)
             .property("channel", &channel)
             .property("sender", &sender)
-            .property("timestamp", &timestamp)
+            .property("timestamp", timestamp)
             .build();
 
         let text_owned = text.as_ref().to_owned();

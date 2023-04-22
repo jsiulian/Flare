@@ -9,19 +9,14 @@ use presage::prelude::{content::AttachmentPointer, AttachmentSpec};
 
 use super::Manager;
 
-#[derive(Debug, Hash, Eq, PartialEq, Clone, Copy, glib::Enum)]
+#[derive(Debug, Hash, Eq, PartialEq, Clone, Copy, glib::Enum, Default)]
 #[repr(u32)]
 #[enum_type(name = "FlAttachmentType")]
 pub enum AttachmentType {
     Image,
     Video,
+    #[default]
     File,
-}
-
-impl Default for AttachmentType {
-    fn default() -> Self {
-        AttachmentType::File
-    }
 }
 
 impl AttachmentType {
@@ -67,7 +62,7 @@ impl Attachment {
             )
             .property("image", &image)
             .property("video", &video)
-            .property("loaded", &true)
+            .property("loaded", true)
             .property("content-type", &mime)
             .build()
     }
@@ -81,10 +76,10 @@ impl Attachment {
         Object::builder::<Self>()
             .property("manager", manager)
             .property("file", &file)
-            .property("name", &"image.png")
+            .property("name", "image.png")
             .property("image", &texture)
-            .property("loaded", &true)
-            .property("content-type", &"image/png")
+            .property("loaded", true)
+            .property("content-type", "image/png")
             .build()
     }
 
@@ -157,8 +152,8 @@ impl Attachment {
             .property("image", &None::<Texture>)
             .property("name", &None::<String>)
             .property("video", &None::<MediaStream>)
-            .property("loaded", &false)
-            .property("content-type", &pointer.content_type.as_ref())
+            .property("loaded", false)
+            .property("content-type", pointer.content_type.as_ref())
             .build();
         *s.imp().pointer.borrow_mut() = Some(pointer.clone());
         s

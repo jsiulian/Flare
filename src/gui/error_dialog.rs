@@ -18,8 +18,8 @@ impl ErrorDialog {
         Object::builder::<Self>()
             .property("error", &error.to_string())
             .property("secondary-error", &error.more_information())
-            .property("should-report", &error.should_report())
-            .property("transient-for", &parent)
+            .property("should-report", error.should_report())
+            .property("transient-for", parent)
             .build()
     }
 }

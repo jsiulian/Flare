@@ -16,7 +16,7 @@ impl LinkWindow {
         Object::builder::<Self>()
             .property("url", &url)
             .property("manager", &manager)
-            .property("transient-for", &parent)
+            .property("transient-for", parent)
             .build()
     }
 

@@ -60,9 +60,9 @@ impl CallMessage {
         let s: Self = Object::builder::<Self>()
             .property("sender", sender)
             .property("channel", channel)
-            .property("timestamp", &timestamp)
+            .property("timestamp", timestamp)
             .property("manager", manager)
-            .property("call-type", &call_type)
+            .property("call-type", call_type)
             .build();
         s.imp().call.swap(&RefCell::new(Some(call)));
         Some(s)

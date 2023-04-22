@@ -25,7 +25,7 @@ impl DeletionMessage {
         let s: Self = Object::builder::<Self>()
             .property("sender", sender)
             .property("channel", channel)
-            .property("timestamp", &timestamp)
+            .property("timestamp", timestamp)
             .property("manager", manager)
             .build();
         s.imp().deletion.swap(&RefCell::new(Some(deletion)));

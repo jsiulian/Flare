@@ -21,15 +21,11 @@ impl DisplayMessage {
         let notification_title;
         let notification_body;
         if channel.group_context().is_some() {
-            notification_title = channel.title().to_string();
-            notification_body = format!(
-                "{}: {}",
-                sender.title().to_string(),
-                body.as_ref().unwrap().to_string()
-            );
+            notification_title = channel.title();
+            notification_body = format!("{}: {}", sender.title(), body.unwrap_or_default());
         } else {
-            notification_title = sender.title().to_string();
-            notification_body = body.as_ref().unwrap().to_string();
+            notification_title = sender.title();
+            notification_body = body.unwrap_or_default();
         }
         let notification = gio::Notification::new(&notification_title);
         notification.set_body(Some(&notification_body));
