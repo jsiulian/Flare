@@ -132,7 +132,7 @@ impl Channel {
                 thread,
                 first_timestamp
             );
-            let iter = manager.messages(&thread, first_timestamp);
+            let iter = manager.messages(&thread, first_timestamp).await;
             if iter.is_err() {
                 log::error!("Failed to load last messages: {}", iter.err().unwrap());
                 return;

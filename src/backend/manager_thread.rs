@@ -1,10 +1,12 @@
+use std::ops::Bound;
+
 use futures::{select, FutureExt, StreamExt};
 use libsignal_service::{
     groups_v2::Group, prelude::ProfileKey, sender::AttachmentUploadError, Profile,
 };
 use presage::{
     prelude::{content::*, AttachmentSpec, ContentBody, DataMessage, ServiceAddress, *},
-    Manager, Registered,
+    Manager, Registered, Thread,
 };
 use presage_store_sled::SledStore as Store;
 use tokio::sync::{mpsc, oneshot};
@@ -38,6 +40,13 @@ enum Command {
     UploadAttachments(
         Vec<(AttachmentSpec, Vec<u8>)>,
         oneshot::Sender<Result<Vec<Result<AttachmentPointer, AttachmentUploadError>>, Error>>,
+    ),
+    Messages(
+        Thread,
+        (Bound<u64>, Bound<u64>),
+        oneshot::Sender<
+            Result<<presage_store_sled::SledStore as presage::Store>::MessagesIter, Error>,
+        >,
     ),
 }
 
@@ -222,6 +231,19 @@ impl ManagerThread {
             .expect("Command sending failed");
         receiver.await.expect("Callback receiving failed")
     }
+
+    pub async fn messages(
+        &self,
+        thread: Thread,
+        range: (Bound<u64>, Bound<u64>),
+    ) -> Result<<presage_store_sled::SledStore as presage::Store>::MessagesIter, Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::Messages(thread, range, sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
 }
 
 async fn setup_manager(
@@ -341,5 +363,9 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
         Command::UploadAttachments(attachments, callback) => callback
             .send(manager.upload_attachments(attachments).await)
             .expect("Callback sending failed"),
+        Command::Messages(thread, range, callback) => {
+            // XXX: Cannot format iterator.
+            let _ = callback.send(manager.messages(&thread, range));
+        }
     }
 }

@@ -204,28 +204,24 @@ impl Manager {
     }
 
     #[cfg(not(feature = "screenshot"))]
-    pub fn messages(
+    pub async fn messages(
         &self,
         thread: &Thread,
         from: Option<u64>,
     ) -> Result<impl Iterator<Item = Content>, ApplicationError> {
         crate::trace!("Querying message by thread: {:?}, from {:?}", thread, from);
-        if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
-            Ok(config_store
-                .messages(
-                    thread,
-                    (
-                        Bound::Unbounded,
-                        from.map(Bound::Excluded).unwrap_or(Bound::Unbounded),
-                    ),
-                )?
-                .rev()
-                .filter_map(|o| o.ok()))
-        } else {
-            log::error!("Query messages by contact without config store being set up");
-            // TODO: Error?
-            panic!("Query messages by contact without config store being set up");
-        }
+        Ok(self
+            .internal()
+            .messages(
+                thread.clone(),
+                (
+                    Bound::Unbounded,
+                    from.map(Bound::Excluded).unwrap_or(Bound::Unbounded),
+                ),
+            )
+            .await?
+            .rev()
+            .filter_map(|o| o.ok()))
     }
 
     #[cfg(not(feature = "screenshot"))]
