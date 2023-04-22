@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Switches in the settings having inconsistent activation.
+- Possibly fixed session corruptions upstream.
 
 ## [0.7.2] - 2023-04-08
 
