@@ -62,13 +62,25 @@ impl ChannelMessages {
         self.set_property("loading", val)
     }
 
+    pub fn filling_screen(&self) -> bool {
+        self.property("filling-screen")
+    }
+
+    pub fn set_filling_screen(&self, val: bool) {
+        self.set_property("filling-screen", val)
+    }
+
     /// If the screen is not yet fully filled with messages, fill it.
     /// If the screen was just filled, scroll down.
     fn load_if_screen_not_filled(&self) {
         let adj = self.imp().scrolled_window.vadjustment();
         if self.active_channel().is_some() && adj.upper() <= adj.page_size() {
+            // The screen is not yet filled.
+            self.set_filling_screen(true);
             self.imp().handle_more();
-        } else {
+        } else if self.filling_screen() {
+            // Just filled the screen.
+            self.set_filling_screen(false);
             self.scroll_down();
         }
     }
@@ -171,6 +183,7 @@ pub mod imp {
 
         sticky: Cell<bool>,
         loading: Cell<bool>,
+        filling_screen: Cell<bool>,
     }
 
     #[gtk::template_callbacks]
@@ -427,6 +440,9 @@ pub mod imp {
                         .default_value(true)
                         .build(),
                     ParamSpecBoolean::builder("loading").build(),
+                    ParamSpecBoolean::builder("filling-screen")
+                        .default_value(true)
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -440,6 +456,7 @@ pub mod imp {
                 "has-attachments" => (!self.attachments.borrow().is_empty()).to_value(),
                 "sticky" => self.sticky.get().to_value(),
                 "loading" => self.loading.get().to_value(),
+                "filling-screen" => self.filling_screen.get().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -478,6 +495,12 @@ pub mod imp {
                         .get::<bool>()
                         .expect("Property `loading` of `ChannelMessages` has to be of type `bool`");
                     self.loading.replace(l);
+                }
+                "filling-screen" => {
+                    let f = value.get::<bool>().expect(
+                        "Property `filling-screen` of `ChannelMessages` has to be of type `bool`",
+                    );
+                    self.filling_screen.replace(f);
                 }
                 _ => unimplemented!(),
             }
