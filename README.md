@@ -19,6 +19,14 @@ An unofficial Signal GTK client.
     </td>
   </tr>
   <tr>
+    <td>Arch Linux (AUR)</td>
+    <td>[flare](https://aur.archlinux.org/packages/flare)</td>
+  </tr>
+  <tr>
+    <td>Alpine Linux (testing), Postmarket OS (edge)</td>
+    <td>[flare](https://pkgs.alpinelinux.org/package/edge/testing/x86/flare)</td>
+  </tr>
+  <tr>
     <td>Self Compile</td>
     <td>See [Compilation](https://gitlab.com/Schmiddiii/flare/-/blob/master/CONTRIBUTING.md#compilation).</td>
   </tr>
