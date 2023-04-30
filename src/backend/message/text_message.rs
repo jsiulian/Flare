@@ -11,7 +11,7 @@ use presage::prelude::{proto::data_message::Quote, *};
 use crate::backend::timeline::{TimelineItem, TimelineItemExt};
 use crate::backend::{Attachment, Channel, Contact};
 
-use super::{DisplayMessage, Manager, Message, MessageExt};
+use super::{DisplayMessage, Manager, Message, MessageExt, ReactionMessage};
 
 gtk::glib::wrapper! {
     pub struct TextMessage(ObjectSubclass<imp::TextMessage>) @extends Message, DisplayMessage, TimelineItem;
@@ -119,8 +119,16 @@ impl TextMessage {
         self.imp().quote.replace(Some(msg.clone()));
     }
 
-    pub fn react<S: AsRef<str>>(&self, reaction: S) {
-        *self.imp().reactions.borrow_mut() += reaction.as_ref();
+    pub fn react(&self, reaction: &ReactionMessage) {
+        self.react_sender_reaction(reaction.sender().uuid(), reaction.reaction());
+    }
+
+    fn react_sender_reaction(&self, sender: Uuid, reaction: Reaction) {
+        if reaction.remove.unwrap_or_default() {
+            self.imp().reactions.borrow_mut().remove(&sender);
+        } else {
+            let _ = self.imp().reactions.borrow_mut().insert(sender, reaction);
+        }
         self.notify("reactions");
     }
 
@@ -163,10 +171,14 @@ impl TextMessage {
         &self,
         reaction: S,
     ) -> Result<(), crate::ApplicationError> {
-        self.react(&reaction);
+        let has_self_reaction = self
+            .imp()
+            .reactions
+            .borrow()
+            .contains_key(&self.manager().uuid());
         let reaction_struct = Reaction {
             emoji: Some(reaction.as_ref().to_owned()),
-            remove: Some(false),
+            remove: Some(has_self_reaction),
             target_author_uuid: self
                 .sender()
                 .address()
@@ -174,6 +186,7 @@ impl TextMessage {
                 .map(|u| u.to_string()),
             target_sent_timestamp: Some(self.timestamp()),
         };
+        self.react_sender_reaction(self.manager().uuid(), reaction_struct.clone());
 
         let timestamp = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
@@ -231,7 +244,10 @@ mod imp {
         ParamSpecString, Value,
     };
     use gtk::{glib, prelude::Cast};
+    use libsignal_service::content::Reaction;
+    use libsignal_service::prelude::Uuid;
     use std::cell::RefCell;
+    use std::collections::HashMap;
 
     use crate::backend::{
         message::{display_message::DisplayMessageImpl, DisplayMessage, MessageExt, MessageImpl},
@@ -246,7 +262,7 @@ mod imp {
     pub struct TextMessage {
         pub(super) quote: RefCell<Option<super::TextMessage>>,
 
-        pub(super) reactions: RefCell<String>,
+        pub(super) reactions: RefCell<HashMap<Uuid, Reaction>>,
 
         pub(super) attachments: RefCell<Vec<Attachment>>,
 
@@ -269,9 +285,6 @@ mod imp {
 
     impl DisplayMessageImpl for TextMessage {
         fn textual_description(&self, obj: &super::TextMessage) -> Option<String> {
-            // let obj = obj
-            //     .dynamic_cast_ref::<super::TextMessage>()
-            //     .expect("Failed to cast `DisplayMessage` to `TextMessage`");
             if let Some(body) = obj.body() {
                 body.lines().next().map(|s| s.to_owned())
             } else {
@@ -314,7 +327,13 @@ mod imp {
             let instance = self.obj();
             match pspec.name() {
                 "body" => instance.internal_data().and_then(|d| d.body).to_value(),
-                "reactions" => self.reactions.borrow().to_value(),
+                "reactions" => self
+                    .reactions
+                    .borrow()
+                    .values()
+                    .map(|r| r.emoji())
+                    .collect::<String>()
+                    .to_value(),
                 "quote" => self.quote.borrow().to_value(),
                 "is-deleted" => self.is_deleted.borrow().to_value(),
                 _ => unimplemented!(),

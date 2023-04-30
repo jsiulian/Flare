@@ -218,19 +218,25 @@ pub mod imp {
         }
 
         #[template_callback]
-        fn handle_react(&self, emoji: String) {
+        fn handle_react(&self, mut emoji: String) {
             let obj = self.obj();
             let msg = obj.message();
+
+            // Remove the last three bytes. For some reason, the GTK picker adds two "variable
+            // selector"s (e.g. bytes "239, 184, 143" ) to the the end of the string, which Signal
+            // does not like. Remove one instance.
+            emoji.truncate(emoji.len() - 3);
+
             crate::trace!(
-                "Reacting to message {} with {} (len: {})",
+                "Reacting to message {} with {}",
                 msg.body().unwrap_or_default(),
                 emoji,
-                emoji.chars().count()
             );
+
             let obj = self.obj();
             gspawn!(clone!(@strong msg, @strong obj => async move {
                 log::trace!("Sending message");
-                if let Err(e) = msg.send_reaction(&emoji.chars().next().unwrap_or_default().to_string()).await {
+                if let Err(e) = msg.send_reaction(emoji).await {
                     let root = obj
                         .root()
                         .expect("`MessageItem` to have a root")

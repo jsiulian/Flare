@@ -27,8 +27,6 @@ use super::{
     Contact, Manager, Message,
 };
 
-const EMPTY_EMOJI: &String = &String::new();
-
 gtk::glib::wrapper! {
     pub struct Channel(ObjectSubclass<imp::Channel>);
 }
@@ -228,33 +226,26 @@ impl Channel {
                 }
                 let id = message.timestamp();
                 if let Some(reactions) = self.imp().pending_reactions.borrow_mut().remove(&id) {
-                    log::trace!("Adding pending reactions to message: {}", reactions);
-                    message.react(reactions);
+                    log::trace!("Adding pending reactions to message: {:?}", reactions);
+                    for reaction in reactions {
+                        message.react(&reaction);
+                    }
                 }
             }
         }
 
-        if let Some(reaction) = message
-            .dynamic_cast_ref::<ReactionMessage>()
-            .map(|r| r.reaction())
-        {
-            let reaction_emoji = reaction.emoji.as_ref().unwrap_or(EMPTY_EMOJI);
+        if let Some(reaction) = message.dynamic_cast_ref::<ReactionMessage>() {
             crate::trace!(
                 "Channel {} got new reaction: {}",
                 self.title(),
-                &reaction_emoji
+                reaction.emoji()
             );
-
-            if reaction.target_sent_timestamp.is_none() {
-                log::warn!("Got reaction message but without a sent timestamp. Aborting reaction");
-                return Ok(());
-            }
 
             let reacted_msg = self
                 .imp()
                 .timeline
                 .borrow()
-                .get_by_timestamp(reaction.target_sent_timestamp.unwrap())
+                .get_by_timestamp(reaction.target_timestamp())
                 .and_then(|o| o.dynamic_cast::<DisplayMessage>().ok());
 
             if let Some(reacted_msg) = reacted_msg {
@@ -265,7 +256,7 @@ impl Channel {
                             .property::<Option<String>>("body")
                             .unwrap_or_default()
                     );
-                    reacted_msg.react(reaction_emoji);
+                    reacted_msg.react(reaction);
                 } else {
                     log::warn!("Reaction message for a non-TextMessage");
                 }
@@ -273,13 +264,12 @@ impl Channel {
                 log::trace!("Message reacted to another message that could not be found yet. Inserting into pending reactions");
                 let mut pending_reactions = self.imp().pending_reactions.borrow_mut();
                 let entry = pending_reactions
-                    .entry(
-                        reaction
-                            .target_sent_timestamp
-                            .expect("Reacted message to have timestamp"),
-                    )
-                    .or_insert_with(|| "".to_string());
-                entry.push_str(reaction_emoji);
+                    .entry(reaction.target_timestamp())
+                    .or_insert_with(Vec::new);
+                let to_insert = entry
+                    .binary_search_by_key(&reaction.timestamp(), |m| m.timestamp())
+                    .unwrap_or_else(|e| e);
+                entry.insert(to_insert, reaction.clone());
             }
         }
 
@@ -420,7 +410,7 @@ mod imp {
     use presage::prelude::{GroupContextV2, Uuid};
 
     use crate::backend::{
-        message::{DisplayMessage, TextMessage},
+        message::{DisplayMessage, ReactionMessage, TextMessage},
         timeline::Timeline,
         Contact, Manager,
     };
@@ -433,7 +423,7 @@ mod imp {
 
         pub(super) manager: RefCell<Option<Manager>>,
         pub(super) timeline: RefCell<Timeline>,
-        pub(super) pending_reactions: RefCell<HashMap<u64, String>>,
+        pub(super) pending_reactions: RefCell<HashMap<u64, Vec<ReactionMessage>>>,
     }
 
     impl std::hash::Hash for Channel {

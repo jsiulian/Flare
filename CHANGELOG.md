@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Switches in the settings having inconsistent activation.
 - Possibly fixed session corruptions upstream.
+- Don't ignore emoji remove reactions.
+- Fixed sending wrong reaction with complex emojis.
 
 ## [0.7.2] - 2023-04-08
 
