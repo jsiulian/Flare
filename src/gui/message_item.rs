@@ -230,7 +230,7 @@ pub mod imp {
             crate::trace!(
                 "Reacting to message {} with {}",
                 msg.body().unwrap_or_default(),
-                emoji,
+                emoji
             );
 
             let obj = self.obj();
