@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Possibly fixed session corruptions upstream.
 - Don't ignore emoji remove reactions.
 - Fixed sending wrong reaction with complex emojis.
+- Fixed groups not working (upstream).
 
 ## [0.7.2] - 2023-04-08
 

@@ -251,7 +251,7 @@ async fn setup_manager(
     name: String,
     link_callback: futures::channel::oneshot::Sender<url::Url>,
 ) -> Result<presage::Manager<Store, presage::Registered>, Error> {
-    if let Ok(manager) = presage::Manager::load_registered(config_store.clone()) {
+    if let Ok(manager) = presage::Manager::load_registered(config_store.clone()).await {
         log::debug!("The configuration store is already valid, loading a registered account");
         drop(link_callback);
         Ok(manager)
@@ -326,8 +326,9 @@ async fn command_loop(
 async fn handle_command(manager: &mut Manager<Store, Registered>, command: Command) {
     log::trace!("Got command: {:?}", command);
     match command {
+        // XXX: Uuid should not be used anymore.
         Command::Uuid(callback) => callback
-            .send(manager.uuid())
+            .send(manager.state().service_ids.aci)
             .expect("Callback sending failed"),
         Command::RetrieveProfileByUuid(uuid, profile_key, callback) => callback
             .send(manager.retrieve_profile_by_uuid(uuid, profile_key).await)

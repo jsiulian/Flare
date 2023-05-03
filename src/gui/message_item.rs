@@ -225,6 +225,7 @@ pub mod imp {
             // Remove the last three bytes. For some reason, the GTK picker adds two "variable
             // selector"s (e.g. bytes "239, 184, 143" ) to the the end of the string, which Signal
             // does not like. Remove one instance.
+            // XXX: Wait until the next version of GTK is released (https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/5898).
             emoji.truncate(emoji.len() - 3);
 
             crate::trace!(
