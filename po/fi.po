@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-04 13:08+0200\n"
-"PO-Revision-Date: 2022-09-28 19:19+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/"
-">\n"
+"PO-Revision-Date: 2023-05-04 20:49+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/resources/ui/about.ui:14
 msgid "translator-credits"
@@ -38,16 +38,16 @@ msgstr "Lataa tiedosto"
 #: data/resources/ui/attachment.ui:131
 msgctxt "accessibility"
 msgid "Open with…"
-msgstr ""
+msgstr "Avaa sovelluksella…"
 
 #: data/resources/ui/attachment.ui:147
 msgctxt "accessibility"
 msgid "Download"
-msgstr ""
+msgstr "Lataa"
 
 #: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:162
 msgid "Channel Information"
-msgstr ""
+msgstr "Kanavan tiedot"
 
 #: data/resources/ui/channel_info_dialog.ui:33
 msgctxt "accessibility"
@@ -136,7 +136,6 @@ msgid "Send"
 msgstr "Lähetä"
 
 #: data/resources/ui/channel_messages.ui:209
-#, fuzzy
 msgid "Send"
 msgstr "Lähetä"
 
@@ -177,11 +176,11 @@ msgstr ""
 
 #: data/resources/ui/dialog_unlink.ui:10
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "Poista linkitys ja poista kaikki viestit"
 
 #: data/resources/ui/dialog_unlink.ui:11
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "Poista linkitys mutta säilytä kaikki viestit"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -218,11 +217,11 @@ msgstr "Reagoi"
 
 #: data/resources/ui/message_item.ui:250
 msgid "Delete"
-msgstr ""
+msgstr "Poista"
 
 #: data/resources/ui/message_item.ui:257
 msgid "Copy"
-msgstr ""
+msgstr "Kopioi"
 
 #: data/resources/ui/preferences_window.ui:9
 msgid "General"
@@ -266,7 +265,6 @@ msgstr "Käynnistyksen yhteydessä ladattavien viestien määrä"
 
 #: data/resources/ui/preferences_window.ui:77
 #: data/resources/ui/preferences_window.ui:93
-#, fuzzy
 msgid "Per channel"
 msgstr "Kanavaa kohden"
 
@@ -279,9 +277,8 @@ msgid "Notifications"
 msgstr "Ilmoitukset"
 
 #: data/resources/ui/preferences_window.ui:111
-#, fuzzy
 msgid "Notifications for new messages."
-msgstr "Lataa lisää viestejä"
+msgstr "Ilmoitukset uusista viesteistä."
 
 #: data/resources/ui/preferences_window.ui:114
 #: data/de.schmidhuberj.Flare.gschema.xml:46
@@ -290,11 +287,11 @@ msgstr "Lähetä ilmoituksia"
 
 #: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "Tarkkaile uusia viestejä suljettuna ollessa"
 
 #: data/resources/ui/preferences_window.ui:146
 msgid "Other"
-msgstr ""
+msgstr "Muu"
 
 #: data/resources/ui/preferences_window.ui:149
 msgid "Selectable Message Text"
@@ -398,7 +395,7 @@ msgstr ""
 
 #: src/backend/message/call_message.rs:115
 msgid "Is busy."
-msgstr ""
+msgstr "On varattu."
 
 #: src/backend/message/text_message.rs:269
 msgid "Sent an image"
@@ -472,7 +469,7 @@ msgstr "Sovellus näyttää olevan väärin konfiguroitu."
 
 #: src/error.rs:136
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Osa sovelluksesta kaatui."
 
 #: src/error.rs:146
 msgid "Please check your internet connection."
@@ -493,11 +490,11 @@ msgstr "Käynnistä sovellus uudelleen tämän ikkunan sulkemisen jälkeen."
 
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
-msgstr ""
+msgstr "Taustaoikeus"
 
 #: src/gui/preferences_window.rs:52
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "Poista oikeuksia asetuksista"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
@@ -515,12 +512,12 @@ msgstr "%d.%m.%Y %H.%M"
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "An unofficial Signal GTK client"
-msgstr ""
+msgstr "Epävirallinen GTK-pohjainen Signal-sovellus"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:23
@@ -532,43 +529,38 @@ msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:29
-#, fuzzy
 msgid "Link device"
 msgstr "Linkitä laite"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:33
-#, fuzzy
 msgid "Send messages"
-msgstr "Tyhjennä viestit"
+msgstr "Lähetä viestejä"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:37
-#, fuzzy
 msgid "Receive messages"
-msgstr "Tyhjennä viestit"
+msgstr "Vastaanota viestejä"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:41
-#, fuzzy
 msgid "Reply to a message"
-msgstr "Tyhjennä viestit"
+msgstr "Vastaa viestiin"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:45
-#, fuzzy
 msgid "React to a message"
-msgstr "Tyhjennä viestit"
+msgstr "Reagoi viestiin"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:49
 msgid "Sending and receiving attachments"
-msgstr ""
+msgstr "Liitteiden lähettäminen ja vastaanottaminen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:53
 msgid "Encrypted storage"
-msgstr ""
+msgstr "Salattu tallennustila"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:58
@@ -585,11 +577,11 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Ikkunan leveys"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Ikkunan korkeus"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
@@ -603,15 +595,15 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Lataa kuvat automaattisesti"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Lataa videot automaattisesti"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download files"
-msgstr ""
+msgstr "Lataa tiedostot automaattisesti"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:37
 #, fuzzy
@@ -625,7 +617,7 @@ msgstr "Pyynnöstä ladattavien viestien määrä"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Suorita taustalla, kun sovellus suljetaan"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:55
 msgid "Can messages be selected"
