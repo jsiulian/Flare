@@ -5,13 +5,16 @@ use gtk::glib::{Cast, DateTime};
 use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
 use presage::prelude::{
     content::{AttachmentPointer, CallMessage as PreCallMessage},
-    proto::call_message::{Hangup, Offer},
+    proto::{
+        call_message::{Hangup, Offer},
+        data_message::Reaction,
+    },
     *,
 };
 use presage::Thread;
 
 use super::{
-    message::{CallMessage, Message, MessageExt, TextMessage},
+    message::{CallMessage, Message, MessageExt, ReactionMessage, TextMessage},
     Channel, Contact,
 };
 use crate::error::ApplicationError;
@@ -68,7 +71,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(1),
             phone_number: None,
-            name: "Arch Linux User".to_string(),
+            name: "Postmarket OS User".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -94,7 +97,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(3),
             phone_number: None,
-            name: "Johnny".to_string(),
+            name: "Unnamed old man".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -120,7 +123,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(5),
             phone_number: None,
-            name: "Vader".to_string(),
+            name: "Palpatine".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -158,7 +161,7 @@ impl super::Manager {
     }
 
     #[cfg(feature = "screenshot")]
-    pub fn messages(
+    pub async fn messages(
         &self,
         thread: &Thread,
         from: Option<u64>,
@@ -188,14 +191,14 @@ impl super::Manager {
 
         let msg_replied = msg!(
             self,
-            "Flare has now got a fresh new UI.",
+            r#"Flare 0.8.0 was released with an improved GUI for the message list. The list is now "smart" and automatically loads messages if more are required. Long live Gtk ListView (and a few things I did)!"#,
             2,
             GROUP_ID,
             18 + base_minute
         );
         let msg_reply = msg!(
             self,
-            "Looks really good. Nice work.",
+            "RIP \"Load More\"-button. Juni 2022 - May 2023. You won't be missed.",
             0,
             GROUP_ID,
             25 + base_minute
@@ -205,11 +208,95 @@ impl super::Manager {
             .downcast::<TextMessage>()
             .unwrap()
             .set_quote(&msg_replied.clone().downcast::<TextMessage>().unwrap());
-        msg_reply
+        msg_reply.clone().downcast::<TextMessage>().unwrap().react(
+            &ReactionMessage::from_reaction(
+                &self.dummy_contacts()[0],
+                &self.dummy_channels().await[GROUP_ID],
+                26 + base_minute,
+                &self,
+                Reaction {
+                    emoji: Some("🤣️".to_string()),
+                    remove: Some(false),
+                    target_author_uuid: None,
+                    target_sent_timestamp: None,
+                },
+            ),
+        );
+
+        let msg_reacted = msg!(
+            self,
+            "Oh, and as always there were many fixes in this version, including a few regarding emojis.",
+            2,
+            GROUP_ID,
+            27 + base_minute
+        );
+        msg_reacted
             .clone()
             .downcast::<TextMessage>()
             .unwrap()
-            .react("👍");
+            .react(&ReactionMessage::from_reaction(
+                &self.dummy_contacts()[0],
+                &self.dummy_channels().await[GROUP_ID],
+                26 + base_minute,
+                &self,
+                Reaction {
+                    emoji: Some("👨‍👨‍👧‍👧️".to_string()),
+                    remove: Some(false),
+                    target_author_uuid: None,
+                    target_sent_timestamp: None,
+                },
+            ));
+        msg_reacted
+            .clone()
+            .downcast::<TextMessage>()
+            .unwrap()
+            .react(&ReactionMessage::from_reaction(
+                &self.dummy_contacts()[1],
+                &self.dummy_channels().await[GROUP_ID],
+                26 + base_minute,
+                &self,
+                Reaction {
+                    emoji: Some("🏴‍☠️️".to_string()),
+                    remove: Some(false),
+                    target_author_uuid: None,
+                    target_sent_timestamp: None,
+                },
+            ));
+        msg_reacted
+            .clone()
+            .downcast::<TextMessage>()
+            .unwrap()
+            .react(&ReactionMessage::from_reaction(
+                &self.dummy_contacts()[2],
+                &self.dummy_channels().await[GROUP_ID],
+                26 + base_minute,
+                &self,
+                Reaction {
+                    emoji: Some("🤌🏼️".to_string()),
+                    remove: Some(false),
+                    target_author_uuid: None,
+                    target_sent_timestamp: None,
+                },
+            ));
+
+        let msg_reacted2 = msg!(self, "Wow, Flare is now almost one year old. It certainly has come far in that time. Who bakes the cake for the birthday party?", 1, GROUP_ID, 35 + base_minute);
+
+        msg_reacted2
+            .clone()
+            .downcast::<TextMessage>()
+            .unwrap()
+            .react(&ReactionMessage::from_reaction(
+                &self.dummy_contacts()[2],
+                &self.dummy_channels().await[GROUP_ID],
+                26 + base_minute,
+                &self,
+                Reaction {
+                    emoji: Some("🎂".to_string()),
+                    remove: Some(false),
+                    target_author_uuid: None,
+                    target_sent_timestamp: None,
+                },
+            ));
 
         let msg_screenshot = msg!(self, "", 2, GROUP_ID, 19 + base_minute);
         let screenshot_file = gtk::gio::File::for_uri("resource:///icon.png");
@@ -224,9 +311,9 @@ impl super::Manager {
 
         vec![
             msg_replied,
-            msg_reply,
             msg_screenshot,
-            msg!(self, "Nice indeed.", 1, GROUP_ID, 27 + base_minute),
+            msg_reply,
+            msg_reacted,
             call_msg!(
                 self,
                 PreCallMessage {
@@ -245,14 +332,49 @@ impl super::Manager {
                 2,
                 base_minute - 99
             ),
-            msg!(self, "Thats not all. In addition to that, Flare now support profile names (no more phone-number contacts). Additionally, Flare now integrates with feedbackd.", 2, GROUP_ID, 30 + base_minute),
-            msg!(self, "And as always, of course, a few bug fixes, overall improvements and dependency updates. For all changes, see the changelog.", 2, GROUP_ID, 32 + base_minute),
-            msg!(self, "Due to one dependency update, you will need to relink your device after the update.", 2, GROUP_ID, 33 + base_minute),
-            msg!(self, "Thanks for the warning", 1, GROUP_ID, 35 + base_minute),
-            msg!(self, "Here's Johnny", 3, 3, 1 + base_minute),
-            msg!(self, "Flee you fools", 4, 4, 2 + base_minute),
-            msg!(self, "I am your father", 5, 5, 3 + base_minute),
-            msg!(self, "Don't you dare say it!", 0, 1, 3 + base_minute),
+            msg_reacted2,
+            msg!(
+                self,
+                "It has indeed improved a lot. Let's hope for an equally bright future.",
+                0,
+                GROUP_ID,
+                36 + base_minute
+            ),
+            msg!(
+                self,
+                "Let's hope I don't have to prepare a speech 😃️",
+                2,
+                GROUP_ID,
+                37 + base_minute
+            ),
+            msg!(
+                self,
+                "Anyway, as there is still space left in this screenshots, here are a few shameless plugs:
+- You can get Flare on Flathub (with a new design 😍️).
+- It's also available on Alpine Edge (and therefore Postmarket OS Edge).
+- It's also available in the AUR for Arch users (punish your PinePhone by compiling this).
+- You can also get involved in Flare by translating it over at Weblate.
+- Feel free to join the Matrix room and talk a bit.",
+                2,
+                GROUP_ID,
+                38 + base_minute
+            ),
+            msg!(
+                self,
+                "It's dangerous to go alone! Take this.",
+                3,
+                3,
+                1 + base_minute
+            ),
+            msg!(self, "Fly you fools", 4, 4, 2 + base_minute),
+            msg!(self, "Do it!", 5, 5, 3 + base_minute),
+            msg!(
+                self,
+                "Flare is also packaged in PMOS!",
+                1,
+                1,
+                3 + base_minute
+            ),
         ]
     }
 
