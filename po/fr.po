@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-04 13:08+0200\n"
-"PO-Revision-Date: 2023-03-31 07:37+0000\n"
+"PO-Revision-Date: 2023-05-04 20:49+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/resources/ui/about.ui:14
 msgid "translator-credits"
@@ -37,12 +37,12 @@ msgstr "Charger le fichier"
 #: data/resources/ui/attachment.ui:131
 msgctxt "accessibility"
 msgid "Open with…"
-msgstr ""
+msgstr "Ouvrir avec…"
 
 #: data/resources/ui/attachment.ui:147
 msgctxt "accessibility"
 msgid "Download"
-msgstr ""
+msgstr "Télécharger"
 
 #: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:162
 msgid "Channel Information"
@@ -65,7 +65,7 @@ msgstr "Fermer"
 #: data/resources/ui/channel_list.ui:15
 #: data/resources/ui/channel_messages.ui:17
 msgid "Offline"
-msgstr ""
+msgstr "Hors-ligne"
 
 #: data/resources/ui/channel_list.ui:31
 msgid "Search"
@@ -78,7 +78,7 @@ msgstr "Recherche"
 
 #: data/resources/ui/channel_messages.ui:31
 msgid "Select a channel"
-msgstr "Sélectionnez une chaîne"
+msgstr "Sélectionnez un canal de discussion"
 
 #: data/resources/ui/channel_messages.ui:73
 msgid "Load more"
@@ -147,8 +147,7 @@ msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
-"Ceci effacera tous les messages stockés localement. Ceci fermera également "
-"l'application."
+"Ceci effacera tous les messages stockés localement et fermera l’application."
 
 #: data/resources/ui/dialog_clear_messages.ui:9
 #: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
@@ -169,8 +168,8 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
-"Ceci va délier cet appareil et supprimer toutes les données enregistrées "
-"localement. Cela fermera aussi l’application pour qu’elle puisse être à "
+"Cet appareil sera délié et toutes les données enregistrées localement seront "
+"supprimées. Cela fermera aussi l’application pour qu’elle puisse être à "
 "nouveau reliée à l’ouverture."
 
 #: data/resources/ui/dialog_unlink.ui:10
@@ -179,7 +178,7 @@ msgstr "Délier et supprimer tous les messages"
 
 #: data/resources/ui/dialog_unlink.ui:11
 msgid "Unlink but keep messages"
-msgstr "Délier mais garder les messages"
+msgstr "Délier mais conserver les messages"
 
 #: data/resources/ui/error_dialog.ui:8
 msgid "Error"
@@ -204,7 +203,7 @@ msgstr "Copier dans le presse-papiers"
 
 #: data/resources/ui/link_window.ui:47
 msgid "Please wait until the contacts are displayed after linking."
-msgstr "Veuillez attendre que les contacts s'affichent après la liaison."
+msgstr "Veuillez attendre que les contacts s’affichent après la liaison."
 
 #: data/resources/ui/message_item.ui:238
 msgid "Reply"
@@ -216,7 +215,7 @@ msgstr "Réagir"
 
 #: data/resources/ui/message_item.ui:250
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: data/resources/ui/message_item.ui:257
 msgid "Copy"
@@ -232,7 +231,8 @@ msgstr "Liaison"
 
 #: data/resources/ui/preferences_window.ui:14
 msgid "The device will need to be relinked to take effect."
-msgstr "L’appareil devra être reconnecté pour prendre effet."
+msgstr ""
+"L’appareil devra être reconnecté pour que les changements prennent effet."
 
 #: data/resources/ui/preferences_window.ui:17
 msgid "Device Name"
@@ -290,15 +290,16 @@ msgstr "Surveiller les nouveaux messages pendant la fermeture"
 
 #: data/resources/ui/preferences_window.ui:146
 msgid "Other"
-msgstr ""
+msgstr "Autre"
 
 #: data/resources/ui/preferences_window.ui:149
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Texte des messages sélectionnable"
 
 #: data/resources/ui/preferences_window.ui:150
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
+"La sélection peut interférer avec les gestes de balayage sur écrans tactiles."
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -318,7 +319,7 @@ msgstr "Aller aux paramètres"
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr "Aller à la page d'information"
+msgstr "Aller à la page À propos"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -328,17 +329,17 @@ msgstr "Ouvrir le menu"
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr "Chaînes"
+msgstr "Canaux de discussion"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr "Aller à la chaîne 1...9"
+msgstr "Aller au canal 1...9"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr "Rechercher dans les chaînes"
+msgstr "Rechercher dans les canaux de discussion"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
@@ -467,7 +468,7 @@ msgstr "L’application semble être mal configurée."
 
 #: src/error.rs:136
 msgid "A part of the application crashed."
-msgstr "Une partie de l'application a planté."
+msgstr "Une partie de l’application a planté."
 
 #: src/error.rs:146
 msgid "Please check your internet connection."
@@ -484,8 +485,8 @@ msgstr "Le chemin de base de données à {} n’est pas un dossier."
 #: src/error.rs:163
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
-"Veuillez redémarrer l'application avec la journalisation et signaler ce "
-"problème."
+"Veuillez redémarrer l’application avec la journalisation activée et signaler "
+"ce problème."
 
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
@@ -511,12 +512,12 @@ msgstr "%d/%m/%Y %H:%M"
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "An unofficial Signal GTK client"
-msgstr ""
+msgstr "Un client GTK non officiel pour Signal"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:23
@@ -525,46 +526,44 @@ msgid ""
 "very simple application with many features missing compared to the official "
 "applications."
 msgstr ""
+"Un client GTK non officiel pour l’application de messagerie Signal. C’est "
+"une application très simple avec un certain nombre de fonctionnalités en "
+"moins par rapport à l’application officielle."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:29
-#, fuzzy
 msgid "Link device"
 msgstr "Lier l’appareil"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:33
-#, fuzzy
 msgid "Send messages"
-msgstr "Effacer les messages"
+msgstr "Effacer des messages"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:37
-#, fuzzy
 msgid "Receive messages"
-msgstr "Effacer les messages"
+msgstr "Recevoir des messages"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:41
-#, fuzzy
 msgid "Reply to a message"
-msgstr "Effacer les messages"
+msgstr "Répondre à un message"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:45
-#, fuzzy
 msgid "React to a message"
-msgstr "Effacer les messages"
+msgstr "Réagir à un message"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:49
 msgid "Sending and receiving attachments"
-msgstr ""
+msgstr "Envoyer et recevoir des pièces-jointes"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:53
 msgid "Encrypted storage"
-msgstr ""
+msgstr "Stockage chiffré"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:58
@@ -574,59 +573,62 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Veuillez noter que l’utilisation de cette application appauvrira sans doute "
+"votre sécurité en comparaison avec l’application Signal officielle. Soyez "
+"prudent lorsque vous manipulez des données sensibles. Lisez le fichier "
+"README du projet pour plus d’informations sur la sécurité."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:340
-#, fuzzy
 msgid "Overview of the application"
-msgstr "Une partie de l'application a planté."
+msgstr "Aperçu de l’application"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Largeur de la fenêtre"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Hauteur de la fenêtre"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Fenêtre maximisée"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Le nom de l’appareil lors de la liaison de Flare. Ceci nécessite que l’"
+"application soit à nouveau liée."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Télécharger automatiquement les images"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Télécharger automatiquement les vidéos"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download files"
-msgstr ""
+msgstr "Télécharger automatiquement les fichiers"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:37
-#, fuzzy
 msgid "The amount of messages to load on startup for each channel"
-msgstr "Nombre de messages à charger au démarrage"
+msgstr "Nombre de messages à charger au démarrage pour chaque canal"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
-#, fuzzy
 msgid "The amount of messages to load on request for each channel"
-msgstr "Nombre de messages à charger sur demande"
+msgstr "Nombre de messages à charger sur demande pour chaque canal"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Exécuter en arrière-plan à la fermeture"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:55
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Sélection des messages possible"
 
 #, fuzzy
 #~ msgid "Changed"
