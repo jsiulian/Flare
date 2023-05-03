@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-04 13:08+0200\n"
-"PO-Revision-Date: 2023-04-11 13:50+0000\n"
+"PO-Revision-Date: 2023-05-04 20:49+0000\n"
 "Last-Translator: Isaias Carrillo <icarrillo1304@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/flare/flare/es/>"
 "\n"
@@ -17,12 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/resources/ui/about.ui:14
-#, fuzzy
 msgid "translator-credits"
-msgstr "Creditos de traducción"
+msgstr "Créditos de traducción"
 
 #: data/resources/ui/attachment.ui:26
 msgid "Load image"
@@ -47,7 +46,6 @@ msgid "Download"
 msgstr "Descargar"
 
 #: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:162
-#, fuzzy
 msgid "Channel Information"
 msgstr "Información del canal"
 
@@ -172,7 +170,7 @@ msgstr "Borrar"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:142
 msgid "Unlink"
-msgstr ""
+msgstr "Desvincular"
 
 #: data/resources/ui/dialog_unlink.ui:5
 #, fuzzy
@@ -233,7 +231,7 @@ msgstr "Reaccionar"
 
 #: data/resources/ui/message_item.ui:250
 msgid "Delete"
-msgstr ""
+msgstr "Borrar"
 
 #: data/resources/ui/message_item.ui:257
 msgid "Copy"
@@ -289,7 +287,7 @@ msgstr "Por canal"
 #: data/resources/ui/preferences_window.ui:92
 #, fuzzy
 msgid "Number of messages to load on request"
-msgstr "Número de mensajes a cargar a petición"
+msgstr "Número de mensajes a cargar en una solicitud"
 
 #: data/resources/ui/preferences_window.ui:110
 msgid "Notifications"
@@ -336,7 +334,6 @@ msgid "Go to settings"
 msgstr "Ir a configuración"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Go to about page"
 msgstr "Ir a acerca de"
@@ -362,10 +359,9 @@ msgid "Search in channels"
 msgstr "Buscar en canales"
 
 #: data/resources/ui/shortcuts.ui:55
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr "Subir un adjunto"
+msgstr "Cargar un adjunto"
 
 #: data/resources/ui/shortcuts.ui:61
 #, fuzzy
@@ -422,7 +418,6 @@ msgid "Is busy."
 msgstr "Está ocupado."
 
 #: src/backend/message/text_message.rs:269
-#, fuzzy
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Enviar una imagen"
