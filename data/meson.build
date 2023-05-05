@@ -42,3 +42,7 @@ install_data(
   '@0@.gschema.xml'.format(application_id),
   install_dir: datadir / 'glib-2.0' / 'schemas'
 )
+
+# Compile schemas
+settings_schemas = [ '@0@.gschema.xml'.format(application_id) ]
+gnome.compile_schemas(depend_files: files(settings_schemas))
