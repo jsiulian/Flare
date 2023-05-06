@@ -42,16 +42,27 @@ An unofficial Signal GTK client.
 - Attachments
 - Message storage
 - Encrypted storage (As I am not a security-expert, I do not guarantee anything. Read the `Security`-section)
-- Notifications (To also get notifications while the application is closed, use something standalone, e.g. [messenger-notify](https://gitlab.com/Schmiddiii/messenger-notify))
+- Notifications
 
 ## Planned Features
 
 - The blocked features listed below once they are ready
 - Maybe once mature enough: Primary device
+- Read receipts
+- Typing indicators
+- Message forwarding
+
+## Features that may be implemented
+
+Some features may be implemented in the future:
+
+- Voice messages
+- Sending a contact
+- Sending your location
 
 ## Not planned features
 
-Some features are not planned by me as I will not use them. But if someone is interested in contributing them, I am open for adding them.
+Some features are not planned by me as I will not use them. But if someone is interested in contributing them, I am open for adding them:
 
 - Full compatibility with the official Signal products, including:
     - Calling
@@ -60,14 +71,17 @@ Some features are not planned by me as I will not use them. But if someone is in
 
 ## Blocked features
 
-This application uses [presage](https://github.com/whisperfish/presage) internally, the current features are not yet implemented for that.
+This application uses [presage](https://github.com/whisperfish/presage) internally. These features haven't been implemented in it yet:
 
 - Avatars
-- Profile names
-- Some Group features
+- Some group features
     - Group invites (you will need to be added to the group, not invited)
     - Group management
-- Contact discovery
+- Some contact features
+    - Contact discovery
+    - Contact management
+- Chat deletion
+- Disappearing messages
 
 ## Translation
 
