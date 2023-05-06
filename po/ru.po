@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-04 13:08+0200\n"
+"POT-Creation-Date: 2023-05-06 17:12+0200\n"
 "PO-Revision-Date: 2023-04-05 19:52+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,12 +51,12 @@ msgstr "Информация о канале"
 
 #: data/resources/ui/channel_info_dialog.ui:33
 msgctxt "accessibility"
-msgid "Reset Identity"
-msgstr "Сбросить личность"
+msgid "Reset Session"
+msgstr ""
 
 #: data/resources/ui/channel_info_dialog.ui:35
-msgid "Reset Identity"
-msgstr "Сбросить личность"
+msgid "Reset Session"
+msgstr ""
 
 #: data/resources/ui/channel_info_dialog.ui:51
 #: data/resources/ui/error_dialog.ui:14
@@ -81,61 +81,57 @@ msgstr "Поиск"
 msgid "Select a channel"
 msgstr "Выберите канал"
 
-#: data/resources/ui/channel_messages.ui:73
-msgid "Load more"
-msgstr "Загрузить больше"
-
-#: data/resources/ui/channel_messages.ui:106
+#: data/resources/ui/channel_messages.ui:114
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Удалить ответ"
 
-#: data/resources/ui/channel_messages.ui:108
+#: data/resources/ui/channel_messages.ui:116
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Удалить ответ"
 
-#: data/resources/ui/channel_messages.ui:138
+#: data/resources/ui/channel_messages.ui:146
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Удалить вложение"
 
-#: data/resources/ui/channel_messages.ui:140
+#: data/resources/ui/channel_messages.ui:148
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Удалить вложение"
 
-#: data/resources/ui/channel_messages.ui:174
+#: data/resources/ui/channel_messages.ui:182
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Добавить вложение"
 
-#: data/resources/ui/channel_messages.ui:176
+#: data/resources/ui/channel_messages.ui:184
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Добавить вложение"
 
-#: data/resources/ui/channel_messages.ui:195
+#: data/resources/ui/channel_messages.ui:203
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Ввод сообщения"
-
-#: data/resources/ui/channel_messages.ui:200
-msgctxt "tooltip"
-msgid "Message input"
-msgstr "Ввод сообщения"
-
-#: data/resources/ui/channel_messages.ui:206
-msgctxt "accessibility"
-msgid "Send"
-msgstr "Отправить"
 
 #: data/resources/ui/channel_messages.ui:208
 msgctxt "tooltip"
+msgid "Message input"
+msgstr "Ввод сообщения"
+
+#: data/resources/ui/channel_messages.ui:214
+msgctxt "accessibility"
 msgid "Send"
 msgstr "Отправить"
 
-#: data/resources/ui/channel_messages.ui:209
+#: data/resources/ui/channel_messages.ui:216
+msgctxt "tooltip"
+msgid "Send"
+msgstr "Отправить"
+
+#: data/resources/ui/channel_messages.ui:217
 msgid "Send"
 msgstr "Отправить"
 
@@ -208,19 +204,19 @@ msgstr ""
 "Пожалуйста подождите до тех пор пока контакты не будут отображены после "
 "привязывания."
 
-#: data/resources/ui/message_item.ui:238
+#: data/resources/ui/message_item.ui:242
 msgid "Reply"
 msgstr "Ответить"
 
-#: data/resources/ui/message_item.ui:244
+#: data/resources/ui/message_item.ui:248
 msgid "React"
 msgstr "Отреагировать"
 
-#: data/resources/ui/message_item.ui:250
+#: data/resources/ui/message_item.ui:254
 msgid "Delete"
 msgstr "Удалить"
 
-#: data/resources/ui/message_item.ui:257
+#: data/resources/ui/message_item.ui:261
 msgid "Copy"
 msgstr "Копировать"
 
@@ -257,48 +253,31 @@ msgid "Dowload files automatically"
 msgstr "Загружать файлы автоматически"
 
 #: data/resources/ui/preferences_window.ui:73
-msgid "Message Storage"
-msgstr "Хранилище сообщений"
-
-#: data/resources/ui/preferences_window.ui:76
-msgid "Number of messages to load on startup"
-msgstr "Количество сообщений для загрузки при запуске"
-
-#: data/resources/ui/preferences_window.ui:77
-#: data/resources/ui/preferences_window.ui:93
-msgid "Per channel"
-msgstr "На канал"
-
-#: data/resources/ui/preferences_window.ui:92
-msgid "Number of messages to load on request"
-msgstr "Количество сообщений для загрузке при запросе"
-
-#: data/resources/ui/preferences_window.ui:110
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: data/resources/ui/preferences_window.ui:111
+#: data/resources/ui/preferences_window.ui:74
 msgid "Notifications for new messages."
 msgstr "Уведомления для новых сообщений."
 
-#: data/resources/ui/preferences_window.ui:114
-#: data/de.schmidhuberj.Flare.gschema.xml:46
+#: data/resources/ui/preferences_window.ui:77
+#: data/de.schmidhuberj.Flare.gschema.xml:37
 msgid "Send notifications"
 msgstr "Отправлять уведомления"
 
-#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.ui:91 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Следить за новыми сообщениями в закрытом состоянии"
 
-#: data/resources/ui/preferences_window.ui:146
+#: data/resources/ui/preferences_window.ui:109
 msgid "Other"
 msgstr "Другое"
 
-#: data/resources/ui/preferences_window.ui:149
+#: data/resources/ui/preferences_window.ui:112
 msgid "Selectable Message Text"
 msgstr "Выбираемый текст сообщения"
 
-#: data/resources/ui/preferences_window.ui:150
+#: data/resources/ui/preferences_window.ui:113
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Выделяемый текст может мешать жестам пролистывания на сенсорных экранах."
@@ -375,7 +354,7 @@ msgstr "Комбинации клавиш"
 msgid "About"
 msgstr "О Приложении"
 
-#: src/backend/channel.rs:499
+#: src/backend/channel.rs:505
 msgid "Note to self"
 msgstr "Заметка для себя"
 
@@ -383,57 +362,57 @@ msgstr "Заметка для себя"
 msgid "You"
 msgstr "Вы"
 
-#: src/backend/message/call_message.rs:112
+#: src/backend/message/call_message.rs:115
 msgid "Started calling."
 msgstr "Начат звонок."
 
-#: src/backend/message/call_message.rs:113
+#: src/backend/message/call_message.rs:116
 msgid "Answered a call."
 msgstr "Звонок отвечен."
 
-#: src/backend/message/call_message.rs:114
+#: src/backend/message/call_message.rs:117
 msgid "Hung up."
 msgstr "На проводе."
 
-#: src/backend/message/call_message.rs:115
+#: src/backend/message/call_message.rs:118
 msgid "Is busy."
 msgstr "Занят."
 
-#: src/backend/message/text_message.rs:269
+#: src/backend/message/text_message.rs:294
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Отправить изображение"
 msgstr[1] "Отправить {} изображений"
 
-#: src/backend/message/text_message.rs:272
+#: src/backend/message/text_message.rs:297
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Отправлено видео"
 msgstr[1] "Отправлено {} видео"
 
-#: src/backend/message/text_message.rs:275
+#: src/backend/message/text_message.rs:300
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Оправить файл"
 msgstr[1] "Отправить {} файлов"
 
-#: src/error.rs:86
+#: src/error.rs:87
 msgid "I/O Error."
 msgstr "Ошибка I/O."
 
-#: src/error.rs:91
+#: src/error.rs:92
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Кажется нет подключения к Интернету."
 
-#: src/error.rs:96
+#: src/error.rs:97
 msgid "Something glib-related failed."
 msgstr "Что-то, связанное с glib, не удалось."
 
-#: src/error.rs:101
+#: src/error.rs:102
 msgid "The communication with Libsecret failed."
 msgstr "Связь с Libsecret не удалась."
 
-#: src/error.rs:106
+#: src/error.rs:107
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -441,7 +420,7 @@ msgstr ""
 "Сбой внутренней базы данных. Пожалуйста, перезапустите приложение или "
 "удалите базу данных и повторно свяжите приложение."
 
-#: src/error.rs:111
+#: src/error.rs:112
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -449,42 +428,42 @@ msgstr ""
 "Похоже вы не авторизованы в Signal. Пожалуйста, удалите базу данных и "
 "повторно свяжите приложение."
 
-#: src/error.rs:116
+#: src/error.rs:117
 msgid "Sending a message failed."
 msgstr "Отправка сообщения не удалась."
 
-#: src/error.rs:121
+#: src/error.rs:122
 msgid "Receiving a message failed."
 msgstr "Получение сообщения не удалась."
 
-#: src/error.rs:126
+#: src/error.rs:127
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 "Что-то неожиданное произошло с бэкендом signal. Пожалуйста, повторите "
 "попытку позже."
 
-#: src/error.rs:131
+#: src/error.rs:132
 msgid "The application seems to be misconfigured."
 msgstr "Кажется приложение неправильно настроено."
 
-#: src/error.rs:136
+#: src/error.rs:137
 msgid "A part of the application crashed."
 msgstr "Часть приложения вылетела."
 
-#: src/error.rs:146
+#: src/error.rs:147
 msgid "Please check your internet connection."
 msgstr "Пожалуйста, проверьте подключение к интернету."
 
-#: src/error.rs:151
+#: src/error.rs:152
 msgid "Please delete the database and relink the device."
 msgstr "Пожалуйста, удалите базу данных и повторно привяжите устройство."
 
-#: src/error.rs:158
+#: src/error.rs:159
 msgid "The database path at {} is no folder."
 msgstr "Путь к базе данных в {} не является папкой."
 
-#: src/error.rs:163
+#: src/error.rs:164
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Пожалуйста, перезапустите приложение с логами и сообщите об этой ошибке."
@@ -521,7 +500,7 @@ msgid "An unofficial Signal GTK client"
 msgstr "Неофициальный GTK клиент Signal"
 
 #. Translators: Description of Flare in metainfo.
-#: data/de.schmidhuberj.Flare.metainfo.xml:23
+#: data/de.schmidhuberj.Flare.metainfo.xml:26
 msgid ""
 "An unofficial GTK client for the messaging application Signal. This is a "
 "very simple application with many features missing compared to the official "
@@ -532,42 +511,54 @@ msgstr ""
 "официальными приложениями."
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:29
+#: data/de.schmidhuberj.Flare.metainfo.xml:32
 msgid "Link device"
 msgstr "Привязка устройства"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:33
+#: data/de.schmidhuberj.Flare.metainfo.xml:36
 msgid "Send messages"
 msgstr "Отправка сообщений"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:37
+#: data/de.schmidhuberj.Flare.metainfo.xml:40
 msgid "Receive messages"
 msgstr "Получение сообщений"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:41
+#: data/de.schmidhuberj.Flare.metainfo.xml:44
 msgid "Reply to a message"
 msgstr "Ответ на сообщение"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:45
+#: data/de.schmidhuberj.Flare.metainfo.xml:48
 msgid "React to a message"
 msgstr "Реакция на сообщение"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:49
+#: data/de.schmidhuberj.Flare.metainfo.xml:52
 msgid "Sending and receiving attachments"
 msgstr "Отправка и получение вложений"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:53
+#: data/de.schmidhuberj.Flare.metainfo.xml:56
 msgid "Encrypted storage"
 msgstr "Зашифрованное хранилище"
 
+#. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:60
+msgid "Notifications, optionally in the background"
+msgstr ""
+
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:58
+#: data/de.schmidhuberj.Flare.metainfo.xml:65
+msgid ""
+"More features are planned, blocked or not-planned. Consult the README for "
+"more information about them."
+msgstr ""
+
+#. Translators: Description of Flare in metainfo: Security note
+#: data/de.schmidhuberj.Flare.metainfo.xml:69
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -580,7 +571,7 @@ msgstr ""
 "данными. Дополнительную информацию о безопасности можно найти в README "
 "проекта."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:340
+#: data/de.schmidhuberj.Flare.metainfo.xml:382
 msgid "Overview of the application"
 msgstr "Обзор приложения"
 
@@ -616,21 +607,41 @@ msgstr "Автоматически загружать видео"
 msgid "Automatically download files"
 msgstr "Автоматически загружать файлы"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:37
-msgid "The amount of messages to load on startup for each channel"
-msgstr "Количество сообщений, загружаемых при запуске для каждого канала"
-
 #: data/de.schmidhuberj.Flare.gschema.xml:41
-msgid "The amount of messages to load on request for each channel"
-msgstr "Количество сообщений, загружаемых по запросу для каждого канала"
-
-#: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Run in background when closed"
 msgstr "Работать в фоновом режиме при закрытии"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:55
+#: data/de.schmidhuberj.Flare.gschema.xml:46
 msgid "Can messages be selected"
 msgstr "Можно ли выбирать сообщения"
+
+#~ msgctxt "accessibility"
+#~ msgid "Reset Identity"
+#~ msgstr "Сбросить личность"
+
+#~ msgid "Reset Identity"
+#~ msgstr "Сбросить личность"
+
+#~ msgid "Load more"
+#~ msgstr "Загрузить больше"
+
+#~ msgid "Message Storage"
+#~ msgstr "Хранилище сообщений"
+
+#~ msgid "Number of messages to load on startup"
+#~ msgstr "Количество сообщений для загрузки при запуске"
+
+#~ msgid "Per channel"
+#~ msgstr "На канал"
+
+#~ msgid "Number of messages to load on request"
+#~ msgstr "Количество сообщений для загрузке при запросе"
+
+#~ msgid "The amount of messages to load on startup for each channel"
+#~ msgstr "Количество сообщений, загружаемых при запуске для каждого канала"
+
+#~ msgid "The amount of messages to load on request for each channel"
+#~ msgstr "Количество сообщений, загружаемых по запросу для каждого канала"
 
 #, fuzzy
 #~ msgid "Changed"

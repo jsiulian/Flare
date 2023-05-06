@@ -56,7 +56,15 @@
       <li>
         Encrypted storage
       </li>
+      <!-- Translators: Description of Flare in metainfo: Features -->
+      <li>
+        Notifications, optionally in the background
+      </li>
     </ul>
+    <!-- Translators: Description of Flare in metainfo: Security note -->
+    <p>
+      More features are planned, blocked or not-planned. Consult the README for more information about them.
+    </p>
     <!-- Translators: Description of Flare in metainfo: Security note -->
     <p>
       Please note that using this application will probably worsen your security compared to using official Signal applications.

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-04 13:08+0200\n"
+"POT-Creation-Date: 2023-05-06 17:12+0200\n"
 "PO-Revision-Date: 2023-04-05 19:52+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
@@ -52,12 +52,12 @@ msgstr "Kanaalinformatie"
 
 #: data/resources/ui/channel_info_dialog.ui:33
 msgctxt "accessibility"
-msgid "Reset Identity"
-msgstr "Identiteit resetten"
+msgid "Reset Session"
+msgstr ""
 
 #: data/resources/ui/channel_info_dialog.ui:35
-msgid "Reset Identity"
-msgstr "Identiteit resetten"
+msgid "Reset Session"
+msgstr ""
 
 #: data/resources/ui/channel_info_dialog.ui:51
 #: data/resources/ui/error_dialog.ui:14
@@ -82,61 +82,57 @@ msgstr "Zoeken"
 msgid "Select a channel"
 msgstr "Kies een kanaal"
 
-#: data/resources/ui/channel_messages.ui:73
-msgid "Load more"
-msgstr "Meer laden"
-
-#: data/resources/ui/channel_messages.ui:106
+#: data/resources/ui/channel_messages.ui:114
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Antwoord wissen"
 
-#: data/resources/ui/channel_messages.ui:108
+#: data/resources/ui/channel_messages.ui:116
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Antwoord wissen"
 
-#: data/resources/ui/channel_messages.ui:138
+#: data/resources/ui/channel_messages.ui:146
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Bijlage verwijderen"
 
-#: data/resources/ui/channel_messages.ui:140
+#: data/resources/ui/channel_messages.ui:148
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Bijlage verwijderen"
 
-#: data/resources/ui/channel_messages.ui:174
+#: data/resources/ui/channel_messages.ui:182
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Bijlage toevoegen"
 
-#: data/resources/ui/channel_messages.ui:176
+#: data/resources/ui/channel_messages.ui:184
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Bijlage toevoegen"
 
-#: data/resources/ui/channel_messages.ui:195
+#: data/resources/ui/channel_messages.ui:203
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Voer een bericht in"
-
-#: data/resources/ui/channel_messages.ui:200
-msgctxt "tooltip"
-msgid "Message input"
-msgstr "Voer een bericht in"
-
-#: data/resources/ui/channel_messages.ui:206
-msgctxt "accessibility"
-msgid "Send"
-msgstr "Versturen"
 
 #: data/resources/ui/channel_messages.ui:208
 msgctxt "tooltip"
+msgid "Message input"
+msgstr "Voer een bericht in"
+
+#: data/resources/ui/channel_messages.ui:214
+msgctxt "accessibility"
 msgid "Send"
 msgstr "Versturen"
 
-#: data/resources/ui/channel_messages.ui:209
+#: data/resources/ui/channel_messages.ui:216
+msgctxt "tooltip"
+msgid "Send"
+msgstr "Versturen"
+
+#: data/resources/ui/channel_messages.ui:217
 msgid "Send"
 msgstr "Versturen"
 
@@ -208,19 +204,19 @@ msgstr "Kopiëren naar klembord"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Wacht na het koppelen tot contactpersoonsynchronisatie is afgerond."
 
-#: data/resources/ui/message_item.ui:238
+#: data/resources/ui/message_item.ui:242
 msgid "Reply"
 msgstr "Beantwoorden"
 
-#: data/resources/ui/message_item.ui:244
+#: data/resources/ui/message_item.ui:248
 msgid "React"
 msgstr "Reageren"
 
-#: data/resources/ui/message_item.ui:250
+#: data/resources/ui/message_item.ui:254
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: data/resources/ui/message_item.ui:257
+#: data/resources/ui/message_item.ui:261
 msgid "Copy"
 msgstr "Kopiëren"
 
@@ -257,48 +253,31 @@ msgid "Dowload files automatically"
 msgstr "Bestanden automatisch downloaden"
 
 #: data/resources/ui/preferences_window.ui:73
-msgid "Message Storage"
-msgstr "Berichtopslag"
-
-#: data/resources/ui/preferences_window.ui:76
-msgid "Number of messages to load on startup"
-msgstr "Aantal te tonen berichten na opstarten"
-
-#: data/resources/ui/preferences_window.ui:77
-#: data/resources/ui/preferences_window.ui:93
-msgid "Per channel"
-msgstr "Per kanaal"
-
-#: data/resources/ui/preferences_window.ui:92
-msgid "Number of messages to load on request"
-msgstr "Aantal op verzoek te tonen berichten"
-
-#: data/resources/ui/preferences_window.ui:110
 msgid "Notifications"
 msgstr "Meldingen"
 
-#: data/resources/ui/preferences_window.ui:111
+#: data/resources/ui/preferences_window.ui:74
 msgid "Notifications for new messages."
 msgstr "Toon meldingen bij nieuwe berichten"
 
-#: data/resources/ui/preferences_window.ui:114
-#: data/de.schmidhuberj.Flare.gschema.xml:46
+#: data/resources/ui/preferences_window.ui:77
+#: data/de.schmidhuberj.Flare.gschema.xml:37
 msgid "Send notifications"
 msgstr "Leesbewijzen"
 
-#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.ui:91 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Meldingen tonen als Flare op de achtergrond wordt uitgevoerd"
 
-#: data/resources/ui/preferences_window.ui:146
+#: data/resources/ui/preferences_window.ui:109
 msgid "Other"
 msgstr "Overig"
 
-#: data/resources/ui/preferences_window.ui:149
+#: data/resources/ui/preferences_window.ui:112
 msgid "Selectable Message Text"
 msgstr "Selecteerbare berichttekst"
 
-#: data/resources/ui/preferences_window.ui:150
+#: data/resources/ui/preferences_window.ui:113
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Selecteerbare tekst kan interfereren met veegbewegingen op aanraakschermen"
@@ -375,7 +354,7 @@ msgstr "Sneltoetsen"
 msgid "About"
 msgstr "Over"
 
-#: src/backend/channel.rs:499
+#: src/backend/channel.rs:505
 msgid "Note to self"
 msgstr "Herinnering aan mezelf"
 
@@ -383,57 +362,57 @@ msgstr "Herinnering aan mezelf"
 msgid "You"
 msgstr "Ik"
 
-#: src/backend/message/call_message.rs:112
+#: src/backend/message/call_message.rs:115
 msgid "Started calling."
 msgstr "Oproep gestart"
 
-#: src/backend/message/call_message.rs:113
+#: src/backend/message/call_message.rs:116
 msgid "Answered a call."
 msgstr "Oproep beantwoord"
 
-#: src/backend/message/call_message.rs:114
+#: src/backend/message/call_message.rs:117
 msgid "Hung up."
 msgstr "Gesprek beëindigd"
 
-#: src/backend/message/call_message.rs:115
+#: src/backend/message/call_message.rs:118
 msgid "Is busy."
 msgstr "Is bezig"
 
-#: src/backend/message/text_message.rs:269
+#: src/backend/message/text_message.rs:294
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Er is één afbeelding verstuurd"
 msgstr[1] "Er zijn {} afbeeldingen verstuurd"
 
-#: src/backend/message/text_message.rs:272
+#: src/backend/message/text_message.rs:297
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Er is één video verstuurd"
 msgstr[1] "Er zijn {} video's verstuurd"
 
-#: src/backend/message/text_message.rs:275
+#: src/backend/message/text_message.rs:300
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Er is één bestand verstuurd"
 msgstr[1] "Er zijn {} bestanden verstuurd"
 
-#: src/error.rs:86
+#: src/error.rs:87
 msgid "I/O Error."
 msgstr "I/O-fout"
 
-#: src/error.rs:91
+#: src/error.rs:92
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Er lijkt geen verbinding met het internet te zijn."
 
-#: src/error.rs:96
+#: src/error.rs:97
 msgid "Something glib-related failed."
 msgstr "Er is iets mis gegaan gerelateerd aan GLib."
 
-#: src/error.rs:101
+#: src/error.rs:102
 msgid "The communication with Libsecret failed."
 msgstr "De communicatie met Libsecret is mislukt."
 
-#: src/error.rs:106
+#: src/error.rs:107
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -441,48 +420,48 @@ msgstr ""
 "De backend-database is beschadigd. Herstart de app of verwijder de database "
 "en herkoppel de app."
 
-#: src/error.rs:111
+#: src/error.rs:112
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
 "U lijkt niet bevoegd te zijn. Verwijder de database en herkoppel de app."
 
-#: src/error.rs:116
+#: src/error.rs:117
 msgid "Sending a message failed."
 msgstr "Het bericht kan niet worden verstuurd."
 
-#: src/error.rs:121
+#: src/error.rs:122
 msgid "Receiving a message failed."
 msgstr "Het bericht kan niet worden ontvangen."
 
-#: src/error.rs:126
+#: src/error.rs:127
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 "Er is iets misgegaan met het Signal-backend. Probeer het later opnieuw."
 
-#: src/error.rs:131
+#: src/error.rs:132
 msgid "The application seems to be misconfigured."
 msgstr "De app lijkt niet goed te zijn ingesteld."
 
-#: src/error.rs:136
+#: src/error.rs:137
 msgid "A part of the application crashed."
 msgstr "Een deel van de app is gecrasht."
 
-#: src/error.rs:146
+#: src/error.rs:147
 msgid "Please check your internet connection."
 msgstr "Controleer uw internetverbinding."
 
-#: src/error.rs:151
+#: src/error.rs:152
 msgid "Please delete the database and relink the device."
 msgstr "Verwijder de database en herkoppel het apparaat."
 
-#: src/error.rs:158
+#: src/error.rs:159
 msgid "The database path at {} is no folder."
 msgstr "De databaselocatie, {}, is geen map."
 
-#: src/error.rs:163
+#: src/error.rs:164
 msgid "Please restart the application with logging and report this issue."
 msgstr "Schakel de foutopsporing in, herstart de app en meld dit probleem."
 
@@ -518,7 +497,7 @@ msgid "An unofficial Signal GTK client"
 msgstr "Onofficiële GTK-app voor Signal"
 
 #. Translators: Description of Flare in metainfo.
-#: data/de.schmidhuberj.Flare.metainfo.xml:23
+#: data/de.schmidhuberj.Flare.metainfo.xml:26
 msgid ""
 "An unofficial GTK client for the messaging application Signal. This is a "
 "very simple application with many features missing compared to the official "
@@ -529,42 +508,54 @@ msgstr ""
 "officiële apps."
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:29
+#: data/de.schmidhuberj.Flare.metainfo.xml:32
 msgid "Link device"
 msgstr "Apparaat koppelen"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:33
+#: data/de.schmidhuberj.Flare.metainfo.xml:36
 msgid "Send messages"
 msgstr "Berichten versturen"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:37
+#: data/de.schmidhuberj.Flare.metainfo.xml:40
 msgid "Receive messages"
 msgstr "Berichten ontvangen"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:41
+#: data/de.schmidhuberj.Flare.metainfo.xml:44
 msgid "Reply to a message"
 msgstr "Berichten beantwoorden"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:45
+#: data/de.schmidhuberj.Flare.metainfo.xml:48
 msgid "React to a message"
 msgstr "Reageren op berichten"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:49
+#: data/de.schmidhuberj.Flare.metainfo.xml:52
 msgid "Sending and receiving attachments"
 msgstr "Bijlagen versturen en ontvangen"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:53
+#: data/de.schmidhuberj.Flare.metainfo.xml:56
 msgid "Encrypted storage"
 msgstr "Versleutelde opslag"
 
+#. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:60
+msgid "Notifications, optionally in the background"
+msgstr ""
+
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:58
+#: data/de.schmidhuberj.Flare.metainfo.xml:65
+msgid ""
+"More features are planned, blocked or not-planned. Consult the README for "
+"more information about them."
+msgstr ""
+
+#. Translators: Description of Flare in metainfo: Security note
+#: data/de.schmidhuberj.Flare.metainfo.xml:69
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -576,7 +567,7 @@ msgstr ""
 "Signal-apps. Wees voorzichtig bij het omgaan met gevoelige gegevens. Bekijk "
 "de README van het project voor meer informatie over beveiliging."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:340
+#: data/de.schmidhuberj.Flare.metainfo.xml:382
 msgid "Overview of the application"
 msgstr "Overzicht van de app"
 
@@ -612,21 +603,41 @@ msgstr "Video's automatisch downloaden"
 msgid "Automatically download files"
 msgstr "Bestanden automatisch downloaden"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:37
-msgid "The amount of messages to load on startup for each channel"
-msgstr "Aantal te laden berichten bij opstarten van elk kanaal"
-
 #: data/de.schmidhuberj.Flare.gschema.xml:41
-msgid "The amount of messages to load on request for each channel"
-msgstr "Aantal te laden berichten bij aanvraag van elk kanaal"
-
-#: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Run in background when closed"
 msgstr "Op achtergrond uitvoeren wanneer gesloten"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:55
+#: data/de.schmidhuberj.Flare.gschema.xml:46
 msgid "Can messages be selected"
 msgstr "Of berichten geselecteerd kunnen worden"
+
+#~ msgctxt "accessibility"
+#~ msgid "Reset Identity"
+#~ msgstr "Identiteit resetten"
+
+#~ msgid "Reset Identity"
+#~ msgstr "Identiteit resetten"
+
+#~ msgid "Load more"
+#~ msgstr "Meer laden"
+
+#~ msgid "Message Storage"
+#~ msgstr "Berichtopslag"
+
+#~ msgid "Number of messages to load on startup"
+#~ msgstr "Aantal te tonen berichten na opstarten"
+
+#~ msgid "Per channel"
+#~ msgstr "Per kanaal"
+
+#~ msgid "Number of messages to load on request"
+#~ msgstr "Aantal op verzoek te tonen berichten"
+
+#~ msgid "The amount of messages to load on startup for each channel"
+#~ msgstr "Aantal te laden berichten bij opstarten van elk kanaal"
+
+#~ msgid "The amount of messages to load on request for each channel"
+#~ msgstr "Aantal te laden berichten bij aanvraag van elk kanaal"
 
 #~ msgid "HOTFIX"
 #~ msgstr "HOTFIX"

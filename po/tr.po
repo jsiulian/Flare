@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-04 13:08+0200\n"
+"POT-Creation-Date: 2023-05-06 17:12+0200\n"
 "PO-Revision-Date: 2023-03-29 19:39+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/"
@@ -53,12 +53,12 @@ msgstr "Kanal Bilgileri"
 
 #: data/resources/ui/channel_info_dialog.ui:33
 msgctxt "accessibility"
-msgid "Reset Identity"
-msgstr "Kimliği Sıfırla"
+msgid "Reset Session"
+msgstr ""
 
 #: data/resources/ui/channel_info_dialog.ui:35
-msgid "Reset Identity"
-msgstr "Kimliği Sıfırla"
+msgid "Reset Session"
+msgstr ""
 
 #: data/resources/ui/channel_info_dialog.ui:51
 #: data/resources/ui/error_dialog.ui:14
@@ -83,61 +83,57 @@ msgstr "Ara"
 msgid "Select a channel"
 msgstr "Kanal seç"
 
-#: data/resources/ui/channel_messages.ui:73
-msgid "Load more"
-msgstr "Daha çoğunu yükle"
-
-#: data/resources/ui/channel_messages.ui:106
+#: data/resources/ui/channel_messages.ui:114
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Cevabı kaldır"
 
-#: data/resources/ui/channel_messages.ui:108
+#: data/resources/ui/channel_messages.ui:116
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Cevabı kaldır"
 
-#: data/resources/ui/channel_messages.ui:138
+#: data/resources/ui/channel_messages.ui:146
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Eki kaldır"
 
-#: data/resources/ui/channel_messages.ui:140
+#: data/resources/ui/channel_messages.ui:148
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Eki kaldır"
 
-#: data/resources/ui/channel_messages.ui:174
+#: data/resources/ui/channel_messages.ui:182
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Ek ekle"
 
-#: data/resources/ui/channel_messages.ui:176
+#: data/resources/ui/channel_messages.ui:184
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Ek ekle"
 
-#: data/resources/ui/channel_messages.ui:195
+#: data/resources/ui/channel_messages.ui:203
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "ileti girdisi"
-
-#: data/resources/ui/channel_messages.ui:200
-msgctxt "tooltip"
-msgid "Message input"
-msgstr "ileti girdisi"
-
-#: data/resources/ui/channel_messages.ui:206
-msgctxt "accessibility"
-msgid "Send"
-msgstr "Gönder"
 
 #: data/resources/ui/channel_messages.ui:208
 msgctxt "tooltip"
+msgid "Message input"
+msgstr "ileti girdisi"
+
+#: data/resources/ui/channel_messages.ui:214
+msgctxt "accessibility"
 msgid "Send"
 msgstr "Gönder"
 
-#: data/resources/ui/channel_messages.ui:209
+#: data/resources/ui/channel_messages.ui:216
+msgctxt "tooltip"
+msgid "Send"
+msgstr "Gönder"
+
+#: data/resources/ui/channel_messages.ui:217
 msgid "Send"
 msgstr "Gönder"
 
@@ -209,19 +205,19 @@ msgstr "Panoya kopyala"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Lütfen bağ kurulduktan sonra kişiler görüntülenene kadar bekleyin."
 
-#: data/resources/ui/message_item.ui:238
+#: data/resources/ui/message_item.ui:242
 msgid "Reply"
 msgstr "Cevapla"
 
-#: data/resources/ui/message_item.ui:244
+#: data/resources/ui/message_item.ui:248
 msgid "React"
 msgstr "Tepki ver"
 
-#: data/resources/ui/message_item.ui:250
+#: data/resources/ui/message_item.ui:254
 msgid "Delete"
 msgstr ""
 
-#: data/resources/ui/message_item.ui:257
+#: data/resources/ui/message_item.ui:261
 msgid "Copy"
 msgstr "Kopyala"
 
@@ -258,48 +254,31 @@ msgid "Dowload files automatically"
 msgstr "Dosyaları kendiliğinden indir"
 
 #: data/resources/ui/preferences_window.ui:73
-msgid "Message Storage"
-msgstr "İleti Depolama"
-
-#: data/resources/ui/preferences_window.ui:76
-msgid "Number of messages to load on startup"
-msgstr "Başlangıçta yüklenecek ileti sayısı"
-
-#: data/resources/ui/preferences_window.ui:77
-#: data/resources/ui/preferences_window.ui:93
-msgid "Per channel"
-msgstr "Kanal başına"
-
-#: data/resources/ui/preferences_window.ui:92
-msgid "Number of messages to load on request"
-msgstr "İstek halinde yüklenecek ileti sayısı"
-
-#: data/resources/ui/preferences_window.ui:110
 msgid "Notifications"
 msgstr "Bildirimler"
 
-#: data/resources/ui/preferences_window.ui:111
+#: data/resources/ui/preferences_window.ui:74
 msgid "Notifications for new messages."
 msgstr "Yeni iletiler için bildirimler."
 
-#: data/resources/ui/preferences_window.ui:114
-#: data/de.schmidhuberj.Flare.gschema.xml:46
+#: data/resources/ui/preferences_window.ui:77
+#: data/de.schmidhuberj.Flare.gschema.xml:37
 msgid "Send notifications"
 msgstr "Bildirim gönder"
 
-#: data/resources/ui/preferences_window.ui:128 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.ui:91 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Kapalıyken yeni iletileri izle"
 
-#: data/resources/ui/preferences_window.ui:146
+#: data/resources/ui/preferences_window.ui:109
 msgid "Other"
 msgstr ""
 
-#: data/resources/ui/preferences_window.ui:149
+#: data/resources/ui/preferences_window.ui:112
 msgid "Selectable Message Text"
 msgstr ""
 
-#: data/resources/ui/preferences_window.ui:150
+#: data/resources/ui/preferences_window.ui:113
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 
@@ -375,7 +354,7 @@ msgstr "Kısayollar"
 msgid "About"
 msgstr "Hakkında"
 
-#: src/backend/channel.rs:499
+#: src/backend/channel.rs:505
 msgid "Note to self"
 msgstr "Kendime not"
 
@@ -383,57 +362,57 @@ msgstr "Kendime not"
 msgid "You"
 msgstr "Siz"
 
-#: src/backend/message/call_message.rs:112
+#: src/backend/message/call_message.rs:115
 msgid "Started calling."
 msgstr "Arama başlatıldı."
 
-#: src/backend/message/call_message.rs:113
+#: src/backend/message/call_message.rs:116
 msgid "Answered a call."
 msgstr "Bir arama yanıtlandı."
 
-#: src/backend/message/call_message.rs:114
+#: src/backend/message/call_message.rs:117
 msgid "Hung up."
 msgstr "Kapatıldı."
 
-#: src/backend/message/call_message.rs:115
+#: src/backend/message/call_message.rs:118
 msgid "Is busy."
 msgstr "meşgul."
 
-#: src/backend/message/text_message.rs:269
+#: src/backend/message/text_message.rs:294
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Görüntü gönderildi"
 msgstr[1] "{} görüntü gönderildi"
 
-#: src/backend/message/text_message.rs:272
+#: src/backend/message/text_message.rs:297
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Video gönderildi"
 msgstr[1] "{} video gönderildi"
 
-#: src/backend/message/text_message.rs:275
+#: src/backend/message/text_message.rs:300
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Dosya gönderildi"
 msgstr[1] "{} dosya gönderildi"
 
-#: src/error.rs:86
+#: src/error.rs:87
 msgid "I/O Error."
 msgstr "G/Ç hatası."
 
-#: src/error.rs:91
+#: src/error.rs:92
 msgid "There does not seem to be a connection to the internet available."
 msgstr "İnternet bağlantısı yok görünüyor."
 
-#: src/error.rs:96
+#: src/error.rs:97
 msgid "Something glib-related failed."
 msgstr "Glib ile ilgili bir şey başarısız oldu."
 
-#: src/error.rs:101
+#: src/error.rs:102
 msgid "The communication with Libsecret failed."
 msgstr "Libsecret ile iletişim başarısız oldu."
 
-#: src/error.rs:106
+#: src/error.rs:107
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -441,7 +420,7 @@ msgstr ""
 "Arka uç veritabanı başarısız oldu. Lütfen uygulamayı yeniden başlatın veya "
 "veritabanını silin ve uygulamayı yeniden bağlayın."
 
-#: src/error.rs:111
+#: src/error.rs:112
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -449,42 +428,42 @@ msgstr ""
 "Signal ile yetkilendirilmemişsiniz görünüyor. Lütfen veritabanını silip "
 "uygulamayı yeniden bağlayın."
 
-#: src/error.rs:116
+#: src/error.rs:117
 msgid "Sending a message failed."
 msgstr "İleti gönderilemedi."
 
-#: src/error.rs:121
+#: src/error.rs:122
 msgid "Receiving a message failed."
 msgstr "İleti alınamadı."
 
-#: src/error.rs:126
+#: src/error.rs:127
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 "Signal arka ucunda beklenmedik bir hata oluştu. Lütfen daha sonra tekrar "
 "deneyin."
 
-#: src/error.rs:131
+#: src/error.rs:132
 msgid "The application seems to be misconfigured."
 msgstr "Uygulama yanlış yapılandırılmış görünüyor."
 
-#: src/error.rs:136
+#: src/error.rs:137
 msgid "A part of the application crashed."
 msgstr "Uygulamanın bir bölümü çöktü."
 
-#: src/error.rs:146
+#: src/error.rs:147
 msgid "Please check your internet connection."
 msgstr "Lütfen internet bağlantınızı denetleyin."
 
-#: src/error.rs:151
+#: src/error.rs:152
 msgid "Please delete the database and relink the device."
 msgstr "Lütfen veritabanını silip aygıtı yeniden bağlayın."
 
-#: src/error.rs:158
+#: src/error.rs:159
 msgid "The database path at {} is no folder."
 msgstr "{} adresindeki veritabanı yolu klasör değil."
 
-#: src/error.rs:163
+#: src/error.rs:164
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Lütfen uygulamayı günlük kaydı ile yeniden başlatın ve bu sorunu bildirin."
@@ -521,7 +500,7 @@ msgid "An unofficial Signal GTK client"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo.
-#: data/de.schmidhuberj.Flare.metainfo.xml:23
+#: data/de.schmidhuberj.Flare.metainfo.xml:26
 msgid ""
 "An unofficial GTK client for the messaging application Signal. This is a "
 "very simple application with many features missing compared to the official "
@@ -529,47 +508,59 @@ msgid ""
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:29
+#: data/de.schmidhuberj.Flare.metainfo.xml:32
 #, fuzzy
 msgid "Link device"
 msgstr "Aygıt Bağla"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:33
+#: data/de.schmidhuberj.Flare.metainfo.xml:36
 #, fuzzy
 msgid "Send messages"
 msgstr "İletileri temizle"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:37
+#: data/de.schmidhuberj.Flare.metainfo.xml:40
 #, fuzzy
 msgid "Receive messages"
 msgstr "İletileri temizle"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:41
+#: data/de.schmidhuberj.Flare.metainfo.xml:44
 #, fuzzy
 msgid "Reply to a message"
 msgstr "İletileri temizle"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:45
+#: data/de.schmidhuberj.Flare.metainfo.xml:48
 #, fuzzy
 msgid "React to a message"
 msgstr "İletileri temizle"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:49
+#: data/de.schmidhuberj.Flare.metainfo.xml:52
 msgid "Sending and receiving attachments"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:53
+#: data/de.schmidhuberj.Flare.metainfo.xml:56
 msgid "Encrypted storage"
 msgstr ""
 
+#. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:60
+msgid "Notifications, optionally in the background"
+msgstr ""
+
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:58
+#: data/de.schmidhuberj.Flare.metainfo.xml:65
+msgid ""
+"More features are planned, blocked or not-planned. Consult the README for "
+"more information about them."
+msgstr ""
+
+#. Translators: Description of Flare in metainfo: Security note
+#: data/de.schmidhuberj.Flare.metainfo.xml:69
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -577,7 +568,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:340
+#: data/de.schmidhuberj.Flare.metainfo.xml:382
 #, fuzzy
 msgid "Overview of the application"
 msgstr "Uygulamanın bir bölümü çöktü."
@@ -612,23 +603,43 @@ msgstr ""
 msgid "Automatically download files"
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.gschema.xml:37
-#, fuzzy
-msgid "The amount of messages to load on startup for each channel"
-msgstr "Başlangıçta yüklenecek ileti sayısı"
-
 #: data/de.schmidhuberj.Flare.gschema.xml:41
-#, fuzzy
-msgid "The amount of messages to load on request for each channel"
-msgstr "İstek halinde yüklenecek ileti sayısı"
-
-#: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Run in background when closed"
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.gschema.xml:55
+#: data/de.schmidhuberj.Flare.gschema.xml:46
 msgid "Can messages be selected"
 msgstr ""
+
+#~ msgctxt "accessibility"
+#~ msgid "Reset Identity"
+#~ msgstr "Kimliği Sıfırla"
+
+#~ msgid "Reset Identity"
+#~ msgstr "Kimliği Sıfırla"
+
+#~ msgid "Load more"
+#~ msgstr "Daha çoğunu yükle"
+
+#~ msgid "Message Storage"
+#~ msgstr "İleti Depolama"
+
+#~ msgid "Number of messages to load on startup"
+#~ msgstr "Başlangıçta yüklenecek ileti sayısı"
+
+#~ msgid "Per channel"
+#~ msgstr "Kanal başına"
+
+#~ msgid "Number of messages to load on request"
+#~ msgstr "İstek halinde yüklenecek ileti sayısı"
+
+#, fuzzy
+#~ msgid "The amount of messages to load on startup for each channel"
+#~ msgstr "Başlangıçta yüklenecek ileti sayısı"
+
+#, fuzzy
+#~ msgid "The amount of messages to load on request for each channel"
+#~ msgstr "İstek halinde yüklenecek ileti sayısı"
 
 #, fuzzy
 #~ msgid "Changed"
