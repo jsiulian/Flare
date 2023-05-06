@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-06 17:12+0200\n"
-"PO-Revision-Date: 2023-04-05 19:52+0000\n"
+"PO-Revision-Date: 2023-05-08 07:48+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/resources/ui/about.ui:14
 msgid "translator-credits"
@@ -53,11 +53,11 @@ msgstr "Kanaalinformatie"
 #: data/resources/ui/channel_info_dialog.ui:33
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Sessie resetten"
 
 #: data/resources/ui/channel_info_dialog.ui:35
 msgid "Reset Session"
-msgstr ""
+msgstr "Sessie resetten"
 
 #: data/resources/ui/channel_info_dialog.ui:51
 #: data/resources/ui/error_dialog.ui:14
@@ -545,7 +545,7 @@ msgstr "Versleutelde opslag"
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:60
 msgid "Notifications, optionally in the background"
-msgstr ""
+msgstr "Meldingen, optioneel op de achtergrond"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:65
@@ -553,6 +553,8 @@ msgid ""
 "More features are planned, blocked or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
+"Meer functies zijn gepland, geblokkeerd of niet-gepland. Raadpleeg de README "
+"voor meer informatie hierover."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:69
