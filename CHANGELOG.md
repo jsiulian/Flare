@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Button to show all channels.
+
+### Changed
+
+- Only show non-empty channels by default.
+
 ## [0.8.0] - 2023-05-03
 
 ### Changed

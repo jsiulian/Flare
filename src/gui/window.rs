@@ -65,6 +65,7 @@ impl Window {
 }
 
 pub mod imp {
+    use std::borrow::Borrow;
     use std::{cell::RefCell, env, path::PathBuf};
 
     use gdk::glib::BindingFlags;
@@ -354,6 +355,8 @@ pub mod imp {
                     crate::trace!("Opening link window for url {}", url);
                     let window = LinkWindow::new(url, man, &obj);
                     window.show();
+                    // After link, show all channels as most likely no channels have messages yet.
+                    obj.imp().channel_list.borrow().set_property("add-conversation-enabled", true);
                     None
                 }));
 
