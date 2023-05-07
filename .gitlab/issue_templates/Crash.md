@@ -15,7 +15,7 @@ Additional information: <!-- Put any remaining information here -->
 <details>
 <summary>Stacktrace:</summary>
 <!-- Run the program in the terminal using `RUST_LOG=flare=trace de.schmidhuberj.Flare` (assuming you have the Flatpak installed) and paste the generated output in the backticks.
-All of the sensitive data should be hashed, but please check that no sensitive data remained is in the logs. -->
+All of the sensitive data should be hashed, but please check that no sensitive data remained is in the logs. Running the script here: https://gitlab.com/Schmiddiii/flare/-/snippets/2538264 should censor your logs for you, but please verify that this is the case before uploading them. -->
 
 ```
 
