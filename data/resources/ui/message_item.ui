@@ -20,9 +20,13 @@
       </closure>
     </binding>
 
-    <!-- Avatar -->
+    <!-- Avatar (Not self) -->
     <child>
-      <object class="AdwAvatar" id="avatar">
+      <object class="AdwAvatar">
+        <style>
+          <class name="avatar-other"/>
+        </style>
+
         <binding name="text">
           <lookup name="title">
             <lookup name="sender">
@@ -30,6 +34,7 @@
             </lookup>
           </lookup>
         </binding>
+
         <property name="show-initials">True</property>
         <property name="valign">start</property>
         <property name="size">32</property>

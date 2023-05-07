@@ -1,8 +1,23 @@
-.message-list .message-item:not(.has-header) {
-  margin-left: 44px;
+.channel-messages .message-item.from-self .avatar-other {
+  opacity: 0;
+}
+.channel-messages .message-item:not(.has-header) .avatar-other {
+  opacity: 0;
 }
 
 .message-bubble {
+  font-size: 16px;
+  color: black;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: @light_2;
+}
+
+.message-item.from-self .message-bubble {
   font-size: 16px;
   color: black;
   border-radius: 9px;

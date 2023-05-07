@@ -73,7 +73,7 @@
       <object class="AdwStatusPage">
         <property name="title">No Conversations</property>
         <property name="description">Add a conversation</property>
-        <property name="icon-name">list-add-symbolic</property>
+        <property name="icon-name">document-edit-symbolic</property>
         <property name="hexpand">True</property>
         <property name="vexpand">True</property>
 

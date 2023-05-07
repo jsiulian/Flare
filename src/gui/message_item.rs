@@ -26,6 +26,7 @@ impl MessageItem {
             .build();
         s.init_label_selectable();
         s.setup_showheader();
+        s.setup_from_self();
         s
     }
 
@@ -92,6 +93,15 @@ impl MessageItem {
         self.set_show_header();
     }
 
+    fn setup_from_self(&self) {
+        if self.message().sender().is_self() {
+            self.add_css_class("from-self");
+            self.set_halign(gtk::Align::End);
+        } else {
+            self.set_halign(gtk::Align::Start);
+        }
+    }
+
     fn init_label_selectable(&self) {
         let manager = self.manager();
         let settings = manager.settings();
@@ -110,7 +120,6 @@ impl MessageItem {
     pub fn set_show_header(&self) {
         let visible = self.message().show_header() || self.property("force-show-header");
 
-        self.imp().avatar.set_visible(visible);
         self.imp().header.set_visible(visible);
 
         if visible && !self.has_css_class("has-header") {
@@ -144,8 +153,6 @@ pub mod imp {
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/message_item.ui")]
     pub struct MessageItem {
-        #[template_child]
-        pub(super) avatar: TemplateChild<libadwaita::Avatar>,
         #[template_child]
         pub(super) header: TemplateChild<gtk::Box>,
         #[template_child]
