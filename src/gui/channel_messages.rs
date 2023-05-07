@@ -194,6 +194,11 @@ pub mod imp {
         }
 
         #[template_callback]
+        fn scroll_down(&self) {
+            self.obj().scroll_down()
+        }
+
+        #[template_callback]
         fn handle_edge_reached(&self, position: PositionType) {
             if position == PositionType::Top {
                 self.handle_more()

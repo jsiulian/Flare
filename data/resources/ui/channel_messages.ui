@@ -62,36 +62,60 @@
           </object>
         </child>
 
-        <!-- Message List -->
         <child>
-          <object class="GtkScrolledWindow" id="scrolled_window">
-            <property name="vexpand">True</property>
-            <property name="hscrollbar-policy">never</property>
+          <object class="GtkOverlay">
+            <child type="overlay">
+              <object class="GtkButton">
+                <style>
+                  <class name="circular"/>
+                </style>
+                <property name="icon-name">go-bottom-symbolic</property>
+                <property name="halign">end</property>
+                <property name="valign">end</property>
+                <property name="margin-bottom">7</property>
+                <property name="margin-end">7</property>
 
-            <signal name="edge-overshot" handler="handle_edge_reached" swapped="true"/>
+                <binding name="visible">
+                  <closure function="not" type="gboolean">
+                    <lookup name="sticky" type="FlChannelMessages"/>
+                  </closure>
+                </binding>
 
+                <signal name="clicked" handler="scroll_down" swapped="true"/>
+              </object>
+            </child>
+            <!-- Message List -->
             <child>
-              <object class="AdwClampScrollable">
-                <property name="vexpand">False</property>
-                <property name="hexpand">True</property>
-                <property name="maximum-size">750</property>
-                <property name="tightening-threshold">550</property>
+              <object class="GtkScrolledWindow" id="scrolled_window">
+                <property name="vexpand">True</property>
+                <property name="hscrollbar-policy">never</property>
+
+                <signal name="edge-overshot" handler="handle_edge_reached" swapped="true"/>
+
                 <child>
-                  <object class="GtkListView" id="list_view">
-                    <style>
-                      <class name="message-list"/>
-                    </style>
-
-                    <property name="hexpand">True</property>
+                  <object class="AdwClampScrollable">
                     <property name="vexpand">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="maximum-size">750</property>
+                    <property name="tightening-threshold">550</property>
+                    <child>
+                      <object class="GtkListView" id="list_view">
+                        <style>
+                          <class name="message-list"/>
+                        </style>
 
-                    <binding name="model">
-                      <closure function="no_selection" type="GtkSelectionModel">
-                        <lookup name="timeline">
-                          <lookup name="active-channel" type="FlChannelMessages"/>
-                        </lookup>
-                      </closure>
-                    </binding>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">False</property>
+
+                        <binding name="model">
+                          <closure function="no_selection" type="GtkSelectionModel">
+                            <lookup name="timeline">
+                              <lookup name="active-channel" type="FlChannelMessages"/>
+                            </lookup>
+                          </closure>
+                        </binding>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
