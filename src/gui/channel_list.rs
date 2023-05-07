@@ -5,6 +5,7 @@ use gtk::prelude::*;
 use gtk::SorterChange;
 use gtk::{gio, glib};
 
+use crate::backend::Manager;
 use crate::{backend::Channel, gspawn};
 
 glib::wrapper! {
@@ -25,6 +26,7 @@ impl ChannelList {
         channel.connect_notify_local(Some("last-message"), move |_, _| {
             log::trace!("Change sorter");
             s.imp().sorter.borrow().changed(SorterChange::Different);
+            s.imp().filter_changed();
             s.scroll_up();
         });
     }
@@ -70,6 +72,10 @@ impl ChannelList {
     pub fn set_search_enabled(&self, enabled: bool) {
         self.set_property("search-enabled", enabled)
     }
+
+    pub fn manager(&self) -> Manager {
+        self.property("manager")
+    }
 }
 
 pub mod imp {
@@ -81,7 +87,7 @@ pub mod imp {
         subclass::{InitializingObject, Signal},
         ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
-    use gtk::{gio, glib};
+    use gtk::{gio, glib, EveryFilter};
     use gtk::{
         prelude::*, subclass::prelude::*, CompositeTemplate, CustomFilter, CustomSorter,
         FilterChange, FilterListModel, SignalListItemFactory, SortListModel, Widget,
@@ -104,19 +110,24 @@ pub mod imp {
 
         pub(super) model: RefCell<gio::ListStore>,
         pub(super) sorter: RefCell<gtk::CustomSorter>,
-        pub(super) filter: RefCell<gtk::CustomFilter>,
+        pub(super) filter: RefCell<gtk::EveryFilter>,
 
         manager: RefCell<Option<Manager>>,
         active_channel: RefCell<Option<Channel>>,
         search_enabled: Cell<bool>,
+        add_conversation_enabled: Cell<bool>,
     }
 
     #[gtk::template_callbacks]
     impl ChannelList {
         #[template_callback]
         fn search_changed(&self) {
-            self.filter.borrow().changed(FilterChange::Different);
+            self.filter_changed();
             self.obj().scroll_up();
+        }
+
+        pub(super) fn filter_changed(&self) {
+            self.filter.borrow().changed(FilterChange::Different);
         }
 
         #[template_callback]
@@ -156,8 +167,9 @@ pub mod imp {
 
     impl ObjectImpl for ChannelList {
         fn constructed(&self) {
+            let obj = self.obj();
             let model = gtk::gio::ListStore::new(Channel::static_type());
-            let filter =
+            let filter_search =
                 CustomFilter::new(clone!(@strong self.search_entry as entry => move |obj| {
                     let search = entry.text().to_string();
                     let channel = obj
@@ -166,6 +178,16 @@ pub mod imp {
                     let title = channel.title();
                     title.to_lowercase().contains(&search.to_lowercase())
                 }));
+            let filter = EveryFilter::new();
+            let filter_empty = CustomFilter::new(clone!(@strong obj as o => move |obj| {
+                let channel = obj
+                    .downcast_ref::<Channel>()
+                    .expect("The object needs to be of type `Channel`.");
+                let has_message = channel.last_message().is_some();
+                has_message || o.property("add-conversation-enabled")
+            }));
+            filter.append(filter_search);
+            filter.append(filter_empty);
             let filter_model = FilterListModel::new(Some(model.clone()), Some(filter.clone()));
             let sorter = CustomSorter::new(|l1, l2| {
                 let c1 = l1
@@ -224,6 +246,13 @@ pub mod imp {
                 .connect_activate(clone!(@weak self as obj => move |_list_view, position| {
                     obj.obj().activate_row(position);
                 }));
+
+            obj.connect_notify_local(
+                Some("add-conversation-enabled"),
+                clone!(@weak self as s => move |_, _| {
+                    s.filter_changed();
+                }),
+            );
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -232,6 +261,7 @@ pub mod imp {
                     ParamSpecObject::builder::<Manager>("manager").build(),
                     ParamSpecObject::builder::<Channel>("active-channel").build(),
                     ParamSpecBoolean::builder("search-enabled").build(),
+                    ParamSpecBoolean::builder("add-conversation-enabled").build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -242,6 +272,7 @@ pub mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "active-channel" => self.active_channel.borrow().as_ref().to_value(),
                 "search-enabled" => self.search_enabled.get().to_value(),
+                "add-conversation-enabled" => self.add_conversation_enabled.get().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -284,6 +315,12 @@ pub mod imp {
                         "Property `search-enabled` of `ChannelList` has to be of type `bool`",
                     );
                     self.search_enabled.replace(search);
+                }
+                "add-conversation-enabled" => {
+                    let add = value.get::<bool>().expect(
+                        "Property `add-conversation-enabled` of `ChannelList` has to be of type `bool`",
+                    );
+                    self.add_conversation_enabled.replace(add);
                 }
                 _ => unimplemented!(),
             }

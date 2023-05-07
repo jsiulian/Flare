@@ -41,6 +41,16 @@
                     <signal name="clicked" handler="handle_search_clicked" swapped="true"/>
                   </object>
                 </child>
+                <child type="start">
+                  <object class="GtkToggleButton">
+                    <accessibility>
+                      <property name="label" translatable="yes" context="accessibility">Add Conversation</property>
+                    </accessibility>
+                    <property name="tooltip-text" context="tooltip">Add Conversation</property>
+                    <property name="icon-name">list-add-symbolic</property>
+                    <property name="active" bind-source="channel_list" bind-property="add-conversation-enabled" bind-flags="sync-create|bidirectional"/>
+                  </object>
+                </child>
                 <child type="end">
                   <object class="GtkMenuButton">
                     <accessibility>

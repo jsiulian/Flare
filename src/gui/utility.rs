@@ -40,6 +40,11 @@ impl Utility {
         s.map(|s| !s.is_empty()).unwrap_or_default()
     }
 
+    #[template_callback]
+    fn uint_equal(i1: u32, i2: u32) -> bool {
+        i1 == i2
+    }
+
     #[template_callback(function)]
     pub(super) fn format_timestamp(timestamp: u64) -> Option<String> {
         let datetime = DateTime::from_unix_utc((timestamp / 1000).try_into().unwrap_or_default())
