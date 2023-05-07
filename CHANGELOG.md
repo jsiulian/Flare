@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Button to show all channels.
+- Button to scroll down in the messages view.
+- Keyboard shortcut "Ctrl+Q" to close window.
 
 ### Changed
 

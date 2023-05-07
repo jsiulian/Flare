@@ -17,6 +17,7 @@ impl Window {
         app.set_accels_for_action("win.settings", &["<Control>comma"]);
         app.set_accels_for_action("win.show-help-overlay", &["<Control>question"]);
         app.set_accels_for_action("win.about", &["F1"]);
+        app.set_accels_for_action("window.close", &["<Control>q"]);
         app.set_accels_for_action("channel-messages.activate-input", &["<Control>i"]);
         app.set_accels_for_action("channel-messages.load-more", &["<Control>l"]);
         for i in 1..=9 {

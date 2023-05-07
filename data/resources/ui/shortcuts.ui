@@ -33,6 +33,12 @@
                 <property name="accelerator">F10</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Close window</property>
+                <property name="accelerator">&lt;Ctrl&gt;&amp;q</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
