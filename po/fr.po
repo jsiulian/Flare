@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-06 17:12+0200\n"
-"PO-Revision-Date: 2023-05-04 20:49+0000\n"
+"PO-Revision-Date: 2023-05-09 08:52+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
@@ -51,11 +51,11 @@ msgstr "Informations sur le canal"
 #: data/resources/ui/channel_info_dialog.ui:33
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Réinitialiser la session"
 
 #: data/resources/ui/channel_info_dialog.ui:35
 msgid "Reset Session"
-msgstr ""
+msgstr "Réinitialiser la session"
 
 #: data/resources/ui/channel_info_dialog.ui:51
 #: data/resources/ui/error_dialog.ui:14
@@ -547,7 +547,7 @@ msgstr "Stockage chiffré"
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:60
 msgid "Notifications, optionally in the background"
-msgstr ""
+msgstr "Notifications, optionnellement quand l’appli fonctionne en arrière-plan"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:65
@@ -555,6 +555,8 @@ msgid ""
 "More features are planned, blocked or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
+"Plus de fonctionnalités sont prévues, bloquées, ou non envisagées. Consultez "
+"le fichier README pour plus d’informations."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:69
