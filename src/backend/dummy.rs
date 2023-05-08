@@ -71,7 +71,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(1),
             phone_number: None,
-            name: "Postmarket OS User".to_string(),
+            name: "Sailfish OS User".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -97,7 +97,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(3),
             phone_number: None,
-            name: "Unnamed old man".to_string(),
+            name: "Bordomir".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -110,7 +110,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(4),
             phone_number: None,
-            name: "Gandalf".to_string(),
+            name: "T'Challah".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -123,7 +123,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(5),
             phone_number: None,
-            name: "Palpatine".to_string(),
+            name: "Call Center".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -191,46 +191,18 @@ impl super::Manager {
 
         let msg_replied = msg!(
             self,
-            r#"Flare 0.8.0 was released with an improved GUI for the message list. The list is now "smart" and automatically loads messages if more are required. Long live Gtk ListView (and a few things I did)!"#,
+            "Another release of Flare, 0.8.1, is out with many minor UI and UX improvements, with the most notable change being in the message view to make it easier to differentiate between own messages and messages sent from others. Some other things include hiding empty conversations by default and a button to scroll down in the messages view.",
             2,
             GROUP_ID,
             18 + base_minute
         );
-        let msg_reply = msg!(
-            self,
-            "RIP \"Load More\"-button. Juni 2022 - May 2023. You won't be missed.",
-            0,
-            GROUP_ID,
-            25 + base_minute
-        );
+        let msg_reply = msg!(self, "Sounds great!", 0, GROUP_ID, 19 + base_minute);
         msg_reply
             .clone()
             .downcast::<TextMessage>()
             .unwrap()
             .set_quote(&msg_replied.clone().downcast::<TextMessage>().unwrap());
-        msg_reply.clone().downcast::<TextMessage>().unwrap().react(
-            &ReactionMessage::from_reaction(
-                &self.dummy_contacts()[0],
-                &self.dummy_channels().await[GROUP_ID],
-                26 + base_minute,
-                &self,
-                Reaction {
-                    emoji: Some("🤣️".to_string()),
-                    remove: Some(false),
-                    target_author_uuid: None,
-                    target_sent_timestamp: None,
-                },
-            ),
-        );
-
-        let msg_reacted = msg!(
-            self,
-            "Oh, and as always there were many fixes in this version, including a few regarding emojis.",
-            2,
-            GROUP_ID,
-            27 + base_minute
-        );
-        msg_reacted
+        msg_replied
             .clone()
             .downcast::<TextMessage>()
             .unwrap()
@@ -240,58 +212,7 @@ impl super::Manager {
                 26 + base_minute,
                 &self,
                 Reaction {
-                    emoji: Some("👨‍👨‍👧‍👧️".to_string()),
-                    remove: Some(false),
-                    target_author_uuid: None,
-                    target_sent_timestamp: None,
-                },
-            ));
-        msg_reacted
-            .clone()
-            .downcast::<TextMessage>()
-            .unwrap()
-            .react(&ReactionMessage::from_reaction(
-                &self.dummy_contacts()[1],
-                &self.dummy_channels().await[GROUP_ID],
-                26 + base_minute,
-                &self,
-                Reaction {
-                    emoji: Some("🏴‍☠️️".to_string()),
-                    remove: Some(false),
-                    target_author_uuid: None,
-                    target_sent_timestamp: None,
-                },
-            ));
-        msg_reacted
-            .clone()
-            .downcast::<TextMessage>()
-            .unwrap()
-            .react(&ReactionMessage::from_reaction(
-                &self.dummy_contacts()[2],
-                &self.dummy_channels().await[GROUP_ID],
-                26 + base_minute,
-                &self,
-                Reaction {
-                    emoji: Some("🤌🏼️".to_string()),
-                    remove: Some(false),
-                    target_author_uuid: None,
-                    target_sent_timestamp: None,
-                },
-            ));
-
-        let msg_reacted2 = msg!(self, "Wow, Flare is now almost one year old. It certainly has come far in that time. Who bakes the cake for the birthday party?", 1, GROUP_ID, 35 + base_minute);
-
-        msg_reacted2
-            .clone()
-            .downcast::<TextMessage>()
-            .unwrap()
-            .react(&ReactionMessage::from_reaction(
-                &self.dummy_contacts()[2],
-                &self.dummy_channels().await[GROUP_ID],
-                26 + base_minute,
-                &self,
-                Reaction {
-                    emoji: Some("🎂".to_string()),
+                    emoji: Some("🎉".to_string()),
                     remove: Some(false),
                     target_author_uuid: None,
                     target_sent_timestamp: None,
@@ -313,7 +234,42 @@ impl super::Manager {
             msg_replied,
             msg_screenshot,
             msg_reply,
-            msg_reacted,
+            msg!(
+                self,
+                "Hey, my messages are now aligned on the right side of the screen! That's cool.",
+                0,
+                GROUP_ID,
+                20 + base_minute
+            ),
+            msg!(
+                self,
+                "Looking good. Sadly not available for Sailfish OS, but luckily we still have Whisperfish.",
+                1,
+                GROUP_ID,
+                23 + base_minute
+            ),
+            msg!(
+                self,
+                "Yes, it does indeed look good. Nevertheless, I am still no UI designer, so it may also look terrible. But in an extensive user study (one additional person), the new UI was an improvement for 100% of the participants. I doubt many applications have such great statistics.",
+                2,
+                GROUP_ID,
+                24 + base_minute
+            ),
+            msg!(
+                self,
+                "By the way, you should be able to see the new scroll-down button somewhere over here ->",
+                2,
+                GROUP_ID,
+                25 + base_minute
+            ),
+            msg!(
+                self,
+                "This is talking a little bit more. You can ignore this part.",
+                2,
+                GROUP_ID,
+                26 + base_minute
+            ),
+
             call_msg!(
                 self,
                 PreCallMessage {
@@ -332,45 +288,18 @@ impl super::Manager {
                 2,
                 base_minute - 99
             ),
-            msg_reacted2,
             msg!(
                 self,
-                "It has indeed improved a lot. Let's hope for an equally bright future.",
-                0,
-                GROUP_ID,
-                36 + base_minute
-            ),
-            msg!(
-                self,
-                "Let's hope I don't have to prepare a speech 😃️",
-                2,
-                GROUP_ID,
-                37 + base_minute
-            ),
-            msg!(
-                self,
-                "Anyway, as there is still space left in this screenshots, here are a few shameless plugs:
-- You can get Flare on Flathub (with a new design 😍️).
-- It's also available on Alpine Edge (and therefore Postmarket OS Edge).
-- It's also available in the AUR for Arch users (punish your PinePhone by compiling this).
-- You can also get involved in Flare by translating it over at Weblate.
-- Feel free to join the Matrix room and talk a bit.",
-                2,
-                GROUP_ID,
-                38 + base_minute
-            ),
-            msg!(
-                self,
-                "It's dangerous to go alone! Take this.",
+                "One does not simply write a Signal client",
                 3,
                 3,
                 1 + base_minute
             ),
-            msg!(self, "Fly you fools", 4, 4, 2 + base_minute),
-            msg!(self, "Do it!", 5, 5, 3 + base_minute),
+            msg!(self, "Get this man a Signal client!", 4, 4, 2 + base_minute),
+            msg!(self, "We've been trying to reach you about your car's extended warranty", 5, 5, 3 + base_minute),
             msg!(
                 self,
-                "Flare is also packaged in PMOS!",
+                "Flare also works with Whisperfish by the way.",
                 1,
                 1,
                 3 + base_minute
