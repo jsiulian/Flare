@@ -74,6 +74,21 @@
   </description>
 
   <releases>
+    <release version="v0.8.1" date="2023-05-07">
+      <description translate="no">
+        <p>Added</p>
+        <ul>
+          <li>Button to show all channels.</li>
+          <li>Button to scroll down in the messages view.</li>
+          <li>Keyboard shortcut Ctrl+Q to close window.</li>
+        </ul>
+        <p>Changed</p>
+        <ul>
+          <li>Only show non-empty channels by default.</li>
+          <li>UI changes to differentiate own messages from others.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.8.0" date="2023-05-03">
       <description translate="no">
         <p>Changed</p>
