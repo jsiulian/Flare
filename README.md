@@ -32,7 +32,15 @@ An unofficial Signal GTK client.
   </tr>
 </table>
 
+## Dependencies
+
+Flare uses the [libsecret](https://wiki.gnome.org/Projects/Libsecret) library to store credentials. To use the Flatpak, you must install libsecret as a system package.
+
+If you would like sound or vibration for Flare's notifications, install [feedbackd](https://source.puri.sm/Librem5/feedbackd) as a system package.
+
 ## Features
+
+For a list of features to be added, see [the wiki](https://gitlab.com/Schmiddiii/flare/-/wikis/Feature-roadmap)
 
 - Linking device
 - Sending a message
@@ -43,45 +51,6 @@ An unofficial Signal GTK client.
 - Message storage
 - Encrypted storage (As I am not a security-expert, I do not guarantee anything. Read the `Security`-section)
 - Notifications
-
-## Planned Features
-
-- The blocked features listed below once they are ready
-- Maybe once mature enough: Primary device
-- Read receipts
-- Typing indicators
-- Message forwarding
-
-## Features that may be implemented
-
-Some features may be implemented in the future:
-
-- Voice messages
-- Sending a contact
-- Sending your location
-
-## Not planned features
-
-Some features are not planned by me as I will not use them. But if someone is interested in contributing them, I am open for adding them:
-
-- Full compatibility with the official Signal products, including:
-    - Calling
-    - Paying
-    - Majority of settings
-
-## Blocked features
-
-This application uses [presage](https://github.com/whisperfish/presage) internally. These features haven't been implemented in it yet:
-
-- Avatars
-- Some group features
-    - Group invites (you will need to be added to the group, not invited)
-    - Group management
-- Some contact features
-    - Contact discovery
-    - Contact management
-- Chat deletion
-- Disappearing messages
 
 ## Translation
 
