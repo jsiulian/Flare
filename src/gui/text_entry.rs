@@ -22,6 +22,10 @@ impl TextEntry {
         let buffer = &obj.buffer;
         buffer.set_text("");
     }
+
+    pub fn insert_emoji(&self) {
+        self.imp().insert_emoji();
+    }
 }
 
 pub mod imp {
@@ -42,7 +46,9 @@ pub mod imp {
         prelude::StaticType,
         subclass::{
             prelude::BoxImpl,
-            widget::{CompositeTemplate, WidgetClassSubclassExt, WidgetImpl},
+            widget::{
+                CompositeTemplate, CompositeTemplateCallbacks, WidgetClassSubclassExt, WidgetImpl,
+            },
         },
         traits::{TextBufferExt, TextViewExt, WidgetExt},
         CompositeTemplate, Inhibit, TemplateChild, TextBuffer, TextView,
@@ -65,10 +71,18 @@ pub mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
+            Self::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {
             obj.init_template();
+        }
+    }
+    #[gtk::template_callbacks]
+    impl TextEntry {
+        #[template_callback]
+        pub(super) fn insert_emoji(&self) {
+            self.view.emit_insert_emoji();
         }
     }
 

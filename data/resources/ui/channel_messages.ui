@@ -28,6 +28,7 @@
     <!-- Status Page -->
     <child>
       <object class="AdwStatusPage">
+        <property name="title" translatable="yes">No Channel Selected</property>
         <property name="description" translatable="yes">Select a channel</property>
         <property name="icon-name">system-search-symbolic</property>
         <property name="vexpand">True</property>
@@ -219,6 +220,16 @@
                     </child>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <accessibility>
+                  <property name="label" translatable="yes" context="accessibility">Insert an emoji</property>
+                </accessibility>
+                <property name="tooltip-text" translatable="yes" context="tooltip">Insert emoji</property>
+                <signal name="clicked" handler="insert_emoji" swapped="true"/>
+                <property name="icon-name">face-smile-symbolic</property>
               </object>
             </child>
             <child>
