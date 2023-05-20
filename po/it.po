@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-06 17:12+0200\n"
+"POT-Creation-Date: 2023-05-20 16:48+0200\n"
 "PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/flare/flare/it/"
@@ -45,7 +45,7 @@ msgctxt "accessibility"
 msgid "Download"
 msgstr ""
 
-#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:162
+#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:172
 msgid "Channel Information"
 msgstr ""
 
@@ -72,71 +72,85 @@ msgstr ""
 msgid "Search"
 msgstr "Ricerca"
 
-#: data/resources/ui/channel_list.ui:33 data/resources/ui/window.ui:36
+#: data/resources/ui/channel_list.ui:33 data/resources/ui/window.ui:58
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Ricerca"
 
 #: data/resources/ui/channel_messages.ui:31
+msgid "No Channel Selected"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:32
 msgid "Select a channel"
 msgstr "Seleziona un canale"
 
-#: data/resources/ui/channel_messages.ui:114
+#: data/resources/ui/channel_messages.ui:139
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Rimuovi la risposta"
 
-#: data/resources/ui/channel_messages.ui:116
+#: data/resources/ui/channel_messages.ui:141
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Rimuovi la risposta"
 
-#: data/resources/ui/channel_messages.ui:146
+#: data/resources/ui/channel_messages.ui:171
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Rimuovi un allegato"
 
-#: data/resources/ui/channel_messages.ui:148
+#: data/resources/ui/channel_messages.ui:173
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Rimuovi l'allegato"
 
-#: data/resources/ui/channel_messages.ui:182
+#: data/resources/ui/channel_messages.ui:207
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Aggiungi un allegato"
 
-#: data/resources/ui/channel_messages.ui:184
+#: data/resources/ui/channel_messages.ui:209
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Aggiungi un allegato"
 
-#: data/resources/ui/channel_messages.ui:203
+#: data/resources/ui/channel_messages.ui:228
+msgctxt "accessibility"
+msgid "Insert an emoji"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:230
+msgctxt "tooltip"
+msgid "Insert emoji"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:238
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Inserimento del messaggio"
 
-#: data/resources/ui/channel_messages.ui:208
+#: data/resources/ui/channel_messages.ui:243
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Inserimento del messaggio"
 
-#: data/resources/ui/channel_messages.ui:214
+#: data/resources/ui/channel_messages.ui:249
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Invia"
 
-#: data/resources/ui/channel_messages.ui:216
+#: data/resources/ui/channel_messages.ui:251
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Invia"
 
-#: data/resources/ui/channel_messages.ui:217
+#: data/resources/ui/channel_messages.ui:252
 #, fuzzy
 msgid "Send"
 msgstr "Invia"
 
-#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:146
+#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:156
 msgid "Clear messages"
 msgstr "Cancella messaggi"
 
@@ -157,7 +171,7 @@ msgstr "Annulla"
 msgid "Clear"
 msgstr "Cancella"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:142
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:152
 msgid "Unlink"
 msgstr "Scollega"
 
@@ -206,19 +220,19 @@ msgstr ""
 "Si prega di attendere fino a quando i contatti vengono visualizzati dopo il "
 "collegamento."
 
-#: data/resources/ui/message_item.ui:242
+#: data/resources/ui/message_item.ui:248
 msgid "Reply"
 msgstr "Rispondi"
 
-#: data/resources/ui/message_item.ui:248
+#: data/resources/ui/message_item.ui:254
 msgid "React"
 msgstr "Reagisci"
 
-#: data/resources/ui/message_item.ui:254
+#: data/resources/ui/message_item.ui:260
 msgid "Delete"
 msgstr ""
 
-#: data/resources/ui/message_item.ui:261
+#: data/resources/ui/message_item.ui:267
 msgid "Copy"
 msgstr ""
 
@@ -309,50 +323,60 @@ msgctxt "shortcut window"
 msgid "Open menu"
 msgstr "Apri il menù"
 
-#: data/resources/ui/shortcuts.ui:40
+#: data/resources/ui/shortcuts.ui:38
+msgctxt "shortcut window"
+msgid "Close window"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
 msgid "Channels"
 msgstr "Canali"
 
-#: data/resources/ui/shortcuts.ui:43
+#: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
 msgstr "Vai al canale 1...9"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Search in channels"
 msgstr "Seleziona nei canali"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Carica l'allegato"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:67
 msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Focalizza la casella di immissione del testo"
 
-#: data/resources/ui/shortcuts.ui:67
+#: data/resources/ui/shortcuts.ui:73
 msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Carica altri messaggi"
 
-#: data/resources/ui/window.ui:47 data/resources/ui/window.ui:107
+#: data/resources/ui/window.ui:36
+msgctxt "accessibility"
+msgid "Add Conversation"
+msgstr ""
+
+#: data/resources/ui/window.ui:46 data/resources/ui/window.ui:117
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Menù"
 
-#: data/resources/ui/window.ui:138
+#: data/resources/ui/window.ui:148
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: data/resources/ui/window.ui:150
+#: data/resources/ui/window.ui:160
 msgid "Keybindings"
 msgstr "Scorciatoie"
 
-#: data/resources/ui/window.ui:154
+#: data/resources/ui/window.ui:164
 msgid "About"
 msgstr "Informazioni"
 
@@ -480,13 +504,13 @@ msgstr ""
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:52
+#: src/gui/utility.rs:57
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:55
+#: src/gui/utility.rs:60
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d/%m/%Y %H:%M"
 
@@ -570,7 +594,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:382
+#: data/de.schmidhuberj.Flare.metainfo.xml:397
 #, fuzzy
 msgid "Overview of the application"
 msgstr "Una parte dell'applicazione si è arrestata in modo anomalo."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-06 17:12+0200\n"
+"POT-Creation-Date: 2023-05-20 16:48+0200\n"
 "PO-Revision-Date: 2023-04-14 16:49+0000\n"
 "Last-Translator: Leo Moser <leomoser99@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -48,7 +48,7 @@ msgctxt "accessibility"
 msgid "Download"
 msgstr "Herunterladen"
 
-#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:162
+#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:172
 msgid "Channel Information"
 msgstr "Kanalinformationen"
 
@@ -75,70 +75,84 @@ msgstr "Offline"
 msgid "Search"
 msgstr "Suchen"
 
-#: data/resources/ui/channel_list.ui:33 data/resources/ui/window.ui:36
+#: data/resources/ui/channel_list.ui:33 data/resources/ui/window.ui:58
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Suchen"
 
 #: data/resources/ui/channel_messages.ui:31
+msgid "No Channel Selected"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:32
 msgid "Select a channel"
 msgstr "Einen Kanal auswählen"
 
-#: data/resources/ui/channel_messages.ui:114
+#: data/resources/ui/channel_messages.ui:139
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Antwort entfernen"
 
-#: data/resources/ui/channel_messages.ui:116
+#: data/resources/ui/channel_messages.ui:141
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Antwort entfernen"
 
-#: data/resources/ui/channel_messages.ui:146
+#: data/resources/ui/channel_messages.ui:171
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:148
+#: data/resources/ui/channel_messages.ui:173
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:182
+#: data/resources/ui/channel_messages.ui:207
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:184
+#: data/resources/ui/channel_messages.ui:209
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:203
+#: data/resources/ui/channel_messages.ui:228
+msgctxt "accessibility"
+msgid "Insert an emoji"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:230
+msgctxt "tooltip"
+msgid "Insert emoji"
+msgstr ""
+
+#: data/resources/ui/channel_messages.ui:238
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:208
+#: data/resources/ui/channel_messages.ui:243
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:214
+#: data/resources/ui/channel_messages.ui:249
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Senden"
 
-#: data/resources/ui/channel_messages.ui:216
+#: data/resources/ui/channel_messages.ui:251
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Senden"
 
-#: data/resources/ui/channel_messages.ui:217
+#: data/resources/ui/channel_messages.ui:252
 msgid "Send"
 msgstr "Senden"
 
-#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:146
+#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:156
 msgid "Clear messages"
 msgstr "Nachrichten löschen"
 
@@ -159,7 +173,7 @@ msgstr "Abbrechen"
 msgid "Clear"
 msgstr "Löschen"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:142
+#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:152
 msgid "Unlink"
 msgstr "Entkoppeln"
 
@@ -206,19 +220,19 @@ msgstr "In die Zwischenablage kopieren"
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Bitte warte nach dem Koppeln, bis deine Kontakte angezeigt werden."
 
-#: data/resources/ui/message_item.ui:242
+#: data/resources/ui/message_item.ui:248
 msgid "Reply"
 msgstr "Antworten"
 
-#: data/resources/ui/message_item.ui:248
+#: data/resources/ui/message_item.ui:254
 msgid "React"
 msgstr "Reagieren"
 
-#: data/resources/ui/message_item.ui:254
+#: data/resources/ui/message_item.ui:260
 msgid "Delete"
 msgstr "Löschen"
 
-#: data/resources/ui/message_item.ui:261
+#: data/resources/ui/message_item.ui:267
 msgid "Copy"
 msgstr "Kopieren"
 
@@ -310,50 +324,60 @@ msgctxt "shortcut window"
 msgid "Open menu"
 msgstr "Menü öffnen"
 
-#: data/resources/ui/shortcuts.ui:40
+#: data/resources/ui/shortcuts.ui:38
+msgctxt "shortcut window"
+msgid "Close window"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
 msgid "Channels"
 msgstr "Kanäle"
 
-#: data/resources/ui/shortcuts.ui:43
+#: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
 msgstr "Zu Kanal 1…9 springen"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Search in channels"
 msgstr "In den Kanälen suchen"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Anhang hochladen"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:67
 msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Die Texteingabe fokussieren"
 
-#: data/resources/ui/shortcuts.ui:67
+#: data/resources/ui/shortcuts.ui:73
 msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Weitere Nachrichten laden"
 
-#: data/resources/ui/window.ui:47 data/resources/ui/window.ui:107
+#: data/resources/ui/window.ui:36
+msgctxt "accessibility"
+msgid "Add Conversation"
+msgstr ""
+
+#: data/resources/ui/window.ui:46 data/resources/ui/window.ui:117
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Menü"
 
-#: data/resources/ui/window.ui:138
+#: data/resources/ui/window.ui:148
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: data/resources/ui/window.ui:150
+#: data/resources/ui/window.ui:160
 msgid "Keybindings"
 msgstr "Tastaturkürzel"
 
-#: data/resources/ui/window.ui:154
+#: data/resources/ui/window.ui:164
 msgid "About"
 msgstr "Info"
 
@@ -480,13 +504,13 @@ msgstr "Nutze die Einstellungen um diese Berechtigung zu entfernen"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:52
+#: src/gui/utility.rs:57
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:55
+#: src/gui/utility.rs:60
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d.%m.%Y %H:%M"
 
@@ -572,7 +596,7 @@ msgstr ""
 "verschlechtert. Seien Sie vorsichtig im Umgang mit sensiblen Daten. In der "
 "README des Projekts finden Sie weitere Informationen zur Sicherheit."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:382
+#: data/de.schmidhuberj.Flare.metainfo.xml:397
 msgid "Overview of the application"
 msgstr "Übersicht der Anwendung"
 
