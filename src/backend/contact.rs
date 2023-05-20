@@ -225,6 +225,12 @@ mod imp {
                         .or(profile_title)
                         .or(phonenumber_title)
                         .or(uuid_title)
+                        // For some reason, Signal includes some special "isolate" control
+                        // characters around names with special symbols.
+                        .map(|mut s| {
+                            s.retain(|c| c != '\u{2068}' && c != '\u{2069}');
+                            s
+                        })
                         .to_value()
                 }
                 _ => unimplemented!(),
