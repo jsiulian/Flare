@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-20 16:48+0200\n"
-"PO-Revision-Date: 2023-05-08 07:48+0000\n"
+"PO-Revision-Date: 2023-05-22 12:51+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
 "Language: nl\n"
@@ -80,7 +80,7 @@ msgstr "Zoeken"
 
 #: data/resources/ui/channel_messages.ui:31
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Geen kanaal geselecteerd"
 
 #: data/resources/ui/channel_messages.ui:32
 msgid "Select a channel"
@@ -119,12 +119,12 @@ msgstr "Bijlage toevoegen"
 #: data/resources/ui/channel_messages.ui:228
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Emoji invoegen"
 
 #: data/resources/ui/channel_messages.ui:230
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Emoji invoegen"
 
 #: data/resources/ui/channel_messages.ui:238
 msgctxt "accessibility"
@@ -324,7 +324,7 @@ msgstr "Menu openen"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Venster sluiten"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -359,7 +359,7 @@ msgstr "Meer berichten laden"
 #: data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Gesprek toevoegen"
 
 #: data/resources/ui/window.ui:46 data/resources/ui/window.ui:117
 msgctxt "accessibility"
