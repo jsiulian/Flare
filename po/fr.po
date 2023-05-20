@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-20 16:48+0200\n"
-"PO-Revision-Date: 2023-05-09 08:52+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
+"PO-Revision-Date: 2023-05-22 12:51+0000\n"
+"Last-Translator: Julian <juliannfairfax@protonmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgstr "Recherche"
 
 #: data/resources/ui/channel_messages.ui:31
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Aucun canal sélectionné"
 
 #: data/resources/ui/channel_messages.ui:32
 msgid "Select a channel"
@@ -117,12 +117,12 @@ msgstr "Ajouter une pièce jointe"
 #: data/resources/ui/channel_messages.ui:228
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Insérer un émoji"
 
 #: data/resources/ui/channel_messages.ui:230
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Insérer émoji"
 
 #: data/resources/ui/channel_messages.ui:238
 msgctxt "accessibility"
@@ -322,7 +322,7 @@ msgstr "Ouvrir le menu"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Fermer la fenêtre"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -357,7 +357,7 @@ msgstr "Charger plus de messages"
 #: data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Ajouter une conversation"
 
 #: data/resources/ui/window.ui:46 data/resources/ui/window.ui:117
 msgctxt "accessibility"
