@@ -402,6 +402,27 @@ impl Manager {
         self.imp().channels.borrow().values().cloned().collect()
     }
 
+    pub(super) async fn channel_from_uuid_or_group(
+        &self,
+        uuid: Uuid,
+        group: &Option<GroupContextV2>,
+    ) -> Channel {
+        let found = if group.is_some() {
+            self.available_channels()
+                .into_iter()
+                .find(|c| &c.group_context() == group)
+        } else {
+            self.available_channels()
+                .into_iter()
+                .find(|c| c.uuid() == Some(uuid))
+        };
+        if let Some(found) = found {
+            return found;
+        }
+        let contact = Contact::from_service_address(&ServiceAddress { uuid }, self);
+        Channel::from_contact_or_group(contact, group, self).await
+    }
+
     #[cfg(not(feature = "screenshot"))]
     pub fn list_contacts(&self) -> Vec<Contact> {
         self.store()

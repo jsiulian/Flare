@@ -19,7 +19,7 @@ use glib::{
 };
 use gtk::{glib, prelude::*};
 use presage::prelude::{
-    content::sync_message::Sent, Content, ContentBody, DataMessage, ServiceAddress, SyncMessage,
+    content::sync_message::Sent, Content, ContentBody, DataMessage, SyncMessage,
 };
 use std::cell::{RefCell, RefMut};
 
@@ -39,12 +39,6 @@ impl Message {
     pub(super) async fn from_content(content: Content, manager: &Manager) -> Option<Self> {
         log::trace!("Trying to build a message from content");
         let metadata = &content.metadata;
-        let contact = Contact::from_service_address(&metadata.sender, manager);
-
-        if contact.is_blocked() {
-            log::debug!("Got message from a blocked contact. Ignoring");
-            return None;
-        }
 
         let body = &content.body;
         let timestamp = metadata.timestamp;
@@ -53,10 +47,15 @@ impl Message {
             ContentBody::DataMessage(message)
                 if message.reaction.is_none() && message.delete.is_none() =>
             {
-                let channel =
-                    Channel::from_contact_or_group(contact.clone(), &message.group_v2, manager)
-                        .await;
-                contact.set_channel(Some(&channel));
+                let channel = manager
+                    .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
+                    .await;
+                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                if contact.is_blocked() {
+                    log::debug!("Got message from a blocked contact. Ignoring");
+                    return None;
+                }
+
                 if message.body.is_none() && message.attachments.is_empty() {
                     return None;
                 }
@@ -72,36 +71,28 @@ impl Message {
             ContentBody::SynchronizeMessage(SyncMessage {
                 sent:
                     Some(Sent {
-                        destination_e164: e164,
                         destination_uuid: uuid,
                         message: Some(message),
                         ..
                     }),
                 ..
             }) if message.reaction.is_none() && message.delete.is_none() => {
+                let channel = manager
+                    .channel_from_uuid_or_group(
+                        uuid.as_ref()
+                            .map(|u| u.parse().expect("Failed to parse UUID"))
+                            .unwrap_or(metadata.sender.uuid),
+                        &message.group_v2,
+                    )
+                    .await;
+                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                if contact.is_blocked() {
+                    log::debug!("Got message from a blocked contact. Ignoring");
+                    return None;
+                }
                 if message.body.is_none() && message.attachments.is_empty() {
                     return None;
                 }
-                let destination_contact = if e164.is_some() || uuid.is_some() {
-                    let destination_address = ServiceAddress {
-                        // TODO: Change reaction message to UUID
-                        uuid: uuid
-                            .clone()
-                            .unwrap_or_default()
-                            .parse()
-                            .expect("Failed to parse UUID"),
-                    };
-                    Contact::from_service_address(&destination_address, manager)
-                } else {
-                    contact.clone()
-                };
-                let channel = Channel::from_contact_or_group(
-                    destination_contact.clone(),
-                    &message.group_v2,
-                    manager,
-                )
-                .await;
-                contact.set_channel(Some(&channel));
                 let s: TextMessage = Object::builder::<TextMessage>()
                     .property("manager", manager)
                     .property("sender", &contact)
@@ -112,10 +103,14 @@ impl Message {
                 Some(s.upcast())
             }
             ContentBody::DataMessage(message) if message.reaction.is_some() => {
-                let channel =
-                    Channel::from_contact_or_group(contact.clone(), &message.group_v2, manager)
-                        .await;
-                contact.set_channel(Some(&channel));
+                let channel = manager
+                    .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
+                    .await;
+                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                if contact.is_blocked() {
+                    log::debug!("Got message from a blocked contact. Ignoring");
+                    return None;
+                }
                 Some(
                     ReactionMessage::from_reaction(
                         &contact,
@@ -130,33 +125,25 @@ impl Message {
             ContentBody::SynchronizeMessage(SyncMessage {
                 sent:
                     Some(Sent {
-                        destination_e164: e164,
                         destination_uuid: uuid,
                         message: Some(message),
                         ..
                     }),
                 ..
             }) if message.reaction.is_some() => {
-                let destination_contact = if e164.is_some() || uuid.is_some() {
-                    let destination_address = ServiceAddress {
-                        // TODO: Change reaction message to UUID
-                        uuid: uuid
-                            .clone()
-                            .unwrap_or_default()
-                            .parse()
-                            .expect("Failed to parse UUID"),
-                    };
-                    Contact::from_service_address(&destination_address, manager)
-                } else {
-                    contact.clone()
-                };
-                let channel = Channel::from_contact_or_group(
-                    destination_contact.clone(),
-                    &message.group_v2,
-                    manager,
-                )
-                .await;
-                contact.set_channel(Some(&channel));
+                let channel = manager
+                    .channel_from_uuid_or_group(
+                        uuid.as_ref()
+                            .map(|u| u.parse().expect("Failed to parse UUID"))
+                            .unwrap_or(metadata.sender.uuid),
+                        &message.group_v2,
+                    )
+                    .await;
+                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                if contact.is_blocked() {
+                    log::debug!("Got message from a blocked contact. Ignoring");
+                    return None;
+                }
                 Some(
                     ReactionMessage::from_reaction(
                         &contact,
@@ -169,10 +156,15 @@ impl Message {
                 )
             }
             ContentBody::DataMessage(message) if message.delete.is_some() => {
+                let channel = manager
+                    .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
+                    .await;
+                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                if contact.is_blocked() {
+                    log::debug!("Got message from a blocked contact. Ignoring");
+                    return None;
+                }
                 log::trace!("Got a deletion message");
-                let channel =
-                    Channel::from_contact_or_group(contact.clone(), &message.group_v2, manager)
-                        .await;
                 Some(
                     DeletionMessage::from_delete(
                         &contact,
@@ -187,33 +179,26 @@ impl Message {
             ContentBody::SynchronizeMessage(SyncMessage {
                 sent:
                     Some(Sent {
-                        destination_e164: e164,
                         destination_uuid: uuid,
                         message: Some(message),
                         ..
                     }),
                 ..
             }) if message.delete.is_some() => {
+                let channel = manager
+                    .channel_from_uuid_or_group(
+                        uuid.as_ref()
+                            .map(|u| u.parse().expect("Failed to parse UUID"))
+                            .unwrap_or(metadata.sender.uuid),
+                        &message.group_v2,
+                    )
+                    .await;
+                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                if contact.is_blocked() {
+                    log::debug!("Got message from a blocked contact. Ignoring");
+                    return None;
+                }
                 log::trace!("Got a deletion message");
-                let destination_contact = if e164.is_some() || uuid.is_some() {
-                    let destination_address = ServiceAddress {
-                        // TODO: Change reaction message to UUID (upstream)
-                        uuid: uuid
-                            .clone()
-                            .unwrap_or_default()
-                            .parse()
-                            .expect("Failed to parse UUID"),
-                    };
-                    Contact::from_service_address(&destination_address, manager)
-                } else {
-                    contact.clone()
-                };
-                let channel = Channel::from_contact_or_group(
-                    destination_contact.clone(),
-                    &message.group_v2,
-                    manager,
-                )
-                .await;
                 Some(
                     DeletionMessage::from_delete(
                         &contact,
@@ -239,8 +224,14 @@ impl Message {
             }
             ContentBody::CallMessage(c) => {
                 // TODO: Group calls?
-                let channel = Channel::from_contact_or_group(contact.clone(), &None, manager).await;
-                contact.set_channel(Some(&channel));
+                let channel = manager
+                    .channel_from_uuid_or_group(metadata.sender.uuid, &None)
+                    .await;
+                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                if contact.is_blocked() {
+                    log::debug!("Got message from a blocked contact. Ignoring");
+                    return None;
+                }
                 CallMessage::from_call(&contact, &channel, timestamp, manager, c.clone())
                     .map(|c| c.upcast())
             }

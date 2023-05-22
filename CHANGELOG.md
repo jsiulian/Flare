@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- A "pick emoji" button for the text entry.
+- Smaller UI improvements.
+
+### Fixed
+
+- Avatar of contacts with special characters not displaying the initials label.
+- No profile names were shown in notifications.
+
 ## [0.8.1] - 2023-05-07
 
 ### Added

@@ -8,7 +8,7 @@ use gdk::{glib::clone, prelude::ObjectExt};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Cast, Object};
 use gtk::{gdk, gio, glib};
-use libsignal_service::groups_v2::Group;
+use libsignal_service::{groups_v2::Group, ServiceAddress};
 use presage::{
     prelude::{DataMessage, GroupContextV2, Uuid},
     Thread,
@@ -69,6 +69,7 @@ impl Channel {
             );
             s.imp().contact.swap(&RefCell::new(Some(contact)));
         }
+        s.initialize_participants().await;
         s
     }
 
@@ -84,6 +85,7 @@ impl Channel {
         s.imp()
             .group_context
             .swap(&RefCell::new(Some(group_context_v2.clone())));
+        s.initialize_participants().await;
         s
     }
 
@@ -181,7 +183,7 @@ impl Channel {
         self.imp().group.borrow().clone()
     }
 
-    fn uuid(&self) -> Option<Uuid> {
+    pub fn uuid(&self) -> Option<Uuid> {
         self.imp()
             .contact
             .borrow()
@@ -396,6 +398,49 @@ impl Channel {
 
         Ok(())
     }
+
+    pub fn participants(&self) -> Vec<Contact> {
+        self.imp().participants.borrow().clone()
+    }
+
+    pub fn participant_by_uuid(&self, uuid: Uuid) -> Contact {
+        let found = self.participants().into_iter().find(|c| c.uuid() == uuid);
+        if let Some(found) = found {
+            return found;
+        }
+        let new = Contact::from_service_address(&ServiceAddress { uuid }, &self.manager());
+        self.imp().participants.borrow_mut().push(new.clone());
+        new
+    }
+
+    async fn initialize_participants(&self) {
+        let manager = self.manager();
+        if let Some(group) = self.group() {
+            let participants = group
+                .members
+                .into_iter()
+                .map(|m| ServiceAddress { uuid: m.uuid })
+                .map(|a| Contact::from_service_address(&a, &manager))
+                .collect::<Vec<_>>();
+            for p in &participants {
+                p.set_channel(Some(self));
+            }
+            self.imp().participants.replace(participants);
+        } else {
+            let participants = self
+                .imp()
+                .contact
+                .borrow()
+                .as_ref()
+                .cloned()
+                .into_iter()
+                .collect::<Vec<_>>();
+            for p in &participants {
+                p.set_channel(Some(self));
+            }
+            self.imp().participants.replace(participants);
+        }
+    }
 }
 
 mod imp {
@@ -420,6 +465,8 @@ mod imp {
         pub(super) contact: RefCell<Option<Contact>>,
         pub(super) group: RefCell<Option<Group>>,
         pub(super) group_context: RefCell<Option<GroupContextV2>>,
+
+        pub(super) participants: RefCell<Vec<Contact>>,
 
         pub(super) manager: RefCell<Option<Manager>>,
         pub(super) timeline: RefCell<Timeline>,
