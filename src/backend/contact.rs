@@ -209,13 +209,10 @@ mod imp {
                             Some(c.name.clone())
                         }
                     });
-                    let profile_title = profile.as_ref().and_then(|p| p.name.as_ref()).map(|p| {
-                        if let Some(family_name) = &p.family_name {
-                            format!("{} {}", p.given_name, family_name)
-                        } else {
-                            p.given_name.clone()
-                        }
-                    });
+                    let profile_title = profile
+                        .as_ref()
+                        .and_then(|p| p.name.as_ref())
+                        .map(crate::utils::format_profile_name);
                     let phonenumber_title = phonenumber
                         .as_ref()
                         .map(|p| p.format().mode(Mode::National).to_string());

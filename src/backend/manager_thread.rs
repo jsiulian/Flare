@@ -22,6 +22,7 @@ type Error = presage::Error<presage_store_sled::SledStoreError>;
 enum Command {
     Uuid(oneshot::Sender<Uuid>),
     RetrieveProfileByUuid(Uuid, ProfileKey, oneshot::Sender<Result<Profile, Error>>),
+    RetrieveProfile(oneshot::Sender<Result<Profile, Error>>),
     GetGroupV2(Vec<u8>, oneshot::Sender<Result<Option<Group>, Error>>),
     SendSessionReset(ServiceAddress, u64, oneshot::Sender<Result<(), Error>>),
     SendMessage(
@@ -59,6 +60,7 @@ impl std::fmt::Debug for Command {
 pub struct ManagerThread {
     command_sender: mpsc::Sender<Command>,
     uuid: Uuid,
+    profile: Option<Profile>,
 }
 
 impl Clone for ManagerThread {
@@ -66,6 +68,7 @@ impl Clone for ManagerThread {
         Self {
             command_sender: self.command_sender.clone(),
             uuid: self.uuid,
+            profile: self.profile.clone(),
         }
     }
 }
@@ -119,9 +122,24 @@ impl ManagerThread {
             return None;
         }
 
+        let (sender_profile, receiver_profile) = oneshot::channel();
+        if sender
+            .send(Command::RetrieveProfile(sender_profile))
+            .await
+            .is_err()
+        {
+            return None;
+        }
+        let profile = receiver_profile.await;
+
+        if profile.is_err() {
+            return None;
+        }
+
         Some(Self {
             command_sender: sender,
             uuid: uuid.unwrap(),
+            profile: profile.unwrap().ok(),
         })
     }
 }
@@ -142,6 +160,10 @@ impl ManagerThread {
             .await
             .expect("Command sending failed");
         receiver.await.expect("Callback receiving failed")
+    }
+
+    pub fn retrieve_profile(&self) -> Option<Profile> {
+        self.profile.clone()
     }
 
     pub async fn get_group_v2(&self, group_master_key: Vec<u8>) -> Result<Option<Group>, Error> {
@@ -332,6 +354,9 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             .expect("Callback sending failed"),
         Command::RetrieveProfileByUuid(uuid, profile_key, callback) => callback
             .send(manager.retrieve_profile_by_uuid(uuid, profile_key).await)
+            .expect("Callback sending failed"),
+        Command::RetrieveProfile(callback) => callback
+            .send(manager.retrieve_profile().await)
             .expect("Callback sending failed"),
         Command::GetGroupV2(master_key, callback) => callback
             .send(manager.group(&master_key[..]))

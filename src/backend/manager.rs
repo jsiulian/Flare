@@ -375,23 +375,12 @@ impl Manager {
     }
 
     pub(super) fn profile_name(&self) -> String {
-        gettextrs::gettext("You")
-        // Profile not yet working in backend.
-        // self.imp()
-        //     .profile
-        //     .borrow()
-        //     .as_ref()
-        //     .expect("Profile to be synced")
-        //     .name
-        //     .as_ref()
-        //     .map(|n| {
-        //         format!(
-        //             "{} {}",
-        //             n.given_name,
-        //             n.family_name.as_ref().unwrap_or(&"".to_string())
-        //         )
-        //     })
-        //     .unwrap_or(gettextrs::gettext("No Name"))
+        self.internal()
+            .retrieve_profile()
+            .and_then(|p| p.name)
+            .as_ref()
+            .map(crate::utils::format_profile_name)
+            .unwrap_or_else(|| gettextrs::gettext("You"))
     }
 
     fn internal(&self) -> ManagerThread {

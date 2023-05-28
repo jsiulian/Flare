@@ -1,5 +1,6 @@
 use gio::prelude::FileExt;
 use gtk::gio;
+use libsignal_service::profile_name::ProfileName;
 
 #[macro_export]
 macro_rules! gspawn {
@@ -52,4 +53,12 @@ pub async fn await_suspend_wakeup_online() -> ashpd::Result<()> {
     await_suspend_wakeup().await?;
     await_online().await;
     Ok(())
+}
+
+pub fn format_profile_name(p: &ProfileName<String>) -> String {
+    if let Some(family_name) = &p.family_name {
+        format!("{} {}", p.given_name, family_name)
+    } else {
+        p.given_name.clone()
+    }
 }

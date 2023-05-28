@@ -1,9 +1,11 @@
 use std::cell::RefCell;
 
+use gdk::pango::{AttrColor, AttrList};
 use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
 use gtk::{gdk, gio, glib};
+use libsignal_service::proto::body_range::AssociatedValue;
 use libsignal_service::proto::data_message::Delete;
 use presage::prelude::content::Reaction;
 use presage::prelude::{proto::data_message::Quote, *};
@@ -16,6 +18,9 @@ use super::{DisplayMessage, Manager, Message, MessageExt, ReactionMessage};
 gtk::glib::wrapper! {
     pub struct TextMessage(ObjectSubclass<imp::TextMessage>) @extends Message, DisplayMessage, TimelineItem;
 }
+
+const MENTION_CHAR: char = '@';
+const MENTION_COLOR: (u16, u16, u16) = (0, 0, u16::MAX);
 
 impl TextMessage {
     pub fn textual_description(&self) -> String {
@@ -88,12 +93,14 @@ impl TextMessage {
         };
 
         s.set_internal_data(Some(message));
+        s.prepare_format_body();
         s
     }
 
     pub(super) async fn init_data(&self, message: &DataMessage, manager: &Manager) {
         let obj = self.imp();
         self.set_internal_data(Some(message.clone()));
+        self.prepare_format_body();
         let mut attachments = Vec::with_capacity(message.attachments.len());
         for pointer in &message.attachments {
             let att = Attachment::from_pointer(pointer, manager).await;
@@ -232,17 +239,78 @@ impl TextMessage {
     pub fn is_empty(&self) -> bool {
         self.body().is_none() && self.attachments().is_empty()
     }
+
+    fn prepare_format_body(&self) {
+        let (body, attrs) = self.format_body();
+        *self.imp().formatted_body.borrow_mut() = body;
+        *self.imp().message_attributes.borrow_mut() = attrs;
+    }
+
+    fn format_body(&self) -> (Option<String>, AttrList) {
+        let Some(body) = self.internal_data().and_then(|m| m.body) else { return (None, AttrList::new()) };
+        let mut ranges = self
+            .internal_data()
+            .map(|m| m.body_ranges)
+            .unwrap_or_default();
+
+        if ranges.is_empty() {
+            return (Some(body), AttrList::new());
+        }
+
+        let channel = self.channel();
+
+        // Sort by growing start index
+        ranges.sort_unstable_by_key(|r| r.start());
+
+        let attrs = AttrList::new();
+
+        // Signal (Java) uses UTF-16 body and therefore also UTF-16 offsets, while Flare (Rust) uses UTF-8. Need to convert.
+        let body_utf16: Vec<u16> = body.encode_utf16().collect();
+
+        let mut result_utf8 = String::new();
+        let mut index_utf16 = 0;
+        let mut index_utf8 = 0;
+        for r in ranges {
+            let start = r.start() as usize;
+            let end = start + r.length() as usize;
+            let Some(AssociatedValue::MentionUuid(u)) = r.associated_value else { continue };
+            let Ok(uuid) = u.parse() else { continue };
+            let name = format!(
+                "{}{}",
+                MENTION_CHAR,
+                channel.participant_by_uuid(uuid).title()
+            );
+            let to_add_body = String::from_utf16_lossy(&body_utf16[index_utf16..start]);
+            result_utf8.extend(to_add_body.chars());
+            result_utf8.extend(name.chars());
+            index_utf16 = end;
+
+            let index_start_highlight = index_utf8 + to_add_body.len();
+            index_utf8 += to_add_body.len() + name.len();
+            let index_end_highlight = index_utf8;
+
+            let mut highlight =
+                AttrColor::new_foreground(MENTION_COLOR.0, MENTION_COLOR.1, MENTION_COLOR.2);
+            highlight.set_start_index(index_start_highlight as u32);
+            highlight.set_end_index(index_end_highlight as u32);
+            attrs.insert(highlight);
+        }
+
+        if index_utf16 < body_utf16.len() {
+            result_utf8.extend(String::from_utf16_lossy(&body_utf16[index_utf16..]).chars())
+        }
+
+        (Some(result_utf8), attrs)
+    }
 }
 
 mod imp {
     use gdk::gdk_pixbuf::prelude::ToValue;
-    use gdk::glib::ParamSpecBoolean;
+    use gdk::glib::{ParamSpecBoolean, ParamSpecBoxed};
+    use gdk::pango::AttrList;
     use gdk::prelude::ParamSpecBuilderExt;
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassIsExt};
-    use glib::{
-        once_cell::sync::Lazy, subclass::prelude::ObjectSubclassExt, ParamSpec, ParamSpecObject,
-        ParamSpecString, Value,
-    };
+    use glib::{once_cell::sync::Lazy, ParamSpec, ParamSpecObject, ParamSpecString, Value};
     use gtk::{glib, prelude::Cast};
     use libsignal_service::content::Reaction;
     use libsignal_service::prelude::Uuid;
@@ -250,7 +318,7 @@ mod imp {
     use std::collections::HashMap;
 
     use crate::backend::{
-        message::{display_message::DisplayMessageImpl, DisplayMessage, MessageExt, MessageImpl},
+        message::{display_message::DisplayMessageImpl, DisplayMessage, MessageImpl},
         Attachment,
     };
     use crate::backend::{
@@ -265,6 +333,9 @@ mod imp {
         pub(super) reactions: RefCell<HashMap<Uuid, Reaction>>,
 
         pub(super) attachments: RefCell<Vec<Attachment>>,
+
+        pub(super) formatted_body: RefCell<Option<String>>,
+        pub(super) message_attributes: RefCell<AttrList>,
 
         pub(super) is_deleted: RefCell<bool>,
     }
@@ -313,6 +384,9 @@ mod imp {
                     ParamSpecObject::builder::<super::TextMessage>("quote")
                         .read_only()
                         .build(),
+                    ParamSpecBoxed::builder::<AttrList>("message-attributes")
+                        .read_only()
+                        .build(),
                     ParamSpecString::builder("reactions")
                         .default_value(Some(""))
                         .read_only()
@@ -324,9 +398,9 @@ mod imp {
         }
 
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            let instance = self.obj();
             match pspec.name() {
-                "body" => instance.internal_data().and_then(|d| d.body).to_value(),
+                "body" => self.formatted_body.borrow().to_value(),
+                "message-attributes" => self.message_attributes.borrow().to_value(),
                 "reactions" => self
                     .reactions
                     .borrow()
