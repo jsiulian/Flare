@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-20 16:48+0200\n"
-"PO-Revision-Date: 2023-04-14 16:49+0000\n"
-"Last-Translator: Leo Moser <leomoser99@gmail.com>\n"
+"PO-Revision-Date: 2023-05-29 08:43+0000\n"
+"Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/resources/ui/about.ui:14
 msgid "translator-credits"
@@ -55,11 +55,11 @@ msgstr "Kanalinformationen"
 #: data/resources/ui/channel_info_dialog.ui:33
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Setze Verbindung zurück"
 
 #: data/resources/ui/channel_info_dialog.ui:35
 msgid "Reset Session"
-msgstr ""
+msgstr "Setze Verbindung zurück"
 
 #: data/resources/ui/channel_info_dialog.ui:51
 #: data/resources/ui/error_dialog.ui:14
@@ -82,7 +82,7 @@ msgstr "Suchen"
 
 #: data/resources/ui/channel_messages.ui:31
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Kein Kanal ausgewählt"
 
 #: data/resources/ui/channel_messages.ui:32
 msgid "Select a channel"
@@ -121,12 +121,12 @@ msgstr "Anhang hinzufügen"
 #: data/resources/ui/channel_messages.ui:228
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Füge ein Emoji ein"
 
 #: data/resources/ui/channel_messages.ui:230
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Füge ein Emoji ein"
 
 #: data/resources/ui/channel_messages.ui:238
 msgctxt "accessibility"
@@ -327,7 +327,7 @@ msgstr "Menü öffnen"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Fenster Schließen"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -362,7 +362,7 @@ msgstr "Weitere Nachrichten laden"
 #: data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Unterhaltung Hinzufügen"
 
 #: data/resources/ui/window.ui:46 data/resources/ui/window.ui:117
 msgctxt "accessibility"
@@ -574,7 +574,7 @@ msgstr "Verschlüsselte Datenspeicherung"
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:60
 msgid "Notifications, optionally in the background"
-msgstr ""
+msgstr "Benachrichtigungen, optional im Hintergrund"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:65
@@ -582,6 +582,8 @@ msgid ""
 "More features are planned, blocked or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
+"Weitere Funktionen geplant, blockiert oder nicht geplant. Beachte die README-"
+"Datei für weitere Informationen über diese Funktionen."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:69
