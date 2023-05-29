@@ -281,8 +281,8 @@ impl TextMessage {
                 channel.participant_by_uuid(uuid).title()
             );
             let to_add_body = String::from_utf16_lossy(&body_utf16[index_utf16..start]);
-            result_utf8.extend(to_add_body.chars());
-            result_utf8.extend(name.chars());
+            result_utf8.push_str(&to_add_body);
+            result_utf8.push_str(&name);
             index_utf16 = end;
 
             let index_start_highlight = index_utf8 + to_add_body.len();
@@ -297,7 +297,7 @@ impl TextMessage {
         }
 
         if index_utf16 < body_utf16.len() {
-            result_utf8.extend(String::from_utf16_lossy(&body_utf16[index_utf16..]).chars())
+            result_utf8.push_str(&String::from_utf16_lossy(&body_utf16[index_utf16..]))
         }
 
         (Some(result_utf8), attrs)
