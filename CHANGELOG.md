@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.2] - 2023-05-29
+
 ### Added
 
 - A "pick emoji" button for the text entry.
@@ -16,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Avatar of contacts with special characters not displaying the initials label.
 - No profile names were shown in notifications.
+- Removing expiration timer for conversations with expire messages.
 
 ## [0.8.1] - 2023-05-07
 
@@ -350,7 +353,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.1...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.2...master
+[0.8.2]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.1...0.8.2
 [0.8.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.0...0.8.1
 [0.8.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.7.2...0.8.0
 [0.7.2]: https://gitlab.com/Schmiddiii/flare/-/compare/0.7.1...0.7.2

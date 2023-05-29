@@ -1,7 +1,7 @@
 [package]
 name = "flare"
 description = "An unofficial Signal GTK client."
-version = "0.8.2-beta.1"
+version = "0.8.2"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -27,9 +27,9 @@ async-recursion = "1.0.2"
 regex = "1.7.0"
 lazy_static = "1.4.0"
 
-presage = { git = "https://github.com/whisperfish/presage.git", rev = "9935bb0" }
-presage-store-sled = { git = "https://github.com/whisperfish/presage.git", rev = "9935bb0" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "c2f70ef" }
+presage = { git = "https://github.com/Schmiddiii/presage.git", rev = "dcaca32a51946e9f7212a144dbfbb30b409e0870" }
+presage-store-sled = { git = "https://github.com/Schmiddiii/presage.git", rev = "dcaca32a51946e9f7212a144dbfbb30b409e0870" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "a2e871a" }
 
 async-trait = "0.1.64"
 sled = "0.34.7"

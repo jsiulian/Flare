@@ -20,14 +20,15 @@
     <property name="release-notes">
       &lt;p&gt;Added&lt;/p&gt;
       &lt;ul&gt;
-        &lt;li&gt;Button to show all channels.&lt;/li&gt;
-        &lt;li&gt;Button to scroll down in the messages view.&lt;/li&gt;
-        &lt;li&gt;Keyboard shortcut Ctrl+Q to close window.&lt;/li&gt;
+        &lt;li&gt;A &quot;pick emoji&quot; button for the text entry.&lt;/li&gt;
+        &lt;li&gt;Support for receiving mentions.&lt;/li&gt;
+        &lt;li&gt;Smaller UI improvements.&lt;/li&gt;
       &lt;/ul&gt;
-      &lt;p&gt;Changed&lt;/p&gt;
+      &lt;p&gt;Fixed&lt;/p&gt;
       &lt;ul&gt;
-        &lt;li&gt;Only show non-empty channels by default.&lt;/li&gt;
-        &lt;li&gt;UI changes to differentiate own messages from others.&lt;/li&gt;
+        &lt;li&gt;Avatar of contacts with special characters not displaying the initials label.&lt;/li&gt;
+        &lt;li&gt;No profile names were shown in notifications.&lt;/li&gt;
+        &lt;li&gt;Removing expiration timer for conversations with expire messages.&lt;/li&gt;
       &lt;/ul&gt;
     </property>
   </object>

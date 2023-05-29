@@ -74,6 +74,22 @@
   </description>
 
   <releases>
+    <release version="v0.8.2" date="2023-05-29">
+      <description translate="no">
+        <p>Added</p>
+        <ul>
+          <li>A &quot;pick emoji&quot; button for the text entry.</li>
+          <li>Support for receiving mentions.</li>
+          <li>Smaller UI improvements.</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+          <li>Avatar of contacts with special characters not displaying the initials label.</li>
+          <li>No profile names were shown in notifications.</li>
+          <li>Removing expiration timer for conversations with expire messages.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.8.1" date="2023-05-07">
       <description translate="no">
         <p>Added</p>
