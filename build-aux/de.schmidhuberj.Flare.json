@@ -23,7 +23,8 @@
         "env": {
             "CARGO_HOME": "/run/build/flare/cargo",
             "RUST_BACKTRACE": "1"
-        }
+        },
+        "build-args": [ "--share=network" ]
     },
     "modules": [
         {
