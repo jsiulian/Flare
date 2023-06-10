@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- New UI improvements to the feed list. This also now respects the accent colors set in GNOME.
+
+### Fixed
+
+- Issue where special characters in replied messages were displayed incorrectly.
+
 ## [0.8.2] - 2023-05-29
 
 ### Added
