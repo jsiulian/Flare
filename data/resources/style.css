@@ -7,25 +7,18 @@
 
 .message-bubble {
   font-size: 16px;
-  color: alpha(@dark_5,0.8);
+  color: @card_fg_color;
   border-radius: 15px;
-  box-shadow: 0 1px @card_shade_color;
   padding: 6px 9px;
   background-color: @light_2;
 }
 
 .message-item.from-self .message-bubble {
-  color: @accent_fg_color;
-  box-shadow: 0 1px alpha(@accent_bg_color, 0.1);
-  background-color: @accent_bg_color;
-}
-
-.message-item.from-self .message-bubble link {
-	color: @accent_fg_color;
+  background-color: alpha(@accent_bg_color, 0.35);
 }
 
 .reaction {
-  background-color: @accent_bg_color;
+  background-color: alpha(@accent_bg_color, 0.35);
   border-radius: 15px;
   padding: 6px 9px;
 }
