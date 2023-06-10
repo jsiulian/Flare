@@ -161,6 +161,11 @@ impl super::Manager {
     }
 
     #[cfg(feature = "screenshot")]
+    pub fn profile_name(&self) -> String {
+        "You".to_string()
+    }
+
+    #[cfg(feature = "screenshot")]
     pub async fn messages(
         &self,
         thread: &Thread,

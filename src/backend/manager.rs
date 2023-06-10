@@ -374,7 +374,8 @@ impl Manager {
             .clone()
     }
 
-    pub(super) fn profile_name(&self) -> String {
+    #[cfg(not(feature = "screenshot"))]
+    pub fn profile_name(&self) -> String {
         self.internal()
             .retrieve_profile()
             .and_then(|p| p.name)
