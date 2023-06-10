@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-20 16:48+0200\n"
-"PO-Revision-Date: 2023-05-20 00:52+0000\n"
+"PO-Revision-Date: 2023-06-11 16:50+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,7 +81,7 @@ msgstr "Ara"
 
 #: data/resources/ui/channel_messages.ui:31
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Kanal Seçilmedi"
 
 #: data/resources/ui/channel_messages.ui:32
 msgid "Select a channel"
@@ -120,12 +120,12 @@ msgstr "Ek ekle"
 #: data/resources/ui/channel_messages.ui:228
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Emoji ekle"
 
 #: data/resources/ui/channel_messages.ui:230
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Emoji ekle"
 
 #: data/resources/ui/channel_messages.ui:238
 msgctxt "accessibility"
@@ -229,7 +229,7 @@ msgstr "Tepki ver"
 
 #: data/resources/ui/message_item.ui:260
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 #: data/resources/ui/message_item.ui:267
 msgid "Copy"
@@ -286,15 +286,17 @@ msgstr "Kapalıyken yeni iletileri izle"
 
 #: data/resources/ui/preferences_window.ui:109
 msgid "Other"
-msgstr ""
+msgstr "Diğer"
 
 #: data/resources/ui/preferences_window.ui:112
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Seçilebilir İleti Metni"
 
 #: data/resources/ui/preferences_window.ui:113
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
+"Seçilebilir metin, dokunmatik ekranlarda kaydırma hareketlerine engel "
+"olabilir."
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -324,7 +326,7 @@ msgstr "Menüyü aç"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Pencereyi kapat"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -359,7 +361,7 @@ msgstr "Daha çok ileti yükle"
 #: data/resources/ui/window.ui:36
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Konuşma Ekle"
 
 #: data/resources/ui/window.ui:46 data/resources/ui/window.ui:117
 msgctxt "accessibility"
@@ -516,12 +518,12 @@ msgstr "%Y-%m-%d %H:%M"
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "An unofficial Signal GTK client"
-msgstr ""
+msgstr "Resmi olmayan bir Signal GTK istemcisi"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
@@ -530,51 +532,48 @@ msgid ""
 "very simple application with many features missing compared to the official "
 "applications."
 msgstr ""
+"Mesajlaşma uygulaması Signal için resmi olmayan bir GTK istemcisi. Bu, resmi "
+"uygulamalara kıyasla birçok özelliği eksik olan çok basit bir uygulamadır."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:32
-#, fuzzy
 msgid "Link device"
-msgstr "Aygıt Bağla"
+msgstr "Aygıt bağla"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:36
-#, fuzzy
 msgid "Send messages"
-msgstr "İletileri temizle"
+msgstr "İleti gönder"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:40
-#, fuzzy
 msgid "Receive messages"
-msgstr "İletileri temizle"
+msgstr "İleti al"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:44
-#, fuzzy
 msgid "Reply to a message"
-msgstr "İletileri temizle"
+msgstr "İletiyi yanıtla"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:48
-#, fuzzy
 msgid "React to a message"
-msgstr "İletileri temizle"
+msgstr "İletiye tepki ver"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:52
 msgid "Sending and receiving attachments"
-msgstr ""
+msgstr "Ek gönderme ve alma"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:56
 msgid "Encrypted storage"
-msgstr ""
+msgstr "Şifreli depolama"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:60
 msgid "Notifications, optionally in the background"
-msgstr ""
+msgstr "İsteğe bağlı olarak arka planda bildirimler"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:65
@@ -582,6 +581,8 @@ msgid ""
 "More features are planned, blocked or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
+"Daha fazla özellik planlanmış, engellenmiş veya planlanmamıştır. Bunlar "
+"hakkında daha fazla bilgi için README'ye bakın."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:69
@@ -591,49 +592,53 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Lütfen bu uygulamayı kullanmanın, resmi Signal uygulamalarını kullanmaya "
+"kıyasla güvenliğinizi muhtemelen daha da kötüleştireceğini unutmayın. Hassas "
+"verileri işlerken dikkatli kullanın. Güvenlik hakkında daha fazla bilgi için "
+"projenin README dosyasına bakın."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:397
-#, fuzzy
 msgid "Overview of the application"
-msgstr "Uygulamanın bir bölümü çöktü."
+msgstr "Uygulamaya genel bakış"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Pencere genişliği"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Pencere yüksekliği"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Pencerenin ekranı kaplama durumu"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Flare bağlanırken aygıt adı. Bu, uygulamanın yeniden bağlanmasını gerektirir."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Görüntüleri kendiliğinden indir"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Videoları kendiliğinden indir"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download files"
-msgstr ""
+msgstr "Dosyaları kendiliğinden indir"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Kapatıldığında arka planda çalış"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:46
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Mesajlar seçilebilir mi?"
 
 #~ msgctxt "accessibility"
 #~ msgid "Reset Identity"
