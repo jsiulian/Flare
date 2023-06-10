@@ -20,16 +20,34 @@
   background-color: @accent_bg_color;
 }
 
+.message-item.from-self .message-bubble link {
+	color: @accent_fg_color;
+}
+
 .reaction {
   background-color: @accent_bg_color;
   border-radius: 15px;
-    padding: 6px 9px;
+  padding: 6px 9px;
+}
+
+.message-item.from-self .reaction{
+  background-color: @accent_fg_color;
+}
+
+.message-item.from-self .reaction{
+  background-color: @accent_fg_color;
 }
 
 .quote {
-  border-left: 2px solid @accent_fg_color;
+  border-left: 2px solid @accent_bg_color;
   padding-left: 3px;
 }
-.spacer{
-  width: 2px;
+
+.message-item.from-self .quote{
+  border-left-color: @accent_fg_color;
 }
+
+.message-bubble separator {
+	min-width: 5px;
+}
+
