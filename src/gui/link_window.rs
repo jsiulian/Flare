@@ -5,7 +5,7 @@ use crate::backend::Manager;
 
 glib::wrapper! {
     pub struct LinkWindow(ObjectSubclass<imp::LinkWindow>)
-        @extends gtk::Dialog, gtk::Window, gtk::Widget,
+        @extends libadwaita::Window, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
@@ -64,7 +64,7 @@ pub mod imp {
     impl ObjectSubclass for LinkWindow {
         const NAME: &'static str = "FlLinkWindow";
         type Type = super::LinkWindow;
-        type ParentType = gtk::Dialog;
+        type ParentType = libadwaita::Window;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
@@ -80,8 +80,6 @@ pub mod imp {
         fn constructed(&self) {
             log::trace!("Constructed LinkWindow");
             self.parent_constructed();
-            // TODO: Cancel manager?
-            self.obj().connect_response(|dialog, _| dialog.close());
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -116,7 +114,7 @@ pub mod imp {
                         man.connect_local(
                             "link-finish",
                             false,
-                            clone!(@strong instance as obj => move |_| {obj.emit_close(); None}),
+                            clone!(@strong instance as obj => move |_| {obj.close(); None}),
                         );
                     }
 
@@ -148,10 +146,7 @@ pub mod imp {
         }
     }
 
-    impl DialogImpl for LinkWindow {}
     impl WidgetImpl for LinkWindow {}
     impl WindowImpl for LinkWindow {}
-    impl ApplicationWindowImpl for LinkWindow {}
     impl AdwWindowImpl for LinkWindow {}
-    impl AdwApplicationWindowImpl for LinkWindow {}
 }

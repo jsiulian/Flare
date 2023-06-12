@@ -148,10 +148,8 @@ pub mod imp {
         clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecBoolean,
         ParamSpecObject, Value,
     };
-    use gtk::{gio, glib, FileChooserNative, PositionType, SignalListItemFactory};
-    use gtk::{
-        prelude::*, subclass::prelude::*, CompositeTemplate, FileChooserAction, ResponseType,
-    };
+    use gtk::{gio, glib, FileDialog, PositionType, SignalListItemFactory};
+    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
     use crate::backend::timeline::{Timeline, TimelineItem};
     use crate::{
@@ -269,30 +267,27 @@ pub mod imp {
         #[template_callback]
         fn add_attachment(&self) {
             log::trace!("Requested to add a attachment");
-            let chooser = FileChooserNative::builder()
-                .transient_for(
+            let chooser = FileDialog::builder().build();
+            let obj = self.obj();
+            chooser.open(
+                Some(
                     &self
                         .obj()
                         .root()
                         .expect("`ChannelMessages` to have a root")
                         .dynamic_cast::<crate::gui::Window>()
                         .expect("Root of `ChannelMessages` to be a `Window`."),
-                )
-                .action(FileChooserAction::Open)
-                .build();
-            let obj = self.obj();
-            chooser.connect_response(clone!(@strong chooser, @strong obj => move |_, action| {
-                if action == ResponseType::Accept {
-                    log::trace!("User added an attachment");
-                    let file = chooser.file();
-                    if let Some(file) = file {
+                ),
+                None::<&gio::Cancellable>,
+                clone!(@strong chooser, @strong obj => move |file| {
+                    if let Ok(file) = file{
+                        log::trace!("User added an attachment");
                         obj.imp().paste_file(file);
+                    } else {
+                        log::trace!("User did not upload a attachment");
                     }
-                } else {
-                    log::trace!("User did not upload a attachment");
-                }
-            }));
-            chooser.show();
+                }),
+            );
         }
 
         #[template_callback]
@@ -346,7 +341,7 @@ pub mod imp {
                                     .dynamic_cast::<crate::gui::Window>()
                                     .expect("Root of `ChannelMessages` to be a `Window`.");
                                 let dialog = ErrorDialog::new(e, &root);
-                                dialog.show();
+                                dialog.present();
                                 return;
                             }
                         }
@@ -358,7 +353,7 @@ pub mod imp {
                                 .dynamic_cast::<crate::gui::Window>()
                                 .expect("Root of `ChannelMessages` to be a `Window`.");
                             let dialog = ErrorDialog::new(e, &root);
-                            dialog.show();
+                            dialog.present();
                         }
                     })
                 );

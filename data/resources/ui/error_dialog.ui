@@ -3,39 +3,15 @@
   <requires lib="gtk+" version="3.24"/>
   <requires lib="libadwaita" version="1.0"/>
 
-  <template class="FlErrorDialog" parent="GtkDialog">
-    <property name="can-focus">True</property>
-    <property name="title" translatable="yes">Error</property>
-    <property name="use-header-bar">True</property>
-    <property name="destroy-with-parent">True</property>
+  <template class="FlErrorDialog" parent="AdwMessageDialog">
+    <property name="heading" translatable="yes">Error</property>
 
-    <child type="action">
-      <object class="GtkButton" id="button_close">
-        <property name="label" translatable="yes">Close</property>
-      </object>
-    </child>
+    <signal name="response" handler="handle_response"/>
 
-    <child internal-child="content_area">
+    <property name="extra-child">
       <object class="GtkBox">
         <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkLabel">
-            <style>
-              <class name="heading"/>
-            </style>
-            <binding name="label">
-              <lookup name="error" type="FlErrorDialog"/>
-            </binding>
-            <property name="wrap">True</property>
-            <property name="xalign">0</property>
-            <property name="wrap-mode">word</property>
-            <property name="justify">left</property>
-            <property name="vexpand">False</property>
-            <property name="valign">start</property>
-            <property name="hexpand">True</property>
-            <property name="halign">start</property>
-          </object>
-        </child>
+        <property name="spacing">10</property>
         <child>
           <object class="GtkLabel">
             <binding name="label">
@@ -52,19 +28,30 @@
           </object>
         </child>
         <child>
-          <object class="GtkLinkButton">
+          <object class="GtkLabel" id="label_report">
             <binding name="visible">
               <lookup name="should-report" type="FlErrorDialog"/>
             </binding>
             <property name="label" translatable="yes">Please consider reporting this error.</property>
-            <property name="uri">https://gitlab.com/Schmiddiii/flare/-/issues/new?issuable_template=Error</property>
+            <property name="wrap">True</property>
+            <property name="xalign">0</property>
+            <property name="wrap-mode">word</property>
+            <property name="justify">left</property>
+            <property name="vexpand">False</property>
+            <property name="valign">start</property>
+            <property name="hexpand">True</property>
+            <property name="halign">start</property>
           </object>
         </child>
       </object>
-    </child>
+    </property>
 
-    <action-widgets>
-      <action-widget response="close">button_close</action-widget>
-    </action-widgets>
+    <property name="default-response">close</property>
+    <property name="close-response">close</property>
+
+    <responses>
+      <response id="close" translatable="yes">Close</response>
+      <response id="report" translatable="yes" appearance="suggested">Report</response>
+    </responses>
   </template>
 </interface>
