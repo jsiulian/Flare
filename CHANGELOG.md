@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Issue where special characters in replied messages were displayed incorrectly.
+- Attachments with very long names not being ellipsized.
 
 ## [0.8.2] - 2023-05-29
 
