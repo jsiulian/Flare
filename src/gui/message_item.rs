@@ -251,7 +251,7 @@ pub mod imp {
                         .dynamic_cast::<crate::gui::Window>()
                         .expect("Root of `ChannelMessages` to be a `Window`.");
                     let dialog = ErrorDialog::new(e, &root);
-                    dialog.show();
+                    dialog.present();
                 }
                 obj.notify("has-reaction");
             }));

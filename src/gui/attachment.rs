@@ -25,15 +25,14 @@ pub mod imp {
     use std::cell::RefCell;
 
     use ashpd::{desktop::open_uri::OpenFileRequest, WindowIdentifier};
+    use gdk::gio::File;
     use gio::Settings;
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject,
         Value,
     };
-    use gtk::{gio, glib, FileChooserNative};
-    use gtk::{
-        prelude::*, subclass::prelude::*, CompositeTemplate, FileChooserAction, ResponseType,
-    };
+    use gtk::{gio, glib, FileDialog};
+    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
     use crate::{
         backend::Manager,
@@ -95,47 +94,40 @@ pub mod imp {
 
         #[template_callback]
         fn download(&self, _: gtk::Button) {
-            log::trace!("User requested to dowload attachment");
+            log::trace!("User requested to download attachment");
             if let Some(attachment) = self.attachment.borrow().as_ref() {
-                let chooser = FileChooserNative::builder()
-                    .transient_for(&self.window())
-                    .action(FileChooserAction::Save)
-                    .build();
+                let mut chooser_builder = FileDialog::builder();
+
                 if let Some(name) = attachment.name() {
-                    crate::trace!("Setting filename to {:?}", &name);
-                    chooser.set_current_name(&name);
+                    chooser_builder = chooser_builder.initial_name(name);
                 }
-                // TODO: Does not work inside Flatpak.
-                // let _ = chooser.set_current_folder(
-                //     glib::user_special_dir(glib::UserDirectory::Downloads)
-                //         .map(|p| gio::File::for_path(&p))
-                //         .as_ref(),
-                // );
+
+                if let Some(downloads) = glib::user_special_dir(glib::UserDirectory::Downloads) {
+                    chooser_builder = chooser_builder.initial_folder(&File::for_path(downloads))
+                }
+
+                let chooser = chooser_builder.build();
 
                 let obj = self.obj();
-                chooser.connect_response(
-                    clone!(@weak chooser, @weak attachment, @weak obj => move |_, action| {
-                        if action == ResponseType::Accept {
+                chooser.save(
+                    Some(&self.window()),
+                    None::<&gio::Cancellable>,
+                    clone!(@weak chooser, @weak attachment, @weak obj => move |file| {
+                        if let Ok(file) = file {
                             log::trace!("User downloads attachment");
-                            let file = chooser.file();
-                            if let Some(file) = file {
-                                gspawn!(clone!(@weak attachment, @weak obj => async move {
-                                    if let Err(e) = attachment.save_to_file(&file).await {
-                                        let root = obj.imp().window();
-                                        let dialog = ErrorDialog::new(e.into(), &root);
-                                        dialog.show();
-                                    }
-                                }));
-                            } else {
-                                log::trace!("Got no file to save the attachment to");
-                            }
+                            gspawn!(clone!(@weak attachment, @weak obj => async move {
+                                if let Err(e) = attachment.save_to_file(&file).await {
+                                    let root = obj.imp().window();
+                                    let dialog = ErrorDialog::new(e.into(), &root);
+                                    dialog.present();
+                                }
+                            }));
                         } else {
                             log::trace!("User did not save a attachment");
                         }
                     }),
                 );
                 log::trace!("Showing download popup");
-                chooser.show();
             }
         }
     }

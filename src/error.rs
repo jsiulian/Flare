@@ -174,10 +174,10 @@ impl ApplicationError {
             ApplicationError::Libsecret(_) => false,
             ApplicationError::Db(_) => true,
             ApplicationError::UnauthorizedSignal => false,
-            ApplicationError::SendFailed(_) => false,
-            ApplicationError::ReceiveFailed(_) => false,
+            ApplicationError::SendFailed(_) => true,
+            ApplicationError::ReceiveFailed(_) => true,
             ApplicationError::Presage(_) => true,
-            ApplicationError::ConfigurationError(_) => false,
+            ApplicationError::ConfigurationError(_) => true,
             ApplicationError::ManagerThreadPanic => true,
         }
     }

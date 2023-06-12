@@ -13,7 +13,7 @@ opt-level = 3
 opt-level = 3
 
 [dependencies]
-gtk = { version = "0.6.2", package = "gtk4", features = ["v4_8"]}
+gtk = { version = "0.6.2", package = "gtk4", features = ["v4_10"]}
 gdk = { version = "0.6.2", package = "gdk4" }
 libadwaita = { version = "0.3.1", features = ["v1_3"]}
 ashpd = { version = "0.4.0", features = ["gtk4"]}
@@ -27,8 +27,8 @@ async-recursion = "1.0.2"
 regex = "1.7.0"
 lazy_static = "1.4.0"
 
-presage = { git = "https://github.com/Schmiddiii/presage.git", rev = "dcaca32a51946e9f7212a144dbfbb30b409e0870" }
-presage-store-sled = { git = "https://github.com/Schmiddiii/presage.git", rev = "dcaca32a51946e9f7212a144dbfbb30b409e0870" }
+presage = { git = "https://github.com/Schmiddiii/presage.git", rev = "c1a246e1ac5181c34e83d9f838da154ca3160b5c" }
+presage-store-sled = { git = "https://github.com/Schmiddiii/presage.git", rev = "c1a246e1ac5181c34e83d9f838da154ca3160b5c" }
 libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "a2e871a" }
 
 async-trait = "0.1.64"

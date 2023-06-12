@@ -129,7 +129,7 @@ pub mod imp {
             let action_settings = SimpleAction::new("settings", None);
             action_settings.connect_activate(|_, _| {
                 let settings = PreferencesWindow::new();
-                settings.show();
+                settings.present();
             });
 
             let action_clear_messages = SimpleAction::new("clear-messages", None);
@@ -152,7 +152,7 @@ pub mod imp {
                         obj.close();
                     }
                 }));
-                dialog.show();
+                dialog.present();
             }));
             log::trace!("Setting up unlink action");
             let action_unlink = SimpleAction::new("unlink", None);
@@ -193,7 +193,7 @@ pub mod imp {
                         obj.close();
                     }
                 }));
-                dialog.show();
+                dialog.present();
             }));
 
             let action_show_help_overlay = SimpleAction::new("show-help-overlay", None);
@@ -202,7 +202,7 @@ pub mod imp {
                 let shortcuts_window: ShortcutsWindow = builder
                     .object("help_overlay")
                     .expect("shortcuts.ui to have at least one object help_overlay");
-                shortcuts_window.show();
+                shortcuts_window.present();
             });
 
             log::trace!("Setting up about-page action");
@@ -212,7 +212,7 @@ pub mod imp {
                 let about: AboutWindow = builder
                     .object("about")
                     .expect("about.ui to have at least one object about");
-                about.show();
+                about.present();
             });
 
             log::trace!("Setting up channel information action");
@@ -221,7 +221,7 @@ pub mod imp {
                 log::trace!("Requested channel info");
                 let Some(channel) = obj.imp().channel_messages.active_channel() else {return};
                 let channel_info = ChannelInfoDialog::new(&channel, &obj.manager(), &obj);
-                channel_info.show();
+                channel_info.present();
             }));
 
             self.channel_messages
@@ -355,7 +355,7 @@ pub mod imp {
                         .expect("Second argument of signal `link-qr-code` of `Manager` to be `String`");
                     crate::trace!("Opening link window for url {}", url);
                     let window = LinkWindow::new(url, man, &obj);
-                    window.show();
+                    window.present();
                     // After link, show all channels as most likely no channels have messages yet.
                     obj.imp().channel_list.borrow().set_property("add-conversation-enabled", true);
                     None
@@ -363,7 +363,7 @@ pub mod imp {
 
                 if let Err(e) = manager.init(&path).await {
                     let dialog = ErrorDialog::new(e, &obj);
-                    dialog.show();
+                    dialog.present();
                 }
             }));
         }
