@@ -33,7 +33,7 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "."
+                    "url" : "../"
                 }
             ]
         }
