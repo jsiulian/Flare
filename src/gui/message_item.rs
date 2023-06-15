@@ -6,7 +6,6 @@ use gtk::{
     prelude::*,
     traits::{PopoverExt, WidgetExt},
 };
-
 use crate::backend::message::{MessageExt, TextMessage};
 use crate::backend::timeline::timeline_item::TimelineItemExt;
 use crate::backend::Manager;
@@ -26,6 +25,7 @@ impl MessageItem {
             .build();
         s.init_label_selectable();
         s.setup_showheader();
+        s.setup_from_group();
         s.setup_from_self();
         s
     }
@@ -96,9 +96,19 @@ impl MessageItem {
     fn setup_from_self(&self) {
         if self.message().sender().is_self() {
             self.add_css_class("from-self");
+            self.message().set_show_header(false);
             self.set_halign(gtk::Align::End);
+            self.imp().reactions.set_halign(gtk::Align::Start);
         } else {
             self.set_halign(gtk::Align::Start);
+            self.imp().reactions.set_halign(gtk::Align::End);
+        }
+    }
+
+    fn setup_from_group(&self) {
+        if self.message().channel().group().is_none() {
+            self.message().set_show_header(false);
+            self.imp().avatar.set_visible(false);
         }
     }
 
@@ -119,7 +129,6 @@ impl MessageItem {
     /// Set whether this item should show its header.
     pub fn set_show_header(&self) {
         let visible = self.message().show_header() || self.property("force-show-header");
-
         self.imp().header.set_visible(visible);
 
         if visible && !self.has_css_class("has-header") {
@@ -154,9 +163,13 @@ pub mod imp {
     #[template(resource = "/ui/message_item.ui")]
     pub struct MessageItem {
         #[template_child]
+        pub(super) avatar: TemplateChild<libadwaita::Avatar>,
+        #[template_child]
         pub(super) header: TemplateChild<gtk::Box>,
         #[template_child]
         emoji_chooser: TemplateChild<gtk::EmojiChooser>,
+        #[template_child]
+        pub(super) reactions: TemplateChild<gtk::Label>,
         #[template_child]
         pub(super) msg_menu: TemplateChild<gtk::PopoverMenu>,
         #[template_child]
@@ -370,3 +383,4 @@ pub mod imp {
     impl WidgetImpl for MessageItem {}
     impl BoxImpl for MessageItem {}
 }
+
