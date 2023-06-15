@@ -1,46 +1,50 @@
-.channel-messages .message-item.from-self .avatar-other {
-  opacity: 0;
-}
-.channel-messages .message-item:not(.has-header) .avatar-other {
-  opacity: 0;
-}
-
 .message-bubble {
   font-size: 16px;
-  color: @card_fg_color;
+  color: @dark_4;
   border-radius: 15px;
-  padding: 6px 9px;
+  padding: 9px;
   background-color: @light_2;
+}
+.message-list row {
+	padding:0;
+}
+.message-item {
+	margin: 5px 0 ;
 }
 
 .message-item.from-self .message-bubble {
   background-color: alpha(@accent_bg_color, 0.35);
+  color: @card_fg_color;
+}
+
+.message-item:not(.has-header) > .avatar-other{
+	opacity: 0;
 }
 
 .reaction {
-  background-color: alpha(@accent_bg_color, 0.35);
+  background-color: @light_2;
+  border: 1px solid @accent_bg_color;
   border-radius: 15px;
   padding: 6px 9px;
-}
-
-.message-item.from-self .reaction{
-  background-color: @accent_fg_color;
-}
-
-.message-item.from-self .reaction{
-  background-color: @accent_fg_color;
+  margin-top: 5px;
 }
 
 .quote {
   border-left: 2px solid @accent_bg_color;
   padding-left: 3px;
+  margin-top: 3px;
 }
 
-.message-item.from-self .quote{
-  border-left-color: @accent_fg_color;
+.message-item.from-self .quote {
+  border-left: 2px solid @accent_fg_color;
 }
 
 .message-bubble separator {
 	min-width: 5px;
+}
+
+.timestamp {
+	font-size: 12px;
+	padding-left: 6px;
 }
 
