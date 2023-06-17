@@ -90,19 +90,11 @@
                   </closure>
                 </binding>
                 <child>
-                  <object class="GtkSeparator">
-                    <style>
-                      <class name="spacer"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
                   <object class="GtkBox">
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel">
                         <style>
-                          <class name="dim-label"/>
                           <class name="heading"/>
                         </style>
                         <binding name="label">
@@ -120,9 +112,6 @@
                     </child>
                     <child>
                       <object class="GtkLabel">
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
                         <binding name="label">
                           <closure function="markup_urls" type="gchararray">
                             <lookup name="body">
