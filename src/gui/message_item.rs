@@ -6,6 +6,8 @@ use gtk::{
     prelude::*,
     traits::{PopoverExt, WidgetExt},
 };
+use regex::Regex;
+
 use crate::backend::message::{MessageExt, TextMessage};
 use crate::backend::timeline::timeline_item::TimelineItemExt;
 use crate::backend::Manager;
@@ -27,6 +29,8 @@ impl MessageItem {
         s.setup_showheader();
         s.setup_from_group();
         s.setup_from_self();
+        s.setup_quote();
+        s.setup_emoji();
         s
     }
 
@@ -93,6 +97,12 @@ impl MessageItem {
         self.set_show_header();
     }
 
+    fn setup_quote(&self) {
+        if self.message().quote().is_some() {
+            self.add_css_class("has-quote");
+        }
+    }
+
     fn setup_from_self(&self) {
         if self.message().sender().is_self() {
             self.add_css_class("from-self");
@@ -109,6 +119,16 @@ impl MessageItem {
         if self.message().channel().group().is_none() {
             self.message().set_show_header(false);
             self.imp().avatar.set_visible(false);
+        }
+    }
+
+    fn setup_emoji(&self) {
+        lazy_static::lazy_static! {
+            static ref RE: Regex = Regex::new(r"^[\p{Emoji} \u{fe0f}\u{200d}]+$").unwrap();
+        }
+        if self.message().body().is_some() && RE.is_match(self.message().body().unwrap().as_str())  {
+            self.add_css_class("emoji");
+            self.message().set_show_header(false);
         }
     }
 
