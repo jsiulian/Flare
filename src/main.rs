@@ -1,11 +1,10 @@
 use gdk::prelude::{ApplicationExt, ApplicationExtManual};
-use gdk::Display;
 use gio::prelude::SettingsExt;
 use gio::{ApplicationFlags, Settings, SettingsBindFlags};
 use glib::IsA;
 use gtk::prelude::SettingsExtManual;
 use gtk::traits::{GtkWindowExt, WidgetExt};
-use gtk::{gdk, gio, glib, CssProvider};
+use gtk::{gdk, gio, glib};
 use once_cell::sync::Lazy;
 
 use std::path::Path;
@@ -45,18 +44,6 @@ fn init_internationalization() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-fn load_css() {
-    let provider = CssProvider::new();
-    provider.load_from_resource("/de/schmidhuberj/Flare/style.css");
-
-    // Add the provider to the default screen
-    gtk::style_context_add_provider_for_display(
-        &Display::default().expect("Could not connect to a display."),
-        &provider,
-        gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
-    );
-}
-
 fn main() {
     env_logger::init();
     init_internationalization().expect("Failed to initialize internationalization");
@@ -68,8 +55,8 @@ fn main() {
         }
     }
 
-    gtk::init().expect("Failed to initialize gtk");
-    libadwaita::init().expect("Failed to initializa libadwaita");
+    init_resources();
+
     let app = libadwaita::Application::builder()
         .application_id(APP_ID)
         .build();
@@ -97,14 +84,12 @@ fn main() {
 }
 
 fn build_ui(app: &libadwaita::Application) {
-    init_resources();
     let settings = Settings::new(APP_ID);
     let window = crate::gui::Window::new(app);
     settings
         .bind("run-in-background", &window, "hide-on-close")
         .flags(SettingsBindFlags::DEFAULT)
         .build();
-    load_css();
     init_icons(&window.display());
     app.connect_activate(move |_| {
         window.present();
