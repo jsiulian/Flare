@@ -1,9 +1,9 @@
 .message-bubble {
   font-size: 16px;
-  color: @theme_fg_color;
+  color: @window_fg_color;
   border-radius: 15px;
   padding: 9px;
-  background-color: mix(@theme_bg_color, @theme_fg_color, .05);
+  background-color: mix(@window_bg_color, @window_fg_color, .05);
 }
 .message-list row {
   padding:0;
@@ -22,7 +22,7 @@
 }
 
 .reaction {
-  background-color: mix(@theme_bg_color, @theme_fg_color, .05);
+  background-color: mix(@window_bg_color, @window_fg_color, .05);
   border: 1px solid @accent_bg_color;
   border-radius: 15px;
   padding: 6px 9px;
@@ -32,11 +32,11 @@
 
 .quote {
   font-size: 16px;
-  background-color: mix(@theme_bg_color, @accent_bg_color, .1);
+  background-color: mix(@window_bg_color, @accent_bg_color, .1);
   border-left:4px solid;
   border-left-color:  @accent_bg_color;
   border-radius: 8px;
-  color: @theme_fg_color;
+  color: @window_fg_color;
   padding: 9px;
   margin-top: 3px;
 }
