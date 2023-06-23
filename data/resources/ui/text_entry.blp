@@ -1,0 +1,29 @@
+using Gtk 4.0;
+
+template $FlTextEntry : Box {
+  ScrolledWindow {
+    hexpand: true;
+    vscrollbar-policy: external;
+    max-content-height: 75;
+    min-content-height: 25;
+    propagate-natural-height: true;
+    has-frame: true;
+    child:
+    TextView view {
+      hexpand: true;
+      accepts-tab: false;
+      top-margin: 6;
+      bottom-margin: 6;
+      left-margin: 6;
+      right-margin: 6;
+      wrap-mode: word;
+      buffer: buffer;
+      input-hints: spellcheck;
+    }
+
+    ;
+  }
+}
+
+TextBuffer buffer {
+}

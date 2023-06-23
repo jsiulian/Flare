@@ -1,0 +1,37 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlLinkWindow : Adw.Window {
+  can-focus: true;
+  title: _("Link Device");
+  default-height: 600;
+  default-width: 500;
+  destroy-with-parent: true;
+
+  Box {
+    orientation: vertical;
+
+    Label {
+      label: _("Please scan this QR code with your primary device.");
+    }
+
+    Picture qr_image {
+    }
+
+    Button switch_show_url {
+      accessibility {
+        label: C_("accessibility", "Copy to clipboard");
+      }
+
+      tooltip-text: "Copy to clipboard";
+      icon-name: "edit-copy-symbolic";
+      hexpand: false;
+      halign: center;
+      clicked => $handle_clipboard() swapped;
+    }
+
+    Label {
+      label: _("Please wait until the contacts are displayed after linking.");
+    }
+  }
+}

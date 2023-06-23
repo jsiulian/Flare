@@ -1,22 +1,22 @@
-# fd -t f -e ui . data/
+# fd -t f -e blp . data/
 # fd -t f -e rs . src/
 
-data/resources/ui/about.ui
-data/resources/ui/attachment.ui
-data/resources/ui/call_message_item.ui
-data/resources/ui/channel_info_dialog.ui
-data/resources/ui/channel_item.ui
-data/resources/ui/channel_list.ui
-data/resources/ui/channel_messages.ui
-data/resources/ui/dialog_clear_messages.ui
-data/resources/ui/dialog_unlink.ui
-data/resources/ui/error_dialog.ui
-data/resources/ui/link_window.ui
-data/resources/ui/message_item.ui
-data/resources/ui/preferences_window.ui
-data/resources/ui/shortcuts.ui
-data/resources/ui/text_entry.ui
-data/resources/ui/window.ui
+data/resources/ui/about.blp.in
+data/resources/ui/attachment.blp
+data/resources/ui/call_message_item.blp
+data/resources/ui/channel_info_dialog.blp
+data/resources/ui/channel_item.blp
+data/resources/ui/channel_list.blp
+data/resources/ui/channel_messages.blp
+data/resources/ui/dialog_clear_messages.blp
+data/resources/ui/dialog_unlink.blp
+data/resources/ui/error_dialog.blp
+data/resources/ui/link_window.blp
+data/resources/ui/message_item.blp
+data/resources/ui/preferences_window.blp
+data/resources/ui/shortcuts.blp
+data/resources/ui/text_entry.blp
+data/resources/ui/window.blp
 
 src/backend/attachment.rs
 src/backend/channel.rs

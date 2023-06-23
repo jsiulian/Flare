@@ -1,0 +1,92 @@
+using Gtk 4.0;
+
+template $FlAttachment : Box {
+  orientation: horizontal;
+  hexpand: true;
+  halign: start;
+
+  Box {
+    orientation: horizontal;
+    hexpand: true;
+    halign: start;
+    visible: bind $not(template.attachment as <$FlAttachmentObject>.loaded) as <bool>;
+
+    Button {
+      label: _("Load image");
+      clicked => $load() swapped;
+      visible: bind template.attachment as <$FlAttachmentObject>.is_image;
+    }
+
+    Button {
+      label: _("Load video");
+      clicked => $load() swapped;
+      visible: bind template.attachment as <$FlAttachmentObject>.is_video;
+    }
+
+    Button {
+      label: _("Load file");
+      clicked => $load() swapped;
+      visible: bind template.attachment as <$FlAttachmentObject>.is_file;
+    }
+  }
+
+  Box {
+    orientation: horizontal;
+    hexpand: true;
+    halign: start;
+    visible: bind template.attachment as <$FlAttachmentObject>.loaded;
+
+    Picture {
+      halign: start;
+      width-request: 100;
+      height-request: 100;
+      visible: bind template.attachment as <$FlAttachmentObject>.is_image;
+      paintable:  bind template.attachment as <$FlAttachmentObject>.image;
+    }
+
+    Video {
+      halign: start;
+      width-request: 100;
+      height-request: 100;
+      visible: bind template.attachment as <$FlAttachmentObject>.is_video;
+      media-stream: bind template.attachment as <$FlAttachmentObject>.video;
+    }
+
+    Label {
+      halign: start;
+      ellipsize: end;
+      visible: bind template.attachment as <$FlAttachmentObject>.is_file;
+      label: bind template.attachment as <$FlAttachmentObject>.name;
+    }
+  }
+
+  Button {
+    styles [
+      "flat",
+      "circular",
+    ]
+
+    accessibility {
+      label: C_("accessibility", "Open with…");
+    }
+
+    tooltip-text: "Open with…";
+    icon-name: "document-open-symbolic";
+    clicked => $open() swapped;
+  }
+
+  Button {
+    styles [
+      "flat",
+      "circular",
+    ]
+
+    accessibility {
+      label: C_("accessibility", "Download");
+    }
+
+    tooltip-text: "Download";
+    icon-name: "document-save-symbolic";
+    clicked => $download() swapped;
+  }
+}

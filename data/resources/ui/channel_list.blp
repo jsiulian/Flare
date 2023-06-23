@@ -1,0 +1,57 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlChannelList : Box {
+  hexpand: false;
+  vexpand: true;
+  orientation: vertical;
+
+  // Offline indicator
+  Adw.Banner {
+    title: _("Offline");
+    revealed: bind $not($network_monitor() as <$GNetworkMonitor>.network-available) as <bool>;
+  }
+
+  SearchBar {
+    search-mode-enabled: bind-property template.search-enabled no-sync-create;
+
+    SearchEntry search_entry {
+      tooltip-text: _("Search");
+
+      accessibility {
+        label: C_("accessibility", "Search");
+      }
+
+      search-changed => $search_changed() swapped;
+      stop-search => $search_stopped() swapped;
+      activate => $search_activate() swapped;
+    }
+  }
+
+  ScrolledWindow scrolled_window {
+    visible: bind $not($uint_equal(list.model as <NoSelection>.n-items,0) as <bool>) as <bool>;
+    hscrollbar-policy: never;
+
+    child:
+    ListView list {
+      hexpand: true;
+      vexpand: true;
+
+      styles [
+        "navigation-sidebar",
+      ]
+    }
+
+    ;
+  }
+
+  Adw.StatusPage {
+    title: "No Conversations";
+    description: "Add a conversation";
+    icon-name: "document-edit-symbolic";
+    hexpand: true;
+    vexpand: true;
+
+    visible: bind $uint_equal(list.model as <NoSelection>.n-items,0) as <bool>;
+  }
+}
