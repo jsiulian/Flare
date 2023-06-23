@@ -1,0 +1,15 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.MessageDialog dialog {
+  heading: _("Unlink");
+  body: _("This will unlink this device and remove all locally saved data. This will also close the application such that it can be relinked when opening it again.");
+  default-response: "cancel";
+  close-response: "cancel";
+
+  responses [
+    cancel: _("Cancel"),
+    unlink-delete: _("Unlink and delete all messages") destructive,
+    unlink-keep: _("Unlink but keep messages") destructive,
+  ]
+}

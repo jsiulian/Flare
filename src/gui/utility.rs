@@ -41,8 +41,8 @@ impl Utility {
     }
 
     #[template_callback]
-    fn uint_equal(i1: u32, i2: u32) -> bool {
-        i1 == i2
+    fn uint_equal(i1: u32, i2: i32) -> bool {
+        i1 as i32 == i2
     }
 
     #[template_callback(function)]

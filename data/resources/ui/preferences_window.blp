@@ -1,0 +1,124 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlPreferencesWindow : Adw.PreferencesWindow {
+  Adw.PreferencesPage {
+    title: _("General");
+    icon-name: "preferences-system-symbolic";
+
+    Adw.PreferencesGroup {
+      title: _("Linking");
+      description: _("The device will need to be relinked to take effect.");
+
+      Adw.EntryRow entry_device_name {
+        title: _("Device Name");
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Attachments");
+
+      Adw.ActionRow row_download_images {
+        title: _("Dowload images automatically");
+
+        Switch switch_download_images {
+          accessibility {
+            labelled-by: row_download_images;
+          }
+
+          valign: center;
+          halign: center;
+        }
+      }
+
+      Adw.ActionRow row_download_videos {
+        title: _("Dowload videos automatically");
+
+        Switch switch_download_videos {
+          accessibility {
+            labelled-by: row_download_videos;
+          }
+
+          valign: center;
+          halign: center;
+        }
+      }
+
+      Adw.ActionRow row_download_files {
+        title: _("Dowload files automatically");
+
+        Switch switch_download_files {
+          accessibility {
+            labelled-by: row_download_files;
+          }
+
+          valign: center;
+          halign: center;
+        }
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Notifications");
+      description: _("Notifications for new messages.");
+
+      Adw.ActionRow row_notifications {
+        title: _("Send notifications");
+
+        Switch switch_notifications {
+          accessibility {
+            labelled-by: row_notifications;
+          }
+
+          valign: center;
+          halign: center;
+        }
+      }
+
+      Adw.ActionRow row_background {
+        title: _("Watch for new messages while closed");
+        sensitive: bind-property switch_notifications.state;
+
+        Switch switch_background {
+          accessibility {
+            labelled-by: row_background;
+          }
+
+          valign: center;
+          halign: center;
+          state-set => $on_background_switch_state_set() swapped;
+        }
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Other");
+
+      Adw.ActionRow row_messages_selectable {
+        title: _("Selectable Message Text");
+        subtitle: _("Selectable text can interfere with swipe-gestures on touch-screens.");
+
+        Switch switch_messages_selectable {
+          accessibility {
+            labelled-by: row_messages_selectable;
+          }
+
+          valign: center;
+          halign: center;
+        }
+      }
+    }
+  }
+}
+
+Adjustment adj_initial_message_loading {
+  lower: 0;
+  upper: 20;
+  step-increment: 1;
+}
+
+Adjustment adj_request_message_loading {
+  lower: 0;
+  upper: 20;
+  step-increment: 1;
+}

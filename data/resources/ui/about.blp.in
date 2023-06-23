@@ -1,0 +1,19 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.AboutWindow about {
+  application-icon: "icon";
+  application-name: "Flare";
+  version: "@VERSION@";
+  comments: "An unofficial Signal GTK client.";
+  issue-url: "https://gitlab.com/Schmiddiii/flare/-/issues";
+  support-url: "https://matrix.to/#/%23flare-signal:matrix.org";
+  website: "https://gitlab.com/Schmiddiii/flare";
+  developer-name: "Julian Schmidhuber";
+  translator-credits: _("translator-credits");
+  // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
+  copyright: "© 2022 Julian Schmidhuber";
+  license-type: agpl_3_0_only;
+  release-notes: "\n      <p>Added</p>\n      <ul>\n        <li>A \"pick emoji\" button for the text entry.</li>\n        <li>Support for receiving mentions.</li>\n        <li>Smaller UI improvements.</li>\n      </ul>\n      <p>Fixed</p>\n      <ul>\n        <li>Avatar of contacts with special characters not displaying the initials label.</li>\n        <li>No profile names were shown in notifications.</li>\n        <li>Removing expiration timer for conversations with expire messages.</li>\n      </ul>\n    ";
+
+}

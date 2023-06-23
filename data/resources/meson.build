@@ -1,5 +1,29 @@
 subdir('ui')
 
+# Blueprint
+blueprints = custom_target('blueprints',
+  input: files(
+    'ui/about.blp',
+    'ui/attachment.blp',
+    'ui/call_message_item.blp',
+    'ui/channel_messages.blp',
+    'ui/channel_item.blp',
+    'ui/channel_list.blp',
+    'ui/channel_info_dialog.blp',
+    'ui/dialog_clear_messages.blp',
+    'ui/dialog_unlink.blp',
+    'ui/error_dialog.blp',
+    'ui/link_window.blp',
+    'ui/message_item.blp',
+    'ui/preferences_window.blp',
+    'ui/shortcuts.blp',
+    'ui/text_entry.blp',
+    'ui/window.blp',
+  ),
+  output: '.',
+  command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
+)
+
 # Resources
 resources = gnome.compile_resources(
   'resources',
@@ -7,4 +31,5 @@ resources = gnome.compile_resources(
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
+  dependencies: blueprints,
 )

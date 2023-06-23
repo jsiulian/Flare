@@ -1,0 +1,54 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlCallMessageItem : Box {
+  orientation: horizontal;
+  hexpand: true;
+  spacing: 5;
+
+  Adw.Avatar {
+    show-initials: true;
+    halign: start;
+    size: 20;
+    text: bind template.message as <$FlCallMessage>.sender as <$FlContact>.title;
+  }
+
+  // Sender
+  Label {
+    styles [
+      "heading",
+    ]
+    label: bind template.message as <$FlCallMessage>.sender as <$FlContact>.title;
+    hexpand: false;
+    halign: start;
+  }
+
+  // Message
+  Label {
+    label: bind template.message as <$FlCallMessage>.textual-description;
+    wrap: true;
+    xalign: 0;
+    wrap-mode: word_char;
+    justify: left;
+    vexpand: false;
+    valign: start;
+    hexpand: true;
+    halign: start;
+    use-markup: false;
+    selectable: false;
+  }
+
+  // Timestamp
+  Label {
+    styles [
+      "dim-label",
+      "caption",
+    ]
+    label: bind $format_timestamp(template.message as <$FlCallMessage>.timestamp) as <string>;
+    justify: right;
+    vexpand: false;
+    valign: start;
+    hexpand: false;
+    halign: end;
+  }
+}

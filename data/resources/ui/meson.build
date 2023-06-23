@@ -7,13 +7,13 @@ global_conf.set('GETTEXT_PACKAGE', gettext_package)
 global_conf.set('LOCALEDIR', localedir)
 global_conf.set('BUILD_DIR', meson.project_build_root())
 config = configure_file(
-  input: 'about.ui.in',
-  output: 'about.ui',
+  input: 'about.blp.in',
+  output: 'about.blp',
   configuration: global_conf
 )
 run_command(
   'cp',
-  meson.project_build_root() / 'data' / 'resources' / 'ui' / 'about.ui',
-  meson.project_source_root() / 'data' / 'resources' / 'ui' / 'about.ui',
+  meson.project_build_root() / 'data' / 'resources' / 'ui' / 'about.blp',
+  meson.project_source_root() / 'data' / 'resources' / 'ui' / 'about.blp',
   check: true
 )

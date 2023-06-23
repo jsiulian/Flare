@@ -1,0 +1,80 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlChannelItem : Grid {
+  accessibility {
+    labelled-by: label-name;
+  }
+
+  margin-bottom: 6;
+  margin-top: 6;
+  hexpand: false;
+  hexpand-set: true;
+  column-spacing: 12;
+
+  // Avatar
+  Adw.Avatar {
+    text: bind template.channel as <$FlChannel>.title;
+    show-initials: true;
+    size: 32;
+
+    layout {
+      column: "0";
+      row: "0";
+      row-span: "2";
+    }
+  }
+
+  // Channel name
+  Label label-name {
+    styles [
+      "heading",
+    ]
+
+    label: bind template.channel as <$FlChannel>.title;
+    halign: start;
+    hexpand: true;
+    ellipsize: end;
+
+    layout {
+      column: "1";
+      row: "0";
+    }
+  }
+
+  Label {
+    halign: start;
+    ellipsize: end;
+    label: bind template.channel as <$FlChannel>.last-message as <$FlTextMessage>.textual-description;
+
+    styles [
+      "dim-label",
+    ]
+
+    layout {
+      column: "1";
+      row: "1";
+      column-span: "2";
+    }
+  }
+
+  // Timestamp
+  Label {
+    styles [
+      "dim-label",
+      "caption",
+    ]
+
+    label: bind $format_timestamp(template.channel as <$FlChannel>.last-message as <$FlMessage>.timestamp) as <string>;
+    justify: right;
+    vexpand: false;
+    valign: start;
+    hexpand: false;
+    halign: end;
+
+    layout {
+      column: "2";
+      row: "0";
+    }
+  }
+}

@@ -1,0 +1,147 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlWindow : Adw.ApplicationWindow {
+  can-focus: true;
+  title: "Flare";
+  default-height: 800;
+  default-width: 500;
+
+  Adw.Leaflet leaflet {
+    can-navigate-back: true;
+
+    Box {
+      styles [
+        "view",
+      ]
+
+      orientation: vertical;
+      width-request: 300;
+
+      Adw.HeaderBar {
+        show-end-title-buttons: bind leaflet.folded;
+        title-widget: Adw.WindowTitle {
+          title: "Flare";
+        };
+
+        [start]
+        ToggleButton {
+          accessibility {
+            label: C_("accessibility", "Add Conversation");
+          }
+
+          tooltip-text: "Add Conversation";
+          icon-name: "document-edit-symbolic";
+          active: bind-property channel_list.add-conversation-enabled bidirectional;
+        }
+
+        [end]
+        MenuButton {
+          accessibility {
+            label: C_("accessibility", "Menu");
+          }
+
+          tooltip-text: "Menu";
+          menu-model: menubar;
+          primary: true;
+          icon-name: "open-menu-symbolic";
+        }
+
+        [end]
+        ToggleButton {
+          accessibility {
+            label: C_("accessibility", "Search");
+          }
+
+          tooltip-text: "Search";
+          icon-name: "system-search-symbolic";
+          active: bind-property channel_list.search-enabled no-sync-create;
+          clicked => $handle_search_clicked() swapped;
+        }
+      }
+
+      $FlChannelList channel_list {
+        active-channel-changed => $handle_go_forward() swapped;
+        manager: bind template.manager;
+
+      }
+    }
+
+    Adw.LeafletPage {
+      navigatable: false;
+      child:
+      Separator {};
+    }
+
+    Box {
+      orientation: vertical;
+      hexpand: true;
+
+      Adw.HeaderBar {
+        title-widget: Adw.WindowTitle {
+          title: bind channel_list.active-channel as <$FlChannel>.title;
+        };
+
+        Button {
+          clicked => $handle_go_back() swapped;
+          icon-name: "go-previous-symbolic";
+          visible: bind leaflet.folded;
+        }
+
+        [end]
+        MenuButton {
+          accessibility {
+            label: C_("accessibility", "Menu");
+          }
+
+          tooltip-text: "Menu";
+          menu-model: menubar-channel;
+          icon-name: "view-more-symbolic";
+        }
+      }
+
+      $FlChannelMessages channel_messages {
+        manager: bind template.manager;
+        active-channel: bind channel_list.active-channel;
+      }
+    }
+  }
+}
+
+menu menubar {
+  section {
+    item {
+      label: _("Settings");
+      action: "win.settings";
+    }
+
+    item {
+      label: _("Unlink");
+      action: "win.unlink";
+    }
+
+    item {
+      label: _("Clear messages");
+      action: "win.clear-messages";
+    }
+
+    item {
+      label: _("Keybindings");
+      action: "win.show-help-overlay";
+    }
+
+    item {
+      label: _("About");
+      action: "win.about";
+    }
+  }
+}
+
+menu menubar-channel {
+  section {
+    item {
+      label: _("Channel Information");
+      action: "win.channel-information";
+    }
+  }
+}

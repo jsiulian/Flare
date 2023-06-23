@@ -1,0 +1,200 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlChannelMessages : Box {
+  orientation: vertical;
+  hexpand: true;
+  vexpand: true;
+
+  styles [
+    "channel-messages",
+  ]
+
+  // Offline Indicator
+  Adw.Banner {
+    title: _("Offline");
+    revealed: bind $not($network_monitor() as <$GNetworkMonitor>.network-available) as <bool>;
+  }
+  // Status Page
+  Adw.StatusPage {
+    title: _("No Channel Selected");
+    description: _("Select a channel");
+    icon-name: "system-search-symbolic";
+    vexpand: true;
+    hexpand: true;
+    visible: bind $is_none(template.active-channel) as <bool>;
+  }
+
+  Box {
+    styles [
+      "view",
+    ]
+    visible: bind $is_some(template.active-channel) as <bool>;
+    hexpand: true;
+    orientation: vertical;
+
+    Spinner {
+      spinning: true;
+      visible: bind template.loading;
+    }
+
+    Overlay {
+      [overlay]
+      Button {
+        styles [
+          "circular",
+        ]
+
+        icon-name: "go-bottom-symbolic";
+        halign: end;
+        valign: end;
+        margin-bottom: 7;
+        margin-end: 7;
+        clicked => $scroll_down() swapped;
+        visible: bind $not(template.sticky) as <bool>;
+      }
+
+      // Message List
+      ScrolledWindow scrolled_window {
+        vexpand: true;
+        hscrollbar-policy: never;
+        edge-overshot => $handle_edge_reached() swapped;
+
+        Adw.ClampScrollable {
+          vexpand: false;
+          hexpand: true;
+          maximum-size: 750;
+          tightening-threshold: 550;
+
+          ListView list_view {
+            styles [
+              "message-list",
+            ]
+            model: bind $no_selection(template.active-channel as <$FlChannel>.timeline) as <SelectionModel>;
+            hexpand: true;
+            vexpand: false;
+          }
+        }
+      }
+    }
+
+    // Quote
+    Box {
+      visible: bind $is_some(template.reply-message) as <bool>;
+      Button {
+        accessibility {
+          label: C_("accessibility", "Remove the reply");
+        }
+
+        tooltip-text: C_("tooltip", "Remove reply");
+
+        styles [
+          "flat",
+        ]
+
+        clicked => $remove_reply() swapped;
+        icon-name: "list-remove-symbolic";
+      }
+
+      $FlMessageItem {
+        message: bind template.reply-message;
+        hexpand: "True";
+        force-show-header: "True";
+      }
+    }
+
+    // Box for attachments
+    Box {
+      visible: bind template.has-attachments;
+      Button {
+        accessibility {
+          label: C_("accessibility", "Remove an attachment");
+        }
+
+        tooltip-text: C_("tooltip", "Remove attachment");
+
+        styles [
+          "flat",
+        ]
+
+        clicked => $remove_attachments() swapped;
+        icon-name: "list-remove-symbolic";
+      }
+
+      Box box_attachments {
+        orientation: vertical;
+        hexpand: true;
+      }
+    }
+
+    Separator {
+    }
+
+    // Entry Box
+    Box {
+      margin-top: 6;
+      margin-bottom: 6;
+      margin-start: 6;
+      margin-end: 6;
+
+      styles [
+        "linked",
+      ]
+
+      Button {
+        accessibility {
+          label: C_("accessibility", "Add an attachment");
+        }
+
+        tooltip-text: C_("tooltip", "Add attachment");
+        clicked => $add_attachment() swapped;
+        icon-name: "mail-attachment-symbolic";
+
+        ShortcutController {
+          scope: managed;
+
+          Shortcut {
+            trigger: "<Control>plus";
+            action: "activate";
+          }
+        }
+      }
+
+      Button {
+        accessibility {
+          label: C_("accessibility", "Insert an emoji");
+        }
+
+        tooltip-text: C_("tooltip", "Insert emoji");
+        clicked => $insert_emoji() swapped;
+        icon-name: "face-smile-symbolic";
+      }
+
+      $FlTextEntry text_entry {
+        accessibility {
+          label: C_("accessibility", "Message input");
+        }
+
+        activate => $send_message() swapped;
+        paste-file => $paste_file() swapped;
+        paste-texture => $paste_texture() swapped;
+        tooltip-text: C_("tooltip", "Message input");
+      }
+
+      Button {
+        sensitive: bind $and($or(template.has-attachments, $not(text_entry.is-empty) as <bool> ) as <bool>, $network_monitor() as <$GNetworkMonitor>.network-available ) as <bool>;
+        accessibility {
+          label: C_("accessibility", "Send");
+        }
+
+        tooltip-text: C_("tooltip", "Send");
+        label: _("Send");
+        clicked => $send_message() swapped;
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+using Gtk 4.0;
+
+ShortcutsWindow help_overlay {
+  modal: true;
+
+  ShortcutsSection {
+    section-name: "shortcuts";
+    max-height: 10;
+
+    ShortcutsGroup {
+      title: C_("shortcut window", "General");
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Show shortcuts");
+        accelerator: "<Ctrl>&question";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Go to settings");
+        accelerator: "<Ctrl>&comma";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Go to about page");
+        accelerator: "F1";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Open menu");
+        accelerator: "F10";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Close window");
+        accelerator: "<Ctrl>&q";
+      }
+    }
+
+    ShortcutsGroup {
+      title: C_("shortcut window", "Channels");
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Go to channel 1…9");
+        accelerator: "<Ctrl>&1...9";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Search in channels");
+        accelerator: "<Ctrl>&f";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Upload attachment");
+        accelerator: "<Ctrl>&plus";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Focus the text input box");
+        accelerator: "<Ctrl>&i";
+      }
+
+      ShortcutsShortcut {
+        title: C_("shortcut window", "Load more messages");
+        accelerator: "<Ctrl>&l";
+      }
+    }
+  }
+}

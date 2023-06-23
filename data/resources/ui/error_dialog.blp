@@ -1,0 +1,46 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlErrorDialog : Adw.MessageDialog {
+  heading: _("Error");
+  response => $handle_response();
+  extra-child:
+  Box {
+    orientation: vertical;
+    spacing: 10;
+
+    Label {
+      label: bind template.secondary-error;
+      wrap: true;
+      xalign: 0;
+      wrap-mode: word;
+      justify: left;
+      vexpand: false;
+      valign: start;
+      hexpand: true;
+      halign: start;
+    }
+
+    Label label_report {
+      label: _("Please consider reporting this error.");
+      visible: bind template.should-report;
+      wrap: true;
+      xalign: 0;
+      wrap-mode: word;
+      justify: left;
+      vexpand: false;
+      valign: start;
+      hexpand: true;
+      halign: start;
+    }
+  }
+
+  ;
+  default-response: "close";
+  close-response: "close";
+
+  responses [
+    close: _("Close"),
+    report: _("Report") suggested,
+  ]
+}
