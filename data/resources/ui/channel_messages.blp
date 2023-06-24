@@ -15,6 +15,7 @@ template $FlChannelMessages : Box {
     title: _("Offline");
     revealed: bind $not($network_monitor() as <$GNetworkMonitor>.network-available) as <bool>;
   }
+
   // Status Page
   Adw.StatusPage {
     title: _("No Channel Selected");
@@ -80,6 +81,7 @@ template $FlChannelMessages : Box {
 
     // Quote
     Box {
+      vexpand-set: true;
       visible: bind $is_some(template.reply-message) as <bool>;
       Button {
         accessibility {
@@ -97,14 +99,16 @@ template $FlChannelMessages : Box {
       }
 
       $FlMessageItem {
+
         message: bind template.reply-message;
-        hexpand: "True";
+        hexpand: true;
         force-show-header: "True";
       }
     }
 
     // Box for attachments
     Box {
+      vexpand-set: true;
       visible: bind template.has-attachments;
       Button {
         accessibility {
