@@ -15,6 +15,7 @@ use super::Manager;
 pub enum AttachmentType {
     Image,
     Video,
+    Audio,
     #[default]
     File,
 }
@@ -26,6 +27,8 @@ impl AttachmentType {
             Self::Image
         } else if content.starts_with("video/") {
             Self::Video
+        } else if content.starts_with("audio/") {
+            Self::Audio
         } else {
             Self::File
         }
@@ -51,6 +54,10 @@ impl Attachment {
         if mime.starts_with("video/") {
             video = Some(MediaFile::for_file(&file))
         }
+        let mut audio = None;
+        if mime.starts_with("audio/") {
+            audio = Some(MediaFile::for_file(&file))
+        }
         Object::builder::<Self>()
             .property("manager", manager)
             .property("file", &file)
@@ -62,6 +69,7 @@ impl Attachment {
             )
             .property("image", &image)
             .property("video", &video)
+            .property("audio", &audio)
             .property("loaded", true)
             .property("content-type", &mime)
             .build()
@@ -101,6 +109,10 @@ impl Attachment {
 
     pub fn is_video(&self) -> bool {
         self.attachment_type() == AttachmentType::Video
+    }
+
+    pub fn is_audio(&self) -> bool {
+        self.attachment_type() == AttachmentType::Audio
     }
 
     pub fn is_file(&self) -> bool {
@@ -152,6 +164,7 @@ impl Attachment {
             .property("image", &None::<Texture>)
             .property("name", &None::<String>)
             .property("video", &None::<MediaStream>)
+            .property("audio", &None::<MediaStream>)
             .property("loaded", false)
             .property("content-type", pointer.content_type.as_ref())
             .build();
@@ -169,6 +182,7 @@ impl Attachment {
 
         let mut image = None;
         let mut video = None;
+        let mut audio = None;
         let mut raw = None;
         let mut name = None;
         let mut file = None;
@@ -182,6 +196,7 @@ impl Attachment {
             match &pointer.content_type {
                 Some(t) if t.starts_with("image/") => name = Some(format!("image.{}", &t[6..])),
                 Some(t) if t.starts_with("video/") => name = Some(format!("video.{}", &t[6..])),
+                Some(t) if t.starts_with("audio/") => name = Some(format!("audio.{}", &t[6..])),
                 _ => {}
             }
         }
@@ -235,6 +250,12 @@ impl Attachment {
                         video = Some(MediaFile::for_file(tmp_file));
                     }
                 }
+                Some(t) if t.starts_with("audio/") => {
+                    log::trace!("Attachment is a voice message , converting to usable type");
+                    if let Some(tmp_file) = file.as_ref() {
+                        audio = Some(MediaFile::for_file(tmp_file));
+                    }
+                }
                 Some(t) => log::trace!("Currently unhandles attachment type: {}", t),
                 None => log::trace!("Attachment got no type"),
             }
@@ -243,10 +264,12 @@ impl Attachment {
         self.set_property("file", file);
         self.set_property("image", image);
         self.set_property("video", video);
+        self.set_property("audio", audio);
         self.set_property("name", name);
         self.notify("type");
         self.notify("is-image");
         self.notify("is-video");
+        self.notify("is-audio");
         self.notify("is-file");
         *self.imp().raw.borrow_mut() = raw;
         self.set_property("loaded", true);
@@ -302,6 +325,7 @@ mod imp {
     pub struct Attachment {
         image: RefCell<Option<Texture>>,
         video: RefCell<Option<MediaStream>>,
+        audio: RefCell<Option<MediaStream>>,
         file: RefCell<Option<File>>,
         name: RefCell<Option<String>>,
 
@@ -330,6 +354,7 @@ mod imp {
                         .build(),
                     ParamSpecObject::builder::<Texture>("image").build(),
                     ParamSpecObject::builder::<MediaStream>("video").build(),
+                    ParamSpecObject::builder::<MediaStream>("audio").build(),
                     ParamSpecObject::builder::<File>("file").build(),
                     ParamSpecEnum::builder::<AttachmentType>("type")
                         .read_only()
@@ -337,6 +362,7 @@ mod imp {
                         .build(),
                     ParamSpecBoolean::builder("is-image").build(),
                     ParamSpecBoolean::builder("is-video").build(),
+                    ParamSpecBoolean::builder("is-audio").build(),
                     ParamSpecBoolean::builder("is-file").build(),
                     ParamSpecString::builder("name").build(),
                     ParamSpecString::builder("content-type").build(),
@@ -351,6 +377,7 @@ mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "image" => self.image.borrow().as_ref().to_value(),
                 "video" => self.video.borrow().as_ref().to_value(),
+                "audio" => self.audio.borrow().as_ref().to_value(),
                 "file" => self.file.borrow().as_ref().to_value(),
                 "name" => self.name.borrow().as_ref().to_value(),
                 "type" => self
@@ -362,6 +389,7 @@ mod imp {
                     .to_value(),
                 "is-image" => self.obj().is_image().to_value(),
                 "is-video" => self.obj().is_video().to_value(),
+                "is-audio" => self.obj().is_audio().to_value(),
                 "is-file" => self.obj().is_file().to_value(),
                 "content-type" => self.content_type.borrow().as_ref().to_value(),
                 "loaded" => self.loaded.get().to_value(),
@@ -391,6 +419,13 @@ mod imp {
                         .expect("Property `video` of `Attachment` has to be of type `MediaStream`");
 
                     self.video.replace(obj);
+                }
+                "audio" => {
+                    let obj = value
+                        .get::<Option<MediaStream>>()
+                        .expect("Property `audio` of `Attachment` has to be of type `MediaStream`");
+
+                    self.audio.replace(obj);
                 }
                 "file" => {
                     let obj = value

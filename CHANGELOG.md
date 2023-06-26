@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Added support for voice messages/audio files
 - Ported the ui to Blueprint.
 - New UI improvements to the feed list. This also now respects the accent colors set in GNOME.
 - Updated to GTK 4.10 with many UI improvements and minor fixes.

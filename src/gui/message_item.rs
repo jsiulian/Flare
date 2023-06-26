@@ -126,7 +126,7 @@ impl MessageItem {
         lazy_static::lazy_static! {
             static ref RE: Regex = Regex::new(r"^[\p{Emoji} \u{fe0f}\u{200d}]+$").unwrap();
         }
-        if self.message().body().is_some() && RE.is_match(self.message().body().unwrap().as_str())  {
+        if self.message().body().is_some() && RE.is_match(self.message().body().unwrap().as_str()) {
             self.add_css_class("emoji");
             self.message().set_show_header(false);
         }
@@ -403,4 +403,3 @@ pub mod imp {
     impl WidgetImpl for MessageItem {}
     impl BoxImpl for MessageItem {}
 }
-
