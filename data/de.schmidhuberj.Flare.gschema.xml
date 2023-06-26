@@ -27,6 +27,10 @@
       <default>true</default>
       <summary>Automatically download videos</summary>
     </key>
+    <key name="autodownload-voice-messages" type="b">
+      <default>true</default>
+      <summary>Automatically download voice messages</summary>
+    </key>
     <key name="autodownload-files" type="b">
       <default>true</default>
       <summary>Automatically download files</summary>

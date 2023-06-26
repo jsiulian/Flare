@@ -28,6 +28,11 @@ template $FlAttachment : Box {
       clicked => $load() swapped;
       visible: bind template.attachment as <$FlAttachmentObject>.is_file;
     }
+    Button {
+      label: _("Load voice message");
+      clicked => $load() swapped;
+      visible: bind template.attachment as <$FlAttachmentObject>.is_audio;
+    }
   }
 
   Box {
@@ -52,6 +57,11 @@ template $FlAttachment : Box {
       media-stream: bind template.attachment as <$FlAttachmentObject>.video;
     }
 
+    MediaControls {
+      visible: bind template.attachment as <$FlAttachmentObject>.is_audio;
+      media-stream: bind template.attachment as <$FlAttachmentObject>.audio;
+      width-request: 300;
+    }
     Label {
       halign: start;
       ellipsize: end;

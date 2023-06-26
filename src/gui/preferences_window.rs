@@ -86,6 +86,8 @@ pub mod imp {
         switch_download_videos: TemplateChild<gtk::Switch>,
         #[template_child]
         switch_download_files: TemplateChild<gtk::Switch>,
+        #[template_child]
+        switch_download_voice_messages: TemplateChild<gtk::Switch>,
 
         #[template_child]
         switch_notifications: TemplateChild<gtk::Switch>,
@@ -129,6 +131,14 @@ pub mod imp {
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
             self.settings
+                .bind(
+                    "autodownload-voice-messages",
+                    &self.switch_download_voice_messages.get(),
+                    "active",
+                )
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
+            self.settings
                 .bind("notifications", &self.switch_notifications.get(), "active")
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
@@ -160,6 +170,7 @@ pub mod imp {
                 entry_device_name: TemplateChild::default(),
                 switch_download_images: TemplateChild::default(),
                 switch_download_videos: TemplateChild::default(),
+                switch_download_voice_messages: TemplateChild::default(),
                 switch_download_files: TemplateChild::default(),
                 switch_notifications: TemplateChild::default(),
                 switch_background: TemplateChild::default(),

@@ -56,6 +56,19 @@ template $FlPreferencesWindow : Adw.PreferencesWindow {
           halign: center;
         }
       }
+
+      Adw.ActionRow row_download_voice_messages {
+        title: _("Dowload voice messages automatically");
+
+        Switch switch_download_voice_messages {
+          accessibility {
+            labelled-by: row_download_voice_messages;
+          }
+
+          valign: center;
+          halign: center;
+        }
+      }
     }
 
     Adw.PreferencesGroup {

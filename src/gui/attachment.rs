@@ -189,6 +189,8 @@ pub mod imp {
                         && att.as_ref().unwrap().is_image()
                         || settings.boolean("autodownload-videos")
                             && att.as_ref().unwrap().is_video()
+                        || settings.boolean("autodownload-voice-messages")
+                            && att.as_ref().unwrap().is_audio()
                         || settings.boolean("autodownload-files")
                             && att.as_ref().unwrap().is_file();
 
