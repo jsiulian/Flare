@@ -8,15 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Added support for voice messages/audio files
+- Added support for voice messages/audio files.
 - Ported the ui to Blueprint.
 - New UI improvements to the feed list. This also now respects the accent colors set in GNOME.
+- Reworked the popover menu for messages.
 - Updated to GTK 4.10 with many UI improvements and minor fixes.
 
 ### Fixed
 
 - Issue where special characters in replied messages were displayed incorrectly.
 - Attachments with very long names not being ellipsized.
+- Messages with only attachment not persisting reactions.
 
 ## [0.8.2] - 2023-05-29
 

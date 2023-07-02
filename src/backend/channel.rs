@@ -31,6 +31,8 @@ gtk::glib::wrapper! {
     pub struct Channel(ObjectSubclass<imp::Channel>);
 }
 
+const EMPTY_MESSAGE_BODY: &str = "<empty>";
+
 impl Channel {
     pub(super) async fn from_contact_or_group(
         contact: Contact,
@@ -207,31 +209,35 @@ impl Channel {
         message: &Message,
     ) -> Result<(), gtk::glib::error::BoolError> {
         if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
-            if let Some(body) = message.property::<Option<String>>("body") {
-                crate::trace!("Channel {} got new message: {}", self.title(), body);
-                if let Some(quote) = message.quote().and_then(|q| q.id) {
-                    log::trace!("Message claims to have a quote");
-                    if let Some(thread) = self.thread() {
-                        if let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await {
-                            if let Some(quoted_msg) = quoted_msg.dynamic_cast_ref::<TextMessage>() {
-                                crate::trace!(
-                                    "Message {} quotes other message {}",
-                                    body,
-                                    quoted_msg
-                                        .property::<Option<String>>("body")
-                                        .unwrap_or_default()
-                                );
-                                message.set_quote(quoted_msg);
-                            }
+            let body = message
+                .body()
+                .unwrap_or_else(|| String::from(EMPTY_MESSAGE_BODY));
+            crate::trace!("Channel {} got new message: {}", self.title(), body);
+            if let Some(quote) = message.quote().and_then(|q| q.id) {
+                log::trace!("Message claims to have a quote");
+                if let Some(thread) = self.thread() {
+                    if let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await {
+                        if let Some(quoted_msg) = quoted_msg.dynamic_cast_ref::<TextMessage>() {
+                            crate::trace!(
+                                "Message {} quotes other message {}",
+                                body,
+                                quoted_msg
+                                    .property::<Option<String>>("body")
+                                    .unwrap_or_default()
+                            );
+                            message.set_quote(quoted_msg);
                         }
                     }
                 }
-                let id = message.timestamp();
-                if let Some(reactions) = self.imp().pending_reactions.borrow_mut().remove(&id) {
-                    log::trace!("Adding pending reactions to message: {:?}", reactions);
-                    for reaction in reactions {
-                        message.react(&reaction);
-                    }
+            }
+            let id = message.timestamp();
+            if let Some(reactions) = self.imp().pending_reactions.borrow_mut().remove(&id) {
+                log::trace!(
+                    "Adding pending reactions to message: {:?}",
+                    reactions.iter().map(|r| r.emoji()).collect::<Vec<_>>()
+                );
+                for reaction in reactions {
+                    message.react(&reaction);
                 }
             }
         }
