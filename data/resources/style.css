@@ -57,3 +57,8 @@
 .emoji:not(.has-quote) .message-bubble, .emoji.from-self:not(.has-quote) .message-bubble{
   background: transparent;
 }
+
+.fl-emoji-picker{
+  font-size: 20px;
+	margin: 6px;
+}

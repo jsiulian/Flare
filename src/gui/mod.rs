@@ -4,6 +4,7 @@ mod channel_info_dialog;
 mod channel_item;
 mod channel_list;
 mod channel_messages;
+mod emoji_picker;
 mod error_dialog;
 mod link_window;
 mod message_item;

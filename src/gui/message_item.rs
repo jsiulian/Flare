@@ -25,6 +25,7 @@ impl MessageItem {
         let s = Object::builder::<Self>()
             .property("message", message)
             .build();
+
         s.init_label_selectable();
         s.setup_showheader();
         s.setup_from_group();
@@ -48,11 +49,6 @@ impl MessageItem {
             s.imp().handle_reply();
         }));
 
-        let action_react = SimpleAction::new("react", None);
-        action_react.connect_activate(clone!(@weak self as s => move |_, _| {
-            s.imp().handle_react_open();
-        }));
-
         let action_delete = SimpleAction::new("delete", None);
         action_delete.connect_activate(clone!(@weak self as s => move |_, _| {
             s.imp().handle_delete();
@@ -66,7 +62,6 @@ impl MessageItem {
         let actions = SimpleActionGroup::new();
         self.insert_action_group("msg", Some(&actions));
         actions.add_action(&action_reply);
-        actions.add_action(&action_react);
         actions.add_action(&action_delete);
         actions.add_action(&action_copy);
 
@@ -176,7 +171,10 @@ pub mod imp {
     use crate::{
         backend::{message::TextMessage, Manager},
         gspawn,
-        gui::{attachment::Attachment, error_dialog::ErrorDialog, utility::Utility},
+        gui::{
+            attachment::Attachment, emoji_picker::EmojiPicker, error_dialog::ErrorDialog,
+            utility::Utility,
+        },
     };
 
     #[derive(CompositeTemplate, Default)]
@@ -186,8 +184,6 @@ pub mod imp {
         pub(super) avatar: TemplateChild<libadwaita::Avatar>,
         #[template_child]
         pub(super) header: TemplateChild<gtk::Box>,
-        #[template_child]
-        emoji_chooser: TemplateChild<gtk::EmojiChooser>,
         #[template_child]
         pub(super) reactions: TemplateChild<gtk::Label>,
         #[template_child]
@@ -213,6 +209,7 @@ pub mod imp {
         type ParentType = gtk::Box;
 
         fn class_init(klass: &mut Self::Class) {
+            EmojiPicker::ensure_type();
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
             Utility::bind_template_callbacks(klass);
@@ -252,13 +249,7 @@ pub mod imp {
         }
 
         #[template_callback]
-        pub(super) fn handle_react_open(&self) {
-            crate::trace!("Opening emoji dropdown",);
-            self.emoji_chooser.popup();
-        }
-
-        #[template_callback]
-        fn handle_react(&self, mut emoji: String) {
+        pub(super) fn handle_react(&self, mut emoji: String) {
             let obj = self.obj();
             let msg = obj.message();
 
@@ -288,6 +279,7 @@ pub mod imp {
                 }
                 obj.notify("has-reaction");
             }));
+            obj.imp().msg_menu.popdown();
         }
 
         #[template_callback]
