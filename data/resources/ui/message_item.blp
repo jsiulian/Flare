@@ -1,6 +1,37 @@
 using Gtk 4.0;
 using Adw 1;
 
+menu message-menu {
+  section {
+    item {
+      custom: "emoji-picker";
+    }
+  }
+  section {
+    item {
+      label: _("Reply");
+      action: "msg.reply";
+      verb-icon: "mail-reply-sender-symbolic";
+      icon: "mail-reply-sender-symbolic";
+    }
+
+    item {
+      label: _("Delete");
+      action: "msg.delete";
+      verb-icon: "user-trash-symbolic";
+      icon: "user-trash-symbolic";
+      hidden-when: "action-disabled";
+    }
+
+    item {
+      label: _("Copy");
+      action: "msg.copy";
+      verb-icon: "edit-copy-symbolic";
+      icon: "edit-copy-symbolic";
+    }
+  }
+}
+
 template $FlMessageItem : Box {
   styles [
     "message-item",
@@ -131,12 +162,15 @@ template $FlMessageItem : Box {
 
       // Pop-Down
       PopoverMenu msg_menu {
+        has-arrow: false;
         menu-model: message-menu;
+
+        [emoji-picker]
+        $FlEmojiPicker {
+          reacted => $handle_react() swapped;
+        }
       }
 
-      EmojiChooser emoji_chooser {
-        emoji-picked => $handle_react() swapped;
-      }
     }
 
     // Reactions
@@ -157,37 +191,3 @@ template $FlMessageItem : Box {
   }
 }
 
-menu message-menu {
-  section {
-    display-hint: "horizontal-buttons";
-
-    item {
-      label: _("Reply");
-      action: "msg.reply";
-      verb-icon: "mail-reply-sender-symbolic";
-      icon: "mail-reply-sender-symbolic";
-    }
-
-    item {
-      label: _("React");
-      action: "msg.react";
-      verb-icon: "face-smile-symbolic";
-      icon: "face-smile-symbolic";
-    }
-
-    item {
-      label: _("Delete");
-      action: "msg.delete";
-      verb-icon: "user-trash-symbolic";
-      icon: "user-trash-symbolic";
-      hidden-when: "action-disabled";
-    }
-
-    item {
-      label: _("Copy");
-      action: "msg.copy";
-      verb-icon: "edit-copy-symbolic";
-      icon: "edit-copy-symbolic";
-    }
-  }
-}

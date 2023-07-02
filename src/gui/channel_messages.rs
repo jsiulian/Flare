@@ -391,6 +391,7 @@ pub mod imp {
                 let timeline_item = list_item_item
                     .and_downcast_ref::<TimelineItem>()
                     .expect("'Timeline' to only contain 'TimelineItem's");
+                list_item.set_activatable(false);
                 list_item.set_child(obj.timeline_item_to_widget(timeline_item).as_ref());
             }));
             factory.connect_unbind(move |_, object| {

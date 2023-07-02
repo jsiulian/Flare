@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/">
     <file alias="icon.png">../icons/de.schmidhuberj.Flare.svg</file>
+    <file preprocess="xml-stripblanks">../icons/view-more-horizontal-symbolic.svg</file>
 
     <file preprocess="xml-stripblanks">ui/window.ui</file>
     <file preprocess="xml-stripblanks">ui/channel_list.ui</file>
@@ -10,6 +11,7 @@
     <file preprocess="xml-stripblanks">ui/message_item.ui</file>
     <file preprocess="xml-stripblanks">ui/link_window.ui</file>
     <file preprocess="xml-stripblanks">ui/error_dialog.ui</file>
+    <file preprocess="xml-stripblanks">ui/emoji_picker.ui</file>
     <file preprocess="xml-stripblanks">ui/attachment.ui</file>
     <file preprocess="xml-stripblanks">ui/preferences_window.ui</file>
     <file preprocess="xml-stripblanks">ui/shortcuts.ui</file>

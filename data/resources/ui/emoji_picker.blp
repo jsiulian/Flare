@@ -1,0 +1,90 @@
+using Gtk 4.0;
+
+template $FlEmojiPicker : Box {
+  hexpand: true;
+  orientation: vertical;
+  styles [
+      "fl-emoji-picker"
+    ]
+
+  Box {
+    orientation: horizontal;
+    Button {
+      styles [
+        "flat",
+        "circular",
+      ]
+      margin-end:6;
+      label: "👍️";
+      clicked => $button_react() swapped;
+    }
+    Button {
+      styles [
+        "flat",
+        "circular",
+      ]
+      margin-end:6;
+      label: "👎️";
+      clicked => $button_react() swapped;
+    }
+    Button {
+      styles [
+        "flat",
+        "circular",
+      ]
+      margin-end:6;
+      label: "😄️";
+      clicked => $button_react() swapped;
+    }
+    Button {
+      styles [
+        "flat",
+        "circular",
+      ]
+      label: "🎉️";
+      clicked => $button_react() swapped;
+    }
+  }
+
+  Box {
+    orientation: horizontal;
+    Button {
+      styles [
+        "flat",
+        "circular",
+      ]
+      margin-end:6;
+      label: "😕️";
+      clicked => $button_react() swapped;
+    }
+    Button {
+      styles [
+        "flat",
+        "circular",
+      ]
+      margin-end:6;
+      label: "❤️";
+      clicked => $button_react() swapped;
+    }
+    Button{
+      styles [
+        "flat",
+        "circular",
+      ]
+      margin-end:6;
+      label: "🚀️";
+      clicked => $button_react() swapped;
+    }
+    Button {
+      styles [
+        "flat",
+        "circular",
+      ]
+      icon-name: "view-more-horizontal-symbolic";
+      clicked => $handle_react_open() swapped;
+    }
+  }
+  EmojiChooser emoji_chooser {
+    emoji-picked => $reacted() swapped;
+  }
+}
