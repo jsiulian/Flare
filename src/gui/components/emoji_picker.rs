@@ -53,6 +53,8 @@ pub mod imp {
         #[template_callback]
         pub(super) fn handle_react_open(&self) {
             crate::trace!("Opening emoji dropdown",);
+            let obj = self.obj();
+
             self.emoji_chooser.popup();
         }
 
