@@ -32,12 +32,11 @@ menu message-menu {
   }
 }
 
-template $FlMessageItem : Box {
+template $FlMessageItem : $ContextMenuBin {
   styles [
     "message-item",
   ]
 
-  spacing: 12;
   visible: bind $not(template.message as <$FlTextMessage>.is-deleted) as <bool>;
 
   // Avatar (Not self)

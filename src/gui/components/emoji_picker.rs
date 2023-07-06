@@ -25,7 +25,7 @@ pub mod imp {
     use crate::gui::utility::Utility;
 
     #[derive(CompositeTemplate, Default)]
-    #[template(resource = "/ui/emoji_picker.ui")]
+    #[template(resource = "/ui/components/emoji_picker.ui")]
     pub struct EmojiPicker {
         #[template_child]
         emoji_chooser: TemplateChild<gtk::EmojiChooser>,

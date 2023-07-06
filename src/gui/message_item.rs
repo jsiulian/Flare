@@ -11,10 +11,11 @@ use regex::Regex;
 use crate::backend::message::{MessageExt, TextMessage};
 use crate::backend::timeline::timeline_item::TimelineItemExt;
 use crate::backend::Manager;
+use crate::gui::components::ContextMenuBin;
 
 glib::wrapper! {
     pub struct MessageItem(ObjectSubclass<imp::MessageItem>)
-        @extends gtk::Box, gtk::Widget,
+        @extends libadwaita::Bin, gtk::Widget,ContextMenuBin,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget;
 }
@@ -42,7 +43,9 @@ impl MessageItem {
     pub fn manager(&self) -> Manager {
         self.message().property("manager")
     }
-
+    pub fn get_popover(&self) -> gtk::PopoverMenu {
+        self.imp().msg_menu.to_owned()
+    }
     fn setup_actions(&self) {
         let action_reply = SimpleAction::new("reply", None);
         action_reply.connect_activate(clone!(@weak self as s => move |_, _| {
@@ -69,15 +72,6 @@ impl MessageItem {
             .transform_to(|_, msg: Option<TextMessage>| msg.map(|m| m.sender().is_self()))
             .flags(BindingFlags::SYNC_CREATE)
             .build();
-    }
-
-    fn setup_click(&self) {
-        let gesture = gtk::GestureClick::new();
-        gesture.connect_released(clone!(@weak self as s => move |gesture, _, _, _| {
-            gesture.set_state(gtk::EventSequenceState::Claimed);
-            s.open_popup();
-        }));
-        self.imp().message_box.add_controller(gesture);
     }
 
     fn setup_showheader(&self) {
@@ -172,10 +166,13 @@ pub mod imp {
         backend::{message::TextMessage, Manager},
         gspawn,
         gui::{
-            attachment::Attachment, emoji_picker::EmojiPicker, error_dialog::ErrorDialog,
+            attachment::Attachment,
+            components::{ContextMenuBin, ContextMenuBinExt, ContextMenuBinImpl, EmojiPicker},
+            error_dialog::ErrorDialog,
             utility::Utility,
         },
     };
+    use libadwaita::subclass::prelude::BinImpl;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/message_item.ui")]
@@ -206,7 +203,7 @@ pub mod imp {
     impl ObjectSubclass for MessageItem {
         const NAME: &'static str = "FlMessageItem";
         type Type = super::MessageItem;
-        type ParentType = gtk::Box;
+        type ParentType = ContextMenuBin;
 
         fn class_init(klass: &mut Self::Class) {
             EmojiPicker::ensure_type();
@@ -300,7 +297,6 @@ pub mod imp {
         fn constructed(&self) {
             self.parent_constructed();
             self.obj().setup_actions();
-            self.obj().setup_click();
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -393,5 +389,12 @@ pub mod imp {
     }
 
     impl WidgetImpl for MessageItem {}
-    impl BoxImpl for MessageItem {}
+    impl BinImpl for MessageItem {}
+    impl ContextMenuBinImpl for MessageItem {
+        fn menu_opened(&self) {
+            let obj = self.obj();
+            let popover = obj.get_popover();
+            obj.set_popover(Some(popover));
+        }
+    }
 }

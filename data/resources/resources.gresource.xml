@@ -11,7 +11,6 @@
     <file preprocess="xml-stripblanks">ui/message_item.ui</file>
     <file preprocess="xml-stripblanks">ui/link_window.ui</file>
     <file preprocess="xml-stripblanks">ui/error_dialog.ui</file>
-    <file preprocess="xml-stripblanks">ui/emoji_picker.ui</file>
     <file preprocess="xml-stripblanks">ui/attachment.ui</file>
     <file preprocess="xml-stripblanks">ui/preferences_window.ui</file>
     <file preprocess="xml-stripblanks">ui/shortcuts.ui</file>
@@ -21,6 +20,9 @@
     <file preprocess="xml-stripblanks">ui/dialog_clear_messages.ui</file>
     <file preprocess="xml-stripblanks">ui/call_message_item.ui</file>
     <file preprocess="xml-stripblanks">ui/channel_info_dialog.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/components/context_menu_bin.ui</file>
+    <file preprocess="xml-stripblanks">ui/components/emoji_picker.ui</file>
   </gresource>
   <gresource prefix="/de/schmidhuberj/Flare/">
     <file compressed="true">style.css</file>
