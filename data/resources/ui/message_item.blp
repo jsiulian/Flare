@@ -167,7 +167,12 @@ template $FlMessageItem : $ContextMenuBin {
         [emoji-picker]
         $FlEmojiPicker {
           reacted => $handle_react() swapped;
+          btn-emoji-clicked => $open_emoji_picker() swapped;
         }
+      }
+
+      EmojiChooser emoji_chooser {
+        emoji-picked => $handle_react() swapped;
       }
 
     }

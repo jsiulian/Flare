@@ -81,10 +81,7 @@ template $FlEmojiPicker : Box {
         "circular",
       ]
       icon-name: "view-more-horizontal-symbolic";
-      clicked => $handle_react_open() swapped;
+      clicked => $btn_emoji_clicked() swapped;
     }
-  }
-  EmojiChooser emoji_chooser {
-    emoji-picked => $reacted() swapped;
   }
 }
