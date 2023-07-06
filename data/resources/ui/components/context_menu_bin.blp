@@ -1,0 +1,16 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ContextMenuBin : Adw.Bin {
+  focusable: true;
+
+  GestureClick click_gesture {
+    button: 3;
+    exclusive: true;
+  }
+
+  GestureLongPress long_press_gesture {
+    touch-only: true;
+    exclusive: true;
+  }
+}
