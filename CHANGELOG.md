@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New UI improvements to the feed list. This also now respects the accent colors set in GNOME.
 - Reworked the popover menu for messages.
 - Updated to GTK 4.10 with many UI improvements and minor fixes.
+- Message popups are now opened with right-click or long-press (touch only).
 
 ### Fixed
 
