@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-20 16:48+0200\n"
-"PO-Revision-Date: 2023-05-22 12:51+0000\n"
+"PO-Revision-Date: 2023-07-08 12:53+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/resources/ui/about.ui:14
 msgid "translator-credits"
@@ -169,7 +169,7 @@ msgstr "Annuleren"
 
 #: data/resources/ui/dialog_clear_messages.ui:10
 msgid "Clear"
-msgstr "Verwijderen"
+msgstr "Wissen"
 
 #: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:152
 msgid "Unlink"
@@ -344,7 +344,7 @@ msgstr "Kanalen doorzoeken"
 #: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr "Bijlage toevoegen"
+msgstr "Bijlage uploaden"
 
 #: data/resources/ui/shortcuts.ui:67
 msgctxt "shortcut window"
