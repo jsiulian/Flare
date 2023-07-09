@@ -26,10 +26,7 @@ pub mod imp {
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/components/emoji_picker.ui")]
-    pub struct EmojiPicker {
-        #[template_child]
-        emoji_chooser: TemplateChild<gtk::EmojiChooser>,
-    }
+    pub struct EmojiPicker {}
 
     #[glib::object_subclass]
     impl ObjectSubclass for EmojiPicker {
@@ -51,12 +48,12 @@ pub mod imp {
     #[gtk::template_callbacks]
     impl EmojiPicker {
         #[template_callback]
-        pub(super) fn handle_react_open(&self) {
+        pub(super) fn btn_emoji_clicked(&self) {
             crate::trace!("Opening emoji dropdown",);
-            self.emoji_chooser.popup();
+            let obj = self.obj();
+            obj.emit_by_name::<()>("btn-emoji-clicked", &[]);
         }
 
-        #[template_callback]
         pub(super) fn reacted(&self, emoji: String) {
             let obj = self.obj();
             obj.emit_by_name::<()>("reacted", &[&emoji]);
@@ -78,9 +75,12 @@ pub mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("reacted")
-                    .param_types([String::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("reacted")
+                        .param_types([String::static_type()])
+                        .build(),
+                    Signal::builder("btn-emoji-clicked").build(),
+                ]
             });
             SIGNALS.as_ref()
         }

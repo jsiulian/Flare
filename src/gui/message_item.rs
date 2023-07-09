@@ -186,6 +186,8 @@ pub mod imp {
         #[template_child]
         pub(super) msg_menu: TemplateChild<gtk::PopoverMenu>,
         #[template_child]
+        pub(super) emoji_chooser: TemplateChild<gtk::EmojiChooser>,
+        #[template_child]
         box_attachments: TemplateChild<gtk::Box>,
         #[template_child]
         pub(super) label_message: TemplateChild<gtk::Label>,
@@ -226,6 +228,16 @@ pub mod imp {
             }
             let s = s.map(|s| glib::markup_escape_text(&s));
             s.map(|s| RE.replace_all(&s, r#"<a href="$l">$l</a>"#).to_string())
+        }
+
+        #[template_callback]
+        pub fn open_emoji_picker(&self) {
+            let obj = self.obj();
+            let (_, rectangle) = obj.imp().msg_menu.pointing_to();
+            obj.imp().emoji_chooser.set_pointing_to(Some(&rectangle));
+
+            obj.imp().msg_menu.popdown();
+            obj.imp().emoji_chooser.popup();
         }
 
         #[template_callback]
