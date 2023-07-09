@@ -39,67 +39,97 @@ template $FlMessageItem : $ContextMenuBin {
 
   visible: bind $not(template.message as <$FlTextMessage>.is-deleted) as <bool>;
 
-  // Avatar (Not self)
-  Adw.Avatar avatar {
-    styles [
-      "avatar-other",
-    ]
-    text: bind template.message as <$FlTextMessage>.sender as <$FlContact>.title;
-    show-initials: true;
-    valign: start;
-    size: 32;
-  }
-
   Box {
-    orientation: vertical;
+    spacing: 12;
 
-    Box message_box {
-      orientation: vertical;
-      spacing: 2;
-
+    // Avatar (Not self)
+    Adw.Avatar avatar {
       styles [
-        "message-bubble",
+        "avatar-other",
       ]
+      text: bind template.message as <$FlTextMessage>.sender as <$FlContact>.title;
+      show-initials: true;
+      valign: start;
+      size: 32;
+    }
 
-      // Header
-      Box header {
-        orientation: horizontal;
+    Box {
+      orientation: vertical;
 
-        // Name
-        Label {
-          styles [
-            "heading",
-          ]
+      Box message_box {
+        orientation: vertical;
+        spacing: 2;
 
-          label: bind template.message as <$FlTextMessage>.sender as <$FlContact>.title;
-          hexpand: true;
-          halign: start;
-          ellipsize: end;
-          margin-end: 15;
-        }
-      }
-
-      // Quote
-      Box quote {
         styles [
-          "quote",
+          "message-bubble",
         ]
 
-        visible: bind $is_some(template.message as <$FlTextMessage>.quote) as <bool>;
-        Box {
-          orientation: vertical;
+        // Header
+        Box header {
+          orientation: horizontal;
 
+          // Name
           Label {
             styles [
               "heading",
             ]
 
-            label: bind template.message as <$FlTextMessage>.quote as <$FlTextMessage>.sender as <$FlContact>.title;
+            label: bind template.message as <$FlTextMessage>.sender as <$FlContact>.title;
             hexpand: true;
             halign: start;
+            ellipsize: end;
+            margin-end: 15;
           }
+        }
 
-          Label {
+        // Quote
+        Box quote {
+          styles [
+            "quote",
+          ]
+
+          visible: bind $is_some(template.message as <$FlTextMessage>.quote) as <bool>;
+          Box {
+            orientation: vertical;
+
+            Label {
+              styles [
+                "heading",
+              ]
+
+              label: bind template.message as <$FlTextMessage>.quote as <$FlTextMessage>.sender as <$FlContact>.title;
+              hexpand: true;
+              halign: start;
+            }
+
+            Label {
+              wrap: true;
+              xalign: 0;
+              wrap-mode: word_char;
+              justify: left;
+              vexpand: false;
+              valign: start;
+              hexpand: true;
+              halign: start;
+              use-markup: true;
+
+              label: bind $markup_urls(template.message as <$FlTextMessage>.quote as <$FlTextMessage>.body) as <string>;
+              attributes: bind template.message as <$FlTextMessage>.message-attributes;
+            }
+          }
+        }
+
+        // Attachments
+        Box box_attachments {
+          orientation: vertical;
+          hexpand: true;
+        }
+
+        // Message Box
+        Box message-box {
+          orientation: vertical;
+
+          Label label_message {
             wrap: true;
             xalign: 0;
             wrap-mode: word_char;
@@ -110,87 +140,61 @@ template $FlMessageItem : $ContextMenuBin {
             halign: start;
             use-markup: true;
 
-            label: bind $markup_urls(template.message as <$FlTextMessage>.quote as <$FlTextMessage>.body) as <string>;
+            label: bind $markup_urls(template.message as <$FlTextMessage>.body) as <string>;
             attributes: bind template.message as <$FlTextMessage>.message-attributes;
+            visible: bind $not_empty(template.message as <$FlTextMessage>.body) as <bool>;
+          }
+
+          // Timestamp label
+          Label {
+            styles [
+              "dim-label",
+              "caption",
+              "timestamp",
+            ]
+
+            label: bind $format_timestamp(template.message as <$FlTextMessage>.timestamp) as <string>;
+            justify: right;
+            vexpand: true;
+            valign: end;
+            hexpand: true;
+            halign: end;
           }
         }
+
+        // Pop-Down
+        PopoverMenu msg_menu {
+          has-arrow: false;
+          menu-model: message-menu;
+
+          [emoji-picker]
+          $FlEmojiPicker {
+            reacted => $handle_react() swapped;
+            btn-emoji-clicked => $open_emoji_picker() swapped;
+          }
+        }
+
+        EmojiChooser emoji_chooser {
+          emoji-picked => $handle_react() swapped;
+        }
+
       }
 
-      // Attachments
-      Box box_attachments {
-        orientation: vertical;
+      // Reactions
+      Label reactions {
+        styles [
+          "reaction",
+        ]
+
+        label: bind template.message as <$FlTextMessage>.reactions;
+        visible: bind template.has-reaction;
+        wrap-mode: word;
+        justify: left;
+        vexpand: false;
+        valign: start;
         hexpand: true;
+        halign: start;
       }
-
-      // Message Box
-      Box message-box {
-        orientation: vertical;
-
-        Label label_message {
-          wrap: true;
-          xalign: 0;
-          wrap-mode: word_char;
-          justify: left;
-          vexpand: false;
-          valign: start;
-          hexpand: true;
-          halign: start;
-          use-markup: true;
-
-          label: bind $markup_urls(template.message as <$FlTextMessage>.body) as <string>;
-          attributes: bind template.message as <$FlTextMessage>.message-attributes;
-          visible: bind $not_empty(template.message as <$FlTextMessage>.body) as <bool>;
-        }
-
-        // Timestamp label
-        Label {
-          styles [
-            "dim-label",
-            "caption",
-            "timestamp",
-          ]
-
-          label: bind $format_timestamp(template.message as <$FlTextMessage>.timestamp) as <string>;
-          justify: right;
-          vexpand: true;
-          valign: end;
-          hexpand: true;
-          halign: end;
-        }
-      }
-
-      // Pop-Down
-      PopoverMenu msg_menu {
-        has-arrow: false;
-        menu-model: message-menu;
-
-        [emoji-picker]
-        $FlEmojiPicker {
-          reacted => $handle_react() swapped;
-          btn-emoji-clicked => $open_emoji_picker() swapped;
-        }
-      }
-
-      EmojiChooser emoji_chooser {
-        emoji-picked => $handle_react() swapped;
-      }
-
-    }
-
-    // Reactions
-    Label reactions {
-      styles [
-        "reaction",
-      ]
-
-      label: bind template.message as <$FlTextMessage>.reactions;
-      visible: bind template.has-reaction;
-      wrap-mode: word;
-      justify: left;
-      vexpand: false;
-      valign: start;
-      hexpand: true;
-      halign: start;
     }
   }
 }
