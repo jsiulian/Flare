@@ -74,6 +74,25 @@
   </description>
 
   <releases>
+    <release version="v0.9.0" date="2023-07-10">
+      <description translate="no">
+        <p>Changed</p>
+        <ul>
+          <li>Added support for voice messages/audio files.</li>
+          <li>Ported the ui to Blueprint.</li>
+          <li>New UI improvements to the feed list. This also now respects the accent colors set in GNOME.</li>
+          <li>Reworked the popover menu for messages.</li>
+          <li>Updated to GTK 4.10 with many UI improvements and minor fixes.</li>
+          <li>Message popups are now opened with right-click or long-press (touch only).</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+          <li>Issue where special characters in replied messages were displayed incorrectly.</li>
+          <li>Attachments with very long names not being ellipsized.</li>
+          <li>Messages with only attachment not persisting reactions.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.8.2" date="2023-05-29">
       <description translate="no">
         <p>Added</p>

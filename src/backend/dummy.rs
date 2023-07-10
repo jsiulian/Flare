@@ -71,7 +71,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(1),
             phone_number: None,
-            name: "Sailfish OS User".to_string(),
+            name: "Arch Linux Mobile User".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -97,7 +97,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(3),
             phone_number: None,
-            name: "Bordomir".to_string(),
+            name: "Richard".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -110,7 +110,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(4),
             phone_number: None,
-            name: "T'Challah".to_string(),
+            name: "Cowboy".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -196,12 +196,18 @@ impl super::Manager {
 
         let msg_replied = msg!(
             self,
-            "Another release of Flare, 0.8.1, is out with many minor UI and UX improvements, with the most notable change being in the message view to make it easier to differentiate between own messages and messages sent from others. Some other things include hiding empty conversations by default and a button to scroll down in the messages view.",
+            "We've got another version of Flare. Version 0.9.0 brings massive improvements to the UI, mainly in regards to the message list. This list got completely overhauled for a better UI experience and now (among other changes) supports being styled by GNOME accent colors and a reworked message popover (which now get opened by right-click or long-press on the message). Flare got also ported to the Blueprint markup language to make development easier and to GTK 4.10 to keep up-to-date with the latest standards. Finally, Flare now supports playback of voice messages, which should make Flare viable for people having that one annoying friend always sending voice messages. For most of those changes, I want to thank @Marc0x (yes, we also now have mentions, but I am too lazy to show them in this screenshot).",
             2,
             GROUP_ID,
             18 + base_minute
         );
-        let msg_reply = msg!(self, "Sounds great!", 0, GROUP_ID, 19 + base_minute);
+        let msg_reply = msg!(
+            self,
+            "Thats awesome! Probably, as always, there were many bug fixes :)",
+            0,
+            GROUP_ID,
+            19 + base_minute
+        );
         msg_reply
             .clone()
             .downcast::<TextMessage>()
@@ -217,12 +223,26 @@ impl super::Manager {
                 26 + base_minute,
                 &self,
                 Reaction {
-                    emoji: Some("🎉".to_string()),
+                    emoji: Some("🎉🚀".to_string()),
                     remove: Some(false),
                     target_author_uuid: None,
                     target_sent_timestamp: None,
                 },
             ));
+        msg_reply.clone().downcast::<TextMessage>().unwrap().react(
+            &ReactionMessage::from_reaction(
+                &self.dummy_contacts()[0],
+                &self.dummy_channels().await[GROUP_ID],
+                26 + base_minute,
+                &self,
+                Reaction {
+                    emoji: Some("😊".to_string()),
+                    remove: Some(false),
+                    target_author_uuid: None,
+                    target_sent_timestamp: None,
+                },
+            ),
+        );
 
         let msg_screenshot = msg!(self, "", 2, GROUP_ID, 19 + base_minute);
         let screenshot_file = gtk::gio::File::for_uri("resource:///icon.png");
@@ -241,40 +261,25 @@ impl super::Manager {
             msg_reply,
             msg!(
                 self,
-                "Hey, my messages are now aligned on the right side of the screen! That's cool.",
+                "And finally voice messages. I have long awaited this moment.",
                 0,
                 GROUP_ID,
                 20 + base_minute
             ),
             msg!(
                 self,
-                "Looking good. Sadly not available for Sailfish OS, but luckily we still have Whisperfish.",
+                "Great to see more contributions to Flare.",
                 1,
                 GROUP_ID,
                 23 + base_minute
             ),
             msg!(
                 self,
-                "Yes, it does indeed look good. Nevertheless, I am still no UI designer, so it may also look terrible. But in an extensive user study (one additional person), the new UI was an improvement for 100% of the participants. I doubt many applications have such great statistics.",
+                "Indeed. I am terrible at UI (if you don't believe me, just look at the first screenshot of Flare - if you dare), so contributions to that are very welcome.",
                 2,
                 GROUP_ID,
                 24 + base_minute
             ),
-            msg!(
-                self,
-                "By the way, you should be able to see the new scroll-down button somewhere over here ->",
-                2,
-                GROUP_ID,
-                25 + base_minute
-            ),
-            msg!(
-                self,
-                "This is talking a little bit more. You can ignore this part.",
-                2,
-                GROUP_ID,
-                26 + base_minute
-            ),
-
             call_msg!(
                 self,
                 PreCallMessage {
@@ -295,20 +300,12 @@ impl super::Manager {
             ),
             msg!(
                 self,
-                "One does not simply write a Signal client",
+                "I'd like to interject for a moment. What you call",
                 3,
                 3,
                 1 + base_minute
             ),
-            msg!(self, "Get this man a Signal client!", 4, 4, 2 + base_minute),
-            msg!(self, "We've been trying to reach you about your car's extended warranty", 5, 5, 3 + base_minute),
-            msg!(
-                self,
-                "Flare also works with Whisperfish by the way.",
-                1,
-                1,
-                3 + base_minute
-            ),
+            msg!(self, "First time?", 4, 4, 2 + base_minute),
         ]
     }
 
