@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.0] - 2023-07-10
+
 ### Changed
 
 - Added support for voice messages/audio files.
@@ -368,7 +370,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.2...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.9.0...master
+[0.9.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.2...0.9.0
 [0.8.2]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.1...0.8.2
 [0.8.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.0...0.8.1
 [0.8.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.7.2...0.8.0
