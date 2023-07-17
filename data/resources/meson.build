@@ -32,7 +32,7 @@ resources = gnome.compile_resources(
   'resources',
   'resources.gresource.xml',
   gresource_bundle: true,
-  install: true,
+  install: false,
   install_dir: pkgdatadir,
   dependencies: blueprints,
 )
