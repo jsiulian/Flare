@@ -1,5 +1,4 @@
 .message-bubble {
-  font-size: 16px;
   color: @window_fg_color;
   border-radius: 15px;
   padding: 9px;
@@ -27,11 +26,9 @@
   border-radius: 15px;
   padding: 6px 9px;
   margin-top: 5px;
-  font-size: 16px;
 }
 
 .quote {
-  font-size: 16px;
   background-color: mix(@window_bg_color, @accent_bg_color, .1);
   border-left:4px solid;
   border-left-color:  @accent_bg_color;
@@ -46,12 +43,11 @@
 }
 
 .timestamp {
-  font-size: 12px;
   padding-left: 6px;
 }
 
 .emoji .message-bubble, .emoji.from-self .message-bubble{
-  font-size: 48px;
+  font-size: 3em;
 }
 
 .emoji:not(.has-quote) .message-bubble, .emoji.from-self:not(.has-quote) .message-bubble{
@@ -59,6 +55,5 @@
 }
 
 .fl-emoji-picker{
-  font-size: 20px;
 	margin: 6px;
 }
