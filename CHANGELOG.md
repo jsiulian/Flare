@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Don't hard-code the font size for texts.
+
 ## [0.9.0] - 2023-07-10
 
 ### Changed
