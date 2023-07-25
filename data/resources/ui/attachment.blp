@@ -5,6 +5,18 @@ template $FlAttachment : Box {
   hexpand: true;
   halign: start;
 
+  GestureClick click_gesture {
+    button: 3;
+    exclusive: true;
+    pressed => $pressed() swapped;
+  }
+
+  GestureLongPress long_press_gesture {
+    touch-only: true;
+    exclusive: true;
+    pressed => $pressed() swapped;
+  }
+
   Box {
     orientation: horizontal;
     hexpand: true;
@@ -60,7 +72,7 @@ template $FlAttachment : Box {
     MediaControls {
       visible: bind template.attachment as <$FlAttachmentObject>.is_audio;
       media-stream: bind template.attachment as <$FlAttachmentObject>.audio;
-      width-request: 300;
+      width-request: 250;
     }
     Label {
       halign: start;
@@ -68,35 +80,5 @@ template $FlAttachment : Box {
       visible: bind template.attachment as <$FlAttachmentObject>.is_file;
       label: bind template.attachment as <$FlAttachmentObject>.name;
     }
-  }
-
-  Button {
-    styles [
-      "flat",
-      "circular",
-    ]
-
-    accessibility {
-      label: C_("accessibility", "Open with…");
-    }
-
-    tooltip-text: "Open with…";
-    icon-name: "document-open-symbolic";
-    clicked => $open() swapped;
-  }
-
-  Button {
-    styles [
-      "flat",
-      "circular",
-    ]
-
-    accessibility {
-      label: C_("accessibility", "Download");
-    }
-
-    tooltip-text: "Download";
-    icon-name: "document-save-symbolic";
-    clicked => $download() swapped;
   }
 }

@@ -8,7 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Text of the quote in the reply message is now truncated to 2 lines.
+- Moved the download and open attachments buttons to the popover.
 - Don't hard-code the font size for texts.
+
+### Fixed
+
+- General UI fixes.
 
 ## [0.9.0] - 2023-07-10
 

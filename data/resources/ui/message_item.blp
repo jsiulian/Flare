@@ -28,6 +28,24 @@ menu message-menu {
       action: "msg.copy";
       verb-icon: "edit-copy-symbolic";
       icon: "edit-copy-symbolic";
+
+    }
+  }
+  section {
+    item {
+      label: _("Save as…");
+      action: "msg.download";
+      verb-icon: "document-save-symbolic";
+      icon: "document-save-symbolic";
+      hidden-when: "action-disabled";
+
+    }
+    item {
+      label: _("Open with…");
+      action: "msg.open";
+      verb-icon: "document-open-symbolic";
+      icon: "document-open-symbolic";
+      hidden-when: "action-disabled";
     }
   }
 }
@@ -103,6 +121,8 @@ template $FlMessageItem : $ContextMenuBin {
             }
 
             Label {
+              ellipsize: end;
+              lines: 2;
               wrap: true;
               xalign: 0;
               wrap-mode: word_char;
@@ -130,6 +150,9 @@ template $FlMessageItem : $ContextMenuBin {
           orientation: vertical;
 
           Label label_message {
+            styles [
+                "message-text",
+            ]
             wrap: true;
             xalign: 0;
             wrap-mode: word_char;

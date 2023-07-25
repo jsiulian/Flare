@@ -25,11 +25,16 @@ pub mod imp {
     use std::cell::RefCell;
 
     use ashpd::{desktop::open_uri::OpenFileRequest, WindowIdentifier};
-    use gdk::gio::File;
+    use gdk::{
+        gio::File,
+        prelude::{Cast, StaticType},
+    };
     use gio::Settings;
     use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject,
-        Value,
+        clone,
+        once_cell::sync::Lazy,
+        subclass::{InitializingObject, Signal},
+        ParamSpec, ParamSpecObject, Value,
     };
     use gtk::{gio, glib, FileDialog};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
@@ -68,8 +73,7 @@ pub mod imp {
                 .expect("Root of `Attachment` to be a `Window`.")
         }
 
-        #[template_callback]
-        fn open(&self, _: gtk::Button) {
+        pub fn open(&self) {
             log::trace!("User requested to open attachment");
             if let Some(file) = self
                 .attachment
@@ -93,7 +97,12 @@ pub mod imp {
         }
 
         #[template_callback]
-        fn download(&self, _: gtk::Button) {
+        fn pressed(&self) {
+            let obj = self.obj();
+            obj.emit_by_name::<()>("pressed", &[&obj.to_value()]);
+        }
+
+        pub fn download(&self) {
             log::trace!("User requested to download attachment");
             if let Some(attachment) = self.attachment.borrow().as_ref() {
                 let mut chooser_builder = FileDialog::builder();
@@ -202,6 +211,15 @@ pub mod imp {
                 }
                 _ => unimplemented!(),
             }
+        }
+
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
+                vec![Signal::builder("pressed")
+                    .param_types([crate::gui::attachment::Attachment::static_type()])
+                    .build()]
+            });
+            SIGNALS.as_ref()
         }
     }
 
