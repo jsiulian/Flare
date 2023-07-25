@@ -46,7 +46,7 @@
   padding-left: 6px;
 }
 
-.emoji .message-bubble, .emoji.from-self .message-bubble{
+.emoji .message-text, .emoji.from-self .message-text{
   font-size: 3em;
 }
 

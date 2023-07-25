@@ -1,4 +1,3 @@
-use gdk::glib::BindingFlags;
 use gio::{subclass::prelude::ObjectSubclassIsExt, SimpleAction, SimpleActionGroup};
 use glib::{clone, Object};
 use gtk::{gio, glib};
@@ -11,6 +10,7 @@ use regex::Regex;
 use crate::backend::message::{MessageExt, TextMessage};
 use crate::backend::timeline::timeline_item::TimelineItemExt;
 use crate::backend::Manager;
+use crate::gui::attachment::Attachment;
 use crate::gui::components::ContextMenuBin;
 
 glib::wrapper! {
@@ -46,6 +46,11 @@ impl MessageItem {
     pub fn get_popover(&self) -> gtk::PopoverMenu {
         self.imp().msg_menu.to_owned()
     }
+
+    pub fn get_pressed_attachment(&self) -> Attachment {
+        self.property("pressed-attachment")
+    }
+
     fn setup_actions(&self) {
         let action_reply = SimpleAction::new("reply", None);
         action_reply.connect_activate(clone!(@weak self as s => move |_, _| {
@@ -62,15 +67,37 @@ impl MessageItem {
             s.imp().handle_copy();
         }));
 
+        let action_download = SimpleAction::new("download", None);
+        action_download.connect_activate(clone!(@weak self as s => move |_, _| {
+            s.get_pressed_attachment().imp().download();
+        }));
+
+        let action_open = SimpleAction::new("open", None);
+        action_open.connect_activate(clone!(@weak self as s => move |_, _| {
+            s.get_pressed_attachment().imp().open();
+        }));
+
         let actions = SimpleActionGroup::new();
         self.insert_action_group("msg", Some(&actions));
         actions.add_action(&action_reply);
         actions.add_action(&action_delete);
         actions.add_action(&action_copy);
+        actions.add_action(&action_download);
+        actions.add_action(&action_open);
 
         self.bind_property("message", &action_delete, "enabled")
             .transform_to(|_, msg: Option<TextMessage>| msg.map(|m| m.sender().is_self()))
-            .flags(BindingFlags::SYNC_CREATE)
+            .sync_create()
+            .build();
+
+        self.bind_property("pressed-attachment", &action_download, "enabled")
+            .transform_to(|_, att: Option<Attachment>| Some(att.is_some()))
+            .sync_create()
+            .build();
+
+        action_download
+            .bind_property("enabled", &action_open, "enabled")
+            .sync_create()
             .build();
     }
 
@@ -195,9 +222,8 @@ pub mod imp {
         pub(super) message_box: TemplateChild<gtk::Box>,
 
         message: RefCell<Option<TextMessage>>,
-
         manager: RefCell<Option<Manager>>,
-
+        pressed_attachment: RefCell<Option<Attachment>>,
         force_show_header: Cell<bool>,
     }
 
@@ -318,6 +344,7 @@ pub mod imp {
                         .construct_only()
                         .build(),
                     ParamSpecObject::builder::<TextMessage>("message").build(),
+                    ParamSpecObject::builder::<Attachment>("pressed-attachment").build(),
                     ParamSpecBoolean::builder("force-show-header")
                         .default_value(true)
                         .build(),
@@ -341,6 +368,7 @@ pub mod imp {
                     .unwrap_or_default()
                     .to_value(),
                 "force-show-header" => self.force_show_header.get().to_value(),
+                "pressed-attachment" => self.pressed_attachment.borrow().as_ref().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -375,6 +403,14 @@ pub mod imp {
                             log::trace!("MessageItem got Attachment, adding to `box_attachments`");
                             let att_widget = Attachment::new(&att);
                             self.box_attachments.append(&att_widget);
+                            att_widget.connect_local(
+                                "pressed",
+                                false,
+                                clone!(@weak instance as obj, @weak att_widget as att => @default-return None, move |_| {
+                                    obj.set_property("pressed-attachment", Some(att));
+                                    None
+                                })
+                            );
                         }
                     }
                     instance.notify("has-reaction");
@@ -385,6 +421,12 @@ pub mod imp {
                         "Property `force-show-header` of `MessageItem` has to be of type `bool`",
                     );
                     self.force_show_header.replace(b);
+                }
+                "pressed-attachment" => {
+                    let attachment = value.get::<Option<Attachment>>().expect(
+                        "Property `message` of `MessageItem` has to be of type `Attachment`",
+                    );
+                    self.pressed_attachment.replace(attachment);
                 }
                 _ => unimplemented!(),
             }
