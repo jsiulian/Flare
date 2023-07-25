@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-20 16:48+0200\n"
+"POT-Creation-Date: 2023-07-25 19:11+0200\n"
 "PO-Revision-Date: 2023-04-05 19:52+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
@@ -19,161 +19,157 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Weblate 4.17-dev\n"
 
-#: data/resources/ui/about.ui:14
+#: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
 msgstr "Давид Лапшин <ddaudix@gmail.com>"
 
-#: data/resources/ui/attachment.ui:26
+#: data/resources/ui/attachment.blp:27
 msgid "Load image"
 msgstr "Загрузить изображение"
 
-#: data/resources/ui/attachment.ui:37
+#: data/resources/ui/attachment.blp:33
 msgid "Load video"
 msgstr "Загрузить видео"
 
-#: data/resources/ui/attachment.ui:48
+#: data/resources/ui/attachment.blp:39
 msgid "Load file"
 msgstr "Загрузить файл"
 
-#: data/resources/ui/attachment.ui:131
-msgctxt "accessibility"
-msgid "Open with…"
-msgstr "Открыть с помощью…"
+#: data/resources/ui/attachment.blp:44
+#, fuzzy
+msgid "Load voice message"
+msgstr "Загрузить больше сообщений"
 
-#: data/resources/ui/attachment.ui:147
-msgctxt "accessibility"
-msgid "Download"
-msgstr "Загрузить"
-
-#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:172
+#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:143
 msgid "Channel Information"
 msgstr "Информация о канале"
 
-#: data/resources/ui/channel_info_dialog.ui:33
+#: data/resources/ui/channel_info_dialog.blp:28
 msgctxt "accessibility"
 msgid "Reset Session"
 msgstr ""
 
-#: data/resources/ui/channel_info_dialog.ui:35
+#: data/resources/ui/channel_info_dialog.blp:31
 msgid "Reset Session"
 msgstr ""
 
-#: data/resources/ui/channel_info_dialog.ui:51
-#: data/resources/ui/error_dialog.ui:14
+#: data/resources/ui/channel_info_dialog.blp:40
+#: data/resources/ui/error_dialog.blp:43
 msgid "Close"
 msgstr "Закрыть"
 
-#: data/resources/ui/channel_list.ui:15
-#: data/resources/ui/channel_messages.ui:17
+#: data/resources/ui/channel_list.blp:11
+#: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
 msgstr "Оффлайн"
 
-#: data/resources/ui/channel_list.ui:31
+#: data/resources/ui/channel_list.blp:19
 msgid "Search"
 msgstr "Поиск"
 
-#: data/resources/ui/channel_list.ui:33 data/resources/ui/window.ui:58
+#: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:53
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Поиск"
 
-#: data/resources/ui/channel_messages.ui:31
+#: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:32
+#: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
 msgstr "Выберите канал"
 
-#: data/resources/ui/channel_messages.ui:139
+#: data/resources/ui/channel_messages.blp:91
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Удалить ответ"
 
-#: data/resources/ui/channel_messages.ui:141
+#: data/resources/ui/channel_messages.blp:94
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Удалить ответ"
 
-#: data/resources/ui/channel_messages.ui:171
+#: data/resources/ui/channel_messages.blp:118
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Удалить вложение"
 
-#: data/resources/ui/channel_messages.ui:173
+#: data/resources/ui/channel_messages.blp:121
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Удалить вложение"
 
-#: data/resources/ui/channel_messages.ui:207
+#: data/resources/ui/channel_messages.blp:153
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Добавить вложение"
 
-#: data/resources/ui/channel_messages.ui:209
+#: data/resources/ui/channel_messages.blp:156
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Добавить вложение"
 
-#: data/resources/ui/channel_messages.ui:228
+#: data/resources/ui/channel_messages.blp:172
 msgctxt "accessibility"
 msgid "Insert an emoji"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:230
+#: data/resources/ui/channel_messages.blp:175
 msgctxt "tooltip"
 msgid "Insert emoji"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:238
+#: data/resources/ui/channel_messages.blp:182
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Ввод сообщения"
 
-#: data/resources/ui/channel_messages.ui:243
+#: data/resources/ui/channel_messages.blp:188
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Ввод сообщения"
 
-#: data/resources/ui/channel_messages.ui:249
+#: data/resources/ui/channel_messages.blp:194
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Отправить"
 
-#: data/resources/ui/channel_messages.ui:251
+#: data/resources/ui/channel_messages.blp:197
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Отправить"
 
-#: data/resources/ui/channel_messages.ui:252
+#: data/resources/ui/channel_messages.blp:198
 msgid "Send"
 msgstr "Отправить"
 
-#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:156
+#: data/resources/ui/dialog_clear_messages.blp:5
+#: data/resources/ui/window.blp:124
 msgid "Clear messages"
 msgstr "Очистить сообщения"
 
-#: data/resources/ui/dialog_clear_messages.ui:5
+#: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
 "Это удалит все сохранённые локально сообщения. Это также закроет приложение."
 
-#: data/resources/ui/dialog_clear_messages.ui:9
-#: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
+#: data/resources/ui/dialog_clear_messages.blp:11
+#: data/resources/ui/dialog_unlink.blp:11
 msgid "Cancel"
 msgstr "Отмена"
 
-#: data/resources/ui/dialog_clear_messages.ui:10
+#: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
 msgstr "Очистить"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:152
+#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:119
 msgid "Unlink"
 msgstr "Отвязать"
 
-#: data/resources/ui/dialog_unlink.ui:5
+#: data/resources/ui/dialog_unlink.blp:6
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -183,206 +179,220 @@ msgstr ""
 "также закроет приложение, чтобы его можно было повторно связать при "
 "повторном открытии."
 
-#: data/resources/ui/dialog_unlink.ui:10
+#: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
 msgstr "Отвязать и удалить все сообщения"
 
-#: data/resources/ui/dialog_unlink.ui:11
+#: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
 msgstr "Отвязать но оставить сообщения"
 
-#: data/resources/ui/error_dialog.ui:8
+#: data/resources/ui/error_dialog.blp:5
 msgid "Error"
 msgstr "Ошибка"
 
-#: data/resources/ui/error_dialog.ui:59
+#: data/resources/ui/error_dialog.blp:25
 msgid "Please consider reporting this error."
 msgstr "Пожалуйста, сообщите об этой ошибке."
 
-#: data/resources/ui/link_window.ui:8
+#: data/resources/ui/error_dialog.blp:44
+msgid "Report"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:6
 msgid "Link Device"
 msgstr "Привязать устройство"
 
-#: data/resources/ui/link_window.ui:25
+#: data/resources/ui/link_window.blp:15
 msgid "Please scan this QR code with your primary device."
 msgstr "Пожалуйста, отсканируйте этот QR-код на основном устройстве."
 
-#: data/resources/ui/link_window.ui:35
+#: data/resources/ui/link_window.blp:23
 msgctxt "accessibility"
 msgid "Copy to clipboard"
 msgstr "Скопировать в буфер обмена"
 
-#: data/resources/ui/link_window.ui:47
+#: data/resources/ui/link_window.blp:34
 msgid "Please wait until the contacts are displayed after linking."
 msgstr ""
 "Пожалуйста подождите до тех пор пока контакты не будут отображены после "
 "привязывания."
 
-#: data/resources/ui/message_item.ui:248
+#: data/resources/ui/message_item.blp:12
 msgid "Reply"
 msgstr "Ответить"
 
-#: data/resources/ui/message_item.ui:254
-msgid "React"
-msgstr "Отреагировать"
-
-#: data/resources/ui/message_item.ui:260
+#: data/resources/ui/message_item.blp:19
 msgid "Delete"
 msgstr "Удалить"
 
-#: data/resources/ui/message_item.ui:267
+#: data/resources/ui/message_item.blp:27
 msgid "Copy"
 msgstr "Копировать"
 
-#: data/resources/ui/preferences_window.ui:9
+#: data/resources/ui/message_item.blp:36
+msgid "Save as…"
+msgstr ""
+
+#: data/resources/ui/message_item.blp:44
+#, fuzzy
+msgid "Open with…"
+msgstr "Открыть с помощью…"
+
+#: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Общее"
 
-#: data/resources/ui/preferences_window.ui:13
+#: data/resources/ui/preferences_window.blp:10
 msgid "Linking"
 msgstr "Привазывание"
 
-#: data/resources/ui/preferences_window.ui:14
+#: data/resources/ui/preferences_window.blp:11
 msgid "The device will need to be relinked to take effect."
 msgstr "Устройство должно быть перепривазано чтобы вступить в силу."
 
-#: data/resources/ui/preferences_window.ui:17
+#: data/resources/ui/preferences_window.blp:14
 msgid "Device Name"
 msgstr "Имя устройства"
 
-#: data/resources/ui/preferences_window.ui:25
+#: data/resources/ui/preferences_window.blp:19
 msgid "Attachments"
 msgstr "Вложения"
 
-#: data/resources/ui/preferences_window.ui:28
+#: data/resources/ui/preferences_window.blp:22
 msgid "Dowload images automatically"
 msgstr "Загружать изображения автоматически"
 
-#: data/resources/ui/preferences_window.ui:42
+#: data/resources/ui/preferences_window.blp:35
 msgid "Dowload videos automatically"
 msgstr "Загружать видео автоматически"
 
-#: data/resources/ui/preferences_window.ui:56
+#: data/resources/ui/preferences_window.blp:48
 msgid "Dowload files automatically"
 msgstr "Загружать файлы автоматически"
 
-#: data/resources/ui/preferences_window.ui:73
+#: data/resources/ui/preferences_window.blp:61
+#, fuzzy
+msgid "Dowload voice messages automatically"
+msgstr "Загружать изображения автоматически"
+
+#: data/resources/ui/preferences_window.blp:75
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: data/resources/ui/preferences_window.ui:74
+#: data/resources/ui/preferences_window.blp:76
 msgid "Notifications for new messages."
 msgstr "Уведомления для новых сообщений."
 
-#: data/resources/ui/preferences_window.ui:77
-#: data/de.schmidhuberj.Flare.gschema.xml:37
+#: data/resources/ui/preferences_window.blp:79
+#: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
 msgstr "Отправлять уведомления"
 
-#: data/resources/ui/preferences_window.ui:91 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:92 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Следить за новыми сообщениями в закрытом состоянии"
 
-#: data/resources/ui/preferences_window.ui:109
+#: data/resources/ui/preferences_window.blp:108
 msgid "Other"
 msgstr "Другое"
 
-#: data/resources/ui/preferences_window.ui:112
+#: data/resources/ui/preferences_window.blp:111
 msgid "Selectable Message Text"
 msgstr "Выбираемый текст сообщения"
 
-#: data/resources/ui/preferences_window.ui:113
+#: data/resources/ui/preferences_window.blp:112
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Выделяемый текст может мешать жестам пролистывания на сенсорных экранах."
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Общее"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
 msgstr "Показать комбинации клавиш"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
 msgstr "Перейти в параметры"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
 msgstr "Перейти на страницу \"О приложении\""
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
 msgstr "Открыть меню"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:46
+#: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
 msgstr "Каналы"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
 msgstr "Перейти в канал 1…9"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
 msgstr "Поиск в каналах"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Загрузить вложение"
 
-#: data/resources/ui/shortcuts.ui:67
+#: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Сфокусироваться на поле ввода"
 
-#: data/resources/ui/shortcuts.ui:73
+#: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Загрузить больше сообщений"
 
-#: data/resources/ui/window.ui:36
+#: data/resources/ui/window.blp:30
 msgctxt "accessibility"
 msgid "Add Conversation"
 msgstr ""
 
-#: data/resources/ui/window.ui:46 data/resources/ui/window.ui:117
+#: data/resources/ui/window.blp:41 data/resources/ui/window.blp:94
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Меню"
 
-#: data/resources/ui/window.ui:148
+#: data/resources/ui/window.blp:114
 msgid "Settings"
 msgstr "Параметры"
 
-#: data/resources/ui/window.ui:160
+#: data/resources/ui/window.blp:129
 msgid "Keybindings"
 msgstr "Комбинации клавиш"
 
-#: data/resources/ui/window.ui:164
+#: data/resources/ui/window.blp:134
 msgid "About"
 msgstr "О Приложении"
 
-#: src/backend/channel.rs:505
+#: src/backend/channel.rs:558
 msgid "Note to self"
 msgstr "Заметка для себя"
 
-#: src/backend/manager.rs:378
+#: src/backend/manager.rs:384
 msgid "You"
 msgstr "Вы"
 
@@ -402,19 +412,26 @@ msgstr "На проводе."
 msgid "Is busy."
 msgstr "Занят."
 
-#: src/backend/message/text_message.rs:294
+#: src/backend/message/text_message.rs:365
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Отправить изображение"
 msgstr[1] "Отправить {} изображений"
 
-#: src/backend/message/text_message.rs:297
+#: src/backend/message/text_message.rs:368
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Отправлено видео"
 msgstr[1] "Отправлено {} видео"
 
-#: src/backend/message/text_message.rs:300
+#: src/backend/message/text_message.rs:372
+#, fuzzy
+msgid "Sent a voice message"
+msgid_plural "Sent {} voice messages"
+msgstr[0] "Отправить изображение"
+msgstr[1] "Отправить {} изображений"
+
+#: src/backend/message/text_message.rs:378
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Оправить файл"
@@ -518,6 +535,11 @@ msgstr "%Y-%m-%d %H:%M"
 msgid "Flare"
 msgstr "Flare"
 
+#: data/de.schmidhuberj.Flare.desktop.in.in:6
+#, fuzzy
+msgid "Signal GTK Client"
+msgstr "Неофициальный GTK клиент Signal"
+
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "An unofficial Signal GTK client"
@@ -595,7 +617,7 @@ msgstr ""
 "данными. Дополнительную информацию о безопасности можно найти в README "
 "проекта."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:397
+#: data/de.schmidhuberj.Flare.metainfo.xml:432
 msgid "Overview of the application"
 msgstr "Обзор приложения"
 
@@ -628,16 +650,28 @@ msgid "Automatically download videos"
 msgstr "Автоматически загружать видео"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
+#, fuzzy
+msgid "Automatically download voice messages"
+msgstr "Автоматически загружать изображения"
+
+#: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
 msgstr "Автоматически загружать файлы"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:41
+#: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
 msgstr "Работать в фоновом режиме при закрытии"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:46
+#: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Can messages be selected"
 msgstr "Можно ли выбирать сообщения"
+
+#~ msgctxt "accessibility"
+#~ msgid "Download"
+#~ msgstr "Загрузить"
+
+#~ msgid "React"
+#~ msgstr "Отреагировать"
 
 #~ msgctxt "accessibility"
 #~ msgid "Reset Identity"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-20 16:48+0200\n"
+"POT-Creation-Date: 2023-07-25 19:11+0200\n"
 "PO-Revision-Date: 2023-05-29 08:43+0000\n"
 "Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
@@ -19,144 +19,140 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.18-dev\n"
 
-#: data/resources/ui/about.ui:14
+#: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
 msgstr ""
 "Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
 "Jürgen Benvenuti <gastornis@posteo.org>, 2022\n"
 "Leo Moser <leomoser99@gmail.com>, 2023"
 
-#: data/resources/ui/attachment.ui:26
+#: data/resources/ui/attachment.blp:27
 msgid "Load image"
 msgstr "Bild laden"
 
-#: data/resources/ui/attachment.ui:37
+#: data/resources/ui/attachment.blp:33
 msgid "Load video"
 msgstr "Video laden"
 
-#: data/resources/ui/attachment.ui:48
+#: data/resources/ui/attachment.blp:39
 msgid "Load file"
 msgstr "Datei laden"
 
-#: data/resources/ui/attachment.ui:131
-msgctxt "accessibility"
-msgid "Open with…"
-msgstr "Öffnen mit…"
+#: data/resources/ui/attachment.blp:44
+#, fuzzy
+msgid "Load voice message"
+msgstr "Weitere Nachrichten laden"
 
-#: data/resources/ui/attachment.ui:147
-msgctxt "accessibility"
-msgid "Download"
-msgstr "Herunterladen"
-
-#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:172
+#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:143
 msgid "Channel Information"
 msgstr "Kanalinformationen"
 
-#: data/resources/ui/channel_info_dialog.ui:33
+#: data/resources/ui/channel_info_dialog.blp:28
 msgctxt "accessibility"
 msgid "Reset Session"
 msgstr "Setze Verbindung zurück"
 
-#: data/resources/ui/channel_info_dialog.ui:35
+#: data/resources/ui/channel_info_dialog.blp:31
 msgid "Reset Session"
 msgstr "Setze Verbindung zurück"
 
-#: data/resources/ui/channel_info_dialog.ui:51
-#: data/resources/ui/error_dialog.ui:14
+#: data/resources/ui/channel_info_dialog.blp:40
+#: data/resources/ui/error_dialog.blp:43
 msgid "Close"
 msgstr "Schließen"
 
-#: data/resources/ui/channel_list.ui:15
-#: data/resources/ui/channel_messages.ui:17
+#: data/resources/ui/channel_list.blp:11
+#: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
 msgstr "Offline"
 
-#: data/resources/ui/channel_list.ui:31
+#: data/resources/ui/channel_list.blp:19
 msgid "Search"
 msgstr "Suchen"
 
-#: data/resources/ui/channel_list.ui:33 data/resources/ui/window.ui:58
+#: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:53
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Suchen"
 
-#: data/resources/ui/channel_messages.ui:31
+#: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
 msgstr "Kein Kanal ausgewählt"
 
-#: data/resources/ui/channel_messages.ui:32
+#: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
 msgstr "Einen Kanal auswählen"
 
-#: data/resources/ui/channel_messages.ui:139
+#: data/resources/ui/channel_messages.blp:91
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Antwort entfernen"
 
-#: data/resources/ui/channel_messages.ui:141
+#: data/resources/ui/channel_messages.blp:94
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Antwort entfernen"
 
-#: data/resources/ui/channel_messages.ui:171
+#: data/resources/ui/channel_messages.blp:118
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:173
+#: data/resources/ui/channel_messages.blp:121
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Anhang entfernen"
 
-#: data/resources/ui/channel_messages.ui:207
+#: data/resources/ui/channel_messages.blp:153
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:209
+#: data/resources/ui/channel_messages.blp:156
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Anhang hinzufügen"
 
-#: data/resources/ui/channel_messages.ui:228
+#: data/resources/ui/channel_messages.blp:172
 msgctxt "accessibility"
 msgid "Insert an emoji"
 msgstr "Füge ein Emoji ein"
 
-#: data/resources/ui/channel_messages.ui:230
+#: data/resources/ui/channel_messages.blp:175
 msgctxt "tooltip"
 msgid "Insert emoji"
 msgstr "Füge ein Emoji ein"
 
-#: data/resources/ui/channel_messages.ui:238
+#: data/resources/ui/channel_messages.blp:182
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:243
+#: data/resources/ui/channel_messages.blp:188
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
-#: data/resources/ui/channel_messages.ui:249
+#: data/resources/ui/channel_messages.blp:194
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Senden"
 
-#: data/resources/ui/channel_messages.ui:251
+#: data/resources/ui/channel_messages.blp:197
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Senden"
 
-#: data/resources/ui/channel_messages.ui:252
+#: data/resources/ui/channel_messages.blp:198
 msgid "Send"
 msgstr "Senden"
 
-#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:156
+#: data/resources/ui/dialog_clear_messages.blp:5
+#: data/resources/ui/window.blp:124
 msgid "Clear messages"
 msgstr "Nachrichten löschen"
 
-#: data/resources/ui/dialog_clear_messages.ui:5
+#: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
@@ -164,20 +160,20 @@ msgstr ""
 "Dies wird alle auf dem Gerät vorhandenen Nachrichten löschen und die "
 "Anwendung schließen."
 
-#: data/resources/ui/dialog_clear_messages.ui:9
-#: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
+#: data/resources/ui/dialog_clear_messages.blp:11
+#: data/resources/ui/dialog_unlink.blp:11
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: data/resources/ui/dialog_clear_messages.ui:10
+#: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
 msgstr "Löschen"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:152
+#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:119
 msgid "Unlink"
 msgstr "Entkoppeln"
 
-#: data/resources/ui/dialog_unlink.ui:5
+#: data/resources/ui/dialog_unlink.blp:6
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -187,205 +183,219 @@ msgstr ""
 "löschen. Dies wird außerdem die Anwendung schließen, sodass es nach dem "
 "erneuten Öffnen neu gekoppelt werden kann."
 
-#: data/resources/ui/dialog_unlink.ui:10
+#: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
 msgstr "Entkoppeln und alle Nachrichten löschen"
 
-#: data/resources/ui/dialog_unlink.ui:11
+#: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
 msgstr "Entkoppeln, aber Nachrichten behalten"
 
-#: data/resources/ui/error_dialog.ui:8
+#: data/resources/ui/error_dialog.blp:5
 msgid "Error"
 msgstr "Fehler"
 
-#: data/resources/ui/error_dialog.ui:59
+#: data/resources/ui/error_dialog.blp:25
 msgid "Please consider reporting this error."
 msgstr "Bitte erwäge, diesen Fehler zu melden."
 
-#: data/resources/ui/link_window.ui:8
+#: data/resources/ui/error_dialog.blp:44
+msgid "Report"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:6
 msgid "Link Device"
 msgstr "Gerät koppeln"
 
-#: data/resources/ui/link_window.ui:25
+#: data/resources/ui/link_window.blp:15
 msgid "Please scan this QR code with your primary device."
 msgstr "Bitte scanne diesen QR-Code mit deinem Hauptgerät."
 
-#: data/resources/ui/link_window.ui:35
+#: data/resources/ui/link_window.blp:23
 msgctxt "accessibility"
 msgid "Copy to clipboard"
 msgstr "In die Zwischenablage kopieren"
 
-#: data/resources/ui/link_window.ui:47
+#: data/resources/ui/link_window.blp:34
 msgid "Please wait until the contacts are displayed after linking."
 msgstr "Bitte warte nach dem Koppeln, bis deine Kontakte angezeigt werden."
 
-#: data/resources/ui/message_item.ui:248
+#: data/resources/ui/message_item.blp:12
 msgid "Reply"
 msgstr "Antworten"
 
-#: data/resources/ui/message_item.ui:254
-msgid "React"
-msgstr "Reagieren"
-
-#: data/resources/ui/message_item.ui:260
+#: data/resources/ui/message_item.blp:19
 msgid "Delete"
 msgstr "Löschen"
 
-#: data/resources/ui/message_item.ui:267
+#: data/resources/ui/message_item.blp:27
 msgid "Copy"
 msgstr "Kopieren"
 
-#: data/resources/ui/preferences_window.ui:9
+#: data/resources/ui/message_item.blp:36
+msgid "Save as…"
+msgstr ""
+
+#: data/resources/ui/message_item.blp:44
+#, fuzzy
+msgid "Open with…"
+msgstr "Öffnen mit…"
+
+#: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Allgemein"
 
-#: data/resources/ui/preferences_window.ui:13
+#: data/resources/ui/preferences_window.blp:10
 msgid "Linking"
 msgstr "Koppelung"
 
-#: data/resources/ui/preferences_window.ui:14
+#: data/resources/ui/preferences_window.blp:11
 msgid "The device will need to be relinked to take effect."
 msgstr ""
 "Das Gerät muss neu gekoppelt werden, damit diese Einstellung wirksam wird."
 
-#: data/resources/ui/preferences_window.ui:17
+#: data/resources/ui/preferences_window.blp:14
 msgid "Device Name"
 msgstr "Name des Gerätes"
 
-#: data/resources/ui/preferences_window.ui:25
+#: data/resources/ui/preferences_window.blp:19
 msgid "Attachments"
 msgstr "Anhänge"
 
-#: data/resources/ui/preferences_window.ui:28
+#: data/resources/ui/preferences_window.blp:22
 msgid "Dowload images automatically"
 msgstr "Bilder automatisch herunterladen"
 
-#: data/resources/ui/preferences_window.ui:42
+#: data/resources/ui/preferences_window.blp:35
 msgid "Dowload videos automatically"
 msgstr "Videos automatisch herunterladen"
 
-#: data/resources/ui/preferences_window.ui:56
+#: data/resources/ui/preferences_window.blp:48
 msgid "Dowload files automatically"
 msgstr "Dateien automatisch herunterladen"
 
-#: data/resources/ui/preferences_window.ui:73
+#: data/resources/ui/preferences_window.blp:61
+#, fuzzy
+msgid "Dowload voice messages automatically"
+msgstr "Bilder automatisch herunterladen"
+
+#: data/resources/ui/preferences_window.blp:75
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
-#: data/resources/ui/preferences_window.ui:74
+#: data/resources/ui/preferences_window.blp:76
 msgid "Notifications for new messages."
 msgstr "Benachrichtigungen für neue Nachrichten."
 
-#: data/resources/ui/preferences_window.ui:77
-#: data/de.schmidhuberj.Flare.gschema.xml:37
+#: data/resources/ui/preferences_window.blp:79
+#: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
 msgstr "Benachrichtigungen senden"
 
-#: data/resources/ui/preferences_window.ui:91 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:92 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Empfange Benachrichtigungen im Hintergrund"
 
-#: data/resources/ui/preferences_window.ui:109
+#: data/resources/ui/preferences_window.blp:108
 msgid "Other"
 msgstr "Andere"
 
-#: data/resources/ui/preferences_window.ui:112
+#: data/resources/ui/preferences_window.blp:111
 msgid "Selectable Message Text"
 msgstr "Auswählbarer Nachrichtentext"
 
-#: data/resources/ui/preferences_window.ui:113
+#: data/resources/ui/preferences_window.blp:112
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Auswählbarer Text kann mit Wischgesten auf Touchscreens Probleme bereiten."
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Allgemein"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
 msgstr "Tastaturkürzel anzeigen"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
 msgstr "Zu den Einstellungen springen"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
 msgstr "Zu Info springen"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
 msgstr "Menü öffnen"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
 msgstr "Fenster Schließen"
 
-#: data/resources/ui/shortcuts.ui:46
+#: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
 msgstr "Kanäle"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
 msgstr "Zu Kanal 1…9 springen"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
 msgstr "In den Kanälen suchen"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Anhang hochladen"
 
-#: data/resources/ui/shortcuts.ui:67
+#: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Die Texteingabe fokussieren"
 
-#: data/resources/ui/shortcuts.ui:73
+#: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Weitere Nachrichten laden"
 
-#: data/resources/ui/window.ui:36
+#: data/resources/ui/window.blp:30
 msgctxt "accessibility"
 msgid "Add Conversation"
 msgstr "Unterhaltung Hinzufügen"
 
-#: data/resources/ui/window.ui:46 data/resources/ui/window.ui:117
+#: data/resources/ui/window.blp:41 data/resources/ui/window.blp:94
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Menü"
 
-#: data/resources/ui/window.ui:148
+#: data/resources/ui/window.blp:114
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: data/resources/ui/window.ui:160
+#: data/resources/ui/window.blp:129
 msgid "Keybindings"
 msgstr "Tastaturkürzel"
 
-#: data/resources/ui/window.ui:164
+#: data/resources/ui/window.blp:134
 msgid "About"
 msgstr "Info"
 
-#: src/backend/channel.rs:505
+#: src/backend/channel.rs:558
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:378
+#: src/backend/manager.rs:384
 msgid "You"
 msgstr "Du"
 
@@ -405,19 +415,26 @@ msgstr "Aufgelegt."
 msgid "Is busy."
 msgstr "Besetzt."
 
-#: src/backend/message/text_message.rs:294
+#: src/backend/message/text_message.rs:365
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Hat ein Bild gesendet"
 msgstr[1] "Hat {} Bilder gesendet"
 
-#: src/backend/message/text_message.rs:297
+#: src/backend/message/text_message.rs:368
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Hat ein Video gesendet"
 msgstr[1] "Hat {} Videos gesendet"
 
-#: src/backend/message/text_message.rs:300
+#: src/backend/message/text_message.rs:372
+#, fuzzy
+msgid "Sent a voice message"
+msgid_plural "Sent {} voice messages"
+msgstr[0] "Hat ein Bild gesendet"
+msgstr[1] "Hat {} Bilder gesendet"
+
+#: src/backend/message/text_message.rs:378
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"
@@ -520,6 +537,11 @@ msgstr "%d.%m.%Y %H:%M"
 msgid "Flare"
 msgstr "Flare"
 
+#: data/de.schmidhuberj.Flare.desktop.in.in:6
+#, fuzzy
+msgid "Signal GTK Client"
+msgstr "Ein inoffizieller Signal GTK-Client"
+
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "An unofficial Signal GTK client"
@@ -598,7 +620,7 @@ msgstr ""
 "verschlechtert. Seien Sie vorsichtig im Umgang mit sensiblen Daten. In der "
 "README des Projekts finden Sie weitere Informationen zur Sicherheit."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:397
+#: data/de.schmidhuberj.Flare.metainfo.xml:432
 msgid "Overview of the application"
 msgstr "Übersicht der Anwendung"
 
@@ -631,16 +653,28 @@ msgid "Automatically download videos"
 msgstr "Videos automatisch herunterladen"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
+#, fuzzy
+msgid "Automatically download voice messages"
+msgstr "Bilder automatisch herunterladen"
+
+#: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
 msgstr "Dateien automatisch herunterladen"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:41
+#: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
 msgstr "Nach dem Schließen im Hintergrund ausführen"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:46
+#: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Can messages be selected"
 msgstr "Nachrichten können ausgewählt werden"
+
+#~ msgctxt "accessibility"
+#~ msgid "Download"
+#~ msgstr "Herunterladen"
+
+#~ msgid "React"
+#~ msgstr "Reagieren"
 
 #~ msgctxt "accessibility"
 #~ msgid "Reset Identity"

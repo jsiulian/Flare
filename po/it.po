@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-20 16:48+0200\n"
+"POT-Creation-Date: 2023-07-25 19:11+0200\n"
 "PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/flare/flare/it/"
@@ -19,142 +19,138 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.14.1\n"
 
-#: data/resources/ui/about.ui:14
+#: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
 msgstr ""
 
-#: data/resources/ui/attachment.ui:26
+#: data/resources/ui/attachment.blp:27
 msgid "Load image"
 msgstr "Carica l’immagine"
 
-#: data/resources/ui/attachment.ui:37
+#: data/resources/ui/attachment.blp:33
 msgid "Load video"
 msgstr "Carica il video"
 
-#: data/resources/ui/attachment.ui:48
+#: data/resources/ui/attachment.blp:39
 msgid "Load file"
 msgstr "Carica il file"
 
-#: data/resources/ui/attachment.ui:131
-msgctxt "accessibility"
-msgid "Open with…"
-msgstr ""
+#: data/resources/ui/attachment.blp:44
+#, fuzzy
+msgid "Load voice message"
+msgstr "Carica altri messaggi"
 
-#: data/resources/ui/attachment.ui:147
-msgctxt "accessibility"
-msgid "Download"
-msgstr ""
-
-#: data/resources/ui/channel_info_dialog.ui:7 data/resources/ui/window.ui:172
+#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:143
 msgid "Channel Information"
 msgstr ""
 
-#: data/resources/ui/channel_info_dialog.ui:33
+#: data/resources/ui/channel_info_dialog.blp:28
 msgctxt "accessibility"
 msgid "Reset Session"
 msgstr ""
 
-#: data/resources/ui/channel_info_dialog.ui:35
+#: data/resources/ui/channel_info_dialog.blp:31
 msgid "Reset Session"
 msgstr ""
 
-#: data/resources/ui/channel_info_dialog.ui:51
-#: data/resources/ui/error_dialog.ui:14
+#: data/resources/ui/channel_info_dialog.blp:40
+#: data/resources/ui/error_dialog.blp:43
 msgid "Close"
 msgstr "Chiudi"
 
-#: data/resources/ui/channel_list.ui:15
-#: data/resources/ui/channel_messages.ui:17
+#: data/resources/ui/channel_list.blp:11
+#: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
 msgstr ""
 
-#: data/resources/ui/channel_list.ui:31
+#: data/resources/ui/channel_list.blp:19
 msgid "Search"
 msgstr "Ricerca"
 
-#: data/resources/ui/channel_list.ui:33 data/resources/ui/window.ui:58
+#: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:53
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Ricerca"
 
-#: data/resources/ui/channel_messages.ui:31
+#: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:32
+#: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
 msgstr "Seleziona un canale"
 
-#: data/resources/ui/channel_messages.ui:139
+#: data/resources/ui/channel_messages.blp:91
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Rimuovi la risposta"
 
-#: data/resources/ui/channel_messages.ui:141
+#: data/resources/ui/channel_messages.blp:94
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Rimuovi la risposta"
 
-#: data/resources/ui/channel_messages.ui:171
+#: data/resources/ui/channel_messages.blp:118
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Rimuovi un allegato"
 
-#: data/resources/ui/channel_messages.ui:173
+#: data/resources/ui/channel_messages.blp:121
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Rimuovi l'allegato"
 
-#: data/resources/ui/channel_messages.ui:207
+#: data/resources/ui/channel_messages.blp:153
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Aggiungi un allegato"
 
-#: data/resources/ui/channel_messages.ui:209
+#: data/resources/ui/channel_messages.blp:156
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Aggiungi un allegato"
 
-#: data/resources/ui/channel_messages.ui:228
+#: data/resources/ui/channel_messages.blp:172
 msgctxt "accessibility"
 msgid "Insert an emoji"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:230
+#: data/resources/ui/channel_messages.blp:175
 msgctxt "tooltip"
 msgid "Insert emoji"
 msgstr ""
 
-#: data/resources/ui/channel_messages.ui:238
+#: data/resources/ui/channel_messages.blp:182
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Inserimento del messaggio"
 
-#: data/resources/ui/channel_messages.ui:243
+#: data/resources/ui/channel_messages.blp:188
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Inserimento del messaggio"
 
-#: data/resources/ui/channel_messages.ui:249
+#: data/resources/ui/channel_messages.blp:194
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Invia"
 
-#: data/resources/ui/channel_messages.ui:251
+#: data/resources/ui/channel_messages.blp:197
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Invia"
 
-#: data/resources/ui/channel_messages.ui:252
+#: data/resources/ui/channel_messages.blp:198
 #, fuzzy
 msgid "Send"
 msgstr "Invia"
 
-#: data/resources/ui/dialog_clear_messages.ui:4 data/resources/ui/window.ui:156
+#: data/resources/ui/dialog_clear_messages.blp:5
+#: data/resources/ui/window.blp:124
 msgid "Clear messages"
 msgstr "Cancella messaggi"
 
-#: data/resources/ui/dialog_clear_messages.ui:5
+#: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
@@ -162,20 +158,20 @@ msgstr ""
 "Questo cancellerà tutti i messaggi memorizzati localmente. Questo chiuderà "
 "anche l'applicazione."
 
-#: data/resources/ui/dialog_clear_messages.ui:9
-#: data/resources/ui/dialog_unlink.ui:9 data/resources/ui/link_window.ui:16
+#: data/resources/ui/dialog_clear_messages.blp:11
+#: data/resources/ui/dialog_unlink.blp:11
 msgid "Cancel"
 msgstr "Annulla"
 
-#: data/resources/ui/dialog_clear_messages.ui:10
+#: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
 msgstr "Cancella"
 
-#: data/resources/ui/dialog_unlink.ui:4 data/resources/ui/window.ui:152
+#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:119
 msgid "Unlink"
 msgstr "Scollega"
 
-#: data/resources/ui/dialog_unlink.ui:5
+#: data/resources/ui/dialog_unlink.blp:6
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
@@ -185,206 +181,219 @@ msgstr ""
 "salvati localmente. Inoltre, chiuderà l'applicazione in modo che possa "
 "essere ricollegata quando la si riapre."
 
-#: data/resources/ui/dialog_unlink.ui:10
+#: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
 msgstr ""
 
-#: data/resources/ui/dialog_unlink.ui:11
+#: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
 msgstr ""
 
-#: data/resources/ui/error_dialog.ui:8
+#: data/resources/ui/error_dialog.blp:5
 msgid "Error"
 msgstr "Errore"
 
-#: data/resources/ui/error_dialog.ui:59
+#: data/resources/ui/error_dialog.blp:25
 msgid "Please consider reporting this error."
 msgstr "Si prega di considerare la possibilità di segnalare questo errore."
 
-#: data/resources/ui/link_window.ui:8
+#: data/resources/ui/error_dialog.blp:44
+msgid "Report"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:6
 msgid "Link Device"
 msgstr "Collega il dispositivo"
 
-#: data/resources/ui/link_window.ui:25
+#: data/resources/ui/link_window.blp:15
 msgid "Please scan this QR code with your primary device."
 msgstr "Scansiona questo codice QR con il tuo dispositivo principale."
 
-#: data/resources/ui/link_window.ui:35
+#: data/resources/ui/link_window.blp:23
 msgctxt "accessibility"
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
 
-#: data/resources/ui/link_window.ui:47
+#: data/resources/ui/link_window.blp:34
 msgid "Please wait until the contacts are displayed after linking."
 msgstr ""
 "Si prega di attendere fino a quando i contatti vengono visualizzati dopo il "
 "collegamento."
 
-#: data/resources/ui/message_item.ui:248
+#: data/resources/ui/message_item.blp:12
 msgid "Reply"
 msgstr "Rispondi"
 
-#: data/resources/ui/message_item.ui:254
-msgid "React"
-msgstr "Reagisci"
-
-#: data/resources/ui/message_item.ui:260
+#: data/resources/ui/message_item.blp:19
 msgid "Delete"
 msgstr ""
 
-#: data/resources/ui/message_item.ui:267
+#: data/resources/ui/message_item.blp:27
 msgid "Copy"
 msgstr ""
 
-#: data/resources/ui/preferences_window.ui:9
+#: data/resources/ui/message_item.blp:36
+msgid "Save as…"
+msgstr ""
+
+#: data/resources/ui/message_item.blp:44
+msgid "Open with…"
+msgstr ""
+
+#: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Generale"
 
-#: data/resources/ui/preferences_window.ui:13
+#: data/resources/ui/preferences_window.blp:10
 msgid "Linking"
 msgstr "Collegamento"
 
-#: data/resources/ui/preferences_window.ui:14
+#: data/resources/ui/preferences_window.blp:11
 msgid "The device will need to be relinked to take effect."
 msgstr "Il dispositivo dovrà essere ricollegato per avere effetto."
 
-#: data/resources/ui/preferences_window.ui:17
+#: data/resources/ui/preferences_window.blp:14
 msgid "Device Name"
 msgstr "Nome del dispositivo"
 
-#: data/resources/ui/preferences_window.ui:25
+#: data/resources/ui/preferences_window.blp:19
 msgid "Attachments"
 msgstr "Allegati"
 
-#: data/resources/ui/preferences_window.ui:28
+#: data/resources/ui/preferences_window.blp:22
 msgid "Dowload images automatically"
 msgstr "Scarica automaticamente le immagini"
 
-#: data/resources/ui/preferences_window.ui:42
+#: data/resources/ui/preferences_window.blp:35
 msgid "Dowload videos automatically"
 msgstr "Scarica automaticamente i video"
 
-#: data/resources/ui/preferences_window.ui:56
+#: data/resources/ui/preferences_window.blp:48
 msgid "Dowload files automatically"
 msgstr "Scarica automaticamente i file"
 
-#: data/resources/ui/preferences_window.ui:73
+#: data/resources/ui/preferences_window.blp:61
+#, fuzzy
+msgid "Dowload voice messages automatically"
+msgstr "Scarica automaticamente le immagini"
+
+#: data/resources/ui/preferences_window.blp:75
 msgid "Notifications"
 msgstr "Notifiche"
 
-#: data/resources/ui/preferences_window.ui:74
+#: data/resources/ui/preferences_window.blp:76
 #, fuzzy
 msgid "Notifications for new messages."
 msgstr "Carica altri messaggi"
 
-#: data/resources/ui/preferences_window.ui:77
-#: data/de.schmidhuberj.Flare.gschema.xml:37
+#: data/resources/ui/preferences_window.blp:79
+#: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
 msgstr "Invia notifiche"
 
-#: data/resources/ui/preferences_window.ui:91 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:92 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr ""
 
-#: data/resources/ui/preferences_window.ui:109
+#: data/resources/ui/preferences_window.blp:108
 msgid "Other"
 msgstr ""
 
-#: data/resources/ui/preferences_window.ui:112
+#: data/resources/ui/preferences_window.blp:111
 msgid "Selectable Message Text"
 msgstr ""
 
-#: data/resources/ui/preferences_window.ui:113
+#: data/resources/ui/preferences_window.blp:112
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Generale"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
 msgstr "Mostra le scorciatoie"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
 msgstr "Vai alle impostazioni"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
 msgstr "Vai alla pagina di informazioni"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
 msgstr "Apri il menù"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:46
+#: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
 msgstr "Canali"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
 msgstr "Vai al canale 1...9"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
 msgstr "Seleziona nei canali"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
 msgstr "Carica l'allegato"
 
-#: data/resources/ui/shortcuts.ui:67
+#: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "Focalizza la casella di immissione del testo"
 
-#: data/resources/ui/shortcuts.ui:73
+#: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Carica altri messaggi"
 
-#: data/resources/ui/window.ui:36
+#: data/resources/ui/window.blp:30
 msgctxt "accessibility"
 msgid "Add Conversation"
 msgstr ""
 
-#: data/resources/ui/window.ui:46 data/resources/ui/window.ui:117
+#: data/resources/ui/window.blp:41 data/resources/ui/window.blp:94
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Menù"
 
-#: data/resources/ui/window.ui:148
+#: data/resources/ui/window.blp:114
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: data/resources/ui/window.ui:160
+#: data/resources/ui/window.blp:129
 msgid "Keybindings"
 msgstr "Scorciatoie"
 
-#: data/resources/ui/window.ui:164
+#: data/resources/ui/window.blp:134
 msgid "About"
 msgstr "Informazioni"
 
-#: src/backend/channel.rs:505
+#: src/backend/channel.rs:558
 msgid "Note to self"
 msgstr "Nota per me"
 
-#: src/backend/manager.rs:378
+#: src/backend/manager.rs:384
 msgid "You"
 msgstr "Tu"
 
@@ -404,19 +413,26 @@ msgstr ""
 msgid "Is busy."
 msgstr ""
 
-#: src/backend/message/text_message.rs:294
+#: src/backend/message/text_message.rs:365
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Ha inviato un'immagine"
 msgstr[1] "Ha inviato {} immagini"
 
-#: src/backend/message/text_message.rs:297
+#: src/backend/message/text_message.rs:368
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Ha inviato un video"
 msgstr[1] "Ha inviato {} video"
 
-#: src/backend/message/text_message.rs:300
+#: src/backend/message/text_message.rs:372
+#, fuzzy
+msgid "Sent a voice message"
+msgid_plural "Sent {} voice messages"
+msgstr[0] "Ha inviato un'immagine"
+msgstr[1] "Ha inviato {} immagini"
+
+#: src/backend/message/text_message.rs:378
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Ha inviato un file"
@@ -520,6 +536,10 @@ msgstr "%d/%m/%Y %H:%M"
 msgid "Flare"
 msgstr ""
 
+#: data/de.schmidhuberj.Flare.desktop.in.in:6
+msgid "Signal GTK Client"
+msgstr ""
+
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "An unofficial Signal GTK client"
@@ -594,7 +614,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:397
+#: data/de.schmidhuberj.Flare.metainfo.xml:432
 #, fuzzy
 msgid "Overview of the application"
 msgstr "Una parte dell'applicazione si è arrestata in modo anomalo."
@@ -626,16 +646,23 @@ msgid "Automatically download videos"
 msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
+msgid "Automatically download voice messages"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.gschema.xml:41
+#: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.gschema.xml:46
+#: data/de.schmidhuberj.Flare.gschema.xml:50
 msgid "Can messages be selected"
 msgstr ""
+
+#~ msgid "React"
+#~ msgstr "Reagisci"
 
 #~ msgid "Load more"
 #~ msgstr "Carica di più"
