@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-25 19:11+0200\n"
-"PO-Revision-Date: 2023-04-05 19:52+0000\n"
+"PO-Revision-Date: 2023-07-27 06:07+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -36,9 +36,8 @@ msgid "Load file"
 msgstr "Загрузить файл"
 
 #: data/resources/ui/attachment.blp:44
-#, fuzzy
 msgid "Load voice message"
-msgstr "Загрузить больше сообщений"
+msgstr "Загрузить голосовое сообщение"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:143
 msgid "Channel Information"
@@ -47,11 +46,11 @@ msgstr "Информация о канале"
 #: data/resources/ui/channel_info_dialog.blp:28
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Сбросить сеанс"
 
 #: data/resources/ui/channel_info_dialog.blp:31
 msgid "Reset Session"
-msgstr ""
+msgstr "Сбросить сеанс"
 
 #: data/resources/ui/channel_info_dialog.blp:40
 #: data/resources/ui/error_dialog.blp:43
@@ -74,7 +73,7 @@ msgstr "Поиск"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Канал не выбран"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
@@ -113,12 +112,12 @@ msgstr "Добавить вложение"
 #: data/resources/ui/channel_messages.blp:172
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Вставить эмодзи"
 
 #: data/resources/ui/channel_messages.blp:175
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Вставить эмодзи"
 
 #: data/resources/ui/channel_messages.blp:182
 msgctxt "accessibility"
@@ -197,7 +196,7 @@ msgstr "Пожалуйста, сообщите об этой ошибке."
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "Пожаловаться"
 
 #: data/resources/ui/link_window.blp:6
 msgid "Link Device"
@@ -232,10 +231,9 @@ msgstr "Копировать"
 
 #: data/resources/ui/message_item.blp:36
 msgid "Save as…"
-msgstr ""
+msgstr "Сохранить как…"
 
 #: data/resources/ui/message_item.blp:44
-#, fuzzy
 msgid "Open with…"
 msgstr "Открыть с помощью…"
 
@@ -272,9 +270,8 @@ msgid "Dowload files automatically"
 msgstr "Загружать файлы автоматически"
 
 #: data/resources/ui/preferences_window.blp:61
-#, fuzzy
 msgid "Dowload voice messages automatically"
-msgstr "Загружать изображения автоматически"
+msgstr "Загружать голосовые сообщения автоматически"
 
 #: data/resources/ui/preferences_window.blp:75
 msgid "Notifications"
@@ -334,7 +331,7 @@ msgstr "Открыть меню"
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Закрыть окно"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
@@ -369,7 +366,7 @@ msgstr "Загрузить больше сообщений"
 #: data/resources/ui/window.blp:30
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Добавить беседу"
 
 #: data/resources/ui/window.blp:41 data/resources/ui/window.blp:94
 msgctxt "accessibility"
@@ -425,11 +422,10 @@ msgstr[0] "Отправлено видео"
 msgstr[1] "Отправлено {} видео"
 
 #: src/backend/message/text_message.rs:372
-#, fuzzy
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] "Отправить изображение"
-msgstr[1] "Отправить {} изображений"
+msgstr[0] "Отправил голосовое сообщение"
+msgstr[1] "Отправил {} голосовых сообщений"
 
 #: src/backend/message/text_message.rs:378
 msgid "Sent a file"
@@ -536,9 +532,8 @@ msgid "Flare"
 msgstr "Flare"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
-#, fuzzy
 msgid "Signal GTK Client"
-msgstr "Неофициальный GTK клиент Signal"
+msgstr "GTK клиент Signal"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
@@ -594,7 +589,7 @@ msgstr "Зашифрованное хранилище"
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:60
 msgid "Notifications, optionally in the background"
-msgstr ""
+msgstr "Уведомления, опционально в фоновом режиме"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:65
@@ -602,6 +597,8 @@ msgid ""
 "More features are planned, blocked or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
+"Другие возможности планируются, блокируются или не планируются. Более "
+"подробную информацию о них можно найти в README."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:69
@@ -650,9 +647,8 @@ msgid "Automatically download videos"
 msgstr "Автоматически загружать видео"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
-#, fuzzy
 msgid "Automatically download voice messages"
-msgstr "Автоматически загружать изображения"
+msgstr "Автоматически загружать голосовые сообщения"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
