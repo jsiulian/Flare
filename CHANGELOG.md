@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - General UI fixes.
 
+### Chores
+
+- Update all dependencies. This especially includes presage/libsignal-service-rs backends becoming post-quantum secure.
+
 ## [0.9.0] - 2023-07-10
 
 ### Changed

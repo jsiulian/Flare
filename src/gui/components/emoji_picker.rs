@@ -15,6 +15,12 @@ impl EmojiPicker {
     }
 }
 
+impl Default for EmojiPicker {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 pub mod imp {
 
     use glib::subclass::Signal;

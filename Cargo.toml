@@ -13,38 +13,37 @@ opt-level = 3
 opt-level = 3
 
 [dependencies]
-gtk = { version = "0.6.2", package = "gtk4", features = ["v4_10"]}
-gdk = { version = "0.6.2", package = "gdk4" }
-libadwaita = { version = "0.3.1", features = ["v1_3"]}
+gtk = { version = "0.6.6", package = "gtk4", features = ["v4_10"]}
+gdk = { version = "0.6.3", package = "gdk4" }
+libadwaita = { version = "0.4.4", features = ["v1_3"]}
 ashpd = { version = "0.4.0", features = ["gtk4"]}
-zbus = "3.10.0"
+zbus = "3.14.1"
 
 gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
  
-futures = "0.3.26"
-tokio = { version = "1.25.0", features = ["rt", "macros", "rt-multi-thread", "time"] }
-async-recursion = "1.0.2"
-regex = "1.7.0"
+futures = "0.3.28"
+tokio = { version = "1.29.1", features = ["rt", "macros", "rt-multi-thread", "time"] }
+regex = "1.9.1"
 lazy_static = "1.4.0"
 
-presage = { git = "https://github.com/Schmiddiii/presage.git", rev = "c1a246e1ac5181c34e83d9f838da154ca3160b5c" }
-presage-store-sled = { git = "https://github.com/Schmiddiii/presage.git", rev = "c1a246e1ac5181c34e83d9f838da154ca3160b5c" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "a2e871a" }
+presage = { git = "https://github.com/whisperfish/presage", rev = "9337c5c" }
+presage-store-sled = { git = "https://github.com/whisperfish/presage", rev = "9337c5c" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "3c65765"  }
 
-async-trait = "0.1.64"
+async-trait = "0.1.72"
 sled = "0.34.7"
-oo7 = { version = "0.1.0", default-features = false, features = ["native_crypto", "async-std"] }
+oo7 = { version = "0.1.2", default-features = false, features = ["native_crypto", "async-std"] }
 rand = "0.8.5"
-zeroize = "1.5.7"
+zeroize = "1.6.0"
 hex = "0.4.3"
 serde = "1.0"
-serde_json = "1.0.93"
-url = "2.3.1"
-once_cell = "1.17.1"
+serde_json = "1.0.103"
+url = "2.4.0"
+once_cell = "1.18.0"
 
-qrcode-generator = "4.1.7"
+qrcode-generator = "4.1.8"
 
-log = "0.4.17"
+log = "0.4.19"
 env_logger = "0.10.0"
 
 err-derive = "0.3.1"
