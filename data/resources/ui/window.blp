@@ -32,7 +32,7 @@ template $FlWindow : Adw.ApplicationWindow {
 
           tooltip-text: "Add Conversation";
           icon-name: "document-edit-symbolic";
-          active: bind-property channel_list.add-conversation-enabled bidirectional;
+          active: bind channel_list.add-conversation-enabled bidirectional;
         }
 
         [end]
@@ -55,7 +55,7 @@ template $FlWindow : Adw.ApplicationWindow {
 
           tooltip-text: "Search";
           icon-name: "system-search-symbolic";
-          active: bind-property channel_list.search-enabled no-sync-create;
+          active: bind channel_list.search-enabled no-sync-create;
           clicked => $handle_search_clicked() swapped;
         }
       }

@@ -90,7 +90,7 @@ template $FlPreferencesWindow : Adw.PreferencesWindow {
 
       Adw.ActionRow row_background {
         title: _("Watch for new messages while closed");
-        sensitive: bind-property switch_notifications.state;
+        sensitive: bind switch_notifications.state;
 
         Switch switch_background {
           accessibility {
