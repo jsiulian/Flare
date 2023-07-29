@@ -88,6 +88,20 @@ template $FlPreferencesWindow : Adw.PreferencesWindow {
         }
       }
 
+      Adw.ActionRow row_notifications_reactions {
+        title: _("Send notifications on reactions");
+        sensitive: bind switch_notifications.state;
+
+        Switch switch_notifications_reactions {
+          accessibility {
+            labelled-by: row_notifications_reactions;
+          }
+
+          valign: center;
+          halign: center;
+        }
+      }
+
       Adw.ActionRow row_background {
         title: _("Watch for new messages while closed");
         sensitive: bind switch_notifications.state;

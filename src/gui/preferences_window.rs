@@ -92,6 +92,8 @@ pub mod imp {
         #[template_child]
         switch_notifications: TemplateChild<gtk::Switch>,
         #[template_child]
+        switch_notifications_reactions: TemplateChild<gtk::Switch>,
+        #[template_child]
         switch_background: TemplateChild<gtk::Switch>,
 
         #[template_child]
@@ -143,6 +145,14 @@ pub mod imp {
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
             self.settings
+                .bind(
+                    "notify-reactions",
+                    &self.switch_notifications_reactions.get(),
+                    "active",
+                )
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
+            self.settings
                 .bind("run-in-background", &self.switch_background.get(), "active")
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
@@ -173,6 +183,7 @@ pub mod imp {
                 switch_download_voice_messages: TemplateChild::default(),
                 switch_download_files: TemplateChild::default(),
                 switch_notifications: TemplateChild::default(),
+                switch_notifications_reactions: TemplateChild::default(),
                 switch_background: TemplateChild::default(),
                 switch_messages_selectable: TemplateChild::default(),
             }

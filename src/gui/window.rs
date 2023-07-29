@@ -359,7 +359,7 @@ pub mod imp {
                     let window = LinkWindow::new(url, man, &obj);
                     window.present();
                     // After link, show all channels as most likely no channels have messages yet.
-                    obj.imp().channel_list.borrow().set_property("add-conversation-enabled", true);
+                    obj.imp().channel_list.set_property("add-conversation-enabled", true);
                     None
                 }));
 
