@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-25 19:11+0200\n"
+"POT-Creation-Date: 2023-07-29 17:32+0200\n"
 "PO-Revision-Date: 2023-06-11 16:50+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/"
@@ -290,19 +290,25 @@ msgstr "Yeni iletiler için bildirimler."
 msgid "Send notifications"
 msgstr "Bildirim gönder"
 
-#: data/resources/ui/preferences_window.blp:92 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:92
+#, fuzzy
+msgid "Send notifications on reactions"
+msgstr "Bildirim gönder"
+
+#: data/resources/ui/preferences_window.blp:106
+#: src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Kapalıyken yeni iletileri izle"
 
-#: data/resources/ui/preferences_window.blp:108
+#: data/resources/ui/preferences_window.blp:122
 msgid "Other"
 msgstr "Diğer"
 
-#: data/resources/ui/preferences_window.blp:111
+#: data/resources/ui/preferences_window.blp:125
 msgid "Selectable Message Text"
 msgstr "Seçilebilir İleti Metni"
 
-#: data/resources/ui/preferences_window.blp:112
+#: data/resources/ui/preferences_window.blp:126
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Seçilebilir metin, dokunmatik ekranlarda kaydırma hareketlerine engel "
@@ -390,7 +396,7 @@ msgstr "Kısayollar"
 msgid "About"
 msgstr "Hakkında"
 
-#: src/backend/channel.rs:558
+#: src/backend/channel.rs:564
 msgid "Note to self"
 msgstr "Kendime not"
 
@@ -413,6 +419,18 @@ msgstr "Kapatıldı."
 #: src/backend/message/call_message.rs:118
 msgid "Is busy."
 msgstr "meşgul."
+
+#. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
+#: src/backend/message/reaction_message.rs:70
+#, fuzzy
+msgid "{sender} reacted {emoji} to a message."
+msgstr "İletiye tepki ver"
+
+#. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
+#: src/backend/message/reaction_message.rs:76
+#, fuzzy
+msgid "Reacted {emoji} to a message."
+msgstr "İletiye tepki ver"
 
 #: src/backend/message/text_message.rs:365
 msgid "Sent an image"
@@ -663,7 +681,11 @@ msgstr "Dosyaları kendiliğinden indir"
 msgid "Run in background when closed"
 msgstr "Kapatıldığında arka planda çalış"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:50
+#: data/de.schmidhuberj.Flare.gschema.xml:49
+msgid "Send notifications when retrieving reactions"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
 msgstr "Mesajlar seçilebilir mi?"
 

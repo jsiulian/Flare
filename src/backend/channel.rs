@@ -4,7 +4,10 @@ use std::{
     hash::{Hash, Hasher},
 };
 
-use gdk::{glib::clone, prelude::ObjectExt};
+use gdk::{
+    glib::clone,
+    prelude::{ObjectExt, SettingsExt},
+};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Cast, Object};
 use gtk::{gdk, gio, glib};
@@ -327,7 +330,6 @@ impl Channel {
         message: Message,
     ) -> Result<(), gtk::glib::error::BoolError> {
         log::trace!("Adding new message to channel");
-
         self.do_new_message(&message).await?;
         if let Some(message) = message.dynamic_cast_ref::<DisplayMessage>() {
             self.imp().timeline.borrow().append(
@@ -340,6 +342,10 @@ impl Channel {
             self.notify("last-message");
             message.send_notification();
             self.emit_by_name::<()>("message", &[&message]);
+        } else if let Some(message) = message.dynamic_cast_ref::<ReactionMessage>() {
+            if self.manager().settings().boolean("notify-reactions") {
+                message.send_notification();
+            }
         } else {
             log::trace!("Channel skip adding empty message");
         }

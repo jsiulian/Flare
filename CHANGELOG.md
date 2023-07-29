@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Notifications on reactions received (configurable).
+
 ### Changed
 
 - Text of the quote in the reply message is now truncated to 2 lines.

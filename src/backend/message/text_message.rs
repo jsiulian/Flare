@@ -114,7 +114,7 @@ impl TextMessage {
     }
 
     pub fn set_quote(&self, msg: &TextMessage) {
-        if let Some(mut data) = self.internal_data_mut().as_mut() {
+        if let Some(data) = self.internal_data_mut().as_mut() {
             let sender = msg.sender().address();
             data.quote = Some(Quote {
                 id: Some(msg.timestamp()),

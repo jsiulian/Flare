@@ -286,19 +286,25 @@ msgstr "Уведомления для новых сообщений."
 msgid "Send notifications"
 msgstr "Отправлять уведомления"
 
-#: data/resources/ui/preferences_window.blp:92 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:92
+#, fuzzy
+msgid "Send notifications on reactions"
+msgstr "Отправлять уведомления"
+
+#: data/resources/ui/preferences_window.blp:106
+#: src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Следить за новыми сообщениями в закрытом состоянии"
 
-#: data/resources/ui/preferences_window.blp:108
+#: data/resources/ui/preferences_window.blp:122
 msgid "Other"
 msgstr "Другое"
 
-#: data/resources/ui/preferences_window.blp:111
+#: data/resources/ui/preferences_window.blp:125
 msgid "Selectable Message Text"
 msgstr "Выбираемый текст сообщения"
 
-#: data/resources/ui/preferences_window.blp:112
+#: data/resources/ui/preferences_window.blp:126
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Выделяемый текст может мешать жестам пролистывания на сенсорных экранах."
@@ -385,7 +391,7 @@ msgstr "Комбинации клавиш"
 msgid "About"
 msgstr "О Приложении"
 
-#: src/backend/channel.rs:558
+#: src/backend/channel.rs:564
 msgid "Note to self"
 msgstr "Заметка для себя"
 
@@ -408,6 +414,18 @@ msgstr "На проводе."
 #: src/backend/message/call_message.rs:118
 msgid "Is busy."
 msgstr "Занят."
+
+#. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
+#: src/backend/message/reaction_message.rs:70
+#, fuzzy
+msgid "{sender} reacted {emoji} to a message."
+msgstr "Реакция на сообщение"
+
+#. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
+#: src/backend/message/reaction_message.rs:76
+#, fuzzy
+msgid "Reacted {emoji} to a message."
+msgstr "Реакция на сообщение"
 
 #: src/backend/message/text_message.rs:365
 msgid "Sent an image"
@@ -658,7 +676,11 @@ msgstr "Автоматически загружать файлы"
 msgid "Run in background when closed"
 msgstr "Работать в фоновом режиме при закрытии"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:50
+#: data/de.schmidhuberj.Flare.gschema.xml:49
+msgid "Send notifications when retrieving reactions"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
 msgstr "Можно ли выбирать сообщения"
 

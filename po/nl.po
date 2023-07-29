@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-25 19:11+0200\n"
+"POT-Creation-Date: 2023-07-29 17:32+0200\n"
 "PO-Revision-Date: 2023-07-08 12:53+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
@@ -289,19 +289,25 @@ msgstr "Toon meldingen bij nieuwe berichten"
 msgid "Send notifications"
 msgstr "Leesbewijzen"
 
-#: data/resources/ui/preferences_window.blp:92 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:92
+#, fuzzy
+msgid "Send notifications on reactions"
+msgstr "Leesbewijzen"
+
+#: data/resources/ui/preferences_window.blp:106
+#: src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Meldingen tonen als Flare op de achtergrond wordt uitgevoerd"
 
-#: data/resources/ui/preferences_window.blp:108
+#: data/resources/ui/preferences_window.blp:122
 msgid "Other"
 msgstr "Overig"
 
-#: data/resources/ui/preferences_window.blp:111
+#: data/resources/ui/preferences_window.blp:125
 msgid "Selectable Message Text"
 msgstr "Selecteerbare berichttekst"
 
-#: data/resources/ui/preferences_window.blp:112
+#: data/resources/ui/preferences_window.blp:126
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Selecteerbare tekst kan interfereren met veegbewegingen op aanraakschermen"
@@ -388,7 +394,7 @@ msgstr "Sneltoetsen"
 msgid "About"
 msgstr "Over"
 
-#: src/backend/channel.rs:558
+#: src/backend/channel.rs:564
 msgid "Note to self"
 msgstr "Herinnering aan mezelf"
 
@@ -411,6 +417,18 @@ msgstr "Gesprek beëindigd"
 #: src/backend/message/call_message.rs:118
 msgid "Is busy."
 msgstr "Is bezig"
+
+#. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
+#: src/backend/message/reaction_message.rs:70
+#, fuzzy
+msgid "{sender} reacted {emoji} to a message."
+msgstr "Reageren op berichten"
+
+#. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
+#: src/backend/message/reaction_message.rs:76
+#, fuzzy
+msgid "Reacted {emoji} to a message."
+msgstr "Reageren op berichten"
 
 #: src/backend/message/text_message.rs:365
 msgid "Sent an image"
@@ -660,7 +678,11 @@ msgstr "Bestanden automatisch downloaden"
 msgid "Run in background when closed"
 msgstr "Op achtergrond uitvoeren wanneer gesloten"
 
-#: data/de.schmidhuberj.Flare.gschema.xml:50
+#: data/de.schmidhuberj.Flare.gschema.xml:49
+msgid "Send notifications when retrieving reactions"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
 msgstr "Of berichten geselecteerd kunnen worden"
 
