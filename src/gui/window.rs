@@ -66,7 +66,6 @@ impl Window {
 }
 
 pub mod imp {
-    use std::borrow::Borrow;
     use std::{cell::RefCell, env, path::PathBuf};
 
     use gdk::glib::BindingFlags;
