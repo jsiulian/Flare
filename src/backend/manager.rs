@@ -170,6 +170,32 @@ impl Manager {
         Ok(())
     }
 
+    pub async fn submit_recaptcha_challenge<S: AsRef<str>>(
+        &self,
+        token: S,
+        captcha: S,
+    ) -> Result<(), ApplicationError> {
+        let token = token.as_ref().to_owned();
+        let mut captcha = captcha.as_ref().to_owned();
+        if captcha.starts_with("signalcaptcha://") {
+            log::trace!("Captcha is the full link. Remove unneeded thigs.");
+            if let Some((_, c)) = captcha.split_once(".challenge.") {
+                captcha = c.to_owned();
+            } else {
+                log::warn!("Splitting the captcha was not successfull. Assuming it is fine");
+            }
+        }
+        crate::trace!(
+            "Submitting recaptcha challenge with token {} and captcha {}",
+            token,
+            captcha
+        );
+        self.internal()
+            .submit_recaptcha_challenge(token, captcha)
+            .await?;
+        Ok(())
+    }
+
     pub async fn message(
         &self,
         thread: &Thread,

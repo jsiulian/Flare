@@ -1,0 +1,26 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.MessageDialog dialog {
+  heading: _("Submit Captcha");
+  // Translators: Do not translate tags around "on this website".
+  body: _("Submit a Captcha challenge. The token can be obtained from the error message that was displayed from Flare. The captcha must be filled out <a href=\"https://signalcaptchas.org/challenge/generate.html\">on this website</a> and the link to open Signal must be pasted to the corresponding entry. Note that the captcha is only valid for about one minute.");
+  body-use-markup: true;
+  extra-child:
+    ListBox {
+      styles [ "boxed-list" ] 
+      Adw.EntryRow entry_token {
+        title: _("Token");
+      }
+      Adw.EntryRow entry_captcha {
+        title: _("Captcha");
+      }
+    };
+  default-response: "close";
+  close-response: "close";
+
+  responses [
+    close: _("Close"),
+    submit: _("Submit") suggested,
+  ]
+}

@@ -21,6 +21,7 @@ type Error = presage::Error<presage_store_sled::SledStoreError>;
 #[allow(clippy::large_enum_variant)]
 enum Command {
     Uuid(oneshot::Sender<Uuid>),
+    SubmitRecaptchaChallenge(String, String, oneshot::Sender<Result<(), Error>>),
     RetrieveProfileByUuid(Uuid, ProfileKey, oneshot::Sender<Result<Profile, Error>>),
     RetrieveProfile(oneshot::Sender<Result<Profile, Error>>),
     GetGroupV2(Vec<u8>, oneshot::Sender<Result<Option<Group>, Error>>),
@@ -147,6 +148,19 @@ impl ManagerThread {
 impl ManagerThread {
     pub fn uuid(&self) -> Uuid {
         self.uuid
+    }
+
+    pub async fn submit_recaptcha_challenge(
+        &self,
+        token: String,
+        captcha: String,
+    ) -> Result<(), Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::SubmitRecaptchaChallenge(token, captcha, sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
     }
 
     pub async fn retrieve_profile_by_uuid(
@@ -351,6 +365,9 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
         // XXX: Uuid should not be used anymore.
         Command::Uuid(callback) => callback
             .send(manager.state().service_ids.aci)
+            .expect("Callback sending failed"),
+        Command::SubmitRecaptchaChallenge(token, captcha, callback) => callback
+            .send(manager.submit_recaptcha_challenge(&token, &captcha).await)
             .expect("Callback sending failed"),
         Command::RetrieveProfileByUuid(uuid, profile_key, callback) => callback
             .send(manager.retrieve_profile_by_uuid(uuid, profile_key).await)
