@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Notifications on reactions received (configurable).
+- Setting to turn off sending a message when the enter-key is pressed. 
 
 ### Changed
 
