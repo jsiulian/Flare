@@ -76,6 +76,7 @@ pub mod imp {
     };
     use gtk::{gio, glib};
     use gtk::{prelude::*, subclass::prelude::*, Builder, CompositeTemplate, ShortcutsWindow};
+    use libadwaita::EntryRow;
     use libadwaita::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
 
     use crate::backend::Channel;
@@ -194,6 +195,38 @@ pub mod imp {
                 }));
                 dialog.present();
             }));
+            log::trace!("Setting up submit-captcha action");
+            let action_submit_captcha = SimpleAction::new("submit-captcha", None);
+            action_submit_captcha.connect_activate(clone!(@weak obj => move |_, _| {
+                log::trace!("User requested to submit a captcha the device");
+                let builder = Builder::from_resource("/ui/submit_captcha_dialog.ui");
+                let dialog: MessageDialog = builder
+                    .object("dialog")
+                    .expect("submit_captcha_dialog.ui to have at least one object dialog");
+                let entry_token: EntryRow = builder
+                    .object("entry_token")
+                    .expect("submit_captcha_dialog.ui to have at least one object entry_token");
+                let entry_captcha: EntryRow = builder
+                    .object("entry_captcha")
+                    .expect("submit_captcha_dialog.ui to have at least one object entry_captcha");
+                dialog.set_transient_for(Some(&obj));
+                dialog.connect_response(None, clone!(@weak obj, @weak entry_token, @weak entry_captcha => move |_dialog, response| {
+                    if response == "submit" {
+                        log::info!("Unlinking device");
+                        if let Some(man) = obj.imp().manager.borrow().as_ref() {
+                            let token = entry_token.text();
+                            let captcha = entry_captcha.text();
+                            gspawn!(clone!(@weak man => async move {
+                                if let Err(e) = man.submit_recaptcha_challenge(&token, &captcha).await {
+                                    // TODO: Show error dialog?
+                                    log::error!("Failed to submit recaptcha: {}", e);
+                                }
+                            }));
+                        }
+                    }
+                }));
+                dialog.present();
+            }));
 
             let action_show_help_overlay = SimpleAction::new("show-help-overlay", None);
             action_show_help_overlay.connect_activate(|_, _| {
@@ -237,6 +270,7 @@ pub mod imp {
             actions.add_action(&action_settings);
             actions.add_action(&action_clear_messages);
             actions.add_action(&action_unlink);
+            actions.add_action(&action_submit_captcha);
             actions.add_action(&action_show_help_overlay);
             actions.add_action(&action_about);
             actions.add_action(&action_channel_information);

@@ -17,6 +17,7 @@ data/resources/ui/preferences_window.blp
 data/resources/ui/shortcuts.blp
 data/resources/ui/text_entry.blp
 data/resources/ui/window.blp
+data/resources/ui/submit_captcha_dialog.blp
 
 src/backend/attachment.rs
 src/backend/channel.rs
