@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-29 17:32+0200\n"
+"POT-Creation-Date: 2023-08-02 15:31+0200\n"
 "PO-Revision-Date: 2023-07-01 20:53+0000\n"
 "Last-Translator: \"J. Lavoie\" <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
@@ -39,7 +39,7 @@ msgstr "Charger le fichier"
 msgid "Load voice message"
 msgstr "Charger plus de messages"
 
-#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:143
+#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
 msgstr "Informations sur le canal"
 
@@ -53,7 +53,8 @@ msgid "Reset Session"
 msgstr "Réinitialiser la session"
 
 #: data/resources/ui/channel_info_dialog.blp:40
-#: data/resources/ui/error_dialog.blp:43
+#: data/resources/ui/error_dialog.blp:44
+#: data/resources/ui/submit_captcha_dialog.blp:23
 msgid "Close"
 msgstr "Fermer"
 
@@ -190,11 +191,11 @@ msgstr "Délier mais conserver les messages"
 msgid "Error"
 msgstr "Erreur"
 
-#: data/resources/ui/error_dialog.blp:25
+#: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
 msgstr "Pensez à signaler cette erreur."
 
-#: data/resources/ui/error_dialog.blp:44
+#: data/resources/ui/error_dialog.blp:45
 msgid "Report"
 msgstr ""
 
@@ -298,17 +299,34 @@ msgid "Watch for new messages while closed"
 msgstr "Surveiller les nouveaux messages pendant la fermeture"
 
 #: data/resources/ui/preferences_window.blp:122
-msgid "Other"
-msgstr "Autre"
+msgid "Mobile Compatibility"
+msgstr ""
 
-#: data/resources/ui/preferences_window.blp:125
+#: data/resources/ui/preferences_window.blp:123
+msgid ""
+"These options may want to be changed for a better experience on touch- and "
+"mobile devices. The default values of those preferences are chosen to be "
+"useful on desktop devices."
+msgstr ""
+
+#: data/resources/ui/preferences_window.blp:126
 msgid "Selectable Message Text"
 msgstr "Texte des messages sélectionnable"
 
-#: data/resources/ui/preferences_window.blp:126
+#: data/resources/ui/preferences_window.blp:127
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "La sélection peut interférer avec les gestes de balayage sur écrans tactiles."
+
+#: data/resources/ui/preferences_window.blp:140
+msgid "Press \"Enter\" to send message"
+msgstr ""
+
+#: data/resources/ui/preferences_window.blp:141
+msgid ""
+"It may not be possible to send messages with newlines on touch keyboards not "
+"allowing \"Control + Enter\""
+msgstr ""
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -385,18 +403,45 @@ msgid "Settings"
 msgstr "Paramètres"
 
 #: data/resources/ui/window.blp:129
+#: data/resources/ui/submit_captcha_dialog.blp:5
+msgid "Submit Captcha"
+msgstr ""
+
+#: data/resources/ui/window.blp:134
 msgid "Keybindings"
 msgstr "Raccourcis clavier"
 
-#: data/resources/ui/window.blp:134
+#: data/resources/ui/window.blp:139
 msgid "About"
 msgstr "À propos"
+
+#. Translators: Do not translate tags around "on this website".
+#: data/resources/ui/submit_captcha_dialog.blp:7
+msgid ""
+"Submit a Captcha challenge. The token can be obtained from the error message "
+"that was displayed from Flare. The captcha must be filled out <a "
+"href=\"https://signalcaptchas.org/challenge/generate.html\">on this website</"
+"a> and the link to open Signal must be pasted to the corresponding entry. "
+"Note that the captcha is only valid for about one minute."
+msgstr ""
+
+#: data/resources/ui/submit_captcha_dialog.blp:13
+msgid "Token"
+msgstr ""
+
+#: data/resources/ui/submit_captcha_dialog.blp:16
+msgid "Captcha"
+msgstr ""
+
+#: data/resources/ui/submit_captcha_dialog.blp:24
+msgid "Submit"
+msgstr ""
 
 #: src/backend/channel.rs:564
 msgid "Note to self"
 msgstr "Note à moi-même"
 
-#: src/backend/manager.rs:384
+#: src/backend/manager.rs:410
 msgid "You"
 msgstr "Vous"
 
@@ -688,6 +733,13 @@ msgstr ""
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
 msgstr "Sélection des messages possible"
+
+#: data/de.schmidhuberj.Flare.gschema.xml:58
+msgid "Send a message when the Enter-key is pressed"
+msgstr ""
+
+#~ msgid "Other"
+#~ msgstr "Autre"
 
 #~ msgctxt "accessibility"
 #~ msgid "Download"
