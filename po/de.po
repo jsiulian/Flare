@@ -39,11 +39,11 @@ msgid "Load file"
 msgstr "Datei laden"
 
 #: data/resources/ui/attachment.blp:44
-#, fuzzy
 msgid "Load voice message"
-msgstr "Weitere Nachrichten laden"
+msgstr "Sprachnachricht laden"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
+#: data/resources/ui/window.blp:143
 msgid "Channel Information"
 msgstr "Kanalinformationen"
 
@@ -59,6 +59,7 @@ msgstr "Setze Verbindung zurück"
 #: data/resources/ui/channel_info_dialog.blp:40
 #: data/resources/ui/error_dialog.blp:44
 #: data/resources/ui/submit_captcha_dialog.blp:23
+#: data/resources/ui/error_dialog.blp:43
 msgid "Close"
 msgstr "Schließen"
 
@@ -196,13 +197,13 @@ msgstr "Entkoppeln, aber Nachrichten behalten"
 msgid "Error"
 msgstr "Fehler"
 
-#: data/resources/ui/error_dialog.blp:26
+#: data/resources/ui/error_dialog.blp:26 data/resources/ui/error_dialog.blp:25
 msgid "Please consider reporting this error."
 msgstr "Bitte erwäge, diesen Fehler zu melden."
 
-#: data/resources/ui/error_dialog.blp:45
+#: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "Melden"
 
 #: data/resources/ui/link_window.blp:6
 msgid "Link Device"
@@ -235,10 +236,9 @@ msgstr "Kopieren"
 
 #: data/resources/ui/message_item.blp:36
 msgid "Save as…"
-msgstr ""
+msgstr "Speichern als…"
 
 #: data/resources/ui/message_item.blp:44
-#, fuzzy
 msgid "Open with…"
 msgstr "Öffnen mit…"
 
@@ -276,9 +276,8 @@ msgid "Dowload files automatically"
 msgstr "Dateien automatisch herunterladen"
 
 #: data/resources/ui/preferences_window.blp:61
-#, fuzzy
 msgid "Dowload voice messages automatically"
-msgstr "Bilder automatisch herunterladen"
+msgstr "Sprachnachrichten automatisch herunterladen"
 
 #: data/resources/ui/preferences_window.blp:75
 msgid "Notifications"
@@ -294,9 +293,8 @@ msgid "Send notifications"
 msgstr "Benachrichtigungen senden"
 
 #: data/resources/ui/preferences_window.blp:92
-#, fuzzy
 msgid "Send notifications on reactions"
-msgstr "Benachrichtigungen senden"
+msgstr "Benachrichtigungen zu Reaktionen senden"
 
 #: data/resources/ui/preferences_window.blp:106
 #: src/gui/preferences_window.rs:29
@@ -315,10 +313,12 @@ msgid ""
 msgstr ""
 
 #: data/resources/ui/preferences_window.blp:126
+#: data/resources/ui/preferences_window.blp:125
 msgid "Selectable Message Text"
 msgstr "Auswählbarer Nachrichtentext"
 
 #: data/resources/ui/preferences_window.blp:127
+#: data/resources/ui/preferences_window.blp:126
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Auswählbarer Text kann mit Wischgesten auf Touchscreens Probleme bereiten."
@@ -412,11 +412,11 @@ msgstr "Einstellungen"
 msgid "Submit Captcha"
 msgstr ""
 
-#: data/resources/ui/window.blp:134
+#: data/resources/ui/window.blp:134 data/resources/ui/window.blp:129
 msgid "Keybindings"
 msgstr "Tastaturkürzel"
 
-#: data/resources/ui/window.blp:139
+#: data/resources/ui/window.blp:139 data/resources/ui/window.blp:134
 msgid "About"
 msgstr "Info"
 
@@ -424,10 +424,10 @@ msgstr "Info"
 #: data/resources/ui/submit_captcha_dialog.blp:7
 msgid ""
 "Submit a Captcha challenge. The token can be obtained from the error message "
-"that was displayed from Flare. The captcha must be filled out <a "
-"href=\"https://signalcaptchas.org/challenge/generate.html\">on this website</"
-"a> and the link to open Signal must be pasted to the corresponding entry. "
-"Note that the captcha is only valid for about one minute."
+"that was displayed from Flare. The captcha must be filled out <a href="
+"\"https://signalcaptchas.org/challenge/generate.html\">on this website</a> "
+"and the link to open Signal must be pasted to the corresponding entry. Note "
+"that the captcha is only valid for about one minute."
 msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
@@ -446,7 +446,7 @@ msgstr ""
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:410
+#: src/backend/manager.rs:410 src/backend/manager.rs:384
 msgid "You"
 msgstr "Du"
 
@@ -468,15 +468,13 @@ msgstr "Besetzt."
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:70
-#, fuzzy
 msgid "{sender} reacted {emoji} to a message."
-msgstr "Auf eine Nachricht reagieren"
+msgstr "{sender} hat {emoji} auf eine Nachricht reagiert."
 
 #. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:76
-#, fuzzy
 msgid "Reacted {emoji} to a message."
-msgstr "Auf eine Nachricht reagieren"
+msgstr "Reagierte {emoji} auf eine Nachricht."
 
 #: src/backend/message/text_message.rs:365
 msgid "Sent an image"
@@ -491,11 +489,10 @@ msgstr[0] "Hat ein Video gesendet"
 msgstr[1] "Hat {} Videos gesendet"
 
 #: src/backend/message/text_message.rs:372
-#, fuzzy
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] "Hat ein Bild gesendet"
-msgstr[1] "Hat {} Bilder gesendet"
+msgstr[0] "Hat eine Sprachnachricht gesendet"
+msgstr[1] "Hat {} Sprachnachrichten gesendet"
 
 #: src/backend/message/text_message.rs:378
 msgid "Sent a file"
@@ -716,9 +713,8 @@ msgid "Automatically download videos"
 msgstr "Videos automatisch herunterladen"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
-#, fuzzy
 msgid "Automatically download voice messages"
-msgstr "Bilder automatisch herunterladen"
+msgstr "Sprachnachrichten automatisch herunterladen"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
@@ -730,7 +726,7 @@ msgstr "Nach dem Schließen im Hintergrund ausführen"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Benachrichtigungen senden beim Abrufen von Reaktionen"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
@@ -740,8 +736,9 @@ msgstr "Nachrichten können ausgewählt werden"
 msgid "Send a message when the Enter-key is pressed"
 msgstr ""
 
-#~ msgid "Other"
-#~ msgstr "Andere"
+#: data/resources/ui/preferences_window.blp:122
+msgid "Other"
+msgstr "Andere"
 
 #~ msgctxt "accessibility"
 #~ msgid "Download"
