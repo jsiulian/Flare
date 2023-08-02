@@ -1,5 +1,6 @@
+use gdk::gio::SettingsBindFlags;
 use gdk::glib::clone;
-use gdk::prelude::Cast;
+use gdk::prelude::{Cast, SettingsExtManual};
 use gdk::subclass::prelude::ObjectSubclassIsExt;
 use glib::ObjectExt;
 use gtk::traits::{AdjustmentExt, WidgetExt};
@@ -104,6 +105,18 @@ impl ChannelMessages {
                 s.load_if_screen_not_filled();
             }),
         );
+    }
+
+    fn setup_send_on_enter(&self) {
+        self.manager()
+            .settings()
+            .bind(
+                "send-on-enter",
+                &self.imp().text_entry.get(),
+                "send-on-enter",
+            )
+            .flags(SettingsBindFlags::GET)
+            .build();
     }
 
     fn scroll_down(&self) {
@@ -473,7 +486,11 @@ pub mod imp {
                     let man = value.get::<Option<Manager>>().expect(
                         "Property `manager` of `ChannelMessages` has to be of type `Manager`",
                     );
+                    let initialized = man.is_some();
                     self.manager.replace(man);
+                    if initialized {
+                        self.obj().setup_send_on_enter();
+                    }
                 }
                 "active-channel" => {
                     let chan = value.get::<Option<Channel>>().expect(

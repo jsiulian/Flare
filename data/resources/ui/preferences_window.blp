@@ -119,7 +119,8 @@ template $FlPreferencesWindow : Adw.PreferencesWindow {
     }
 
     Adw.PreferencesGroup {
-      title: _("Other");
+      title: _("Mobile Compatibility");
+      description: _("These options may want to be changed for a better experience on touch- and mobile devices. The default values of those preferences are chosen to be useful on desktop devices.");
 
       Adw.ActionRow row_messages_selectable {
         title: _("Selectable Message Text");
@@ -128,6 +129,20 @@ template $FlPreferencesWindow : Adw.PreferencesWindow {
         Switch switch_messages_selectable {
           accessibility {
             labelled-by: row_messages_selectable;
+          }
+
+          valign: center;
+          halign: center;
+        }
+      }
+
+      Adw.ActionRow row_send_on_enter {
+        title: _("Press \"Enter\" to send message");
+        subtitle: _("It may not be possible to send messages with newlines on touch keyboards not allowing \"Control + Enter\"");
+
+        Switch switch_send_on_enter {
+          accessibility {
+            labelled-by: row_send_on_enter;
           }
 
           valign: center;

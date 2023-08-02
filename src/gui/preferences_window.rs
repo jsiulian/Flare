@@ -98,6 +98,8 @@ pub mod imp {
 
         #[template_child]
         switch_messages_selectable: TemplateChild<gtk::Switch>,
+        #[template_child]
+        switch_send_on_enter: TemplateChild<gtk::Switch>,
 
         settings: Settings,
     }
@@ -165,6 +167,10 @@ pub mod imp {
                 )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
+            self.settings
+                .bind("send-on-enter", &self.switch_send_on_enter.get(), "active")
+                .flags(SettingsBindFlags::DEFAULT)
+                .build();
         }
     }
 
@@ -186,6 +192,7 @@ pub mod imp {
                 switch_notifications_reactions: TemplateChild::default(),
                 switch_background: TemplateChild::default(),
                 switch_messages_selectable: TemplateChild::default(),
+                switch_send_on_enter: TemplateChild::default(),
             }
         }
 

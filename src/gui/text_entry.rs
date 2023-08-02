@@ -1,3 +1,4 @@
+use gdk::prelude::ObjectExt;
 use glib::subclass::prelude::ObjectSubclassIsExt;
 use gtk::glib;
 use gtk::traits::TextBufferExt;
@@ -26,9 +27,15 @@ impl TextEntry {
     pub fn insert_emoji(&self) {
         self.imp().insert_emoji();
     }
+
+    pub fn send_on_enter(&self) -> bool {
+        self.property("send-on-enter")
+    }
 }
 
 pub mod imp {
+    use std::cell::Cell;
+
     use crate::gspawn;
     use gdk::prelude::ParamSpecBuilderExt;
     use glib::{
@@ -61,6 +68,8 @@ pub mod imp {
         pub(super) view: TemplateChild<TextView>,
         #[template_child]
         pub(super) buffer: TemplateChild<TextBuffer>,
+
+        send_on_enter: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -92,7 +101,7 @@ pub mod imp {
             let key_events = gtk::EventControllerKey::new();
             key_events
                 .connect_key_pressed(clone!(@weak obj => @default-return Inhibit(false), move |_, key, _, modifier| {
-                if !modifier.contains(gdk::ModifierType::SHIFT_MASK) && (key == gdk::Key::Return || key == gdk::Key::KP_Enter) {
+                if !modifier.contains(gdk::ModifierType::SHIFT_MASK) && (key == gdk::Key::Return || key == gdk::Key::KP_Enter) && obj.send_on_enter() {
                     obj.emit_by_name::<()>("activate", &[]);
                     Inhibit(true)
                 } else {
@@ -146,8 +155,12 @@ pub mod imp {
                 }));
         }
         fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> =
-                Lazy::new(|| vec![ParamSpecBoolean::builder("is-empty").read_only().build()]);
+            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
+                vec![
+                    ParamSpecBoolean::builder("is-empty").read_only().build(),
+                    ParamSpecBoolean::builder("send-on-enter").build(),
+                ]
+            });
             PROPERTIES.as_ref()
         }
 
@@ -157,12 +170,21 @@ pub mod imp {
                     let (start, end) = self.buffer.bounds();
                     (start == end).to_value()
                 }
+                "send-on-enter" => self.send_on_enter.get().to_value(),
                 _ => unimplemented!(),
             }
         }
 
-        fn set_property(&self, _id: usize, _value: &Value, _pspec: &ParamSpec) {
-            unimplemented!()
+        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
+            match pspec.name() {
+                "send-on-enter" => {
+                    let b = value
+                        .get::<bool>()
+                        .expect("Property `send-on-enter` of `TextEntry` has to be of type `bool`");
+                    self.send_on_enter.replace(b);
+                }
+                _ => unimplemented!(),
+            }
         }
 
         fn signals() -> &'static [Signal] {

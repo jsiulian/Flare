@@ -53,6 +53,10 @@
       <default>false</default>
       <summary>Can messages be selected</summary>
     </key>
+    <key name="send-on-enter" type="b">
+      <default>true</default>
+      <summary>Send a message when the Enter-key is pressed</summary>
+    </key>
   </schema>
 </schemalist>
 
