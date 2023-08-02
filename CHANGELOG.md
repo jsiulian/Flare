@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.1] - 2023-08-02
+
 ### Added
 
 - Notifications on reactions received (configurable).
@@ -390,7 +392,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.9.0...master
+[Unreleased]: https://gitlab.com/Schmiddiii/flare/-/compare/0.9.1...master
+[0.9.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.9.0...0.9.1
 [0.9.0]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.2...0.9.0
 [0.8.2]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.1...0.8.2
 [0.8.1]: https://gitlab.com/Schmiddiii/flare/-/compare/0.8.0...0.8.1
