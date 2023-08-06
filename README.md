@@ -7,7 +7,7 @@ An unofficial Signal GTK client.
 
 ## Screenshot
 
-![Overview](https://gitlab.com/Schmiddiii/flare/-/raw/master/data/screenshots/screenshot.png)
+![Overview](https://gitlab.com/schmiddi-on-mobile/flare/-/raw/master/data/screenshots/screenshot.png)
 
 ## Installation
 
@@ -28,7 +28,7 @@ An unofficial Signal GTK client.
   </tr>
   <tr>
     <td>Self Compile</td>
-    <td>See [Compilation](https://gitlab.com/Schmiddiii/flare/-/blob/master/CONTRIBUTING.md#compilation).</td>
+    <td>See [Compilation](https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/CONTRIBUTING.md#compilation).</td>
   </tr>
 </table>
 
@@ -40,7 +40,7 @@ If you would like sound or vibration for Flare's notifications, install [feedbac
 
 ## Features
 
-For a list of features to be added, see [the wiki](https://gitlab.com/Schmiddiii/flare/-/wikis/Feature-roadmap)
+For a list of features to be added, see [the wiki](https://gitlab.com/schmiddi-on-mobile/flare/-/wikis/Feature-roadmap)
 
 - Linking device
 - Sending a message
@@ -62,7 +62,7 @@ Flare can easily be translated for other languages, as it uses gettext. Please c
 
 ## Contributing
 
-This project is open to contributions. Please refer to [CONTRIBUTING.md](https://gitlab.com/Schmiddiii/flare/-/blob/master/CONTRIBUTING.md) for more information.
+This project is open to contributions. Please refer to [CONTRIBUTING.md](https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/CONTRIBUTING.md) for more information.
 
 ## Code of Conduct
 

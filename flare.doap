@@ -7,7 +7,7 @@
   <name xml:lang="en">Flare</name>
   <shortdesc xml:lang="en">An unofficial Signal GTK client</shortdesc>
   <homepage rdf:resource="https://apps.gnome.org" />
-  <bug-database rdf:resource="https://gitlab.com/Schmiddiii/flare/-/issues"/>
+  <bug-database rdf:resource="https://gitlab.com/schmiddi-on-mobile/flare/-/issues"/>
   <programming-language>Rust</programming-language>
   <platform>GTK 4</platform>
   <platform>Libadwaita</platform>

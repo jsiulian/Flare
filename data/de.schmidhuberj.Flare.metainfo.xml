@@ -14,12 +14,12 @@
   <translation type="gettext">flare</translation>
   <update_contact>flatpak@schmiddi.anonaddy.com</update_contact>
 
-  <url type="homepage">https://gitlab.com/Schmiddiii/flare</url>
-  <url type="bugtracker">https://gitlab.com/Schmiddiii/flare/-/issues</url>
+  <url type="homepage">https://gitlab.com/schmiddi-on-mobile/flare</url>
+  <url type="bugtracker">https://gitlab.com/schmiddi-on-mobile/flare/-/issues</url>
   <url type="translate">https://hosted.weblate.org/engage/flare/</url>
   <url type="contact">https://matrix.to/#/#flare-signal:matrix.org</url>
-  <url type="vcs-browser">https://gitlab.com/Schmiddiii/flare</url>
-  <url type="contribute">https://gitlab.com/Schmiddiii/flare/-/blob/master/CONTRIBUTING.md</url>
+  <url type="vcs-browser">https://gitlab.com/schmiddi-on-mobile/flare</url>
+  <url type="contribute">https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/CONTRIBUTING.md</url>
 
   <description>
     <!-- Translators: Description of Flare in metainfo. -->

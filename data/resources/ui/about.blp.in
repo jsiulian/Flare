@@ -6,9 +6,9 @@ Adw.AboutWindow about {
   application-name: "Flare";
   version: "@VERSION@";
   comments: "An unofficial Signal GTK client.";
-  issue-url: "https://gitlab.com/Schmiddiii/flare/-/issues";
+  issue-url: "https://gitlab.com/schmiddi-on-mobile/flare/-/issues";
   support-url: "https://matrix.to/#/%23flare-signal:matrix.org";
-  website: "https://gitlab.com/Schmiddiii/flare";
+  website: "https://gitlab.com/schmiddi-on-mobile/flare";
   developer-name: "Julian Schmidhuber";
   translator-credits: _("translator-credits");
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded

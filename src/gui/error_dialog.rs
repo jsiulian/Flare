@@ -55,7 +55,7 @@ pub mod imp {
         fn handle_response(&self, response: &str) {
             log::info!("Response: {}", response);
             if response == super::REPORT {
-                let launcher = UriLauncher::new("https://gitlab.com/Schmiddiii/flare/-/issues");
+                let launcher = UriLauncher::new("https://gitlab.com/schmiddi-on-mobile/flare/-/issues");
                 launcher.launch(
                     self.obj().transient_for().as_ref(),
                     None::<&gio::Cancellable>,
