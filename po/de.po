@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-02 15:31+0200\n"
-"PO-Revision-Date: 2023-05-29 08:43+0000\n"
-"Last-Translator: Julian Schmidhuber <gitlab@schmiddi.anonaddy.com>\n"
+"PO-Revision-Date: 2023-08-07 12:52+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -303,7 +303,7 @@ msgstr "Empfange Benachrichtigungen im Hintergrund"
 
 #: data/resources/ui/preferences_window.blp:122
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Kompatibilität mit mobilen Geräten"
 
 #: data/resources/ui/preferences_window.blp:123
 msgid ""
@@ -311,6 +311,9 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Diese Optionen können geändert werden, um eine bessere Nutzung auf Touch- "
+"und Mobilgeräten zu ermöglichen. Die Standardwerte dieser Einstellungen sind "
+"so gewählt, dass sie auf Desktop-Geräten nützlich sind."
 
 #: data/resources/ui/preferences_window.blp:126
 #: data/resources/ui/preferences_window.blp:125
@@ -410,7 +413,7 @@ msgstr "Einstellungen"
 #: data/resources/ui/window.blp:129
 #: data/resources/ui/submit_captcha_dialog.blp:5
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Captcha absenden"
 
 #: data/resources/ui/window.blp:134 data/resources/ui/window.blp:129
 msgid "Keybindings"
@@ -432,15 +435,15 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/submit_captcha_dialog.blp:24
 msgid "Submit"
-msgstr ""
+msgstr "Absenden"
 
 #: src/backend/channel.rs:564
 msgid "Note to self"
@@ -598,9 +601,8 @@ msgid "Flare"
 msgstr "Flare"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
-#, fuzzy
 msgid "Signal GTK Client"
-msgstr "Ein inoffizieller Signal GTK-Client"
+msgstr "Signal GTK-Client"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
