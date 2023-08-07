@@ -5,7 +5,7 @@ Adw.AboutWindow about {
   application-icon: "icon";
   application-name: "Flare";
   version: "@VERSION@";
-  comments: "An unofficial Signal GTK client.";
+  comments: "Chat with your friends on Signal";
   issue-url: "https://gitlab.com/schmiddi-on-mobile/flare/-/issues";
   support-url: "https://matrix.to/#/%23flare-signal:matrix.org";
   website: "https://gitlab.com/schmiddi-on-mobile/flare";

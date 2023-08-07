@@ -3,7 +3,7 @@
 [![Matrix](https://img.shields.io/badge/Matrix-Join-brightgreen)](https://matrix.to/#/%23flare-signal:matrix.org)
 [![Translation status](https://hosted.weblate.org/widgets/flare/-/flare/svg-badge.svg)](https://hosted.weblate.org/engage/flare/)
 
-An unofficial Signal GTK client.
+Chat with your friends on Signal
 
 ## Screenshot
 
