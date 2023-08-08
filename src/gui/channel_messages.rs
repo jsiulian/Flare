@@ -1,17 +1,12 @@
 use gdk::gio::SettingsBindFlags;
 use gdk::glib::clone;
-use gdk::prelude::{Cast, SettingsExtManual};
+use gdk::prelude::SettingsExtManual;
 use gdk::subclass::prelude::ObjectSubclassIsExt;
 use glib::ObjectExt;
 use gtk::traits::{AdjustmentExt, WidgetExt};
 use gtk::{gdk, glib};
 
-use crate::backend::message::CallMessage;
-use crate::backend::timeline::TimelineItem;
 use crate::backend::{message::TextMessage, Channel, Manager};
-
-use super::call_message_item::CallMessageItem;
-use super::message_item::MessageItem;
 
 const MESSAGES_REQUEST_LOAD: usize = 10;
 
@@ -128,30 +123,6 @@ impl ChannelMessages {
                 .emit_by_name::<bool>("scroll-child", &[&gtk::ScrollType::End, &false]);
         }));
     }
-
-    fn timeline_item_to_widget(&self, item: &TimelineItem) -> Option<gtk::Widget> {
-        if let Some(message) = item.dynamic_cast_ref::<TextMessage>() {
-            let widget = MessageItem::new(message);
-            widget.connect_local(
-                "reply",
-                false,
-                clone!(@strong self as s => move |args| {
-                    let msg = args[1]
-                        .get::<TextMessage>()
-                        .expect("Type of signal `reply` of `MessageItem` to be `TextMessage`.");
-                    s.set_reply_message(&Some(msg));
-                    None
-                }),
-            );
-            Some(widget.dynamic_cast().unwrap())
-        } else if let Some(message) = item.dynamic_cast_ref::<CallMessage>() {
-            let widget = CallMessageItem::new(message);
-            Some(widget.dynamic_cast().unwrap())
-        } else {
-            log::warn!("`ChannelMessages` was asked to display an unknown `TimelineItem`");
-            None
-        }
-    }
 }
 
 pub mod imp {
@@ -164,7 +135,8 @@ pub mod imp {
     use gtk::{gio, glib, FileDialog, PositionType, SignalListItemFactory};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
-    use crate::backend::timeline::{Timeline, TimelineItem};
+    use crate::backend::timeline::Timeline;
+    use crate::gui::components::ItemRow;
     use crate::{
         backend::{message::TextMessage, Channel, Manager},
         gspawn,
@@ -398,19 +370,21 @@ pub mod imp {
         fn construct_list_view(&self) {
             let obj = self.obj();
             let factory = SignalListItemFactory::new();
-            factory.connect_bind(clone!(@weak obj => move |_, object| {
+            factory.connect_setup(clone!(@weak obj => move |_, object| {
+                let widget = ItemRow::default();
+                widget.connect_local("reply", false, clone!(@weak obj => @default-return None, move |args| {
+                    let msg = args[1]
+                        .get::<Option<TextMessage>>()
+                        .expect("Type of signal `reply` of `ItemRow` to be `TextMessage`.");
+                    obj.set_reply_message(&msg);
+                    None
+                }));
                 let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
-                let list_item_item = list_item.item();
-                let timeline_item = list_item_item
-                    .and_downcast_ref::<TimelineItem>()
-                    .expect("'Timeline' to only contain 'TimelineItem's");
                 list_item.set_activatable(false);
-                list_item.set_child(obj.timeline_item_to_widget(timeline_item).as_ref());
+                list_item.set_selectable(false);
+                list_item.set_child(Some(&widget));
+                list_item.bind_property("item", &widget, "item").build();
             }));
-            factory.connect_unbind(move |_, object| {
-                let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
-                list_item.set_child(None::<&gtk::Label>);
-            });
 
             self.list_view.set_factory(Some(&factory));
         }
