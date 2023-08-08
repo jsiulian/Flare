@@ -37,7 +37,10 @@ pub mod imp {
     use std::cell::Cell;
 
     use crate::gspawn;
-    use gdk::prelude::ParamSpecBuilderExt;
+    use gdk::{
+        glib::{Priority, Propagation},
+        prelude::ParamSpecBuilderExt,
+    };
     use glib::{
         clone,
         once_cell::sync::Lazy,
@@ -48,17 +51,18 @@ pub mod imp {
         prelude::{ObjectExt, ToValue},
         subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassExt},
     };
-    use gtk::{gdk, gio, glib, subclass::widget::CompositeTemplateInitializingExt};
+    use gtk::{
+        gdk, gio, glib,
+        subclass::widget::{CompositeTemplateInitializingExt, WidgetClassExt},
+    };
     use gtk::{
         prelude::StaticType,
         subclass::{
             prelude::BoxImpl,
-            widget::{
-                CompositeTemplate, CompositeTemplateCallbacks, WidgetClassSubclassExt, WidgetImpl,
-            },
+            widget::{CompositeTemplate, CompositeTemplateCallbacks, WidgetImpl},
         },
         traits::{TextBufferExt, TextViewExt, WidgetExt},
-        CompositeTemplate, Inhibit, TemplateChild, TextBuffer, TextView,
+        CompositeTemplate, TemplateChild, TextBuffer, TextView,
     };
 
     #[derive(CompositeTemplate, Default)]
@@ -100,12 +104,12 @@ pub mod imp {
             let obj = self.obj();
             let key_events = gtk::EventControllerKey::new();
             key_events
-                .connect_key_pressed(clone!(@weak obj => @default-return Inhibit(false), move |_, key, _, modifier| {
+                .connect_key_pressed(clone!(@weak obj => @default-return Propagation::Proceed, move |_, key, _, modifier| {
                 if !modifier.contains(gdk::ModifierType::SHIFT_MASK) && (key == gdk::Key::Return || key == gdk::Key::KP_Enter) && obj.send_on_enter() {
                     obj.emit_by_name::<()>("activate", &[]);
-                    Inhibit(true)
+                    Propagation::Stop
                 } else {
-                    Inhibit(false)
+                    Propagation::Proceed
                 }
             }));
             self.view.add_controller(key_events);
@@ -120,7 +124,7 @@ pub mod imp {
                         if formats.contains_type(gio::File::static_type()) {
                             entry.stop_signal_emission_by_name("paste-clipboard");
                             match clipboard
-                                .read_value_future(gio::File::static_type(), glib::PRIORITY_DEFAULT)
+                                .read_value_future(gio::File::static_type(), Priority::DEFAULT)
                                 .await
                             {
                                 Ok(value) => match value.get::<gio::File>() {
@@ -134,7 +138,7 @@ pub mod imp {
                         } else if formats.contains_type(gdk::Texture::static_type()) {
                             entry.stop_signal_emission_by_name("paste-clipboard");
                             match clipboard
-                                .read_value_future(gdk::Texture::static_type(), glib::PRIORITY_DEFAULT)
+                                .read_value_future(gdk::Texture::static_type(), Priority::DEFAULT)
                                 .await
                             {
                                 Ok(value) => match value.get::<gdk::Texture>() {

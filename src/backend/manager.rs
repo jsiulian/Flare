@@ -254,6 +254,7 @@ impl Manager {
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
         use futures::channel::oneshot;
         use futures::{select, FutureExt};
+        use gdk::glib::ControlFlow;
         use tokio::sync::mpsc;
 
         use crate::backend::message::MessageExt;
@@ -277,7 +278,7 @@ impl Manager {
             None,
             clone!(@strong self as s => move |url| {
                 s.emit_by_name::<()>("link-qr-code", &[&url]);
-                Continue(false)
+                ControlFlow::Break
             }),
         );
 

@@ -68,7 +68,7 @@ impl Window {
 pub mod imp {
     use std::{cell::RefCell, env, path::PathBuf};
 
-    use gdk::glib::BindingFlags;
+    use gdk::glib::{BindingFlags, Propagation};
     use gio::{Settings, SimpleAction, SimpleActionGroup};
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject,
@@ -432,7 +432,7 @@ pub mod imp {
 
     impl WidgetImpl for Window {}
     impl WindowImpl for Window {
-        fn close_request(&self) -> gtk::Inhibit {
+        fn close_request(&self) -> Propagation {
             if let Err(err) = self.obj().save_window_size() {
                 log::warn!("Failed to save window state, {}", &err);
             }

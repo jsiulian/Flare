@@ -98,7 +98,7 @@ pub mod imp {
         gui::{channel_item::ChannelItem, utility::Utility},
     };
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate)]
     #[template(resource = "/ui/channel_list.ui")]
     pub struct ChannelList {
         #[template_child]
@@ -116,6 +116,23 @@ pub mod imp {
         active_channel: RefCell<Option<Channel>>,
         search_enabled: Cell<bool>,
         add_conversation_enabled: Cell<bool>,
+    }
+
+    impl Default for ChannelList {
+        fn default() -> Self {
+            Self {
+                scrolled_window: Default::default(),
+                list: Default::default(),
+                search_entry: Default::default(),
+                model: RefCell::new(gio::ListStore::new::<Channel>()),
+                sorter: Default::default(),
+                filter: Default::default(),
+                manager: Default::default(),
+                active_channel: Default::default(),
+                search_enabled: Default::default(),
+                add_conversation_enabled: Default::default(),
+            }
+        }
     }
 
     #[gtk::template_callbacks]
@@ -168,7 +185,7 @@ pub mod imp {
     impl ObjectImpl for ChannelList {
         fn constructed(&self) {
             let obj = self.obj();
-            let model = gtk::gio::ListStore::new(Channel::static_type());
+            let model = gtk::gio::ListStore::new::<Channel>();
             let filter_search =
                 CustomFilter::new(clone!(@strong self.search_entry as entry => move |obj| {
                     let search = entry.text().to_string();
