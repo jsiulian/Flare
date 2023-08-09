@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-02 15:31+0200\n"
-"PO-Revision-Date: 2023-05-04 20:49+0000\n"
+"PO-Revision-Date: 2023-08-10 20:53+0000\n"
 "Last-Translator: Isaias Carrillo <icarrillo1304@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/flare/flare/es/"
-">\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/flare/flare/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -36,9 +36,8 @@ msgid "Load file"
 msgstr "Cargar archivo"
 
 #: data/resources/ui/attachment.blp:44
-#, fuzzy
 msgid "Load voice message"
-msgstr "Cargar más mensajes"
+msgstr "Cargar mensaje de voz"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
@@ -47,11 +46,11 @@ msgstr "Información del canal"
 #: data/resources/ui/channel_info_dialog.blp:28
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Reiniciar sesión"
 
 #: data/resources/ui/channel_info_dialog.blp:31
 msgid "Reset Session"
-msgstr ""
+msgstr "Reiniciar sesión"
 
 #: data/resources/ui/channel_info_dialog.blp:40
 #: data/resources/ui/error_dialog.blp:44
@@ -75,56 +74,51 @@ msgstr "Buscar"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "No se ha seleccionado un canal"
 
 #: data/resources/ui/channel_messages.blp:22
-#, fuzzy
 msgid "Select a channel"
-msgstr "Elije un canal"
+msgstr "Seleccione un canal"
 
 #: data/resources/ui/channel_messages.blp:91
-#, fuzzy
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Eliminar la respuesta"
 
 #: data/resources/ui/channel_messages.blp:94
-#, fuzzy
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr "Eliminar la respuesta"
+msgstr "Eliminar respuesta"
 
 #: data/resources/ui/channel_messages.blp:118
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr "Eliminar el adjunto"
+msgstr "Eliminar un adjunto"
 
 #: data/resources/ui/channel_messages.blp:121
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr "Eliminar el adjunto"
+msgstr "Eliminar adjunto"
 
 #: data/resources/ui/channel_messages.blp:153
-#, fuzzy
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr "Adjuntar"
+msgstr "Añadir un adjunto"
 
 #: data/resources/ui/channel_messages.blp:156
-#, fuzzy
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr "Adjuntar"
+msgstr "Añadir adjunto"
 
 #: data/resources/ui/channel_messages.blp:172
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Insertar un emoji"
 
 #: data/resources/ui/channel_messages.blp:175
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Insertar emoji"
 
 #: data/resources/ui/channel_messages.blp:182
 #, fuzzy
@@ -158,7 +152,6 @@ msgid "Clear messages"
 msgstr "Borrar mensajes"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
-#, fuzzy
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
@@ -209,7 +202,7 @@ msgstr "Por favor considera reportar este error."
 
 #: data/resources/ui/error_dialog.blp:45
 msgid "Report"
-msgstr ""
+msgstr "Reportar"
 
 #: data/resources/ui/link_window.blp:6
 msgid "Link Device"
@@ -249,7 +242,6 @@ msgid "Save as…"
 msgstr ""
 
 #: data/resources/ui/message_item.blp:44
-#, fuzzy
 msgid "Open with…"
 msgstr "Abrir con…"
 
@@ -288,9 +280,8 @@ msgid "Dowload files automatically"
 msgstr "Descargar archivos automáticamente"
 
 #: data/resources/ui/preferences_window.blp:61
-#, fuzzy
 msgid "Dowload voice messages automatically"
-msgstr "Descargar imágenes automáticamente"
+msgstr "Descargar audios automáticamente"
 
 #: data/resources/ui/preferences_window.blp:75
 msgid "Notifications"
@@ -317,32 +308,40 @@ msgstr "Esperar por nuevos mensajes mientras está cerrado"
 
 #: data/resources/ui/preferences_window.blp:122
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Compatibilidad móvil"
 
 #: data/resources/ui/preferences_window.blp:123
+#, fuzzy
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Estas opciones pueden ser cambiadas para una mejor experiencia táctil y en "
+"dispositivos móviles. Los valores por defecto de estas preferencias están "
+"optimizadas para ser útiles en dispositivos de escritorio."
 
 #: data/resources/ui/preferences_window.blp:126
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Texto seleccionable en mensajes"
 
 #: data/resources/ui/preferences_window.blp:127
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
+"El texto seleccionable puede interferir con los gestos de deslizamiento en "
+"pantallas táctiles."
 
 #: data/resources/ui/preferences_window.blp:140
 msgid "Press \"Enter\" to send message"
-msgstr ""
+msgstr "Presionar \"Enter\" para enviar mensaje"
 
 #: data/resources/ui/preferences_window.blp:141
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing \"Control + Enter\""
 msgstr ""
+"Puede que no sea posible enviar mensajes con líneas nuevas en teclados "
+"táctiles que no permiten \"Control + Enter\""
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -372,7 +371,7 @@ msgstr "Abrir menú"
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Cerrar ventana"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
@@ -408,7 +407,7 @@ msgstr "Cargar más mensajes"
 #: data/resources/ui/window.blp:30
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Añadir conversación"
 
 #: data/resources/ui/window.blp:41 data/resources/ui/window.blp:94
 msgctxt "accessibility"
