@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed performance issues when loading messages.
+
 ## [0.9.2] - 2023-08-09
 
 ### HOTFIX
