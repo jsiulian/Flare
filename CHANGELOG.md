@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.2] - 2023-08-09
+
+### HOTFIX
+
+- Fix linking being broken.
+
+### Changed
+
+- Updated description and namespace.
+
 ## [0.9.1] - 2023-08-02
 
 ### Added
@@ -392,7 +402,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.9.1...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.9.2...master
+[0.9.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.9.1...0.9.2
 [0.9.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.9.0...0.9.1
 [0.9.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.8.2...0.9.0
 [0.8.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.8.1...0.8.2
