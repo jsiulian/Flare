@@ -8,7 +8,7 @@ Adw.AboutWindow about {
   comments: "Chat with your friends on Signal";
   issue-url: "https://gitlab.com/schmiddi-on-mobile/flare/-/issues";
   support-url: "https://matrix.to/#/%23flare-signal:matrix.org";
-  website: "https://gitlab.com/schmiddi-on-mobile/flare";
+  website: "https://mobile.schmidhuberj.de/flare";
   developer-name: "Julian Schmidhuber";
   translator-credits: _("translator-credits");
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded

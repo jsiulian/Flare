@@ -246,6 +246,7 @@ pub mod imp {
                     .expect("about.ui to have at least one object about");
                 // TODO: Replace this in Blueprint when string[] is supported
                 about.set_artists(&["David Lapshin <ddaudix@gmail.com>"]);
+                about.add_link("GitLab", "https://gitlab.com/schmiddi-on-mobile/flare");
                 about.present();
             });
 
