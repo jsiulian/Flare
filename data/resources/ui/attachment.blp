@@ -1,10 +1,9 @@
 using Gtk 4.0;
+using Adw 1;
 
-template $FlAttachment : Box {
-  orientation: horizontal;
-  hexpand: true;
-  halign: start;
-
+template $FlAttachmentBase {
+  visible: bind template.attachment as <$FlAttachmentObject>.loaded;
+  layout-manager: BinLayout {};
   GestureClick click_gesture {
     button: 3;
     exclusive: true;
@@ -15,70 +14,5 @@ template $FlAttachment : Box {
     touch-only: true;
     exclusive: true;
     pressed => $pressed() swapped;
-  }
-
-  Box {
-    orientation: horizontal;
-    hexpand: true;
-    halign: start;
-    visible: bind $not(template.attachment as <$FlAttachmentObject>.loaded) as <bool>;
-
-    Button {
-      label: _("Load image");
-      clicked => $load() swapped;
-      visible: bind template.attachment as <$FlAttachmentObject>.is_image;
-    }
-
-    Button {
-      label: _("Load video");
-      clicked => $load() swapped;
-      visible: bind template.attachment as <$FlAttachmentObject>.is_video;
-    }
-
-    Button {
-      label: _("Load file");
-      clicked => $load() swapped;
-      visible: bind template.attachment as <$FlAttachmentObject>.is_file;
-    }
-    Button {
-      label: _("Load voice message");
-      clicked => $load() swapped;
-      visible: bind template.attachment as <$FlAttachmentObject>.is_audio;
-    }
-  }
-
-  Box {
-    orientation: horizontal;
-    hexpand: true;
-    halign: start;
-    visible: bind template.attachment as <$FlAttachmentObject>.loaded;
-
-    Picture {
-      halign: start;
-      width-request: 100;
-      height-request: 100;
-      visible: bind template.attachment as <$FlAttachmentObject>.is_image;
-      paintable:  bind template.attachment as <$FlAttachmentObject>.image;
-    }
-
-    Video {
-      halign: start;
-      width-request: 100;
-      height-request: 100;
-      visible: bind template.attachment as <$FlAttachmentObject>.is_video;
-      media-stream: bind template.attachment as <$FlAttachmentObject>.video;
-    }
-
-    MediaControls {
-      visible: bind template.attachment as <$FlAttachmentObject>.is_audio;
-      media-stream: bind template.attachment as <$FlAttachmentObject>.audio;
-      width-request: 250;
-    }
-    Label {
-      halign: start;
-      ellipsize: end;
-      visible: bind template.attachment as <$FlAttachmentObject>.is_file;
-      label: bind template.attachment as <$FlAttachmentObject>.name;
-    }
   }
 }

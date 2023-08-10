@@ -4,9 +4,11 @@
   padding: 9px;
   background-color: mix(@window_bg_color, @window_fg_color, .05);
 }
+
 .message-list row {
   padding:0;
 }
+
 .message-item {
   margin: 5px 0 ;
 }
@@ -30,30 +32,50 @@
 
 .quote {
   background-color: mix(@window_bg_color, @accent_bg_color, .1);
-  border-left:4px solid;
+  border-left: 4px solid;
   border-left-color:  @accent_bg_color;
   border-radius: 8px;
   color: @window_fg_color;
   padding: 9px;
-  margin-top: 3px;
+  margin-bottom: 9px;
 }
 
 .message-item.from-self .quote {
   border-left-color: @accent_fg_color;
 }
 
-.timestamp {
-  padding-left: 6px;
+.timestamp{
+  background: white;
+	padding: 3px 8px;
+	border-radius:10px;
 }
 
 .emoji .message-text, .emoji.from-self .message-text{
   font-size: 3em;
 }
 
-.emoji:not(.has-quote) .message-bubble, .emoji.from-self:not(.has-quote) .message-bubble{
+.emoji:not(.has-attachment):not(.has-quote), .emoji.from-self:not(.has-attachment):not(.has-quote){
   background: transparent;
 }
 
 .fl-emoji-picker{
 	margin: 6px;
+}
+
+group {
+	margin: -10px;
+	margin-bottom: 9px;
+  min-width:250px;
+}
+
+.only-media {
+	margin-bottom: -34px;
+}
+
+.has-header group {
+	margin-top: 0;
+}
+
+.download-media {
+	margin-bottom: 14px;
 }

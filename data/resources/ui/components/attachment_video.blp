@@ -1,0 +1,14 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlAttachmentVideo : $FlAttachmentBase {
+    Video video {
+      styles [
+        "video"
+      ]
+      height-request: 250;
+      width-request: 250;
+      overflow: hidden;
+      media-stream: bind template.attachment as <$FlAttachmentObject>.video;
+    }
+}

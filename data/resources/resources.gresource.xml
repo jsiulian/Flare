@@ -25,8 +25,13 @@
     <file preprocess="xml-stripblanks">ui/components/context_menu_bin.ui</file>
     <file preprocess="xml-stripblanks">ui/components/emoji_picker.ui</file>
     <file preprocess="xml-stripblanks">ui/components/item_row.ui</file>
+    <file preprocess="xml-stripblanks">ui/components/attachment_audio.ui</file>
+    <file preprocess="xml-stripblanks">ui/components/attachment_file.ui</file>
+    <file preprocess="xml-stripblanks">ui/components/attachment_photo.ui</file>
+    <file preprocess="xml-stripblanks">ui/components/attachment_video.ui</file>
   </gresource>
   <gresource prefix="/de/schmidhuberj/Flare/">
     <file compressed="true">style.css</file>
+    <file compressed="true">style-dark.css</file>
   </gresource>
 </gresources>
