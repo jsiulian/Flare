@@ -139,9 +139,6 @@ impl MessageItem {
     }
 
     fn setup_emoji(&self) {
-    	if self.message().body().is_some(){
-    	println!("{:?}",self.message().body().unwrap());
-    	}
         lazy_static::lazy_static! {
             static ref RE: Regex = Regex::new(r"^[[\p{Emoji}--\p{Ascii}]\u{fe0f}\u{200d} ]+$").unwrap();
         }
