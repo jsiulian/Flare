@@ -139,8 +139,11 @@ impl MessageItem {
     }
 
     fn setup_emoji(&self) {
+    	if self.message().body().is_some(){
+    	println!("{:?}",self.message().body().unwrap());
+    	}
         lazy_static::lazy_static! {
-            static ref RE: Regex = Regex::new(r"^[\p{Emoji} \u{fe0f}\u{200d}]+$").unwrap();
+            static ref RE: Regex = Regex::new(r"^[[\p{Emoji}--\p{Ascii}]\u{fe0f}\u{200d} ]+$").unwrap();
         }
         if self.message().body().is_some() && RE.is_match(self.message().body().unwrap().as_str()) {
             self.add_css_class("emoji");
