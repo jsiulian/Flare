@@ -163,6 +163,7 @@ impl Attachment {
             .property("manager", manager)
             .property("image", &None::<Texture>)
             .property("name", &None::<String>)
+            .property("size", 0_u32)
             .property("video", &None::<MediaStream>)
             .property("audio", &None::<MediaStream>)
             .property("loaded", false)
@@ -185,6 +186,7 @@ impl Attachment {
         let mut audio = None;
         let mut raw = None;
         let mut name = None;
+        let mut size = 0;
         let mut file = None;
 
         // Populate name if set.
@@ -192,6 +194,10 @@ impl Attachment {
             name = Some(pointer_name.clone());
         }
 
+        // Populate size if set.
+        if let Some(pointer_size) = &pointer.size {
+            size = *pointer_size;
+        }
         if name.is_none() {
             match &pointer.content_type {
                 Some(t) if t.starts_with("image/") => name = Some(format!("image.{}", &t[6..])),
@@ -266,6 +272,7 @@ impl Attachment {
         self.set_property("video", video);
         self.set_property("audio", audio);
         self.set_property("name", name);
+        self.set_property("size", size);
         self.notify("type");
         self.notify("is-image");
         self.notify("is-video");
@@ -277,6 +284,14 @@ impl Attachment {
 
     pub fn name(&self) -> Option<String> {
         self.property::<Option<String>>("name")
+    }
+
+    pub fn size(&self) -> u32 {
+        self.property::<u32>("size")
+    }
+
+    pub fn loaded(&self) -> bool {
+        self.property::<bool>("loaded")
     }
 
     pub fn uri(&self) -> Option<glib::GString> {
@@ -312,7 +327,7 @@ mod imp {
     use glib::ParamSpecEnum;
     use glib::{
         once_cell::sync::Lazy, Bytes, ParamSpec, ParamSpecBoolean, ParamSpecObject,
-        ParamSpecString, Value,
+        ParamSpecString, ParamSpecUInt, Value,
     };
     use gtk::MediaStream;
     use gtk::{gdk, gio, glib};
@@ -328,6 +343,7 @@ mod imp {
         audio: RefCell<Option<MediaStream>>,
         file: RefCell<Option<File>>,
         name: RefCell<Option<String>>,
+        size: Cell<u32>,
 
         content_type: RefCell<Option<String>>,
 
@@ -365,6 +381,7 @@ mod imp {
                     ParamSpecBoolean::builder("is-audio").build(),
                     ParamSpecBoolean::builder("is-file").build(),
                     ParamSpecString::builder("name").build(),
+                    ParamSpecUInt::builder("size").build(),
                     ParamSpecString::builder("content-type").build(),
                     ParamSpecBoolean::builder("loaded").build(),
                 ]
@@ -380,6 +397,7 @@ mod imp {
                 "audio" => self.audio.borrow().as_ref().to_value(),
                 "file" => self.file.borrow().as_ref().to_value(),
                 "name" => self.name.borrow().as_ref().to_value(),
+                "size" => self.size.get().to_value(),
                 "type" => self
                     .content_type
                     .borrow()
@@ -440,6 +458,13 @@ mod imp {
                         .expect("Property `name` of `Attachment` has to be of type `String`");
 
                     self.name.replace(obj);
+                }
+                "size" => {
+                    let obj = value
+                        .get::<u32>()
+                        .expect("Property `size` of `Attachment` has to be of type `u32`");
+
+                    self.size.replace(obj);
                 }
                 "content-type" => {
                     let obj = value.get::<Option<String>>().expect(

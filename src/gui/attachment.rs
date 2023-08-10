@@ -1,24 +1,41 @@
-use glib::{Object, ObjectExt};
+use gdk::glib::Object;
+use gdk::prelude::IsA;
+use gdk::{glib::object::IsClass, prelude::Cast};
+use glib::ObjectExt;
 use gtk::glib;
+use gtk::subclass::prelude::*;
 
-gtk::glib::wrapper! {
+use crate::backend::AttachmentType;
+
+use super::components::{AttachmentAudio, AttachmentFile, AttachmentPhoto, AttachmentVideo};
+
+glib::wrapper! {
     pub struct Attachment(ObjectSubclass<imp::Attachment>)
-        @extends gtk::Box, gtk::Widget,
-        @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
-            gtk::ConstraintTarget;
+        @extends gtk::Widget;
 }
 
 impl Attachment {
-    pub fn new(attachment: &crate::backend::Attachment) -> Self {
-        log::trace!("Initializing `Attachment`");
-        Object::builder::<Self>()
-            .property("attachment", attachment)
-            .build()
-    }
-
     pub fn attachment(&self) -> crate::backend::Attachment {
         self.property("attachment")
     }
+}
+
+pub fn backend_to_gui(attachment: &crate::backend::Attachment) -> Attachment {
+    match attachment.attachment_type() {
+        AttachmentType::Image => backend_to_gui_internal::<AttachmentPhoto>(attachment).upcast(),
+        AttachmentType::Video => backend_to_gui_internal::<AttachmentVideo>(attachment).upcast(),
+        AttachmentType::File => backend_to_gui_internal::<AttachmentFile>(attachment).upcast(),
+        AttachmentType::Audio => backend_to_gui_internal::<AttachmentAudio>(attachment).upcast(),
+    }
+}
+
+fn backend_to_gui_internal<T: IsA<Attachment> + IsA<Object> + IsClass>(
+    attachment: &crate::backend::Attachment,
+) -> T {
+    log::trace!("Initializing child of `Attachment`");
+    Object::builder::<T>()
+        .property("attachment", &attachment)
+        .build()
 }
 
 pub mod imp {
@@ -143,9 +160,10 @@ pub mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for Attachment {
-        const NAME: &'static str = "FlAttachment";
+        const NAME: &'static str = "FlAttachmentBase";
+        const ABSTRACT: bool = true;
         type Type = super::Attachment;
-        type ParentType = gtk::Box;
+        type ParentType = gtk::Widget;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
@@ -225,4 +243,12 @@ pub mod imp {
 
     impl WidgetImpl for Attachment {}
     impl BoxImpl for Attachment {}
+}
+
+pub(crate) trait AttachmentImpl: WidgetImpl + ObjectImpl + 'static {}
+
+unsafe impl<T: AttachmentImpl> IsSubclassable<T> for Attachment {
+    fn class_init(class: &mut glib::Class<Self>) {
+        Self::parent_class_init::<T>(class.upcast_ref_mut());
+    }
 }

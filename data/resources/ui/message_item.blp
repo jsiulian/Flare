@@ -76,6 +76,7 @@ template $FlMessageItem : $ContextMenuBin {
 
       Box message_box {
         orientation: vertical;
+        overflow: hidden;
         spacing: 2;
 
         styles [
@@ -140,13 +141,32 @@ template $FlMessageItem : $ContextMenuBin {
         }
 
         // Attachments
+
+        Box download_media_box {
+            styles ["download-media"]
+            visible: bind template.shows-media-loading as <bool>;
+            Button {
+                styles ["circular"]
+                margin-end: 6;
+                clicked => $load_media() swapped;
+                icon-name: "view-refresh-symbolic";
+            }
+
+            Label {
+                label: _("Load media");
+            }
+        }
+
         Box box_attachments {
-          orientation: vertical;
-          hexpand: true;
+            orientation: vertical;
+            //$OriGroup media_group {
+            //  visible: false;
+            //}
         }
 
         // Message Box
         Box message-box {
+          hexpand-set: true;
           orientation: vertical;
 
           Label label_message {
