@@ -136,13 +136,14 @@ pub mod imp {
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
     use crate::backend::timeline::Timeline;
+    use crate::gui::attachment::backend_to_gui;
     use crate::gui::components::ItemRow;
     use crate::{
         backend::{message::TextMessage, Channel, Manager},
         gspawn,
         gui::{
-            attachment::Attachment, error_dialog::ErrorDialog, message_item::MessageItem,
-            text_entry::TextEntry, utility::Utility,
+            error_dialog::ErrorDialog, message_item::MessageItem, text_entry::TextEntry,
+            utility::Utility,
         },
     };
 
@@ -224,7 +225,7 @@ pub mod imp {
         }
 
         fn append_attachment(&self, attachment: crate::backend::Attachment) {
-            let att_widget = Attachment::new(&attachment);
+            let att_widget = backend_to_gui(&attachment);
             self.box_attachments.append(&att_widget);
             self.attachments.borrow_mut().push(attachment);
         }

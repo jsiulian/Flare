@@ -1,0 +1,15 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlAttachmentPhoto : $FlAttachmentBase {
+  Picture picture {
+    styles [
+      "photo"
+    ]
+    height-request: 250;
+    width-request: 250;
+    overflow: hidden;
+    paintable: bind template.attachment as <$FlAttachmentObject>.image;
+    content-fit: cover;
+  }
+}

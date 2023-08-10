@@ -1,4 +1,5 @@
 use gdk::gio;
+
 use gtk::glib::{DateTime, Object};
 
 pub struct Utility {}
@@ -67,5 +68,10 @@ impl Utility {
                 }
             })
             .map(|s| s.into())
+    }
+
+    #[template_callback(function)]
+    pub(super) fn format_size(size: u32) -> gtk::glib::GString {
+        gtk::glib::format_size(size as u64)
     }
 }

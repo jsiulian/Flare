@@ -45,6 +45,7 @@ fn init_internationalization() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn main() {
+    // ori::init();
     env_logger::init();
     init_internationalization().expect("Failed to initialize internationalization");
 
