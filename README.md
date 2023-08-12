@@ -3,7 +3,7 @@
 [![Matrix](https://img.shields.io/badge/Matrix-Join-brightgreen)](https://matrix.to/#/%23flare-signal:matrix.org)
 [![Translation status](https://hosted.weblate.org/widgets/flare/-/flare/svg-badge.svg)](https://hosted.weblate.org/engage/flare/)
 
-Chat with your friends on Signal
+Flare is an unofficial app that lets you chat with your friends on Signal from Linux.
 
 ## Screenshot
 
@@ -21,6 +21,10 @@ Chat with your friends on Signal
   <tr>
     <td>Arch Linux (AUR)</td>
     <td>[flare](https://aur.archlinux.org/packages/flare)</td>
+  </tr>
+  <tr>
+    <td>Arch Linux (AUR - binary)</td>
+    <td>[flare-bin](https://aur.archlinux.org/packages/flare-bin)</td>
   </tr>
   <tr>
     <td>Alpine Linux (testing), Postmarket OS (edge)</td>
@@ -50,7 +54,7 @@ For a list of features to be added, see [the wiki](https://gitlab.com/schmiddi-o
 - Attachments
 - Message storage
 - Encrypted storage (As I am not a security-expert, I do not guarantee anything. Read the `Security`-section)
-- Notifications
+- Notifications, optionally in the background
 
 ## Translation
 

@@ -24,33 +24,32 @@
   <description>
     <!-- Translators: Description of Flare in metainfo. -->
     <p>
-      An unofficial GTK client for the messaging application Signal.
-      This is a very simple application with many features missing compared to the official applications.
+      Flare is an unofficial app that lets you chat with your friends on Signal from Linux. It is still in development and doesn't include as many features as the official Signal applications.
     </p>
     <ul>
       <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
-        Link device
+        Linking device
       </li>
       <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
-        Send messages
+        Sending messages
       </li>
       <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
-        Receive messages
+        Receiving messages
       </li>
       <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
-        Reply to a message
+        Replying to a message
       </li>
       <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
-        React to a message
+        Reacting to a message
       </li>
       <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
-        Sending and receiving attachments
+        Attachments
       </li>
       <!-- Translators: Description of Flare in metainfo: Features -->
       <li>
@@ -63,7 +62,7 @@
     </ul>
     <!-- Translators: Description of Flare in metainfo: Security note -->
     <p>
-      More features are planned, blocked or not-planned. Consult the README for more information about them.
+      More features are planned, blocked, or not-planned. Consult the README for more information about them.
     </p>
     <!-- Translators: Description of Flare in metainfo: Security note -->
     <p>
