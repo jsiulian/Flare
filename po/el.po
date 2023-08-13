@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-02 15:31+0200\n"
-"PO-Revision-Date: 2023-05-29 08:43+0000\n"
+"PO-Revision-Date: 2023-08-14 19:53+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/flare/flare/el/>\n"
 "Language: el\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -35,9 +35,8 @@ msgid "Load file"
 msgstr "Φόρτωση αρχείου"
 
 #: data/resources/ui/attachment.blp:44
-#, fuzzy
 msgid "Load voice message"
-msgstr "Λήψη περισσότερων μηνυμάτων"
+msgstr "Λήψη φωνητικού μηνύματος"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
@@ -198,7 +197,7 @@ msgstr "Παρακαλώ αναφέρετε αυτό το σφάλμα."
 
 #: data/resources/ui/error_dialog.blp:45
 msgid "Report"
-msgstr ""
+msgstr "Αναφορά"
 
 #: data/resources/ui/link_window.blp:6
 msgid "Link Device"
@@ -232,10 +231,9 @@ msgstr "Αντιγραφή"
 
 #: data/resources/ui/message_item.blp:36
 msgid "Save as…"
-msgstr ""
+msgstr "Αποθήκευση ως…"
 
 #: data/resources/ui/message_item.blp:44
-#, fuzzy
 msgid "Open with…"
 msgstr "Άνοιγμα με…"
 
@@ -272,9 +270,8 @@ msgid "Dowload files automatically"
 msgstr "Αυτόματη λήψη αρχείων"
 
 #: data/resources/ui/preferences_window.blp:61
-#, fuzzy
 msgid "Dowload voice messages automatically"
-msgstr "Αυτόματη λήψη εικόνων"
+msgstr "Αυτόματη λήψη φωνητικών μηνυμάτων"
 
 #: data/resources/ui/preferences_window.blp:75
 msgid "Notifications"
@@ -290,9 +287,8 @@ msgid "Send notifications"
 msgstr "Αποστολή γνωστοποιήσεων"
 
 #: data/resources/ui/preferences_window.blp:92
-#, fuzzy
 msgid "Send notifications on reactions"
-msgstr "Αποστολή γνωστοποιήσεων"
+msgstr "Αποστολή ειδοποιήσεων σχετικά με αντιδράσεις"
 
 #: data/resources/ui/preferences_window.blp:106
 #: src/gui/preferences_window.rs:29
@@ -301,7 +297,7 @@ msgstr "Αναμονή καινούργιων μηνυμάτων κατά το �
 
 #: data/resources/ui/preferences_window.blp:122
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Συμβατότητα κινητού"
 
 #: data/resources/ui/preferences_window.blp:123
 msgid ""
@@ -309,6 +305,9 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Μπορείτε να αλλάξετε τις ρυθμίσεις για μια καλύτερη εμπειρία σε κινητές ή "
+"touch συσκευές. Οι προεπιλεγμένες ρυθμίσεις είναι ορισμένες με βάση τη "
+"καλύτερη λειτουργία σε συσκευές desktop."
 
 #: data/resources/ui/preferences_window.blp:126
 msgid "Selectable Message Text"
@@ -321,13 +320,15 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:140
 msgid "Press \"Enter\" to send message"
-msgstr ""
+msgstr "Πατήστε \"Enter\" για αποστολή μηνύματος"
 
 #: data/resources/ui/preferences_window.blp:141
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing \"Control + Enter\""
 msgstr ""
+"Μπορεί να μην είναι δυνατή η αποστολή μηνυμάτων με νέες γραμμές σε πλήκτρα "
+"αφής που δεν επιτρέπουν το συνδυασμό \"Control + Enter\""
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -406,7 +407,7 @@ msgstr "Ρυθμίσεις"
 #: data/resources/ui/window.blp:129
 #: data/resources/ui/submit_captcha_dialog.blp:5
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Υποβολή captcha"
 
 #: data/resources/ui/window.blp:134
 msgid "Keybindings"
@@ -425,18 +426,23 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Υποβολή captcha: το token μπορεί να αποκτηθεί από το μήνυμα σφάλματος που "
+"προβλήθηκε από το Flare. Το captcha πρέπει να συμπληρωθεί <a href=\"https"
+"://signalcaptchas.org/challenge/generate.html\">σε αυτή τη σελίδα</a> και το "
+"link για να ανοίξετε το Signal να επικολληθεί στο αντίστοιχο πλαίσιο. "
+"Σημειώστε ότι το captcha ισχύει μόνο για ένα λεπτό."
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/submit_captcha_dialog.blp:24
 msgid "Submit"
-msgstr ""
+msgstr "Υποβολή"
 
 #: src/backend/channel.rs:564
 msgid "Note to self"
@@ -464,15 +470,13 @@ msgstr "Κατειλημμένο."
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:70
-#, fuzzy
 msgid "{sender} reacted {emoji} to a message."
-msgstr "Αντίδραση σε μήνυμα"
+msgstr "Ο/Η {sender} αντέδρασε με {emoji} σε ένα μήνυμα."
 
 #. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:76
-#, fuzzy
 msgid "Reacted {emoji} to a message."
-msgstr "Αντίδραση σε μήνυμα"
+msgstr "Αντέδρασε με {emoji} σε ένα μήνυμα."
 
 #: src/backend/message/text_message.rs:365
 msgid "Sent an image"
@@ -487,11 +491,10 @@ msgstr[0] "Έστειλε ένα βίντεο"
 msgstr[1] "Έστειλε {} βίντεο"
 
 #: src/backend/message/text_message.rs:372
-#, fuzzy
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] "Έστειλε μια εικόνα"
-msgstr[1] "Έστειλε {} εικόνες"
+msgstr[0] "Έστειλε ένα φωνητικό μήνυμα"
+msgstr[1] "Έστειλε {} φωνητικά μηνύματα"
 
 #: src/backend/message/text_message.rs:378
 msgid "Sent a file"
@@ -598,7 +601,6 @@ msgid "Flare"
 msgstr "Flare"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
-#, fuzzy
 msgid "Signal GTK Client"
 msgstr "Ένα ανεπίσημο πρόγραμμα Signal γραμμένο σε GTK"
 
@@ -715,9 +717,8 @@ msgid "Automatically download videos"
 msgstr "Αυτόματη λήψη βίντεο"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
-#, fuzzy
 msgid "Automatically download voice messages"
-msgstr "Αυτόματη λήψη εικόνων"
+msgstr "Αυτόματη λήψη φωνητικών μηνυμάτων"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
@@ -729,7 +730,7 @@ msgstr "Λειτουργία στο παρασκήνιο όσο το παράθ�
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Αποστολή ειδοποιήσεων σχετικά με αντιδράσεις"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
@@ -737,7 +738,7 @@ msgstr "Μηνύματα είναι επιλέξιμα"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Στείλτε μήνυμα αφού πατήσετε Enter"
 
 #~ msgid "Other"
 #~ msgstr "Λοιπά"
