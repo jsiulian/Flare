@@ -35,6 +35,11 @@ else
   message('Building in debug mode')
 endif
 
+if libspelling.found ()
+  cargo_options += [ '--features', 'libspelling' ]
+  message('Building with libspelling support')
+endif
+
 cargo_env = [ 'CARGO_HOME=' + meson.project_build_root() / 'cargo-home' ]
 
 cargo_build = custom_target(

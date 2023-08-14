@@ -6,9 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Support for [libspelling](https://gitlab.gnome.org/chergert/libspelling/).
+
 ### Fixed
 
 - Fixed performance issues when loading messages.
+
+### Note to Packagers
+
+- New library required: [gtksourceview5](https://gitlab.gnome.org/GNOME/gtksourceview).
+- New library recommended: [libspelling](https://gitlab.gnome.org/chergert/libspelling/).
+
 
 ## [0.9.2] - 2023-08-09
 
