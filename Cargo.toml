@@ -52,11 +52,13 @@ env_logger = "0.10.0"
 err-derive = "0.3.1"
 
 tracing = { version = "0.1.37", features = ["log-always"] }
-# ori = { git = "https://github.com/yuraiz/origami", version = "0.1.0", package = "origami", branch = "grouped_layout" }
+sourceview5 = "0.7.1"
+libspelling = "0.1.0"
 
 [features]
 default = []
 screenshot = []
+libspelling = []
 
 [patch.crates-io]
 "curve25519-dalek" = { git = 'https://github.com/Schmiddiii/curve25519-dalek', rev = '1b9f81352bb659999a46af961f069d635ca432d3' }

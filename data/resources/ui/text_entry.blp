@@ -8,8 +8,7 @@ template $FlTextEntry : Box {
     min-content-height: 25;
     propagate-natural-height: true;
     has-frame: true;
-    child:
-    TextView view {
+    child: TextView view {
       hexpand: true;
       accepts-tab: false;
       top-margin: 6;
@@ -17,13 +16,7 @@ template $FlTextEntry : Box {
       left-margin: 6;
       right-margin: 6;
       wrap-mode: word;
-      buffer: buffer;
       input-hints: spellcheck;
-    }
-
-    ;
+    };
   }
-}
-
-TextBuffer buffer {
 }

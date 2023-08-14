@@ -12,15 +12,13 @@ gtk::glib::wrapper! {
 
 impl TextEntry {
     pub fn text(&self) -> String {
-        let obj = self.imp();
-        let buffer = &obj.buffer;
+        let buffer: sourceview5::Buffer = self.property("buffer");
         let (start_iter, end_iter) = buffer.bounds();
         buffer.text(&start_iter, &end_iter, true).to_string()
     }
 
     pub fn clear(&self) {
-        let obj = self.imp();
-        let buffer = &obj.buffer;
+        let buffer: sourceview5::Buffer = self.property("buffer");
         buffer.set_text("");
     }
 
@@ -34,18 +32,19 @@ impl TextEntry {
 }
 
 pub mod imp {
-    use std::cell::Cell;
+    use std::cell::{Cell, RefCell};
 
     use crate::gspawn;
     use gdk::{
         glib::{Priority, Propagation},
         prelude::ParamSpecBuilderExt,
+        subclass::prelude::ObjectSubclassIsExt,
     };
     use glib::{
         clone,
         once_cell::sync::Lazy,
         subclass::{InitializingObject, Signal},
-        ParamSpec, ParamSpecBoolean, Value,
+        ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
     use glib::{
         prelude::{ObjectExt, ToValue},
@@ -62,7 +61,7 @@ pub mod imp {
             widget::{CompositeTemplate, CompositeTemplateCallbacks, WidgetImpl},
         },
         traits::{TextBufferExt, TextViewExt, WidgetExt},
-        CompositeTemplate, TemplateChild, TextBuffer, TextView,
+        CompositeTemplate, TemplateChild, TextView,
     };
 
     #[derive(CompositeTemplate, Default)]
@@ -70,8 +69,8 @@ pub mod imp {
     pub struct TextEntry {
         #[template_child]
         pub(super) view: TemplateChild<TextView>,
-        #[template_child]
-        pub(super) buffer: TemplateChild<TextBuffer>,
+
+        pub(super) buffer: RefCell<Option<sourceview5::Buffer>>,
 
         send_on_enter: Cell<bool>,
     }
@@ -102,6 +101,7 @@ pub mod imp {
     impl ObjectImpl for TextEntry {
         fn constructed(&self) {
             let obj = self.obj();
+            obj.set_property("buffer", sourceview5::Buffer::new(None));
             let key_events = gtk::EventControllerKey::new();
             key_events
                 .connect_key_pressed(clone!(@weak obj => @default-return Propagation::Proceed, move |_, key, _, modifier| {
@@ -153,16 +153,30 @@ pub mod imp {
                     }));
                 }));
 
-            self.buffer
-                .connect_text_notify(clone!(@weak obj => move |_| {
-                    obj.notify("is-empty");
-                }));
+            let buffer: sourceview5::Buffer = obj.property("buffer");
+            obj.imp().view.set_buffer(Some(&buffer));
+            buffer.connect_text_notify(clone!(@weak obj => move |_| {
+                obj.notify("is-empty");
+            }));
+
+            #[cfg(feature = "libspelling")]
+            {
+                let checker = libspelling::Checker::default();
+                let adapter = libspelling::TextBufferAdapter::new(&buffer, &checker);
+                let extra_menu = adapter.menu_model();
+
+                self.view.set_extra_menu(Some(&extra_menu));
+                self.view.insert_action_group("spelling", Some(&adapter));
+
+                adapter.set_enabled(true);
+            }
         }
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
                 vec![
                     ParamSpecBoolean::builder("is-empty").read_only().build(),
                     ParamSpecBoolean::builder("send-on-enter").build(),
+                    ParamSpecObject::builder::<sourceview5::Buffer>("buffer").build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -171,10 +185,13 @@ pub mod imp {
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "is-empty" => {
-                    let (start, end) = self.buffer.bounds();
+                    let (start, end) = self.buffer.borrow().as_ref()
+                    .expect("Property `Buffer` of `TextEntry` has to be of type `sourceview5::Buffer`")
+                    .bounds();
                     (start == end).to_value()
                 }
                 "send-on-enter" => self.send_on_enter.get().to_value(),
+                "buffer" => self.buffer.borrow().as_ref().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -186,6 +203,13 @@ pub mod imp {
                         .get::<bool>()
                         .expect("Property `send-on-enter` of `TextEntry` has to be of type `bool`");
                     self.send_on_enter.replace(b);
+                }
+                "buffer" => {
+                    let obj = value.get::<Option<sourceview5::Buffer>>().expect(
+                        "Property `Buffer` of `TextEntry` has to be of type `sourceview5::Buffer`",
+                    );
+
+                    self.buffer.replace(obj);
                 }
                 _ => unimplemented!(),
             }

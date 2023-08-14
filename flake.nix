@@ -27,8 +27,8 @@
                 };
               };
               src = ./.;
-              buildInputs = with pkgs; [ libadwaita protobuf libsecret gst_all_1.gstreamer gst_all_1.gst-plugins-base gst_all_1.gst-plugins-good gst_all_1.gst-plugins-bad]; 
-              nativeBuildInputs = with pkgs; [ appstream-glib blueprint-compiler desktop-file-utils meson ninja pkg-config wrapGAppsHook4 rustPlatform.cargoSetupHook cargo rustc ];
+              buildInputs = with pkgs; [ libadwaita protobuf libsecret gst_all_1.gstreamer gst_all_1.gst-plugins-base gst_all_1.gst-plugins-good gst_all_1.gst-plugins-bad gtksourceview5 libspelling ];
+              nativeBuildInputs = with pkgs; [ appstream-glib blueprint-compiler desktop-file-utils meson ninja pkg-config wrapGAppsHook4 rustPlatform.cargoSetupHook cargo rustc  ];
 
               inherit name;
             };
