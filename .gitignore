@@ -3,3 +3,4 @@ src/config.rs
 data/resources/ui/about.blp
 .flatpak-builder/
 /subprojects/blueprint-compiler
+.direnv
