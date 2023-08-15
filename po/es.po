@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-02 15:31+0200\n"
-"PO-Revision-Date: 2023-08-10 20:53+0000\n"
+"PO-Revision-Date: 2023-08-16 14:55+0000\n"
 "Last-Translator: Isaias Carrillo <icarrillo1304@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/flare/flare/es/>"
 "\n"
@@ -239,7 +239,7 @@ msgstr "Copiar"
 
 #: data/resources/ui/message_item.blp:36
 msgid "Save as…"
-msgstr ""
+msgstr "Guardar como…"
 
 #: data/resources/ui/message_item.blp:44
 msgid "Open with…"
