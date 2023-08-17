@@ -1,7 +1,6 @@
+use crate::backend::Manager;
 use glib::{prelude::IsA, Object, ObjectExt};
 use gtk::glib;
-
-use crate::backend::Manager;
 
 glib::wrapper! {
     pub struct LinkWindow(ObjectSubclass<imp::LinkWindow>)
@@ -26,9 +25,8 @@ impl LinkWindow {
 }
 
 pub mod imp {
-    use std::cell::RefCell;
-
     use gdk::gdk_pixbuf::Pixbuf;
+    use gettextrs::gettext;
     use gio::MemoryInputStream;
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, Bytes, ParamSpec,
@@ -37,12 +35,18 @@ pub mod imp {
     use gtk::{gdk, gio, glib};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
     use libadwaita::subclass::prelude::*;
+    use libadwaita::Toast;
+    use std::cell::RefCell;
 
     use crate::backend::Manager;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/link_window.ui")]
     pub struct LinkWindow {
+        #[template_child]
+        pub(super) toast_overlay: TemplateChild<libadwaita::ToastOverlay>,
+        #[template_child]
+        pub(super) content: TemplateChild<libadwaita::Leaflet>,
         #[template_child]
         qr_image: TemplateChild<gtk::Picture>,
 
@@ -57,6 +61,23 @@ pub mod imp {
             let obj = self.obj();
             let clipboard = obj.clipboard();
             clipboard.set_text(&obj.url());
+
+            let toast = Toast::new(&gettext("Copied to clipboard"));
+            obj.imp().toast_overlay.add_toast(toast);
+        }
+        #[template_callback]
+        fn previous(&self) {
+            let obj = self.obj();
+            obj.imp()
+                .content
+                .navigate(libadwaita::NavigationDirection::Back);
+        }
+        #[template_callback]
+        fn forward(&self) {
+            let obj = self.obj();
+            obj.imp()
+                .content
+                .navigate(libadwaita::NavigationDirection::Forward);
         }
     }
 
@@ -129,7 +150,7 @@ pub mod imp {
                         let bytes_vec = qrcode_generator::to_png_to_vec(
                             url,
                             qrcode_generator::QrCodeEcc::Low,
-                            1024,
+                            200,
                         )
                         .expect("Failed to generate QR code");
                         let bytes_glib = Bytes::from_owned(bytes_vec);

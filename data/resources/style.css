@@ -79,3 +79,8 @@ group {
 .download-media {
 	margin-bottom: 14px;
 }
+
+.qr-code {
+	padding:18px;
+  background-color: white;
+}
