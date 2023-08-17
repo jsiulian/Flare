@@ -2,7 +2,6 @@
 <gresources>
   <gresource prefix="/">
     <file alias="icon.png">../icons/de.schmidhuberj.Flare.svg</file>
-    <file preprocess="xml-stripblanks">../icons/view-more-horizontal-symbolic.svg</file>
 
     <file preprocess="xml-stripblanks">ui/window.ui</file>
     <file preprocess="xml-stripblanks">ui/channel_list.ui</file>
@@ -33,5 +32,8 @@
   <gresource prefix="/de/schmidhuberj/Flare/">
     <file compressed="true">style.css</file>
     <file compressed="true">style-dark.css</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/view-more-horizontal-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/phonelink2-symbolic.svg</file>
   </gresource>
 </gresources>
+

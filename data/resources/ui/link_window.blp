@@ -3,35 +3,106 @@ using Adw 1;
 
 template $FlLinkWindow : Adw.Window {
   can-focus: true;
-  title: _("Link Device");
   default-height: 600;
-  default-width: 500;
+  default-width: 450;
+  resizable: false;
   destroy-with-parent: true;
+  modal: true;
 
-  Box {
-    orientation: vertical;
+  content: Adw.ToastOverlay toast_overlay {
+  child: Box {
+      orientation: vertical;
 
-    Label {
-      label: _("Please scan this QR code with your primary device.");
-    }
+      Adw.Leaflet content {
+        can-unfold: false;
+        vexpand: true;
+        can-navigate-back: true;
+      
+        Adw.LeafletPage {
+          navigatable: true;
+          name: "qr-code-page";
+          child:  Box {
+            orientation: vertical;
+            Adw.HeaderBar {
+              styles ["flat"]
+              title-widget: Adw.WindowTitle {
+                title: _("Link device");
+              };
+            }
+          
+            Adw.StatusPage {
+              title: _("Scan Code");
+              description: _("Scan this code with another Signal app logged into your account.");
+              vexpand: true;
+              child: Box {
+                orientation: vertical;
 
-    Picture qr_image {
-    }
+                Adw.Bin {
+                  Picture qr_image {
+                    styles [
+                      "qr-code",
+                      "card",
+                    ]
+                    height-request: 200;
+                    width-request: 200;
+                    halign: center;
+                    overflow: hidden;
+                  }
+                }
+                
+                Button switch_show_url {
+                  styles [
+                    "pill",
+                    "text-button",
+                  ]
+                  margin-top: 30;
+                  label: _("Link without scanning");
+                  halign: center;
+                  clicked => $forward() swapped;
+                }
+              };
+            }
+          };
+        }
+      
+        Adw.LeafletPage {
+          name: "link-without-scanning";
+          navigatable: true;
+          child:  Box {
+            orientation: vertical;
 
-    Button switch_show_url {
-      accessibility {
-        label: C_("accessibility", "Copy to clipboard");
+            Adw.HeaderBar {
+              styles ["flat"]
+              Button {
+                clicked => $previous() swapped;
+                icon-name: "go-previous-symbolic";
+              }
+              title-widget: Adw.WindowTitle {
+                title: _("Link device");
+              };
+            }
+
+            Adw.StatusPage {
+              title: _("Manual Linking");
+              description: _("If your device can't scan the QR code, you can manually enter the link provided here");
+              icon-name: "phonelink2-symbolic";
+              vexpand: true;
+              
+              Button  {
+                styles [
+                  "pill",
+                  "suggested-action",
+                  "text-button",
+                ]
+                
+                label: _("Copy to clipboard");
+                halign: center;
+                clicked => $handle_clipboard() swapped;
+              }
+            }
+          };
+        }  
       }
-
-      tooltip-text: "Copy to clipboard";
-      icon-name: "edit-copy-symbolic";
-      hexpand: false;
-      halign: center;
-      clicked => $handle_clipboard() swapped;
-    }
-
-    Label {
-      label: _("Please wait until the contacts are displayed after linking.");
-    }
-  }
+    };
+  };
 }
