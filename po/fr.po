@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-02 15:31+0200\n"
-"PO-Revision-Date: 2023-08-17 19:54+0000\n"
+"PO-Revision-Date: 2023-08-18 16:30+0000\n"
 "Last-Translator: \"Mathieu B.\" <mathieu.bousquet2@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
@@ -286,9 +286,8 @@ msgid "Send notifications"
 msgstr "Envoyer des notifications"
 
 #: data/resources/ui/preferences_window.blp:92
-#, fuzzy
 msgid "Send notifications on reactions"
-msgstr "Envoyer des notifications"
+msgstr "Envoyer des notifications pour les réactions"
 
 #: data/resources/ui/preferences_window.blp:106
 #: src/gui/preferences_window.rs:29
@@ -305,6 +304,9 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Ces options peuvent être modifiées pour une meilleure expérience sur les "
+"appareils tactiles et mobiles. Les valeurs par défaut de ces préférences "
+"sont choisies pour être utiles sur les appareils de bureau."
 
 #: data/resources/ui/preferences_window.blp:126
 msgid "Selectable Message Text"
@@ -317,13 +319,15 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:140
 msgid "Press \"Enter\" to send message"
-msgstr ""
+msgstr "Appuyer sur « Entrée » pour envoyer le message"
 
 #: data/resources/ui/preferences_window.blp:141
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing \"Control + Enter\""
 msgstr ""
+"Il peut être impossible d'envoyer des messages contenant des nouvelles "
+"lignes avec des claviers tactiles ne permettant pas «Contrôle + Entrée»"
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -402,7 +406,7 @@ msgstr "Paramètres"
 #: data/resources/ui/window.blp:129
 #: data/resources/ui/submit_captcha_dialog.blp:5
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Soumettre le Captcha"
 
 #: data/resources/ui/window.blp:134
 msgid "Keybindings"
@@ -424,15 +428,15 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
 msgid "Token"
-msgstr ""
+msgstr "Jeton"
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/submit_captcha_dialog.blp:24
 msgid "Submit"
-msgstr ""
+msgstr "Soumettre"
 
 #: src/backend/channel.rs:564
 msgid "Note to self"
@@ -483,11 +487,10 @@ msgstr[0] "A envoyé une vidéo"
 msgstr[1] "A envoyé {} vidéos"
 
 #: src/backend/message/text_message.rs:372
-#, fuzzy
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] "A envoyé une image"
-msgstr[1] "A envoyé {} images"
+msgstr[0] "A envoyé un message vocal"
+msgstr[1] "A envoyé {} messages vocaux"
 
 #: src/backend/message/text_message.rs:378
 msgid "Sent a file"
@@ -595,7 +598,6 @@ msgid "Flare"
 msgstr "Flare"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
-#, fuzzy
 msgid "Signal GTK Client"
 msgstr "Un client GTK non officiel pour Signal"
 
@@ -711,9 +713,8 @@ msgid "Automatically download videos"
 msgstr "Télécharger automatiquement les vidéos"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
-#, fuzzy
 msgid "Automatically download voice messages"
-msgstr "Télécharger automatiquement les images"
+msgstr "Télécharger automatiquement les messages vocaux"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
@@ -725,7 +726,7 @@ msgstr "Exécuter en arrière-plan à la fermeture"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Envoyer des notifications à la réception de réactions"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
@@ -733,7 +734,7 @@ msgstr "Sélection des messages possible"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Envoyer un message quand la touche « Entrée » est appuyée"
 
 #~ msgid "Other"
 #~ msgstr "Autre"
