@@ -14,5 +14,5 @@ Adw.AboutWindow about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>HOTFIX</p> <ul> <li>Fix linking being broken.</li> </ul> <p>Changed</p> <ul> <li>Updated description and namespace.</li> </ul>";
+  release-notes: "<p>Added</p> <ul> <li>Support for libspelling.</li> </ul> <p>Fixed</p> <ul> <li>Fixed performance issues when loading messages.</li> </ul>";
 }

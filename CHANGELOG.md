@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.3] - 2023-08-17
+
 ### Added
 
 - Support for [libspelling](https://gitlab.gnome.org/chergert/libspelling/).
@@ -18,7 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New library required: [gtksourceview5](https://gitlab.gnome.org/GNOME/gtksourceview).
 - New library recommended: [libspelling](https://gitlab.gnome.org/chergert/libspelling/).
-
 
 ## [0.9.2] - 2023-08-09
 
@@ -416,7 +417,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.9.2...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.9.3...master
+[0.9.3]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.9.2...0.9.3
 [0.9.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.9.1...0.9.2
 [0.9.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.9.0...0.9.1
 [0.9.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.8.2...0.9.0
