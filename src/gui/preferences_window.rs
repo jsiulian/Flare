@@ -11,7 +11,7 @@ use crate::gspawn;
 
 glib::wrapper! {
     pub struct PreferencesWindow(ObjectSubclass<imp::PreferencesWindow>)
-        @extends libadwaita::PreferencesWindow, libadwaita::Window, gtk::Window, gtk::Widget,
+        @extends adw::PreferencesWindow, adw::Window, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
@@ -72,13 +72,13 @@ pub mod imp {
     use glib::subclass::InitializingObject;
     use gtk::{gio, glib};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
-    use libadwaita::subclass::prelude::*;
+    use adw::subclass::prelude::*;
 
     #[derive(CompositeTemplate)]
     #[template(resource = "/ui/preferences_window.ui")]
     pub struct PreferencesWindow {
         #[template_child]
-        entry_device_name: TemplateChild<libadwaita::EntryRow>,
+        entry_device_name: TemplateChild<adw::EntryRow>,
 
         #[template_child]
         switch_download_images: TemplateChild<gtk::Switch>,
@@ -178,7 +178,7 @@ pub mod imp {
     impl ObjectSubclass for PreferencesWindow {
         const NAME: &'static str = "FlPreferencesWindow";
         type Type = super::PreferencesWindow;
-        type ParentType = libadwaita::PreferencesWindow;
+        type ParentType = adw::PreferencesWindow;
 
         fn new() -> Self {
             Self {

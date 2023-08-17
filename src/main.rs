@@ -57,7 +57,7 @@ fn main() {
 
     init_resources();
 
-    let app = libadwaita::Application::builder()
+    let app = adw::Application::builder()
         .application_id(APP_ID)
         .build();
 
@@ -83,7 +83,7 @@ fn main() {
     app.run();
 }
 
-fn build_ui(app: &libadwaita::Application) {
+fn build_ui(app: &adw::Application) {
     let settings = Settings::new(APP_ID);
     let window = crate::gui::Window::new(app);
     settings

@@ -1,6 +1,6 @@
 use gdk::glib::{clone, Object, SignalHandlerId};
 use gtk::{gdk, glib, prelude::*, CompositeTemplate};
-use libadwaita::subclass::prelude::*;
+use adw::subclass::prelude::*;
 
 use crate::{
     backend::{
@@ -12,7 +12,7 @@ use crate::{
 
 glib::wrapper! {
     pub struct ItemRow(ObjectSubclass<imp::ItemRow>)
-        @extends gtk::Widget, libadwaita::Bin, @implements gtk::Accessible;
+        @extends gtk::Widget, adw::Bin, @implements gtk::Accessible;
 }
 
 impl Default for ItemRow {
@@ -57,7 +57,7 @@ impl ItemRow {
 mod imp {
     use gdk::glib::subclass::Signal;
     use glib::subclass::InitializingObject;
-    use libadwaita::traits::BinExt;
+    use adw::traits::BinExt;
     use once_cell::sync::Lazy;
 
     use crate::backend::timeline::TimelineItem;
@@ -76,7 +76,7 @@ mod imp {
     impl ObjectSubclass for ItemRow {
         const NAME: &'static str = "ItemRow";
         type Type = super::ItemRow;
-        type ParentType = libadwaita::Bin;
+        type ParentType = adw::Bin;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);

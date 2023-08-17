@@ -6,13 +6,13 @@ use crate::backend::Manager;
 
 glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
-        @extends libadwaita::ApplicationWindow, gtk::ApplicationWindow, libadwaita::Window, gtk::Window, gtk::Widget,
+        @extends adw::ApplicationWindow, gtk::ApplicationWindow, adw::Window, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
 
 impl Window {
-    pub fn new(app: &libadwaita::Application) -> Self {
+    pub fn new(app: &adw::Application) -> Self {
         log::trace!("Initializing window");
         app.set_accels_for_action("win.settings", &["<Control>comma"]);
         app.set_accels_for_action("win.show-help-overlay", &["<Control>question"]);
@@ -76,8 +76,8 @@ pub mod imp {
     };
     use gtk::{gio, glib};
     use gtk::{prelude::*, subclass::prelude::*, Builder, CompositeTemplate, ShortcutsWindow};
-    use libadwaita::EntryRow;
-    use libadwaita::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
+    use adw::EntryRow;
+    use adw::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
 
     use crate::backend::Channel;
     use crate::gui::channel_info_dialog::ChannelInfoDialog;
@@ -96,7 +96,7 @@ pub mod imp {
     #[template(resource = "/ui/window.ui")]
     pub struct Window {
         #[template_child]
-        leaflet: TemplateChild<libadwaita::Leaflet>,
+        leaflet: TemplateChild<adw::Leaflet>,
 
         #[template_child]
         channel_list: TemplateChild<ChannelList>,
@@ -324,14 +324,14 @@ pub mod imp {
         #[template_callback]
         fn handle_go_back(&self) {
             log::trace!("Go backward in the leaflet");
-            self.leaflet.navigate(libadwaita::NavigationDirection::Back);
+            self.leaflet.navigate(adw::NavigationDirection::Back);
         }
 
         #[template_callback]
         fn handle_go_forward(&self) {
             log::trace!("Go forward in the leaflet");
             self.leaflet
-                .navigate(libadwaita::NavigationDirection::Forward);
+                .navigate(adw::NavigationDirection::Forward);
         }
     }
 
@@ -339,7 +339,7 @@ pub mod imp {
     impl ObjectSubclass for Window {
         const NAME: &'static str = "FlWindow";
         type Type = super::Window;
-        type ParentType = libadwaita::ApplicationWindow;
+        type ParentType = adw::ApplicationWindow;
 
         fn class_init(klass: &mut Self::Class) {
             crate::gui::channel_list::ChannelList::ensure_type();
