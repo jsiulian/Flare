@@ -602,7 +602,7 @@ msgstr "Flare"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 msgid "Signal GTK Client"
-msgstr "Un client GTK non officiel pour Signal"
+msgstr "Un client GTK pour Signal"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
