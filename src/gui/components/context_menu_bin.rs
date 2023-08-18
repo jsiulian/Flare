@@ -1,11 +1,11 @@
 use gtk::{gdk, glib, glib::clone, prelude::*, CompositeTemplate};
-use libadwaita::subclass::prelude::*;
+use adw::subclass::prelude::*;
 use log::debug;
 
 glib::wrapper! {
     /// A Bin widget that adds a context menu.
     pub struct ContextMenuBin(ObjectSubclass<imp::ContextMenuBin>)
-        @extends gtk::Widget, libadwaita::Bin, @implements gtk::Accessible;
+        @extends gtk::Widget, adw::Bin, @implements gtk::Accessible;
 }
 
 impl ContextMenuBin {
@@ -118,7 +118,7 @@ mod imp {
 
     #[repr(C)]
     pub struct ContextMenuBinClass {
-        pub parent_class: glib::object::Class<libadwaita::Bin>,
+        pub parent_class: glib::object::Class<adw::Bin>,
         pub menu_opened: fn(&super::ContextMenuBin),
     }
 
@@ -147,7 +147,7 @@ mod imp {
         const NAME: &'static str = "ContextMenuBin";
         const ABSTRACT: bool = true;
         type Type = super::ContextMenuBin;
-        type ParentType = libadwaita::Bin;
+        type ParentType = adw::Bin;
         type Class = ContextMenuBinClass;
 
         fn class_init(klass: &mut Self::Class) {

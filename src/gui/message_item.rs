@@ -15,7 +15,7 @@ use crate::gui::components::ContextMenuBin;
 
 glib::wrapper! {
     pub struct MessageItem(ObjectSubclass<imp::MessageItem>)
-        @extends libadwaita::Bin, gtk::Widget, ContextMenuBin,
+        @extends adw::Bin, gtk::Widget, ContextMenuBin,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget;
 }
@@ -199,13 +199,13 @@ pub mod imp {
             utility::Utility,
         },
     };
-    use libadwaita::subclass::prelude::BinImpl;
+    use adw::subclass::prelude::BinImpl;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/message_item.ui")]
     pub struct MessageItem {
         #[template_child]
-        pub(super) avatar: TemplateChild<libadwaita::Avatar>,
+        pub(super) avatar: TemplateChild<adw::Avatar>,
         #[template_child]
         pub(super) header: TemplateChild<gtk::Box>,
         #[template_child]

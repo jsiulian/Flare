@@ -4,7 +4,7 @@ use gtk::glib;
 
 glib::wrapper! {
     pub struct LinkWindow(ObjectSubclass<imp::LinkWindow>)
-        @extends libadwaita::Window, gtk::Window, gtk::Widget,
+        @extends adw::Window, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
@@ -34,8 +34,8 @@ pub mod imp {
     };
     use gtk::{gdk, gio, glib};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
-    use libadwaita::subclass::prelude::*;
-    use libadwaita::Toast;
+    use adw::subclass::prelude::*;
+    use adw::Toast;
     use std::cell::RefCell;
 
     use crate::backend::Manager;
@@ -44,9 +44,9 @@ pub mod imp {
     #[template(resource = "/ui/link_window.ui")]
     pub struct LinkWindow {
         #[template_child]
-        pub(super) toast_overlay: TemplateChild<libadwaita::ToastOverlay>,
+        pub(super) toast_overlay: TemplateChild<adw::ToastOverlay>,
         #[template_child]
-        pub(super) content: TemplateChild<libadwaita::Leaflet>,
+        pub(super) content: TemplateChild<adw::Leaflet>,
         #[template_child]
         qr_image: TemplateChild<gtk::Picture>,
 
@@ -70,14 +70,14 @@ pub mod imp {
             let obj = self.obj();
             obj.imp()
                 .content
-                .navigate(libadwaita::NavigationDirection::Back);
+                .navigate(adw::NavigationDirection::Back);
         }
         #[template_callback]
         fn forward(&self) {
             let obj = self.obj();
             obj.imp()
                 .content
-                .navigate(libadwaita::NavigationDirection::Forward);
+                .navigate(adw::NavigationDirection::Forward);
         }
     }
 
@@ -85,7 +85,7 @@ pub mod imp {
     impl ObjectSubclass for LinkWindow {
         const NAME: &'static str = "FlLinkWindow";
         type Type = super::LinkWindow;
-        type ParentType = libadwaita::Window;
+        type ParentType = adw::Window;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);

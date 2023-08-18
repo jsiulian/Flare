@@ -1,6 +1,6 @@
 use glib::{prelude::IsA, Object};
 use gtk::glib;
-use libadwaita::traits::MessageDialogExt;
+use adw::traits::MessageDialogExt;
 
 use crate::ApplicationError;
 
@@ -8,7 +8,7 @@ const REPORT: &str = "report";
 
 glib::wrapper! {
     pub struct ErrorDialog(ObjectSubclass<imp::ErrorDialog>)
-        @extends libadwaita::MessageDialog, gtk::Window, gtk::Widget,
+        @extends adw::MessageDialog, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
@@ -40,7 +40,7 @@ pub mod imp {
     };
     use gtk::{glib, UriLauncher};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
-    use libadwaita::subclass::prelude::*;
+    use adw::subclass::prelude::*;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/error_dialog.ui")]
@@ -70,7 +70,7 @@ pub mod imp {
     impl ObjectSubclass for ErrorDialog {
         const NAME: &'static str = "FlErrorDialog";
         type Type = super::ErrorDialog;
-        type ParentType = libadwaita::MessageDialog;
+        type ParentType = adw::MessageDialog;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);

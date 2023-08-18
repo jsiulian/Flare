@@ -6,7 +6,7 @@ use crate::backend::{Channel, Manager};
 
 glib::wrapper! {
     pub struct ChannelInfoDialog(ObjectSubclass<imp::ChannelInfoDialog>)
-        @extends libadwaita::MessageDialog, gtk::Window, gtk::Widget,
+        @extends adw::MessageDialog, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget;
 }
@@ -28,7 +28,7 @@ impl ChannelInfoDialog {
 }
 
 pub mod imp {
-    use libadwaita::subclass::prelude::MessageDialogImpl;
+    use adw::subclass::prelude::MessageDialogImpl;
     use std::cell::RefCell;
 
     use glib::{
@@ -62,7 +62,7 @@ pub mod imp {
     impl ObjectSubclass for ChannelInfoDialog {
         const NAME: &'static str = "FlChannelInfoDialog";
         type Type = super::ChannelInfoDialog;
-        type ParentType = libadwaita::MessageDialog;
+        type ParentType = adw::MessageDialog;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
