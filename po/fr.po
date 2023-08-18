@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-02 15:31+0200\n"
 "PO-Revision-Date: 2023-08-18 16:30+0000\n"
-"Last-Translator: \"Mathieu B.\" <mathieu.bousquet2@gmail.com>\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -296,7 +296,7 @@ msgstr "Surveiller les nouveaux messages pendant la fermeture"
 
 #: data/resources/ui/preferences_window.blp:122
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Compatibilité avec les mobiles"
 
 #: data/resources/ui/preferences_window.blp:123
 msgid ""
@@ -425,6 +425,11 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Soumettre un challenge Captcha. Le jeton peut être obtenu depuis le message "
+"d’erreur qui a été affiché par Flare. Le captcha doit être rempli <a href="
+"\"https://signalcaptchas.org/challenge/generate.html\">sur cette page</a> et "
+"le lien d’ouverture de Signal doit être collé dans le champ correspondant. "
+"Notez que le captcha n’est valide que pendant une minute environ."
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
 msgid "Token"
@@ -464,15 +469,13 @@ msgstr "Occupé."
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:70
-#, fuzzy
 msgid "{sender} reacted {emoji} to a message."
-msgstr "Réagir à un message"
+msgstr "{sender} a réagi par {emoji} à un message."
 
 #. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:76
-#, fuzzy
 msgid "Reacted {emoji} to a message."
-msgstr "Réagir à un message"
+msgstr "A réagi par {emoji} à un message."
 
 #: src/backend/message/text_message.rs:365
 msgid "Sent an image"
