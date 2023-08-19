@@ -51,6 +51,10 @@ async fn encryption_password() -> Result<String, ApplicationError> {
 
     if let Some(item) = item {
         log::trace!("Password found");
+        if item.is_locked().await? {
+            log::trace!("Item is locked. Unlocking.");
+            item.unlock().await?;
+        }
         let secret_bytes = item.secret().await?;
         // Should normally not be lossy, but just in case
         let secret = String::from_utf8_lossy(&secret_bytes).into_owned();

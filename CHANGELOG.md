@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Better UI for linking.
 
+### Fixed
+
+- Handle libsecret stores that can lock specific items.
+
 ## [0.9.3] - 2023-08-17
 
 ### Added
