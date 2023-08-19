@@ -348,12 +348,12 @@ msgstr "Afficher les raccourcis"
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr "Aller aux paramètres"
+msgstr "Ouvrir les paramètres"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr "Aller à la page À propos"
+msgstr "Afficher la page À propos"
 
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
@@ -412,7 +412,7 @@ msgstr "Paramètres"
 #: data/resources/ui/window.blp:129
 #: data/resources/ui/submit_captcha_dialog.blp:5
 msgid "Submit Captcha"
-msgstr "Soumettre le Captcha"
+msgstr "Soumettre un Captcha"
 
 #: data/resources/ui/window.blp:134
 msgid "Keybindings"
