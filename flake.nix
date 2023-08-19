@@ -41,12 +41,16 @@
               check = pkgs.writeShellScriptBin "check" ''
                 cargo clippy
               '';
+              i18n = pkgs.writeShellScriptBin "i18n" ''
+                meson compile flare-pot -C build
+                meson compile flare-update-po -C build
+              '';
             in
             with pkgs;
             pkgs.mkShell {
               src = ./.;
               buildInputs = self.packages.${system}.default.buildInputs;
-              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ run check ];
+              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ run check i18n ];
               shellHook = ''
                 meson setup -Dprofile=development build
               '';

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 15:31+0200\n"
+"POT-Creation-Date: 2023-08-19 12:50+0200\n"
 "PO-Revision-Date: 2022-09-28 19:19+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/flare/flare/it/"
@@ -22,23 +22,6 @@ msgstr ""
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
 msgstr ""
-
-#: data/resources/ui/attachment.blp:27
-msgid "Load image"
-msgstr "Carica l’immagine"
-
-#: data/resources/ui/attachment.blp:33
-msgid "Load video"
-msgstr "Carica il video"
-
-#: data/resources/ui/attachment.blp:39
-msgid "Load file"
-msgstr "Carica il file"
-
-#: data/resources/ui/attachment.blp:44
-#, fuzzy
-msgid "Load voice message"
-msgstr "Carica altri messaggi"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
@@ -202,24 +185,38 @@ msgstr "Si prega di considerare la possibilità di segnalare questo errore."
 msgid "Report"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:6
-msgid "Link Device"
+#: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
+#, fuzzy
+msgid "Link device"
 msgstr "Collega il dispositivo"
 
-#: data/resources/ui/link_window.blp:15
-msgid "Please scan this QR code with your primary device."
-msgstr "Scansiona questo codice QR con il tuo dispositivo principale."
+#: data/resources/ui/link_window.blp:34
+msgid "Scan Code"
+msgstr ""
 
-#: data/resources/ui/link_window.blp:23
-msgctxt "accessibility"
+#: data/resources/ui/link_window.blp:35
+msgid "Scan this code with another Signal app logged into your account."
+msgstr ""
+
+#: data/resources/ui/link_window.blp:59
+msgid "Link without scanning"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:86
+#, fuzzy
+msgid "Manual Linking"
+msgstr "Collegamento"
+
+#: data/resources/ui/link_window.blp:87
+msgid ""
+"If your device can't scan the QR code, you can manually enter the link "
+"provided here"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:98
+#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
-
-#: data/resources/ui/link_window.blp:34
-msgid "Please wait until the contacts are displayed after linking."
-msgstr ""
-"Si prega di attendere fino a quando i contatti vengono visualizzati dopo il "
-"collegamento."
 
 #: data/resources/ui/message_item.blp:12
 msgid "Reply"
@@ -241,6 +238,11 @@ msgstr ""
 msgid "Open with…"
 msgstr ""
 
+#: data/resources/ui/message_item.blp:156
+#, fuzzy
+msgid "Load media"
+msgstr "Carica di più"
+
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Generale"
@@ -257,7 +259,9 @@ msgstr "Il dispositivo dovrà essere ricollegato per avere effetto."
 msgid "Device Name"
 msgstr "Nome del dispositivo"
 
+#. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:19
+#: data/de.schmidhuberj.Flare.metainfo.xml:51
 msgid "Attachments"
 msgstr "Allegati"
 
@@ -444,7 +448,7 @@ msgstr ""
 msgid "Note to self"
 msgstr "Nota per me"
 
-#: src/backend/manager.rs:410
+#: src/backend/manager.rs:411
 msgid "You"
 msgstr "Tu"
 
@@ -573,6 +577,11 @@ msgstr "Il percorso della base di dati in {} non è una cartella."
 msgid "Please restart the application with logging and report this issue."
 msgstr "Riavvia l'applicazione dopo la chiusura di questa finestra."
 
+#: src/gui/link_window.rs:65
+#, fuzzy
+msgid "Copied to clipboard"
+msgstr "Copia negli appunti"
+
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
 msgstr ""
@@ -583,13 +592,13 @@ msgstr ""
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:57
+#: src/gui/utility.rs:58
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:60
+#: src/gui/utility.rs:61
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d/%m/%Y %H:%M"
 
@@ -599,77 +608,69 @@ msgstr "%d/%m/%Y %H:%M"
 msgid "Flare"
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
-msgid "Signal GTK Client"
-msgstr ""
-
 #. Translators: Flare summary in metainfo.
+#: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
-msgid "An unofficial Signal GTK client"
+msgid "Chat with your friends on Signal"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
 msgid ""
-"An unofficial GTK client for the messaging application Signal. This is a "
-"very simple application with many features missing compared to the official "
-"applications."
+"Flare is an unofficial app that lets you chat with your friends on Signal "
+"from Linux. It is still in development and doesn't include as many features "
+"as the official Signal applications."
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:32
+#: data/de.schmidhuberj.Flare.metainfo.xml:31
 #, fuzzy
-msgid "Link device"
+msgid "Linking device"
 msgstr "Collega il dispositivo"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:36
+#: data/de.schmidhuberj.Flare.metainfo.xml:35
 #, fuzzy
-msgid "Send messages"
+msgid "Sending messages"
 msgstr "Cancella messaggi"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:40
+#: data/de.schmidhuberj.Flare.metainfo.xml:39
 #, fuzzy
-msgid "Receive messages"
+msgid "Receiving messages"
 msgstr "Cancella messaggi"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:44
+#: data/de.schmidhuberj.Flare.metainfo.xml:43
 #, fuzzy
-msgid "Reply to a message"
+msgid "Replying to a message"
 msgstr "Cancella messaggi"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:48
+#: data/de.schmidhuberj.Flare.metainfo.xml:47
 #, fuzzy
-msgid "React to a message"
+msgid "Reacting to a message"
 msgstr "Cancella messaggi"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:52
-msgid "Sending and receiving attachments"
-msgstr ""
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:56
+#: data/de.schmidhuberj.Flare.metainfo.xml:55
 msgid "Encrypted storage"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:60
+#: data/de.schmidhuberj.Flare.metainfo.xml:59
 msgid "Notifications, optionally in the background"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:65
+#: data/de.schmidhuberj.Flare.metainfo.xml:64
 msgid ""
-"More features are planned, blocked or not-planned. Consult the README for "
+"More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:69
+#: data/de.schmidhuberj.Flare.metainfo.xml:68
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -677,7 +678,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:432
+#: data/de.schmidhuberj.Flare.metainfo.xml:479
 #, fuzzy
 msgid "Overview of the application"
 msgstr "Una parte dell'applicazione si è arrestata in modo anomalo."
@@ -732,11 +733,96 @@ msgstr ""
 msgid "Send a message when the Enter-key is pressed"
 msgstr ""
 
+#, fuzzy
+#~ msgid "Changed"
+#~ msgstr "Canali"
+
+#, fuzzy
+#~ msgid "Notifications on reactions received (configurable)."
+#~ msgstr "Invia notifiche"
+
+#, fuzzy
+#~ msgid "Keyboard shortcut Ctrl+Q to close window."
+#~ msgstr "Mostra le scorciatoie"
+
+#, fuzzy
+#~ msgid "Message deletion."
+#~ msgstr "Archiviazione dei messaggi"
+
+#, fuzzy
+#~ msgid "Updated application icon and emblem."
+#~ msgstr "Una parte dell'applicazione si è arrestata in modo anomalo."
+
+#, fuzzy
+#~ msgid "Copy action in message menu."
+#~ msgstr "Cancella messaggi"
+
+#, fuzzy
+#~ msgid "Messages and notifications for calls."
+#~ msgstr "Invia notifiche"
+
+#, fuzzy
+#~ msgid "Greatly refactored messages."
+#~ msgstr "Cancella messaggi"
+
+#, fuzzy
+#~ msgid "Changed:"
+#~ msgstr "Canali"
+
+#, fuzzy
+#~ msgid "UI improvements for the channel list."
+#~ msgstr "Seleziona nei canali"
+
+#, fuzzy
+#~ msgid "Notification support."
+#~ msgstr "Notifiche"
+
+#, fuzzy
+#~ msgid "New message storage backend."
+#~ msgstr "Archiviazione dei messaggi"
+
+#, fuzzy
+#~ msgid "Group storage."
+#~ msgstr "Archiviazione dei messaggi"
+
+#, fuzzy
+#~ msgid "Search for the channel view."
+#~ msgstr "Seleziona nei canali"
+
+#, fuzzy
+#~ msgid "Message storage."
+#~ msgstr "Archiviazione dei messaggi"
+
+#, fuzzy
+#~ msgid "Keyboard shortcuts."
+#~ msgstr "Mostra le scorciatoie"
+
+#~ msgid "Load image"
+#~ msgstr "Carica l’immagine"
+
+#~ msgid "Load video"
+#~ msgstr "Carica il video"
+
+#~ msgid "Load file"
+#~ msgstr "Carica il file"
+
+#, fuzzy
+#~ msgid "Load voice message"
+#~ msgstr "Carica altri messaggi"
+
+#~ msgid "Link Device"
+#~ msgstr "Collega il dispositivo"
+
+#~ msgid "Please scan this QR code with your primary device."
+#~ msgstr "Scansiona questo codice QR con il tuo dispositivo principale."
+
+#~ msgid "Please wait until the contacts are displayed after linking."
+#~ msgstr ""
+#~ "Si prega di attendere fino a quando i contatti vengono visualizzati dopo "
+#~ "il collegamento."
+
 #~ msgid "React"
 #~ msgstr "Reagisci"
-
-#~ msgid "Load more"
-#~ msgstr "Carica di più"
 
 #~ msgid "Message Storage"
 #~ msgstr "Archiviazione dei messaggi"
@@ -757,42 +843,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "The amount of messages to load on request for each channel"
 #~ msgstr "Numero di messaggi da caricare su richiesta"
-
-#, fuzzy
-#~ msgid "Changed"
-#~ msgstr "Canali"
-
-#, fuzzy
-#~ msgid "Messages and notifications for calls."
-#~ msgstr "Invia notifiche"
-
-#, fuzzy
-#~ msgid "Greatly refactored messages."
-#~ msgstr "Cancella messaggi"
-
-#, fuzzy
-#~ msgid "Changed:"
-#~ msgstr "Canali"
-
-#, fuzzy
-#~ msgid "Notification support."
-#~ msgstr "Notifiche"
-
-#, fuzzy
-#~ msgid "New message storage backend."
-#~ msgstr "Archiviazione dei messaggi"
-
-#, fuzzy
-#~ msgid "Search for the channel view."
-#~ msgstr "Seleziona nei canali"
-
-#, fuzzy
-#~ msgid "Message storage."
-#~ msgstr "Archiviazione dei messaggi"
-
-#, fuzzy
-#~ msgid "Keyboard shortcuts."
-#~ msgstr "Mostra le scorciatoie"
 
 #~ msgid ""
 #~ "Notifications for new messages. These notifications will only work while "

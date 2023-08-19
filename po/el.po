@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 15:31+0200\n"
+"POT-Creation-Date: 2023-08-19 12:50+0200\n"
 "PO-Revision-Date: 2023-08-14 19:53+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/flare/flare/el/>\n"
@@ -21,22 +21,6 @@ msgstr ""
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
 msgstr "Yiannis Ioannides"
-
-#: data/resources/ui/attachment.blp:27
-msgid "Load image"
-msgstr "Φόρτωση εικόνας"
-
-#: data/resources/ui/attachment.blp:33
-msgid "Load video"
-msgstr "Φόρτωση βίντεο"
-
-#: data/resources/ui/attachment.blp:39
-msgid "Load file"
-msgstr "Φόρτωση αρχείου"
-
-#: data/resources/ui/attachment.blp:44
-msgid "Load voice message"
-msgstr "Λήψη φωνητικού μηνύματος"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
@@ -199,23 +183,37 @@ msgstr "Παρακαλώ αναφέρετε αυτό το σφάλμα."
 msgid "Report"
 msgstr "Αναφορά"
 
-#: data/resources/ui/link_window.blp:6
-msgid "Link Device"
+#: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
+msgid "Link device"
 msgstr "Σύνδεση συσκευής"
 
-#: data/resources/ui/link_window.blp:15
-msgid "Please scan this QR code with your primary device."
-msgstr "Παρακαλώ σαρώστε αυτό το QR code με τη κυρίως συσκευή σας."
+#: data/resources/ui/link_window.blp:34
+msgid "Scan Code"
+msgstr ""
 
-#: data/resources/ui/link_window.blp:23
-msgctxt "accessibility"
+#: data/resources/ui/link_window.blp:35
+msgid "Scan this code with another Signal app logged into your account."
+msgstr ""
+
+#: data/resources/ui/link_window.blp:59
+msgid "Link without scanning"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:86
+#, fuzzy
+msgid "Manual Linking"
+msgstr "Σύνδεση"
+
+#: data/resources/ui/link_window.blp:87
+msgid ""
+"If your device can't scan the QR code, you can manually enter the link "
+"provided here"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:98
+#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Αντιγραφή στο πρόχειρο"
-
-#: data/resources/ui/link_window.blp:34
-msgid "Please wait until the contacts are displayed after linking."
-msgstr ""
-"Παρακαλώ περιμένετε μέχρι όλες οι επαφές να εμφανιστούν μετά την σύνδεση."
 
 #: data/resources/ui/message_item.blp:12
 msgid "Reply"
@@ -237,6 +235,11 @@ msgstr "Αποθήκευση ως…"
 msgid "Open with…"
 msgstr "Άνοιγμα με…"
 
+#: data/resources/ui/message_item.blp:156
+#, fuzzy
+msgid "Load media"
+msgstr "Φόρτωση εικόνας"
+
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Γενικά"
@@ -253,7 +256,9 @@ msgstr "Η συσκευή πρέπει να επανασυνδεθεί για ν
 msgid "Device Name"
 msgstr "Όνομα συσκευής"
 
+#. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:19
+#: data/de.schmidhuberj.Flare.metainfo.xml:51
 msgid "Attachments"
 msgstr "Συνημμένα"
 
@@ -427,8 +432,8 @@ msgid ""
 "Note that the captcha is only valid for about one minute."
 msgstr ""
 "Υποβολή captcha: το token μπορεί να αποκτηθεί από το μήνυμα σφάλματος που "
-"προβλήθηκε από το Flare. Το captcha πρέπει να συμπληρωθεί <a href=\"https"
-"://signalcaptchas.org/challenge/generate.html\">σε αυτή τη σελίδα</a> και το "
+"προβλήθηκε από το Flare. Το captcha πρέπει να συμπληρωθεί <a href=\"https://"
+"signalcaptchas.org/challenge/generate.html\">σε αυτή τη σελίδα</a> και το "
 "link για να ανοίξετε το Signal να επικολληθεί στο αντίστοιχο πλαίσιο. "
 "Σημειώστε ότι το captcha ισχύει μόνο για ένα λεπτό."
 
@@ -448,7 +453,7 @@ msgstr "Υποβολή"
 msgid "Note to self"
 msgstr "Σημειώσεις Προς Εμένα"
 
-#: src/backend/manager.rs:410
+#: src/backend/manager.rs:411
 msgid "You"
 msgstr "Εσείς"
 
@@ -574,6 +579,11 @@ msgstr ""
 "Παρακαλώ επανεκκινήστε την εφαρμογή με καταγραφή και αναφέρετε αυτό το "
 "πρόβλημα."
 
+#: src/gui/link_window.rs:65
+#, fuzzy
+msgid "Copied to clipboard"
+msgstr "Αντιγραφή στο πρόχειρο"
+
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
 msgstr "Άδεια λειτουργίας στο παρασκήνιο"
@@ -584,13 +594,13 @@ msgstr "Χρήση ρυθμίσεων για την κατάργηση δικα�
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:57
+#: src/gui/utility.rs:58
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:60
+#: src/gui/utility.rs:61
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
 
@@ -600,70 +610,65 @@ msgstr "%Y-%m-%d %H:%M"
 msgid "Flare"
 msgstr "Flare"
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
-msgid "Signal GTK Client"
-msgstr "Ένα ανεπίσημο πρόγραμμα Signal γραμμένο σε GTK"
-
 #. Translators: Flare summary in metainfo.
+#: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
-msgid "An unofficial Signal GTK client"
-msgstr "Ένα ανεπίσημο πρόγραμμα Signal γραμμένο σε GTK"
+msgid "Chat with your friends on Signal"
+msgstr ""
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
 msgid ""
-"An unofficial GTK client for the messaging application Signal. This is a "
-"very simple application with many features missing compared to the official "
-"applications."
+"Flare is an unofficial app that lets you chat with your friends on Signal "
+"from Linux. It is still in development and doesn't include as many features "
+"as the official Signal applications."
 msgstr ""
-"Ένα ανεπίσημο πρόγραμμα για την εφαρμογή μηνυμάτων Signal, γραμμένο σε GTK. "
-"Είναι μια απλή εφαρμογή με πολλές λειτουργίες που δεν υπάρχουν σε επίσημες "
-"εφαρμογές."
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:32
-msgid "Link device"
+#: data/de.schmidhuberj.Flare.metainfo.xml:31
+#, fuzzy
+msgid "Linking device"
 msgstr "Σύνδεση συσκευής"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:36
-msgid "Send messages"
+#: data/de.schmidhuberj.Flare.metainfo.xml:35
+#, fuzzy
+msgid "Sending messages"
 msgstr "Αποστολή μηνυμάτων"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:40
-msgid "Receive messages"
+#: data/de.schmidhuberj.Flare.metainfo.xml:39
+#, fuzzy
+msgid "Receiving messages"
 msgstr "Λήψη μηνυμάτων"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:44
-msgid "Reply to a message"
+#: data/de.schmidhuberj.Flare.metainfo.xml:43
+#, fuzzy
+msgid "Replying to a message"
 msgstr "Απάντηση σε μήνυμα"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:48
-msgid "React to a message"
+#: data/de.schmidhuberj.Flare.metainfo.xml:47
+#, fuzzy
+msgid "Reacting to a message"
 msgstr "Αντίδραση σε μήνυμα"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:52
-msgid "Sending and receiving attachments"
-msgstr "Αποστολή και λήψη συνημμένων"
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:56
+#: data/de.schmidhuberj.Flare.metainfo.xml:55
 msgid "Encrypted storage"
 msgstr "Κρυπτογραφημένος αποθηκευτικός χώρος"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:60
+#: data/de.schmidhuberj.Flare.metainfo.xml:59
 msgid "Notifications, optionally in the background"
 msgstr "Γνωστοποιήσεις, προαιρετικά στο παρασκήνιο"
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:65
+#: data/de.schmidhuberj.Flare.metainfo.xml:64
+#, fuzzy
 msgid ""
-"More features are planned, blocked or not-planned. Consult the README for "
+"More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
 "Περισσότερες λειτουργίες είναι προγραμματισμένες, μπλοκαρισμένες ή μη "
@@ -671,7 +676,7 @@ msgstr ""
 "τα παραπάνω."
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:69
+#: data/de.schmidhuberj.Flare.metainfo.xml:68
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -684,7 +689,7 @@ msgstr ""
 "Αναφερθείτε στο README για περισσότερες πληροφορίες σχετικά με το θέμα "
 "ασφάλειας."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:432
+#: data/de.schmidhuberj.Flare.metainfo.xml:479
 msgid "Overview of the application"
 msgstr "Επισκόπηση της εφαρμογής"
 
@@ -739,6 +744,112 @@ msgstr "Μηνύματα είναι επιλέξιμα"
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
 msgstr "Στείλτε μήνυμα αφού πατήσετε Enter"
+
+#~ msgid "Signal GTK Client"
+#~ msgstr "Ένα ανεπίσημο πρόγραμμα Signal γραμμένο σε GTK"
+
+#, fuzzy
+#~ msgid "Changed"
+#~ msgstr "Κανάλια"
+
+#, fuzzy
+#~ msgid "Notifications on reactions received (configurable)."
+#~ msgstr "Αποστολή ειδοποιήσεων σχετικά με αντιδράσεις"
+
+#, fuzzy
+#~ msgid "Setting to turn off sending a message when the enter-key is pressed."
+#~ msgstr "Στείλτε μήνυμα αφού πατήσετε Enter"
+
+#, fuzzy
+#~ msgid "Button to scroll down in the messages view."
+#~ msgstr "Αυτόματη λήψη φωνητικών μηνυμάτων"
+
+#, fuzzy
+#~ msgid "Message deletion."
+#~ msgstr "Προσθήκη μηνύματος"
+
+#, fuzzy
+#~ msgid "Updated application icon and emblem."
+#~ msgstr "Ένα μέρος της εφαρμογής κατέρρευσε."
+
+#, fuzzy
+#~ msgid "Copy action in message menu."
+#~ msgstr "Απάντηση σε μήνυμα"
+
+#, fuzzy
+#~ msgid "Unlink without deleting messages."
+#~ msgstr "Αποσύνδεση χωρίς διαγραφή μηνυμάτων"
+
+#, fuzzy
+#~ msgid "Messages and notifications for calls."
+#~ msgstr "Αποστολή ειδοποιήσεων σχετικά με αντιδράσεις"
+
+#, fuzzy
+#~ msgid "Greatly refactored messages."
+#~ msgstr "Καθαρισμός μηνυμάτων"
+
+#, fuzzy
+#~ msgid "Changed:"
+#~ msgstr "Κανάλια"
+
+#, fuzzy
+#~ msgid "Notification support."
+#~ msgstr "Γνωστοποιήσεις"
+
+#, fuzzy
+#~ msgid "Group storage."
+#~ msgstr "Κρυπτογραφημένος αποθηκευτικός χώρος"
+
+#, fuzzy
+#~ msgid "Search for the channel view."
+#~ msgstr "Αναζήτηση στα κανάλια"
+
+#, fuzzy
+#~ msgid "Message storage."
+#~ msgstr "Προσθήκη μηνύματος"
+
+#, fuzzy
+#~ msgid "Prevented sending empty messages."
+#~ msgstr "Πατήστε \"Enter\" για αποστολή μηνύματος"
+
+#, fuzzy
+#~ msgid "Keyboard shortcuts."
+#~ msgstr "Εμφάνιση συντομεύσεων"
+
+#, fuzzy
+#~ msgid "Fix message receiving, sending attachments."
+#~ msgstr "Αποστολή και λήψη συνημμένων"
+
+#~ msgid "Load video"
+#~ msgstr "Φόρτωση βίντεο"
+
+#~ msgid "Load file"
+#~ msgstr "Φόρτωση αρχείου"
+
+#~ msgid "Load voice message"
+#~ msgstr "Λήψη φωνητικού μηνύματος"
+
+#~ msgid "Link Device"
+#~ msgstr "Σύνδεση συσκευής"
+
+#~ msgid "Please scan this QR code with your primary device."
+#~ msgstr "Παρακαλώ σαρώστε αυτό το QR code με τη κυρίως συσκευή σας."
+
+#~ msgid "Please wait until the contacts are displayed after linking."
+#~ msgstr ""
+#~ "Παρακαλώ περιμένετε μέχρι όλες οι επαφές να εμφανιστούν μετά την σύνδεση."
+
+#~ msgid "An unofficial Signal GTK client"
+#~ msgstr "Ένα ανεπίσημο πρόγραμμα Signal γραμμένο σε GTK"
+
+#~ msgid ""
+#~ "An unofficial GTK client for the messaging application Signal. This is a "
+#~ "very simple application with many features missing compared to the "
+#~ "official applications."
+#~ msgstr ""
+#~ "Ένα ανεπίσημο πρόγραμμα για την εφαρμογή μηνυμάτων Signal, γραμμένο σε "
+#~ "GTK. Είναι μια απλή εφαρμογή με πολλές λειτουργίες που δεν υπάρχουν σε "
+#~ "επίσημες εφαρμογές."
 
 #~ msgid "Other"
 #~ msgstr "Λοιπά"

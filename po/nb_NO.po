@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 15:31+0200\n"
+"POT-Creation-Date: 2023-08-19 12:50+0200\n"
 "PO-Revision-Date: 2023-07-27 06:07+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
@@ -22,23 +22,6 @@ msgstr ""
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
 msgstr "Allan Nordhøy <epost@anotheragency.no>"
-
-#: data/resources/ui/attachment.blp:27
-msgid "Load image"
-msgstr "Last inn bilde"
-
-#: data/resources/ui/attachment.blp:33
-msgid "Load video"
-msgstr "Last inn video"
-
-#: data/resources/ui/attachment.blp:39
-msgid "Load file"
-msgstr "Last inn fil"
-
-#: data/resources/ui/attachment.blp:44
-#, fuzzy
-msgid "Load voice message"
-msgstr "Last inn flere bilder"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
@@ -207,23 +190,38 @@ msgstr "Du bør rapportere denne feilen."
 msgid "Report"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:6
-msgid "Link Device"
+#: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
+#, fuzzy
+msgid "Link device"
 msgstr "Tilknytt enhet"
 
-#: data/resources/ui/link_window.blp:15
-msgid "Please scan this QR code with your primary device."
-msgstr "Skann denne QR-koden med din hovedenhet."
+#: data/resources/ui/link_window.blp:34
+msgid "Scan Code"
+msgstr ""
 
-#: data/resources/ui/link_window.blp:23
-msgctxt "accessibility"
+#: data/resources/ui/link_window.blp:35
+msgid "Scan this code with another Signal app logged into your account."
+msgstr ""
+
+#: data/resources/ui/link_window.blp:59
+msgid "Link without scanning"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:86
+#, fuzzy
+msgid "Manual Linking"
+msgstr "Sammenkobling"
+
+#: data/resources/ui/link_window.blp:87
+msgid ""
+"If your device can't scan the QR code, you can manually enter the link "
+"provided here"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:98
+#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Kopier til utklippstavlen"
-
-#: data/resources/ui/link_window.blp:34
-#, fuzzy
-msgid "Please wait until the contacts are displayed after linking."
-msgstr "Vent til kontaktene vises etter sammenlenking."
 
 #: data/resources/ui/message_item.blp:12
 msgid "Reply"
@@ -245,6 +243,11 @@ msgstr ""
 msgid "Open with…"
 msgstr ""
 
+#: data/resources/ui/message_item.blp:156
+#, fuzzy
+msgid "Load media"
+msgstr "Last inn mer"
+
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Generelt"
@@ -263,7 +266,9 @@ msgstr "Enheten må sammenkobles igjen for å gjøre dette."
 msgid "Device Name"
 msgstr "Enhetsnavn"
 
+#. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:19
+#: data/de.schmidhuberj.Flare.metainfo.xml:51
 msgid "Attachments"
 msgstr "Vedlegg"
 
@@ -454,7 +459,7 @@ msgstr ""
 msgid "Note to self"
 msgstr "Selvpåminnelse"
 
-#: src/backend/manager.rs:410
+#: src/backend/manager.rs:411
 msgid "You"
 msgstr "Deg"
 
@@ -585,6 +590,11 @@ msgstr "Databasestien {} er ikke en mappe."
 msgid "Please restart the application with logging and report this issue."
 msgstr "Start programmet på ny etter at dette vinduet er lukket."
 
+#: src/gui/link_window.rs:65
+#, fuzzy
+msgid "Copied to clipboard"
+msgstr "Kopier til utklippstavlen"
+
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
 msgstr ""
@@ -595,14 +605,14 @@ msgstr ""
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:57
+#: src/gui/utility.rs:58
 #, fuzzy
 msgid "%H:%M"
 msgstr "%H %M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:60
+#: src/gui/utility.rs:61
 #, fuzzy
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d %m %y. %H %M"
@@ -613,77 +623,69 @@ msgstr "%d %m %y. %H %M"
 msgid "Flare"
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
-msgid "Signal GTK Client"
-msgstr ""
-
 #. Translators: Flare summary in metainfo.
+#: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
-msgid "An unofficial Signal GTK client"
+msgid "Chat with your friends on Signal"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
 msgid ""
-"An unofficial GTK client for the messaging application Signal. This is a "
-"very simple application with many features missing compared to the official "
-"applications."
+"Flare is an unofficial app that lets you chat with your friends on Signal "
+"from Linux. It is still in development and doesn't include as many features "
+"as the official Signal applications."
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:32
+#: data/de.schmidhuberj.Flare.metainfo.xml:31
 #, fuzzy
-msgid "Link device"
+msgid "Linking device"
 msgstr "Tilknytt enhet"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:36
+#: data/de.schmidhuberj.Flare.metainfo.xml:35
 #, fuzzy
-msgid "Send messages"
+msgid "Sending messages"
 msgstr "Last inn flere bilder"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:40
+#: data/de.schmidhuberj.Flare.metainfo.xml:39
 #, fuzzy
-msgid "Receive messages"
+msgid "Receiving messages"
 msgstr "Last inn flere bilder"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:44
+#: data/de.schmidhuberj.Flare.metainfo.xml:43
 #, fuzzy
-msgid "Reply to a message"
+msgid "Replying to a message"
 msgstr "Last inn flere bilder"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:48
+#: data/de.schmidhuberj.Flare.metainfo.xml:47
 #, fuzzy
-msgid "React to a message"
+msgid "Reacting to a message"
 msgstr "Last inn flere bilder"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:52
-msgid "Sending and receiving attachments"
-msgstr ""
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:56
+#: data/de.schmidhuberj.Flare.metainfo.xml:55
 msgid "Encrypted storage"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:60
+#: data/de.schmidhuberj.Flare.metainfo.xml:59
 msgid "Notifications, optionally in the background"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:65
+#: data/de.schmidhuberj.Flare.metainfo.xml:64
 msgid ""
-"More features are planned, blocked or not-planned. Consult the README for "
+"More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:69
+#: data/de.schmidhuberj.Flare.metainfo.xml:68
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -691,7 +693,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:432
+#: data/de.schmidhuberj.Flare.metainfo.xml:479
 #, fuzzy
 msgid "Overview of the application"
 msgstr "En del av programmet krasjet."
@@ -746,12 +748,99 @@ msgstr ""
 msgid "Send a message when the Enter-key is pressed"
 msgstr ""
 
-#~ msgid "React"
-#~ msgstr "Reager"
+#, fuzzy
+#~ msgid "Changed"
+#~ msgstr "Kanaler"
 
 #, fuzzy
-#~ msgid "Load more"
-#~ msgstr "Last inn mer"
+#~ msgid "Notifications on reactions received (configurable)."
+#~ msgstr "Send merknader"
+
+#, fuzzy
+#~ msgid "Keyboard shortcut Ctrl+Q to close window."
+#~ msgstr "Vis snarveier"
+
+#, fuzzy
+#~ msgid "Message deletion."
+#~ msgstr "Meldingslagring"
+
+#, fuzzy
+#~ msgid "Updated application icon and emblem."
+#~ msgstr "En del av programmet krasjet."
+
+#, fuzzy
+#~ msgid "Copy action in message menu."
+#~ msgstr "Last inn flere bilder"
+
+#, fuzzy
+#~ msgid "Unlink without deleting messages."
+#~ msgstr "Opphev lenking, men behold meldinger"
+
+#, fuzzy
+#~ msgid "Messages and notifications for calls."
+#~ msgstr "Send merknader"
+
+#, fuzzy
+#~ msgid "Greatly refactored messages."
+#~ msgstr "Last inn flere bilder"
+
+#, fuzzy
+#~ msgid "Changed:"
+#~ msgstr "Kanaler"
+
+#, fuzzy
+#~ msgid "UI improvements for the channel list."
+#~ msgstr "Velg en kanal"
+
+#, fuzzy
+#~ msgid "Notification support."
+#~ msgstr "Merknader"
+
+#, fuzzy
+#~ msgid "New message storage backend."
+#~ msgstr "Meldingslagring"
+
+#, fuzzy
+#~ msgid "Group storage."
+#~ msgstr "Meldingslagring"
+
+#, fuzzy
+#~ msgid "Search for the channel view."
+#~ msgstr "Velg en kanal"
+
+#, fuzzy
+#~ msgid "Message storage."
+#~ msgstr "Meldingslagring"
+
+#, fuzzy
+#~ msgid "Keyboard shortcuts."
+#~ msgstr "Vis snarveier"
+
+#~ msgid "Load image"
+#~ msgstr "Last inn bilde"
+
+#~ msgid "Load video"
+#~ msgstr "Last inn video"
+
+#~ msgid "Load file"
+#~ msgstr "Last inn fil"
+
+#, fuzzy
+#~ msgid "Load voice message"
+#~ msgstr "Last inn flere bilder"
+
+#~ msgid "Link Device"
+#~ msgstr "Tilknytt enhet"
+
+#~ msgid "Please scan this QR code with your primary device."
+#~ msgstr "Skann denne QR-koden med din hovedenhet."
+
+#, fuzzy
+#~ msgid "Please wait until the contacts are displayed after linking."
+#~ msgstr "Vent til kontaktene vises etter sammenlenking."
+
+#~ msgid "React"
+#~ msgstr "Reager"
 
 #~ msgid "Message Storage"
 #~ msgstr "Meldingslagring"
@@ -772,46 +861,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "The amount of messages to load on request for each channel"
 #~ msgstr "Antall meldinger å laste inn ved forespørsel"
-
-#, fuzzy
-#~ msgid "Changed"
-#~ msgstr "Kanaler"
-
-#, fuzzy
-#~ msgid "Unlink without deleting messages."
-#~ msgstr "Opphev lenking, men behold meldinger"
-
-#, fuzzy
-#~ msgid "Messages and notifications for calls."
-#~ msgstr "Send merknader"
-
-#, fuzzy
-#~ msgid "Greatly refactored messages."
-#~ msgstr "Last inn flere bilder"
-
-#, fuzzy
-#~ msgid "Changed:"
-#~ msgstr "Kanaler"
-
-#, fuzzy
-#~ msgid "Notification support."
-#~ msgstr "Merknader"
-
-#, fuzzy
-#~ msgid "New message storage backend."
-#~ msgstr "Meldingslagring"
-
-#, fuzzy
-#~ msgid "Search for the channel view."
-#~ msgstr "Velg en kanal"
-
-#, fuzzy
-#~ msgid "Message storage."
-#~ msgstr "Meldingslagring"
-
-#, fuzzy
-#~ msgid "Keyboard shortcuts."
-#~ msgstr "Vis snarveier"
 
 #, fuzzy
 #~ msgid ""

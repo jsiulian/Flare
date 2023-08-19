@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 15:31+0200\n"
+"POT-Creation-Date: 2023-08-19 12:50+0200\n"
 "PO-Revision-Date: 2023-08-16 14:55+0000\n"
 "Last-Translator: Isaias Carrillo <icarrillo1304@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/flare/flare/es/>"
-"\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/flare/flare/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,22 +22,6 @@ msgstr ""
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
 msgstr "Créditos de traducción"
-
-#: data/resources/ui/attachment.blp:27
-msgid "Load image"
-msgstr "Cargar imagen"
-
-#: data/resources/ui/attachment.blp:33
-msgid "Load video"
-msgstr "Cargar video"
-
-#: data/resources/ui/attachment.blp:39
-msgid "Load file"
-msgstr "Cargar archivo"
-
-#: data/resources/ui/attachment.blp:44
-msgid "Load voice message"
-msgstr "Cargar mensaje de voz"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
@@ -204,26 +188,38 @@ msgstr "Por favor considera reportar este error."
 msgid "Report"
 msgstr "Reportar"
 
-#: data/resources/ui/link_window.blp:6
-msgid "Link Device"
+#: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
+#, fuzzy
+msgid "Link device"
 msgstr "Vincular Dispositivo"
 
-#: data/resources/ui/link_window.blp:15
-msgid "Please scan this QR code with your primary device."
-msgstr "Por favor escanea este código QR con tu dispositivo principal."
+#: data/resources/ui/link_window.blp:34
+msgid "Scan Code"
+msgstr ""
 
-#: data/resources/ui/link_window.blp:23
+#: data/resources/ui/link_window.blp:35
+msgid "Scan this code with another Signal app logged into your account."
+msgstr ""
+
+#: data/resources/ui/link_window.blp:59
+msgid "Link without scanning"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:86
 #, fuzzy
-msgctxt "accessibility"
+msgid "Manual Linking"
+msgstr "Vinculando"
+
+#: data/resources/ui/link_window.blp:87
+msgid ""
+"If your device can't scan the QR code, you can manually enter the link "
+"provided here"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:98
+#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Copiar al portapapeles"
-
-#: data/resources/ui/link_window.blp:34
-#, fuzzy
-msgid "Please wait until the contacts are displayed after linking."
-msgstr ""
-"Por favor espere hasta que se muestren los contactos después de la "
-"vinculación."
 
 #: data/resources/ui/message_item.blp:12
 msgid "Reply"
@@ -245,6 +241,11 @@ msgstr "Guardar como…"
 msgid "Open with…"
 msgstr "Abrir con…"
 
+#: data/resources/ui/message_item.blp:156
+#, fuzzy
+msgid "Load media"
+msgstr "Cargar más"
+
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "General"
@@ -263,7 +264,9 @@ msgstr "El dispositivo debe ser vinculado de nuevo para tomar efecto."
 msgid "Device Name"
 msgstr "Nombre del Dispositivo"
 
+#. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:19
+#: data/de.schmidhuberj.Flare.metainfo.xml:51
 msgid "Attachments"
 msgstr "Adjuntos"
 
@@ -457,7 +460,7 @@ msgstr ""
 msgid "Note to self"
 msgstr "Notas privadas"
 
-#: src/backend/manager.rs:410
+#: src/backend/manager.rs:411
 msgid "You"
 msgstr "Tú"
 
@@ -594,6 +597,11 @@ msgstr ""
 "Por favor reinicie la aplicación con inicio de sesión y reporta este "
 "problema."
 
+#: src/gui/link_window.rs:65
+#, fuzzy
+msgid "Copied to clipboard"
+msgstr "Copiar al portapapeles"
+
 #: src/gui/preferences_window.rs:51
 #, fuzzy
 msgid "Background permission"
@@ -605,13 +613,13 @@ msgstr "Use los ajustes para quitar permisos"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:57
+#: src/gui/utility.rs:58
 msgid "%H:%M"
 msgstr ""
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:60
+#: src/gui/utility.rs:61
 msgid "%Y-%m-%d %H:%M"
 msgstr ""
 
@@ -621,77 +629,69 @@ msgstr ""
 msgid "Flare"
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
-msgid "Signal GTK Client"
-msgstr ""
-
 #. Translators: Flare summary in metainfo.
+#: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
-msgid "An unofficial Signal GTK client"
+msgid "Chat with your friends on Signal"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
 msgid ""
-"An unofficial GTK client for the messaging application Signal. This is a "
-"very simple application with many features missing compared to the official "
-"applications."
+"Flare is an unofficial app that lets you chat with your friends on Signal "
+"from Linux. It is still in development and doesn't include as many features "
+"as the official Signal applications."
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:32
+#: data/de.schmidhuberj.Flare.metainfo.xml:31
 #, fuzzy
-msgid "Link device"
+msgid "Linking device"
 msgstr "Vincular Dispositivo"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:36
+#: data/de.schmidhuberj.Flare.metainfo.xml:35
 #, fuzzy
-msgid "Send messages"
+msgid "Sending messages"
 msgstr "Borrar mensajes"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:40
+#: data/de.schmidhuberj.Flare.metainfo.xml:39
 #, fuzzy
-msgid "Receive messages"
+msgid "Receiving messages"
 msgstr "Borrar mensajes"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:44
+#: data/de.schmidhuberj.Flare.metainfo.xml:43
 #, fuzzy
-msgid "Reply to a message"
+msgid "Replying to a message"
 msgstr "Borrar mensajes"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:48
+#: data/de.schmidhuberj.Flare.metainfo.xml:47
 #, fuzzy
-msgid "React to a message"
+msgid "Reacting to a message"
 msgstr "Borrar mensajes"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:52
-msgid "Sending and receiving attachments"
-msgstr ""
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:56
+#: data/de.schmidhuberj.Flare.metainfo.xml:55
 msgid "Encrypted storage"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:60
+#: data/de.schmidhuberj.Flare.metainfo.xml:59
 msgid "Notifications, optionally in the background"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:65
+#: data/de.schmidhuberj.Flare.metainfo.xml:64
 msgid ""
-"More features are planned, blocked or not-planned. Consult the README for "
+"More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:69
+#: data/de.schmidhuberj.Flare.metainfo.xml:68
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -699,7 +699,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:432
+#: data/de.schmidhuberj.Flare.metainfo.xml:479
 #, fuzzy
 msgid "Overview of the application"
 msgstr "Una parte de la aplicación se colgó."
@@ -754,6 +754,102 @@ msgstr ""
 msgid "Send a message when the Enter-key is pressed"
 msgstr ""
 
+#, fuzzy
+#~ msgid "Changed"
+#~ msgstr "Canales"
+
+#, fuzzy
+#~ msgid "Notifications on reactions received (configurable)."
+#~ msgstr "Enviar notificaciones"
+
+#, fuzzy
+#~ msgid "Keyboard shortcut Ctrl+Q to close window."
+#~ msgstr "Mostrar atajos"
+
+#, fuzzy
+#~ msgid "Message deletion."
+#~ msgstr "Almacenamiento de Mensajes"
+
+#, fuzzy
+#~ msgid "Updated application icon and emblem."
+#~ msgstr "Una parte de la aplicación se colgó."
+
+#, fuzzy
+#~ msgid "Copy action in message menu."
+#~ msgstr "Borrar mensajes"
+
+#, fuzzy
+#~ msgid "Unlink without deleting messages."
+#~ msgstr "Desvincular manteniendo los mensajes"
+
+#, fuzzy
+#~ msgid "Messages and notifications for calls."
+#~ msgstr "Enviar notificaciones"
+
+#, fuzzy
+#~ msgid "Greatly refactored messages."
+#~ msgstr "Borrar mensajes"
+
+#, fuzzy
+#~ msgid "Changed:"
+#~ msgstr "Canales"
+
+#, fuzzy
+#~ msgid "UI improvements for the channel list."
+#~ msgstr "Buscar en canales"
+
+#, fuzzy
+#~ msgid "Notification support."
+#~ msgstr "Notificaciones"
+
+#, fuzzy
+#~ msgid "New message storage backend."
+#~ msgstr "Almacenamiento de Mensajes"
+
+#, fuzzy
+#~ msgid "Group storage."
+#~ msgstr "Almacenamiento de Mensajes"
+
+#, fuzzy
+#~ msgid "Search for the channel view."
+#~ msgstr "Buscar en canales"
+
+#, fuzzy
+#~ msgid "Message storage."
+#~ msgstr "Almacenamiento de Mensajes"
+
+#, fuzzy
+#~ msgid "Prevented sending empty messages."
+#~ msgstr "Presionar \"Enter\" para enviar mensaje"
+
+#, fuzzy
+#~ msgid "Keyboard shortcuts."
+#~ msgstr "Mostrar atajos"
+
+#~ msgid "Load image"
+#~ msgstr "Cargar imagen"
+
+#~ msgid "Load video"
+#~ msgstr "Cargar video"
+
+#~ msgid "Load file"
+#~ msgstr "Cargar archivo"
+
+#~ msgid "Load voice message"
+#~ msgstr "Cargar mensaje de voz"
+
+#~ msgid "Link Device"
+#~ msgstr "Vincular Dispositivo"
+
+#~ msgid "Please scan this QR code with your primary device."
+#~ msgstr "Por favor escanea este código QR con tu dispositivo principal."
+
+#, fuzzy
+#~ msgid "Please wait until the contacts are displayed after linking."
+#~ msgstr ""
+#~ "Por favor espere hasta que se muestren los contactos después de la "
+#~ "vinculación."
+
 #~ msgctxt "accessibility"
 #~ msgid "Download"
 #~ msgstr "Descargar"
@@ -767,9 +863,6 @@ msgstr ""
 
 #~ msgid "Reset Identity"
 #~ msgstr "Reiniciar identidad"
-
-#~ msgid "Load more"
-#~ msgstr "Cargar más"
 
 #~ msgid "Message Storage"
 #~ msgstr "Almacenamiento de Mensajes"
@@ -791,43 +884,3 @@ msgstr ""
 #, fuzzy
 #~ msgid "The amount of messages to load on request for each channel"
 #~ msgstr "Número de mensajes a cargar a petición"
-
-#, fuzzy
-#~ msgid "Changed"
-#~ msgstr "Canales"
-
-#, fuzzy
-#~ msgid "Unlink without deleting messages."
-#~ msgstr "Desvincular manteniendo los mensajes"
-
-#, fuzzy
-#~ msgid "Messages and notifications for calls."
-#~ msgstr "Enviar notificaciones"
-
-#, fuzzy
-#~ msgid "Greatly refactored messages."
-#~ msgstr "Borrar mensajes"
-
-#, fuzzy
-#~ msgid "Changed:"
-#~ msgstr "Canales"
-
-#, fuzzy
-#~ msgid "Notification support."
-#~ msgstr "Notificaciones"
-
-#, fuzzy
-#~ msgid "New message storage backend."
-#~ msgstr "Almacenamiento de Mensajes"
-
-#, fuzzy
-#~ msgid "Search for the channel view."
-#~ msgstr "Buscar en canales"
-
-#, fuzzy
-#~ msgid "Message storage."
-#~ msgstr "Almacenamiento de Mensajes"
-
-#, fuzzy
-#~ msgid "Keyboard shortcuts."
-#~ msgstr "Mostrar atajos"

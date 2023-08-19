@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 15:31+0200\n"
+"POT-Creation-Date: 2023-08-19 12:50+0200\n"
 "PO-Revision-Date: 2023-06-11 16:50+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/"
@@ -24,23 +24,6 @@ msgid "translator-credits"
 msgstr ""
 "Sabri Ünal <libreajans@gmail.com>\n"
 "Oğuz Ersen <oguz@ersen.moe>"
-
-#: data/resources/ui/attachment.blp:27
-msgid "Load image"
-msgstr "Görüntü yükle"
-
-#: data/resources/ui/attachment.blp:33
-msgid "Load video"
-msgstr "Video yükle"
-
-#: data/resources/ui/attachment.blp:39
-msgid "Load file"
-msgstr "Dosya yükle"
-
-#: data/resources/ui/attachment.blp:44
-#, fuzzy
-msgid "Load voice message"
-msgstr "Daha çok ileti yükle"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
@@ -203,22 +186,37 @@ msgstr "Lütfen hatayı bildirin."
 msgid "Report"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:6
-msgid "Link Device"
-msgstr "Aygıt Bağla"
-
-#: data/resources/ui/link_window.blp:15
-msgid "Please scan this QR code with your primary device."
-msgstr "Lütfen bu QR kodunu birincil aygıtınızla tarayın."
-
-#: data/resources/ui/link_window.blp:23
-msgctxt "accessibility"
-msgid "Copy to clipboard"
-msgstr "Panoya kopyala"
+#: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
+msgid "Link device"
+msgstr "Aygıt bağla"
 
 #: data/resources/ui/link_window.blp:34
-msgid "Please wait until the contacts are displayed after linking."
-msgstr "Lütfen bağ kurulduktan sonra kişiler görüntülenene kadar bekleyin."
+msgid "Scan Code"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:35
+msgid "Scan this code with another Signal app logged into your account."
+msgstr ""
+
+#: data/resources/ui/link_window.blp:59
+msgid "Link without scanning"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:86
+#, fuzzy
+msgid "Manual Linking"
+msgstr "Bağlama"
+
+#: data/resources/ui/link_window.blp:87
+msgid ""
+"If your device can't scan the QR code, you can manually enter the link "
+"provided here"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:98
+#, fuzzy
+msgid "Copy to clipboard"
+msgstr "Panoya kopyala"
 
 #: data/resources/ui/message_item.blp:12
 msgid "Reply"
@@ -241,6 +239,11 @@ msgstr ""
 msgid "Open with…"
 msgstr "Birlikte Aç…"
 
+#: data/resources/ui/message_item.blp:156
+#, fuzzy
+msgid "Load media"
+msgstr "Daha çoğunu yükle"
+
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Genel"
@@ -257,7 +260,9 @@ msgstr "Etkinleşmesi için aygıtın yeniden bağlanması gerekir."
 msgid "Device Name"
 msgstr "Aygıt Adı"
 
+#. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:19
+#: data/de.schmidhuberj.Flare.metainfo.xml:51
 msgid "Attachments"
 msgstr "Ekler"
 
@@ -445,7 +450,7 @@ msgstr ""
 msgid "Note to self"
 msgstr "Kendime not"
 
-#: src/backend/manager.rs:410
+#: src/backend/manager.rs:411
 msgid "You"
 msgstr "Siz"
 
@@ -574,6 +579,11 @@ msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Lütfen uygulamayı günlük kaydı ile yeniden başlatın ve bu sorunu bildirin."
 
+#: src/gui/link_window.rs:65
+#, fuzzy
+msgid "Copied to clipboard"
+msgstr "Panoya kopyala"
+
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
 msgstr "Arka plan izni"
@@ -584,13 +594,13 @@ msgstr "İzinleri kaldırmak için ayarları kullanın"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:57
+#: src/gui/utility.rs:58
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:60
+#: src/gui/utility.rs:61
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
 
@@ -600,77 +610,72 @@ msgstr "%Y-%m-%d %H:%M"
 msgid "Flare"
 msgstr "Flare"
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
-#, fuzzy
-msgid "Signal GTK Client"
-msgstr "Resmi olmayan bir Signal GTK istemcisi"
-
 #. Translators: Flare summary in metainfo.
+#: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
-msgid "An unofficial Signal GTK client"
-msgstr "Resmi olmayan bir Signal GTK istemcisi"
+msgid "Chat with your friends on Signal"
+msgstr ""
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
 msgid ""
-"An unofficial GTK client for the messaging application Signal. This is a "
-"very simple application with many features missing compared to the official "
-"applications."
+"Flare is an unofficial app that lets you chat with your friends on Signal "
+"from Linux. It is still in development and doesn't include as many features "
+"as the official Signal applications."
 msgstr ""
-"Mesajlaşma uygulaması Signal için resmi olmayan bir GTK istemcisi. Bu, resmi "
-"uygulamalara kıyasla birçok özelliği eksik olan çok basit bir uygulamadır."
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:32
-msgid "Link device"
+#: data/de.schmidhuberj.Flare.metainfo.xml:31
+#, fuzzy
+msgid "Linking device"
 msgstr "Aygıt bağla"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:36
-msgid "Send messages"
+#: data/de.schmidhuberj.Flare.metainfo.xml:35
+#, fuzzy
+msgid "Sending messages"
 msgstr "İleti gönder"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:40
-msgid "Receive messages"
+#: data/de.schmidhuberj.Flare.metainfo.xml:39
+#, fuzzy
+msgid "Receiving messages"
 msgstr "İleti al"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:44
-msgid "Reply to a message"
+#: data/de.schmidhuberj.Flare.metainfo.xml:43
+#, fuzzy
+msgid "Replying to a message"
 msgstr "İletiyi yanıtla"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:48
-msgid "React to a message"
+#: data/de.schmidhuberj.Flare.metainfo.xml:47
+#, fuzzy
+msgid "Reacting to a message"
 msgstr "İletiye tepki ver"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:52
-msgid "Sending and receiving attachments"
-msgstr "Ek gönderme ve alma"
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:56
+#: data/de.schmidhuberj.Flare.metainfo.xml:55
 msgid "Encrypted storage"
 msgstr "Şifreli depolama"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:60
+#: data/de.schmidhuberj.Flare.metainfo.xml:59
 msgid "Notifications, optionally in the background"
 msgstr "İsteğe bağlı olarak arka planda bildirimler"
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:65
+#: data/de.schmidhuberj.Flare.metainfo.xml:64
+#, fuzzy
 msgid ""
-"More features are planned, blocked or not-planned. Consult the README for "
+"More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
 "Daha fazla özellik planlanmış, engellenmiş veya planlanmamıştır. Bunlar "
 "hakkında daha fazla bilgi için README'ye bakın."
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:69
+#: data/de.schmidhuberj.Flare.metainfo.xml:68
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -682,7 +687,7 @@ msgstr ""
 "verileri işlerken dikkatli kullanın. Güvenlik hakkında daha fazla bilgi için "
 "projenin README dosyasına bakın."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:432
+#: data/de.schmidhuberj.Flare.metainfo.xml:479
 msgid "Overview of the application"
 msgstr "Uygulamaya genel bakış"
 
@@ -738,6 +743,120 @@ msgstr "Mesajlar seçilebilir mi?"
 msgid "Send a message when the Enter-key is pressed"
 msgstr ""
 
+#, fuzzy
+#~ msgid "Signal GTK Client"
+#~ msgstr "Resmi olmayan bir Signal GTK istemcisi"
+
+#, fuzzy
+#~ msgid "Changed"
+#~ msgstr "Kanallar"
+
+#, fuzzy
+#~ msgid "Notifications on reactions received (configurable)."
+#~ msgstr "Bildirim gönder"
+
+#, fuzzy
+#~ msgid "Button to scroll down in the messages view."
+#~ msgstr "Görüntüleri kendiliğinden indir"
+
+#, fuzzy
+#~ msgid "Keyboard shortcut Ctrl+Q to close window."
+#~ msgstr "Kısayolları göster"
+
+#, fuzzy
+#~ msgid "Message deletion."
+#~ msgstr "İleti Depolama"
+
+#, fuzzy
+#~ msgid "Updated application icon and emblem."
+#~ msgstr "Uygulamanın bir bölümü çöktü."
+
+#, fuzzy
+#~ msgid "Copy action in message menu."
+#~ msgstr "İletiyi yanıtla"
+
+#, fuzzy
+#~ msgid "Unlink without deleting messages."
+#~ msgstr "Bağı kaldır ama iletileri sakla"
+
+#, fuzzy
+#~ msgid "Messages and notifications for calls."
+#~ msgstr "Bildirim gönder"
+
+#, fuzzy
+#~ msgid "Greatly refactored messages."
+#~ msgstr "İletileri temizle"
+
+#, fuzzy
+#~ msgid "Changed:"
+#~ msgstr "Kanallar"
+
+#, fuzzy
+#~ msgid "UI improvements for the channel list."
+#~ msgstr "Kanallarda ara"
+
+#, fuzzy
+#~ msgid "Notification support."
+#~ msgstr "Bildirimler"
+
+#, fuzzy
+#~ msgid "New message storage backend."
+#~ msgstr "İleti Depolama"
+
+#, fuzzy
+#~ msgid "Group storage."
+#~ msgstr "Şifreli depolama"
+
+#, fuzzy
+#~ msgid "Search for the channel view."
+#~ msgstr "Kanallarda ara"
+
+#, fuzzy
+#~ msgid "Message storage."
+#~ msgstr "İleti Depolama"
+
+#, fuzzy
+#~ msgid "Keyboard shortcuts."
+#~ msgstr "Kısayolları göster"
+
+#, fuzzy
+#~ msgid "Fix message receiving, sending attachments."
+#~ msgstr "Ek gönderme ve alma"
+
+#~ msgid "Load image"
+#~ msgstr "Görüntü yükle"
+
+#~ msgid "Load video"
+#~ msgstr "Video yükle"
+
+#~ msgid "Load file"
+#~ msgstr "Dosya yükle"
+
+#, fuzzy
+#~ msgid "Load voice message"
+#~ msgstr "Daha çok ileti yükle"
+
+#~ msgid "Link Device"
+#~ msgstr "Aygıt Bağla"
+
+#~ msgid "Please scan this QR code with your primary device."
+#~ msgstr "Lütfen bu QR kodunu birincil aygıtınızla tarayın."
+
+#~ msgid "Please wait until the contacts are displayed after linking."
+#~ msgstr "Lütfen bağ kurulduktan sonra kişiler görüntülenene kadar bekleyin."
+
+#~ msgid "An unofficial Signal GTK client"
+#~ msgstr "Resmi olmayan bir Signal GTK istemcisi"
+
+#~ msgid ""
+#~ "An unofficial GTK client for the messaging application Signal. This is a "
+#~ "very simple application with many features missing compared to the "
+#~ "official applications."
+#~ msgstr ""
+#~ "Mesajlaşma uygulaması Signal için resmi olmayan bir GTK istemcisi. Bu, "
+#~ "resmi uygulamalara kıyasla birçok özelliği eksik olan çok basit bir "
+#~ "uygulamadır."
+
 #~ msgid "Other"
 #~ msgstr "Diğer"
 
@@ -754,9 +873,6 @@ msgstr ""
 
 #~ msgid "Reset Identity"
 #~ msgstr "Kimliği Sıfırla"
-
-#~ msgid "Load more"
-#~ msgstr "Daha çoğunu yükle"
 
 #~ msgid "Message Storage"
 #~ msgstr "İleti Depolama"
@@ -777,46 +893,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "The amount of messages to load on request for each channel"
 #~ msgstr "İstek halinde yüklenecek ileti sayısı"
-
-#, fuzzy
-#~ msgid "Changed"
-#~ msgstr "Kanallar"
-
-#, fuzzy
-#~ msgid "Unlink without deleting messages."
-#~ msgstr "Bağı kaldır ama iletileri sakla"
-
-#, fuzzy
-#~ msgid "Messages and notifications for calls."
-#~ msgstr "Bildirim gönder"
-
-#, fuzzy
-#~ msgid "Greatly refactored messages."
-#~ msgstr "İletileri temizle"
-
-#, fuzzy
-#~ msgid "Changed:"
-#~ msgstr "Kanallar"
-
-#, fuzzy
-#~ msgid "Notification support."
-#~ msgstr "Bildirimler"
-
-#, fuzzy
-#~ msgid "New message storage backend."
-#~ msgstr "İleti Depolama"
-
-#, fuzzy
-#~ msgid "Search for the channel view."
-#~ msgstr "Kanallarda ara"
-
-#, fuzzy
-#~ msgid "Message storage."
-#~ msgstr "İleti Depolama"
-
-#, fuzzy
-#~ msgid "Keyboard shortcuts."
-#~ msgstr "Kısayolları göster"
 
 #~ msgid ""
 #~ "Notifications for new messages. These notifications will only work while "

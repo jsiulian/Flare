@@ -2,7 +2,7 @@
 Type=Application
 Icon=de.schmidhuberj.Flare
 Name=Flare
-Comment=Signal GTK Client
+Comment=Chat with your friends on Signal
 StartupWMClass=Flare
 Exec=@bindir@/flare
 Categories=Network;Chat;

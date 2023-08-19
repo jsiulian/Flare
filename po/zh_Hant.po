@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 15:31+0200\n"
+"POT-Creation-Date: 2023-08-19 12:50+0200\n"
 "PO-Revision-Date: 2023-01-02 15:50+0000\n"
 "Last-Translator: AsBenDoge <J395206@tutanota.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
@@ -22,23 +22,6 @@ msgstr ""
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
 msgstr "鳴謝翻譯者:"
-
-#: data/resources/ui/attachment.blp:27
-msgid "Load image"
-msgstr "載入圖像"
-
-#: data/resources/ui/attachment.blp:33
-msgid "Load video"
-msgstr "載入影片"
-
-#: data/resources/ui/attachment.blp:39
-msgid "Load file"
-msgstr "載入檔案"
-
-#: data/resources/ui/attachment.blp:44
-#, fuzzy
-msgid "Load voice message"
-msgstr "載入圖像"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
@@ -197,22 +180,38 @@ msgstr "請匯報此錯誤"
 msgid "Report"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:6
-msgid "Link Device"
+#: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
+#, fuzzy
+msgid "Link device"
 msgstr "連結裝置"
 
-#: data/resources/ui/link_window.blp:15
-msgid "Please scan this QR code with your primary device."
+#: data/resources/ui/link_window.blp:34
+msgid "Scan Code"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:23
-msgctxt "accessibility"
+#: data/resources/ui/link_window.blp:35
+msgid "Scan this code with another Signal app logged into your account."
+msgstr ""
+
+#: data/resources/ui/link_window.blp:59
+msgid "Link without scanning"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:86
+#, fuzzy
+msgid "Manual Linking"
+msgstr "連結中"
+
+#: data/resources/ui/link_window.blp:87
+msgid ""
+"If your device can't scan the QR code, you can manually enter the link "
+"provided here"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:98
+#, fuzzy
 msgid "Copy to clipboard"
 msgstr "複製"
-
-#: data/resources/ui/link_window.blp:34
-msgid "Please wait until the contacts are displayed after linking."
-msgstr ""
 
 #: data/resources/ui/message_item.blp:12
 msgid "Reply"
@@ -234,6 +233,11 @@ msgstr ""
 msgid "Open with…"
 msgstr ""
 
+#: data/resources/ui/message_item.blp:156
+#, fuzzy
+msgid "Load media"
+msgstr "載入更多"
+
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr ""
@@ -250,7 +254,9 @@ msgstr ""
 msgid "Device Name"
 msgstr "裝置名稱"
 
+#. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:19
+#: data/de.schmidhuberj.Flare.metainfo.xml:51
 msgid "Attachments"
 msgstr "附件"
 
@@ -436,7 +442,7 @@ msgstr ""
 msgid "Note to self"
 msgstr ""
 
-#: src/backend/manager.rs:410
+#: src/backend/manager.rs:411
 msgid "You"
 msgstr ""
 
@@ -557,6 +563,11 @@ msgstr ""
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 
+#: src/gui/link_window.rs:65
+#, fuzzy
+msgid "Copied to clipboard"
+msgstr "複製"
+
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
 msgstr ""
@@ -567,13 +578,13 @@ msgstr ""
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:57
+#: src/gui/utility.rs:58
 msgid "%H:%M"
 msgstr ""
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:60
+#: src/gui/utility.rs:61
 msgid "%Y-%m-%d %H:%M"
 msgstr ""
 
@@ -583,77 +594,69 @@ msgstr ""
 msgid "Flare"
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
-msgid "Signal GTK Client"
-msgstr ""
-
 #. Translators: Flare summary in metainfo.
+#: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
-msgid "An unofficial Signal GTK client"
+msgid "Chat with your friends on Signal"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
 msgid ""
-"An unofficial GTK client for the messaging application Signal. This is a "
-"very simple application with many features missing compared to the official "
-"applications."
+"Flare is an unofficial app that lets you chat with your friends on Signal "
+"from Linux. It is still in development and doesn't include as many features "
+"as the official Signal applications."
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:32
+#: data/de.schmidhuberj.Flare.metainfo.xml:31
 #, fuzzy
-msgid "Link device"
+msgid "Linking device"
 msgstr "連結裝置"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:36
+#: data/de.schmidhuberj.Flare.metainfo.xml:35
 #, fuzzy
-msgid "Send messages"
+msgid "Sending messages"
 msgstr "清除訊息"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:40
+#: data/de.schmidhuberj.Flare.metainfo.xml:39
 #, fuzzy
-msgid "Receive messages"
+msgid "Receiving messages"
 msgstr "清除訊息"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:44
+#: data/de.schmidhuberj.Flare.metainfo.xml:43
 #, fuzzy
-msgid "Reply to a message"
+msgid "Replying to a message"
 msgstr "清除訊息"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:48
+#: data/de.schmidhuberj.Flare.metainfo.xml:47
 #, fuzzy
-msgid "React to a message"
+msgid "Reacting to a message"
 msgstr "清除訊息"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:52
-msgid "Sending and receiving attachments"
-msgstr ""
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:56
+#: data/de.schmidhuberj.Flare.metainfo.xml:55
 msgid "Encrypted storage"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:60
+#: data/de.schmidhuberj.Flare.metainfo.xml:59
 msgid "Notifications, optionally in the background"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:65
+#: data/de.schmidhuberj.Flare.metainfo.xml:64
 msgid ""
-"More features are planned, blocked or not-planned. Consult the README for "
+"More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:69
+#: data/de.schmidhuberj.Flare.metainfo.xml:68
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -661,7 +664,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:432
+#: data/de.schmidhuberj.Flare.metainfo.xml:479
 msgid "Overview of the application"
 msgstr ""
 
@@ -715,21 +718,25 @@ msgstr ""
 msgid "Send a message when the Enter-key is pressed"
 msgstr ""
 
-#~ msgid "React"
-#~ msgstr "回應"
-
-#~ msgid "Load more"
-#~ msgstr "載入更多"
-
-#~ msgid "Message Storage"
-#~ msgstr "儲存訊息"
-
-#~ msgid "Per channel"
-#~ msgstr "每頻道"
-
 #, fuzzy
 #~ msgid "Changed"
 #~ msgstr "頻道"
+
+#, fuzzy
+#~ msgid "Notifications on reactions received (configurable)."
+#~ msgstr "傳送通知"
+
+#, fuzzy
+#~ msgid "Keyboard shortcut Ctrl+Q to close window."
+#~ msgstr "顯示快捷鍵"
+
+#, fuzzy
+#~ msgid "Message deletion."
+#~ msgstr "儲存訊息"
+
+#, fuzzy
+#~ msgid "Copy action in message menu."
+#~ msgstr "清除訊息"
 
 #, fuzzy
 #~ msgid "Unlink without deleting messages."
@@ -756,9 +763,38 @@ msgstr ""
 #~ msgstr "儲存訊息"
 
 #, fuzzy
+#~ msgid "Group storage."
+#~ msgstr "儲存訊息"
+
+#, fuzzy
 #~ msgid "Message storage."
 #~ msgstr "儲存訊息"
 
 #, fuzzy
 #~ msgid "Keyboard shortcuts."
 #~ msgstr "顯示快捷鍵"
+
+#~ msgid "Load image"
+#~ msgstr "載入圖像"
+
+#~ msgid "Load video"
+#~ msgstr "載入影片"
+
+#~ msgid "Load file"
+#~ msgstr "載入檔案"
+
+#, fuzzy
+#~ msgid "Load voice message"
+#~ msgstr "載入圖像"
+
+#~ msgid "Link Device"
+#~ msgstr "連結裝置"
+
+#~ msgid "React"
+#~ msgstr "回應"
+
+#~ msgid "Message Storage"
+#~ msgstr "儲存訊息"
+
+#~ msgid "Per channel"
+#~ msgstr "每頻道"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 15:31+0200\n"
+"POT-Creation-Date: 2023-08-19 12:50+0200\n"
 "PO-Revision-Date: 2023-07-08 12:53+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
@@ -23,23 +23,6 @@ msgid "translator-credits"
 msgstr ""
 "Heimen Stoffels <vistausss@fastmail.com>\n"
 "Philip Goto https://flipflop97.github.io/"
-
-#: data/resources/ui/attachment.blp:27
-msgid "Load image"
-msgstr "Afbeelding laden"
-
-#: data/resources/ui/attachment.blp:33
-msgid "Load video"
-msgstr "Video laden"
-
-#: data/resources/ui/attachment.blp:39
-msgid "Load file"
-msgstr "Bestand laden"
-
-#: data/resources/ui/attachment.blp:44
-#, fuzzy
-msgid "Load voice message"
-msgstr "Meer berichten laden"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
@@ -202,22 +185,37 @@ msgstr "Gelieve deze fout te melden."
 msgid "Report"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:6
-msgid "Link Device"
+#: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
+msgid "Link device"
 msgstr "Apparaat koppelen"
 
-#: data/resources/ui/link_window.blp:15
-msgid "Please scan this QR code with your primary device."
-msgstr "Scan deze QR-code met behulp van uw hoofdapparaat."
+#: data/resources/ui/link_window.blp:34
+msgid "Scan Code"
+msgstr ""
 
-#: data/resources/ui/link_window.blp:23
-msgctxt "accessibility"
+#: data/resources/ui/link_window.blp:35
+msgid "Scan this code with another Signal app logged into your account."
+msgstr ""
+
+#: data/resources/ui/link_window.blp:59
+msgid "Link without scanning"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:86
+#, fuzzy
+msgid "Manual Linking"
+msgstr "Koppelen"
+
+#: data/resources/ui/link_window.blp:87
+msgid ""
+"If your device can't scan the QR code, you can manually enter the link "
+"provided here"
+msgstr ""
+
+#: data/resources/ui/link_window.blp:98
+#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Kopiëren naar klembord"
-
-#: data/resources/ui/link_window.blp:34
-msgid "Please wait until the contacts are displayed after linking."
-msgstr "Wacht na het koppelen tot contactpersoonsynchronisatie is afgerond."
 
 #: data/resources/ui/message_item.blp:12
 msgid "Reply"
@@ -240,6 +238,11 @@ msgstr ""
 msgid "Open with…"
 msgstr "Openen met…"
 
+#: data/resources/ui/message_item.blp:156
+#, fuzzy
+msgid "Load media"
+msgstr "Meer laden"
+
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Algemeen"
@@ -256,7 +259,9 @@ msgstr "Herkoppel het apparaat om de wijzigingen toe te passen."
 msgid "Device Name"
 msgstr "Apparaatnaam"
 
+#. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:19
+#: data/de.schmidhuberj.Flare.metainfo.xml:51
 msgid "Attachments"
 msgstr "Bijlagen"
 
@@ -443,7 +448,7 @@ msgstr ""
 msgid "Note to self"
 msgstr "Herinnering aan mezelf"
 
-#: src/backend/manager.rs:410
+#: src/backend/manager.rs:411
 msgid "You"
 msgstr "Ik"
 
@@ -569,6 +574,11 @@ msgstr "De databaselocatie, {}, is geen map."
 msgid "Please restart the application with logging and report this issue."
 msgstr "Schakel de foutopsporing in, herstart de app en meld dit probleem."
 
+#: src/gui/link_window.rs:65
+#, fuzzy
+msgid "Copied to clipboard"
+msgstr "Kopiëren naar klembord"
+
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
 msgstr "Achtergrondrecht"
@@ -579,13 +589,13 @@ msgstr "Beheer de rechten in de voorkeuren"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:57
+#: src/gui/utility.rs:58
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:60
+#: src/gui/utility.rs:61
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
 
@@ -595,78 +605,72 @@ msgstr "%Y-%m-%d %H:%M"
 msgid "Flare"
 msgstr "Flare"
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
-#, fuzzy
-msgid "Signal GTK Client"
-msgstr "Onofficiële GTK-app voor Signal"
-
 #. Translators: Flare summary in metainfo.
+#: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
-msgid "An unofficial Signal GTK client"
-msgstr "Onofficiële GTK-app voor Signal"
+msgid "Chat with your friends on Signal"
+msgstr ""
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
 msgid ""
-"An unofficial GTK client for the messaging application Signal. This is a "
-"very simple application with many features missing compared to the official "
-"applications."
+"Flare is an unofficial app that lets you chat with your friends on Signal "
+"from Linux. It is still in development and doesn't include as many features "
+"as the official Signal applications."
 msgstr ""
-"Een onofficiële GTK-app voor de berichtenapplicatie Signal. Dit is een zeer "
-"eenvoudige app met veel ontbrekende functionaliteit in vergelijking met de "
-"officiële apps."
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:32
-msgid "Link device"
+#: data/de.schmidhuberj.Flare.metainfo.xml:31
+#, fuzzy
+msgid "Linking device"
 msgstr "Apparaat koppelen"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:36
-msgid "Send messages"
+#: data/de.schmidhuberj.Flare.metainfo.xml:35
+#, fuzzy
+msgid "Sending messages"
 msgstr "Berichten versturen"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:40
-msgid "Receive messages"
+#: data/de.schmidhuberj.Flare.metainfo.xml:39
+#, fuzzy
+msgid "Receiving messages"
 msgstr "Berichten ontvangen"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:44
-msgid "Reply to a message"
+#: data/de.schmidhuberj.Flare.metainfo.xml:43
+#, fuzzy
+msgid "Replying to a message"
 msgstr "Berichten beantwoorden"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:48
-msgid "React to a message"
+#: data/de.schmidhuberj.Flare.metainfo.xml:47
+#, fuzzy
+msgid "Reacting to a message"
 msgstr "Reageren op berichten"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:52
-msgid "Sending and receiving attachments"
-msgstr "Bijlagen versturen en ontvangen"
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:56
+#: data/de.schmidhuberj.Flare.metainfo.xml:55
 msgid "Encrypted storage"
 msgstr "Versleutelde opslag"
 
 #. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:60
+#: data/de.schmidhuberj.Flare.metainfo.xml:59
 msgid "Notifications, optionally in the background"
 msgstr "Meldingen, optioneel op de achtergrond"
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:65
+#: data/de.schmidhuberj.Flare.metainfo.xml:64
+#, fuzzy
 msgid ""
-"More features are planned, blocked or not-planned. Consult the README for "
+"More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
 "Meer functies zijn gepland, geblokkeerd of niet-gepland. Raadpleeg de README "
 "voor meer informatie hierover."
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:69
+#: data/de.schmidhuberj.Flare.metainfo.xml:68
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -678,7 +682,7 @@ msgstr ""
 "Signal-apps. Wees voorzichtig bij het omgaan met gevoelige gegevens. Bekijk "
 "de README van het project voor meer informatie over beveiliging."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:432
+#: data/de.schmidhuberj.Flare.metainfo.xml:479
 msgid "Overview of the application"
 msgstr "Overzicht van de app"
 
@@ -735,46 +739,44 @@ msgstr "Of berichten geselecteerd kunnen worden"
 msgid "Send a message when the Enter-key is pressed"
 msgstr ""
 
-#~ msgid "Other"
-#~ msgstr "Overig"
+#, fuzzy
+#~ msgid "Signal GTK Client"
+#~ msgstr "Onofficiële GTK-app voor Signal"
 
-#~ msgctxt "accessibility"
-#~ msgid "Download"
-#~ msgstr "Downloaden"
+#~ msgid "Added"
+#~ msgstr "Toegevoegd"
 
-#~ msgid "React"
-#~ msgstr "Reageren"
-
-#~ msgctxt "accessibility"
-#~ msgid "Reset Identity"
-#~ msgstr "Identiteit resetten"
-
-#~ msgid "Reset Identity"
-#~ msgstr "Identiteit resetten"
-
-#~ msgid "Load more"
-#~ msgstr "Meer laden"
-
-#~ msgid "Message Storage"
-#~ msgstr "Berichtopslag"
-
-#~ msgid "Number of messages to load on startup"
-#~ msgstr "Aantal te tonen berichten na opstarten"
-
-#~ msgid "Per channel"
-#~ msgstr "Per kanaal"
-
-#~ msgid "Number of messages to load on request"
-#~ msgstr "Aantal op verzoek te tonen berichten"
-
-#~ msgid "The amount of messages to load on startup for each channel"
-#~ msgstr "Aantal te laden berichten bij opstarten van elk kanaal"
-
-#~ msgid "The amount of messages to load on request for each channel"
-#~ msgstr "Aantal te laden berichten bij aanvraag van elk kanaal"
+#~ msgid "Fixed"
+#~ msgstr "Foutoplossingen"
 
 #~ msgid "HOTFIX"
 #~ msgstr "HOTFIX"
+
+#~ msgid "Changed"
+#~ msgstr "Gewijzigd"
+
+#, fuzzy
+#~ msgid "Notifications on reactions received (configurable)."
+#~ msgstr "Leesbewijzen"
+
+#~ msgid "Chores"
+#~ msgstr "Klusjes"
+
+#, fuzzy
+#~ msgid "Button to scroll down in the messages view."
+#~ msgstr "Afbeeldingen automatisch downloaden"
+
+#, fuzzy
+#~ msgid "Keyboard shortcut Ctrl+Q to close window."
+#~ msgstr "Sneltoetsen"
+
+#, fuzzy
+#~ msgid "Message deletion."
+#~ msgstr "Berichtopslag"
+
+#, fuzzy
+#~ msgid "Updated application icon and emblem."
+#~ msgstr "Een deel van de app is gecrasht."
 
 #~ msgid "Fix outgoing 1-to-1 messages stored incorrectly."
 #~ msgstr "Probleemoplossing voor verkeerd opgeslagen privéberichten"
@@ -786,9 +788,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Vanwege een nieuwe gegevensopslag is bij de eerste keer opstarten een "
 #~ "herkoppeling vereist"
-
-#~ msgid "Added"
-#~ msgstr "Toegevoegd"
 
 #~ msgid "Integration with feedbackd."
 #~ msgstr "Integratie met feedbackd"
@@ -805,9 +804,6 @@ msgstr ""
 #~ msgid "Show offline status in GUI."
 #~ msgstr "Offline-status aan interface toegevoegd"
 
-#~ msgid "Changed"
-#~ msgstr "Gewijzigd"
-
 #~ msgid ""
 #~ "Notifications for group messages now display the name of the group "
 #~ "instead of just the name of the sender."
@@ -823,18 +819,12 @@ msgstr ""
 #~ msgid "UI got revamped."
 #~ msgstr "Interface is vernieuwd"
 
-#~ msgid "Fixed"
-#~ msgstr "Foutoplossingen"
-
 #~ msgid "Fixed not setting revision for groups."
 #~ msgstr ""
 #~ "Fout waarbij herzieningen voor groepen niet werden ingesteld opgelost"
 
 #~ msgid "Prevent sending messages while offline."
 #~ msgstr "Voorkomen dat offline berichten worden verstuurd"
-
-#~ msgid "Chores"
-#~ msgstr "Klusjes"
 
 #~ msgid "Updated all dependencies."
 #~ msgstr "Alle afhankelijkheden bijgewerkt"
@@ -875,6 +865,10 @@ msgstr ""
 #~ msgid "Changed:"
 #~ msgstr "Gewijzigd"
 
+#, fuzzy
+#~ msgid "UI improvements for the channel list."
+#~ msgstr "Kanalen doorzoeken"
+
 #~ msgid "Notification support."
 #~ msgstr "Ondersteuning voor meldingen"
 
@@ -895,8 +889,85 @@ msgstr ""
 #~ msgid "Message storage."
 #~ msgstr "Berichtopslag"
 
+#, fuzzy
+#~ msgid "Prevented sending empty messages."
+#~ msgstr "Voorkomen dat offline berichten worden verstuurd"
+
 #~ msgid "Keyboard shortcuts."
 #~ msgstr "Sneltoetsen"
 
+#, fuzzy
+#~ msgid "Fix message receiving, sending attachments."
+#~ msgstr "Bijlagen versturen en ontvangen"
+
 #~ msgid "Initial Release."
 #~ msgstr "Initiële uitgave"
+
+#~ msgid "Load image"
+#~ msgstr "Afbeelding laden"
+
+#~ msgid "Load video"
+#~ msgstr "Video laden"
+
+#~ msgid "Load file"
+#~ msgstr "Bestand laden"
+
+#, fuzzy
+#~ msgid "Load voice message"
+#~ msgstr "Meer berichten laden"
+
+#~ msgid "Link Device"
+#~ msgstr "Apparaat koppelen"
+
+#~ msgid "Please scan this QR code with your primary device."
+#~ msgstr "Scan deze QR-code met behulp van uw hoofdapparaat."
+
+#~ msgid "Please wait until the contacts are displayed after linking."
+#~ msgstr "Wacht na het koppelen tot contactpersoonsynchronisatie is afgerond."
+
+#~ msgid "An unofficial Signal GTK client"
+#~ msgstr "Onofficiële GTK-app voor Signal"
+
+#~ msgid ""
+#~ "An unofficial GTK client for the messaging application Signal. This is a "
+#~ "very simple application with many features missing compared to the "
+#~ "official applications."
+#~ msgstr ""
+#~ "Een onofficiële GTK-app voor de berichtenapplicatie Signal. Dit is een "
+#~ "zeer eenvoudige app met veel ontbrekende functionaliteit in vergelijking "
+#~ "met de officiële apps."
+
+#~ msgid "Other"
+#~ msgstr "Overig"
+
+#~ msgctxt "accessibility"
+#~ msgid "Download"
+#~ msgstr "Downloaden"
+
+#~ msgid "React"
+#~ msgstr "Reageren"
+
+#~ msgctxt "accessibility"
+#~ msgid "Reset Identity"
+#~ msgstr "Identiteit resetten"
+
+#~ msgid "Reset Identity"
+#~ msgstr "Identiteit resetten"
+
+#~ msgid "Message Storage"
+#~ msgstr "Berichtopslag"
+
+#~ msgid "Number of messages to load on startup"
+#~ msgstr "Aantal te tonen berichten na opstarten"
+
+#~ msgid "Per channel"
+#~ msgstr "Per kanaal"
+
+#~ msgid "Number of messages to load on request"
+#~ msgstr "Aantal op verzoek te tonen berichten"
+
+#~ msgid "The amount of messages to load on startup for each channel"
+#~ msgstr "Aantal te laden berichten bij opstarten van elk kanaal"
+
+#~ msgid "The amount of messages to load on request for each channel"
+#~ msgstr "Aantal te laden berichten bij aanvraag van elk kanaal"
