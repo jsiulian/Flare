@@ -225,6 +225,10 @@ pub mod imp {
         }
 
         fn append_attachment(&self, attachment: crate::backend::Attachment) {
+            // File attachments can only be sent alone and do not allow any other attachments to be added.
+            if attachment.is_file() || self.attachments.borrow().iter().any(|a| a.is_file()) {
+                self.remove_attachments();
+            }
             let att_widget = backend_to_gui(&attachment);
             self.box_attachments.append(&att_widget);
             self.attachments.borrow_mut().push(attachment);

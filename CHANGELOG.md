@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Handle libsecret stores that can lock specific items.
+- Restrict sending of a file-attachment such that a file-attachment must be sent without any additional attachments (restriction from Signal).
 
 ## [0.9.3] - 2023-08-17
 
