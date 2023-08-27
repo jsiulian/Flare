@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-19 12:50+0200\n"
-"PO-Revision-Date: 2023-07-08 12:53+0000\n"
+"PO-Revision-Date: 2023-08-28 09:51+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -183,7 +183,7 @@ msgstr "Gelieve deze fout te melden."
 
 #: data/resources/ui/error_dialog.blp:45
 msgid "Report"
-msgstr ""
+msgstr "Rapporteren"
 
 #: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
 msgid "Link device"
@@ -191,7 +191,7 @@ msgstr "Apparaat koppelen"
 
 #: data/resources/ui/link_window.blp:34
 msgid "Scan Code"
-msgstr ""
+msgstr "Code scannen"
 
 #: data/resources/ui/link_window.blp:35
 msgid "Scan this code with another Signal app logged into your account."
@@ -199,12 +199,11 @@ msgstr ""
 
 #: data/resources/ui/link_window.blp:59
 msgid "Link without scanning"
-msgstr ""
+msgstr "Koppeling zonder scannen"
 
 #: data/resources/ui/link_window.blp:86
-#, fuzzy
 msgid "Manual Linking"
-msgstr "Koppelen"
+msgstr "Handmatige koppeling"
 
 #: data/resources/ui/link_window.blp:87
 msgid ""
@@ -213,7 +212,6 @@ msgid ""
 msgstr ""
 
 #: data/resources/ui/link_window.blp:98
-#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Kopiëren naar klembord"
 
@@ -231,17 +229,15 @@ msgstr "Kopiëren"
 
 #: data/resources/ui/message_item.blp:36
 msgid "Save as…"
-msgstr ""
+msgstr "Opslaan als…"
 
 #: data/resources/ui/message_item.blp:44
-#, fuzzy
 msgid "Open with…"
 msgstr "Openen met…"
 
 #: data/resources/ui/message_item.blp:156
-#, fuzzy
 msgid "Load media"
-msgstr "Meer laden"
+msgstr "Media laden"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -278,9 +274,8 @@ msgid "Dowload files automatically"
 msgstr "Bestanden automatisch downloaden"
 
 #: data/resources/ui/preferences_window.blp:61
-#, fuzzy
 msgid "Dowload voice messages automatically"
-msgstr "Afbeeldingen automatisch downloaden"
+msgstr "Spraakberichten automatisch downloaden"
 
 #: data/resources/ui/preferences_window.blp:75
 msgid "Notifications"
@@ -296,9 +291,8 @@ msgid "Send notifications"
 msgstr "Leesbewijzen"
 
 #: data/resources/ui/preferences_window.blp:92
-#, fuzzy
 msgid "Send notifications on reactions"
-msgstr "Leesbewijzen"
+msgstr "Meldingen bij reacties"
 
 #: data/resources/ui/preferences_window.blp:106
 #: src/gui/preferences_window.rs:29
@@ -307,7 +301,7 @@ msgstr "Meldingen tonen als Flare op de achtergrond wordt uitgevoerd"
 
 #: data/resources/ui/preferences_window.blp:122
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Mobiele compatibiliteit"
 
 #: data/resources/ui/preferences_window.blp:123
 msgid ""
@@ -412,7 +406,7 @@ msgstr "Instellingen"
 #: data/resources/ui/window.blp:129
 #: data/resources/ui/submit_captcha_dialog.blp:5
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Captcha inzenden"
 
 #: data/resources/ui/window.blp:134
 msgid "Keybindings"
@@ -434,15 +428,15 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/submit_captcha_dialog.blp:24
 msgid "Submit"
-msgstr ""
+msgstr "Inzenden"
 
 #: src/backend/channel.rs:564
 msgid "Note to self"
@@ -575,9 +569,8 @@ msgid "Please restart the application with logging and report this issue."
 msgstr "Schakel de foutopsporing in, herstart de app en meld dit probleem."
 
 #: src/gui/link_window.rs:65
-#, fuzzy
 msgid "Copied to clipboard"
-msgstr "Kopiëren naar klembord"
+msgstr "Gekopieerd naar klembord"
 
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
@@ -621,33 +614,28 @@ msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:31
-#, fuzzy
 msgid "Linking device"
 msgstr "Apparaat koppelen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:35
-#, fuzzy
 msgid "Sending messages"
 msgstr "Berichten versturen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:39
-#, fuzzy
 msgid "Receiving messages"
 msgstr "Berichten ontvangen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:43
-#, fuzzy
 msgid "Replying to a message"
-msgstr "Berichten beantwoorden"
+msgstr "Antwoorden op een bericht"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:47
-#, fuzzy
 msgid "Reacting to a message"
-msgstr "Reageren op berichten"
+msgstr "Reageren op een bericht"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:55
@@ -715,9 +703,8 @@ msgid "Automatically download videos"
 msgstr "Video's automatisch downloaden"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
-#, fuzzy
 msgid "Automatically download voice messages"
-msgstr "Afbeeldingen automatisch downloaden"
+msgstr "Spraakberichten automatisch downloaden"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
