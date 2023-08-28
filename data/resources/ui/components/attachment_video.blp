@@ -2,13 +2,23 @@ using Gtk 4.0;
 using Adw 1;
 
 template $FlAttachmentVideo : $FlAttachmentBase {
-    Video video {
-      styles [
-        "video"
-      ]
-      height-request: 250;
-      width-request: 250;
-      overflow: hidden;
-      media-stream: bind template.attachment as <$FlAttachmentObject>.video;
+    styles ["attachment-video"]
+    Overlay video_overlay {
+      child: Picture video {
+        GestureClick click_gesture {
+          pressed => $toggle() swapped;
+        }
+        height-request: bind $resize_height(template.attachment as <$FlAttachmentObject>.width, template.attachment as <$FlAttachmentObject>.height) as <int>;
+        width-request: bind $resize_width(template.attachment as <$FlAttachmentObject>.width) as <int>;
+        paintable: bind template.attachment as <$FlAttachmentObject>.video;
+      };
+      [overlay]
+      MediaControls controls {
+        visible: bind template.attachment as <$FlAttachmentObject>.loaded;
+        media-stream: bind template.attachment as <$FlAttachmentObject>.video;
+        styles ["osd"]
+        halign: fill;
+        valign: end;
+      }
     }
 }

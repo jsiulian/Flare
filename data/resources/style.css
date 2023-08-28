@@ -1,8 +1,12 @@
+@define-color bubble_bg_color  mix(@window_bg_color, @window_fg_color, .05);
+@define-color bubble_self_bg_color alpha(@accent_bg_color, 0.3);
+@define-color quote_bg_color mix(@window_bg_color, @accent_bg_color, .1);
+
 .message-bubble {
   color: @window_fg_color;
-  border-radius: 15px;
+  border-radius: 16px;
   padding: 9px;
-  background-color: mix(@window_bg_color, @window_fg_color, .05);
+  background-color: @bubble_bg_color;
 }
 
 .message-list row {
@@ -14,7 +18,7 @@
 }
 
 .message-item.from-self .message-bubble {
-  background-color: alpha(@accent_bg_color, 0.3);
+  background-color: @bubble_self_bg_color;
   color: @card_fg_color;
 }
 
@@ -23,15 +27,15 @@
 }
 
 .reaction {
-  background-color: mix(@window_bg_color, @window_fg_color, .05);
+  background-color: @bubble_bg_color;
   border: 1px solid @accent_bg_color;
-  border-radius: 15px;
+  border-radius: 16px;
   padding: 6px 9px;
   margin-top: 5px;
 }
 
 .quote {
-  background-color: mix(@window_bg_color, @accent_bg_color, .1);
+  background-color: @quote_bg_color;
   border-left: 4px solid;
   border-left-color:  @accent_bg_color;
   border-radius: 8px;
@@ -72,10 +76,6 @@ group {
 	margin-bottom: -34px;
 }
 
-.has-header group {
-	margin-top: 0;
-}
-
 .download-media {
 	margin-bottom: 14px;
 }
@@ -83,4 +83,56 @@ group {
 .qr-code {
 	padding:18px;
   background-color: white;
+}
+
+video controls {
+  padding-left: 8px;
+}
+
+.not-loaded  video image, .not-loaded  video controls {
+	opacity: 0;
+}
+
+.media-overlay {
+	margin-left:-9px;
+	margin-right:-9px;
+	border-left: 1px solid;
+	border-right: 1px solid;
+	border-color: @bubble_bg_color;
+}
+
+.has-attachment:not(.has-text) .media-overlay {
+	margin-bottom: -35px;
+	border-bottom-left-radius: 16px;
+	border-bottom-right-radius: 16px;
+	border-bottom: 1px solid @light_3;
+}
+
+.message-item:not(.has-header) .media-overlay {
+	margin-top: -9px;
+	border-top-left-radius: 16px;
+	border-top-right-radius: 16px;
+  border-top: 1px solid @light_3;
+}
+
+.media-group {
+	background-color: @window_bg_color;
+}
+
+.attachment-video controls {
+	border-radius: 8px;
+	margin-bottom: 16px;
+	margin-right: 16px;
+	margin-left: 16px;
+	opacity: 0;
+}
+
+.attachment-video:hover controls {
+	transition: all 0.5s ease-in-out;
+	opacity: 1;
+}
+
+.has-attachment:not(.has-text):hover .timestamp {
+	transition: all 0.3s ease-in-out;
+	opacity: 0;
 }

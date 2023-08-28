@@ -25,6 +25,8 @@ impl LinkWindow {
 }
 
 pub mod imp {
+    use adw::subclass::prelude::*;
+    use adw::Toast;
     use gdk::gdk_pixbuf::Pixbuf;
     use gettextrs::gettext;
     use gio::MemoryInputStream;
@@ -33,9 +35,7 @@ pub mod imp {
         ParamSpecObject, ParamSpecString, Value,
     };
     use gtk::{gdk, gio, glib};
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
-    use adw::subclass::prelude::*;
-    use adw::Toast;
+    use gtk::{prelude::*, CompositeTemplate};
     use std::cell::RefCell;
 
     use crate::backend::Manager;
@@ -68,9 +68,7 @@ pub mod imp {
         #[template_callback]
         fn previous(&self) {
             let obj = self.obj();
-            obj.imp()
-                .content
-                .navigate(adw::NavigationDirection::Back);
+            obj.imp().content.navigate(adw::NavigationDirection::Back);
         }
         #[template_callback]
         fn forward(&self) {

@@ -54,6 +54,8 @@ err-derive = "0.3.1"
 tracing = { version = "0.1.37", features = ["log-always"] }
 sourceview5 = "0.7.1"
 libspelling = "0.1.0"
+blurhash = { git = 'https://github.com/marc0x1/blurhash-rs', branch = "pixbuf-patch", features = ["image", "gdk-pixbuf"] }
+image = "0.23.14"
 
 [features]
 default = []

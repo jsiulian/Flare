@@ -240,6 +240,7 @@ pub mod imp {
             let obj = self.obj();
             let manager = obj.manager();
             let attachment = crate::backend::Attachment::from_file(file, &manager);
+
             self.append_attachment(attachment);
             obj.notify("has-attachments");
         }

@@ -68,11 +68,11 @@ impl Default for PreferencesWindow {
 }
 
 pub mod imp {
+    use adw::subclass::prelude::*;
     use gio::{Settings, SettingsBindFlags};
     use glib::subclass::InitializingObject;
     use gtk::{gio, glib};
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
-    use adw::subclass::prelude::*;
+    use gtk::{prelude::*, CompositeTemplate};
 
     #[derive(CompositeTemplate)]
     #[template(resource = "/ui/preferences_window.ui")]

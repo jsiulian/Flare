@@ -74,7 +74,7 @@ template $FlMessageItem : $ContextMenuBin {
     Box {
       orientation: vertical;
 
-      Box message_box {
+      Box message_bubble {
         orientation: vertical;
         overflow: hidden;
         spacing: 2;
@@ -138,30 +138,39 @@ template $FlMessageItem : $ContextMenuBin {
               attributes: bind template.message as <$FlTextMessage>.message-attributes;
             }
           }
-        }
-
-        // Attachments
-
-        Box download_media_box {
-            styles ["download-media"]
-            visible: bind template.shows-media-loading as <bool>;
-            Button {
-                styles ["circular"]
-                margin-end: 6;
-                clicked => $load_media() swapped;
-                icon-name: "view-refresh-symbolic";
-            }
-
-            Label {
-                label: _("Load media");
-            }
-        }
+        }     
 
         Box box_attachments {
             orientation: vertical;
-            //$OriGroup media_group {
-            //  visible: false;
-            //}
+            styles ["not-loaded"]
+            Overlay media_overlay {
+              styles ["media-overlay"]
+              overflow: hidden;
+              visible:false;
+              // TODO: Switch to OriGroup
+              child: Box media_group {
+                styles ["media-group"]
+                overflow: hidden;
+                orientation: vertical;
+              };
+
+              [overlay]
+              Button download_btn{
+                  halign: center;
+                  valign: center;
+                  height-request: 64;
+                  width-request: 64;
+                  visible: bind template.shows-media-loading as <bool>;
+                  styles [
+                    "osd",
+                    "large-icons",
+                    "circular"
+                    ]
+                  clicked => $load_media() swapped;
+                  icon-name: "document-save-symbolic";
+              }
+
+            }
         }
 
         // Message Box

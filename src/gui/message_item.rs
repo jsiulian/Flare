@@ -33,6 +33,8 @@ impl MessageItem {
         s.setup_from_self();
         s.setup_quote();
         s.setup_emoji();
+        s.setup_loaded();
+        s.setup_text();
         s
     }
 
@@ -115,7 +117,13 @@ impl MessageItem {
 
     fn setup_quote(&self) {
         if self.message().quote().is_some() {
-            self.imp().message_box.add_css_class("has-quote");
+            self.imp().message_bubble.add_css_class("has-quote");
+        }
+    }
+
+    fn setup_text(&self) {
+        if self.message().body().is_some() {
+            self.imp().message_bubble.add_css_class("has-text");
         }
     }
 
@@ -143,7 +151,7 @@ impl MessageItem {
             static ref RE: Regex = Regex::new(r"^[[\p{Emoji}--\p{Ascii}]\u{fe0f}\u{200d} ]+$").unwrap();
         }
         if self.message().body().is_some() && RE.is_match(self.message().body().unwrap().as_str()) {
-            self.imp().message_box.add_css_class("emoji");
+            self.imp().message_bubble.add_css_class("emoji");
             self.message().set_show_header(false);
         }
     }
@@ -172,6 +180,15 @@ impl MessageItem {
         } else if !visible && self.has_css_class("has-header") {
             self.remove_css_class("has-header");
         }
+    }
+
+    fn setup_loaded(&self) {
+        self.connect_notify_local(
+            Some("shows-media-loading"),
+            clone!(@weak self as s => move |_, _| {
+                s.imp().box_attachments.remove_css_class("not-loaded");
+            }),
+        );
     }
 }
 
@@ -215,13 +232,17 @@ pub mod imp {
         #[template_child]
         pub(super) emoji_chooser: TemplateChild<gtk::EmojiChooser>,
         #[template_child]
-        box_attachments: TemplateChild<gtk::Box>,
+        pub(super) box_attachments: TemplateChild<gtk::Box>,
         #[template_child]
-        download_media_box: TemplateChild<gtk::Box>,
+        media_overlay: TemplateChild<gtk::Overlay>,
+        #[template_child]
+        media_group: TemplateChild<gtk::Box>,
+        #[template_child]
+        download_btn: TemplateChild<gtk::Button>,
         #[template_child]
         pub(super) label_message: TemplateChild<gtk::Label>,
         #[template_child]
-        pub(super) message_box: TemplateChild<gtk::Box>,
+        pub(super) message_bubble: TemplateChild<gtk::Box>,
 
         message: RefCell<Option<TextMessage>>,
         manager: RefCell<Option<Manager>>,
@@ -337,10 +358,14 @@ pub mod imp {
         pub(super) fn load_media(&self) {
             let obj = self.obj();
             let msg = obj.message();
+            let btn = &obj.imp().download_btn;
+            btn.set_can_target(false);
+            let spinner = gtk::Spinner::new();
+            spinner.start();
+            btn.set_child(Some(&spinner));
             for att in msg.attachments() {
                 gspawn!(async move { att.load().await });
             }
-            obj.imp().download_media_box.set_visible(false);
         }
     }
 
@@ -426,11 +451,11 @@ pub mod imp {
                                 obj.notify("has-reaction");
                             }),
                         );
-                        //Clear attachments
-                        //self.box_attachments.remove_children();
+                        let attachments = msg.attachments();
+                        let mut container = &self.box_attachments;
 
                         // Set attachments
-                        if !msg.attachments().is_empty() {
+                        if !attachments.is_empty() {
                             instance.notify("shows-media-loading");
                             instance.set_property("has-attachment", true);
                             self.box_attachments
@@ -438,7 +463,12 @@ pub mod imp {
                                 .unwrap()
                                 .add_css_class("has-attachment");
 
-                            for att in msg.attachments() {
+                            if attachments[0].is_image() || attachments[0].is_video() {
+                                container = &self.media_group;
+                                self.media_overlay.set_visible(true);
+                            }
+
+                            for att in attachments {
                                 log::trace!(
                                     "MessageItem got Attachment, adding to `box_attachments`"
                                 );
@@ -460,7 +490,7 @@ pub mod imp {
                                         None
                                     })
                                 );
-                                self.box_attachments.append(&att_widget);
+                                container.append(&att_widget);
                             }
                         }
                     }

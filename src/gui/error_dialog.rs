@@ -1,6 +1,6 @@
+use adw::traits::MessageDialogExt;
 use glib::{prelude::IsA, Object};
 use gtk::glib;
-use adw::traits::MessageDialogExt;
 
 use crate::ApplicationError;
 
@@ -33,14 +33,14 @@ pub mod imp {
     pub(crate) use std::cell::Cell;
     use std::cell::RefCell;
 
+    use adw::subclass::prelude::*;
     use gdk::gio;
     use glib::{
         once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecBoolean,
         ParamSpecString, Value,
     };
     use gtk::{glib, UriLauncher};
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
-    use adw::subclass::prelude::*;
+    use gtk::{prelude::*, CompositeTemplate};
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/error_dialog.ui")]
