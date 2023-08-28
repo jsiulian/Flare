@@ -97,7 +97,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(3),
             phone_number: None,
-            name: "Richard".to_string(),
+            name: "T'Challa".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -110,7 +110,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
         presage::prelude::Contact {
             uuid: Uuid::from_u128(4),
             phone_number: None,
-            name: "Cowboy".to_string(),
+            name: "Toad".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -196,17 +196,17 @@ impl super::Manager {
 
         let msg_replied = msg!(
             self,
-            "We've got another version of Flare. Version 0.9.0 brings massive improvements to the UI, mainly in regards to the message list. This list got completely overhauled for a better UI experience and now (among other changes) supports being styled by GNOME accent colors and a reworked message popover (which now get opened by right-click or long-press on the message). Flare got also ported to the Blueprint markup language to make development easier and to GTK 4.10 to keep up-to-date with the latest standards. Finally, Flare now supports playback of voice messages, which should make Flare viable for people having that one annoying friend always sending voice messages. For most of those changes, I want to thank @Marc0x (yes, we also now have mentions, but I am too lazy to show them in this screenshot).",
+            "Another new version of Flare. Version 0.10.0 brings many new UI improvements, bug fixes and also features. The biggest feature this release it the support for blurhashes for images and videos, this makes loading images and videos a lot smoother and visually appealing. Furthermore, one can now delete all the messages of a single chat. But this was not all, since the last screenshot, there has been numerous of changes, features and improvements.",
             2,
             GROUP_ID,
             18 + base_minute
         );
         let msg_reply = msg!(
             self,
-            "Thats awesome! Probably, as always, there were many bug fixes :)",
+            "Nice to see continued improvement with Flare. I also noticed that the URL of the projects repository has changed. Whats up with that?",
             0,
             GROUP_ID,
-            19 + base_minute
+            20 + base_minute
         );
         msg_reply
             .clone()
@@ -261,24 +261,31 @@ impl super::Manager {
             msg_reply,
             msg!(
                 self,
-                "And finally voice messages. I have long awaited this moment.",
-                0,
-                GROUP_ID,
-                20 + base_minute
-            ),
-            msg!(
-                self,
-                "Great to see more contributions to Flare.",
-                1,
-                GROUP_ID,
-                23 + base_minute
-            ),
-            msg!(
-                self,
-                "Indeed. I am terrible at UI (if you don't believe me, just look at the first screenshot of Flare - if you dare), so contributions to that are very welcome.",
+                "Yes, we have now decided to put all of my applications that are targetted towards Linux Mobile in a separate GitLab group, called 'Schmiddi on Mobile' (I know, it's a bit egoistic. But we could not find a better name). There, you can also find Pipeline for playing YouTube and Peertube videos, and DieBahn (pending a rename) for all your public transport needs.",
                 2,
                 GROUP_ID,
                 24 + base_minute
+            ),
+            msg!(
+                self,
+                "Oh, and we also have a Mastodon account by the way. It can be found at @schmiddionmobile@fosstodon.org.",
+                2,
+                GROUP_ID,
+                25 + base_minute
+            ),
+            msg!(
+                self,
+                "Yes, I already noticed that Mastodon account. Already following.",
+                0,
+                GROUP_ID,
+                26 + base_minute
+            ),
+            msg!(
+                self,
+                "I did not know you also had other apps. Will need to check them out.",
+                1,
+                GROUP_ID,
+                27 + base_minute
             ),
             call_msg!(
                 self,
@@ -300,12 +307,12 @@ impl super::Manager {
             ),
             msg!(
                 self,
-                "I'd like to interject for a moment. What you call",
+                "We don't do that here",
                 3,
                 3,
                 1 + base_minute
             ),
-            msg!(self, "First time?", 4, 4, 2 + base_minute),
+            msg!(self, "Thank you! But our princess is in another castle", 4, 4, 2 + base_minute),
         ]
     }
 
