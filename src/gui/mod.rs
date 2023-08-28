@@ -10,7 +10,7 @@ mod link_window;
 mod message_item;
 mod preferences_window;
 mod text_entry;
-mod utility;
+pub mod utility;
 mod window;
 
 pub use window::Window;

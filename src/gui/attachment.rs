@@ -1,6 +1,4 @@
-use gdk::glib::Object;
-use gdk::prelude::IsA;
-use gdk::{glib::object::IsClass, prelude::Cast};
+use gdk::prelude::Cast;
 use glib::ObjectExt;
 use gtk::glib;
 use gtk::subclass::prelude::*;
@@ -22,20 +20,12 @@ impl Attachment {
 
 pub fn backend_to_gui(attachment: &crate::backend::Attachment) -> Attachment {
     match attachment.attachment_type() {
-        AttachmentType::Image => backend_to_gui_internal::<AttachmentPhoto>(attachment).upcast(),
-        AttachmentType::Video => backend_to_gui_internal::<AttachmentVideo>(attachment).upcast(),
-        AttachmentType::File => backend_to_gui_internal::<AttachmentFile>(attachment).upcast(),
-        AttachmentType::Audio => backend_to_gui_internal::<AttachmentAudio>(attachment).upcast(),
+        AttachmentType::Image => AttachmentPhoto::new(attachment).upcast(),
+        AttachmentType::Gif => AttachmentPhoto::new(attachment).upcast(),
+        AttachmentType::Video => AttachmentVideo::new(attachment).upcast(),
+        AttachmentType::File => AttachmentFile::new(attachment).upcast(),
+        AttachmentType::Audio => AttachmentAudio::new(attachment).upcast(),
     }
-}
-
-fn backend_to_gui_internal<T: IsA<Attachment> + IsA<Object> + IsClass>(
-    attachment: &crate::backend::Attachment,
-) -> T {
-    log::trace!("Initializing child of `Attachment`");
-    Object::builder::<T>()
-        .property("attachment", &attachment)
-        .build()
 }
 
 pub mod imp {
@@ -74,8 +64,9 @@ pub mod imp {
     #[gtk::template_callbacks]
     impl Attachment {
         #[template_callback]
-        fn load(&self, _: gtk::Button) {
+        pub fn load(&self) {
             let obj = self.obj();
+
             gspawn!(clone!(@weak obj => async move {
                 let attachment = obj.attachment();
                 attachment.load().await
@@ -224,7 +215,7 @@ pub mod imp {
                     self.attachment.replace(att);
                     if autoload {
                         log::trace!("Autodownloading attachment");
-                        self.load(gtk::Button::new());
+                        self.load();
                     }
                 }
                 _ => unimplemented!(),

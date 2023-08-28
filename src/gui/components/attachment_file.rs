@@ -53,6 +53,10 @@ pub mod imp {
         pub fn download(&self) {
             let obj = self.obj();
             let att: Attachment = obj.clone().upcast();
+            let att_backend: crate::backend::Attachment = att.property("attachment");
+            if !att_backend.property::<bool>("loaded") {
+                att.imp().load();
+            }
             att.imp().download();
         }
     }

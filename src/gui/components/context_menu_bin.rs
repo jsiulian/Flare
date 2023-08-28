@@ -1,5 +1,5 @@
-use gtk::{gdk, glib, glib::clone, prelude::*, CompositeTemplate};
 use adw::subclass::prelude::*;
+use gtk::{gdk, glib, glib::clone, prelude::*, CompositeTemplate};
 use log::debug;
 
 glib::wrapper! {

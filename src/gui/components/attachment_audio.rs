@@ -1,6 +1,11 @@
+use crate::config::APP_ID;
+use crate::gio::Settings;
 use crate::gui::attachment::Attachment;
-use glib::Object;
-use gtk::glib;
+use gdk::prelude::Cast;
+use gdk::subclass::prelude::ObjectSubclassIsExt;
+use glib::{clone, Object};
+use gtk::prelude::{MediaStreamExt, ObjectExt, SettingsExt};
+use gtk::{glib, traits::WidgetExt, Widget};
 
 gtk::glib::wrapper! {
     pub struct AttachmentAudio(ObjectSubclass<imp::AttachmentAudio>)
@@ -10,9 +15,35 @@ gtk::glib::wrapper! {
 impl AttachmentAudio {
     pub fn new(attachment: &crate::backend::Attachment) -> Self {
         log::trace!("Initializing `Attachment`");
-        Object::builder::<Self>()
+        let obj = Object::builder::<Self>()
             .property("attachment", attachment)
-            .build()
+            .build();
+        let imp = obj.imp();
+        // Remove the play_button when the attachment is not loaded
+        let play_button: Option<Widget> = imp.controls.first_child().and_then(|w| w.first_child());
+
+        if let Some(play_button) = play_button {
+            if let Ok(play_button) = play_button.downcast::<gtk::Button>() {
+                if !Settings::new(APP_ID).boolean("autodownload-voice-messages") {
+                    attachment.connect_notify_local(
+                        Some("loaded"),
+                        clone!(@weak play_button, @weak imp => move |_, _| {
+                            play_button.set_can_target(true);
+                            play_button.set_visible(true);
+                            imp.controls.set_width_request(250);
+                            imp.controls.media_stream().unwrap().play();
+                        }),
+                    );
+                    play_button.set_visible(false);
+                }
+            } else {
+                log::warn!("'play_button' in 'AttachmentAudio' is not a 'Button'")
+            }
+        } else {
+            log::warn!("Unable to find 'play_button' widget in 'AttachmentAudio'")
+        }
+
+        obj
     }
 }
 
@@ -20,15 +51,19 @@ pub mod imp {
 
     use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
     use glib::subclass::InitializingObject;
-    use gtk::traits::WidgetExt;
-    use gtk::{glib, MediaControls};
+    use gtk::prelude::{ButtonExt, Cast, WidgetExt};
+    use gtk::{glib, Box, Button, MediaControls};
     use gtk::{subclass::prelude::*, CompositeTemplate};
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/components/attachment_audio.ui")]
     pub struct AttachmentAudio {
         #[template_child]
-        controls: TemplateChild<MediaControls>,
+        box_audio: TemplateChild<Box>,
+        #[template_child]
+        download_btn: TemplateChild<Button>,
+        #[template_child]
+        pub(super) controls: TemplateChild<MediaControls>,
     }
 
     #[glib::object_subclass]
@@ -39,11 +74,27 @@ pub mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
+            Self::bind_template_callbacks(klass);
             Utility::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {
             obj.init_template();
+        }
+    }
+
+    #[gtk::template_callbacks]
+    impl AttachmentAudio {
+        #[template_callback]
+        pub async fn download(&self) {
+            let obj = self.obj();
+            let att: Attachment = obj.clone().upcast();
+            att.imp().load();
+            let btn = &obj.imp().download_btn;
+            btn.set_can_target(false);
+            let spinner = gtk::Spinner::new();
+            spinner.start();
+            btn.set_child(Some(&spinner));
         }
     }
 
@@ -53,7 +104,7 @@ pub mod imp {
         }
 
         fn dispose(&self) {
-            self.controls.unparent()
+            self.box_audio.unparent()
         }
     }
 

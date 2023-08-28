@@ -1,3 +1,7 @@
 .timestamp{
   background-color: black ;
 }
+
+.media-overlay {
+	border-color: @dark_3;
+}

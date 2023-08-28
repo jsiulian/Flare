@@ -1,18 +1,45 @@
 use crate::gui::attachment::Attachment;
+use gdk::subclass::prelude::ObjectSubclassIsExt;
+
+use crate::config::APP_ID;
+use crate::gio::Settings;
+use gdk::Texture;
 use glib::Object;
 use gtk::glib;
+use gtk::prelude::{MediaStreamExt, ObjectExt, SettingsExt};
 
-gtk::glib::wrapper! {
-    pub struct AttachmentVideo(ObjectSubclass<imp::AttachmentVideo>)
+glib::wrapper! {
+    pub struct AttachmentVideo(ObjectSubclass
+        <imp::AttachmentVideo>)
         @extends gtk::Widget, Attachment;
 }
 
 impl AttachmentVideo {
     pub fn new(attachment: &crate::backend::Attachment) -> Self {
         log::trace!("Initializing `Attachment`");
-        Object::builder::<Self>()
+
+        let preview = attachment.property::<Option<Texture>>("image");
+        let obj = Object::builder::<Self>()
             .property("attachment", attachment)
-            .build()
+            .build();
+
+        if preview.is_some() {
+            obj.imp().video.set_paintable(preview.as_ref());
+        }
+
+        if !Settings::new(APP_ID).boolean("autodownload-videos") {
+            attachment.connect_notify_local(
+                Some("loaded"),
+                glib::clone!(@weak obj => move |_, _| {
+                    if let Some(media_stream) = obj.imp().controls.media_stream(){
+                        media_stream.play();
+                    }
+
+                }),
+            );
+        }
+
+        obj
     }
 }
 
@@ -20,15 +47,32 @@ pub mod imp {
 
     use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
     use glib::subclass::InitializingObject;
-    use gtk::traits::WidgetExt;
-    use gtk::{glib, Video};
+    use gtk::traits::{MediaStreamExt, WidgetExt};
+    use gtk::{glib, MediaControls, Overlay, Picture};
     use gtk::{subclass::prelude::*, CompositeTemplate};
-
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/components/attachment_video.ui")]
     pub struct AttachmentVideo {
         #[template_child]
-        video: TemplateChild<Video>,
+        pub video_overlay: TemplateChild<Overlay>,
+        #[template_child]
+        pub video: TemplateChild<Picture>,
+        #[template_child]
+        pub controls: TemplateChild<MediaControls>,
+    }
+
+    #[gtk::template_callbacks]
+    impl AttachmentVideo {
+        #[template_callback]
+        fn toggle(&self) {
+            if let Some(media_stream) = self.controls.media_stream() {
+                if media_stream.is_playing() {
+                    media_stream.pause();
+                } else {
+                    media_stream.play();
+                }
+            }
+        }
     }
 
     #[glib::object_subclass]
@@ -39,6 +83,7 @@ pub mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
+            Self::bind_template_callbacks(klass);
             Utility::bind_template_callbacks(klass);
         }
 
@@ -53,7 +98,7 @@ pub mod imp {
         }
 
         fn dispose(&self) {
-            self.video.unparent()
+            self.video_overlay.unparent()
         }
     }
 

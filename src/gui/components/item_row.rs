@@ -1,6 +1,6 @@
+use adw::subclass::prelude::*;
 use gdk::glib::{clone, Object, SignalHandlerId};
 use gtk::{gdk, glib, prelude::*, CompositeTemplate};
-use adw::subclass::prelude::*;
 
 use crate::{
     backend::{
@@ -55,9 +55,9 @@ impl ItemRow {
 }
 
 mod imp {
+    use adw::traits::BinExt;
     use gdk::glib::subclass::Signal;
     use glib::subclass::InitializingObject;
-    use adw::traits::BinExt;
     use once_cell::sync::Lazy;
 
     use crate::backend::timeline::TimelineItem;

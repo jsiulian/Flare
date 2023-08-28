@@ -68,6 +68,8 @@ impl Window {
 pub mod imp {
     use std::{cell::RefCell, env, path::PathBuf};
 
+    use adw::EntryRow;
+    use adw::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
     use gdk::glib::{BindingFlags, Propagation};
     use gio::{Settings, SimpleAction, SimpleActionGroup};
     use glib::{
@@ -75,9 +77,7 @@ pub mod imp {
         Value,
     };
     use gtk::{gio, glib};
-    use gtk::{prelude::*, subclass::prelude::*, Builder, CompositeTemplate, ShortcutsWindow};
-    use adw::EntryRow;
-    use adw::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
+    use gtk::{prelude::*, Builder, CompositeTemplate, ShortcutsWindow};
 
     use crate::backend::Channel;
     use crate::gui::channel_info_dialog::ChannelInfoDialog;
@@ -330,8 +330,7 @@ pub mod imp {
         #[template_callback]
         fn handle_go_forward(&self) {
             log::trace!("Go forward in the leaflet");
-            self.leaflet
-                .navigate(adw::NavigationDirection::Forward);
+            self.leaflet.navigate(adw::NavigationDirection::Forward);
         }
     }
 

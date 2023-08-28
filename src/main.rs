@@ -57,9 +57,7 @@ fn main() {
 
     init_resources();
 
-    let app = adw::Application::builder()
-        .application_id(APP_ID)
-        .build();
+    let app = adw::Application::builder().application_id(APP_ID).build();
 
     // Do not start as a service if setting not set
     // Background portal may have created a .desktop file in ~/.config/autostart

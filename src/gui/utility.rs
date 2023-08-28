@@ -4,6 +4,8 @@ use gtk::glib::{DateTime, Object};
 
 pub struct Utility {}
 
+const MAX_MEDIA_WIDTH: i32 = 250;
+
 #[gtk::template_callbacks(functions)]
 impl Utility {
     #[template_callback]
@@ -44,6 +46,29 @@ impl Utility {
     #[template_callback]
     fn uint_equal(i1: u32, i2: i32) -> bool {
         i1 as i32 == i2
+    }
+
+    #[template_callback]
+    pub(crate) fn resize_width(width: u32) -> i32 {
+        if (width as i32) < MAX_MEDIA_WIDTH {
+            width as i32
+        } else {
+            MAX_MEDIA_WIDTH
+        }
+    }
+
+    #[template_callback]
+    pub(crate) fn resize_height(width: u32, height: u32) -> i32 {
+        if height > 0 && width > 0 {
+            let aspect_ratio: f32 = width as f32 / height as f32;
+            if (width as i32) < MAX_MEDIA_WIDTH {
+                height as i32
+            } else {
+                (MAX_MEDIA_WIDTH as f32 / aspect_ratio) as i32
+            }
+        } else {
+            -1
+        }
     }
 
     #[template_callback(function)]
