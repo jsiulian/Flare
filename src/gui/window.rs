@@ -68,8 +68,10 @@ impl Window {
 pub mod imp {
     use std::{cell::RefCell, env, path::PathBuf};
 
-    use adw::EntryRow;
+    use adw::prelude::MessageDialogExtManual;
     use adw::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
+    use adw::{EntryRow, ResponseAppearance};
+    use gdk::gio::Cancellable;
     use gdk::glib::{BindingFlags, Propagation};
     use gio::{Settings, SimpleAction, SimpleActionGroup};
     use glib::{
@@ -259,8 +261,38 @@ pub mod imp {
                 channel_info.present();
             }));
 
+            log::trace!("Setting up channel clear messages action");
+            let action_channel_clear_messages = SimpleAction::new("channel-clear-messages", None);
+            action_channel_clear_messages.connect_activate(clone!(@weak obj => move |_, _| {
+                log::trace!("Requested clearing messages of channels");
+                let confirmation_dialog = MessageDialog::builder()
+                    .transient_for(&obj)
+                    .heading(&gettextrs::gettext("Remove Messages"))
+                    .body(&gettextrs::gettext("This will remove all locally stored messages from this channel"))
+                    .close_response("cancel")
+                    .default_response("cancel")
+                    .build();
+                confirmation_dialog.add_response("cancel",  &gettextrs::gettext("Cancel"));
+                confirmation_dialog.add_response("remove",  &gettextrs::gettext("Remove Messages"));
+                confirmation_dialog.set_response_appearance("remove", ResponseAppearance::Destructive);
+                confirmation_dialog.choose(None::<&Cancellable>, clone!(@weak obj => move |response| {
+                    if response == "remove" {
+                        if let Err(e) = obj.imp().channel_messages.clear_messages() {
+                            let dialog = ErrorDialog::new(e, &obj);
+                            dialog.present();
+                        }
+                    }
+                }));
+            }));
+
             self.channel_messages
                 .bind_property("active-channel", &action_channel_information, "enabled")
+                .transform_to(|_, c: Option<Channel>| Some(c.is_some()))
+                .flags(BindingFlags::SYNC_CREATE)
+                .build();
+
+            self.channel_messages
+                .bind_property("active-channel", &action_channel_clear_messages, "enabled")
                 .transform_to(|_, c: Option<Channel>| Some(c.is_some()))
                 .flags(BindingFlags::SYNC_CREATE)
                 .build();
@@ -275,6 +307,7 @@ pub mod imp {
             actions.add_action(&action_show_help_overlay);
             actions.add_action(&action_about);
             actions.add_action(&action_channel_information);
+            actions.add_action(&action_channel_clear_messages);
 
             let action_activate_input = SimpleAction::new("activate-input", None);
             action_activate_input.connect_activate(
