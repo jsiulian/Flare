@@ -14,5 +14,5 @@ Adw.AboutWindow about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>Added</p> <ul> <li>Support for libspelling.</li> </ul> <p>Fixed</p> <ul> <li>Fixed performance issues when loading messages.</li> </ul>";
+  release-notes: "<p>Added</p> <ul> <li>Deleting messages of a channel locally.</li> <li>Blurred placeholders for attachments.</li> </ul> <p>Changed</p> <ul> <li>Better UI for linking.</li> <li>Better UI for attachments.</li> <li>Better UI for message entry.</li> </ul> <p>Fixed</p> <ul> <li>Handle libsecret stores that can lock specific items.</li> <li>Restrict sending of a file-attachment such that a file-attachment must be sent without any additional attachments (restriction from Signal).</li> </ul>";
 }
