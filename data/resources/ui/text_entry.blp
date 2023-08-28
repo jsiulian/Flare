@@ -1,22 +1,53 @@
 using Gtk 4.0;
 
 template $FlTextEntry : Box {
-  ScrolledWindow {
-    hexpand: true;
-    vscrollbar-policy: external;
-    max-content-height: 75;
-    min-content-height: 25;
-    propagate-natural-height: true;
-    has-frame: true;
-    child: TextView view {
-      hexpand: true;
-      accepts-tab: false;
-      top-margin: 6;
-      bottom-margin: 6;
-      left-margin: 6;
-      right-margin: 6;
-      wrap-mode: word;
-      input-hints: spellcheck;
-    };
+  Overlay overlay {
+    [overlay]
+    Inscription placeholder {
+      styles [
+        "dim-label",
+      ]
+      visible: bind $is_empty(view.buffer.text as <string>) as <bool>;
+      can-target: false;
+      text: _("Message");
+      text-overflow: ellipsize_end;
+    }
+
+    Box {
+      css-name: "entry";
+
+      styles [
+        "small-pill",
+      ]
+
+      ScrolledWindow {
+        max-content-height: 200;
+        hscrollbar-policy: never;
+        propagate-natural-height: true;
+        hexpand: true;
+        child: TextView view {
+          top-margin: 6;
+          bottom-margin: 6;
+          wrap-mode: word_char;
+          valign: center;
+        };
+      }
+      
+      Button {
+        accessibility {
+          label: C_("accessibility", "Insert an emoji");
+        }
+        styles [
+            "circular",
+            "dim-label",
+        ]
+        tooltip-text: C_("tooltip", "Insert emoji");
+        clicked => $insert_emoji() swapped;
+        icon-name: "emoji-people-symbolic";
+        valign: center;
+
+      }
+    }
   }
 }
+

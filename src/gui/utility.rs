@@ -39,6 +39,11 @@ impl Utility {
     }
 
     #[template_callback]
+    fn is_empty(s: Option<String>) -> bool {
+        s.map(|s| s.is_empty()).unwrap_or_default()
+    }
+
+    #[template_callback]
     fn not_empty(s: Option<String>) -> bool {
         s.map(|s| !s.is_empty()).unwrap_or_default()
     }

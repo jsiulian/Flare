@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Better UI for linking.
 - Better UI for attachments.
+- Better UI for message entry.
 
 ### Fixed
 
