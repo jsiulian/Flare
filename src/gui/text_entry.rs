@@ -1,9 +1,20 @@
-use gdk::prelude::ObjectExt;
-use glib::subclass::prelude::ObjectSubclassIsExt;
-use gtk::glib;
-use gtk::traits::TextBufferExt;
+use gdk::glib::{Priority, Propagation};
+use gtk::prelude::*;
+use gtk::subclass::prelude::*;
+use gtk::subclass::widget::WidgetImpl;
+use gtk::{gdk, gio, glib, CompositeTemplate, TemplateChild, TextView};
 
-gtk::glib::wrapper! {
+use crate::gspawn;
+use crate::gui::utility::Utility;
+use glib::{
+    clone,
+    once_cell::sync::Lazy,
+    subclass::{InitializingObject, Signal},
+    ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
+};
+use std::cell::{Cell, RefCell};
+
+glib::wrapper! {
     pub struct TextEntry(ObjectSubclass<imp::TextEntry>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -32,37 +43,8 @@ impl TextEntry {
 }
 
 pub mod imp {
-    use std::cell::{Cell, RefCell};
 
-    use crate::gspawn;
-    use gdk::{
-        glib::{Priority, Propagation},
-        prelude::ParamSpecBuilderExt,
-        subclass::prelude::ObjectSubclassIsExt,
-    };
-    use glib::{
-        clone,
-        once_cell::sync::Lazy,
-        subclass::{InitializingObject, Signal},
-        ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
-    };
-    use glib::{
-        prelude::{ObjectExt, ToValue},
-        subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassExt},
-    };
-    use gtk::{
-        gdk, gio, glib,
-        subclass::widget::{CompositeTemplateInitializingExt, WidgetClassExt},
-    };
-    use gtk::{
-        prelude::StaticType,
-        subclass::{
-            prelude::BoxImpl,
-            widget::{CompositeTemplate, CompositeTemplateCallbacks, WidgetImpl},
-        },
-        traits::{TextBufferExt, TextViewExt, WidgetExt},
-        CompositeTemplate, TemplateChild, TextView,
-    };
+    use super::*;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/text_entry.ui")]
@@ -82,8 +64,10 @@ pub mod imp {
         type ParentType = gtk::Box;
 
         fn class_init(klass: &mut Self::Class) {
-            Self::bind_template(klass);
-            Self::bind_template_callbacks(klass);
+            klass.bind_template();
+            klass.bind_template_callbacks();
+            klass.set_css_name("message-entry");
+            Utility::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

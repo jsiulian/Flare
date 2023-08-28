@@ -64,11 +64,11 @@ template $FlChannelMessages : Box {
         Adw.ClampScrollable {
           vexpand: false;
           hexpand: true;
-          maximum-size: 750;
-          tightening-threshold: 550;
-          margin-bottom: 4;
-          margin-start: 12;
-          margin-end: 12;
+          maximum-size: 800;
+          tightening-threshold: 600;
+          styles [
+              "message-clamp",
+          ]
 
           ListView list_view {
             styles [
@@ -134,73 +134,68 @@ template $FlChannelMessages : Box {
       }
     }
 
-    Separator {
-    }
+    Separator {}
 
     // Entry Box
-    Box {
-      margin-top: 6;
-      margin-bottom: 6;
-      margin-start: 6;
-      margin-end: 6;
+    Adw.Clamp {
+      maximum-size: 800;
+      tightening-threshold: 600;
+      styles ["background"]
+      
+      Box {
+        styles [
+          "toolbar",
+        ]
 
-      styles [
-        "linked",
-      ]
+        Button {
+          accessibility {
+            label: C_("accessibility", "Add an attachment");
+          }
+          styles [
+            "circular",
+          ]
 
-      Button {
-        accessibility {
-          label: C_("accessibility", "Add an attachment");
-        }
+          valign: end;
+          tooltip-text: C_("tooltip", "Add attachment");
+          clicked => $add_attachment() swapped;
+          icon-name: "mail-attachment-symbolic";
 
-        tooltip-text: C_("tooltip", "Add attachment");
-        clicked => $add_attachment() swapped;
-        icon-name: "mail-attachment-symbolic";
+          ShortcutController {
+            scope: managed;
 
-        ShortcutController {
-          scope: managed;
-
-          Shortcut {
-            trigger: "<Control>plus";
-            action: "activate";
+            Shortcut {
+              trigger: "<Control>plus";
+              action: "activate";
+            }
           }
         }
-      }
 
-      Button {
-        accessibility {
-          label: C_("accessibility", "Insert an emoji");
+        $FlTextEntry text_entry {
+          accessibility {
+            label: C_("accessibility", "Message input");
+          }
+
+          activate => $send_message() swapped;
+          paste-file => $paste_file() swapped;
+          paste-texture => $paste_texture() swapped;
+          tooltip-text: C_("tooltip", "Message input");
         }
 
-        tooltip-text: C_("tooltip", "Insert emoji");
-        clicked => $insert_emoji() swapped;
-        icon-name: "face-smile-symbolic";
-      }
+        Button {
+          styles [
+            "circular",
+            "suggested-action",
+          ]
+          sensitive: bind $and($or(template.has-attachments, $not(text_entry.is-empty) as <bool> ) as <bool>, $network_monitor() as <$GNetworkMonitor>.network-available ) as <bool>;
+          accessibility {
+            label: C_("accessibility", "Send");
+          }
+          icon-name: "send-symbolic";
+          tooltip-text: C_("tooltip", "Send");
+          valign: end;
+          clicked => $send_message() swapped;
 
-      $FlTextEntry text_entry {
-        accessibility {
-          label: C_("accessibility", "Message input");
         }
-
-        activate => $send_message() swapped;
-        paste-file => $paste_file() swapped;
-        paste-texture => $paste_texture() swapped;
-        tooltip-text: C_("tooltip", "Message input");
-      }
-
-      Button {
-        sensitive: bind $and($or(template.has-attachments, $not(text_entry.is-empty) as <bool> ) as <bool>, $network_monitor() as <$GNetworkMonitor>.network-available ) as <bool>;
-        accessibility {
-          label: C_("accessibility", "Send");
-        }
-
-        tooltip-text: C_("tooltip", "Send");
-        label: _("Send");
-        clicked => $send_message() swapped;
-
-        styles [
-          "suggested-action",
-        ]
       }
     }
   }

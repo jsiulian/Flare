@@ -375,11 +375,6 @@ pub mod imp {
                 msg.open_popup();
             }
         }
-
-        #[template_callback]
-        fn insert_emoji(&self) {
-            self.text_entry.insert_emoji();
-        }
     }
 
     impl ChannelMessages {

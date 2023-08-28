@@ -62,7 +62,7 @@
   background: transparent;
 }
 
-.fl-emoji-picker{
+.fl-emoji-picker {
 	margin: 6px;
 }
 
@@ -83,6 +83,56 @@ group {
 .qr-code {
 	padding:18px;
   background-color: white;
+}
+
+.message-clamp {
+  padding: 0 16px;
+}
+
+.message-list:first-child {
+  padding-top: 16px;
+}
+
+.message-list:last-child {
+  padding-bottom: 16px;
+}
+
+/* Utility */
+
+.small-pill {
+  border-radius: 18px;
+}
+
+/* Placeholder */
+message-entry > overlay > label {
+  margin: 0 9px;
+}
+
+message-entry > overlay > entry > .image-button {
+  margin-right: -6px;
+}
+
+message-entry > overlay > entry > .image-button:hover {
+	opacity: 1;
+	background-color: unset;
+}
+
+message-entry > overlay > entry {
+  padding: 0 9px;
+}
+
+message-entry > overlay > entry > scrolledwindow > scrollbar {
+  box-shadow: none;
+  background: none;
+}
+
+message-entry > overlay > entry > scrolledwindow > scrollbar slider {
+  min-height: 0;
+}
+
+message-entry > overlay > entry > scrolledwindow > textview {
+  background: none;
+  color: inherit;
 }
 
 video controls {
