@@ -174,6 +174,21 @@ impl Manager {
         Ok(())
     }
 
+    pub fn clear_channel_messages(&self, channel: &Channel) -> Result<(), ApplicationError> {
+        crate::trace!(
+            "Clearing channel messages the manager for: {}",
+            channel.title()
+        );
+        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
+            if let Some(thread) = channel.thread() {
+                config_store.clear_thread(&thread)?;
+            } else {
+                log::warn!("Was asked to clear a channel without an associated thread");
+            }
+        }
+        Ok(())
+    }
+
     pub async fn submit_recaptcha_challenge<S: AsRef<str>>(
         &self,
         token: S,

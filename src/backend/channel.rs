@@ -94,7 +94,7 @@ impl Channel {
         s
     }
 
-    fn thread(&self) -> Option<Thread> {
+    pub fn thread(&self) -> Option<Thread> {
         if let Some(key) = self
             .group_context()
             .and_then(|c| c.master_key)
@@ -172,6 +172,12 @@ impl Channel {
 
     pub fn trim_old(&self) {
         self.imp().timeline.borrow().trim_old()
+    }
+
+    pub fn clear_messages(&self) -> Result<(), ApplicationError> {
+        self.manager().clear_channel_messages(&self)?;
+        self.imp().timeline.borrow().clear();
+        Ok(())
     }
 
     pub(super) fn internal_hash(&self) -> u64 {

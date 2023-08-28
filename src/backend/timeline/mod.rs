@@ -38,6 +38,14 @@ impl Timeline {
         }
     }
 
+    pub fn clear(&self) {
+        let mut list = self.imp().list.borrow_mut();
+        let len = list.len();
+        list.clear();
+        drop(list);
+        self.items_changed(0, len as u32, 0);
+    }
+
     pub fn get_by_timestamp(&self, timestamp: u64) -> Option<TimelineItem> {
         let current_items = self.imp().list.borrow();
         let index = current_items.binary_search_by_key(&timestamp, |i| i.timestamp());

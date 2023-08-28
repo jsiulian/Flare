@@ -8,8 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Deleting messages of a channel locally.
 - Blurred placeholders for attachments.
- 
+
 ### Changed
 
 - Better UI for linking.

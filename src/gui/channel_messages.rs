@@ -7,6 +7,7 @@ use gtk::traits::{AdjustmentExt, WidgetExt};
 use gtk::{gdk, glib};
 
 use crate::backend::{message::TextMessage, Channel, Manager};
+use crate::ApplicationError;
 
 const MESSAGES_REQUEST_LOAD: usize = 10;
 
@@ -122,6 +123,15 @@ impl ChannelMessages {
                 .scrolled_window
                 .emit_by_name::<bool>("scroll-child", &[&gtk::ScrollType::End, &false]);
         }));
+    }
+
+    pub fn clear_messages(&self) -> Result<(), ApplicationError> {
+        if let Some(channel) = self.active_channel() {
+            channel.clear_messages()?;
+        } else {
+            log::warn!("Was asked to clear the messages with no currently active channel");
+        }
+        Ok(())
     }
 }
 
