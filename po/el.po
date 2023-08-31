@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-19 12:50+0200\n"
-"PO-Revision-Date: 2023-08-14 19:53+0000\n"
+"PO-Revision-Date: 2023-09-01 18:55+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/flare/flare/el/>\n"
 "Language: el\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -189,29 +189,29 @@ msgstr "Σύνδεση συσκευής"
 
 #: data/resources/ui/link_window.blp:34
 msgid "Scan Code"
-msgstr ""
+msgstr "Ανίχνευση κωδικού"
 
 #: data/resources/ui/link_window.blp:35
 msgid "Scan this code with another Signal app logged into your account."
-msgstr ""
+msgstr "Ανιχνεύστε τον κωδικό με κάποια άλλη ήδη συνδεδεμένη εφαρμογή Signal."
 
 #: data/resources/ui/link_window.blp:59
 msgid "Link without scanning"
-msgstr ""
+msgstr "Σύνδεσμος χωρίς ανίχνευση"
 
 #: data/resources/ui/link_window.blp:86
-#, fuzzy
 msgid "Manual Linking"
-msgstr "Σύνδεση"
+msgstr "Χειρωνακτική Σύνδεση"
 
 #: data/resources/ui/link_window.blp:87
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Αν η συσκευή σαν δεν μπορεί να ανιχνεύσει τον QR κωδικό, μπορείτε να "
+"εισάγετε μόνοι σας εδώ τον σύνδεσμο που παρέχεται"
 
 #: data/resources/ui/link_window.blp:98
-#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Αντιγραφή στο πρόχειρο"
 
@@ -236,9 +236,8 @@ msgid "Open with…"
 msgstr "Άνοιγμα με…"
 
 #: data/resources/ui/message_item.blp:156
-#, fuzzy
 msgid "Load media"
-msgstr "Φόρτωση εικόνας"
+msgstr "Φόρτωση μέσων"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -580,9 +579,8 @@ msgstr ""
 "πρόβλημα."
 
 #: src/gui/link_window.rs:65
-#, fuzzy
 msgid "Copied to clipboard"
-msgstr "Αντιγραφή στο πρόχειρο"
+msgstr "Αντιγράφτηκε στο πρόχειρο"
 
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
@@ -614,7 +612,7 @@ msgstr "Flare"
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Συνομιλήστε με τους φίλους σας στο Signal"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
@@ -623,34 +621,32 @@ msgid ""
 "from Linux. It is still in development and doesn't include as many features "
 "as the official Signal applications."
 msgstr ""
+"Το Flare είναι μια ανεπίσημη εφαρμογή που σας επιτρέπει να συνομιλείτε με "
+"τους φίλους σας μέσω Signal στα Linux. Είναι ακόμη υπό ανάπτυξη και δεν "
+"συμπεριλαμβάνει κάποια χαρακτηριστικά που έχουν οι επίσημες εφαρμογές."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:31
-#, fuzzy
 msgid "Linking device"
 msgstr "Σύνδεση συσκευής"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:35
-#, fuzzy
 msgid "Sending messages"
 msgstr "Αποστολή μηνυμάτων"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:39
-#, fuzzy
 msgid "Receiving messages"
 msgstr "Λήψη μηνυμάτων"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:43
-#, fuzzy
 msgid "Replying to a message"
 msgstr "Απάντηση σε μήνυμα"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:47
-#, fuzzy
 msgid "Reacting to a message"
 msgstr "Αντίδραση σε μήνυμα"
 
@@ -666,7 +662,6 @@ msgstr "Γνωστοποιήσεις, προαιρετικά στο παρασκ
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:64
-#, fuzzy
 msgid ""
 "More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
