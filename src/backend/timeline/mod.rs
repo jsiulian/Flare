@@ -67,6 +67,7 @@ impl Timeline {
 
     fn items_changed(&self, position: u32, removed: u32, added: u32) {
         self.update_show_header(position, removed, added);
+        self.update_show_timestamp(position, removed, added);
         self.upcast_ref::<gio::ListModel>()
             .items_changed(position, removed, added);
     }
@@ -93,6 +94,35 @@ impl Timeline {
             for i in items_iter.take(added as usize + 1) {
                 i.update_show_header(previous);
                 previous = Some(i);
+            }
+        }
+    }
+
+    fn update_show_timestamp(&self, position: u32, _removed: u32, added: u32) {
+        let current_items = self.imp().list.borrow();
+        if position + added == current_items.len() as u32 {
+            // The end was modified.
+            let items_iter = current_items.iter().rev();
+            let mut next = None;
+
+            // Iterate over all the added items (in reverse order), plus one as the previous may also require an update
+            for i in items_iter.take(added as usize + 1) {
+                i.update_show_timestamp(next);
+                next = Some(i);
+            }
+        } else {
+            // Somewhere else was modified. Skip to the position (minus one to get the previous
+            // item for the first one to calculate).
+            let mut items_iter = current_items
+                .iter()
+                .rev()
+                .skip(current_items.len() - position as usize - added as usize - 1);
+            let mut next = items_iter.next();
+
+            // Iterate over all the added items (in reverse), plus one as the next may also require an update
+            for i in items_iter.take(added as usize + 1) {
+                i.update_show_timestamp(next);
+                next = Some(i);
             }
         }
     }

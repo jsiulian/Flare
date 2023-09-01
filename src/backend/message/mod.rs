@@ -389,9 +389,12 @@ mod imp {
         }
     }
 
-    // At least 4 minutes need to pass that for two messages from the same sender, the second one will
+    // At least 4 minutes need to pass such that for two messages from the same sender, the second one will
     // also show avatar and sender title.
     const MESSAGE_SENT_SHOW_NAME_DURATION: u64 = 4 * 60 * 1000;
+    // At least 1 minute need to pass such that for two messages from the same sender, the second one will
+    // also show the timestamp.
+    const MESSAGE_SENT_SHOW_TIMESTAMP_DURATION: u64 = 1 * 60 * 1000;
 
     impl TimelineItemImpl for Message {
         fn update_show_header(&self, obj: &Self::Type, previous: Option<&TimelineItem>) {
@@ -402,6 +405,17 @@ mod imp {
                 );
             } else {
                 obj.set_show_header(true);
+            }
+        }
+        fn update_show_timestamp(&self, obj: &Self::Type, next: Option<&TimelineItem>) {
+            if let Some(msg) = next.and_then(|p| p.downcast_ref::<super::Message>()) {
+                obj.set_show_timestamp(
+                    obj.sender().uuid() != msg.sender().uuid()
+                        || msg.timestamp()
+                            >= obj.timestamp() + MESSAGE_SENT_SHOW_TIMESTAMP_DURATION,
+                );
+            } else {
+                obj.set_show_timestamp(true);
             }
         }
     }

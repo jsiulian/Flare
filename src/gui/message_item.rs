@@ -29,6 +29,7 @@ impl MessageItem {
 
         s.init_label_selectable();
         s.setup_showheader();
+        s.setup_showtimestamp();
         s.setup_from_group();
         s.setup_from_self();
         s.setup_quote();
@@ -115,6 +116,18 @@ impl MessageItem {
         self.set_show_header();
     }
 
+    fn setup_showtimestamp(&self) {
+        self.message().connect_notify_local(
+            Some("show-timestamp"),
+            clone!(@weak self as s => move |_, _| s.set_show_timestamp()),
+        );
+        self.connect_notify_local(
+            Some("force-show-timestamp"),
+            clone!(@weak self as s => move |_, _| s.set_show_timestamp()),
+        );
+        self.set_show_timestamp();
+    }
+
     fn setup_quote(&self) {
         if self.message().quote().is_some() {
             self.imp().message_bubble.add_css_class("has-quote");
@@ -182,6 +195,12 @@ impl MessageItem {
         }
     }
 
+    /// Set whether this item should show its timestamp.
+    pub fn set_show_timestamp(&self) {
+        let visible = self.message().show_timestamp() || self.property("force-show-timestamp");
+        self.imp().timestamp.set_visible(visible);
+    }
+
     fn setup_loaded(&self) {
         self.connect_notify_local(
             Some("shows-media-loading"),
@@ -243,11 +262,14 @@ pub mod imp {
         pub(super) label_message: TemplateChild<gtk::Label>,
         #[template_child]
         pub(super) message_bubble: TemplateChild<gtk::Box>,
+        #[template_child]
+        pub(super) timestamp: TemplateChild<gtk::Label>,
 
         message: RefCell<Option<TextMessage>>,
         manager: RefCell<Option<Manager>>,
         pressed_attachment: RefCell<Option<Attachment>>,
         force_show_header: Cell<bool>,
+        force_show_timestamp: Cell<bool>,
         has_attachment: Cell<bool>,
     }
 
@@ -386,6 +408,9 @@ pub mod imp {
                     ParamSpecBoolean::builder("force-show-header")
                         .default_value(true)
                         .build(),
+                    ParamSpecBoolean::builder("force-show-timestamp")
+                        .default_value(true)
+                        .build(),
                     ParamSpecBoolean::builder("shows-media-loading")
                         .read_only()
                         .build(),
@@ -414,6 +439,7 @@ pub mod imp {
                     .unwrap_or_default()
                     .to_value(),
                 "force-show-header" => self.force_show_header.get().to_value(),
+                "force-show-timestamp" => self.force_show_timestamp.get().to_value(),
                 "shows-media-loading" => {
                     let mut value = false;
 
@@ -502,6 +528,12 @@ pub mod imp {
                         "Property `force-show-header` of `MessageItem` has to be of type `bool`",
                     );
                     self.force_show_header.replace(b);
+                }
+                "force-show-timestamp" => {
+                    let b = value.get::<bool>().expect(
+                        "Property `force-show-timestamp` of `MessageItem` has to be of type `bool`",
+                    );
+                    self.force_show_timestamp.replace(b);
                 }
                 "has-attachment" => {
                     let b = value.get::<bool>().expect(
