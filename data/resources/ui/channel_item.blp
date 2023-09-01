@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlChannelItem : Grid {
+template $FlChannelItem : Box {
   accessibility {
     labelled-by: label-name;
   }
@@ -10,71 +10,59 @@ template $FlChannelItem : Grid {
   margin-top: 6;
   hexpand: false;
   hexpand-set: true;
-  column-spacing: 12;
-
+  
   // Avatar
   Adw.Avatar {
-    text: bind template.channel as <$FlChannel>.title;
+    text: bind $note_to_self(template.channel as <$FlChannel>.title) as <string>;
+    icon-name: "user-bookmarks-symbolic";
     show-initials: true;
-    size: 32;
-
-    layout {
-      column: "0";
-      row: "0";
-      row-span: "2";
-    }
+    size: 44;
   }
+  Box {
+    orientation: vertical;
+    margin-start: 12;
+    Box {
 
-  // Channel name
-  Label label-name {
-    styles [
-      "heading",
-    ]
+      // Channel name
+      Label label-name {
+        styles ["heading"]
+        label: bind template.channel as <$FlChannel>.title;
+        halign: start;
+        hexpand: true;
+        ellipsize: end;
+      }
 
-    label: bind template.channel as <$FlChannel>.title;
-    halign: start;
-    hexpand: true;
-    ellipsize: end;
+      // Timestamp
+      Label {
+        styles [
+          "dim-label",
+          "caption",
+          "numeric",
+        ]
 
-    layout {
-      column: "1";
-      row: "0";
+        label: bind $format_timestamp(template.channel as <$FlChannel>.last-message as <$FlMessage>.timestamp) as <string>;
+        justify: right;
+        vexpand: false;
+        valign: start;
+        hexpand: false;
+        halign: end;
+
+      }
     }
-  }
-
-  Label {
-    halign: start;
-    ellipsize: end;
-    label: bind template.channel as <$FlChannel>.last-message as <$FlTextMessage>.textual-description;
-
-    styles [
-      "dim-label",
-    ]
-
-    layout {
-      column: "1";
-      row: "1";
-      column-span: "2";
-    }
-  }
-
-  // Timestamp
-  Label {
-    styles [
-      "dim-label",
-      "caption",
-    ]
-
-    label: bind $format_timestamp(template.channel as <$FlChannel>.last-message as <$FlMessage>.timestamp) as <string>;
-    justify: right;
-    vexpand: false;
-    valign: start;
-    hexpand: false;
-    halign: end;
-
-    layout {
-      column: "2";
-      row: "0";
+    Label label_last_message {
+      halign: start;
+      xalign: 0;
+      yalign: 0;
+      // Request height for two lines
+      height-request: 32;
+      ellipsize: end;
+      lines: 2;
+      use-markup: true;
+      label: bind $format_last_message(template.channel as <$FlChannel>.last-message as <$FlTextMessage>) as <string>;
+      styles [
+        "dim-label",
+        "caption"
+      ]
     }
   }
 }
