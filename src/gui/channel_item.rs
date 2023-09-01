@@ -1,5 +1,8 @@
+use gdk::prelude::ObjectExt;
 use glib::Object;
 use gtk::glib;
+
+use crate::backend::Channel;
 
 glib::wrapper! {
     pub struct ChannelItem(ObjectSubclass<imp::ChannelItem>)
@@ -12,6 +15,10 @@ impl ChannelItem {
     pub fn new() -> Self {
         log::trace!("Initializing `ChannelItem`");
         Object::builder::<Self>().build()
+    }
+
+    fn channel(&self) -> Channel {
+        self.property("channel")
     }
 }
 
@@ -27,9 +34,10 @@ pub mod imp {
     use glib::{
         once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject, Value,
     };
-    use gtk::glib;
+    use gtk::{glib, Label};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
+    use crate::backend::message::{DisplayMessage, DisplayMessageExt, MessageExt};
     use crate::{
         backend::{Channel, Manager},
         gui::utility::Utility,
@@ -38,6 +46,9 @@ pub mod imp {
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/channel_item.ui")]
     pub struct ChannelItem {
+        #[template_child]
+        label_last_message: TemplateChild<Label>,
+
         channel: RefCell<Option<Channel>>,
 
         manager: RefCell<Option<Manager>>,
@@ -45,9 +56,33 @@ pub mod imp {
 
     #[gtk::template_callbacks]
     impl ChannelItem {
-        #[template_callback(function)]
-        pub(super) fn append_colon(s: Option<String>) -> String {
-            format!("{}: ", s.unwrap_or_default())
+        #[template_callback]
+        fn format_last_message(&self, message: Option<DisplayMessage>) -> String {
+            if let Some(msg) = message {
+                let is_group = self.obj().channel().group().is_some();
+                if is_group {
+                    format!(
+                        "<span font-weight='500'>{}:</span> {}",
+                        glib::markup_escape_text(&msg.sender().title()),
+                        glib::markup_escape_text(&msg.textual_description().unwrap_or_default())
+                    )
+                } else {
+                    format!(
+                        "{}",
+                        glib::markup_escape_text(&msg.textual_description().unwrap_or_default())
+                    )
+                }
+            } else {
+                String::new()
+            }
+        }
+        #[template_callback]
+        fn note_to_self(&self, name: String) -> String {
+            if self.obj().channel().is_self() {
+                String::new()
+            } else {
+                name
+            }
         }
     }
 
@@ -55,7 +90,7 @@ pub mod imp {
     impl ObjectSubclass for ChannelItem {
         const NAME: &'static str = "FlChannelItem";
         type Type = super::ChannelItem;
-        type ParentType = gtk::Grid;
+        type ParentType = gtk::Box;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
@@ -109,5 +144,5 @@ pub mod imp {
     }
 
     impl WidgetImpl for ChannelItem {}
-    impl GridImpl for ChannelItem {}
+    impl BoxImpl for ChannelItem {}
 }

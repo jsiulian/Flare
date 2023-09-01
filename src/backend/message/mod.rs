@@ -6,7 +6,7 @@ mod text_message;
 
 pub use call_message::CallMessage;
 pub use deletion_message::DeletionMessage;
-pub use display_message::DisplayMessage;
+pub use display_message::{DisplayMessage, DisplayMessageExt};
 pub use reaction_message::ReactionMessage;
 pub use text_message::TextMessage;
 

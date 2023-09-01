@@ -110,7 +110,7 @@ impl Channel {
         self.property("manager")
     }
 
-    pub fn last_message(&self) -> Option<Message> {
+    pub fn last_message(&self) -> Option<DisplayMessage> {
         self.property("last-message")
     }
 
@@ -192,6 +192,17 @@ impl Channel {
 
     pub fn group(&self) -> Option<Group> {
         self.imp().group.borrow().clone()
+    }
+
+    pub fn contact(&self) -> Option<Contact> {
+        self.imp().contact.borrow().clone()
+    }
+
+    pub fn is_self(&self) -> bool {
+        self.contact()
+            .as_ref()
+            .map(Contact::is_self)
+            .unwrap_or_default()
     }
 
     pub fn uuid(&self) -> Option<Uuid> {

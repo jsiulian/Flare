@@ -4,3 +4,5 @@ data/resources/ui/about.blp
 .flatpak-builder/
 /subprojects/blueprint-compiler
 .direnv
+.flatpak/
+.vscode/
