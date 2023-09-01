@@ -152,6 +152,10 @@ mod imp {
             let upcast = obj.upcast_ref::<Message>();
             upcast.imp().update_show_header(upcast, previous);
         }
+        fn update_show_timestamp(&self, obj: &Self::Type, previous: Option<&TimelineItem>) {
+            let upcast = obj.upcast_ref::<Message>();
+            upcast.imp().update_show_timestamp(upcast, previous);
+        }
     }
 
     impl MessageImpl for DisplayMessage {}

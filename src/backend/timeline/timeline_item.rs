@@ -11,6 +11,7 @@ glib::wrapper! {
 
 pub trait TimelineItemExt: 'static + std::marker::Sized + glib::ObjectExt {
     fn update_show_header(&self, previous: Option<&TimelineItem>);
+    fn update_show_timestamp(&self, next: Option<&TimelineItem>);
 
     fn timestamp(&self) -> u64 {
         self.property("timestamp")
@@ -27,16 +28,29 @@ pub trait TimelineItemExt: 'static + std::marker::Sized + glib::ObjectExt {
     fn set_show_header(&self, value: bool) {
         self.set_property("show-header", value)
     }
+
+    fn show_timestamp(&self) -> bool {
+        self.property("show-timestamp")
+    }
+
+    fn set_show_timestamp(&self, value: bool) {
+        self.set_property("show-timestamp", value)
+    }
 }
 
 impl<O: IsA<TimelineItem>> TimelineItemExt for O {
     fn update_show_header(&self, previous: Option<&TimelineItem>) {
         imp::timeline_item_update_show_header(self.upcast_ref(), previous)
     }
+
+    fn update_show_timestamp(&self, previous: Option<&TimelineItem>) {
+        imp::timeline_item_update_show_timestamp(self.upcast_ref(), previous)
+    }
 }
 
 pub trait TimelineItemImpl: ObjectImpl {
     fn update_show_header(&self, _obj: &Self::Type, _previous: Option<&TimelineItem>) {}
+    fn update_show_timestamp(&self, _obj: &Self::Type, _previous: Option<&TimelineItem>) {}
 }
 
 unsafe impl<T> IsSubclassable<T> for TimelineItem
@@ -50,6 +64,7 @@ where
         let klass = class.as_mut();
 
         klass.update_show_header = update_show_header_trampoline::<T>;
+        klass.update_show_timestamp = update_show_timestamp_trampoline::<T>;
     }
 }
 
@@ -60,6 +75,15 @@ where
 {
     let this = this.downcast_ref::<T::Type>().unwrap();
     this.imp().update_show_header(this, previous)
+}
+
+fn update_show_timestamp_trampoline<T>(this: &TimelineItem, next: Option<&TimelineItem>)
+where
+    T: ObjectSubclass + TimelineItemImpl,
+    T::Type: IsA<TimelineItem>,
+{
+    let this = this.downcast_ref::<T::Type>().unwrap();
+    this.imp().update_show_timestamp(this, next)
 }
 
 mod imp {
@@ -76,6 +100,7 @@ mod imp {
     pub struct TimelineItemClass {
         pub parent_class: glib::object::ObjectClass,
         pub update_show_header: fn(&super::TimelineItem, Option<&super::TimelineItem>),
+        pub update_show_timestamp: fn(&super::TimelineItem, Option<&super::TimelineItem>),
     }
 
     unsafe impl ClassStruct for TimelineItemClass {
@@ -90,11 +115,20 @@ mod imp {
         (klass.as_ref().update_show_header)(this, previous)
     }
 
+    pub(super) fn timeline_item_update_show_timestamp(
+        this: &super::TimelineItem,
+        next: Option<&super::TimelineItem>,
+    ) {
+        let klass = this.class();
+        (klass.as_ref().update_show_timestamp)(this, next)
+    }
+
     #[derive(Debug, Default)]
     pub struct TimelineItem {
         timestamp: Cell<u64>,
 
         show_header: Cell<bool>,
+        show_timestamp: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -113,6 +147,7 @@ mod imp {
                         .construct_only()
                         .build(),
                     ParamSpecBoolean::builder("show-header").build(),
+                    ParamSpecBoolean::builder("show-timestamp").build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -122,6 +157,7 @@ mod imp {
             match pspec.name() {
                 "timestamp" => self.timestamp.get().to_value(),
                 "show-header" => self.show_header.get().to_value(),
+                "show-timestamp" => self.show_timestamp.get().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -141,6 +177,13 @@ mod imp {
                     );
 
                     self.show_header.set(obj);
+                }
+                "show-timestamp" => {
+                    let obj = value.get::<bool>().expect(
+                        "Property `show-timestamp` of `TimelineItem` has to be of type `bool`",
+                    );
+
+                    self.show_timestamp.set(obj);
                 }
                 _ => unimplemented!(),
             }
