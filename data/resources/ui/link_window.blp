@@ -60,6 +60,12 @@ template $FlLinkWindow : Adw.Window {
                   halign: center;
                   clicked => $forward() swapped;
                 }
+
+                Gtk.Label {
+                  label: _("Note: Currently, to sucessfully link contacts requires intervention. Please follow these steps: \n- Link Flare as usual. Wait ~1min after the link window closed. \n- Make sure you do not have running in the background enabled. Close and restart Flare. \n- In the primary menu, click 'synchronize contacts'. Wait ~1min. \n- Make sure you do not have running in the background enabled. Close and restart Flare. \n- Your contacts should be behind the pencil-icon in the top-left.");
+                  margin-top: 12;
+                  wrap: true;
+                }
               };
             }
           };
@@ -100,6 +106,7 @@ template $FlLinkWindow : Adw.Window {
                 clicked => $handle_clipboard() swapped;
               }
             }
+
           };
         }  
       }

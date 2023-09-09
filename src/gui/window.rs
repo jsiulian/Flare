@@ -229,6 +229,19 @@ pub mod imp {
                 }));
                 dialog.present();
             }));
+            log::trace!("Setting up sync-contacts action");
+            let action_sync_contacts = SimpleAction::new("sync-contacts", None);
+            action_sync_contacts.connect_activate(clone!(@weak obj => move |_, _| {
+                log::trace!("User requested to synchronize contacts");
+                if let Some(man) = obj.imp().manager.borrow().as_ref() {
+                    gspawn!(clone!(@weak man => async move {
+                        if let Err(e) = man.request_contacts_sync().await {
+                            // TODO: Show error dialog?
+                            log::error!("Failed to synchronize contacts: {}", e);
+                        }
+                    }));
+                };
+            }));
 
             let action_show_help_overlay = SimpleAction::new("show-help-overlay", None);
             action_show_help_overlay.connect_activate(|_, _| {
@@ -304,6 +317,7 @@ pub mod imp {
             actions.add_action(&action_clear_messages);
             actions.add_action(&action_unlink);
             actions.add_action(&action_submit_captcha);
+            actions.add_action(&action_sync_contacts);
             actions.add_action(&action_show_help_overlay);
             actions.add_action(&action_about);
             actions.add_action(&action_channel_information);

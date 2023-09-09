@@ -50,6 +50,7 @@ enum Command {
             Result<<presage_store_sled::SledStore as presage::Store>::MessagesIter, Error>,
         >,
     ),
+    RequestContactsSync(oneshot::Sender<Result<(), Error>>),
 }
 
 impl std::fmt::Debug for Command {
@@ -280,6 +281,15 @@ impl ManagerThread {
             .expect("Command sending failed");
         receiver.await.expect("Callback receiving failed")
     }
+
+    pub async fn request_contacts_sync(&self) -> Result<(), Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::RequestContactsSync(sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
 }
 
 async fn setup_manager(
@@ -410,5 +420,8 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             // XXX: Cannot format iterator.
             let _ = callback.send(manager.messages(&thread, range));
         }
+        Command::RequestContactsSync(callback) => callback
+            .send(manager.sync_contacts().await)
+            .expect("Callback sending failed"),
     }
 }

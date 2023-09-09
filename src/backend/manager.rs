@@ -642,6 +642,13 @@ impl Manager {
         log::trace!("`Manager::upload_attachment` finished");
         r
     }
+
+    pub async fn request_contacts_sync(&self) -> Result<(), PresageError> {
+        log::trace!("`Manager::request_contacts_sync` start");
+        let r = self.internal().request_contacts_sync().await;
+        log::trace!("`Manager::request_contacts_sync` finished");
+        r
+    }
 }
 
 mod imp {
