@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Introduced a workaround for contacts not syncing anymore. Note that the workaround requires intervention:
+    - Link Flare as usual. Wait ~1min after the link window closed.
+    - Make sure you do not have running in the background enabled. Close and restart Flare.
+    - In the primary menu, click "synchronize contacts". Wait ~1min.
+    - Make sure you do not have running in the background enabled. Close and restart Flare.
+    - Your contacts should be behind the pencil-icon in the top-left.
+
 ### Changed
 
 - Better UI for showing the last message of a channel.
