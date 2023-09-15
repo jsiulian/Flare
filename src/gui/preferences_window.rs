@@ -81,25 +81,25 @@ pub mod imp {
         entry_device_name: TemplateChild<adw::EntryRow>,
 
         #[template_child]
-        switch_download_images: TemplateChild<gtk::Switch>,
+        row_download_images: TemplateChild<adw::SwitchRow>,
         #[template_child]
-        switch_download_videos: TemplateChild<gtk::Switch>,
+        row_download_videos: TemplateChild<adw::SwitchRow>,
         #[template_child]
-        switch_download_files: TemplateChild<gtk::Switch>,
+        row_download_files: TemplateChild<adw::SwitchRow>,
         #[template_child]
-        switch_download_voice_messages: TemplateChild<gtk::Switch>,
+        row_download_voice_messages: TemplateChild<adw::SwitchRow>,
 
         #[template_child]
-        switch_notifications: TemplateChild<gtk::Switch>,
+        row_notifications: TemplateChild<adw::SwitchRow>,
         #[template_child]
-        switch_notifications_reactions: TemplateChild<gtk::Switch>,
+        row_notifications_reactions: TemplateChild<adw::SwitchRow>,
         #[template_child]
-        switch_background: TemplateChild<gtk::Switch>,
+        row_background: TemplateChild<adw::SwitchRow>,
 
         #[template_child]
-        switch_messages_selectable: TemplateChild<gtk::Switch>,
+        row_messages_selectable: TemplateChild<adw::SwitchRow>,
         #[template_child]
-        switch_send_on_enter: TemplateChild<gtk::Switch>,
+        row_send_on_enter: TemplateChild<adw::SwitchRow>,
 
         settings: Settings,
     }
@@ -113,7 +113,7 @@ pub mod imp {
             self.settings
                 .bind(
                     "autodownload-images",
-                    &self.switch_download_images.get(),
+                    &self.row_download_images.get(),
                     "active",
                 )
                 .flags(SettingsBindFlags::DEFAULT)
@@ -121,7 +121,7 @@ pub mod imp {
             self.settings
                 .bind(
                     "autodownload-videos",
-                    &self.switch_download_videos.get(),
+                    &self.row_download_videos.get(),
                     "active",
                 )
                 .flags(SettingsBindFlags::DEFAULT)
@@ -129,7 +129,7 @@ pub mod imp {
             self.settings
                 .bind(
                     "autodownload-files",
-                    &self.switch_download_files.get(),
+                    &self.row_download_files.get(),
                     "active",
                 )
                 .flags(SettingsBindFlags::DEFAULT)
@@ -137,38 +137,38 @@ pub mod imp {
             self.settings
                 .bind(
                     "autodownload-voice-messages",
-                    &self.switch_download_voice_messages.get(),
+                    &self.row_download_voice_messages.get(),
                     "active",
                 )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
             self.settings
-                .bind("notifications", &self.switch_notifications.get(), "active")
+                .bind("notifications", &self.row_notifications.get(), "active")
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
             self.settings
                 .bind(
                     "notify-reactions",
-                    &self.switch_notifications_reactions.get(),
+                    &self.row_notifications_reactions.get(),
                     "active",
                 )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
             self.settings
-                .bind("run-in-background", &self.switch_background.get(), "active")
+                .bind("run-in-background", &self.row_background.get(), "active")
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
 
             self.settings
                 .bind(
                     "messages-selectable",
-                    &self.switch_messages_selectable.get(),
+                    &self.row_messages_selectable.get(),
                     "active",
                 )
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
             self.settings
-                .bind("send-on-enter", &self.switch_send_on_enter.get(), "active")
+                .bind("send-on-enter", &self.row_send_on_enter.get(), "active")
                 .flags(SettingsBindFlags::DEFAULT)
                 .build();
         }
@@ -184,15 +184,15 @@ pub mod imp {
             Self {
                 settings: Settings::new(crate::config::APP_ID),
                 entry_device_name: TemplateChild::default(),
-                switch_download_images: TemplateChild::default(),
-                switch_download_videos: TemplateChild::default(),
-                switch_download_voice_messages: TemplateChild::default(),
-                switch_download_files: TemplateChild::default(),
-                switch_notifications: TemplateChild::default(),
-                switch_notifications_reactions: TemplateChild::default(),
-                switch_background: TemplateChild::default(),
-                switch_messages_selectable: TemplateChild::default(),
-                switch_send_on_enter: TemplateChild::default(),
+                row_download_images: TemplateChild::default(),
+                row_download_videos: TemplateChild::default(),
+                row_download_voice_messages: TemplateChild::default(),
+                row_download_files: TemplateChild::default(),
+                row_notifications: TemplateChild::default(),
+                row_notifications_reactions: TemplateChild::default(),
+                row_background: TemplateChild::default(),
+                row_messages_selectable: TemplateChild::default(),
+                row_send_on_enter: TemplateChild::default(),
             }
         }
 

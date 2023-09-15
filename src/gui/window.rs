@@ -98,7 +98,7 @@ pub mod imp {
     #[template(resource = "/ui/window.ui")]
     pub struct Window {
         #[template_child]
-        leaflet: TemplateChild<adw::Leaflet>,
+        split_view: TemplateChild<adw::NavigationSplitView>,
 
         #[template_child]
         channel_list: TemplateChild<ChannelList>,
@@ -113,7 +113,7 @@ pub mod imp {
     impl Default for Window {
         fn default() -> Self {
             Self {
-                leaflet: Default::default(),
+                split_view: Default::default(),
                 channel_list: Default::default(),
                 channel_messages: Default::default(),
                 manager: Default::default(),
@@ -370,14 +370,14 @@ pub mod imp {
 
         #[template_callback]
         fn handle_go_back(&self) {
-            log::trace!("Go backward in the leaflet");
-            self.leaflet.navigate(adw::NavigationDirection::Back);
+            log::trace!("Go backward in the SplitView");
+            self.split_view.set_show_content(false);
         }
 
         #[template_callback]
         fn handle_go_forward(&self) {
-            log::trace!("Go forward in the leaflet");
-            self.leaflet.navigate(adw::NavigationDirection::Forward);
+            log::trace!("Go forward in the SplitView");
+            self.split_view.set_show_content(true);
         }
     }
 

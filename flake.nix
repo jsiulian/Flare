@@ -2,13 +2,17 @@
   description = "Chat with your friends on Signal";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgsgnome.url = "github:NixOS/nixpkgs/704a204ff98d07aec17bd741d304c0ea8c30bc49";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgsgnome, flake-utils, ... }@inputs:
     (flake-utils.lib.eachDefaultSystem
       (system:
         let
           pkgs = import nixpkgs {
+            inherit system;
+          };
+          pkgsgnome = import nixpkgsgnome {
             inherit system;
           };
           name = "flare";
@@ -27,15 +31,15 @@
                 };
               };
               src = ./.;
-              buildInputs = with pkgs; [ libadwaita protobuf libsecret gst_all_1.gstreamer gst_all_1.gst-plugins-base gst_all_1.gst-plugins-good gst_all_1.gst-plugins-bad gtksourceview5 libspelling ];
-              nativeBuildInputs = with pkgs; [ appstream-glib blueprint-compiler desktop-file-utils meson ninja pkg-config wrapGAppsHook4 rustPlatform.cargoSetupHook cargo rustc  ];
+              buildInputs = with pkgs; [ pkgsgnome.libadwaita pkgsgnome.protobuf pkgsgnome.libsecret pkgsgnome.gst_all_1.gstreamer pkgsgnome.gst_all_1.gst-plugins-base pkgsgnome.gst_all_1.gst-plugins-good pkgsgnome.gst_all_1.gst-plugins-bad pkgsgnome.gtksourceview5 pkgsgnome.gtk4 ];
+              nativeBuildInputs = with pkgs; [ pkgsgnome.appstream-glib pkgsgnome.blueprint-compiler pkgsgnome.desktop-file-utils pkgsgnome.meson pkgsgnome.ninja pkgsgnome.pkg-config pkgsgnome.wrapGAppsHook4 pkgsgnome.rustPlatform.cargoSetupHook cargo rustc pkgsgnome.glib ];
 
               inherit name;
             };
           devShells.default =
             let 
               run = pkgs.writeShellScriptBin "run" ''
-                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:./build/data/
+                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgsgnome.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgsgnome.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
                 meson compile -C build && ./build/target/debug/${name}
               '';
               check = pkgs.writeShellScriptBin "check" ''
