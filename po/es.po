@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-19 12:50+0200\n"
-"PO-Revision-Date: 2023-08-16 14:55+0000\n"
-"Last-Translator: Isaias Carrillo <icarrillo1304@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/flare/flare/es/"
-">\n"
+"PO-Revision-Date: 2023-09-20 12:01+0000\n"
+"Last-Translator: Sergio Varela <sergitroll9@gmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/flare/flare/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -105,16 +105,14 @@ msgid "Insert emoji"
 msgstr "Insertar emoji"
 
 #: data/resources/ui/channel_messages.blp:182
-#, fuzzy
 msgctxt "accessibility"
 msgid "Message input"
-msgstr "Entrada de mensaje"
+msgstr "Entrada de mensajes"
 
 #: data/resources/ui/channel_messages.blp:188
-#, fuzzy
 msgctxt "tooltip"
 msgid "Message input"
-msgstr "Entrada de mensaje"
+msgstr "Entrada de mensajes"
 
 #: data/resources/ui/channel_messages.blp:194
 msgctxt "accessibility"
@@ -157,24 +155,22 @@ msgid "Unlink"
 msgstr "Desvincular"
 
 #: data/resources/ui/dialog_unlink.blp:6
-#, fuzzy
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
-"Esto desvinculará este dispositivo y borrará todos los datos almacenados "
-"localmente. Esto también cerrará la aplicación para poder vincular al abrir "
-"la aplicación nuevamente."
+"Esto desvinculará este dispositivo y eliminará todos los datos guardados "
+"localmente. También cerrará la aplicación para que pueda volver a vincularse "
+"al abrirla de nuevo."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
 msgstr "Desvincular y borrar todos los mensajes"
 
 #: data/resources/ui/dialog_unlink.blp:13
-#, fuzzy
 msgid "Unlink but keep messages"
-msgstr "Desvincular manteniendo los mensajes"
+msgstr "Desvincular pero conservar los mensajes"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
@@ -189,35 +185,34 @@ msgid "Report"
 msgstr "Reportar"
 
 #: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
-#, fuzzy
 msgid "Link device"
-msgstr "Vincular Dispositivo"
+msgstr "Vincular dispositivo"
 
 #: data/resources/ui/link_window.blp:34
 msgid "Scan Code"
-msgstr ""
+msgstr "Escanear código"
 
 #: data/resources/ui/link_window.blp:35
 msgid "Scan this code with another Signal app logged into your account."
-msgstr ""
+msgstr "Escanea este código con otra aplicación Signal conectada a tu cuenta."
 
 #: data/resources/ui/link_window.blp:59
 msgid "Link without scanning"
-msgstr ""
+msgstr "Enlazar sin escanear"
 
 #: data/resources/ui/link_window.blp:86
-#, fuzzy
 msgid "Manual Linking"
-msgstr "Vinculando"
+msgstr "Enlace manual"
 
 #: data/resources/ui/link_window.blp:87
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Si su dispositivo no puede escanear el código QR, puede introducir "
+"manualmente el enlace que se proporciona aquí"
 
 #: data/resources/ui/link_window.blp:98
-#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Copiar al portapapeles"
 
@@ -242,23 +237,20 @@ msgid "Open with…"
 msgstr "Abrir con…"
 
 #: data/resources/ui/message_item.blp:156
-#, fuzzy
 msgid "Load media"
-msgstr "Cargar más"
+msgstr "Cargar medios"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "General"
 
 #: data/resources/ui/preferences_window.blp:10
-#, fuzzy
 msgid "Linking"
 msgstr "Vinculando"
 
 #: data/resources/ui/preferences_window.blp:11
-#, fuzzy
 msgid "The device will need to be relinked to take effect."
-msgstr "El dispositivo debe ser vinculado de nuevo para tomar efecto."
+msgstr "Será necesario volver a vincular el dispositivo para que surta efecto."
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Device Name"
@@ -300,9 +292,8 @@ msgid "Send notifications"
 msgstr "Enviar notificaciones"
 
 #: data/resources/ui/preferences_window.blp:92
-#, fuzzy
 msgid "Send notifications on reactions"
-msgstr "Enviar notificaciones"
+msgstr "Enviar notificaciones al recibir reacciones"
 
 #: data/resources/ui/preferences_window.blp:106
 #: src/gui/preferences_window.rs:29
@@ -314,15 +305,15 @@ msgid "Mobile Compatibility"
 msgstr "Compatibilidad móvil"
 
 #: data/resources/ui/preferences_window.blp:123
-#, fuzzy
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
-"Estas opciones pueden ser cambiadas para una mejor experiencia táctil y en "
-"dispositivos móviles. Los valores por defecto de estas preferencias están "
-"optimizadas para ser útiles en dispositivos de escritorio."
+"Estas opciones pueden querer cambiarse para una mejor experiencia en "
+"dispositivos táctiles y móviles. Los valores predeterminados de estas "
+"preferencias están optimizadas para que sean útiles en dispositivos de "
+"sobremesa."
 
 #: data/resources/ui/preferences_window.blp:126
 msgid "Selectable Message Text"
@@ -397,10 +388,9 @@ msgid "Upload attachment"
 msgstr "Cargar un adjunto"
 
 #: data/resources/ui/shortcuts.blp:58
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr "Enfocar la casilla de entrada de texto"
+msgstr "Enfocar el cuadro de entrada de texto"
 
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
@@ -424,7 +414,7 @@ msgstr "Ajustes"
 #: data/resources/ui/window.blp:129
 #: data/resources/ui/submit_captcha_dialog.blp:5
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Enviar Captcha"
 
 #: data/resources/ui/window.blp:134
 msgid "Keybindings"
@@ -443,18 +433,23 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Envíe un desafío Captcha. El token puede obtenerse del mensaje de error "
+"mostrado desde Flare. El captcha debe rellenarse <a href=\"https"
+"://signalcaptchas.org/challenge/generate.html\">en esta página web</a> y el "
+"enlace para abrir Signal debe pegarse en la entrada correspondiente. Tenga "
+"en cuenta que el captcha sólo es válido durante un minuto aproximadamente."
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/submit_captcha_dialog.blp:24
 msgid "Submit"
-msgstr ""
+msgstr "Enviar"
 
 #: src/backend/channel.rs:564
 msgid "Note to self"
@@ -469,30 +464,26 @@ msgid "Started calling."
 msgstr "Iniciando llamada."
 
 #: src/backend/message/call_message.rs:116
-#, fuzzy
 msgid "Answered a call."
-msgstr "Responder llamada"
+msgstr "Respondió a una llamada."
 
 #: src/backend/message/call_message.rs:117
 msgid "Hung up."
 msgstr "Colgar."
 
 #: src/backend/message/call_message.rs:118
-#, fuzzy
 msgid "Is busy."
 msgstr "Está ocupado."
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:70
-#, fuzzy
 msgid "{sender} reacted {emoji} to a message."
-msgstr "Borrar mensajes"
+msgstr "{sender} reaccionó {emoji} a un mensaje."
 
 #. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:76
-#, fuzzy
 msgid "Reacted {emoji} to a message."
-msgstr "Borrar mensajes"
+msgstr "Reaccionó {emoji} a un mensaje."
 
 #: src/backend/message/text_message.rs:365
 msgid "Sent an image"
@@ -507,11 +498,10 @@ msgstr[0] "Enviar un video"
 msgstr[1] "Enviar {} videos"
 
 #: src/backend/message/text_message.rs:372
-#, fuzzy
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] "Enviar una imagen"
-msgstr[1] "Enviar {} imágenes"
+msgstr[0] "Envío un mensaje de voz"
+msgstr[1] "Envío {} mensajes de voz"
 
 #: src/backend/message/text_message.rs:378
 msgid "Sent a file"
@@ -524,9 +514,8 @@ msgid "I/O Error."
 msgstr "Error en I/O."
 
 #: src/error.rs:92
-#, fuzzy
 msgid "There does not seem to be a connection to the internet available."
-msgstr "Parece que no hay una conexión a internet disponible."
+msgstr "Parece que no hay conexión a internet disponible."
 
 #: src/error.rs:97
 msgid "Something glib-related failed."
@@ -545,13 +534,12 @@ msgstr ""
 "base de datos y vincula de nuevo la aplicación."
 
 #: src/error.rs:112
-#, fuzzy
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
-"Parece que no está autorizado por Signal. Por favor borre la base de datos y "
-"vincule de nuevo la aplicación."
+"Parece que no está autorizado con Signal. Por favor, borre la base de datos "
+"y vuelva a vincular la aplicación."
 
 #: src/error.rs:117
 msgid "Sending a message failed."
@@ -573,9 +561,8 @@ msgid "The application seems to be misconfigured."
 msgstr "Parece que la aplicación está mal configurada."
 
 #: src/error.rs:137
-#, fuzzy
 msgid "A part of the application crashed."
-msgstr "Una parte de la aplicación se colgó."
+msgstr "Una parte de la aplicación se ha bloqueado."
 
 #: src/error.rs:147
 msgid "Please check your internet connection."
@@ -586,26 +573,21 @@ msgid "Please delete the database and relink the device."
 msgstr "Por favor borre la base de datos y vincule de nuevo el dispositivo."
 
 #: src/error.rs:159
-#, fuzzy
 msgid "The database path at {} is no folder."
-msgstr "La ruta de la base de datos {} no es una carpeta."
+msgstr "La ruta de la base de datos en {} no es una carpeta."
 
 #: src/error.rs:164
-#, fuzzy
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
-"Por favor reinicie la aplicación con inicio de sesión y reporta este "
-"problema."
+"Por favor, reinicie la aplicación con el registro e informe de este problema."
 
 #: src/gui/link_window.rs:65
-#, fuzzy
 msgid "Copied to clipboard"
 msgstr "Copiar al portapapeles"
 
 #: src/gui/preferences_window.rs:51
-#, fuzzy
 msgid "Background permission"
-msgstr "Permisos de segundo plano"
+msgstr "Permiso de segundo plano"
 
 #: src/gui/preferences_window.rs:52
 msgid "Use settings to remove permissions"
@@ -615,25 +597,25 @@ msgstr "Use los ajustes para quitar permisos"
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:58
 msgid "%H:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:61
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%d-%m-%Y %H:%M"
 
 #. Translators: Flare name in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Chatea con tus amigos en Signal"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
@@ -642,46 +624,44 @@ msgid ""
 "from Linux. It is still in development and doesn't include as many features "
 "as the official Signal applications."
 msgstr ""
+"Flare es una aplicación no oficial que te permite chatear con tus amigos en "
+"Signal desde Linux. Aún está en desarrollo y no incluye tantas funciones "
+"como las aplicaciones oficiales de Signal."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:31
-#, fuzzy
 msgid "Linking device"
-msgstr "Vincular Dispositivo"
+msgstr "Vincular dispositivo"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:35
-#, fuzzy
 msgid "Sending messages"
-msgstr "Borrar mensajes"
+msgstr "Enviar mensajes"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:39
-#, fuzzy
 msgid "Receiving messages"
-msgstr "Borrar mensajes"
+msgstr "Recibir mensajes"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:43
-#, fuzzy
 msgid "Replying to a message"
-msgstr "Borrar mensajes"
+msgstr "Responder a mensajes"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:47
-#, fuzzy
 msgid "Reacting to a message"
-msgstr "Borrar mensajes"
+msgstr "Reaccionar a mensajes"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:55
 msgid "Encrypted storage"
-msgstr ""
+msgstr "Almacenamiento encriptado"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:59
 msgid "Notifications, optionally in the background"
-msgstr ""
+msgstr "Notificaciones, opcionalmente en segundo plano"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:64
@@ -689,6 +669,8 @@ msgid ""
 "More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
+"Hay más funciones previstas, bloqueadas o no previstas. Consulta el README "
+"para obtener más información sobre ellas."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:68
@@ -698,61 +680,66 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Ten en cuenta que el uso de esta aplicación probablemente empeorará tu "
+"seguridad en comparación con el uso de las aplicaciones oficiales de Signal. "
+"Utilízala con cuidado cuando manejes datos sensibles. Mira el README del "
+"proyecto para más información sobre seguridad."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:479
-#, fuzzy
 msgid "Overview of the application"
-msgstr "Una parte de la aplicación se colgó."
+msgstr "Descripción general de la aplicación"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Anchura de ventana"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Altura de la ventana"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Ventana maximizada"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"El nombre del dispositivo al vincular Flare. Esto requiere que se vuelva a "
+"vincular la aplicación."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Descargar imágenes automáticamente"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Descargar vídeos automáticamente"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
-msgstr ""
+msgstr "Descargar automáticamente los mensajes de voz"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "Descargar archivos automáticamente"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Ejecutarse en segundo plano cuando se cierre"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Enviar notificaciones al recibir reacciones"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Se pueden seleccionar mensajes"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Enviar un mensaje al pulsar la tecla Enter"
 
 #, fuzzy
 #~ msgid "Changed"
