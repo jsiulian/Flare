@@ -46,7 +46,9 @@ pub mod imp {
         #[template_child]
         pub(super) toast_overlay: TemplateChild<adw::ToastOverlay>,
         #[template_child]
-        pub(super) content: TemplateChild<adw::Leaflet>,
+        pub(super) content: TemplateChild<adw::NavigationView>,
+        #[template_child]
+        page_manual: TemplateChild<adw::NavigationPage>,
         #[template_child]
         qr_image: TemplateChild<gtk::Picture>,
 
@@ -68,14 +70,12 @@ pub mod imp {
         #[template_callback]
         fn previous(&self) {
             let obj = self.obj();
-            obj.imp().content.navigate(adw::NavigationDirection::Back);
+            obj.imp().content.pop();
         }
         #[template_callback]
         fn forward(&self) {
             let obj = self.obj();
-            obj.imp()
-                .content
-                .navigate(adw::NavigationDirection::Forward);
+            obj.imp().content.push(&self.page_manual.get());
         }
     }
 

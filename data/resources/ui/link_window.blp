@@ -13,16 +13,15 @@ template $FlLinkWindow : Adw.Window {
   child: Box {
       orientation: vertical;
 
-      Adw.Leaflet content {
-        can-unfold: false;
+      Adw.NavigationView content {
         vexpand: true;
-        can-navigate-back: true;
       
-        Adw.LeafletPage {
-          navigatable: true;
-          name: "qr-code-page";
-          child:  Box {
-            orientation: vertical;
+        Adw.NavigationPage {
+          title: _("Link device");
+          tag: "qr-code-page";
+          child: Adw.ToolbarView {
+
+            [top]
             Adw.HeaderBar {
               styles ["flat"]
               title-widget: Adw.WindowTitle {
@@ -71,18 +70,13 @@ template $FlLinkWindow : Adw.Window {
           };
         }
       
-        Adw.LeafletPage {
-          name: "link-without-scanning";
-          navigatable: true;
-          child:  Box {
-            orientation: vertical;
-
+        Adw.NavigationPage page_manual {
+          title: _("Manual linking");
+          tag: "link-without-scanning";
+          child: Adw.ToolbarView {
+            [top]
             Adw.HeaderBar {
               styles ["flat"]
-              Button {
-                clicked => $previous() swapped;
-                icon-name: "go-previous-symbolic";
-              }
               title-widget: Adw.WindowTitle {
                 title: _("Link device");
               };
@@ -106,7 +100,6 @@ template $FlLinkWindow : Adw.Window {
                 clicked => $handle_clipboard() swapped;
               }
             }
-
           };
         }  
       }

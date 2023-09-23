@@ -4,107 +4,106 @@ using Adw 1;
 template $FlWindow : Adw.ApplicationWindow {
   can-focus: true;
   title: "Flare";
+  height-request: 300;
+  width-request: 300;
   default-height: 800;
   default-width: 500;
 
-  Adw.Leaflet leaflet {
-    can-navigate-back: true;
+  Adw.Breakpoint {
+    condition ("max-width: 720sp")
+    setters {
+      split_view.collapsed: true;
+    }
+  }
 
-    Box {
-      styles [
-        "view",
-      ]
+  Adw.NavigationSplitView split_view {
+    min-sidebar-width: 300;
+    max-sidebar-width: 400;
+    sidebar-width-fraction: 0.25;
+    
+    sidebar: Adw.NavigationPage {
+      title: _("Channel list");
+      tag: "channel-list";
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          title-widget: Adw.WindowTitle {
+            title: "Flare";
+          };
 
-      orientation: vertical;
-      width-request: 300;
+          [start]
+          ToggleButton {
+            accessibility {
+              label: C_("accessibility", "Add Conversation");
+            }
 
-      Adw.HeaderBar {
-        show-end-title-buttons: bind leaflet.folded;
-        title-widget: Adw.WindowTitle {
-          title: "Flare";
+            tooltip-text: "Add Conversation";
+            icon-name: "document-edit-symbolic";
+            active: bind channel_list.add-conversation-enabled bidirectional;
+          }
+
+          [end]
+          MenuButton {
+            accessibility {
+              label: C_("accessibility", "Menu");
+            }
+
+            tooltip-text: "Menu";
+            menu-model: menubar;
+            primary: true;
+            icon-name: "open-menu-symbolic";
+          }
+
+          [end]
+          ToggleButton {
+            accessibility {
+              label: C_("accessibility", "Search");
+            }
+
+            tooltip-text: "Search";
+            icon-name: "system-search-symbolic";
+            active: bind channel_list.search-enabled no-sync-create;
+            clicked => $handle_search_clicked() swapped;
+          }
+        }
+
+        content: $FlChannelList channel_list {
+          active-channel-changed => $handle_go_forward() swapped;
+          manager: bind template.manager;
         };
-
-        [start]
-        ToggleButton {
-          accessibility {
-            label: C_("accessibility", "Add Conversation");
-          }
-
-          tooltip-text: "Add Conversation";
-          icon-name: "document-edit-symbolic";
-          active: bind channel_list.add-conversation-enabled bidirectional;
-        }
-
-        [end]
-        MenuButton {
-          accessibility {
-            label: C_("accessibility", "Menu");
-          }
-
-          tooltip-text: "Menu";
-          menu-model: menubar;
-          primary: true;
-          icon-name: "open-menu-symbolic";
-        }
-
-        [end]
-        ToggleButton {
-          accessibility {
-            label: C_("accessibility", "Search");
-          }
-
-          tooltip-text: "Search";
-          icon-name: "system-search-symbolic";
-          active: bind channel_list.search-enabled no-sync-create;
-          clicked => $handle_search_clicked() swapped;
-        }
       }
+    };
 
-      $FlChannelList channel_list {
-        active-channel-changed => $handle_go_forward() swapped;
-        manager: bind template.manager;
+    content: Adw.NavigationPage {
+      title: _("Chat");
+      tag: "chat";
+      Adw.ToolbarView {
 
-      }
-    }
+        [top]
+        Adw.HeaderBar {
+          title-widget: Adw.WindowTitle {
+            title: bind channel_list.active-channel as <$FlChannel>.title;
+          };
 
-    Adw.LeafletPage {
-      navigatable: false;
-      child:
-      Separator {};
-    }
+          [end]
+          MenuButton {
+            accessibility {
+              label: C_("accessibility", "Menu");
+            }
 
-    Box {
-      orientation: vertical;
-      hexpand: true;
+            tooltip-text: "Menu";
+            menu-model: menubar-channel;
+            icon-name: "view-more-symbolic";
+          }
+        }
 
-      Adw.HeaderBar {
-        title-widget: Adw.WindowTitle {
-          title: bind channel_list.active-channel as <$FlChannel>.title;
+        content: $FlChannelMessages channel_messages {
+          manager: bind template.manager;
+          active-channel: bind channel_list.active-channel;
         };
-
-        Button {
-          clicked => $handle_go_back() swapped;
-          icon-name: "go-previous-symbolic";
-          visible: bind leaflet.folded;
-        }
-
-        [end]
-        MenuButton {
-          accessibility {
-            label: C_("accessibility", "Menu");
-          }
-
-          tooltip-text: "Menu";
-          menu-model: menubar-channel;
-          icon-name: "view-more-symbolic";
-        }
       }
+    };
 
-      $FlChannelMessages channel_messages {
-        manager: bind template.manager;
-        active-channel: bind channel_list.active-channel;
-      }
-    }
   }
 }
 
