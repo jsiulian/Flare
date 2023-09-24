@@ -5,6 +5,7 @@ pub(super) mod attachment_video;
 pub(super) mod context_menu_bin;
 pub(super) mod emoji_picker;
 mod item_row;
+pub(super) mod time_divider;
 
 pub use self::{
     attachment_audio::AttachmentAudio,

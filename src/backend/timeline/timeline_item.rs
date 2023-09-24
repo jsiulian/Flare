@@ -13,6 +13,19 @@ pub trait TimelineItemExt: 'static + std::marker::Sized + glib::ObjectExt {
     fn update_show_header(&self, previous: Option<&TimelineItem>);
     fn update_show_timestamp(&self, next: Option<&TimelineItem>);
 
+    // Time as [glib::DateTime]. Should not return `None`, but just in case.
+    fn datetime(&self) -> Option<glib::DateTime> {
+        glib::DateTime::from_unix_utc((self.timestamp() / 1000).try_into().unwrap_or_default())
+            .ok()
+            .and_then(|d| d.to_local().ok())
+    }
+
+    // Days since 01.01.1970
+    fn day_timestamp(&self) -> u64 {
+        self.timestamp() / (1000 * 60 * 60 * 24)
+    }
+
+    /// The timestamp in ms from 01.01.1970
     fn timestamp(&self) -> u64 {
         self.property("timestamp")
     }
@@ -89,7 +102,10 @@ where
 mod imp {
     use std::cell::Cell;
 
-    use gdk::{glib::ParamSpecBoolean, subclass::prelude::ClassStruct};
+    use gdk::{
+        glib::{ParamSpecBoolean, ParamSpecBoxed},
+        subclass::prelude::{ClassStruct, ObjectSubclassExt},
+    };
     use glib::{
         once_cell::sync::Lazy, subclass::types::ObjectSubclass, ParamSpec, ParamSpecUInt64, Value,
     };
@@ -146,6 +162,9 @@ mod imp {
                     ParamSpecUInt64::builder("timestamp")
                         .construct_only()
                         .build(),
+                    ParamSpecBoxed::builder::<glib::DateTime>("datetime")
+                        .read_only()
+                        .build(),
                     ParamSpecBoolean::builder("show-header").build(),
                     ParamSpecBoolean::builder("show-timestamp").build(),
                 ]
@@ -156,6 +175,7 @@ mod imp {
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "timestamp" => self.timestamp.get().to_value(),
+                "datetime" => self.obj().datetime().to_value(),
                 "show-header" => self.show_header.get().to_value(),
                 "show-timestamp" => self.show_timestamp.get().to_value(),
                 _ => unimplemented!(),

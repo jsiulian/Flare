@@ -205,7 +205,7 @@ template $FlMessageItem : $ContextMenuBin {
               "timestamp",
             ]
 
-            label: bind $format_timestamp(template.message as <$FlTextMessage>.timestamp) as <string>;
+            label: bind $format_time_human(template.message as <$FlTextMessage>.datetime) as <string>;
             justify: right;
             vexpand: true;
             valign: end;

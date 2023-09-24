@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- A date-divider between messages sent on different days.
+
+### Chores
+
+- Updated to GTK 4.12 and Libadwaita 1.4
+
 ### HOTFIX
 
 - Introduced a workaround for contacts not syncing anymore. Note that the workaround requires intervention:

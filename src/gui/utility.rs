@@ -104,4 +104,38 @@ impl Utility {
     pub(super) fn format_size(size: u32) -> gtk::glib::GString {
         gtk::glib::format_size(size as u64)
     }
+
+    #[template_callback(function)]
+    pub(super) fn format_time_human(time: &DateTime) -> Option<gtk::glib::GString> {
+        // How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
+        // then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+        let format = gettextrs::gettext("%H:%M");
+        time.format(&format).ok()
+    }
+
+    // Should not really fail.
+    pub(super) fn format_date_human(date: &DateTime) -> Option<gtk::glib::GString> {
+        let now = DateTime::now_local().expect("Now to be representable as DateTime");
+
+        let today = now.day_of_year() == date.day_of_year() && now.year() == date.year();
+        let yesterday = now.day_of_year() == date.day_of_year() + 1 && now.year() == date.year();
+
+        if today {
+            return Some(gettextrs::gettext("Today").into());
+        } else if yesterday {
+            return Some(gettextrs::gettext("Yesterday").into());
+        }
+
+        let format = if now.year() != date.year() {
+            // How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
+            // For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+            gettextrs::gettext("%Y-%m-%d")
+        } else {
+            // How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
+            // For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+            gettextrs::gettext("%a., %e. %b")
+        };
+
+        date.format(&format).ok()
+    }
 }
