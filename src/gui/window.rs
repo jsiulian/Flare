@@ -89,8 +89,8 @@ pub mod imp {
         gspawn,
         gui::{
             channel_list::ChannelList, channel_messages::ChannelMessages,
-            error_dialog::ErrorDialog, link_window::LinkWindow,
-            preferences_window::PreferencesWindow,
+            error_dialog::ErrorDialog, preferences_window::PreferencesWindow,
+            setup_window::SetupWindow,
         },
     };
 
@@ -390,7 +390,7 @@ pub mod imp {
         fn class_init(klass: &mut Self::Class) {
             crate::gui::channel_list::ChannelList::ensure_type();
             crate::gui::channel_messages::ChannelMessages::ensure_type();
-            crate::gui::link_window::LinkWindow::ensure_type();
+            crate::gui::setup_window::SetupWindow::ensure_type();
             crate::gui::error_dialog::ErrorDialog::ensure_type();
             crate::backend::timeline::TimelineItem::ensure_type();
             Self::bind_template(klass);
@@ -428,20 +428,10 @@ pub mod imp {
                 log::trace!("Setup manager for Window");
                 let manager = Manager::new(obj.property::<gio::Application>("application"));
                 obj.set_property("manager", Some(&manager));
-                manager.connect_local("link-qr-code", false, clone!(@weak obj => @default-return None, move |args| {
-                    let man = args[0]
-                        .get::<Manager>()
-                        .expect("First argument of signal `link-qr-code` of `Manager` to be `Manager`");
-                    let url = args[1]
-                        .get::<String>()
-                        .expect("Second argument of signal `link-qr-code` of `Manager` to be `String`");
-                    crate::trace!("Opening link window for url {}", url);
-                    let window = LinkWindow::new(url, man, &obj);
-                    window.present();
-                    // After link, show all channels as most likely no channels have messages yet.
-                    obj.imp().channel_list.set_property("add-conversation-enabled", true);
-                    None
-                }));
+                let _setup_window = SetupWindow::new(manager.clone(), &obj);
+
+                // TODO
+                // obj.imp().channel_list.set_property("add-conversation-enabled", true);
 
                 if let Err(e) = manager.init(&path).await {
                     let dialog = ErrorDialog::new(e, &obj);

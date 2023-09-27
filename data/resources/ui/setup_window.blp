@@ -1,0 +1,463 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlSetupWindow : Adw.Window {
+  can-focus: true;
+  default-height: 600;
+  default-width: 450;
+  resizable: false;
+  destroy-with-parent: true;
+  modal: true;
+
+  content: Adw.ToastOverlay toast_overlay {
+  child: Box {
+      orientation: vertical;
+
+      Adw.NavigationView content {
+        vexpand: true;
+
+        Adw.NavigationPage page_welcome {
+          title: _("Welcome to Flare");
+          tag: "welcome";
+
+          child: Adw.ToolbarView {
+
+            [top]
+            Adw.HeaderBar {
+              title-widget: Adw.WindowTitle {
+                title: _("Welcome to Flare");
+              };
+            }
+
+            [bottom]
+            Gtk.Box {
+              styles [ "toolbar" ]
+              hexpand: true;
+
+              Gtk.Button {
+                styles [ "suggested-action" ]
+                label: _("Set Up Flare");
+                halign: end;
+                hexpand: true;
+
+                clicked => $handle_welcome_to_decision() swapped;
+              }
+            }
+
+
+            Adw.StatusPage {
+              icon-name: "icon";
+              title: _("Flare");
+              child: Gtk.Label {
+                label: _("Flare is an unofficial Signal client. Note that Flare is not stable and there are bugs to be expected. If you are experiencing any bugs, consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">issue tracket</a> and open issues if you are experiencing a new issue. Also note that due to being a third-party application, Flare cannot guarantee the same level of security and privacy as official Signal applications do. If you or someone you need to contact requires a strong level of security, do not use Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README</a> for more information.");
+                wrap: true;
+                use-markup: true;
+              };
+            }
+          };
+        }      
+
+        Adw.NavigationPage page_decision {
+          title: _("Setup Primary Device or Link Device?");
+          tag: "decision";
+
+          child: Adw.ToolbarView {
+
+            [top]
+            Adw.HeaderBar {
+              title-widget: Adw.WindowTitle {
+                title: _("Setup Primary Device or Link Device?");
+              };
+            }
+
+            [bottom]
+            Gtk.Box {
+              styles [ "toolbar" ]
+              hexpand: true;
+
+              Gtk.Button {
+                styles [ ]
+                label: _("Primary Device");
+                halign: end;
+                hexpand: true;
+                // Primary device currently not supported, turn it off.
+                sensitive: false;
+
+                clicked => $handle_decision_to_decision_primary() swapped;
+              }
+
+              Gtk.Button {
+                styles [ "suggested-action" ]
+                label: _("Link Device");
+                halign: end;
+
+                clicked => $handle_decision_to_decision_link() swapped;
+              }
+            }
+
+            Gtk.Label {
+              label: _("Primary Device or Link Device?");
+            }
+            Gtk.Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+              orientation: vertical;
+
+              Gtk.Label {
+                label: _("You can use Flare either as a primary or secondary device.");
+                wrap: true;
+              }
+
+              Gtk.Label {
+                styles [ "heading" ]
+                label: _("Primary Device (Unstable)");
+                wrap: true;
+              }
+
+              Gtk.Label {
+                label: _("Flare can act as a primary device, similar to the official Signal applications on Android or IOS. This mode is currently not supported by Flare, even though initial tests seem to indicate that it works.");
+                wrap: true;
+              }
+
+              Gtk.Label {
+                styles [ "heading" ]
+                label: _("Linked Device (Recommented)");
+                wrap: true;
+              }
+
+              Gtk.Label {
+                label: _("Flare can be an application linked to your primary device, similar to the official Signal Desktop. This mode has been more extensively tested and mostly works.");
+                wrap: true;
+              }
+            }
+          };
+        }
+
+        Adw.NavigationPage page_decision_link {
+          title: _("Link Device");
+          tag: "decision-link";
+
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              title-widget: Adw.WindowTitle {
+                title: _("Link Device");
+              };
+            }
+
+            [bottom]
+            Gtk.Box {
+              styles [ "toolbar" ]
+              hexpand: true;
+
+              Gtk.Button {
+                styles [ "suggested-action" ]
+                label: _("Link Device");
+                hexpand: true;
+                halign: end;
+
+                clicked => $handle_link_confirm() swapped;
+              }
+            }
+
+            Gtk.Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+              orientation: vertical;
+
+              Gtk.Label {
+                label: _("For linking as a secondary device, Flare will need a device name that will be shown in the official application.");
+                wrap: true;
+              }
+
+              Gtk.ListBox {
+                styles [ "boxed-list" ]
+                Adw.EntryRow entry_device_name {
+                  title: _("Device Name");
+                }
+              }
+
+              Gtk.Label {
+                label: _("The next page will show a QR code which has to be scanned from the primary device. Note that you only have a timeframe of about one minute to scan the code, so please already prepare your official application for scanning the QR code.");
+                wrap: true;
+              }
+            }
+          };
+        }
+
+        Adw.NavigationPage page_link_qr {
+          title: _("Link device");
+          tag: "link-qr";
+          can-pop: false;
+          
+          child: Adw.ToolbarView {
+
+            [top]
+            Adw.HeaderBar {
+              styles ["flat"]
+              title-widget: Adw.WindowTitle {
+                title: _("Link device");
+              };
+            }
+          
+            Adw.StatusPage {
+              title: _("Scan Code");
+              description: _("Scan this code with another Signal app logged into your account.");
+              vexpand: true;
+              child: Box {
+                orientation: vertical;
+
+                Adw.Bin {
+                  Picture qr_image {
+                    styles [
+                      "qr-code",
+                      "card",
+                    ]
+                    height-request: 200;
+                    width-request: 200;
+                    halign: center;
+                    overflow: hidden;
+                  }
+                }
+                
+                // TODO
+                // Button switch_show_url {
+                //   styles [
+                //     "pill",
+                //     "text-button",
+                //   ]
+                //   margin-top: 30;
+                //   label: _("Link without scanning");
+                //   halign: center;
+                //   clicked => $forward() swapped;
+                // }
+
+                Gtk.Label {
+                  label: _("Note: Currently, the application will take about one minute after scanning the code in which it seems to do nothing. This is a known bug.");
+                  margin-top: 12;
+                  wrap: true;
+                }
+              };
+            }
+          };
+        }
+      
+        // TODO
+        // Adw.NavigationPage page_manual {
+        //   title: _("Manual linking");
+        //   tag: "link-without-scanning";
+        //   child: Adw.ToolbarView {
+        //     [top]
+        //     Adw.HeaderBar {
+        //       styles ["flat"]
+        //       title-widget: Adw.WindowTitle {
+        //         title: _("Link device");
+        //       };
+        //     }
+
+        //     Adw.StatusPage {
+        //       title: _("Manual Linking");
+        //       description: _("If your device can't scan the QR code, you can manually enter the link provided here");
+        //       icon-name: "phonelink2-symbolic";
+        //       vexpand: true;
+              
+        //       Button  {
+        //         styles [
+        //           "pill",
+        //           "suggested-action",
+        //           "text-button",
+        //         ]
+                
+        //         label: _("Copy to clipboard");
+        //         halign: center;
+        //         clicked => $handle_clipboard() swapped;
+        //       }
+        //     }
+        //   };
+        // }  
+
+        Adw.NavigationPage page_decision_primary {
+          title: _("Primary Device");
+          tag: "decision-primary";
+
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              title-widget: Adw.WindowTitle {
+                title: _("Primary Device");
+              };
+            }
+
+            [bottom]
+            Gtk.Box {
+              styles [ "toolbar" ]
+              hexpand: true;
+
+              Gtk.Button {
+                styles [ "suggested-action" ]
+                label: _("Continue");
+                hexpand: true;
+                halign: end;
+
+                clicked => $handle_primary_decision_confirm() swapped;
+              }
+            }
+
+            Gtk.Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+              orientation: vertical;
+
+              Gtk.Label {
+                label: _("For registering as a primary device, Flare will need your phone number and a completion of the captcha. Please give the phone number in international E.164-format, including the leading \"+\" and country code. The captcha can be completed <a href=\"https://signalcaptchas.org/registration/generate.html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into the below field. Note that this captcha is only valid for about one minute, so please proceed fast.");
+                use-markup: true;
+              }
+
+              Gtk.ListBox {
+                styles [ "boxed-list" ]
+                Adw.EntryRow entry_phone_number {
+                  title: _("Phone Number");
+                }
+                Adw.EntryRow entry_captch {
+                  title: _("Captcha");
+                }
+              }
+
+              Gtk.Label {
+                label: _("After submitting this information, you will get a SMS from Signal with a verification code. Insert this verification code on the next page.");
+                use-markup: true;
+              }
+            }
+          };
+        }
+
+        Adw.NavigationPage page_primary_confirm {
+          title: _("Confirm");
+          tag: "primary-confirm";
+          can-pop: false;
+
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              title-widget: Adw.WindowTitle {
+                title: _("Confirm");
+              };
+            }
+
+            [bottom]
+            Gtk.Box {
+              styles [ "toolbar" ]
+              hexpand: true;
+
+              Gtk.Button {
+                styles [ "suggested-action" ]
+                label: _("Confirm");
+                hexpand: true;
+                halign: end;
+
+                clicked => $handle_primary_confirm() swapped;
+              }
+            }
+
+            Gtk.Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+              orientation: vertical;
+
+              Gtk.Label {
+                label: _("Insert the verification code you received from Signal here.");
+              }
+
+              Gtk.ListBox {
+                styles [ "boxed-list" ]
+                Adw.EntryRow entry_confirm {
+                  title: _("Confirm");
+                }
+              }
+            }
+          };
+        }
+
+        Adw.NavigationPage page_finished {
+          title: _("Finished");
+          tag: "finished";
+          can-pop: false;
+
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              title-widget: Adw.WindowTitle {
+                title: _("Finished");
+              };
+            }
+
+            [bottom]
+            Gtk.Box {
+              styles [ "toolbar" ]
+              hexpand: true;
+
+              Gtk.Button {
+                styles [ "suggested-action" ]
+                label: _("Close");
+                hexpand: true;
+                halign: end;
+
+                clicked => $handle_finished_close() swapped;
+              }
+            }
+
+            Gtk.Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+              orientation: vertical;
+
+              Gtk.Label {
+                label: _("You are set up now. A few final notes before you start using Flare:");
+                wrap: true;
+              }
+
+              Gtk.Label {
+                styles [ "heading" ]
+                label: _("Known Bugs");
+                wrap: true;
+              }
+
+              Gtk.Label {
+                label: _("Currently, contacts will not sync correctly. This makes usage of Flare infeasable in most cases. We are working with upstream to fix this problem.");
+                wrap: true;
+              }
+
+              Gtk.Label {
+                styles [ "heading" ]
+                label: _("Contact");
+                wrap: true;
+              }
+
+              Gtk.Label {
+                label: _("Want to leave some feedback about Flare, or just talk a little bit? Our <a href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is open for everyone.");
+                wrap: true;
+                use-markup: true;
+              }
+            }
+          };
+        }
+
+      }
+    };
+  };
+}

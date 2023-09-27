@@ -2,7 +2,7 @@ use std::{cell::RefCell, collections::HashMap, io::Write, ops::Bound, path::Path
 
 use gdk::{gio::Settings, prelude::*};
 use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
-use glib::{clone, MainContext, Object, Priority};
+use glib::{clone, Object};
 use gtk::{gdk, gio, glib};
 use libsignal_service::{
     groups_v2::Group, prelude::ProfileKey, proto::AttachmentPointer, sender::AttachmentUploadError,
@@ -272,8 +272,8 @@ impl Manager {
     #[cfg(not(feature = "screenshot"))]
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
         use futures::channel::oneshot;
-        use futures::{select, FutureExt};
-        use gdk::glib::ControlFlow;
+        use futures::{select, FutureExt, StreamExt};
+        use gdk::glib::BoxedAnyObject;
         use tokio::sync::mpsc;
 
         use crate::backend::message::MessageExt;
@@ -286,36 +286,25 @@ impl Manager {
             .swap(&RefCell::new(Some(config_store.clone())));
 
         log::trace!("Setting up the manager");
-        let (provisioning_link_tx, provisioning_link_rx) = oneshot::channel();
+        // TODO: This is a heavy mix of tokio and futures channels. Why?
+        // XXX: Use different message bound?
+        let (setup_results_tx, mut setup_results_rx) =
+            futures::channel::mpsc::channel(MESSAGE_BOUND);
         let (error_tx, error_rx) = oneshot::channel();
 
         let (send_content, mut receive_content) = mpsc::unbounded_channel();
         let (send_error, mut receive_error) = mpsc::channel(MESSAGE_BOUND);
 
-        let (send, receive) = MainContext::channel(Priority::default());
-        receive.attach(
-            None,
-            clone!(@strong self as s => move |url| {
-                s.emit_by_name::<()>("link-qr-code", &[&url]);
-                ControlFlow::Break
-            }),
-        );
-
-        gspawn!(async move {
-            log::trace!("Awaiting for provisioning link");
-            match provisioning_link_rx.await {
-                Ok(url) => {
-                    log::trace!("Manager wants to show QR code, emitting signal");
-                    let _ = send.send(String::from(url));
-                }
-                Err(_e) => log::trace!("Manager is already linked"),
+        gspawn!(clone!(@weak self as s => async move {
+            log::trace!("Awaiting for setup results");
+            while let Some(result) = setup_results_rx.next().await {
+                s.emit_by_name::<()>("setup-result", &[&BoxedAnyObject::new(result)]);
             }
-        });
+        }));
 
         let internal = ManagerThread::new(
             config_store,
-            self.imp().settings.string("link-device-name").to_string(),
-            provisioning_link_tx,
+            setup_results_tx,
             error_tx,
             send_content,
             send_error,
@@ -348,10 +337,6 @@ impl Manager {
         }
         self.imp().internal.swap(&RefCell::new(internal));
         self.imp().feedbackd.swap(&RefCell::new(feedbackd));
-
-        self.emit_by_name::<()>("link-finish", &[]);
-
-        // self.sync_contacts().await?;
 
         let mut channels_init = self.init_channels().await;
 
@@ -667,6 +652,7 @@ impl Manager {
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
+    use gdk::glib::BoxedAnyObject;
     use gdk::prelude::StaticType;
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gio::{Application, Settings};
@@ -732,10 +718,9 @@ mod imp {
                     Signal::builder("channel")
                         .param_types([Channel::static_type()])
                         .build(),
-                    Signal::builder("link-qr-code")
-                        .param_types([String::static_type()])
+                    Signal::builder("setup-result")
+                        .param_types([BoxedAnyObject::static_type()])
                         .build(),
-                    Signal::builder("link-finish").build(),
                 ]
             });
             SIGNALS.as_ref()

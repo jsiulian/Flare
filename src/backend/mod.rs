@@ -10,6 +10,7 @@ pub use attachment::{Attachment, AttachmentType};
 pub use channel::Channel;
 pub use contact::Contact;
 pub use manager::Manager;
+pub use manager_thread::{SetupDecision, SetupResult};
 pub use message::Message;
 
 #[cfg(feature = "screenshot")]

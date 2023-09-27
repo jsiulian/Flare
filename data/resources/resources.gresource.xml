@@ -8,7 +8,7 @@
     <file preprocess="xml-stripblanks">ui/channel_item.ui</file>
     <file preprocess="xml-stripblanks">ui/channel_messages.ui</file>
     <file preprocess="xml-stripblanks">ui/message_item.ui</file>
-    <file preprocess="xml-stripblanks">ui/link_window.ui</file>
+    <file preprocess="xml-stripblanks">ui/setup_window.ui</file>
     <file preprocess="xml-stripblanks">ui/error_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/attachment.ui</file>
     <file preprocess="xml-stripblanks">ui/preferences_window.ui</file>
