@@ -155,7 +155,8 @@ pub mod imp {
                         let stream = MemoryInputStream::from_bytes(&bytes_glib);
                         let pixbuf = Pixbuf::from_stream(&stream, None::<&gio::Cancellable>)
                             .expect("Failed to generate Pixbuf from stream");
-                        self.qr_image.set_pixbuf(Some(&pixbuf));
+                        self.qr_image
+                            .set_paintable(Some(&gdk::Texture::for_pixbuf(&pixbuf)));
                     }
 
                     self.url.replace(url);

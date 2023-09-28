@@ -147,6 +147,7 @@ pub mod imp {
 
     use crate::backend::timeline::Timeline;
     use crate::gui::attachment::backend_to_gui;
+    use crate::gui::components::time_divider::TimeDivider;
     use crate::gui::components::ItemRow;
     use crate::{
         backend::{message::TextMessage, Channel, Manager},
@@ -397,7 +398,16 @@ pub mod imp {
                 list_item.bind_property("item", &widget, "item").build();
             }));
 
+            let header_factory = SignalListItemFactory::new();
+            header_factory.connect_setup(clone!(@weak obj => move |_, object| {
+                let widget = TimeDivider::default();
+                let header_item = object.downcast_ref::<gtk::ListHeader>().unwrap();
+                header_item.set_child(Some(&widget));
+                header_item.bind_property("item", &widget, "item").build();
+            }));
+
             self.list_view.set_factory(Some(&factory));
+            self.list_view.set_header_factory(Some(&header_factory));
         }
     }
 

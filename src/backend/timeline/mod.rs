@@ -13,7 +13,7 @@ const TRIM_SIZE: usize = 10;
 
 glib::wrapper! {
     pub struct Timeline(ObjectSubclass<imp::Timeline>)
-        @implements gio::ListModel;
+        @implements gio::ListModel, gtk::SectionModel;
 }
 
 impl Default for Timeline {
@@ -239,21 +239,21 @@ mod imp {
         prelude::{Cast, StaticType},
         subclass::prelude::{ListModelImpl, ObjectImpl, ObjectSubclass},
     };
+    use gtk::subclass::prelude::SectionModelImpl;
     use gtk::{gio, glib};
 
-    use super::TimelineItem;
+    use super::{TimelineItem, TimelineItemExt};
 
     #[derive(Debug, Default)]
     pub struct Timeline {
         pub list: RefCell<VecDeque<TimelineItem>>,
-        // pub state: Cell<TimelineState>,
     }
 
     #[glib::object_subclass]
     impl ObjectSubclass for Timeline {
         const NAME: &'static str = "Timeline";
         type Type = super::Timeline;
-        type Interfaces = (gio::ListModel,);
+        type Interfaces = (gio::ListModel, gtk::SectionModel);
     }
 
     impl ObjectImpl for Timeline {}
@@ -272,6 +272,33 @@ mod imp {
 
             list.get(position as usize)
                 .map(|o| o.clone().upcast::<glib::Object>())
+        }
+    }
+
+    impl SectionModelImpl for Timeline {
+        fn section(&self, pos: u32) -> (u32, u32) {
+            let list = self.list.borrow();
+
+            // As per the doc: <https://docs.gtk.org/gtk4/method.SectionModel.get_section.html>
+            // > If the position is larger than the number of items, a single range from n_items to G_MAXUINT will be returned.
+            if pos >= list.len().try_into().unwrap_or_default() {
+                return (list.len().try_into().unwrap_or_default(), u32::MAX);
+            }
+
+            // Unwrap should never happen due to previous check.
+            let day = list
+                .get(pos.try_into().unwrap_or_default())
+                .map(|t| t.day_timestamp())
+                .unwrap_or_default();
+
+            // Scan forward
+            let first_in = list.partition_point(|t| t.day_timestamp() < day);
+            let first_out = list.partition_point(|t| t.day_timestamp() < day + 1);
+
+            (
+                first_in.try_into().unwrap_or_default(),
+                first_out.try_into().unwrap_or_default(),
+            )
         }
     }
 }
