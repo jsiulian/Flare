@@ -7,7 +7,7 @@ use gtk::{gdk, gio, glib};
 
 use gettextrs::gettext;
 
-use crate::gspawn;
+use crate::{gspawn, tspawn};
 
 glib::wrapper! {
     pub struct PreferencesWindow(ObjectSubclass<imp::PreferencesWindow>)
@@ -24,7 +24,7 @@ impl PreferencesWindow {
 
     async fn request_background(&self) -> ashpd::Result<()> {
         let identifier = WindowIdentifier::from_native(&self.native().unwrap()).await;
-        let _ = BackgroundRequest::default()
+        let _ = tspawn!(BackgroundRequest::default()
             .reason(Some(
                 gettext("Watch for new messages while closed").as_str(),
             ))
@@ -32,8 +32,9 @@ impl PreferencesWindow {
             .identifier(identifier)
             .command(&["flare", "--gapplication-service"])
             .dbus_activatable(false)
-            .send()
-            .await?;
+            .send())
+        .await
+        .expect("Failed to join tokio")?;
         Ok(())
     }
 

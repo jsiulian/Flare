@@ -51,6 +51,7 @@ pub mod imp {
         config::APP_ID,
         gspawn,
         gui::{error_dialog::ErrorDialog, utility::Utility},
+        tspawn,
     };
 
     #[derive(CompositeTemplate, Default)]
@@ -93,13 +94,15 @@ pub mod imp {
 
                 gspawn!(clone!(@weak obj => async move {
                     let identifier = WindowIdentifier::from_native(&obj.native().unwrap()).await;
-                    if let Err(e) = OpenFileRequest::default()
-                                        .ask(false)
-                                        .identifier(identifier)
-                                        .send_file(&file)
-                                        .await {
-                        log::error!("Failed to open file: {}", e);
-                    }
+                    tspawn!(async move {
+                        if let Err(e) = OpenFileRequest::default()
+                                            .ask(false)
+                                            .identifier(identifier)
+                                            .send_file(&file)
+                                            .await {
+                            log::error!("Failed to open file: {}", e);
+                        }
+                    }).await.expect("Failed to join tokio")
                 }));
             }
         }
