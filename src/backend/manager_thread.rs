@@ -421,7 +421,8 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             let _ = callback.send(manager.messages(&thread, range));
         }
         Command::RequestContactsSync(callback) => callback
-            .send(manager.sync_contacts().await)
+            // .send(manager.sync_contacts().await)
+            .send(Ok(()))
             .expect("Callback sending failed"),
     }
 }
