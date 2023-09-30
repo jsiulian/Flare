@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-19 12:50+0200\n"
-"PO-Revision-Date: 2023-01-02 15:50+0000\n"
-"Last-Translator: AsBenDoge <J395206@tutanota.com>\n"
+"PO-Revision-Date: 2023-10-01 08:02+0000\n"
+"Last-Translator: randint <lancameb@hotmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
 "flare/flare/zh_Hant/>\n"
 "Language: zh_Hant\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.15.1-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -25,16 +25,16 @@ msgstr "鳴謝翻譯者:"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
 msgid "Channel Information"
-msgstr ""
+msgstr "頻道資訊"
 
 #: data/resources/ui/channel_info_dialog.blp:28
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "重置"
 
 #: data/resources/ui/channel_info_dialog.blp:31
 msgid "Reset Session"
-msgstr ""
+msgstr "重置"
 
 #: data/resources/ui/channel_info_dialog.blp:40
 #: data/resources/ui/error_dialog.blp:44
@@ -45,7 +45,7 @@ msgstr "關閉"
 #: data/resources/ui/channel_list.blp:11
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "離線"
 
 #: data/resources/ui/channel_list.blp:19
 msgid "Search"
@@ -58,7 +58,7 @@ msgstr "搜尋"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "未選取頻道"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
@@ -97,12 +97,12 @@ msgstr "新增附件"
 #: data/resources/ui/channel_messages.blp:172
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "插入表情符號"
 
 #: data/resources/ui/channel_messages.blp:175
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "插入表情符號"
 
 #: data/resources/ui/channel_messages.blp:182
 msgctxt "accessibility"
@@ -138,7 +138,7 @@ msgstr "清除訊息"
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
-msgstr "將會清除儲存的訊息並關閉此應用軟體"
+msgstr "此動作將清除所有儲存的聊天記錄且關閉此程式。"
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
@@ -158,7 +158,8 @@ msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
 "again."
-msgstr ""
+msgstr "這個動作將取消連結這台裝置並清楚所有儲存的資料，也會將程式關閉。之後再次打開"
+"本程式時可以再次連結本裝置。"
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
@@ -174,11 +175,11 @@ msgstr "錯誤"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr "請匯報此錯誤"
+msgstr "請考慮回報此錯誤。"
 
 #: data/resources/ui/error_dialog.blp:45
 msgid "Report"
-msgstr ""
+msgstr "檢舉"
 
 #: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
 #, fuzzy
@@ -187,26 +188,25 @@ msgstr "連結裝置"
 
 #: data/resources/ui/link_window.blp:34
 msgid "Scan Code"
-msgstr ""
+msgstr "掃描條碼"
 
 #: data/resources/ui/link_window.blp:35
 msgid "Scan this code with another Signal app logged into your account."
-msgstr ""
+msgstr "請以另一台已登入 Signal 的裝置掃描此碼。"
 
 #: data/resources/ui/link_window.blp:59
 msgid "Link without scanning"
-msgstr ""
+msgstr "連結但不掃條碼"
 
 #: data/resources/ui/link_window.blp:86
-#, fuzzy
 msgid "Manual Linking"
-msgstr "連結中"
+msgstr "手動連結"
 
 #: data/resources/ui/link_window.blp:87
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
-msgstr ""
+msgstr "如果你的另一台裝置無法掃描 QR code，可以手動輸入這個連結。"
 
 #: data/resources/ui/link_window.blp:98
 #, fuzzy
