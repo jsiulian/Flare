@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-19 12:50+0200\n"
-"PO-Revision-Date: 2023-10-01 08:02+0000\n"
-"Last-Translator: Jonas Haberkorn <j.bohne.13@gmail.com>\n"
+"PO-Revision-Date: 2023-10-02 23:00+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -578,9 +578,8 @@ msgstr ""
 "Bitte starte die Anwendung neu mit Protokollierung und melde dieses Problem."
 
 #: src/gui/link_window.rs:65
-#, fuzzy
 msgid "Copied to clipboard"
-msgstr "In die Zwischenablage kopieren"
+msgstr "In die Zwischenablage kopiert"
 
 #: src/gui/preferences_window.rs:51
 msgid "Background permission"
@@ -612,7 +611,7 @@ msgstr "Flare"
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Chatte mit deinen Freunden auf Signal"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
@@ -624,31 +623,26 @@ msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:31
-#, fuzzy
 msgid "Linking device"
 msgstr "Gerät koppeln"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:35
-#, fuzzy
 msgid "Sending messages"
 msgstr "Nachrichten senden"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:39
-#, fuzzy
 msgid "Receiving messages"
 msgstr "Nachrichten empfangen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:43
-#, fuzzy
 msgid "Replying to a message"
 msgstr "Auf eine Nachricht antworten"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:47
-#, fuzzy
 msgid "Reacting to a message"
 msgstr "Auf eine Nachricht reagieren"
 
@@ -739,7 +733,7 @@ msgstr "Nachrichten können ausgewählt werden"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Eine Nachricht senden, wenn die Eingabetaste gedrückt wird"
 
 #~ msgid "Signal GTK Client"
 #~ msgstr "Signal GTK-Client"
