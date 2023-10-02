@@ -62,6 +62,8 @@ pub mod imp {
         #[template_child]
         page_link_qr: TemplateChild<adw::NavigationPage>,
         #[template_child]
+        page_link_manual: TemplateChild<adw::NavigationPage>,
+        #[template_child]
         page_primary_confirm: TemplateChild<adw::NavigationPage>,
         #[template_child]
         page_finished: TemplateChild<adw::NavigationPage>,
@@ -75,8 +77,6 @@ pub mod imp {
         #[template_child]
         entry_confirm: TemplateChild<adw::EntryRow>,
 
-        // #[template_child]
-        // page_manual: TemplateChild<adw::NavigationPage>,
         #[template_child]
         qr_image: TemplateChild<gtk::Picture>,
 
@@ -84,19 +84,22 @@ pub mod imp {
 
         decision_callback: RefCell<Option<Sender<SetupDecision>>>,
         confirm_callback: RefCell<Option<Sender<String>>>,
+
+        url: RefCell<Option<String>>,
     }
 
     #[gtk::template_callbacks]
     impl SetupWindow {
         #[template_callback]
         fn handle_clipboard(&self, _: gtk::Button) {
-            let obj = self.obj();
-            // let clipboard = obj.clipboard();
-            // TODO
-            // clipboard.set_text(&obj.url());
+            if let Some(url) = self.url.borrow().as_ref() {
+                let obj = self.obj();
+                let clipboard = obj.clipboard();
+                clipboard.set_text(&url);
 
-            let toast = Toast::new(&gettext("Copied to clipboard"));
-            obj.imp().toast_overlay.add_toast(toast);
+                let toast = Toast::new(&gettext("Copied to clipboard"));
+                obj.imp().toast_overlay.add_toast(toast);
+            }
         }
 
         #[template_callback]
@@ -104,12 +107,6 @@ pub mod imp {
             let obj = self.obj();
             obj.imp().content.pop();
         }
-
-        // #[template_callback]
-        // fn forward(&self) {
-        //     let obj = self.obj();
-        //     obj.imp().content.push(&self.page_manual.get());
-        // }
 
         #[template_callback]
         fn handle_welcome_to_decision(&self) {
@@ -168,6 +165,12 @@ pub mod imp {
         }
 
         #[template_callback]
+        fn handle_link_qr_to_link_manual(&self) {
+            self.content.push(&self.page_link_manual.get());
+        }
+
+
+        #[template_callback]
         fn handle_finished_close(&self) {
             self.obj().close();
         }
@@ -201,7 +204,7 @@ pub mod imp {
                 SetupResult::DisplayLinkQR(url) => {
                     let url = url.to_string();
                     let bytes_vec = qrcode_generator::to_png_to_vec(
-                        url,
+                        url.clone(),
                         qrcode_generator::QrCodeEcc::Low,
                         200,
                     )
@@ -213,7 +216,7 @@ pub mod imp {
                     self.qr_image
                         .set_paintable(Some(&gdk::Texture::for_pixbuf(&pixbuf)));
 
-                    // TODO: Also set manual method.
+                    self.url.replace(Some(url));
 
                     self.content.push(&self.page_link_qr.get());
                 }

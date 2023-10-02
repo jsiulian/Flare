@@ -124,7 +124,7 @@ template $FlSetupWindow : Adw.Window {
 
               Gtk.Label {
                 styles [ "heading" ]
-                label: _("Linked Device (Recommented)");
+                label: _("Linked Device (Recommended)");
                 wrap: true;
               }
 
@@ -226,17 +226,16 @@ template $FlSetupWindow : Adw.Window {
                   }
                 }
                 
-                // TODO
-                // Button switch_show_url {
-                //   styles [
-                //     "pill",
-                //     "text-button",
-                //   ]
-                //   margin-top: 30;
-                //   label: _("Link without scanning");
-                //   halign: center;
-                //   clicked => $forward() swapped;
-                // }
+                Button switch_show_url {
+                  styles [
+                    "pill",
+                    "text-button",
+                  ]
+                  margin-top: 30;
+                  label: _("Link without scanning");
+                  halign: center;
+                  clicked => $handle_link_qr_to_link_manual() swapped;
+                }
 
                 Gtk.Label {
                   label: _("Note: Currently, the application will take about one minute after scanning the code in which it seems to do nothing. This is a known bug.");
@@ -249,38 +248,38 @@ template $FlSetupWindow : Adw.Window {
         }
       
         // TODO
-        // Adw.NavigationPage page_manual {
-        //   title: _("Manual linking");
-        //   tag: "link-without-scanning";
-        //   child: Adw.ToolbarView {
-        //     [top]
-        //     Adw.HeaderBar {
-        //       styles ["flat"]
-        //       title-widget: Adw.WindowTitle {
-        //         title: _("Link device");
-        //       };
-        //     }
+        Adw.NavigationPage page_link_manual {
+          title: _("Manual linking");
+          tag: "link-manual";
+          child: Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              styles ["flat"]
+              title-widget: Adw.WindowTitle {
+                title: _("Link device");
+              };
+            }
 
-        //     Adw.StatusPage {
-        //       title: _("Manual Linking");
-        //       description: _("If your device can't scan the QR code, you can manually enter the link provided here");
-        //       icon-name: "phonelink2-symbolic";
-        //       vexpand: true;
+            Adw.StatusPage {
+              title: _("Manual Linking");
+              description: _("If your device can't scan the QR code, you can manually enter the link provided here");
+              icon-name: "phonelink2-symbolic";
+              vexpand: true;
               
-        //       Button  {
-        //         styles [
-        //           "pill",
-        //           "suggested-action",
-        //           "text-button",
-        //         ]
+              Button  {
+                styles [
+                  "pill",
+                  "suggested-action",
+                  "text-button",
+                ]
                 
-        //         label: _("Copy to clipboard");
-        //         halign: center;
-        //         clicked => $handle_clipboard() swapped;
-        //       }
-        //     }
-        //   };
-        // }  
+                label: _("Copy to clipboard");
+                halign: center;
+                clicked => $handle_clipboard() swapped;
+              }
+            }
+          };
+        }
 
         Adw.NavigationPage page_decision_primary {
           title: _("Primary Device");
