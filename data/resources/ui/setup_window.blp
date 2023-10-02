@@ -181,6 +181,14 @@ template $FlSetupWindow : Adw.Window {
                 Adw.EntryRow entry_device_name {
                   title: _("Device Name");
                 }
+
+                Adw.ExpanderRow {
+                  title: _("Developer Options");
+
+                  Adw.ComboRow dropdown_link_server {
+                    title: _("Signal Servers");
+                  }
+                }
               }
 
               Gtk.Label {
@@ -318,6 +326,7 @@ template $FlSetupWindow : Adw.Window {
 
               Gtk.Label {
                 label: _("For registering as a primary device, Flare will need your phone number and a completion of the captcha. Please give the phone number in international E.164-format, including the leading \"+\" and country code. The captcha can be completed <a href=\"https://signalcaptchas.org/registration/generate.html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into the below field. Note that this captcha is only valid for about one minute, so please proceed fast.");
+                wrap: true;
                 use-markup: true;
               }
 
@@ -329,10 +338,19 @@ template $FlSetupWindow : Adw.Window {
                 Adw.EntryRow entry_captch {
                   title: _("Captcha");
                 }
+
+                Adw.ExpanderRow {
+                  title: _("Developer Options");
+
+                  Adw.ComboRow dropdown_primary_server {
+                    title: _("Signal Servers");
+                  }
+                }
               }
 
               Gtk.Label {
                 label: _("After submitting this information, you will get a SMS from Signal with a verification code. Insert this verification code on the next page.");
+                wrap: true;
                 use-markup: true;
               }
             }

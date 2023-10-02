@@ -1,6 +1,7 @@
-use crate::backend::Manager;
+use crate::backend::{Manager, Server};
 use glib::{prelude::IsA, Object, ObjectExt};
 use gtk::glib;
+use libsignal_service::configuration::SignalServers;
 
 glib::wrapper! {
     pub struct SetupWindow(ObjectSubclass<imp::SetupWindow>)
@@ -23,11 +24,20 @@ impl SetupWindow {
     }
 }
 
+fn servers() -> Vec<Server> {
+    vec![
+        Server::new(gettextrs::pgettext("Signal Server", "Production"), SignalServers::Production),
+        Server::new(gettextrs::pgettext("Signal Server", "Staging"), SignalServers::Staging),
+    ]
+}
+
 pub mod imp {
+    use adw::prelude::ComboRowExt;
     use adw::subclass::prelude::*;
     use adw::Toast;
     use futures::channel::oneshot::Sender;
     use gdk::gdk_pixbuf::Pixbuf;
+    use gdk::gio::ListStore;
     use gdk::glib::BoxedAnyObject;
     use gettextrs::gettext;
     use gio::MemoryInputStream;
@@ -35,13 +45,14 @@ pub mod imp {
         clone, once_cell::sync::Lazy, subclass::InitializingObject, Bytes, ParamSpec,
         ParamSpecObject, Value,
     };
-    use gtk::{gdk, gio, glib};
+    use gtk::{gdk, gio, glib, PropertyExpression};
     use gtk::{prelude::*, CompositeTemplate};
+    use libsignal_service::configuration::SignalServers;
     use presage::prelude::PhoneNumber;
-    use std::cell::{RefCell};
+    use std::cell::RefCell;
     use std::str::FromStr;
 
-    use crate::backend::{Manager, SetupResult, SetupDecision};
+    use crate::backend::{Manager, SetupResult, SetupDecision, Server};
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/setup_window.ui")]
@@ -79,6 +90,11 @@ pub mod imp {
 
         #[template_child]
         qr_image: TemplateChild<gtk::Picture>,
+
+        #[template_child]
+        dropdown_primary_server: TemplateChild<adw::ComboRow>,
+        #[template_child]
+        dropdown_link_server: TemplateChild<adw::ComboRow>,
 
         manager: RefCell<Option<Manager>>,
 
@@ -127,9 +143,8 @@ pub mod imp {
         #[template_callback]
         fn handle_link_confirm(&self) {
             if let Some(callback) = self.decision_callback.take() {
-                // TODO: Configurable server.
                 // TODO: Disallow empty device name.
-                callback.send(SetupDecision::Link(libsignal_service::configuration::SignalServers::Production, self.entry_device_name.text().to_string())).expect("Failed to send setup decision");
+                callback.send(SetupDecision::Link(self.dropdown_link_server.selected_item().and_dynamic_cast::<Server>().map(|s| s.server()).unwrap_or(SignalServers::Production), self.entry_device_name.text().to_string())).expect("Failed to send setup decision");
                 // TODO: Maybe display spinner afterwards?
             }
         }
@@ -155,9 +170,7 @@ pub mod imp {
             if let Ok(phone) = PhoneNumber::from_str(&self.entry_phone_number.text().to_string()) {
                 // TODO: Error on phone number parsing
                 if let Some(callback) = self.decision_callback.take() {
-                    // TODO: Configurable server.
-
-                    callback.send(SetupDecision::Register(libsignal_service::configuration::SignalServers::Staging, phone, captcha)).expect("Failed to send setup decision");
+                    callback.send(SetupDecision::Register(self.dropdown_primary_server.selected_item().and_dynamic_cast::<Server>().map(|s| s.server()).unwrap_or(SignalServers::Production), phone, captcha)).expect("Failed to send setup decision");
                     // TODO: Maybe display spinner afterwards?
                 }
                 
@@ -229,6 +242,17 @@ pub mod imp {
                 }
             }
         }
+
+        fn setup_servers_dropdown(&self) {
+            let model = ListStore::from_iter(super::servers());
+            let expression = PropertyExpression::new(Server::static_type(), None::<PropertyExpression>, "display");
+
+            self.dropdown_primary_server.set_expression(Some(&expression));
+            self.dropdown_link_server.set_expression(Some(&expression));
+
+            self.dropdown_primary_server.set_model(Some(&model));
+            self.dropdown_link_server.set_model(Some(&model));
+        }
     }
 
     #[glib::object_subclass]
@@ -250,6 +274,7 @@ pub mod imp {
     impl ObjectImpl for SetupWindow {
         fn constructed(&self) {
             log::trace!("Constructed SetupWindow");
+            self.setup_servers_dropdown();
             self.parent_constructed();
         }
 

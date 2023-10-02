@@ -6,7 +6,7 @@ use libsignal_service::{
 };
 use presage::{
     prelude::{content::*, AttachmentSpec, ContentBody, DataMessage, ServiceAddress, *},
-    Manager, Registered, RegistrationOptions, Store as TraitStore, Thread,
+    Manager, Registered, RegistrationOptions, Thread,
 };
 use presage_store_sled::SledStore as Store;
 use tokio::sync::{mpsc, oneshot};
