@@ -53,6 +53,7 @@ pub mod imp {
     use std::str::FromStr;
 
     use crate::backend::{Manager, SetupResult, SetupDecision, Server};
+    use crate::gui::utility::Utility;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/setup_window.ui")]
@@ -142,20 +143,21 @@ pub mod imp {
 
         #[template_callback]
         fn handle_link_confirm(&self) {
+            // Should always be given due to UI only being on that page after setup decision was asked for.
             if let Some(callback) = self.decision_callback.take() {
-                // TODO: Disallow empty device name.
-                callback.send(SetupDecision::Link(self.dropdown_link_server.selected_item().and_dynamic_cast::<Server>().map(|s| s.server()).unwrap_or(SignalServers::Production), self.entry_device_name.text().to_string())).expect("Failed to send setup decision");
-                // TODO: Maybe display spinner afterwards?
+                // Device name will not be empty as UI button only sensitive when the device name is non-empty.
+                let device_name = self.entry_device_name.text().to_string();
+                let _ = self.obj().manager().settings().set_string("link-device-name", &device_name);
+                callback.send(SetupDecision::Link(self.dropdown_link_server.selected_item().and_dynamic_cast::<Server>().map(|s| s.server()).unwrap_or(SignalServers::Production), device_name)).expect("Failed to send setup decision");
+                // XXX: Maybe display spinner afterwards?
             }
         }
 
         #[template_callback]
         fn handle_primary_confirm(&self) {
             if let Some(callback) = self.confirm_callback.take() {
-                // TODO: Configurable server.
-                // TODO: Disallow empty device name.
                 callback.send(self.entry_confirm.text().to_string()).expect("Failed to send setup decision");
-                // TODO: Maybe display spinner afterwards?
+                // XXX: Maybe display spinner afterwards?
             }
         }
 
@@ -167,11 +169,12 @@ pub mod imp {
                 captcha = c.to_owned();
             }
 
+            // Should always succeed due to UI button only being sensitive when the text is a phone number.
             if let Ok(phone) = PhoneNumber::from_str(&self.entry_phone_number.text().to_string()) {
-                // TODO: Error on phone number parsing
+                // Should always be given due to UI only being on that page after setup decision was asked for.
                 if let Some(callback) = self.decision_callback.take() {
                     callback.send(SetupDecision::Register(self.dropdown_primary_server.selected_item().and_dynamic_cast::<Server>().map(|s| s.server()).unwrap_or(SignalServers::Production), phone, captcha)).expect("Failed to send setup decision");
-                    // TODO: Maybe display spinner afterwards?
+                    // XXX: Maybe display spinner afterwards?
                 }
                 
             }
@@ -264,6 +267,7 @@ pub mod imp {
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
+            Utility::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

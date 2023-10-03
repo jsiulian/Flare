@@ -113,17 +113,6 @@ template $FlSetupWindow : Adw.Window {
 
               Gtk.Label {
                 styles [ "heading" ]
-                label: _("Primary Device (Unstable)");
-                wrap: true;
-              }
-
-              Gtk.Label {
-                label: _("Flare can act as a primary device, similar to the official Signal applications on Android or IOS. This mode is currently not supported by Flare, even though initial tests seem to indicate that it works.");
-                wrap: true;
-              }
-
-              Gtk.Label {
-                styles [ "heading" ]
                 label: _("Linked Device (Recommended)");
                 wrap: true;
               }
@@ -132,6 +121,18 @@ template $FlSetupWindow : Adw.Window {
                 label: _("Flare can be an application linked to your primary device, similar to the official Signal Desktop. This mode has been more extensively tested and mostly works.");
                 wrap: true;
               }
+
+              Gtk.Label {
+                styles [ "heading" ]
+                label: _("Primary Device (Disabled)");
+                wrap: true;
+              }
+
+              Gtk.Label {
+                label: _("Flare can act as a primary device, similar to the official Signal applications on Android or IOS. This mode is currently not supported by Flare, even though initial tests seem to indicate that it works. If you are willing to test it, you may enable the button below (and if you don't know how to do that, you should not think about testing primary-device support).");
+                wrap: true;
+              }
+
             }
           };
         }
@@ -158,6 +159,7 @@ template $FlSetupWindow : Adw.Window {
                 label: _("Link Device");
                 hexpand: true;
                 halign: end;
+                sensitive: bind $not_empty(entry_device_name.text) as <bool>;
 
                 clicked => $handle_link_confirm() swapped;
               }
@@ -255,7 +257,6 @@ template $FlSetupWindow : Adw.Window {
           };
         }
       
-        // TODO
         Adw.NavigationPage page_link_manual {
           title: _("Manual linking");
           tag: "link-manual";
@@ -311,6 +312,7 @@ template $FlSetupWindow : Adw.Window {
                 label: _("Continue");
                 hexpand: true;
                 halign: end;
+                sensitive: bind $is_phone_number(entry_phone_number.text) as <bool>;
 
                 clicked => $handle_primary_decision_confirm() swapped;
               }
