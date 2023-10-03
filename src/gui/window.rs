@@ -32,6 +32,12 @@ impl Window {
             .build()
     }
 
+    pub fn enable_add_conversation(&self) {
+        self.imp()
+            .channel_list
+            .set_property("add-conversation-enabled", true);
+    }
+
     fn save_window_size(&self) -> Result<(), glib::BoolError> {
         let imp = self.imp();
 
@@ -101,7 +107,7 @@ pub mod imp {
         split_view: TemplateChild<adw::NavigationSplitView>,
 
         #[template_child]
-        channel_list: TemplateChild<ChannelList>,
+        pub(super) channel_list: TemplateChild<ChannelList>,
         #[template_child]
         channel_messages: TemplateChild<ChannelMessages>,
 
@@ -429,9 +435,6 @@ pub mod imp {
                 let manager = Manager::new(obj.property::<gio::Application>("application"));
                 obj.set_property("manager", Some(&manager));
                 let _setup_window = SetupWindow::new(manager.clone(), &obj);
-
-                // TODO
-                // obj.imp().channel_list.set_property("add-conversation-enabled", true);
 
                 if let Err(e) = manager.init(&path).await {
                     let dialog = ErrorDialog::new(e, &obj);

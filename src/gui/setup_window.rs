@@ -1,7 +1,9 @@
 use crate::backend::{Manager, Server};
-use glib::{prelude::IsA, Object, ObjectExt};
+use glib::{Object, ObjectExt};
 use gtk::glib;
 use libsignal_service::configuration::SignalServers;
+
+use super::Window;
 
 glib::wrapper! {
     pub struct SetupWindow(ObjectSubclass<imp::SetupWindow>)
@@ -11,7 +13,7 @@ glib::wrapper! {
 }
 
 impl SetupWindow {
-    pub fn new(manager: Manager, parent: &impl IsA<gtk::Window>) -> Self {
+    pub fn new(manager: Manager, parent: &Window) -> Self {
         log::trace!("Initializing link window");
         Object::builder::<Self>()
             .property("manager", &manager)
@@ -53,6 +55,7 @@ pub mod imp {
     use std::str::FromStr;
 
     use crate::backend::{Manager, SetupResult, SetupDecision, Server};
+    use crate::gui::Window;
     use crate::gui::utility::Utility;
 
     #[derive(CompositeTemplate, Default)]
@@ -216,6 +219,8 @@ pub mod imp {
                 SetupResult::Pending(callback) => {
                     obj.present();
                     self.decision_callback.replace(callback.take());
+
+                    obj.transient_for().and_dynamic_cast::<Window>().expect("SetupWindow to have Window parent").enable_add_conversation();
                 }
                 SetupResult::DisplayLinkQR(url) => {
                     let url = url.to_string();
