@@ -38,6 +38,12 @@ impl Window {
             .set_property("add-conversation-enabled", true);
     }
 
+    pub fn destroy_if_invisible(&self) {
+        if !self.get_visible() {
+            self.destroy();
+        }
+    }
+
     fn save_window_size(&self) -> Result<(), glib::BoolError> {
         let imp = self.imp();
 

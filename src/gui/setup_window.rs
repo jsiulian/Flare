@@ -1,4 +1,6 @@
 use crate::backend::{Manager, Server};
+use adw::prelude::GtkWindowExt;
+use gdk::prelude::CastNone;
 use glib::{Object, ObjectExt};
 use gtk::glib;
 use libsignal_service::configuration::SignalServers;
@@ -24,6 +26,10 @@ impl SetupWindow {
     fn manager(&self) -> Manager {
         self.property("manager")
     }
+
+    pub fn window(&self) -> Window {
+        self.transient_for().and_dynamic_cast().expect("SetupWindow to have a Window parent")
+    }
 }
 
 fn servers() -> Vec<Server> {
@@ -40,7 +46,7 @@ pub mod imp {
     use futures::channel::oneshot::Sender;
     use gdk::gdk_pixbuf::Pixbuf;
     use gdk::gio::ListStore;
-    use gdk::glib::BoxedAnyObject;
+    use gdk::glib::{BoxedAnyObject, Propagation};
     use gettextrs::gettext;
     use gio::MemoryInputStream;
     use glib::{
@@ -55,7 +61,6 @@ pub mod imp {
     use std::str::FromStr;
 
     use crate::backend::{Manager, SetupResult, SetupDecision, Server};
-    use crate::gui::Window;
     use crate::gui::utility::Utility;
 
     #[derive(CompositeTemplate, Default)]
@@ -220,7 +225,10 @@ pub mod imp {
                     obj.present();
                     self.decision_callback.replace(callback.take());
 
-                    obj.transient_for().and_dynamic_cast::<Window>().expect("SetupWindow to have Window parent").enable_add_conversation();
+                    let win = obj.window();
+
+                    win.enable_add_conversation();
+                    win.destroy_if_invisible();
                 }
                 SetupResult::DisplayLinkQR(url) => {
                     let url = url.to_string();
@@ -320,6 +328,15 @@ pub mod imp {
     }
 
     impl WidgetImpl for SetupWindow {}
-    impl WindowImpl for SetupWindow {}
+    impl WindowImpl for SetupWindow {
+        fn close_request(&self) -> Propagation {
+            // If it is closed while not being finished, close the parent window
+            if self.content.visible_page() != Some(self.page_finished.get()) {
+                self.obj().window().destroy();
+            }
+
+            self.parent_close_request()
+        }
+    }
     impl AdwWindowImpl for SetupWindow {}
 }

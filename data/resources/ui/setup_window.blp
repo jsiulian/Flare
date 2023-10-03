@@ -5,9 +5,9 @@ template $FlSetupWindow : Adw.Window {
   can-focus: true;
   default-height: 600;
   default-width: 450;
-  resizable: false;
   destroy-with-parent: true;
   modal: true;
+  deletable: false;
 
   content: Adw.ToastOverlay toast_overlay {
   child: Box {
@@ -49,7 +49,7 @@ template $FlSetupWindow : Adw.Window {
               icon-name: "icon";
               title: _("Flare");
               child: Gtk.Label {
-                label: _("Flare is an unofficial Signal client. Note that Flare is not stable and there are bugs to be expected. If you are experiencing any bugs, consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">issue tracket</a> and open issues if you are experiencing a new issue. Also note that due to being a third-party application, Flare cannot guarantee the same level of security and privacy as official Signal applications do. If you or someone you need to contact requires a strong level of security, do not use Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README</a> for more information.");
+                label: _("Flare is an unofficial Signal client. Note that Flare is not stable and there are bugs to be expected. If you are experiencing any bugs, consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">issue tracker</a> and open issues if you are experiencing a new issue. Also note that due to being a third-party application, Flare cannot guarantee the same level of security and privacy as official Signal applications do. If you or someone you need to contact requires a strong level of security, do not use Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README</a> for more information.");
                 wrap: true;
                 use-markup: true;
               };
