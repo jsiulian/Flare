@@ -27,6 +27,7 @@ msgstr ""
 "Leo Moser <leomoser99@gmail.com>, 2023"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:152
+#: data/resources/ui/window.blp:148
 msgid "Channel Information"
 msgstr "Kanalinformationen"
 
@@ -52,9 +53,10 @@ msgstr "Offline"
 
 #: data/resources/ui/channel_list.blp:19
 msgid "Search"
-msgstr "Suchen"
+msgstr "Suche"
 
 #: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:60
+#: data/resources/ui/window.blp:53
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Suchen"
@@ -78,11 +80,13 @@ msgid "Remove reply"
 msgstr "Antwort entfernen"
 
 #: data/resources/ui/channel_messages.blp:119
+#: data/resources/ui/channel_messages.blp:118
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Anhang entfernen"
 
 #: data/resources/ui/channel_messages.blp:122
+#: data/resources/ui/channel_messages.blp:121
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Anhang entfernen"
@@ -93,32 +97,37 @@ msgid "Add an attachment"
 msgstr "Anhang hinzufügen"
 
 #: data/resources/ui/channel_messages.blp:160
+#: data/resources/ui/channel_messages.blp:156
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Anhang hinzufügen"
 
 #: data/resources/ui/channel_messages.blp:176
+#: data/resources/ui/channel_messages.blp:182
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
 #: data/resources/ui/channel_messages.blp:182
+#: data/resources/ui/channel_messages.blp:188
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Nachricht eingeben"
 
 #: data/resources/ui/channel_messages.blp:192
+#: data/resources/ui/channel_messages.blp:194
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Senden"
 
 #: data/resources/ui/channel_messages.blp:195
+#: data/resources/ui/channel_messages.blp:197
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Senden"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
-#: data/resources/ui/window.blp:123
+#: data/resources/ui/window.blp:123 data/resources/ui/window.blp:124
 msgid "Clear messages"
 msgstr "Nachrichten löschen"
 
@@ -140,6 +149,7 @@ msgid "Clear"
 msgstr "Löschen"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:118
+#: data/resources/ui/window.blp:119
 msgid "Unlink"
 msgstr "Entkoppeln"
 
@@ -174,21 +184,21 @@ msgid "Report"
 msgstr "Melden"
 
 #: data/resources/ui/link_window.blp:20 data/resources/ui/link_window.blp:28
-#: data/resources/ui/link_window.blp:81
+#: data/resources/ui/link_window.blp:81 data/resources/ui/link_window.blp:29
 msgid "Link device"
 msgstr "Gerät koppeln"
 
-#: data/resources/ui/link_window.blp:33
+#: data/resources/ui/link_window.blp:33 data/resources/ui/link_window.blp:34
 msgid "Scan Code"
 msgstr "Code scannen"
 
-#: data/resources/ui/link_window.blp:34
+#: data/resources/ui/link_window.blp:34 data/resources/ui/link_window.blp:35
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
 "Scannen Sie diesen Code mit einer anderen Signal-App, die bereits mit Ihrem "
 "Konto angemeldet ist."
 
-#: data/resources/ui/link_window.blp:58
+#: data/resources/ui/link_window.blp:58 data/resources/ui/link_window.blp:59
 msgid "Link without scanning"
 msgstr "Verbinden ohne zu scannen"
 
@@ -274,43 +284,53 @@ msgid "Dowload images automatically"
 msgstr "Bilder automatisch herunterladen"
 
 #: data/resources/ui/preferences_window.blp:26
+#: data/resources/ui/preferences_window.blp:35
 msgid "Dowload videos automatically"
 msgstr "Videos automatisch herunterladen"
 
 #: data/resources/ui/preferences_window.blp:30
+#: data/resources/ui/preferences_window.blp:48
 msgid "Dowload files automatically"
 msgstr "Dateien automatisch herunterladen"
 
 #: data/resources/ui/preferences_window.blp:34
+#: data/resources/ui/preferences_window.blp:61
 msgid "Dowload voice messages automatically"
 msgstr "Sprachnachrichten automatisch herunterladen"
 
 #: data/resources/ui/preferences_window.blp:39
+#: data/resources/ui/preferences_window.blp:75
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
 #: data/resources/ui/preferences_window.blp:40
+#: data/resources/ui/preferences_window.blp:76
 msgid "Notifications for new messages."
 msgstr "Benachrichtigungen für neue Nachrichten."
 
 #: data/resources/ui/preferences_window.blp:43
 #: data/de.schmidhuberj.Flare.gschema.xml:41
+#: data/resources/ui/preferences_window.blp:79
 msgid "Send notifications"
 msgstr "Benachrichtigungen senden"
 
 #: data/resources/ui/preferences_window.blp:47
+#: data/resources/ui/preferences_window.blp:92
 msgid "Send notifications on reactions"
 msgstr "Benachrichtigungen zu Reaktionen senden"
 
 #: data/resources/ui/preferences_window.blp:52 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:106
 msgid "Watch for new messages while closed"
 msgstr "Empfange Benachrichtigungen im Hintergrund"
 
 #: data/resources/ui/preferences_window.blp:60
+#: data/resources/ui/preferences_window.blp:122
 msgid "Mobile Compatibility"
 msgstr "Kompatibilität mit mobilen Geräten"
 
 #: data/resources/ui/preferences_window.blp:61
+#: data/resources/ui/preferences_window.blp:123
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
@@ -321,23 +341,29 @@ msgstr ""
 "so gewählt, dass sie auf Desktop-Geräten nützlich sind."
 
 #: data/resources/ui/preferences_window.blp:64
+#: data/resources/ui/preferences_window.blp:126
 msgid "Selectable Message Text"
 msgstr "Auswählbarer Nachrichtentext"
 
 #: data/resources/ui/preferences_window.blp:65
+#: data/resources/ui/preferences_window.blp:127
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Auswählbarer Text kann mit Wischgesten auf Touchscreens Probleme bereiten."
 
 #: data/resources/ui/preferences_window.blp:69
+#: data/resources/ui/preferences_window.blp:140
 msgid "Press \"Enter\" to send message"
 msgstr "Drücke \"Enter\" um die Nachricht zu senden"
 
-#: data/resources/ui/preferences_window.blp:70
+#: data/resources/ui/preferences_window.blp:141
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing \"Control + Enter\""
 msgstr ""
+"Auf Touch-Tastaturen, die die Tastenkombination \"Strg + Enter\" nicht "
+"zulassen, ist es möglicherweise nicht möglich, Nachrichten mit "
+"Zeilenumbrüchen zu versenden"
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -405,11 +431,13 @@ msgid "Message"
 msgstr "Nachricht eingeben"
 
 #: data/resources/ui/text_entry.blp:38
+#: data/resources/ui/channel_messages.blp:172
 msgctxt "accessibility"
 msgid "Insert an emoji"
 msgstr "Füge ein Emoji ein"
 
 #: data/resources/ui/text_entry.blp:44
+#: data/resources/ui/channel_messages.blp:175
 msgctxt "tooltip"
 msgid "Insert emoji"
 msgstr "Füge ein Emoji ein"
@@ -419,12 +447,13 @@ msgstr "Füge ein Emoji ein"
 msgid "Channel list"
 msgstr "Kanäle"
 
-#: data/resources/ui/window.blp:37
+#: data/resources/ui/window.blp:37 data/resources/ui/window.blp:30
 msgctxt "accessibility"
 msgid "Add Conversation"
 msgstr "Unterhaltung Hinzufügen"
 
 #: data/resources/ui/window.blp:48 data/resources/ui/window.blp:91
+#: data/resources/ui/window.blp:41 data/resources/ui/window.blp:94
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Menü"
@@ -433,12 +462,13 @@ msgstr "Menü"
 msgid "Chat"
 msgstr ""
 
-#: data/resources/ui/window.blp:113
+#: data/resources/ui/window.blp:113 data/resources/ui/window.blp:114
 msgid "Settings"
 msgstr "Einstellungen"
 
 #: data/resources/ui/window.blp:128
 #: data/resources/ui/submit_captcha_dialog.blp:5
+#: data/resources/ui/window.blp:129
 msgid "Submit Captcha"
 msgstr "Captcha absenden"
 
@@ -446,11 +476,11 @@ msgstr "Captcha absenden"
 msgid "Synchronize Contacts"
 msgstr ""
 
-#: data/resources/ui/window.blp:138
+#: data/resources/ui/window.blp:138 data/resources/ui/window.blp:134
 msgid "Keybindings"
 msgstr "Tastaturkürzel"
 
-#: data/resources/ui/window.blp:143
+#: data/resources/ui/window.blp:143 data/resources/ui/window.blp:139
 msgid "About"
 msgstr "Info"
 
@@ -468,6 +498,12 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Submit a Captcha challenge. The token can be obtained from the error message "
+"that was displayed from Flare. Das Captcha muss <a href=\"https://"
+"signalcaptchas.org/challenge/generate.html\">auf dieser Website</a> "
+"ausgefüllt werden und der Link zum Öffnen von Signal muss in den "
+"entsprechenden Eintrag eingefügt werden. Note that the captcha is only valid "
+"for about one minute."
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
 msgid "Token"
@@ -481,11 +517,11 @@ msgstr "Captcha"
 msgid "Submit"
 msgstr "Absenden"
 
-#: src/backend/channel.rs:581
+#: src/backend/channel.rs:581 src/backend/channel.rs:564
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/manager.rs:430
+#: src/backend/manager.rs:430 src/backend/manager.rs:411
 msgid "You"
 msgstr "Du"
 
@@ -516,24 +552,28 @@ msgid "Reacted {emoji} to a message."
 msgstr "Reagierte {emoji} auf eine Nachricht."
 
 #: src/backend/message/text_message.rs:369
+#: src/backend/message/text_message.rs:365
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Hat ein Bild gesendet"
 msgstr[1] "Hat {} Bilder gesendet"
 
 #: src/backend/message/text_message.rs:372
+#: src/backend/message/text_message.rs:368
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Hat ein Video gesendet"
 msgstr[1] "Hat {} Videos gesendet"
 
 #: src/backend/message/text_message.rs:376
+#: src/backend/message/text_message.rs:372
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
 msgstr[0] "Hat eine Sprachnachricht gesendet"
 msgstr[1] "Hat {} Sprachnachrichten gesendet"
 
 #: src/backend/message/text_message.rs:382
+#: src/backend/message/text_message.rs:378
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"
@@ -610,27 +650,27 @@ msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Bitte starte die Anwendung neu mit Protokollierung und melde dieses Problem."
 
-#: src/gui/link_window.rs:67
+#: src/gui/link_window.rs:67 src/gui/link_window.rs:65
 msgid "Copied to clipboard"
 msgstr "In die Zwischenablage kopiert"
 
-#: src/gui/preferences_window.rs:52
+#: src/gui/preferences_window.rs:52 src/gui/preferences_window.rs:51
 msgid "Background permission"
 msgstr "Hintergrundberechtigung"
 
-#: src/gui/preferences_window.rs:53
+#: src/gui/preferences_window.rs:53 src/gui/preferences_window.rs:52
 msgid "Use settings to remove permissions"
 msgstr "Nutze die Einstellungen um diese Berechtigung zu entfernen"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:88 src/gui/utility.rs:112
+#: src/gui/utility.rs:88 src/gui/utility.rs:112 src/gui/utility.rs:58
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:91
+#: src/gui/utility.rs:91 src/gui/utility.rs:61
 msgid "%Y-%m-%d %H:%M"
 msgstr "%d.%m.%Y %H:%M"
 
@@ -686,6 +726,10 @@ msgid ""
 "from Linux. It is still in development and doesn't include as many features "
 "as the official Signal applications."
 msgstr ""
+"Flare ist eine inoffizielle Anwendung, mit der Sie von Linux aus mit Ihren "
+"Freunden über Signal chatten können. Sie befindet sich noch in der "
+"Entwicklung und bietet nicht so viele Funktionen wie die offiziellen Signal-"
+"Anwendungen."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:31
@@ -724,13 +768,12 @@ msgstr "Benachrichtigungen, optional im Hintergrund"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:64
-#, fuzzy
 msgid ""
 "More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
-"Weitere Funktionen geplant, blockiert oder nicht geplant. Beachte die README-"
-"Datei für weitere Informationen über diese Funktionen."
+"Weitere Funktionen sind geplant, blockiert oder nicht geplant. In der README "
+"finden Sie weitere Informationen dazu."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:68
@@ -746,6 +789,7 @@ msgstr ""
 "README des Projekts finden Sie weitere Informationen zur Sicherheit."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:499
+#: data/de.schmidhuberj.Flare.metainfo.xml:479
 msgid "Overview of the application"
 msgstr "Übersicht der Anwendung"
 
@@ -801,11 +845,13 @@ msgstr "Nachrichten können ausgewählt werden"
 msgid "Send a message when the Enter-key is pressed"
 msgstr "Eine Nachricht senden, wenn die Eingabetaste gedrückt wird"
 
-#~ msgid "Send"
-#~ msgstr "Senden"
+#: data/resources/ui/channel_messages.blp:198
+msgid "Send"
+msgstr "Senden"
 
-#~ msgid "Load media"
-#~ msgstr "Medien laden"
+#: data/resources/ui/message_item.blp:156
+msgid "Load media"
+msgstr "Medien laden"
 
 #~ msgid "Signal GTK Client"
 #~ msgstr "Signal GTK-Client"
