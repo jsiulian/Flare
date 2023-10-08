@@ -24,6 +24,7 @@ msgid "translator-credits"
 msgstr "Давид Лапшин <ddaudix@gmail.com>"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:152
+#: data/resources/ui/window.blp:148
 msgid "Channel Information"
 msgstr "Информация о канале"
 
@@ -52,6 +53,7 @@ msgid "Search"
 msgstr "Поиск"
 
 #: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:60
+#: data/resources/ui/window.blp:53
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Поиск"
@@ -75,11 +77,13 @@ msgid "Remove reply"
 msgstr "Удалить ответ"
 
 #: data/resources/ui/channel_messages.blp:119
+#: data/resources/ui/channel_messages.blp:118
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Удалить вложение"
 
 #: data/resources/ui/channel_messages.blp:122
+#: data/resources/ui/channel_messages.blp:121
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Удалить вложение"
@@ -90,32 +94,37 @@ msgid "Add an attachment"
 msgstr "Добавить вложение"
 
 #: data/resources/ui/channel_messages.blp:160
+#: data/resources/ui/channel_messages.blp:156
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Добавить вложение"
 
 #: data/resources/ui/channel_messages.blp:176
+#: data/resources/ui/channel_messages.blp:182
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Ввод сообщения"
 
 #: data/resources/ui/channel_messages.blp:182
+#: data/resources/ui/channel_messages.blp:188
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Ввод сообщения"
 
 #: data/resources/ui/channel_messages.blp:192
+#: data/resources/ui/channel_messages.blp:194
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Отправить"
 
 #: data/resources/ui/channel_messages.blp:195
+#: data/resources/ui/channel_messages.blp:197
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Отправить"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
-#: data/resources/ui/window.blp:123
+#: data/resources/ui/window.blp:123 data/resources/ui/window.blp:124
 msgid "Clear messages"
 msgstr "Очистить сообщения"
 
@@ -136,6 +145,7 @@ msgid "Clear"
 msgstr "Очистить"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:118
+#: data/resources/ui/window.blp:119
 msgid "Unlink"
 msgstr "Отвязать"
 
@@ -170,21 +180,23 @@ msgid "Report"
 msgstr "Пожаловаться"
 
 #: data/resources/ui/link_window.blp:20 data/resources/ui/link_window.blp:28
-#: data/resources/ui/link_window.blp:81
+#: data/resources/ui/link_window.blp:81 data/resources/ui/link_window.blp:29
 msgid "Link device"
 msgstr "Привязка устройства"
 
-#: data/resources/ui/link_window.blp:33
-msgid "Scan Code"
-msgstr ""
-
 #: data/resources/ui/link_window.blp:34
+msgid "Scan Code"
+msgstr "Сканировать код"
+
+#: data/resources/ui/link_window.blp:35
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
+"Сканируйте этот код с другого приложения Signal, где выполнен вход в ваш "
+"аккаунт."
 
-#: data/resources/ui/link_window.blp:58
+#: data/resources/ui/link_window.blp:59
 msgid "Link without scanning"
-msgstr ""
+msgstr "Связать без сканирования"
 
 #: data/resources/ui/link_window.blp:64
 msgid ""
@@ -205,18 +217,18 @@ msgid "Manual linking"
 msgstr "Привазывание"
 
 #: data/resources/ui/link_window.blp:86
-#, fuzzy
 msgid "Manual Linking"
-msgstr "Привазывание"
+msgstr "Ручная привязка"
 
 #: data/resources/ui/link_window.blp:87
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Если ваше устройство не может сканировать QR-код, вы можете ввести ссылку, "
+"представленную здесь"
 
 #: data/resources/ui/link_window.blp:98
-#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Скопировать в буфер обмена"
 
@@ -267,68 +279,81 @@ msgid "Dowload images automatically"
 msgstr "Загружать изображения автоматически"
 
 #: data/resources/ui/preferences_window.blp:26
+#: data/resources/ui/preferences_window.blp:35
 msgid "Dowload videos automatically"
 msgstr "Загружать видео автоматически"
 
 #: data/resources/ui/preferences_window.blp:30
+#: data/resources/ui/preferences_window.blp:48
 msgid "Dowload files automatically"
 msgstr "Загружать файлы автоматически"
 
 #: data/resources/ui/preferences_window.blp:34
+#: data/resources/ui/preferences_window.blp:61
 msgid "Dowload voice messages automatically"
 msgstr "Загружать голосовые сообщения автоматически"
 
 #: data/resources/ui/preferences_window.blp:39
+#: data/resources/ui/preferences_window.blp:75
 msgid "Notifications"
 msgstr "Уведомления"
 
 #: data/resources/ui/preferences_window.blp:40
+#: data/resources/ui/preferences_window.blp:76
 msgid "Notifications for new messages."
 msgstr "Уведомления для новых сообщений."
 
 #: data/resources/ui/preferences_window.blp:43
 #: data/de.schmidhuberj.Flare.gschema.xml:41
+#: data/resources/ui/preferences_window.blp:79
 msgid "Send notifications"
 msgstr "Отправлять уведомления"
 
-#: data/resources/ui/preferences_window.blp:47
-#, fuzzy
+#: data/resources/ui/preferences_window.blp:92
 msgid "Send notifications on reactions"
-msgstr "Отправлять уведомления"
+msgstr "Отправлять уведомления о реакциях"
 
 #: data/resources/ui/preferences_window.blp:52 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:106
 msgid "Watch for new messages while closed"
 msgstr "Следить за новыми сообщениями в закрытом состоянии"
 
-#: data/resources/ui/preferences_window.blp:60
+#: data/resources/ui/preferences_window.blp:122
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Совместимость с мобильными устройствами"
 
-#: data/resources/ui/preferences_window.blp:61
+#: data/resources/ui/preferences_window.blp:123
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Эти параметры, возможно, потребуется изменить для лучшего взаимодействия с "
+"сенсорными и мобильными устройствами. Значения этих параметров по умолчанию "
+"выбраны так, чтобы они были полезны на настольных устройствах."
 
 #: data/resources/ui/preferences_window.blp:64
+#: data/resources/ui/preferences_window.blp:126
 msgid "Selectable Message Text"
 msgstr "Выбираемый текст сообщения"
 
 #: data/resources/ui/preferences_window.blp:65
+#: data/resources/ui/preferences_window.blp:127
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Выделяемый текст может мешать жестам пролистывания на сенсорных экранах."
 
-#: data/resources/ui/preferences_window.blp:69
+#: data/resources/ui/preferences_window.blp:140
 msgid "Press \"Enter\" to send message"
-msgstr ""
+msgstr "Нажать \"Enter\" для отправки сообщения"
 
-#: data/resources/ui/preferences_window.blp:70
+#: data/resources/ui/preferences_window.blp:141
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing \"Control + Enter\""
 msgstr ""
+"Может быть, будет невозможно отправлять сообщения с переносом строки на "
+"сенсорной клавиатуре, не позволяющей использовать «Control + Enter»"
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -396,11 +421,13 @@ msgid "Message"
 msgstr "Ввод сообщения"
 
 #: data/resources/ui/text_entry.blp:38
+#: data/resources/ui/channel_messages.blp:172
 msgctxt "accessibility"
 msgid "Insert an emoji"
 msgstr "Вставить эмодзи"
 
 #: data/resources/ui/text_entry.blp:44
+#: data/resources/ui/channel_messages.blp:175
 msgctxt "tooltip"
 msgid "Insert emoji"
 msgstr "Вставить эмодзи"
@@ -410,12 +437,13 @@ msgstr "Вставить эмодзи"
 msgid "Channel list"
 msgstr "Каналы"
 
-#: data/resources/ui/window.blp:37
+#: data/resources/ui/window.blp:37 data/resources/ui/window.blp:30
 msgctxt "accessibility"
 msgid "Add Conversation"
 msgstr "Добавить беседу"
 
 #: data/resources/ui/window.blp:48 data/resources/ui/window.blp:91
+#: data/resources/ui/window.blp:41 data/resources/ui/window.blp:94
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Меню"
@@ -424,24 +452,24 @@ msgstr "Меню"
 msgid "Chat"
 msgstr ""
 
-#: data/resources/ui/window.blp:113
+#: data/resources/ui/window.blp:113 data/resources/ui/window.blp:114
 msgid "Settings"
 msgstr "Параметры"
 
-#: data/resources/ui/window.blp:128
+#: data/resources/ui/window.blp:129
 #: data/resources/ui/submit_captcha_dialog.blp:5
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Отправить капчу"
 
 #: data/resources/ui/window.blp:133
 msgid "Synchronize Contacts"
 msgstr ""
 
-#: data/resources/ui/window.blp:138
+#: data/resources/ui/window.blp:138 data/resources/ui/window.blp:134
 msgid "Keybindings"
 msgstr "Комбинации клавиш"
 
-#: data/resources/ui/window.blp:143
+#: data/resources/ui/window.blp:143 data/resources/ui/window.blp:139
 msgid "About"
 msgstr "О Приложении"
 
@@ -459,24 +487,29 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Решите капчу. Токен можно получить из сообщения об ошибке, отображаемого в "
+"Flare. Капчу необходимо решить <a href=\"https://signalcaptchas.org/"
+"challenge/generate.html\"> на этом веб-сайте</a> и ссылку для открытия "
+"Signal необходимо вставить в соответствующую запись. Обратите внимание, что "
+"капча действительна только около одной минуты."
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
 msgid "Token"
-msgstr ""
+msgstr "Токен"
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Captcha"
-msgstr ""
+msgstr "Капча"
 
 #: data/resources/ui/submit_captcha_dialog.blp:24
 msgid "Submit"
-msgstr ""
+msgstr "Отправить"
 
-#: src/backend/channel.rs:581
+#: src/backend/channel.rs:581 src/backend/channel.rs:564
 msgid "Note to self"
 msgstr "Заметка для себя"
 
-#: src/backend/manager.rs:430
+#: src/backend/manager.rs:430 src/backend/manager.rs:411
 msgid "You"
 msgstr "Вы"
 
@@ -498,35 +531,37 @@ msgstr "Занят."
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:70
-#, fuzzy
 msgid "{sender} reacted {emoji} to a message."
-msgstr "Реакция на сообщение"
+msgstr "{sender} отреагировал {emoji} на сообщение."
 
 #. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:76
-#, fuzzy
 msgid "Reacted {emoji} to a message."
-msgstr "Реакция на сообщение"
+msgstr "Отреагировал {emoji} на сообщение."
 
 #: src/backend/message/text_message.rs:369
+#: src/backend/message/text_message.rs:365
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Отправить изображение"
 msgstr[1] "Отправить {} изображений"
 
 #: src/backend/message/text_message.rs:372
+#: src/backend/message/text_message.rs:368
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Отправлено видео"
 msgstr[1] "Отправлено {} видео"
 
 #: src/backend/message/text_message.rs:376
+#: src/backend/message/text_message.rs:372
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
 msgstr[0] "Отправил голосовое сообщение"
 msgstr[1] "Отправил {} голосовых сообщений"
 
 #: src/backend/message/text_message.rs:382
+#: src/backend/message/text_message.rs:378
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Оправить файл"
@@ -604,28 +639,27 @@ msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Пожалуйста, перезапустите приложение с логами и сообщите об этой ошибке."
 
-#: src/gui/link_window.rs:67
-#, fuzzy
+#: src/gui/link_window.rs:65
 msgid "Copied to clipboard"
-msgstr "Скопировать в буфер обмена"
+msgstr "Скопировано в буфер обмена"
 
-#: src/gui/preferences_window.rs:52
+#: src/gui/preferences_window.rs:52 src/gui/preferences_window.rs:51
 msgid "Background permission"
 msgstr "Фоновое разрешение"
 
-#: src/gui/preferences_window.rs:53
+#: src/gui/preferences_window.rs:53 src/gui/preferences_window.rs:52
 msgid "Use settings to remove permissions"
 msgstr "Используйте настройки для удаления разрешений"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:88 src/gui/utility.rs:112
+#: src/gui/utility.rs:88 src/gui/utility.rs:112 src/gui/utility.rs:58
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:91
+#: src/gui/utility.rs:91 src/gui/utility.rs:61
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
 
@@ -671,7 +705,7 @@ msgstr "Flare"
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Общайтесь с друзьями в Signal"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
@@ -680,34 +714,32 @@ msgid ""
 "from Linux. It is still in development and doesn't include as many features "
 "as the official Signal applications."
 msgstr ""
+"Flare это неофициальное приложение, позволяющее общаться с друзьями в Signal "
+"на Linux. Оно все еще находится в разработке и не включает в себя столько "
+"функций, сколько официальные приложения Signal."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:31
-#, fuzzy
 msgid "Linking device"
 msgstr "Привязка устройства"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:35
-#, fuzzy
 msgid "Sending messages"
 msgstr "Отправка сообщений"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:39
-#, fuzzy
 msgid "Receiving messages"
 msgstr "Получение сообщений"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:43
-#, fuzzy
 msgid "Replying to a message"
 msgstr "Ответ на сообщение"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:47
-#, fuzzy
 msgid "Reacting to a message"
 msgstr "Реакция на сообщение"
 
@@ -723,7 +755,6 @@ msgstr "Уведомления, опционально в фоновом реж�
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:64
-#, fuzzy
 msgid ""
 "More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
@@ -746,6 +777,7 @@ msgstr ""
 "проекта."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:499
+#: data/de.schmidhuberj.Flare.metainfo.xml:479
 msgid "Overview of the application"
 msgstr "Обзор приложения"
 
@@ -791,7 +823,7 @@ msgstr "Работать в фоновом режиме при закрытии"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Отправлять уведомления при получении реакций"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
@@ -799,14 +831,15 @@ msgstr "Можно ли выбирать сообщения"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Отправить сообщение когда клавиша Enter нажата"
 
-#~ msgid "Send"
-#~ msgstr "Отправить"
+#: data/resources/ui/channel_messages.blp:198
+msgid "Send"
+msgstr "Отправить"
 
-#, fuzzy
-#~ msgid "Load media"
-#~ msgstr "Загрузить больше"
+#: data/resources/ui/message_item.blp:156
+msgid "Load media"
+msgstr "Загрузить медиа"
 
 #~ msgid "Signal GTK Client"
 #~ msgstr "GTK клиент Signal"
