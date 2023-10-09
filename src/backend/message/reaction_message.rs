@@ -52,7 +52,7 @@ impl ReactionMessage {
     }
 
     pub fn target_uuid(&self) -> Uuid {
-        Uuid::parse_str(self.reaction().target_author_uuid()).expect("`Reaction` Uuid to be valid")
+        Uuid::parse_str(self.reaction().target_author_aci()).expect("`Reaction` Uuid to be valid")
     }
 
     pub fn send_notification(&self) {

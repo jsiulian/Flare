@@ -71,7 +71,7 @@ impl Message {
             ContentBody::SynchronizeMessage(SyncMessage {
                 sent:
                     Some(Sent {
-                        destination_uuid: uuid,
+                        destination_service_id: uuid,
                         message: Some(message),
                         ..
                     }),
@@ -125,7 +125,7 @@ impl Message {
             ContentBody::SynchronizeMessage(SyncMessage {
                 sent:
                     Some(Sent {
-                        destination_uuid: uuid,
+                        destination_service_id: uuid,
                         message: Some(message),
                         ..
                     }),
@@ -179,7 +179,7 @@ impl Message {
             ContentBody::SynchronizeMessage(SyncMessage {
                 sent:
                     Some(Sent {
-                        destination_uuid: uuid,
+                        destination_service_id: uuid,
                         message: Some(message),
                         ..
                     }),
