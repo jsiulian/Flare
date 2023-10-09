@@ -1,7 +1,7 @@
 # Flare
 
 [![Matrix](https://img.shields.io/badge/Matrix-Join-brightgreen)](https://matrix.to/#/%23flare-signal:matrix.org)
-[![Translation status](https://hosted.weblate.org/widgets/flare/-/flare/svg-badge.svg)](https://hosted.weblate.org/engage/flare/)
+[![Translation status](https://hosted.weblate.org/widgets/schmiddi-on-mobile/-/flare/svg-badge.svg)](https://hosted.weblate.org/engage/schmiddi-on-mobile/)
 
 Flare is an unofficial app that lets you chat with your friends on Signal from Linux.
 
@@ -61,7 +61,7 @@ For a list of features to be added, see [the wiki](https://gitlab.com/schmiddi-o
 Flare can easily be translated for other languages, as it uses gettext. Please consider contributing translations using [Weblate](https://hosted.weblate.org/engage/flare/), as an alternative you can also open merge requests and I will notify you if updates are necessary. Thanks to Weblate for free hosting and all the translators for their great work keeping the translations up-to-date.
 
 <a href="https://hosted.weblate.org/engage/flare/">
-<img src="https://hosted.weblate.org/widgets/flare/-/flare/multi-auto.svg" alt="Translation status" />
+<img src="https://hosted.weblate.org/widgets/schmiddi-on-mobile/-/flare/multi-auto.svg" alt="Translation status" />
 </a>
 
 ## Contributing
