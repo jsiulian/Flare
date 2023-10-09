@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: 2023-08-21 01:54+0000\n"
+"PO-Revision-Date: 2023-10-10 16:01+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/flare/flare/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -48,7 +49,7 @@ msgstr "Hors-ligne"
 
 #: data/resources/ui/channel_list.blp:19
 msgid "Search"
-msgstr "Recherche"
+msgstr "Rechercher"
 
 #: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:60
 msgctxt "accessibility"
@@ -198,9 +199,19 @@ msgid ""
 "restart Flare. \n"
 "- Your contacts should be behind the pencil-icon in the top-left."
 msgstr ""
+"Remarque : actuellement, une intervention est nécessaire pour relier les "
+"contacts avec succès. Veuillez suivre les étapes suivantes : \n"
+"- Liez Flare comme d’habitude. Attendez ~1min après la fermeture de la "
+"fenêtre de liaison. \n"
+"- Assurez-vous que vous n’avez pas activé l’exécution en arrière-plan. "
+"Fermez et redémarrez Flare. \n"
+"- Dans le menu principal, cliquez sur « synchroniser les contacts ». "
+"Attendez environ 1 minute. \n"
+"- Assurez-vous que vous n’avez pas activé la synchronisation en arrière-"
+"plan. Fermez et redémarrez Flare. \n"
+"- Vos contacts devraient se trouver derrière l’icône crayon en haut à gauche."
 
 #: data/resources/ui/link_window.blp:74
-#, fuzzy
 msgid "Manual linking"
 msgstr "Liaison manuelle"
 
@@ -396,9 +407,8 @@ msgid "Load more messages"
 msgstr "Charger plus de messages"
 
 #: data/resources/ui/text_entry.blp:12
-#, fuzzy
 msgid "Message"
-msgstr "Saisie du message"
+msgstr "Message"
 
 #: data/resources/ui/text_entry.blp:38
 msgctxt "accessibility"
@@ -411,9 +421,8 @@ msgid "Insert emoji"
 msgstr "Insérer émoji"
 
 #: data/resources/ui/window.blp:25
-#, fuzzy
 msgid "Channel list"
-msgstr "Canaux de discussion"
+msgstr "Liste des conversations"
 
 #: data/resources/ui/window.blp:37
 msgctxt "accessibility"
@@ -427,7 +436,7 @@ msgstr "Menu"
 
 #: data/resources/ui/window.blp:78
 msgid "Chat"
-msgstr ""
+msgstr "Discussion"
 
 #: data/resources/ui/window.blp:113
 msgid "Settings"
@@ -440,7 +449,7 @@ msgstr "Soumettre un Captcha"
 
 #: data/resources/ui/window.blp:133
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Synchroniser les contacts"
 
 #: data/resources/ui/window.blp:138
 msgid "Keybindings"
@@ -451,7 +460,6 @@ msgid "About"
 msgstr "À propos"
 
 #: data/resources/ui/window.blp:156
-#, fuzzy
 msgid "Clear Messages"
 msgstr "Effacer les messages"
 
@@ -649,26 +657,23 @@ msgstr ""
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:132
-#, fuzzy
 msgid "%Y-%m-%d"
-msgstr "%d/%m/%Y %H:%M"
+msgstr "%d-%m-%Y"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:136
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/window.rs:283 src/gui/window.rs:289
-#, fuzzy
 msgid "Remove Messages"
-msgstr "Réception de messages"
+msgstr "Supprimer les messages"
 
 #: src/gui/window.rs:284
-#, fuzzy
 msgid "This will remove all locally stored messages from this channel"
 msgstr ""
-"Ceci effacera tous les messages stockés localement et fermera l’application."
+"Ceci effacera tous les messages stockés localement et de cette conversation"
 
 #. Translators: Flare name in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
