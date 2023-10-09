@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-19 12:50+0200\n"
+"POT-Creation-Date: 2023-10-09 13:04+0200\n"
 "PO-Revision-Date: 2023-08-28 09:51+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/flare/flare/nl/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Heimen Stoffels <vistausss@fastmail.com>\n"
 "Philip Goto https://flipflop97.github.io/"
 
-#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
+#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:152
 msgid "Channel Information"
 msgstr "Kanaalinformatie"
 
@@ -52,7 +52,7 @@ msgstr "Offline"
 msgid "Search"
 msgstr "Zoeken"
 
-#: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:53
+#: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:60
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Zoeken"
@@ -75,12 +75,12 @@ msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Antwoord wissen"
 
-#: data/resources/ui/channel_messages.blp:118
+#: data/resources/ui/channel_messages.blp:119
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Bijlage verwijderen"
 
-#: data/resources/ui/channel_messages.blp:121
+#: data/resources/ui/channel_messages.blp:122
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Bijlage verwijderen"
@@ -90,47 +90,33 @@ msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Bijlage toevoegen"
 
-#: data/resources/ui/channel_messages.blp:156
+#: data/resources/ui/channel_messages.blp:160
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Bijlage toevoegen"
 
-#: data/resources/ui/channel_messages.blp:172
+#: data/resources/ui/channel_messages.blp:176
 msgctxt "accessibility"
-msgid "Insert an emoji"
-msgstr "Emoji invoegen"
-
-#: data/resources/ui/channel_messages.blp:175
-msgctxt "tooltip"
-msgid "Insert emoji"
-msgstr "Emoji invoegen"
+msgid "Message input"
+msgstr "Voer een bericht in"
 
 #: data/resources/ui/channel_messages.blp:182
-msgctxt "accessibility"
-msgid "Message input"
-msgstr "Voer een bericht in"
-
-#: data/resources/ui/channel_messages.blp:188
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Voer een bericht in"
 
-#: data/resources/ui/channel_messages.blp:194
+#: data/resources/ui/channel_messages.blp:192
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Versturen"
 
-#: data/resources/ui/channel_messages.blp:197
+#: data/resources/ui/channel_messages.blp:195
 msgctxt "tooltip"
-msgid "Send"
-msgstr "Versturen"
-
-#: data/resources/ui/channel_messages.blp:198
 msgid "Send"
 msgstr "Versturen"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
-#: data/resources/ui/window.blp:124
+#: data/resources/ui/window.blp:123
 msgid "Clear messages"
 msgstr "Berichten verwijderen"
 
@@ -143,7 +129,7 @@ msgstr ""
 "afgesloten."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
-#: data/resources/ui/dialog_unlink.blp:11
+#: data/resources/ui/dialog_unlink.blp:11 src/gui/window.rs:288
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -151,7 +137,7 @@ msgstr "Annuleren"
 msgid "Clear"
 msgstr "Wissen"
 
-#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:119
+#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:118
 msgid "Unlink"
 msgstr "Ontkoppelen"
 
@@ -185,21 +171,40 @@ msgstr "Gelieve deze fout te melden."
 msgid "Report"
 msgstr "Rapporteren"
 
-#: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
+#: data/resources/ui/link_window.blp:20 data/resources/ui/link_window.blp:28
+#: data/resources/ui/link_window.blp:81
 msgid "Link device"
 msgstr "Apparaat koppelen"
 
-#: data/resources/ui/link_window.blp:34
+#: data/resources/ui/link_window.blp:33
 msgid "Scan Code"
 msgstr "Code scannen"
 
-#: data/resources/ui/link_window.blp:35
+#: data/resources/ui/link_window.blp:34
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
 
-#: data/resources/ui/link_window.blp:59
+#: data/resources/ui/link_window.blp:58
 msgid "Link without scanning"
 msgstr "Koppeling zonder scannen"
+
+#: data/resources/ui/link_window.blp:64
+msgid ""
+"Note: Currently, to sucessfully link contacts requires intervention. Please "
+"follow these steps: \n"
+"- Link Flare as usual. Wait ~1min after the link window closed. \n"
+"- Make sure you do not have running in the background enabled. Close and "
+"restart Flare. \n"
+"- In the primary menu, click 'synchronize contacts'. Wait ~1min. \n"
+"- Make sure you do not have running in the background enabled. Close and "
+"restart Flare. \n"
+"- Your contacts should be behind the pencil-icon in the top-left."
+msgstr ""
+
+#: data/resources/ui/link_window.blp:74
+#, fuzzy
+msgid "Manual linking"
+msgstr "Handmatige koppeling"
 
 #: data/resources/ui/link_window.blp:86
 msgid "Manual Linking"
@@ -235,10 +240,6 @@ msgstr "Opslaan als…"
 msgid "Open with…"
 msgstr "Openen met…"
 
-#: data/resources/ui/message_item.blp:156
-msgid "Load media"
-msgstr "Media laden"
-
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Algemeen"
@@ -265,65 +266,64 @@ msgstr "Bijlagen"
 msgid "Dowload images automatically"
 msgstr "Afbeeldingen automatisch downloaden"
 
-#: data/resources/ui/preferences_window.blp:35
+#: data/resources/ui/preferences_window.blp:26
 msgid "Dowload videos automatically"
 msgstr "Video's automatisch downloaden"
 
-#: data/resources/ui/preferences_window.blp:48
+#: data/resources/ui/preferences_window.blp:30
 msgid "Dowload files automatically"
 msgstr "Bestanden automatisch downloaden"
 
-#: data/resources/ui/preferences_window.blp:61
+#: data/resources/ui/preferences_window.blp:34
 msgid "Dowload voice messages automatically"
 msgstr "Spraakberichten automatisch downloaden"
 
-#: data/resources/ui/preferences_window.blp:75
+#: data/resources/ui/preferences_window.blp:39
 msgid "Notifications"
 msgstr "Meldingen"
 
-#: data/resources/ui/preferences_window.blp:76
+#: data/resources/ui/preferences_window.blp:40
 msgid "Notifications for new messages."
 msgstr "Toon meldingen bij nieuwe berichten"
 
-#: data/resources/ui/preferences_window.blp:79
+#: data/resources/ui/preferences_window.blp:43
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
 msgstr "Leesbewijzen"
 
-#: data/resources/ui/preferences_window.blp:92
+#: data/resources/ui/preferences_window.blp:47
 msgid "Send notifications on reactions"
 msgstr "Meldingen bij reacties"
 
-#: data/resources/ui/preferences_window.blp:106
-#: src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:52 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Meldingen tonen als Flare op de achtergrond wordt uitgevoerd"
 
-#: data/resources/ui/preferences_window.blp:122
+#: data/resources/ui/preferences_window.blp:60
 msgid "Mobile Compatibility"
 msgstr "Mobiele compatibiliteit"
 
-#: data/resources/ui/preferences_window.blp:123
+#: data/resources/ui/preferences_window.blp:61
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:126
+#: data/resources/ui/preferences_window.blp:64
 msgid "Selectable Message Text"
 msgstr "Selecteerbare berichttekst"
 
-#: data/resources/ui/preferences_window.blp:127
+#: data/resources/ui/preferences_window.blp:65
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Selecteerbare tekst kan interfereren met veegbewegingen op aanraakschermen"
 
-#: data/resources/ui/preferences_window.blp:140
+#: data/resources/ui/preferences_window.blp:69
 msgid "Press \"Enter\" to send message"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:141
+#: data/resources/ui/preferences_window.blp:70
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing \"Control + Enter\""
@@ -389,32 +389,65 @@ msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Meer berichten laden"
 
-#: data/resources/ui/window.blp:30
+#: data/resources/ui/text_entry.blp:12
+#, fuzzy
+msgid "Message"
+msgstr "Voer een bericht in"
+
+#: data/resources/ui/text_entry.blp:38
+msgctxt "accessibility"
+msgid "Insert an emoji"
+msgstr "Emoji invoegen"
+
+#: data/resources/ui/text_entry.blp:44
+msgctxt "tooltip"
+msgid "Insert emoji"
+msgstr "Emoji invoegen"
+
+#: data/resources/ui/window.blp:25
+#, fuzzy
+msgid "Channel list"
+msgstr "Kanalen"
+
+#: data/resources/ui/window.blp:37
 msgctxt "accessibility"
 msgid "Add Conversation"
 msgstr "Gesprek toevoegen"
 
-#: data/resources/ui/window.blp:41 data/resources/ui/window.blp:94
+#: data/resources/ui/window.blp:48 data/resources/ui/window.blp:91
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Menu"
 
-#: data/resources/ui/window.blp:114
+#: data/resources/ui/window.blp:78
+msgid "Chat"
+msgstr ""
+
+#: data/resources/ui/window.blp:113
 msgid "Settings"
 msgstr "Instellingen"
 
-#: data/resources/ui/window.blp:129
+#: data/resources/ui/window.blp:128
 #: data/resources/ui/submit_captcha_dialog.blp:5
 msgid "Submit Captcha"
 msgstr "Captcha inzenden"
 
-#: data/resources/ui/window.blp:134
+#: data/resources/ui/window.blp:133
+msgid "Synchronize Contacts"
+msgstr ""
+
+#: data/resources/ui/window.blp:138
 msgid "Keybindings"
 msgstr "Sneltoetsen"
 
-#: data/resources/ui/window.blp:139
+#: data/resources/ui/window.blp:143
 msgid "About"
 msgstr "Over"
+
+#: data/resources/ui/window.blp:156
+#, fuzzy
+msgid "Clear Messages"
+msgstr "Berichten verwijderen"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -438,11 +471,11 @@ msgstr "Captcha"
 msgid "Submit"
 msgstr "Inzenden"
 
-#: src/backend/channel.rs:564
+#: src/backend/channel.rs:581
 msgid "Note to self"
 msgstr "Herinnering aan mezelf"
 
-#: src/backend/manager.rs:411
+#: src/backend/manager.rs:430
 msgid "You"
 msgstr "Ik"
 
@@ -474,26 +507,26 @@ msgstr "Reageren op berichten"
 msgid "Reacted {emoji} to a message."
 msgstr "Reageren op berichten"
 
-#: src/backend/message/text_message.rs:365
+#: src/backend/message/text_message.rs:369
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Er is één afbeelding verstuurd"
 msgstr[1] "Er zijn {} afbeeldingen verstuurd"
 
-#: src/backend/message/text_message.rs:368
+#: src/backend/message/text_message.rs:372
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Er is één video verstuurd"
 msgstr[1] "Er zijn {} video's verstuurd"
 
-#: src/backend/message/text_message.rs:372
+#: src/backend/message/text_message.rs:376
 #, fuzzy
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
 msgstr[0] "Er is één afbeelding verstuurd"
 msgstr[1] "Er zijn {} afbeeldingen verstuurd"
 
-#: src/backend/message/text_message.rs:378
+#: src/backend/message/text_message.rs:382
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Er is één bestand verstuurd"
@@ -568,29 +601,62 @@ msgstr "De databaselocatie, {}, is geen map."
 msgid "Please restart the application with logging and report this issue."
 msgstr "Schakel de foutopsporing in, herstart de app en meld dit probleem."
 
-#: src/gui/link_window.rs:65
+#: src/gui/link_window.rs:67
 msgid "Copied to clipboard"
 msgstr "Gekopieerd naar klembord"
 
-#: src/gui/preferences_window.rs:51
+#: src/gui/preferences_window.rs:52
 msgid "Background permission"
 msgstr "Achtergrondrecht"
 
-#: src/gui/preferences_window.rs:52
+#: src/gui/preferences_window.rs:53
 msgid "Use settings to remove permissions"
 msgstr "Beheer de rechten in de voorkeuren"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:58
+#: src/gui/utility.rs:88 src/gui/utility.rs:112
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:61
+#: src/gui/utility.rs:91
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
+
+#: src/gui/utility.rs:124
+msgid "Today"
+msgstr ""
+
+#: src/gui/utility.rs:126
+msgid "Yesterday"
+msgstr ""
+
+#. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
+#. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+#: src/gui/utility.rs:132
+#, fuzzy
+msgid "%Y-%m-%d"
+msgstr "%Y-%m-%d %H:%M"
+
+#. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
+#. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+#: src/gui/utility.rs:136
+msgid "%a., %e. %b"
+msgstr ""
+
+#: src/gui/window.rs:283 src/gui/window.rs:289
+#, fuzzy
+msgid "Remove Messages"
+msgstr "Berichten ontvangen"
+
+#: src/gui/window.rs:284
+#, fuzzy
+msgid "This will remove all locally stored messages from this channel"
+msgstr ""
+"Hierdoor worden alle lokaal opgeslagen berichten verwijderd en de app "
+"afgesloten."
 
 #. Translators: Flare name in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
@@ -670,7 +736,7 @@ msgstr ""
 "Signal-apps. Wees voorzichtig bij het omgaan met gevoelige gegevens. Bekijk "
 "de README van het project voor meer informatie over beveiliging."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:479
+#: data/de.schmidhuberj.Flare.metainfo.xml:499
 msgid "Overview of the application"
 msgstr "Overzicht van de app"
 
@@ -725,6 +791,12 @@ msgstr "Of berichten geselecteerd kunnen worden"
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
 msgstr ""
+
+#~ msgid "Send"
+#~ msgstr "Versturen"
+
+#~ msgid "Load media"
+#~ msgstr "Media laden"
 
 #, fuzzy
 #~ msgid "Signal GTK Client"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-19 12:50+0200\n"
+"POT-Creation-Date: 2023-10-09 13:04+0200\n"
 "PO-Revision-Date: 2023-07-27 06:07+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr "Давид Лапшин <ddaudix@gmail.com>"
 
-#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:148
+#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:152
 msgid "Channel Information"
 msgstr "Информация о канале"
 
@@ -51,7 +51,7 @@ msgstr "Оффлайн"
 msgid "Search"
 msgstr "Поиск"
 
-#: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:53
+#: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:60
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Поиск"
@@ -74,12 +74,12 @@ msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Удалить ответ"
 
-#: data/resources/ui/channel_messages.blp:118
+#: data/resources/ui/channel_messages.blp:119
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Удалить вложение"
 
-#: data/resources/ui/channel_messages.blp:121
+#: data/resources/ui/channel_messages.blp:122
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Удалить вложение"
@@ -89,47 +89,33 @@ msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Добавить вложение"
 
-#: data/resources/ui/channel_messages.blp:156
+#: data/resources/ui/channel_messages.blp:160
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Добавить вложение"
 
-#: data/resources/ui/channel_messages.blp:172
+#: data/resources/ui/channel_messages.blp:176
 msgctxt "accessibility"
-msgid "Insert an emoji"
-msgstr "Вставить эмодзи"
-
-#: data/resources/ui/channel_messages.blp:175
-msgctxt "tooltip"
-msgid "Insert emoji"
-msgstr "Вставить эмодзи"
+msgid "Message input"
+msgstr "Ввод сообщения"
 
 #: data/resources/ui/channel_messages.blp:182
-msgctxt "accessibility"
-msgid "Message input"
-msgstr "Ввод сообщения"
-
-#: data/resources/ui/channel_messages.blp:188
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Ввод сообщения"
 
-#: data/resources/ui/channel_messages.blp:194
+#: data/resources/ui/channel_messages.blp:192
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Отправить"
 
-#: data/resources/ui/channel_messages.blp:197
+#: data/resources/ui/channel_messages.blp:195
 msgctxt "tooltip"
-msgid "Send"
-msgstr "Отправить"
-
-#: data/resources/ui/channel_messages.blp:198
 msgid "Send"
 msgstr "Отправить"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
-#: data/resources/ui/window.blp:124
+#: data/resources/ui/window.blp:123
 msgid "Clear messages"
 msgstr "Очистить сообщения"
 
@@ -141,7 +127,7 @@ msgstr ""
 "Это удалит все сохранённые локально сообщения. Это также закроет приложение."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
-#: data/resources/ui/dialog_unlink.blp:11
+#: data/resources/ui/dialog_unlink.blp:11 src/gui/window.rs:288
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -149,7 +135,7 @@ msgstr "Отмена"
 msgid "Clear"
 msgstr "Очистить"
 
-#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:119
+#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:118
 msgid "Unlink"
 msgstr "Отвязать"
 
@@ -183,21 +169,40 @@ msgstr "Пожалуйста, сообщите об этой ошибке."
 msgid "Report"
 msgstr "Пожаловаться"
 
-#: data/resources/ui/link_window.blp:29 data/resources/ui/link_window.blp:81
+#: data/resources/ui/link_window.blp:20 data/resources/ui/link_window.blp:28
+#: data/resources/ui/link_window.blp:81
 msgid "Link device"
 msgstr "Привязка устройства"
 
-#: data/resources/ui/link_window.blp:34
+#: data/resources/ui/link_window.blp:33
 msgid "Scan Code"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:35
+#: data/resources/ui/link_window.blp:34
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
 
-#: data/resources/ui/link_window.blp:59
+#: data/resources/ui/link_window.blp:58
 msgid "Link without scanning"
 msgstr ""
+
+#: data/resources/ui/link_window.blp:64
+msgid ""
+"Note: Currently, to sucessfully link contacts requires intervention. Please "
+"follow these steps: \n"
+"- Link Flare as usual. Wait ~1min after the link window closed. \n"
+"- Make sure you do not have running in the background enabled. Close and "
+"restart Flare. \n"
+"- In the primary menu, click 'synchronize contacts'. Wait ~1min. \n"
+"- Make sure you do not have running in the background enabled. Close and "
+"restart Flare. \n"
+"- Your contacts should be behind the pencil-icon in the top-left."
+msgstr ""
+
+#: data/resources/ui/link_window.blp:74
+#, fuzzy
+msgid "Manual linking"
+msgstr "Привазывание"
 
 #: data/resources/ui/link_window.blp:86
 #, fuzzy
@@ -235,11 +240,6 @@ msgstr "Сохранить как…"
 msgid "Open with…"
 msgstr "Открыть с помощью…"
 
-#: data/resources/ui/message_item.blp:156
-#, fuzzy
-msgid "Load media"
-msgstr "Загрузить больше"
-
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Общее"
@@ -266,66 +266,65 @@ msgstr "Вложения"
 msgid "Dowload images automatically"
 msgstr "Загружать изображения автоматически"
 
-#: data/resources/ui/preferences_window.blp:35
+#: data/resources/ui/preferences_window.blp:26
 msgid "Dowload videos automatically"
 msgstr "Загружать видео автоматически"
 
-#: data/resources/ui/preferences_window.blp:48
+#: data/resources/ui/preferences_window.blp:30
 msgid "Dowload files automatically"
 msgstr "Загружать файлы автоматически"
 
-#: data/resources/ui/preferences_window.blp:61
+#: data/resources/ui/preferences_window.blp:34
 msgid "Dowload voice messages automatically"
 msgstr "Загружать голосовые сообщения автоматически"
 
-#: data/resources/ui/preferences_window.blp:75
+#: data/resources/ui/preferences_window.blp:39
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: data/resources/ui/preferences_window.blp:76
+#: data/resources/ui/preferences_window.blp:40
 msgid "Notifications for new messages."
 msgstr "Уведомления для новых сообщений."
 
-#: data/resources/ui/preferences_window.blp:79
+#: data/resources/ui/preferences_window.blp:43
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
 msgstr "Отправлять уведомления"
 
-#: data/resources/ui/preferences_window.blp:92
+#: data/resources/ui/preferences_window.blp:47
 #, fuzzy
 msgid "Send notifications on reactions"
 msgstr "Отправлять уведомления"
 
-#: data/resources/ui/preferences_window.blp:106
-#: src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:52 src/gui/preferences_window.rs:29
 msgid "Watch for new messages while closed"
 msgstr "Следить за новыми сообщениями в закрытом состоянии"
 
-#: data/resources/ui/preferences_window.blp:122
+#: data/resources/ui/preferences_window.blp:60
 msgid "Mobile Compatibility"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:123
+#: data/resources/ui/preferences_window.blp:61
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:126
+#: data/resources/ui/preferences_window.blp:64
 msgid "Selectable Message Text"
 msgstr "Выбираемый текст сообщения"
 
-#: data/resources/ui/preferences_window.blp:127
+#: data/resources/ui/preferences_window.blp:65
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 "Выделяемый текст может мешать жестам пролистывания на сенсорных экранах."
 
-#: data/resources/ui/preferences_window.blp:140
+#: data/resources/ui/preferences_window.blp:69
 msgid "Press \"Enter\" to send message"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:141
+#: data/resources/ui/preferences_window.blp:70
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing \"Control + Enter\""
@@ -391,32 +390,65 @@ msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr "Загрузить больше сообщений"
 
-#: data/resources/ui/window.blp:30
+#: data/resources/ui/text_entry.blp:12
+#, fuzzy
+msgid "Message"
+msgstr "Ввод сообщения"
+
+#: data/resources/ui/text_entry.blp:38
+msgctxt "accessibility"
+msgid "Insert an emoji"
+msgstr "Вставить эмодзи"
+
+#: data/resources/ui/text_entry.blp:44
+msgctxt "tooltip"
+msgid "Insert emoji"
+msgstr "Вставить эмодзи"
+
+#: data/resources/ui/window.blp:25
+#, fuzzy
+msgid "Channel list"
+msgstr "Каналы"
+
+#: data/resources/ui/window.blp:37
 msgctxt "accessibility"
 msgid "Add Conversation"
 msgstr "Добавить беседу"
 
-#: data/resources/ui/window.blp:41 data/resources/ui/window.blp:94
+#: data/resources/ui/window.blp:48 data/resources/ui/window.blp:91
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Меню"
 
-#: data/resources/ui/window.blp:114
+#: data/resources/ui/window.blp:78
+msgid "Chat"
+msgstr ""
+
+#: data/resources/ui/window.blp:113
 msgid "Settings"
 msgstr "Параметры"
 
-#: data/resources/ui/window.blp:129
+#: data/resources/ui/window.blp:128
 #: data/resources/ui/submit_captcha_dialog.blp:5
 msgid "Submit Captcha"
 msgstr ""
 
-#: data/resources/ui/window.blp:134
+#: data/resources/ui/window.blp:133
+msgid "Synchronize Contacts"
+msgstr ""
+
+#: data/resources/ui/window.blp:138
 msgid "Keybindings"
 msgstr "Комбинации клавиш"
 
-#: data/resources/ui/window.blp:139
+#: data/resources/ui/window.blp:143
 msgid "About"
 msgstr "О Приложении"
+
+#: data/resources/ui/window.blp:156
+#, fuzzy
+msgid "Clear Messages"
+msgstr "Очистить сообщения"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -440,11 +472,11 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: src/backend/channel.rs:564
+#: src/backend/channel.rs:581
 msgid "Note to self"
 msgstr "Заметка для себя"
 
-#: src/backend/manager.rs:411
+#: src/backend/manager.rs:430
 msgid "You"
 msgstr "Вы"
 
@@ -476,25 +508,25 @@ msgstr "Реакция на сообщение"
 msgid "Reacted {emoji} to a message."
 msgstr "Реакция на сообщение"
 
-#: src/backend/message/text_message.rs:365
+#: src/backend/message/text_message.rs:369
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Отправить изображение"
 msgstr[1] "Отправить {} изображений"
 
-#: src/backend/message/text_message.rs:368
+#: src/backend/message/text_message.rs:372
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Отправлено видео"
 msgstr[1] "Отправлено {} видео"
 
-#: src/backend/message/text_message.rs:372
+#: src/backend/message/text_message.rs:376
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
 msgstr[0] "Отправил голосовое сообщение"
 msgstr[1] "Отправил {} голосовых сообщений"
 
-#: src/backend/message/text_message.rs:378
+#: src/backend/message/text_message.rs:382
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Оправить файл"
@@ -572,30 +604,62 @@ msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Пожалуйста, перезапустите приложение с логами и сообщите об этой ошибке."
 
-#: src/gui/link_window.rs:65
+#: src/gui/link_window.rs:67
 #, fuzzy
 msgid "Copied to clipboard"
 msgstr "Скопировать в буфер обмена"
 
-#: src/gui/preferences_window.rs:51
+#: src/gui/preferences_window.rs:52
 msgid "Background permission"
 msgstr "Фоновое разрешение"
 
-#: src/gui/preferences_window.rs:52
+#: src/gui/preferences_window.rs:53
 msgid "Use settings to remove permissions"
 msgstr "Используйте настройки для удаления разрешений"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:58
+#: src/gui/utility.rs:88 src/gui/utility.rs:112
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:61
+#: src/gui/utility.rs:91
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
+
+#: src/gui/utility.rs:124
+msgid "Today"
+msgstr ""
+
+#: src/gui/utility.rs:126
+msgid "Yesterday"
+msgstr ""
+
+#. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
+#. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+#: src/gui/utility.rs:132
+#, fuzzy
+msgid "%Y-%m-%d"
+msgstr "%Y-%m-%d %H:%M"
+
+#. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
+#. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
+#: src/gui/utility.rs:136
+msgid "%a., %e. %b"
+msgstr ""
+
+#: src/gui/window.rs:283 src/gui/window.rs:289
+#, fuzzy
+msgid "Remove Messages"
+msgstr "Получение сообщений"
+
+#: src/gui/window.rs:284
+#, fuzzy
+msgid "This will remove all locally stored messages from this channel"
+msgstr ""
+"Это удалит все сохранённые локально сообщения. Это также закроет приложение."
 
 #. Translators: Flare name in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
@@ -681,7 +745,7 @@ msgstr ""
 "данными. Дополнительную информацию о безопасности можно найти в README "
 "проекта."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:479
+#: data/de.schmidhuberj.Flare.metainfo.xml:499
 msgid "Overview of the application"
 msgstr "Обзор приложения"
 
@@ -736,6 +800,13 @@ msgstr "Можно ли выбирать сообщения"
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
 msgstr ""
+
+#~ msgid "Send"
+#~ msgstr "Отправить"
+
+#, fuzzy
+#~ msgid "Load media"
+#~ msgstr "Загрузить больше"
 
 #~ msgid "Signal GTK Client"
 #~ msgstr "GTK клиент Signal"
