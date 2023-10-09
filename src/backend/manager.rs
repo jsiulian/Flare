@@ -5,8 +5,8 @@ use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
 use glib::{clone, Object};
 use gtk::{gdk, gio, glib};
 use libsignal_service::{
-    groups_v2::Group, prelude::ProfileKey, proto::AttachmentPointer, sender::AttachmentUploadError,
-    Profile,
+    groups_v2::Group, prelude::ProfileKey, proto::AttachmentPointer, push_service::DeviceInfo,
+    sender::AttachmentUploadError, Profile,
 };
 use oo7::Keyring;
 use presage::{
@@ -18,6 +18,7 @@ use presage::{
 };
 use presage_store_sled::MigrationConflictStrategy;
 use rand::distributions::DistString;
+use url::Url;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
 use crate::{dbus::Feedbackd, gspawn, tspawn, ApplicationError};
@@ -338,6 +339,9 @@ impl Manager {
         self.imp().internal.swap(&RefCell::new(internal));
         self.imp().feedbackd.swap(&RefCell::new(feedbackd));
 
+        // Check again if is primary, after setup is successful.
+        self.notify("is-primary");
+
         let mut channels_init = self.init_channels().await;
 
         crate::info!("Own uuid: {:?}", self.uuid());
@@ -647,13 +651,34 @@ impl Manager {
         log::trace!("`Manager::request_contacts_sync` finished");
         r
     }
+
+    pub async fn link_secondary(&self, url: Url) -> Result<(), PresageError> {
+        log::trace!("`Manager::link_secondary` start");
+        let r = self.internal().link_secondary(url).await;
+        log::trace!("`Manager::link_secondary` finished");
+        r
+    }
+
+    pub async fn unlink_secondary(&self, id: i64) -> Result<(), PresageError> {
+        log::trace!("`Manager::unlink_secondary` start");
+        let r = self.internal().unlink_secondary(id).await;
+        log::trace!("`Manager::unlink_secondary` finished");
+        r
+    }
+
+    pub async fn linked_devices(&self) -> Result<Vec<DeviceInfo>, PresageError> {
+        log::trace!("`Manager::linked_devices` start");
+        let r = self.internal().linked_devices().await;
+        log::trace!("`Manager::linked_devices` finished");
+        r
+    }
 }
 
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
-    use gdk::glib::BoxedAnyObject;
-    use gdk::prelude::StaticType;
+    use gdk::glib::{BoxedAnyObject, ParamSpec, ParamSpecBoolean, Value};
+    use gdk::prelude::{ParamSpecBuilderExt, StaticType, ToValue};
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gio::{Application, Settings};
     use glib::{once_cell::sync::Lazy, subclass::Signal};
@@ -709,6 +734,29 @@ mod imp {
     }
 
     impl ObjectImpl for Manager {
+        fn properties() -> &'static [glib::ParamSpec] {
+            static PROPERTIES: Lazy<Vec<ParamSpec>> =
+                Lazy::new(|| vec![ParamSpecBoolean::builder("is-primary").read_only().build()]);
+            PROPERTIES.as_ref()
+        }
+
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
+            match pspec.name() {
+                "is-primary" => (self
+                    .internal
+                    .borrow()
+                    .as_ref()
+                    .and_then(|r| r.registration_type())
+                    == Some(presage::RegistrationType::Primary))
+                .to_value(),
+                _ => unimplemented!(),
+            }
+        }
+
+        fn set_property(&self, _id: usize, _value: &Value, _pspec: &ParamSpec) {
+            unimplemented!()
+        }
+
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
                 vec![

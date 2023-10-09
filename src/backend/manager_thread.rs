@@ -2,11 +2,12 @@ use std::{cell::OnceCell, ops::Bound};
 
 use futures::{join, select, FutureExt, SinkExt, StreamExt};
 use libsignal_service::{
-    groups_v2::Group, prelude::ProfileKey, sender::AttachmentUploadError, Profile,
+    groups_v2::Group, prelude::ProfileKey, push_service::DeviceInfo, sender::AttachmentUploadError,
+    Profile,
 };
 use presage::{
     prelude::{content::*, AttachmentSpec, ContentBody, DataMessage, ServiceAddress, *},
-    Manager, Registered, RegistrationOptions, Thread,
+    Manager, Registered, RegistrationOptions, RegistrationType, Thread,
 };
 use presage_store_sled::SledStore as Store;
 use tokio::sync::{mpsc, oneshot};
@@ -51,6 +52,10 @@ enum Command {
             Result<<presage_store_sled::SledStore as presage::Store>::MessagesIter, Error>,
         >,
     ),
+    RegistrationType(oneshot::Sender<RegistrationType>),
+    LinkSecondary(Url, oneshot::Sender<Result<(), Error>>),
+    UnlinkSecondary(i64, oneshot::Sender<Result<(), Error>>),
+    LinkedDevices(oneshot::Sender<Result<Vec<DeviceInfo>, Error>>),
 }
 
 #[derive(Debug)]
@@ -83,6 +88,7 @@ impl std::fmt::Debug for Command {
 
 pub struct ManagerThread {
     command_sender: mpsc::Sender<Command>,
+    registration_type: Option<RegistrationType>,
     uuid: Uuid,
     profile: Option<Profile>,
 }
@@ -91,6 +97,7 @@ impl Clone for ManagerThread {
     fn clone(&self) -> Self {
         Self {
             command_sender: self.command_sender.clone(),
+            registration_type: self.registration_type.clone(),
             uuid: self.uuid,
             profile: self.profile.clone(),
         }
@@ -145,6 +152,20 @@ impl ManagerThread {
             return None;
         }
 
+        let (sender_registration_type, receiver_registration_type) = oneshot::channel();
+        if sender
+            .send(Command::RegistrationType(sender_registration_type))
+            .await
+            .is_err()
+        {
+            return None;
+        }
+        let registration_type = receiver_registration_type.await;
+
+        if registration_type.is_err() {
+            return None;
+        }
+
         let (sender_profile, receiver_profile) = oneshot::channel();
         if sender
             .send(Command::RetrieveProfile(sender_profile))
@@ -162,6 +183,7 @@ impl ManagerThread {
         Some(Self {
             command_sender: sender,
             uuid: uuid.unwrap(),
+            registration_type: Some(registration_type.unwrap()),
             profile: profile.unwrap().ok(),
         })
     }
@@ -170,6 +192,10 @@ impl ManagerThread {
 impl ManagerThread {
     pub fn uuid(&self) -> Uuid {
         self.uuid
+    }
+
+    pub fn registration_type(&self) -> Option<RegistrationType> {
+        self.registration_type.clone()
     }
 
     pub async fn submit_recaptcha_challenge(
@@ -298,6 +324,33 @@ impl ManagerThread {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
             .send(Command::Messages(thread, range, sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
+
+    pub async fn link_secondary(&self, url: Url) -> Result<(), Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::LinkSecondary(url, sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
+
+    pub async fn unlink_secondary(&self, id: i64) -> Result<(), Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::UnlinkSecondary(id, sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
+
+    pub async fn linked_devices(&self) -> Result<Vec<DeviceInfo>, Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::LinkedDevices(sender))
             .await
             .expect("Command sending failed");
         receiver.await.expect("Callback receiving failed")
@@ -488,5 +541,18 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             // XXX: Cannot format iterator.
             let _ = callback.send(manager.messages(&thread, range));
         }
+        Command::RegistrationType(callback) => callback
+            // .send(manager.sync_contacts().await)
+            .send(manager.registration_type())
+            .expect("Callback sending failed"),
+        Command::LinkSecondary(url, callback) => callback
+            .send(manager.link_secondary(url).await)
+            .expect("Callback sending failed"),
+        Command::UnlinkSecondary(id, callback) => callback
+            .send(manager.unlink_secondary(id).await)
+            .expect("Callback sending failed"),
+        Command::LinkedDevices(callback) => callback
+            .send(manager.linked_devices().await)
+            .expect("Callback sending failed"),
     }
 }

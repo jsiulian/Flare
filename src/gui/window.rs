@@ -95,6 +95,7 @@ pub mod imp {
 
     use crate::backend::Channel;
     use crate::gui::channel_info_dialog::ChannelInfoDialog;
+    use crate::gui::linked_devices_window::LinkedDevicesWindow;
     use crate::{
         backend::Manager,
         config::APP_ID,
@@ -209,6 +210,7 @@ pub mod imp {
                 }));
                 dialog.present();
             }));
+
             log::trace!("Setting up submit-captcha action");
             let action_submit_captcha = SimpleAction::new("submit-captcha", None);
             action_submit_captcha.connect_activate(clone!(@weak obj => move |_, _| {
@@ -375,6 +377,29 @@ pub mod imp {
             actions.add_action(&action_toggle_search);
         }
 
+        // Requires the manager to be set up. Therefore, postponed.
+        fn setup_linked_devices_action(&self) {
+            let obj = self.obj();
+
+            log::trace!("Setting up linked-devices action");
+            let action_linked_devices = SimpleAction::new("linked-devices", None);
+            action_linked_devices.connect_activate(clone!(@weak obj => move |_, _| {
+                log::trace!("User requested to view linked devices");
+                let win = LinkedDevicesWindow::new(obj.manager(), &obj);
+                win.present();
+            }));
+
+            self.obj()
+                .manager()
+                .bind_property("is-primary", &action_linked_devices, "enabled")
+                .flags(BindingFlags::SYNC_CREATE)
+                .build();
+
+            let actions = SimpleActionGroup::new();
+            obj.insert_action_group("win-managed", Some(&actions));
+            actions.add_action(&action_linked_devices);
+        }
+
         #[template_callback]
         fn handle_search_clicked(&self) {
             self.channel_list.toggle_search();
@@ -440,6 +465,8 @@ pub mod imp {
                 log::trace!("Setup manager for Window");
                 let manager = Manager::new(obj.property::<gio::Application>("application"));
                 obj.set_property("manager", Some(&manager));
+                obj.imp().setup_linked_devices_action();
+
                 let _setup_window = SetupWindow::new(manager.clone(), &obj);
 
                 if let Err(e) = manager.init(&path).await {

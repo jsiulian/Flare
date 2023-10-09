@@ -963,7 +963,7 @@ dependencies = [
  "image 0.24.7",
  "lazy_static",
  "libadwaita",
- "libsignal-service",
+ "libsignal-service 0.1.0",
  "libspelling",
  "log",
  "once_cell",
@@ -2013,7 +2013,39 @@ dependencies = [
 [[package]]
 name = "libsignal-service"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=8305357#8305357c60e2b16b6c5eb87db75c027cca502332"
+dependencies = [
+ "aes 0.7.5",
+ "aes-gcm",
+ "async-trait",
+ "base64 0.13.1",
+ "bincode",
+ "block-modes",
+ "bytes",
+ "chrono",
+ "derivative",
+ "futures",
+ "hex",
+ "hkdf",
+ "hmac",
+ "libsignal-protocol",
+ "log",
+ "phonenumber",
+ "prost 0.10.4",
+ "prost-build 0.10.4",
+ "rand",
+ "serde",
+ "serde_json",
+ "sha2",
+ "thiserror",
+ "url",
+ "uuid",
+ "zkgroup",
+]
+
+[[package]]
+name = "libsignal-service"
+version = "0.1.0"
+source = "git+https://github.com/Schmiddiii/libsignal-service-rs?rev=76705ea7f70d458011b22cc1d3617756e75bd77a#76705ea7f70d458011b22cc1d3617756e75bd77a"
 dependencies = [
  "aes 0.7.5",
  "aes-gcm",
@@ -2046,7 +2078,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service-hyper"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=8305357#8305357c60e2b16b6c5eb87db75c027cca502332"
+source = "git+https://github.com/Schmiddiii/libsignal-service-rs?rev=76705ea7f70d458011b22cc1d3617756e75bd77a#76705ea7f70d458011b22cc1d3617756e75bd77a"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -2057,7 +2089,7 @@ dependencies = [
  "hyper",
  "hyper-rustls",
  "hyper-timeout",
- "libsignal-service",
+ "libsignal-service 0.1.0 (git+https://github.com/Schmiddiii/libsignal-service-rs?rev=76705ea7f70d458011b22cc1d3617756e75bd77a)",
  "log",
  "mpart-async",
  "rustls-pemfile 0.3.0",
@@ -2798,11 +2830,10 @@ checksum = "97e91cb6af081c6daad5fa705f8adb0634c027662052cb3174bdf2957bf07e25"
 [[package]]
 name = "presage"
 version = "0.6.0-dev"
-source = "git+https://github.com/whisperfish/presage?rev=e3a6084#e3a6084cb573ab9eaccdd8b6c8994bd26862b058"
 dependencies = [
  "base64 0.12.3",
  "futures",
- "libsignal-service",
+ "libsignal-service 0.1.0 (git+https://github.com/Schmiddiii/libsignal-service-rs?rev=76705ea7f70d458011b22cc1d3617756e75bd77a)",
  "libsignal-service-hyper",
  "log",
  "parking_lot",
@@ -4469,3 +4500,7 @@ dependencies = [
  "quote",
  "syn 1.0.109",
 ]
+
+[[patch.unused]]
+name = "libsignal-service-hyper"
+version = "0.1.0"
