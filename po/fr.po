@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
 "PO-Revision-Date: 2023-10-10 16:01+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
+"Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/fr/>\n"
 "Language: fr\n"
@@ -648,11 +648,11 @@ msgstr "%d/%m/%Y %H:%M"
 
 #: src/gui/utility.rs:124
 msgid "Today"
-msgstr ""
+msgstr "Aujourd’hui"
 
 #: src/gui/utility.rs:126
 msgid "Yesterday"
-msgstr ""
+msgstr "Hier"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
