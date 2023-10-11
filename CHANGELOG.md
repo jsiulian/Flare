@@ -16,12 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### HOTFIX
 
-- Introduced a workaround for contacts not syncing anymore. Note that the workaround requires intervention:
+- Introduced a workaround for contacts not syncing anymore. Note that the workaround may require intervention:
     - Link Flare as usual. Wait ~1min after the link window closed.
+    - If your contacts are synced successfully, you are finished.
     - Make sure you do not have running in the background enabled. Close and restart Flare.
     - In the primary menu, click "synchronize contacts". Wait ~1min.
-    - Make sure you do not have running in the background enabled. Close and restart Flare.
     - Your contacts should be behind the pencil-icon in the top-left.
+    - If not, wait a longer time and repeat from step 3.
 
 ### Changed
 
