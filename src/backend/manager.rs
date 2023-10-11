@@ -643,9 +643,22 @@ impl Manager {
         r
     }
 
-    pub async fn request_contacts_sync(&self) -> Result<(), PresageError> {
+    pub async fn request_contacts_sync(&self) -> Result<(), ApplicationError> {
         log::trace!("`Manager::request_contacts_sync` start");
-        let r = self.internal().request_contacts_sync().await;
+        let uuid = self.uuid();
+        let timestamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .expect("Time went backwards")
+            .as_millis() as u64;
+        let sync_message = presage::prelude::SyncMessage {
+            request: Some(presage::prelude::content::sync_message::Request {
+                r#type: Some(
+                    presage::prelude::content::sync_message::request::Type::Contacts as i32,
+                ),
+            }),
+            ..Default::default()
+        };
+        let r = self.send_message(uuid, sync_message, timestamp).await;
         log::trace!("`Manager::request_contacts_sync` finished");
         r
     }

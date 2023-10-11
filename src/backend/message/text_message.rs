@@ -118,7 +118,7 @@ impl TextMessage {
             let sender = msg.sender().address();
             data.quote = Some(Quote {
                 id: Some(msg.timestamp()),
-                author_uuid: sender.as_ref().map(|a| a.uuid).map(|u| u.to_string()),
+                author_aci: sender.as_ref().map(|a| a.uuid).map(|u| u.to_string()),
                 text: msg.body(),
                 ..Default::default()
             });
@@ -186,7 +186,7 @@ impl TextMessage {
         let reaction_struct = Reaction {
             emoji: Some(reaction.as_ref().to_owned()),
             remove: Some(has_self_reaction),
-            target_author_uuid: self
+            target_author_aci: self
                 .sender()
                 .address()
                 .map(|a| a.uuid)
@@ -247,7 +247,9 @@ impl TextMessage {
     }
 
     fn format_body(&self) -> (Option<String>, AttrList) {
-        let Some(body) = self.internal_data().and_then(|m| m.body) else { return (None, AttrList::new()) };
+        let Some(body) = self.internal_data().and_then(|m| m.body) else {
+            return (None, AttrList::new());
+        };
         let mut ranges = self
             .internal_data()
             .map(|m| m.body_ranges)
@@ -273,7 +275,9 @@ impl TextMessage {
         for r in ranges {
             let start = r.start() as usize;
             let end = start + r.length() as usize;
-            let Some(AssociatedValue::MentionUuid(u)) = r.associated_value else { continue };
+            let Some(AssociatedValue::MentionAci(u)) = r.associated_value else {
+                continue;
+            };
             let Ok(uuid) = u.parse() else { continue };
             let name = format!(
                 "{}{}",
