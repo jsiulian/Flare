@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: 2023-09-20 12:01+0000\n"
+"PO-Revision-Date: 2023-10-16 04:19+0000\n"
 "Last-Translator: Sergio Varela <sergitroll9@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/flare/flare/es/"
-">\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +21,9 @@ msgstr ""
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
-msgstr "Créditos de traducción"
+msgstr ""
+"Izocha\n"
+"Sergio Varela <sergiovg01@outlook.com>"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:152
 msgid "Channel Information"
@@ -327,7 +329,7 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:69
 msgid "Press \"Enter\" to send message"
-msgstr "Presionar \"Enter\" para enviar mensaje"
+msgstr "Presionar «Enter» para enviar mensaje"
 
 #: data/resources/ui/preferences_window.blp:70
 msgid ""
@@ -335,7 +337,7 @@ msgid ""
 "allowing \"Control + Enter\""
 msgstr ""
 "Puede que no sea posible enviar mensajes con líneas nuevas en teclados "
-"táctiles que no permiten \"Control + Enter\""
+"táctiles que no permiten «Control + Enter»"
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -398,9 +400,8 @@ msgid "Load more messages"
 msgstr "Cargar más mensajes"
 
 #: data/resources/ui/text_entry.blp:12
-#, fuzzy
 msgid "Message"
-msgstr "Entrada de mensajes"
+msgstr "Mensaje"
 
 #: data/resources/ui/text_entry.blp:38
 msgctxt "accessibility"
@@ -413,9 +414,8 @@ msgid "Insert emoji"
 msgstr "Insertar emoji"
 
 #: data/resources/ui/window.blp:25
-#, fuzzy
 msgid "Channel list"
-msgstr "Canales"
+msgstr "Lista de canales"
 
 #: data/resources/ui/window.blp:37
 msgctxt "accessibility"
@@ -429,7 +429,7 @@ msgstr "Menú"
 
 #: data/resources/ui/window.blp:78
 msgid "Chat"
-msgstr ""
+msgstr "Chat"
 
 #: data/resources/ui/window.blp:113
 msgid "Settings"
@@ -442,7 +442,7 @@ msgstr "Enviar Captcha"
 
 #: data/resources/ui/window.blp:133
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Sincronizar contactos"
 
 #: data/resources/ui/window.blp:138
 msgid "Keybindings"
@@ -453,7 +453,6 @@ msgid "About"
 msgstr "Acerca de"
 
 #: data/resources/ui/window.blp:156
-#, fuzzy
 msgid "Clear Messages"
 msgstr "Borrar mensajes"
 
@@ -640,16 +639,15 @@ msgstr "%d-%m-%Y %H:%M"
 
 #: src/gui/utility.rs:124
 msgid "Today"
-msgstr ""
+msgstr "Hoy"
 
 #: src/gui/utility.rs:126
 msgid "Yesterday"
-msgstr ""
+msgstr "Ayer"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:132
-#, fuzzy
 msgid "%Y-%m-%d"
 msgstr "%d-%m-%Y %H:%M"
 
@@ -657,19 +655,15 @@ msgstr "%d-%m-%Y %H:%M"
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:136
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/window.rs:283 src/gui/window.rs:289
-#, fuzzy
 msgid "Remove Messages"
-msgstr "Recibir mensajes"
+msgstr "Eliminar mensajes"
 
 #: src/gui/window.rs:284
-#, fuzzy
 msgid "This will remove all locally stored messages from this channel"
-msgstr ""
-"Esto eliminará todos los mensajes almacenados localmente. Esto también "
-"cerrará la aplicación."
+msgstr "Esto eliminará todos los mensajes almacenados localmente de este canal"
 
 #. Translators: Flare name in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
