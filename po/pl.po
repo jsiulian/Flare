@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: 2023-07-15 10:53+0000\n"
-"Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/flare/flare/pl/>\n"
+"PO-Revision-Date: 2023-10-16 04:19+0000\n"
+"Last-Translator: Jarek Zagórski <me.kubolski@gmail.com>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -25,16 +26,16 @@ msgstr ""
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:152
 msgid "Channel Information"
-msgstr ""
+msgstr "Informacje o kanale"
 
 #: data/resources/ui/channel_info_dialog.blp:28
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Odnów sesję"
 
 #: data/resources/ui/channel_info_dialog.blp:31
 msgid "Reset Session"
-msgstr ""
+msgstr "Odnów sesję"
 
 #: data/resources/ui/channel_info_dialog.blp:40
 #: data/resources/ui/error_dialog.blp:44
@@ -58,41 +59,41 @@ msgstr "Szukaj"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Nie wybrano żadnego kanału"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "Wybierz kanał"
 
 #: data/resources/ui/channel_messages.blp:91
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Usuń odpowiedź"
 
 #: data/resources/ui/channel_messages.blp:94
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Usuń odpowiedź"
 
 #: data/resources/ui/channel_messages.blp:119
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "Usuń załącznik"
 
 #: data/resources/ui/channel_messages.blp:122
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "Usuń załącznik"
 
 #: data/resources/ui/channel_messages.blp:153
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "Dodaj załącznik"
 
 #: data/resources/ui/channel_messages.blp:160
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "Dodaj załącznik"
 
 #: data/resources/ui/channel_messages.blp:176
 msgctxt "accessibility"
@@ -124,6 +125,8 @@ msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
+"To usunie wszystkie wiadomości zapisane na urządzeniu, a także zamknie "
+"aplikację."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11 src/gui/window.rs:288
