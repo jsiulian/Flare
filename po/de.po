@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: 2023-10-02 23:00+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/flare/flare/de/>\n"
+"PO-Revision-Date: 2023-10-24 04:07+0000\n"
+"Last-Translator: Quinten Wolff <quinten@daskju.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.1.1-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -214,6 +215,17 @@ msgid ""
 "restart Flare. \n"
 "- Your contacts should be behind the pencil-icon in the top-left."
 msgstr ""
+"Hinweis: Um Kontakte erfolgreich zu verknüpfen, ist derzeit ein Eingriff "
+"erforderlich. Bitte folgen Sie diesen Schritten:\n"
+"- Verknüpfen Sie Flare wie gewohnt. Warten Sie ~1min nachdem das Link-"
+"Fenster geschlossen wurde.\n"
+"- Vergewissern Sie sich, dass Sie die Option \"Im Hintergrund laufen\" nicht "
+"aktiviert haben. Schließen Sie Flare und starten Sie es neu.\n"
+"- Klicken Sie im Hauptmenü auf 'Kontakte synchronisieren'. Warten Sie ~1 "
+"Minute.\n"
+"- Vergewissern Sie sich, dass Sie die Option \"Im Hintergrund laufen\" nicht "
+"aktiviert haben. Schließen Sie Flare und starten Sie es neu.\n"
+"- Ihre Kontakte sollten nun hinter dem Stift-Symbol oben links zu sehen sein."
 
 #: data/resources/ui/link_window.blp:74
 #, fuzzy
@@ -426,7 +438,6 @@ msgid "Load more messages"
 msgstr "Weitere Nachrichten laden"
 
 #: data/resources/ui/text_entry.blp:12
-#, fuzzy
 msgid "Message"
 msgstr "Nachricht eingeben"
 
@@ -460,7 +471,7 @@ msgstr "Menü"
 
 #: data/resources/ui/window.blp:78
 msgid "Chat"
-msgstr ""
+msgstr "Chat"
 
 #: data/resources/ui/window.blp:113 data/resources/ui/window.blp:114
 msgid "Settings"
@@ -474,7 +485,7 @@ msgstr "Captcha absenden"
 
 #: data/resources/ui/window.blp:133
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Kontakte synchronisieren"
 
 #: data/resources/ui/window.blp:138 data/resources/ui/window.blp:134
 msgid "Keybindings"
@@ -676,11 +687,11 @@ msgstr "%d.%m.%Y %H:%M"
 
 #: src/gui/utility.rs:124
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 #: src/gui/utility.rs:126
 msgid "Yesterday"
-msgstr ""
+msgstr "Gestern"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
@@ -693,7 +704,7 @@ msgstr "%d.%m.%Y %H:%M"
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:136
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/window.rs:283 src/gui/window.rs:289
 #, fuzzy
