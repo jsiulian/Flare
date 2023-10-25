@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: 2023-10-24 04:07+0000\n"
-"Last-Translator: Quinten Wolff <quinten@daskju.com>\n"
+"PO-Revision-Date: 2023-10-27 09:26+0000\n"
+"Last-Translator: Markus Göllnitz <camelcasenick@bewares.it>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/de/>\n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1.1-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -54,7 +54,7 @@ msgstr "Offline"
 
 #: data/resources/ui/channel_list.blp:19
 msgid "Search"
-msgstr "Suche"
+msgstr "Suchen"
 
 #: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:60
 #: data/resources/ui/window.blp:53
@@ -696,9 +696,8 @@ msgstr "Gestern"
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:132
-#, fuzzy
 msgid "%Y-%m-%d"
-msgstr "%d.%m.%Y %H:%M"
+msgstr "%d.%m.%Y"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
