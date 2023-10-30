@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: 2023-10-13 04:05+0000\n"
+"PO-Revision-Date: 2023-10-31 17:02+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
 "flare/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -201,9 +201,20 @@ msgid ""
 "restart Flare. \n"
 "- Your contacts should be behind the pencil-icon in the top-left."
 msgstr ""
+"Let op: om contactpersonen te koppelen zijn momenteel enkele stappen vereist:"
+"\n"
+"- Koppel Flare zoals gebruikelijk. Wacht ong. 1 minuut na het sluiten van "
+"het koppelvenster. \n"
+"- Zorg dat uitvoeren op de achtergrond is uitgeschakeld. Sluit en herstart "
+"Flare. \n"
+"- Klik in het hoofdmenu op ‘Contactpersonen synchroniseren’. Wacht ong. 1 "
+"minuut. \n"
+"- Zorg dat uitvoeren op de achtergrond is uitgeschakeld. Sluit en herstart "
+"Flare. \n"
+"- Uw contactpersonen zouden nu zichtbaar moeten zijn via het "
+"potloodpictogram linksboven."
 
 #: data/resources/ui/link_window.blp:74
-#, fuzzy
 msgid "Manual linking"
 msgstr "Handmatige koppeling"
 
@@ -216,6 +227,8 @@ msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Als uw apparaat de QR-code niet kan scannen, dan kunt u hieronder de link "
+"invoeren"
 
 #: data/resources/ui/link_window.blp:98
 msgid "Copy to clipboard"
@@ -310,6 +323,9 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Deze opties kunnen worden aangepast voor een betere gebruikservaring op "
+"touchscreen- en mobiele apparaten. De standaardwaarden zijn geoptimaliseerd "
+"voor computers."
 
 #: data/resources/ui/preferences_window.blp:64
 msgid "Selectable Message Text"
@@ -322,13 +338,15 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:69
 msgid "Press \"Enter\" to send message"
-msgstr ""
+msgstr "Op enter drukken om te versturen"
 
 #: data/resources/ui/preferences_window.blp:70
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing \"Control + Enter\""
 msgstr ""
+"Het kan zijn dat berichten met nieuwe regels niet verstuurd kunnen worden op "
+"schermtoetsenborden die Ctrl+Enter niet ondersteunen"
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -391,9 +409,8 @@ msgid "Load more messages"
 msgstr "Meer berichten laden"
 
 #: data/resources/ui/text_entry.blp:12
-#, fuzzy
 msgid "Message"
-msgstr "Voer een bericht in"
+msgstr "Bericht"
 
 #: data/resources/ui/text_entry.blp:38
 msgctxt "accessibility"
@@ -406,9 +423,8 @@ msgid "Insert emoji"
 msgstr "Emoji invoegen"
 
 #: data/resources/ui/window.blp:25
-#, fuzzy
 msgid "Channel list"
-msgstr "Kanalen"
+msgstr "Kanaallijst"
 
 #: data/resources/ui/window.blp:37
 msgctxt "accessibility"
@@ -422,7 +438,7 @@ msgstr "Menu"
 
 #: data/resources/ui/window.blp:78
 msgid "Chat"
-msgstr ""
+msgstr "Gesprek"
 
 #: data/resources/ui/window.blp:113
 msgid "Settings"
@@ -435,7 +451,7 @@ msgstr "Captcha inzenden"
 
 #: data/resources/ui/window.blp:133
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Contactpersonen synchroniseren"
 
 #: data/resources/ui/window.blp:138
 msgid "Keybindings"
@@ -446,9 +462,8 @@ msgid "About"
 msgstr "Over"
 
 #: data/resources/ui/window.blp:156
-#, fuzzy
 msgid "Clear Messages"
-msgstr "Berichten verwijderen"
+msgstr "Berichten wissen"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -459,6 +474,11 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Verstuur een captcha-uitdaging. De toegangssleutel is te vinden in de door "
+"Flare getoonde foutmelding. De captcha <a href=\"https://signalcaptchas.org/"
+"challenge/generate.html\">op deze website</a> dient volledig te worden "
+"ingevuld en de link om Signal te openen dient bij het juiste item te worden "
+"geplakt. Let op: de captcha is slechts één minuut geldig."
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
 msgid "Token"
@@ -498,15 +518,13 @@ msgstr "Is bezig"
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:70
-#, fuzzy
 msgid "{sender} reacted {emoji} to a message."
-msgstr "Reageren op berichten"
+msgstr "{sender} heeft met {emoji} gereageerd op een bericht."
 
 #. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:76
-#, fuzzy
 msgid "Reacted {emoji} to a message."
-msgstr "Reageren op berichten"
+msgstr "Gereageerd met {emoji} op een bericht."
 
 #: src/backend/message/text_message.rs:369
 msgid "Sent an image"
@@ -521,11 +539,10 @@ msgstr[0] "Er is één video verstuurd"
 msgstr[1] "Er zijn {} video's verstuurd"
 
 #: src/backend/message/text_message.rs:376
-#, fuzzy
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] "Er is één afbeelding verstuurd"
-msgstr[1] "Er zijn {} afbeeldingen verstuurd"
+msgstr[0] "Er is één spraakbericht verstuurd"
+msgstr[1] "Er zijn {} spraakberichten verstuurd"
 
 #: src/backend/message/text_message.rs:382
 msgid "Sent a file"
@@ -644,19 +661,16 @@ msgstr "%d %m %Y"
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:136
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/window.rs:283 src/gui/window.rs:289
-#, fuzzy
 msgid "Remove Messages"
-msgstr "Berichten ontvangen"
+msgstr "Berichten verwijderen"
 
 #: src/gui/window.rs:284
-#, fuzzy
 msgid "This will remove all locally stored messages from this channel"
 msgstr ""
-"Hierdoor worden alle lokaal opgeslagen berichten verwijderd en de app "
-"afgesloten."
+"Hierdoor worden alle lokaal opgeslagen berichten van dit kanaal verwijderd"
 
 #. Translators: Flare name in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
@@ -668,7 +682,7 @@ msgstr "Flare"
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Voer gesprekken met uw Signal-vrienden"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
@@ -677,6 +691,9 @@ msgid ""
 "from Linux. It is still in development and doesn't include as many features "
 "as the official Signal applications."
 msgstr ""
+"Flare is een onofficiële toepassing waarmee u op Linux gesprekken met uw "
+"vrienden kunt voeren op Signal. Let op: de ontwikkeling is nog in volle gang "
+"en nog niet alle officiële functies zijn beschikbaar."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:31
@@ -715,7 +732,6 @@ msgstr "Meldingen, optioneel op de achtergrond"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:64
-#, fuzzy
 msgid ""
 "More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
@@ -778,11 +794,11 @@ msgstr "Bestanden automatisch downloaden"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr "Op achtergrond uitvoeren wanneer gesloten"
+msgstr "Op achtergrond uitvoeren indien gesloten"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Meldingen versturen bij het ophalen van reacties"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
@@ -790,7 +806,7 @@ msgstr "Of berichten geselecteerd kunnen worden"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Berichten versturen met entertoets"
 
 #~ msgid "Send"
 #~ msgstr "Versturen"
