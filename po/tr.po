@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: 2023-08-21 01:54+0000\n"
+"PO-Revision-Date: 2023-11-03 21:32+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/flare/flare/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -204,9 +204,8 @@ msgid ""
 msgstr ""
 
 #: data/resources/ui/link_window.blp:74
-#, fuzzy
 msgid "Manual linking"
-msgstr "Elle Bağlama"
+msgstr "Elle bağlama"
 
 #: data/resources/ui/link_window.blp:86
 msgid "Manual Linking"
@@ -400,9 +399,8 @@ msgid "Load more messages"
 msgstr "Daha çok ileti yükle"
 
 #: data/resources/ui/text_entry.blp:12
-#, fuzzy
 msgid "Message"
-msgstr "ileti girdisi"
+msgstr "ileti"
 
 #: data/resources/ui/text_entry.blp:38
 msgctxt "accessibility"
@@ -415,9 +413,8 @@ msgid "Insert emoji"
 msgstr "Emoji ekle"
 
 #: data/resources/ui/window.blp:25
-#, fuzzy
 msgid "Channel list"
-msgstr "Kanallar"
+msgstr "Kanal listesi"
 
 #: data/resources/ui/window.blp:37
 msgctxt "accessibility"
@@ -431,7 +428,7 @@ msgstr "Menü"
 
 #: data/resources/ui/window.blp:78
 msgid "Chat"
-msgstr ""
+msgstr "Sohbet"
 
 #: data/resources/ui/window.blp:113
 msgid "Settings"
@@ -444,7 +441,7 @@ msgstr "Captcha Gönder"
 
 #: data/resources/ui/window.blp:133
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Kişileri Eşzamanla"
 
 #: data/resources/ui/window.blp:138
 msgid "Keybindings"
@@ -455,9 +452,8 @@ msgid "About"
 msgstr "Hakkında"
 
 #: data/resources/ui/window.blp:156
-#, fuzzy
 msgid "Clear Messages"
-msgstr "İletileri temizle"
+msgstr "İletileri Temizle"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -642,36 +638,31 @@ msgstr "%Y-%m-%d %H:%M"
 
 #: src/gui/utility.rs:124
 msgid "Today"
-msgstr ""
+msgstr "Bugün"
 
 #: src/gui/utility.rs:126
 msgid "Yesterday"
-msgstr ""
+msgstr "Dün"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:132
-#, fuzzy
 msgid "%Y-%m-%d"
-msgstr "%Y-%m-%d %H:%M"
+msgstr "%Y-%m-%d"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:136
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/window.rs:283 src/gui/window.rs:289
-#, fuzzy
 msgid "Remove Messages"
-msgstr "İletiler alınıyor"
+msgstr "İletiler Kaldır"
 
 #: src/gui/window.rs:284
-#, fuzzy
 msgid "This will remove all locally stored messages from this channel"
-msgstr ""
-"Bu, yerel olarak depolanan tüm iletileri temizleyecek. Aynı zamanda "
-"uygulamayı da kapatacak."
+msgstr "Bu, yerel olarak depolanan tüm iletileri bu kanaldan kaldıracak"
 
 #. Translators: Flare name in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
