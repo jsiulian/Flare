@@ -1,15 +1,17 @@
-use std::ops::Bound;
+use std::{cell::OnceCell, ops::Bound};
 
-use futures::{select, FutureExt, StreamExt};
+use futures::{join, select, FutureExt, SinkExt, StreamExt};
 use libsignal_service::{
-    groups_v2::Group, prelude::ProfileKey, sender::AttachmentUploadError, Profile,
+    groups_v2::Group, prelude::ProfileKey, push_service::DeviceInfo, sender::AttachmentUploadError,
+    Profile,
 };
 use presage::{
     prelude::{content::*, AttachmentSpec, ContentBody, DataMessage, ServiceAddress, *},
-    Manager, Registered, Thread,
+    Manager, Registered, RegistrationOptions, RegistrationType, Thread,
 };
 use presage_store_sled::SledStore as Store;
 use tokio::sync::{mpsc, oneshot};
+use url::Url;
 
 use crate::ApplicationError;
 
@@ -50,6 +52,32 @@ enum Command {
             Result<<presage_store_sled::SledStore as presage::Store>::MessagesIter, Error>,
         >,
     ),
+    RegistrationType(oneshot::Sender<RegistrationType>),
+    LinkSecondary(Url, oneshot::Sender<Result<(), Error>>),
+    UnlinkSecondary(i64, oneshot::Sender<Result<(), Error>>),
+    LinkedDevices(oneshot::Sender<Result<Vec<DeviceInfo>, Error>>),
+}
+
+#[derive(Debug)]
+pub enum SetupDecision {
+    /// Server, Device Name
+    Link(SignalServers, String),
+    /// Server, Phone Number, Captcha
+    Register(SignalServers, phonenumber::PhoneNumber, String),
+}
+
+pub type SetupConfirmation = String;
+
+#[derive(Debug)]
+pub enum SetupResult {
+    /// Setup must make a decision. Either register as primary device or link device.
+    Pending(OnceCell<futures::channel::oneshot::Sender<SetupDecision>>),
+    /// The manager is pending a SMS confirmation code.
+    Confirm(OnceCell<futures::channel::oneshot::Sender<SetupConfirmation>>),
+    /// Display QR code to link.
+    DisplayLinkQR(Url),
+    /// Everything is finished
+    Finished,
 }
 
 impl std::fmt::Debug for Command {
@@ -60,6 +88,7 @@ impl std::fmt::Debug for Command {
 
 pub struct ManagerThread {
     command_sender: mpsc::Sender<Command>,
+    registration_type: Option<RegistrationType>,
     uuid: Uuid,
     profile: Option<Profile>,
 }
@@ -68,6 +97,7 @@ impl Clone for ManagerThread {
     fn clone(&self) -> Self {
         Self {
             command_sender: self.command_sender.clone(),
+            registration_type: self.registration_type.clone(),
             uuid: self.uuid,
             profile: self.profile.clone(),
         }
@@ -77,8 +107,7 @@ impl Clone for ManagerThread {
 impl ManagerThread {
     pub async fn new(
         config_store: Store,
-        device_name: String,
-        link_callback: futures::channel::oneshot::Sender<url::Url>,
+        setup_callback: futures::channel::mpsc::Sender<SetupResult>,
         error_callback: futures::channel::oneshot::Sender<Error>,
         content: mpsc::UnboundedSender<Content>,
         error: mpsc::Sender<ApplicationError>,
@@ -88,7 +117,7 @@ impl ManagerThread {
             let error_clone = error.clone();
             let panic = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
                 crate::TOKIO_RUNTIME.block_on(async move {
-                    let setup = setup_manager(config_store, device_name, link_callback).await;
+                    let setup = setup_manager(config_store, setup_callback).await;
                     if let Ok(mut manager) = setup {
                         log::trace!("Starting command loop");
                         drop(error_callback);
@@ -123,6 +152,20 @@ impl ManagerThread {
             return None;
         }
 
+        let (sender_registration_type, receiver_registration_type) = oneshot::channel();
+        if sender
+            .send(Command::RegistrationType(sender_registration_type))
+            .await
+            .is_err()
+        {
+            return None;
+        }
+        let registration_type = receiver_registration_type.await;
+
+        if registration_type.is_err() {
+            return None;
+        }
+
         let (sender_profile, receiver_profile) = oneshot::channel();
         if sender
             .send(Command::RetrieveProfile(sender_profile))
@@ -140,6 +183,7 @@ impl ManagerThread {
         Some(Self {
             command_sender: sender,
             uuid: uuid.unwrap(),
+            registration_type: Some(registration_type.unwrap()),
             profile: profile.unwrap().ok(),
         })
     }
@@ -148,6 +192,10 @@ impl ManagerThread {
 impl ManagerThread {
     pub fn uuid(&self) -> Uuid {
         self.uuid
+    }
+
+    pub fn registration_type(&self) -> Option<RegistrationType> {
+        self.registration_type.clone()
     }
 
     pub async fn submit_recaptcha_challenge(
@@ -280,26 +328,109 @@ impl ManagerThread {
             .expect("Command sending failed");
         receiver.await.expect("Callback receiving failed")
     }
+
+    pub async fn link_secondary(&self, url: Url) -> Result<(), Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::LinkSecondary(url, sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
+
+    pub async fn unlink_secondary(&self, id: i64) -> Result<(), Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::UnlinkSecondary(id, sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
+
+    pub async fn linked_devices(&self) -> Result<Vec<DeviceInfo>, Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::LinkedDevices(sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
 }
 
 async fn setup_manager(
     config_store: Store,
-    name: String,
-    link_callback: futures::channel::oneshot::Sender<url::Url>,
+    mut setup_sender: futures::channel::mpsc::Sender<SetupResult>,
 ) -> Result<presage::Manager<Store, presage::Registered>, Error> {
     if let Ok(manager) = presage::Manager::load_registered(config_store.clone()).await {
         log::debug!("The configuration store is already valid, loading a registered account");
-        drop(link_callback);
+        setup_sender
+            .send(SetupResult::Finished)
+            .await
+            .expect("Failed to send setup results");
         Ok(manager)
     } else {
-        log::debug!("The config store is not valid yet, linking with a secondary device");
-        presage::Manager::link_secondary_device(
-            config_store.clone(),
-            presage::prelude::SignalServers::Production,
-            name,
-            link_callback,
-        )
-        .await
+        log::debug!("The config store is not valid yet, sending decision via channel.");
+
+        let (tx_decision, rx_decision) = futures::channel::oneshot::channel();
+        let to_send = OnceCell::new();
+        let _ = to_send.set(tx_decision);
+        setup_sender
+            .send(SetupResult::Pending(to_send))
+            .await
+            .expect("Failed to send setup results");
+        match rx_decision.await.ok().expect("Callback receiving failed") {
+            SetupDecision::Link(servers, name) => {
+                let (tx_link, rx_link) = futures::channel::oneshot::channel();
+                let (_, manager) = join!(
+                    async {
+                        let link = rx_link.await.expect("Failed to receive link callback");
+                        setup_sender
+                            .send(SetupResult::DisplayLinkQR(link))
+                            .await
+                            .expect("Failed to send setup results");
+                    },
+                    presage::Manager::link_secondary_device(
+                        config_store.clone(),
+                        servers,
+                        name,
+                        tx_link,
+                    )
+                );
+                setup_sender
+                    .send(SetupResult::Finished)
+                    .await
+                    .expect("Failed to send setup results");
+                manager
+            }
+            SetupDecision::Register(servers, phonenumber, captcha) => {
+                let (tx_confirm, rx_confirm) = futures::channel::oneshot::channel();
+                let manager = presage::Manager::register(
+                    config_store.clone(),
+                    RegistrationOptions {
+                        signal_servers: servers,
+                        phone_number: phonenumber,
+                        use_voice_call: false,
+                        captcha: Some(&captcha[..]),
+                        force: false,
+                    },
+                )
+                .await?;
+                // TODO: Error handling?
+                setup_sender
+                    .send(SetupResult::Confirm(tx_confirm.into()))
+                    .await
+                    .expect("Failed to send setup results");
+                let confirmation = rx_confirm
+                    .await
+                    .expect("Failed to receive confirm callback");
+                let manager = manager.confirm_verification_code(&confirmation).await;
+                setup_sender
+                    .send(SetupResult::Finished)
+                    .await
+                    .expect("Failed to send setup results");
+                manager
+            }
+        }
     }
 }
 
@@ -410,5 +541,18 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             // XXX: Cannot format iterator.
             let _ = callback.send(manager.messages(&thread, range));
         }
+        Command::RegistrationType(callback) => callback
+            // .send(manager.sync_contacts().await)
+            .send(manager.registration_type())
+            .expect("Callback sending failed"),
+        Command::LinkSecondary(url, callback) => callback
+            .send(manager.link_secondary(url).await)
+            .expect("Callback sending failed"),
+        Command::UnlinkSecondary(id, callback) => callback
+            .send(manager.unlink_secondary(id).await)
+            .expect("Callback sending failed"),
+        Command::LinkedDevices(callback) => callback
+            .send(manager.linked_devices().await)
+            .expect("Callback sending failed"),
     }
 }

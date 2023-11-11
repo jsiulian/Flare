@@ -79,9 +79,6 @@ pub mod imp {
     #[template(resource = "/ui/preferences_window.ui")]
     pub struct PreferencesWindow {
         #[template_child]
-        entry_device_name: TemplateChild<adw::EntryRow>,
-
-        #[template_child]
         row_download_images: TemplateChild<adw::SwitchRow>,
         #[template_child]
         row_download_videos: TemplateChild<adw::SwitchRow>,
@@ -107,10 +104,6 @@ pub mod imp {
 
     impl PreferencesWindow {
         fn init_settings(&self) {
-            self.settings
-                .bind("link-device-name", &self.entry_device_name.get(), "text")
-                .flags(SettingsBindFlags::DEFAULT)
-                .build();
             self.settings
                 .bind(
                     "autodownload-images",
@@ -184,7 +177,6 @@ pub mod imp {
         fn new() -> Self {
             Self {
                 settings: Settings::new(crate::config::APP_ID),
-                entry_device_name: TemplateChild::default(),
                 row_download_images: TemplateChild::default(),
                 row_download_videos: TemplateChild::default(),
                 row_download_voice_messages: TemplateChild::default(),

@@ -2,11 +2,11 @@ use std::{cell::RefCell, collections::HashMap, io::Write, ops::Bound, path::Path
 
 use gdk::{gio::Settings, prelude::*};
 use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
-use glib::{clone, MainContext, Object, Priority};
+use glib::{clone, Object};
 use gtk::{gdk, gio, glib};
 use libsignal_service::{
-    groups_v2::Group, prelude::ProfileKey, proto::AttachmentPointer, sender::AttachmentUploadError,
-    Profile,
+    groups_v2::Group, prelude::ProfileKey, proto::AttachmentPointer, push_service::DeviceInfo,
+    sender::AttachmentUploadError, Profile,
 };
 use oo7::Keyring;
 use presage::{
@@ -18,6 +18,7 @@ use presage::{
 };
 use presage_store_sled::MigrationConflictStrategy;
 use rand::distributions::DistString;
+use url::Url;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
 use crate::{dbus::Feedbackd, gspawn, tspawn, ApplicationError};
@@ -272,8 +273,8 @@ impl Manager {
     #[cfg(not(feature = "screenshot"))]
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
         use futures::channel::oneshot;
-        use futures::{select, FutureExt};
-        use gdk::glib::ControlFlow;
+        use futures::{select, FutureExt, StreamExt};
+        use gdk::glib::BoxedAnyObject;
         use tokio::sync::mpsc;
 
         use crate::backend::message::MessageExt;
@@ -286,36 +287,25 @@ impl Manager {
             .swap(&RefCell::new(Some(config_store.clone())));
 
         log::trace!("Setting up the manager");
-        let (provisioning_link_tx, provisioning_link_rx) = oneshot::channel();
+        // TODO: This is a heavy mix of tokio and futures channels. Why?
+        // XXX: Use different message bound?
+        let (setup_results_tx, mut setup_results_rx) =
+            futures::channel::mpsc::channel(MESSAGE_BOUND);
         let (error_tx, error_rx) = oneshot::channel();
 
         let (send_content, mut receive_content) = mpsc::unbounded_channel();
         let (send_error, mut receive_error) = mpsc::channel(MESSAGE_BOUND);
 
-        let (send, receive) = MainContext::channel(Priority::default());
-        receive.attach(
-            None,
-            clone!(@strong self as s => move |url| {
-                s.emit_by_name::<()>("link-qr-code", &[&url]);
-                ControlFlow::Break
-            }),
-        );
-
-        gspawn!(async move {
-            log::trace!("Awaiting for provisioning link");
-            match provisioning_link_rx.await {
-                Ok(url) => {
-                    log::trace!("Manager wants to show QR code, emitting signal");
-                    let _ = send.send(String::from(url));
-                }
-                Err(_e) => log::trace!("Manager is already linked"),
+        gspawn!(clone!(@weak self as s => async move {
+            log::trace!("Awaiting for setup results");
+            while let Some(result) = setup_results_rx.next().await {
+                s.emit_by_name::<()>("setup-result", &[&BoxedAnyObject::new(result)]);
             }
-        });
+        }));
 
         let internal = ManagerThread::new(
             config_store,
-            self.imp().settings.string("link-device-name").to_string(),
-            provisioning_link_tx,
+            setup_results_tx,
             error_tx,
             send_content,
             send_error,
@@ -349,9 +339,8 @@ impl Manager {
         self.imp().internal.swap(&RefCell::new(internal));
         self.imp().feedbackd.swap(&RefCell::new(feedbackd));
 
-        self.emit_by_name::<()>("link-finish", &[]);
-
-        // self.sync_contacts().await?;
+        // Check again if is primary, after setup is successful.
+        self.notify("is-primary");
 
         let mut channels_init = self.init_channels().await;
 
@@ -662,12 +651,34 @@ impl Manager {
         log::trace!("`Manager::request_contacts_sync` finished");
         r
     }
+
+    pub async fn link_secondary(&self, url: Url) -> Result<(), PresageError> {
+        log::trace!("`Manager::link_secondary` start");
+        let r = self.internal().link_secondary(url).await;
+        log::trace!("`Manager::link_secondary` finished");
+        r
+    }
+
+    pub async fn unlink_secondary(&self, id: i64) -> Result<(), PresageError> {
+        log::trace!("`Manager::unlink_secondary` start");
+        let r = self.internal().unlink_secondary(id).await;
+        log::trace!("`Manager::unlink_secondary` finished");
+        r
+    }
+
+    pub async fn linked_devices(&self) -> Result<Vec<DeviceInfo>, PresageError> {
+        log::trace!("`Manager::linked_devices` start");
+        let r = self.internal().linked_devices().await;
+        log::trace!("`Manager::linked_devices` finished");
+        r
+    }
 }
 
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
-    use gdk::prelude::StaticType;
+    use gdk::glib::{BoxedAnyObject, ParamSpec, ParamSpecBoolean, Value};
+    use gdk::prelude::{ParamSpecBuilderExt, StaticType, ToValue};
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gio::{Application, Settings};
     use glib::{once_cell::sync::Lazy, subclass::Signal};
@@ -723,6 +734,29 @@ mod imp {
     }
 
     impl ObjectImpl for Manager {
+        fn properties() -> &'static [glib::ParamSpec] {
+            static PROPERTIES: Lazy<Vec<ParamSpec>> =
+                Lazy::new(|| vec![ParamSpecBoolean::builder("is-primary").read_only().build()]);
+            PROPERTIES.as_ref()
+        }
+
+        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
+            match pspec.name() {
+                "is-primary" => (self
+                    .internal
+                    .borrow()
+                    .as_ref()
+                    .and_then(|r| r.registration_type())
+                    == Some(presage::RegistrationType::Primary))
+                .to_value(),
+                _ => unimplemented!(),
+            }
+        }
+
+        fn set_property(&self, _id: usize, _value: &Value, _pspec: &ParamSpec) {
+            unimplemented!()
+        }
+
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
                 vec![
@@ -732,10 +766,9 @@ mod imp {
                     Signal::builder("channel")
                         .param_types([Channel::static_type()])
                         .build(),
-                    Signal::builder("link-qr-code")
-                        .param_types([String::static_type()])
+                    Signal::builder("setup-result")
+                        .param_types([BoxedAnyObject::static_type()])
                         .build(),
-                    Signal::builder("link-finish").build(),
                 ]
             });
             SIGNALS.as_ref()

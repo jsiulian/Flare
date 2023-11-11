@@ -120,6 +120,12 @@ menu menubar {
     }
 
     item {
+      label: _("Linked Devices");
+      action: "win-managed.linked-devices";
+      hidden-when: "action-disabled";
+    }
+
+    item {
       label: _("Clear messages");
       action: "win.clear-messages";
     }

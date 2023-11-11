@@ -32,6 +32,18 @@ impl Window {
             .build()
     }
 
+    pub fn enable_add_conversation(&self) {
+        self.imp()
+            .channel_list
+            .set_property("add-conversation-enabled", true);
+    }
+
+    pub fn destroy_if_invisible(&self) {
+        if !self.get_visible() {
+            self.destroy();
+        }
+    }
+
     fn save_window_size(&self) -> Result<(), glib::BoolError> {
         let imp = self.imp();
 
@@ -83,14 +95,15 @@ pub mod imp {
 
     use crate::backend::Channel;
     use crate::gui::channel_info_dialog::ChannelInfoDialog;
+    use crate::gui::linked_devices_window::LinkedDevicesWindow;
     use crate::{
         backend::Manager,
         config::APP_ID,
         gspawn,
         gui::{
             channel_list::ChannelList, channel_messages::ChannelMessages,
-            error_dialog::ErrorDialog, link_window::LinkWindow,
-            preferences_window::PreferencesWindow,
+            error_dialog::ErrorDialog, preferences_window::PreferencesWindow,
+            setup_window::SetupWindow,
         },
     };
 
@@ -101,7 +114,7 @@ pub mod imp {
         split_view: TemplateChild<adw::NavigationSplitView>,
 
         #[template_child]
-        channel_list: TemplateChild<ChannelList>,
+        pub(super) channel_list: TemplateChild<ChannelList>,
         #[template_child]
         channel_messages: TemplateChild<ChannelMessages>,
 
@@ -197,6 +210,7 @@ pub mod imp {
                 }));
                 dialog.present();
             }));
+
             log::trace!("Setting up submit-captcha action");
             let action_submit_captcha = SimpleAction::new("submit-captcha", None);
             action_submit_captcha.connect_activate(clone!(@weak obj => move |_, _| {
@@ -363,6 +377,29 @@ pub mod imp {
             actions.add_action(&action_toggle_search);
         }
 
+        // Requires the manager to be set up. Therefore, postponed.
+        fn setup_linked_devices_action(&self) {
+            let obj = self.obj();
+
+            log::trace!("Setting up linked-devices action");
+            let action_linked_devices = SimpleAction::new("linked-devices", None);
+            action_linked_devices.connect_activate(clone!(@weak obj => move |_, _| {
+                log::trace!("User requested to view linked devices");
+                let win = LinkedDevicesWindow::new(obj.manager(), &obj);
+                win.present();
+            }));
+
+            self.obj()
+                .manager()
+                .bind_property("is-primary", &action_linked_devices, "enabled")
+                .flags(BindingFlags::SYNC_CREATE)
+                .build();
+
+            let actions = SimpleActionGroup::new();
+            obj.insert_action_group("win-managed", Some(&actions));
+            actions.add_action(&action_linked_devices);
+        }
+
         #[template_callback]
         fn handle_search_clicked(&self) {
             self.channel_list.toggle_search();
@@ -390,7 +427,7 @@ pub mod imp {
         fn class_init(klass: &mut Self::Class) {
             crate::gui::channel_list::ChannelList::ensure_type();
             crate::gui::channel_messages::ChannelMessages::ensure_type();
-            crate::gui::link_window::LinkWindow::ensure_type();
+            crate::gui::setup_window::SetupWindow::ensure_type();
             crate::gui::error_dialog::ErrorDialog::ensure_type();
             crate::backend::timeline::TimelineItem::ensure_type();
             Self::bind_template(klass);
@@ -428,20 +465,9 @@ pub mod imp {
                 log::trace!("Setup manager for Window");
                 let manager = Manager::new(obj.property::<gio::Application>("application"));
                 obj.set_property("manager", Some(&manager));
-                manager.connect_local("link-qr-code", false, clone!(@weak obj => @default-return None, move |args| {
-                    let man = args[0]
-                        .get::<Manager>()
-                        .expect("First argument of signal `link-qr-code` of `Manager` to be `Manager`");
-                    let url = args[1]
-                        .get::<String>()
-                        .expect("Second argument of signal `link-qr-code` of `Manager` to be `String`");
-                    crate::trace!("Opening link window for url {}", url);
-                    let window = LinkWindow::new(url, man, &obj);
-                    window.present();
-                    // After link, show all channels as most likely no channels have messages yet.
-                    obj.imp().channel_list.set_property("add-conversation-enabled", true);
-                    None
-                }));
+                obj.imp().setup_linked_devices_action();
+
+                let _setup_window = SetupWindow::new(manager.clone(), &obj);
 
                 if let Err(e) = manager.init(&path).await {
                     let dialog = ErrorDialog::new(e, &obj);

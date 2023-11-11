@@ -1,6 +1,9 @@
+use std::str::FromStr;
+
 use gdk::gio;
 
 use gtk::glib::{DateTime, Object};
+use presage::prelude::PhoneNumber;
 
 pub struct Utility {}
 
@@ -51,6 +54,12 @@ impl Utility {
     #[template_callback]
     fn uint_equal(i1: u32, i2: i32) -> bool {
         i1 as i32 == i2
+    }
+
+    #[template_callback]
+    fn is_phone_number(s: Option<String>) -> bool {
+        s.map(|s| PhoneNumber::from_str(&s).is_ok())
+            .unwrap_or_default()
     }
 
     #[template_callback]
