@@ -2,7 +2,7 @@
   description = "Chat with your friends on Signal";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.nixpkgsgnome.url = "github:NixOS/nixpkgs/704a204ff98d07aec17bd741d304c0ea8c30bc49";
+  inputs.nixpkgsgnome.url = "github:NixOS/nixpkgs/d3eb30e4b2205e440e8b77ba1af1632d929e2fcc";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   outputs = { self, nixpkgs, nixpkgsgnome, flake-utils, ... }@inputs:
