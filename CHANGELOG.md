@@ -9,25 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - A date-divider between messages sent on different days.
-
-### Chores
-
-- Updated to GTK 4.12 and Libadwaita 1.4
-
-### HOTFIX
-
-- Introduced a workaround for contacts not syncing anymore. Note that the workaround may require intervention:
-    - Link Flare as usual. Wait ~1min after the link window closed.
-    - If your contacts are synced successfully, you are finished.
-    - Make sure you do not have running in the background enabled. Close and restart Flare.
-    - In the primary menu, click "synchronize contacts". Wait ~1min.
-    - Your contacts should be behind the pencil-icon in the top-left.
-    - If not, wait a longer time and repeat from step 3.
+- Initial work for usage of Flare as a primary device (not yet enabled by default).
+- Menu entry for contact sync.
 
 ### Changed
 
 - Better UI for showing the last message of a channel.
 - Only show the message timestamp if it differs from the next message.
+
+### Chores
+
+- Updated to GTK 4.12 and Libadwaita 1.4 and all other dependencies.
 
 ## [0.10.0] - 2023-08-28
 
