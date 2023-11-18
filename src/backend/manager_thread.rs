@@ -2,12 +2,19 @@ use std::{cell::OnceCell, ops::Bound};
 
 use futures::{join, select, FutureExt, SinkExt, StreamExt};
 use libsignal_service::{
-    groups_v2::Group, prelude::ProfileKey, push_service::DeviceInfo, sender::AttachmentUploadError,
-    Profile,
+    configuration::SignalServers,
+    content::ContentBody,
+    groups_v2::Group,
+    prelude::{phonenumber, Content, ProfileKey, Uuid},
+    proto::{AttachmentPointer, DataMessage},
+    push_service::DeviceInfo,
+    sender::{AttachmentSpec, AttachmentUploadError},
+    Profile, ServiceAddress,
 };
 use presage::{
-    prelude::{content::*, AttachmentSpec, ContentBody, DataMessage, ServiceAddress, *},
-    Manager, Registered, RegistrationOptions, RegistrationType, Thread,
+    manager::{Registered, RegistrationOptions, RegistrationType},
+    store::{ContentsStore, Thread},
+    Manager,
 };
 use presage_store_sled::SledStore as Store;
 use tokio::sync::{mpsc, oneshot};
@@ -17,7 +24,7 @@ use crate::ApplicationError;
 
 const MESSAGE_BOUND: usize = 10;
 
-type Error = presage::Error<presage_store_sled::SledStoreError>;
+type Error = presage::Error<<Store as presage::store::Store>::Error>;
 
 // TODO: Reconsider ignoring in the future, but probably does not make any huge difference.
 #[allow(clippy::large_enum_variant)]
@@ -26,7 +33,10 @@ enum Command {
     SubmitRecaptchaChallenge(String, String, oneshot::Sender<Result<(), Error>>),
     RetrieveProfileByUuid(Uuid, ProfileKey, oneshot::Sender<Result<Profile, Error>>),
     RetrieveProfile(oneshot::Sender<Result<Profile, Error>>),
-    GetGroupV2(Vec<u8>, oneshot::Sender<Result<Option<Group>, Error>>),
+    GetGroupV2(
+        [u8; 32],
+        oneshot::Sender<Result<Option<Group>, <Store as presage::store::Store>::Error>>,
+    ),
     SendSessionReset(ServiceAddress, u64, oneshot::Sender<Result<(), Error>>),
     SendMessage(
         ServiceAddress,
@@ -49,7 +59,10 @@ enum Command {
         Thread,
         (Bound<u64>, Bound<u64>),
         oneshot::Sender<
-            Result<<presage_store_sled::SledStore as presage::Store>::MessagesIter, Error>,
+            Result<
+                <presage_store_sled::SledStore as presage::store::ContentsStore>::MessagesIter,
+                Error,
+            >,
         >,
     ),
     RegistrationType(oneshot::Sender<RegistrationType>),
@@ -228,7 +241,10 @@ impl ManagerThread {
         self.profile.clone()
     }
 
-    pub async fn get_group_v2(&self, group_master_key: Vec<u8>) -> Result<Option<Group>, Error> {
+    pub async fn get_group_v2(
+        &self,
+        group_master_key: [u8; 32],
+    ) -> Result<Option<Group>, <Store as presage::store::Store>::Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
             .send(Command::GetGroupV2(group_master_key, sender))
@@ -320,7 +336,8 @@ impl ManagerThread {
         &self,
         thread: Thread,
         range: (Bound<u64>, Bound<u64>),
-    ) -> Result<<presage_store_sled::SledStore as presage::Store>::MessagesIter, Error> {
+    ) -> Result<<presage_store_sled::SledStore as presage::store::ContentsStore>::MessagesIter, Error>
+    {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
             .send(Command::Messages(thread, range, sender))
@@ -360,7 +377,7 @@ impl ManagerThread {
 async fn setup_manager(
     config_store: Store,
     mut setup_sender: futures::channel::mpsc::Sender<SetupResult>,
-) -> Result<presage::Manager<Store, presage::Registered>, Error> {
+) -> Result<presage::Manager<Store, Registered>, Error> {
     if let Ok(manager) = presage::Manager::load_registered(config_store.clone()).await {
         log::debug!("The configuration store is already valid, loading a registered account");
         setup_sender
@@ -441,7 +458,8 @@ async fn command_loop(
     error: mpsc::Sender<ApplicationError>,
 ) {
     'outer: loop {
-        let msgs = manager.receive_messages().await;
+        let msgs: Result<_, presage::Error<<Store as presage::store::Store>::Error>> =
+            manager.receive_messages().await;
         match msgs {
             Ok(messages) => {
                 futures::pin_mut!(messages);
@@ -495,7 +513,7 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
     match command {
         // XXX: Uuid should not be used anymore.
         Command::Uuid(callback) => callback
-            .send(manager.state().service_ids.aci)
+            .send(manager.aci())
             .expect("Callback sending failed"),
         Command::SubmitRecaptchaChallenge(token, captcha, callback) => callback
             .send(manager.submit_recaptcha_challenge(&token, &captcha).await)
@@ -507,7 +525,7 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             .send(manager.retrieve_profile().await)
             .expect("Callback sending failed"),
         Command::GetGroupV2(master_key, callback) => callback
-            .send(manager.group(&master_key[..]))
+            .send(manager.store().group(master_key))
             .map_err(|_| ())
             .expect("Callback sending failed"),
         Command::SendSessionReset(recipient_address, timestamp, callback) => callback

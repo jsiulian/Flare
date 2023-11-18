@@ -4,8 +4,7 @@ use gdk::glib::clone;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Object, ObjectExt};
 use gtk::{gio, glib};
-use libsignal_service::prelude::Uuid;
-use presage::prelude::ServiceAddress;
+use libsignal_service::{prelude::Uuid, ServiceAddress};
 
 use crate::gspawn;
 
@@ -29,8 +28,11 @@ impl Contact {
         s
     }
 
-    pub(super) fn from_contact(contact: presage::prelude::Contact, manager: &Manager) -> Self {
-        log::trace!("Building a `Contact` from a `presage::prelude::Contact`");
+    pub(super) fn from_contact(
+        contact: libsignal_service::models::Contact,
+        manager: &Manager,
+    ) -> Self {
+        log::trace!("Building a `Contact` from a `libsignal_service::models::Contact`");
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
             .build();
@@ -138,16 +140,16 @@ mod imp {
         once_cell::sync::Lazy, ParamSpec, ParamSpecBoolean, ParamSpecObject, ParamSpecString, Value,
     };
     use gtk::{gdk, glib};
-    use libsignal_service::prelude::Uuid;
+    use libsignal_service::prelude::phonenumber::Mode;
+    use libsignal_service::prelude::{phonenumber::PhoneNumber, Uuid};
     use libsignal_service::Profile;
-    use presage::prelude::phonenumber::Mode;
 
     use crate::backend::{Channel, Manager};
 
     #[derive(Default)]
     pub struct Contact {
-        pub(super) contact: RefCell<Option<presage::prelude::Contact>>,
-        pub(super) phonenumber: RefCell<Option<presage::prelude::PhoneNumber>>,
+        pub(super) contact: RefCell<Option<libsignal_service::models::Contact>>,
+        pub(super) phonenumber: RefCell<Option<PhoneNumber>>,
         pub(super) uuid: RefCell<Option<Uuid>>,
         pub(super) profile: RefCell<Option<Profile>>,
 

@@ -7,6 +7,11 @@ mod text_message;
 pub use call_message::CallMessage;
 pub use deletion_message::DeletionMessage;
 pub use display_message::{DisplayMessage, DisplayMessageExt};
+use libsignal_service::{
+    content::ContentBody,
+    prelude::Content,
+    proto::{sync_message::Sent, DataMessage, SyncMessage},
+};
 pub use reaction_message::ReactionMessage;
 pub use text_message::TextMessage;
 
@@ -18,9 +23,6 @@ use glib::{
     Object,
 };
 use gtk::{glib, prelude::*};
-use presage::prelude::{
-    content::sync_message::Sent, Content, ContentBody, DataMessage, SyncMessage,
-};
 use std::cell::{RefCell, RefMut};
 
 use crate::backend::Channel;

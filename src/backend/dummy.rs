@@ -2,16 +2,18 @@ use std::path::Path;
 
 use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
 use gtk::glib::{Cast, DateTime};
+use libsignal_service::content::CallMessage as PreCallMessage;
+use libsignal_service::models::Contact as LContact;
+use libsignal_service::prelude::AttachmentPointer;
+use libsignal_service::prelude::Content;
+use libsignal_service::prelude::Uuid;
+use libsignal_service::proto::call_message::Hangup;
+use libsignal_service::proto::call_message::Offer;
+use libsignal_service::proto::data_message::Reaction;
+use libsignal_service::proto::GroupContextV2;
+use libsignal_service::sender::AttachmentSpec;
 use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
-use presage::prelude::{
-    content::{AttachmentPointer, CallMessage as PreCallMessage},
-    proto::{
-        call_message::{Hangup, Offer},
-        data_message::Reaction,
-    },
-    *,
-};
-use presage::Thread;
+use presage::store::Thread;
 
 use super::{
     message::{CallMessage, Message, MessageExt, ReactionMessage, TextMessage},
@@ -53,9 +55,9 @@ macro_rules! call_msg {
     }};
 }
 
-pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
+pub fn dummy_presage_contacts() -> Vec<LContact> {
     vec![
-        presage::prelude::Contact {
+        LContact {
             uuid: Uuid::from_u128(0),
             phone_number: None,
             name: "".to_string(),
@@ -68,7 +70,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             archived: false,
             avatar: None,
         },
-        presage::prelude::Contact {
+        LContact {
             uuid: Uuid::from_u128(1),
             phone_number: None,
             name: "Arch Linux Mobile User".to_string(),
@@ -81,7 +83,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             archived: false,
             avatar: None,
         },
-        presage::prelude::Contact {
+        LContact {
             uuid: Uuid::from_u128(2),
             phone_number: None,
             name: "Developer".to_string(),
@@ -94,7 +96,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             archived: false,
             avatar: None,
         },
-        presage::prelude::Contact {
+        LContact {
             uuid: Uuid::from_u128(3),
             phone_number: None,
             name: "T'Challa".to_string(),
@@ -107,7 +109,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             archived: false,
             avatar: None,
         },
-        presage::prelude::Contact {
+        LContact {
             uuid: Uuid::from_u128(4),
             phone_number: None,
             name: "Toad".to_string(),
@@ -120,7 +122,7 @@ pub fn dummy_presage_contacts() -> Vec<presage::prelude::Contact> {
             archived: false,
             avatar: None,
         },
-        presage::prelude::Contact {
+        LContact {
             uuid: Uuid::from_u128(5),
             phone_number: None,
             name: "Call Center".to_string(),
@@ -225,7 +227,7 @@ impl super::Manager {
                 Reaction {
                     emoji: Some("🎉🚀".to_string()),
                     remove: Some(false),
-                    target_author_uuid: None,
+                    target_author_aci: None,
                     target_sent_timestamp: None,
                 },
             ));
@@ -238,7 +240,7 @@ impl super::Manager {
                 Reaction {
                     emoji: Some("😊".to_string()),
                     remove: Some(false),
-                    target_author_uuid: None,
+                    target_author_aci: None,
                     target_sent_timestamp: None,
                 },
             ),
