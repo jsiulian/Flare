@@ -5,7 +5,7 @@ use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
 use gtk::{gdk, gio, glib};
-use presage::prelude::content::CallMessage as PreCallMessage;
+use libsignal_service::content::CallMessage as PreCallMessage;
 
 use crate::backend::{Channel, Contact};
 
@@ -84,7 +84,7 @@ mod imp {
     };
     use glib::ParamSpecEnum;
     use gtk::{glib, prelude::Cast};
-    use presage::prelude::content::CallMessage as PreCallMessage;
+    use libsignal_service::content::CallMessage as PreCallMessage;
     use std::cell::RefCell;
 
     use crate::backend::message::{

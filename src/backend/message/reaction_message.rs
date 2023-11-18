@@ -4,8 +4,7 @@ use gdk::gdk_pixbuf::Pixbuf;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
 use gtk::{gio, glib};
-use presage::prelude::content::Reaction;
-use presage::prelude::*;
+use libsignal_service::{content::Reaction, prelude::Uuid};
 
 use crate::backend::{timeline::TimelineItem, Channel, Contact};
 
@@ -92,7 +91,7 @@ impl ReactionMessage {
 mod imp {
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gtk::glib;
-    use presage::prelude::content::Reaction;
+    use libsignal_service::content::Reaction;
     use std::cell::RefCell;
 
     use crate::backend::{message::MessageImpl, timeline::TimelineItemImpl, Message};

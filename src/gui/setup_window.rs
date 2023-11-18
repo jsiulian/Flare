@@ -56,7 +56,7 @@ pub mod imp {
     use gtk::{gdk, gio, glib, PropertyExpression};
     use gtk::{prelude::*, CompositeTemplate};
     use libsignal_service::configuration::SignalServers;
-    use presage::prelude::PhoneNumber;
+    use libsignal_service::prelude::phonenumber::PhoneNumber;
     use std::cell::RefCell;
     use std::str::FromStr;
 

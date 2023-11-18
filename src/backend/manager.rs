@@ -5,17 +5,16 @@ use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
 use glib::{clone, Object};
 use gtk::{gdk, gio, glib};
 use libsignal_service::{
-    groups_v2::Group, prelude::ProfileKey, proto::AttachmentPointer, push_service::DeviceInfo,
-    sender::AttachmentUploadError, Profile,
+    content::ContentBody,
+    groups_v2::Group,
+    prelude::{Content, ProfileKey, Uuid},
+    proto::{sync_message::Request, AttachmentPointer, DataMessage, GroupContextV2, SyncMessage},
+    push_service::DeviceInfo,
+    sender::{AttachmentSpec, AttachmentUploadError},
+    Profile, ServiceAddress,
 };
 use oo7::Keyring;
-use presage::{
-    prelude::{
-        content::{DataMessage, GroupContextV2},
-        AttachmentSpec, Content, ContentBody, ServiceAddress, Uuid,
-    },
-    Store, Thread,
-};
+use presage::store::{ContentsStore, StateStore, Thread};
 use presage_store_sled::MigrationConflictStrategy;
 use rand::distributions::DistString;
 use url::Url;
@@ -100,6 +99,7 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationErr
         path,
         Some(&passphrase),
         MigrationConflictStrategy::BackupAndDrop,
+        presage_store_sled::OnNewIdentity::Trust,
     )?);
 
     if !path_store_version.exists() {
@@ -464,7 +464,7 @@ impl Manager {
     }
 
     pub fn self_contact(&self) -> Contact {
-        let presage_contact = presage::prelude::Contact {
+        let presage_contact = libsignal_service::models::Contact {
             uuid: self.uuid(),
             // TODO: Get own phone number?
             phone_number: None,
@@ -529,8 +529,8 @@ impl Manager {
 impl Manager {
     pub(super) async fn get_group_v2(
         &self,
-        master_key: Vec<u8>,
-    ) -> Result<Option<Group>, PresageError> {
+        master_key: [u8; 32],
+    ) -> Result<Option<Group>, <StoreType as presage::store::Store>::Error> {
         log::trace!("`Manager::get_group_v2`start");
         let r = self.internal().get_group_v2(master_key).await;
         log::trace!("`Manager::get_group_v2`finished");
@@ -569,13 +569,13 @@ impl Manager {
 
     pub(super) async fn send_session_reset(
         &self,
-        recipient_addr: impl Into<ServiceAddress> + std::clone::Clone,
+        recipient_addr: impl Into<ServiceAddress>,
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
         log::trace!("`Manager::send_session_reset` start");
         let r = self
             .internal()
-            .send_session_reset(recipient_addr.clone(), timestamp)
+            .send_session_reset(recipient_addr, timestamp)
             .await;
         log::trace!("`Manager::send_session_reset` finished");
         Ok(r?)
@@ -599,7 +599,7 @@ impl Manager {
     pub(super) fn get_contact_by_id(
         &self,
         id: Uuid,
-    ) -> Result<Option<presage::prelude::Contact>, PresageError> {
+    ) -> Result<Option<libsignal_service::models::Contact>, PresageError> {
         log::trace!("`Manager::get_contact_by_id` start");
         let r = self.store().contact_by_id(id);
         log::trace!("`Manager::get_contact_by_id` finished");
@@ -639,10 +639,10 @@ impl Manager {
             .duration_since(std::time::UNIX_EPOCH)
             .expect("Time went backwards")
             .as_millis() as u64;
-        let sync_message = presage::prelude::SyncMessage {
-            request: Some(presage::prelude::content::sync_message::Request {
+        let sync_message = SyncMessage {
+            request: Some(Request {
                 r#type: Some(
-                    presage::prelude::content::sync_message::request::Type::Contacts as i32,
+                    libsignal_service::proto::sync_message::request::Type::Contacts as i32,
                 ),
             }),
             ..Default::default()
@@ -747,7 +747,7 @@ mod imp {
                     .borrow()
                     .as_ref()
                     .and_then(|r| r.registration_type())
-                    == Some(presage::RegistrationType::Primary))
+                    == Some(presage::manager::RegistrationType::Primary))
                 .to_value(),
                 _ => unimplemented!(),
             }

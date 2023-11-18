@@ -11,11 +11,13 @@ use gdk::{
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Cast, Object};
 use gtk::{gdk, gio, glib};
-use libsignal_service::{groups_v2::Group, ServiceAddress};
-use presage::{
-    prelude::{DataMessage, GroupContextV2, Uuid},
-    Thread,
+use libsignal_service::{
+    groups_v2::Group,
+    prelude::Uuid,
+    proto::{DataMessage, GroupContextV2},
+    ServiceAddress,
 };
+use presage::store::Thread;
 
 use crate::{
     backend::{
@@ -55,8 +57,16 @@ impl Channel {
             }
 
             // TODO: Can be `None`?
+            // XXX: Error on invalid size?
             let group = manager
-                .get_group_v2(group_context_v2.master_key.clone().unwrap_or_default())
+                .get_group_v2(
+                    group_context_v2
+                        .master_key
+                        .clone()
+                        .unwrap_or_default()
+                        .try_into()
+                        .unwrap_or_default(),
+                )
                 .await;
             if let Ok(Some(group)) = group {
                 return Self::from_group(group, group_context_v2, manager).await;
@@ -220,7 +230,9 @@ impl Channel {
             .duration_since(std::time::UNIX_EPOCH)
             .expect("Time went backwards")
             .as_millis() as u64;
-        let Some(uuid) = self.uuid() else {return Ok(())};
+        let Some(uuid) = self.uuid() else {
+            return Ok(());
+        };
         self.manager().send_session_reset(uuid, ts).await
     }
 
@@ -480,8 +492,7 @@ mod imp {
         once_cell::sync::Lazy, subclass::Signal, ParamSpec, ParamSpecObject, ParamSpecString, Value,
     };
     use gtk::{gdk, glib};
-    use libsignal_service::groups_v2::Group;
-    use presage::prelude::{GroupContextV2, Uuid};
+    use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::GroupContextV2};
 
     use crate::backend::{
         message::{DisplayMessage, ReactionMessage, TextMessage},

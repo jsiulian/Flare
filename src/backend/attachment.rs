@@ -7,7 +7,8 @@ use glib::{Bytes, Object, Priority};
 use gtk::prelude::{PaintableExt, TextureExt};
 use gtk::{gdk, gio, glib};
 use gtk::{MediaFile, MediaStream};
-use presage::prelude::{content::AttachmentPointer, AttachmentSpec};
+use libsignal_service::proto::AttachmentPointer;
+use libsignal_service::sender::AttachmentSpec;
 use std::path::PathBuf;
 
 #[derive(Debug, Hash, Eq, PartialEq, Clone, Copy, glib::Enum, Default)]
@@ -446,7 +447,7 @@ mod imp {
     };
     use gtk::MediaStream;
     use gtk::{gdk, gio, glib};
-    use presage::prelude::content::AttachmentPointer;
+    use libsignal_service::proto::AttachmentPointer;
 
     use crate::backend::attachment::{AttachmentType, Flags};
     use crate::backend::Manager;

@@ -43,7 +43,7 @@
                 meson compile -C build && ./build/target/debug/${name}
               '';
               check = pkgs.writeShellScriptBin "check" ''
-                cargo clippy
+                cargo check
               '';
               i18n = pkgs.writeShellScriptBin "i18n" ''
                 meson compile flare-pot -C build

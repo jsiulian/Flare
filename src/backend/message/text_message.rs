@@ -5,10 +5,11 @@ use gdk::prelude::ObjectExt;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
 use gtk::{gdk, gio, glib};
+use libsignal_service::content::Reaction;
+use libsignal_service::prelude::Uuid;
 use libsignal_service::proto::body_range::AssociatedValue;
-use libsignal_service::proto::data_message::Delete;
-use presage::prelude::content::Reaction;
-use presage::prelude::{proto::data_message::Quote, *};
+use libsignal_service::proto::data_message::{Delete, Quote};
+use libsignal_service::proto::DataMessage;
 
 use crate::backend::timeline::{TimelineItem, TimelineItemExt};
 use crate::backend::{Attachment, Channel, Contact};

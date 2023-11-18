@@ -3,7 +3,7 @@ use std::str::FromStr;
 use gdk::gio;
 
 use gtk::glib::{DateTime, Object};
-use presage::prelude::PhoneNumber;
+use libsignal_service::prelude::phonenumber::PhoneNumber;
 
 pub struct Utility {}
 

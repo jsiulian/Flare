@@ -1,5 +1,6 @@
 use gtk::glib;
 use libsignal_service as lss;
+use lss::push_service::ServiceError;
 use presage as p;
 
 const FAILED_TO_LOOK_UP_ADDRESS: &str = "failed to lookup address information";
@@ -29,19 +30,19 @@ pub enum ApplicationError {
 impl From<PresageError> for ApplicationError {
     fn from(e: PresageError) -> Self {
         match e {
-            p::Error::ServiceError(p::prelude::content::ServiceError::Unauthorized) => {
+            p::Error::ServiceError(ServiceError::Unauthorized) => {
                 ApplicationError::UnauthorizedSignal
             }
             p::Error::Store(e) => ApplicationError::Db(e),
-            p::Error::ServiceError(p::prelude::content::ServiceError::WsError { reason: e })
+            p::Error::ServiceError(ServiceError::WsError { reason: e })
                 if e.contains(FAILED_TO_LOOK_UP_ADDRESS) =>
             {
                 ApplicationError::NoInternet
             }
             p::Error::MessageSenderError(lss::sender::MessageSenderError::ServiceError(
-                p::prelude::content::ServiceError::SendError { reason: e },
+                ServiceError::SendError { reason: e },
             )) if e.contains(FAILED_TO_LOOK_UP_ADDRESS) => ApplicationError::NoInternet,
-            p::Error::ServiceError(p::prelude::content::ServiceError::SendError { reason: e })
+            p::Error::ServiceError(ServiceError::SendError { reason: e })
                 if e.contains(FAILED_TO_LOOK_UP_ADDRESS) =>
             {
                 ApplicationError::NoInternet
