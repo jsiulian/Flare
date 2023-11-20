@@ -12,7 +12,7 @@ use libsignal_service::{
     Profile, ServiceAddress,
 };
 use presage::{
-    manager::{Registered, RegistrationOptions, RegistrationType},
+    manager::{ReceivingMode, Registered, RegistrationOptions, RegistrationType},
     store::{ContentsStore, Thread},
     Manager,
 };
@@ -94,8 +94,11 @@ pub enum SetupResult {
 }
 
 impl std::fmt::Debug for Command {
-    fn fmt(&self, _f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        Ok(())
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Uuid(_) => f.debug_tuple("Uuid").field(&format_args!("_")).finish(),
+            _ => f.write_str("Unknown"),
+        }
     }
 }
 
@@ -130,13 +133,15 @@ impl ManagerThread {
             let error_clone = error.clone();
             let panic = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
                 crate::TOKIO_RUNTIME.block_on(async move {
-                    let setup = setup_manager(config_store, setup_callback).await;
-                    if let Ok(mut manager) = setup {
+                    // XXX: Make sure the initial sync is finished (requires upstream presage changes).
+                    // See https://github.com/whisperfish/presage/pull/212.
+                    let manager_receive = setup_manager(config_store, setup_callback).await;
+                    if let Ok(mut manager_receive) = manager_receive {
                         log::trace!("Starting command loop");
                         drop(error_callback);
-                        command_loop(&mut manager, receiver, content, error).await;
+                        command_loop(&mut manager_receive, receiver, content, error).await;
                     } else {
-                        let e = setup.err().unwrap();
+                        let e = manager_receive.err().unwrap();
                         log::trace!("Got error: {}", e);
                         error_callback.send(e).expect("Failed to send error")
                     }
@@ -459,13 +464,14 @@ async fn command_loop(
 ) {
     'outer: loop {
         let msgs: Result<_, presage::Error<<Store as presage::store::Store>::Error>> =
-            manager.receive_messages().await;
+            manager.receive_messages(ReceivingMode::Forever).await;
         match msgs {
             Ok(messages) => {
                 futures::pin_mut!(messages);
+                let mut next_msg = messages.next().fuse();
                 loop {
                     select! {
-                        msg = messages.next().fuse() => {
+                        msg = next_msg => {
                             if let Some(msg) = msg {
                                 if content.send(msg).is_err() {
                                     log::info!("Failed to send message to `Manager`, exiting");
@@ -475,6 +481,7 @@ async fn command_loop(
                                 log::error!("Message stream finished. Restarting command loop.");
                                 break;
                             }
+                            next_msg = messages.next().fuse();
                         },
                         cmd = receiver.recv().fuse() => {
                             if let Some(cmd) = cmd {
@@ -509,9 +516,10 @@ async fn command_loop(
 }
 
 async fn handle_command(manager: &mut Manager<Store, Registered>, command: Command) {
-    log::trace!("Got command: {:?}", command);
+    log::trace!("Got command: {:#?}", command);
     match command {
         // XXX: Uuid should not be used anymore.
+        // XXX: Don't use nil.
         Command::Uuid(callback) => callback
             .send(manager.aci())
             .expect("Callback sending failed"),

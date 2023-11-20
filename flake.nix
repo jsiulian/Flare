@@ -42,6 +42,10 @@
                 export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgsgnome.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgsgnome.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
                 meson compile -C build && ./build/target/debug/${name}
               '';
+              run-gdb = pkgs.writeShellScriptBin "run-gdb" ''
+                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgsgnome.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgsgnome.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
+                meson compile -C build && gdb ./build/target/debug/${name}
+              '';
               check = pkgs.writeShellScriptBin "check" ''
                 cargo check
               '';
@@ -54,7 +58,7 @@
             pkgs.mkShell {
               src = ./.;
               buildInputs = self.packages.${system}.default.buildInputs;
-              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ run check i18n ];
+              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb ] ++ [ run check i18n run-gdb];
               shellHook = ''
                 meson setup -Dprofile=development build
               '';

@@ -328,6 +328,7 @@ impl Manager {
             }
         }
 
+        log::trace!("Setup feedbackd");
         let feedbackd = crate::tspawn!(async { Feedbackd::new().await })
             .await
             .map(|e| e.ok())
@@ -601,7 +602,7 @@ impl Manager {
         id: Uuid,
     ) -> Result<Option<libsignal_service::models::Contact>, PresageError> {
         log::trace!("`Manager::get_contact_by_id` start");
-        let r = self.store().contact_by_id(id);
+        let r = self.store().contact_by_id(&id);
         log::trace!("`Manager::get_contact_by_id` finished");
         Ok(r?)
     }
