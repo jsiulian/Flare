@@ -8,3 +8,4 @@ data/resources/ui/about.blp
 .fenv/
 .vscode/
 result
+.nixos-test-history

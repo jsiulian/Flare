@@ -2,48 +2,59 @@
   description = "Chat with your friends on Signal";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.nixpkgsgnome.url = "github:NixOS/nixpkgs/d3eb30e4b2205e440e8b77ba1af1632d929e2fcc";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  outputs = { self, nixpkgs, nixpkgsgnome, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     (flake-utils.lib.eachDefaultSystem
       (system:
         let
           pkgs = import nixpkgs {
             inherit system;
           };
-          pkgsgnome = import nixpkgsgnome {
-            inherit system;
-          };
           name = "flare";
         in
-        rec { 
-          packages.default = 
+        rec {
+          packages.default =
             with pkgs;
             stdenv.mkDerivation rec {
               cargoDeps = rustPlatform.importCargoLock {
                 lockFile = ./Cargo.lock;
                 outputHashes = {
-                  "curve25519-dalek-3.2.1" = "sha256-0hFRhn920tLBpo6ZNCl6DYtTMHMXY/EiDvuhOPVjvC0=";
-                  "libsignal-protocol-0.1.0" = "sha256-VQwrGTNZnlDK5p8ZleAZYtbzDiVTHxc93/CRlCUjWtE=";
-                  "libsignal-service-0.1.0" = "sha256-1ub0IPSvGhZ2tsC6IolusJ1NSWy+5SXSx8qlIdPngTE=";
-                  "presage-0.6.0-dev" = "sha256-4isKBn/4yHoAYsYbBTULK/veZmaecU7t+PvE4Y0oNgk=";
+                  "curve25519-dalek-4.0.0" = "sha256-KUXvYXeVvJEQ/+dydKzXWCZmA2bFa2IosDzaBL6/Si0=";
+                  "libsignal-protocol-0.1.0" = "sha256-FCrJO7porlY5FrwZ2c67UPd4tgN7cH2/3DTwfPjihwM=";
+                  "libsignal-service-0.1.0" = "sha256-5/Rl0gT1EAFgPFKTye9yFBLDu46HIm6hKMGLpIqMzIs=";
+                  "presage-0.6.0-dev" = "sha256-H+FDpE+HOX5c3mKgcSKm9LBNg+m96g93Q4+J7cgAAIA=";
                 };
               };
-              src = ./.;
-              buildInputs = with pkgs; [ pkgsgnome.libadwaita pkgsgnome.protobuf pkgsgnome.libsecret pkgsgnome.gst_all_1.gstreamer pkgsgnome.gst_all_1.gst-plugins-base pkgsgnome.gst_all_1.gst-plugins-good pkgsgnome.gst_all_1.gst-plugins-bad pkgsgnome.gtksourceview5 pkgsgnome.gtk4 ];
-              nativeBuildInputs = with pkgs; [ pkgsgnome.appstream-glib pkgsgnome.blueprint-compiler pkgsgnome.desktop-file-utils pkgsgnome.meson pkgsgnome.ninja pkgsgnome.pkg-config pkgsgnome.wrapGAppsHook4 pkgsgnome.rustPlatform.cargoSetupHook cargo rustc pkgsgnome.glib ];
+              src = let fs = lib.fileset; in fs.toSource {
+                root = ./.;
+                fileset =
+                  fs.difference
+                    ./.
+                    (fs.unions [
+                      (fs.maybeMissing ./result)
+                      (fs.maybeMissing ./build)
+                      ./flake.nix
+                      ./flake.lock
+                    ]);
+              };
+              buildInputs = with pkgs; [ pkgs.libadwaita pkgs.protobuf pkgs.libsecret pkgs.gst_all_1.gstreamer pkgs.gst_all_1.gst-plugins-base pkgs.gst_all_1.gst-plugins-good pkgs.gst_all_1.gst-plugins-bad pkgs.gtksourceview5 pkgs.gtk4 ];
+              nativeBuildInputs = with pkgs; [ pkgs.appstream-glib pkgs.blueprint-compiler pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib ];
 
               inherit name;
             };
+          packages.flare-screenshot = packages.default.overrideAttrs {
+            mesonFlags = [ "-Dprofile=screenshot" ];
+          };
+
           devShells.default =
-            let 
+            let
               run = pkgs.writeShellScriptBin "run" ''
-                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgsgnome.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgsgnome.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
+                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
                 meson compile -C build && ./build/target/debug/${name}
               '';
               run-gdb = pkgs.writeShellScriptBin "run-gdb" ''
-                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgsgnome.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgsgnome.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
+                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
                 meson compile -C build && gdb ./build/target/debug/${name}
               '';
               check = pkgs.writeShellScriptBin "check" ''
@@ -68,6 +79,103 @@
             inherit name;
             program = "${self.packages.${system}.default}/bin/${name}";
           };
+
+          packages.makeScreenshot =
+            let
+              nixos-lib = import (nixpkgs + "/nixos/lib") { };
+            in
+            nixos-lib.runTest {
+              name = "screenshot";
+              hostPkgs = pkgs;
+              imports = [
+                {
+                  nodes = {
+                    machine = { pkgs, ... }: {
+                      boot.loader.systemd-boot.enable = true;
+                      boot.loader.efi.canTouchEfiVariables = true;
+
+                      services.xserver.enable = true;
+                      services.xserver.displayManager.gdm.enable = true;
+                      services.xserver.desktopManager.gnome.enable = true;
+                      services.xserver.displayManager.autoLogin.enable = true;
+                      services.xserver.displayManager.autoLogin.user = "alice";
+
+                      virtualisation.qemu.options = [ "-device VGA,edid=on,xres=1920,yres=1080" ]; # Source: https://wiki.archlinux.org/title/QEMU
+
+                      users.users.alice = {
+                        isNormalUser = true;
+                        extraGroups = [ "wheel" ];
+                        uid = 1000;
+                      };
+
+                      system.stateVersion = "22.05";
+
+                      environment.systemPackages = [
+                        self.packages.${system}.flare-screenshot
+                      ];
+
+                      systemd.user.services = {
+                        "org.gnome.Shell@wayland" = {
+                          serviceConfig = {
+                            ExecStart = [
+                              ""
+                              "${pkgs.gnome.gnome-shell}/bin/gnome-shell"
+                            ];
+                          };
+                        };
+                      };
+                    };
+                  };
+
+                  testScript = { nodes, ... }:
+                    let
+                      lib = pkgs.lib;
+                      l = lib.lists;
+
+                      user = nodes.machine.users.users.alice;
+                      username = user.name;
+                      uid = toString user.uid;
+
+                      bus = "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/${uid}/bus";
+                      su = command: "su - ${user.name} -c '${command}'";
+
+                      key = key: "machine.send_key(\"${key}\")";
+                      sleep = duration: "machine.sleep(${toString duration})";
+
+                      execution = [
+                        (l.replicate 5 (key "tab"))
+                        (key "ret")
+                      ];
+
+                      preExecution = [
+                        (sleep 10)
+                        (key "esc")
+                        "machine.succeed(\"${launch}\")"
+                        (key "esc")
+                      ];
+
+                      postExecution = [
+                        (key "alt-print") # XXX: This for some reason sometimes fails. No idea why.
+                        "machine.execute(\"mv /home/${username}/Pictures/Screenshots/* screenshot.png\")"
+                        "machine.copy_from_vm(\"screenshot.png\", \".\")"
+                      ];
+
+                      fullExecution = l.flatten [preExecution (sleep 5) execution (sleep 5) postExecution];
+
+                      keysequence = (lib.lists.replicate 5 "tab") ++ [ "ret" ];
+                      executekeys = lib.concatStringsSep "\nmachine.sleep(${sleep.short})\n" (map (x: "machine.send_key(\"${x}\")") keysequence);
+
+                      code = lib.concatStringsSep "\nmachine.sleep(1)\n" fullExecution;
+
+                      # Start Flare
+                      launch = su "${bus} gapplication launch de.schmidhuberj.Flare";
+                    in
+                      code;
+                }
+              ];
+            };
+
+          formatter = pkgs.nixpkgs-fmt;
         })
     );
 }
