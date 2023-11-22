@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: 2023-10-10 16:01+0000\n"
-"Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2023-11-23 16:03+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/fr/>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.2.1-rc\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -25,7 +25,7 @@ msgstr "Irénée Thirion"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:152
 msgid "Channel Information"
-msgstr "Informations sur le canal"
+msgstr "Informations sur la conversation"
 
 #: data/resources/ui/channel_info_dialog.blp:28
 msgctxt "accessibility"
@@ -58,11 +58,11 @@ msgstr "Recherche"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr "Aucun canal sélectionné"
+msgstr "Aucune conversation sélectionnée"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr "Sélectionnez un canal de discussion"
+msgstr "Sélectionnez une conversation"
 
 #: data/resources/ui/channel_messages.blp:91
 msgctxt "accessibility"
@@ -384,7 +384,7 @@ msgstr "Canaux de discussion"
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr "Aller au canal 1...9"
+msgstr "Aller à la conversation 1...9"
 
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
