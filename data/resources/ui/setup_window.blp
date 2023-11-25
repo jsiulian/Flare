@@ -246,12 +246,6 @@ template $FlSetupWindow : Adw.Window {
                   halign: center;
                   clicked => $handle_link_qr_to_link_manual() swapped;
                 }
-
-                Gtk.Label {
-                  label: _("Note: Currently, the application will take about one minute after scanning the code in which it seems to do nothing. This is a known bug.");
-                  margin-top: 12;
-                  wrap: true;
-                }
               };
             }
           };
@@ -457,7 +451,7 @@ template $FlSetupWindow : Adw.Window {
               }
 
               Gtk.Label {
-                label: _("Currently, contacts will not sync correctly. This makes usage of Flare infeasable in most cases. We are working with upstream to fix this problem.");
+                label: _("Currently, contacts will not sync correctly directly after linking. As claimed by upstream, contact sync will start working after some time. To manually initialize contact sync, use the corresponding entry in the main menu. We are working with upstream to fix this problem. Furthermore, make sure to not send any messages while the messages are still received by Flare. We are also trying to fix this problem.");
                 wrap: true;
               }
 
