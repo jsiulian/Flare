@@ -65,6 +65,7 @@ template $FlMessageItem : $ContextMenuBin {
       styles [
         "avatar-other",
       ]
+      visible: bind $not(template.is-message-currently-replied) as <bool>;
       text: bind template.message as <$FlTextMessage>.sender as <$FlContact>.title;
       show-initials: true;
       valign: start;
@@ -107,7 +108,7 @@ template $FlMessageItem : $ContextMenuBin {
             "quote",
           ]
 
-          visible: bind $is_some(template.message as <$FlTextMessage>.quote) as <bool>;
+          visible: bind $and($is_some(template.message as <$FlTextMessage>.quote) as <bool>,$not(template.is-message-currently-replied) as <bool>) as <bool>;
           Box {
             orientation: vertical;
 
@@ -204,7 +205,7 @@ template $FlMessageItem : $ContextMenuBin {
               "caption",
               "timestamp",
             ]
-
+            visible: bind $not(template.is-message-currently-replied) as <bool>;
             label: bind $format_time_human(template.message as <$FlTextMessage>.datetime) as <string>;
             justify: right;
             vexpand: true;

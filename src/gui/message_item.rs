@@ -271,6 +271,7 @@ pub mod imp {
         force_show_header: Cell<bool>,
         force_show_timestamp: Cell<bool>,
         has_attachment: Cell<bool>,
+        is_message_currently_replied: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -421,6 +422,10 @@ pub mod imp {
                     ParamSpecBoolean::builder("has-attachment")
                         .default_value(false)
                         .build(),
+                    ParamSpecBoolean::builder("is-message-currently-replied")
+                        .default_value(false)
+                        .construct_only()
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -452,6 +457,9 @@ pub mod imp {
                     value.to_value()
                 }
                 "pressed-attachment" => self.pressed_attachment.borrow().as_ref().to_value(),
+                "is-message-currently-replied" => {
+                    self.is_message_currently_replied.get().to_value()
+                }
                 _ => unimplemented!(),
             }
         }
@@ -546,6 +554,15 @@ pub mod imp {
                         "Property `message` of `MessageItem` has to be of type `Attachment`",
                     );
                     self.pressed_attachment.replace(attachment);
+                }
+                "is-message-currently-replied" => {
+                    let b = value.get::<bool>().expect(
+                        "Property `has-attachment` of `MessageItem` has to be of type `bool`",
+                    );
+                    self.is_message_currently_replied.replace(b);
+                    if b {
+                        self.obj().add_css_class("is-message-currently-replied");
+                    }
                 }
                 _ => unimplemented!(),
             }

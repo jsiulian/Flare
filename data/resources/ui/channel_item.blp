@@ -52,9 +52,8 @@ template $FlChannelItem : Box {
     Label label_last_message {
       halign: start;
       xalign: 0;
-      yalign: 0;
-      // Request height for two lines
-      height-request: 32;
+      yalign: 0.5;
+      wrap: true;
       ellipsize: end;
       lines: 2;
       use-markup: true;
