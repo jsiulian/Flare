@@ -33,7 +33,9 @@ Issues are a good way to tell me problems you are having with the applications o
 
 If you feel comfortable enough writing code, you can also submit your changes directly via a merge request. Here are a few pointers that might help write the code:
 
-### Compilation
+## Compilation
+
+### GNU/Linux
 
 Compile Flare using the following commands
 
@@ -42,6 +44,38 @@ meson build -Dprofile=development   # Run once before all changes you make. Subs
 meson compile -C build   # Run every time you want to test your changes
 GSETTINGS_SCHEMA_DIR=./build/data/ RUST_LOG=flare=trace ./build/target/debug/flare   # Run your locally compiled application with some logging
 ```
+
+### Flatpak via fenv
+
+As an alternative, [fenv](https://gitlab.gnome.org/ZanderBrown/fenv) allows to setup a flatpak
+environment from the command line and execute commands in that environment.
+
+First, install fenv:
+
+```sh
+# Clone the project somewhere on your system
+git clone https://gitlab.gnome.org/ZanderBrown/fenv.git
+
+# Move into the folder
+cd fenv
+
+# Install fenv with Cargo
+cargo install --path .
+```
+
+You can now discard the `fenv` directory if you want.
+
+After that, move into the directory where you cloned Flare and setup the project:
+
+```sh
+# Setup the flatpak environment
+fenv gen build-aux/de.schmidhuberj.Flare.Devel.json
+
+# Launch a shell inside the build environment
+fenv shell
+```
+
+You can now follow the compilation phase for GNU/Linux
 
 ### Some useful documentation
 

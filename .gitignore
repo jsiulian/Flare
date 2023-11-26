@@ -5,5 +5,6 @@ data/resources/ui/about.blp
 /subprojects/blueprint-compiler
 .direnv
 .flatpak/
+.fenv/
 .vscode/
 result
