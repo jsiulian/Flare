@@ -28,14 +28,22 @@ impl SetupWindow {
     }
 
     pub fn window(&self) -> Window {
-        self.transient_for().and_dynamic_cast().expect("SetupWindow to have a Window parent")
+        self.transient_for()
+            .and_dynamic_cast()
+            .expect("SetupWindow to have a Window parent")
     }
 }
 
 fn servers() -> Vec<Server> {
     vec![
-        Server::new(gettextrs::pgettext("Signal Server", "Production"), SignalServers::Production),
-        Server::new(gettextrs::pgettext("Signal Server", "Staging"), SignalServers::Staging),
+        Server::new(
+            gettextrs::pgettext("Signal Server", "Production"),
+            SignalServers::Production,
+        ),
+        Server::new(
+            gettextrs::pgettext("Signal Server", "Staging"),
+            SignalServers::Staging,
+        ),
     ]
 }
 
@@ -60,7 +68,7 @@ pub mod imp {
     use std::cell::RefCell;
     use std::str::FromStr;
 
-    use crate::backend::{Manager, SetupResult, SetupDecision, Server};
+    use crate::backend::{Manager, Server, SetupDecision, SetupResult};
     use crate::gui::utility::Utility;
 
     #[derive(CompositeTemplate, Default)]
@@ -140,7 +148,8 @@ pub mod imp {
 
         #[template_callback]
         fn handle_decision_to_decision_link(&self) {
-            self.entry_device_name.set_text(&self.obj().manager().settings().string("link-device-name"));
+            self.entry_device_name
+                .set_text(&self.obj().manager().settings().string("link-device-name"));
             self.content.push(&self.page_decision_link.get());
         }
 
@@ -155,8 +164,21 @@ pub mod imp {
             if let Some(callback) = self.decision_callback.take() {
                 // Device name will not be empty as UI button only sensitive when the device name is non-empty.
                 let device_name = self.entry_device_name.text().to_string();
-                let _ = self.obj().manager().settings().set_string("link-device-name", &device_name);
-                callback.send(SetupDecision::Link(self.dropdown_link_server.selected_item().and_dynamic_cast::<Server>().map(|s| s.server()).unwrap_or(SignalServers::Production), device_name)).expect("Failed to send setup decision");
+                let _ = self
+                    .obj()
+                    .manager()
+                    .settings()
+                    .set_string("link-device-name", &device_name);
+                callback
+                    .send(SetupDecision::Link(
+                        self.dropdown_link_server
+                            .selected_item()
+                            .and_dynamic_cast::<Server>()
+                            .map(|s| s.server())
+                            .unwrap_or(SignalServers::Production),
+                        device_name,
+                    ))
+                    .expect("Failed to send setup decision");
                 // XXX: Maybe display spinner afterwards?
             }
         }
@@ -164,7 +186,9 @@ pub mod imp {
         #[template_callback]
         fn handle_primary_confirm(&self) {
             if let Some(callback) = self.confirm_callback.take() {
-                callback.send(self.entry_confirm.text().to_string()).expect("Failed to send setup decision");
+                callback
+                    .send(self.entry_confirm.text().to_string())
+                    .expect("Failed to send setup decision");
                 // XXX: Maybe display spinner afterwards?
             }
         }
@@ -181,10 +205,19 @@ pub mod imp {
             if let Ok(phone) = PhoneNumber::from_str(&self.entry_phone_number.text().to_string()) {
                 // Should always be given due to UI only being on that page after setup decision was asked for.
                 if let Some(callback) = self.decision_callback.take() {
-                    callback.send(SetupDecision::Register(self.dropdown_primary_server.selected_item().and_dynamic_cast::<Server>().map(|s| s.server()).unwrap_or(SignalServers::Production), phone, captcha)).expect("Failed to send setup decision");
+                    callback
+                        .send(SetupDecision::Register(
+                            self.dropdown_primary_server
+                                .selected_item()
+                                .and_dynamic_cast::<Server>()
+                                .map(|s| s.server())
+                                .unwrap_or(SignalServers::Production),
+                            phone,
+                            captcha,
+                        ))
+                        .expect("Failed to send setup decision");
                     // XXX: Maybe display spinner afterwards?
                 }
-                
             }
         }
 
@@ -192,7 +225,6 @@ pub mod imp {
         fn handle_link_qr_to_link_manual(&self) {
             self.content.push(&self.page_link_manual.get());
         }
-
 
         #[template_callback]
         fn handle_finished_close(&self) {
@@ -212,7 +244,6 @@ pub mod imp {
                     let result: &mut SetupResult = &mut *result.borrow_mut();
 
                     obj.imp().handle_setup_result(result);
-                   
                     None
                 }),
             );
@@ -261,9 +292,14 @@ pub mod imp {
 
         fn setup_servers_dropdown(&self) {
             let model = ListStore::from_iter(super::servers());
-            let expression = PropertyExpression::new(Server::static_type(), None::<PropertyExpression>, "display");
+            let expression = PropertyExpression::new(
+                Server::static_type(),
+                None::<PropertyExpression>,
+                "display",
+            );
 
-            self.dropdown_primary_server.set_expression(Some(&expression));
+            self.dropdown_primary_server
+                .set_expression(Some(&expression));
             self.dropdown_link_server.set_expression(Some(&expression));
 
             self.dropdown_primary_server.set_model(Some(&model));

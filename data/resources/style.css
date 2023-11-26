@@ -9,6 +9,10 @@
   background-color: @bubble_bg_color;
 }
 
+.message-input-bar {
+  border-top: 1px solid @borders;
+}
+
 .message-list row {
   padding:0;
 }
@@ -26,6 +30,22 @@
   opacity: 0;
 }
 
+.message-item.is-message-currently-replied {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.is-message-currently-replied * {
+  background: transparent;
+}
+
+.is-message-currently-replied {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.currently-replied-box {
+  padding: 12px 0;
+}
 .reaction {
   background-color: @bubble_bg_color;
   border: 1px solid @accent_bg_color;

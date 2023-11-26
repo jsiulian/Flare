@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Better UI for showing the last message of a channel.
 - Only show the message timestamp if it differs from the next message.
+- Better UI for the message entry bar.
 
 ### Chores
 

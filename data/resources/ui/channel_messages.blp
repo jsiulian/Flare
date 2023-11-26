@@ -57,6 +57,7 @@ template $FlChannelMessages : Box {
 
       // Message List
       ScrolledWindow scrolled_window {
+        styles [ "undershoot-bottom" ]
         vexpand: true;
         hscrollbar-policy: never;
         edge-overshot => $handle_edge_reached() swapped;
@@ -82,120 +83,136 @@ template $FlChannelMessages : Box {
       }
     }
 
-    // Quote
     Box {
-      vexpand-set: true;
-      visible: bind $is_some(template.reply-message) as <bool>;
-      Button {
-        accessibility {
-          label: C_("accessibility", "Remove the reply");
-        }
+      styles [ "toolbar", "message-input-bar" ]
+      orientation: horizontal;
 
-        tooltip-text: C_("tooltip", "Remove reply");
+      // Entry Box
+      Adw.Clamp {
+        maximum-size: 800;
+        tightening-threshold: 600;
 
-        styles [
-          "flat",
-        ]
+        Box {
+          orientation: vertical;
 
-        clicked => $remove_reply() swapped;
-        icon-name: "list-remove-symbolic";
-      }
+          // Quote
+          Box {
+            vexpand-set: true;
+            styles ["currently-replied-box"]
+            visible: bind $is_some(template.reply-message) as <bool>;
+            Image {
+              styles ["accent"]
+              icon-name: "mail-reply-sender-symbolic";
+              width-request: 34;
+            }
+            Separator {
+              styles ["accent"]
+              margin-start: 6;
+              width-request: 2;
+            }
+            $FlMessageItem {
+              margin-top:0;
+              is-message-currently-replied: true;
+              message: bind template.reply-message;
+              hexpand: true;
+              force-show-header: true;
+              force-show-timestamp: false;
+            }
 
-      $FlMessageItem {
+            Button {
+              accessibility {
+                label: C_("accessibility", "Remove the reply");
+              }
 
-        message: bind template.reply-message;
-        hexpand: true;
-        force-show-header: "True";
-        force-show-timestamp: "True";
-      }
-    }
+              tooltip-text: C_("tooltip", "Remove reply");
 
-    // Box for attachments
-    Box {
-      vexpand-set: true;
-      visible: bind template.has-attachments;
-      Button {
-        accessibility {
-          label: C_("accessibility", "Remove an attachment");
-        }
-
-        tooltip-text: C_("tooltip", "Remove attachment");
-
-        styles [
-          "flat",
-        ]
-
-        clicked => $remove_attachments() swapped;
-        icon-name: "list-remove-symbolic";
-      }
-
-      Box box_attachments {
-        orientation: vertical;
-        hexpand: true;
-      }
-    }
-
-    Separator {}
-
-    // Entry Box
-    Adw.Clamp {
-      maximum-size: 800;
-      tightening-threshold: 600;
-      styles ["background"]
-      
-      Box {
-        styles [
-          "toolbar",
-        ]
-
-        Button {
-          accessibility {
-            label: C_("accessibility", "Add an attachment");
-          }
-          styles [
-            "circular",
-          ]
-
-          valign: end;
-          tooltip-text: C_("tooltip", "Add attachment");
-          clicked => $add_attachment() swapped;
-          icon-name: "mail-attachment-symbolic";
-
-          ShortcutController {
-            scope: managed;
-
-            Shortcut {
-              trigger: "<Control>plus";
-              action: "activate";
+              styles [
+                "flat", "circular"
+              ]
+              valign: center;
+              clicked => $remove_reply() swapped;
+              icon-name: "window-close-symbolic";
             }
           }
-        }
 
-        $FlTextEntry text_entry {
-          accessibility {
-            label: C_("accessibility", "Message input");
+          // Box for attachments
+          Box {
+            vexpand-set: true;
+            visible: bind template.has-attachments;
+            Button {
+              accessibility {
+                label: C_("accessibility", "Remove an attachment");
+              }
+
+              tooltip-text: C_("tooltip", "Remove attachment");
+
+              styles [
+                "flat",
+              ]
+
+              clicked => $remove_attachments() swapped;
+              icon-name: "list-remove-symbolic";
+            }
+
+            Box box_attachments {
+              orientation: vertical;
+              hexpand: true;
+            }
           }
 
-          activate => $send_message() swapped;
-          paste-file => $paste_file() swapped;
-          paste-texture => $paste_texture() swapped;
-          tooltip-text: C_("tooltip", "Message input");
-        }
+  
+          Box {
+            spacing: 6;
 
-        Button {
-          styles [
-            "circular",
-            "suggested-action",
-          ]
-          sensitive: bind $and($or(template.has-attachments, $not(text_entry.is-empty) as <bool> ) as <bool>, $network_monitor() as <$GNetworkMonitor>.network-available ) as <bool>;
-          accessibility {
-            label: C_("accessibility", "Send");
+            Button {
+              accessibility {
+                label: C_("accessibility", "Add an attachment");
+              }
+              styles [
+                "circular",
+              ]
+
+              valign: end;
+              tooltip-text: C_("tooltip", "Add attachment");
+              clicked => $add_attachment() swapped;
+              icon-name: "mail-attachment-symbolic";
+
+              ShortcutController {
+                scope: managed;
+
+                Shortcut {
+                  trigger: "<Control>plus";
+                  action: "activate";
+                }
+              }
+            }
+
+            $FlTextEntry text_entry {
+              accessibility {
+                label: C_("accessibility", "Message input");
+              }
+
+              activate => $send_message() swapped;
+              paste-file => $paste_file() swapped;
+              paste-texture => $paste_texture() swapped;
+              tooltip-text: C_("tooltip", "Message input");
+            }
+
+            Button {
+              styles [
+                "circular",
+                "suggested-action",
+              ]
+              sensitive: bind $and($or(template.has-attachments, $not(text_entry.is-empty) as <bool> ) as <bool>, $network_monitor() as <$GNetworkMonitor>.network-available ) as <bool>;
+              accessibility {
+                label: C_("accessibility", "Send");
+              }
+              icon-name: "send-symbolic";
+              tooltip-text: C_("tooltip", "Send");
+              valign: end;
+              clicked => $send_message() swapped;
+            }
           }
-          icon-name: "send-symbolic";
-          tooltip-text: C_("tooltip", "Send");
-          valign: end;
-          clicked => $send_message() swapped;
-
         }
       }
     }
