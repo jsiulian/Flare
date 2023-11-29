@@ -39,7 +39,8 @@ impl PreferencesWindow {
     }
 
     #[template_callback]
-    fn on_background_switch_state_set(&self, state: bool) -> bool {
+    fn on_background_switch_state_set(&self, _: glib::ParamSpec, r: adw::SwitchRow) {
+        let state = r.is_active();
         let app = gio::Application::default().unwrap();
         if state {
             gspawn!(clone!(@weak self as this => async move {
@@ -58,7 +59,6 @@ impl PreferencesWindow {
             notification.set_icon(&icon);
             app.send_notification(None, &notification);
         }
-        false
     }
 }
 
