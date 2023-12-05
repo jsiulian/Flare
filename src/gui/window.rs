@@ -32,6 +32,12 @@ impl Window {
             .build()
     }
 
+    // Closes the window, even if hide-on-close is set.
+    pub fn kill(&self) {
+        self.set_hide_on_close(false);
+        self.close();
+    }
+
     pub fn enable_add_conversation(&self) {
         self.imp()
             .channel_list
@@ -164,7 +170,7 @@ pub mod imp {
                             }
                         }
                         log::trace!("Closing the window after clear");
-                        obj.close();
+                        obj.kill();
                     }
                 }));
                 dialog.present();
@@ -187,7 +193,7 @@ pub mod imp {
                             }
                         }
                         log::trace!("Closing the window after unlink");
-                        obj.close();
+                        obj.kill();
                     } else if response == "unlink-delete" {
                         log::info!("Unlinking device");
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
@@ -205,7 +211,7 @@ pub mod imp {
                             }
                         }
                         log::trace!("Closing the window after unlink");
-                        obj.close();
+                        obj.kill();
                     }
                 }));
                 dialog.present();
@@ -279,6 +285,12 @@ pub mod imp {
                 about.present();
             });
 
+            log::trace!("Setting up kill action");
+            let action_kill = SimpleAction::new("kill", None);
+            action_kill.connect_activate(clone!(@weak obj => move |_, _| {
+                obj.kill();
+            }));
+
             log::trace!("Setting up channel information action");
             let action_channel_information = SimpleAction::new("channel-information", None);
             action_channel_information.connect_activate(clone!(@weak obj => move |_, _| {
@@ -334,6 +346,7 @@ pub mod imp {
             actions.add_action(&action_sync_contacts);
             actions.add_action(&action_show_help_overlay);
             actions.add_action(&action_about);
+            actions.add_action(&action_kill);
             actions.add_action(&action_channel_information);
             actions.add_action(&action_channel_clear_messages);
 
