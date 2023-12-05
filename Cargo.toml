@@ -4,7 +4,7 @@ description = "Chat with your friends on Signal"
 authors = ["Julian Schmidhuber <schmidhuberj2@protonmail.com>"]
 homepage = "https://mobile.schmidhuberj.de/flare"
 repository = "https://gitlab.com/schmiddi-on-mobile/flare"
-version = "0.10.1-beta.4"
+version = "0.10.1-beta.5"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -29,9 +29,9 @@ tokio = { version = "1.34.0", features = ["rt", "macros", "rt-multi-thread", "ti
 regex = "1.10.2"
 lazy_static = "1.4.0"
 
-presage = { git = "https://github.com/Schmiddiii/presage", rev = "af72b474099361c68f09aff38182eb26d7c8ca86" }
-presage-store-sled = { git = "https://github.com/Schmiddiii/presage", rev = "af72b474099361c68f09aff38182eb26d7c8ca86" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "6fc62c8" }
+presage = { git = "https://github.com/Schmiddiii/presage", rev = "75b0ae32a074b9a1882b55ad985b1be57ccf7db1" }
+presage-store-sled = { git = "https://github.com/Schmiddiii/presage", rev = "75b0ae32a074b9a1882b55ad985b1be57ccf7db1" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "2e3bd5813aa54abe354a46e78ac0ee164027b985" }
 
 async-trait = "0.1.74"
 sled = "0.34.7"

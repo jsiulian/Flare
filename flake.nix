@@ -22,8 +22,8 @@
                 outputHashes = {
                   "curve25519-dalek-4.0.0" = "sha256-KUXvYXeVvJEQ/+dydKzXWCZmA2bFa2IosDzaBL6/Si0=";
                   "libsignal-protocol-0.1.0" = "sha256-FCrJO7porlY5FrwZ2c67UPd4tgN7cH2/3DTwfPjihwM=";
-                  "libsignal-service-0.1.0" = "sha256-5/Rl0gT1EAFgPFKTye9yFBLDu46HIm6hKMGLpIqMzIs=";
-                  "presage-0.6.0-dev" = "sha256-H+FDpE+HOX5c3mKgcSKm9LBNg+m96g93Q4+J7cgAAIA=";
+                  "libsignal-service-0.1.0" = "sha256-Nv0QWBnj+e3Y6vqKfR9kebyvXomWNRRJAG2OuCqREsE=";
+                  "presage-0.6.0-dev" = "sha256-mfWr2AWCbgo2YivWGd5wRonYnX2KsLo55PAkhu2jOGc=";
                 };
               };
               src = let fs = lib.fileset; in fs.toSource {
