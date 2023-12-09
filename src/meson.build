@@ -30,6 +30,10 @@ elif get_option('profile') == 'screenshot'
   rust_target = 'debug'
   cargo_options += [ '--features', 'screenshot' ]
   message('Building in debug for screenshots mode')
+elif get_option('profile') == 'screenshot-setup'
+  rust_target = 'debug'
+  cargo_options += [ '--features', 'screenshot-setup' ]
+  message('Building in debug for screenshots mode with setup window')
 else
   rust_target = 'debug'
   message('Building in debug mode')
