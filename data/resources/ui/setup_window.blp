@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlSetupWindow : Adw.Window {
+template $FlSetupWindow: Adw.Window {
   can-focus: true;
   default-height: 600;
   default-width: 450;
@@ -10,7 +10,7 @@ template $FlSetupWindow : Adw.Window {
   deletable: false;
 
   content: Adw.ToastOverlay toast_overlay {
-  child: Box {
+    child: Box {
       orientation: vertical;
 
       Adw.NavigationView content {
@@ -21,7 +21,6 @@ template $FlSetupWindow : Adw.Window {
           tag: "welcome";
 
           child: Adw.ToolbarView {
-
             [top]
             Adw.HeaderBar {
               title-widget: Adw.WindowTitle {
@@ -31,23 +30,28 @@ template $FlSetupWindow : Adw.Window {
 
             [bottom]
             Gtk.Box {
-              styles [ "toolbar" ]
+              styles [
+                "toolbar"
+              ]
+
               hexpand: true;
 
               Gtk.Button {
-                styles [ "suggested-action" ]
+                styles [
+                  "suggested-action"
+                ]
+
                 label: _("Set Up Flare");
                 halign: end;
                 hexpand: true;
-
                 clicked => $handle_welcome_to_decision() swapped;
               }
             }
 
-
             Adw.StatusPage {
               icon-name: "icon";
               title: _("Flare");
+
               child: Gtk.Label {
                 label: _("Flare is an unofficial Signal client. Note that Flare is not stable and there are bugs to be expected. If you are experiencing any bugs, consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">issue tracker</a> and open issues if you are experiencing a new issue. Also note that due to being a third-party application, Flare cannot guarantee the same level of security and privacy as official Signal applications do. If you or someone you need to contact requires a strong level of security, do not use Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README</a> for more information.");
                 wrap: true;
@@ -55,14 +59,13 @@ template $FlSetupWindow : Adw.Window {
               };
             }
           };
-        }      
+        }
 
         Adw.NavigationPage page_decision {
           title: _("Setup Primary Device or Link Device?");
           tag: "decision";
 
           child: Adw.ToolbarView {
-
             [top]
             Adw.HeaderBar {
               title-widget: Adw.WindowTitle {
@@ -72,25 +75,31 @@ template $FlSetupWindow : Adw.Window {
 
             [bottom]
             Gtk.Box {
-              styles [ "toolbar" ]
+              styles [
+                "toolbar"
+              ]
+
               hexpand: true;
 
               Gtk.Button {
-                styles [ ]
+                styles [
+                ]
+
                 label: _("Primary Device");
                 halign: end;
                 hexpand: true;
                 // Primary device currently not supported, turn it off.
                 sensitive: false;
-
                 clicked => $handle_decision_to_decision_primary() swapped;
               }
 
               Gtk.Button {
-                styles [ "suggested-action" ]
+                styles [
+                  "suggested-action"
+                ]
+
                 label: _("Link Device");
                 halign: end;
-
                 clicked => $handle_decision_to_decision_link() swapped;
               }
             }
@@ -98,6 +107,7 @@ template $FlSetupWindow : Adw.Window {
             Gtk.Label {
               label: _("Primary Device or Link Device?");
             }
+
             Gtk.Box {
               margin-top: 12;
               margin-bottom: 12;
@@ -112,7 +122,10 @@ template $FlSetupWindow : Adw.Window {
               }
 
               Gtk.Label {
-                styles [ "heading" ]
+                styles [
+                  "heading"
+                ]
+
                 label: _("Linked Device (Recommended)");
                 wrap: true;
               }
@@ -123,7 +136,10 @@ template $FlSetupWindow : Adw.Window {
               }
 
               Gtk.Label {
-                styles [ "heading" ]
+                styles [
+                  "heading"
+                ]
+
                 label: _("Primary Device (Disabled)");
                 wrap: true;
               }
@@ -132,7 +148,6 @@ template $FlSetupWindow : Adw.Window {
                 label: _("Flare can act as a primary device, similar to the official Signal applications on Android or IOS. This mode is currently not supported by Flare, even though initial tests seem to indicate that it works. If you are willing to test it, you may enable the button below (and if you don't know how to do that, you should not think about testing primary-device support).");
                 wrap: true;
               }
-
             }
           };
         }
@@ -151,16 +166,21 @@ template $FlSetupWindow : Adw.Window {
 
             [bottom]
             Gtk.Box {
-              styles [ "toolbar" ]
+              styles [
+                "toolbar"
+              ]
+
               hexpand: true;
 
               Gtk.Button {
-                styles [ "suggested-action" ]
+                styles [
+                  "suggested-action"
+                ]
+
                 label: _("Link Device");
                 hexpand: true;
                 halign: end;
                 sensitive: bind $not_empty(entry_device_name.text) as <bool>;
-
                 clicked => $handle_link_confirm() swapped;
               }
             }
@@ -179,7 +199,10 @@ template $FlSetupWindow : Adw.Window {
               }
 
               Gtk.ListBox {
-                styles [ "boxed-list" ]
+                styles [
+                  "boxed-list"
+                ]
+
                 Adw.EntryRow entry_device_name {
                   title: _("Device Name");
                 }
@@ -205,21 +228,24 @@ template $FlSetupWindow : Adw.Window {
           title: _("Link device");
           tag: "link-qr";
           can-pop: false;
-          
-          child: Adw.ToolbarView {
 
+          child: Adw.ToolbarView {
             [top]
             Adw.HeaderBar {
-              styles ["flat"]
+              styles [
+                "flat"
+              ]
+
               title-widget: Adw.WindowTitle {
                 title: _("Link device");
               };
             }
-          
+
             Adw.StatusPage {
               title: _("Scan Code");
               description: _("Scan this code with another Signal app logged into your account.");
               vexpand: true;
+
               child: Box {
                 orientation: vertical;
 
@@ -229,18 +255,20 @@ template $FlSetupWindow : Adw.Window {
                       "qr-code",
                       "card",
                     ]
+
                     height-request: 200;
                     width-request: 200;
                     halign: center;
                     overflow: hidden;
                   }
                 }
-                
+
                 Button switch_show_url {
                   styles [
                     "pill",
                     "text-button",
                   ]
+
                   margin-top: 30;
                   label: _("Link without scanning");
                   halign: center;
@@ -250,14 +278,18 @@ template $FlSetupWindow : Adw.Window {
             }
           };
         }
-      
+
         Adw.NavigationPage page_link_manual {
           title: _("Manual linking");
           tag: "link-manual";
+
           child: Adw.ToolbarView {
             [top]
             Adw.HeaderBar {
-              styles ["flat"]
+              styles [
+                "flat"
+              ]
+
               title-widget: Adw.WindowTitle {
                 title: _("Link device");
               };
@@ -268,14 +300,14 @@ template $FlSetupWindow : Adw.Window {
               description: _("If your device can't scan the QR code, you can manually enter the link provided here");
               icon-name: "phonelink2-symbolic";
               vexpand: true;
-              
-              Button  {
+
+              Button {
                 styles [
                   "pill",
                   "suggested-action",
                   "text-button",
                 ]
-                
+
                 label: _("Copy to clipboard");
                 halign: center;
                 clicked => $handle_clipboard() swapped;
@@ -298,16 +330,21 @@ template $FlSetupWindow : Adw.Window {
 
             [bottom]
             Gtk.Box {
-              styles [ "toolbar" ]
+              styles [
+                "toolbar"
+              ]
+
               hexpand: true;
 
               Gtk.Button {
-                styles [ "suggested-action" ]
+                styles [
+                  "suggested-action"
+                ]
+
                 label: _("Continue");
                 hexpand: true;
                 halign: end;
                 sensitive: bind $is_phone_number(entry_phone_number.text) as <bool>;
-
                 clicked => $handle_primary_decision_confirm() swapped;
               }
             }
@@ -327,10 +364,14 @@ template $FlSetupWindow : Adw.Window {
               }
 
               Gtk.ListBox {
-                styles [ "boxed-list" ]
+                styles [
+                  "boxed-list"
+                ]
+
                 Adw.EntryRow entry_phone_number {
                   title: _("Phone Number");
                 }
+
                 Adw.EntryRow entry_captch {
                   title: _("Captcha");
                 }
@@ -368,15 +409,20 @@ template $FlSetupWindow : Adw.Window {
 
             [bottom]
             Gtk.Box {
-              styles [ "toolbar" ]
+              styles [
+                "toolbar"
+              ]
+
               hexpand: true;
 
               Gtk.Button {
-                styles [ "suggested-action" ]
+                styles [
+                  "suggested-action"
+                ]
+
                 label: _("Confirm");
                 hexpand: true;
                 halign: end;
-
                 clicked => $handle_primary_confirm() swapped;
               }
             }
@@ -394,7 +440,10 @@ template $FlSetupWindow : Adw.Window {
               }
 
               Gtk.ListBox {
-                styles [ "boxed-list" ]
+                styles [
+                  "boxed-list"
+                ]
+
                 Adw.EntryRow entry_confirm {
                   title: _("Confirm");
                 }
@@ -418,15 +467,20 @@ template $FlSetupWindow : Adw.Window {
 
             [bottom]
             Gtk.Box {
-              styles [ "toolbar" ]
+              styles [
+                "toolbar"
+              ]
+
               hexpand: true;
 
               Gtk.Button {
-                styles [ "suggested-action" ]
+                styles [
+                  "suggested-action"
+                ]
+
                 label: _("Close");
                 hexpand: true;
                 halign: end;
-
                 clicked => $handle_finished_close() swapped;
               }
             }
@@ -445,7 +499,10 @@ template $FlSetupWindow : Adw.Window {
               }
 
               Gtk.Label {
-                styles [ "heading" ]
+                styles [
+                  "heading"
+                ]
+
                 label: _("Known Bugs");
                 wrap: true;
               }
@@ -456,7 +513,10 @@ template $FlSetupWindow : Adw.Window {
               }
 
               Gtk.Label {
-                styles [ "heading" ]
+                styles [
+                  "heading"
+                ]
+
                 label: _("Contact");
                 wrap: true;
               }
@@ -469,7 +529,6 @@ template $FlSetupWindow : Adw.Window {
             }
           };
         }
-
       }
     };
   };

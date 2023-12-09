@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlWindow : Adw.ApplicationWindow {
+template $FlWindow: Adw.ApplicationWindow {
   can-focus: true;
   title: "Flare";
   height-request: 300;
@@ -9,6 +9,7 @@ template $FlWindow : Adw.ApplicationWindow {
 
   Adw.Breakpoint {
     condition ("max-width: 720sp")
+
     setters {
       split_view.collapsed: true;
     }
@@ -18,10 +19,11 @@ template $FlWindow : Adw.ApplicationWindow {
     min-sidebar-width: 300;
     max-sidebar-width: 400;
     sidebar-width-fraction: 0.25;
-    
+
     sidebar: Adw.NavigationPage {
       title: _("Channel list");
       tag: "channel-list";
+
       Adw.ToolbarView {
         [top]
         Adw.HeaderBar {
@@ -75,8 +77,8 @@ template $FlWindow : Adw.ApplicationWindow {
     content: Adw.NavigationPage {
       title: _("Chat");
       tag: "chat";
-      Adw.ToolbarView {
 
+      Adw.ToolbarView {
         [top]
         Adw.HeaderBar {
           title-widget: Adw.WindowTitle {
@@ -101,7 +103,6 @@ template $FlWindow : Adw.ApplicationWindow {
         };
       }
     };
-
   }
 }
 
@@ -161,6 +162,7 @@ menu menubar-channel {
       label: _("Channel Information");
       action: "win.channel-information";
     }
+
     item {
       label: _("Clear Messages");
       action: "win.channel-clear-messages";

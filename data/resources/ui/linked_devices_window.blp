@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlLinkedDevicesWindow : Adw.Window {
+template $FlLinkedDevicesWindow: Adw.Window {
   can-focus: true;
   default-height: 600;
   default-width: 450;
@@ -24,9 +24,7 @@ template $FlLinkedDevicesWindow : Adw.Window {
     Gtk.ScrolledWindow {
       hscrollbar-policy: never;
 
-      Gtk.ListView list_devices {
-        
-      }
+      Gtk.ListView list_devices {}
     }
   };
 }
@@ -38,7 +36,9 @@ Adw.MessageDialog add_device_dialog {
   close-response: "cancel";
 
   Gtk.ListBox {
-    styles [ "boxed-list" ]
+    styles [
+      "boxed-list"
+    ]
 
     Adw.EntryRow entry_device_url {
       title: _("Device URL");

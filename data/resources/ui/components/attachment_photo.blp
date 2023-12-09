@@ -1,11 +1,12 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlAttachmentPhoto : $FlAttachmentBase {
+template $FlAttachmentPhoto: $FlAttachmentBase {
   Picture picture {
     styles [
       "photo"
     ]
+
     height-request: bind $resize_height(template.attachment as <$FlAttachmentObject>.width, template.attachment as <$FlAttachmentObject>.height) as <int>;
     width-request: bind $resize_width(template.attachment as <$FlAttachmentObject>.width) as <int>;
     overflow: hidden;

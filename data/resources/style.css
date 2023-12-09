@@ -30,19 +30,6 @@
   opacity: 0;
 }
 
-.message-item.is-message-currently-replied {
-  margin-left: 6px;
-  margin-right: 6px;
-}
-
-.is-message-currently-replied * {
-  background: transparent;
-}
-
-.is-message-currently-replied {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
 .currently-replied-box {
   padding: 12px 0;
 }
@@ -68,11 +55,6 @@
   border-left-color: @accent_fg_color;
 }
 
-.timestamp{
-  background: white;
-	padding: 3px 8px;
-	border-radius:10px;
-}
 
 .emoji .message-text, .emoji.from-self .message-text{
   font-size: 3em;
@@ -172,7 +154,7 @@ video controls {
 }
 
 .has-attachment:not(.has-text) .media-overlay {
-	margin-bottom: -35px;
+	margin-bottom: -9px;
 	border-bottom-left-radius: 16px;
 	border-bottom-right-radius: 16px;
 	border-bottom: 1px solid @light_3;
@@ -184,6 +166,13 @@ video controls {
 	border-top-right-radius: 16px;
   border-top: 1px solid @light_3;
 }
+.message-item .has-quote .media-overlay {
+	margin-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+  border-top: 0;
+}
+
 
 .media-group {
 	background-color: @window_bg_color;
@@ -202,7 +191,11 @@ video controls {
 	opacity: 1;
 }
 
-.has-attachment:not(.has-text):hover .timestamp {
-	transition: all 0.3s ease-in-out;
-	opacity: 0;
+ .media-overlay messageindicators {
+  opacity: 0.7;
+  background-color: alpha(black, 0.4);
+  color: white;
+  border-radius: 9999px;
+  padding: 2px 6px;
+  margin:12px;
 }

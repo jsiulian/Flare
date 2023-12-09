@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlChannelMessages : Box {
+template $FlChannelMessages: Box {
   orientation: vertical;
   hexpand: true;
   vexpand: true;
@@ -30,6 +30,7 @@ template $FlChannelMessages : Box {
     styles [
       "view",
     ]
+
     visible: bind $is_some(template.active-channel) as <bool>;
     hexpand: true;
     orientation: vertical;
@@ -57,7 +58,10 @@ template $FlChannelMessages : Box {
 
       // Message List
       ScrolledWindow scrolled_window {
-        styles [ "undershoot-bottom" ]
+        styles [
+          "undershoot-bottom"
+        ]
+
         vexpand: true;
         hscrollbar-policy: never;
         edge-overshot => $handle_edge_reached() swapped;
@@ -67,14 +71,16 @@ template $FlChannelMessages : Box {
           hexpand: true;
           maximum-size: 800;
           tightening-threshold: 600;
+
           styles [
-              "message-clamp",
+            "message-clamp",
           ]
 
           ListView list_view {
             styles [
               "message-list",
             ]
+
             model: bind $no_selection(template.active-channel as <$FlChannel>.timeline) as <SelectionModel>;
             hexpand: true;
             vexpand: false;
@@ -84,9 +90,12 @@ template $FlChannelMessages : Box {
     }
 
     Box {
-      styles [ "toolbar", "message-input-bar" ]
-      orientation: horizontal;
+      styles [
+        "toolbar",
+        "message-input-bar"
+      ]
 
+      orientation: horizontal;
       // Entry Box
       Adw.Clamp {
         maximum-size: 800;
@@ -94,29 +103,74 @@ template $FlChannelMessages : Box {
 
         Box {
           orientation: vertical;
-
           // Quote
           Box {
             vexpand-set: true;
-            styles ["currently-replied-box"]
+
+            styles [
+              "currently-replied-box"
+            ]
+
             visible: bind $is_some(template.reply-message) as <bool>;
+
             Image {
-              styles ["accent"]
+              styles [
+                "accent"
+              ]
+
               icon-name: "mail-reply-sender-symbolic";
               width-request: 34;
             }
+
             Separator {
-              styles ["accent"]
+              styles [
+                "accent"
+              ]
+
               margin-start: 6;
               width-request: 2;
             }
-            $FlMessageItem {
-              margin-top:0;
-              is-message-currently-replied: true;
-              message: bind template.reply-message;
+
+            Grid {
               hexpand: true;
-              force-show-header: true;
-              force-show-timestamp: false;
+              margin-start: 12;
+              margin-end: 12;
+
+              Label {
+                styles [
+                  "heading",
+                ]
+
+                halign: start;
+                label: bind template.reply-message as <$FlTextMessage>.sender as <$FlContact>.title;
+                wrap: true;
+                wrap-mode: word_char;
+                lines: 1;
+                ellipsize: end;
+
+                layout {
+                  row: 0;
+                  column: 0;
+                }
+              }
+
+              Label {
+                styles [
+                  "message-text",
+                ]
+
+                halign: start;
+                label: bind $attachment_placeholder(template.reply-message as <$FlTextMessage>.body) as <string>;
+                wrap: true;
+                wrap-mode: word_char;
+                lines: 2;
+                ellipsize: end;
+
+                layout {
+                  row: 1;
+                  column: 0;
+                }
+              }
             }
 
             Button {
@@ -127,8 +181,10 @@ template $FlChannelMessages : Box {
               tooltip-text: C_("tooltip", "Remove reply");
 
               styles [
-                "flat", "circular"
+                "flat",
+                "circular"
               ]
+
               valign: center;
               clicked => $remove_reply() swapped;
               icon-name: "window-close-symbolic";
@@ -139,6 +195,7 @@ template $FlChannelMessages : Box {
           Box {
             vexpand-set: true;
             visible: bind template.has-attachments;
+
             Button {
               accessibility {
                 label: C_("accessibility", "Remove an attachment");
@@ -160,7 +217,6 @@ template $FlChannelMessages : Box {
             }
           }
 
-  
           Box {
             spacing: 6;
 
@@ -168,6 +224,7 @@ template $FlChannelMessages : Box {
               accessibility {
                 label: C_("accessibility", "Add an attachment");
               }
+
               styles [
                 "circular",
               ]
@@ -203,10 +260,13 @@ template $FlChannelMessages : Box {
                 "circular",
                 "suggested-action",
               ]
-              sensitive: bind $and($or(template.has-attachments, $not(text_entry.is-empty) as <bool> ) as <bool>, $network_monitor() as <$GNetworkMonitor>.network-available ) as <bool>;
+
+              sensitive: bind $and($or(template.has-attachments, $not(text_entry.is-empty) as <bool>) as <bool>, $network_monitor() as <$GNetworkMonitor>.network-available) as <bool>;
+
               accessibility {
                 label: C_("accessibility", "Send");
               }
+
               icon-name: "send-symbolic";
               tooltip-text: C_("tooltip", "Send");
               valign: end;

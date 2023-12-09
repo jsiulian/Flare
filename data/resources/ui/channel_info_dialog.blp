@@ -1,10 +1,10 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlChannelInfoDialog : Adw.MessageDialog {
+template $FlChannelInfoDialog: Adw.MessageDialog {
   heading: _("Channel Information");
-  extra-child:
-  Box {
+
+  extra-child: Box {
     spacing: 5;
 
     styles [
@@ -12,14 +12,13 @@ template $FlChannelInfoDialog : Adw.MessageDialog {
     ]
 
     orientation: vertical;
-
     // The channel
     $FlChannelItem {
       margin-top: "5";
       margin-bottom: "5";
       margin-start: "5";
       margin-end: "5";
-      channel:  bind template.channel;
+      channel: bind template.channel;
     }
 
     // Identity Reset
@@ -32,9 +31,7 @@ template $FlChannelInfoDialog : Adw.MessageDialog {
       clicked => $reset_session() swapped;
       visible: bind template.channel as <$FlChannel>.is-contact;
     }
-  }
-
-  ;
+  };
 
   responses [
     close: _("Close"),

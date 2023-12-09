@@ -1,12 +1,13 @@
 using Gtk 4.0;
 
-template $FlTextEntry : Box {
+template $FlTextEntry: Box {
   Overlay overlay {
     [overlay]
     Inscription placeholder {
       styles [
         "dim-label",
       ]
+
       visible: bind $is_empty(view.buffer.text as <string>) as <bool>;
       can-target: false;
       text: _("Message");
@@ -25,6 +26,7 @@ template $FlTextEntry : Box {
         hscrollbar-policy: never;
         propagate-natural-height: true;
         hexpand: true;
+
         child: TextView view {
           top-margin: 6;
           bottom-margin: 6;
@@ -32,22 +34,22 @@ template $FlTextEntry : Box {
           valign: center;
         };
       }
-      
+
       Button {
         accessibility {
           label: C_("accessibility", "Insert an emoji");
         }
+
         styles [
-            "circular",
-            "dim-label",
+          "circular",
+          "dim-label",
         ]
+
         tooltip-text: C_("tooltip", "Insert emoji");
         clicked => $insert_emoji() swapped;
         icon-name: "emoji-people-symbolic";
         valign: center;
-
       }
     }
   }
 }
-
