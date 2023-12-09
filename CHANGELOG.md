@@ -11,12 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A date-divider between messages sent on different days.
 - Initial work for usage of Flare as a primary device (not yet enabled by default).
 - Menu entry for contact sync.
+- Menu entry for stopping Flare, even if it is running in the background.
 
 ### Changed
 
 - Better UI for showing the last message of a channel.
 - Only show the message timestamp if it differs from the next message.
 - Better UI for the message entry bar.
+
+### Fixed
+
+- Unlinking Flare while running in the background is enabled not bringing up the relink window at next start.
 
 ### Chores
 
