@@ -1,36 +1,38 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlAttachmentFile : $FlAttachmentBase {
-    Box box_file {
-      Button {
-        styles [
-          "circular",
-        ]
-        margin-end: 6;
-        clicked => $download() swapped;
-        valign: center;
-        icon-name: "document-save-symbolic";
+template $FlAttachmentFile: $FlAttachmentBase {
+  Box box_file {
+    Button {
+      styles [
+        "circular",
+      ]
+
+      margin-end: 6;
+      clicked => $download() swapped;
+      valign: center;
+      icon-name: "document-save-symbolic";
+    }
+
+    Box {
+      orientation: vertical;
+
+      Label {
+        halign: start;
+        ellipsize: end;
+        label: bind template.attachment as <$FlAttachmentObject>.name;
       }
 
-      Box {
-        orientation: vertical;
+      Label {
+        styles [
+          "dim-label",
+          "caption",
+          "numeric",
+        ]
 
-        Label {
-          halign: start;
-          ellipsize: end;
-          label: bind template.attachment as <$FlAttachmentObject>.name;
-        }
-
-        Label {
-          styles [
-            "dim-label",
-            "caption",
-            "numeric",
-          ]
-          halign: start;
-          label: bind $format_size(template.attachment as <$FlAttachmentObject>.size) as <string>;
+        halign: start;
+        label: bind $format_size(template.attachment as <$FlAttachmentObject>.size) as <string>;
       }
     }
-  }    
+  }
 }

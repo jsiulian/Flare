@@ -1,47 +1,56 @@
 using Gtk 4.0;
 
-template $FlEmojiPicker : Box {
+template $FlEmojiPicker: Box {
   hexpand: true;
   orientation: vertical;
+
   styles [
-      "fl-emoji-picker",
-      "heading"
-    ]
+    "fl-emoji-picker",
+    "heading"
+  ]
 
   Box {
     orientation: horizontal;
+
     Button {
       styles [
         "flat",
         "circular",
       ]
-      margin-end:6;
+
+      margin-end: 6;
       label: "👍️";
       clicked => $button_react() swapped;
     }
+
     Button {
       styles [
         "flat",
         "circular",
       ]
-      margin-end:6;
+
+      margin-end: 6;
       label: "👎️";
       clicked => $button_react() swapped;
     }
+
     Button {
       styles [
         "flat",
         "circular",
       ]
-      margin-end:6;
+
+      margin-end: 6;
       label: "😄️";
       clicked => $button_react() swapped;
     }
+
     Button {
       styles [
         "flat",
         "circular",
       ]
+
       label: "🎉️";
       clicked => $button_react() swapped;
     }
@@ -49,38 +58,46 @@ template $FlEmojiPicker : Box {
 
   Box {
     orientation: horizontal;
+
     Button {
       styles [
         "flat",
         "circular",
       ]
-      margin-end:6;
+
+      margin-end: 6;
       label: "😕️";
       clicked => $button_react() swapped;
     }
+
     Button {
       styles [
         "flat",
         "circular",
       ]
-      margin-end:6;
+
+      margin-end: 6;
       label: "❤️";
       clicked => $button_react() swapped;
     }
-    Button{
-      styles [
-        "flat",
-        "circular",
-      ]
-      margin-end:6;
-      label: "🚀️";
-      clicked => $button_react() swapped;
-    }
+
     Button {
       styles [
         "flat",
         "circular",
       ]
+
+      margin-end: 6;
+      label: "🚀️";
+      clicked => $button_react() swapped;
+    }
+
+    Button {
+      styles [
+        "flat",
+        "circular",
+      ]
+
       icon-name: "view-more-horizontal-symbolic";
       clicked => $btn_emoji_clicked() swapped;
     }

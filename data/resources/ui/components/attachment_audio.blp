@@ -1,25 +1,28 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlAttachmentAudio : $FlAttachmentBase {
+template $FlAttachmentAudio: $FlAttachmentBase {
   Box box_audio {
-      Button download_btn {
-        visible: bind $not(template.attachment as <$FlAttachmentObject>.loaded) as <bool>;
+    Button download_btn {
+      visible: bind $not(template.attachment as <$FlAttachmentObject>.loaded) as <bool>;
 
-        styles [
-          "flat",
-        ]
-        margin-end: 4;
-        clicked => $download() swapped;
-        valign: center;
-        icon-name: "document-save-symbolic";
-      }
-      MediaControls controls {
-        styles [
-          "audio"
-        ]
-        media-stream: bind template.attachment as <$FlAttachmentObject>.audio;
-        width-request: 212;
-      }
+      styles [
+        "flat",
+      ]
+
+      margin-end: 4;
+      clicked => $download() swapped;
+      valign: center;
+      icon-name: "document-save-symbolic";
+    }
+
+    MediaControls controls {
+      styles [
+        "audio"
+      ]
+
+      media-stream: bind template.attachment as <$FlAttachmentObject>.audio;
+      width-request: 212;
+    }
   }
 }

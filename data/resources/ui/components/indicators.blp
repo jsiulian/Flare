@@ -1,0 +1,23 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlMessageIndicators {
+  layout-manager: BoxLayout {
+    spacing: 3;
+  };
+
+  halign: end;
+  valign: end;
+
+  Label message_info_label {
+    styles [
+      "dim-label",
+      "caption",
+      "numeric",
+    ]
+
+    label: bind template.timestamp;
+  }
+
+  //Image sending_state_icon {}
+}

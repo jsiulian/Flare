@@ -7,6 +7,7 @@ menu message-menu {
       custom: "emoji-picker";
     }
   }
+
   section {
     item {
       label: _("Reply");
@@ -28,9 +29,9 @@ menu message-menu {
       action: "msg.copy";
       verb-icon: "edit-copy-symbolic";
       icon: "edit-copy-symbolic";
-
     }
   }
+
   section {
     item {
       label: _("Save as…");
@@ -38,8 +39,8 @@ menu message-menu {
       verb-icon: "document-save-symbolic";
       icon: "document-save-symbolic";
       hidden-when: "action-disabled";
-
     }
+
     item {
       label: _("Open with…");
       action: "msg.open";
@@ -50,7 +51,7 @@ menu message-menu {
   }
 }
 
-template $FlMessageItem : $ContextMenuBin {
+template $FlMessageItem: $ContextMenuBin {
   styles [
     "message-item",
   ]
@@ -59,13 +60,12 @@ template $FlMessageItem : $ContextMenuBin {
 
   Box {
     spacing: 12;
-
     // Avatar (Not self)
     Adw.Avatar avatar {
       styles [
         "avatar-other",
       ]
-      visible: bind $not(template.is-message-currently-replied) as <bool>;
+
       text: bind template.message as <$FlTextMessage>.sender as <$FlContact>.title;
       show-initials: true;
       valign: start;
@@ -75,180 +75,177 @@ template $FlMessageItem : $ContextMenuBin {
     Box {
       orientation: vertical;
 
-      Box message_bubble {
-        orientation: vertical;
-        overflow: hidden;
-        spacing: 2;
+      Adw.Clamp {
+        maximum-size: 400;
 
-        styles [
-          "message-bubble",
-        ]
+        child: Box reaction_grid {
+          orientation: vertical;
 
-        // Header
-        Box header {
-          orientation: horizontal;
+          Box message_bubble {
+            orientation: vertical;
+            overflow: hidden;
 
-          // Name
-          Label {
             styles [
-              "heading",
+              "message-bubble",
             ]
 
-            label: bind template.message as <$FlTextMessage>.sender as <$FlContact>.title;
-            hexpand: true;
-            halign: start;
-            ellipsize: end;
-            margin-end: 15;
-          }
-        }
+            // Header
+            Box header {
+              orientation: horizontal;
+              // Name
+              Label {
+                styles [
+                  "heading",
+                ]
 
-        // Quote
-        Box quote {
-          styles [
-            "quote",
-          ]
+                label: bind template.message as <$FlTextMessage>.sender as <$FlContact>.title;
+                hexpand: true;
+                halign: start;
+                ellipsize: end;
+                margin-end: 15;
+              }
+            }
 
-          visible: bind $and($is_some(template.message as <$FlTextMessage>.quote) as <bool>,$not(template.is-message-currently-replied) as <bool>) as <bool>;
-          Box {
-            orientation: vertical;
-
-            Label {
+            // Quote
+            Box quote {
               styles [
-                "heading",
+                "quote",
               ]
 
-              label: bind template.message as <$FlTextMessage>.quote as <$FlTextMessage>.sender as <$FlContact>.title;
-              hexpand: true;
-              halign: start;
-            }
+              visible: bind $is_some(template.message as <$FlTextMessage>.quote) as <bool>;
 
-            Label {
-              ellipsize: end;
-              lines: 2;
-              wrap: true;
-              xalign: 0;
-              wrap-mode: word_char;
-              justify: left;
-              vexpand: false;
-              valign: start;
-              hexpand: true;
-              halign: start;
-              use-markup: true;
-
-              label: bind $markup_urls(template.message as <$FlTextMessage>.quote as <$FlTextMessage>.body) as <string>;
-              attributes: bind template.message as <$FlTextMessage>.message-attributes;
-            }
-          }
-        }     
-
-        Box box_attachments {
-            orientation: vertical;
-            styles ["not-loaded"]
-            Overlay media_overlay {
-              styles ["media-overlay"]
-              overflow: hidden;
-              visible:false;
-              // TODO: Switch to OriGroup
-              child: Box media_group {
-                styles ["media-group"]
-                overflow: hidden;
+              Box {
                 orientation: vertical;
-              };
 
-              [overlay]
-              Button download_btn{
+                Label {
+                  styles [
+                    "heading",
+                  ]
+
+                  label: bind template.message as <$FlTextMessage>.quote as <$FlTextMessage>.sender as <$FlContact>.title;
+                  hexpand: true;
+                  halign: start;
+                }
+
+                Label {
+                  ellipsize: end;
+                  lines: 2;
+                  wrap: true;
+                  xalign: 0;
+                  wrap-mode: word_char;
+                  justify: left;
+                  vexpand: false;
+                  valign: start;
+                  hexpand: true;
+                  halign: start;
+                  use-markup: true;
+                  label: bind $attachment_placeholder($markup_urls(template.message as <$FlTextMessage>.quote as <$FlTextMessage>.body) as <string>) as <string>;
+                  attributes: bind template.message as <$FlTextMessage>.message-attributes;
+                }
+              }
+            }
+
+            Box box_attachments {
+              orientation: vertical;
+
+              styles [
+                "not-loaded"
+              ]
+
+              Overlay media_overlay {
+                styles [
+                  "media-overlay"
+                ]
+
+                overflow: hidden;
+                visible: false;
+                // TODO: Switch to OriGroup
+                child: Box media_group {
+                  styles [
+                    "media-group"
+                  ]
+
+                  overflow: hidden;
+                  orientation: vertical;
+                };
+
+                [overlay]
+                Button download_btn {
                   halign: center;
                   valign: center;
                   height-request: 64;
                   width-request: 64;
                   visible: bind template.shows-media-loading as <bool>;
+
                   styles [
                     "osd",
                     "large-icons",
                     "circular"
-                    ]
+                  ]
+
                   clicked => $load_media() swapped;
                   icon-name: "document-save-symbolic";
+                }
+
+                [overlay]
+                $FlMessageIndicators timestamp_img {
+                  valign: end;
+                  halign: end;
+                  timestamp: bind $format_time_human(template.message as <$FlTextMessage>.datetime) as <string>;
+                }
               }
-
             }
-        }
 
-        // Message Box
-        Box message-box {
-          hexpand-set: true;
-          orientation: vertical;
+            // Message Box
+            Box message-box {
+              hexpand-set: true;
+              orientation: vertical;
 
-          Label label_message {
+              $FlMessageLabel label_message {
+                label: bind $markup_urls(template.message as <$FlTextMessage>.body) as <string>;
+                attributes: bind template.message as <$FlTextMessage>.message-attributes;
+
+                indicators: $FlMessageIndicators timestamp {
+                  timestamp: bind $format_time_human(template.message as <$FlTextMessage>.datetime) as <string>;
+                  visible: bind $not_empty(template.message as <$FlTextMessage>.body) as <bool>;
+                };
+              }
+            }
+
+            // Pop-Down
+            PopoverMenu msg_menu {
+              has-arrow: false;
+              menu-model: message-menu;
+
+              [emoji-picker]
+              $FlEmojiPicker {
+                reacted => $handle_react() swapped;
+                btn-emoji-clicked => $open_emoji_picker() swapped;
+              }
+            }
+
+            EmojiChooser emoji_chooser {
+              emoji-picked => $handle_react() swapped;
+            }
+          }
+
+          // Reactions
+          Label reactions {
             styles [
-                "message-text",
+              "reaction",
             ]
-            wrap: true;
-            xalign: 0;
-            wrap-mode: word_char;
+
+            label: bind $fix_emoji(template.message as <$FlTextMessage>.reactions) as <string>;
+            visible: bind template.has-reaction;
+            wrap-mode: word;
             justify: left;
             vexpand: false;
             valign: start;
             hexpand: true;
             halign: start;
-            use-markup: true;
-
-            label: bind $markup_urls(template.message as <$FlTextMessage>.body) as <string>;
-            attributes: bind template.message as <$FlTextMessage>.message-attributes;
-            visible: bind $not_empty(template.message as <$FlTextMessage>.body) as <bool>;
           }
-
-          // Timestamp label
-          Label timestamp {
-            styles [
-              "dim-label",
-              "caption",
-              "timestamp",
-            ]
-            visible: bind $not(template.is-message-currently-replied) as <bool>;
-            label: bind $format_time_human(template.message as <$FlTextMessage>.datetime) as <string>;
-            justify: right;
-            vexpand: true;
-            valign: end;
-            hexpand: true;
-            halign: end;
-          }
-        }
-
-        // Pop-Down
-        PopoverMenu msg_menu {
-          has-arrow: false;
-          menu-model: message-menu;
-
-          [emoji-picker]
-          $FlEmojiPicker {
-            reacted => $handle_react() swapped;
-            btn-emoji-clicked => $open_emoji_picker() swapped;
-          }
-        }
-
-        EmojiChooser emoji_chooser {
-          emoji-picked => $handle_react() swapped;
-        }
-
-      }
-
-      // Reactions
-      Label reactions {
-        styles [
-          "reaction",
-        ]
-
-        label: bind template.message as <$FlTextMessage>.reactions;
-        visible: bind template.has-reaction;
-        wrap-mode: word;
-        justify: left;
-        vexpand: false;
-        valign: start;
-        hexpand: true;
-        halign: start;
+        };
       }
     }
   }
 }
-

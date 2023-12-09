@@ -424,6 +424,7 @@ pub mod imp {
             Utility::bind_template_callbacks(klass);
             MessageItem::ensure_type();
             TextEntry::ensure_type();
+            crate::backend::Contact::ensure_type();
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

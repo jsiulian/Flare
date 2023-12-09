@@ -1,11 +1,10 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlChannelList : Box {
+template $FlChannelList: Box {
   hexpand: false;
   vexpand: true;
   orientation: vertical;
-
   // Offline indicator
   Adw.Banner {
     title: _("Offline");
@@ -29,20 +28,17 @@ template $FlChannelList : Box {
   }
 
   ScrolledWindow scrolled_window {
-    visible: bind $not($uint_equal(list.model as <NoSelection>.n-items,0) as <bool>) as <bool>;
+    visible: bind $not($uint_equal(list.model as <NoSelection>.n-items, 0) as <bool>) as <bool>;
     hscrollbar-policy: never;
 
-    child:
-    ListView list {
+    child: ListView list {
       hexpand: true;
       vexpand: true;
 
       styles [
         "navigation-sidebar",
       ]
-    }
-
-    ;
+    };
   }
 
   Adw.StatusPage {
@@ -51,7 +47,6 @@ template $FlChannelList : Box {
     icon-name: "document-edit-symbolic";
     hexpand: true;
     vexpand: true;
-
-    visible: bind $uint_equal(list.model as <NoSelection>.n-items,0) as <bool>;
+    visible: bind $uint_equal(list.model as <NoSelection>.n-items, 0) as <bool>;
   }
 }

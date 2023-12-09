@@ -1,0 +1,17 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlMessageLabel {
+  Label label {
+    styles [
+      "message-text",
+    ]
+
+    use-markup: true;
+    wrap: true;
+    wrap-mode: word_char;
+    natural-wrap-mode: none;
+    xalign: 0;
+    yalign: 0;
+  }
+}

@@ -30,6 +30,8 @@
     <file preprocess="xml-stripblanks">ui/components/attachment_photo.ui</file>
     <file preprocess="xml-stripblanks">ui/components/attachment_video.ui</file>
     <file preprocess="xml-stripblanks">ui/components/time_divider.ui</file>
+    <file preprocess="xml-stripblanks">ui/components/label.ui</file>
+    <file preprocess="xml-stripblanks">ui/components/indicators.ui</file>
   </gresource>
   <gresource prefix="/de/schmidhuberj/Flare/">
     <file compressed="true">style.css</file>

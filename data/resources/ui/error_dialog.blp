@@ -1,11 +1,11 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlErrorDialog : Adw.MessageDialog {
+template $FlErrorDialog: Adw.MessageDialog {
   heading: _("Error");
   response => $handle_response();
-  extra-child:
-  Box {
+
+  extra-child: Box {
     orientation: vertical;
     spacing: 10;
 
@@ -34,9 +34,8 @@ template $FlErrorDialog : Adw.MessageDialog {
       hexpand: true;
       halign: start;
     }
-  }
+  };
 
-  ;
   default-response: "close";
   close-response: "close";
 

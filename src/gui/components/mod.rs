@@ -4,7 +4,9 @@ pub(super) mod attachment_photo;
 pub(super) mod attachment_video;
 pub(super) mod context_menu_bin;
 pub(super) mod emoji_picker;
+pub(super) mod indicators;
 mod item_row;
+pub(super) mod label;
 pub(super) mod time_divider;
 
 pub use self::{
@@ -14,6 +16,8 @@ pub use self::{
     attachment_video::AttachmentVideo,
     context_menu_bin::{ContextMenuBin, ContextMenuBinExt, ContextMenuBinImpl},
     emoji_picker::EmojiPicker,
+    indicators::MessageIndicators,
     item_row::*,
+    label::MessageLabel,
 };
 pub use super::window::Window;

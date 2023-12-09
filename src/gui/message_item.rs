@@ -11,7 +11,7 @@ use crate::backend::message::{MessageExt, TextMessage};
 use crate::backend::timeline::timeline_item::TimelineItemExt;
 use crate::backend::Manager;
 use crate::gui::attachment::Attachment;
-use crate::gui::components::ContextMenuBin;
+use crate::gui::components::*;
 
 glib::wrapper! {
     pub struct MessageItem(ObjectSubclass<imp::MessageItem>)
@@ -137,6 +137,9 @@ impl MessageItem {
     fn setup_text(&self) {
         if self.message().body().is_some() {
             self.imp().message_bubble.add_css_class("has-text");
+            self.imp().timestamp_img.set_visible(false);
+        } else {
+            self.imp().timestamp.set_visible(false);
         }
     }
 
@@ -146,9 +149,13 @@ impl MessageItem {
             self.message().set_show_header(false);
             self.set_halign(gtk::Align::End);
             self.imp().reactions.set_halign(gtk::Align::Start);
+            self.imp().message_bubble.set_halign(gtk::Align::End);
+            self.imp().reaction_grid.set_halign(gtk::Align::End);
         } else {
             self.set_halign(gtk::Align::Start);
             self.imp().reactions.set_halign(gtk::Align::End);
+            self.imp().message_bubble.set_halign(gtk::Align::Start);
+            self.imp().reaction_grid.set_halign(gtk::Align::Start);
         }
     }
 
@@ -172,7 +179,7 @@ impl MessageItem {
     fn init_label_selectable(&self) {
         let manager = self.manager();
         let settings = manager.settings();
-        let label = &self.imp().label_message;
+        let label = &self.imp().label_message.imp().label;
 
         settings
             .bind("messages-selectable", &**label, "selectable")
@@ -199,6 +206,7 @@ impl MessageItem {
     pub fn set_show_timestamp(&self) {
         let visible = self.message().show_timestamp() || self.property("force-show-timestamp");
         self.imp().timestamp.set_visible(visible);
+        self.imp().timestamp_img.set_visible(visible);
     }
 
     fn setup_loaded(&self) {
@@ -253,17 +261,21 @@ pub mod imp {
         #[template_child]
         pub(super) box_attachments: TemplateChild<gtk::Box>,
         #[template_child]
-        media_overlay: TemplateChild<gtk::Overlay>,
+        pub(super) media_overlay: TemplateChild<gtk::Overlay>,
         #[template_child]
         media_group: TemplateChild<gtk::Box>,
         #[template_child]
+        pub(super) timestamp_img: TemplateChild<MessageIndicators>,
+        #[template_child]
         download_btn: TemplateChild<gtk::Button>,
         #[template_child]
-        pub(super) label_message: TemplateChild<gtk::Label>,
+        pub(super) label_message: TemplateChild<MessageLabel>,
+        #[template_child]
+        pub reaction_grid: TemplateChild<gtk::Box>,
         #[template_child]
         pub(super) message_bubble: TemplateChild<gtk::Box>,
         #[template_child]
-        pub(super) timestamp: TemplateChild<gtk::Label>,
+        pub(super) timestamp: TemplateChild<MessageIndicators>,
 
         message: RefCell<Option<TextMessage>>,
         manager: RefCell<Option<Manager>>,
@@ -271,7 +283,6 @@ pub mod imp {
         force_show_header: Cell<bool>,
         force_show_timestamp: Cell<bool>,
         has_attachment: Cell<bool>,
-        is_message_currently_replied: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -282,6 +293,8 @@ pub mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             EmojiPicker::ensure_type();
+            MessageIndicators::ensure_type();
+            MessageLabel::ensure_type();
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
             Utility::bind_template_callbacks(klass);
@@ -328,6 +341,16 @@ pub mod imp {
             let msg = obj.message();
 
             gspawn!(async move { msg.delete().await });
+        }
+
+        // Signal uses the old unicode for the heart emoji, which is recognized as a black heart by gtk. This function converts it to the standard red heart
+        #[template_callback(function)]
+        pub(super) fn fix_emoji(emoji: Option<String>) -> Option<String> {
+            if emoji == Some(String::from("❤")) {
+                Some(String::from("❤\u{fe0f}"))
+            } else {
+                emoji
+            }
         }
 
         #[template_callback]
@@ -422,10 +445,6 @@ pub mod imp {
                     ParamSpecBoolean::builder("has-attachment")
                         .default_value(false)
                         .build(),
-                    ParamSpecBoolean::builder("is-message-currently-replied")
-                        .default_value(false)
-                        .construct_only()
-                        .build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -457,9 +476,6 @@ pub mod imp {
                     value.to_value()
                 }
                 "pressed-attachment" => self.pressed_attachment.borrow().as_ref().to_value(),
-                "is-message-currently-replied" => {
-                    self.is_message_currently_replied.get().to_value()
-                }
                 _ => unimplemented!(),
             }
         }
@@ -554,15 +570,6 @@ pub mod imp {
                         "Property `message` of `MessageItem` has to be of type `Attachment`",
                     );
                     self.pressed_attachment.replace(attachment);
-                }
-                "is-message-currently-replied" => {
-                    let b = value.get::<bool>().expect(
-                        "Property `has-attachment` of `MessageItem` has to be of type `bool`",
-                    );
-                    self.is_message_currently_replied.replace(b);
-                    if b {
-                        self.obj().add_css_class("is-message-currently-replied");
-                    }
                 }
                 _ => unimplemented!(),
             }
