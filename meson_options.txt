@@ -4,7 +4,8 @@ option(
   choices: [
     'default',
     'development',
-    'screenshot'
+    'screenshot',
+    'screenshot-setup'
   ],
   value: 'default',
   description: 'The build profile for Flare. One of "default" or "development" or "screenshot".'

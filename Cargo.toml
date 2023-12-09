@@ -59,6 +59,7 @@ image = "0.24.7"
 [features]
 default = []
 screenshot = []
+screenshot-setup = [ "screenshot" ]
 libspelling = []
 
 [patch.crates-io]

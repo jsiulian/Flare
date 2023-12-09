@@ -1,7 +1,8 @@
+use std::cell::OnceCell;
 use std::path::Path;
 
 use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
-use gtk::glib::{Cast, DateTime};
+use gtk::glib::{BoxedAnyObject, Cast, DateTime};
 use libsignal_service::content::CallMessage as PreCallMessage;
 use libsignal_service::models::Contact as LContact;
 use libsignal_service::prelude::AttachmentPointer;
@@ -19,7 +20,7 @@ use super::{
     message::{CallMessage, Message, MessageExt, ReactionMessage, TextMessage},
     Channel, Contact,
 };
-use crate::error::ApplicationError;
+use crate::{backend::SetupResult, error::ApplicationError};
 
 const GROUP_ID: usize = 6;
 type PresageError = presage::Error<presage_store_sled::SledStoreError>;
@@ -144,6 +145,30 @@ impl super::Manager {
         log::trace!("Init manager for screenshots");
         self.init_channels().await;
         self.setup_receive_message_loop().await?;
+
+        #[cfg(feature = "screenshot-setup")]
+        {
+            let (tx_decision, rx_decision) = futures::channel::oneshot::channel();
+            let to_send = OnceCell::new();
+            let _ = to_send.set(tx_decision);
+            self.emit_by_name::<()>(
+                "setup-result",
+                &[&BoxedAnyObject::new(SetupResult::Pending(to_send))],
+            );
+            let _ = rx_decision.await;
+            self.emit_by_name::<()>(
+                "setup-result",
+                &[&BoxedAnyObject::new(SetupResult::DisplayLinkQR(
+                    "https://mobile.schmidhuberj.de/".try_into().unwrap(),
+                ))],
+            );
+            gtk::glib::timeout_future_seconds(2).await;
+            self.emit_by_name::<()>(
+                "setup-result",
+                &[&BoxedAnyObject::new(SetupResult::Finished)],
+            );
+        }
+
         Ok(())
     }
 

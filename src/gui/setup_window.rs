@@ -16,7 +16,7 @@ glib::wrapper! {
 
 impl SetupWindow {
     pub fn new(manager: Manager, parent: &Window) -> Self {
-        log::trace!("Initializing link window");
+        log::trace!("Initializing setup window");
         Object::builder::<Self>()
             .property("manager", &manager)
             .property("transient-for", parent)
