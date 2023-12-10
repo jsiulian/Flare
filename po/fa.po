@@ -8,109 +8,111 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-12-11 15:06+0000\n"
+"Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.3-dev\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
-msgstr ""
+msgstr "دانیال بهزادی <dani.behzi@ubuntu.com>"
 
 #: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:152
 msgid "Channel Information"
-msgstr ""
+msgstr "اطّلاعات کانال"
 
 #: data/resources/ui/channel_info_dialog.blp:28
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "بازنشانی نشست"
 
 #: data/resources/ui/channel_info_dialog.blp:31
 msgid "Reset Session"
-msgstr ""
+msgstr "بازنشانی نشست"
 
 #: data/resources/ui/channel_info_dialog.blp:40
 #: data/resources/ui/error_dialog.blp:44
 #: data/resources/ui/submit_captcha_dialog.blp:23
 msgid "Close"
-msgstr ""
+msgstr "بستن"
 
 #: data/resources/ui/channel_list.blp:11
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "برون‌خط"
 
 #: data/resources/ui/channel_list.blp:19
 msgid "Search"
-msgstr ""
+msgstr "جست‌وجو"
 
 #: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:60
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "جست‌وجو"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "هیچ کانالی گزیده نشده"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "گزینش یک کانال"
 
 #: data/resources/ui/channel_messages.blp:91
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "برداشتن پاسخ"
 
 #: data/resources/ui/channel_messages.blp:94
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "برداشتن پاسخ"
 
 #: data/resources/ui/channel_messages.blp:119
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "برداشتن پیوست"
 
 #: data/resources/ui/channel_messages.blp:122
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "برداشتن پیوست"
 
 #: data/resources/ui/channel_messages.blp:153
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "افزودن پیوست"
 
 #: data/resources/ui/channel_messages.blp:160
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "افزودن پیوست"
 
 #: data/resources/ui/channel_messages.blp:176
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "ورودی پیام"
 
 #: data/resources/ui/channel_messages.blp:182
 msgctxt "tooltip"
 msgid "Message input"
-msgstr ""
+msgstr "ورودی پیام"
 
 #: data/resources/ui/channel_messages.blp:192
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "فرستادن"
 
 #: data/resources/ui/channel_messages.blp:195
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "فرستادن"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:123
@@ -126,11 +128,11 @@ msgstr ""
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11 src/gui/window.rs:288
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "پاک‌سازی"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:118
 msgid "Unlink"
@@ -153,7 +155,7 @@ msgstr ""
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "خطا"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
@@ -161,16 +163,16 @@ msgstr ""
 
 #: data/resources/ui/error_dialog.blp:45
 msgid "Report"
-msgstr ""
+msgstr "گزارش"
 
 #: data/resources/ui/link_window.blp:20 data/resources/ui/link_window.blp:28
 #: data/resources/ui/link_window.blp:81
 msgid "Link device"
-msgstr ""
+msgstr "پیوند افزاره"
 
 #: data/resources/ui/link_window.blp:33
 msgid "Scan Code"
-msgstr ""
+msgstr "پویش کد"
 
 #: data/resources/ui/link_window.blp:34
 msgid "Scan this code with another Signal app logged into your account."
@@ -178,7 +180,7 @@ msgstr ""
 
 #: data/resources/ui/link_window.blp:58
 msgid "Link without scanning"
-msgstr ""
+msgstr "پیوند بدون پوییدن"
 
 #: data/resources/ui/link_window.blp:64
 msgid ""
@@ -195,11 +197,11 @@ msgstr ""
 
 #: data/resources/ui/link_window.blp:74
 msgid "Manual linking"
-msgstr ""
+msgstr "پیوند دادن دستی"
 
 #: data/resources/ui/link_window.blp:86
 msgid "Manual Linking"
-msgstr ""
+msgstr "پیوند دادن دستی"
 
 #: data/resources/ui/link_window.blp:87
 msgid ""
@@ -209,19 +211,19 @@ msgstr ""
 
 #: data/resources/ui/link_window.blp:98
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "رونوشت در تخته‌گیره"
 
 #: data/resources/ui/message_item.blp:12
 msgid "Reply"
-msgstr ""
+msgstr "پاسخ"
 
 #: data/resources/ui/message_item.blp:19
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 #: data/resources/ui/message_item.blp:27
 msgid "Copy"
-msgstr ""
+msgstr "رونوشت"
 
 #: data/resources/ui/message_item.blp:36
 msgid "Save as…"
@@ -233,11 +235,11 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "عمومی"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Linking"
-msgstr ""
+msgstr "پیوند دادن"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "The device will need to be relinked to take effect."
@@ -245,7 +247,7 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Device Name"
-msgstr ""
+msgstr "نام افزاره"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:19
@@ -255,11 +257,11 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Dowload images automatically"
-msgstr ""
+msgstr "بارگیری خودکار تصویرها"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Dowload videos automatically"
-msgstr ""
+msgstr "بارگیری خودکار ویدیوها"
 
 #: data/resources/ui/preferences_window.blp:30
 msgid "Dowload files automatically"
@@ -271,7 +273,7 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Notifications"
-msgstr ""
+msgstr "آگاهی‌ها"
 
 #: data/resources/ui/preferences_window.blp:40
 msgid "Notifications for new messages."
@@ -292,7 +294,7 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:60
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "سازگاری همراه"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid ""
@@ -322,7 +324,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "عمومی"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
@@ -332,7 +334,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "رفتن به تنظیمات"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
@@ -342,17 +344,17 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "گشودن فهرست"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "بستن پنجره"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "کانال‌ها"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
@@ -367,7 +369,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "بارگذاری پیوست"
 
 #: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
@@ -381,17 +383,17 @@ msgstr ""
 
 #: data/resources/ui/text_entry.blp:12
 msgid "Message"
-msgstr ""
+msgstr "پیام"
 
 #: data/resources/ui/text_entry.blp:38
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "درج شکلک"
 
 #: data/resources/ui/text_entry.blp:44
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "درج شکلک"
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
@@ -400,20 +402,20 @@ msgstr ""
 #: data/resources/ui/window.blp:37
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "افزودن گفت‌وگو"
 
 #: data/resources/ui/window.blp:48 data/resources/ui/window.blp:91
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "فهرست"
 
 #: data/resources/ui/window.blp:78
 msgid "Chat"
-msgstr ""
+msgstr "گپ"
 
 #: data/resources/ui/window.blp:113
 msgid "Settings"
-msgstr ""
+msgstr "تنظیمات"
 
 #: data/resources/ui/window.blp:128
 #: data/resources/ui/submit_captcha_dialog.blp:5
@@ -430,7 +432,7 @@ msgstr ""
 
 #: data/resources/ui/window.blp:143
 msgid "About"
-msgstr ""
+msgstr "درباره"
 
 #: data/resources/ui/window.blp:156
 msgid "Clear Messages"
@@ -448,15 +450,15 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:13
 msgid "Token"
-msgstr ""
+msgstr "ژتون"
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Captcha"
-msgstr ""
+msgstr "کپچا"
 
 #: data/resources/ui/submit_captcha_dialog.blp:24
 msgid "Submit"
-msgstr ""
+msgstr "ثبت"
 
 #: src/backend/channel.rs:581
 msgid "Note to self"
@@ -464,7 +466,7 @@ msgstr ""
 
 #: src/backend/manager.rs:430
 msgid "You"
-msgstr ""
+msgstr "شما"
 
 #: src/backend/message/call_message.rs:115
 msgid "Started calling."
@@ -480,7 +482,7 @@ msgstr ""
 
 #: src/backend/message/call_message.rs:118
 msgid "Is busy."
-msgstr ""
+msgstr "مشغول است."
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:70
@@ -607,11 +609,11 @@ msgstr ""
 
 #: src/gui/utility.rs:124
 msgid "Today"
-msgstr ""
+msgstr "امروز"
 
 #: src/gui/utility.rs:126
 msgid "Yesterday"
-msgstr ""
+msgstr "دیروز"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
@@ -710,11 +712,11 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "پهنای پنجره"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "بلندای پنجره"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
