@@ -31,6 +31,10 @@ Flare is an unofficial app that lets you chat with your friends on Signal from L
     <td>[flare](https://pkgs.alpinelinux.org/package/edge/testing/x86/flare)</td>
   </tr>
   <tr>
+  <td>Nix</td>
+  <td>[flare-signal](https://search.nixos.org/packages?channel=23.11&show=flare-signal&from=0&size=50&sort=relevance&type=packages&query=flare)</td>
+  </tr>
+  <tr>
     <td>Self Compile</td>
     <td>See [Compilation](https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/CONTRIBUTING.md#compilation).</td>
   </tr>
