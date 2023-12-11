@@ -8,7 +8,7 @@ use libsignal_service::{
     content::ContentBody,
     groups_v2::Group,
     prelude::{Content, ProfileKey, Uuid},
-    proto::{sync_message::Request, AttachmentPointer, DataMessage, GroupContextV2, SyncMessage},
+    proto::{AttachmentPointer, DataMessage, GroupContextV2},
     push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
     Profile, ServiceAddress,
@@ -635,22 +635,9 @@ impl Manager {
 
     pub async fn request_contacts_sync(&self) -> Result<(), ApplicationError> {
         log::trace!("`Manager::request_contacts_sync` start");
-        let uuid = self.uuid();
-        let timestamp = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .expect("Time went backwards")
-            .as_millis() as u64;
-        let sync_message = SyncMessage {
-            request: Some(Request {
-                r#type: Some(
-                    libsignal_service::proto::sync_message::request::Type::Contacts as i32,
-                ),
-            }),
-            ..Default::default()
-        };
-        let r = self.send_message(uuid, sync_message, timestamp).await;
+        let r = self.internal().request_contacts().await;
         log::trace!("`Manager::request_contacts_sync` finished");
-        r
+        Ok(r?)
     }
 
     pub async fn link_secondary(&self, url: Url) -> Result<(), PresageError> {

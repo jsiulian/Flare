@@ -6,12 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Workaround for issue about contact syncing. To sucessfully sync contacts, wait a few hours after linking and manually initialize contact sync from the menu.
+
 ### Added
 
 - A date-divider between messages sent on different days.
 - Initial work for usage of Flare as a primary device (not yet enabled by default).
 - Menu entry for contact sync.
 - Menu entry for stopping Flare, even if it is running in the background.
+- An improved setup window, which introduces Flare, gives the option to either link or use Flare as primary device (not yet enabled by default), insert required information and gives further information about Flare, e.g. some known issues or contact information.
 
 ### Changed
 

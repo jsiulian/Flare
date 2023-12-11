@@ -69,6 +69,7 @@ enum Command {
     LinkSecondary(Url, oneshot::Sender<Result<(), Error>>),
     UnlinkSecondary(i64, oneshot::Sender<Result<(), Error>>),
     LinkedDevices(oneshot::Sender<Result<Vec<DeviceInfo>, Error>>),
+    RequestContacts(oneshot::Sender<Result<(), Error>>),
 }
 
 #[derive(Debug)]
@@ -377,6 +378,15 @@ impl ManagerThread {
             .expect("Command sending failed");
         receiver.await.expect("Callback receiving failed")
     }
+
+    pub async fn request_contacts(&self) -> Result<(), Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::RequestContacts(sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
 }
 
 async fn setup_manager(
@@ -568,7 +578,6 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             let _ = callback.send(manager.messages(&thread, range));
         }
         Command::RegistrationType(callback) => callback
-            // .send(manager.sync_contacts().await)
             .send(manager.registration_type())
             .expect("Callback sending failed"),
         Command::LinkSecondary(url, callback) => callback
@@ -579,6 +588,9 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             .expect("Callback sending failed"),
         Command::LinkedDevices(callback) => callback
             .send(manager.linked_devices().await)
+            .expect("Callback sending failed"),
+        Command::RequestContacts(callback) => callback
+            .send(manager.request_contacts().await)
             .expect("Callback sending failed"),
     }
 }
