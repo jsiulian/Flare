@@ -4,7 +4,7 @@ description = "Chat with your friends on Signal"
 authors = ["Julian Schmidhuber <schmidhuberj2@protonmail.com>"]
 homepage = "https://mobile.schmidhuberj.de/flare"
 repository = "https://gitlab.com/schmiddi-on-mobile/flare"
-version = "0.10.1-beta.5"
+version = "0.10.1-beta.6"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

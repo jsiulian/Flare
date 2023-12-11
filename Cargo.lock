@@ -995,7 +995,7 @@ checksum = "0ce7134b9999ecaf8bcd65542e436736ef32ddca1b3e06094cb6ec5755203b80"
 
 [[package]]
 name = "flare"
-version = "0.10.1-beta.5"
+version = "0.10.1-beta.6"
 dependencies = [
  "ashpd",
  "async-trait",
