@@ -306,8 +306,8 @@ pub mod imp {
                 log::trace!("Requested clearing messages of channels");
                 let confirmation_dialog = MessageDialog::builder()
                     .transient_for(&obj)
-                    .heading(&gettextrs::gettext("Remove Messages"))
-                    .body(&gettextrs::gettext("This will remove all locally stored messages from this channel"))
+                    .heading(gettextrs::gettext("Remove Messages"))
+                    .body(gettextrs::gettext("This will remove all locally stored messages from this channel"))
                     .close_response("cancel")
                     .default_response("cancel")
                     .build();

@@ -1,6 +1,5 @@
 use super::Manager;
 use crate::gui::utility::Utility;
-use blurhash;
 use gdk::{Paintable, Texture};
 use gio::{prelude::*, subclass::prelude::ObjectSubclassIsExt, Cancellable, File, FileCreateFlags};
 use glib::{Bytes, Object, Priority};

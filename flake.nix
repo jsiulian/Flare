@@ -69,7 +69,7 @@
             pkgs.mkShell {
               src = ./.;
               buildInputs = self.packages.${system}.default.buildInputs;
-              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb ] ++ [ run check i18n run-gdb];
+              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb clippy ] ++ [ run check i18n run-gdb];
               shellHook = ''
                 meson setup -Dprofile=development build
               '';

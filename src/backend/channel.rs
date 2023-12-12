@@ -185,7 +185,7 @@ impl Channel {
     }
 
     pub fn clear_messages(&self) -> Result<(), ApplicationError> {
-        self.manager().clear_channel_messages(&self)?;
+        self.manager().clear_channel_messages(self)?;
         self.imp().timeline.borrow().clear();
         Ok(())
     }
@@ -305,7 +305,7 @@ impl Channel {
                 let mut pending_reactions = self.imp().pending_reactions.borrow_mut();
                 let entry = pending_reactions
                     .entry(reaction.target_timestamp())
-                    .or_insert_with(Vec::new);
+                    .or_default();
                 let to_insert = entry
                     .binary_search_by_key(&reaction.timestamp(), |m| m.timestamp())
                     .unwrap_or_else(|e| e);
