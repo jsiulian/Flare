@@ -410,7 +410,7 @@ async fn setup_manager(
             .send(SetupResult::Pending(to_send))
             .await
             .expect("Failed to send setup results");
-        match rx_decision.await.ok().expect("Callback receiving failed") {
+        match rx_decision.await.expect("Callback receiving failed") {
             SetupDecision::Link(servers, name) => {
                 let (tx_link, rx_link) = futures::channel::oneshot::channel();
                 let (_, manager) = join!(

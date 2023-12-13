@@ -16,7 +16,7 @@ impl Server {
     }
 
     pub fn server(&self) -> SignalServers {
-        self.imp().server.borrow().clone()
+        *self.imp().server.borrow()
     }
 }
 

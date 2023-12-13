@@ -396,7 +396,7 @@ mod imp {
     const MESSAGE_SENT_SHOW_NAME_DURATION: u64 = 4 * 60 * 1000;
     // At least 1 minute need to pass such that for two messages from the same sender, the second one will
     // also show the timestamp.
-    const MESSAGE_SENT_SHOW_TIMESTAMP_DURATION: u64 = 1 * 60 * 1000;
+    const MESSAGE_SENT_SHOW_TIMESTAMP_DURATION: u64 = 60 * 1000;
 
     impl TimelineItemImpl for Message {
         fn update_show_header(&self, obj: &Self::Type, previous: Option<&TimelineItem>) {

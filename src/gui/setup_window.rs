@@ -128,7 +128,7 @@ pub mod imp {
             if let Some(url) = self.url.borrow().as_ref() {
                 let obj = self.obj();
                 let clipboard = obj.clipboard();
-                clipboard.set_text(&url);
+                clipboard.set_text(url);
 
                 let toast = Toast::new(&gettext("Copied to clipboard"));
                 obj.imp().toast_overlay.add_toast(toast);
@@ -202,7 +202,7 @@ pub mod imp {
             }
 
             // Should always succeed due to UI button only being sensitive when the text is a phone number.
-            if let Ok(phone) = PhoneNumber::from_str(&self.entry_phone_number.text().to_string()) {
+            if let Ok(phone) = PhoneNumber::from_str(self.entry_phone_number.text().as_ref()) {
                 // Should always be given due to UI only being on that page after setup decision was asked for.
                 if let Some(callback) = self.decision_callback.take() {
                     callback
@@ -241,7 +241,7 @@ pub mod imp {
                 clone!(@strong obj => move |r| {
                     // r[0] is the manager
                     let result = r[1].get::<BoxedAnyObject>().expect("Setup-Result to be BoxedAnyObject");
-                    let result: &mut SetupResult = &mut *result.borrow_mut();
+                    let result: &mut SetupResult = &mut result.borrow_mut();
 
                     obj.imp().handle_setup_result(result);
                     None
