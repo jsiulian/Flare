@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: 2023-12-12 21:07+0000\n"
-"Last-Translator: helix loop <gitlab@fruweb.de>\n"
+"PO-Revision-Date: 2023-12-13 19:07+0000\n"
+"Last-Translator: Julian <juliannfairfax@protonmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/de/>\n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"X-Generator: Weblate 5.3-rc\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -454,9 +454,8 @@ msgid "Insert emoji"
 msgstr "Füge ein Emoji ein"
 
 #: data/resources/ui/window.blp:25
-#, fuzzy
 msgid "Channel list"
-msgstr "Kanäle"
+msgstr "Kanal-Liste"
 
 #: data/resources/ui/window.blp:37 data/resources/ui/window.blp:30
 msgctxt "accessibility"
@@ -710,11 +709,9 @@ msgid "Remove Messages"
 msgstr "Nachrichten entfernen"
 
 #: src/gui/window.rs:284
-#, fuzzy
 msgid "This will remove all locally stored messages from this channel"
 msgstr ""
-"Dies wird alle auf dem Gerät vorhandenen Nachrichten löschen und die "
-"Anwendung schließen."
+"Damit werden alle lokal gespeicherten Nachrichten aus diesem Kanal entfernt."
 
 #. Translators: Flare name in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
