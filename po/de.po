@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-09 13:04+0200\n"
-"PO-Revision-Date: 2023-12-13 19:07+0000\n"
+"PO-Revision-Date: 2023-12-14 19:10+0000\n"
 "Last-Translator: Julian <juliannfairfax@protonmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/de/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3-rc\n"
+"X-Generator: Weblate 5.3\n"
 
 #: data/resources/ui/about.blp.in:13
 msgid "translator-credits"
@@ -228,7 +228,6 @@ msgstr ""
 "- Ihre Kontakte sollten nun hinter dem Stift-Symbol oben links zu sehen sein."
 
 #: data/resources/ui/link_window.blp:74
-#, fuzzy
 msgid "Manual linking"
 msgstr "Manuelles Verbinden"
 
@@ -495,7 +494,6 @@ msgid "About"
 msgstr "Info"
 
 #: data/resources/ui/window.blp:156
-#, fuzzy
 msgid "Clear Messages"
 msgstr "Nachrichten löschen"
 
