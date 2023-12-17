@@ -494,7 +494,7 @@ template $FlSetupWindow: Adw.Window {
               orientation: vertical;
 
               Gtk.Label {
-                label: _("You are set up now. A few final notes before you start using Flare:");
+                label: _("Flare is almost ready, it is waiting for contacts to finish syncing. This may take a few seconds, you can start to use Flare once the contacts are synced. A few final notes before you start using Flare:");
                 wrap: true;
               }
 
@@ -508,8 +508,9 @@ template $FlSetupWindow: Adw.Window {
               }
 
               Gtk.Label {
-                label: _("Currently, contacts will not sync correctly directly after linking. As claimed by upstream and independently tested, contact sync will start working after some time (about 2-3 hours). To manually initialize contact sync, use the corresponding entry in the main menu. We are working with upstream to fix this problem. Furthermore, make sure to not send any messages while the messages are still received by Flare. We are also trying to fix this problem.");
+                label: _("Make sure to not send any messages while the messages are still received by Flare, this makes sure that all required information is received. We are trying to fix this problem. Furthermore, Flare is currently using excessive amounts of memory after a while. This is due to some memory leak which has not yet been found. We also try to resolve this. For a full list of bugs, visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>.");
                 wrap: true;
+                use-markup: true;
               }
 
               Gtk.Label {
