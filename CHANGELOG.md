@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### HOTFIX
 
-- Workaround for issue about contact syncing. To sucessfully sync contacts, wait a few hours after linking and manually initialize contact sync from the menu.
+- Contacts syncing.
+- Linking device.
 
 ### Added
 
