@@ -413,7 +413,7 @@ async fn setup_manager(
         match rx_decision.await.expect("Callback receiving failed") {
             SetupDecision::Link(servers, name) => {
                 let (tx_link, rx_link) = futures::channel::oneshot::channel();
-                let (_, manager) = join!(
+                let (_, mut manager) = join!(
                     async {
                         let link = rx_link.await.expect("Failed to receive link callback");
                         setup_sender
@@ -428,6 +428,12 @@ async fn setup_manager(
                         tx_link,
                     )
                 );
+                // Request contact sync directly after linking.
+                if let Ok(manager) = &mut manager {
+                    if let Err(e) = manager.request_contacts().await {
+                        log::error!("Failed to sync contacts after linking: {}", e);
+                    }
+                }
                 setup_sender
                     .send(SetupResult::Finished)
                     .await

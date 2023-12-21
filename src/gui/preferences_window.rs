@@ -24,15 +24,20 @@ impl PreferencesWindow {
 
     async fn request_background(&self) -> ashpd::Result<()> {
         let identifier = WindowIdentifier::from_native(&self.native().unwrap()).await;
-        let _ = tspawn!(BackgroundRequest::default()
-            .reason(Some(
-                gettext("Watch for new messages while closed").as_str(),
-            ))
-            .auto_start(true)
-            .identifier(identifier)
-            .command(&["flare", "--gapplication-service"])
-            .dbus_activatable(false)
-            .send())
+        tspawn!(async move {
+            BackgroundRequest::default()
+                .reason(Some(
+                    gettext("Watch for new messages while closed").as_str(),
+                ))
+                .auto_start(true)
+                .identifier(identifier)
+                .command(&["flare", "--gapplication-service"])
+                .dbus_activatable(false)
+                .send()
+                .await
+                // Drop the result, otherwise it would be dropped in the glib thread. Due to dropping requiring tokio, this would panic.
+                .map(|_| {})
+        })
         .await
         .expect("Failed to join tokio")?;
         Ok(())
