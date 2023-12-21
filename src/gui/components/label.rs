@@ -74,7 +74,7 @@ mod imp {
                                 let label = &obj.imp().label;
                                 let text = label.text().replace(OBJECT_REPLACEMENT_CHARACTER,"");
                                 if let Some(bounds) = label.selection_bounds(){
-                                    let selected_text =  &text.as_str()[bounds.0 as usize..(bounds.1 as usize).min(text.bytes().len())];
+                                    let selected_text: String = text.chars().skip(bounds.0 as usize).take((bounds.1 - bounds.0) as usize).collect();
                                     let display = gdk::Display::default().expect("there should be a display");
                                     let clipboard = display.clipboard();
                                     crate::trace!("Copying message to clipboard",);
@@ -91,7 +91,8 @@ mod imp {
 
                                 let text = label.text().replace(OBJECT_REPLACEMENT_CHARACTER,"");
                                 if let Some(bounds) = label.selection_bounds(){
-                                    label.select_region(bounds.0,bounds.1.min(text.bytes().len() as i32));                                    };
+                                    label.select_region(bounds.0,bounds.1.min(text.char_indices().count() as i32));
+                                };
                                 None
                             }),
                         );
