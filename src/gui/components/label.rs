@@ -66,6 +66,36 @@ mod imp {
                 "label" => {
                     if let Ok(l) = value.get() {
                         obj.set_label(l);
+                        let label = &obj.imp().label;
+                        label.connect_local(
+                            "copy-clipboard",
+                            true,
+                            glib::clone!(@weak obj => @default-return None, move |_| {
+                                let label = &obj.imp().label;
+                                let text = label.text().replace(OBJECT_REPLACEMENT_CHARACTER,"");
+                                if let Some(bounds) = label.selection_bounds(){
+                                    let selected_text: String = text.chars().skip(bounds.0 as usize).take((bounds.1 - bounds.0) as usize).collect();
+                                    let display = gdk::Display::default().expect("there should be a display");
+                                    let clipboard = display.clipboard();
+                                    crate::trace!("Copying message to clipboard",);
+                                    clipboard.set_text(&selected_text);
+                                };
+                                None
+                            }),
+                        );
+                        label.connect_local(
+                            "move-cursor",
+                            true,
+                            glib::clone!(@weak obj => @default-return None, move |_| {
+                                let label = &obj.imp().label;
+
+                                let text = label.text().replace(OBJECT_REPLACEMENT_CHARACTER,"");
+                                if let Some(bounds) = label.selection_bounds(){
+                                    label.select_region(bounds.0,bounds.1.min(text.char_indices().count() as i32));
+                                };
+                                None
+                            }),
+                        );
                     }
                 }
                 "indicators" => {
