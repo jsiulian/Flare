@@ -64,12 +64,17 @@
                 meson compile flare-pot -C build
                 meson compile flare-update-po -C build
               '';
+              prof = pkgs.writeShellScriptBin "prof" ''
+                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
+                RUSTFLAGS="-C force-frame-pointers=yes" meson compile -C build
+                sysprof-cli --force --no-battery --use-trace-fd --speedtrack --gtk flare.syscap -- ./build/target/debug/${name}
+              '';
             in
             with pkgs;
             pkgs.mkShell {
               src = ./.;
               buildInputs = self.packages.${system}.default.buildInputs;
-              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb clippy ] ++ [ run check i18n run-gdb];
+              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb clippy sysprof ] ++ [ run check i18n prof ];
               shellHook = ''
                 meson setup -Dprofile=development build
               '';

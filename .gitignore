@@ -9,3 +9,4 @@ data/resources/ui/about.blp
 .vscode/
 result
 .nixos-test-history
+*.syscap
