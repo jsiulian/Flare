@@ -251,7 +251,7 @@ pub mod imp {
         #[template_child]
         pub(super) avatar: TemplateChild<adw::Avatar>,
         #[template_child]
-        pub(super) header: TemplateChild<gtk::Box>,
+        pub(super) header: TemplateChild<gtk::Label>,
         #[template_child]
         pub(super) reactions: TemplateChild<gtk::Label>,
         #[template_child]
@@ -273,7 +273,7 @@ pub mod imp {
         #[template_child]
         pub reaction_grid: TemplateChild<gtk::Box>,
         #[template_child]
-        pub(super) message_bubble: TemplateChild<gtk::Box>,
+        pub(super) message_bubble: TemplateChild<gtk::Grid>,
         #[template_child]
         pub(super) timestamp: TemplateChild<MessageIndicators>,
 
