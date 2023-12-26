@@ -6,9 +6,7 @@ use crate::backend::message::CallMessage;
 
 gtk::glib::wrapper! {
     pub struct CallMessageItem(ObjectSubclass<imp::CallMessageItem>)
-        @extends gtk::Box, gtk::Widget,
-        @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
-            gtk::ConstraintTarget;
+        @extends gtk::Box,gtk::Widget;
 }
 
 impl CallMessageItem {
@@ -51,7 +49,7 @@ pub mod imp {
         const NAME: &'static str = "FlCallMessageItem";
         type Type = super::CallMessageItem;
         type ParentType = gtk::Box;
-
+        
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
             Utility::bind_template_callbacks(klass);

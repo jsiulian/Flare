@@ -112,10 +112,10 @@ mod imp {
     impl DisplayMessageImpl for CallMessage {
         fn textual_description(&self, obj: &super::CallMessage) -> Option<String> {
             match obj.call_type() {
-                CallMessageType::Offer => Some(gettextrs::gettext("Started calling.")),
-                CallMessageType::Answer => Some(gettextrs::gettext("Answered a call.")),
-                CallMessageType::Hangup => Some(gettextrs::gettext("Hung up.")),
-                CallMessageType::Busy => Some(gettextrs::gettext("Is busy.")),
+                CallMessageType::Offer => Some(gettextrs::gettext("Started calling")),
+                CallMessageType::Answer => Some(gettextrs::gettext("Answered voice call")),
+                CallMessageType::Hangup => Some(gettextrs::gettext("Hung up")),
+                CallMessageType::Busy => Some(gettextrs::gettext("Unanswered voice call")),
             }
         }
     }
