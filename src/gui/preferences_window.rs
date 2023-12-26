@@ -60,7 +60,7 @@ impl PreferencesWindow {
             let notification = gio::Notification::new(&title);
             notification.set_body(Some(body.as_str()));
             let icon =
-                Pixbuf::from_resource("/icon.png").expect("Flare to have an application icon");
+                Pixbuf::from_resource("/icon.svg").expect("Flare to have an application icon");
             notification.set_icon(&icon);
             app.send_notification(None, &notification);
         }

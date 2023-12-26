@@ -22,7 +22,7 @@ use super::{
 };
 use crate::{backend::SetupResult, error::ApplicationError};
 
-const GROUP_ID: usize = 6;
+const GROUP_ID: usize = 5;
 type PresageError = presage::Error<presage_store_sled::SledStoreError>;
 
 macro_rules! msg {
@@ -100,7 +100,7 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
         LContact {
             uuid: Uuid::from_u128(3),
             phone_number: None,
-            name: "T'Challa".to_string(),
+            name: "Rubeus Hagrid".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -113,20 +113,7 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
         LContact {
             uuid: Uuid::from_u128(4),
             phone_number: None,
-            name: "Toad".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        LContact {
-            uuid: Uuid::from_u128(5),
-            phone_number: None,
-            name: "Call Center".to_string(),
+            name: "Palpetine".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -223,14 +210,14 @@ impl super::Manager {
 
         let msg_replied = msg!(
             self,
-            "Another new version of Flare. Version 0.10.0 brings many new UI improvements, bug fixes and also features. The biggest feature this release it the support for blurhashes for images and videos, this makes loading images and videos a lot smoother and visually appealing. Furthermore, one can now delete all the messages of a single chat. But this was not all, since the last screenshot, there has been numerous of changes, features and improvements.",
+            "Flare 0.11.0 was now released. This release brings many UI improvements, like date-dividers between messages and a revamped setup window. This release also prepared for Flare for being used as a primary device, which currently is still disabled and unsupported. Note that this release took quite long due to some issues Flare was facing which were hard to resolve.",
             2,
             GROUP_ID,
             18 + base_minute
         );
         let msg_reply = msg!(
             self,
-            "Nice to see continued improvement with Flare. I also noticed that the URL of the projects repository has changed. Whats up with that?",
+            "Great to see another release! And nice that those issues are finally fixed.",
             0,
             GROUP_ID,
             20 + base_minute
@@ -256,23 +243,9 @@ impl super::Manager {
                     target_sent_timestamp: None,
                 },
             ));
-        msg_reply.clone().downcast::<TextMessage>().unwrap().react(
-            &ReactionMessage::from_reaction(
-                &self.dummy_contacts()[0],
-                &self.dummy_channels().await[GROUP_ID],
-                26 + base_minute,
-                &self,
-                Reaction {
-                    emoji: Some("😊".to_string()),
-                    remove: Some(false),
-                    target_author_aci: None,
-                    target_sent_timestamp: None,
-                },
-            ),
-        );
 
         let msg_screenshot = msg!(self, "", 2, GROUP_ID, 19 + base_minute);
-        let screenshot_file = gtk::gio::File::for_uri("resource:///icon.png");
+        let screenshot_file = gtk::gio::File::for_uri("resource:///icon.svg");
         let attachment = crate::backend::Attachment::from_file(screenshot_file, self);
         msg_screenshot
             .clone()
@@ -288,31 +261,10 @@ impl super::Manager {
             msg_reply,
             msg!(
                 self,
-                "Yes, we have now decided to put all of my applications that are targetted towards Linux Mobile in a separate GitLab group, called 'Schmiddi on Mobile' (I know, it's a bit egoistic. But we could not find a better name). There, you can also find Pipeline for playing YouTube and Peertube videos, and DieBahn (pending a rename) for all your public transport needs.",
+                "Indeed very nice, and the backend should have grown more reliable due to the fixes.",
                 2,
                 GROUP_ID,
                 24 + base_minute
-            ),
-            msg!(
-                self,
-                "Oh, and we also have a Mastodon account by the way. It can be found at @schmiddionmobile@fosstodon.org.",
-                2,
-                GROUP_ID,
-                25 + base_minute
-            ),
-            msg!(
-                self,
-                "Yes, I already noticed that Mastodon account. Already following.",
-                0,
-                GROUP_ID,
-                26 + base_minute
-            ),
-            msg!(
-                self,
-                "I did not know you also had other apps. Will need to check them out.",
-                1,
-                GROUP_ID,
-                27 + base_minute
             ),
             call_msg!(
                 self,
@@ -334,12 +286,12 @@ impl super::Manager {
             ),
             msg!(
                 self,
-                "We don't do that here",
+                "You're a wizard, Harry!",
                 3,
                 3,
                 1 + base_minute
             ),
-            msg!(self, "Thank you! But our princess is in another castle", 4, 4, 2 + base_minute),
+            msg!(self, "A surprise, to be sure, but a welcome one.", 4, 4, 2 + base_minute),
         ]
     }
 

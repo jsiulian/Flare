@@ -78,7 +78,7 @@ impl ReactionMessage {
         }
         let notification = gio::Notification::new(&notification_title);
         notification.set_body(Some(&notification_body));
-        let icon = Pixbuf::from_resource("/icon.png").expect("Flare to have an application icon");
+        let icon = Pixbuf::from_resource("/icon.svg").expect("Flare to have an application icon");
         notification.set_icon(&icon);
 
         let manager = self.manager();

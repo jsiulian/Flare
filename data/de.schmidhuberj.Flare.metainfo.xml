@@ -73,6 +73,37 @@
   </description>
 
   <releases>
+    <release version="v0.11.0" date="2023-12-25">
+      <description translatable="no">
+        <p>HOTFIX</p>
+        <ul>
+          <li>Contacts syncing.</li>
+          <li>Linking device.</li>
+        </ul>
+        <p>Added</p>
+        <ul>
+          <li>A date-divider between messages sent on different days.</li>
+          <li>Initial work for usage of Flare as a primary device (not yet enabled by default).</li>
+          <li>Menu entry for contact sync.</li>
+          <li>Menu entry for stopping Flare, even if it is running in the background.</li>
+          <li>An improved setup window, which introduces Flare, gives the option to either link or use Flare as primary device (not yet enabled by default), insert required information and gives further information about Flare, e.g. some known issues or contact information.</li>
+        </ul>
+        <p>Changed</p>
+        <ul>
+          <li>Better UI for showing the last message of a channel.</li>
+          <li>Only show the message timestamp if it differs from the next message.</li>
+          <li>Better UI for the message entry bar.</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+          <li>Unlinking Flare while running in the background is enabled not bringing up the relink window at next start.</li>
+        </ul>
+        <p>Chores</p>
+        <ul>
+          <li>Updated to GTK 4.12 and Libadwaita 1.4 and all other dependencies.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.10.0" date="2023-08-28">
       <description translatable="no">
         <p>Added</p>
