@@ -230,7 +230,7 @@ pub mod imp {
         subclass::{InitializingObject, Signal},
         ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
-    use gtk::glib;
+    use gtk::{glib, EmojiChooser};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
 
     use crate::{
@@ -256,8 +256,6 @@ pub mod imp {
         pub(super) reactions: TemplateChild<gtk::Label>,
         #[template_child]
         pub(super) msg_menu: TemplateChild<gtk::PopoverMenu>,
-        #[template_child]
-        pub(super) emoji_chooser: TemplateChild<gtk::EmojiChooser>,
         #[template_child]
         pub(super) box_attachments: TemplateChild<gtk::Box>,
         #[template_child]
@@ -319,11 +317,28 @@ pub mod imp {
         #[template_callback]
         pub fn open_emoji_picker(&self) {
             let obj = self.obj();
-            let (_, rectangle) = obj.imp().msg_menu.pointing_to();
-            obj.imp().emoji_chooser.set_pointing_to(Some(&rectangle));
 
-            obj.imp().msg_menu.popdown();
-            obj.imp().emoji_chooser.popup();
+            let emoji_chooser = EmojiChooser::new();
+            let (_, rectangle) = self.msg_menu.pointing_to();
+            emoji_chooser.set_pointing_to(Some(&rectangle));
+
+            emoji_chooser.connect_emoji_picked(clone!(@weak obj => move |_, emoji| {
+                obj.imp().handle_react(emoji.to_owned());
+            }));
+            emoji_chooser.connect_local(
+                "closed",
+                false,
+                clone!(@weak obj => @default-return None, move |values| {
+                    let chooser = values[0].get::<EmojiChooser>().expect("Closed of EmojiChooser return value to be EmojiChooser");
+                    chooser.unparent();
+                    None
+                }),
+            );
+
+            self.message_bubble.attach(&emoji_chooser, 0, 2, 1, 1);
+
+            self.msg_menu.popdown();
+            emoji_chooser.popup();
         }
 
         #[template_callback]
