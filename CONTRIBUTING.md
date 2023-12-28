@@ -41,7 +41,7 @@ flatpak install org.freedesktop.Sdk.Extension.rust-stable//23.08
 Compile Flare using the following commands:
 
 ```bash
-meson build -Dprofile=development   # Run once before all changes you make. Substitute "development" for "default" for compiling for release.
+meson setup build -Dprofile=development   # Run once before all changes you make. Substitute "development" for "default" for compiling for release.
 meson compile -C build   # Run every time you want to test your changes
 GSETTINGS_SCHEMA_DIR=./build/data/ RUST_LOG=flare=trace ./build/target/debug/flare   # Run your locally compiled application with some logging
 ```
