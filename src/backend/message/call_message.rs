@@ -116,7 +116,7 @@ mod imp {
             let sender: Contact = obj.property("sender");
 
             match (obj.call_type(), sender.is_self()) {
-                (CallMessageType::Offer, false) => Some(gettextrs::gettext("Ingoing call")),
+                (CallMessageType::Offer, false) => Some(gettextrs::gettext("Incoming call")),
                 (CallMessageType::Offer, true) => Some(gettextrs::gettext("Outgoing call")),
                 (CallMessageType::Answer, _) => Some(gettextrs::gettext("Call started")),
                 (CallMessageType::Hangup, _) => Some(gettextrs::gettext("Call ended")),
