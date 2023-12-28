@@ -1,6 +1,6 @@
-use crate::backend::{Manager, Server};
+use crate::backend::{Manager, Server, SetupResult};
 use adw::prelude::GtkWindowExt;
-use gdk::prelude::CastNone;
+use gdk::{glib::subclass::types::ObjectSubclassIsExt, prelude::CastNone};
 use glib::{Object, ObjectExt};
 use gtk::glib;
 use libsignal_service::configuration::SignalServers;
@@ -21,6 +21,10 @@ impl SetupWindow {
             .property("manager", &manager)
             .property("transient-for", parent)
             .build()
+    }
+
+    pub fn handle_setup_result(&self, result: &mut SetupResult) {
+        self.imp().handle_setup_result(result)
     }
 
     fn manager(&self) -> Manager {
@@ -54,12 +58,12 @@ pub mod imp {
     use futures::channel::oneshot::Sender;
     use gdk::gdk_pixbuf::Pixbuf;
     use gdk::gio::ListStore;
-    use gdk::glib::{BoxedAnyObject, Propagation};
+    use gdk::glib::Propagation;
     use gettextrs::gettext;
     use gio::MemoryInputStream;
     use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, Bytes, ParamSpec,
-        ParamSpecObject, Value,
+        once_cell::sync::Lazy, subclass::InitializingObject, Bytes, ParamSpec, ParamSpecObject,
+        Value,
     };
     use gtk::{gdk, gio, glib, PropertyExpression};
     use gtk::{prelude::*, CompositeTemplate};
@@ -231,25 +235,7 @@ pub mod imp {
             self.obj().close();
         }
 
-        fn setup_manager(&self) {
-            let obj = self.obj();
-            let manager = obj.manager();
-
-            manager.connect_local(
-                "setup-result",
-                false,
-                clone!(@strong obj => move |r| {
-                    // r[0] is the manager
-                    let result = r[1].get::<BoxedAnyObject>().expect("Setup-Result to be BoxedAnyObject");
-                    let result: &mut SetupResult = &mut result.borrow_mut();
-
-                    obj.imp().handle_setup_result(result);
-                    None
-                }),
-            );
-        }
-
-        fn handle_setup_result(&self, result: &mut SetupResult) {
+        pub(super) fn handle_setup_result(&self, result: &mut SetupResult) {
             let obj = self.obj();
             match result {
                 SetupResult::Pending(callback) => {
@@ -355,8 +341,6 @@ pub mod imp {
                         .expect("Property `manager` of `SetupWindow` has to be of type `Manager`");
 
                     self.manager.replace(man);
-
-                    self.setup_manager();
                 }
                 _ => unimplemented!(),
             }
