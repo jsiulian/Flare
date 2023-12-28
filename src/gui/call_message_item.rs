@@ -1,8 +1,10 @@
+use gdk::glib::subclass::types::ObjectSubclassIsExt;
 use glib::Object;
 use gtk::glib;
 use gtk::prelude::*;
 
-use crate::backend::message::CallMessage;
+use crate::backend::message::{CallMessage, CallMessageType};
+use crate::backend::Contact;
 
 gtk::glib::wrapper! {
     pub struct CallMessageItem(ObjectSubclass<imp::CallMessageItem>)
@@ -12,9 +14,22 @@ gtk::glib::wrapper! {
 impl CallMessageItem {
     pub fn new(message: &CallMessage) -> Self {
         log::trace!("Initializing `CallMessageItem`");
-        Object::builder::<Self>()
+        let obj = Object::builder::<Self>()
             .property("message", message)
-            .build()
+            .build();
+
+        let sender: Contact = message.property("sender");
+
+        let icon_name = match (message.call_type(), sender.is_self()) {
+            (CallMessageType::Offer, false) => "call-incoming-symbolic",
+            (CallMessageType::Offer, true) => "call-outcoming-symbolic",
+            (CallMessageType::Answer, _) => "call-start-symbolic",
+            (CallMessageType::Hangup, _) => "call-stop-symbolic",
+            (CallMessageType::Busy, _) => "call-missed-symbolic",
+        };
+
+        obj.imp().icon.set_icon_name(Some(icon_name));
+        obj
     }
 
     pub fn message(&self) -> CallMessage {
@@ -39,6 +54,9 @@ pub mod imp {
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/call_message_item.ui")]
     pub struct CallMessageItem {
+        #[template_child]
+        pub icon: TemplateChild<gtk::Image>,
+
         message: RefCell<Option<CallMessage>>,
 
         manager: RefCell<Option<Manager>>,
@@ -49,7 +67,7 @@ pub mod imp {
         const NAME: &'static str = "FlCallMessageItem";
         type Type = super::CallMessageItem;
         type ParentType = gtk::Box;
-        
+
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
             Utility::bind_template_callbacks(klass);

@@ -40,6 +40,10 @@
     <file preprocess="xml-stripblanks">icons/scalable/status/phonelink2-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/send-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/mail-reply-sender-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/call-missed-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/call-outgoing-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/call-start-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/call-stop-symbolic.svg</file>
   </gresource>
 </gresources>
 

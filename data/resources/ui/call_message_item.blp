@@ -6,17 +6,12 @@ template $FlCallMessageItem: Box {
   hexpand: true;
   halign: center;
   spacing: 6;
+  margin-bottom: 6;
+  margin-top: 6;
 
-  // Sender  
-  // Label {
-  //  styles [
-  //    "heading",
-  //  ]
-
-  //  label: bind template.message as <$FlCallMessage>.sender as <$FlContact>.title;
-  //  hexpand: false;
-  //  halign: start;
-  //}
+  Image icon {
+    margin-end: 4;
+  }
 
   // Message
   Label {
@@ -27,9 +22,11 @@ template $FlCallMessageItem: Box {
     use-markup: false;
     selectable: false;
   }
+
   Label {
     label: "·";
   }
+
   // Timestamp
   Label {
     styles [
@@ -37,7 +34,7 @@ template $FlCallMessageItem: Box {
     ]
     halign: center;
     selectable: false;
-    label: bind $format_timestamp(template.message as <$FlCallMessage>.timestamp) as <string>;
+    label: bind $format_time_human(template.message as <$FlCallMessage>.datetime) as <string>;
   }
   
 }

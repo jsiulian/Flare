@@ -52,7 +52,7 @@ pub mod imp {
     use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
     use glib::subclass::InitializingObject;
     use gtk::prelude::{ButtonExt, Cast, WidgetExt};
-    use gtk::{glib, Grid, Button, MediaControls};
+    use gtk::{glib, Button, Grid, MediaControls};
     use gtk::{subclass::prelude::*, CompositeTemplate};
 
     #[derive(CompositeTemplate, Default)]
