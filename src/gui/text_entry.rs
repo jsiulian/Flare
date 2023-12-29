@@ -89,7 +89,8 @@ pub mod imp {
             let key_events = gtk::EventControllerKey::new();
             key_events
                 .connect_key_pressed(clone!(@weak obj => @default-return Propagation::Proceed, move |_, key, _, modifier| {
-                if !modifier.contains(gdk::ModifierType::SHIFT_MASK) && (key == gdk::Key::Return || key == gdk::Key::KP_Enter) && obj.send_on_enter() {
+                if !modifier.contains(gdk::ModifierType::SHIFT_MASK) && (key == gdk::Key::Return || key == gdk::Key::KP_Enter) && obj.send_on_enter() 
+                    || modifier.contains(gdk::ModifierType::SHIFT_MASK) && (key == gdk::Key::Return || key == gdk::Key::KP_Enter) && !obj.send_on_enter() {
                     obj.emit_by_name::<()>("activate", &[]);
                     Propagation::Stop
                 } else {
