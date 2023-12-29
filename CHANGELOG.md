@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- High memory usage due to having unused emoji pickers.
+
 ## [0.11.0] - 2023-12-25
 
 ### HOTFIX
