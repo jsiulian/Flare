@@ -90,7 +90,7 @@ pub mod imp {
     use adw::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
     use adw::{EntryRow, ResponseAppearance};
     use gdk::gio::Cancellable;
-    use gdk::glib::{BindingFlags, Propagation};
+    use gdk::glib::{BindingFlags, BoxedAnyObject, Propagation};
     use gio::{Settings, SimpleAction, SimpleActionGroup};
     use glib::{
         clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject,
@@ -99,7 +99,7 @@ pub mod imp {
     use gtk::{gio, glib};
     use gtk::{prelude::*, Builder, CompositeTemplate, ShortcutsWindow};
 
-    use crate::backend::Channel;
+    use crate::backend::{Channel, SetupResult};
     use crate::gui::channel_info_dialog::ChannelInfoDialog;
     use crate::gui::linked_devices_window::LinkedDevicesWindow;
     use crate::{
@@ -480,7 +480,29 @@ pub mod imp {
                 obj.set_property("manager", Some(&manager));
                 obj.imp().setup_linked_devices_action();
 
-                let _setup_window = SetupWindow::new(manager.clone(), &obj);
+                let setup_window: RefCell<Option<SetupWindow>> = RefCell::default();
+
+                manager.connect_local(
+                    "setup-result",
+                    false,
+                    clone!(@weak obj, @weak manager, @strong setup_window => @default-return None, move |r| {
+                        // r[0] is the manager
+                        let result = r[1].get::<BoxedAnyObject>().expect("Setup-Result to be BoxedAnyObject");
+                        let result: &mut SetupResult = &mut result.borrow_mut();
+                        let mut setup_window = setup_window.borrow_mut();
+
+                        if !matches!(result, SetupResult::Finished) || setup_window.is_some() {
+                            let setup = setup_window.get_or_insert_with(|| SetupWindow::new(manager, &obj));
+                            setup.handle_setup_result(result);
+
+                            if matches!(result, SetupResult::Finished) {
+                                *setup_window = None;
+                            }
+                        }
+
+                        None
+                    }),
+                );
 
                 if let Err(e) = manager.init(&path).await {
                     let dialog = ErrorDialog::new(e, &obj);
