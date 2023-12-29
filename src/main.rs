@@ -86,7 +86,7 @@ fn build_ui(app: &adw::Application) {
     let window = crate::gui::Window::new(app);
     settings
         .bind("run-in-background", &window, "hide-on-close")
-        .flags(SettingsBindFlags::DEFAULT)
+        .flags(SettingsBindFlags::GET)
         .build();
     init_icons(&window.display());
     app.connect_activate(move |_| {
