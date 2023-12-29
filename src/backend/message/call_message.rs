@@ -74,6 +74,8 @@ impl CallMessage {
 }
 
 mod imp {
+    use super::*;
+    use gdk::glib::ObjectExt;
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassIsExt};
     use gdk::{
         gdk_pixbuf::{
@@ -111,11 +113,15 @@ mod imp {
 
     impl DisplayMessageImpl for CallMessage {
         fn textual_description(&self, obj: &super::CallMessage) -> Option<String> {
-            match obj.call_type() {
-                CallMessageType::Offer => Some(gettextrs::gettext("Started calling.")),
-                CallMessageType::Answer => Some(gettextrs::gettext("Answered a call.")),
-                CallMessageType::Hangup => Some(gettextrs::gettext("Hung up.")),
-                CallMessageType::Busy => Some(gettextrs::gettext("Is busy.")),
+            let sender: Contact = obj.property("sender");
+
+            match (obj.call_type(), sender.is_self()) {
+                (CallMessageType::Offer, false) => Some(gettextrs::gettext("Incoming call")),
+                (CallMessageType::Offer, true) => Some(gettextrs::gettext("Outgoing call")),
+                (CallMessageType::Answer, _) => Some(gettextrs::gettext("Call started")),
+                (CallMessageType::Hangup, _) => Some(gettextrs::gettext("Call ended")),
+                (CallMessageType::Busy, false) => Some(gettextrs::gettext("Call declined")),
+                (CallMessageType::Busy, true) => Some(gettextrs::gettext("Unanswered call")),
             }
         }
     }

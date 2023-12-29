@@ -27,7 +27,7 @@ pub mod imp {
     #[template(resource = "/ui/components/attachment_file.ui")]
     pub struct AttachmentFile {
         #[template_child]
-        box_file: TemplateChild<gtk::Box>,
+        box_file: TemplateChild<gtk::Grid>,
     }
 
     #[glib::object_subclass]

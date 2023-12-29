@@ -2,8 +2,12 @@ using Gtk 4.0;
 using Adw 1;
 
 template $FlAttachmentAudio: $FlAttachmentBase {
-  Box box_audio {
+  Grid box_audio {
     Button download_btn {
+      layout {
+        row: 0;
+        column: 0;
+      }
       visible: bind $not(template.attachment as <$FlAttachmentObject>.loaded) as <bool>;
 
       styles [
@@ -17,6 +21,10 @@ template $FlAttachmentAudio: $FlAttachmentBase {
     }
 
     MediaControls controls {
+      layout {
+        row: 0;
+        column: 1;
+      }
       styles [
         "audio"
       ]

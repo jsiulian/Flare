@@ -52,14 +52,14 @@ pub mod imp {
     use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
     use glib::subclass::InitializingObject;
     use gtk::prelude::{ButtonExt, Cast, WidgetExt};
-    use gtk::{glib, Box, Button, MediaControls};
+    use gtk::{glib, Button, Grid, MediaControls};
     use gtk::{subclass::prelude::*, CompositeTemplate};
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/components/attachment_audio.ui")]
     pub struct AttachmentAudio {
         #[template_child]
-        box_audio: TemplateChild<Box>,
+        box_audio: TemplateChild<Grid>,
         #[template_child]
         download_btn: TemplateChild<Button>,
         #[template_child]

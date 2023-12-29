@@ -2,8 +2,13 @@ using Gtk 4.0;
 using Adw 1;
 
 template $FlAttachmentFile: $FlAttachmentBase {
-  Box box_file {
+  Grid box_file {
     Button {
+      layout {
+        row: 0;
+        column: 0;
+        row-span:2;
+      }
       styles [
         "circular",
       ]
@@ -12,27 +17,33 @@ template $FlAttachmentFile: $FlAttachmentBase {
       clicked => $download() swapped;
       valign: center;
       icon-name: "document-save-symbolic";
+      
+    }
+   
+    Label {
+      layout {
+        row: 0;
+        column: 1;
+      }
+      halign: start;
+      ellipsize: end;
+      label: bind template.attachment as <$FlAttachmentObject>.name;
     }
 
-    Box {
-      orientation: vertical;
-
-      Label {
-        halign: start;
-        ellipsize: end;
-        label: bind template.attachment as <$FlAttachmentObject>.name;
+    Label {
+      layout {
+        row: 1;
+        column: 1;
       }
+      styles [
+        "dim-label",
+        "caption",
+        "numeric",
+      ]
 
-      Label {
-        styles [
-          "dim-label",
-          "caption",
-          "numeric",
-        ]
-
-        halign: start;
-        label: bind $format_size(template.attachment as <$FlAttachmentObject>.size) as <string>;
-      }
+      halign: start;
+      label: bind $format_size(template.attachment as <$FlAttachmentObject>.size) as <string>;
     }
+    
   }
 }

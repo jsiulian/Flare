@@ -4,7 +4,7 @@ mod display_message;
 mod reaction_message;
 mod text_message;
 
-pub use call_message::CallMessage;
+pub use call_message::{CallMessage, CallMessageType};
 pub use deletion_message::DeletionMessage;
 pub use display_message::{DisplayMessage, DisplayMessageExt};
 use libsignal_service::{

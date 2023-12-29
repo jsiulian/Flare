@@ -3,103 +3,135 @@ using Gtk 4.0;
 template $FlEmojiPicker: Box {
   hexpand: true;
   orientation: vertical;
-
+  layout-manager: GridLayout{};
   styles [
     "fl-emoji-picker",
     "heading"
   ]
 
-  Box {
-    orientation: horizontal;
+  Button {
+    styles [
+      "flat",
+      "circular",
+    ]
 
-    Button {
-      styles [
-        "flat",
-        "circular",
-      ]
-
-      margin-end: 6;
-      label: "👍️";
-      clicked => $button_react() swapped;
+    layout {
+      row: 0;
+      column: 0;
     }
 
-    Button {
-      styles [
-        "flat",
-        "circular",
-      ]
-
-      margin-end: 6;
-      label: "👎️";
-      clicked => $button_react() swapped;
-    }
-
-    Button {
-      styles [
-        "flat",
-        "circular",
-      ]
-
-      margin-end: 6;
-      label: "😄️";
-      clicked => $button_react() swapped;
-    }
-
-    Button {
-      styles [
-        "flat",
-        "circular",
-      ]
-
-      label: "🎉️";
-      clicked => $button_react() swapped;
-    }
+    margin-end: 6;
+    label: "👍️";
+    clicked => $button_react() swapped;
   }
 
-  Box {
-    orientation: horizontal;
+  Button {
+    styles [
+      "flat",
+      "circular",
+    ]
 
-    Button {
-      styles [
-        "flat",
-        "circular",
-      ]
-
-      margin-end: 6;
-      label: "😕️";
-      clicked => $button_react() swapped;
+    layout {
+      row: 0;
+      column: 1;
     }
 
-    Button {
-      styles [
-        "flat",
-        "circular",
-      ]
+    margin-end: 6;
+    label: "👎️";
+    clicked => $button_react() swapped;
+  }
 
-      margin-end: 6;
-      label: "❤️";
-      clicked => $button_react() swapped;
+  Button {
+    styles [
+      "flat",
+      "circular",
+    ]
+
+    layout {
+      row: 0;
+      column: 2;
     }
 
-    Button {
-      styles [
-        "flat",
-        "circular",
-      ]
+    margin-end: 6;
+    label: "😄️";
+    clicked => $button_react() swapped;
+  }
 
-      margin-end: 6;
-      label: "🚀️";
-      clicked => $button_react() swapped;
+  Button {
+    styles [
+      "flat",
+      "circular",
+    ]
+    
+    layout {
+      row: 0;
+      column: 3;
     }
 
-    Button {
-      styles [
-        "flat",
-        "circular",
-      ]
+    label: "🎉️";
+    clicked => $button_react() swapped;
+  }
+  
+  Button {
+    styles [
+      "flat",
+      "circular",
+    ]
 
-      icon-name: "view-more-horizontal-symbolic";
-      clicked => $btn_emoji_clicked() swapped;
+    layout {
+      row: 1;
+      column: 0;
     }
+
+    margin-end: 6;
+    label: "😕️";
+    clicked => $button_react() swapped;
+  }
+
+  Button {
+    styles [
+      "flat",
+      "circular",
+    ]
+
+    layout {
+      row: 1;
+      column: 1;
+    }
+
+    margin-end: 6;
+    label: "❤️";
+    clicked => $button_react() swapped;
+  }
+
+  Button {
+    styles [
+      "flat",
+      "circular",
+    ]
+
+    layout {
+      row: 1;
+      column: 2;
+    }
+
+    margin-end: 6;
+    label: "🚀️";
+    clicked => $button_react() swapped;
+  }
+
+  Button {
+    styles [
+      "flat",
+      "circular",
+    ]
+
+    layout {
+      row: 1;
+      column: 3;
+    }
+
+    icon-name: "view-more-horizontal-symbolic";
+    clicked => $btn_emoji_clicked() swapped;
   }
 }
