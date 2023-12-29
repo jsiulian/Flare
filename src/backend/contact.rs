@@ -190,10 +190,6 @@ mod imp {
                     }
                 }
                 "title" => {
-                    let contact = self.contact.borrow();
-                    let profile = self.profile.borrow();
-                    let phonenumber = self.phonenumber.borrow();
-                    let uuid = self.uuid.borrow();
                     if self.obj().is_self() {
                         return self
                             .manager
@@ -204,26 +200,32 @@ mod imp {
                             .to_value();
                     }
 
-                    let contact_title = contact.as_ref().and_then(|c| {
+                    let contact_title = self.contact.borrow().as_ref().and_then(|c| {
                         if c.name.is_empty() {
                             None
                         } else {
                             Some(c.name.clone())
                         }
                     });
-                    let profile_title = profile
-                        .as_ref()
-                        .and_then(|p| p.name.as_ref())
-                        .map(crate::utils::format_profile_name);
-                    let phonenumber_title = phonenumber
-                        .as_ref()
-                        .map(|p| p.format().mode(Mode::National).to_string());
-                    let uuid_title = uuid.map(|u| u.to_string());
+                    let profile_title = || {
+                        self.profile
+                            .borrow()
+                            .as_ref()
+                            .and_then(|p| p.name.as_ref())
+                            .map(crate::utils::format_profile_name)
+                    };
+                    let phonenumber_title = || {
+                        self.phonenumber
+                            .borrow()
+                            .as_ref()
+                            .map(|p| p.format().mode(Mode::National).to_string())
+                    };
+                    let uuid_title = || self.uuid.borrow().map(|u| u.to_string());
 
                     contact_title
-                        .or(profile_title)
-                        .or(phonenumber_title)
-                        .or(uuid_title)
+                        .or_else(profile_title)
+                        .or_else(phonenumber_title)
+                        .or_else(uuid_title)
                         // For some reason, Signal includes some special "isolate" control
                         // characters around names with special symbols.
                         .map(|mut s| {
