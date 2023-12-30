@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - High memory usage due to having unused emoji pickers.
 - High memory usage of the setup window, even if unused.
 - Send on Ctrl+Enter when sending on Enter is disabled.
-- Long starting times due to formatting of contacts (still requires more profiling).
+- Long starting times due to formatting of contacts.
 - Quitting the application turning off running in the background.
 
 ## [0.11.0] - 2023-12-25

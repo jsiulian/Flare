@@ -73,6 +73,18 @@
   </description>
 
   <releases>
+    <release version="v0.11.1" date="2023-12-30">
+      <description translatable="no">
+        <p>Fixed</p>
+        <ul>
+          <li>High memory usage due to having unused emoji pickers.</li>
+          <li>High memory usage of the setup window, even if unused.</li>
+          <li>Send on Ctrl+Enter when sending on Enter is disabled.</li>
+          <li>Long starting times due to formatting of contacts.</li>
+          <li>Quitting the application turning off running in the background.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.11.0" date="2023-12-25">
       <description translatable="no">
         <p>HOTFIX</p>
