@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-09 13:04+0200\n"
+"POT-Creation-Date: 2023-12-30 11:30+0100\n"
 "PO-Revision-Date: 2023-10-16 04:19+0000\n"
 "Last-Translator: Jarek Zagórski <me.kubolski@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/"
-"schmiddi-on-mobile/flare/pl/>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/schmiddi-on-"
+"mobile/flare/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,39 +20,39 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.1-dev\n"
 
-#: data/resources/ui/about.blp.in:13
+#: data/resources/ui/about.blp:13
 msgid "translator-credits"
 msgstr ""
 
-#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:152
+#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:162
 msgid "Channel Information"
 msgstr "Informacje o kanale"
 
-#: data/resources/ui/channel_info_dialog.blp:28
+#: data/resources/ui/channel_info_dialog.blp:27
 msgctxt "accessibility"
 msgid "Reset Session"
 msgstr "Odnów sesję"
 
-#: data/resources/ui/channel_info_dialog.blp:31
+#: data/resources/ui/channel_info_dialog.blp:30
 msgid "Reset Session"
 msgstr "Odnów sesję"
 
-#: data/resources/ui/channel_info_dialog.blp:40
-#: data/resources/ui/error_dialog.blp:44
-#: data/resources/ui/submit_captcha_dialog.blp:23
+#: data/resources/ui/channel_info_dialog.blp:37
+#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:481
+#: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
 msgstr "Zamknij"
 
-#: data/resources/ui/channel_list.blp:11
+#: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
 msgstr "Offline"
 
-#: data/resources/ui/channel_list.blp:19
+#: data/resources/ui/channel_list.blp:18
 msgid "Search"
 msgstr "Szukaj"
 
-#: data/resources/ui/channel_list.blp:22 data/resources/ui/window.blp:60
+#: data/resources/ui/channel_list.blp:21 data/resources/ui/window.blp:60
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Szukaj"
@@ -65,58 +65,58 @@ msgstr "Nie wybrano żadnego kanału"
 msgid "Select a channel"
 msgstr "Wybierz kanał"
 
-#: data/resources/ui/channel_messages.blp:91
+#: data/resources/ui/channel_messages.blp:178
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Usuń odpowiedź"
 
-#: data/resources/ui/channel_messages.blp:94
+#: data/resources/ui/channel_messages.blp:181
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Usuń odpowiedź"
 
-#: data/resources/ui/channel_messages.blp:119
+#: data/resources/ui/channel_messages.blp:201
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Usuń załącznik"
 
-#: data/resources/ui/channel_messages.blp:122
+#: data/resources/ui/channel_messages.blp:204
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Usuń załącznik"
 
-#: data/resources/ui/channel_messages.blp:153
+#: data/resources/ui/channel_messages.blp:225
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Dodaj załącznik"
 
-#: data/resources/ui/channel_messages.blp:160
+#: data/resources/ui/channel_messages.blp:233
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Dodaj załącznik"
 
-#: data/resources/ui/channel_messages.blp:176
+#: data/resources/ui/channel_messages.blp:249
 msgctxt "accessibility"
 msgid "Message input"
 msgstr ""
 
-#: data/resources/ui/channel_messages.blp:182
+#: data/resources/ui/channel_messages.blp:255
 msgctxt "tooltip"
 msgid "Message input"
 msgstr ""
 
-#: data/resources/ui/channel_messages.blp:192
+#: data/resources/ui/channel_messages.blp:267
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Wyślij"
 
-#: data/resources/ui/channel_messages.blp:195
+#: data/resources/ui/channel_messages.blp:271
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Wyślij"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
-#: data/resources/ui/window.blp:123
+#: data/resources/ui/window.blp:128
 msgid "Clear messages"
 msgstr ""
 
@@ -129,7 +129,8 @@ msgstr ""
 "aplikację."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
-#: data/resources/ui/dialog_unlink.blp:11 src/gui/window.rs:288
+#: data/resources/ui/dialog_unlink.blp:11
+#: data/resources/ui/linked_devices_window.blp:52 src/gui/window.rs:314
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -137,7 +138,7 @@ msgstr "Anuluj"
 msgid "Clear"
 msgstr "Wyczyść"
 
-#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:118
+#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:117
 msgid "Unlink"
 msgstr "Odłącz"
 
@@ -164,75 +165,49 @@ msgstr "Błąd"
 msgid "Please consider reporting this error."
 msgstr ""
 
-#: data/resources/ui/error_dialog.blp:45
+#: data/resources/ui/error_dialog.blp:44
 msgid "Report"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:20 data/resources/ui/link_window.blp:28
-#: data/resources/ui/link_window.blp:81
-msgid "Link device"
+#: data/resources/ui/linked_devices_window.blp:15
+#: data/resources/ui/window.blp:122
+msgid "Linked Devices"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:33
-msgid "Scan Code"
+#: data/resources/ui/linked_devices_window.blp:33
+msgid "Add Linked Device"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:34
-msgid "Scan this code with another Signal app logged into your account."
+#: data/resources/ui/linked_devices_window.blp:34
+msgid "Please insert the URL of the device to link."
 msgstr ""
 
-#: data/resources/ui/link_window.blp:58
-msgid "Link without scanning"
+#: data/resources/ui/linked_devices_window.blp:44
+#, fuzzy
+msgid "Device URL"
+msgstr "Nazwa urządzenia"
+
+#: data/resources/ui/linked_devices_window.blp:53
+msgid "Add Device"
 msgstr ""
 
-#: data/resources/ui/link_window.blp:64
-msgid ""
-"Note: Currently, to sucessfully link contacts requires intervention. Please "
-"follow these steps: \n"
-"- Link Flare as usual. Wait ~1min after the link window closed. \n"
-"- Make sure you do not have running in the background enabled. Close and "
-"restart Flare. \n"
-"- In the primary menu, click 'synchronize contacts'. Wait ~1min. \n"
-"- Make sure you do not have running in the background enabled. Close and "
-"restart Flare. \n"
-"- Your contacts should be behind the pencil-icon in the top-left."
-msgstr ""
-
-#: data/resources/ui/link_window.blp:74
-msgid "Manual linking"
-msgstr ""
-
-#: data/resources/ui/link_window.blp:86
-msgid "Manual Linking"
-msgstr ""
-
-#: data/resources/ui/link_window.blp:87
-msgid ""
-"If your device can't scan the QR code, you can manually enter the link "
-"provided here"
-msgstr ""
-
-#: data/resources/ui/link_window.blp:98
-msgid "Copy to clipboard"
-msgstr ""
-
-#: data/resources/ui/message_item.blp:12
+#: data/resources/ui/message_item.blp:13
 msgid "Reply"
 msgstr ""
 
-#: data/resources/ui/message_item.blp:19
+#: data/resources/ui/message_item.blp:20
 msgid "Delete"
 msgstr ""
 
-#: data/resources/ui/message_item.blp:27
+#: data/resources/ui/message_item.blp:28
 msgid "Copy"
 msgstr ""
 
-#: data/resources/ui/message_item.blp:36
+#: data/resources/ui/message_item.blp:37
 msgid "Save as…"
 msgstr ""
 
-#: data/resources/ui/message_item.blp:44
+#: data/resources/ui/message_item.blp:45
 msgid "Open with…"
 msgstr ""
 
@@ -240,88 +215,295 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:10
-msgid "Linking"
-msgstr ""
-
-#: data/resources/ui/preferences_window.blp:11
-msgid "The device will need to be relinked to take effect."
-msgstr ""
-
-#: data/resources/ui/preferences_window.blp:14
-msgid "Device Name"
-msgstr "Nazwa urządzenia"
-
 #. Translators: Description of Flare in metainfo: Features
-#: data/resources/ui/preferences_window.blp:19
+#: data/resources/ui/preferences_window.blp:10
 #: data/de.schmidhuberj.Flare.metainfo.xml:51
 msgid "Attachments"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:22
+#: data/resources/ui/preferences_window.blp:13
 msgid "Dowload images automatically"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:26
+#: data/resources/ui/preferences_window.blp:17
 msgid "Dowload videos automatically"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:30
+#: data/resources/ui/preferences_window.blp:21
 msgid "Dowload files automatically"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:34
+#: data/resources/ui/preferences_window.blp:25
 msgid "Dowload voice messages automatically"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:39
+#: data/resources/ui/preferences_window.blp:30
 msgid "Notifications"
 msgstr "Powiadomienia"
 
-#: data/resources/ui/preferences_window.blp:40
+#: data/resources/ui/preferences_window.blp:31
 msgid "Notifications for new messages."
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:43
+#: data/resources/ui/preferences_window.blp:34
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:47
+#: data/resources/ui/preferences_window.blp:38
 msgid "Send notifications on reactions"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:52 src/gui/preferences_window.rs:29
+#: data/resources/ui/preferences_window.blp:43 src/gui/preferences_window.rs:30
 msgid "Watch for new messages while closed"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:60
+#: data/resources/ui/preferences_window.blp:50
 msgid "Mobile Compatibility"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:61
+#: data/resources/ui/preferences_window.blp:51
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:64
+#: data/resources/ui/preferences_window.blp:54
 msgid "Selectable Message Text"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:65
+#: data/resources/ui/preferences_window.blp:55
 msgid "Selectable text can interfere with swipe-gestures on touch-screens."
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:69
+#: data/resources/ui/preferences_window.blp:59
 msgid "Press \"Enter\" to send message"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:70
+#: data/resources/ui/preferences_window.blp:60
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing \"Control + Enter\""
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
+msgid "Welcome to Flare"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:44
+msgid "Set Up Flare"
+msgstr ""
+
+#. Translators: Flare name in metainfo.
+#: data/resources/ui/setup_window.blp:53
+#: data/de.schmidhuberj.Flare.desktop.in.in:5
+#: data/de.schmidhuberj.Flare.metainfo.xml:8
+msgid "Flare"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:56
+msgid ""
+"Flare is an unofficial Signal client. Note that Flare is not stable and "
+"there are bugs to be expected. If you are experiencing any bugs, consult the "
+"<a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">issue "
+"tracker</a> and open issues if you are experiencing a new issue. Also note "
+"that due to being a third-party application, Flare cannot guarantee the same "
+"level of security and privacy as official Signal applications do. If you or "
+"someone you need to contact requires a strong level of security, do not use "
+"Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
+"blob/master/README.md#security\">README</a> for more information."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:65 data/resources/ui/setup_window.blp:72
+msgid "Setup Primary Device or Link Device?"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:88 data/resources/ui/setup_window.blp:320
+#: data/resources/ui/setup_window.blp:327
+msgid "Primary Device"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:101
+#: data/resources/ui/setup_window.blp:156
+#: data/resources/ui/setup_window.blp:163
+#: data/resources/ui/setup_window.blp:180
+msgid "Link Device"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:108
+msgid "Primary Device or Link Device?"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:120
+msgid "You can use Flare either as a primary or secondary device."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:129
+msgid "Linked Device (Recommended)"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:134
+msgid ""
+"Flare can be an application linked to your primary device, similar to the "
+"official Signal Desktop. This mode has been more extensively tested and "
+"mostly works."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:143
+msgid "Primary Device (Disabled)"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:148
+msgid ""
+"Flare can act as a primary device, similar to the official Signal "
+"applications on Android or IOS. This mode is currently not supported by "
+"Flare, even though initial tests seem to indicate that it works. If you are "
+"willing to test it, you may enable the button below (and if you don't know "
+"how to do that, you should not think about testing primary-device support)."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:197
+msgid ""
+"For linking as a secondary device, Flare will need a device name that will "
+"be shown in the official application."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:207
+msgid "Device Name"
+msgstr "Nazwa urządzenia"
+
+#: data/resources/ui/setup_window.blp:211
+#: data/resources/ui/setup_window.blp:380
+msgid "Developer Options"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:214
+#: data/resources/ui/setup_window.blp:383
+msgid "Signal Servers"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:220
+msgid ""
+"The next page will show a QR code which has to be scanned from the primary "
+"device. Note that you only have a timeframe of about one minute to scan the "
+"code, so please already prepare your official application for scanning the "
+"QR code."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:228
+#: data/resources/ui/setup_window.blp:240
+#: data/resources/ui/setup_window.blp:294
+msgid "Link device"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:245
+msgid "Scan Code"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:246
+msgid "Scan this code with another Signal app logged into your account."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:273
+msgid "Link without scanning"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:283
+msgid "Manual linking"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:299
+msgid "Manual Linking"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:300
+msgid ""
+"If your device can't scan the QR code, you can manually enter the link "
+"provided here"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:311
+msgid "Copy to clipboard"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:344
+msgid "Continue"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:361
+msgid ""
+"For registering as a primary device, Flare will need your phone number and a "
+"completion of the captcha. Please give the phone number in international "
+"E.164-format, including the leading \"+\" and country code. The captcha can "
+"be completed <a href=\"https://signalcaptchas.org/registration/generate."
+"html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into "
+"the below field. Note that this captcha is only valid for about one minute, "
+"so please proceed fast."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:372
+msgid "Phone Number"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:376
+#: data/resources/ui/submit_captcha_dialog.blp:20
+msgid "Captcha"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:389
+msgid ""
+"After submitting this information, you will get a SMS from Signal with a "
+"verification code. Insert this verification code on the next page."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:398
+#: data/resources/ui/setup_window.blp:406
+#: data/resources/ui/setup_window.blp:423
+#: data/resources/ui/setup_window.blp:448
+msgid "Confirm"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:439
+msgid "Insert the verification code you received from Signal here."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:456
+#: data/resources/ui/setup_window.blp:464
+msgid "Finished"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:497
+msgid ""
+"Flare is almost ready, it is waiting for contacts to finish syncing. This "
+"may take a few seconds, you can start to use Flare once the contacts are "
+"synced. A few final notes before you start using Flare:"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:506
+msgid "Known Bugs"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:511
+msgid ""
+"Make sure to not send any messages while the messages are still received by "
+"Flare, this makes sure that all required information is received. We are "
+"trying to fix this problem. Furthermore, Flare is currently using excessive "
+"amounts of memory after a while. This is due to some memory leak which has "
+"not yet been found. We also try to resolve this. For a full list of bugs, "
+"visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
+"label_name%5B%5D=bug\">issue tracker</a>."
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:521
+msgid "Contact"
+msgstr ""
+
+#: data/resources/ui/setup_window.blp:526
+msgid ""
+"Want to leave some feedback about Flare, or just talk a little bit? Our <a "
+"href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
+"open for everyone."
 msgstr ""
 
 #: data/resources/ui/shortcuts.blp:11
@@ -384,21 +566,44 @@ msgctxt "shortcut window"
 msgid "Load more messages"
 msgstr ""
 
-#: data/resources/ui/text_entry.blp:12
+#: data/resources/ui/submit_captcha_dialog.blp:5
+#: data/resources/ui/window.blp:133
+msgid "Submit Captcha"
+msgstr ""
+
+#. Translators: Do not translate tags around "on this website".
+#: data/resources/ui/submit_captcha_dialog.blp:7
+msgid ""
+"Submit a Captcha challenge. The token can be obtained from the error message "
+"that was displayed from Flare. The captcha must be filled out <a "
+"href=\"https://signalcaptchas.org/challenge/generate.html\">on this website</"
+"a> and the link to open Signal must be pasted to the corresponding entry. "
+"Note that the captcha is only valid for about one minute."
+msgstr ""
+
+#: data/resources/ui/submit_captcha_dialog.blp:16
+msgid "Token"
+msgstr ""
+
+#: data/resources/ui/submit_captcha_dialog.blp:29
+msgid "Submit"
+msgstr ""
+
+#: data/resources/ui/text_entry.blp:13
 msgid "Message"
 msgstr ""
 
-#: data/resources/ui/text_entry.blp:38
+#: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
 msgid "Insert an emoji"
 msgstr ""
 
-#: data/resources/ui/text_entry.blp:44
+#: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
 msgstr ""
 
-#: data/resources/ui/window.blp:25
+#: data/resources/ui/window.blp:24
 msgid "Channel list"
 msgstr ""
 
@@ -416,239 +621,237 @@ msgstr ""
 msgid "Chat"
 msgstr ""
 
-#: data/resources/ui/window.blp:113
+#: data/resources/ui/window.blp:112
 msgid "Settings"
 msgstr ""
 
-#: data/resources/ui/window.blp:128
-#: data/resources/ui/submit_captcha_dialog.blp:5
-msgid "Submit Captcha"
-msgstr ""
-
-#: data/resources/ui/window.blp:133
+#: data/resources/ui/window.blp:138
 msgid "Synchronize Contacts"
 msgstr ""
 
-#: data/resources/ui/window.blp:138
+#: data/resources/ui/window.blp:143
 msgid "Keybindings"
 msgstr ""
 
-#: data/resources/ui/window.blp:143
+#: data/resources/ui/window.blp:148
 msgid "About"
 msgstr ""
 
-#: data/resources/ui/window.blp:156
+#: data/resources/ui/window.blp:153
+msgid "Quit"
+msgstr ""
+
+#: data/resources/ui/window.blp:167
 msgid "Clear Messages"
 msgstr ""
 
-#. Translators: Do not translate tags around "on this website".
-#: data/resources/ui/submit_captcha_dialog.blp:7
-msgid ""
-"Submit a Captcha challenge. The token can be obtained from the error message "
-"that was displayed from Flare. The captcha must be filled out <a "
-"href=\"https://signalcaptchas.org/challenge/generate.html\">on this website</"
-"a> and the link to open Signal must be pasted to the corresponding entry. "
-"Note that the captcha is only valid for about one minute."
-msgstr ""
-
-#: data/resources/ui/submit_captcha_dialog.blp:13
-msgid "Token"
-msgstr ""
-
-#: data/resources/ui/submit_captcha_dialog.blp:16
-msgid "Captcha"
-msgstr ""
-
-#: data/resources/ui/submit_captcha_dialog.blp:24
-msgid "Submit"
-msgstr ""
-
-#: src/backend/channel.rs:581
+#: src/backend/channel.rs:592
 msgid "Note to self"
 msgstr ""
 
-#: src/backend/manager.rs:430
+#: src/backend/manager.rs:420
 msgid "You"
 msgstr ""
 
-#: src/backend/message/call_message.rs:115
-msgid "Started calling."
+#: src/backend/message/call_message.rs:119
+msgid "Incoming call"
 msgstr ""
 
-#: src/backend/message/call_message.rs:116
-msgid "Answered a call."
+#: src/backend/message/call_message.rs:120
+msgid "Outgoing call"
 msgstr ""
 
-#: src/backend/message/call_message.rs:117
-msgid "Hung up."
+#: src/backend/message/call_message.rs:121
+msgid "Call started"
 msgstr ""
 
-#: src/backend/message/call_message.rs:118
-msgid "Is busy."
+#: src/backend/message/call_message.rs:122
+msgid "Call ended"
+msgstr ""
+
+#: src/backend/message/call_message.rs:123
+msgid "Call declined"
+msgstr ""
+
+#: src/backend/message/call_message.rs:124
+msgid "Unanswered call"
 msgstr ""
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
-#: src/backend/message/reaction_message.rs:70
+#: src/backend/message/reaction_message.rs:69
 msgid "{sender} reacted {emoji} to a message."
 msgstr ""
 
 #. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
-#: src/backend/message/reaction_message.rs:76
+#: src/backend/message/reaction_message.rs:75
 msgid "Reacted {emoji} to a message."
 msgstr ""
 
-#: src/backend/message/text_message.rs:369
+#: src/backend/message/text_message.rs:374
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/backend/message/text_message.rs:372
+#: src/backend/message/text_message.rs:377
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/backend/message/text_message.rs:376
+#: src/backend/message/text_message.rs:381
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/backend/message/text_message.rs:382
+#: src/backend/message/text_message.rs:387
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/error.rs:87
+#: src/error.rs:88
 msgid "I/O Error."
 msgstr ""
 
-#: src/error.rs:92
+#: src/error.rs:93
 msgid "There does not seem to be a connection to the internet available."
 msgstr ""
 
-#: src/error.rs:97
+#: src/error.rs:98
 msgid "Something glib-related failed."
 msgstr ""
 
-#: src/error.rs:102
+#: src/error.rs:103
 msgid "The communication with Libsecret failed."
 msgstr ""
 
-#: src/error.rs:107
+#: src/error.rs:108
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
 
-#: src/error.rs:112
+#: src/error.rs:113
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
 
-#: src/error.rs:117
+#: src/error.rs:118
 msgid "Sending a message failed."
 msgstr ""
 
-#: src/error.rs:122
+#: src/error.rs:123
 msgid "Receiving a message failed."
 msgstr ""
 
-#: src/error.rs:127
+#: src/error.rs:128
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 
-#: src/error.rs:132
+#: src/error.rs:133
 msgid "The application seems to be misconfigured."
 msgstr ""
 
-#: src/error.rs:137
+#: src/error.rs:138
 msgid "A part of the application crashed."
 msgstr ""
 
-#: src/error.rs:147
+#: src/error.rs:148
 msgid "Please check your internet connection."
 msgstr ""
 
-#: src/error.rs:152
+#: src/error.rs:153
 msgid "Please delete the database and relink the device."
 msgstr ""
 
-#: src/error.rs:159
+#: src/error.rs:160
 msgid "The database path at {} is no folder."
 msgstr ""
 
-#: src/error.rs:164
+#: src/error.rs:165
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 
-#: src/gui/link_window.rs:67
-msgid "Copied to clipboard"
-msgstr ""
-
-#: src/gui/preferences_window.rs:52
+#: src/gui/preferences_window.rs:58
 msgid "Background permission"
 msgstr ""
 
-#: src/gui/preferences_window.rs:53
+#: src/gui/preferences_window.rs:59
 msgid "Use settings to remove permissions"
+msgstr ""
+
+#: src/gui/setup_window.rs:44
+msgctxt "Signal Server"
+msgid "Production"
+msgstr ""
+
+#: src/gui/setup_window.rs:48
+msgctxt "Signal Server"
+msgid "Staging"
+msgstr ""
+
+#: src/gui/setup_window.rs:137
+msgid "Copied to clipboard"
 msgstr ""
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:88 src/gui/utility.rs:112
+#: src/gui/utility.rs:97 src/gui/utility.rs:121
 msgid "%H:%M"
 msgstr ""
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:91
+#: src/gui/utility.rs:100
 msgid "%Y-%m-%d %H:%M"
 msgstr ""
 
-#: src/gui/utility.rs:124
+#: src/gui/utility.rs:133
 msgid "Today"
 msgstr ""
 
-#: src/gui/utility.rs:126
+#: src/gui/utility.rs:135
 msgid "Yesterday"
 msgstr ""
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:132
+#: src/gui/utility.rs:141
 msgid "%Y-%m-%d"
 msgstr ""
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:136
+#: src/gui/utility.rs:145
 msgid "%a., %e. %b"
 msgstr ""
 
-#: src/gui/window.rs:283 src/gui/window.rs:289
+#: src/gui/utility.rs:152
+#, fuzzy
+msgid "Attachment"
+msgstr "Dodaj załącznik"
+
+#: src/gui/window.rs:309 src/gui/window.rs:315
 msgid "Remove Messages"
 msgstr ""
 
-#: src/gui/window.rs:284
+#: src/gui/window.rs:310
 msgid "This will remove all locally stored messages from this channel"
-msgstr ""
-
-#. Translators: Flare name in metainfo.
-#: data/de.schmidhuberj.Flare.desktop.in.in:5
-#: data/de.schmidhuberj.Flare.metainfo.xml:8
-msgid "Flare"
 msgstr ""
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "Chat with your friends on Signal"
+msgstr ""
+
+#: data/de.schmidhuberj.Flare.desktop.in.in:15
+msgid "messaging;chat;signal;"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo.
@@ -710,7 +913,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:499
+#: data/de.schmidhuberj.Flare.metainfo.xml:530
 msgid "Overview of the application"
 msgstr ""
 
