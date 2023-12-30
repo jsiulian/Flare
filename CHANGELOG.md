@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - High memory usage due to having unused emoji pickers.
 - High memory usage of the setup window, even if unused.
+- Send on Ctrl+Enter when sending on Enter is disabled.
 
 ## [0.11.0] - 2023-12-25
 
