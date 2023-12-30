@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Backend panic after suspend.
 
+### Fixed
+
+- Use Control instead of Shift for invertet action on the text input.
+
 ## [0.11.1] - 2023-12-30
 
 ### Fixed
