@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-30 11:30+0100\n"
-"PO-Revision-Date: 2023-12-16 10:27+0000\n"
+"PO-Revision-Date: 2024-01-03 17:07+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/sv/>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -173,27 +173,24 @@ msgstr "Rapportera"
 
 #: data/resources/ui/linked_devices_window.blp:15
 #: data/resources/ui/window.blp:122
-#, fuzzy
 msgid "Linked Devices"
-msgstr "Länka enhet"
+msgstr "Länkade enheter"
 
 #: data/resources/ui/linked_devices_window.blp:33
-#, fuzzy
 msgid "Add Linked Device"
-msgstr "Länka enhet"
+msgstr "Lägg till länkad enhet"
 
 #: data/resources/ui/linked_devices_window.blp:34
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Vänligen infoga URL:en till enheten som ska länkas."
 
 #: data/resources/ui/linked_devices_window.blp:44
-#, fuzzy
 msgid "Device URL"
-msgstr "Enhetsnamn"
+msgstr "Enhets URL"
 
 #: data/resources/ui/linked_devices_window.blp:53
 msgid "Add Device"
-msgstr ""
+msgstr "Lägg till enhet"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
@@ -298,11 +295,11 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Välkommen till Flare"
 
 #: data/resources/ui/setup_window.blp:44
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Ställ in Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:53
@@ -323,35 +320,44 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare är en inofficiell signalklient. Observera att Flare inte är stabilt "
+"och att man kan förvänta sig buggar. Om du upplever några buggar, konsultera "
+"<a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\""
+">problemspåraren</a> och öppna problem om du upplever ett nytt problem. "
+"Observera också att Flare inte kan garantera samma nivå av säkerhet och "
+"sekretess som officiella Signal-applikationer, eftersom det är en "
+"tredjepartsapplikation. Om du eller någon du behöver kontakta kräver en "
+"stark säkerhetsnivå, använd inte Flare. Konsultera <a href=\"https://gitlab."
+"com/schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README</a> "
+"för mer information."
 
 #: data/resources/ui/setup_window.blp:65 data/resources/ui/setup_window.blp:72
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Konfigurera primär enhet eller länka enhet?"
 
 #: data/resources/ui/setup_window.blp:88 data/resources/ui/setup_window.blp:320
 #: data/resources/ui/setup_window.blp:327
 msgid "Primary Device"
-msgstr ""
+msgstr "Primär enhet"
 
 #: data/resources/ui/setup_window.blp:101
 #: data/resources/ui/setup_window.blp:156
 #: data/resources/ui/setup_window.blp:163
 #: data/resources/ui/setup_window.blp:180
-#, fuzzy
 msgid "Link Device"
 msgstr "Länka enhet"
 
 #: data/resources/ui/setup_window.blp:108
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "Primär enhet eller länkenhet?"
 
 #: data/resources/ui/setup_window.blp:120
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Du kan använda Flare antingen som en primär eller sekundär enhet."
 
 #: data/resources/ui/setup_window.blp:129
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Länkad enhet (rekommenderas)"
 
 #: data/resources/ui/setup_window.blp:134
 msgid ""
@@ -359,10 +365,13 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare kan vara en applikation kopplad till din primära enhet, liknande det "
+"officiella Signal Desktop. Detta läge har testats mer utförligt och fungerar "
+"för det mesta."
 
 #: data/resources/ui/setup_window.blp:143
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Primär enhet (inaktiverad)"
 
 #: data/resources/ui/setup_window.blp:148
 msgid ""
@@ -372,12 +381,20 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare kan fungera som en primär enhet, liknande de officiella "
+"signalapplikationerna på Android eller IOS. Det här läget stöds för "
+"närvarande inte av Flare, även om inledande tester verkar tyda på att det "
+"fungerar. Om du är villig att testa det kan du aktivera knappen nedan (och "
+"om du inte vet hur du gör det bör du inte tänka på att testa stöd för "
+"primära enheter)."
 
 #: data/resources/ui/setup_window.blp:197
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"För att länka som en sekundär enhet behöver Flare ett enhetsnamn som kommer "
+"att visas i den officiella applikationen."
 
 #: data/resources/ui/setup_window.blp:207
 msgid "Device Name"
@@ -386,12 +403,12 @@ msgstr "Enhetsnamn"
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Developer Options"
-msgstr ""
+msgstr "Utvecklaralternativ"
 
 #: data/resources/ui/setup_window.blp:214
 #: data/resources/ui/setup_window.blp:383
 msgid "Signal Servers"
-msgstr ""
+msgstr "Signal servrar"
 
 #: data/resources/ui/setup_window.blp:220
 msgid ""
@@ -400,6 +417,10 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"Nästa sida kommer att visa en QR-kod som måste skannas från den primära "
+"enheten. Observera att du bara har en tidsram på cirka en minut för att "
+"skanna koden, så förbered redan din officiella applikation för att skanna QR-"
+"koden."
 
 #: data/resources/ui/setup_window.blp:228
 #: data/resources/ui/setup_window.blp:240
@@ -440,7 +461,7 @@ msgstr "Kopiera till urklipp"
 
 #: data/resources/ui/setup_window.blp:344
 msgid "Continue"
-msgstr ""
+msgstr "Fortsätt"
 
 #: data/resources/ui/setup_window.blp:361
 msgid ""
@@ -452,10 +473,17 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"För att registrera dig som en primär enhet behöver Flare ditt telefonnummer "
+"och en komplettering av captcha. Vänligen ange telefonnumret i "
+"internationellt E.164-format, inklusive inledande \"+\" och landskod. "
+"Captcha kan fyllas i <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">här</a>, kopiera sedan länken \"Öppna signal\" och klistra "
+"in den i fältet nedan. Observera att denna captcha bara är giltig i ungefär "
+"en minut, så fortsätt snabbt."
 
 #: data/resources/ui/setup_window.blp:372
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefonnummer"
 
 #: data/resources/ui/setup_window.blp:376
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -467,22 +495,24 @@ msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"Efter att ha skickat in denna information får du ett SMS från Signal med en "
+"verifieringskod. Infoga denna verifieringskod på nästa sida."
 
 #: data/resources/ui/setup_window.blp:398
 #: data/resources/ui/setup_window.blp:406
 #: data/resources/ui/setup_window.blp:423
 #: data/resources/ui/setup_window.blp:448
 msgid "Confirm"
-msgstr ""
+msgstr "Bekräfta"
 
 #: data/resources/ui/setup_window.blp:439
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Infoga verifieringskoden du fick från Signal här."
 
 #: data/resources/ui/setup_window.blp:456
 #: data/resources/ui/setup_window.blp:464
 msgid "Finished"
-msgstr ""
+msgstr "Slutfört"
 
 #: data/resources/ui/setup_window.blp:497
 msgid ""
@@ -490,10 +520,14 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare är nästan redo, det väntar på att kontakter ska slutföra "
+"synkroniseringen. Detta kan ta några sekunder, du kan börja använda Flare "
+"när kontakterna har synkroniserats. Några sista anteckningar innan du börjar "
+"använda Flare:"
 
 #: data/resources/ui/setup_window.blp:506
 msgid "Known Bugs"
-msgstr ""
+msgstr "Kända buggar"
 
 #: data/resources/ui/setup_window.blp:511
 msgid ""
@@ -505,10 +539,17 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Se till att inte skicka några meddelanden medan meddelandena fortfarande tas "
+"emot av Flare, detta säkerställer att all nödvändig information tas emot. Vi "
+"försöker lösa det här problemet. Dessutom använder Flare för närvarande "
+"överdrivna mängder minne efter ett tag. Detta beror på en minnesläcka som "
+"ännu inte har hittats. Vi försöker också lösa detta. För en fullständig "
+"lista över buggar, besök <a href=\"https://gitlab.com/schmiddi-on-mobile/"
+"flare/-/issues/?label_name%5B%5D=bug\">problemspåraren</a> ."
 
 #: data/resources/ui/setup_window.blp:521
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: data/resources/ui/setup_window.blp:526
 msgid ""
@@ -516,6 +557,9 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"Vill du ge lite feedback om Flare, eller bara prata lite? Vårt <a href="
+"\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix-rum</a> är öppet för "
+"alla."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -655,7 +699,7 @@ msgstr "Om"
 
 #: data/resources/ui/window.blp:153
 msgid "Quit"
-msgstr ""
+msgstr "Avsluta"
 
 #: data/resources/ui/window.blp:167
 msgid "Clear Messages"
@@ -671,28 +715,27 @@ msgstr "Dig"
 
 #: src/backend/message/call_message.rs:119
 msgid "Incoming call"
-msgstr ""
+msgstr "Inkommande samtal"
 
 #: src/backend/message/call_message.rs:120
 msgid "Outgoing call"
-msgstr ""
+msgstr "Utgående samtal"
 
 #: src/backend/message/call_message.rs:121
 msgid "Call started"
-msgstr ""
+msgstr "Samtal startat"
 
 #: src/backend/message/call_message.rs:122
 msgid "Call ended"
-msgstr ""
+msgstr "Samtal avslutat"
 
 #: src/backend/message/call_message.rs:123
 msgid "Call declined"
-msgstr ""
+msgstr "Samtal avböjdes"
 
 #: src/backend/message/call_message.rs:124
-#, fuzzy
 msgid "Unanswered call"
-msgstr "Svarade på ett samtal."
+msgstr "Obesvarat samtal"
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:69
@@ -809,12 +852,12 @@ msgstr "Använd inställningar för att ta bort behörigheter"
 #: src/gui/setup_window.rs:44
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Produktion"
 
 #: src/gui/setup_window.rs:48
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Iscensättning"
 
 #: src/gui/setup_window.rs:137
 msgid "Copied to clipboard"
@@ -853,9 +896,8 @@ msgid "%a., %e. %b"
 msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:152
-#, fuzzy
 msgid "Attachment"
-msgstr "Bilagor"
+msgstr "Bilaga"
 
 #: src/gui/window.rs:309 src/gui/window.rs:315
 msgid "Remove Messages"
@@ -873,7 +915,7 @@ msgstr "Chatta med dina vänner på Signal"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "meddelanden;chatt;signal;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
