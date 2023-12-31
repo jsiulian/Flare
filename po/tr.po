@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-30 11:30+0100\n"
-"PO-Revision-Date: 2023-11-03 21:32+0000\n"
+"PO-Revision-Date: 2024-01-03 17:07+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -175,28 +175,24 @@ msgstr "Raporla"
 
 #: data/resources/ui/linked_devices_window.blp:15
 #: data/resources/ui/window.blp:122
-#, fuzzy
 msgid "Linked Devices"
-msgstr "Aygıt Bağla"
+msgstr "Ağlı Aygıtlar"
 
 #: data/resources/ui/linked_devices_window.blp:33
-#, fuzzy
 msgid "Add Linked Device"
-msgstr "Aygıt Bağla"
+msgstr "Bağlı Aygıt Ekle"
 
 #: data/resources/ui/linked_devices_window.blp:34
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Lütfen bağlantı verilecek aygıtın URL'sini girin."
 
 #: data/resources/ui/linked_devices_window.blp:44
-#, fuzzy
 msgid "Device URL"
-msgstr "Aygıt Adı"
+msgstr "Cihaz URL'si"
 
 #: data/resources/ui/linked_devices_window.blp:53
-#, fuzzy
 msgid "Add Device"
-msgstr "Aygıt Bağla"
+msgstr "Aygıt Ekle"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
@@ -303,11 +299,11 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Flare'e Hoş Geldiniz"
 
 #: data/resources/ui/setup_window.blp:44
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Flare'ı Kur"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:53
@@ -331,13 +327,12 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:65 data/resources/ui/setup_window.blp:72
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Birincil Aygıt ya da Bağlantı Aygıt Kurulsun mu?"
 
 #: data/resources/ui/setup_window.blp:88 data/resources/ui/setup_window.blp:320
 #: data/resources/ui/setup_window.blp:327
-#, fuzzy
 msgid "Primary Device"
-msgstr "Aygıt Bağla"
+msgstr "Birincil Aygıt"
 
 #: data/resources/ui/setup_window.blp:101
 #: data/resources/ui/setup_window.blp:156
@@ -348,15 +343,15 @@ msgstr "Aygıt Bağla"
 
 #: data/resources/ui/setup_window.blp:108
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "Birincil Aygıt mı Bağlantı Aygıt mı?"
 
 #: data/resources/ui/setup_window.blp:120
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Flare birincil ya da ikincil aygıt olarak kullanılabilir."
 
 #: data/resources/ui/setup_window.blp:129
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Bağlı Aygıt (Önerilen)"
 
 #: data/resources/ui/setup_window.blp:134
 msgid ""
@@ -367,7 +362,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:143
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Birincil Aygıt (Devre Dışı)"
 
 #: data/resources/ui/setup_window.blp:148
 msgid ""
@@ -391,12 +386,12 @@ msgstr "Aygıt Adı"
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Developer Options"
-msgstr ""
+msgstr "Geliştirici Seçenekleri"
 
 #: data/resources/ui/setup_window.blp:214
 #: data/resources/ui/setup_window.blp:383
 msgid "Signal Servers"
-msgstr ""
+msgstr "Signal Sunucuları"
 
 #: data/resources/ui/setup_window.blp:220
 msgid ""
@@ -447,7 +442,7 @@ msgstr "Panoya kopyala"
 
 #: data/resources/ui/setup_window.blp:344
 msgid "Continue"
-msgstr ""
+msgstr "Devam Et"
 
 #: data/resources/ui/setup_window.blp:361
 msgid ""
@@ -462,7 +457,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:372
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefon Numarası"
 
 #: data/resources/ui/setup_window.blp:376
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -480,16 +475,16 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:423
 #: data/resources/ui/setup_window.blp:448
 msgid "Confirm"
-msgstr ""
+msgstr "Onayla"
 
 #: data/resources/ui/setup_window.blp:439
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Signal'den aldığınız doğrulama kodunu buraya girin."
 
 #: data/resources/ui/setup_window.blp:456
 #: data/resources/ui/setup_window.blp:464
 msgid "Finished"
-msgstr ""
+msgstr "Bitti"
 
 #: data/resources/ui/setup_window.blp:497
 msgid ""
@@ -497,10 +492,14 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare neredeyse hazır, kişilerin eşzamanlamasının bitmesi bekleniyor. Bu "
+"işlem birkaç saniye sürebilir, kişiler eşzamanlandıktan sonra Flare "
+"kullanmaya başlayabilirsiniz. Flare kullanmaya başlamadan önce son birkaç "
+"not:"
 
 #: data/resources/ui/setup_window.blp:506
 msgid "Known Bugs"
-msgstr ""
+msgstr "Bilinen Hatalar"
 
 #: data/resources/ui/setup_window.blp:511
 msgid ""
@@ -515,7 +514,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:521
 msgid "Contact"
-msgstr ""
+msgstr "İletişim"
 
 #: data/resources/ui/setup_window.blp:526
 msgid ""
@@ -662,7 +661,7 @@ msgstr "Hakkında"
 
 #: data/resources/ui/window.blp:153
 msgid "Quit"
-msgstr ""
+msgstr "Çık"
 
 #: data/resources/ui/window.blp:167
 msgid "Clear Messages"
@@ -678,28 +677,27 @@ msgstr "Siz"
 
 #: src/backend/message/call_message.rs:119
 msgid "Incoming call"
-msgstr ""
+msgstr "Gelen arama"
 
 #: src/backend/message/call_message.rs:120
 msgid "Outgoing call"
-msgstr ""
+msgstr "Giden arama"
 
 #: src/backend/message/call_message.rs:121
 msgid "Call started"
-msgstr ""
+msgstr "arama başladı"
 
 #: src/backend/message/call_message.rs:122
 msgid "Call ended"
-msgstr ""
+msgstr "Arama bitti"
 
 #: src/backend/message/call_message.rs:123
 msgid "Call declined"
-msgstr ""
+msgstr "arama reddedildi"
 
 #: src/backend/message/call_message.rs:124
-#, fuzzy
 msgid "Unanswered call"
-msgstr "Bir arama yanıtlandı."
+msgstr "Cevapsız çağrı"
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:69
@@ -818,12 +816,12 @@ msgstr "İzinleri kaldırmak için ayarları kullanın"
 #: src/gui/setup_window.rs:44
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Canlı"
 
 #: src/gui/setup_window.rs:48
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Hazırlık"
 
 #: src/gui/setup_window.rs:137
 msgid "Copied to clipboard"
@@ -862,9 +860,8 @@ msgid "%a., %e. %b"
 msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:152
-#, fuzzy
 msgid "Attachment"
-msgstr "Ekler"
+msgstr "Ek"
 
 #: src/gui/window.rs:309 src/gui/window.rs:315
 msgid "Remove Messages"
@@ -882,7 +879,7 @@ msgstr "Signal üstünden arkadaşlarınla sohbet et"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "mesajlaşma;iletişim;sohbet;signal;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
