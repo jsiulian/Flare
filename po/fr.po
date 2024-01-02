@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-30 11:30+0100\n"
-"PO-Revision-Date: 2023-11-23 16:03+0000\n"
+"PO-Revision-Date: 2024-01-03 17:07+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.2.1-rc\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -172,28 +172,24 @@ msgstr "Signaler"
 
 #: data/resources/ui/linked_devices_window.blp:15
 #: data/resources/ui/window.blp:122
-#, fuzzy
 msgid "Linked Devices"
-msgstr "Lier l’appareil"
+msgstr "Appareils liés"
 
 #: data/resources/ui/linked_devices_window.blp:33
-#, fuzzy
 msgid "Add Linked Device"
-msgstr "Lier l’appareil"
+msgstr "Relier un appareil"
 
 #: data/resources/ui/linked_devices_window.blp:34
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Veuillez insérer l’URL de l’appareil à lier."
 
 #: data/resources/ui/linked_devices_window.blp:44
-#, fuzzy
 msgid "Device URL"
-msgstr "Nom de l’appareil"
+msgstr "URL de l’appareil"
 
 #: data/resources/ui/linked_devices_window.blp:53
-#, fuzzy
 msgid "Add Device"
-msgstr "Lier l’appareil"
+msgstr "Ajouter l’appareil"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
@@ -299,11 +295,11 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Bienvenue dans Flare"
 
 #: data/resources/ui/setup_window.blp:44
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Configurer Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:53
@@ -324,16 +320,25 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare est un client non officiel pour Signal. Notez que l’application n’est "
+"pas stable et peut produire des bogues. Si vous en rencontrez, consultez le "
+"<a href=\"https ://gitlab.com/schmiddi-on-mobile/flare/-/issues\">fil des "
+"signalements</a> et ouvrez un signalement si votre problème est nouveau. "
+"Étant une application tierce Flare, ne peut non plus garantir le même niveau "
+"de sécurité et de confidentialité que les applications Signal officielles. "
+"Si vous ou l'un de vos contacts préférez un niveau de sécurité élevé, n’"
+"utilisez pas Flare. Consultez le fichier <a href=\"https ://gitlab.com/"
+"schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README</a> pour "
+"plus d’informations."
 
 #: data/resources/ui/setup_window.blp:65 data/resources/ui/setup_window.blp:72
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Configurer comme appareil primaire ou lier l’appareil ?"
 
 #: data/resources/ui/setup_window.blp:88 data/resources/ui/setup_window.blp:320
 #: data/resources/ui/setup_window.blp:327
-#, fuzzy
 msgid "Primary Device"
-msgstr "Lier l’appareil"
+msgstr "Appareil primaire"
 
 #: data/resources/ui/setup_window.blp:101
 #: data/resources/ui/setup_window.blp:156
@@ -344,15 +349,15 @@ msgstr "Lier l’appareil"
 
 #: data/resources/ui/setup_window.blp:108
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "Appareil primaire ou lié ?"
 
 #: data/resources/ui/setup_window.blp:120
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Vous pouvez utiliser Flare comme appareil primaire ou secondaire."
 
 #: data/resources/ui/setup_window.blp:129
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Lier l’appareil (recommandé)"
 
 #: data/resources/ui/setup_window.blp:134
 msgid ""
@@ -360,10 +365,13 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare peut être une application reliée à votre appareil primaire, comme l’"
+"application Signal Desktop officielle. Ce mode a été plus largement testé et "
+"fonctionnera dans la plupart des cas."
 
 #: data/resources/ui/setup_window.blp:143
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Appareil primaire (désactivé)"
 
 #: data/resources/ui/setup_window.blp:148
 msgid ""
@@ -373,12 +381,20 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare peut être configuré comme appareil principal, comme les applications "
+"officielles Signal sur Android ou IOS. Ce mode n’est actuellement pas pris "
+"en charge par Flare, même si les premiers tests semblent indiquer qu’il "
+"fonctionne. Si vous êtes prêt à le tester, vous pouvez activer le bouton ci-"
+"dessous (et si vous ne savez pas comment faire, vous ne devriez pas penser à "
+"tester la prise en charge d’appareil principal)."
 
 #: data/resources/ui/setup_window.blp:197
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Pour la liaison comme appareil secondaire, Flare nécessitera un nom d’"
+"appareil qui sera affiché dans l’application officielle."
 
 #: data/resources/ui/setup_window.blp:207
 msgid "Device Name"
@@ -387,12 +403,12 @@ msgstr "Nom de l’appareil"
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Developer Options"
-msgstr ""
+msgstr "Options développeur"
 
 #: data/resources/ui/setup_window.blp:214
 #: data/resources/ui/setup_window.blp:383
 msgid "Signal Servers"
-msgstr ""
+msgstr "Serveurs Signal"
 
 #: data/resources/ui/setup_window.blp:220
 msgid ""
@@ -401,6 +417,10 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"La page suivante affichera un QR code qui devra être scanné depuis l’"
+"appareil primaire. Notez que vous n’aurez qu’une minute environ pour scanner "
+"le code, pensez donc à préparer votre application officielle pour scanner le "
+"QR code."
 
 #: data/resources/ui/setup_window.blp:228
 #: data/resources/ui/setup_window.blp:240
@@ -443,7 +463,7 @@ msgstr "Copier vers le presse-papiers"
 
 #: data/resources/ui/setup_window.blp:344
 msgid "Continue"
-msgstr ""
+msgstr "Continuer"
 
 #: data/resources/ui/setup_window.blp:361
 msgid ""
@@ -455,10 +475,18 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"Pour l’enregistrement comme appareil primaire, Flare aura besoin de votre "
+"numéro de téléphone et de la complétion du captcha. Veuillez fournir le "
+"numéro de téléphone au format international E.164, incluant le signe « + » "
+"et le code du pays. Le captcha pourra être complété <a href=\"https "
+"://signalcaptchas.org/registration/generate.html\">ici</a>, après quoi vous "
+"devrez copier le lien « Ouvrir Signal » et le coller dans le champ ci-"
+"dessous. Notez que ce captcha ne sera valide que pendant une minute environ, "
+"il vous faudra donc procéder rapidement."
 
 #: data/resources/ui/setup_window.blp:372
 msgid "Phone Number"
-msgstr ""
+msgstr "Numéro de téléphone"
 
 #: data/resources/ui/setup_window.blp:376
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -470,22 +498,24 @@ msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"Après avoir fourni cette information, vous recevrez un SMS de Signal avec un "
+"code de vérification. Insérez-le sur la page suivante."
 
 #: data/resources/ui/setup_window.blp:398
 #: data/resources/ui/setup_window.blp:406
 #: data/resources/ui/setup_window.blp:423
 #: data/resources/ui/setup_window.blp:448
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #: data/resources/ui/setup_window.blp:439
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Insérez le code de vérification reçu de Signal ici."
 
 #: data/resources/ui/setup_window.blp:456
 #: data/resources/ui/setup_window.blp:464
 msgid "Finished"
-msgstr ""
+msgstr "Terminé"
 
 #: data/resources/ui/setup_window.blp:497
 msgid ""
@@ -493,10 +523,14 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"L’application est presque prête, elle est en attente de la synchronisation "
+"de vos contacts. Cela pourrait prendre quelques instants, vous pourrez "
+"commencer à utiliser Flare une fois la synchronisation achevée. Quelques "
+"remarques pour finir avant que vous ne commenciez à utiliser Flare :"
 
 #: data/resources/ui/setup_window.blp:506
 msgid "Known Bugs"
-msgstr ""
+msgstr "Bogues connus"
 
 #: data/resources/ui/setup_window.blp:511
 msgid ""
@@ -508,10 +542,18 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Assurez-vous de ne pas envoyer de messages pendant que d’autres sont en "
+"cours de réception par Flare, pour que toutes les informations requises "
+"soient reçues (cet inconvénient est en cours de résolution). En outre, Flare "
+"utilise actuellement des quantités excessives de mémoire après un certain "
+"temps, du fait d’une fuite de mémoire qui n'a pas encore été trouvée. Nous "
+"essayons également de résoudre ce problème. Pour une liste complète des "
+"bogues, référez-vous au <a href=\"https ://gitlab.com/schmiddi-on-mobile/"
+"flare/-/issues/ ?label_name%5B%5D=bug\">fil des signalements</a>."
 
 #: data/resources/ui/setup_window.blp:521
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #: data/resources/ui/setup_window.blp:526
 msgid ""
@@ -519,6 +561,9 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"Vous voulez donner votre avis sur Flare, ou simplement discuter un peu ? "
+"Notre <a href=\"https ://matrix.to/#/#flare-signal :matrix.org\">salon de "
+"discussion Matrix</a> est ouvert à tous."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -659,7 +704,7 @@ msgstr "À propos"
 
 #: data/resources/ui/window.blp:153
 msgid "Quit"
-msgstr ""
+msgstr "Quitter"
 
 #: data/resources/ui/window.blp:167
 msgid "Clear Messages"
@@ -675,28 +720,27 @@ msgstr "Vous"
 
 #: src/backend/message/call_message.rs:119
 msgid "Incoming call"
-msgstr ""
+msgstr "Appel entrant"
 
 #: src/backend/message/call_message.rs:120
 msgid "Outgoing call"
-msgstr ""
+msgstr "Appel sortant"
 
 #: src/backend/message/call_message.rs:121
 msgid "Call started"
-msgstr ""
+msgstr "Appel débuté"
 
 #: src/backend/message/call_message.rs:122
 msgid "Call ended"
-msgstr ""
+msgstr "Appel terminé"
 
 #: src/backend/message/call_message.rs:123
 msgid "Call declined"
-msgstr ""
+msgstr "Appel refusé"
 
 #: src/backend/message/call_message.rs:124
-#, fuzzy
 msgid "Unanswered call"
-msgstr "A répondu à un appel."
+msgstr "Appel sans réponse"
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:69
@@ -816,12 +860,12 @@ msgstr "Utiliser les paramètres pour retirer les permissions"
 #: src/gui/setup_window.rs:44
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Production"
 
 #: src/gui/setup_window.rs:48
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Préparation"
 
 #: src/gui/setup_window.rs:137
 msgid "Copied to clipboard"
@@ -860,9 +904,8 @@ msgid "%a., %e. %b"
 msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:152
-#, fuzzy
 msgid "Attachment"
-msgstr "Pièces-jointes"
+msgstr "Pièce-jointe"
 
 #: src/gui/window.rs:309 src/gui/window.rs:315
 msgid "Remove Messages"
@@ -881,7 +924,7 @@ msgstr "Discutez avec vos amis sur Signal"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "messagerie ;chat ;signal ;discussion ;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
