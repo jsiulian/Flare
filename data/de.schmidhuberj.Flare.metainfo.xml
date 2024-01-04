@@ -73,6 +73,18 @@
   </description>
 
   <releases>
+    <release version="v0.11.2" date="2024-01-04">
+      <description translatable="no">
+        <p>HOTFIX</p>
+        <ul>
+          <li>Backend panic after suspend.</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+          <li>Use Control instead of Shift for invertet action on the text input.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.11.1" date="2023-12-30">
       <description translatable="no">
         <p>Fixed</p>

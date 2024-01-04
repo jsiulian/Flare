@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.2] - 2024-01-04
+
 ### HOTFIX
 
 - Backend panic after suspend.
@@ -483,7 +485,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.11.1...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.11.2...master
+[0.11.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.11.1...0.11.2
 [0.11.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.11.0...0.11.1
 [0.11.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.10.0...0.11.0
 [0.10.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.9.3...0.10.0

@@ -14,5 +14,5 @@ Adw.AboutWindow about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>Fixed</p> <ul> <li>High memory usage due to having unused emoji pickers.</li> <li>High memory usage of the setup window, even if unused.</li> <li>Send on Ctrl+Enter when sending on Enter is disabled.</li> <li>Long starting times due to formatting of contacts.</li> <li>Quitting the application turning off running in the background.</li> </ul>";
+  release-notes: "<p>HOTFIX</p> <ul> <li>Backend panic after suspend.</li> </ul> <p>Fixed</p> <ul> <li>Use Control instead of Shift for invertet action on the text input.</li> </ul>";
 }
