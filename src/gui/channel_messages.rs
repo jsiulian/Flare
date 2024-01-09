@@ -169,6 +169,8 @@ pub mod imp {
         pub(super) text_entry: TemplateChild<TextEntry>,
         #[template_child]
         pub(super) list_view: TemplateChild<gtk::ListView>,
+        #[template_child]
+        button_send: TemplateChild<gtk::Button>,
 
         attachments: RefCell<Vec<crate::backend::Attachment>>,
         reply_message: RefCell<Option<TextMessage>>,
@@ -296,6 +298,10 @@ pub mod imp {
         #[template_callback]
         fn send_message(&self) {
             log::trace!("Got callback to send message");
+            // Don't send if not allowed to. This can happen if the entry was activated and not the button.
+            if !self.button_send.is_sensitive() {
+                return;
+            }
             let text = self.text_entry.text();
             self.text_entry.clear();
             let attachments = {
