@@ -76,14 +76,6 @@ pub mod imp {
                 String::new()
             }
         }
-        #[template_callback]
-        fn note_to_self(&self, name: String) -> String {
-            if self.obj().channel().is_self() {
-                String::new()
-            } else {
-                name
-            }
-        }
     }
 
     #[glib::object_subclass]

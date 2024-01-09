@@ -12,9 +12,9 @@ template $FlChannelItem: Box {
   hexpand-set: true;
   // Avatar
   Adw.Avatar {
-    text: bind $note_to_self(template.channel as <$FlChannel>.title) as <string>;
+    text: bind template.channel as <$FlChannel>.title;
     icon-name: "user-bookmarks-symbolic";
-    show-initials: true;
+    show-initials: bind $not(template.channel as <$FlChannel>.is-self) as <bool>;
     size: 44;
   }
 

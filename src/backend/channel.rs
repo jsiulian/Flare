@@ -215,6 +215,10 @@ impl Channel {
             .unwrap_or_default()
     }
 
+    pub fn is_contact(&self) -> bool {
+        self.property("is-contact")
+    }
+
     pub fn uuid(&self) -> Option<Uuid> {
         self.imp()
             .contact
@@ -381,11 +385,6 @@ impl Channel {
         Ok(())
     }
 
-    pub fn messages(&self) -> Vec<DisplayMessage> {
-        // self.imp().messages.borrow().clone()
-        vec![]
-    }
-
     pub(super) async fn send_internal_message(
         &self,
         mut data: DataMessage,
@@ -482,12 +481,29 @@ impl Channel {
             self.imp().participants.replace(participants);
         }
     }
+
+    pub fn phone_number(&self) -> Option<String> {
+        self.property("phone-number")
+    }
+
+    pub fn description(&self) -> Option<String> {
+        self.property("description")
+    }
+
+    /// In seconds. A value of 0 means messages don't disappear.
+    pub fn disappearing_messages_timer(&self) -> u32 {
+        self.property("disappearing-messages-timer")
+    }
 }
 
 mod imp {
     use std::{cell::RefCell, collections::HashMap};
 
-    use gdk::{glib::ParamSpecBoolean, prelude::*, subclass::prelude::*};
+    use gdk::{
+        glib::{ParamSpecBoolean, ParamSpecUInt},
+        prelude::*,
+        subclass::prelude::*,
+    };
     use glib::{
         once_cell::sync::Lazy, subclass::Signal, ParamSpec, ParamSpecObject, ParamSpecString, Value,
     };
@@ -561,6 +577,12 @@ mod imp {
                         .build(),
                     ParamSpecString::builder("title").read_only().build(),
                     ParamSpecBoolean::builder("is-contact").read_only().build(),
+                    ParamSpecBoolean::builder("is-self").read_only().build(),
+                    ParamSpecUInt::builder("disappearing-messages-timer")
+                        .read_only()
+                        .build(),
+                    ParamSpecString::builder("phone-number").read_only().build(),
+                    ParamSpecString::builder("description").read_only().build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -600,6 +622,38 @@ mod imp {
                     title.to_value()
                 }
                 "is-contact" => self.contact.borrow().as_ref().is_some().to_value(),
+                "is-self" => self
+                    .contact
+                    .borrow()
+                    .as_ref()
+                    .is_some_and(|c| c.is_self())
+                    .to_value(),
+                "disappearing-messages-timer" => {
+                    if let Some(group) = self.group.borrow().as_ref() {
+                        group
+                            .disappearing_messages_timer
+                            .as_ref()
+                            .map(|t| t.duration)
+                            .unwrap_or_default()
+                            .to_value()
+                    } else if let Some(contact) = self.contact.borrow().as_ref() {
+                        contact.expire_timer().to_value()
+                    } else {
+                        0.to_value()
+                    }
+                }
+                "phone-number" => self
+                    .contact
+                    .borrow()
+                    .as_ref()
+                    .and_then(|c| c.phone_number())
+                    .to_value(),
+                "description" => self
+                    .group
+                    .borrow()
+                    .as_ref()
+                    .and_then(|g| g.description.clone())
+                    .to_value(),
                 _ => unimplemented!(),
             }
         }

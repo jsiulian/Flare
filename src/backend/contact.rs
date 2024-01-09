@@ -130,6 +130,24 @@ impl Contact {
             .as_ref()
             .map(|c| ServiceAddress { uuid: c.uuid })
     }
+
+    pub fn expire_timer(&self) -> u32 {
+        // Unwrap should never happen.
+        self.imp()
+            .contact
+            .borrow()
+            .as_ref()
+            .map(|c| c.expire_timer)
+            .unwrap_or_default()
+    }
+
+    pub fn phone_number(&self) -> Option<String> {
+        self.imp()
+            .contact
+            .borrow()
+            .as_ref()
+            .and_then(|c| c.phone_number.as_ref().map(|p| p.to_string()))
+    }
 }
 
 mod imp {

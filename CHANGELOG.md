@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- UI improvements to the channel information dialog, which now also displays phone number, disappearing messages timer and description.
+
+### Fixed
+
+- Random color of note-to-self chat.
+
 ## [0.11.2] - 2024-01-04
 
 ### HOTFIX

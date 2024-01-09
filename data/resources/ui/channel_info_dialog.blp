@@ -2,34 +2,51 @@ using Gtk 4.0;
 using Adw 1;
 
 template $FlChannelInfoDialog: Adw.MessageDialog {
-  heading: _("Channel Information");
+  heading: bind template.channel as <$FlChannel>.title;
 
   extra-child: Box {
     spacing: 5;
 
-    styles [
-      "card",
-    ]
-
     orientation: vertical;
-    // The channel
-    $FlChannelItem {
-      margin-top: "5";
-      margin-bottom: "5";
-      margin-start: "5";
-      margin-end: "5";
-      channel: bind template.channel;
+
+    Adw.PreferencesGroup {
+      title: _("Channel Information");
+      header-suffix:
+        Adw.Avatar avatar {
+          icon-name: "user-bookmarks-symbolic";
+          size: 30;
+        };
+
+      Adw.ActionRow row_phone {
+        styles ["property"]
+
+        title: _("Phone Number");
+        icon-name: "call-start-symbolic";
+      }
+
+      Adw.ActionRow row_disappearing {
+        styles ["property"]
+
+        title: _("Disappearing Messages");
+        icon-name: "appointment-missed-symbolic";
+      }
+
+      Adw.ActionRow row_description {
+        styles ["property"]
+
+        title: _("Description");
+        subtitle-lines: 2;
+      }
     }
 
-    // Identity Reset
-    Button {
+    // Session Reset
+    Button button_reset_session {
       accessibility {
         label: C_("accessibility", "Reset Session");
       }
 
       label: _("Reset Session");
       clicked => $reset_session() swapped;
-      visible: bind template.channel as <$FlChannel>.is-contact;
     }
   };
 
