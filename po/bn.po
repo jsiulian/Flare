@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-30 11:30+0100\n"
+"POT-Creation-Date: 2024-01-17 18:47+0100\n"
 "PO-Revision-Date: 2023-10-01 08:02+0000\n"
 "Last-Translator: porshuram <byronytherony@gmail.com>\n"
 "Language-Team: Bengali <https://hosted.weblate.org/projects/flare/flare/bn/"
@@ -23,20 +23,35 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:162
+#: data/resources/ui/channel_info_dialog.blp:13
+#: data/resources/ui/window.blp:162
 msgid "Channel Information"
 msgstr "চ্যানেলের তথ্য"
 
-#: data/resources/ui/channel_info_dialog.blp:27
+#: data/resources/ui/channel_info_dialog.blp:23
+#: data/resources/ui/setup_window.blp:372
+msgid "Phone Number"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.blp:30
+#, fuzzy
+msgid "Disappearing Messages"
+msgstr "বার্তা মুছুন"
+
+#: data/resources/ui/channel_info_dialog.blp:37
+msgid "Description"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.blp:45
 msgctxt "accessibility"
 msgid "Reset Session"
 msgstr "সেশন নবায়ন করুন"
 
-#: data/resources/ui/channel_info_dialog.blp:30
+#: data/resources/ui/channel_info_dialog.blp:48
 msgid "Reset Session"
 msgstr "সেশন নবায়ন করুন"
 
-#: data/resources/ui/channel_info_dialog.blp:37
+#: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:481
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
@@ -218,54 +233,65 @@ msgstr "খুলুন …"
 msgid "General"
 msgstr "সাধারণ"
 
-#. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:10
-#: data/de.schmidhuberj.Flare.metainfo.xml:51
-msgid "Attachments"
-msgstr "সংযুক্তিগুলো"
+#, fuzzy
+msgid "Automatically Download Attachments"
+msgstr "স্বক্রিয়ভাবে ডাউনলোড করা ছবি"
 
-#: data/resources/ui/preferences_window.blp:13
-msgid "Dowload images automatically"
-msgstr "ছবিগুলো স্বয়ংক্রিয়ভাবে ডাউনলোড করুন"
+#: data/resources/ui/preferences_window.blp:11
+msgid "Attachment types selected below will be automatically downloaded"
+msgstr ""
 
-#: data/resources/ui/preferences_window.blp:17
-msgid "Dowload videos automatically"
-msgstr "ভিডিওগুলো স্বয়ংক্রিয়ভাবে ডাউনলোড করুন"
+#: data/resources/ui/preferences_window.blp:14
+msgid "Images"
+msgstr ""
 
-#: data/resources/ui/preferences_window.blp:21
-msgid "Dowload files automatically"
-msgstr "ফাইলগুলো স্বয়ংক্রিয়ভাবে ডাউনলোড করুন"
+#: data/resources/ui/preferences_window.blp:18
+msgid "Videos"
+msgstr ""
 
-#: data/resources/ui/preferences_window.blp:25
-msgid "Dowload voice messages automatically"
-msgstr "কণ্ঠ বার্তাগুলো স্বয়ংক্রিয়ভাবে ডাউনলোড করুন"
+#: data/resources/ui/preferences_window.blp:22
+msgid "Files"
+msgstr ""
 
-#: data/resources/ui/preferences_window.blp:30
+#: data/resources/ui/preferences_window.blp:26
+#, fuzzy
+msgid "Voice Messages"
+msgstr "বার্তা গ্রহণ"
+
+#: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
 msgstr "নোটিফিকেশান"
 
-#: data/resources/ui/preferences_window.blp:31
-msgid "Notifications for new messages."
+#: data/resources/ui/preferences_window.blp:32
+#, fuzzy
+msgid "Notifications for new messages"
 msgstr "নতুন বার্তাগুলোর জন্য নোটিফিকেশান।"
 
-#: data/resources/ui/preferences_window.blp:34
-#: data/de.schmidhuberj.Flare.gschema.xml:41
-msgid "Send notifications"
+#: data/resources/ui/preferences_window.blp:35
+#, fuzzy
+msgid "Send Notifications"
 msgstr "নোটিফিকেশান পাঠান"
 
-#: data/resources/ui/preferences_window.blp:38
-msgid "Send notifications on reactions"
+#: data/resources/ui/preferences_window.blp:39
+#, fuzzy
+msgid "Send Notifications on Reactions"
 msgstr "প্রতিক্রিয়ার নোটিফিকেশান পাঠান"
 
-#: data/resources/ui/preferences_window.blp:43 src/gui/preferences_window.rs:30
-msgid "Watch for new messages while closed"
-msgstr "বন্ধ অবস্থায় নতুন বার্তা খোঁজ"
+#: data/resources/ui/preferences_window.blp:44
+#, fuzzy
+msgid "Background Notifications"
+msgstr "নোটিফিকেশান পাঠান"
 
-#: data/resources/ui/preferences_window.blp:50
+#: data/resources/ui/preferences_window.blp:45
+msgid "Fetch notifications while the app is closed"
+msgstr ""
+
+#: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:51
+#: data/resources/ui/preferences_window.blp:53
 #, fuzzy
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
@@ -274,22 +300,23 @@ msgid ""
 msgstr ""
 "এই নির্বাচনিগুলো টাচ ও মোবাইল ডিভাইসে ভাল অভিজ্ঞতার জন্য পাল্টানো যেতে পারে।"
 
-#: data/resources/ui/preferences_window.blp:54
+#: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
 msgstr "বাছাইযোগ্য বার্তা"
 
-#: data/resources/ui/preferences_window.blp:55
-msgid "Selectable text can interfere with swipe-gestures on touch-screens."
+#: data/resources/ui/preferences_window.blp:57
+msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:59
-msgid "Press \"Enter\" to send message"
+#: data/resources/ui/preferences_window.blp:61
+#, fuzzy
+msgid "Press “Enter” to Send Message"
 msgstr "বার্তা পাঠাতে এনটার চাপুন"
 
-#: data/resources/ui/preferences_window.blp:60
+#: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
-"allowing \"Control + Enter\""
+"allowing “Control + Enter”"
 msgstr ""
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
@@ -451,10 +478,6 @@ msgid ""
 "html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into "
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
-msgstr ""
-
-#: data/resources/ui/setup_window.blp:372
-msgid "Phone Number"
 msgstr ""
 
 #: data/resources/ui/setup_window.blp:376
@@ -659,7 +682,7 @@ msgstr ""
 msgid "Clear Messages"
 msgstr "বার্তা মুছুন"
 
-#: src/backend/channel.rs:592
+#: src/backend/channel.rs:614
 msgid "Note to self"
 msgstr "নিজস্ব নোট"
 
@@ -795,6 +818,14 @@ msgstr "{} এ কোনো তথ্যভান্ডার এর ফোল�
 msgid "Please restart the application with logging and report this issue."
 msgstr "দয়া করে লগ ইন করে সফটওয়ারটি পুনরায় চালু করুন এবং সমস্যাটি অভিযোগ করুন।"
 
+#: src/gui/channel_info_dialog.rs:105
+msgid "Never"
+msgstr ""
+
+#: src/gui/preferences_window.rs:30
+msgid "Watch for new messages while closed"
+msgstr "বন্ধ অবস্থায় নতুন বার্তা খোঁজ"
+
 #: src/gui/preferences_window.rs:58
 msgid "Background permission"
 msgstr "ব্যাকগ্রাঊন্ড অনুমতি"
@@ -914,6 +945,11 @@ msgid "Reacting to a message"
 msgstr "বার্তার প্রতিক্রিয়া"
 
 #. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:51
+msgid "Attachments"
+msgstr "সংযুক্তিগুলো"
+
+#. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:55
 #, fuzzy
 msgid "Encrypted storage"
@@ -941,7 +977,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:530
+#: data/de.schmidhuberj.Flare.metainfo.xml:554
 msgid "Overview of the application"
 msgstr ""
 
@@ -981,6 +1017,10 @@ msgstr "স্বক্রিয়ভাবে ডাউনলোড করা ক
 msgid "Automatically download files"
 msgstr "স্বক্রিয়ভাবে ডাউনলোড করা ফাইল"
 
+#: data/de.schmidhuberj.Flare.gschema.xml:41
+msgid "Send notifications"
+msgstr "নোটিফিকেশান পাঠান"
+
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
 msgstr "বন্ধ অবস্থায় ব্যাকগ্রাউন্ড এ চলবে কি না?"
@@ -996,6 +1036,18 @@ msgstr ""
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
 msgstr "এনটার চেপে বার্তা পাঠান"
+
+#~ msgid "Dowload images automatically"
+#~ msgstr "ছবিগুলো স্বয়ংক্রিয়ভাবে ডাউনলোড করুন"
+
+#~ msgid "Dowload videos automatically"
+#~ msgstr "ভিডিওগুলো স্বয়ংক্রিয়ভাবে ডাউনলোড করুন"
+
+#~ msgid "Dowload files automatically"
+#~ msgstr "ফাইলগুলো স্বয়ংক্রিয়ভাবে ডাউনলোড করুন"
+
+#~ msgid "Dowload voice messages automatically"
+#~ msgstr "কণ্ঠ বার্তাগুলো স্বয়ংক্রিয়ভাবে ডাউনলোড করুন"
 
 #~ msgid "Linking"
 #~ msgstr "ডিভাইস সংযুক্তি"

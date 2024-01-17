@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-30 11:30+0100\n"
+"POT-Creation-Date: 2024-01-17 18:47+0100\n"
 "PO-Revision-Date: 2023-07-27 06:07+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/flare/flare/ru/"
@@ -23,20 +23,35 @@ msgstr ""
 msgid "translator-credits"
 msgstr "Давид Лапшин <ddaudix@gmail.com>"
 
-#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:162
+#: data/resources/ui/channel_info_dialog.blp:13
+#: data/resources/ui/window.blp:162
 msgid "Channel Information"
 msgstr "Информация о канале"
 
-#: data/resources/ui/channel_info_dialog.blp:27
+#: data/resources/ui/channel_info_dialog.blp:23
+#: data/resources/ui/setup_window.blp:372
+msgid "Phone Number"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.blp:30
+#, fuzzy
+msgid "Disappearing Messages"
+msgstr "Очистить сообщения"
+
+#: data/resources/ui/channel_info_dialog.blp:37
+msgid "Description"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.blp:45
 msgctxt "accessibility"
 msgid "Reset Session"
 msgstr "Сбросить сеанс"
 
-#: data/resources/ui/channel_info_dialog.blp:30
+#: data/resources/ui/channel_info_dialog.blp:48
 msgid "Reset Session"
 msgstr "Сбросить сеанс"
 
-#: data/resources/ui/channel_info_dialog.blp:37
+#: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:481
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
@@ -219,54 +234,66 @@ msgstr "Открыть с помощью…"
 msgid "General"
 msgstr "Общее"
 
-#. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:10
-#: data/de.schmidhuberj.Flare.metainfo.xml:51
-msgid "Attachments"
-msgstr "Вложения"
+#, fuzzy
+msgid "Automatically Download Attachments"
+msgstr "Автоматически загружать изображения"
 
-#: data/resources/ui/preferences_window.blp:13
-msgid "Dowload images automatically"
-msgstr "Загружать изображения автоматически"
+#: data/resources/ui/preferences_window.blp:11
+msgid "Attachment types selected below will be automatically downloaded"
+msgstr ""
 
-#: data/resources/ui/preferences_window.blp:17
-msgid "Dowload videos automatically"
-msgstr "Загружать видео автоматически"
+#: data/resources/ui/preferences_window.blp:14
+msgid "Images"
+msgstr ""
 
-#: data/resources/ui/preferences_window.blp:21
-msgid "Dowload files automatically"
-msgstr "Загружать файлы автоматически"
+#: data/resources/ui/preferences_window.blp:18
+msgid "Videos"
+msgstr ""
 
-#: data/resources/ui/preferences_window.blp:25
-msgid "Dowload voice messages automatically"
-msgstr "Загружать голосовые сообщения автоматически"
+#: data/resources/ui/preferences_window.blp:22
+msgid "Files"
+msgstr ""
 
-#: data/resources/ui/preferences_window.blp:30
+#: data/resources/ui/preferences_window.blp:26
+#, fuzzy
+msgid "Voice Messages"
+msgstr "Получение сообщений"
+
+#: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: data/resources/ui/preferences_window.blp:31
-msgid "Notifications for new messages."
+#: data/resources/ui/preferences_window.blp:32
+#, fuzzy
+msgid "Notifications for new messages"
 msgstr "Уведомления для новых сообщений."
 
-#: data/resources/ui/preferences_window.blp:34
-#: data/de.schmidhuberj.Flare.gschema.xml:41
-msgid "Send notifications"
+#: data/resources/ui/preferences_window.blp:35
+#, fuzzy
+msgid "Send Notifications"
 msgstr "Отправлять уведомления"
 
-#: data/resources/ui/preferences_window.blp:38
-msgid "Send notifications on reactions"
+#: data/resources/ui/preferences_window.blp:39
+#, fuzzy
+msgid "Send Notifications on Reactions"
 msgstr "Отправлять уведомления о реакциях"
 
-#: data/resources/ui/preferences_window.blp:43 src/gui/preferences_window.rs:30
-msgid "Watch for new messages while closed"
-msgstr "Следить за новыми сообщениями в закрытом состоянии"
+#: data/resources/ui/preferences_window.blp:44
+#, fuzzy
+msgid "Background Notifications"
+msgstr "Отправлять уведомления"
 
-#: data/resources/ui/preferences_window.blp:50
+#: data/resources/ui/preferences_window.blp:45
+#, fuzzy
+msgid "Fetch notifications while the app is closed"
+msgstr "Отправлять уведомления при получении реакций"
+
+#: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
 msgstr "Совместимость с мобильными устройствами"
 
-#: data/resources/ui/preferences_window.blp:51
+#: data/resources/ui/preferences_window.blp:53
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
@@ -276,23 +303,26 @@ msgstr ""
 "сенсорными и мобильными устройствами. Значения этих параметров по умолчанию "
 "выбраны так, чтобы они были полезны на настольных устройствах."
 
-#: data/resources/ui/preferences_window.blp:54
+#: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
 msgstr "Выбираемый текст сообщения"
 
-#: data/resources/ui/preferences_window.blp:55
-msgid "Selectable text can interfere with swipe-gestures on touch-screens."
+#: data/resources/ui/preferences_window.blp:57
+#, fuzzy
+msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
 "Выделяемый текст может мешать жестам пролистывания на сенсорных экранах."
 
-#: data/resources/ui/preferences_window.blp:59
-msgid "Press \"Enter\" to send message"
+#: data/resources/ui/preferences_window.blp:61
+#, fuzzy
+msgid "Press “Enter” to Send Message"
 msgstr "Нажать \"Enter\" для отправки сообщения"
 
-#: data/resources/ui/preferences_window.blp:60
+#: data/resources/ui/preferences_window.blp:62
+#, fuzzy
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
-"allowing \"Control + Enter\""
+"allowing “Control + Enter”"
 msgstr ""
 "Может быть, будет невозможно отправлять сообщения с переносом строки на "
 "сенсорной клавиатуре, не позволяющей использовать «Control + Enter»"
@@ -456,10 +486,6 @@ msgid ""
 "html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into "
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
-msgstr ""
-
-#: data/resources/ui/setup_window.blp:372
-msgid "Phone Number"
 msgstr ""
 
 #: data/resources/ui/setup_window.blp:376
@@ -669,7 +695,7 @@ msgstr ""
 msgid "Clear Messages"
 msgstr "Очистить сообщения"
 
-#: src/backend/channel.rs:592
+#: src/backend/channel.rs:614
 msgid "Note to self"
 msgstr "Заметка для себя"
 
@@ -808,6 +834,14 @@ msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Пожалуйста, перезапустите приложение с логами и сообщите об этой ошибке."
 
+#: src/gui/channel_info_dialog.rs:105
+msgid "Never"
+msgstr ""
+
+#: src/gui/preferences_window.rs:30
+msgid "Watch for new messages while closed"
+msgstr "Следить за новыми сообщениями в закрытом состоянии"
+
 #: src/gui/preferences_window.rs:58
 msgid "Background permission"
 msgstr "Фоновое разрешение"
@@ -926,6 +960,11 @@ msgid "Reacting to a message"
 msgstr "Реакция на сообщение"
 
 #. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:51
+msgid "Attachments"
+msgstr "Вложения"
+
+#. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:55
 msgid "Encrypted storage"
 msgstr "Зашифрованное хранилище"
@@ -958,7 +997,7 @@ msgstr ""
 "данными. Дополнительную информацию о безопасности можно найти в README "
 "проекта."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:530
+#: data/de.schmidhuberj.Flare.metainfo.xml:554
 msgid "Overview of the application"
 msgstr "Обзор приложения"
 
@@ -998,6 +1037,10 @@ msgstr "Автоматически загружать голосовые соо�
 msgid "Automatically download files"
 msgstr "Автоматически загружать файлы"
 
+#: data/de.schmidhuberj.Flare.gschema.xml:41
+msgid "Send notifications"
+msgstr "Отправлять уведомления"
+
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
 msgstr "Работать в фоновом режиме при закрытии"
@@ -1013,6 +1056,18 @@ msgstr "Можно ли выбирать сообщения"
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
 msgstr "Отправить сообщение когда клавиша Enter нажата"
+
+#~ msgid "Dowload images automatically"
+#~ msgstr "Загружать изображения автоматически"
+
+#~ msgid "Dowload videos automatically"
+#~ msgstr "Загружать видео автоматически"
+
+#~ msgid "Dowload files automatically"
+#~ msgstr "Загружать файлы автоматически"
+
+#~ msgid "Dowload voice messages automatically"
+#~ msgstr "Загружать голосовые сообщения автоматически"
 
 #~ msgid "Linking"
 #~ msgstr "Привазывание"

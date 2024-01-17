@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-30 11:30+0100\n"
+"POT-Creation-Date: 2024-01-17 18:47+0100\n"
 "PO-Revision-Date: 2023-12-11 15:06+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/schmiddi-on-"
@@ -23,20 +23,34 @@ msgstr ""
 msgid "translator-credits"
 msgstr "دانیال بهزادی <dani.behzi@ubuntu.com>"
 
-#: data/resources/ui/channel_info_dialog.blp:5 data/resources/ui/window.blp:162
+#: data/resources/ui/channel_info_dialog.blp:13
+#: data/resources/ui/window.blp:162
 msgid "Channel Information"
 msgstr "اطّلاعات کانال"
 
-#: data/resources/ui/channel_info_dialog.blp:27
+#: data/resources/ui/channel_info_dialog.blp:23
+#: data/resources/ui/setup_window.blp:372
+msgid "Phone Number"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.blp:30
+msgid "Disappearing Messages"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.blp:37
+msgid "Description"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.blp:45
 msgctxt "accessibility"
 msgid "Reset Session"
 msgstr "بازنشانی نشست"
 
-#: data/resources/ui/channel_info_dialog.blp:30
+#: data/resources/ui/channel_info_dialog.blp:48
 msgid "Reset Session"
 msgstr "بازنشانی نشست"
 
-#: data/resources/ui/channel_info_dialog.blp:37
+#: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:481
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
@@ -214,76 +228,85 @@ msgstr ""
 msgid "General"
 msgstr "عمومی"
 
-#. Translators: Description of Flare in metainfo: Features
 #: data/resources/ui/preferences_window.blp:10
-#: data/de.schmidhuberj.Flare.metainfo.xml:51
-msgid "Attachments"
+msgid "Automatically Download Attachments"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:13
-msgid "Dowload images automatically"
-msgstr "بارگیری خودکار تصویرها"
-
-#: data/resources/ui/preferences_window.blp:17
-msgid "Dowload videos automatically"
-msgstr "بارگیری خودکار ویدیوها"
-
-#: data/resources/ui/preferences_window.blp:21
-msgid "Dowload files automatically"
+#: data/resources/ui/preferences_window.blp:11
+msgid "Attachment types selected below will be automatically downloaded"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:25
-msgid "Dowload voice messages automatically"
+#: data/resources/ui/preferences_window.blp:14
+msgid "Images"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:30
+#: data/resources/ui/preferences_window.blp:18
+msgid "Videos"
+msgstr ""
+
+#: data/resources/ui/preferences_window.blp:22
+msgid "Files"
+msgstr ""
+
+#: data/resources/ui/preferences_window.blp:26
+#, fuzzy
+msgid "Voice Messages"
+msgstr "پیام"
+
+#: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
 msgstr "آگاهی‌ها"
 
-#: data/resources/ui/preferences_window.blp:31
-msgid "Notifications for new messages."
+#: data/resources/ui/preferences_window.blp:32
+#, fuzzy
+msgid "Notifications for new messages"
+msgstr "آگاهی‌ها"
+
+#: data/resources/ui/preferences_window.blp:35
+#, fuzzy
+msgid "Send Notifications"
+msgstr "آگاهی‌ها"
+
+#: data/resources/ui/preferences_window.blp:39
+msgid "Send Notifications on Reactions"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:34
-#: data/de.schmidhuberj.Flare.gschema.xml:41
-msgid "Send notifications"
+#: data/resources/ui/preferences_window.blp:44
+#, fuzzy
+msgid "Background Notifications"
+msgstr "آگاهی‌ها"
+
+#: data/resources/ui/preferences_window.blp:45
+msgid "Fetch notifications while the app is closed"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:38
-msgid "Send notifications on reactions"
-msgstr ""
-
-#: data/resources/ui/preferences_window.blp:43 src/gui/preferences_window.rs:30
-msgid "Watch for new messages while closed"
-msgstr ""
-
-#: data/resources/ui/preferences_window.blp:50
+#: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
 msgstr "سازگاری همراه"
 
-#: data/resources/ui/preferences_window.blp:51
+#: data/resources/ui/preferences_window.blp:53
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:54
+#: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:55
-msgid "Selectable text can interfere with swipe-gestures on touch-screens."
+#: data/resources/ui/preferences_window.blp:57
+msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:59
-msgid "Press \"Enter\" to send message"
+#: data/resources/ui/preferences_window.blp:61
+msgid "Press “Enter” to Send Message"
 msgstr ""
 
-#: data/resources/ui/preferences_window.blp:60
+#: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
-"allowing \"Control + Enter\""
+"allowing “Control + Enter”"
 msgstr ""
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
@@ -440,10 +463,6 @@ msgid ""
 "html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into "
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
-msgstr ""
-
-#: data/resources/ui/setup_window.blp:372
-msgid "Phone Number"
 msgstr ""
 
 #: data/resources/ui/setup_window.blp:376
@@ -645,7 +664,7 @@ msgstr ""
 msgid "Clear Messages"
 msgstr ""
 
-#: src/backend/channel.rs:592
+#: src/backend/channel.rs:614
 msgid "Note to self"
 msgstr ""
 
@@ -776,6 +795,14 @@ msgstr ""
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 
+#: src/gui/channel_info_dialog.rs:105
+msgid "Never"
+msgstr ""
+
+#: src/gui/preferences_window.rs:30
+msgid "Watch for new messages while closed"
+msgstr ""
+
 #: src/gui/preferences_window.rs:58
 msgid "Background permission"
 msgstr ""
@@ -887,6 +914,11 @@ msgid "Reacting to a message"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo: Features
+#: data/de.schmidhuberj.Flare.metainfo.xml:51
+msgid "Attachments"
+msgstr ""
+
+#. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:55
 msgid "Encrypted storage"
 msgstr ""
@@ -912,7 +944,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:530
+#: data/de.schmidhuberj.Flare.metainfo.xml:554
 msgid "Overview of the application"
 msgstr ""
 
@@ -950,6 +982,10 @@ msgstr ""
 msgid "Automatically download files"
 msgstr ""
 
+#: data/de.schmidhuberj.Flare.gschema.xml:41
+msgid "Send notifications"
+msgstr ""
+
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
 msgstr ""
@@ -965,6 +1001,12 @@ msgstr ""
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
 msgstr ""
+
+#~ msgid "Dowload images automatically"
+#~ msgstr "بارگیری خودکار تصویرها"
+
+#~ msgid "Dowload videos automatically"
+#~ msgstr "بارگیری خودکار ویدیوها"
 
 #~ msgid "Linking"
 #~ msgstr "پیوند دادن"
