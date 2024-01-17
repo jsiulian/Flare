@@ -7,40 +7,42 @@ template $FlPreferencesWindow: Adw.PreferencesWindow {
     icon-name: "preferences-system-symbolic";
 
     Adw.PreferencesGroup {
-      title: _("Attachments");
+      title: _("Automatically Download Attachments");
+      description: _("Attachment types selected below will be automatically downloaded");
 
       Adw.SwitchRow row_download_images {
-        title: _("Dowload images automatically");
+        title: _("Images");
       }
 
       Adw.SwitchRow row_download_videos {
-        title: _("Dowload videos automatically");
+        title: _("Videos");
       }
 
       Adw.SwitchRow row_download_files {
-        title: _("Dowload files automatically");
+        title: _("Files");
       }
 
       Adw.SwitchRow row_download_voice_messages {
-        title: _("Dowload voice messages automatically");
+        title: _("Voice Messages");
       }
     }
 
     Adw.PreferencesGroup {
       title: _("Notifications");
-      description: _("Notifications for new messages.");
+      description: _("Notifications for new messages");
 
       Adw.SwitchRow row_notifications {
-        title: _("Send notifications");
+        title: _("Send Notifications");
       }
 
       Adw.SwitchRow row_notifications_reactions {
-        title: _("Send notifications on reactions");
+        title: _("Send Notifications on Reactions");
         sensitive: bind row_notifications.active;
       }
 
       Adw.SwitchRow row_background {
-        title: _("Watch for new messages while closed");
+        title: _("Background Notifications");
+        subtitle: _("Fetch notifications while the app is closed");
         sensitive: bind row_notifications.active;
         notify::active => $on_background_switch_state_set() swapped;
       }
@@ -52,12 +54,12 @@ template $FlPreferencesWindow: Adw.PreferencesWindow {
 
       Adw.SwitchRow row_messages_selectable {
         title: _("Selectable Message Text");
-        subtitle: _("Selectable text can interfere with swipe-gestures on touch-screens.");
+        subtitle: _("Selectable text can interfere with swipe-gestures on touch-screens");
       }
 
       Adw.SwitchRow row_send_on_enter {
-        title: _("Press \"Enter\" to send message");
-        subtitle: _("It may not be possible to send messages with newlines on touch keyboards not allowing \"Control + Enter\"");
+        title: _("Press “Enter” to Send Message");
+        subtitle: _("It may not be possible to send messages with newlines on touch keyboards not allowing “Control + Enter”");
       }
     }
   }
