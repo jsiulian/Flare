@@ -8,14 +8,17 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-01-22 19:01+0000\n"
+"Last-Translator: Amethyst Silva Freitas <rockyamethyst@users.noreply.hosted."
+"weblate.org>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -52,7 +55,7 @@ msgstr ""
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:481
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
@@ -141,7 +144,7 @@ msgstr ""
 #: data/resources/ui/dialog_unlink.blp:11
 #: data/resources/ui/linked_devices_window.blp:52 src/gui/window.rs:314
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
