@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-01-03 17:07+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/fr/>\n"
+"PO-Revision-Date: 2024-01-24 22:01+0000\n"
+"Last-Translator: Kevin Joly <kevin.joly@posteo.net>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgstr "Effacer les messages"
 
 #: data/resources/ui/channel_info_dialog.blp:37
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: data/resources/ui/channel_info_dialog.blp:45
 msgctxt "accessibility"
@@ -241,15 +241,15 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Images"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Videos"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Fichiers"
 
 #: data/resources/ui/preferences_window.blp:26
 #, fuzzy
@@ -261,9 +261,8 @@ msgid "Notifications"
 msgstr "Notifications"
 
 #: data/resources/ui/preferences_window.blp:32
-#, fuzzy
 msgid "Notifications for new messages"
-msgstr "Notifications pour les nouveaux messages."
+msgstr "Notifications pour les nouveaux messages"
 
 #: data/resources/ui/preferences_window.blp:35
 #, fuzzy
@@ -304,13 +303,11 @@ msgid "Selectable Message Text"
 msgstr "Texte des messages sélectionnable"
 
 #: data/resources/ui/preferences_window.blp:57
-#, fuzzy
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
-"La sélection peut interférer avec les gestes de balayage sur écrans tactiles."
+"La sélection peut interférer avec les gestes de balayage sur écrans tactiles"
 
 #: data/resources/ui/preferences_window.blp:61
-#, fuzzy
 msgid "Press “Enter” to Send Message"
 msgstr "Appuyer sur « Entrée » pour envoyer le message"
 
@@ -877,7 +874,7 @@ msgstr ""
 
 #: src/gui/channel_info_dialog.rs:105
 msgid "Never"
-msgstr ""
+msgstr "Jamais"
 
 #: src/gui/preferences_window.rs:30
 msgid "Watch for new messages while closed"
