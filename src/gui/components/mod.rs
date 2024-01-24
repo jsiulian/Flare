@@ -20,4 +20,3 @@ pub use self::{
     item_row::*,
     label::MessageLabel,
 };
-pub use super::window::Window;

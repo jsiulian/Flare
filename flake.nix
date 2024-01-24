@@ -22,8 +22,8 @@
                 outputHashes = {
                   "curve25519-dalek-4.0.0" = "sha256-KUXvYXeVvJEQ/+dydKzXWCZmA2bFa2IosDzaBL6/Si0=";
                   "libsignal-protocol-0.1.0" = "sha256-FCrJO7porlY5FrwZ2c67UPd4tgN7cH2/3DTwfPjihwM=";
-                  "libsignal-service-0.1.0" = "sha256-Ul1mg+oQ8te364Jc2gOBoiq2udYsw9UBret/O9VU9ec=";
-                  "presage-0.6.0-dev" = "sha256-0Z2ySXMZZ4wpyesxOikhra/eN7K3I+ElAh7vAaNSbb0=";
+                  "libsignal-service-0.1.0" = "sha256-QoA/eVSRT8Gk0BPRjxv5pSZB5NhBYnd4BnGtX5Ka4Zk=";
+                  "presage-0.6.0-dev" = "sha256-PYB4hGx9qvDfj4HzV9Iejwy3SqU44g3MeKrZZk7xGNA=";
                 };
               };
               src = let fs = lib.fileset; in fs.toSource {
@@ -41,6 +41,8 @@
               buildInputs = with pkgs; [ pkgs.libadwaita pkgs.protobuf pkgs.libsecret pkgs.gst_all_1.gstreamer pkgs.gst_all_1.gst-plugins-base pkgs.gst_all_1.gst-plugins-good pkgs.gst_all_1.gst-plugins-bad pkgs.gtksourceview5 pkgs.gtk4 ];
               nativeBuildInputs = with pkgs; [ pkgs.appstream-glib pkgs.blueprint-compiler pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib ];
 
+              PROTOC = "${pkgs.protobuf}/bin/protoc";
+
               inherit name;
             };
           packages.flare-screenshot = packages.default.overrideAttrs {
@@ -50,11 +52,9 @@
           devShells.default =
             let
               run = pkgs.writeShellScriptBin "run" ''
-                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
                 meson compile -C build && ./build/target/debug/${name}
               '';
               run-gdb = pkgs.writeShellScriptBin "run-gdb" ''
-                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
                 meson compile -C build && gdb ./build/target/debug/${name}
               '';
               check = pkgs.writeShellScriptBin "check" ''
@@ -65,7 +65,6 @@
                 meson compile flare-update-po -C build
               '';
               prof = pkgs.writeShellScriptBin "prof" ''
-                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
                 RUSTFLAGS="-C force-frame-pointers=yes" meson compile -C build
                 sysprof-cli --force --no-battery --use-trace-fd --speedtrack --gtk $@ flare.syscap -- ./build/target/debug/${name}
               '';
@@ -76,6 +75,10 @@
               buildInputs = self.packages.${system}.default.buildInputs;
               nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb clippy sysprof ] ++ [ run run-gdb check i18n prof ];
               shellHook = ''
+                # Required for the application findings settings.
+                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
+                # Required for prost, which by default ships its own protoc (at least in the version of one of our dependencies uses); overrides it to system-protobuf.
+                export PROTOC=${pkgs.protobuf}/bin/protoc
                 meson setup -Dprofile=development build
               '';
             };
