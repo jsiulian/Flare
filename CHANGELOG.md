@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - UI improvements to the channel information dialog, which now also displays phone number, disappearing messages timer and description.
+- Fix the messages being sent on shift+enter instead of ctrl+enter.
 
 ### Fixed
 
