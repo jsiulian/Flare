@@ -57,8 +57,15 @@ pub mod imp {
     #[gtk::template_callbacks]
     impl ChannelItem {
         #[template_callback]
-        fn format_last_message(&self, message: Option<DisplayMessage>) -> String {
-            if let Some(msg) = message {
+        fn format_last_message(&self, message: Option<DisplayMessage>, is_typing: bool) -> String {
+            if is_typing {
+                self.label_last_message.add_css_class("accent");
+                self.label_last_message.remove_css_class("dim-label");
+                gettextrs::gettext("is typing")
+            } else if let Some(msg) = message {
+                self.label_last_message.add_css_class("dim-label");
+                self.label_last_message.remove_css_class("accent");
+
                 let is_group = self.obj().channel().group().is_some();
                 if is_group {
                     format!(

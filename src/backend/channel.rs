@@ -494,10 +494,22 @@ impl Channel {
     pub fn disappearing_messages_timer(&self) -> u32 {
         self.property("disappearing-messages-timer")
     }
+
+    pub fn add_user_typing(&self, contact: Contact) {
+        let _ = self.imp().typing.borrow_mut().insert(contact);
+        self.notify("is-typing");
+    }
+    pub fn remove_user_typing(&self, contact: Contact) {
+        let _ = self.imp().typing.borrow_mut().remove(&contact);
+        self.notify("is-typing");
+    }
 }
 
 mod imp {
-    use std::{cell::RefCell, collections::HashMap};
+    use std::{
+        cell::RefCell,
+        collections::{HashMap, HashSet},
+    };
 
     use gdk::{
         glib::{ParamSpecBoolean, ParamSpecUInt},
@@ -527,6 +539,7 @@ mod imp {
         pub(super) manager: RefCell<Option<Manager>>,
         pub(super) timeline: RefCell<Timeline>,
         pub(super) pending_reactions: RefCell<HashMap<u64, Vec<ReactionMessage>>>,
+        pub(super) typing: RefCell<HashSet<Contact>>,
     }
 
     impl std::hash::Hash for Channel {
@@ -583,6 +596,7 @@ mod imp {
                         .build(),
                     ParamSpecString::builder("phone-number").read_only().build(),
                     ParamSpecString::builder("description").read_only().build(),
+                    ParamSpecBoolean::builder("is-typing").read_only().build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -654,6 +668,7 @@ mod imp {
                     .as_ref()
                     .and_then(|g| g.description.clone())
                     .to_value(),
+                "is-typing" => (!self.typing.borrow().is_empty()).to_value(),
                 _ => unimplemented!(),
             }
         }

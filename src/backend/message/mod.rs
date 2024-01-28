@@ -26,6 +26,7 @@ use gtk::{glib, prelude::*};
 use std::cell::{RefCell, RefMut};
 
 use crate::backend::Channel;
+use libsignal_service::proto::typing_message::Action;
 
 use super::{
     timeline::{TimelineItem, TimelineItemImpl},
@@ -52,7 +53,9 @@ impl Message {
                 let channel = manager
                     .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
                     .await;
+
                 let contact = channel.participant_by_uuid(metadata.sender.uuid);
+
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -237,8 +240,20 @@ impl Message {
                 CallMessage::from_call(&contact, &channel, timestamp, manager, c.clone())
                     .map(|c| c.upcast())
             }
-            ContentBody::TypingMessage(_) => {
-                log::trace!("Got currently unhandled typing-message");
+            ContentBody::TypingMessage(t) => {
+                let uuid = metadata.sender.uuid;
+                // TODO: typing message for group
+                let channel = manager.channel_from_uuid_or_group(uuid, &None).await;
+
+                let contact = channel.participant_by_uuid(uuid);
+                if contact.is_blocked() {
+                    log::debug!("Got message from a blocked contact. Ignoring");
+                } else {
+                    match t.action() {
+                        Action::Started => channel.add_user_typing(contact),
+                        Action::Stopped => channel.remove_user_typing(contact),
+                    };
+                }
                 None
             }
             ContentBody::ReceiptMessage(_) => {

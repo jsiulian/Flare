@@ -62,10 +62,9 @@ template $FlChannelItem: Box {
       use-markup: true;
       wrap-mode: word_char;
       natural-wrap-mode: none;
-      label: bind $format_last_message(template.channel as <$FlChannel>.last-message as <$FlTextMessage>) as <string>;
+      label: bind $format_last_message(template.channel as <$FlChannel>.last-message as <$FlTextMessage>, template.channel as <$FlChannel>.is-typing as <bool>) as <string>;
 
       styles [
-        "dim-label",
         "caption"
       ]
     }

@@ -118,9 +118,10 @@ pub mod imp {
     pub struct Window {
         #[template_child]
         split_view: TemplateChild<adw::NavigationSplitView>,
-
         #[template_child]
         pub(super) channel_list: TemplateChild<ChannelList>,
+        #[template_child]
+        subtitle_label: TemplateChild<gtk::Label>,
         #[template_child]
         channel_messages: TemplateChild<ChannelMessages>,
 
@@ -134,6 +135,7 @@ pub mod imp {
             Self {
                 split_view: Default::default(),
                 channel_list: Default::default(),
+                subtitle_label: Default::default(),
                 channel_messages: Default::default(),
                 manager: Default::default(),
                 settings: Settings::new(APP_ID),
@@ -429,6 +431,19 @@ pub mod imp {
             log::trace!("Go forward in the SplitView");
             self.split_view.set_show_content(true);
         }
+
+        #[template_callback]
+        fn handle_typing(&self, is_typing: bool, description: Option<String>) -> Option<String> {
+            if is_typing {
+                self.subtitle_label.add_css_class("accent");
+                self.subtitle_label.remove_css_class("dim-label");
+                Some(gettextrs::gettext("is typing"))
+            } else {
+                self.subtitle_label.remove_css_class("accent");
+                self.subtitle_label.add_css_class("dim-label");
+                description
+            }
+        }
     }
 
     #[glib::object_subclass]
@@ -445,6 +460,7 @@ pub mod imp {
             crate::backend::timeline::TimelineItem::ensure_type();
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
+            crate::gui::utility::Utility::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

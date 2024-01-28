@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
+### Added
+- Display of group descriptions.
+- Reception of typing indicators.
 
+### Changed
+- Grab focus of the entry when replying to a message.
 - UI improvements to the channel information dialog, which now also displays phone number, disappearing messages timer and description.
 - Fix the messages being sent on shift+enter instead of ctrl+enter.
 
