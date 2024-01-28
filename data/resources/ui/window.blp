@@ -81,10 +81,44 @@ template $FlWindow: Adw.ApplicationWindow {
       Adw.ToolbarView {
         [top]
         Adw.HeaderBar {
-          title-widget: Adw.WindowTitle {
-            title: bind channel_list.active-channel as <$FlChannel>.title;
-          };
+          title-widget: Box {
+            name: "room_title";
+            orientation: vertical;
+            halign: center;
+            valign: center;
 
+            Label title_label {
+              focusable: true;
+              ellipsize: end;
+              halign: center;
+              wrap: false;
+              single-line-mode: true;
+              use-markup: true;
+              width-chars: 5;
+              label: bind channel_list.active-channel as <$FlChannel>.title;
+              styles [
+                "title",
+              ]
+            }
+
+            Label subtitle_label {
+              focusable: true;
+              ellipsize: end;
+              halign: center;
+              wrap: false;
+              single-line-mode: true;
+              use-markup: true;
+              visible: bind $or(channel_list.active-channel as <$FlChannel>.is-typing,$not_empty(channel_list.active-channel as <$FlChannel>.description) as <bool>) as <bool>;
+              label: bind $handle_typing(channel_list.active-channel as <$FlChannel>.is-typing,channel_list.active-channel as <$FlChannel>.description) as <string>;
+              tooltip-markup: bind channel_list.active-channel as <$FlChannel>.description;
+
+              styles [
+                "subtitle-room",
+                "dim-label",
+              ]
+            }
+          };
+          
           [end]
           MenuButton {
             accessibility {

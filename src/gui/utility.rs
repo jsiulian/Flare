@@ -147,6 +147,7 @@ impl Utility {
 
         date.format(&format).ok()
     }
+
     #[template_callback(function)]
     fn attachment_placeholder(text: Option<String>) -> String {
         text.unwrap_or_else(|| gettextrs::gettext("Attachment"))

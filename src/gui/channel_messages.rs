@@ -396,6 +396,7 @@ pub mod imp {
                         .get::<Option<TextMessage>>()
                         .expect("Type of signal `reply` of `ItemRow` to be `TextMessage`.");
                     obj.set_reply_message(&msg);
+                    obj.imp().text_entry.grab_focus();
                     None
                 }));
                 let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();

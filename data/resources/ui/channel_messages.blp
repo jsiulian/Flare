@@ -75,7 +75,7 @@ template $FlChannelMessages: Box {
           styles [
             "message-clamp",
           ]
-
+          
           ListView list_view {
             styles [
               "message-list",
@@ -88,7 +88,7 @@ template $FlChannelMessages: Box {
         }
       }
     }
-
+     
     Box {
       styles [
         "toolbar",
@@ -159,12 +159,13 @@ template $FlChannelMessages: Box {
                   "message-text",
                 ]
 
-                halign: start;
+                halign: fill;
                 label: bind $attachment_placeholder(template.reply-message as <$FlTextMessage>.body) as <string>;
                 wrap: true;
                 wrap-mode: word_char;
                 lines: 2;
                 ellipsize: end;
+                xalign: 0;
 
                 layout {
                   row: 1;
