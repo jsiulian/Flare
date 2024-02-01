@@ -29,9 +29,9 @@ tokio = { version = "1.35.1", features = ["rt", "macros", "rt-multi-thread", "ti
 regex = "1.10.3"
 lazy_static = "1.4.0"
 
-presage = { git = "https://github.com/Schmiddiii/presage", rev = "2a3bd590b2a1e460759f0f7733ae1a2312c84a51" }
-presage-store-sled = { git = "https://github.com/Schmiddiii/presage", rev = "2a3bd590b2a1e460759f0f7733ae1a2312c84a51" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "0ad842f7646b21feca3c79d1e7f73d052529314d" }
+presage = { git = "https://github.com/Schmiddiii/presage", rev = "75011227faac60773bb1422d365ecc7fed95484a" }
+presage-store-sled = { git = "https://github.com/Schmiddiii/presage", rev = "75011227faac60773bb1422d365ecc7fed95484a" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "a2e7540a71866a62028ad0205574a5feb0e717ec" }
 
 async-trait = "0.1.77"
 sled = "0.34.7"
