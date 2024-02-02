@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-01-24 22:01+0000\n"
-"Last-Translator: Kevin Joly <kevin.joly@posteo.net>\n"
+"PO-Revision-Date: 2024-02-03 17:01+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/fr/>\n"
 "Language: fr\n"
@@ -34,9 +34,8 @@ msgid "Phone Number"
 msgstr "Numéro de téléphone"
 
 #: data/resources/ui/channel_info_dialog.blp:30
-#, fuzzy
 msgid "Disappearing Messages"
-msgstr "Effacer les messages"
+msgstr "Messages disparaissant"
 
 #: data/resources/ui/channel_info_dialog.blp:37
 msgid "Description"
@@ -231,13 +230,14 @@ msgid "General"
 msgstr "Général"
 
 #: data/resources/ui/preferences_window.blp:10
-#, fuzzy
 msgid "Automatically Download Attachments"
-msgstr "Télécharger automatiquement les images"
+msgstr "Télécharger automatiquement les pièces-jointes"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
 msgstr ""
+"Les types de pièces-jointes sélectionnés ci-dessous seront automatiquement "
+"téléchargés"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
@@ -245,16 +245,15 @@ msgstr "Images"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr "Videos"
+msgstr "Vidéos"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
 msgstr "Fichiers"
 
 #: data/resources/ui/preferences_window.blp:26
-#, fuzzy
 msgid "Voice Messages"
-msgstr "Supprimer les messages"
+msgstr "Messages vocaux"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
@@ -265,24 +264,20 @@ msgid "Notifications for new messages"
 msgstr "Notifications pour les nouveaux messages"
 
 #: data/resources/ui/preferences_window.blp:35
-#, fuzzy
 msgid "Send Notifications"
 msgstr "Envoyer des notifications"
 
 #: data/resources/ui/preferences_window.blp:39
-#, fuzzy
 msgid "Send Notifications on Reactions"
 msgstr "Envoyer des notifications pour les réactions"
 
 #: data/resources/ui/preferences_window.blp:44
-#, fuzzy
 msgid "Background Notifications"
-msgstr "Envoyer des notifications"
+msgstr "Notifications en arrière-plan"
 
 #: data/resources/ui/preferences_window.blp:45
-#, fuzzy
 msgid "Fetch notifications while the app is closed"
-msgstr "Envoyer des notifications à la réception de réactions"
+msgstr "Continuer à envoyer des notifications lorsque l’application est fermée"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
@@ -312,13 +307,12 @@ msgid "Press “Enter” to Send Message"
 msgstr "Appuyer sur « Entrée » pour envoyer le message"
 
 #: data/resources/ui/preferences_window.blp:62
-#, fuzzy
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
-"Il peut être impossible d'envoyer des messages contenant des nouvelles "
-"lignes avec des claviers tactiles ne permettant pas «Contrôle + Entrée»"
+"Il peut n’être pas possible d’envoyer des messages contenant des sauts de "
+"lignes avec des claviers tactiles ne permettant pas « Ctrl + Entrée »"
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
 msgid "Welcome to Flare"
@@ -906,7 +900,7 @@ msgstr "Copié vers le presse-papiers"
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:97 src/gui/utility.rs:121
 msgid "%H:%M"
-msgstr "%H:%M"
+msgstr "%H : %M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
