@@ -8,14 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-02-07 13:01+0000\n"
+"Last-Translator: Marek Ľach <graweeld@googlemail.com>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
+"flare/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -29,7 +31,7 @@ msgstr ""
 #: data/resources/ui/channel_info_dialog.blp:23
 #: data/resources/ui/setup_window.blp:372
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefonní číslo"
 
 #: data/resources/ui/channel_info_dialog.blp:30
 msgid "Disappearing Messages"
@@ -37,7 +39,7 @@ msgstr ""
 
 #: data/resources/ui/channel_info_dialog.blp:37
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: data/resources/ui/channel_info_dialog.blp:45
 msgctxt "accessibility"
@@ -61,35 +63,35 @@ msgstr ""
 
 #: data/resources/ui/channel_list.blp:18
 msgid "Search"
-msgstr ""
+msgstr "Hledat"
 
 #: data/resources/ui/channel_list.blp:21 data/resources/ui/window.blp:60
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Hledat"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Nevybrán žádný kanál"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "Vybrat kanál"
 
 #: data/resources/ui/channel_messages.blp:178
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Odstranit tuto odpověď"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Odstranit odpověď"
 
 #: data/resources/ui/channel_messages.blp:201
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "Odstranit přílohu"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "tooltip"
