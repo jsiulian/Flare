@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-01-03 17:07+0000\n"
+"PO-Revision-Date: 2024-02-09 07:02+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,13 +36,12 @@ msgid "Phone Number"
 msgstr "Telefon Numarası"
 
 #: data/resources/ui/channel_info_dialog.blp:30
-#, fuzzy
 msgid "Disappearing Messages"
-msgstr "İletileri Temizle"
+msgstr "Kaybolan İletiler"
 
 #: data/resources/ui/channel_info_dialog.blp:37
 msgid "Description"
-msgstr ""
+msgstr "Açıklama"
 
 #: data/resources/ui/channel_info_dialog.blp:45
 msgctxt "accessibility"
@@ -234,59 +233,52 @@ msgid "General"
 msgstr "Genel"
 
 #: data/resources/ui/preferences_window.blp:10
-#, fuzzy
 msgid "Automatically Download Attachments"
-msgstr "Görüntüleri kendiliğinden indir"
+msgstr "Ekleri Kendiliğinden İndir"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "Aşağıda seçilen ek türleri kendiliğinden indirilecek"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Görüntüler"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Videolar"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Dosyalar"
 
 #: data/resources/ui/preferences_window.blp:26
-#, fuzzy
 msgid "Voice Messages"
-msgstr "İletiler Kaldır"
+msgstr "Sesli İletiler"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
 msgstr "Bildirimler"
 
 #: data/resources/ui/preferences_window.blp:32
-#, fuzzy
 msgid "Notifications for new messages"
-msgstr "Yeni iletiler için bildirimler."
+msgstr "Yeni iletiler için bildirimler"
 
 #: data/resources/ui/preferences_window.blp:35
-#, fuzzy
 msgid "Send Notifications"
-msgstr "Bildirim gönder"
+msgstr "Bildirim Gönder"
 
 #: data/resources/ui/preferences_window.blp:39
-#, fuzzy
 msgid "Send Notifications on Reactions"
-msgstr "Tepkiler hakkında bildirim gönder"
+msgstr "Tepkiler Hakkında Bildirim Gönder"
 
 #: data/resources/ui/preferences_window.blp:44
-#, fuzzy
 msgid "Background Notifications"
-msgstr "Bildirim gönder"
+msgstr "Arka Plan Bildirimleri"
 
 #: data/resources/ui/preferences_window.blp:45
-#, fuzzy
 msgid "Fetch notifications while the app is closed"
-msgstr "Tepkileri alırken bildirim gönder"
+msgstr "Uygulama kapalıyken bildirimleri al"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
@@ -307,24 +299,21 @@ msgid "Selectable Message Text"
 msgstr "Seçilebilir İleti Metni"
 
 #: data/resources/ui/preferences_window.blp:57
-#, fuzzy
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
 "Seçilebilir metin, dokunmatik ekranlarda kaydırma hareketlerine engel "
-"olabilir."
+"olabilir"
 
 #: data/resources/ui/preferences_window.blp:61
-#, fuzzy
 msgid "Press “Enter” to Send Message"
-msgstr "İletiyi göndermek için \"Enter\" tuşuna basın"
+msgstr "İletiyi göndermek için “Enter” tuşuna basın"
 
 #: data/resources/ui/preferences_window.blp:62
-#, fuzzy
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
-"\"Control + Enter\" kullanımına izin vermeyen dokunmatik klavyelerde yeni "
+"“Control + Enter” kullanımına izin vermeyen dokunmatik klavyelerde yeni "
 "satırlı mesaj göndermek mümkün olmayabilir"
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
@@ -833,7 +822,7 @@ msgstr ""
 
 #: src/gui/channel_info_dialog.rs:105
 msgid "Never"
-msgstr ""
+msgstr "Asla"
 
 #: src/gui/preferences_window.rs:30
 msgid "Watch for new messages while closed"
