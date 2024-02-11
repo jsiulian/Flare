@@ -12,9 +12,11 @@ template $FlChannelList: Box {
   }
 
   SearchBar {
+    styles ["inline"]
     search-mode-enabled: bind template.search-enabled no-sync-create;
 
     SearchEntry search_entry {
+      hexpand: true;
       tooltip-text: _("Search");
 
       accessibility {
@@ -28,7 +30,7 @@ template $FlChannelList: Box {
   }
 
   ScrolledWindow scrolled_window {
-    visible: bind $not($uint_equal(list.model as <NoSelection>.n-items, 0) as <bool>) as <bool>;
+    visible: bind $not($uint_equal(list.model as <$SidebarSelection>.n-items, 0) as <bool>) as <bool>;
     hscrollbar-policy: never;
 
     child: ListView list {
@@ -47,6 +49,6 @@ template $FlChannelList: Box {
     icon-name: "document-edit-symbolic";
     hexpand: true;
     vexpand: true;
-    visible: bind $uint_equal(list.model as <NoSelection>.n-items, 0) as <bool>;
+    visible: bind $uint_equal(list.model as <$SidebarSelection>.n-items, 0) as <bool>;
   }
 }

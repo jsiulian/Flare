@@ -95,7 +95,7 @@ pub mod imp {
 
     use crate::{
         backend::{timeline::timeline_item::TimelineItemExt, Channel, Manager},
-        gui::{channel_item::ChannelItem, utility::Utility},
+        gui::{channel_item::ChannelItem, components::Selection, utility::Utility},
     };
 
     #[derive(CompositeTemplate)]
@@ -175,6 +175,7 @@ pub mod imp {
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
             Utility::bind_template_callbacks(klass);
+            Selection::ensure_type();
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {
@@ -239,7 +240,7 @@ pub mod imp {
             });
             let sort_model = SortListModel::new(Some(filter_model), Some(sorter.clone()));
 
-            let selection_model = gtk::NoSelection::new(Some(sort_model));
+            let selection_model = Selection::new(sort_model.into());
             self.list.get().set_model(Some(&selection_model));
 
             self.model.replace(model);
@@ -251,7 +252,6 @@ pub mod imp {
                 let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
                 let channel_item = ChannelItem::new();
                 list_item.set_child(Some(&channel_item));
-
                 list_item
                     .property_expression("item")
                     .bind(&channel_item, "channel", Widget::NONE);
@@ -262,6 +262,7 @@ pub mod imp {
             self.list
                 .connect_activate(clone!(@weak self as obj => move |_list_view, position| {
                     obj.obj().activate_row(position);
+                    selection_model.set_selected_position(position);
                 }));
 
             obj.connect_notify_local(

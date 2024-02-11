@@ -446,6 +446,10 @@ pub mod imp {
                 Some("active-channel"),
                 clone!(@weak self as obj => move |_, _| {
                     obj.obj().set_reply_message(&None);
+                    if let Some(channel) = obj.active_channel.borrow().as_ref() {
+                        let draft = channel.property("draft");
+                        obj.text_entry.set_text(draft);
+                    };
                 }),
             );
             self.obj().setup_autoscroll();
@@ -500,6 +504,11 @@ pub mod imp {
                     let chan = value.get::<Option<Channel>>().expect(
                         "Property `active-channel` of `ChannelMessages` has to be of type `Channel`",
                     );
+
+                    if let Some(active_chan) = self.active_channel.borrow().as_ref() {
+                        active_chan.set_property("draft", self.text_entry.text());
+                    }
+
                     let old = self.active_channel.replace(chan);
                     if let Some(old) = old {
                         old.trim_old();

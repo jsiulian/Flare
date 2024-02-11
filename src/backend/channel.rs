@@ -540,6 +540,7 @@ mod imp {
         pub(super) timeline: RefCell<Timeline>,
         pub(super) pending_reactions: RefCell<HashMap<u64, Vec<ReactionMessage>>>,
         pub(super) typing: RefCell<HashSet<Contact>>,
+        pub(super) draft: RefCell<String>,
     }
 
     impl std::hash::Hash for Channel {
@@ -597,6 +598,7 @@ mod imp {
                     ParamSpecString::builder("phone-number").read_only().build(),
                     ParamSpecString::builder("description").read_only().build(),
                     ParamSpecBoolean::builder("is-typing").read_only().build(),
+                    ParamSpecString::builder("draft").build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -662,13 +664,19 @@ mod imp {
                     .as_ref()
                     .and_then(|c| c.phone_number())
                     .to_value(),
-                "description" => self
-                    .group
-                    .borrow()
-                    .as_ref()
-                    .and_then(|g| g.description.clone())
-                    .to_value(),
+                "description" => {
+                    if let Some(contact) = self.contact.borrow().as_ref() {
+                        contact.description().to_value()
+                    } else {
+                        self.group
+                            .borrow()
+                            .as_ref()
+                            .and_then(|g| g.description.clone())
+                            .to_value()
+                    }
+                }
                 "is-typing" => (!self.typing.borrow().is_empty()).to_value(),
+                "draft" => self.draft.borrow().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -681,6 +689,12 @@ mod imp {
                         .expect("Property `manager` of `Channel` has to be of type `Manager`");
 
                     self.manager.replace(obj);
+                }
+                "draft" => {
+                    let draft = value
+                        .get::<String>()
+                        .expect("Property `draft` of `Channel` has to be of type `String`");
+                    self.draft.replace(draft);
                 }
                 _ => unimplemented!(),
             }
