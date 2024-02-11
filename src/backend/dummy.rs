@@ -74,7 +74,7 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
         LContact {
             uuid: Uuid::from_u128(1),
             phone_number: None,
-            name: "Arch Linux Mobile User".to_string(),
+            name: "Postmarket OS Linux Mobile User".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -100,7 +100,7 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
         LContact {
             uuid: Uuid::from_u128(3),
             phone_number: None,
-            name: "Rubeus Hagrid".to_string(),
+            name: "Mr. Freeze".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -113,7 +113,7 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
         LContact {
             uuid: Uuid::from_u128(4),
             phone_number: None,
-            name: "Palpetine".to_string(),
+            name: "Ron Burgundy".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -210,14 +210,14 @@ impl super::Manager {
 
         let msg_replied = msg!(
             self,
-            "Flare 0.11.0 was now released. This release brings many UI improvements, like date-dividers between messages and a revamped setup window. This release also prepared for Flare for being used as a primary device, which currently is still disabled and unsupported. Note that this release took quite long due to some issues Flare was facing which were hard to resolve.",
+            "Flare 0.12.0 was now released. This release contains many nice-to-have UI improvements, like separate draft messages for each chat and displaying of group descriptions and contact information. It also contains many other fixes and UX improvements which are nice to have.",
             2,
             GROUP_ID,
             18 + base_minute
         );
         let msg_reply = msg!(
             self,
-            "Great to see another release! And nice that those issues are finally fixed.",
+            "Seems like this release contains many minor improvements! Great! I especially like the highlighting of the selected channel in the channel list.",
             0,
             GROUP_ID,
             20 + base_minute
@@ -261,7 +261,7 @@ impl super::Manager {
             msg_reply,
             msg!(
                 self,
-                "Indeed very nice, and the backend should have grown more reliable due to the fixes.",
+                "Yes, that is a great improvement.",
                 2,
                 GROUP_ID,
                 24 + base_minute
@@ -286,12 +286,12 @@ impl super::Manager {
             ),
             msg!(
                 self,
-                "You're a wizard, Harry!",
+                "What killed the dinosaurs? The Ice Age!",
                 3,
                 3,
                 1 + base_minute
             ),
-            msg!(self, "A surprise, to be sure, but a welcome one.", 4, 4, 2 + base_minute),
+            msg!(self, "Well, that escalated quickly", 4, 4, 2 + base_minute),
         ]
     }
 

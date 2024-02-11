@@ -14,5 +14,5 @@ Adw.AboutWindow about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>HOTFIX</p> <ul> <li>Backend panic after suspend.</li> </ul> <p>Fixed</p> <ul> <li>Use Control instead of Shift for invertet action on the text input.</li> </ul>";
+  release-notes: "<p>Added</p> <ul> <li>Draft message for each chat.</li> <li>Display of group descriptions.</li> <li>Reception of typing indicators.</li> </ul> <p>Changed</p> <ul> <li>The sidebar now highlights the active chat.</li> <li>Grab focus of the entry when replying to a message.</li> <li>UI improvements to the channel information dialog, which now also displays phone number, disappearing messages timer and description.</li> <li>Fix the messages being sent on shift+enter instead of ctrl+enter.</li> </ul> <p>Fixed</p> <ul> <li>Random color of note-to-self chat.</li> </ul>";
 }
