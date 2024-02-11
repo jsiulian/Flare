@@ -85,16 +85,6 @@ impl Contact {
             let contact = obj.contact.borrow();
             let channel = self.channel();
 
-            // Don't do anything if contact is self of contact has well-defined name
-            if self.is_self()
-                || contact
-                    .as_ref()
-                    .map(|c| !c.name.is_empty())
-                    .unwrap_or_default()
-            {
-                return;
-            }
-
             if let Some(group) = channel.and_then(|c| c.group()) {
                 group
                     .members
@@ -147,6 +137,20 @@ impl Contact {
             .borrow()
             .as_ref()
             .and_then(|c| c.phone_number.as_ref().map(|p| p.to_string()))
+    }
+
+    pub fn description(&self) -> Option<String> {
+        self.imp().profile.borrow().as_ref().and_then(|c| {
+            // Should be fixed upstream
+            let emoji = c.about_emoji.clone().unwrap_or_default();
+            let about = c.about.clone().unwrap_or_default();
+            match (emoji.as_str(), about.as_str()) {
+                ("", "") => None,
+                ("", about) => Some(about.to_string()),
+                (emoji, "") => Some(emoji.to_string()),
+                (emoji, about) => Some(format!("{} {}", emoji, about)),
+            }
+        })
     }
 }
 
@@ -238,12 +242,11 @@ mod imp {
                             .as_ref()
                             .map(|p| p.format().mode(Mode::National).to_string())
                     };
-                    let uuid_title = || self.uuid.borrow().map(|u| u.to_string());
 
                     contact_title
                         .or_else(profile_title)
                         .or_else(phonenumber_title)
-                        .or_else(uuid_title)
+                        .or_else(|| Some(gettextrs::gettext("Unknown contact")))
                         // For some reason, Signal includes some special "isolate" control
                         // characters around names with special symbols.
                         .map(|mut s| {

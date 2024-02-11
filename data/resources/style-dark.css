@@ -5,3 +5,7 @@
 .media-overlay {
 	border-color: @dark_3;
 }
+
+button.scroll-to-bottom {
+  box-shadow: 0 1px 3px 0 alpha(black, 0.6);
+}

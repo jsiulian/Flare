@@ -10,9 +10,9 @@ use glib::{
     clone,
     once_cell::sync::Lazy,
     subclass::{InitializingObject, Signal},
-    ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
 };
-use std::cell::{Cell, RefCell};
+use std::cell::Cell;
+use std::marker::PhantomData;
 
 glib::wrapper! {
     pub struct TextEntry(ObjectSubclass<imp::TextEntry>)
@@ -22,23 +22,28 @@ glib::wrapper! {
 }
 
 impl TextEntry {
+    pub fn buffer(&self) -> sourceview5::Buffer {
+        self.imp().view.buffer().downcast().unwrap()
+    }
+
     pub fn text(&self) -> String {
-        let buffer: sourceview5::Buffer = self.property("buffer");
+        let buffer: sourceview5::Buffer = self.buffer();
         let (start_iter, end_iter) = buffer.bounds();
         buffer.text(&start_iter, &end_iter, true).to_string()
     }
 
+    pub fn set_text(&self, text: String) {
+        let buffer: sourceview5::Buffer = self.buffer();
+        buffer.set_text(text.as_str());
+    }
+
     pub fn clear(&self) {
-        let buffer: sourceview5::Buffer = self.property("buffer");
+        let buffer: sourceview5::Buffer = self.buffer();
         buffer.set_text("");
     }
 
     pub fn insert_emoji(&self) {
         self.imp().insert_emoji();
-    }
-
-    pub fn send_on_enter(&self) -> bool {
-        self.property("send-on-enter")
     }
 }
 
@@ -46,15 +51,16 @@ pub mod imp {
 
     use super::*;
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate, Default, glib::Properties)]
     #[template(resource = "/ui/text_entry.ui")]
+    #[properties(wrapper_type = super::TextEntry)]
     pub struct TextEntry {
         #[template_child]
         pub(super) view: TemplateChild<TextView>,
-
-        pub(super) buffer: RefCell<Option<sourceview5::Buffer>>,
-
+        #[property(get, set)]
         send_on_enter: Cell<bool>,
+        #[property(get = Self::is_empty)]
+        _is_empty: PhantomData<bool>,
     }
 
     #[glib::object_subclass]
@@ -82,10 +88,10 @@ pub mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for TextEntry {
         fn constructed(&self) {
             let obj = self.obj();
-            obj.set_property("buffer", sourceview5::Buffer::new(None));
             let key_events = gtk::EventControllerKey::new();
             key_events
                 .connect_key_pressed(clone!(@weak obj => @default-return Propagation::Proceed, move |_, key, _, modifier| {
@@ -145,10 +151,10 @@ pub mod imp {
                     }));
                 }));
 
-            let buffer: sourceview5::Buffer = obj.property("buffer");
+            let buffer = sourceview5::Buffer::new(None);
             obj.imp().view.set_buffer(Some(&buffer));
             buffer.connect_text_notify(clone!(@weak obj => move |_| {
-                obj.notify("is-empty");
+                obj.notify_is_empty();
             }));
 
             #[cfg(feature = "libspelling")]
@@ -161,49 +167,6 @@ pub mod imp {
                 self.view.insert_action_group("spelling", Some(&adapter));
 
                 adapter.set_enabled(true);
-            }
-        }
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecBoolean::builder("is-empty").read_only().build(),
-                    ParamSpecBoolean::builder("send-on-enter").build(),
-                    ParamSpecObject::builder::<sourceview5::Buffer>("buffer").build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "is-empty" => {
-                    let (start, end) = self.buffer.borrow().as_ref()
-                    .expect("Property `Buffer` of `TextEntry` has to be of type `sourceview5::Buffer`")
-                    .bounds();
-                    (start == end).to_value()
-                }
-                "send-on-enter" => self.send_on_enter.get().to_value(),
-                "buffer" => self.buffer.borrow().as_ref().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "send-on-enter" => {
-                    let b = value
-                        .get::<bool>()
-                        .expect("Property `send-on-enter` of `TextEntry` has to be of type `bool`");
-                    self.send_on_enter.replace(b);
-                }
-                "buffer" => {
-                    let obj = value.get::<Option<sourceview5::Buffer>>().expect(
-                        "Property `Buffer` of `TextEntry` has to be of type `sourceview5::Buffer`",
-                    );
-
-                    self.buffer.replace(obj);
-                }
-                _ => unimplemented!(),
             }
         }
 
@@ -230,4 +193,11 @@ pub mod imp {
         }
     }
     impl BoxImpl for TextEntry {}
+
+    impl TextEntry {
+        fn is_empty(&self) -> bool {
+            let (start, end) = self.obj().buffer().bounds();
+            start == end
+        }
+    }
 }

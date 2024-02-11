@@ -17,7 +17,7 @@ impl ChannelItem {
         Object::builder::<Self>().build()
     }
 
-    fn channel(&self) -> Channel {
+    pub fn channel(&self) -> Channel {
         self.property("channel")
     }
 }
@@ -57,11 +57,22 @@ pub mod imp {
     #[gtk::template_callbacks]
     impl ChannelItem {
         #[template_callback]
-        fn format_last_message(&self, message: Option<DisplayMessage>, is_typing: bool) -> String {
+        fn format_last_message(
+            &self,
+            message: Option<DisplayMessage>,
+            is_typing: bool,
+            draft: String,
+        ) -> String {
             if is_typing {
                 self.label_last_message.add_css_class("accent");
                 self.label_last_message.remove_css_class("dim-label");
                 gettextrs::gettext("is typing")
+            } else if !draft.is_empty() {
+                format!(
+                    "<span font-weight='500'>{}:</span> {}",
+                    gettextrs::gettext("Draft"),
+                    glib::markup_escape_text(draft.as_str())
+                )
             } else if let Some(msg) = message {
                 self.label_last_message.add_css_class("dim-label");
                 self.label_last_message.remove_css_class("accent");
