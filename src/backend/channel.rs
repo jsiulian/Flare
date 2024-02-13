@@ -24,7 +24,7 @@ use crate::{
         message::{DisplayMessage, MessageExt, TextMessage},
         timeline::{TimelineItem, TimelineItemExt},
     },
-    ApplicationError,
+    gspawn, ApplicationError,
 };
 
 use super::{
@@ -37,6 +37,12 @@ gtk::glib::wrapper! {
 }
 
 const EMPTY_MESSAGE_BODY: &str = "<empty>";
+const TYPING_NOTIFICATION_DURATION_SECONDS: u32 = 10;
+#[derive(Eq, Hash, PartialEq, Clone, Debug)]
+pub struct TypingNotification {
+    pub sender: Contact,
+    pub timestamp: u64,
+}
 
 impl Channel {
     pub(super) async fn from_contact_or_group(
@@ -495,12 +501,21 @@ impl Channel {
         self.property("disappearing-messages-timer")
     }
 
-    pub fn add_user_typing(&self, contact: Contact) {
-        let _ = self.imp().typing.borrow_mut().insert(contact);
+    pub fn add_user_typing(&self, notification: TypingNotification) {
+        let _ = self.imp().typing.borrow_mut().insert(notification.clone());
+        gspawn!(clone!(@weak self as s, @strong notification => async move {
+            glib::timeout_future_seconds(TYPING_NOTIFICATION_DURATION_SECONDS).await;
+            s.imp().typing.borrow_mut().remove(&notification);
+            s.notify("is-typing");
+        }));
         self.notify("is-typing");
     }
     pub fn remove_user_typing(&self, contact: Contact) {
-        let _ = self.imp().typing.borrow_mut().remove(&contact);
+        let mut typing = self.imp().typing.borrow_mut();
+        if let Some(el) = typing.iter().find(|t| t.sender == contact).cloned() {
+            typing.remove(&el);
+        }
+        drop(typing);
         self.notify("is-typing");
     }
 }
@@ -528,6 +543,8 @@ mod imp {
         Contact, Manager,
     };
 
+    use super::TypingNotification;
+
     #[derive(Default)]
     pub struct Channel {
         pub(super) contact: RefCell<Option<Contact>>,
@@ -539,7 +556,7 @@ mod imp {
         pub(super) manager: RefCell<Option<Manager>>,
         pub(super) timeline: RefCell<Timeline>,
         pub(super) pending_reactions: RefCell<HashMap<u64, Vec<ReactionMessage>>>,
-        pub(super) typing: RefCell<HashSet<Contact>>,
+        pub(super) typing: RefCell<HashSet<TypingNotification>>,
         pub(super) draft: RefCell<String>,
     }
 

@@ -222,3 +222,7 @@ button.scroll-to-bottom {
 .sidebar-pane searchbar box {
 	padding-top: 0;
 }
+
+.navigation-sidebar .subtitle:not(.dim-label) {
+	opacity:1;
+}
