@@ -2073,7 +2073,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=a2e7540a71866a62028ad0205574a5feb0e717ec#a2e7540a71866a62028ad0205574a5feb0e717ec"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=1a8cdf81#1a8cdf81e66477077bd130cdd0313762e3d5e3c8"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -2108,7 +2108,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service-hyper"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=a2e7540a71866a62028ad0205574a5feb0e717ec#a2e7540a71866a62028ad0205574a5feb0e717ec"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=1a8cdf81#1a8cdf81e66477077bd130cdd0313762e3d5e3c8"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -2881,7 +2881,7 @@ checksum = "94e851c7654eed9e68d7d27164c454961a616cf8c203d500607ef22c737b51bb"
 [[package]]
 name = "presage"
 version = "0.6.0-dev"
-source = "git+https://github.com/Schmiddiii/presage?rev=75011227faac60773bb1422d365ecc7fed95484a#75011227faac60773bb1422d365ecc7fed95484a"
+source = "git+https://github.com/Schmiddiii/presage?rev=03ffb349a125518fdc6087ebfb6a5d82a1600da6#03ffb349a125518fdc6087ebfb6a5d82a1600da6"
 dependencies = [
  "base64",
  "futures",
@@ -2900,7 +2900,7 @@ dependencies = [
 [[package]]
 name = "presage-store-cipher"
 version = "0.1.0"
-source = "git+https://github.com/Schmiddiii/presage?rev=75011227faac60773bb1422d365ecc7fed95484a#75011227faac60773bb1422d365ecc7fed95484a"
+source = "git+https://github.com/Schmiddiii/presage?rev=03ffb349a125518fdc6087ebfb6a5d82a1600da6#03ffb349a125518fdc6087ebfb6a5d82a1600da6"
 dependencies = [
  "blake3",
  "chacha20poly1305",
@@ -2917,7 +2917,7 @@ dependencies = [
 [[package]]
 name = "presage-store-sled"
 version = "0.6.0-dev"
-source = "git+https://github.com/Schmiddiii/presage?rev=75011227faac60773bb1422d365ecc7fed95484a#75011227faac60773bb1422d365ecc7fed95484a"
+source = "git+https://github.com/Schmiddiii/presage?rev=03ffb349a125518fdc6087ebfb6a5d82a1600da6#03ffb349a125518fdc6087ebfb6a5d82a1600da6"
 dependencies = [
  "async-trait",
  "base64",
