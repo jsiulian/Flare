@@ -130,7 +130,10 @@ impl ManagerThread {
         error: mpsc::Sender<ApplicationError>,
     ) -> Option<Self> {
         let (sender, receiver) = mpsc::channel(MESSAGE_BOUND);
-        std::thread::spawn(move || {
+        let thread = std::thread::Builder::new()
+            .name("ManagerThread".into())
+            .stack_size(8 * 1024 * 1024);
+        let _ = thread.spawn(move || {
             let error_clone = error.clone();
             let panic = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
                 crate::TOKIO_RUNTIME.block_on(async move {

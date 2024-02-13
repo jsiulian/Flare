@@ -25,7 +25,7 @@ use glib::{
 use gtk::{glib, prelude::*};
 use std::cell::{RefCell, RefMut};
 
-use crate::backend::Channel;
+use crate::backend::{channel::TypingNotification, Channel};
 use libsignal_service::proto::typing_message::Action;
 
 use super::{
@@ -250,7 +250,10 @@ impl Message {
                     log::debug!("Got message from a blocked contact. Ignoring");
                 } else {
                     match t.action() {
-                        Action::Started => channel.add_user_typing(contact),
+                        Action::Started => channel.add_user_typing(TypingNotification {
+                            sender: contact,
+                            timestamp: t.timestamp(),
+                        }),
                         Action::Stopped => channel.remove_user_typing(contact),
                     };
                 }

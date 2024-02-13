@@ -54,8 +54,9 @@ template $FlChannelItem: Box {
 
     Label label_last_message {
       halign: start;
+      height-request: 36;
       xalign: 0;
-      yalign: 0.5;
+      yalign: 0;
       wrap: true;
       ellipsize: end;
       lines: 2;
@@ -65,7 +66,7 @@ template $FlChannelItem: Box {
       label: bind $format_last_message(template.channel as <$FlChannel>.last-message as <$FlTextMessage>, template.channel as <$FlChannel>.is-typing as <bool>, template.channel as <$FlChannel>.draft as <string>) as <string>;
 
       styles [
-        "caption"
+        "subtitle"
       ]
     }
   }
