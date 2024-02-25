@@ -1,6 +1,9 @@
 use std::cell::RefCell;
 
-use gdk::glib::clone;
+use gdk::{
+    glib::{clone, Bytes},
+    Paintable, Texture,
+};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Object, ObjectExt};
 use gtk::{gio, glib};
@@ -102,7 +105,30 @@ impl Contact {
             let profile = manager.retrieve_profile_by_uuid(uuid, key).await.ok();
             obj.profile.replace(profile);
             self.notify("title");
+            let Some(avatar) = manager
+                .retrieve_profile_avatar_by_uuid(uuid, key)
+                .await
+                .ok()
+                .flatten()
+                .and_then(|b| Texture::from_bytes(&Bytes::from_owned(b)).ok())
+            else {
+                log::debug!(
+                    "Failed to fetch avatar for {}; they may not have a profile picture set",
+                    self.title()
+                );
+                return;
+            };
+
+            self.set_avatar(avatar);
         }
+    }
+
+    pub fn avatar(&self) -> Option<Paintable> {
+        self.property("avatar")
+    }
+
+    fn set_avatar(&self, image: Texture) {
+        self.set_property("avatar", image);
     }
 
     pub fn uuid(&self) -> Uuid {
@@ -157,6 +183,7 @@ impl Contact {
 mod imp {
     use std::cell::RefCell;
 
+    use gdk::Paintable;
     use gdk::{prelude::*, subclass::prelude::*};
     use glib::{
         once_cell::sync::Lazy, ParamSpec, ParamSpecBoolean, ParamSpecObject, ParamSpecString, Value,
@@ -174,6 +201,8 @@ mod imp {
         pub(super) phonenumber: RefCell<Option<PhoneNumber>>,
         pub(super) uuid: RefCell<Option<Uuid>>,
         pub(super) profile: RefCell<Option<Profile>>,
+
+        pub(crate) avatar: RefCell<Option<Paintable>>,
 
         manager: RefCell<Option<Manager>>,
         channel: RefCell<Option<Channel>>,
@@ -193,6 +222,7 @@ mod imp {
                         .construct_only()
                         .build(),
                     ParamSpecObject::builder::<Channel>("channel").build(),
+                    ParamSpecObject::builder::<Paintable>("avatar").build(),
                     ParamSpecBoolean::builder("is-self").read_only().build(),
                     ParamSpecString::builder("title").read_only().build(),
                 ]
@@ -204,6 +234,7 @@ mod imp {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "channel" => self.channel.borrow().as_ref().to_value(),
+                "avatar" => self.avatar.borrow().as_ref().to_value(),
                 "is-self" => {
                     if let Some(contact) = self.contact.borrow().as_ref() {
                         (contact.uuid == self.manager.borrow().as_ref().unwrap().uuid()).to_value()
@@ -274,6 +305,13 @@ mod imp {
                         .expect("Property `channel` of `Contact` has to be of type `Channel`");
 
                     self.channel.replace(obj);
+                }
+                "avatar" => {
+                    let obj = value
+                        .get::<Option<Paintable>>()
+                        .expect("Property `avatar` of `Contact` has to be of type `Paintable`");
+
+                    self.avatar.replace(obj);
                 }
                 _ => unimplemented!(),
             }

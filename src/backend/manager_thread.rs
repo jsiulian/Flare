@@ -6,7 +6,7 @@ use libsignal_service::{
     content::ContentBody,
     groups_v2::Group,
     prelude::{phonenumber, Content, ProfileKey, Uuid},
-    proto::{AttachmentPointer, DataMessage},
+    proto::{AttachmentPointer, DataMessage, GroupContextV2},
     push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
     Profile, ServiceAddress,
@@ -70,6 +70,15 @@ enum Command {
     UnlinkSecondary(i64, oneshot::Sender<Result<(), Error>>),
     LinkedDevices(oneshot::Sender<Result<Vec<DeviceInfo>, Error>>),
     RequestContacts(oneshot::Sender<Result<(), Error>>),
+    RetrieveProfileAvatarByUuid(
+        Uuid,
+        ProfileKey,
+        oneshot::Sender<Result<Option<Vec<u8>>, Error>>,
+    ),
+    RetrieveGroupAvatar(
+        GroupContextV2,
+        oneshot::Sender<Result<Option<Vec<u8>>, Error>>,
+    ),
 }
 
 #[derive(Debug)]
@@ -390,6 +399,35 @@ impl ManagerThread {
             .expect("Command sending failed");
         receiver.await.expect("Callback receiving failed")
     }
+
+    pub async fn retrieve_profile_avatar_by_uuid(
+        &self,
+        uuid: Uuid,
+        profile_key: ProfileKey,
+    ) -> Result<Option<Vec<u8>>, Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::RetrieveProfileAvatarByUuid(
+                uuid,
+                profile_key,
+                sender,
+            ))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
+
+    pub async fn retrieve_group_avatar(
+        &self,
+        context: GroupContextV2,
+    ) -> Result<Option<Vec<u8>>, Error> {
+        let (sender, receiver) = oneshot::channel();
+        self.command_sender
+            .send(Command::RetrieveGroupAvatar(context, sender))
+            .await
+            .expect("Command sending failed");
+        receiver.await.expect("Callback receiving failed")
+    }
 }
 
 async fn setup_manager(
@@ -600,6 +638,16 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             .expect("Callback sending failed"),
         Command::RequestContacts(callback) => callback
             .send(manager.request_contacts().await)
+            .expect("Callback sending failed"),
+        Command::RetrieveProfileAvatarByUuid(uuid, profile_key, callback) => callback
+            .send(
+                manager
+                    .retrieve_profile_avatar_by_uuid(uuid, profile_key)
+                    .await,
+            )
+            .expect("Callback sending failed"),
+        Command::RetrieveGroupAvatar(context, callback) => callback
+            .send(manager.retrieve_group_avatar(context).await)
             .expect("Callback sending failed"),
     }
 }

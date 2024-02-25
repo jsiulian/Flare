@@ -551,6 +551,29 @@ impl Manager {
         log::trace!("`Manager::retrieve_profile_by_uuid` finished");
         r
     }
+    pub(super) async fn retrieve_profile_avatar_by_uuid(
+        &self,
+        uuid: Uuid,
+        profile_key: ProfileKey,
+    ) -> Result<Option<Vec<u8>>, PresageError> {
+        log::trace!("`Manager::retrieve_profile_avatar_by_uuid` start");
+        let r = self
+            .internal()
+            .retrieve_profile_avatar_by_uuid(uuid, profile_key)
+            .await;
+        log::trace!("`Manager::retrieve_profile_avatar_by_uuid` finished");
+        r
+    }
+
+    pub(super) async fn retrieve_group_avatar(
+        &self,
+        context: GroupContextV2,
+    ) -> Result<Option<Vec<u8>>, PresageError> {
+        log::trace!("`Manager::retrieve_group_avatar` start");
+        let r = self.internal().retrieve_group_avatar(context).await;
+        log::trace!("`Manager::retrieve_group_avatar` finished");
+        r
+    }
 
     pub(super) async fn send_message(
         &self,

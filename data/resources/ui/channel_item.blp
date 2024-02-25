@@ -13,6 +13,7 @@ template $FlChannelItem: Box {
   // Avatar
   Adw.Avatar {
     text: bind template.channel as <$FlChannel>.title;
+    custom-image: bind template.channel as <$FlChannel>.avatar;
     icon-name: "user-bookmarks-symbolic";
     show-initials: bind $not(template.channel as <$FlChannel>.is-self) as <bool>;
     size: 44;

@@ -68,6 +68,7 @@ template $FlMessageItem: $ContextMenuBin {
       ]
 
       text: bind template.message as <$FlTextMessage>.sender as <$FlContact>.title;
+      custom-image: bind template.message as <$FlTextMessage>.sender as <$FlContact>.avatar;
       show-initials: true;
       valign: start;
       size: 32;

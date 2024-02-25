@@ -5,8 +5,9 @@ use std::{
 };
 
 use gdk::{
-    glib::clone,
+    glib::{clone, Bytes},
     prelude::{ObjectExt, SettingsExt},
+    Paintable, Texture,
 };
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{Cast, Object};
@@ -107,6 +108,7 @@ impl Channel {
             .group_context
             .swap(&RefCell::new(Some(group_context_v2.clone())));
         s.initialize_participants().await;
+        s.initialize_avatar().await;
         s
     }
 
@@ -488,6 +490,33 @@ impl Channel {
         }
     }
 
+    async fn initialize_avatar(&self) {
+        // TODO: Do in background.
+        let Some(context) = self.group_context() else {
+            return;
+        };
+
+        let Some(avatar) = self
+            .manager()
+            .retrieve_group_avatar(context)
+            .await
+            .ok()
+            .flatten()
+            .and_then(|b| Texture::from_bytes(&Bytes::from_owned(b)).ok())
+        else {
+            log::debug!("Failed to fetch group avatar; it may not have a profile picture set",);
+            return;
+        };
+
+        self.imp().group_avatar.replace(Some(avatar.into()));
+
+        self.notify("avatar");
+    }
+
+    pub fn avatar(&self) -> Option<Paintable> {
+        self.property("avatar")
+    }
+
     pub fn phone_number(&self) -> Option<String> {
         self.property("phone-number")
     }
@@ -530,6 +559,7 @@ mod imp {
         glib::{ParamSpecBoolean, ParamSpecUInt},
         prelude::*,
         subclass::prelude::*,
+        Paintable,
     };
     use glib::{
         once_cell::sync::Lazy, subclass::Signal, ParamSpec, ParamSpecObject, ParamSpecString, Value,
@@ -550,6 +580,8 @@ mod imp {
         pub(super) contact: RefCell<Option<Contact>>,
         pub(super) group: RefCell<Option<Group>>,
         pub(super) group_context: RefCell<Option<GroupContextV2>>,
+
+        pub(super) group_avatar: RefCell<Option<Paintable>>,
 
         pub(super) participants: RefCell<Vec<Contact>>,
 
@@ -606,6 +638,9 @@ mod imp {
                     ParamSpecObject::builder::<DisplayMessage>("last-message")
                         .read_only()
                         .build(),
+                    ParamSpecObject::builder::<Paintable>("avatar")
+                        .read_only()
+                        .build(),
                     ParamSpecString::builder("title").read_only().build(),
                     ParamSpecBoolean::builder("is-contact").read_only().build(),
                     ParamSpecBoolean::builder("is-self").read_only().build(),
@@ -639,6 +674,13 @@ mod imp {
                             .unwrap_or(false)
                     })
                     .to_value(),
+                "avatar" => {
+                    if let Some(contact) = self.contact.borrow().as_ref() {
+                        contact.property("avatar")
+                    } else {
+                        self.group_avatar.borrow().as_ref().to_value()
+                    }
+                }
                 "title" => {
                     let title = if let Some(group) = self.group.borrow().as_ref() {
                         group.title.clone()

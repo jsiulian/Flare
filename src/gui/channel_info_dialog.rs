@@ -72,6 +72,7 @@ pub mod imp {
             let channel = binding.as_ref().expect("channel to be set at setup");
             self.avatar.set_text(Some(&channel.title()));
             self.avatar.set_show_initials(!channel.is_self());
+            self.avatar.set_custom_image(channel.avatar().as_ref());
 
             let phone = channel.phone_number();
             self.row_phone.set_visible(phone.is_some());
