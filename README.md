@@ -23,10 +23,6 @@ Flare is an unofficial app that lets you chat with your friends on Signal from L
     <td>[flare](https://aur.archlinux.org/packages/flare)</td>
   </tr>
   <tr>
-    <td>Arch Linux (AUR - binary)</td>
-    <td>[flare-bin](https://aur.archlinux.org/packages/flare-bin)</td>
-  </tr>
-  <tr>
     <td>Alpine Linux (testing), Postmarket OS (edge)</td>
     <td>[flare](https://pkgs.alpinelinux.org/package/edge/testing/x86/flare)</td>
   </tr>
