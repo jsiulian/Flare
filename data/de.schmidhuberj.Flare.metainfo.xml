@@ -10,7 +10,10 @@
   <summary>Chat with your friends on Signal</summary>
   <launchable type="desktop-id">de.schmidhuberj.Flare.desktop</launchable>
   <content_rating type="oars-1.1"/>
-  <developer_name translatable="no">Julian Schmidhuber</developer_name>
+  <developer_name>Julian Schmidhuber</developer_name>
+  <developer id="mobile.schmidhuberj.de">
+    <name>Julian Schmidhuber</name>
+  </developer>
   <translation type="gettext">flare</translation>
   <update_contact>flatpak@schmiddi.anonaddy.com</update_contact>
 
@@ -578,13 +581,14 @@
   </screenshots>
 
   <provides>
-    <!-- <id>de.schmidhuberj.Flare</id> -->
     <binary>flare</binary>
   </provides>
 
 
   <requires>
     <internet>first-run</internet>
+    <display_length compare="ge" side="shortest">300</display_length>
+    <display_length compare="ge" side="longest">360</display_length>
   </requires>
   <recommends>
     <internet>always</internet>
@@ -593,12 +597,6 @@
     <control>keyboard</control>
     <control>pointing</control>
     <control>touch</control>
-    <display_length compare="ge">small</display_length>
   </supports>
-
-  <custom>
-    <!-- <value key="Purism::form_factor">workstation</value> -->
-    <value key="Purism::form_factor">mobile</value>
-  </custom>
 </component>
 
