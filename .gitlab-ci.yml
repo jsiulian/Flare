@@ -34,7 +34,6 @@ upload:
   script:
     - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz "${UPLOAD_URL_BASE}/${PROJ_NAME_VERSION}.tar.xz"'
     - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz.sha256sum "${UPLOAD_URL_BASE}/${PROJ_NAME_VERSION}.tar.xz.sha256sum"'
-    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${BUILD_RELEASE}/target/release/${CI_PROJECT_NAME} "${UPLOAD_URL_BASE}/${CI_PROJECT_NAME}"'
 
 
 test:cargo-deny:
