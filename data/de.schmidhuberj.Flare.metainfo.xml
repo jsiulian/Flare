@@ -38,6 +38,19 @@
   </description>
 
   <releases>
+    <release version="v0.13.0" date="2024-02-25">
+      <description translatable="no">
+        <p>Added</p>
+        <ul>
+          <li>Avatars for contacts and groups.</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+          <li>Persistent typing messages</li>
+          <li>Possible crashes while linking</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.12.0" date="2024-02-11">
       <description translatable="no">
         <p>Added</p>

@@ -538,6 +538,7 @@ impl Manager {
         r
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub(super) async fn retrieve_profile_by_uuid(
         &self,
         uuid: Uuid,
@@ -551,6 +552,8 @@ impl Manager {
         log::trace!("`Manager::retrieve_profile_by_uuid` finished");
         r
     }
+
+    #[cfg(not(feature = "screenshot"))]
     pub(super) async fn retrieve_profile_avatar_by_uuid(
         &self,
         uuid: Uuid,
@@ -565,6 +568,7 @@ impl Manager {
         r
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub(super) async fn retrieve_group_avatar(
         &self,
         context: GroupContextV2,

@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0] - 2024-02-25
+
 ### Added
 
 - Avatars for contacts and groups.
@@ -513,7 +515,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.12.0...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.13.0...master
+[0.13.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.12.0...0.13.0
 [0.12.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.11.2...0.12.0
 [0.11.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.11.1...0.11.2
 [0.11.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.11.0...0.11.1

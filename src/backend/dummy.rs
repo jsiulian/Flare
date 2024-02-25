@@ -3,16 +3,19 @@ use std::path::Path;
 
 use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
 use gtk::glib::{BoxedAnyObject, Cast, DateTime};
+use gtk::prelude::FileExt;
 use libsignal_service::content::CallMessage as PreCallMessage;
 use libsignal_service::models::Contact as LContact;
 use libsignal_service::prelude::AttachmentPointer;
 use libsignal_service::prelude::Content;
+use libsignal_service::prelude::ProfileKey;
 use libsignal_service::prelude::Uuid;
 use libsignal_service::proto::call_message::Hangup;
 use libsignal_service::proto::call_message::Offer;
 use libsignal_service::proto::data_message::Reaction;
 use libsignal_service::proto::GroupContextV2;
 use libsignal_service::sender::AttachmentSpec;
+use libsignal_service::Profile;
 use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
 use presage::store::Thread;
 
@@ -30,7 +33,7 @@ macro_rules! msg {
         TextMessage::pub_from_text_channel_sender_timestamp(
             $m,
             $s.dummy_channels().await[$j].clone(),
-            $s.dummy_contacts()[$i].clone(),
+            $s.dummy_contacts().await[$i].clone(),
             $t * 1000 * 60,
             $s,
         )
@@ -43,7 +46,7 @@ macro_rules! msg {
 
 macro_rules! call_msg {
     ($s:expr, $m:expr, $i:expr, $t:expr) => {{
-        let c = $s.dummy_contacts()[$i].clone();
+        let c = $s.dummy_contacts().await[$i].clone();
         CallMessage::from_call(
             &c,
             &Channel::from_contact_or_group(c.clone(), &None, $s).await,
@@ -90,7 +93,7 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
             name: "Developer".to_string(),
             color: None,
             verified: Default::default(),
-            profile_key: vec![],
+            profile_key: vec![0; 32],
             blocked: false,
             expire_timer: 0,
             inbox_position: 0,
@@ -100,7 +103,7 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
         LContact {
             uuid: Uuid::from_u128(3),
             phone_number: None,
-            name: "Mr. Freeze".to_string(),
+            name: "Thanos".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -113,7 +116,7 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
         LContact {
             uuid: Uuid::from_u128(4),
             phone_number: None,
-            name: "Ron Burgundy".to_string(),
+            name: "Norman Osborn".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -194,6 +197,43 @@ impl super::Manager {
     }
 
     #[cfg(feature = "screenshot")]
+    pub(super) async fn retrieve_profile_by_uuid(
+        &self,
+        _uuid: Uuid,
+        _profile_key: ProfileKey,
+    ) -> Result<Profile, PresageError> {
+        Ok(Profile::default())
+    }
+
+    #[cfg(feature = "screenshot")]
+    pub(super) async fn retrieve_profile_avatar_by_uuid(
+        &self,
+        uuid: Uuid,
+        _profile_key: ProfileKey,
+    ) -> Result<Option<Vec<u8>>, PresageError> {
+        if uuid == Uuid::from_u128(2) {
+            let screenshot_file = gtk::gio::File::for_uri("resource:///icon.svg");
+            Ok(Some(
+                screenshot_file
+                    .load_bytes(None::<gtk::gio::Cancellable>.as_ref())
+                    .expect("Failed to load icon bytes")
+                    .0
+                    .to_vec(),
+            ))
+        } else {
+            Ok(None)
+        }
+    }
+
+    #[cfg(feature = "screenshot")]
+    pub(super) async fn retrieve_group_avatar(
+        &self,
+        context: GroupContextV2,
+    ) -> Result<Option<Vec<u8>>, PresageError> {
+        Ok(None)
+    }
+
+    #[cfg(feature = "screenshot")]
     pub async fn upload_attachments(
         &self,
         attachments: Vec<(AttachmentSpec, Vec<u8>)>,
@@ -210,15 +250,15 @@ impl super::Manager {
 
         let msg_replied = msg!(
             self,
-            "Flare 0.12.0 was now released. This release contains many nice-to-have UI improvements, like separate draft messages for each chat and displaying of group descriptions and contact information. It also contains many other fixes and UX improvements which are nice to have.",
+            "Flare 0.13.0 was now released. This release brings avatars (took only 1.5 years)! (And a few fixes) Now everyone can see my glorious profile picture, which is the icon of Flare btw.",
             2,
             GROUP_ID,
             18 + base_minute
         );
         let msg_reply = msg!(
             self,
-            "Seems like this release contains many minor improvements! Great! I especially like the highlighting of the selected channel in the channel list.",
-            0,
+            "Nice, I always wanted avatars.",
+            1,
             GROUP_ID,
             20 + base_minute
         );
@@ -232,12 +272,12 @@ impl super::Manager {
             .downcast::<TextMessage>()
             .unwrap()
             .react(&ReactionMessage::from_reaction(
-                &self.dummy_contacts()[0],
+                &self.dummy_contacts().await[0],
                 &self.dummy_channels().await[GROUP_ID],
                 26 + base_minute,
                 &self,
                 Reaction {
-                    emoji: Some("🎉🚀".to_string()),
+                    emoji: Some("🎉🚀🫥️".to_string()),
                     remove: Some(false),
                     target_author_aci: None,
                     target_sent_timestamp: None,
@@ -257,14 +297,28 @@ impl super::Manager {
 
         vec![
             msg_replied,
-            msg_screenshot,
+            // msg_screenshot,
             msg_reply,
             msg!(
                 self,
-                "Yes, that is a great improvement.",
-                2,
+                "Hey, why don't I have an avatar set?",
+                1,
                 GROUP_ID,
                 24 + base_minute
+            ),
+            msg!(
+                self,
+                "It was already hard enough to set my profile picture for this screenshot, I won't add another picture for you.",
+                2,
+                GROUP_ID,
+                25 + base_minute
+            ),
+            msg!(
+                self,
+                "YAY!",
+                0,
+                GROUP_ID,
+                27 + base_minute
             ),
             call_msg!(
                 self,
@@ -286,27 +340,31 @@ impl super::Manager {
             ),
             msg!(
                 self,
-                "What killed the dinosaurs? The Ice Age!",
+                "Perfectly balanced, as all things should be.",
                 3,
                 3,
                 1 + base_minute
             ),
-            msg!(self, "Well, that escalated quickly", 4, 4, 2 + base_minute),
+            msg!(self, "You know, I'm something of a scientist myself", 4, 4, 2 + base_minute),
         ]
     }
 
     #[cfg(feature = "screenshot")]
-    fn dummy_contacts(&self) -> Vec<Contact> {
-        dummy_presage_contacts()
-            .into_iter()
-            .map(|c| Contact::from_contact(c, self))
-            .collect()
+    async fn dummy_contacts(&self) -> Vec<Contact> {
+        let mut result = vec![];
+        for c in dummy_presage_contacts() {
+            let contact = Contact::from_contact(c, self);
+            let channel = Channel::from_contact_or_group(contact.clone(), &None, self).await;
+            contact.set_channel(Some(&channel));
+            result.push(contact);
+        }
+        result
     }
 
     #[cfg(feature = "screenshot")]
     async fn dummy_channels(&self) -> Vec<Channel> {
         let mut result = vec![];
-        for con in self.dummy_contacts() {
+        for con in self.dummy_contacts().await {
             result.push(Channel::from_contact_or_group(con, &None, self).await);
         }
         result.push(
