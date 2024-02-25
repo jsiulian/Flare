@@ -48,17 +48,7 @@ If you would like sound or vibration for Flare's notifications, install [feedbac
 
 ## Features
 
-For a list of features to be added, see [the wiki](https://gitlab.com/schmiddi-on-mobile/flare/-/wikis/Feature-roadmap)
-
-- Linking device
-- Sending a message
-- Receiving messages
-- Replying to a message
-- Reacting to a message
-- Attachments
-- Message storage
-- Encrypted storage (As I am not a security-expert, I do not guarantee anything. Read the `Security`-section)
-- Notifications, optionally in the background
+Flare is an unofficial app for Signal. It is still in development and doesn't include all the features that the official Signal apps do. More information can be found on its [feature roadmap](https://gitlab.com/schmiddi-on-mobile/flare/-/wikis/Feature-roadmap).
 
 ## Translation
 

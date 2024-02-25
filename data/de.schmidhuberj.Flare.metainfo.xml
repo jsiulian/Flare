@@ -27,45 +27,7 @@
   <description>
     <!-- Translators: Description of Flare in metainfo. -->
     <p>
-      Flare is an unofficial app that lets you chat with your friends on Signal from Linux. It is still in development and doesn't include as many features as the official Signal applications.
-    </p>
-    <ul>
-      <!-- Translators: Description of Flare in metainfo: Features -->
-      <li>
-        Linking device
-      </li>
-      <!-- Translators: Description of Flare in metainfo: Features -->
-      <li>
-        Sending messages
-      </li>
-      <!-- Translators: Description of Flare in metainfo: Features -->
-      <li>
-        Receiving messages
-      </li>
-      <!-- Translators: Description of Flare in metainfo: Features -->
-      <li>
-        Replying to a message
-      </li>
-      <!-- Translators: Description of Flare in metainfo: Features -->
-      <li>
-        Reacting to a message
-      </li>
-      <!-- Translators: Description of Flare in metainfo: Features -->
-      <li>
-        Attachments
-      </li>
-      <!-- Translators: Description of Flare in metainfo: Features -->
-      <li>
-        Encrypted storage
-      </li>
-      <!-- Translators: Description of Flare in metainfo: Features -->
-      <li>
-        Notifications, optionally in the background
-      </li>
-    </ul>
-    <!-- Translators: Description of Flare in metainfo: Security note -->
-    <p>
-      More features are planned, blocked, or not-planned. Consult the README for more information about them.
+      Flare is an unofficial app for Signal. It is still in development and doesn't include all the features that the official Signal apps do. More information can be found on its feature roadmap.
     </p>
     <!-- Translators: Description of Flare in metainfo: Security note -->
     <p>
