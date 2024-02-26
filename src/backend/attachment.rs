@@ -441,12 +441,12 @@ mod imp {
     use gio::File;
     use glib::ParamSpecEnum;
     use glib::{
-        once_cell::sync::Lazy, Bytes, ParamSpec, ParamSpecBoolean, ParamSpecObject,
-        ParamSpecString, ParamSpecUInt, Value,
+        Bytes, ParamSpec, ParamSpecBoolean, ParamSpecObject, ParamSpecString, ParamSpecUInt, Value,
     };
     use gtk::MediaStream;
     use gtk::{gdk, gio, glib};
     use libsignal_service::proto::AttachmentPointer;
+    use once_cell::sync::Lazy;
 
     use crate::backend::attachment::{AttachmentType, Flags};
     use crate::backend::Manager;

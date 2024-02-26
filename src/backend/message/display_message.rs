@@ -87,10 +87,10 @@ where
 
 mod imp {
     use glib::{
-        once_cell::sync::Lazy,
         subclass::types::{ClassStruct, ObjectSubclass},
         ParamSpec, ParamSpecString,
     };
+    use once_cell::sync::Lazy;
 
     use crate::backend::{message::MessageImpl, Message};
 

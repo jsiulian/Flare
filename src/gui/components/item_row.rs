@@ -55,7 +55,7 @@ impl ItemRow {
 }
 
 mod imp {
-    use adw::traits::BinExt;
+    use adw::prelude::BinExt;
     use gdk::glib::subclass::Signal;
     use glib::subclass::InitializingObject;
     use once_cell::sync::Lazy;

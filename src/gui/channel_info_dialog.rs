@@ -36,11 +36,10 @@ pub mod imp {
     use adw::subclass::prelude::MessageDialogImpl;
     use std::cell::RefCell;
 
-    use glib::{
-        once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject, Value,
-    };
+    use glib::{subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
     use gtk::glib;
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use once_cell::sync::Lazy;
 
     use crate::backend::{Channel, Manager};
     use crate::gspawn;

@@ -75,11 +75,11 @@ impl CallMessage {
 
 mod imp {
     use super::*;
-    use gdk::glib::ObjectExt;
+    use gdk::prelude::ObjectExt;
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassIsExt};
     use gdk::{
         gdk_pixbuf::{
-            glib::{once_cell::sync::Lazy, ParamSpec, Value},
+            glib::{ParamSpec, Value},
             prelude::ToValue,
         },
         prelude::ParamSpecBuilderExt,
@@ -87,6 +87,7 @@ mod imp {
     use glib::ParamSpecEnum;
     use gtk::{glib, prelude::Cast};
     use libsignal_service::content::CallMessage as PreCallMessage;
+    use once_cell::sync::Lazy;
     use std::cell::RefCell;
 
     use crate::backend::message::{

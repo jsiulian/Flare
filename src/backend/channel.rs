@@ -10,7 +10,7 @@ use gdk::{
     Paintable, Texture,
 };
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use glib::{Cast, Object};
+use glib::{prelude::Cast, Object};
 use gtk::{gdk, gio, glib};
 use libsignal_service::{
     groups_v2::Group,
@@ -561,11 +561,10 @@ mod imp {
         subclass::prelude::*,
         Paintable,
     };
-    use glib::{
-        once_cell::sync::Lazy, subclass::Signal, ParamSpec, ParamSpecObject, ParamSpecString, Value,
-    };
+    use glib::{subclass::Signal, ParamSpec, ParamSpecObject, ParamSpecString, Value};
     use gtk::{gdk, glib};
     use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::GroupContextV2};
+    use once_cell::sync::Lazy;
 
     use crate::backend::{
         message::{DisplayMessage, ReactionMessage, TextMessage},

@@ -1,7 +1,7 @@
 use crate::backend::Manager;
 use adw::prelude::GtkWindowExt;
 use gdk::prelude::CastNone;
-use glib::{Object, ObjectExt};
+use glib::{prelude::ObjectExt, Object};
 use gtk::glib;
 
 use super::Window;
@@ -41,11 +41,10 @@ pub mod imp {
     use gdk::glib::clone;
     use gdk::prelude::ParamSpecBuilderExt;
     use gdk::prelude::ToValue;
-    use glib::{
-        once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject, Value,
-    };
+    use glib::{subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
     use gtk::glib;
     use gtk::CompositeTemplate;
+    use once_cell::sync::Lazy;
     use std::cell::RefCell;
     use url::Url;
 

@@ -9,7 +9,7 @@ glib::wrapper! {
     pub struct TimelineItem(ObjectSubclass<imp::TimelineItem>);
 }
 
-pub trait TimelineItemExt: 'static + std::marker::Sized + glib::ObjectExt {
+pub trait TimelineItemExt: 'static + std::marker::Sized + glib::prelude::ObjectExt {
     fn update_show_header(&self, previous: Option<&TimelineItem>);
     fn update_show_timestamp(&self, next: Option<&TimelineItem>);
 
@@ -106,9 +106,8 @@ mod imp {
         glib::{ParamSpecBoolean, ParamSpecBoxed},
         subclass::prelude::{ClassStruct, ObjectSubclassExt},
     };
-    use glib::{
-        once_cell::sync::Lazy, subclass::types::ObjectSubclass, ParamSpec, ParamSpecUInt64, Value,
-    };
+    use glib::{subclass::types::ObjectSubclass, ParamSpec, ParamSpecUInt64, Value};
+    use once_cell::sync::Lazy;
 
     use super::*;
 

@@ -1,6 +1,7 @@
-use crate::gui::attachment::Attachment;
 use glib::Object;
 use gtk::glib;
+
+use crate::gui::attachment::Attachment;
 
 gtk::glib::wrapper! {
     pub struct AttachmentPhoto(ObjectSubclass<imp::AttachmentPhoto>)
@@ -17,11 +18,12 @@ impl AttachmentPhoto {
 }
 
 pub mod imp {
-    use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
     use glib::subclass::InitializingObject;
-    use gtk::traits::WidgetExt;
+    use gtk::prelude::WidgetExt;
     use gtk::{glib, Picture};
     use gtk::{subclass::prelude::*, CompositeTemplate};
+
+    use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/components/attachment_photo.ui")]

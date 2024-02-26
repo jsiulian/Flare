@@ -1,13 +1,13 @@
 use futures::StreamExt;
-use zbus::{dbus_proxy, Connection};
+use zbus::{proxy, Connection};
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.freedesktop.login1.Manager",
     default_service = "org.freedesktop.login1",
     default_path = "/org/freedesktop/login1"
 )]
 trait Login1 {
-    #[dbus_proxy(signal)]
+    #[zbus(signal)]
     fn prepare_for_sleep(&self, arg1: bool) -> fdo::Result<()>;
 }
 

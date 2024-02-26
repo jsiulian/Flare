@@ -1,7 +1,7 @@
 use crate::backend::{Manager, Server, SetupResult};
 use adw::prelude::GtkWindowExt;
 use gdk::{glib::subclass::types::ObjectSubclassIsExt, prelude::CastNone};
-use glib::{Object, ObjectExt};
+use glib::{prelude::ObjectExt, Object};
 use gtk::glib;
 use libsignal_service::configuration::SignalServers;
 
@@ -61,14 +61,12 @@ pub mod imp {
     use gdk::glib::Propagation;
     use gettextrs::gettext;
     use gio::MemoryInputStream;
-    use glib::{
-        once_cell::sync::Lazy, subclass::InitializingObject, Bytes, ParamSpec, ParamSpecObject,
-        Value,
-    };
+    use glib::{subclass::InitializingObject, Bytes, ParamSpec, ParamSpecObject, Value};
     use gtk::{gdk, gio, glib, PropertyExpression};
     use gtk::{prelude::*, CompositeTemplate};
     use libsignal_service::configuration::SignalServers;
     use libsignal_service::prelude::phonenumber::PhoneNumber;
+    use once_cell::sync::Lazy;
     use std::cell::RefCell;
     use std::str::FromStr;
 

@@ -1,10 +1,9 @@
 use std::collections::HashMap;
 
-use zbus::dbus_proxy;
 use zbus::zvariant::Value;
-use zbus::Connection;
+use zbus::{proxy, Connection};
 
-#[dbus_proxy(
+#[proxy(
     interface = "org.sigxcpu.Feedback",
     default_path = "/org/sigxcpu/Feedback"
 )]
@@ -17,7 +16,7 @@ trait Feedback {
         timeout: i32,
     ) -> zbus::Result<u32>;
 
-    #[dbus_proxy(signal)]
+    #[zbus(signal)]
     fn feedback_ended(&self, arg1: u32, arg2: u32) -> fdo::Result<()>;
 }
 
@@ -34,7 +33,7 @@ impl Feedbackd {
 
     pub async fn feedback(&self) -> Result<(), zbus::Error> {
         log::trace!("Providing feedback");
-        let proxy = FeedbackProxy::new(&self.connection).await?;
+        let proxy = FeedbackProxy::new(&self.connection, "org.sigxcpu.Feedback").await?;
         let _ = proxy
             .trigger_feedback(
                 crate::config::APP_ID,

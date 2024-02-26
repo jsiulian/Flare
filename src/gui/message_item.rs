@@ -1,10 +1,7 @@
 use gio::{subclass::prelude::ObjectSubclassIsExt, SimpleAction, SimpleActionGroup};
 use glib::{clone, Object};
+use gtk::prelude::*;
 use gtk::{gio, glib};
-use gtk::{
-    prelude::*,
-    traits::{PopoverExt, WidgetExt},
-};
 use regex::Regex;
 
 use crate::backend::message::{MessageExt, TextMessage};
@@ -226,12 +223,12 @@ pub mod imp {
 
     use glib::{
         clone,
-        once_cell::sync::Lazy,
         subclass::{InitializingObject, Signal},
         ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
     use gtk::{glib, EmojiChooser};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use once_cell::sync::Lazy;
 
     use crate::{
         backend::{message::TextMessage, Manager},
