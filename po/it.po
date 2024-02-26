@@ -8,20 +8,20 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2023-12-18 14:09+0000\n"
+"PO-Revision-Date: 2024-02-26 18:38+0000\n"
 "Last-Translator: boblaspugna4f1ee5d391024b4c <boblaspugna@null.net>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr ""
+msgstr "Bob Sponge <boblaspugna@null.net>"
 
 #: data/resources/ui/channel_info_dialog.blp:13
 #: data/resources/ui/window.blp:162
@@ -672,7 +672,7 @@ msgstr "Informazioni"
 
 #: data/resources/ui/window.blp:153
 msgid "Quit"
-msgstr ""
+msgstr "Esci"
 
 #: data/resources/ui/window.blp:167
 #, fuzzy
