@@ -11,6 +11,29 @@
           pkgs = import nixpkgs {
             inherit system;
           };
+
+          libadwaita_1_5 = pkgs.libadwaita.overrideAttrs (finalAttrs: prevAttrs: {
+            version = "1.5.beta";
+            src = with pkgs; fetchFromGitLab {
+              domain = "gitlab.gnome.org";
+              owner = "GNOME";
+              repo = "libadwaita";
+              rev = "66edcd31c1acfb5a569db02870d1f7e471946fcf";
+              hash = "sha256-ipyifdRwZCO8H7qQOcEHOXW9PT9w+Ix+k374qHRfSjg=";
+            };
+          });
+
+          blueprint-compiler-git = pkgs.blueprint-compiler.overrideAttrs (finalAttrs: prevAttrs: {
+            version = "0.10.1.git";
+            src = with pkgs; fetchFromGitLab {
+              domain = "gitlab.gnome.org";
+              owner = "jwestman";
+              repo = "blueprint-compiler";
+              rev = "d47955c5a20b2f7cf85ff25a00b02160883aa0b1";
+              hash = "sha256-yNFgJpCGu2CrT6J004N4G+Nlt+3/DbEkSGOWkvSn4J8=";
+            };
+          });
+
           name = "flare";
         in
         rec {
@@ -38,8 +61,8 @@
                       ./flake.lock
                     ]);
               };
-              buildInputs = with pkgs; [ pkgs.libadwaita pkgs.protobuf pkgs.libsecret pkgs.gst_all_1.gstreamer pkgs.gst_all_1.gst-plugins-base pkgs.gst_all_1.gst-plugins-good pkgs.gst_all_1.gst-plugins-bad pkgs.gtksourceview5 pkgs.gtk4 ];
-              nativeBuildInputs = with pkgs; [ pkgs.appstream-glib pkgs.blueprint-compiler pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib ];
+              buildInputs = with pkgs; [ libadwaita_1_5 pkgs.protobuf pkgs.libsecret pkgs.gst_all_1.gstreamer pkgs.gst_all_1.gst-plugins-base pkgs.gst_all_1.gst-plugins-good pkgs.gst_all_1.gst-plugins-bad pkgs.gtksourceview5 pkgs.gtk4 ];
+              nativeBuildInputs = with pkgs; [ pkgs.appstream-glib blueprint-compiler-git pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib ];
 
               PROTOC = "${pkgs.protobuf}/bin/protoc";
 

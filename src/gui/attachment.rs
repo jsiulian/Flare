@@ -31,6 +31,7 @@ pub fn backend_to_gui(attachment: &crate::backend::Attachment) -> Attachment {
 pub mod imp {
     use std::{cell::RefCell, os::fd::AsFd};
 
+    use adw::prelude::*;
     use ashpd::{desktop::open_uri::OpenFileRequest, WindowIdentifier};
     use gdk::{
         gio::File,
@@ -43,7 +44,7 @@ pub mod imp {
         ParamSpec, ParamSpecObject, Value,
     };
     use gtk::{gio, glib, FileDialog};
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use gtk::{subclass::prelude::*, CompositeTemplate};
     use once_cell::sync::Lazy;
 
     use crate::{
@@ -139,7 +140,7 @@ pub mod imp {
                                 if let Err(e) = attachment.save_to_file(&file).await {
                                     let root = obj.imp().window();
                                     let dialog = ErrorDialog::new(e.into(), &root);
-                                    dialog.present();
+                                    dialog.present(&root);
                                 }
                             }));
                         } else {

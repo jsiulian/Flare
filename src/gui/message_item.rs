@@ -221,13 +221,14 @@ pub mod imp {
     use regex::Regex;
     use std::cell::{Cell, RefCell};
 
+    use adw::prelude::*;
     use glib::{
         clone,
         subclass::{InitializingObject, Signal},
         ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
     use gtk::{glib, EmojiChooser};
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use gtk::{subclass::prelude::*, CompositeTemplate};
     use once_cell::sync::Lazy;
 
     use crate::{
@@ -392,7 +393,7 @@ pub mod imp {
                         .dynamic_cast::<crate::gui::Window>()
                         .expect("Root of `ChannelMessages` to be a `Window`.");
                     let dialog = ErrorDialog::new(e, &root);
-                    dialog.present();
+                    dialog.present(&root);
                 }
                 obj.notify("has-reaction");
             }));

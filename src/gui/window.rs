@@ -86,9 +86,8 @@ impl Window {
 pub mod imp {
     use std::{cell::RefCell, env, path::PathBuf};
 
-    use adw::prelude::MessageDialogExtManual;
-    use adw::{prelude::*, subclass::prelude::*, AboutWindow, MessageDialog};
-    use adw::{EntryRow, ResponseAppearance};
+    use adw::{prelude::*, subclass::prelude::*, AboutDialog};
+    use adw::{AlertDialog, EntryRow, ResponseAppearance};
     use gdk::gio::Cancellable;
     use gdk::glib::{BindingFlags, BoxedAnyObject, Propagation};
     use gio::{Settings, SimpleAction, SimpleActionGroup};
@@ -148,19 +147,18 @@ pub mod imp {
             log::trace!("Setting up preferences-window action");
             let obj = self.obj();
             let action_settings = SimpleAction::new("settings", None);
-            action_settings.connect_activate(|_, _| {
+            action_settings.connect_activate(clone!(@weak obj => move |_, _| {
                 let settings = PreferencesWindow::new();
-                settings.present();
-            });
+                settings.present(&obj);
+            }));
 
             let action_clear_messages = SimpleAction::new("clear-messages", None);
             action_clear_messages.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("User requested to clear messages");
                 let builder = Builder::from_resource("/ui/dialog_clear_messages.ui");
-                let dialog: MessageDialog = builder
+                let dialog: AlertDialog = builder
                     .object("dialog")
                     .expect("dialog_clear_messages.ui to have at least one object dialog");
-                dialog.set_transient_for(Some(&obj));
                 dialog.connect_response(None, clone!(@weak obj => move |_dialog, response| {
                     if response == "clear" {
                         log::info!("Clear messages device");
@@ -173,17 +171,16 @@ pub mod imp {
                         obj.kill();
                     }
                 }));
-                dialog.present();
+                dialog.present(&obj);
             }));
             log::trace!("Setting up unlink action");
             let action_unlink = SimpleAction::new("unlink", None);
             action_unlink.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("User requested to unlink the device");
                 let builder = Builder::from_resource("/ui/dialog_unlink.ui");
-                let dialog: MessageDialog = builder
+                let dialog: AlertDialog = builder
                     .object("dialog")
                     .expect("dialog_unlink.ui to have at least one object dialog");
-                dialog.set_transient_for(Some(&obj));
                 dialog.connect_response(None, clone!(@weak obj => move |_dialog, response| {
                     if response == "unlink-keep" {
                         log::info!("Unlinking device");
@@ -214,7 +211,7 @@ pub mod imp {
                         obj.kill();
                     }
                 }));
-                dialog.present();
+                dialog.present(&obj);
             }));
 
             log::trace!("Setting up submit-captcha action");
@@ -222,7 +219,7 @@ pub mod imp {
             action_submit_captcha.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("User requested to submit a captcha the device");
                 let builder = Builder::from_resource("/ui/submit_captcha_dialog.ui");
-                let dialog: MessageDialog = builder
+                let dialog: AlertDialog = builder
                     .object("dialog")
                     .expect("submit_captcha_dialog.ui to have at least one object dialog");
                 let entry_token: EntryRow = builder
@@ -231,7 +228,6 @@ pub mod imp {
                 let entry_captcha: EntryRow = builder
                     .object("entry_captcha")
                     .expect("submit_captcha_dialog.ui to have at least one object entry_captcha");
-                dialog.set_transient_for(Some(&obj));
                 dialog.connect_response(None, clone!(@weak obj, @weak entry_token, @weak entry_captcha => move |_dialog, response| {
                     if response == "submit" {
                         log::info!("Unlinking device");
@@ -247,7 +243,7 @@ pub mod imp {
                         }
                     }
                 }));
-                dialog.present();
+                dialog.present(&obj);
             }));
             log::trace!("Setting up sync-contacts action");
             let action_sync_contacts = SimpleAction::new("sync-contacts", None);
@@ -274,16 +270,16 @@ pub mod imp {
 
             log::trace!("Setting up about-page action");
             let action_about = SimpleAction::new("about", None);
-            action_about.connect_activate(|_, _| {
+            action_about.connect_activate(clone!(@weak obj => move |_, _| {
                 let builder = Builder::from_resource("/ui/about.ui");
-                let about: AboutWindow = builder
+                let about: AboutDialog = builder
                     .object("about")
                     .expect("about.ui to have at least one object about");
                 // TODO: Replace this in Blueprint when string[] is supported
                 about.set_artists(&["David Lapshin <ddaudix@gmail.com>"]);
                 about.add_link("GitLab", "https://gitlab.com/schmiddi-on-mobile/flare");
-                about.present();
-            });
+                about.present(&obj);
+            }));
 
             log::trace!("Setting up kill action");
             let action_kill = SimpleAction::new("kill", None);
@@ -296,16 +292,17 @@ pub mod imp {
             action_channel_information.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("Requested channel info");
                 let Some(channel) = obj.imp().channel_messages.active_channel() else {return};
-                let channel_info = ChannelInfoDialog::new(&channel, &obj.manager(), &obj);
-                channel_info.present();
+                // TODO: To AlertDialog
+                let channel_info = ChannelInfoDialog::new(&channel, &obj.manager());
+                channel_info.present(&obj);
             }));
 
             log::trace!("Setting up channel clear messages action");
             let action_channel_clear_messages = SimpleAction::new("channel-clear-messages", None);
             action_channel_clear_messages.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("Requested clearing messages of channels");
-                let confirmation_dialog = MessageDialog::builder()
-                    .transient_for(&obj)
+                // TODO: To AlertDialog
+                let confirmation_dialog = AlertDialog::builder()
                     .heading(gettextrs::gettext("Remove Messages"))
                     .body(gettextrs::gettext("This will remove all locally stored messages from this channel"))
                     .close_response("cancel")
@@ -314,11 +311,11 @@ pub mod imp {
                 confirmation_dialog.add_response("cancel",  &gettextrs::gettext("Cancel"));
                 confirmation_dialog.add_response("remove",  &gettextrs::gettext("Remove Messages"));
                 confirmation_dialog.set_response_appearance("remove", ResponseAppearance::Destructive);
-                confirmation_dialog.choose(None::<&Cancellable>, clone!(@weak obj => move |response| {
+                confirmation_dialog.choose(&obj, None::<&Cancellable>, clone!(@weak obj => move |response| {
                     if response == "remove" {
                         if let Err(e) = obj.imp().channel_messages.clear_messages() {
                             let dialog = ErrorDialog::new(e, &obj);
-                            dialog.present();
+                            dialog.present(&obj);
                         }
                     }
                 }));
@@ -399,7 +396,7 @@ pub mod imp {
             action_linked_devices.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("User requested to view linked devices");
                 let win = LinkedDevicesWindow::new(obj.manager(), &obj);
-                win.present();
+                win.present(&obj);
             }));
 
             self.obj()
@@ -520,7 +517,7 @@ pub mod imp {
 
                 if let Err(e) = manager.init(&path).await {
                     let dialog = ErrorDialog::new(e, &obj);
-                    dialog.present();
+                    dialog.present(&obj);
                 }
             }));
         }

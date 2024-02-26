@@ -1,15 +1,12 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlSetupWindow: Adw.Window {
+template $FlSetupWindow: Adw.Dialog {
   can-focus: true;
-  default-height: 600;
-  default-width: 450;
-  destroy-with-parent: true;
-  modal: true;
-  deletable: false;
+  content-height: 600;
+  content-width: 450;
 
-  content: Adw.ToastOverlay toast_overlay {
+  Adw.ToastOverlay toast_overlay {
     child: Box {
       orientation: vertical;
 
@@ -532,5 +529,5 @@ template $FlSetupWindow: Adw.Window {
         }
       }
     };
-  };
+  }
 }

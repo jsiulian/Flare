@@ -1,6 +1,4 @@
 use crate::backend::Manager;
-use adw::prelude::GtkWindowExt;
-use gdk::prelude::CastNone;
 use glib::{prelude::ObjectExt, Object};
 use gtk::glib;
 
@@ -8,9 +6,8 @@ use super::Window;
 
 glib::wrapper! {
     pub struct LinkedDevicesWindow(ObjectSubclass<imp::LinkedDevicesWindow>)
-        @extends adw::Window, gtk::Window, gtk::Widget,
-        @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
-            gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
+        @extends adw::Dialog, gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl LinkedDevicesWindow {
@@ -18,7 +15,7 @@ impl LinkedDevicesWindow {
         log::trace!("Initializing link window");
         Object::builder::<Self>()
             .property("manager", &manager)
-            .property("transient-for", parent)
+            .property("window", parent)
             .build()
     }
 
@@ -27,16 +24,13 @@ impl LinkedDevicesWindow {
     }
 
     fn window(&self) -> Window {
-        self.transient_for()
-            .and_dynamic_cast()
-            .expect("LinkedDevicesWindow to have a Window parent")
+        self.property("window")
     }
 }
 
 pub mod imp {
-    use adw::prelude::EditableExt;
-    use adw::prelude::GtkWindowExt;
-    use adw::prelude::{MessageDialogExt, WidgetExt};
+    use adw::prelude::WidgetExt;
+    use adw::prelude::*;
     use adw::subclass::prelude::*;
     use gdk::glib::clone;
     use gdk::prelude::ParamSpecBuilderExt;
@@ -52,16 +46,19 @@ pub mod imp {
     use crate::gspawn;
     use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::utility::Utility;
+    use crate::gui::Window;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/linked_devices_window.ui")]
     pub struct LinkedDevicesWindow {
+        // TODO: Port to AlertDialog
         #[template_child]
-        add_device_dialog: TemplateChild<adw::MessageDialog>,
+        add_device_dialog: TemplateChild<adw::AlertDialog>,
         #[template_child]
         entry_device_url: TemplateChild<adw::EntryRow>,
 
         manager: RefCell<Option<Manager>>,
+        window: RefCell<Option<Window>>,
     }
 
     #[gtk::template_callbacks]
@@ -70,9 +67,7 @@ pub mod imp {
         fn handle_add_linked_device(&self) {
             log::trace!("User asked to add device link. Presenting dialog.");
             self.entry_device_url.set_text("");
-            self.add_device_dialog
-                .set_transient_for(Some(&self.obj().window()));
-            self.add_device_dialog.present();
+            self.add_device_dialog.present(&self.obj().window());
         }
 
         #[template_callback]
@@ -88,8 +83,9 @@ pub mod imp {
                     let manager = self.obj().manager();
                     gspawn!(clone!(@weak obj => async move {
                         if let Err(e) = manager.link_secondary(url).await {
-                            let dialog = ErrorDialog::new(e.into(), &obj.window());
-                            dialog.present();
+                            let root = obj.window();
+                            let dialog = ErrorDialog::new(e.into(), &root);
+                            dialog.present(&root);
                         }
                     }));
                 }
@@ -109,7 +105,7 @@ pub mod imp {
     impl ObjectSubclass for LinkedDevicesWindow {
         const NAME: &'static str = "FlLinkedDevicesWindow";
         type Type = super::LinkedDevicesWindow;
-        type ParentType = adw::Window;
+        type ParentType = adw::Dialog;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
@@ -130,9 +126,14 @@ pub mod imp {
 
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![ParamSpecObject::builder::<Manager>("manager")
-                    .construct_only()
-                    .build()]
+                vec![
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecObject::builder::<Window>("window")
+                        .construct_only()
+                        .build(),
+                ]
             });
             PROPERTIES.as_ref()
         }
@@ -140,6 +141,7 @@ pub mod imp {
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
+                "window" => self.window.borrow().as_ref().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -153,12 +155,18 @@ pub mod imp {
 
                     self.manager.replace(man);
                 }
+                "window" => {
+                    let win = value.get::<Option<Window>>().expect(
+                        "Property `window` of `LinkedDevicesWindow` has to be of type `Window`",
+                    );
+
+                    self.window.replace(win);
+                }
                 _ => unimplemented!(),
             }
         }
     }
 
     impl WidgetImpl for LinkedDevicesWindow {}
-    impl WindowImpl for LinkedDevicesWindow {}
-    impl AdwWindowImpl for LinkedDevicesWindow {}
+    impl AdwDialogImpl for LinkedDevicesWindow {}
 }
