@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-01-12 18:06+0000\n"
+"PO-Revision-Date: 2024-02-27 18:59+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/es/>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -33,16 +33,15 @@ msgstr "Información del canal"
 #: data/resources/ui/channel_info_dialog.blp:23
 #: data/resources/ui/setup_window.blp:372
 msgid "Phone Number"
-msgstr ""
+msgstr "Número de teléfono"
 
 #: data/resources/ui/channel_info_dialog.blp:30
-#, fuzzy
 msgid "Disappearing Messages"
-msgstr "Borrar mensajes"
+msgstr "Mensajes que se borran automáticamente"
 
 #: data/resources/ui/channel_info_dialog.blp:37
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: data/resources/ui/channel_info_dialog.blp:45
 msgctxt "accessibility"
@@ -190,28 +189,24 @@ msgstr "Reportar"
 
 #: data/resources/ui/linked_devices_window.blp:15
 #: data/resources/ui/window.blp:122
-#, fuzzy
 msgid "Linked Devices"
-msgstr "Vincular Dispositivo"
+msgstr "Dispositivos vinculados"
 
 #: data/resources/ui/linked_devices_window.blp:33
-#, fuzzy
 msgid "Add Linked Device"
-msgstr "Vincular Dispositivo"
+msgstr "Añadir dispositivo vinculado"
 
 #: data/resources/ui/linked_devices_window.blp:34
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Por favor, introduzca la URL del dispositivo que desea vincular."
 
 #: data/resources/ui/linked_devices_window.blp:44
-#, fuzzy
 msgid "Device URL"
-msgstr "Nombre del Dispositivo"
+msgstr "URL del dispositivo"
 
 #: data/resources/ui/linked_devices_window.blp:53
-#, fuzzy
 msgid "Add Device"
-msgstr "Vincular Dispositivo"
+msgstr "Añadir dispositivo"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
@@ -238,59 +233,54 @@ msgid "General"
 msgstr "General"
 
 #: data/resources/ui/preferences_window.blp:10
-#, fuzzy
 msgid "Automatically Download Attachments"
-msgstr "Descargar imágenes automáticamente"
+msgstr "Descarga automática de archivos adjuntos"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
 msgstr ""
+"Los tipos de anexos seleccionados a continuación se descargarán "
+"automáticamente"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Imágenes"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Vídeos"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Archivos"
 
 #: data/resources/ui/preferences_window.blp:26
-#, fuzzy
 msgid "Voice Messages"
-msgstr "Eliminar mensajes"
+msgstr "Mensajes de voz"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
 msgstr "Notificaciones"
 
 #: data/resources/ui/preferences_window.blp:32
-#, fuzzy
 msgid "Notifications for new messages"
-msgstr "Notificaciones de nuevos mensajes."
+msgstr "Notificaciones de nuevos mensajes"
 
 #: data/resources/ui/preferences_window.blp:35
-#, fuzzy
 msgid "Send Notifications"
-msgstr "Enviar notificaciones"
+msgstr "Envío de notificaciones"
 
 #: data/resources/ui/preferences_window.blp:39
-#, fuzzy
 msgid "Send Notifications on Reactions"
-msgstr "Enviar notificaciones al recibir reacciones"
+msgstr "Enviar notificaciones para reacciones"
 
 #: data/resources/ui/preferences_window.blp:44
-#, fuzzy
 msgid "Background Notifications"
-msgstr "Enviar notificaciones"
+msgstr "Notificaciones en segundo plano"
 
 #: data/resources/ui/preferences_window.blp:45
-#, fuzzy
 msgid "Fetch notifications while the app is closed"
-msgstr "Enviar notificaciones al recibir reacciones"
+msgstr "Obtener notificaciones mientras la aplicación está cerrada"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
@@ -312,33 +302,30 @@ msgid "Selectable Message Text"
 msgstr "Texto seleccionable en mensajes"
 
 #: data/resources/ui/preferences_window.blp:57
-#, fuzzy
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
-"El texto seleccionable puede interferir con los gestos de deslizamiento en "
-"pantallas táctiles."
+"El texto seleccionable puede causar problemas con los gestos de "
+"deslizamiento en las pantallas táctiles"
 
 #: data/resources/ui/preferences_window.blp:61
-#, fuzzy
 msgid "Press “Enter” to Send Message"
-msgstr "Presionar «Enter» para enviar mensaje"
+msgstr "Pulse \"Intro\" para enviar el mensaje"
 
 #: data/resources/ui/preferences_window.blp:62
-#, fuzzy
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
-"Puede que no sea posible enviar mensajes con líneas nuevas en teclados "
-"táctiles que no permiten «Control + Enter»"
+"Puede que no sea posible enviar mensajes con nuevas líneas en teclados "
+"táctiles que no permitan \"Control + Intro\""
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Bienvenido a Flare"
 
 #: data/resources/ui/setup_window.blp:44
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Configurar Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:53
@@ -359,16 +346,25 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare es un cliente no oficial de Signal. Tenga en cuenta que Flare no es "
+"estable y que se esperan errores. Si experimenta algún error, consulte el "
+"rastreador de <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
+"issues\">fallos</a> y abra un tema si está experimentando un nuevo fallo. "
+"También tenga en cuenta que, debido a que es una aplicación de terceros, "
+"Flare no puede garantizar el mismo nivel de seguridad y privacidad que las "
+"aplicaciones oficiales de Signal. Si usted o alguien con quien necesita "
+"ponerse en contacto requiere un alto nivel de seguridad, no use Flare. "
+"Consulte el <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/"
+"master/README.md#security\">LÉAME</a> para obtener más información."
 
 #: data/resources/ui/setup_window.blp:65 data/resources/ui/setup_window.blp:72
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "¿Dispositivo principal o de enlace?"
 
 #: data/resources/ui/setup_window.blp:88 data/resources/ui/setup_window.blp:320
 #: data/resources/ui/setup_window.blp:327
-#, fuzzy
 msgid "Primary Device"
-msgstr "Vincular Dispositivo"
+msgstr "Dispositivo principal"
 
 #: data/resources/ui/setup_window.blp:101
 #: data/resources/ui/setup_window.blp:156
@@ -379,15 +375,15 @@ msgstr "Vincular Dispositivo"
 
 #: data/resources/ui/setup_window.blp:108
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "¿Dispositivo principal o dispositivo de enlace?"
 
 #: data/resources/ui/setup_window.blp:120
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Puede utilizar Flare como dispositivo principal o secundario."
 
 #: data/resources/ui/setup_window.blp:129
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Dispositivo vinculado (recomendado)"
 
 #: data/resources/ui/setup_window.blp:134
 msgid ""
@@ -395,10 +391,13 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare puede ser una aplicación vinculada a tu dispositivo principal, similar "
+"al Signal Desktop oficial. Este modo se ha probado de forma más exhaustiva y "
+"funciona en la mayoría de los casos."
 
 #: data/resources/ui/setup_window.blp:143
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Dispositivo principal (desactivado)"
 
 #: data/resources/ui/setup_window.blp:148
 msgid ""
@@ -408,12 +407,20 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare puede actuar como dispositivo principal, de forma similar a las "
+"aplicaciones oficiales de Signal en Android o IOS. Actualmente, Flare no "
+"admite este modo, aunque las pruebas iniciales parecen indicar que funciona. "
+"Si estás dispuesto a probarlo, puedes habilitar el botón que aparece a "
+"continuación (y si no sabes cómo hacerlo, no deberías pensar en probar la "
+"compatibilidad con dispositivos primarios)."
 
 #: data/resources/ui/setup_window.blp:197
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Para la vinculación como dispositivo secundario, Flare necesitará un nombre "
+"de dispositivo que se mostrará en la aplicación oficial."
 
 #: data/resources/ui/setup_window.blp:207
 msgid "Device Name"
@@ -422,12 +429,12 @@ msgstr "Nombre del Dispositivo"
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Developer Options"
-msgstr ""
+msgstr "Opciones de desarrollador"
 
 #: data/resources/ui/setup_window.blp:214
 #: data/resources/ui/setup_window.blp:383
 msgid "Signal Servers"
-msgstr ""
+msgstr "Servidores de Signal"
 
 #: data/resources/ui/setup_window.blp:220
 msgid ""
