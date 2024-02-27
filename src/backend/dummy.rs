@@ -126,6 +126,32 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
             archived: false,
             avatar: None,
         },
+        LContact {
+            uuid: Uuid::from_u128(5),
+            phone_number: None,
+            name: "Norman Osborn 2".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
+        LContact {
+            uuid: Uuid::from_u128(6),
+            phone_number: None,
+            name: "Norman Osborn 3".to_string(),
+            color: None,
+            verified: Default::default(),
+            profile_key: vec![],
+            blocked: false,
+            expire_timer: 0,
+            inbox_position: 0,
+            archived: false,
+            avatar: None,
+        },
     ]
 }
 
@@ -346,6 +372,8 @@ impl super::Manager {
                 1 + base_minute
             ),
             msg!(self, "You know, I'm something of a scientist myself", 4, 4, 2 + base_minute),
+            msg!(self, "You know, I'm something of a scientist myself", 4, 6, 2 + base_minute),
+            msg!(self, "You know, I'm something of a scientist myself", 4, 6, 2 + base_minute),
         ]
     }
 

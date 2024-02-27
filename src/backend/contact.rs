@@ -5,7 +5,7 @@ use gdk::{
     Paintable, Texture,
 };
 use gio::subclass::prelude::ObjectSubclassIsExt;
-use glib::{Object, ObjectExt};
+use glib::{prelude::ObjectExt, Object};
 use gtk::{gio, glib};
 use libsignal_service::{prelude::Uuid, ServiceAddress};
 
@@ -185,13 +185,12 @@ mod imp {
 
     use gdk::Paintable;
     use gdk::{prelude::*, subclass::prelude::*};
-    use glib::{
-        once_cell::sync::Lazy, ParamSpec, ParamSpecBoolean, ParamSpecObject, ParamSpecString, Value,
-    };
+    use glib::{ParamSpec, ParamSpecBoolean, ParamSpecObject, ParamSpecString, Value};
     use gtk::{gdk, glib};
     use libsignal_service::prelude::phonenumber::Mode;
     use libsignal_service::prelude::{phonenumber::PhoneNumber, Uuid};
     use libsignal_service::Profile;
+    use once_cell::sync::Lazy;
 
     use crate::backend::{Channel, Manager};
 

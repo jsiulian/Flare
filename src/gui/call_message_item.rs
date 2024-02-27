@@ -40,11 +40,10 @@ impl CallMessageItem {
 pub mod imp {
     use std::cell::RefCell;
 
-    use glib::{
-        once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject, Value,
-    };
+    use glib::{subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
     use gtk::glib;
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use once_cell::sync::Lazy;
 
     use crate::{
         backend::{message::CallMessage, Manager},

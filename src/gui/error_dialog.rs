@@ -1,4 +1,4 @@
-use adw::traits::MessageDialogExt;
+use adw::prelude::MessageDialogExt;
 use glib::{prelude::IsA, Object};
 use gtk::glib;
 
@@ -35,12 +35,10 @@ pub mod imp {
 
     use adw::subclass::prelude::*;
     use gdk::gio;
-    use glib::{
-        once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecBoolean,
-        ParamSpecString, Value,
-    };
+    use glib::{subclass::InitializingObject, ParamSpec, ParamSpecBoolean, ParamSpecString, Value};
     use gtk::{glib, UriLauncher};
     use gtk::{prelude::*, CompositeTemplate};
+    use once_cell::sync::Lazy;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/error_dialog.ui")]

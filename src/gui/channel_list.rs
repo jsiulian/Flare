@@ -83,7 +83,6 @@ pub mod imp {
 
     use glib::{
         clone,
-        once_cell::sync::Lazy,
         subclass::{InitializingObject, Signal},
         ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
@@ -92,6 +91,7 @@ pub mod imp {
         prelude::*, subclass::prelude::*, CompositeTemplate, CustomFilter, CustomSorter,
         FilterChange, FilterListModel, SignalListItemFactory, SortListModel, Widget,
     };
+    use once_cell::sync::Lazy;
 
     use crate::{
         backend::{timeline::timeline_item::TimelineItemExt, Channel, Manager},

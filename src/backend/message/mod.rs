@@ -283,7 +283,7 @@ impl Message {
     }
 }
 
-pub trait MessageExt: std::marker::Sized + glib::ObjectExt {
+pub trait MessageExt: std::marker::Sized + glib::prelude::ObjectExt {
     fn set_internal_data(&self, data: Option<DataMessage>) {
         self.dynamic_cast_ref::<Message>()
             .expect("`MessageExt` to dynamic cast to `Message`")
@@ -329,9 +329,8 @@ where
 mod imp {
     use std::cell::RefCell;
 
-    use glib::{
-        once_cell::sync::Lazy, subclass::types::ObjectSubclass, ParamSpec, ParamSpecObject, Value,
-    };
+    use glib::{subclass::types::ObjectSubclass, ParamSpec, ParamSpecObject, Value};
+    use once_cell::sync::Lazy;
 
     use crate::backend::{timeline::TimelineItemExt, Manager};
 

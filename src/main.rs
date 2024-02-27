@@ -1,9 +1,9 @@
 use gdk::prelude::{ApplicationExt, ApplicationExtManual};
 use gio::prelude::SettingsExt;
 use gio::{ApplicationFlags, Settings, SettingsBindFlags};
-use glib::IsA;
+use glib::prelude::IsA;
 use gtk::prelude::SettingsExtManual;
-use gtk::traits::{GtkWindowExt, WidgetExt};
+use gtk::prelude::{GtkWindowExt, WidgetExt};
 use gtk::{gdk, gio, glib};
 use once_cell::sync::Lazy;
 

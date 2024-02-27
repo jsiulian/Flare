@@ -87,17 +87,15 @@ pub mod imp {
     use std::{cell::RefCell, env, path::PathBuf};
 
     use adw::prelude::MessageDialogExtManual;
-    use adw::{subclass::prelude::*, traits::*, AboutWindow, MessageDialog};
+    use adw::{prelude::*, subclass::prelude::*, AboutWindow, MessageDialog};
     use adw::{EntryRow, ResponseAppearance};
     use gdk::gio::Cancellable;
     use gdk::glib::{BindingFlags, BoxedAnyObject, Propagation};
     use gio::{Settings, SimpleAction, SimpleActionGroup};
-    use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject,
-        Value,
-    };
+    use glib::{clone, subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
     use gtk::{gio, glib};
-    use gtk::{prelude::*, Builder, CompositeTemplate, ShortcutsWindow};
+    use gtk::{Builder, CompositeTemplate, ShortcutsWindow};
+    use once_cell::sync::Lazy;
 
     use crate::backend::{Channel, SetupResult};
     use crate::gui::channel_info_dialog::ChannelInfoDialog;

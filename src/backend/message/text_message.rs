@@ -315,10 +315,11 @@ mod imp {
     use gdk::pango::AttrList;
     use gdk::prelude::ParamSpecBuilderExt;
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassIsExt};
-    use glib::{once_cell::sync::Lazy, ParamSpec, ParamSpecObject, ParamSpecString, Value};
+    use glib::{ParamSpec, ParamSpecObject, ParamSpecString, Value};
     use gtk::{glib, prelude::Cast};
     use libsignal_service::content::Reaction;
     use libsignal_service::prelude::Uuid;
+    use once_cell::sync::Lazy;
     use std::cell::RefCell;
     use std::collections::HashMap;
 

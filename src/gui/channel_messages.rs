@@ -2,8 +2,8 @@ use gdk::gio::SettingsBindFlags;
 use gdk::glib::clone;
 use gdk::prelude::SettingsExtManual;
 use gdk::subclass::prelude::ObjectSubclassIsExt;
-use glib::ObjectExt;
-use gtk::traits::{AdjustmentExt, WidgetExt};
+use glib::prelude::ObjectExt;
+use gtk::prelude::{AdjustmentExt, WidgetExt};
 use gtk::{gdk, glib};
 
 use crate::backend::{message::TextMessage, Channel, Manager};
@@ -139,11 +139,11 @@ pub mod imp {
     use std::cell::{Cell, RefCell};
 
     use glib::{
-        clone, once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecBoolean,
-        ParamSpecObject, Value,
+        clone, subclass::InitializingObject, ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
     use gtk::{gio, glib, FileDialog, PositionType, SignalListItemFactory};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use once_cell::sync::Lazy;
 
     use crate::backend::timeline::Timeline;
     use crate::gui::attachment::backend_to_gui;

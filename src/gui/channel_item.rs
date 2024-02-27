@@ -31,11 +31,10 @@ impl Default for ChannelItem {
 pub mod imp {
     use std::cell::RefCell;
 
-    use glib::{
-        once_cell::sync::Lazy, subclass::InitializingObject, ParamSpec, ParamSpecObject, Value,
-    };
+    use glib::{subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
     use gtk::{glib, Label};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use once_cell::sync::Lazy;
 
     use crate::backend::message::{DisplayMessage, DisplayMessageExt, MessageExt};
     use crate::{

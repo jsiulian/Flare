@@ -46,7 +46,7 @@ async fn encryption_password() -> Result<String, ApplicationError> {
     ]);
 
     log::trace!("Looking up password from libsecret");
-    let items = keyring.search_items(attributes.clone()).await?;
+    let items = keyring.search_items(&attributes).await?;
     let item = items.first();
 
     if let Some(item) = item {
@@ -66,7 +66,12 @@ async fn encryption_password() -> Result<String, ApplicationError> {
         let secret_bytes = secret.as_bytes();
         log::trace!("Storing password");
         keyring
-            .create_item("Flare: Encryption password", attributes, secret_bytes, true)
+            .create_item(
+                "Flare: Encryption password",
+                &attributes,
+                secret_bytes,
+                true,
+            )
             .await?;
         Ok(secret)
     }
@@ -696,8 +701,9 @@ mod imp {
     use gdk::prelude::{ParamSpecBuilderExt, StaticType, ToValue};
     use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gio::{Application, Settings};
-    use glib::{once_cell::sync::Lazy, subclass::Signal};
+    use glib::subclass::Signal;
     use gtk::{gdk, gio, glib};
+    use once_cell::sync::Lazy;
 
     use crate::dbus::Feedbackd;
     use crate::{

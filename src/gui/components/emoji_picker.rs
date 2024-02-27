@@ -22,11 +22,11 @@ impl Default for EmojiPicker {
 }
 
 pub mod imp {
-
+    use glib::subclass::InitializingObject;
     use glib::subclass::Signal;
-    use glib::{once_cell::sync::Lazy, subclass::InitializingObject};
     use gtk::glib;
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use once_cell::sync::Lazy;
 
     use crate::gui::utility::Utility;
 

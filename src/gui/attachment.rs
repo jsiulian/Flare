@@ -1,5 +1,5 @@
 use gdk::prelude::Cast;
-use glib::ObjectExt;
+use glib::prelude::ObjectExt;
 use gtk::glib;
 use gtk::subclass::prelude::*;
 
@@ -29,7 +29,7 @@ pub fn backend_to_gui(attachment: &crate::backend::Attachment) -> Attachment {
 }
 
 pub mod imp {
-    use std::cell::RefCell;
+    use std::{cell::RefCell, os::fd::AsFd};
 
     use ashpd::{desktop::open_uri::OpenFileRequest, WindowIdentifier};
     use gdk::{
@@ -39,12 +39,12 @@ pub mod imp {
     use gio::Settings;
     use glib::{
         clone,
-        once_cell::sync::Lazy,
         subclass::{InitializingObject, Signal},
         ParamSpec, ParamSpecObject, Value,
     };
     use gtk::{gio, glib, FileDialog};
     use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use once_cell::sync::Lazy;
 
     use crate::{
         backend::Manager,
@@ -98,7 +98,7 @@ pub mod imp {
                         if let Err(e) = OpenFileRequest::default()
                                             .ask(false)
                                             .identifier(identifier)
-                                            .send_file(&file)
+                                            .send_file(&file.as_fd())
                                             .await {
                             log::error!("Failed to open file: {}", e);
                         }

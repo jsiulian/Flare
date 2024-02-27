@@ -1,11 +1,12 @@
-use crate::config::APP_ID;
-use crate::gio::Settings;
-use crate::gui::attachment::Attachment;
 use gdk::prelude::Cast;
 use gdk::subclass::prelude::ObjectSubclassIsExt;
 use glib::{clone, Object};
 use gtk::prelude::{MediaStreamExt, ObjectExt, SettingsExt};
-use gtk::{glib, traits::WidgetExt, Widget};
+use gtk::{glib, prelude::WidgetExt, Widget};
+
+use crate::config::APP_ID;
+use crate::gio::Settings;
+use crate::gui::attachment::Attachment;
 
 gtk::glib::wrapper! {
     pub struct AttachmentAudio(ObjectSubclass<imp::AttachmentAudio>)
@@ -48,12 +49,12 @@ impl AttachmentAudio {
 }
 
 pub mod imp {
-
-    use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
     use glib::subclass::InitializingObject;
     use gtk::prelude::{ButtonExt, Cast, WidgetExt};
     use gtk::{glib, Button, Grid, MediaControls};
     use gtk::{subclass::prelude::*, CompositeTemplate};
+
+    use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/components/attachment_audio.ui")]

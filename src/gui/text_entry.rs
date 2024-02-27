@@ -1,16 +1,17 @@
 use gdk::glib::{Priority, Propagation};
+use glib::{
+    clone,
+    subclass::{InitializingObject, Signal},
+};
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::subclass::widget::WidgetImpl;
 use gtk::{gdk, gio, glib, CompositeTemplate, TemplateChild, TextView};
+use once_cell::sync::Lazy;
 
 use crate::gspawn;
 use crate::gui::utility::Utility;
-use glib::{
-    clone,
-    once_cell::sync::Lazy,
-    subclass::{InitializingObject, Signal},
-};
+
 use std::cell::Cell;
 use std::marker::PhantomData;
 
