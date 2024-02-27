@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-02-27 18:59+0000\n"
+"PO-Revision-Date: 2024-02-28 22:02+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/es/>\n"
@@ -443,6 +443,10 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"La página siguiente mostrará un código QR que deberá escanearse desde el "
+"dispositivo principal. Tenga en cuenta que solo dispone de un minuto "
+"aproximadamente para escanear el código, así que prepare ya su aplicación "
+"oficial para escanear el código QR."
 
 #: data/resources/ui/setup_window.blp:228
 #: data/resources/ui/setup_window.blp:240
@@ -484,7 +488,7 @@ msgstr "Copiar al portapapeles"
 
 #: data/resources/ui/setup_window.blp:344
 msgid "Continue"
-msgstr ""
+msgstr "Continuar"
 
 #: data/resources/ui/setup_window.blp:361
 msgid ""
@@ -496,6 +500,13 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"Para registrarse como dispositivo principal, Flare necesitará su número de "
+"teléfono y completar el captcha. Indique el número de teléfono en formato "
+"internacional E.164, incluido el \"+\" inicial y el código de país. El "
+"captcha se puede completar <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">aquí</a>, luego copie el enlace \"Open Signal\" y péguelo en "
+"el campo de abajo. Tenga en cuenta que este captcha solo es válido durante "
+"aproximadamente un minuto, así que proceda rápido."
 
 #: data/resources/ui/setup_window.blp:376
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -507,22 +518,25 @@ msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"Después de enviar esta información, recibirás un SMS de Signal con un código "
+"de verificación. Introduce este código de verificación en la página "
+"siguiente."
 
 #: data/resources/ui/setup_window.blp:398
 #: data/resources/ui/setup_window.blp:406
 #: data/resources/ui/setup_window.blp:423
 #: data/resources/ui/setup_window.blp:448
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 #: data/resources/ui/setup_window.blp:439
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Introduzca aquí el código de verificación que ha recibido de Signal."
 
 #: data/resources/ui/setup_window.blp:456
 #: data/resources/ui/setup_window.blp:464
 msgid "Finished"
-msgstr ""
+msgstr "Terminado"
 
 #: data/resources/ui/setup_window.blp:497
 msgid ""
@@ -530,10 +544,14 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare está casi lista, está esperando a que los contactos terminen de "
+"sincronizarse. Esto puede tardar unos segundos, puede empezar a utilizar "
+"Flare una vez que los contactos estén sincronizados. Algunas notas finales "
+"antes de empezar a utilizar Flare:"
 
 #: data/resources/ui/setup_window.blp:506
 msgid "Known Bugs"
-msgstr ""
+msgstr "Errores conocidos"
 
 #: data/resources/ui/setup_window.blp:511
 msgid ""
@@ -545,10 +563,18 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Asegúrese de no enviar ningún mensaje mientras Flare aún recibe los "
+"mensajes, esto asegura que se reciba toda la información requerida. Estamos "
+"tratando de solucionar este problema. Además, Flare está utilizando "
+"cantidades excesivas de memoria después de un tiempo. Esto se debe a una "
+"fuga de memoria que aún no se ha encontrado. También tratamos de resolver "
+"esto. Para obtener una lista completa de errores, visite el <a href=\"https"
+"://gitlab.com/schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\""
+">gestor de incidencias</a>."
 
 #: data/resources/ui/setup_window.blp:521
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #: data/resources/ui/setup_window.blp:526
 msgid ""
@@ -556,6 +582,9 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"¿Quieres dejar tu opinión sobre Flare o simplemente hablar un poco? Nuestra "
+"sala <a href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix</a> "
+"está abierta para todos."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -695,7 +724,7 @@ msgstr "Acerca de"
 
 #: data/resources/ui/window.blp:153
 msgid "Quit"
-msgstr ""
+msgstr "Salir"
 
 #: data/resources/ui/window.blp:167
 msgid "Clear Messages"
@@ -711,28 +740,27 @@ msgstr "Tú"
 
 #: src/backend/message/call_message.rs:119
 msgid "Incoming call"
-msgstr ""
+msgstr "Llamada recibida"
 
 #: src/backend/message/call_message.rs:120
 msgid "Outgoing call"
-msgstr ""
+msgstr "Llamada saliente"
 
 #: src/backend/message/call_message.rs:121
 msgid "Call started"
-msgstr ""
+msgstr "Llamada iniciada"
 
 #: src/backend/message/call_message.rs:122
 msgid "Call ended"
-msgstr ""
+msgstr "Llamada finalizada"
 
 #: src/backend/message/call_message.rs:123
 msgid "Call declined"
-msgstr ""
+msgstr "Llamada rechazada"
 
 #: src/backend/message/call_message.rs:124
-#, fuzzy
 msgid "Unanswered call"
-msgstr "Respondió a una llamada."
+msgstr "Llamada perdida"
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:69
@@ -842,7 +870,7 @@ msgstr ""
 
 #: src/gui/channel_info_dialog.rs:105
 msgid "Never"
-msgstr ""
+msgstr "Nunca"
 
 #: src/gui/preferences_window.rs:30
 msgid "Watch for new messages while closed"
@@ -859,12 +887,12 @@ msgstr "Use los ajustes para quitar permisos"
 #: src/gui/setup_window.rs:44
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Producción"
 
 #: src/gui/setup_window.rs:48
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Preparación"
 
 #: src/gui/setup_window.rs:137
 msgid "Copied to clipboard"
@@ -903,9 +931,8 @@ msgid "%a., %e. %b"
 msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:152
-#, fuzzy
 msgid "Attachment"
-msgstr "Adjuntos"
+msgstr "Archivo adjunto"
 
 #: src/gui/window.rs:309 src/gui/window.rs:315
 msgid "Remove Messages"
@@ -923,7 +950,7 @@ msgstr "Chatea con tus amigos en Signal"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "mensajería;chat;signal;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml:26
