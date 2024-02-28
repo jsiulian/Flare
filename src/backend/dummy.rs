@@ -2,8 +2,8 @@ use std::cell::OnceCell;
 use std::path::Path;
 
 use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
-use gtk::glib::{BoxedAnyObject, Cast, DateTime};
-use gtk::prelude::FileExt;
+use gtk::glib::{BoxedAnyObject, DateTime};
+use gtk::prelude::{Cast, FileExt};
 use libsignal_service::content::CallMessage as PreCallMessage;
 use libsignal_service::models::Contact as LContact;
 use libsignal_service::prelude::AttachmentPointer;
@@ -117,32 +117,6 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
             uuid: Uuid::from_u128(4),
             phone_number: None,
             name: "Norman Osborn".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        LContact {
-            uuid: Uuid::from_u128(5),
-            phone_number: None,
-            name: "Norman Osborn 2".to_string(),
-            color: None,
-            verified: Default::default(),
-            profile_key: vec![],
-            blocked: false,
-            expire_timer: 0,
-            inbox_position: 0,
-            archived: false,
-            avatar: None,
-        },
-        LContact {
-            uuid: Uuid::from_u128(6),
-            phone_number: None,
-            name: "Norman Osborn 3".to_string(),
             color: None,
             verified: Default::default(),
             profile_key: vec![],
@@ -372,8 +346,6 @@ impl super::Manager {
                 1 + base_minute
             ),
             msg!(self, "You know, I'm something of a scientist myself", 4, 4, 2 + base_minute),
-            msg!(self, "You know, I'm something of a scientist myself", 4, 6, 2 + base_minute),
-            msg!(self, "You know, I'm something of a scientist myself", 4, 6, 2 + base_minute),
         ]
     }
 

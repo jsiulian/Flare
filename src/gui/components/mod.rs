@@ -7,6 +7,7 @@ pub(super) mod emoji_picker;
 pub(super) mod indicators;
 mod item_row;
 pub(super) mod label;
+pub(super) mod letter_divider;
 pub(super) mod selection;
 pub(super) mod time_divider;
 

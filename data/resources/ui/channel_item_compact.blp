@@ -1,0 +1,31 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $FlChannelItemCompact: Box {
+  accessibility {
+    labelled-by: label_name;
+  }
+
+  margin-bottom: 6;
+  margin-top: 6;
+  hexpand: false;
+  hexpand-set: true;
+  spacing: 6;
+
+  // Avatar
+  Adw.Avatar {
+    text: bind template.channel as <$FlChannel>.title;
+    custom-image: bind template.channel as <$FlChannel>.avatar;
+    icon-name: "user-bookmarks-symbolic";
+    show-initials: bind $not(template.channel as <$FlChannel>.is-self) as <bool>;
+    size: 32;
+  }
+
+  // Channel name
+  Label label_name {
+    halign: start;
+    hexpand: true;
+    ellipsize: end;
+    use-markup: true;
+  }
+}

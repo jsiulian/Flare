@@ -1,0 +1,83 @@
+using Gtk 4.0;
+using Gio 2.0;
+using Adw 1;
+
+template $FlNewChannelDialog: Adw.Dialog {
+  can-focus: true;
+  content-height: 600;
+  content-width: 450;
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      title-widget: Adw.WindowTitle {
+        title: _("New Chat");
+      };
+
+      [start]
+      MenuButton {
+        accessibility {
+          label: C_("accessibility", "Menu");
+        }
+
+        tooltip-text: "Menu";
+        menu-model: primary_menu;
+        icon-name: "view-more-symbolic";
+      }
+
+    }
+
+    [top]
+    Gtk.SearchBar {
+      search-mode-enabled: true;
+      Gtk.SearchEntry search_entry {
+        hexpand: true;
+        placeholder-text: _("Search Contacts");
+
+        search-changed => $search_changed() swapped;
+        activate => $search_activated() swapped;
+      }
+    }
+
+    Gtk.Box {
+      orientation: vertical;
+
+      Gtk.ScrolledWindow scrolled_window {
+        hscrollbar-policy: never;
+
+        Gtk.ListView list_channels {
+          styles [
+            "navigation-sidebar"
+          ]
+          vexpand: true;
+        }
+
+        visible: bind $not($uint_equal(list_channels.model as <Gtk.NoSelection>.n-items, 0) as <bool>) as <bool>;
+      }
+
+      Adw.StatusPage {
+        title: "No Results";
+        icon-name: "system-search-symbolic";
+        hexpand: true;
+        vexpand: true;
+        visible: bind $uint_equal(list_channels.model as <Gtk.NoSelection>.n-items, 0) as <bool>;
+      }
+    }
+  }
+}
+
+menu primary_menu {
+  section {
+    label: _("List Contacts By:");
+    item {
+      label: _("First Name");
+      action: "new-chat-dialog.sort-on";
+      target: "firstname";
+    }
+    item {
+      label: _("Surname");
+      action: "new-chat-dialog.sort-on";
+      target: "surname";
+    }
+  }
+}

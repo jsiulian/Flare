@@ -16,10 +16,20 @@ glib::wrapper! {
 }
 
 impl ChannelList {
-    fn add_channel(&self, channel: Channel) {
+    pub fn add_channel(&self, channel: Channel) {
         crate::trace!("`ChannelList` got new `Channel`: {}", channel.title());
         let obj = self.imp();
-        obj.model.borrow().append(&channel);
+        let model = obj.model.borrow();
+        if model.find(&channel).is_some() {
+            crate::trace!(
+                "`ChannelList` got duplicated `Channel`: {}. Just setting as active channel",
+                channel.title()
+            );
+            self.set_property("active-channel", channel);
+            return;
+        }
+
+        model.append(&channel);
         obj.sorter.borrow().changed(SorterChange::Different);
         self.scroll_up();
         let s = self.clone();
@@ -115,7 +125,6 @@ pub mod imp {
         manager: RefCell<Option<Manager>>,
         active_channel: RefCell<Option<Channel>>,
         search_enabled: Cell<bool>,
-        add_conversation_enabled: Cell<bool>,
     }
 
     impl Default for ChannelList {
@@ -130,7 +139,6 @@ pub mod imp {
                 manager: Default::default(),
                 active_channel: Default::default(),
                 search_enabled: Default::default(),
-                add_conversation_enabled: Default::default(),
             }
         }
     }
@@ -202,7 +210,8 @@ pub mod imp {
                     .downcast_ref::<Channel>()
                     .expect("The object needs to be of type `Channel`.");
                 let has_message = channel.last_message().is_some();
-                has_message || o.property("add-conversation-enabled")
+                let is_selected = Some(channel) == o.property::<Option<Channel>>("active-channel").as_ref();
+                has_message || is_selected
             }));
             filter.append(filter_search);
             filter.append(filter_empty);
@@ -264,13 +273,6 @@ pub mod imp {
                     obj.obj().activate_row(position);
                     selection_model.set_selected_position(position);
                 }));
-
-            obj.connect_notify_local(
-                Some("add-conversation-enabled"),
-                clone!(@weak self as s => move |_, _| {
-                    s.filter_changed();
-                }),
-            );
         }
 
         fn properties() -> &'static [ParamSpec] {
@@ -279,7 +281,6 @@ pub mod imp {
                     ParamSpecObject::builder::<Manager>("manager").build(),
                     ParamSpecObject::builder::<Channel>("active-channel").build(),
                     ParamSpecBoolean::builder("search-enabled").build(),
-                    ParamSpecBoolean::builder("add-conversation-enabled").build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -290,7 +291,6 @@ pub mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "active-channel" => self.active_channel.borrow().as_ref().to_value(),
                 "search-enabled" => self.search_enabled.get().to_value(),
-                "add-conversation-enabled" => self.add_conversation_enabled.get().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -333,12 +333,6 @@ pub mod imp {
                         "Property `search-enabled` of `ChannelList` has to be of type `bool`",
                     );
                     self.search_enabled.replace(search);
-                }
-                "add-conversation-enabled" => {
-                    let add = value.get::<bool>().expect(
-                        "Property `add-conversation-enabled` of `ChannelList` has to be of type `bool`",
-                    );
-                    self.add_conversation_enabled.replace(add);
                 }
                 _ => unimplemented!(),
             }
