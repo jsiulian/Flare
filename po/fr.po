@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-02-03 17:01+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
+"PO-Revision-Date: 2024-02-28 22:02+0000\n"
+"Last-Translator: Kevin Joly <kevin.joly@posteo.net>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/fr/>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -231,13 +231,13 @@ msgstr "Général"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr "Télécharger automatiquement les pièces-jointes"
+msgstr "Télécharger automatiquement les pièces jointes"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
 msgstr ""
-"Les types de pièces-jointes sélectionnés ci-dessous seront automatiquement "
-"téléchargés"
+"Les types de pièces jointes sélectionnées ci-dessous seront automatiquement "
+"téléchargées"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
@@ -273,11 +273,11 @@ msgstr "Envoyer des notifications pour les réactions"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr "Notifications en arrière-plan"
+msgstr "Notifications en arrière plan"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr "Continuer à envoyer des notifications lorsque l’application est fermée"
+msgstr "Envoyer des notifications quand l'application est fermée"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
@@ -311,8 +311,8 @@ msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
-"Il peut n’être pas possible d’envoyer des messages contenant des sauts de "
-"lignes avec des claviers tactiles ne permettant pas « Ctrl + Entrée »"
+"Il peut être impossible d'envoyer des messages contenant des retours à la "
+"ligne avec des claviers tactiles ne permettant pas «Contrôle + Entrée»"
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
 msgid "Welcome to Flare"
