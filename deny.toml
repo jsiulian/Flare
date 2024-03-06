@@ -15,7 +15,6 @@ allow = [
     "Unicode-DFS-2016",
     "OpenSSL",
 ]
-copyleft = "allow"
 
 [[licenses.clarify]]
 name = "ring"
