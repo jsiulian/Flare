@@ -30,9 +30,9 @@ tokio = { version = "1.36.0", features = ["rt", "macros", "rt-multi-thread", "ti
 regex = "1.10.3"
 lazy_static = "1.4.0"
 
-presage = { git = "https://github.com/Schmiddiii/presage", rev = "03ffb349a125518fdc6087ebfb6a5d82a1600da6" }
-presage-store-sled = { git = "https://github.com/Schmiddiii/presage", rev = "03ffb349a125518fdc6087ebfb6a5d82a1600da6" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "1a8cdf81" }
+presage = { git = "https://github.com/Schmiddiii/presage", rev = "8e9c62bf15c0d290c18afc4b76a72018fe551853" }
+presage-store-sled = { git = "https://github.com/Schmiddiii/presage", rev = "8e9c62bf15c0d290c18afc4b76a72018fe551853" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "689a4c2" }
 
 async-trait = "0.1.77"
 sled = "0.34.7"
@@ -61,4 +61,4 @@ screenshot-setup = [ "screenshot" ]
 libspelling = []
 
 [patch.crates-io]
-curve25519-dalek = { git = 'https://github.com/signalapp/curve25519-dalek', tag = 'signal-curve25519-4.0.0' }
+curve25519-dalek = { git = 'https://github.com/signalapp/curve25519-dalek', tag = 'signal-curve25519-4.1.1' }
