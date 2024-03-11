@@ -1,14 +1,12 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlLinkedDevicesWindow: Adw.Window {
+template $FlLinkedDevicesWindow: Adw.Dialog {
   can-focus: true;
-  default-height: 600;
-  default-width: 450;
-  destroy-with-parent: true;
-  modal: true;
+  content-height: 600;
+  content-width: 450;
 
-  content: Adw.ToolbarView {
+  Adw.ToolbarView {
     [top]
     Adw.HeaderBar {
       title-widget: Adw.WindowTitle {
@@ -26,10 +24,10 @@ template $FlLinkedDevicesWindow: Adw.Window {
 
       Gtk.ListView list_devices {}
     }
-  };
+  }
 }
 
-Adw.MessageDialog add_device_dialog {
+Adw.AlertDialog add_device_dialog {
   heading: _("Add Linked Device");
   body: _("Please insert the URL of the device to link.");
   default-response: "cancel";

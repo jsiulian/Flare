@@ -1,56 +1,69 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlChannelInfoDialog: Adw.MessageDialog {
-  heading: bind template.channel as <$FlChannel>.title;
+template $FlChannelInfoDialog: Adw.Dialog {
+  can-focus: true;
+  content-height: 600;
+  content-width: 450;
 
-  extra-child: Box {
-    spacing: 5;
-
-    orientation: vertical;
-
-    Adw.PreferencesGroup {
-      title: _("Channel Information");
-      header-suffix:
-        Adw.Avatar avatar {
-          icon-name: "user-bookmarks-symbolic";
-          size: 30;
-        };
-
-      Adw.ActionRow row_phone {
-        styles ["property"]
-
-        title: _("Phone Number");
-        icon-name: "call-start-symbolic";
-      }
-
-      Adw.ActionRow row_disappearing {
-        styles ["property"]
-
-        title: _("Disappearing Messages");
-        icon-name: "appointment-missed-symbolic";
-      }
-
-      Adw.ActionRow row_description {
-        styles ["property"]
-
-        title: _("Description");
-        subtitle-lines: 2;
-      }
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      title-widget: Adw.WindowTitle {
+        title: bind template.channel as <$FlChannel>.title;
+      };
     }
 
-    // Session Reset
-    Button button_reset_session {
-      accessibility {
-        label: C_("accessibility", "Reset Session");
+    Adw.Clamp {
+      orientation: horizontal;
+      tightening-threshold: 300;
+      maximum-size: 600;
+
+      Box {
+        spacing: 5;
+
+        orientation: vertical;
+
+        Adw.PreferencesGroup {
+          title: _("Channel Information");
+          header-suffix:
+            Adw.Avatar avatar {
+              icon-name: "user-bookmarks-symbolic";
+              size: 30;
+            };
+
+          Adw.ActionRow row_phone {
+            styles ["property"]
+
+            title: _("Phone Number");
+            icon-name: "call-start-symbolic";
+          }
+
+          Adw.ActionRow row_disappearing {
+            styles ["property"]
+
+            title: _("Disappearing Messages");
+            icon-name: "appointment-missed-symbolic";
+          }
+
+          Adw.ActionRow row_description {
+            styles ["property"]
+
+            title: _("Description");
+            subtitle-lines: 2;
+          }
+        }
+
+        // Session Reset
+        Button button_reset_session {
+          accessibility {
+            label: C_("accessibility", "Reset Session");
+          }
+
+          label: _("Reset Session");
+          clicked => $reset_session() swapped;
+        }
       }
-
-      label: _("Reset Session");
-      clicked => $reset_session() swapped;
     }
-  };
-
-  responses [
-    close: _("Close"),
-  ]
+  }
 }

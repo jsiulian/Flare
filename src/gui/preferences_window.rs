@@ -11,7 +11,7 @@ use crate::{gspawn, tspawn};
 
 glib::wrapper! {
     pub struct PreferencesWindow(ObjectSubclass<imp::PreferencesWindow>)
-        @extends adw::PreferencesWindow, adw::Window, gtk::Window, gtk::Widget,
+        @extends adw::PreferencesDialog, adw::Dialog, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
@@ -177,7 +177,7 @@ pub mod imp {
     impl ObjectSubclass for PreferencesWindow {
         const NAME: &'static str = "FlPreferencesWindow";
         type Type = super::PreferencesWindow;
-        type ParentType = adw::PreferencesWindow;
+        type ParentType = adw::PreferencesDialog;
 
         fn new() -> Self {
             Self {
@@ -211,7 +211,6 @@ pub mod imp {
         }
     }
     impl WidgetImpl for PreferencesWindow {}
-    impl WindowImpl for PreferencesWindow {}
-    impl PreferencesWindowImpl for PreferencesWindow {}
-    impl AdwWindowImpl for PreferencesWindow {}
+    impl PreferencesDialogImpl for PreferencesWindow {}
+    impl AdwDialogImpl for PreferencesWindow {}
 }

@@ -1,7 +1,4 @@
-use gdk::{
-    glib::subclass::types::ObjectSubclassIsExt,
-    prelude::{IsA, ObjectExt},
-};
+use gdk::{glib::subclass::types::ObjectSubclassIsExt, prelude::ObjectExt};
 use glib::Object;
 use gtk::glib;
 
@@ -9,18 +6,17 @@ use crate::backend::{Channel, Manager};
 
 glib::wrapper! {
     pub struct ChannelInfoDialog(ObjectSubclass<imp::ChannelInfoDialog>)
-        @extends adw::MessageDialog, gtk::Window, gtk::Widget,
+        @extends adw::Dialog, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget;
 }
 
 impl ChannelInfoDialog {
-    pub fn new(channel: &Channel, manager: &Manager, parent: &impl IsA<gtk::Window>) -> Self {
+    pub fn new(channel: &Channel, manager: &Manager) -> Self {
         log::trace!("Initializing `ChannelInfoDialog`");
         let s = Object::builder::<Self>()
             .property("channel", channel)
             .property("manager", manager)
-            .property("transient-for", parent)
             .build();
         s.imp().setup();
         s
@@ -33,7 +29,7 @@ impl ChannelInfoDialog {
 
 pub mod imp {
     use adw::prelude::ActionRowExt;
-    use adw::subclass::prelude::MessageDialogImpl;
+    use adw::subclass::dialog::AdwDialogImpl;
     use std::cell::RefCell;
 
     use glib::{subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
@@ -172,7 +168,7 @@ pub mod imp {
     impl ObjectSubclass for ChannelInfoDialog {
         const NAME: &'static str = "FlChannelInfoDialog";
         type Type = super::ChannelInfoDialog;
-        type ParentType = adw::MessageDialog;
+        type ParentType = adw::Dialog;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
@@ -229,8 +225,6 @@ pub mod imp {
         }
     }
 
-    impl WindowImpl for ChannelInfoDialog {}
-    impl MessageDialogImpl for ChannelInfoDialog {}
+    impl AdwDialogImpl for ChannelInfoDialog {}
     impl WidgetImpl for ChannelInfoDialog {}
-    impl BoxImpl for ChannelInfoDialog {}
 }

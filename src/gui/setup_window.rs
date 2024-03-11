@@ -1,6 +1,5 @@
 use crate::backend::{Manager, Server, SetupResult};
-use adw::prelude::GtkWindowExt;
-use gdk::{glib::subclass::types::ObjectSubclassIsExt, prelude::CastNone};
+use gdk::glib::subclass::types::ObjectSubclassIsExt;
 use glib::{prelude::ObjectExt, Object};
 use gtk::glib;
 use libsignal_service::configuration::SignalServers;
@@ -9,7 +8,7 @@ use super::Window;
 
 glib::wrapper! {
     pub struct SetupWindow(ObjectSubclass<imp::SetupWindow>)
-        @extends adw::Window, gtk::Window, gtk::Widget,
+        @extends adw::Dialog, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
@@ -19,7 +18,7 @@ impl SetupWindow {
         log::trace!("Initializing setup window");
         Object::builder::<Self>()
             .property("manager", &manager)
-            .property("transient-for", parent)
+            .property("window", parent)
             .build()
     }
 
@@ -32,9 +31,7 @@ impl SetupWindow {
     }
 
     pub fn window(&self) -> Window {
-        self.transient_for()
-            .and_dynamic_cast()
-            .expect("SetupWindow to have a Window parent")
+        self.property("window")
     }
 }
 
@@ -52,13 +49,14 @@ fn servers() -> Vec<Server> {
 }
 
 pub mod imp {
+    use adw::prelude::AdwDialogExt;
     use adw::prelude::ComboRowExt;
+    use adw::subclass::dialog::AdwDialogImplExt;
     use adw::subclass::prelude::*;
     use adw::Toast;
     use futures::channel::oneshot::Sender;
     use gdk::gdk_pixbuf::Pixbuf;
     use gdk::gio::ListStore;
-    use gdk::glib::Propagation;
     use gettextrs::gettext;
     use gio::MemoryInputStream;
     use glib::{subclass::InitializingObject, Bytes, ParamSpec, ParamSpecObject, Value};
@@ -72,6 +70,7 @@ pub mod imp {
 
     use crate::backend::{Manager, Server, SetupDecision, SetupResult};
     use crate::gui::utility::Utility;
+    use crate::gui::Window;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/setup_window.ui")]
@@ -116,6 +115,8 @@ pub mod imp {
         dropdown_link_server: TemplateChild<adw::ComboRow>,
 
         manager: RefCell<Option<Manager>>,
+
+        window: RefCell<Option<Window>>,
 
         decision_callback: RefCell<Option<Sender<SetupDecision>>>,
         confirm_callback: RefCell<Option<Sender<String>>>,
@@ -237,7 +238,7 @@ pub mod imp {
             let obj = self.obj();
             match result {
                 SetupResult::Pending(callback) => {
-                    obj.present();
+                    obj.present(&obj.window());
                     self.decision_callback.replace(callback.take());
 
                     let win = obj.window();
@@ -295,7 +296,7 @@ pub mod imp {
     impl ObjectSubclass for SetupWindow {
         const NAME: &'static str = "FlSetupWindow";
         type Type = super::SetupWindow;
-        type ParentType = adw::Window;
+        type ParentType = adw::Dialog;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
@@ -317,9 +318,14 @@ pub mod imp {
 
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![ParamSpecObject::builder::<Manager>("manager")
-                    .construct_only()
-                    .build()]
+                vec![
+                    ParamSpecObject::builder::<Manager>("manager")
+                        .construct_only()
+                        .build(),
+                    ParamSpecObject::builder::<Window>("window")
+                        .construct_only()
+                        .build(),
+                ]
             });
             PROPERTIES.as_ref()
         }
@@ -327,6 +333,7 @@ pub mod imp {
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "manager" => self.manager.borrow().as_ref().to_value(),
+                "window" => self.window.borrow().as_ref().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -340,21 +347,27 @@ pub mod imp {
 
                     self.manager.replace(man);
                 }
+                "window" => {
+                    let win = value
+                        .get::<Option<Window>>()
+                        .expect("Property `window` of `SetupWindow` has to be of type `Window`");
+
+                    self.window.replace(win);
+                }
                 _ => unimplemented!(),
             }
         }
     }
 
     impl WidgetImpl for SetupWindow {}
-    impl WindowImpl for SetupWindow {
-        fn close_request(&self) -> Propagation {
+    impl AdwDialogImpl for SetupWindow {
+        fn closed(&self) {
             // If it is closed while not being finished, close the parent window
             if self.content.visible_page() != Some(self.page_finished.get()) {
                 self.obj().window().destroy();
             }
 
-            self.parent_close_request()
+            self.parent_closed()
         }
     }
-    impl AdwWindowImpl for SetupWindow {}
 }

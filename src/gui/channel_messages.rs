@@ -138,11 +138,12 @@ impl ChannelMessages {
 pub mod imp {
     use std::cell::{Cell, RefCell};
 
+    use adw::prelude::*;
     use glib::{
         clone, subclass::InitializingObject, ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
     };
     use gtk::{gio, glib, FileDialog, PositionType, SignalListItemFactory};
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use gtk::{subclass::prelude::*, CompositeTemplate};
     use once_cell::sync::Lazy;
 
     use crate::backend::timeline::Timeline;
@@ -350,7 +351,7 @@ pub mod imp {
                                     .dynamic_cast::<crate::gui::Window>()
                                     .expect("Root of `ChannelMessages` to be a `Window`.");
                                 let dialog = ErrorDialog::new(e, &root);
-                                dialog.present();
+                                dialog.present(&root);
                                 return;
                             }
                         }
@@ -362,7 +363,7 @@ pub mod imp {
                                 .dynamic_cast::<crate::gui::Window>()
                                 .expect("Root of `ChannelMessages` to be a `Window`.");
                             let dialog = ErrorDialog::new(e, &root);
-                            dialog.present();
+                            dialog.present(&root);
                         }
                     })
                 );

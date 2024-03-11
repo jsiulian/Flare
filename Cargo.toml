@@ -19,7 +19,7 @@ opt-level = 3
 [dependencies]
 gtk = { version = "0.8.0", package = "gtk4", features = ["v4_12"]}
 gdk = { version = "0.8.0", package = "gdk4" }
-adw = { version = "0.6.0", package = "libadwaita", features = ["v1_4"]}
+adw = { version = "0.6.0", package = "libadwaita", features = ["v1_5"]}
 ashpd = { version = "0.8.0", default-features = false, features = [ "gtk4", "tokio" ]}
 zbus = { version = "4.1.2", default-features = false, features = [ "tokio" ]}
 
