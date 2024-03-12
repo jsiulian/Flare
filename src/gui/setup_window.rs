@@ -243,7 +243,6 @@ pub mod imp {
 
                     let win = obj.window();
 
-                    win.enable_add_conversation();
                     win.destroy_if_invisible();
                 }
                 SetupResult::DisplayLinkQR(url) => {

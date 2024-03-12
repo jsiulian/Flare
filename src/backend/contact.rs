@@ -7,7 +7,10 @@ use gdk::{
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{prelude::ObjectExt, Object};
 use gtk::{gio, glib};
-use libsignal_service::{prelude::Uuid, ServiceAddress};
+use libsignal_service::{
+    prelude::{phonenumber::Mode, Uuid},
+    ServiceAddress,
+};
 
 use crate::gspawn;
 
@@ -177,6 +180,55 @@ impl Contact {
                 (emoji, about) => Some(format!("{} {}", emoji, about)),
             }
         })
+    }
+
+    pub fn name_parts(&self) -> (Option<String>, String) {
+        if self.is_self() {
+            return (None, self.manager().profile_name());
+        }
+
+        let contact_title = self.imp().contact.borrow().as_ref().and_then(|c| {
+            if c.name.is_empty() {
+                None
+            } else if let Some((p1, p2)) = c.name.rsplit_once(' ') {
+                Some((Some(p1.to_owned()), p2.to_owned()))
+            } else {
+                Some((None, c.name.clone()))
+            }
+        });
+        let profile_title = || {
+            self.imp()
+                .profile
+                .borrow()
+                .as_ref()
+                .and_then(|p| p.name.as_ref())
+                .map(|n| {
+                    if let Some(family) = &n.family_name {
+                        (Some(n.given_name.clone()), family.clone())
+                    } else {
+                        (None, n.given_name.clone())
+                    }
+                })
+        };
+        let phonenumber_title = || {
+            self.imp()
+                .phonenumber
+                .borrow()
+                .as_ref()
+                .map(|p| (None, p.format().mode(Mode::National).to_string()))
+        };
+
+        let (mut s1, mut s2) = contact_title
+            .or_else(profile_title)
+            .or_else(phonenumber_title)
+            .unwrap_or_else(|| (None, gettextrs::gettext("Unknown contact")));
+        // For some reason, Signal includes some special "isolate" control
+        // characters around names with special symbols.
+        if let Some(s1) = &mut s1 {
+            s1.retain(|c| c != '\u{2068}' && c != '\u{2069}')
+        }
+        s2.retain(|c| c != '\u{2068}' && c != '\u{2069}');
+        (s1, s2)
     }
 }
 

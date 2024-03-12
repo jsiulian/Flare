@@ -57,6 +57,11 @@
       <default>true</default>
       <summary>Send a message when the Enter-key is pressed</summary>
     </key>
+
+    <key name="sort-contacts-by" type="s">
+      <default>"firstname"</default>
+      <summary>How to sort contacts, e.g with "firstname" or "surname"</summary>
+    </key>
   </schema>
 </schemalist>
 

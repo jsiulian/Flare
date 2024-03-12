@@ -32,14 +32,14 @@ template $FlWindow: Adw.ApplicationWindow {
           };
 
           [start]
-          ToggleButton {
+          Gtk.Button {
             accessibility {
               label: C_("accessibility", "Add Conversation");
             }
-
+            
             tooltip-text: "Add Conversation";
-            icon-name: "document-edit-symbolic";
-            active: bind channel_list.add-conversation-enabled bidirectional;
+            icon-name: "chat-message-new-symbolic";
+            clicked => $handle_add_conversation_clicked() swapped;
           }
 
           [end]
@@ -139,6 +139,13 @@ template $FlWindow: Adw.ApplicationWindow {
     };
   }
 }
+
+$FlNewChannelDialog new_channel_dialog {
+  window: template;
+
+  channel => $handle_new_channel() swapped;
+}
+
 
 menu menubar {
   section {

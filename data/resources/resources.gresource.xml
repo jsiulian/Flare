@@ -6,6 +6,7 @@
     <file preprocess="xml-stripblanks">ui/window.ui</file>
     <file preprocess="xml-stripblanks">ui/channel_list.ui</file>
     <file preprocess="xml-stripblanks">ui/channel_item.ui</file>
+    <file preprocess="xml-stripblanks">ui/channel_item_compact.ui</file>
     <file preprocess="xml-stripblanks">ui/channel_messages.ui</file>
     <file preprocess="xml-stripblanks">ui/message_item.ui</file>
     <file preprocess="xml-stripblanks">ui/setup_window.ui</file>
@@ -21,6 +22,7 @@
     <file preprocess="xml-stripblanks">ui/call_message_item.ui</file>
     <file preprocess="xml-stripblanks">ui/channel_info_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/submit_captcha_dialog.ui</file>
+    <file preprocess="xml-stripblanks">ui/new_channel_dialog.ui</file>
 
     <file preprocess="xml-stripblanks">ui/components/context_menu_bin.ui</file>
     <file preprocess="xml-stripblanks">ui/components/emoji_picker.ui</file>
@@ -30,6 +32,7 @@
     <file preprocess="xml-stripblanks">ui/components/attachment_photo.ui</file>
     <file preprocess="xml-stripblanks">ui/components/attachment_video.ui</file>
     <file preprocess="xml-stripblanks">ui/components/time_divider.ui</file>
+    <file preprocess="xml-stripblanks">ui/components/letter_divider.ui</file>
     <file preprocess="xml-stripblanks">ui/components/label.ui</file>
     <file preprocess="xml-stripblanks">ui/components/indicators.ui</file>
   </gresource>
@@ -46,6 +49,7 @@
     <file preprocess="xml-stripblanks">icons/scalable/status/call-outgoing-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/call-start-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/call-stop-symbolic.svg</file>  
+    <file preprocess="xml-stripblanks">icons/scalable/status/chat-message-new-symbolic.svg</file>  
   </gresource>
 </gresources>
 

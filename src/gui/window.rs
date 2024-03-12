@@ -1,4 +1,4 @@
-use gdk::{glib, prelude::SettingsExt, subclass::prelude::*};
+use gdk::{gio, glib, prelude::SettingsExt, subclass::prelude::*};
 use glib::Object;
 use gtk::prelude::*;
 
@@ -38,12 +38,6 @@ impl Window {
         self.close();
     }
 
-    pub fn enable_add_conversation(&self) {
-        self.imp()
-            .channel_list
-            .set_property("add-conversation-enabled", true);
-    }
-
     pub fn destroy_if_invisible(&self) {
         if !self.get_visible() {
             self.destroy();
@@ -81,6 +75,10 @@ impl Window {
     fn manager(&self) -> Manager {
         self.property("manager")
     }
+
+    pub(crate) fn settings(&self) -> gio::Settings {
+        self.imp().settings.clone()
+    }
 }
 
 pub mod imp {
@@ -99,6 +97,7 @@ pub mod imp {
     use crate::backend::{Channel, SetupResult};
     use crate::gui::channel_info_dialog::ChannelInfoDialog;
     use crate::gui::linked_devices_window::LinkedDevicesWindow;
+    use crate::gui::new_channel_dialog::NewChannelDialog;
     use crate::{
         backend::Manager,
         config::APP_ID,
@@ -121,6 +120,8 @@ pub mod imp {
         subtitle_label: TemplateChild<gtk::Label>,
         #[template_child]
         channel_messages: TemplateChild<ChannelMessages>,
+        #[template_child]
+        new_channel_dialog: TemplateChild<NewChannelDialog>,
 
         manager: RefCell<Option<Manager>>,
 
@@ -134,6 +135,7 @@ pub mod imp {
                 channel_list: Default::default(),
                 subtitle_label: Default::default(),
                 channel_messages: Default::default(),
+                new_channel_dialog: Default::default(),
                 manager: Default::default(),
                 settings: Settings::new(APP_ID),
             }
@@ -292,7 +294,6 @@ pub mod imp {
             action_channel_information.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("Requested channel info");
                 let Some(channel) = obj.imp().channel_messages.active_channel() else {return};
-                // TODO: To AlertDialog
                 let channel_info = ChannelInfoDialog::new(&channel, &obj.manager());
                 channel_info.present(&obj);
             }));
@@ -301,7 +302,6 @@ pub mod imp {
             let action_channel_clear_messages = SimpleAction::new("channel-clear-messages", None);
             action_channel_clear_messages.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("Requested clearing messages of channels");
-                // TODO: To AlertDialog
                 let confirmation_dialog = AlertDialog::builder()
                     .heading(gettextrs::gettext("Remove Messages"))
                     .body(gettextrs::gettext("This will remove all locally stored messages from this channel"))
@@ -439,6 +439,17 @@ pub mod imp {
                 description
             }
         }
+
+        #[template_callback]
+        fn handle_add_conversation_clicked(&self) {
+            let dialog = &self.new_channel_dialog;
+            dialog.present_for_selection(&self.obj().manager().available_channels());
+        }
+
+        #[template_callback]
+        fn handle_new_channel(&self, channel: Channel) {
+            self.channel_list.add_channel(channel);
+        }
     }
 
     #[glib::object_subclass]
@@ -453,6 +464,7 @@ pub mod imp {
             crate::gui::setup_window::SetupWindow::ensure_type();
             crate::gui::error_dialog::ErrorDialog::ensure_type();
             crate::backend::timeline::TimelineItem::ensure_type();
+            crate::gui::new_channel_dialog::NewChannelDialog::ensure_type();
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
             crate::gui::utility::Utility::bind_template_callbacks(klass);

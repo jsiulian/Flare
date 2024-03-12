@@ -539,6 +539,7 @@ impl Channel {
         }));
         self.notify("is-typing");
     }
+
     pub fn remove_user_typing(&self, contact: Contact) {
         let mut typing = self.imp().typing.borrow_mut();
         if let Some(el) = typing.iter().find(|t| t.sender == contact).cloned() {
@@ -546,6 +547,33 @@ impl Channel {
         }
         drop(typing);
         self.notify("is-typing");
+    }
+
+    /// Split up the name into first names (if available) and last name.
+    /// For groups, everything will be "last name".
+    pub fn name_parts(&self) -> (Option<String>, String) {
+        if self.is_self() {
+            (None, gettextrs::gettext("Note to self"))
+        } else if let Some(group) = self.group() {
+            (None, group.title)
+        } else if let Some(contact) = self.contact() {
+            contact.name_parts()
+        } else {
+            panic!("Contact is neither group nor contact; impossible.")
+        }
+    }
+
+    pub fn last_name(&self) -> String {
+        self.name_parts().1
+    }
+
+    /// The name which defines how channels are sorted. Depends on the settings.
+    pub fn sort_name(&self) -> String {
+        if self.manager().settings().string("sort-contacts-by") == "surname" {
+            self.last_name()
+        } else {
+            self.title()
+        }
     }
 }
 
