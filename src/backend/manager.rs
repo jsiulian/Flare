@@ -41,7 +41,7 @@ async fn encryption_password() -> Result<String, ApplicationError> {
     let keyring = Keyring::new().await?;
     keyring.unlock().await?;
     let attributes = HashMap::from([
-        (SCHEMA_ATTRIBUTE, crate::config::APP_ID),
+        (SCHEMA_ATTRIBUTE, crate::config::BASE_ID),
         ATTRIBUTE_PASSWORD,
     ]);
 
@@ -708,7 +708,7 @@ mod imp {
     use crate::dbus::Feedbackd;
     use crate::{
         backend::{manager_thread::ManagerThread, Channel, Message},
-        config::APP_ID,
+        config::BASE_ID,
     };
 
     pub struct Manager {
@@ -731,7 +731,7 @@ mod imp {
                 internal: Default::default(),
                 config_store: Default::default(),
                 channels: Default::default(),
-                settings: Settings::new(APP_ID),
+                settings: Settings::new(BASE_ID),
                 application: Default::default(),
                 feedbackd: Default::default(),
             }

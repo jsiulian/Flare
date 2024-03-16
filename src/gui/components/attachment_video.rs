@@ -4,7 +4,7 @@ use glib::Object;
 use gtk::glib;
 use gtk::prelude::{MediaStreamExt, ObjectExt, SettingsExt};
 
-use crate::config::APP_ID;
+use crate::config::BASE_ID;
 use crate::gio::Settings;
 use crate::gui::attachment::Attachment;
 
@@ -27,7 +27,7 @@ impl AttachmentVideo {
             obj.imp().video.set_paintable(preview.as_ref());
         }
 
-        if !Settings::new(APP_ID).boolean("autodownload-videos") {
+        if !Settings::new(BASE_ID).boolean("autodownload-videos") {
             attachment.connect_notify_local(
                 Some("loaded"),
                 glib::clone!(@weak obj => move |_, _| {

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2022 Julian Schmidhuber -->
 <component type="desktop-application">
-  <id>de.schmidhuberj.Flare</id>
+  <id>@app-id@</id>
   <project_license>AGPL-3.0</project_license>
   <metadata_license>FSFAP</metadata_license>
   <!-- Translators: Flare name in metainfo. -->
   <name>Flare</name>
   <!-- Translators: Flare summary in metainfo. -->
   <summary>Chat with your friends on Signal</summary>
-  <launchable type="desktop-id">de.schmidhuberj.Flare.desktop</launchable>
+  <launchable type="desktop-id">@app-id@.desktop</launchable>
   <content_rating type="oars-1.1"/>
   <developer_name>Julian Schmidhuber</developer_name>
   <developer id="mobile.schmidhuberj.de">
     <name>Julian Schmidhuber</name>
   </developer>
-  <translation type="gettext">flare</translation>
+  <translation type="gettext">@gettext-package@</translation>
   <update_contact>flatpak@schmiddi.anonaddy.com</update_contact>
 
   <url type="homepage">https://mobile.schmidhuberj.de/flare</url>

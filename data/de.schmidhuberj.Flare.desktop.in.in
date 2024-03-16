@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Icon=de.schmidhuberj.Flare
+Icon=@app-id@
 Name=Flare
 Comment=Chat with your friends on Signal
 StartupWMClass=Flare

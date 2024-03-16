@@ -11,6 +11,7 @@ gnome = import('gnome')
 
 base_id = 'de.schmidhuberj.Flare'
 application_id = 'de.schmidhuberj.Flare'
+resources_path = '/de/schmidhuberj/Flare/'
 
 dependency('glib-2.0', version: '>= 2.66')
 dependency('gio-2.0', version: '>= 2.66')
@@ -49,6 +50,12 @@ if get_option('profile') == 'development'
 else
   profile = ''
   version_suffix = ''
+  application_id = base_id
+endif
+
+if profile != ''
+  application_id = '@0@.@1@'.format(base_id, profile)
+else
   application_id = base_id
 endif
 

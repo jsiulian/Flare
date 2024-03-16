@@ -181,7 +181,7 @@ pub mod imp {
 
         fn new() -> Self {
             Self {
-                settings: Settings::new(crate::config::APP_ID),
+                settings: Settings::new(crate::config::BASE_ID),
                 row_download_images: TemplateChild::default(),
                 row_download_videos: TemplateChild::default(),
                 row_download_voice_messages: TemplateChild::default(),

@@ -1,16 +1,17 @@
+use gdk::glib::object::IsA;
 use gdk::prelude::{ApplicationExt, ApplicationExtManual};
 use gio::prelude::SettingsExt;
 use gio::{ApplicationFlags, Settings, SettingsBindFlags};
-use glib::prelude::IsA;
+use gtk::prelude::GtkWindowExt;
+use gtk::prelude::RootExt;
 use gtk::prelude::SettingsExtManual;
-use gtk::prelude::{GtkWindowExt, WidgetExt};
 use gtk::{gdk, gio, glib};
 use once_cell::sync::Lazy;
 
 use std::path::Path;
 
 mod config;
-use self::config::{APP_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_BYTES};
+use self::config::{APP_ID, BASE_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_BYTES, RESOURCES_PATH};
 
 mod backend;
 mod dbus;
@@ -34,7 +35,7 @@ fn init_resources() {
 fn init_icons<P: IsA<gdk::Display>>(display: &P) {
     let icon_theme = gtk::IconTheme::for_display(display);
 
-    icon_theme.add_resource_path("/");
+    icon_theme.add_resource_path(RESOURCES_PATH);
 }
 
 fn init_internationalization() -> Result<(), Box<dyn std::error::Error>> {
@@ -57,12 +58,15 @@ fn main() {
 
     init_resources();
 
-    let app = adw::Application::builder().application_id(APP_ID).build();
+    let app = adw::Application::builder()
+        .application_id(APP_ID)
+        .resource_base_path(RESOURCES_PATH)
+        .build();
 
     // Do not start as a service if setting not set
     // Background portal may have created a .desktop file in ~/.config/autostart
     if app.flags() & ApplicationFlags::IS_SERVICE == ApplicationFlags::IS_SERVICE {
-        let settings = Settings::new(APP_ID);
+        let settings = Settings::new(BASE_ID);
         let run_in_background = settings.boolean("run-in-background");
         if !run_in_background {
             return;
@@ -82,7 +86,7 @@ fn main() {
 }
 
 fn build_ui(app: &adw::Application) {
-    let settings = Settings::new(APP_ID);
+    let settings = Settings::new(BASE_ID);
     let window = crate::gui::Window::new(app);
     settings
         .bind("run-in-background", &window, "hide-on-close")

@@ -4,7 +4,7 @@ use glib::{clone, Object};
 use gtk::prelude::{MediaStreamExt, ObjectExt, SettingsExt};
 use gtk::{glib, prelude::WidgetExt, Widget};
 
-use crate::config::APP_ID;
+use crate::config::BASE_ID;
 use crate::gio::Settings;
 use crate::gui::attachment::Attachment;
 
@@ -25,7 +25,7 @@ impl AttachmentAudio {
 
         if let Some(play_button) = play_button {
             if let Ok(play_button) = play_button.downcast::<gtk::Button>() {
-                if !Settings::new(APP_ID).boolean("autodownload-voice-messages") {
+                if !Settings::new(BASE_ID).boolean("autodownload-voice-messages") {
                     attachment.connect_notify_local(
                         Some("loaded"),
                         clone!(@weak play_button, @weak imp => move |_, _| {

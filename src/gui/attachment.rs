@@ -49,7 +49,7 @@ pub mod imp {
 
     use crate::{
         backend::Manager,
-        config::APP_ID,
+        config::BASE_ID,
         gspawn,
         gui::{error_dialog::ErrorDialog, utility::Utility},
         tspawn,
@@ -205,7 +205,7 @@ pub mod imp {
                         .get::<Option<crate::backend::Attachment>>()
                         .expect("Property `attachment` of `Attachment` has to be of type `crate::backend::Attachment`");
 
-                    let settings = Settings::new(APP_ID);
+                    let settings = Settings::new(BASE_ID);
                     let autoload = att.is_some()
                         && settings.boolean("autodownload-images")
                         && att.as_ref().unwrap().is_image()
