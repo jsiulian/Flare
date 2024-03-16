@@ -9,6 +9,52 @@ variables:
   MESON_DIST: "${BUILD_RELEASE}/meson-dist"
   PROJ_NAME_VERSION: "${CI_PROJECT_NAME}-${CI_COMMIT_TAG}"
 
+
+# flatpak, based on https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml
+flatpak:
+  image: 'quay.io/gnome_infrastructure/gnome-runtime-images:gnome-master'
+  stage: build
+  interruptible: true
+  variables:
+    LANG: "C.UTF-8"
+    RUN_TESTS: "1"
+    MANIFEST_PATH: 'build-aux/de.schmidhuberj.Flare.Devel.json'
+    RUNTIME_REPO: 'https://nightly.gnome.org/gnome-nightly.flatpakrepo'
+    FLATPAK_MODULE: 'flare'
+    BUNDLE: "de.schmidhuberj.Flare.Devel.flatpak"
+    APP_ID: 'de.schmidhuberj.Flare.Devel'
+
+  script:
+    - flatpak --version
+    # Report the installed versions of the runtime
+    - flatpak info org.gnome.Platform
+    - flatpak info org.gnome.Sdk
+
+    # Print the date, since appstream depends on local timezone
+    - date && date -u
+
+    - >-
+      xvfb-run -a -s "-screen 0 1024x768x24" --
+      dbus-run-session
+      flatpak-builder --keep-build-dirs --user --disable-rofiles-fuse flatpak_app --repo=repo ${BRANCH:+--default-branch=$BRANCH} ${MANIFEST_PATH}
+
+    # Generate a Flatpak bundle
+    - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
+    - tar cf repo.tar repo/
+  artifacts:
+    name: 'Flatpak artifacts'
+    when: 'always'
+    paths:
+      - $BUNDLE
+      - 'repo.tar'
+      - '.flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/meson-log.txt'
+      - '.flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/testlog.txt'
+    reports:
+      junit: '.flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/testlog.junit.xml'
+    expire_in: 14 days
+# end flatpak
+
+
 build:
   stage: build
   image: archlinux:base-devel
