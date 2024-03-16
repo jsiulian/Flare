@@ -1,4 +1,6 @@
 pub const APP_ID: &str = @APP_ID@;
+pub const BASE_ID: &str = @BASE_ID@;
+pub const RESOURCES_PATH: &str = @RESOURCES_PATH@;
 pub const GETTEXT_PACKAGE: &str = @GETTEXT_PACKAGE@;
 pub const LOCALEDIR: &str = @LOCALEDIR@;
 pub const PROFILE: &str = @PROFILE@;

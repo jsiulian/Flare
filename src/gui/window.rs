@@ -100,7 +100,7 @@ pub mod imp {
     use crate::gui::new_channel_dialog::NewChannelDialog;
     use crate::{
         backend::Manager,
-        config::APP_ID,
+        config::BASE_ID,
         gspawn,
         gui::{
             channel_list::ChannelList, channel_messages::ChannelMessages,
@@ -137,7 +137,7 @@ pub mod imp {
                 channel_messages: Default::default(),
                 new_channel_dialog: Default::default(),
                 manager: Default::default(),
-                settings: Settings::new(APP_ID),
+                settings: Settings::new(BASE_ID),
             }
         }
     }
