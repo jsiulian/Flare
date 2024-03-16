@@ -52,6 +52,12 @@ else
   application_id = base_id
 endif
 
+if profile != ''
+  application_id = '@0@.@1@'.format(base_id, profile)
+else
+  application_id = base_id
+endif
+
 meson.add_dist_script(
   'build-aux/dist-vendor.sh',
   meson.project_build_root() / 'meson-dist' / meson.project_name() + '-' + version,
