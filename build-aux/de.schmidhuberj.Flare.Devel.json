@@ -1,5 +1,5 @@
 {
-    "app-id": "de.schmidhuberj.Flare",
+    "app-id": "de.schmidhuberj.Flare.Devel",
     "runtime": "org.gnome.Platform",
     "runtime-version": "master",
     "sdk": "org.gnome.Sdk",
@@ -83,8 +83,11 @@
             ],
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "../"
+                    "type" : "dir",
+                    "path" : "..",
+                    "exclude": [
+                        ".flatpak-builder"
+                    ]
                 }
             ]
         }
