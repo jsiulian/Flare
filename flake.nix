@@ -46,7 +46,7 @@
                   "curve25519-dalek-4.1.1" = "sha256-p9Vx0lAaYILypsI4/RVsHZLOqZKaa4Wvf7DanLA38pc=";
                   "libsignal-protocol-0.1.0" = "sha256-p4YzrtJaQhuMBTtquvS1m9llszfyTeDfl7+IXzRUFSE=";
                   "libsignal-service-0.1.0" = "sha256-p0umCPtBg9s4G6RHcwK/tU+RtQE2fFLRHOYt2GmBCtQ=";
-                  "presage-0.6.1" = "sha256-hwvFQBl0/Rb46cpGn7yq3qjI/50TYeJDnyas4oBGrWc=";
+                  "presage-0.6.1" = "sha256-+xsQdtlp4xAwhbN2I59DdY5/qLgfCraKFHRFSEO3Y2s=";
                 };
               };
               src = let fs = lib.fileset; in fs.toSource {

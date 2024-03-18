@@ -2741,7 +2741,7 @@ checksum = "94e851c7654eed9e68d7d27164c454961a616cf8c203d500607ef22c737b51bb"
 [[package]]
 name = "presage"
 version = "0.6.1"
-source = "git+https://github.com/Schmiddiii/presage?rev=8e9c62bf15c0d290c18afc4b76a72018fe551853#8e9c62bf15c0d290c18afc4b76a72018fe551853"
+source = "git+https://github.com/Schmiddiii/presage?rev=0c3060540a04c2c262e20606b29af5cdeef012d9#0c3060540a04c2c262e20606b29af5cdeef012d9"
 dependencies = [
  "base64",
  "futures",
@@ -2761,7 +2761,7 @@ dependencies = [
 [[package]]
 name = "presage-store-cipher"
 version = "0.1.0"
-source = "git+https://github.com/Schmiddiii/presage?rev=8e9c62bf15c0d290c18afc4b76a72018fe551853#8e9c62bf15c0d290c18afc4b76a72018fe551853"
+source = "git+https://github.com/Schmiddiii/presage?rev=0c3060540a04c2c262e20606b29af5cdeef012d9#0c3060540a04c2c262e20606b29af5cdeef012d9"
 dependencies = [
  "blake3",
  "chacha20poly1305",
@@ -2778,7 +2778,7 @@ dependencies = [
 [[package]]
 name = "presage-store-sled"
 version = "0.6.0-dev"
-source = "git+https://github.com/Schmiddiii/presage?rev=8e9c62bf15c0d290c18afc4b76a72018fe551853#8e9c62bf15c0d290c18afc4b76a72018fe551853"
+source = "git+https://github.com/Schmiddiii/presage?rev=0c3060540a04c2c262e20606b29af5cdeef012d9#0c3060540a04c2c262e20606b29af5cdeef012d9"
 dependencies = [
  "async-trait",
  "base64",
