@@ -6,9 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Groups not working for newly linked devices.
+
 ### Added
 
 - Dialog for adding a new channel.
+
+### Fixed
+
+- UUID not found issues for some groups.
+
+### Chores
+
+- Updated GTK and libadwaita dependencies to GNOME 46 versions.
 
 ## [0.13.0] - 2024-02-25
 
