@@ -17,6 +17,7 @@ glib::wrapper! {
 impl NewChannelDialog {
     pub fn present_for_selection(&self, channels: &[Channel]) {
         self.imp().set_channels(channels);
+        self.set_focus(Some(&self.imp().search_entry.get()));
         self.present(&self.property::<Window>("window"));
     }
 
@@ -92,7 +93,7 @@ pub mod imp {
         #[template_child]
         scrolled_window: TemplateChild<gtk::ScrolledWindow>,
         #[template_child]
-        search_entry: TemplateChild<gtk::SearchEntry>,
+        pub(super) search_entry: TemplateChild<gtk::SearchEntry>,
 
         pub(super) channels: RefCell<Vec<Channel>>,
 
