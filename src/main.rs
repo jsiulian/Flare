@@ -35,6 +35,7 @@ fn init_resources() {
 fn init_icons<P: IsA<gdk::Display>>(display: &P) {
     let icon_theme = gtk::IconTheme::for_display(display);
 
+    icon_theme.add_resource_path("/");
     icon_theme.add_resource_path(RESOURCES_PATH);
 }
 
