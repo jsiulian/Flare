@@ -428,19 +428,6 @@ pub mod imp {
         }
 
         #[template_callback]
-        fn handle_typing(&self, is_typing: bool, description: Option<String>) -> Option<String> {
-            if is_typing {
-                self.subtitle_label.add_css_class("accent");
-                self.subtitle_label.remove_css_class("dim-label");
-                Some(gettextrs::gettext("is typing"))
-            } else {
-                self.subtitle_label.remove_css_class("accent");
-                self.subtitle_label.add_css_class("dim-label");
-                description
-            }
-        }
-
-        #[template_callback]
         fn handle_add_conversation_clicked(&self) {
             let dialog = &self.new_channel_dialog;
             dialog.present_for_selection(&self.obj().manager().available_channels());

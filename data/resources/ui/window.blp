@@ -81,54 +81,50 @@ template $FlWindow: Adw.ApplicationWindow {
       Adw.ToolbarView {
         [top]
         Adw.HeaderBar {
-          title-widget: Box {
-            name: "room_title";
-            orientation: vertical;
-            halign: center;
-            valign: center;
+          title-widget: Button {
+            styles ["flat"]
+            sensitive: bind $is_some(channel_list.active-channel) as <bool>;
+            visible: bind $is_some(channel_list.active-channel) as <bool>;
+            action-name: "win.channel-information";
 
-            Label title_label {
-              focusable: true;
-              ellipsize: end;
+            child: Box {
+              name: "room_title";
+              orientation: vertical;
               halign: center;
-              wrap: false;
-              single-line-mode: true;
-              use-markup: true;
-              width-chars: 5;
-              label: bind channel_list.active-channel as <$FlChannel>.title;
-              styles [
-                "title",
-              ]
-            }
+              valign: center;
 
-            Label subtitle_label {
-              focusable: true;
-              ellipsize: end;
-              halign: center;
-              wrap: false;
-              single-line-mode: true;
-              use-markup: true;
-              visible: bind $or(channel_list.active-channel as <$FlChannel>.is-typing,$not_empty(channel_list.active-channel as <$FlChannel>.description) as <bool>) as <bool>;
-              label: bind $handle_typing(channel_list.active-channel as <$FlChannel>.is-typing,channel_list.active-channel as <$FlChannel>.description) as <string>;
-              tooltip-markup: bind channel_list.active-channel as <$FlChannel>.description;
+              Label title_label {
+                focusable: true;
+                ellipsize: end;
+                halign: center;
+                wrap: false;
+                single-line-mode: true;
+                use-markup: true;
+                width-chars: 5;
+                label: bind channel_list.active-channel as <$FlChannel>.title;
+                styles [
+                  "title",
+                ]
+              }
 
-              styles [
-                "subtitle-room",
-                "dim-label",
-              ]
-            }
+              Label subtitle_label {
+                focusable: true;
+                ellipsize: end;
+                halign: center;
+                wrap: false;
+                single-line-mode: true;
+                use-markup: true;
+                visible: bind channel_list.active-channel as <$FlChannel>.is-typing;
+                label: _("is typing");
+                tooltip-markup: bind channel_list.active-channel as <$FlChannel>.description;
+
+                styles [
+                  "subtitle-room",
+                  "accent" 
+                ]
+              }
+            };
           };
-          
-          [end]
-          MenuButton {
-            accessibility {
-              label: C_("accessibility", "Menu");
-            }
-
-            tooltip-text: "Menu";
-            menu-model: menubar-channel;
-            icon-name: "view-more-symbolic";
-          }
         }
 
         content: $FlChannelMessages channel_messages {
@@ -193,20 +189,6 @@ menu menubar {
     item {
       label: _("Quit");
       action: "win.kill";
-    }
-  }
-}
-
-menu menubar-channel {
-  section {
-    item {
-      label: _("Channel Information");
-      action: "win.channel-information";
-    }
-
-    item {
-      label: _("Clear Messages");
-      action: "win.channel-clear-messages";
     }
   }
 }

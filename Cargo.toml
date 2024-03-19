@@ -54,9 +54,11 @@ libspelling = "0.2.0"
 blurhash = { version = "0.2.1", features = ["image", "gdk-pixbuf"] }
 image = "0.24.9"
 
+phonenumber = { version = "0.3", optional = true }
+
 [features]
 default = []
-screenshot = []
+screenshot = [ "dep:phonenumber" ]
 screenshot-setup = [ "screenshot" ]
 libspelling = []
 

@@ -226,3 +226,7 @@ button.scroll-to-bottom {
 .navigation-sidebar .subtitle:not(.dim-label) {
 	opacity:1;
 }
+
+.image-text-button label {
+  font-weight: bold;
+}
