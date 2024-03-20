@@ -20,11 +20,18 @@ impl ChannelList {
         crate::trace!("`ChannelList` got new `Channel`: {}", channel.title());
         let obj = self.imp();
         let model = obj.model.borrow();
-        if model.find(&channel).is_some() {
+        if let Some(pos) = model.find(&channel) {
             crate::trace!(
                 "`ChannelList` got duplicated `Channel`: {}. Just setting as active channel",
                 channel.title()
             );
+            self.imp()
+                .list
+                .scroll_to(pos, gtk::ListScrollFlags::NONE, None);
+            self.imp()
+                .selection_model
+                .borrow()
+                .set_selected_chat(Some(&channel));
             self.set_property("active-channel", channel);
             return;
         }
@@ -121,6 +128,7 @@ pub mod imp {
         pub(super) model: RefCell<gio::ListStore>,
         pub(super) sorter: RefCell<gtk::CustomSorter>,
         pub(super) filter: RefCell<gtk::EveryFilter>,
+        pub(super) selection_model: RefCell<Selection>,
 
         manager: RefCell<Option<Manager>>,
         active_channel: RefCell<Option<Channel>>,
@@ -136,6 +144,9 @@ pub mod imp {
                 model: RefCell::new(gio::ListStore::new::<Channel>()),
                 sorter: Default::default(),
                 filter: Default::default(),
+                selection_model: RefCell::new(Selection::new(
+                    gio::ListStore::new::<Channel>().into(),
+                )),
                 manager: Default::default(),
                 active_channel: Default::default(),
                 search_enabled: Default::default(),
@@ -228,9 +239,9 @@ pub mod imp {
                 let m2 = c2.last_message();
 
                 if m1.is_some() && m2.is_none() {
-                    return gtk::Ordering::Smaller;
-                } else if m1.is_none() && m2.is_some() {
                     return gtk::Ordering::Larger;
+                } else if m1.is_none() && m2.is_some() {
+                    return gtk::Ordering::Smaller;
                 } else if let (Some(m1), Some(m2)) = (m1, m2) {
                     let s1 = m1.timestamp();
                     let s2 = m2.timestamp();
@@ -255,6 +266,7 @@ pub mod imp {
             self.model.replace(model);
             self.sorter.replace(sorter);
             self.filter.replace(filter);
+            self.selection_model.replace(selection_model.clone());
 
             let factory = SignalListItemFactory::new();
             factory.connect_setup(move |_, object| {
