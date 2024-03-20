@@ -14,5 +14,5 @@ Adw.AboutDialog about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>Added</p> <ul> <li>Avatars for contacts and groups.</li> </ul> <p>Fixed</p> <ul> <li>Persistent typing messages</li> <li>Possible crashes while linking</li> </ul>";
+  release-notes: "<p>HOTFIX</p> <ul> <li>Groups not working for newly linked devices.</li> </ul> <p>Added</p> <ul> <li>Dialog for adding a new channel.</li> </ul> <p>Fixed</p> <ul> <li>UUID not found issues for some groups.</li> </ul> <p>Chores</p> <ul> <li>Updated GTK and libadwaita dependencies to GNOME 46 versions.</li> </ul>";
 }

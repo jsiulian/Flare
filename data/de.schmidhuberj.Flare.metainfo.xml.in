@@ -38,6 +38,26 @@
   </description>
 
   <releases>
+    <release version="v0.14.0" date="2024-03-20">
+      <description translatable="no">
+        <p>HOTFIX</p>
+        <ul>
+          <li>Groups not working for newly linked devices.</li>
+        </ul>
+        <p>Added</p>
+        <ul>
+          <li>Dialog for adding a new channel.</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+          <li>UUID not found issues for some groups.</li>
+        </ul>
+        <p>Chores</p>
+        <ul>
+          <li>Updated GTK and libadwaita dependencies to GNOME 46 versions.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.13.0" date="2024-02-25">
       <description translatable="no">
         <p>Added</p>
