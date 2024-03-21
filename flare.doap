@@ -15,7 +15,13 @@
   <maintainer>
     <foaf:Person>
       <foaf:name>Julian Schmidhuber</foaf:name>
-      <foaf:mbox rdf:resource="mailto:gitlab@schmiddi.anonaddy.com" />
+      <foaf:mbox rdf:resource="mailto:mobile@schmidhuberj.de" />
+      <foaf:account>
+        <foaf:OnlineAccount>
+          <foaf:accountServiceHomepage rdf:resource="https://gitlab.com/"/>
+          <foaf:accountName>Schmiddiii</foaf:accountName>
+        </foaf:OnlineAccount>
+      </foaf:account>
     </foaf:Person>
   </maintainer>
 </Project>

@@ -1,7 +1,7 @@
 # English translations for Flare package.
 # Copyright (C) 2022 THE Flare'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Flare package.
-# Julian Schmidhuber <translation@schmiddi.anonaddy.com>, 2022.
+# Julian Schmidhuber <translation@schmidhuberj.de>, 2022.
 # Jürgen Benvenuti <gastornis@posteo.org>, 2022.
 #
 msgid ""
@@ -23,7 +23,7 @@ msgstr ""
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
 msgstr ""
-"Julian Schmidhuber <translation@schmiddi.anonaddy.com>\n"
+"Julian Schmidhuber <translation@schmidhuberj.de>\n"
 "Jürgen Benvenuti <gastornis@posteo.org>, 2022\n"
 "Leo Moser <leomoser99@gmail.com>, 2023\n"
 "czarlie <flare-translate@cza.li>"

@@ -1,7 +1,7 @@
 [package]
 name = "flare"
 description = "Chat with your friends on Signal"
-authors = ["Julian Schmidhuber <schmidhuberj2@protonmail.com>"]
+authors = ["Julian Schmidhuber <mobile@schmidhuberj.de>"]
 homepage = "https://mobile.schmidhuberj.de/flare"
 repository = "https://gitlab.com/schmiddi-on-mobile/flare"
 license = "AGPL-3.0-only"

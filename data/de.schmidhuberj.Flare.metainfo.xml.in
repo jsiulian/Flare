@@ -15,7 +15,7 @@
     <name>Julian Schmidhuber</name>
   </developer>
   <translation type="gettext">@gettext-package@</translation>
-  <update_contact>flatpak@schmiddi.anonaddy.com</update_contact>
+  <update_contact>flatpak@schmidhuberj.de</update_contact>
 
   <url type="homepage">https://mobile.schmidhuberj.de/flare</url>
   <url type="bugtracker">https://gitlab.com/schmiddi-on-mobile/flare/-/issues</url>
