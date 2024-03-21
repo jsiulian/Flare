@@ -8,148 +8,151 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-03-21 12:05+0000\n"
+"Last-Translator: Niek Nooijens <nieknooijens@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr ""
+msgstr "翻訳者のクレジット"
 
 #: data/resources/ui/channel_info_dialog.blp:13
 #: data/resources/ui/window.blp:162
 msgid "Channel Information"
-msgstr ""
+msgstr "チャネル情報"
 
 #: data/resources/ui/channel_info_dialog.blp:23
 #: data/resources/ui/setup_window.blp:372
 msgid "Phone Number"
-msgstr ""
+msgstr "電話番号"
 
 #: data/resources/ui/channel_info_dialog.blp:30
 msgid "Disappearing Messages"
-msgstr ""
+msgstr "消えるメッセージ"
 
 #: data/resources/ui/channel_info_dialog.blp:37
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 #: data/resources/ui/channel_info_dialog.blp:45
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "セッションをリセットする"
 
 #: data/resources/ui/channel_info_dialog.blp:48
 msgid "Reset Session"
-msgstr ""
+msgstr "セッションをリセットする"
 
 #: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:481
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr ""
+msgstr "終了"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "オフライン"
 
 #: data/resources/ui/channel_list.blp:18
 msgid "Search"
-msgstr ""
+msgstr "検索"
 
 #: data/resources/ui/channel_list.blp:21 data/resources/ui/window.blp:60
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "検索"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "チャネルを選択されていません"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "チャネルを選択してください"
 
 #: data/resources/ui/channel_messages.blp:178
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "反応を消去"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "反応消去"
 
 #: data/resources/ui/channel_messages.blp:201
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "添付ファイルを削除する"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "添付ファイル削除"
 
 #: data/resources/ui/channel_messages.blp:225
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "添付ファイルを追加する"
 
 #: data/resources/ui/channel_messages.blp:233
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "添付ファイル追加"
 
 #: data/resources/ui/channel_messages.blp:249
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "メセージ入力"
 
 #: data/resources/ui/channel_messages.blp:255
 msgctxt "tooltip"
 msgid "Message input"
-msgstr ""
+msgstr "メセージ入力"
 
 #: data/resources/ui/channel_messages.blp:267
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "送信"
 
 #: data/resources/ui/channel_messages.blp:271
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "送信"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:128
 msgid "Clear messages"
-msgstr ""
+msgstr "メセージ消去"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
-msgstr ""
+msgstr "これにより、ローカルに保存されたメッセージがすべて消去されます。 "
+"これによりアプリケーションも終了します。"
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
 #: data/resources/ui/linked_devices_window.blp:52 src/gui/window.rs:314
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "クリア"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:117
 msgid "Unlink"
-msgstr ""
+msgstr "リンクを解除する"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -157,123 +160,126 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"これにより、このデバイスのリンクが解除され、ローカルに保存されたデータがすべ"
+"て削除されます。 これにより、アプリケーションが閉じられ、再度開いたときに再リ"
+"ンクできるようになります。"
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "リンクを解除してすべてのメセージを削除する"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "リンクを解除してもメッセージは保持"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "エラー"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "このエラーを報告することを検討してください。"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "報告"
 
 #: data/resources/ui/linked_devices_window.blp:15
 #: data/resources/ui/window.blp:122
 msgid "Linked Devices"
-msgstr ""
+msgstr "接続されたデバイス"
 
 #: data/resources/ui/linked_devices_window.blp:33
 msgid "Add Linked Device"
-msgstr ""
+msgstr "接続されたデバイスを加える"
 
 #: data/resources/ui/linked_devices_window.blp:34
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "リンクするデバイスの URL を入力してください。"
 
 #: data/resources/ui/linked_devices_window.blp:44
 msgid "Device URL"
-msgstr ""
+msgstr "デバイスの URL"
 
 #: data/resources/ui/linked_devices_window.blp:53
 msgid "Add Device"
-msgstr ""
+msgstr "デバイスを加える"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr ""
+msgstr "反応"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "消去"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "コピー"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "名前を付けて保存…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "…で開く"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "一般的"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "添付ファイルを自動的にダウンロードする"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "以下で選択した添付ファイルの種類が自動的にダウンロードされます"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "絵"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "動画"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "ファイル"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Voice Messages"
-msgstr ""
+msgstr "ボイスメッセージ"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr ""
+msgstr "通知"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr ""
+msgstr "新しいメッセージの通知"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr ""
+msgstr "通知を送信する"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr ""
+msgstr "反応に関する通知を送信する"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr ""
+msgstr "バックグラウンド通知"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "アプリを閉じている間に通知を取得する"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "モバイル互換性"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -281,18 +287,23 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"タッチ デバイスやモバイル デバイスでのエクスペリエンスを向上させるために、こ"
+"れらのオプションを変更する必要がある場合があります。 "
+"これらの設定のデフォルト値は、デスクトップ "
+"デバイスで使いやすいように選択されています。"
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "選択可能なメッセージテキスト"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr ""
+msgstr "選択可能なテキストがタッチ スクリーンのスワイプ "
+"ジェスチャを妨げる可能性がある"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "「Enter」を押してメッセージを送信"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
