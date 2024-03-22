@@ -986,6 +986,7 @@ dependencies = [
  "log",
  "once_cell",
  "oo7",
+ "phonenumber",
  "presage",
  "presage-store-sled",
  "qrcode-generator",

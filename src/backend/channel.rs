@@ -25,7 +25,9 @@ use crate::{
         message::{DisplayMessage, MessageExt, TextMessage},
         timeline::{TimelineItem, TimelineItemExt},
     },
-    gspawn, ApplicationError,
+    gspawn,
+    gui::utility::Utility,
+    ApplicationError,
 };
 
 use super::{
@@ -523,6 +525,10 @@ impl Channel {
 
     pub fn description(&self) -> Option<String> {
         self.property("description")
+    }
+
+    pub fn single_line_description(&self) -> Option<String> {
+        Utility::single_line(self.description())
     }
 
     /// In seconds. A value of 0 means messages don't disappear.

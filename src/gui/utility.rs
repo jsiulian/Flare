@@ -63,6 +63,11 @@ impl Utility {
     }
 
     #[template_callback]
+    pub(crate) fn single_line(s: Option<String>) -> Option<String> {
+        s.and_then(|s| s.lines().next().map(|s| s.to_owned()))
+    }
+
+    #[template_callback]
     pub(crate) fn resize_width(width: u32) -> i32 {
         if (width as i32) < MAX_MEDIA_WIDTH {
             width as i32

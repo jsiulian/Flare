@@ -29,7 +29,12 @@ impl ChannelInfoDialog {
 
 pub mod imp {
     use adw::prelude::ActionRowExt;
+    use adw::prelude::ExpanderRowExt;
     use adw::subclass::dialog::AdwDialogImpl;
+    use ashpd::desktop::open_uri::OpenFileRequest;
+    use ashpd::WindowIdentifier;
+    use gdk::glib::clone;
+    use gtk::Align;
     use std::cell::RefCell;
 
     use glib::{subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
@@ -38,8 +43,8 @@ pub mod imp {
     use once_cell::sync::Lazy;
 
     use crate::backend::{Channel, Manager};
-    use crate::gspawn;
     use crate::gui::utility::Utility;
+    use crate::{gspawn, tspawn};
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/channel_info_dialog.ui")]
@@ -51,9 +56,15 @@ pub mod imp {
         #[template_child]
         row_disappearing: TemplateChild<adw::ActionRow>,
         #[template_child]
-        row_description: TemplateChild<adw::ActionRow>,
+        row_description: TemplateChild<adw::ExpanderRow>,
         #[template_child]
         button_reset_session: TemplateChild<gtk::Button>,
+        #[template_child]
+        button_clear_messages: TemplateChild<gtk::Button>,
+        #[template_child]
+        group_phone_description: TemplateChild<adw::PreferencesGroup>,
+        #[template_child]
+        grid_buttons: TemplateChild<gtk::Grid>,
 
         channel: RefCell<Option<Channel>>,
         manager: RefCell<Option<Manager>>,
@@ -61,6 +72,24 @@ pub mod imp {
 
     #[gtk::template_callbacks]
     impl ChannelInfoDialog {
+        // By default, the icon is centered. This looks weird with a long description.
+        fn fixup_description_expander_row_icon(&self) {
+            let icon = self
+                .row_description
+                .first_child() // box
+                .and_then(|w| w.first_child()) // ListBox
+                .and_then(|w| w.first_child()) // action_row
+                .and_then(|w| w.first_child()) // header
+                .and_then(|w| w.last_child()) // suffixes
+                .and_then(|w| w.last_child()); // image
+
+            if let Some(icon) = icon {
+                icon.set_margin_top(18);
+                icon.set_valign(Align::Start);
+            } else {
+                log::warn!("Cannot fix up description expander row of channel info dialog");
+            }
+        }
         // For some reason, expressions lead to a crash in the UI. Do it manually.
         pub(super) fn setup(&self) {
             let binding = self.channel.borrow();
@@ -79,11 +108,58 @@ pub mod imp {
                 ));
 
             let description = channel.description();
+            let single_line_description = channel.single_line_description();
             self.row_description.set_visible(description.is_some());
-            self.row_description
-                .set_subtitle(&description.unwrap_or_default());
+            self.row_description.set_subtitle(
+                single_line_description
+                    .as_ref()
+                    .unwrap_or(&String::default()),
+            );
+            self.row_description.set_subtitle_lines(1);
 
-            self.button_reset_session.set_visible(channel.is_contact());
+            self.row_description.connect_expanded_notify(move |row| {
+                if row.is_expanded() {
+                    row.set_subtitle(description.as_ref().unwrap_or(&String::default()));
+                    row.set_subtitle_lines(0);
+                } else {
+                    row.set_subtitle(
+                        single_line_description
+                            .as_ref()
+                            .unwrap_or(&String::default()),
+                    );
+                    row.set_subtitle_lines(1);
+                }
+            });
+
+            self.group_phone_description
+                .set_visible(self.row_phone.is_visible() || self.row_description.is_visible());
+
+            // Fill the list of active buttons such that. Each row has two buttons, except for possibly the last row which has one button spanning two columns.
+            // Firstly, define the list of buttons that are active.
+            let mut active_buttons = if channel.is_contact() {
+                vec![&self.button_reset_session, &self.button_clear_messages]
+            } else {
+                vec![&self.button_clear_messages]
+            };
+
+            // If there is an odd number of buttons, remove the last button which will have its own row.
+            let odd = active_buttons.len() % 2 == 1;
+            let final_button = if odd {
+                Some(active_buttons.remove(active_buttons.len() - 1))
+            } else {
+                None
+            };
+
+            // Insert the buttons at the correct positions.
+            for (i, button) in active_buttons.iter().enumerate() {
+                self.grid_buttons
+                    .attach(&button.get(), (i % 2) as i32, (i / 2) as i32, 1, 1);
+            }
+
+            if let Some(button) = final_button {
+                self.grid_buttons
+                    .attach(&button.get(), 0, active_buttons.len() as i32, 2, 1);
+            }
         }
 
         #[template_callback]
@@ -92,6 +168,31 @@ pub mod imp {
             let channel = obj.channel();
             crate::trace!("Resetting session of channel {}", channel.title());
             gspawn!(async move { channel.send_session_reset().await });
+        }
+
+        #[template_callback]
+        fn open_phone_number(&self) {
+            let obj = self.obj();
+            let channel = self.channel.borrow();
+            let phone_number = channel.as_ref().and_then(|c| c.phone_number());
+
+            if let Some(url) =
+                phone_number.and_then(|p| url::Url::parse(&format!("tel:{}", p)).ok())
+            {
+                gspawn!(clone!(@weak obj => async move {
+                    let identifier = WindowIdentifier::from_native(&obj.native().unwrap()).await;
+                    tspawn!(async move {
+                        if let Err(e) = OpenFileRequest::default()
+                                            .identifier(identifier)
+                                            .send_uri(&url)
+                                            .await {
+                            log::error!("Failed to open phone number: {}", e);
+                        }
+                    }).await.expect("Failed to join tokio")
+                }));
+            } else {
+                log::warn!("Trying to open phone number even if it does not exist");
+            }
         }
 
         // Note: Input is in seconds, a value of `0` means no timer.
@@ -184,6 +285,7 @@ pub mod imp {
     impl ObjectImpl for ChannelInfoDialog {
         fn constructed(&self) {
             self.parent_constructed();
+            self.fixup_description_expander_row_icon();
         }
 
         fn properties() -> &'static [ParamSpec] {

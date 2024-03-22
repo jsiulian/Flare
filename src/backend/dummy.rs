@@ -89,7 +89,10 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
         },
         LContact {
             uuid: Uuid::from_u128(2),
-            phone_number: None,
+            phone_number: Some(
+                phonenumber::parse(None, "+123456789")
+                    .expect("Developer to have a valid phone number"),
+            ),
             name: "Developer".to_string(),
             color: None,
             verified: Default::default(),
@@ -202,7 +205,15 @@ impl super::Manager {
         _uuid: Uuid,
         _profile_key: ProfileKey,
     ) -> Result<Profile, PresageError> {
-        Ok(Profile::default())
+        Ok(Profile {
+            name: None,
+            about: Some(
+                "I am the Developer. I thus may write here what I want. (Insert evil laughter)\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                    .to_string(),
+            ),
+            about_emoji: Some("🤯️".to_string()),
+            avatar: None,
+        })
     }
 
     #[cfg(feature = "screenshot")]

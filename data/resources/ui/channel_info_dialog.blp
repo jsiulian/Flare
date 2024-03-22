@@ -9,65 +9,145 @@ template $FlChannelInfoDialog: Adw.Dialog {
   Adw.ToolbarView {
     [top]
     Adw.HeaderBar {
-      title-widget: Adw.WindowTitle {
-        title: bind template.channel as <$FlChannel>.title;
-      };
     }
+
 
     Adw.Clamp {
       orientation: horizontal;
       tightening-threshold: 360;
       maximum-size: 450;
 
-      Box {
-        spacing: 5;
-        margin-start: 12;
-        margin-end: 12;
-        margin-top: 12;
-        margin-bottom: 12;
+      Gtk.ScrolledWindow {
+        hscrollbar-policy: never;
 
-        orientation: vertical;
+        Box {
+          spacing: 5;
+          margin-start: 12;
+          margin-end: 12;
+          margin-top: 12;
+          margin-bottom: 12;
+          orientation: vertical;
 
-        Adw.PreferencesGroup {
-          title: _("Channel Information");
-          header-suffix:
-            Adw.Avatar avatar {
-              icon-name: "user-bookmarks-symbolic";
-              size: 30;
-            };
-
-          Adw.ActionRow row_phone {
-            styles ["property"]
-
-            title: _("Phone Number");
-            icon-name: "call-start-symbolic";
+          Adw.Avatar avatar {
+            icon-name: "user-bookmarks-symbolic";
+            size: 120;
           }
 
-          Adw.ActionRow row_disappearing {
-            styles ["property"]
-
-            title: _("Disappearing Messages");
-            icon-name: "appointment-missed-symbolic";
+          Gtk.Label {
+            styles [ "title-1" ]
+            label: bind template.channel as <$FlChannel>.title;
+            lines: 2;
+            wrap: true;
+            ellipsize: end;
+            margin-bottom: 24;
           }
 
-          Adw.ActionRow row_description {
-            styles ["property"]
+          Adw.PreferencesGroup group_phone_description {
+            margin-bottom: 18;
+            Adw.ActionRow row_phone {
+              styles ["property"]
 
-            title: _("Description");
-            subtitle-lines: 2;
+              title: _("Phone Number");
+
+              [suffix]
+              Gtk.Button {
+                styles ["flat"]
+                tooltip-text: "Open phone number";
+                icon-name: "call-start-symbolic";
+                valign: center;
+
+                clicked => $open_phone_number() swapped;
+              }
+            }
+
+            Adw.ExpanderRow row_description {
+              styles ["property"]
+
+              title: _("Description");
+            }
           }
-        }
 
-        // Session Reset
-        Button button_reset_session {
-          accessibility {
-            label: C_("accessibility", "Reset Session");
+          Adw.PreferencesGroup {
+            margin-bottom: 18;
+
+            Adw.ActionRow row_disappearing {
+              styles ["property"]
+
+              title: _("Disappearing Messages");
+              [suffix]
+              Gtk.Image {
+                icon-name: "appointment-missed-symbolic";
+              }
+            }
           }
 
-          label: _("Reset Session");
-          clicked => $reset_session() swapped;
+          Gtk.Grid grid_buttons {
+            row-homogeneous: true;
+            column-homogeneous: true;
+            row-spacing: 6;
+            column-spacing: 6;
+          }
         }
       }
     }
   }
 }
+
+// Session Reset
+Button button_reset_session {
+  styles [ "card", "image-text-button" ]
+  accessibility {
+    label: C_("accessibility", "Reset Session");
+  }
+
+  clicked => $reset_session() swapped;
+
+  child: Gtk.Box {
+    margin-top: 6;
+    margin-bottom: 6;
+    margin-start: 6;
+    margin-end: 6;
+    spacing: 6;
+    orientation: vertical;
+
+    Gtk.Image {
+      icon-name: "view-refresh-symbolic";
+    }
+
+    Gtk.Label {
+      label: _("Reset Session");
+    }
+  };
+}
+
+
+// Clear messages
+Button button_clear_messages {
+  styles [ "card", "image-text-button" ]
+  accessibility {
+    label: C_("accessibility", "Clear Messages");
+  }
+
+  // Note: This uses the fact that the channel in `channel_messages` must be the same as in the info dialog as the info dialog can only be opened from there and the info dialog prevents any further interaction with the rest of the window.
+  action-name: "win.channel-clear-messages";
+
+  child: Gtk.Box {
+    styles [ "error" ]
+
+    margin-top: 6;
+    margin-bottom: 6;
+    margin-start: 6;
+    margin-end: 6;
+    spacing: 6;
+    orientation: vertical;
+
+    Gtk.Image {
+      icon-name: "user-trash-symbolic";
+    }
+
+    Gtk.Label {
+      label: _("Clear Messages");
+    }
+  };
+}
+
