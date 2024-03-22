@@ -38,6 +38,14 @@
   </description>
 
   <releases>
+    <release version="v0.14.1" date="2024-03-22">
+      <description translatable="no">
+        <p>Added</p>
+        <ul>
+          <li>Revamped channel info dialog.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.14.0" date="2024-03-20">
       <description translatable="no">
         <p>HOTFIX</p>

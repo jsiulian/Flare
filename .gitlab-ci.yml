@@ -64,7 +64,8 @@ build:
     - pacman -Syu rustup meson gtk4 git cmake libadwaita blueprint-compiler gtksourceview5 protobuf --noconfirm
     - rustup default stable
     - meson setup $BUILD_RELEASE
-    - meson dist -C $BUILD_RELEASE
+    # Don't test, as Flatpak already builds it.
+    - meson dist --no-tests -C $BUILD_RELEASE
   artifacts:
     paths:
       - ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz
