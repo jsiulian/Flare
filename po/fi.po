@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-03-24 15:08+0000\n"
+"PO-Revision-Date: 2024-03-25 16:01+0000\n"
 "Last-Translator: jerekulmala <jerekmailj@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/fi/>\n"
@@ -339,8 +339,8 @@ msgid ""
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
 "Flare on epävirallinen Signal asiakasohjelma. Huomaa, että Flare ei ole "
-"vielä vakaa ja kohdata bugeja. Jos löydät ohjelmasta bugin, kerro siitä <a "
-"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">issue "
+"vielä vakaa ja saatat kohdata bugeja. Jos löydät ohjelmasta bugin, kerro "
+"siitä <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">issue "
 "trackeriin</a>. Ota huomioon myös, koska Flare on kolmannen osapuolen "
 "sovellus, emme voi taata samaa turvallisuuden ja yksityisyyden tasoa kuin "
 "virallinen Signal sovellus. Jos tarvitset vahvaa suojausta ja yksityisyyttä, "
@@ -741,7 +741,7 @@ msgstr "Puhelu loppui"
 
 #: src/backend/message/call_message.rs:123
 msgid "Call declined"
-msgstr ""
+msgstr "Puheluun ei vastattu"
 
 #: src/backend/message/call_message.rs:124
 msgid "Unanswered call"
@@ -913,9 +913,8 @@ msgstr "%d.%m.%Y"
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:145
-#, fuzzy
 msgid "%a., %e. %b"
-msgstr "%a., %e. %b"
+msgstr "%a %e. %b"
 
 #: src/gui/utility.rs:152
 msgid "Attachment"
@@ -953,31 +952,27 @@ msgstr ""
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:31
 msgid "Linking device"
-msgstr "Laitteen linkittäminen"
+msgstr "Linkitä laite"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:35
-#, fuzzy
 msgid "Sending messages"
 msgstr "Lähetä viestejä"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:39
-#, fuzzy
 msgid "Receiving messages"
 msgstr "Vastaanota viestejä"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:43
-#, fuzzy
 msgid "Replying to a message"
-msgstr "Vastaa viestiin"
+msgstr "Vastaa viesteihin"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:47
-#, fuzzy
 msgid "Reacting to a message"
-msgstr "Reagoi viestiin"
+msgstr "Reagoi viesteihin"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:51
@@ -992,7 +987,7 @@ msgstr "Salattu tallennustila"
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:59
 msgid "Notifications, optionally in the background"
-msgstr ""
+msgstr "Ilmoitukset, valinnaisesti taustalla"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:64
@@ -1000,6 +995,8 @@ msgid ""
 "More features are planned, blocked, or not-planned. Consult the README for "
 "more information about them."
 msgstr ""
+"Lisää ominaisuuksia on suunnitteilla, estettynä tai ei suunniteltuna. "
+"Lisätietoa READMEssä."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml:68
@@ -1009,10 +1006,14 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Huomaa, että tämän sovelluksen käyttäminen todennäköisesti huonontaa "
+"turvallisuutta verrattuna viralliseen Signal sovellukseen. Ole varovainen "
+"arkaluontoisen tiedon kanssa. Tarkista projektit README:stä saadaksesi lisää "
+"tietoa turvallisuudesta."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml:554
 msgid "Overview of the application"
-msgstr ""
+msgstr "Yleiskatsaus"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
@@ -1031,6 +1032,8 @@ msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Laitteen nimi, kun linkität Flareen. Tämä edellyttää sovelluksen uudelleen "
+"linkittämistä."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
@@ -1041,9 +1044,8 @@ msgid "Automatically download videos"
 msgstr "Lataa videot automaattisesti"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
-#, fuzzy
 msgid "Automatically download voice messages"
-msgstr "Lataa kuvat automaattisesti"
+msgstr "Lataa ääniviestit automaattisesti"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
@@ -1059,11 +1061,11 @@ msgstr "Suorita taustalla, kun sovellus suljetaan"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Lähetä ilmoituksia hakiessa reaktioita"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Voiko viestejä valita"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
