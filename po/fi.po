@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2023-05-04 20:49+0000\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/flare/flare/fi/"
-">\n"
+"PO-Revision-Date: 2024-03-24 15:08+0000\n"
+"Last-Translator: jerekulmala <jerekmailj@gmail.com>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -31,25 +31,24 @@ msgstr "Kanavan tiedot"
 #: data/resources/ui/channel_info_dialog.blp:23
 #: data/resources/ui/setup_window.blp:372
 msgid "Phone Number"
-msgstr ""
+msgstr "Puhelinnumero"
 
 #: data/resources/ui/channel_info_dialog.blp:30
-#, fuzzy
 msgid "Disappearing Messages"
-msgstr "Tyhjennä viestit"
+msgstr "Katoavat viestit"
 
 #: data/resources/ui/channel_info_dialog.blp:37
 msgid "Description"
-msgstr ""
+msgstr "Kuvaus"
 
 #: data/resources/ui/channel_info_dialog.blp:45
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Nollaa istunto"
 
 #: data/resources/ui/channel_info_dialog.blp:48
 msgid "Reset Session"
-msgstr ""
+msgstr "Nollaa istunto"
 
 #: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:481
@@ -60,7 +59,7 @@ msgstr "Sulje"
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 #: data/resources/ui/channel_list.blp:18
 msgid "Search"
@@ -73,7 +72,7 @@ msgstr "Hae"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Kanavaa ei valittu"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
@@ -184,32 +183,28 @@ msgstr "Harkitse tämän virheen ilmoittamista."
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "Ilmoita"
 
 #: data/resources/ui/linked_devices_window.blp:15
 #: data/resources/ui/window.blp:122
-#, fuzzy
 msgid "Linked Devices"
-msgstr "Linkitä laite"
+msgstr "Linkitetyt laitteet"
 
 #: data/resources/ui/linked_devices_window.blp:33
-#, fuzzy
 msgid "Add Linked Device"
-msgstr "Linkitä laite"
+msgstr "Lisää linkitetty laite"
 
 #: data/resources/ui/linked_devices_window.blp:34
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Syötä linkitettävän laitteen URL-osoite."
 
 #: data/resources/ui/linked_devices_window.blp:44
-#, fuzzy
 msgid "Device URL"
-msgstr "Laitteen nimi"
+msgstr "Laitteen URL-osoite"
 
 #: data/resources/ui/linked_devices_window.blp:53
-#, fuzzy
 msgid "Add Device"
-msgstr "Linkitä laite"
+msgstr "Lisää laite"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
@@ -225,10 +220,9 @@ msgstr "Kopioi"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "Tallenna nimellä…"
 
 #: data/resources/ui/message_item.blp:45
-#, fuzzy
 msgid "Open with…"
 msgstr "Avaa sovelluksella…"
 
@@ -237,62 +231,56 @@ msgid "General"
 msgstr "Yleiset"
 
 #: data/resources/ui/preferences_window.blp:10
-#, fuzzy
 msgid "Automatically Download Attachments"
-msgstr "Lataa kuvat automaattisesti"
+msgstr "Lataa liitteet automaattisesti"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "Alla valitut liitteet ladataan automaattisesti"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Kuvat"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Videot"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Tiedostot"
 
 #: data/resources/ui/preferences_window.blp:26
-#, fuzzy
 msgid "Voice Messages"
-msgstr "Vastaanota viestejä"
+msgstr "Ääniviestit"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
 msgstr "Ilmoitukset"
 
 #: data/resources/ui/preferences_window.blp:32
-#, fuzzy
 msgid "Notifications for new messages"
-msgstr "Ilmoitukset uusista viesteistä."
+msgstr "Ilmoitukset uusista viesteistä"
 
 #: data/resources/ui/preferences_window.blp:35
-#, fuzzy
 msgid "Send Notifications"
 msgstr "Lähetä ilmoituksia"
 
 #: data/resources/ui/preferences_window.blp:39
-#, fuzzy
 msgid "Send Notifications on Reactions"
-msgstr "Lähetä ilmoituksia"
+msgstr "Lähetä ilmoituksia reaktioista"
 
 #: data/resources/ui/preferences_window.blp:44
-#, fuzzy
 msgid "Background Notifications"
-msgstr "Lähetä ilmoituksia"
+msgstr "Taustailmoitukset"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "Nouda ilmoituksia kun sovellus on suljettu"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Yhteensopivuus puhelimille"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -300,32 +288,36 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Näitä vaihtoehtoja muuttamalla voi saada paremman kokemuksen "
+"kosketusnäytöillä. Oletusarvot perustuvat työpöytälaitteiden mieltymyksiin."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Valittava viestiteksti"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr ""
+msgstr "Valittava tekstikenttä voi haitata pyyhkäisyeleitä kosketusnäytöillä"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "Lähetä viesti painamalla \"Enter\""
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"Kosketusnäppäimistöillä, joilla ei pysty painamaan \"Ctrl+Enter\" nappeja, "
+"ei ole välttämättä mahdollista lähettää viestejä joissa on rivinvaihtoja"
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Tervetuloa Flareen"
 
 #: data/resources/ui/setup_window.blp:44
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Flaren käyttöönotto"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:53
@@ -346,16 +338,23 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare on epävirallinen Signal asiakasohjelma. Huomaa, että Flare ei ole "
+"vielä vakaa ja kohdata bugeja. Jos löydät ohjelmasta bugin, kerro siitä <a "
+"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">issue "
+"trackeriin</a>. Ota huomioon myös, koska Flare on kolmannen osapuolen "
+"sovellus, emme voi taata samaa turvallisuuden ja yksityisyyden tasoa kuin "
+"virallinen Signal sovellus. Jos tarvitset vahvaa suojausta ja yksityisyyttä, "
+"älä käytä Flarea. Lue lisää <a href=\"https://gitlab.com/schmiddi-on-mobile/"
+"flare/-/blob/master/README.md#security\">täältä</a>."
 
 #: data/resources/ui/setup_window.blp:65 data/resources/ui/setup_window.blp:72
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Aseta ensisijaiseksi laitteeksi vai linkitetyksi laitteeksi?"
 
 #: data/resources/ui/setup_window.blp:88 data/resources/ui/setup_window.blp:320
 #: data/resources/ui/setup_window.blp:327
-#, fuzzy
 msgid "Primary Device"
-msgstr "Linkitä laite"
+msgstr "Ensisijainen laite"
 
 #: data/resources/ui/setup_window.blp:101
 #: data/resources/ui/setup_window.blp:156
@@ -366,15 +365,15 @@ msgstr "Linkitä laite"
 
 #: data/resources/ui/setup_window.blp:108
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "Ensisijainen vai linkitetty laite?"
 
 #: data/resources/ui/setup_window.blp:120
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Voit käyttää Flarea joko ensisijaisena tai linkitettynä laitteena"
 
 #: data/resources/ui/setup_window.blp:129
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Linkitetty laite (suositellaan)"
 
 #: data/resources/ui/setup_window.blp:134
 msgid ""
@@ -382,10 +381,12 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare voi olla linkitettynä ensisijaiseen laitteeseesi, kuten Signal "
+"Desktop. Tämä tila on paremmin testattu ja pääosin toimii."
 
 #: data/resources/ui/setup_window.blp:143
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Ensisijainen laite (pois käytöstä)"
 
 #: data/resources/ui/setup_window.blp:148
 msgid ""
@@ -395,12 +396,19 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare voi toimia ensisijaisena laitteena, kuten virallinen Signal sovellus "
+"androidilla tai IOS:lla. Flare ei tällä hetkellä tue tätä tilaa, vaikka "
+"alustavat kokeilut viittaavat siihen, että se toimii. Jos olet valmiina "
+"kokeilemaan sitä, voit ottaa alla olevan napin käyttöön (jos et tiedä miten "
+"se tehdään, sinun ei pitäisi harkita ensisijaisen laitteen tuen testaamista)."
 
 #: data/resources/ui/setup_window.blp:197
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Toissijaisen laitteen linkittämiseen Flare tarvitsee laitteelle nimen, joka "
+"näkyy virallisessa sovelluksessa."
 
 #: data/resources/ui/setup_window.blp:207
 msgid "Device Name"
@@ -409,12 +417,12 @@ msgstr "Laitteen nimi"
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Developer Options"
-msgstr ""
+msgstr "Sovelluskehittäjien asetukset"
 
 #: data/resources/ui/setup_window.blp:214
 #: data/resources/ui/setup_window.blp:383
 msgid "Signal Servers"
-msgstr ""
+msgstr "Signal palvelin"
 
 #: data/resources/ui/setup_window.blp:220
 msgid ""
@@ -423,6 +431,9 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"Seuraavaksi näytämme QR koodin, jonka sinun on skannattava ensisijaiselta "
+"laitteeltasi. Huomaa, että sinulla on vain minuutti aikaa skannata koodi, "
+"joten otathan virallisen Signal sovelluksen auki QR koodin skannausta varten."
 
 #: data/resources/ui/setup_window.blp:228
 #: data/resources/ui/setup_window.blp:240
@@ -432,40 +443,41 @@ msgstr "Linkitä laite"
 
 #: data/resources/ui/setup_window.blp:245
 msgid "Scan Code"
-msgstr ""
+msgstr "Skannaa koodi"
 
 #: data/resources/ui/setup_window.blp:246
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
+"Skannaa tämä koodi toisella Signal sovelluksella, joka on kirjautuneena "
+"Signal tilillesi."
 
 #: data/resources/ui/setup_window.blp:273
 msgid "Link without scanning"
-msgstr ""
+msgstr "Linkitä skannaamatta"
 
 #: data/resources/ui/setup_window.blp:283
-#, fuzzy
 msgid "Manual linking"
-msgstr "Linkitys"
+msgstr "Manuaalinen linkitys"
 
 #: data/resources/ui/setup_window.blp:299
-#, fuzzy
 msgid "Manual Linking"
-msgstr "Linkitys"
+msgstr "Manuaalinen Linkitys"
 
 #: data/resources/ui/setup_window.blp:300
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Jos et pysty skannaamaan QR koodia, voit lisätä sen manuaalisesti "
+"kopioimalla täältä löytyvä linkki"
 
 #: data/resources/ui/setup_window.blp:311
-#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Kopioi leikepöydälle"
 
 #: data/resources/ui/setup_window.blp:344
 msgid "Continue"
-msgstr ""
+msgstr "Jatka"
 
 #: data/resources/ui/setup_window.blp:361
 msgid ""
@@ -477,33 +489,42 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"Flaren rekisteröintiä ensisijaiseksi laitteeksi sinun tarvitsee antaa "
+"puhelinnumerosi ja täytetty captcha. Kirjoita puhelinnumerosi "
+"kansainvälisessä E.164-formaatissa, sisällyttäen alkuun \"+\" ja maakoodin. "
+"Captchan voit täyttää <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">täällä</a>, sen jälkeen kopioi \"Open Signal\" linkki ja "
+"liitä se alla olevaan kenttään. Huomaa, että captcha on voimassa vain "
+"minuutin, joten toimi nopeasti."
 
 #: data/resources/ui/setup_window.blp:376
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/setup_window.blp:389
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"Kun olet täyttänyt tiedot, saat tekstiviestinä vahvistuskoodin Signalilta. "
+"Kirjoita tämä vahvistuskoodi seuraavalla sivulla."
 
 #: data/resources/ui/setup_window.blp:398
 #: data/resources/ui/setup_window.blp:406
 #: data/resources/ui/setup_window.blp:423
 #: data/resources/ui/setup_window.blp:448
 msgid "Confirm"
-msgstr ""
+msgstr "Vahvista"
 
 #: data/resources/ui/setup_window.blp:439
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Kirjoita vahvistuskoodi jonka sait Signalilta tähän."
 
 #: data/resources/ui/setup_window.blp:456
 #: data/resources/ui/setup_window.blp:464
 msgid "Finished"
-msgstr ""
+msgstr "Valmista"
 
 #: data/resources/ui/setup_window.blp:497
 msgid ""
@@ -511,10 +532,13 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare on kohta valmis ja odottaa yhteystietojen synkronoinnin valmistumista. "
+"Siinä saattaa mennä hetki, voit alkaa käyttämään Flarea synkronoinnin "
+"valmistuttua. Muutama asia ennen kuin alat käyttämään Flarea:"
 
 #: data/resources/ui/setup_window.blp:506
 msgid "Known Bugs"
-msgstr ""
+msgstr "Tunnettuja bugeja"
 
 #: data/resources/ui/setup_window.blp:511
 msgid ""
@@ -526,10 +550,17 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Älä lähetä viestejä silloin kun Flare vastaanottaa viestejä. Tämä varmistaa "
+"sen, että kaikki tarvittavat tiedot ovat saatavilla. Yritämme korjata tätä "
+"ongelmaa. Lisäksi Flare käyttää tällä hetkellä liiallisesti muistia jonkin "
+"ajan käytön jälkeen. Tämä johtuu muistivuodosta jota ei olla vielä löydetty. "
+"Yritämme korjata tätä. Lista kaikista bugeista löytyy <a href=\"https"
+"://gitlab.com/schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\""
+">täältä</a>."
 
 #: data/resources/ui/setup_window.blp:521
 msgid "Contact"
-msgstr ""
+msgstr "Ota Yhteyttä"
 
 #: data/resources/ui/setup_window.blp:526
 msgid ""
@@ -537,6 +568,9 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"Haluatko antaa palautetta tai muuten vain jutella? Piipahda meidän <a href="
+"\"https://matrix.to/#/#flare-signal:matrix.org\">matrix huoneessa</a>, se on "
+"avoin kaikille."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -566,7 +600,7 @@ msgstr "Avaa valikko"
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Sulje ikkuna"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
@@ -601,7 +635,7 @@ msgstr "Lataa lisää viestejä"
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:133
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Täytä captcha"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -612,39 +646,41 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Lähetä captcha-haaste. Tokenin saat Flaren virheilmoituksesta. Captchan voit "
+"täyttää <a href=\"https://signalcaptchas.org/challenge/generate.html\""
+">täällä</a> ja linkki kohdasta \"Open Signal\" täytyy liittää sitä "
+"vastaavaan kohtaan. Huomaa, että captcha on voimassa vain minuutin."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "Lähetä"
 
 #: data/resources/ui/text_entry.blp:13
-#, fuzzy
 msgid "Message"
-msgstr "Viestin syöttö"
+msgstr "Viesti"
 
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Syötä emoji"
 
 #: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Syötä emoji"
 
 #: data/resources/ui/window.blp:24
-#, fuzzy
 msgid "Channel list"
 msgstr "Kanavat"
 
 #: data/resources/ui/window.blp:37
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Lisää keskustelu"
 
 #: data/resources/ui/window.blp:48 data/resources/ui/window.blp:91
 msgctxt "accessibility"
@@ -653,7 +689,7 @@ msgstr "Valikko"
 
 #: data/resources/ui/window.blp:78
 msgid "Chat"
-msgstr ""
+msgstr "Keskustelut"
 
 #: data/resources/ui/window.blp:112
 msgid "Settings"
@@ -661,7 +697,7 @@ msgstr "Asetukset"
 
 #: data/resources/ui/window.blp:138
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Synkronoi kontaktit"
 
 #: data/resources/ui/window.blp:143
 msgid "Keybindings"
@@ -673,10 +709,9 @@ msgstr "Tietoja"
 
 #: data/resources/ui/window.blp:153
 msgid "Quit"
-msgstr ""
+msgstr "Lopeta"
 
 #: data/resources/ui/window.blp:167
-#, fuzzy
 msgid "Clear Messages"
 msgstr "Tyhjennä viestit"
 
@@ -690,19 +725,19 @@ msgstr "Sinä"
 
 #: src/backend/message/call_message.rs:119
 msgid "Incoming call"
-msgstr ""
+msgstr "Tuleva puhelu"
 
 #: src/backend/message/call_message.rs:120
 msgid "Outgoing call"
-msgstr ""
+msgstr "Lähtevä puhelu"
 
 #: src/backend/message/call_message.rs:121
 msgid "Call started"
-msgstr ""
+msgstr "Puhelu alkoi"
 
 #: src/backend/message/call_message.rs:122
 msgid "Call ended"
-msgstr ""
+msgstr "Puhelu loppui"
 
 #: src/backend/message/call_message.rs:123
 msgid "Call declined"
@@ -710,19 +745,17 @@ msgstr ""
 
 #: src/backend/message/call_message.rs:124
 msgid "Unanswered call"
-msgstr ""
+msgstr "Vastaamaton puhelu"
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:69
-#, fuzzy
 msgid "{sender} reacted {emoji} to a message."
-msgstr "Reagoi viestiin"
+msgstr "{sender} reagoi viestiin {emoji}"
 
 #. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:75
-#, fuzzy
 msgid "Reacted {emoji} to a message."
-msgstr "Reagoi viestiin"
+msgstr "Reagoi viestiin {emoji}"
 
 #: src/backend/message/text_message.rs:374
 msgid "Sent an image"
@@ -737,11 +770,10 @@ msgstr[0] "On lähettänyt videon"
 msgstr[1] "On lähettänyt {} videota"
 
 #: src/backend/message/text_message.rs:381
-#, fuzzy
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] "Kuva lähetetty"
-msgstr[1] "{} kuvaa lähetetty"
+msgstr[0] "Lähetti ääniviestin"
+msgstr[1] "Lähetti {} ääniviestiä"
 
 #: src/backend/message/text_message.rs:387
 msgid "Sent a file"
@@ -758,9 +790,8 @@ msgid "There does not seem to be a connection to the internet available."
 msgstr "Internet-yhteyttä ei näytä olevan saatavilla."
 
 #: src/error.rs:98
-#, fuzzy
 msgid "Something glib-related failed."
-msgstr "Viestin lähettäminen epäonnistui."
+msgstr "Jotain glib:iin liittyvää meni pieleen."
 
 #: src/error.rs:103
 msgid "The communication with Libsecret failed."
@@ -818,13 +849,14 @@ msgid "The database path at {} is no folder."
 msgstr "Tietokannan polku kohdassa {} ei ole kansiota."
 
 #: src/error.rs:165
-#, fuzzy
 msgid "Please restart the application with logging and report this issue."
-msgstr "Käynnistä sovellus uudelleen tämän ikkunan sulkemisen jälkeen."
+msgstr ""
+"Käynnistä sovellus uudelleen loggaamisella tämän ikkunan sulkemisen jälkeen "
+"ja raportoi tästä."
 
 #: src/gui/channel_info_dialog.rs:105
 msgid "Never"
-msgstr ""
+msgstr "Ei koskaan"
 
 #: src/gui/preferences_window.rs:30
 msgid "Watch for new messages while closed"
@@ -849,7 +881,6 @@ msgid "Staging"
 msgstr ""
 
 #: src/gui/setup_window.rs:137
-#, fuzzy
 msgid "Copied to clipboard"
 msgstr "Kopioi leikepöydälle"
 
@@ -867,47 +898,42 @@ msgstr "%d.%m.%Y %H.%M"
 
 #: src/gui/utility.rs:133
 msgid "Today"
-msgstr ""
+msgstr "Tänään"
 
 #: src/gui/utility.rs:135
 msgid "Yesterday"
-msgstr ""
+msgstr "Eilen"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:141
-#, fuzzy
 msgid "%Y-%m-%d"
-msgstr "%d.%m.%Y %H.%M"
+msgstr "%d.%m.%Y"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:145
+#, fuzzy
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:152
-#, fuzzy
 msgid "Attachment"
-msgstr "Liitteet"
+msgstr "Liite"
 
 #: src/gui/window.rs:309 src/gui/window.rs:315
-#, fuzzy
 msgid "Remove Messages"
-msgstr "Vastaanota viestejä"
+msgstr "Poista viestejä"
 
 #: src/gui/window.rs:310
-#, fuzzy
 msgid "This will remove all locally stored messages from this channel"
-msgstr ""
-"Tämä tyhjentää kaikki paikallisesti tallennetut viestit. Tämä sulkee myös "
-"sovelluksen."
+msgstr "Tämä tyhjentää kaikki paikallisesti tallennetut viestit"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Chattaa kavereidesi kanssa Signalissa"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
@@ -920,12 +946,14 @@ msgid ""
 "from Linux. It is still in development and doesn't include as many features "
 "as the official Signal applications."
 msgstr ""
+"Flare on epävirallinen sovellus jonka avulla voit keskustella kavereidesi "
+"kanssa Signalissa Linuxilla. Se on vielä kehityksessä ja siinä ei ole yhtä "
+"paljon ominaisuuksia kuin virallisissa Signal sovelluksissa."
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:31
-#, fuzzy
 msgid "Linking device"
-msgstr "Linkitä laite"
+msgstr "Laitteen linkittäminen"
 
 #. Translators: Description of Flare in metainfo: Features
 #: data/de.schmidhuberj.Flare.metainfo.xml:35
@@ -1039,7 +1067,7 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Lähetä viesti painamalla Enter-näppäintä"
 
 #~ msgid "Dowload images automatically"
 #~ msgstr "Lataa kuvat automaattisesti"
