@@ -3,7 +3,7 @@ use std::cell::RefCell;
 use gdk::gdk_pixbuf::Pixbuf;
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::Object;
-use gtk::{gio, glib};
+use gtk::{gio, glib, prelude::ObjectExt};
 use libsignal_service::{content::Reaction, prelude::Uuid};
 
 use crate::backend::{timeline::TimelineItem, Channel, Contact};
@@ -29,6 +29,7 @@ impl ReactionMessage {
             .property("channel", channel)
             .property("timestamp", timestamp)
             .property("manager", manager)
+            .property("read", channel.property::<bool>("is-active"))
             .build();
         s.imp().reaction.swap(&RefCell::new(Some(reaction)));
         s
@@ -82,8 +83,9 @@ impl ReactionMessage {
         notification.set_icon(&icon);
 
         let manager = self.manager();
+        let uid = self.uid();
         crate::gspawn!(async move {
-            manager.send_notification(&notification).await;
+            manager.send_notification(uid, &notification).await;
         });
     }
 }

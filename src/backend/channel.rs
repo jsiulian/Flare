@@ -383,10 +383,13 @@ impl Channel {
             );
 
             self.notify("last-message");
-            message.send_notification();
+            if !message.property::<bool>("read") {
+                message.send_notification();
+            }
             self.emit_by_name::<()>("message", &[&message]);
         } else if let Some(message) = message.dynamic_cast_ref::<ReactionMessage>() {
-            if self.manager().settings().boolean("notify-reactions") {
+            if self.manager().settings().boolean("notify-reactions") &&
+                    !message.property::<bool>("read") {
                 message.send_notification();
             }
         } else {
@@ -581,6 +584,29 @@ impl Channel {
             self.title()
         }
     }
+
+    pub fn set_active(&self, active: bool) {
+        self.set_property("is-active", active);
+    }
+
+    pub fn mark_as_read(&self) -> Vec<String> {
+        let marked = self.imp()
+                         .timeline
+                         .borrow()
+                         .iter_backwards()
+                         .filter(|i| i.is::<DisplayMessage>() || i.is::<ReactionMessage>())
+                         .map_while(|m| {
+                let message = m.dynamic_cast::<Message>().unwrap();
+                // We can stop at first read message
+                if message.mark_as_read() {
+                    if let Some(uid) = message.uid() {
+                        return Some(uid);
+                    }
+                }
+                None
+            }).collect();
+        marked
+    }
 }
 
 mod imp {
@@ -623,6 +649,7 @@ mod imp {
         pub(super) pending_reactions: RefCell<HashMap<u64, Vec<ReactionMessage>>>,
         pub(super) typing: RefCell<HashSet<TypingNotification>>,
         pub(super) draft: RefCell<String>,
+        pub(super) is_active: RefCell<bool>
     }
 
     impl std::hash::Hash for Channel {
@@ -684,6 +711,7 @@ mod imp {
                     ParamSpecString::builder("description").read_only().build(),
                     ParamSpecBoolean::builder("is-typing").read_only().build(),
                     ParamSpecString::builder("draft").build(),
+                    ParamSpecBoolean::builder("is-active").build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -769,6 +797,7 @@ mod imp {
                 }
                 "is-typing" => (!self.typing.borrow().is_empty()).to_value(),
                 "draft" => self.draft.borrow().to_value(),
+                "is-active" => self.is_active.borrow().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -787,6 +816,12 @@ mod imp {
                         .get::<String>()
                         .expect("Property `draft` of `Channel` has to be of type `String`");
                     self.draft.replace(draft);
+                }
+                "is-active" => {
+                    let is_active = value
+                        .get::<bool>()
+                        .expect("Property `is-active` of `Channel` has to be of type `bool`");
+                    self.is_active.replace(is_active);
                 }
                 _ => unimplemented!(),
             }
