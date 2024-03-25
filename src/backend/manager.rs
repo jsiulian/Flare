@@ -127,11 +127,11 @@ impl Manager {
         self.imp().settings.clone()
     }
 
-    pub async fn send_notification(&self, notification: &gio::Notification) {
+    pub async fn send_notification(&self, id: Option<String>, notification: &gio::Notification) {
         if self.imp().settings.boolean("notifications") {
             if let Some(application) = self.application() {
                 log::trace!("Sending a notification");
-                application.send_notification(None, notification);
+                application.send_notification(id.as_deref(), notification);
                 if let Some(feedbackd) = self.feedbackd() {
                     // Ignore errors creating feedback
                     let _ = crate::tspawn!(async move { feedbackd.feedback().await }).await;

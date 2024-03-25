@@ -69,6 +69,7 @@ impl Message {
                     .property("sender", &contact)
                     .property("channel", &channel)
                     .property("timestamp", timestamp)
+                    .property("read", channel.property::<bool>("is-active"))
                     .build();
                 s.init_data(message, manager).await;
                 Some(s.upcast())
@@ -103,6 +104,7 @@ impl Message {
                     .property("sender", &contact)
                     .property("channel", &channel)
                     .property("timestamp", timestamp)
+                    .property("read", channel.property::<bool>("is-active"))
                     .build();
                 s.init_data(message, manager).await;
                 Some(s.upcast())
@@ -270,6 +272,13 @@ impl Message {
         }
     }
 
+    fn uid(&self) -> Option<String> {
+        let Some(data) = self.imp().data.borrow().clone() else { return None; };
+        let Some(timestamp) = data.timestamp else { return None; };
+        let sender_uuid = self.sender().uuid();
+        Some(format!("{:x}{:x}", timestamp, sender_uuid))
+    }
+
     fn set_internal_data(&self, data: Option<DataMessage>) {
         self.imp().data.swap(&RefCell::new(data));
     }
@@ -281,9 +290,25 @@ impl Message {
     fn internal_data_mut(&self) -> RefMut<'_, Option<DataMessage>> {
         self.imp().data.borrow_mut()
     }
+
+    fn mark_as_read(&self) -> bool {
+        let this = self.imp();
+        let read = *this.read.borrow();
+        if !read {
+            this.read.replace(true);
+            return true;
+        }
+        false
+    }
 }
 
 pub trait MessageExt: std::marker::Sized + glib::prelude::ObjectExt {
+    fn uid(&self) -> Option<String> {
+        self.dynamic_cast_ref::<Message>()
+            .expect("`MessageExt` to dynamic cast to `Message`")
+            .uid()
+    }
+
     fn set_internal_data(&self, data: Option<DataMessage>) {
         self.dynamic_cast_ref::<Message>()
             .expect("`MessageExt` to dynamic cast to `Message`")
@@ -313,6 +338,13 @@ pub trait MessageExt: std::marker::Sized + glib::prelude::ObjectExt {
     fn manager(&self) -> Manager {
         self.property("manager")
     }
+
+    fn mark_as_read(&self) -> bool {
+        self.dynamic_cast_ref::<Message>()
+            .expect("`MessageExt` to dynamic cast to `Message`")
+            .mark_as_read()
+    }
+
 }
 
 impl<O: IsA<Message>> MessageExt for O {}
@@ -329,7 +361,7 @@ where
 mod imp {
     use std::cell::RefCell;
 
-    use glib::{subclass::types::ObjectSubclass, ParamSpec, ParamSpecObject, Value};
+    use glib::{subclass::types::ObjectSubclass, ParamSpec, ParamSpecObject, ParamSpecBoolean, Value};
     use once_cell::sync::Lazy;
 
     use crate::backend::{timeline::TimelineItemExt, Manager};
@@ -344,6 +376,8 @@ mod imp {
         pub(super) data: RefCell<Option<DataMessage>>,
 
         manager: RefCell<Option<Manager>>,
+
+        pub(super) read: RefCell<bool>,
     }
 
     #[glib::object_subclass]
@@ -366,6 +400,9 @@ mod imp {
                     ParamSpecObject::builder::<Channel>("channel")
                         .construct_only()
                         .build(),
+                    ParamSpecBoolean::builder("read")
+                        .construct_only()
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -376,6 +413,7 @@ mod imp {
                 "manager" => self.manager.borrow().as_ref().to_value(),
                 "sender" => self.sender.borrow().as_ref().to_value(),
                 "channel" => self.channel.borrow().as_ref().to_value(),
+                "read" => self.read.borrow().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -402,6 +440,13 @@ mod imp {
                         .expect("Property `channel` of `Message` has to be of type `Channel`");
 
                     self.channel.replace(Some(obj));
+                }
+                "read" => {
+                    let read = value
+                        .get::<bool>()
+                        .expect("Property `read` of `Message` has to be of type `bool`");
+
+                    self.read.replace(read);
                 }
                 _ => unimplemented!(),
             }

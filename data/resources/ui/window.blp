@@ -19,6 +19,7 @@ template $FlWindow: Adw.ApplicationWindow {
     min-sidebar-width: 300;
     max-sidebar-width: 400;
     sidebar-width-fraction: 0.25;
+    notify::show-content => $handle_show_content() swapped;
 
     sidebar: Adw.NavigationPage {
       title: _("Channel list");

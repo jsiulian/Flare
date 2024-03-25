@@ -65,10 +65,21 @@ impl ChannelList {
             .model()
             .expect("`ChannelList` list to have a model");
         if let Some(channel) = model.item(i).and_then(|c| c.downcast::<Channel>().ok()) {
+            if let Some(previously_active) = self.property::<Option<Channel>>("active-channel") {
+                previously_active.set_active(false);
+            }
             self.set_property("active-channel", channel);
+            self.set_active(true);
             true
         } else {
             false
+        }
+    }
+
+    pub fn set_active(&self, active: bool) {
+        if let Some(channel) = self.property::<Option<Channel>>("active-channel") {
+            channel.set_active(active);
+            self.withdraw_notifications();
         }
     }
 
@@ -92,6 +103,14 @@ impl ChannelList {
 
     pub fn manager(&self) -> Manager {
         self.property("manager")
+    }
+
+    fn withdraw_notifications(&self) {
+        let Some(channel) = self.property::<Option<Channel>>("active-channel") else { return; };
+        let Some(application) = self.manager().application() else { return; };
+        for uid in channel.mark_as_read() {
+            application.withdraw_notification(&uid);
+        }
     }
 }
 
@@ -336,9 +355,9 @@ pub mod imp {
                     let chan = value.get::<Option<Channel>>().expect(
                         "Property `active-channel` of `ChannelList` has to be of type `Channel`",
                     );
-                    self.obj()
-                        .emit_by_name::<()>("active-channel-changed", &[&chan]);
                     self.active_channel.replace(chan);
+                    self.obj()
+                        .emit_by_name::<()>("active-channel-changed", &[&*self.active_channel.borrow()]);
                 }
                 "search-enabled" => {
                     let search = value.get::<bool>().expect(

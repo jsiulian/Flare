@@ -387,6 +387,15 @@ pub mod imp {
             actions.add_action(&action_toggle_search);
         }
 
+        fn setup_active_window_handler(&self) {
+            let obj = self.obj();
+            obj.connect_is_active_notify(clone!(
+                @weak self as w => move |window| {
+                    w.channel_list.set_active(window.is_active())
+                }),
+            );
+        }
+
         // Requires the manager to be set up. Therefore, postponed.
         fn setup_linked_devices_action(&self) {
             let obj = self.obj();
@@ -416,15 +425,18 @@ pub mod imp {
         }
 
         #[template_callback]
-        fn handle_go_back(&self) {
-            log::trace!("Go backward in the SplitView");
-            self.split_view.set_show_content(false);
+        fn handle_show_content(&self) {
+            log::trace!("Active view changed in the SplitView");
+            if !self.split_view.property::<bool>("show-content") {
+                self.channel_list.set_active(false);
+            }
         }
 
         #[template_callback]
         fn handle_go_forward(&self) {
             log::trace!("Go forward in the SplitView");
             self.split_view.set_show_content(true);
+            self.channel_list.set_active(self.obj().is_active());
         }
 
         #[template_callback]
@@ -489,6 +501,7 @@ pub mod imp {
                 let manager = Manager::new(obj.property::<gio::Application>("application"));
                 obj.set_property("manager", Some(&manager));
                 obj.imp().setup_linked_devices_action();
+                obj.imp().setup_active_window_handler();
 
                 let setup_window: RefCell<Option<SetupWindow>> = RefCell::default();
 
