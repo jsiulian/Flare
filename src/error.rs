@@ -4,6 +4,7 @@ use lss::push_service::ServiceError;
 use presage as p;
 
 const FAILED_TO_LOOK_UP_ADDRESS: &str = "failed to lookup address information";
+const NETWORK_UNREACHABLE: &str = " Network is unreachable";
 type PresageError = presage::Error<presage_store_sled::SledStoreError>;
 
 #[derive(Debug, err_derive::Error)]
@@ -35,7 +36,7 @@ impl From<PresageError> for ApplicationError {
             }
             p::Error::Store(e) => ApplicationError::Db(e),
             p::Error::ServiceError(ServiceError::WsError { reason: e })
-                if e.contains(FAILED_TO_LOOK_UP_ADDRESS) =>
+                if e.contains(FAILED_TO_LOOK_UP_ADDRESS) || e.contains(NETWORK_UNREACHABLE) =>
             {
                 ApplicationError::NoInternet
             }

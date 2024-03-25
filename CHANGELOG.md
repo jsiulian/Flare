@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Withdraw notification when message has been read.
  
+### Fixed
+
+- Failing to load groups and messages when started offline.
+
 ## [0.14.1] - 2024-03-22
 
 ### Added
