@@ -492,43 +492,66 @@ impl Manager {
         log::trace!("Trying to initialize channels");
         let mut to_load = vec![];
 
-        for contact in self.list_contacts() {
-            log::trace!("Got a contact from the storage");
-            let channel = Channel::from_contact_or_group(contact.clone(), &None, self).await;
-            contact.set_channel(Some(&channel));
-            self.emit_by_name::<()>("channel", &[&channel]);
-            let mut channels = self.imp().channels.borrow_mut();
-            to_load.push(channel.clone());
-            channels.insert(channel.internal_hash(), channel);
+        // Construct all channels in parallel.
+        let channels_futures = self.list_contacts().into_iter().map(|c| async move {
+            let channel = Channel::from_contact_or_group(c.clone(), &None, self).await;
+            c.set_channel(Some(&channel));
+            channel
+        });
+        let loaded_channels = futures::future::join_all(channels_futures).await;
+
+        // Storing loaded cannels. Extra block around to drop `known_channels` before `await`.
+        {
+            let mut known_channels = self.imp().channels.borrow_mut();
+            to_load.extend(loaded_channels.clone());
+            for channel in loaded_channels {
+                log::trace!("Got a contact from the storage");
+                self.emit_by_name::<()>("channel", &[&channel]);
+                known_channels.insert(channel.internal_hash(), channel);
+            }
         }
+
+        // Note: Groups need channels to be finished initializing first due to loading participants; we cannot combine them.
 
         // TODO: Error handling?
         if let Ok(groups) = self.store().groups() {
-            for val in groups {
-                let Ok((key, group)) = val else { break };
-                crate::trace!("Got group by key {:?}", key);
-                let revision = group.revision;
-                let channel = Channel::from_group(
-                    group,
-                    &GroupContextV2 {
-                        master_key: Some(key.into()),
-                        revision: Some(revision),
-                        group_change: None,
-                    },
-                    self,
-                )
-                .await;
-                self.emit_by_name::<()>("channel", &[&channel]);
-                let mut channels = self.imp().channels.borrow_mut();
-                to_load.push(channel.clone());
-                channels.insert(channel.internal_hash(), channel);
+            // Construct all groups in parallel.
+            let groups = groups
+                .into_iter()
+                .map_while(|v| v.ok())
+                .map(|(key, group)| async move {
+                    let revision = group.revision;
+                    Channel::from_group(
+                        group,
+                        &GroupContextV2 {
+                            master_key: Some(key.into()),
+                            revision: Some(revision),
+                            group_change: None,
+                        },
+                        self,
+                    )
+                    .await
+                });
+            let loaded_channels = futures::future::join_all(groups).await;
+
+            // Store loaded channels. Extra block around to drop `known_channels` before `await`.
+            {
+                let mut known_channels = self.imp().channels.borrow_mut();
+                to_load.extend(loaded_channels.clone());
+                for channel in loaded_channels {
+                    self.emit_by_name::<()>("channel", &[&channel]);
+                    known_channels.insert(channel.internal_hash(), channel);
+                }
             }
         }
-        let something_loaded = !to_load.is_empty();
-        for c in to_load {
-            c.load_last(MESSAGES_INITIAL_LOAD).await;
-        }
-        something_loaded
+
+        // For each channel, load initial messages and initialize avatars, all in parallel.
+        let futures = to_load.iter().map(|c| {
+            futures::future::join(c.load_last(MESSAGES_INITIAL_LOAD), c.initialize_avatar())
+        });
+        futures::future::join_all(futures).await;
+
+        !to_load.is_empty()
     }
 }
 

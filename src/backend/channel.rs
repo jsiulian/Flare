@@ -110,7 +110,6 @@ impl Channel {
             .group_context
             .swap(&RefCell::new(Some(group_context_v2.clone())));
         s.initialize_participants().await;
-        s.initialize_avatar().await;
         s
     }
 
@@ -477,6 +476,7 @@ impl Channel {
                 .collect::<Vec<_>>();
             for p in &participants {
                 p.set_channel(Some(self));
+                p.update_profile_name().await;
             }
             self.imp().participants.replace(participants);
         } else {
@@ -495,26 +495,24 @@ impl Channel {
         }
     }
 
-    async fn initialize_avatar(&self) {
-        // TODO: Do in background.
-        let Some(context) = self.group_context() else {
-            return;
-        };
+    pub async fn initialize_avatar(&self) {
+        if let Some(context) = self.group_context() {
+            let Some(avatar) = self
+                .manager()
+                .retrieve_group_avatar(context)
+                .await
+                .ok()
+                .flatten()
+                .and_then(|b| Texture::from_bytes(&Bytes::from_owned(b)).ok())
+            else {
+                log::debug!("Failed to fetch group avatar; it may not have a profile picture set",);
+                return;
+            };
 
-        let Some(avatar) = self
-            .manager()
-            .retrieve_group_avatar(context)
-            .await
-            .ok()
-            .flatten()
-            .and_then(|b| Texture::from_bytes(&Bytes::from_owned(b)).ok())
-        else {
-            log::debug!("Failed to fetch group avatar; it may not have a profile picture set",);
-            return;
-        };
-
-        self.imp().group_avatar.replace(Some(avatar.into()));
-
+            self.imp().group_avatar.replace(Some(avatar.into()));
+        } else if let Some(contact) = self.contact() {
+            contact.update_profile_name().await;
+        }
         self.notify("avatar");
     }
 

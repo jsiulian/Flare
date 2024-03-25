@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Failing to load groups and messages when started offline.
+- Improve performance on startup.
 
 ## [0.14.1] - 2024-03-22
 
