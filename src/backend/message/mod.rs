@@ -463,16 +463,25 @@ mod imp {
     impl TimelineItemImpl for Message {
         fn update_show_header(&self, obj: &Self::Type, previous: Option<&TimelineItem>) {
             if let Some(msg) = previous.and_then(|p| p.downcast_ref::<super::Message>()) {
+                // Show header if:
+                // - The sender of the previous message is different to the sender of this message, or
+                // - Some time has passed between the two messages.
+                // Furthermore, never show headers for messages sent by self.
                 obj.set_show_header(
-                    obj.sender().uuid() != msg.sender().uuid()
-                        || obj.timestamp() >= msg.timestamp() + MESSAGE_SENT_SHOW_NAME_DURATION,
+                    (obj.sender().uuid() != msg.sender().uuid()
+                        || obj.timestamp() >= msg.timestamp() + MESSAGE_SENT_SHOW_NAME_DURATION)
+                        && obj.sender().uuid() != obj.manager().uuid(),
                 );
             } else {
                 obj.set_show_header(true);
             }
         }
+
         fn update_show_timestamp(&self, obj: &Self::Type, next: Option<&TimelineItem>) {
             if let Some(msg) = next.and_then(|p| p.downcast_ref::<super::Message>()) {
+                // Show timestamp if:
+                // - The sender of the previous message is different to the sender of this message, or
+                // - Some time has passed between the two messages.
                 obj.set_show_timestamp(
                     obj.sender().uuid() != msg.sender().uuid()
                         || msg.timestamp()
