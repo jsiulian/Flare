@@ -1,17 +1,12 @@
-use gdk::gio::SettingsBindFlags;
-use gdk::glib::clone;
-use gdk::prelude::SettingsExtManual;
-use gdk::subclass::prelude::ObjectSubclassIsExt;
-use glib::prelude::ObjectExt;
-use gtk::prelude::{AdjustmentExt, WidgetExt};
-use gtk::{gdk, glib};
+use crate::prelude::*;
+use gio::SettingsBindFlags;
 
-use crate::backend::{message::TextMessage, Channel, Manager};
 use crate::ApplicationError;
 
 const MESSAGES_REQUEST_LOAD: usize = 10;
 
 glib::wrapper! {
+    /// [ChannelMessages] is the right pane displaying the list of messages and the entry-bar.
     pub struct ChannelMessages(ObjectSubclass<imp::ChannelMessages>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -25,46 +20,6 @@ impl ChannelMessages {
 
     pub fn load_more(&self) {
         self.imp().handle_more();
-    }
-
-    pub fn manager(&self) -> Manager {
-        self.property("manager")
-    }
-
-    pub fn reply_message(&self) -> Option<TextMessage> {
-        self.property("reply-message")
-    }
-
-    pub fn set_reply_message(&self, msg: &Option<TextMessage>) {
-        self.set_property("reply-message", msg)
-    }
-
-    pub fn active_channel(&self) -> Option<Channel> {
-        self.property("active-channel")
-    }
-
-    pub fn sticky(&self) -> bool {
-        self.property("sticky")
-    }
-
-    pub fn set_sticky(&self, val: bool) {
-        self.set_property("sticky", val)
-    }
-
-    pub fn loading(&self) -> bool {
-        self.property("loading")
-    }
-
-    pub fn set_loading(&self, val: bool) {
-        self.set_property("loading", val)
-    }
-
-    pub fn filling_screen(&self) -> bool {
-        self.property("filling-screen")
-    }
-
-    pub fn set_filling_screen(&self, val: bool) {
-        self.set_property("filling-screen", val)
     }
 
     /// If the screen is not yet fully filled with messages, fill it.
@@ -82,6 +37,9 @@ impl ChannelMessages {
         }
     }
 
+    /// The message list autoscrolls when the list is at the bottom.
+    ///
+    /// This furthermore loads the screen until is is completely filled.
     fn setup_autoscroll(&self) {
         let adj = self.imp().scrolled_window.vadjustment();
         adj.connect_value_changed(clone!(@weak self as s => move |adj| {
@@ -136,15 +94,13 @@ impl ChannelMessages {
 }
 
 pub mod imp {
-    use std::cell::{Cell, RefCell};
+    use std::marker::PhantomData;
 
-    use adw::prelude::*;
-    use glib::{
-        clone, subclass::InitializingObject, ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
-    };
-    use gtk::{gio, glib, FileDialog, PositionType, SignalListItemFactory};
-    use gtk::{subclass::prelude::*, CompositeTemplate};
-    use once_cell::sync::Lazy;
+    use crate::prelude::*;
+
+    use glib::subclass::InitializingObject;
+    use gtk::CompositeTemplate;
+    use gtk::{FileDialog, PositionType, SignalListItemFactory};
 
     use crate::backend::timeline::Timeline;
     use crate::gui::attachment::backend_to_gui;
@@ -152,14 +108,11 @@ pub mod imp {
     use crate::gui::components::ItemRow;
     use crate::{
         backend::{message::TextMessage, Channel, Manager},
-        gspawn,
-        gui::{
-            error_dialog::ErrorDialog, message_item::MessageItem, text_entry::TextEntry,
-            utility::Utility,
-        },
+        gui::{error_dialog::ErrorDialog, message_item::MessageItem, text_entry::TextEntry},
     };
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate, Default, glib::Properties)]
+    #[properties(wrapper_type = super::ChannelMessages)]
     #[template(resource = "/ui/channel_messages.ui")]
     pub struct ChannelMessages {
         #[template_child]
@@ -174,18 +127,50 @@ pub mod imp {
         button_send: TemplateChild<gtk::Button>,
 
         attachments: RefCell<Vec<crate::backend::Attachment>>,
+
+        #[property(get, set = Self::set_active_channel)]
+        active_channel: RefCell<Option<Channel>>,
+        #[property(get, set, nullable)]
         reply_message: RefCell<Option<TextMessage>>,
 
-        manager: RefCell<Option<Manager>>,
-        active_channel: RefCell<Option<Channel>>,
-
+        #[property(get, set, default = true)]
         sticky: Cell<bool>,
+        #[property(get, set)]
         loading: Cell<bool>,
+        #[property(get, set, default = true)]
         filling_screen: Cell<bool>,
+        #[property(get = Self::has_attachments)]
+        has_attachments: PhantomData<bool>,
+
+        #[property(get, set = Self::set_manager, type = Manager)]
+        manager: RefCell<Option<Manager>>,
     }
 
     #[gtk::template_callbacks]
     impl ChannelMessages {
+        fn has_attachments(&self) -> bool {
+            !self.attachments.borrow().is_empty()
+        }
+
+        fn set_manager(&self, man: Option<Manager>) {
+            let initialized = man.is_some();
+            self.manager.replace(man);
+            if initialized {
+                self.obj().setup_send_on_enter();
+            }
+        }
+
+        fn set_active_channel(&self, chan: Option<Channel>) {
+            if let Some(active_chan) = self.active_channel.borrow().as_ref() {
+                active_chan.set_property("draft", self.text_entry.text());
+            }
+
+            let old = self.active_channel.replace(chan);
+            if let Some(old) = old {
+                old.trim_old();
+            }
+        }
+
         #[template_callback(function)]
         fn no_selection(timeline: Option<Timeline>) -> gtk::SelectionModel {
             gtk::NoSelection::new(timeline).into()
@@ -222,7 +207,7 @@ pub mod imp {
         #[template_callback]
         fn remove_reply(&self) {
             log::trace!("Unsetting reply message");
-            self.obj().set_reply_message(&None);
+            self.obj().set_reply_message(None::<TextMessage>);
         }
 
         #[template_callback]
@@ -336,7 +321,7 @@ pub mod imp {
                 if let Some(quote) = obj.reply_message() {
                     log::trace!("Adding quote to message");
                     msg.set_quote(&quote);
-                    obj.set_reply_message(&None);
+                    obj.set_reply_message(None::<TextMessage>);
                 }
 
                 let obj = self.obj();
@@ -396,7 +381,7 @@ pub mod imp {
                     let msg = args[1]
                         .get::<Option<TextMessage>>()
                         .expect("Type of signal `reply` of `ItemRow` to be `TextMessage`.");
-                    obj.set_reply_message(&msg);
+                    obj.set_reply_message(msg);
                     obj.imp().text_entry.grab_focus();
                     None
                 }));
@@ -440,13 +425,14 @@ pub mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for ChannelMessages {
         fn constructed(&self) {
             self.parent_constructed();
             self.obj().connect_notify_local(
                 Some("active-channel"),
                 clone!(@weak self as obj => move |_, _| {
-                    obj.obj().set_reply_message(&None);
+                    obj.obj().set_reply_message(None::<TextMessage>);
                     if let Some(channel) = obj.active_channel.borrow().as_ref() {
                         let draft = channel.property("draft");
                         obj.text_entry.set_text(draft);
@@ -455,92 +441,6 @@ pub mod imp {
             );
             self.obj().setup_autoscroll();
             self.construct_list_view();
-        }
-
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager").build(),
-                    ParamSpecObject::builder::<Channel>("active-channel").build(),
-                    ParamSpecObject::builder::<TextMessage>("reply-message").build(),
-                    ParamSpecBoolean::builder("has-attachments").build(),
-                    ParamSpecBoolean::builder("sticky")
-                        .default_value(true)
-                        .build(),
-                    ParamSpecBoolean::builder("loading").build(),
-                    ParamSpecBoolean::builder("filling-screen")
-                        .default_value(true)
-                        .build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "active-channel" => self.active_channel.borrow().as_ref().to_value(),
-                "reply-message" => self.reply_message.borrow().as_ref().to_value(),
-                "has-attachments" => (!self.attachments.borrow().is_empty()).to_value(),
-                "sticky" => self.sticky.get().to_value(),
-                "loading" => self.loading.get().to_value(),
-                "filling-screen" => self.filling_screen.get().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let man = value.get::<Option<Manager>>().expect(
-                        "Property `manager` of `ChannelMessages` has to be of type `Manager`",
-                    );
-                    let initialized = man.is_some();
-                    self.manager.replace(man);
-                    if initialized {
-                        self.obj().setup_send_on_enter();
-                    }
-                }
-                "active-channel" => {
-                    let chan = value.get::<Option<Channel>>().expect(
-                        "Property `active-channel` of `ChannelMessages` has to be of type `Channel`",
-                    );
-
-                    if let Some(active_chan) = self.active_channel.borrow().as_ref() {
-                        active_chan.set_property("draft", self.text_entry.text());
-                    }
-
-                    let old = self.active_channel.replace(chan);
-                    if let Some(old) = old {
-                        old.trim_old();
-                    }
-                }
-                "reply-message" => {
-                    let msg = value.get::<Option<TextMessage>>().expect(
-                        "Property `reply-message` of `ChannelMessages` has to be of type `TextMessage`",
-                    );
-                    self.reply_message.replace(msg);
-                }
-                "sticky" => {
-                    let s = value
-                        .get::<bool>()
-                        .expect("Property `sticky` of `ChannelMessages` has to be of type `bool`");
-                    self.sticky.replace(s);
-                }
-                "loading" => {
-                    let l = value
-                        .get::<bool>()
-                        .expect("Property `loading` of `ChannelMessages` has to be of type `bool`");
-                    self.loading.replace(l);
-                }
-                "filling-screen" => {
-                    let f = value.get::<bool>().expect(
-                        "Property `filling-screen` of `ChannelMessages` has to be of type `bool`",
-                    );
-                    self.filling_screen.replace(f);
-                }
-                _ => unimplemented!(),
-            }
         }
     }
 

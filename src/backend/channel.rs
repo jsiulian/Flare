@@ -1,46 +1,34 @@
+use crate::backend::{
+    message::{DeletionMessage, DisplayMessage, MessageExt, ReactionMessage, TextMessage},
+    timeline::{TimelineItem, TimelineItemExt},
+    Contact, Manager, Message,
+};
+use crate::prelude::*;
+
 use std::{
-    cell::RefCell,
     collections::hash_map::DefaultHasher,
     hash::{Hash, Hasher},
 };
 
-use gdk::{
-    glib::{clone, Bytes},
-    prelude::{ObjectExt, SettingsExt},
-    Paintable, Texture,
-};
-use gio::subclass::prelude::ObjectSubclassIsExt;
+use gdk::Texture;
+use glib::Bytes;
 use glib::{prelude::Cast, Object};
-use gtk::{gdk, gio, glib};
+
 use libsignal_service::{
     groups_v2::Group,
-    prelude::Uuid,
     proto::{DataMessage, GroupContextV2},
     ServiceAddress,
 };
 use presage::store::Thread;
 
-use crate::{
-    backend::{
-        message::{DisplayMessage, MessageExt, TextMessage},
-        timeline::{TimelineItem, TimelineItemExt},
-    },
-    gspawn,
-    gui::utility::Utility,
-    ApplicationError,
-};
-
-use super::{
-    message::{DeletionMessage, ReactionMessage},
-    Contact, Manager, Message,
-};
-
 gtk::glib::wrapper! {
+    /// A channel represents either a 1-to-1 channel or a group.
     pub struct Channel(ObjectSubclass<imp::Channel>);
 }
 
 const EMPTY_MESSAGE_BODY: &str = "<empty>";
 const TYPING_NOTIFICATION_DURATION_SECONDS: u32 = 10;
+
 #[derive(Eq, Hash, PartialEq, Clone, Debug)]
 pub struct TypingNotification {
     pub sender: Contact,
@@ -54,10 +42,14 @@ impl Channel {
         manager: &Manager,
     ) -> Self {
         log::trace!("Trying to build a `Channel` from a `Contact` or `GroupContextV2`");
+
+        // Use cached channel if available.
         let available_channels = manager.available_channels();
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
             .build();
+
+        // Set from a group.
         if let Some(group_context_v2) = group_context {
             if let Some(channel) = available_channels.iter().find(|c| {
                 c.group_context().and_then(|c| c.master_key) == group_context_v2.master_key
@@ -87,12 +79,14 @@ impl Channel {
                 s.imp().contact.swap(&RefCell::new(Some(contact)));
             }
         } else {
+            // Set from a contact.
             contact.connect_notify_local(
                 Some("title"),
                 clone!(@weak s => move |_, _| s.notify("title")),
             );
             s.imp().contact.swap(&RefCell::new(Some(contact)));
         }
+
         s.initialize_participants().await;
         s
     }
@@ -125,22 +119,12 @@ impl Channel {
         }
     }
 
-    pub fn manager(&self) -> Manager {
-        self.property("manager")
-    }
-
-    pub fn last_message(&self) -> Option<DisplayMessage> {
-        self.property("last-message")
-    }
-
-    pub fn title(&self) -> String {
-        self.property("title")
-    }
-
+    /// Load the specified number of message from the end of the message queue.
     pub async fn load_last(&self, number: usize) {
         if let Some(thread) = self.thread() {
             let mut results = vec![];
             let manager = self.manager();
+
             let first_timestamp = self
                 .imp()
                 .timeline
@@ -161,6 +145,7 @@ impl Channel {
                 log::error!("Failed to load last messages: {}", iter.err().unwrap());
                 return;
             }
+
             for content in iter.unwrap() {
                 let msg = Message::from_content(content, &manager).await;
                 if let Some(msg) = msg {
@@ -199,6 +184,7 @@ impl Channel {
         Ok(())
     }
 
+    /// The hash of internal data; used by the manager to cache channels.
     pub(super) fn internal_hash(&self) -> u64 {
         let mut hasher = DefaultHasher::new();
         self.imp().hash(&mut hasher);
@@ -215,17 +201,6 @@ impl Channel {
 
     pub fn contact(&self) -> Option<Contact> {
         self.imp().contact.borrow().clone()
-    }
-
-    pub fn is_self(&self) -> bool {
-        self.contact()
-            .as_ref()
-            .map(Contact::is_self)
-            .unwrap_or_default()
-    }
-
-    pub fn is_contact(&self) -> bool {
-        self.property("is-contact")
     }
 
     pub fn uuid(&self) -> Option<Uuid> {
@@ -249,6 +224,11 @@ impl Channel {
         self.manager().send_session_reset(uuid, ts).await
     }
 
+    /// Register a new message with the channel.
+    /// This does the following (based on the type of message):
+    /// - Add a quote to the message if needed.
+    /// - Cache pending reactions and apply them for the correct message.
+    /// - Delete a message in the current channel.
     pub(super) async fn do_new_message(
         &self,
         message: &Message,
@@ -257,8 +237,10 @@ impl Channel {
             let body = message
                 .body()
                 .unwrap_or_else(|| String::from(EMPTY_MESSAGE_BODY));
+
+            // Message quote.
             crate::trace!("Channel {} got new message: {}", self.title(), body);
-            if let Some(quote) = message.quote().and_then(|q| q.id) {
+            if let Some(quote) = message.quote_timestamp() {
                 log::trace!("Message claims to have a quote");
                 if let Some(thread) = self.thread() {
                     if let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await {
@@ -275,6 +257,8 @@ impl Channel {
                     }
                 }
             }
+
+            // Apply pending reactions.
             let id = message.timestamp();
             if let Some(reactions) = self.imp().pending_reactions.borrow_mut().remove(&id) {
                 log::trace!(
@@ -287,6 +271,7 @@ impl Channel {
             }
         }
 
+        // Apply reactions or store them.
         if let Some(reaction) = message.dynamic_cast_ref::<ReactionMessage>() {
             crate::trace!(
                 "Channel {} got new reaction: {}",
@@ -326,6 +311,8 @@ impl Channel {
             }
         }
 
+        // Delete messages.
+        // Note we do not need to store pending deletion requests, those will not be returned by presage after deletion.
         if let Some(deletion) = message
             .dynamic_cast_ref::<DeletionMessage>()
             .map(|r| r.deletion())
@@ -367,6 +354,7 @@ impl Channel {
         Ok(())
     }
 
+    /// Add a message to the channel, which includes putting it into the timeline, notifying it and updating the last message.
     pub(super) async fn new_message(
         &self,
         message: Message,
@@ -387,8 +375,9 @@ impl Channel {
             }
             self.emit_by_name::<()>("message", &[&message]);
         } else if let Some(message) = message.dynamic_cast_ref::<ReactionMessage>() {
-            if self.manager().settings().boolean("notify-reactions") &&
-                    !message.property::<bool>("read") {
+            if self.manager().settings().boolean("notify-reactions")
+                && !message.property::<bool>("read")
+            {
                 message.send_notification();
             }
         } else {
@@ -424,6 +413,7 @@ impl Channel {
         Ok(())
     }
 
+    /// Send a message to the channel and add it to the channel.
     pub async fn send_message(&self, msg: Message) -> Result<(), crate::ApplicationError> {
         crate::debug!(
             "Sending a message {} to channel {} (timestamp {})",
@@ -476,7 +466,7 @@ impl Channel {
                 .collect::<Vec<_>>();
             for p in &participants {
                 p.set_channel(Some(self));
-                p.update_profile_name().await;
+                p.update_profile_name_and_avatar().await;
             }
             self.imp().participants.replace(participants);
         } else {
@@ -511,30 +501,14 @@ impl Channel {
 
             self.imp().group_avatar.replace(Some(avatar.into()));
         } else if let Some(contact) = self.contact() {
-            contact.update_profile_name().await;
+            contact.update_profile_name_and_avatar().await;
         }
         self.notify("avatar");
     }
 
-    pub fn avatar(&self) -> Option<Paintable> {
-        self.property("avatar")
-    }
-
-    pub fn phone_number(&self) -> Option<String> {
-        self.property("phone-number")
-    }
-
-    pub fn description(&self) -> Option<String> {
-        self.property("description")
-    }
-
+    /// Cap the description to a single line.
     pub fn single_line_description(&self) -> Option<String> {
         Utility::single_line(self.description())
-    }
-
-    /// In seconds. A value of 0 means messages don't disappear.
-    pub fn disappearing_messages_timer(&self) -> u32 {
-        self.property("disappearing-messages-timer")
     }
 
     pub fn add_user_typing(&self, notification: TypingNotification) {
@@ -583,17 +557,20 @@ impl Channel {
         }
     }
 
+    /// Whether the channel is currently visible in the UI.
     pub fn set_active(&self, active: bool) {
         self.set_property("is-active", active);
     }
 
+    /// Mark all messages as read.
     pub fn mark_as_read(&self) -> Vec<String> {
-        let marked = self.imp()
-                         .timeline
-                         .borrow()
-                         .iter_backwards()
-                         .filter(|i| i.is::<DisplayMessage>() || i.is::<ReactionMessage>())
-                         .map_while(|m| {
+        let marked = self
+            .imp()
+            .timeline
+            .borrow()
+            .iter_backwards()
+            .filter(|i| i.is::<DisplayMessage>() || i.is::<ReactionMessage>())
+            .map_while(|m| {
                 let message = m.dynamic_cast::<Message>().unwrap();
                 // We can stop at first read message
                 if message.mark_as_read() {
@@ -602,52 +579,155 @@ impl Channel {
                     }
                 }
                 None
-            }).collect();
+            })
+            .collect();
         marked
     }
 }
 
 mod imp {
-    use std::{
-        cell::RefCell,
-        collections::{HashMap, HashSet},
-    };
-
-    use gdk::{
-        glib::{ParamSpecBoolean, ParamSpecUInt},
-        prelude::*,
-        subclass::prelude::*,
-        Paintable,
-    };
-    use glib::{subclass::Signal, ParamSpec, ParamSpecObject, ParamSpecString, Value};
-    use gtk::{gdk, glib};
-    use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::GroupContextV2};
-    use once_cell::sync::Lazy;
-
+    use super::TypingNotification;
     use crate::backend::{
         message::{DisplayMessage, ReactionMessage, TextMessage},
         timeline::Timeline,
         Contact, Manager,
     };
+    use crate::prelude::*;
 
-    use super::TypingNotification;
+    use std::{
+        collections::{HashMap, HashSet},
+        marker::PhantomData,
+    };
 
-    #[derive(Default)]
+    use gdk::Paintable;
+
+    use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::GroupContextV2};
+
+    #[derive(Default, glib::Properties)]
+    #[properties(wrapper_type = super::Channel)]
     pub struct Channel {
         pub(super) contact: RefCell<Option<Contact>>,
         pub(super) group: RefCell<Option<Group>>,
         pub(super) group_context: RefCell<Option<GroupContextV2>>,
 
-        pub(super) group_avatar: RefCell<Option<Paintable>>,
-
         pub(super) participants: RefCell<Vec<Contact>>,
 
-        pub(super) manager: RefCell<Option<Manager>>,
-        pub(super) timeline: RefCell<Timeline>,
         pub(super) pending_reactions: RefCell<HashMap<u64, Vec<ReactionMessage>>>,
         pub(super) typing: RefCell<HashSet<TypingNotification>>,
+
+        #[property(name = "avatar", get = Self::avatar)]
+        pub(super) group_avatar: RefCell<Option<Paintable>>,
+        #[property(get)]
+        pub(super) timeline: RefCell<Timeline>,
+
+        #[property(get, set)]
         pub(super) draft: RefCell<String>,
-        pub(super) is_active: RefCell<bool>
+        #[property(get, set)]
+        pub(super) is_active: RefCell<bool>,
+
+        #[property(get = Self::last_message)]
+        pub(super) last_message: PhantomData<Option<DisplayMessage>>,
+        #[property(get = Self::title)]
+        pub(super) title: PhantomData<String>,
+        #[property(get = Self::is_contact)]
+        pub(super) is_contact: PhantomData<bool>,
+        #[property(get = Self::is_self)]
+        pub(super) is_self: PhantomData<bool>,
+        /// In seconds. A value of 0 means messages don't disappear.
+        #[property(get = Self::disappearing_messages_timer)]
+        pub(super) disappearing_messages_timer: PhantomData<u32>,
+        #[property(get = Self::phone_number)]
+        pub(super) phone_number: PhantomData<Option<String>>,
+        #[property(get = Self::description)]
+        pub(super) description: PhantomData<Option<String>>,
+        #[property(get = Self::is_typing)]
+        pub(super) is_typing: PhantomData<bool>,
+
+        #[property(get, set, construct_only, type = Manager)]
+        pub(super) manager: RefCell<Option<Manager>>,
+    }
+
+    impl Channel {
+        fn avatar(&self) -> Option<Paintable> {
+            if let Some(contact) = self.contact.borrow().as_ref() {
+                contact.property("avatar")
+            } else {
+                self.group_avatar.borrow().clone()
+            }
+        }
+
+        fn last_message(&self) -> Option<DisplayMessage> {
+            self.timeline
+                .borrow()
+                .iter_backwards()
+                .filter(|i| i.is::<DisplayMessage>())
+                .map(|m| m.dynamic_cast::<DisplayMessage>().unwrap())
+                .find(|m| {
+                    !(*m)
+                        .clone()
+                        .downcast::<TextMessage>()
+                        .map(|m| m.is_deleted())
+                        .unwrap_or(false)
+                })
+        }
+
+        fn title(&self) -> String {
+            if let Some(group) = self.group.borrow().as_ref() {
+                group.title.clone()
+            } else if let Some(contact) = self.contact.borrow().as_ref() {
+                if contact.property::<bool>("is-self") {
+                    gettextrs::gettext("Note to self")
+                } else {
+                    contact.title()
+                }
+            } else {
+                "".to_string()
+            }
+        }
+
+        fn is_contact(&self) -> bool {
+            self.contact.borrow().as_ref().is_some()
+        }
+
+        fn is_self(&self) -> bool {
+            self.contact.borrow().as_ref().is_some_and(|c| c.is_self())
+        }
+
+        fn disappearing_messages_timer(&self) -> u32 {
+            if let Some(group) = self.group.borrow().as_ref() {
+                group
+                    .disappearing_messages_timer
+                    .as_ref()
+                    .map(|t| t.duration)
+                    .unwrap_or_default()
+            } else if let Some(contact) = self.contact.borrow().as_ref() {
+                contact.expire_timer()
+            } else {
+                0
+            }
+        }
+
+        fn phone_number(&self) -> Option<String> {
+            self.contact
+                .borrow()
+                .as_ref()
+                .and_then(|c| c.phone_number())
+        }
+
+        fn description(&self) -> Option<String> {
+            if let Some(contact) = self.contact.borrow().as_ref() {
+                contact.description()
+            } else {
+                self.group
+                    .borrow()
+                    .as_ref()
+                    .and_then(|g| g.description.clone())
+            }
+        }
+
+        fn is_typing(&self) -> bool {
+            !self.typing.borrow().is_empty()
+        }
     }
 
     impl std::hash::Hash for Channel {
@@ -683,148 +763,8 @@ mod imp {
         type Type = super::Channel;
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for Channel {
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<Timeline>("timeline")
-                        .read_only()
-                        .build(),
-                    ParamSpecObject::builder::<DisplayMessage>("last-message")
-                        .read_only()
-                        .build(),
-                    ParamSpecObject::builder::<Paintable>("avatar")
-                        .read_only()
-                        .build(),
-                    ParamSpecString::builder("title").read_only().build(),
-                    ParamSpecBoolean::builder("is-contact").read_only().build(),
-                    ParamSpecBoolean::builder("is-self").read_only().build(),
-                    ParamSpecUInt::builder("disappearing-messages-timer")
-                        .read_only()
-                        .build(),
-                    ParamSpecString::builder("phone-number").read_only().build(),
-                    ParamSpecString::builder("description").read_only().build(),
-                    ParamSpecBoolean::builder("is-typing").read_only().build(),
-                    ParamSpecString::builder("draft").build(),
-                    ParamSpecBoolean::builder("is-active").build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "timeline" => self.timeline.borrow().to_value(),
-                "last-message" => self
-                    .timeline
-                    .borrow()
-                    .iter_backwards()
-                    .filter(|i| i.is::<DisplayMessage>())
-                    .map(|m| m.dynamic_cast::<DisplayMessage>().unwrap())
-                    .find(|m| {
-                        !(*m)
-                            .clone()
-                            .downcast::<TextMessage>()
-                            .map(|m| m.is_deleted())
-                            .unwrap_or(false)
-                    })
-                    .to_value(),
-                "avatar" => {
-                    if let Some(contact) = self.contact.borrow().as_ref() {
-                        contact.property("avatar")
-                    } else {
-                        self.group_avatar.borrow().as_ref().to_value()
-                    }
-                }
-                "title" => {
-                    let title = if let Some(group) = self.group.borrow().as_ref() {
-                        group.title.clone()
-                    } else if let Some(contact) = self.contact.borrow().as_ref() {
-                        if contact.property::<bool>("is-self") {
-                            gettextrs::gettext("Note to self")
-                        } else {
-                            contact.title()
-                        }
-                    } else {
-                        "".to_string()
-                    };
-
-                    title.to_value()
-                }
-                "is-contact" => self.contact.borrow().as_ref().is_some().to_value(),
-                "is-self" => self
-                    .contact
-                    .borrow()
-                    .as_ref()
-                    .is_some_and(|c| c.is_self())
-                    .to_value(),
-                "disappearing-messages-timer" => {
-                    if let Some(group) = self.group.borrow().as_ref() {
-                        group
-                            .disappearing_messages_timer
-                            .as_ref()
-                            .map(|t| t.duration)
-                            .unwrap_or_default()
-                            .to_value()
-                    } else if let Some(contact) = self.contact.borrow().as_ref() {
-                        contact.expire_timer().to_value()
-                    } else {
-                        0.to_value()
-                    }
-                }
-                "phone-number" => self
-                    .contact
-                    .borrow()
-                    .as_ref()
-                    .and_then(|c| c.phone_number())
-                    .to_value(),
-                "description" => {
-                    if let Some(contact) = self.contact.borrow().as_ref() {
-                        contact.description().to_value()
-                    } else {
-                        self.group
-                            .borrow()
-                            .as_ref()
-                            .and_then(|g| g.description.clone())
-                            .to_value()
-                    }
-                }
-                "is-typing" => (!self.typing.borrow().is_empty()).to_value(),
-                "draft" => self.draft.borrow().to_value(),
-                "is-active" => self.is_active.borrow().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let obj = value
-                        .get::<Option<Manager>>()
-                        .expect("Property `manager` of `Channel` has to be of type `Manager`");
-
-                    self.manager.replace(obj);
-                }
-                "draft" => {
-                    let draft = value
-                        .get::<String>()
-                        .expect("Property `draft` of `Channel` has to be of type `String`");
-                    self.draft.replace(draft);
-                }
-                "is-active" => {
-                    let is_active = value
-                        .get::<bool>()
-                        .expect("Property `is-active` of `Channel` has to be of type `bool`");
-                    self.is_active.replace(is_active);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
                 vec![Signal::builder("message")

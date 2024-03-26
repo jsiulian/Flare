@@ -1,17 +1,13 @@
 pub mod timeline_item;
 
-use gdk::{
-    glib::Object,
-    prelude::{Cast, ListModelExt},
-    subclass::prelude::ObjectSubclassIsExt,
-};
-pub use timeline_item::*;
+use crate::prelude::*;
 
-use gtk::{gio, glib};
+pub use timeline_item::*;
 
 const TRIM_SIZE: usize = 10;
 
 glib::wrapper! {
+    /// The timeline stores ordered [TimelineItem]s (i.e. [Message](crate::backend::Message)s)
     pub struct Timeline(ObjectSubclass<imp::Timeline>)
         @implements gio::ListModel, gtk::SectionModel;
 }
@@ -27,6 +23,7 @@ impl Timeline {
         Object::builder().build()
     }
 
+    /// Remove old messages to free memory.
     pub fn trim_old(&self) {
         let mut current_items = self.imp().list.borrow_mut();
         if current_items.len() > TRIM_SIZE {
@@ -38,6 +35,7 @@ impl Timeline {
         }
     }
 
+    /// Completely clear the list.
     pub fn clear(&self) {
         let mut list = self.imp().list.borrow_mut();
         let len = list.len();
@@ -232,15 +230,8 @@ impl Timeline {
 }
 
 mod imp {
-    use std::cell::RefCell;
+    use crate::prelude::*;
     use std::collections::VecDeque;
-
-    use gdk::{
-        prelude::{Cast, StaticType},
-        subclass::prelude::{ListModelImpl, ObjectImpl, ObjectSubclass},
-    };
-    use gtk::subclass::prelude::SectionModelImpl;
-    use gtk::{gio, glib};
 
     use super::{TimelineItem, TimelineItemExt};
 

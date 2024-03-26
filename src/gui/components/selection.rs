@@ -2,135 +2,14 @@
 // https://github.com/paper-plane-developers/paper-plane/
 // src/ui/session/sidebar/selection.rs
 
-use std::cell::Cell;
-use std::cell::RefCell;
-
-use glib::clone;
-use gtk::gio;
-use gtk::glib;
-use gtk::prelude::*;
-use gtk::subclass::prelude::*;
-use once_cell::sync::Lazy;
+use crate::prelude::*;
 
 use crate::backend::Channel;
-
-mod imp {
-    use super::*;
-
-    #[derive(Debug, Default)]
-    pub struct Selection {
-        pub(super) model: RefCell<Option<gio::ListModel>>,
-        pub(super) selected_chat: glib::WeakRef<Channel>,
-        pub(super) hide_selection: Cell<bool>,
-        pub(super) item_position: Cell<u32>,
-        pub(super) signal_handler: RefCell<Option<glib::SignalHandlerId>>,
-    }
-
-    #[glib::object_subclass]
-    impl ObjectSubclass for Selection {
-        const NAME: &'static str = "SidebarSelection";
-        type Type = super::Selection;
-        type Interfaces = (gio::ListModel, gtk::SelectionModel);
-    }
-
-    impl ObjectImpl for Selection {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    glib::ParamSpecObject::builder::<gio::ListModel>("model")
-                        .explicit_notify()
-                        .build(),
-                    glib::ParamSpecObject::builder::<glib::Object>("selected-chat")
-                        .explicit_notify()
-                        .build(),
-                    glib::ParamSpecBoolean::builder("hide-selection")
-                        .explicit_notify()
-                        .build(),
-                    glib::ParamSpecUInt::builder("n-items")
-                        .read_only()
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "model" => obj.set_model(value.get().unwrap()),
-                "selected-chat" => obj.set_selected_chat(value.get().unwrap()),
-                "hide-selection" => obj.set_hide_selection(value.get().unwrap()),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "model" => obj.model().to_value(),
-                "selected-chat" => obj.selected_chat().to_value(),
-                "hide-selection" => obj.hide_selection().to_value(),
-                "n-items" => obj.n_items().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn constructed(&self) {
-            self.parent_constructed();
-            self.item_position.set(gtk::INVALID_LIST_POSITION)
-        }
-
-        fn dispose(&self) {
-            self.obj().disconnect_model_signal();
-        }
-    }
-
-    impl ListModelImpl for Selection {
-        fn item_type(&self) -> glib::Type {
-            Channel::static_type()
-        }
-
-        fn n_items(&self) -> u32 {
-            self.model
-                .borrow()
-                .as_ref()
-                .map(|m| m.n_items())
-                .unwrap_or_default()
-        }
-
-        fn item(&self, position: u32) -> Option<glib::Object> {
-            self.model.borrow().as_ref().and_then(|m| m.item(position))
-        }
-    }
-
-    impl SelectionModelImpl for Selection {
-        fn is_selected(&self, position: u32) -> bool {
-            let item_position = self.item_position.get();
-            if self.obj().hide_selection() || item_position == gtk::INVALID_LIST_POSITION {
-                return false;
-            }
-
-            position == item_position
-        }
-
-        fn selection_in_range(&self, _position: u32, _n_items: u32) -> gtk::Bitset {
-            let result = gtk::Bitset::new_empty();
-            let item_position = self.item_position.get();
-            if !self.obj().hide_selection() && item_position != gtk::INVALID_LIST_POSITION {
-                result.add(item_position);
-            }
-
-            result
-        }
-    }
-}
 
 glib::wrapper! {
     // TODO: This is basically https://gitlab.gnome.org/GNOME/libadwaita/-/merge_requests/504,
     // so when that selection model will arrive in libadwaita we should use that instead
+    /// A ListModel that highlights the selected item.
     pub struct Selection(ObjectSubclass<imp::Selection>)
         @implements gio::ListModel, gtk::SelectionModel;
 }
@@ -290,6 +169,120 @@ impl Selection {
         let item_position = imp.item_position.get();
         if item_position != gtk::INVALID_LIST_POSITION {
             self.selection_changed(item_position, 1);
+        }
+    }
+}
+
+mod imp {
+    use super::*;
+
+    #[derive(Debug, Default)]
+    pub struct Selection {
+        pub(super) model: RefCell<Option<gio::ListModel>>,
+        pub(super) selected_chat: glib::WeakRef<Channel>,
+        pub(super) hide_selection: Cell<bool>,
+        pub(super) item_position: Cell<u32>,
+        pub(super) signal_handler: RefCell<Option<glib::SignalHandlerId>>,
+    }
+
+    #[glib::object_subclass]
+    impl ObjectSubclass for Selection {
+        const NAME: &'static str = "SidebarSelection";
+        type Type = super::Selection;
+        type Interfaces = (gio::ListModel, gtk::SelectionModel);
+    }
+
+    impl ObjectImpl for Selection {
+        fn properties() -> &'static [glib::ParamSpec] {
+            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
+                vec![
+                    glib::ParamSpecObject::builder::<gio::ListModel>("model")
+                        .explicit_notify()
+                        .build(),
+                    glib::ParamSpecObject::builder::<glib::Object>("selected-chat")
+                        .explicit_notify()
+                        .build(),
+                    glib::ParamSpecBoolean::builder("hide-selection")
+                        .explicit_notify()
+                        .build(),
+                    glib::ParamSpecUInt::builder("n-items")
+                        .read_only()
+                        .explicit_notify()
+                        .build(),
+                ]
+            });
+            PROPERTIES.as_ref()
+        }
+
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            let obj = self.obj();
+
+            match pspec.name() {
+                "model" => obj.set_model(value.get().unwrap()),
+                "selected-chat" => obj.set_selected_chat(value.get().unwrap()),
+                "hide-selection" => obj.set_hide_selection(value.get().unwrap()),
+                _ => unimplemented!(),
+            }
+        }
+
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.obj();
+
+            match pspec.name() {
+                "model" => obj.model().to_value(),
+                "selected-chat" => obj.selected_chat().to_value(),
+                "hide-selection" => obj.hide_selection().to_value(),
+                "n-items" => obj.n_items().to_value(),
+                _ => unimplemented!(),
+            }
+        }
+
+        fn constructed(&self) {
+            self.parent_constructed();
+            self.item_position.set(gtk::INVALID_LIST_POSITION)
+        }
+
+        fn dispose(&self) {
+            self.obj().disconnect_model_signal();
+        }
+    }
+
+    impl ListModelImpl for Selection {
+        fn item_type(&self) -> glib::Type {
+            Channel::static_type()
+        }
+
+        fn n_items(&self) -> u32 {
+            self.model
+                .borrow()
+                .as_ref()
+                .map(|m| m.n_items())
+                .unwrap_or_default()
+        }
+
+        fn item(&self, position: u32) -> Option<glib::Object> {
+            self.model.borrow().as_ref().and_then(|m| m.item(position))
+        }
+    }
+
+    impl SelectionModelImpl for Selection {
+        fn is_selected(&self, position: u32) -> bool {
+            let item_position = self.item_position.get();
+            if self.obj().hide_selection() || item_position == gtk::INVALID_LIST_POSITION {
+                return false;
+            }
+
+            position == item_position
+        }
+
+        fn selection_in_range(&self, _position: u32, _n_items: u32) -> gtk::Bitset {
+            let result = gtk::Bitset::new_empty();
+            let item_position = self.item_position.get();
+            if !self.obj().hide_selection() && item_position != gtk::INVALID_LIST_POSITION {
+                result.add(item_position);
+            }
+
+            result
         }
     }
 }

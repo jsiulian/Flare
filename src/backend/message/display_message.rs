@@ -1,15 +1,23 @@
+use crate::prelude::*;
+
 use crate::backend::timeline::{TimelineItem, TimelineItemImpl};
 
-use gdk::gdk_pixbuf::Pixbuf;
-use gtk::{gdk, gio, glib, prelude::*, subclass::prelude::*};
+use gdk_pixbuf::Pixbuf;
+use gio::Notification;
 
 use super::{Message, MessageExt, MessageImpl};
 
 glib::wrapper! {
+    /// A DisplayMessage is a message that should be shown to the user within the UI of Flare and which may also be notified about.
     pub struct DisplayMessage(ObjectSubclass<imp::DisplayMessage>) @extends Message, TimelineItem;
 }
 
 impl DisplayMessage {
+    /// Send a notification if needed.
+    ///
+    /// Sending a notification is skipped if:
+    /// - The message is from self, or
+    /// - The message has no textual description
     pub fn send_notification(&self) {
         let sender = self.sender();
         let channel = self.channel();
@@ -18,18 +26,19 @@ impl DisplayMessage {
             // Skip notifications for messages sent from self or empty messages.
             return;
         }
-        let notification_title;
-        let notification_body;
-        if channel.group_context().is_some() {
-            notification_title = channel.title();
-            notification_body = format!("{}: {}", sender.title(), body.unwrap_or_default());
+        let (notification_title, notification_body) = if channel.group_context().is_some() {
+            (
+                channel.title(),
+                format!("{}: {}", sender.title(), body.unwrap_or_default()),
+            )
         } else {
-            notification_title = sender.title();
-            notification_body = body.unwrap_or_default();
-        }
-        let notification = gio::Notification::new(&notification_title);
-        notification.set_body(Some(&notification_body));
+            (sender.title(), body.unwrap_or_default())
+        };
+
         let icon = Pixbuf::from_resource("/icon.svg").expect("Flare to have an application icon");
+
+        let notification = Notification::new(&notification_title);
+        notification.set_body(Some(&notification_body));
         notification.set_icon(&icon);
 
         let manager = self.manager();
@@ -87,15 +96,16 @@ where
 }
 
 mod imp {
+    use crate::prelude::*;
+
     use glib::{
         subclass::types::{ClassStruct, ObjectSubclass},
         ParamSpec, ParamSpecString,
     };
-    use once_cell::sync::Lazy;
 
+    use super::DisplayMessageExt;
+    use crate::backend::timeline::{TimelineItem, TimelineItemImpl};
     use crate::backend::{message::MessageImpl, Message};
-
-    use super::*;
 
     #[repr(C)]
     pub struct DisplayMessageClass {

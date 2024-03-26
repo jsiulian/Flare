@@ -1,13 +1,12 @@
-use std::{cell::RefCell, collections::HashMap, io::Write, ops::Bound, path::Path, time::Duration};
+use crate::prelude::*;
 
-use gdk::{gio::Settings, prelude::*};
-use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
-use glib::{clone, Object};
-use gtk::{gdk, gio, glib};
+use std::{collections::HashMap, io::Write, ops::Bound, path::Path, time::Duration};
+
+use gio::Application;
+use gio::Settings;
 use libsignal_service::{
     content::ContentBody,
     groups_v2::Group,
-    prelude::{Content, ProfileKey, Uuid},
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
     push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
@@ -31,12 +30,17 @@ const SECRET_LENGTH: usize = 64;
 const STORE_VERSION_FILE: &str = "store_version";
 
 gtk::glib::wrapper! {
+    /// The manager is the core of the logic of Flare.
+    ///
+    /// It is mostly a wrapper around [ManagerThread] (which is itself a wrapper around [presage::Manager]).
+    /// It also has other functions, like caching the channels which are in use or sending notifications.
     pub struct Manager(ObjectSubclass<imp::Manager>);
 }
 
 type StoreType = presage_store_sled::SledStore;
 type PresageError = presage::Error<presage_store_sled::SledStoreError>;
 
+/// Query the encryption password from the keyring, storing one if none exists.
 async fn encryption_password() -> Result<String, ApplicationError> {
     let keyring = Keyring::new().await?;
     keyring.unlock().await?;
@@ -77,6 +81,7 @@ async fn encryption_password() -> Result<String, ApplicationError> {
     }
 }
 
+/// Creating the configuration store at the specified path.
 async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationError> {
     let path = p.as_ref();
     log::trace!("Initialize config store at {}", path.to_string_lossy());
@@ -275,14 +280,20 @@ impl Manager {
             .filter_map(|o| o.ok()))
     }
 
+    /// Asynchronously initialize the manager. This will never return unless there is an error.
+    ///
+    /// This includes:
+    /// - Setting up the configuration store.
+    /// - Constructing the manager thread, reacting to any setup results or errors that happen.
+    /// - Initializing feedbackd.
+    /// - Loading the stored channels.
+    /// - Listening for messages or errors and propagating them to the correct channels.
     #[cfg(not(feature = "screenshot"))]
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
         use futures::channel::oneshot;
         use futures::{select, FutureExt, StreamExt};
         use gdk::glib::BoxedAnyObject;
         use tokio::sync::mpsc;
-
-        use crate::backend::message::MessageExt;
 
         let config_store = config_store(p).await?;
 
@@ -353,6 +364,7 @@ impl Manager {
         crate::info!("Own uuid: {:?}", self.uuid());
         log::debug!("Start receiving messages");
         'outer: loop {
+            // On setup, it takes a while for channels to sync. Therefore try multiple times until there are channels.
             let mut init_channels_sleep =
                 gtk::glib::timeout_future(Duration::from_secs(INIT_CHANNELS_SLEEP_SECS)).fuse();
             select! {
@@ -361,12 +373,14 @@ impl Manager {
                         channels_init = self.init_channels().await;
                     }
                 }
+                // Receive errors.
                 error_opt = receive_error.recv().fuse() => {
                     if error_opt.is_none() {
                         break 'outer;
                     }
                     return Err(error_opt.unwrap());
                 }
+                // Receive messages.
                 msg_opt = receive_content.recv().fuse() => {
                     if msg_opt.is_none() {
                         break 'outer;
@@ -718,15 +732,11 @@ impl Manager {
 }
 
 mod imp {
-    use std::{cell::RefCell, collections::HashMap};
+    use crate::prelude::*;
+    use std::collections::HashMap;
 
-    use gdk::glib::{BoxedAnyObject, ParamSpec, ParamSpecBoolean, Value};
-    use gdk::prelude::{ParamSpecBuilderExt, StaticType, ToValue};
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gio::{Application, Settings};
-    use glib::subclass::Signal;
-    use gtk::{gdk, gio, glib};
-    use once_cell::sync::Lazy;
+    use glib::{BoxedAnyObject, ParamSpec, ParamSpecBoolean, Value};
 
     use crate::dbus::Feedbackd;
     use crate::{
@@ -741,7 +751,6 @@ mod imp {
         pub(in super::super) channels: RefCell<HashMap<u64, Channel>>,
         #[cfg(not(feature = "screenshot"))]
         pub(super) channels: RefCell<HashMap<u64, Channel>>,
-        // pub(super) profile: RefCell<Option<Profile>>,
         pub(super) settings: Settings,
         pub(super) application: RefCell<Option<Application>>,
 

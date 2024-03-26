@@ -1,16 +1,15 @@
-use gio::{subclass::prelude::ObjectSubclassIsExt, SimpleAction, SimpleActionGroup};
-use glib::{clone, Object};
-use gtk::prelude::*;
-use gtk::{gio, glib};
+use crate::prelude::*;
+
+use gio::{SimpleAction, SimpleActionGroup};
 use regex::Regex;
 
 use crate::backend::message::{MessageExt, TextMessage};
 use crate::backend::timeline::timeline_item::TimelineItemExt;
-use crate::backend::Manager;
 use crate::gui::attachment::Attachment;
 use crate::gui::components::*;
 
 glib::wrapper! {
+    /// Widget displaying text messages.
     pub struct MessageItem(ObjectSubclass<imp::MessageItem>)
         @extends adw::Bin, gtk::Widget, ContextMenuBin,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -36,13 +35,10 @@ impl MessageItem {
         s
     }
 
-    pub fn message(&self) -> TextMessage {
-        self.property("message")
+    fn manager(&self) -> Manager {
+        self.message().manager()
     }
 
-    pub fn manager(&self) -> Manager {
-        self.message().property("manager")
-    }
     pub fn get_popover(&self) -> gtk::PopoverMenu {
         self.imp().msg_menu.to_owned()
     }
@@ -217,33 +213,28 @@ impl MessageItem {
 }
 
 pub mod imp {
+    use std::marker::PhantomData;
+
+    use crate::prelude::*;
+
     use lazy_static::lazy_static;
     use regex::Regex;
-    use std::cell::{Cell, RefCell};
 
-    use adw::prelude::*;
-    use glib::{
-        clone,
-        subclass::{InitializingObject, Signal},
-        ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
-    };
-    use gtk::{glib, EmojiChooser};
-    use gtk::{subclass::prelude::*, CompositeTemplate};
-    use once_cell::sync::Lazy;
+    use glib::subclass::{InitializingObject, Signal};
+    use gtk::{CompositeTemplate, EmojiChooser};
 
     use crate::{
-        backend::{message::TextMessage, Manager},
-        gspawn,
+        backend::message::TextMessage,
         gui::{
             attachment::{backend_to_gui, Attachment},
             components::*,
             error_dialog::ErrorDialog,
-            utility::Utility,
         },
     };
     use adw::subclass::prelude::BinImpl;
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate, Default, glib::Properties)]
+    #[properties(wrapper_type = super::MessageItem)]
     #[template(resource = "/ui/message_item.ui")]
     pub struct MessageItem {
         #[template_child]
@@ -273,12 +264,21 @@ pub mod imp {
         #[template_child]
         pub(super) timestamp: TemplateChild<MessageIndicators>,
 
+        #[property(get, set = Self::set_message, type = TextMessage)]
         message: RefCell<Option<TextMessage>>,
-        manager: RefCell<Option<Manager>>,
+        #[property(get, set, nullable)]
         pressed_attachment: RefCell<Option<Attachment>>,
+        #[property(get, set, default = true)]
         force_show_header: Cell<bool>,
+        #[property(get, set, default = true)]
         force_show_timestamp: Cell<bool>,
+        #[property(get, set)]
         has_attachment: Cell<bool>,
+
+        #[property(get = Self::shows_media_loading)]
+        shows_media_loading: PhantomData<bool>,
+        #[property(get = Self::has_reaction)]
+        has_reaction: PhantomData<bool>,
     }
 
     #[glib::object_subclass]
@@ -303,6 +303,79 @@ pub mod imp {
 
     #[gtk::template_callbacks]
     impl MessageItem {
+        fn has_reaction(&self) -> bool {
+            self.message
+                .borrow()
+                .as_ref()
+                .map(|m| !m.reactions().is_empty())
+                .unwrap_or_default()
+        }
+
+        fn shows_media_loading(&self) -> bool {
+            self.message
+                .borrow()
+                .as_ref()
+                .iter()
+                .flat_map(|m| m.attachments())
+                .any(|a| !a.loaded())
+        }
+
+        fn set_message(&self, msg: Option<TextMessage>) {
+            let obj = self.obj();
+            if let Some(msg) = &msg {
+                msg.connect_notify_local(
+                    Some("reactions"),
+                    clone!(@weak obj => move |_, _| {
+                        log::trace!("MessageItem got reaction, updating `has-reaction`");
+                        obj.notify("has-reaction");
+                    }),
+                );
+                let attachments = msg.attachments();
+                let mut container = &self.box_attachments;
+
+                // Set attachments
+                if !attachments.is_empty() {
+                    obj.notify("shows-media-loading");
+                    obj.set_property("has-attachment", true);
+                    self.box_attachments
+                        .parent()
+                        .unwrap()
+                        .add_css_class("has-attachment");
+
+                    if attachments[0].is_image() || attachments[0].is_video() {
+                        container = &self.media_group;
+                        self.media_overlay.set_visible(true);
+                    }
+
+                    for att in attachments {
+                        log::trace!("MessageItem got Attachment, adding to `box_attachments`");
+
+                        let att_widget = backend_to_gui(&att);
+
+                        att.connect_notify_local(
+                            Some("loaded"),
+                            clone!(@weak obj => move |_, _| {
+                                obj.notify("shows-media-loading")
+                            }),
+                        );
+
+                        att_widget.connect_local(
+                            "pressed",
+                            false,
+                            clone!(@weak obj, @weak att_widget as att => @default-return None, move |_| {
+                                obj.set_property("pressed-attachment", Some(att));
+                                None
+                            })
+                        );
+                        container.append(&att_widget);
+                    }
+                }
+            }
+            obj.notify("has-reaction");
+
+            self.message.replace(msg);
+        }
+
         #[template_callback(function)]
         fn markup_urls(s: Option<String>) -> Option<String> {
             lazy_static! {
@@ -428,164 +501,11 @@ pub mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for MessageItem {
         fn constructed(&self) {
             self.parent_constructed();
             self.obj().setup_actions();
-        }
-
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<TextMessage>("message").build(),
-                    ParamSpecObject::builder::<Attachment>("pressed-attachment").build(),
-                    ParamSpecBoolean::builder("force-show-header")
-                        .default_value(true)
-                        .build(),
-                    ParamSpecBoolean::builder("force-show-timestamp")
-                        .default_value(true)
-                        .build(),
-                    ParamSpecBoolean::builder("shows-media-loading")
-                        .read_only()
-                        .build(),
-                    ParamSpecBoolean::builder("has-reaction")
-                        .read_only()
-                        .build(),
-                    // XXX: Make read_only.
-                    ParamSpecBoolean::builder("has-attachment")
-                        .default_value(false)
-                        .build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "message" => self.message.borrow().as_ref().to_value(),
-                "has-attachment" => self.has_attachment.get().to_value(),
-                "has-reaction" => self
-                    .message
-                    .borrow()
-                    .as_ref()
-                    .map(|m| !m.reactions().is_empty())
-                    .unwrap_or_default()
-                    .to_value(),
-                "force-show-header" => self.force_show_header.get().to_value(),
-                "force-show-timestamp" => self.force_show_timestamp.get().to_value(),
-                "shows-media-loading" => {
-                    let mut value = false;
-
-                    if let Some(msg) = self.message.borrow().as_ref() {
-                        for att in msg.attachments() {
-                            value = value || !att.loaded()
-                        }
-                    }
-
-                    value.to_value()
-                }
-                "pressed-attachment" => self.pressed_attachment.borrow().as_ref().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            let instance = self.obj();
-            match pspec.name() {
-                "manager" => {
-                    let man = value
-                        .get::<Option<Manager>>()
-                        .expect("Property `manager` of `MessageItem` has to be of type `Manager`");
-                    self.manager.replace(man);
-                }
-                "message" => {
-                    let msg = value
-                        .get::<Option<TextMessage>>()
-                        .expect("Property `message` of `MessageItem` has to be of type `Message`");
-                    if let Some(msg) = &msg {
-                        msg.connect_notify_local(
-                            Some("reactions"),
-                            clone!(@weak instance as obj => move |_, _| {
-                                log::trace!("MessageItem got reaction, updating `has-reaction`");
-                                obj.notify("has-reaction");
-                            }),
-                        );
-                        let attachments = msg.attachments();
-                        let mut container = &self.box_attachments;
-
-                        // Set attachments
-                        if !attachments.is_empty() {
-                            instance.notify("shows-media-loading");
-                            instance.set_property("has-attachment", true);
-                            self.box_attachments
-                                .parent()
-                                .unwrap()
-                                .add_css_class("has-attachment");
-
-                            if attachments[0].is_image() || attachments[0].is_video() {
-                                container = &self.media_group;
-                                self.media_overlay.set_visible(true);
-                            }
-
-                            for att in attachments {
-                                log::trace!(
-                                    "MessageItem got Attachment, adding to `box_attachments`"
-                                );
-
-                                let att_widget = backend_to_gui(&att);
-
-                                att.connect_notify_local(
-                                    Some("loaded"),
-                                    clone!(@weak instance as obj => move |_, _| {
-                                        obj.notify("shows-media-loading")
-                                    }),
-                                );
-
-                                att_widget.connect_local(
-                                    "pressed",
-                                    false,
-                                    clone!(@weak instance as obj, @weak att_widget as att => @default-return None, move |_| {
-                                        obj.set_property("pressed-attachment", Some(att));
-                                        None
-                                    })
-                                );
-                                container.append(&att_widget);
-                            }
-                        }
-                    }
-                    instance.notify("has-reaction");
-                    self.message.replace(msg);
-                }
-                "force-show-header" => {
-                    let b = value.get::<bool>().expect(
-                        "Property `force-show-header` of `MessageItem` has to be of type `bool`",
-                    );
-                    self.force_show_header.replace(b);
-                }
-                "force-show-timestamp" => {
-                    let b = value.get::<bool>().expect(
-                        "Property `force-show-timestamp` of `MessageItem` has to be of type `bool`",
-                    );
-                    self.force_show_timestamp.replace(b);
-                }
-                "has-attachment" => {
-                    let b = value.get::<bool>().expect(
-                        "Property `has-attachment` of `MessageItem` has to be of type `bool`",
-                    );
-                    self.has_attachment.replace(b);
-                }
-                "pressed-attachment" => {
-                    let attachment = value.get::<Option<Attachment>>().expect(
-                        "Property `message` of `MessageItem` has to be of type `Attachment`",
-                    );
-                    self.pressed_attachment.replace(attachment);
-                }
-                _ => unimplemented!(),
-            }
         }
 
         fn signals() -> &'static [Signal] {

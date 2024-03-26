@@ -69,7 +69,7 @@ template $FlWindow: Adw.ApplicationWindow {
         }
 
         content: $FlChannelList channel_list {
-          active-channel-changed => $handle_go_forward() swapped;
+          notify::active-channel => $handle_go_forward() swapped;
           manager: bind template.manager;
         };
       }

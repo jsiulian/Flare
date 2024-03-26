@@ -1,8 +1,8 @@
+use crate::prelude::*;
+
 use std::str::FromStr;
 
-use gdk::gio;
-
-use gtk::glib::{DateTime, Object};
+use glib::{DateTime, Object};
 use libsignal_service::prelude::phonenumber::PhoneNumber;
 
 pub struct Utility {}
@@ -136,7 +136,8 @@ impl Utility {
 
         if today {
             return Some(gettextrs::gettext("Today").into());
-        } else if yesterday {
+        }
+        if yesterday {
             return Some(gettextrs::gettext("Yesterday").into());
         }
 

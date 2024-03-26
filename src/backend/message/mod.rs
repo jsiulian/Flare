@@ -7,13 +7,15 @@ mod text_message;
 pub use call_message::{CallMessage, CallMessageType};
 pub use deletion_message::DeletionMessage;
 pub use display_message::{DisplayMessage, DisplayMessageExt};
-use libsignal_service::{
-    content::ContentBody,
-    prelude::Content,
-    proto::{sync_message::Sent, DataMessage, SyncMessage},
-};
 pub use reaction_message::ReactionMessage;
 pub use text_message::TextMessage;
+
+use super::{
+    timeline::{TimelineItem, TimelineItemImpl},
+    Contact, Manager,
+};
+use crate::backend::{channel::TypingNotification, Channel};
+use crate::prelude::*;
 
 use glib::{
     subclass::{
@@ -22,23 +24,31 @@ use glib::{
     },
     Object,
 };
-use gtk::{glib, prelude::*};
-use std::cell::{RefCell, RefMut};
+use std::cell::RefMut;
 
-use crate::backend::{channel::TypingNotification, Channel};
 use libsignal_service::proto::typing_message::Action;
-
-use super::{
-    timeline::{TimelineItem, TimelineItemImpl},
-    Contact, Manager,
+use libsignal_service::{
+    content::ContentBody,
+    proto::{sync_message::Sent, DataMessage, SyncMessage},
 };
 
+/// At least 4 minutes need to pass such that for two messages from the same sender, the second one will
+/// also show avatar and sender title.
+const MESSAGE_SENT_SHOW_NAME_DURATION: u64 = 4 * 60 * 1000;
+/// At least 1 minute need to pass such that for two messages from the same sender, the second one will
+/// also show the timestamp.
+const MESSAGE_SENT_SHOW_TIMESTAMP_DURATION: u64 = 60 * 1000;
+
 glib::wrapper! {
+    /// A generic message. Note that not every message needs to be displayed to the user, e.g. deletion messages.
+    ///
+    /// In general, a [Message] is just something holding [Content].
     pub struct Message(ObjectSubclass<imp::Message>)
     @extends TimelineItem;
 }
 
 impl Message {
+    /// Big function to create all different message types from the Content.
     pub(super) async fn from_content(content: Content, manager: &Manager) -> Option<Self> {
         log::trace!("Trying to build a message from content");
         let metadata = &content.metadata;
@@ -47,6 +57,7 @@ impl Message {
         let timestamp = metadata.timestamp;
 
         match body {
+            // A normal text message.
             ContentBody::DataMessage(message)
                 if message.reaction.is_none() && message.delete.is_none() =>
             {
@@ -74,6 +85,7 @@ impl Message {
                 s.init_data(message, manager).await;
                 Some(s.upcast())
             }
+            // A normal text message, sent from another device.
             ContentBody::SynchronizeMessage(SyncMessage {
                 sent:
                     Some(Sent {
@@ -109,6 +121,7 @@ impl Message {
                 s.init_data(message, manager).await;
                 Some(s.upcast())
             }
+            // A reaction message.
             ContentBody::DataMessage(message) if message.reaction.is_some() => {
                 let channel = manager
                     .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
@@ -129,6 +142,7 @@ impl Message {
                     .upcast(),
                 )
             }
+            // A reaction message, sent from another device.
             ContentBody::SynchronizeMessage(SyncMessage {
                 sent:
                     Some(Sent {
@@ -162,6 +176,7 @@ impl Message {
                     .upcast(),
                 )
             }
+            // A deletion message.
             ContentBody::DataMessage(message) if message.delete.is_some() => {
                 let channel = manager
                     .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
@@ -183,6 +198,7 @@ impl Message {
                     .upcast(),
                 )
             }
+            // A deletion message, sent from another device.
             ContentBody::SynchronizeMessage(SyncMessage {
                 sent:
                     Some(Sent {
@@ -217,18 +233,7 @@ impl Message {
                     .upcast(),
                 )
             }
-            ContentBody::SynchronizeMessage(SyncMessage { read: read_arr, .. })
-                if !read_arr.is_empty() =>
-            {
-                log::trace!("Got currently unhandled read-message");
-                None
-            }
-            ContentBody::SynchronizeMessage(SyncMessage {
-                viewed: viewed_arr, ..
-            }) if !viewed_arr.is_empty() => {
-                log::trace!("Got currently unhandled viewed-message");
-                None
-            }
+            // Call message.
             ContentBody::CallMessage(c) => {
                 // TODO: Group calls?
                 let channel = manager
@@ -242,6 +247,8 @@ impl Message {
                 CallMessage::from_call(&contact, &channel, timestamp, manager, c.clone())
                     .map(|c| c.upcast())
             }
+            // Typing messages.
+            // Note that they are currently only implemented for contacts, this requires upstream updates to fix.
             ContentBody::TypingMessage(t) => {
                 let uuid = metadata.sender.uuid;
                 // TODO: typing message for group
@@ -261,20 +268,39 @@ impl Message {
                 }
                 None
             }
+
+            // Currently unhandled messages
+            ContentBody::SynchronizeMessage(SyncMessage { read: read_arr, .. })
+                if !read_arr.is_empty() =>
+            {
+                log::trace!("Got currently unhandled read-message");
+                None
+            }
+            ContentBody::SynchronizeMessage(SyncMessage {
+                viewed: viewed_arr, ..
+            }) if !viewed_arr.is_empty() => {
+                log::trace!("Got currently unhandled viewed-message");
+                None
+            }
             ContentBody::ReceiptMessage(_) => {
                 log::trace!("Got currently unhandled receipt-message");
                 None
             }
             _ => {
-                log::info!("Do not know what to do with the message: {:?}", content);
+                log::debug!("Do not know what to do with the message: {:?}", content);
                 None
             }
         }
     }
 
+    // A unique ID of the message, built from the timestamp and sender.
     fn uid(&self) -> Option<String> {
-        let Some(data) = self.imp().data.borrow().clone() else { return None; };
-        let Some(timestamp) = data.timestamp else { return None; };
+        let Some(data) = self.imp().data.borrow().clone() else {
+            return None;
+        };
+        let Some(timestamp) = data.timestamp else {
+            return None;
+        };
         let sender_uuid = self.sender().uuid();
         Some(format!("{:x}{:x}", timestamp, sender_uuid))
     }
@@ -344,7 +370,6 @@ pub trait MessageExt: std::marker::Sized + glib::prelude::ObjectExt {
             .expect("`MessageExt` to dynamic cast to `Message`")
             .mark_as_read()
     }
-
 }
 
 impl<O: IsA<Message>> MessageExt for O {}
@@ -359,25 +384,24 @@ where
 }
 
 mod imp {
-    use std::cell::RefCell;
-
-    use glib::{subclass::types::ObjectSubclass, ParamSpec, ParamSpecObject, ParamSpecBoolean, Value};
-    use once_cell::sync::Lazy;
-
     use crate::backend::{timeline::TimelineItemExt, Manager};
 
     use super::*;
 
-    #[derive(Debug, Default)]
+    #[derive(Debug, Default, glib::Properties)]
+    #[properties(wrapper_type = super::Message)]
     pub struct Message {
+        #[property(get, set, construct_only, type = Contact)]
         sender: RefCell<Option<Contact>>,
+        #[property(get, set, construct_only, type = Channel)]
         channel: RefCell<Option<Channel>>,
+        #[property(get, set, construct_only)]
+        pub(super) read: RefCell<bool>,
 
         pub(super) data: RefCell<Option<DataMessage>>,
 
+        #[property(get, set, construct_only, type = Manager)]
         manager: RefCell<Option<Manager>>,
-
-        pub(super) read: RefCell<bool>,
     }
 
     #[glib::object_subclass]
@@ -387,78 +411,8 @@ mod imp {
         type ParentType = TimelineItem;
     }
 
-    impl ObjectImpl for Message {
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<Contact>("sender")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<Channel>("channel")
-                        .construct_only()
-                        .build(),
-                    ParamSpecBoolean::builder("read")
-                        .construct_only()
-                        .build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "sender" => self.sender.borrow().as_ref().to_value(),
-                "channel" => self.channel.borrow().as_ref().to_value(),
-                "read" => self.read.borrow().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let obj = value
-                        .get::<Option<Manager>>()
-                        .expect("Property `manager` of `Message` has to be of type `Manager`");
-
-                    self.manager.replace(obj);
-                }
-                "sender" => {
-                    let obj = value
-                        .get::<Contact>()
-                        .expect("Property `sender` of `Message` has to be of type `Contact`");
-
-                    self.sender.replace(Some(obj));
-                }
-                "channel" => {
-                    let obj = value
-                        .get::<Channel>()
-                        .expect("Property `channel` of `Message` has to be of type `Channel`");
-
-                    self.channel.replace(Some(obj));
-                }
-                "read" => {
-                    let read = value
-                        .get::<bool>()
-                        .expect("Property `read` of `Message` has to be of type `bool`");
-
-                    self.read.replace(read);
-                }
-                _ => unimplemented!(),
-            }
-        }
-    }
-
-    // At least 4 minutes need to pass such that for two messages from the same sender, the second one will
-    // also show avatar and sender title.
-    const MESSAGE_SENT_SHOW_NAME_DURATION: u64 = 4 * 60 * 1000;
-    // At least 1 minute need to pass such that for two messages from the same sender, the second one will
-    // also show the timestamp.
-    const MESSAGE_SENT_SHOW_TIMESTAMP_DURATION: u64 = 60 * 1000;
+    #[glib::derived_properties]
+    impl ObjectImpl for Message {}
 
     impl TimelineItemImpl for Message {
         fn update_show_header(&self, obj: &Self::Type, previous: Option<&TimelineItem>) {

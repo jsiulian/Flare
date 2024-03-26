@@ -1,22 +1,17 @@
+use crate::prelude::*;
+
 use ashpd::{desktop::background::BackgroundRequest, WindowIdentifier};
-use gdk::gdk_pixbuf::Pixbuf;
-use gio::prelude::ApplicationExt;
-use glib::{clone, Object};
-use gtk::prelude::WidgetExt;
-use gtk::{gdk, gio, glib};
 
 use gettextrs::gettext;
 
-use crate::{gspawn, tspawn};
-
 glib::wrapper! {
+    /// The preferences window of the application.
     pub struct PreferencesWindow(ObjectSubclass<imp::PreferencesWindow>)
         @extends adw::PreferencesDialog, adw::Dialog, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
 
-#[gtk::template_callbacks]
 impl PreferencesWindow {
     pub fn new() -> Self {
         Object::builder::<Self>().build()
@@ -42,29 +37,6 @@ impl PreferencesWindow {
         .expect("Failed to join tokio")?;
         Ok(())
     }
-
-    #[template_callback]
-    fn on_background_switch_state_set(&self, _: glib::ParamSpec, r: adw::SwitchRow) {
-        let state = r.is_active();
-        let app = gio::Application::default().unwrap();
-        if state {
-            gspawn!(clone!(@weak self as this => async move {
-                match this.request_background().await {
-                    Ok(_) => {},
-                    Err(err) => log::warn!("Failed to request background mode, {}", &err)
-                }
-            }));
-        } else {
-            let title = gettext("Background permission");
-            let body = gettext("Use settings to remove permissions");
-            let notification = gio::Notification::new(&title);
-            notification.set_body(Some(body.as_str()));
-            let icon =
-                Pixbuf::from_resource("/icon.svg").expect("Flare to have an application icon");
-            notification.set_icon(&icon);
-            app.send_notification(None, &notification);
-        }
-    }
 }
 
 impl Default for PreferencesWindow {
@@ -74,11 +46,13 @@ impl Default for PreferencesWindow {
 }
 
 pub mod imp {
-    use adw::subclass::prelude::*;
+    use crate::prelude::*;
+
+    use gdk_pixbuf::Pixbuf;
+    use gettextrs::gettext;
     use gio::{Settings, SettingsBindFlags};
     use glib::subclass::InitializingObject;
-    use gtk::{gio, glib};
-    use gtk::{prelude::*, CompositeTemplate};
+    use gtk::CompositeTemplate;
 
     #[derive(CompositeTemplate)]
     #[template(resource = "/ui/preferences_window.ui")]
@@ -107,7 +81,32 @@ pub mod imp {
         settings: Settings,
     }
 
+    #[gtk::template_callbacks]
     impl PreferencesWindow {
+        #[template_callback]
+        fn on_background_switch_state_set(&self, _: glib::ParamSpec, r: adw::SwitchRow) {
+            let obj = self.obj();
+            let state = r.is_active();
+            let app = gio::Application::default().unwrap();
+            if state {
+                gspawn!(clone!(@weak obj => async move {
+                    match obj.request_background().await {
+                        Ok(_) => {},
+                        Err(err) => log::warn!("Failed to request background mode, {}", &err)
+                    }
+                }));
+            } else {
+                let title = gettext("Background permission");
+                let body = gettext("Use settings to remove permissions");
+                let notification = gio::Notification::new(&title);
+                notification.set_body(Some(body.as_str()));
+                let icon =
+                    Pixbuf::from_resource("/icon.svg").expect("Flare to have an application icon");
+                notification.set_icon(&icon);
+                app.send_notification(None, &notification);
+            }
+        }
+
         fn init_settings(&self) {
             self.settings
                 .bind(
@@ -196,7 +195,7 @@ pub mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
-            klass.bind_template_instance_callbacks();
+            Self::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &InitializingObject<Self>) {

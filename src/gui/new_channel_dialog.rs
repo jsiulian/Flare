@@ -1,14 +1,9 @@
-use crate::backend::Channel;
-use adw::prelude::AdwDialogExt;
-use gdk::{
-    gio::{self, prelude::SettingsExt},
-    glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt},
-};
-use gtk::glib;
+use crate::prelude::*;
 
-use super::Window;
+use crate::backend::Channel;
 
 glib::wrapper! {
+    /// A dialog for adding a new channel.
     pub struct NewChannelDialog(ObjectSubclass<imp::NewChannelDialog>)
         @extends adw::Dialog, gtk::Widget,
         @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
@@ -18,11 +13,11 @@ impl NewChannelDialog {
     pub fn present_for_selection(&self, channels: &[Channel]) {
         self.imp().set_channels(channels);
         self.set_focus(Some(&self.imp().search_entry.get()));
-        self.present(&self.property::<Window>("window"));
+        self.present(&self.window());
     }
 
     fn settings(&self) -> gio::Settings {
-        self.property::<Window>("window").settings()
+        self.window().settings()
     }
 
     fn sort_by(&self) -> String {
@@ -37,46 +32,19 @@ impl NewChannelDialog {
 }
 
 pub mod imp {
-    use std::cell::RefCell;
+    use crate::prelude::*;
     use std::collections::VecDeque;
     use std::time::Duration;
 
-    use adw::prelude::AdwDialogExt;
-    use adw::subclass::prelude::*;
-    use gdk::gio;
-    use gdk::gio::prelude::ListModelExt;
-    use gdk::glib::clone;
-    use gdk::glib::object::Cast;
-    use gdk::glib::object::ObjectExt;
-    use gdk::glib::subclass::Signal;
-    use gdk::glib::types::StaticType;
-    use gdk::glib::value::ToValue;
-    use gdk::glib::variant::ToVariant;
-    use gdk::glib::ParamSpec;
-    use gdk::glib::ParamSpecBuilderExt;
-    use gdk::glib::ParamSpecObject;
-    use gdk::glib::Value;
-    use gdk::glib::Variant;
-    use gdk::glib::VariantTy;
     use gio::{SimpleAction, SimpleActionGroup};
-    use glib::subclass::InitializingObject;
-    use glib::Propagation;
-    use gtk::glib;
-    use gtk::prelude::ActionMapExt;
-    use gtk::prelude::AdjustmentExt;
-    use gtk::prelude::EditableExt;
-    use gtk::prelude::FilterExt;
-    use gtk::prelude::GObjectPropertyExpressionExt;
-    use gtk::prelude::ListItemExt;
-    use gtk::prelude::WidgetExt;
-    use gtk::CompositeTemplate;
-    use gtk::CustomFilter;
-    use gtk::FilterChange;
-    use gtk::FilterListModel;
-    use gtk::NoSelection;
-    use gtk::SignalListItemFactory;
-    use gtk::Widget;
-    use once_cell::sync::Lazy;
+    use glib::{
+        subclass::InitializingObject, subclass::Signal, types::StaticType, variant::ToVariant,
+        Propagation, Variant, VariantTy,
+    };
+    use gtk::{
+        CompositeTemplate, CustomFilter, FilterChange, FilterListModel, NoSelection,
+        SignalListItemFactory, Widget,
+    };
 
     use crate::backend::Channel;
     use crate::gspawn;
@@ -85,7 +53,8 @@ pub mod imp {
     use crate::gui::utility::Utility;
     use crate::gui::Window;
 
-    #[derive(CompositeTemplate)]
+    #[derive(CompositeTemplate, glib::Properties)]
+    #[properties(wrapper_type = super::NewChannelDialog)]
     #[template(resource = "/ui/new_channel_dialog.ui")]
     pub struct NewChannelDialog {
         #[template_child]
@@ -100,6 +69,7 @@ pub mod imp {
         model: RefCell<gtk::FlattenListModel>,
         filter: RefCell<gtk::CustomFilter>,
 
+        #[property(get, set, construct_only, type = Window)]
         window: RefCell<Option<Window>>,
     }
 
@@ -314,41 +284,13 @@ pub mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for NewChannelDialog {
         fn constructed(&self) {
             self.setup_model();
             self.setup_actions();
             self.connect_quit_on_escape();
             self.parent_constructed();
-        }
-
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![ParamSpecObject::builder::<Window>("window")
-                    .construct_only()
-                    .build()]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "window" => self.window.borrow().as_ref().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "window" => {
-                    let win = value.get::<Option<Window>>().expect(
-                        "Property `window` of `NewChannelDialog` has to be of type `Window`",
-                    );
-
-                    self.window.replace(win);
-                }
-                _ => unimplemented!(),
-            }
         }
 
         fn signals() -> &'static [Signal] {

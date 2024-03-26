@@ -1,7 +1,7 @@
-use glib::Object;
-use gtk::glib;
+use crate::prelude::*;
 
 gtk::glib::wrapper! {
+    /// A grid of multiple emojis displayed in the message menu for reacting to them.
     pub struct EmojiPicker(ObjectSubclass<imp::EmojiPicker>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -22,13 +22,9 @@ impl Default for EmojiPicker {
 }
 
 pub mod imp {
-    use glib::subclass::InitializingObject;
-    use glib::subclass::Signal;
-    use gtk::glib;
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
-    use once_cell::sync::Lazy;
-
-    use crate::gui::utility::Utility;
+    use crate::prelude::*;
+    use glib::subclass::{InitializingObject, Signal};
+    use gtk::CompositeTemplate;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/components/emoji_picker.ui")]

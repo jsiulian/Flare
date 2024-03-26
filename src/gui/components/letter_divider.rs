@@ -1,8 +1,7 @@
-use adw::subclass::prelude::*;
-use gdk::glib::Object;
-use gtk::{gdk, glib, prelude::*, CompositeTemplate};
+use crate::prelude::*;
 
 glib::wrapper! {
+    /// A divider between chats starting with different letters in the new chat dialog.
     pub struct LetterDivider(ObjectSubclass<imp::LetterDivider>)
         @extends gtk::Box, gtk::Widget, @implements gtk::Accessible;
 }
@@ -14,17 +13,32 @@ impl Default for LetterDivider {
 }
 
 mod imp {
+    use std::marker::PhantomData;
+
+    use crate::prelude::*;
+
     use glib::subclass::InitializingObject;
     use gtk::subclass::box_::BoxImpl;
-    use once_cell::sync::Lazy;
+    use gtk::CompositeTemplate;
 
-    use super::*;
-
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, CompositeTemplate, glib::Properties)]
+    #[properties(wrapper_type = super::LetterDivider)]
     #[template(resource = "/ui/components/letter_divider.ui")]
     pub struct LetterDivider {
         #[template_child]
         label_char: TemplateChild<gtk::Label>,
+
+        #[property(set = Self::set_string)]
+        string: PhantomData<String>,
+    }
+
+    impl LetterDivider {
+        fn set_string(&self, string: Option<String>) {
+            let formatted = string
+                .and_then(|v| v.chars().next())
+                .map(|c| c.to_uppercase().to_string());
+            self.label_char.set_text(&formatted.unwrap_or_default());
+        }
     }
 
     #[glib::object_subclass]
@@ -42,35 +56,8 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for LetterDivider {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecString::builder("string")
-                    .write_only()
-                    .build()]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            match pspec.name() {
-                "string" => {
-                    let v = value
-                        .get::<Option<String>>()
-                        .expect("LetterDivider to only get String");
-
-                    let formatted = v.and_then(|v| v.chars().next()).map(|c| c.to_uppercase().to_string());
-                    self.label_char.set_text(&formatted.unwrap_or_default());
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, _pspec: &glib::ParamSpec) -> glib::Value {
-            unimplemented!();
-        }
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for LetterDivider {}
 
     impl WidgetImpl for LetterDivider {}
     impl BoxImpl for LetterDivider {}

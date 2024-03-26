@@ -1,3 +1,14 @@
+//! The [ManagerThread] is a [presage::Manager] running on its own tokio thread.
+//!
+//! This is required as the tokio and glib runtimes do not play together nicely (i.e. this can lead to crashes).
+//! Furthermore, one cannot just send [presage::Manager] to a separate tokio thread and send back results each time one
+//! runs a method on it as [presage::Manager] is `!Sync`. Therefore, this workaround exists which runs the manager in a
+//! separate thread and communication between threads happens via channels. Those communications are two-way,
+//! [crate::backend::Manger] to [ManagerThread] happens via sending a [Command] over a channel, this command includes a
+//! channel back where the result is sent. This way is also accompanied by methods of [ManagerThread] that are similar
+//! to those of [presage::Manager]. The other way is with a separate channel which has to be given to [ManagerThread]
+//! when it is constructed.
+
 use std::{cell::OnceCell, ops::Bound};
 
 use futures::{join, select, FutureExt, SinkExt, StreamExt};
@@ -82,6 +93,7 @@ enum Command {
     ),
 }
 
+/// Message from the UI to the manager thread how to do setup.
 #[derive(Debug)]
 pub enum SetupDecision {
     /// Server, Device Name
@@ -92,6 +104,7 @@ pub enum SetupDecision {
 
 pub type SetupConfirmation = String;
 
+/// Message from the manager thread to the UI on what steps need to be taken for setting up the device.
 #[derive(Debug)]
 pub enum SetupResult {
     /// Setup must make a decision. Either register as primary device or link device.
@@ -114,9 +127,13 @@ impl std::fmt::Debug for Command {
 }
 
 pub struct ManagerThread {
+    /// Sending commands to the thread.
     command_sender: mpsc::Sender<Command>,
+    /// Cache for how the device is registered (primary or secondary).
     registration_type: Option<RegistrationType>,
+    /// Cache for the own UUID.
     uuid: Uuid,
+    /// Cache for the own profile.
     profile: Option<Profile>,
 }
 
@@ -132,6 +149,15 @@ impl Clone for ManagerThread {
 }
 
 impl ManagerThread {
+    /// Construct a new [ManagerThread].
+    ///
+    /// The parameters are as follows:
+    ///
+    /// - `config_store`: The [Store] to store data to.
+    /// - `setup_callback`: If setup is required, the required steps will be sent over this channel.
+    /// - `error_callback`: If an error during setup happens, it will be sent through this channel. If no error happened, the channel will be closed.
+    /// - `content`: The messages received by the thread.
+    /// - `error`: Any errors receiving messages.
     pub async fn new(
         config_store: Store,
         setup_callback: futures::channel::mpsc::Sender<SetupResult>,
@@ -142,6 +168,7 @@ impl ManagerThread {
         let (sender, receiver) = mpsc::channel(MESSAGE_BOUND);
         let thread = std::thread::Builder::new()
             .name("ManagerThread".into())
+            // Note: Increased stack size required, otherwise this thread can use too much of it and crash Flare.
             .stack_size(8 * 1024 * 1024);
         let _ = thread.spawn(move || {
             let error_clone = error.clone();
@@ -173,6 +200,8 @@ impl ManagerThread {
                     });
             }
         });
+
+        // Fill cache
 
         let (sender_uuid, receiver_uuid) = oneshot::channel();
         if sender.send(Command::Uuid(sender_uuid)).await.is_err() {
@@ -221,6 +250,7 @@ impl ManagerThread {
     }
 }
 
+// These methods mostly mimic the [presage::Manager].
 impl ManagerThread {
     pub fn uuid(&self) -> Uuid {
         self.uuid
@@ -431,6 +461,7 @@ impl ManagerThread {
     }
 }
 
+/// Setting up the manager if required.
 async fn setup_manager(
     config_store: Store,
     mut setup_sender: futures::channel::mpsc::Sender<SetupResult>,
@@ -514,6 +545,7 @@ async fn setup_manager(
     }
 }
 
+/// The command loop where messages are received and commands from the UI thread are executed.
 async fn command_loop(
     manager: &mut Manager<Store, Registered>,
     mut receiver: mpsc::Receiver<Command>,
@@ -529,6 +561,7 @@ async fn command_loop(
                 let mut next_msg = messages.next().fuse();
                 loop {
                     select! {
+                        // Receiving a message.
                         msg = next_msg => {
                             if let Some(msg) = msg {
                                 if content.send(msg).is_err() {
@@ -541,11 +574,13 @@ async fn command_loop(
                             }
                             next_msg = messages.next().fuse();
                         },
+                        // Receiving a command.
                         cmd = receiver.recv().fuse() => {
                             if let Some(cmd) = cmd {
                                 handle_command(manager, cmd).await;
                             }
                         },
+                        // The network status changed; restart the loop to restart the signal websockets.
                         _ = crate::utils::await_suspend_wakeup_online().fuse() => {
                             log::trace!("Waking up from suspend. Restarting command loop.");
                             break;

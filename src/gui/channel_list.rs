@@ -1,14 +1,13 @@
+use crate::prelude::*;
+
 use std::time::Duration;
 
-use gio::subclass::prelude::ObjectSubclassIsExt;
-use gtk::prelude::*;
 use gtk::SorterChange;
-use gtk::{gio, glib};
 
-use crate::backend::Manager;
-use crate::{backend::Channel, gspawn};
+use crate::backend::Channel;
 
 glib::wrapper! {
+    /// The list of channels.
     pub struct ChannelList(ObjectSubclass<imp::ChannelList>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -20,6 +19,7 @@ impl ChannelList {
         crate::trace!("`ChannelList` got new `Channel`: {}", channel.title());
         let obj = self.imp();
         let model = obj.model.borrow();
+
         if let Some(pos) = model.find(&channel) {
             crate::trace!(
                 "`ChannelList` got duplicated `Channel`: {}. Just setting as active channel",
@@ -32,7 +32,7 @@ impl ChannelList {
                 .selection_model
                 .borrow()
                 .set_selected_chat(Some(&channel));
-            self.set_property("active-channel", channel);
+            self.set_active_channel(Some(channel));
             return;
         }
 
@@ -65,10 +65,10 @@ impl ChannelList {
             .model()
             .expect("`ChannelList` list to have a model");
         if let Some(channel) = model.item(i).and_then(|c| c.downcast::<Channel>().ok()) {
-            if let Some(previously_active) = self.property::<Option<Channel>>("active-channel") {
+            if let Some(previously_active) = self.active_channel() {
                 previously_active.set_active(false);
             }
-            self.set_property("active-channel", channel);
+            self.set_active_channel(Some(channel));
             self.set_active(true);
             true
         } else {
@@ -77,7 +77,7 @@ impl ChannelList {
     }
 
     pub fn set_active(&self, active: bool) {
-        if let Some(channel) = self.property::<Option<Channel>>("active-channel") {
+        if let Some(channel) = self.active_channel() {
             channel.set_active(active);
             self.withdraw_notifications();
         }
@@ -93,21 +93,13 @@ impl ChannelList {
         }
     }
 
-    pub fn search_enabled(&self) -> bool {
-        self.property("search-enabled")
-    }
-
-    pub fn set_search_enabled(&self, enabled: bool) {
-        self.set_property("search-enabled", enabled)
-    }
-
-    pub fn manager(&self) -> Manager {
-        self.property("manager")
-    }
-
     fn withdraw_notifications(&self) {
-        let Some(channel) = self.property::<Option<Channel>>("active-channel") else { return; };
-        let Some(application) = self.manager().application() else { return; };
+        let Some(channel) = self.active_channel() else {
+            return;
+        };
+        let Some(application) = self.manager().application() else {
+            return;
+        };
         for uid in channel.mark_as_read() {
             application.withdraw_notification(&uid);
         }
@@ -115,27 +107,22 @@ impl ChannelList {
 }
 
 pub mod imp {
-    use std::cell::{Cell, RefCell};
+    use crate::prelude::*;
 
-    use glib::{
-        clone,
-        subclass::{InitializingObject, Signal},
-        ParamSpec, ParamSpecBoolean, ParamSpecObject, Value,
-    };
-    use gtk::{gio, glib, EveryFilter};
+    use glib::subclass::InitializingObject;
     use gtk::{
-        prelude::*, subclass::prelude::*, CompositeTemplate, CustomFilter, CustomSorter,
-        FilterChange, FilterListModel, SignalListItemFactory, SortListModel, Widget,
+        CompositeTemplate, CustomFilter, CustomSorter, EveryFilter, FilterChange, FilterListModel,
+        SignalListItemFactory, SortListModel, Widget,
     };
-    use once_cell::sync::Lazy;
 
     use crate::{
-        backend::{timeline::timeline_item::TimelineItemExt, Channel, Manager},
-        gui::{channel_item::ChannelItem, components::Selection, utility::Utility},
+        backend::{timeline::timeline_item::TimelineItemExt, Channel},
+        gui::{channel_item::ChannelItem, components::Selection},
     };
 
-    #[derive(CompositeTemplate)]
+    #[derive(CompositeTemplate, glib::Properties)]
     #[template(resource = "/ui/channel_list.ui")]
+    #[properties(wrapper_type = super::ChannelList)]
     pub struct ChannelList {
         #[template_child]
         pub(super) scrolled_window: TemplateChild<gtk::ScrolledWindow>,
@@ -149,8 +136,11 @@ pub mod imp {
         pub(super) filter: RefCell<gtk::EveryFilter>,
         pub(super) selection_model: RefCell<Selection>,
 
+        #[property(get, set = Self::set_manager, type = Manager)]
         manager: RefCell<Option<Manager>>,
+        #[property(get, set, nullable)]
         active_channel: RefCell<Option<Channel>>,
+        #[property(get, set)]
         search_enabled: Cell<bool>,
     }
 
@@ -201,6 +191,24 @@ pub mod imp {
             self.list.grab_focus();
             self.obj().scroll_up();
         }
+
+        fn set_manager(&self, manager: Option<Manager>) {
+            if let Some(manager) = &manager {
+                log::trace!("Connecting to the `channel` signal of `Manager` in `ChannelList`");
+                manager.connect_local(
+                    "channel",
+                    false,
+                    clone!(@weak self as obj => @default-return None, move |args| {
+                        let channel = args[1]
+                            .get::<Channel>()
+                            .expect("Type of `channel` signal of `Manager` to be `Channel`");
+                        obj.obj().add_channel(channel);
+                        None
+                    }),
+                );
+            }
+            self.manager.replace(manager);
+        }
     }
 
     #[glib::object_subclass]
@@ -221,10 +229,13 @@ pub mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for ChannelList {
         fn constructed(&self) {
             let obj = self.obj();
             let model = gtk::gio::ListStore::new::<Channel>();
+
+            // Filter
             let filter_search =
                 CustomFilter::new(clone!(@strong self.search_entry as entry => move |obj| {
                     let search = entry.text().to_string();
@@ -240,12 +251,14 @@ pub mod imp {
                     .downcast_ref::<Channel>()
                     .expect("The object needs to be of type `Channel`.");
                 let has_message = channel.last_message().is_some();
-                let is_selected = Some(channel) == o.property::<Option<Channel>>("active-channel").as_ref();
+                let is_selected = Some(channel) == o.active_channel().as_ref();
                 has_message || is_selected
             }));
             filter.append(filter_search);
             filter.append(filter_empty);
             let filter_model = FilterListModel::new(Some(model.clone()), Some(filter.clone()));
+
+            // Sorter
             let sorter = CustomSorter::new(|l1, l2| {
                 let c1 = l1
                     .downcast_ref::<Channel>()
@@ -259,16 +272,17 @@ pub mod imp {
 
                 if m1.is_some() && m2.is_none() {
                     return gtk::Ordering::Larger;
-                } else if m1.is_none() && m2.is_some() {
+                }
+                if m1.is_none() && m2.is_some() {
                     return gtk::Ordering::Smaller;
-                } else if let (Some(m1), Some(m2)) = (m1, m2) {
+                }
+                if let (Some(m1), Some(m2)) = (m1, m2) {
                     let s1 = m1.timestamp();
                     let s2 = m2.timestamp();
                     if s1 > s2 {
                         return gtk::Ordering::Smaller;
-                    } else {
-                        return gtk::Ordering::Larger;
                     }
+                    return gtk::Ordering::Larger;
                 }
 
                 if c1.title() < c2.title() {
@@ -279,6 +293,7 @@ pub mod imp {
             });
             let sort_model = SortListModel::new(Some(filter_model), Some(sorter.clone()));
 
+            // Selection
             let selection_model = Selection::new(sort_model.into());
             self.list.get().set_model(Some(&selection_model));
 
@@ -287,6 +302,7 @@ pub mod imp {
             self.filter.replace(filter);
             self.selection_model.replace(selection_model.clone());
 
+            // Item factory.
             let factory = SignalListItemFactory::new();
             factory.connect_setup(move |_, object| {
                 let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
@@ -299,83 +315,12 @@ pub mod imp {
             self.list.set_factory(Some(&factory));
             self.list.set_single_click_activate(true);
 
+            // Activate on click.
             self.list
                 .connect_activate(clone!(@weak self as obj => move |_list_view, position| {
                     obj.obj().activate_row(position);
                     selection_model.set_selected_position(position);
                 }));
-        }
-
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager").build(),
-                    ParamSpecObject::builder::<Channel>("active-channel").build(),
-                    ParamSpecBoolean::builder("search-enabled").build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "active-channel" => self.active_channel.borrow().as_ref().to_value(),
-                "search-enabled" => self.search_enabled.get().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let man = value
-                        .get::<Option<Manager>>()
-                        .expect("Property `manager` of `ChannelList` has to be of type `Manager`");
-
-                    if let Some(man) = &man {
-                        log::trace!(
-                            "Connecting to the `channel` signal of `Manager` in `ChannelList`"
-                        );
-                        man.connect_local(
-                            "channel",
-                            false,
-                            clone!(@weak self as obj => @default-return None, move |args| {
-                                let channel = args[1]
-                                    .get::<Channel>()
-                                    .expect("Type of `channel` signal of `Manager` to be `Channel`");
-                                obj.obj().add_channel(channel);
-                                None
-                            }),
-                        );
-                    }
-                    self.manager.replace(man);
-                }
-                "active-channel" => {
-                    let chan = value.get::<Option<Channel>>().expect(
-                        "Property `active-channel` of `ChannelList` has to be of type `Channel`",
-                    );
-                    self.active_channel.replace(chan);
-                    self.obj()
-                        .emit_by_name::<()>("active-channel-changed", &[&*self.active_channel.borrow()]);
-                }
-                "search-enabled" => {
-                    let search = value.get::<bool>().expect(
-                        "Property `search-enabled` of `ChannelList` has to be of type `bool`",
-                    );
-                    self.search_enabled.replace(search);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn signals() -> &'static [Signal] {
-            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder("active-channel-changed")
-                    .param_types([Channel::static_type()])
-                    .build()]
-            });
-            SIGNALS.as_ref()
         }
     }
 

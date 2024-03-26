@@ -1,15 +1,10 @@
-use std::cell::RefCell;
+use crate::prelude::*;
 
-use gdk::pango::{AttrColor, AttrList};
-use gdk::prelude::ObjectExt;
-use gio::subclass::prelude::ObjectSubclassIsExt;
-use glib::Object;
-use gtk::{gdk, gio, glib};
 use libsignal_service::content::Reaction;
-use libsignal_service::prelude::Uuid;
 use libsignal_service::proto::body_range::AssociatedValue;
-use libsignal_service::proto::data_message::{Delete, Quote};
+use libsignal_service::proto::data_message::Delete;
 use libsignal_service::proto::DataMessage;
+use pango::{AttrColor, AttrList};
 
 use crate::backend::timeline::{TimelineItem, TimelineItemExt};
 use crate::backend::{Attachment, Channel, Contact};
@@ -17,6 +12,7 @@ use crate::backend::{Attachment, Channel, Contact};
 use super::{DisplayMessage, Manager, Message, MessageExt, ReactionMessage};
 
 gtk::glib::wrapper! {
+    /// A message which contains either text, attachments or both.
     pub struct TextMessage(ObjectSubclass<imp::TextMessage>) @extends Message, DisplayMessage, TimelineItem;
 }
 
@@ -24,18 +20,6 @@ const MENTION_CHAR: char = '@';
 const MENTION_COLOR: (u16, u16, u16) = (0, 0, u16::MAX);
 
 impl TextMessage {
-    pub fn textual_description(&self) -> String {
-        self.property("textual-description")
-    }
-
-    pub fn body(&self) -> Option<String> {
-        self.property("body")
-    }
-
-    pub fn reactions(&self) -> String {
-        self.property("reactions")
-    }
-
     pub fn from_text_channel_sender<S: AsRef<str>>(
         text: S,
         channel: Channel,
@@ -98,39 +82,27 @@ impl TextMessage {
         s
     }
 
+    /// Asynchronously complete constructing the message.
     pub(super) async fn init_data(&self, message: &DataMessage, manager: &Manager) {
         let obj = self.imp();
         self.set_internal_data(Some(message.clone()));
         self.prepare_format_body();
-        let mut attachments = Vec::with_capacity(message.attachments.len());
-        for pointer in &message.attachments {
-            let att = Attachment::from_pointer(pointer, manager).await;
-            attachments.push(att);
-        }
+
+        // Load attachments in parallel.
+        let attachment_futures = message
+            .attachments
+            .iter()
+            .map(|pointer| async move { Attachment::from_pointer(pointer, manager).await });
+        let attachments = futures::future::join_all(attachment_futures).await;
         obj.attachments.swap(&RefCell::new(attachments));
     }
 
-    pub fn quote(&self) -> Option<Quote> {
-        self.internal_data().and_then(|d| d.quote)
-    }
-
-    pub fn set_quote(&self, msg: &TextMessage) {
-        if let Some(data) = self.internal_data_mut().as_mut() {
-            let sender = msg.sender().address();
-            data.quote = Some(Quote {
-                id: Some(msg.timestamp()),
-                author_aci: sender.as_ref().map(|a| a.uuid).map(|u| u.to_string()),
-                text: msg.body(),
-                ..Default::default()
-            });
-        }
-        self.imp().quote.replace(Some(msg.clone()));
-    }
-
+    /// Apply a reaction message.
     pub fn react(&self, reaction: &ReactionMessage) {
         self.react_sender_reaction(reaction.sender().uuid(), reaction.reaction());
     }
 
+    /// Apply a reaction from a sender.
     fn react_sender_reaction(&self, sender: Uuid, reaction: Reaction) {
         if reaction.remove.unwrap_or_default() {
             self.imp().reactions.borrow_mut().remove(&sender);
@@ -140,6 +112,13 @@ impl TextMessage {
         self.notify("reactions");
     }
 
+    pub fn quote_timestamp(&self) -> Option<u64> {
+        self.internal_data()
+            .and_then(|d| d.quote)
+            .and_then(|q| q.id)
+    }
+
+    /// Sends a deletion request for a message and marks the message as deleted.
     pub async fn delete(&self) -> Result<(), crate::ApplicationError> {
         crate::trace!("Delete a message with timestamp: {}", self.timestamp());
         let delete = Delete {
@@ -171,19 +150,18 @@ impl TextMessage {
         self.set_property("is-deleted", true);
     }
 
-    pub fn is_deleted(&self) -> bool {
-        self.property("is-deleted")
-    }
-
+    /// Send a reaction for a message and apply it.
     pub async fn send_reaction<S: AsRef<str>>(
         &self,
         reaction: S,
     ) -> Result<(), crate::ApplicationError> {
+        // Instead of adding a reaction, remove it if there is already a reaction.
         let has_self_reaction = self
             .imp()
             .reactions
             .borrow()
             .contains_key(&self.manager().uuid());
+
         let reaction_struct = Reaction {
             emoji: Some(reaction.as_ref().to_owned()),
             remove: Some(has_self_reaction),
@@ -215,6 +193,7 @@ impl TextMessage {
         self.imp().attachments.borrow().clone()
     }
 
+    /// Adds the attachment to the message by uploading it and adding the resulting attachment pointer to the internal data.
     pub async fn add_attachment(
         &self,
         attachment: Attachment,
@@ -247,6 +226,10 @@ impl TextMessage {
         *self.imp().message_attributes.borrow_mut() = attrs;
     }
 
+    /// Formats the message body based on its ranges, e.g. to insert mention names.
+    ///
+    /// Returns the resulting strings and an [AttrList] that can be used in labels to highlight areas.
+    /// Be carefull when editing this function and note that Signal uses UTF-16 byte offsets, while Rust uses UTF-8 byte offsets.
     fn format_body(&self) -> (Option<String>, AttrList) {
         let Some(body) = self.internal_data().and_then(|m| m.body) else {
             return (None, AttrList::new());
@@ -310,19 +293,14 @@ impl TextMessage {
 }
 
 mod imp {
-    use gdk::gdk_pixbuf::prelude::ToValue;
-    use gdk::glib::{ParamSpecBoolean, ParamSpecBoxed};
-    use gdk::pango::AttrList;
-    use gdk::prelude::ParamSpecBuilderExt;
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassIsExt};
-    use glib::{ParamSpec, ParamSpecObject, ParamSpecString, Value};
-    use gtk::{glib, prelude::Cast};
+    use crate::prelude::*;
     use libsignal_service::content::Reaction;
-    use libsignal_service::prelude::Uuid;
-    use once_cell::sync::Lazy;
-    use std::cell::RefCell;
+    use pango::AttrList;
+    use presage::proto::data_message::Quote;
     use std::collections::HashMap;
 
+    use crate::backend::message::MessageExt;
+    use crate::backend::timeline::TimelineItemExt;
     use crate::backend::{
         message::{display_message::DisplayMessageImpl, DisplayMessage, MessageImpl},
         Attachment,
@@ -332,18 +310,46 @@ mod imp {
         Message,
     };
 
-    #[derive(Default)]
+    #[derive(Default, glib::Properties)]
+    #[properties(wrapper_type = super::TextMessage)]
     pub struct TextMessage {
+        #[property(get, set = Self::set_quote)]
         pub(super) quote: RefCell<Option<super::TextMessage>>,
 
+        #[property(get = Self::reactions, type = String, default = Some(""))]
         pub(super) reactions: RefCell<HashMap<Uuid, Reaction>>,
 
         pub(super) attachments: RefCell<Vec<Attachment>>,
 
+        #[property(name = "body", get)]
         pub(super) formatted_body: RefCell<Option<String>>,
+        #[property(get)]
         pub(super) message_attributes: RefCell<AttrList>,
-
+        #[property(get, set)]
         pub(super) is_deleted: RefCell<bool>,
+    }
+
+    impl TextMessage {
+        fn reactions(&self) -> String {
+            self.reactions
+                .borrow()
+                .values()
+                .map(|r| r.emoji())
+                .collect::<String>()
+        }
+
+        fn set_quote(&self, msg: &super::TextMessage) {
+            if let Some(data) = self.obj().internal_data_mut().as_mut() {
+                let sender = msg.sender().address();
+                data.quote = Some(Quote {
+                    id: Some(msg.timestamp()),
+                    author_aci: sender.as_ref().map(|a| a.uuid).map(|u| u.to_string()),
+                    text: msg.body(),
+                    ..Default::default()
+                });
+            }
+            self.quote.replace(Some(msg.clone()));
+        }
     }
 
     #[glib::object_subclass]
@@ -371,77 +377,26 @@ mod imp {
             } else {
                 let attachments = self.attachments.borrow();
 
-                Some(if attachments.iter().all(|a| a.is_image()) {
+                let formatter = if attachments.iter().all(|a| a.is_image()) {
                     gettextrs::ngettext("Sent an image", "Sent {} images", attachments.len() as u32)
-                        .replace("{}", &attachments.len().to_string())
                 } else if attachments.iter().all(|a| a.is_video()) {
                     gettextrs::ngettext("Sent an video", "Sent {} videos", attachments.len() as u32)
-                        .replace("{}", &attachments.len().to_string())
                 } else if attachments.iter().all(|a| a.is_audio()) {
                     gettextrs::ngettext(
                         "Sent a voice message",
                         "Sent {} voice messages",
                         attachments.len() as u32,
                     )
-                    .replace("{}", &attachments.len().to_string())
                 } else {
                     gettextrs::ngettext("Sent a file", "Sent {} files", attachments.len() as u32)
-                        .replace("{}", &attachments.len().to_string())
-                })
+                };
+
+                Some(formatter.replace("{}", &attachments.len().to_string()))
             }
         }
     }
     impl MessageImpl for TextMessage {}
 
-    impl ObjectImpl for TextMessage {
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecString::builder("body").read_only().build(),
-                    ParamSpecObject::builder::<super::TextMessage>("quote")
-                        .read_only()
-                        .build(),
-                    ParamSpecBoxed::builder::<AttrList>("message-attributes")
-                        .read_only()
-                        .build(),
-                    ParamSpecString::builder("reactions")
-                        .default_value(Some(""))
-                        .read_only()
-                        .build(),
-                    ParamSpecBoolean::builder("is-deleted").build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "body" => self.formatted_body.borrow().to_value(),
-                "message-attributes" => self.message_attributes.borrow().to_value(),
-                "reactions" => self
-                    .reactions
-                    .borrow()
-                    .values()
-                    .map(|r| r.emoji())
-                    .collect::<String>()
-                    .to_value(),
-                "quote" => self.quote.borrow().to_value(),
-                "is-deleted" => self.is_deleted.borrow().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "is-deleted" => {
-                    let obj = value
-                        .get::<bool>()
-                        .expect("Property `is-deleted` of `TextMessage` has to be of type `bool`");
-
-                    self.is_deleted.replace(obj);
-                }
-                _ => unimplemented!(),
-            }
-        }
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for TextMessage {}
 }

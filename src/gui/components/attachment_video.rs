@@ -1,16 +1,13 @@
-use gdk::subclass::prelude::ObjectSubclassIsExt;
+use crate::prelude::*;
 use gdk::Texture;
-use glib::Object;
-use gtk::glib;
-use gtk::prelude::{MediaStreamExt, ObjectExt, SettingsExt};
 
 use crate::config::BASE_ID;
 use crate::gio::Settings;
 use crate::gui::attachment::Attachment;
 
 glib::wrapper! {
-    pub struct AttachmentVideo(ObjectSubclass
-        <imp::AttachmentVideo>)
+    /// Attachment displaying videos
+    pub struct AttachmentVideo(ObjectSubclass<imp::AttachmentVideo>)
         @extends gtk::Widget, Attachment;
 }
 
@@ -44,11 +41,11 @@ impl AttachmentVideo {
 }
 
 pub mod imp {
-    use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
+    use crate::gui::{attachment::Attachment, attachment::AttachmentImpl};
+    use crate::prelude::*;
+
     use glib::subclass::InitializingObject;
-    use gtk::prelude::{MediaStreamExt, WidgetExt};
-    use gtk::{glib, MediaControls, Overlay, Picture};
-    use gtk::{subclass::prelude::*, CompositeTemplate};
+    use gtk::{CompositeTemplate, MediaControls, Overlay, Picture};
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/components/attachment_video.ui")]

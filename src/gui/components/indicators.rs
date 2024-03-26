@@ -1,12 +1,24 @@
-use glib::Object;
-use gtk::glib;
-use gtk::prelude::*;
-use gtk::subclass::prelude::*;
-use gtk::CompositeTemplate;
+use crate::prelude::*;
+
+glib::wrapper! {
+    /// Message indicators, currently including the message timestamp.
+    pub struct MessageIndicators(ObjectSubclass<imp::MessageIndicators>)
+        @extends gtk::Widget;
+}
+
+impl MessageIndicators {
+    pub fn new(timestamp: String) -> Self {
+        log::trace!("Initializing `MessageIndicators`");
+        Object::builder::<Self>()
+            .property("timestamp", timestamp)
+            .build()
+    }
+}
 
 mod imp {
-    use super::*;
-    use std::cell::RefCell;
+    use crate::prelude::*;
+    use gtk::CompositeTemplate;
+
     #[derive(Default, CompositeTemplate, glib::Properties)]
     #[properties(wrapper_type = super::MessageIndicators)]
     #[template(resource = "/ui/components/indicators.ui")]
@@ -49,18 +61,4 @@ mod imp {
     }
 
     impl WidgetImpl for MessageIndicators {}
-}
-
-glib::wrapper! {
-    pub struct MessageIndicators(ObjectSubclass<imp::MessageIndicators>)
-        @extends gtk::Widget;
-}
-
-impl MessageIndicators {
-    pub fn new(timestamp: String) -> Self {
-        log::trace!("Initializing `MessageIndicators`");
-        Object::builder::<Self>()
-            .property("timestamp", timestamp)
-            .build()
-    }
 }
