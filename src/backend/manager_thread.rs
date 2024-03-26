@@ -23,6 +23,7 @@ use url::Url;
 use crate::ApplicationError;
 
 const MESSAGE_BOUND: usize = 10;
+const OFFLINE_SLEEP_TIMEOUT: u64 = 15;
 
 type Error = presage::Error<<Store as presage::store::Store>::Error>;
 
@@ -564,7 +565,20 @@ async fn command_loop(
                 if !matches!(e, ApplicationError::NoInternet) {
                     error.send(e).await.expect("Callback sending failed");
                 }
-                tokio::time::sleep(std::time::Duration::from_secs(15)).await;
+
+                // Handle all commands while sleeping; this ensures Flare can start up without internet.
+                loop {
+                    select! {
+                        cmd = receiver.recv().fuse() => {
+                            if let Some(cmd) = cmd {
+                                handle_command(manager, cmd).await;
+                            }
+                        },
+                        _ = tokio::time::sleep(std::time::Duration::from_secs(OFFLINE_SLEEP_TIMEOUT)).fuse() => {
+                            break;
+                        }
+                    }
+                }
             }
         }
         log::debug!("Websocket closed, trying again");

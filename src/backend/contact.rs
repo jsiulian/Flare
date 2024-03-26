@@ -1,9 +1,6 @@
 use std::cell::RefCell;
 
-use gdk::{
-    glib::{clone, Bytes},
-    Paintable, Texture,
-};
+use gdk::{glib::Bytes, Paintable, Texture};
 use gio::subclass::prelude::ObjectSubclassIsExt;
 use glib::{prelude::ObjectExt, Object};
 use gtk::{gio, glib};
@@ -11,8 +8,6 @@ use libsignal_service::{
     prelude::{phonenumber::Mode, Uuid},
     ServiceAddress,
 };
-
-use crate::gspawn;
 
 use super::{Channel, Manager};
 
@@ -77,12 +72,9 @@ impl Contact {
 
     pub fn set_channel(&self, channel: Option<&Channel>) {
         self.set_property("channel", channel);
-        gspawn!(clone!(@weak self as s => async move {
-            s.update_profile_name().await
-        }));
     }
 
-    async fn update_profile_name(&self) {
+    pub async fn update_profile_name(&self) {
         let obj = self.imp();
         let manager = self.manager();
         let uuid = self.uuid();
