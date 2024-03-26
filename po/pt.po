@@ -8,9 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-01-22 19:01+0000\n"
-"Last-Translator: Amethyst Silva Freitas <rockyamethyst@users.noreply.hosted."
-"weblate.org>\n"
+"PO-Revision-Date: 2024-03-27 15:01+0000\n"
+"Last-Translator: Tiago Lucas Flach <tiagolucas9830@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/pt/>\n"
 "Language: pt\n"
@@ -18,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -27,29 +26,30 @@ msgstr ""
 #: data/resources/ui/channel_info_dialog.blp:13
 #: data/resources/ui/window.blp:162
 msgid "Channel Information"
-msgstr ""
+msgstr "Informações do Canal"
 
 #: data/resources/ui/channel_info_dialog.blp:23
 #: data/resources/ui/setup_window.blp:372
 msgid "Phone Number"
-msgstr ""
+msgstr "Número de Telefone"
 
 #: data/resources/ui/channel_info_dialog.blp:30
+#, fuzzy
 msgid "Disappearing Messages"
-msgstr ""
+msgstr "Mensagens Desaparecendo"
 
 #: data/resources/ui/channel_info_dialog.blp:37
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #: data/resources/ui/channel_info_dialog.blp:45
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Redefinir Sessão"
 
 #: data/resources/ui/channel_info_dialog.blp:48
 msgid "Reset Session"
-msgstr ""
+msgstr "Redefinir Sessão"
 
 #: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:481
@@ -59,86 +59,89 @@ msgstr "Fechar"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
+#, fuzzy
 msgid "Offline"
-msgstr ""
+msgstr "Desligado"
 
 #: data/resources/ui/channel_list.blp:18
 msgid "Search"
-msgstr ""
+msgstr "Procurar"
 
 #: data/resources/ui/channel_list.blp:21 data/resources/ui/window.blp:60
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Procurar"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Nenhum Canal Selecionado"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "Selecione um canal"
 
 #: data/resources/ui/channel_messages.blp:178
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Remover a resposta"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Remover resposta"
 
 #: data/resources/ui/channel_messages.blp:201
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "Remover um anexo"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "Remover anexo"
 
 #: data/resources/ui/channel_messages.blp:225
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "Adicionar um anexo"
 
 #: data/resources/ui/channel_messages.blp:233
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "Adicionar anexo"
 
 #: data/resources/ui/channel_messages.blp:249
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "Entrada de mensagem"
 
 #: data/resources/ui/channel_messages.blp:255
 msgctxt "tooltip"
 msgid "Message input"
-msgstr ""
+msgstr "Entrada de mensagem"
 
 #: data/resources/ui/channel_messages.blp:267
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Enviar"
 
 #: data/resources/ui/channel_messages.blp:271
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "Enviar"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:128
 msgid "Clear messages"
-msgstr ""
+msgstr "Limpar mensagens"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
+"Isso limpará todas as mensagens armazenadas localmente. Isso também fechará "
+"o aplicativo."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
@@ -148,11 +151,11 @@ msgstr "Cancelar"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "Limpar"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:117
 msgid "Unlink"
-msgstr ""
+msgstr "Desvincular"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -160,79 +163,82 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Isso desvinculará este dispositivo e removerá todos os dados salvos "
+"localmente. Isso também fechará o aplicativo para que ele possa ser "
+"vinculado novamente ao abri-lo novamente."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "Desvincular e excluir todas as mensagens"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "Desvincular, mas manter as mensagens"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "Por favor, considere relatar este erro."
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "Reportar"
 
 #: data/resources/ui/linked_devices_window.blp:15
 #: data/resources/ui/window.blp:122
 msgid "Linked Devices"
-msgstr ""
+msgstr "Dispositivos Vinculados"
 
 #: data/resources/ui/linked_devices_window.blp:33
 msgid "Add Linked Device"
-msgstr ""
+msgstr "Adicionar Dispositivo Vinculado"
 
 #: data/resources/ui/linked_devices_window.blp:34
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Insira o URL do dispositivo para vincular."
 
 #: data/resources/ui/linked_devices_window.blp:44
 msgid "Device URL"
-msgstr ""
+msgstr "URL do dispositivo"
 
 #: data/resources/ui/linked_devices_window.blp:53
 msgid "Add Device"
-msgstr ""
+msgstr "Adicionar Dispositivo"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr ""
+msgstr "Responder"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "Excluir"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "Salvar como…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "Abrir com…"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "Em geral"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "Baixar Anexos Automaticamente"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "Os tipos de anexo selecionados abaixo serão baixados automaticamente"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
