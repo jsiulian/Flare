@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-03-27 15:01+0000\n"
+"PO-Revision-Date: 2024-03-29 00:01+0000\n"
 "Last-Translator: Tiago Lucas Flach <tiagolucas9830@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/pt/>\n"
@@ -242,47 +242,47 @@ msgstr "Os tipos de anexo selecionados abaixo serão baixados automaticamente"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Imagens"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Vídeos"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Arquivos"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Voice Messages"
-msgstr ""
+msgstr "Mensagens de Voz"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr ""
+msgstr "Notificações"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr ""
+msgstr "Notificações para novas mensagens"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr ""
+msgstr "Enviar Notificações"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr ""
+msgstr "Envie Notificações sobre Reações"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr ""
+msgstr "Notificações em Segundo Plano"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "Buscar notificações enquanto o aplicativo está fechado"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Compatibilidade móvel"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -290,39 +290,46 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Essas opções podem ser alteradas para uma melhor experiência em dispositivos "
+"móveis e de toque. Os valores padrão dessas preferências são escolhidos para "
+"serem úteis em dispositivos desktop."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Texto da Mensagem Selecionável"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
+"O texto selecionável pode interferir nos gestos de deslizar em telas "
+"sensíveis ao toque"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "Pressione “Enter” para Enviar Mensagem"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"Pode não ser possível enviar mensagens com novas linhas em teclados "
+"sensíveis ao toque que não permitem “Control + Enter”"
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Bem-vindo ao Flare"
 
 #: data/resources/ui/setup_window.blp:44
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Configurar o Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:53
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #: data/resources/ui/setup_window.blp:56
 msgid ""
@@ -336,22 +343,32 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare é um cliente Signal não oficial. Observe que o Flare não é estável e "
+"há bugs que são esperados. Se você estiver enfrentando algum bug, consulte o "
+"<a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">rastreador "
+"de problemas</a> e abra problemas se estiver enfrentando um novo emitir. "
+"Observe também que, por ser um aplicativo de terceiros, o Flare não pode "
+"garantir o mesmo nível de segurança e privacidade que os aplicativos "
+"oficiais do Signal. Se você ou alguém com quem você precisa entrar em "
+"contato exige um alto nível de segurança, não use o Flare. Consulte o <a "
+"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README.md#"
+"security\">README</a> para obter mais informações."
 
 #: data/resources/ui/setup_window.blp:65 data/resources/ui/setup_window.blp:72
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Configurar Dispositivo Primário ou Vincular Dispositivo?"
 
 #: data/resources/ui/setup_window.blp:88 data/resources/ui/setup_window.blp:320
 #: data/resources/ui/setup_window.blp:327
 msgid "Primary Device"
-msgstr ""
+msgstr "Dispositivo Primário"
 
 #: data/resources/ui/setup_window.blp:101
 #: data/resources/ui/setup_window.blp:156
 #: data/resources/ui/setup_window.blp:163
 #: data/resources/ui/setup_window.blp:180
 msgid "Link Device"
-msgstr ""
+msgstr "Vincular Dispositivo"
 
 #: data/resources/ui/setup_window.blp:108
 msgid "Primary Device or Link Device?"
