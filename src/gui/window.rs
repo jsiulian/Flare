@@ -231,10 +231,11 @@ pub mod imp {
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
                             let token = entry_token.text();
                             let captcha = entry_captcha.text();
-                            gspawn!(clone!(@weak man => async move {
+                            gspawn!(clone!(@weak man, @weak obj => async move {
                                 if let Err(e) = man.submit_recaptcha_challenge(&token, &captcha).await {
-                                    // TODO: Show error dialog?
                                     log::error!("Failed to submit recaptcha: {}", e);
+                                    let dialog = ErrorDialog::new(e, &obj);
+                                    dialog.present(&obj);
                                 }
                             }));
                         }
@@ -248,10 +249,11 @@ pub mod imp {
             action_sync_contacts.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("User requested to synchronize contacts");
                 if let Some(man) = obj.imp().manager.borrow().as_ref() {
-                    gspawn!(clone!(@weak man => async move {
+                    gspawn!(clone!(@weak man, @weak obj => async move {
                         if let Err(e) = man.request_contacts_sync().await {
-                            // TODO: Show error dialog?
                             log::error!("Failed to synchronize contacts: {}", e);
+                            let dialog = ErrorDialog::new(e, &obj);
+                            dialog.present(&obj);
                         }
                     }));
                 };

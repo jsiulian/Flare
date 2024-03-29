@@ -215,7 +215,7 @@ impl MessageItem {
 pub mod imp {
     use std::marker::PhantomData;
 
-    use crate::prelude::*;
+    use crate::{backend::message::DisplayMessageExt, prelude::*};
 
     use lazy_static::lazy_static;
     use regex::Regex;
@@ -416,8 +416,10 @@ pub mod imp {
         pub(super) fn handle_reply(&self) {
             let obj = self.obj();
             let msg = obj.message();
-            // TODO: Log message
-            crate::trace!("Replying to a message",);
+            crate::trace!(
+                "Replying to a message: {}",
+                msg.textual_description().unwrap_or("No Text".to_string())
+            );
             obj.emit_by_name::<()>("reply", &[&msg]);
         }
 
@@ -479,8 +481,10 @@ pub mod imp {
             let display = gdk::Display::default().expect("there should be a display");
             let clipboard = display.clipboard();
             let msg = obj.message();
-            // TODO: Log message
-            crate::trace!("Copying message to clipboard",);
+            crate::trace!(
+                "Copying message to clipboard: {}",
+                msg.textual_description().unwrap_or("No Text".to_string())
+            );
             if let Some(text) = msg.body() {
                 clipboard.set_text(&text)
             }

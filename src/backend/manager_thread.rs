@@ -11,6 +11,7 @@
 
 use std::{cell::OnceCell, ops::Bound};
 
+use futures::channel::{mpsc, oneshot};
 use futures::{join, select, FutureExt, SinkExt, StreamExt};
 use libsignal_service::{
     configuration::SignalServers,
@@ -28,7 +29,6 @@ use presage::{
     Manager,
 };
 use presage_store_sled::SledStore as Store;
-use tokio::sync::{mpsc, oneshot};
 use url::Url;
 
 use crate::ApplicationError;
@@ -165,13 +165,13 @@ impl ManagerThread {
         content: mpsc::UnboundedSender<Content>,
         error: mpsc::Sender<ApplicationError>,
     ) -> Option<Self> {
-        let (sender, receiver) = mpsc::channel(MESSAGE_BOUND);
+        let (mut sender, receiver) = mpsc::channel(MESSAGE_BOUND);
         let thread = std::thread::Builder::new()
             .name("ManagerThread".into())
             // Note: Increased stack size required, otherwise this thread can use too much of it and crash Flare.
             .stack_size(8 * 1024 * 1024);
         let _ = thread.spawn(move || {
-            let error_clone = error.clone();
+            let mut error_clone = error.clone();
             let panic = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
                 crate::TOKIO_RUNTIME.block_on(async move {
                     // XXX: Make sure the initial sync is finished (requires upstream presage changes).
@@ -267,6 +267,7 @@ impl ManagerThread {
     ) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::SubmitRecaptchaChallenge(token, captcha, sender))
             .await
             .expect("Command sending failed");
@@ -280,6 +281,7 @@ impl ManagerThread {
     ) -> Result<Profile, Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::RetrieveProfileByUuid(uuid, profile_key, sender))
             .await
             .expect("Command sending failed");
@@ -296,6 +298,7 @@ impl ManagerThread {
     ) -> Result<Option<Group>, <Store as presage::store::Store>::Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::GetGroupV2(group_master_key, sender))
             .await
             .expect("Command sending failed");
@@ -310,6 +313,7 @@ impl ManagerThread {
     ) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::SendMessage(
                 recipient_addr.into(),
                 Box::new(message.into()),
@@ -328,6 +332,7 @@ impl ManagerThread {
     ) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::SendSessionReset(
                 recipient_addr.into(),
                 timestamp,
@@ -346,6 +351,7 @@ impl ManagerThread {
     ) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::SendMessageToGroup(
                 group_key,
                 Box::new(message),
@@ -363,6 +369,7 @@ impl ManagerThread {
     ) -> Result<Vec<u8>, Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::GetAttachment(attachment_pointer.clone(), sender))
             .await
             .expect("Command sending failed");
@@ -375,6 +382,7 @@ impl ManagerThread {
     ) -> Result<Vec<Result<AttachmentPointer, AttachmentUploadError>>, Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::UploadAttachments(attachments, sender))
             .await
             .expect("Command sending failed");
@@ -389,6 +397,7 @@ impl ManagerThread {
     {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::Messages(thread, range, sender))
             .await
             .expect("Command sending failed");
@@ -398,6 +407,7 @@ impl ManagerThread {
     pub async fn link_secondary(&self, url: Url) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::LinkSecondary(url, sender))
             .await
             .expect("Command sending failed");
@@ -407,6 +417,7 @@ impl ManagerThread {
     pub async fn unlink_secondary(&self, id: i64) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::UnlinkSecondary(id, sender))
             .await
             .expect("Command sending failed");
@@ -416,6 +427,7 @@ impl ManagerThread {
     pub async fn linked_devices(&self) -> Result<Vec<DeviceInfo>, Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::LinkedDevices(sender))
             .await
             .expect("Command sending failed");
@@ -425,6 +437,7 @@ impl ManagerThread {
     pub async fn request_contacts(&self) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::RequestContacts(sender))
             .await
             .expect("Command sending failed");
@@ -438,6 +451,7 @@ impl ManagerThread {
     ) -> Result<Option<Vec<u8>>, Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::RetrieveProfileAvatarByUuid(
                 uuid,
                 profile_key,
@@ -454,6 +468,7 @@ impl ManagerThread {
     ) -> Result<Option<Vec<u8>>, Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
+            .clone()
             .send(Command::RetrieveGroupAvatar(context, sender))
             .await
             .expect("Command sending failed");
@@ -549,8 +564,8 @@ async fn setup_manager(
 async fn command_loop(
     manager: &mut Manager<Store, Registered>,
     mut receiver: mpsc::Receiver<Command>,
-    content: mpsc::UnboundedSender<Content>,
-    error: mpsc::Sender<ApplicationError>,
+    mut content: mpsc::UnboundedSender<Content>,
+    mut error: mpsc::Sender<ApplicationError>,
 ) {
     'outer: loop {
         let msgs: Result<_, presage::Error<<Store as presage::store::Store>::Error>> =
@@ -564,7 +579,7 @@ async fn command_loop(
                         // Receiving a message.
                         msg = next_msg => {
                             if let Some(msg) = msg {
-                                if content.send(msg).is_err() {
+                                if content.send(msg).await.is_err() {
                                     log::info!("Failed to send message to `Manager`, exiting");
                                     break 'outer;
                                 }
@@ -575,7 +590,7 @@ async fn command_loop(
                             next_msg = messages.next().fuse();
                         },
                         // Receiving a command.
-                        cmd = receiver.recv().fuse() => {
+                        cmd = receiver.next() => {
                             if let Some(cmd) = cmd {
                                 handle_command(manager, cmd).await;
                             }
@@ -596,7 +611,6 @@ async fn command_loop(
                 log::error!("Got error receiving: {}, {:?}", e, e);
                 let e = e.into();
                 // Don't send no-internet errors, Flare is able to handle them automatically.
-                // TODO: Think about maybe handling if the application is not in the background?
                 if !matches!(e, ApplicationError::NoInternet) {
                     error.send(e).await.expect("Callback sending failed");
                 }
@@ -604,7 +618,7 @@ async fn command_loop(
                 // Handle all commands while sleeping; this ensures Flare can start up without internet.
                 loop {
                     select! {
-                        cmd = receiver.recv().fuse() => {
+                        cmd = receiver.next().fuse() => {
                             if let Some(cmd) = cmd {
                                 handle_command(manager, cmd).await;
                             }

@@ -19,6 +19,7 @@ use rand::distributions::DistString;
 use url::Url;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
+use crate::backend::message::{DisplayMessage, DisplayMessageExt};
 use crate::{dbus::Feedbackd, gspawn, tspawn, ApplicationError};
 
 const MESSAGE_BOUND: usize = 100;
@@ -251,8 +252,13 @@ impl Manager {
         }?;
         if let Some(content) = content {
             let msg = Message::from_content(content, self).await;
-            // TODO: Log message
-            log::trace!("Found message queried",);
+            log::trace!(
+                "Found message queried: {}",
+                msg.as_ref()
+                    .and_then(|t| t.dynamic_cast_ref::<DisplayMessage>())
+                    .and_then(|t| t.textual_description())
+                    .unwrap_or("No Text".to_string())
+            );
             Ok(msg)
         } else {
             Ok(None)
@@ -290,10 +296,9 @@ impl Manager {
     /// - Listening for messages or errors and propagating them to the correct channels.
     #[cfg(not(feature = "screenshot"))]
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
-        use futures::channel::oneshot;
+        use futures::channel::{mpsc, oneshot};
         use futures::{select, FutureExt, StreamExt};
         use gdk::glib::BoxedAnyObject;
-        use tokio::sync::mpsc;
 
         let config_store = config_store(p).await?;
 
@@ -303,13 +308,11 @@ impl Manager {
             .swap(&RefCell::new(Some(config_store.clone())));
 
         log::trace!("Setting up the manager");
-        // TODO: This is a heavy mix of tokio and futures channels. Why?
-        // XXX: Use different message bound?
         let (setup_results_tx, mut setup_results_rx) =
             futures::channel::mpsc::channel(MESSAGE_BOUND);
         let (error_tx, error_rx) = oneshot::channel();
 
-        let (send_content, mut receive_content) = mpsc::unbounded_channel();
+        let (send_content, mut receive_content) = mpsc::unbounded();
         let (send_error, mut receive_error) = mpsc::channel(MESSAGE_BOUND);
 
         gspawn!(clone!(@weak self as s => async move {
@@ -338,7 +341,7 @@ impl Manager {
         }
 
         if internal.is_none() {
-            if let Some(error_opt) = receive_error.recv().await {
+            if let Some(error_opt) = receive_error.next().await {
                 log::error!("Got error after linking device: {}", error_opt);
                 return Err(error_opt);
             }
@@ -374,14 +377,14 @@ impl Manager {
                     }
                 }
                 // Receive errors.
-                error_opt = receive_error.recv().fuse() => {
+                error_opt = receive_error.next().fuse() => {
                     if error_opt.is_none() {
                         break 'outer;
                     }
                     return Err(error_opt.unwrap());
                 }
                 // Receive messages.
-                msg_opt = receive_content.recv().fuse() => {
+                msg_opt = receive_content.next().fuse() => {
                     if msg_opt.is_none() {
                         break 'outer;
                     }
