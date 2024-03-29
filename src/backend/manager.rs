@@ -669,7 +669,7 @@ impl Manager {
     pub(super) fn get_contact_by_id(
         &self,
         id: Uuid,
-    ) -> Result<Option<libsignal_service::models::Contact>, PresageError> {
+    ) -> Result<Option<libsignal_service::models::Contact>, ApplicationError> {
         log::trace!("`Manager::get_contact_by_id` start");
         let r = self.store().contact_by_id(&id);
         log::trace!("`Manager::get_contact_by_id` finished");
