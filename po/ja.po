@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-03-21 12:05+0000\n"
-"Last-Translator: Niek Nooijens <nieknooijens@gmail.com>\n"
+"PO-Revision-Date: 2024-03-30 06:01+0000\n"
+"Last-Translator: maboroshin <maboroshin@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ja/>\n"
 "Language: ja\n"
@@ -72,7 +72,7 @@ msgstr "検索"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr "チャネルを選択されていません"
+msgstr "チャネルが選択されていません"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
@@ -81,42 +81,42 @@ msgstr "チャネルを選択してください"
 #: data/resources/ui/channel_messages.blp:178
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr "反応を消去"
+msgstr "返信を消去"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr "反応消去"
+msgstr "返信の消去"
 
 #: data/resources/ui/channel_messages.blp:201
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr "添付ファイルを削除する"
+msgstr "添付ファイルを削除"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr "添付ファイル削除"
+msgstr "添付ファイルの削除"
 
 #: data/resources/ui/channel_messages.blp:225
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr "添付ファイルを追加する"
+msgstr "添付ファイルを追加"
 
 #: data/resources/ui/channel_messages.blp:233
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr "添付ファイル追加"
+msgstr "添付ファイルの追加"
 
 #: data/resources/ui/channel_messages.blp:249
 msgctxt "accessibility"
 msgid "Message input"
-msgstr "メセージ入力"
+msgstr "メッセージを入力"
 
 #: data/resources/ui/channel_messages.blp:255
 msgctxt "tooltip"
 msgid "Message input"
-msgstr "メセージ入力"
+msgstr "メセージの入力"
 
 #: data/resources/ui/channel_messages.blp:267
 msgctxt "accessibility"
@@ -131,14 +131,14 @@ msgstr "送信"
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:128
 msgid "Clear messages"
-msgstr "メセージ消去"
+msgstr "メッセージの消去"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
-msgstr "これにより、ローカルに保存されたメッセージがすべて消去されます。 "
-"これによりアプリケーションも終了します。"
+msgstr "端末に保存されたすべてのメッセージが消去されます。 "
+"またこのアプリも終了します。"
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
@@ -148,11 +148,11 @@ msgstr "キャンセル"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr "クリア"
+msgstr "消去"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:117
 msgid "Unlink"
-msgstr "リンクを解除する"
+msgstr "リンクを解除"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -160,17 +160,16 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
-"これにより、このデバイスのリンクが解除され、ローカルに保存されたデータがすべ"
-"て削除されます。 これにより、アプリケーションが閉じられ、再度開いたときに再リ"
-"ンクできるようになります。"
+"この端末とのリンクが解除され、端末に保存されたすべてのデータが削除されます。 "
+"またこのアプリは閉じられます。再び開いたときに再度リンク可能になります。"
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr "リンクを解除してすべてのメセージを削除する"
+msgstr "リンクを解除しすべてのメッセージを削除する"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr "リンクを解除してもメッセージは保持"
+msgstr "リンクを解除しメッセージは保持"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
@@ -187,27 +186,27 @@ msgstr "報告"
 #: data/resources/ui/linked_devices_window.blp:15
 #: data/resources/ui/window.blp:122
 msgid "Linked Devices"
-msgstr "接続されたデバイス"
+msgstr "リンク済みの端末"
 
 #: data/resources/ui/linked_devices_window.blp:33
 msgid "Add Linked Device"
-msgstr "接続されたデバイスを加える"
+msgstr "リンクする端末を追加"
 
 #: data/resources/ui/linked_devices_window.blp:34
 msgid "Please insert the URL of the device to link."
-msgstr "リンクするデバイスの URL を入力してください。"
+msgstr "リンクする端末の URL を入力してください。"
 
 #: data/resources/ui/linked_devices_window.blp:44
 msgid "Device URL"
-msgstr "デバイスの URL"
+msgstr "端末の URL"
 
 #: data/resources/ui/linked_devices_window.blp:53
 msgid "Add Device"
-msgstr "デバイスを加える"
+msgstr "端末を追加"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr "反応"
+msgstr "返信"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
@@ -223,15 +222,15 @@ msgstr "名前を付けて保存…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr "…で開く"
+msgstr "アプリで開く…"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr "一般的"
+msgstr "一般"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr "添付ファイルを自動的にダウンロードする"
+msgstr "添付ファイルを自動的にダウンロード"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
@@ -239,7 +238,7 @@ msgstr "以下で選択した添付ファイルの種類が自動的にダウン
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr "絵"
+msgstr "画像"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
@@ -263,11 +262,11 @@ msgstr "新しいメッセージの通知"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr "通知を送信する"
+msgstr "通知を送信"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr "反応に関する通知を送信する"
+msgstr "返信に関する通知を送信"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
@@ -275,7 +274,7 @@ msgstr "バックグラウンド通知"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr "アプリを閉じている間に通知を取得する"
+msgstr "アプリを閉じている間に通知を取得"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
@@ -287,10 +286,9 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
-"タッチ デバイスやモバイル デバイスでのエクスペリエンスを向上させるために、こ"
-"れらのオプションを変更する必要がある場合があります。 "
-"これらの設定のデフォルト値は、デスクトップ "
-"デバイスで使いやすいように選択されています。"
+"タッチデバイスやモバイル端末での使用感を向上させるためには、これらのオプショ"
+"ンを変更する必要があることがあります。 "
+"これらの設定の初期値は、デスクトップ端末で使いやすいような設定です。"
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
@@ -298,8 +296,8 @@ msgstr "選択可能なメッセージテキスト"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr "選択可能なテキストがタッチ スクリーンのスワイプ "
-"ジェスチャを妨げる可能性がある"
+msgstr "選択可能なテキストはタッチスクリーンのスワイプジェスチャの邪魔になる場合があ"
+"る"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
@@ -309,15 +307,16 @@ msgstr "「Enter」を押してメッセージを送信"
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
-msgstr ""
+msgstr "タッチデバイスのキーボードで Control + Enter "
+"が使えないと、メッセージに改行を含めることができないことがある"
 
 #: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Flare にようこそ"
 
 #: data/resources/ui/setup_window.blp:44
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Flare を設定"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:53
