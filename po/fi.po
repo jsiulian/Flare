@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-03-27 15:01+0000\n"
+"PO-Revision-Date: 2024-03-30 06:01+0000\n"
 "Last-Translator: jerekulmala <jerekmailj@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/fi/>\n"
@@ -766,8 +766,8 @@ msgstr[1] "Lähetti {} kuvaa"
 #: src/backend/message/text_message.rs:377
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] "On lähettänyt videon"
-msgstr[1] "On lähettänyt {} videota"
+msgstr[0] "Lähetti videon"
+msgstr[1] "Lähetti {} videota"
 
 #: src/backend/message/text_message.rs:381
 msgid "Sent a voice message"
@@ -778,8 +778,8 @@ msgstr[1] "Lähetti {} ääniviestiä"
 #: src/backend/message/text_message.rs:387
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] "On lähettänyt tiedoston"
-msgstr[1] "On lähettänyt {} tiedostoa"
+msgstr[0] "Lähetti tiedoston"
+msgstr[1] "Lähetti {} tiedostoa"
 
 #: src/error.rs:88
 msgid "I/O Error."
