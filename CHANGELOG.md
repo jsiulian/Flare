@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Chores
 
 - Cleanup major parts of the code.
+- Add developer documentation.
 
 ## [0.14.1] - 2024-03-22
 
