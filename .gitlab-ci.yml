@@ -1,6 +1,6 @@
 stages:
+  - quick-test
   - build
-  - test
   - upload
 
 variables:
@@ -54,6 +54,13 @@ flatpak:
     expire_in: 14 days
 # end flatpak
 
+i18n:
+  stage: quick-test
+  image: archlinux:base-devel
+  script:
+    - pacman -Syu fd --noconfirm
+    - ./build-aux/test/i18n-strings-check.sh
+  allow_failure: true
 
 build:
   stage: build
@@ -84,7 +91,7 @@ upload:
 
 
 test:cargo-deny:
-  stage: test
+  stage: quick-test
   image: archlinux:base-devel
   script:
     - pacman -Syu rustup cargo-deny --noconfirm
