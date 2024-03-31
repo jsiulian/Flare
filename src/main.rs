@@ -19,7 +19,7 @@ mod prelude {
     pub use glib::subclass::*;
     pub use libsignal_service::prelude::*;
 
-    pub use gtk::{gdk_pixbuf, gio, glib, pango};
+    pub use gtk::{gdk, gdk_pixbuf, gio, glib, pango};
 
     pub use glib::{clone, Object};
     pub use once_cell::sync::Lazy;
