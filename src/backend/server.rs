@@ -1,8 +1,9 @@
-use gdk::glib::Object;
-use gdk::subclass::prelude::ObjectSubclassIsExt;
+use crate::prelude::*;
+
 use libsignal_service::configuration::SignalServers;
 
 gtk::glib::wrapper! {
+    /// Which server to use when linking.
     pub struct Server(ObjectSubclass<imp::Server>);
 }
 
@@ -21,14 +22,9 @@ impl Server {
 }
 
 mod imp {
-    use gtk::glib;
+    use crate::prelude::*;
+
     use libsignal_service::configuration::SignalServers;
-    use std::cell::RefCell;
-
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-
-    use gtk::prelude::ObjectExt;
-    use gtk::subclass::prelude::DerivedObjectProperties;
 
     #[derive(glib::Properties)]
     #[properties(wrapper_type=super::Server)]
@@ -50,7 +46,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for Server {
-        const NAME: &'static str = "DBServer";
+        const NAME: &'static str = "FlServer";
         type Type = super::Server;
     }
 

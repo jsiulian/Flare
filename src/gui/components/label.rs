@@ -1,15 +1,108 @@
-use std::cell::RefCell;
+use crate::prelude::*;
 
 use crate::gui::components::MessageIndicators;
-use gtk::glib;
-use gtk::pango;
-use gtk::prelude::*;
-use gtk::subclass::prelude::*;
 use gtk::CompositeTemplate;
-use once_cell::sync::Lazy;
 
 const OBJECT_REPLACEMENT_CHARACTER: char = '\u{FFFC}';
 const INDICATORS_SPACING: i32 = 6;
+
+glib::wrapper! {
+    /// A Label which allows indicators to be placed in-line.
+    pub struct MessageLabel(ObjectSubclass<imp::MessageLabel>)
+        @extends gtk::Widget;
+}
+
+impl MessageLabel {
+    fn update_label_attributes(&self, indicators_size: &gtk::Requisition) {
+        let imp = self.imp();
+        if let Some(start_index) = imp.label.text().find(OBJECT_REPLACEMENT_CHARACTER) {
+            let attrs = pango::AttrList::new();
+            let width = indicators_size.width() + INDICATORS_SPACING;
+            let height = indicators_size.height();
+            let logical_rect = pango::Rectangle::new(
+                0,
+                -(height - (height / 4)) * pango::SCALE,
+                width * pango::SCALE,
+                height * pango::SCALE,
+            );
+            let mut shape = pango::AttrShape::new(&logical_rect, &logical_rect);
+
+            shape.set_start_index(start_index as u32);
+            shape.set_end_index((start_index + OBJECT_REPLACEMENT_CHARACTER.len_utf8()) as u32);
+            attrs.insert(shape);
+
+            imp.label.set_attributes(Some(&attrs));
+        } else {
+            imp.label.set_attributes(None);
+        }
+    }
+
+    fn is_opposite_text_direction(&self) -> bool {
+        let text = self.imp().text.borrow();
+        let text_direction = pango::find_base_dir(&text);
+        let widget_direction = self.direction();
+
+        (text_direction == pango::Direction::Rtl && widget_direction == gtk::TextDirection::Ltr)
+            || text_direction == pango::Direction::Ltr
+                && widget_direction == gtk::TextDirection::Rtl
+    }
+
+    fn update_label(&self) {
+        let imp = self.imp();
+        let text = imp.text.borrow();
+        if let Some(indicators) = imp.indicators.borrow().as_ref() {
+            if !self.is_opposite_text_direction() {
+                imp.label
+                    .set_label(&format!("{text}{OBJECT_REPLACEMENT_CHARACTER}"));
+            } else {
+                imp.label.set_label(&text);
+            }
+
+            let (_, indicators_size) = indicators.preferred_size();
+            self.update_label_attributes(&indicators_size);
+        } else {
+            imp.label.set_label(&text);
+        }
+    }
+
+    pub fn label(&self) -> String {
+        self.imp().text.borrow().clone()
+    }
+
+    pub fn set_label(&self, label: String) {
+        let imp = self.imp();
+        let old = imp.text.replace(label);
+        if old != *imp.text.borrow() {
+            self.update_label();
+            self.notify("label");
+        }
+    }
+
+    pub fn add_label_class(&self, class: &str) {
+        self.imp().label.add_css_class(class);
+    }
+
+    pub fn indicators(&self) -> Option<MessageIndicators> {
+        self.imp().indicators.borrow().clone()
+    }
+
+    pub fn set_indicators(&self, indicators: Option<MessageIndicators>) {
+        let imp = self.imp();
+        let old = imp.indicators.replace(indicators);
+        if old != *imp.indicators.borrow() {
+            if let Some(old) = old {
+                old.unparent();
+            }
+
+            if let Some(indicators) = imp.indicators.borrow().as_ref() {
+                indicators.set_parent(self);
+            }
+
+            self.update_label();
+            self.notify("indicators");
+        }
+    }
+}
 
 mod imp {
     use super::*;
@@ -178,103 +271,6 @@ mod imp {
 
         fn direction_changed(&self, _previous_direction: gtk::TextDirection) {
             self.obj().update_label();
-        }
-    }
-}
-
-glib::wrapper! {
-    pub struct MessageLabel(ObjectSubclass<imp::MessageLabel>)
-        @extends gtk::Widget;
-}
-
-impl MessageLabel {
-    fn update_label_attributes(&self, indicators_size: &gtk::Requisition) {
-        let imp = self.imp();
-        if let Some(start_index) = imp.label.text().find(OBJECT_REPLACEMENT_CHARACTER) {
-            let attrs = pango::AttrList::new();
-            let width = indicators_size.width() + INDICATORS_SPACING;
-            let height = indicators_size.height();
-            let logical_rect = pango::Rectangle::new(
-                0,
-                -(height - (height / 4)) * pango::SCALE,
-                width * pango::SCALE,
-                height * pango::SCALE,
-            );
-            let mut shape = pango::AttrShape::new(&logical_rect, &logical_rect);
-
-            shape.set_start_index(start_index as u32);
-            shape.set_end_index((start_index + OBJECT_REPLACEMENT_CHARACTER.len_utf8()) as u32);
-            attrs.insert(shape);
-
-            imp.label.set_attributes(Some(&attrs));
-        } else {
-            imp.label.set_attributes(None);
-        }
-    }
-
-    fn is_opposite_text_direction(&self) -> bool {
-        let text = self.imp().text.borrow();
-        let text_direction = pango::find_base_dir(&text);
-        let widget_direction = self.direction();
-
-        (text_direction == pango::Direction::Rtl && widget_direction == gtk::TextDirection::Ltr)
-            || text_direction == pango::Direction::Ltr
-                && widget_direction == gtk::TextDirection::Rtl
-    }
-
-    fn update_label(&self) {
-        let imp = self.imp();
-        let text = imp.text.borrow();
-        if let Some(indicators) = imp.indicators.borrow().as_ref() {
-            if !self.is_opposite_text_direction() {
-                imp.label
-                    .set_label(&format!("{text}{OBJECT_REPLACEMENT_CHARACTER}"));
-            } else {
-                imp.label.set_label(&text);
-            }
-
-            let (_, indicators_size) = indicators.preferred_size();
-            self.update_label_attributes(&indicators_size);
-        } else {
-            imp.label.set_label(&text);
-        }
-    }
-
-    pub fn label(&self) -> String {
-        self.imp().text.borrow().clone()
-    }
-
-    pub fn set_label(&self, label: String) {
-        let imp = self.imp();
-        let old = imp.text.replace(label);
-        if old != *imp.text.borrow() {
-            self.update_label();
-            self.notify("label");
-        }
-    }
-
-    pub fn add_label_class(&self, class: &str) {
-        self.imp().label.add_css_class(class);
-    }
-
-    pub fn indicators(&self) -> Option<MessageIndicators> {
-        self.imp().indicators.borrow().clone()
-    }
-
-    pub fn set_indicators(&self, indicators: Option<MessageIndicators>) {
-        let imp = self.imp();
-        let old = imp.indicators.replace(indicators);
-        if old != *imp.indicators.borrow() {
-            if let Some(old) = old {
-                old.unparent();
-            }
-
-            if let Some(indicators) = imp.indicators.borrow().as_ref() {
-                indicators.set_parent(self);
-            }
-
-            self.update_label();
-            self.notify("indicators");
         }
     }
 }

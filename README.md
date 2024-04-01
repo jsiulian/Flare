@@ -57,6 +57,7 @@ Flare can easily be translated for other languages, as it uses gettext. Please c
 ## Contributing
 
 This project is open to contributions. Please refer to [CONTRIBUTING.md](https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/CONTRIBUTING.md) for more information.
+If you plan to contribute code, please also review the [developer documentation](https://gitlab.com/schmiddi-on-mobile/flare/-/tree/master/doc?ref_type=heads).
 
 ## Code of Conduct
 

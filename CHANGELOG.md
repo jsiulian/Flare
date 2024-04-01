@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improve performance on startup.
 - Sometimes the avatar and name showing for own messages.
 
+### Chores
+
+- Cleanup major parts of the code.
+- Add developer documentation.
+
 ## [0.14.1] - 2024-03-22
 
 ### Added

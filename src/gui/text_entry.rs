@@ -1,21 +1,11 @@
-use gdk::glib::{Priority, Propagation};
-use glib::{
-    clone,
-    subclass::{InitializingObject, Signal},
-};
-use gtk::prelude::*;
-use gtk::subclass::prelude::*;
-use gtk::subclass::widget::WidgetImpl;
-use gtk::{gdk, gio, glib, CompositeTemplate, TemplateChild, TextView};
-use once_cell::sync::Lazy;
+use crate::prelude::*;
 
-use crate::gspawn;
-use crate::gui::utility::Utility;
-
-use std::cell::Cell;
-use std::marker::PhantomData;
+use sourceview5::Buffer;
 
 glib::wrapper! {
+    /// Widget for entering text messages.
+    ///
+    /// This adds a few nice-to-have features to the TextView, like sending on enter (configurable), spell checking (if installed) or pasting files.
     pub struct TextEntry(ObjectSubclass<imp::TextEntry>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -23,23 +13,23 @@ glib::wrapper! {
 }
 
 impl TextEntry {
-    pub fn buffer(&self) -> sourceview5::Buffer {
+    pub fn buffer(&self) -> Buffer {
         self.imp().view.buffer().downcast().unwrap()
     }
 
     pub fn text(&self) -> String {
-        let buffer: sourceview5::Buffer = self.buffer();
+        let buffer: Buffer = self.buffer();
         let (start_iter, end_iter) = buffer.bounds();
         buffer.text(&start_iter, &end_iter, true).to_string()
     }
 
     pub fn set_text(&self, text: String) {
-        let buffer: sourceview5::Buffer = self.buffer();
+        let buffer = self.buffer();
         buffer.set_text(text.as_str());
     }
 
     pub fn clear(&self) {
-        let buffer: sourceview5::Buffer = self.buffer();
+        let buffer: Buffer = self.buffer();
         buffer.set_text("");
     }
 
@@ -49,8 +39,15 @@ impl TextEntry {
 }
 
 pub mod imp {
+    use crate::prelude::*;
 
-    use super::*;
+    use glib::subclass::{InitializingObject, Signal};
+    use glib::{Priority, Propagation};
+    use gtk::subclass::widget::WidgetImpl;
+    use gtk::{CompositeTemplate, TemplateChild, TextView};
+
+    use std::cell::Cell;
+    use std::marker::PhantomData;
 
     #[derive(CompositeTemplate, Default, glib::Properties)]
     #[template(resource = "/ui/text_entry.ui")]
@@ -58,6 +55,7 @@ pub mod imp {
     pub struct TextEntry {
         #[template_child]
         pub(super) view: TemplateChild<TextView>,
+
         #[property(get, set)]
         send_on_enter: Cell<bool>,
         #[property(get = Self::is_empty)]
@@ -93,6 +91,8 @@ pub mod imp {
     impl ObjectImpl for TextEntry {
         fn constructed(&self) {
             let obj = self.obj();
+
+            // Send on enter
             let key_events = gtk::EventControllerKey::new();
             key_events
                 .connect_key_pressed(clone!(@weak obj => @default-return Propagation::Proceed, move |_, key, _, modifier| {
@@ -113,6 +113,7 @@ pub mod imp {
             }));
             self.view.add_controller(key_events);
 
+            // Paste files
             self.view
                 .connect_paste_clipboard(clone!(@weak obj => move |entry| {
                     let clipboard = obj.clipboard();
@@ -152,12 +153,14 @@ pub mod imp {
                     }));
                 }));
 
+            // Updating property if empty.
             let buffer = sourceview5::Buffer::new(None);
             obj.imp().view.set_buffer(Some(&buffer));
             buffer.connect_text_notify(clone!(@weak obj => move |_| {
                 obj.notify_is_empty();
             }));
 
+            // Spell checking.
             #[cfg(feature = "libspelling")]
             {
                 let checker = libspelling::Checker::default();

@@ -1,5 +1,5 @@
-use gio::prelude::FileExt;
-use gtk::gio;
+use crate::prelude::*;
+
 use libsignal_service::profile_name::ProfileName;
 
 #[macro_export]

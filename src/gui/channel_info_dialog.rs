@@ -1,10 +1,9 @@
-use gdk::{glib::subclass::types::ObjectSubclassIsExt, prelude::ObjectExt};
-use glib::Object;
-use gtk::glib;
+use crate::prelude::*;
 
 use crate::backend::{Channel, Manager};
 
 glib::wrapper! {
+    /// Dialog showing more information about the channel.
     pub struct ChannelInfoDialog(ObjectSubclass<imp::ChannelInfoDialog>)
         @extends adw::Dialog, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -21,32 +20,21 @@ impl ChannelInfoDialog {
         s.imp().setup();
         s
     }
-
-    pub fn channel(&self) -> Channel {
-        self.property("channel")
-    }
 }
 
 pub mod imp {
-    use adw::prelude::ActionRowExt;
-    use adw::prelude::ExpanderRowExt;
-    use adw::subclass::dialog::AdwDialogImpl;
+    use crate::prelude::*;
     use ashpd::desktop::open_uri::OpenFileRequest;
     use ashpd::WindowIdentifier;
-    use gdk::glib::clone;
     use gtk::Align;
-    use std::cell::RefCell;
 
-    use glib::{subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
-    use gtk::glib;
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
-    use once_cell::sync::Lazy;
+    use glib::subclass::InitializingObject;
+    use gtk::CompositeTemplate;
 
     use crate::backend::{Channel, Manager};
-    use crate::gui::utility::Utility;
-    use crate::{gspawn, tspawn};
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate, Default, glib::Properties)]
+    #[properties(wrapper_type = super::ChannelInfoDialog)]
     #[template(resource = "/ui/channel_info_dialog.ui")]
     pub struct ChannelInfoDialog {
         #[template_child]
@@ -66,7 +54,9 @@ pub mod imp {
         #[template_child]
         grid_buttons: TemplateChild<gtk::Grid>,
 
+        #[property(get, set, construct_only, type = Channel)]
         channel: RefCell<Option<Channel>>,
+        #[property(get, set, construct_only, type = Manager)]
         manager: RefCell<Option<Manager>>,
     }
 
@@ -152,8 +142,13 @@ pub mod imp {
 
             // Insert the buttons at the correct positions.
             for (i, button) in active_buttons.iter().enumerate() {
-                self.grid_buttons
-                    .attach(&button.get(), (i % 2) as i32, (i / 2) as i32, 1, 1);
+                self.grid_buttons.attach(
+                    &TemplateChild::get(button),
+                    (i % 2) as i32,
+                    (i / 2) as i32,
+                    1,
+                    1,
+                );
             }
 
             if let Some(button) = final_button {
@@ -282,48 +277,11 @@ pub mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for ChannelInfoDialog {
         fn constructed(&self) {
             self.parent_constructed();
             self.fixup_description_expander_row_icon();
-        }
-
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<Channel>("channel").build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "channel" => self.channel.borrow().as_ref().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let man = value.get::<Option<Manager>>().expect(
-                        "Property `manager` of `ChannelInfoDialog` has to be of type `Manager`",
-                    );
-                    self.manager.replace(man);
-                }
-                "channel" => {
-                    let msg = value.get::<Option<Channel>>().expect(
-                        "Property `channel` of `ChannelInfoDialog` has to be of type `Channel`",
-                    );
-                    self.channel.replace(msg);
-                }
-                _ => unimplemented!(),
-            }
         }
     }
 

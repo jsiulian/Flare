@@ -1,17 +1,11 @@
 use gdk::glib::object::IsA;
-use gdk::prelude::{ApplicationExt, ApplicationExtManual};
-use gio::prelude::SettingsExt;
 use gio::{ApplicationFlags, Settings, SettingsBindFlags};
-use gtk::prelude::GtkWindowExt;
-use gtk::prelude::RootExt;
-use gtk::prelude::SettingsExtManual;
-use gtk::{gdk, gio, glib};
-use once_cell::sync::Lazy;
 
 use std::path::Path;
 
 mod config;
 use self::config::{APP_ID, BASE_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_BYTES, RESOURCES_PATH};
+use crate::prelude::*;
 
 mod backend;
 mod dbus;
@@ -19,6 +13,23 @@ mod error;
 mod gui;
 mod hash_log;
 mod utils;
+
+mod prelude {
+    pub use adw::{prelude::*, subclass::prelude::*};
+    pub use glib::subclass::*;
+    pub use libsignal_service::prelude::*;
+
+    pub use gtk::{gdk, gdk_pixbuf, gio, glib, pango};
+
+    pub use glib::{clone, Object};
+    pub use once_cell::sync::Lazy;
+    pub use std::cell::{Cell, RefCell};
+
+    pub use crate::backend::Manager;
+    pub use crate::gui::utility::Utility;
+    pub use crate::ApplicationError;
+    pub use crate::{gspawn, tspawn};
+}
 
 pub use error::{ApplicationError, ConfigurationError};
 
@@ -93,7 +104,7 @@ fn build_ui(app: &adw::Application) {
         .bind("run-in-background", &window, "hide-on-close")
         .flags(SettingsBindFlags::GET)
         .build();
-    init_icons(&window.display());
+    init_icons(&<crate::gui::Window as RootExt>::display(&window));
     app.connect_activate(move |_| {
         window.present();
     });

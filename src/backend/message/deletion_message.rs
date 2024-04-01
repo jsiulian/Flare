@@ -1,16 +1,13 @@
 use crate::backend::timeline::TimelineItem;
-use std::cell::RefCell;
-
-use gio::subclass::prelude::ObjectSubclassIsExt;
-use glib::Object;
-use gtk::{gio, glib};
-use libsignal_service::proto::data_message::Delete;
-
 use crate::backend::{Channel, Contact};
+use crate::prelude::*;
+
+use libsignal_service::proto::data_message::Delete;
 
 use super::{Manager, Message};
 
 gtk::glib::wrapper! {
+    /// A deletion message is propagated to mark a message as deleted.
     pub struct DeletionMessage(ObjectSubclass<imp::DeletionMessage>) @extends Message, TimelineItem;
 }
 
@@ -46,12 +43,10 @@ impl DeletionMessage {
 }
 
 mod imp {
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gtk::glib;
-    use libsignal_service::proto::data_message::Delete;
-    use std::cell::RefCell;
-
     use crate::backend::{message::MessageImpl, timeline::TimelineItemImpl, Message};
+    use crate::prelude::*;
+
+    use libsignal_service::proto::data_message::Delete;
 
     #[derive(Default)]
     pub struct DeletionMessage {
@@ -67,6 +62,5 @@ mod imp {
 
     impl TimelineItemImpl for DeletionMessage {}
     impl MessageImpl for DeletionMessage {}
-
     impl ObjectImpl for DeletionMessage {}
 }

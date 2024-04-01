@@ -21,9 +21,11 @@ pub enum ApplicationError {
     Libsecret(oo7::Error),
     Db(presage_store_sled::SledStoreError),
     UnauthorizedSignal,
-    SendFailed(libsignal_service::sender::MessageSenderError),
+    // MessageSenderError is pretty big, put into `Box` to move it to the heap.
+    SendFailed(Box<libsignal_service::sender::MessageSenderError>),
     ReceiveFailed(libsignal_service::push_service::ServiceError),
-    Presage(PresageError),
+    // PresageError is pretty big, put into `Box` to move it to the heap.
+    Presage(Box<PresageError>),
     ConfigurationError(ConfigurationError),
     ManagerThreadPanic,
 }
@@ -48,8 +50,8 @@ impl From<PresageError> for ApplicationError {
             {
                 ApplicationError::NoInternet
             }
-            p::Error::MessageSenderError(e) => ApplicationError::SendFailed(e),
-            _ => ApplicationError::Presage(e),
+            p::Error::MessageSenderError(e) => ApplicationError::SendFailed(Box::new(e)),
+            _ => ApplicationError::Presage(Box::new(e)),
         }
     }
 }

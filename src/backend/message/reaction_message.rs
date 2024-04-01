@@ -1,18 +1,15 @@
-use std::cell::RefCell;
-
-use gdk::gdk_pixbuf::Pixbuf;
-use gio::subclass::prelude::ObjectSubclassIsExt;
-use glib::Object;
-use gtk::{gio, glib, prelude::ObjectExt};
-use libsignal_service::{content::Reaction, prelude::Uuid};
-
 use crate::backend::{timeline::TimelineItem, Channel, Contact};
+use crate::prelude::*;
+
+use gdk_pixbuf::Pixbuf;
+use gettextrs::gettext;
+
+use libsignal_service::{content::Reaction, prelude::Uuid};
 
 use super::{Manager, Message, MessageExt};
 
-use gettextrs::gettext;
-
 gtk::glib::wrapper! {
+    /// A ReactionMessage is propagated to add or remove a reaction from a [Message].
     pub struct ReactionMessage(ObjectSubclass<imp::ReactionMessage>) @extends Message, TimelineItem;
 }
 
@@ -55,6 +52,11 @@ impl ReactionMessage {
         Uuid::parse_str(self.reaction().target_author_aci()).expect("`Reaction` Uuid to be valid")
     }
 
+    /// Send a notification for the reaction.
+    ///
+    /// This is skipped if:
+    /// - The reaction is sent from self.
+    /// - The reaction targets a message from someone else.
     pub fn send_notification(&self) {
         let sender = self.sender();
         let channel = self.channel();
@@ -62,24 +64,29 @@ impl ReactionMessage {
             // Skip notifications for reaction messages sent from self.
             return;
         }
-        let notification_title;
-        let notification_body;
-        if channel.group_context().is_some() {
-            notification_title = channel.title();
+
+        let (notification_title, notification_body) = if channel.group_context().is_some() {
             // Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
-            notification_body = gettext("{sender} reacted {emoji} to a message.")
-                .replace("{sender}", &sender.title())
-                .replace("{emoji}", &self.emoji());
+            (
+                channel.title(),
+                gettext("{sender} reacted {emoji} to a message.")
+                    .replace("{sender}", &sender.title())
+                    .replace("{emoji}", &self.emoji()),
+            )
         } else {
-            notification_title = sender.title();
             // Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
-            notification_body = gettext("Reacted {emoji} to a message.")
-                .replace("{sender}", &sender.title())
-                .replace("{emoji}", &self.emoji());
-        }
+            (
+                sender.title(),
+                gettext("Reacted {emoji} to a message.")
+                    .replace("{sender}", &sender.title())
+                    .replace("{emoji}", &self.emoji()),
+            )
+        };
+
+        let icon = Pixbuf::from_resource("/icon.svg").expect("Flare to have an application icon");
+
         let notification = gio::Notification::new(&notification_title);
         notification.set_body(Some(&notification_body));
-        let icon = Pixbuf::from_resource("/icon.svg").expect("Flare to have an application icon");
         notification.set_icon(&icon);
 
         let manager = self.manager();
@@ -91,10 +98,8 @@ impl ReactionMessage {
 }
 
 mod imp {
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
-    use gtk::glib;
+    use crate::prelude::*;
     use libsignal_service::content::Reaction;
-    use std::cell::RefCell;
 
     use crate::backend::{message::MessageImpl, timeline::TimelineItemImpl, Message};
 
@@ -111,8 +116,6 @@ mod imp {
     }
 
     impl TimelineItemImpl for ReactionMessage {}
-
     impl MessageImpl for ReactionMessage {}
-
     impl ObjectImpl for ReactionMessage {}
 }

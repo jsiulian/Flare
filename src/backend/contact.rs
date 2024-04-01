@@ -1,17 +1,16 @@
-use std::cell::RefCell;
+use crate::prelude::*;
 
-use gdk::{glib::Bytes, Paintable, Texture};
-use gio::subclass::prelude::ObjectSubclassIsExt;
-use glib::{prelude::ObjectExt, Object};
-use gtk::{gio, glib};
+use gdk::Texture;
+use glib::Bytes;
 use libsignal_service::{
     prelude::{phonenumber::Mode, Uuid},
     ServiceAddress,
 };
 
-use super::{Channel, Manager};
+use super::Manager;
 
 gtk::glib::wrapper! {
+    /// A contact represents a user of Signal.
     pub struct Contact(ObjectSubclass<imp::Contact>);
 }
 
@@ -45,14 +44,6 @@ impl Contact {
         s
     }
 
-    pub fn manager(&self) -> Manager {
-        self.property("manager")
-    }
-
-    pub fn is_self(&self) -> bool {
-        self.property("is-self")
-    }
-
     pub fn is_blocked(&self) -> bool {
         self.imp()
             .contact
@@ -62,19 +53,8 @@ impl Contact {
             .unwrap_or_default()
     }
 
-    pub fn title(&self) -> String {
-        self.property("title")
-    }
-
-    pub fn channel(&self) -> Option<Channel> {
-        self.property("channel")
-    }
-
-    pub fn set_channel(&self, channel: Option<&Channel>) {
-        self.set_property("channel", channel);
-    }
-
-    pub async fn update_profile_name(&self) {
+    /// Query the profile name and avatar of the contact.
+    pub async fn update_profile_name_and_avatar(&self) {
         let obj = self.imp();
         let manager = self.manager();
         let uuid = self.uuid();
@@ -83,6 +63,7 @@ impl Contact {
             let contact = obj.contact.borrow();
             let channel = self.channel();
 
+            // Note: The profile key may be different if the contact is in a group or a 1-to-1 message.
             if let Some(group) = channel.and_then(|c| c.group()) {
                 group
                     .members
@@ -100,6 +81,8 @@ impl Contact {
             let profile = manager.retrieve_profile_by_uuid(uuid, key).await.ok();
             obj.profile.replace(profile);
             self.notify("title");
+
+            // Avatar
             let Some(avatar) = manager
                 .retrieve_profile_avatar_by_uuid(uuid, key)
                 .await
@@ -116,14 +99,6 @@ impl Contact {
 
             self.set_avatar(avatar);
         }
-    }
-
-    pub fn avatar(&self) -> Option<Paintable> {
-        self.property("avatar")
-    }
-
-    fn set_avatar(&self, image: Texture) {
-        self.set_property("avatar", image);
     }
 
     pub fn uuid(&self) -> Uuid {
@@ -162,7 +137,6 @@ impl Contact {
 
     pub fn description(&self) -> Option<String> {
         self.imp().profile.borrow().as_ref().and_then(|c| {
-            // Should be fixed upstream
             let emoji = c.about_emoji.clone().unwrap_or_default();
             let about = c.about.clone().unwrap_or_default();
             match (emoji.as_str(), about.as_str()) {
@@ -174,6 +148,9 @@ impl Contact {
         })
     }
 
+    /// A heuristic how to split the name.
+    ///
+    /// Note that this may not be the best solution, e.g. for persons with multi-part surname.
     pub fn name_parts(&self) -> (Option<String>, String) {
         if self.is_self() {
             return (None, self.manager().profile_name());
@@ -225,30 +202,85 @@ impl Contact {
 }
 
 mod imp {
-    use std::cell::RefCell;
+    use crate::prelude::*;
+
+    use std::marker::PhantomData;
 
     use gdk::Paintable;
-    use gdk::{prelude::*, subclass::prelude::*};
-    use glib::{ParamSpec, ParamSpecBoolean, ParamSpecObject, ParamSpecString, Value};
-    use gtk::{gdk, glib};
-    use libsignal_service::prelude::phonenumber::Mode;
-    use libsignal_service::prelude::{phonenumber::PhoneNumber, Uuid};
+    use libsignal_service::prelude::phonenumber::{Mode, PhoneNumber};
     use libsignal_service::Profile;
-    use once_cell::sync::Lazy;
 
     use crate::backend::{Channel, Manager};
 
-    #[derive(Default)]
+    #[derive(Default, glib::Properties)]
+    #[properties(wrapper_type = super::Contact)]
     pub struct Contact {
         pub(super) contact: RefCell<Option<libsignal_service::models::Contact>>,
         pub(super) phonenumber: RefCell<Option<PhoneNumber>>,
         pub(super) uuid: RefCell<Option<Uuid>>,
         pub(super) profile: RefCell<Option<Profile>>,
 
+        #[property(get, set)]
         pub(crate) avatar: RefCell<Option<Paintable>>,
 
+        #[property(get, set, construct_only, type = Manager)]
         manager: RefCell<Option<Manager>>,
+        #[property(get, set, nullable)]
         channel: RefCell<Option<Channel>>,
+
+        #[property(get = Self::is_self)]
+        is_self: PhantomData<bool>,
+        #[property(get = Self::title)]
+        title: PhantomData<String>,
+    }
+
+    impl Contact {
+        fn is_self(&self) -> bool {
+            if let Some(contact) = self.contact.borrow().as_ref() {
+                contact.uuid == self.manager.borrow().as_ref().unwrap().uuid()
+            } else {
+                false
+            }
+        }
+
+        fn title(&self) -> String {
+            if self.obj().is_self() {
+                return self.manager.borrow().as_ref().unwrap().profile_name();
+            }
+
+            let contact_title = self.contact.borrow().as_ref().and_then(|c| {
+                if c.name.is_empty() {
+                    None
+                } else {
+                    Some(c.name.clone())
+                }
+            });
+            let profile_title = || {
+                self.profile
+                    .borrow()
+                    .as_ref()
+                    .and_then(|p| p.name.as_ref())
+                    .map(crate::utils::format_profile_name)
+            };
+            let phonenumber_title = || {
+                self.phonenumber
+                    .borrow()
+                    .as_ref()
+                    .map(|p| p.format().mode(Mode::National).to_string())
+            };
+
+            contact_title
+                .or_else(profile_title)
+                .or_else(phonenumber_title)
+                .or_else(|| Some(gettextrs::gettext("Unknown contact")))
+                // For some reason, Signal includes some special "isolate" control
+                // characters around names with special symbols.
+                .map(|mut s| {
+                    s.retain(|c| c != '\u{2068}' && c != '\u{2069}');
+                    s
+                })
+                .unwrap_or_default()
+        }
     }
 
     #[glib::object_subclass]
@@ -257,107 +289,6 @@ mod imp {
         type Type = super::Contact;
     }
 
-    impl ObjectImpl for Contact {
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<Channel>("channel").build(),
-                    ParamSpecObject::builder::<Paintable>("avatar").build(),
-                    ParamSpecBoolean::builder("is-self").read_only().build(),
-                    ParamSpecString::builder("title").read_only().build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "channel" => self.channel.borrow().as_ref().to_value(),
-                "avatar" => self.avatar.borrow().as_ref().to_value(),
-                "is-self" => {
-                    if let Some(contact) = self.contact.borrow().as_ref() {
-                        (contact.uuid == self.manager.borrow().as_ref().unwrap().uuid()).to_value()
-                    } else {
-                        false.to_value()
-                    }
-                }
-                "title" => {
-                    if self.obj().is_self() {
-                        return self
-                            .manager
-                            .borrow()
-                            .as_ref()
-                            .unwrap()
-                            .profile_name()
-                            .to_value();
-                    }
-
-                    let contact_title = self.contact.borrow().as_ref().and_then(|c| {
-                        if c.name.is_empty() {
-                            None
-                        } else {
-                            Some(c.name.clone())
-                        }
-                    });
-                    let profile_title = || {
-                        self.profile
-                            .borrow()
-                            .as_ref()
-                            .and_then(|p| p.name.as_ref())
-                            .map(crate::utils::format_profile_name)
-                    };
-                    let phonenumber_title = || {
-                        self.phonenumber
-                            .borrow()
-                            .as_ref()
-                            .map(|p| p.format().mode(Mode::National).to_string())
-                    };
-
-                    contact_title
-                        .or_else(profile_title)
-                        .or_else(phonenumber_title)
-                        .or_else(|| Some(gettextrs::gettext("Unknown contact")))
-                        // For some reason, Signal includes some special "isolate" control
-                        // characters around names with special symbols.
-                        .map(|mut s| {
-                            s.retain(|c| c != '\u{2068}' && c != '\u{2069}');
-                            s
-                        })
-                        .to_value()
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let obj = value
-                        .get::<Option<Manager>>()
-                        .expect("Property `manager` of `Contact` has to be of type `Manager`");
-
-                    self.manager.replace(obj);
-                }
-                "channel" => {
-                    let obj = value
-                        .get::<Option<Channel>>()
-                        .expect("Property `channel` of `Contact` has to be of type `Channel`");
-
-                    self.channel.replace(obj);
-                }
-                "avatar" => {
-                    let obj = value
-                        .get::<Option<Paintable>>()
-                        .expect("Property `avatar` of `Contact` has to be of type `Paintable`");
-
-                    self.avatar.replace(obj);
-                }
-                _ => unimplemented!(),
-            }
-        }
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for Contact {}
 }

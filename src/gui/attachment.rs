@@ -1,70 +1,83 @@
-use gdk::prelude::Cast;
-use glib::prelude::ObjectExt;
-use gtk::glib;
-use gtk::subclass::prelude::*;
+use crate::prelude::*;
 
 use crate::backend::AttachmentType;
 
-use super::components::{AttachmentAudio, AttachmentFile, AttachmentPhoto, AttachmentVideo};
+use super::components::{AttachmentAudio, AttachmentFile, AttachmentImage, AttachmentVideo};
 
 glib::wrapper! {
+    /// Displaying any attachment.
+    ///
+    /// This is only a base class, the implementations is attachment-type specific and one of:
+    /// - [AttachmentAudio]
+    /// - [AttachmentImage]
+    /// - [AttachmentVideo]
+    /// - [AttachmentFile]
     pub struct Attachment(ObjectSubclass<imp::Attachment>)
         @extends gtk::Widget;
 }
 
-impl Attachment {
-    pub fn attachment(&self) -> crate::backend::Attachment {
-        self.property("attachment")
-    }
-}
-
 pub fn backend_to_gui(attachment: &crate::backend::Attachment) -> Attachment {
-    match attachment.attachment_type() {
-        AttachmentType::Image => AttachmentPhoto::new(attachment).upcast(),
-        AttachmentType::Gif => AttachmentPhoto::new(attachment).upcast(),
+    match attachment.r#type() {
+        AttachmentType::Image => AttachmentImage::new(attachment).upcast(),
+        AttachmentType::Gif => AttachmentImage::new(attachment).upcast(),
         AttachmentType::Video => AttachmentVideo::new(attachment).upcast(),
         AttachmentType::File => AttachmentFile::new(attachment).upcast(),
         AttachmentType::Audio => AttachmentAudio::new(attachment).upcast(),
     }
 }
 
-pub mod imp {
-    use std::{cell::RefCell, os::fd::AsFd};
+pub(crate) trait AttachmentImpl: WidgetImpl + ObjectImpl + 'static {}
 
-    use adw::prelude::*;
+unsafe impl<T: AttachmentImpl> IsSubclassable<T> for Attachment {
+    fn class_init(class: &mut glib::Class<Self>) {
+        Self::parent_class_init::<T>(class.upcast_ref_mut());
+    }
+}
+
+pub mod imp {
+    use crate::prelude::*;
+    use std::os::fd::AsFd;
+
     use ashpd::{desktop::open_uri::OpenFileRequest, WindowIdentifier};
-    use gdk::{
-        gio::File,
-        prelude::{Cast, StaticType},
-    };
-    use gio::Settings;
-    use glib::{
-        clone,
-        subclass::{InitializingObject, Signal},
-        ParamSpec, ParamSpecObject, Value,
-    };
-    use gtk::{gio, glib, FileDialog};
-    use gtk::{subclass::prelude::*, CompositeTemplate};
-    use once_cell::sync::Lazy;
+    use gio::{File, Settings};
+    use glib::subclass::{InitializingObject, Signal};
+    use gtk::{CompositeTemplate, FileDialog};
 
     use crate::{
         backend::Manager,
         config::BASE_ID,
-        gspawn,
         gui::{error_dialog::ErrorDialog, utility::Utility},
-        tspawn,
     };
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate, Default, glib::Properties)]
+    #[properties(wrapper_type = super::Attachment)]
     #[template(resource = "/ui/attachment.ui")]
     pub struct Attachment {
+        #[property(get, set = Self::set_attachment, type = crate::backend::Attachment)]
         attachment: RefCell<Option<crate::backend::Attachment>>,
 
+        #[property(get, set, construct_only, type = Manager)]
         manager: RefCell<Option<Manager>>,
     }
 
     #[gtk::template_callbacks]
     impl Attachment {
+        fn set_attachment(&self, attachment: Option<crate::backend::Attachment>) {
+            let settings = Settings::new(BASE_ID);
+            let autoload = attachment.as_ref().is_some_and(|a| {
+                settings.boolean("autodownload-images") && a.is_image()
+                    || settings.boolean("autodownload-videos") && a.is_video()
+                    || settings.boolean("autodownload-voice-messages") && a.is_audio()
+                    || settings.boolean("autodownload-files") && a.is_file()
+            });
+
+            self.attachment.replace(attachment);
+            if autoload {
+                log::trace!("Autodownloading attachment");
+                self.load();
+            }
+        }
+
         #[template_callback]
         pub fn load(&self) {
             let obj = self.obj();
@@ -171,61 +184,8 @@ pub mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for Attachment {
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<crate::backend::Attachment>("attachment").build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "attachment" => self.attachment.borrow().as_ref().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let man = value
-                        .get::<Option<Manager>>()
-                        .expect("Property `manager` of `Attachment` has to be of type `Manager`");
-                    self.manager.replace(man);
-                }
-                "attachment" => {
-                    let att = value
-                        .get::<Option<crate::backend::Attachment>>()
-                        .expect("Property `attachment` of `Attachment` has to be of type `crate::backend::Attachment`");
-
-                    let settings = Settings::new(BASE_ID);
-                    let autoload = att.is_some()
-                        && settings.boolean("autodownload-images")
-                        && att.as_ref().unwrap().is_image()
-                        || settings.boolean("autodownload-videos")
-                            && att.as_ref().unwrap().is_video()
-                        || settings.boolean("autodownload-voice-messages")
-                            && att.as_ref().unwrap().is_audio()
-                        || settings.boolean("autodownload-files")
-                            && att.as_ref().unwrap().is_file();
-
-                    self.attachment.replace(att);
-                    if autoload {
-                        log::trace!("Autodownloading attachment");
-                        self.load();
-                    }
-                }
-                _ => unimplemented!(),
-            }
-        }
-
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
                 vec![Signal::builder("pressed")
@@ -238,12 +198,4 @@ pub mod imp {
 
     impl WidgetImpl for Attachment {}
     impl BoxImpl for Attachment {}
-}
-
-pub(crate) trait AttachmentImpl: WidgetImpl + ObjectImpl + 'static {}
-
-unsafe impl<T: AttachmentImpl> IsSubclassable<T> for Attachment {
-    fn class_init(class: &mut glib::Class<Self>) {
-        Self::parent_class_init::<T>(class.upcast_ref_mut());
-    }
 }

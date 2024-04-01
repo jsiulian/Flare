@@ -1,6 +1,6 @@
-use adw::subclass::prelude::*;
-use gdk::glib::{clone, Object, SignalHandlerId};
-use gtk::{gdk, glib, prelude::*, CompositeTemplate};
+use glib::SignalHandlerId;
+
+use crate::prelude::*;
 
 use crate::{
     backend::{
@@ -11,6 +11,7 @@ use crate::{
 };
 
 glib::wrapper! {
+    /// A row in the channel messages holding e.g. a [MessageItem].
     pub struct ItemRow(ObjectSubclass<imp::ItemRow>)
         @extends gtk::Widget, adw::Bin, @implements gtk::Accessible;
 }
@@ -55,14 +56,15 @@ impl ItemRow {
 }
 
 mod imp {
-    use adw::prelude::BinExt;
-    use gdk::glib::subclass::Signal;
-    use glib::subclass::InitializingObject;
-    use once_cell::sync::Lazy;
+    use crate::{backend::message::TextMessage, prelude::*};
+
+    use glib::{
+        subclass::{InitializingObject, Signal},
+        SignalHandlerId,
+    };
+    use gtk::CompositeTemplate;
 
     use crate::backend::timeline::TimelineItem;
-
-    use super::*;
 
     use std::cell::RefCell;
 

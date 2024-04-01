@@ -1,13 +1,12 @@
-use std::{cell::RefCell, collections::HashMap, io::Write, ops::Bound, path::Path, time::Duration};
+use crate::prelude::*;
 
-use gdk::{gio::Settings, prelude::*};
-use gio::{subclass::prelude::ObjectSubclassIsExt, Application};
-use glib::{clone, Object};
-use gtk::{gdk, gio, glib};
+use std::{collections::HashMap, io::Write, ops::Bound, path::Path, time::Duration};
+
+use gio::Application;
+use gio::Settings;
 use libsignal_service::{
     content::ContentBody,
     groups_v2::Group,
-    prelude::{Content, ProfileKey, Uuid},
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
     push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
@@ -20,6 +19,7 @@ use rand::distributions::DistString;
 use url::Url;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
+use crate::backend::message::{DisplayMessage, DisplayMessageExt};
 use crate::{dbus::Feedbackd, gspawn, tspawn, ApplicationError};
 
 const MESSAGE_BOUND: usize = 100;
@@ -31,12 +31,17 @@ const SECRET_LENGTH: usize = 64;
 const STORE_VERSION_FILE: &str = "store_version";
 
 gtk::glib::wrapper! {
+    /// The manager is the core of the logic of Flare.
+    ///
+    /// It is mostly a wrapper around [ManagerThread] (which is itself a wrapper around [presage::Manager]).
+    /// It also has other functions, like caching the channels which are in use or sending notifications.
     pub struct Manager(ObjectSubclass<imp::Manager>);
 }
 
 type StoreType = presage_store_sled::SledStore;
 type PresageError = presage::Error<presage_store_sled::SledStoreError>;
 
+/// Query the encryption password from the keyring, storing one if none exists.
 async fn encryption_password() -> Result<String, ApplicationError> {
     let keyring = Keyring::new().await?;
     keyring.unlock().await?;
@@ -77,6 +82,7 @@ async fn encryption_password() -> Result<String, ApplicationError> {
     }
 }
 
+/// Creating the configuration store at the specified path.
 async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationError> {
     let path = p.as_ref();
     log::trace!("Initialize config store at {}", path.to_string_lossy());
@@ -246,8 +252,13 @@ impl Manager {
         }?;
         if let Some(content) = content {
             let msg = Message::from_content(content, self).await;
-            // TODO: Log message
-            log::trace!("Found message queried",);
+            log::trace!(
+                "Found message queried: {}",
+                msg.as_ref()
+                    .and_then(|t| t.dynamic_cast_ref::<DisplayMessage>())
+                    .and_then(|t| t.textual_description())
+                    .unwrap_or("No Text".to_string())
+            );
             Ok(msg)
         } else {
             Ok(None)
@@ -275,14 +286,19 @@ impl Manager {
             .filter_map(|o| o.ok()))
     }
 
+    /// Asynchronously initialize the manager. This will never return unless there is an error.
+    ///
+    /// This includes:
+    /// - Setting up the configuration store.
+    /// - Constructing the manager thread, reacting to any setup results or errors that happen.
+    /// - Initializing feedbackd.
+    /// - Loading the stored channels.
+    /// - Listening for messages or errors and propagating them to the correct channels.
     #[cfg(not(feature = "screenshot"))]
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
-        use futures::channel::oneshot;
+        use futures::channel::{mpsc, oneshot};
         use futures::{select, FutureExt, StreamExt};
         use gdk::glib::BoxedAnyObject;
-        use tokio::sync::mpsc;
-
-        use crate::backend::message::MessageExt;
 
         let config_store = config_store(p).await?;
 
@@ -292,13 +308,11 @@ impl Manager {
             .swap(&RefCell::new(Some(config_store.clone())));
 
         log::trace!("Setting up the manager");
-        // TODO: This is a heavy mix of tokio and futures channels. Why?
-        // XXX: Use different message bound?
         let (setup_results_tx, mut setup_results_rx) =
             futures::channel::mpsc::channel(MESSAGE_BOUND);
         let (error_tx, error_rx) = oneshot::channel();
 
-        let (send_content, mut receive_content) = mpsc::unbounded_channel();
+        let (send_content, mut receive_content) = mpsc::unbounded();
         let (send_error, mut receive_error) = mpsc::channel(MESSAGE_BOUND);
 
         gspawn!(clone!(@weak self as s => async move {
@@ -327,7 +341,7 @@ impl Manager {
         }
 
         if internal.is_none() {
-            if let Some(error_opt) = receive_error.recv().await {
+            if let Some(error_opt) = receive_error.next().await {
                 log::error!("Got error after linking device: {}", error_opt);
                 return Err(error_opt);
             }
@@ -353,6 +367,7 @@ impl Manager {
         crate::info!("Own uuid: {:?}", self.uuid());
         log::debug!("Start receiving messages");
         'outer: loop {
+            // On setup, it takes a while for channels to sync. Therefore try multiple times until there are channels.
             let mut init_channels_sleep =
                 gtk::glib::timeout_future(Duration::from_secs(INIT_CHANNELS_SLEEP_SECS)).fuse();
             select! {
@@ -361,13 +376,15 @@ impl Manager {
                         channels_init = self.init_channels().await;
                     }
                 }
-                error_opt = receive_error.recv().fuse() => {
+                // Receive errors.
+                error_opt = receive_error.next().fuse() => {
                     if error_opt.is_none() {
                         break 'outer;
                     }
                     return Err(error_opt.unwrap());
                 }
-                msg_opt = receive_content.recv().fuse() => {
+                // Receive messages.
+                msg_opt = receive_content.next().fuse() => {
                     if msg_opt.is_none() {
                         break 'outer;
                     }
@@ -655,7 +672,7 @@ impl Manager {
     pub(super) fn get_contact_by_id(
         &self,
         id: Uuid,
-    ) -> Result<Option<libsignal_service::models::Contact>, PresageError> {
+    ) -> Result<Option<libsignal_service::models::Contact>, ApplicationError> {
         log::trace!("`Manager::get_contact_by_id` start");
         let r = self.store().contact_by_id(&id);
         log::trace!("`Manager::get_contact_by_id` finished");
@@ -718,15 +735,11 @@ impl Manager {
 }
 
 mod imp {
-    use std::{cell::RefCell, collections::HashMap};
+    use crate::prelude::*;
+    use std::collections::HashMap;
 
-    use gdk::glib::{BoxedAnyObject, ParamSpec, ParamSpecBoolean, Value};
-    use gdk::prelude::{ParamSpecBuilderExt, StaticType, ToValue};
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass};
     use gio::{Application, Settings};
-    use glib::subclass::Signal;
-    use gtk::{gdk, gio, glib};
-    use once_cell::sync::Lazy;
+    use glib::{BoxedAnyObject, ParamSpec, ParamSpecBoolean, Value};
 
     use crate::dbus::Feedbackd;
     use crate::{
@@ -741,7 +754,6 @@ mod imp {
         pub(in super::super) channels: RefCell<HashMap<u64, Channel>>,
         #[cfg(not(feature = "screenshot"))]
         pub(super) channels: RefCell<HashMap<u64, Channel>>,
-        // pub(super) profile: RefCell<Option<Profile>>,
         pub(super) settings: Settings,
         pub(super) application: RefCell<Option<Application>>,
 

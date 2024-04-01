@@ -1,10 +1,7 @@
-use gdk::prelude::ObjectExt;
-use glib::Object;
-use gtk::glib;
-
-use crate::backend::Channel;
+use crate::prelude::*;
 
 glib::wrapper! {
+    /// A channel displayed in the sidebar.
     pub struct ChannelItem(ObjectSubclass<imp::ChannelItem>)
         @extends gtk::Box, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -16,10 +13,6 @@ impl ChannelItem {
         log::trace!("Initializing `ChannelItem`");
         Object::builder::<Self>().build()
     }
-
-    pub fn channel(&self) -> Channel {
-        self.property("channel")
-    }
 }
 
 impl Default for ChannelItem {
@@ -29,27 +22,25 @@ impl Default for ChannelItem {
 }
 
 pub mod imp {
-    use std::cell::RefCell;
+    use crate::prelude::*;
 
-    use glib::{subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
-    use gtk::{glib, Label};
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
-    use once_cell::sync::Lazy;
+    use glib::subclass::InitializingObject;
+    use gtk::{CompositeTemplate, Label};
 
     use crate::backend::message::{DisplayMessage, DisplayMessageExt, MessageExt};
-    use crate::{
-        backend::{Channel, Manager},
-        gui::utility::Utility,
-    };
+    use crate::backend::{Channel, Manager};
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate, Default, glib::Properties)]
+    #[properties(wrapper_type = super::ChannelItem)]
     #[template(resource = "/ui/channel_item.ui")]
     pub struct ChannelItem {
         #[template_child]
         label_last_message: TemplateChild<Label>,
 
+        #[property(get, set, type = Channel)]
         channel: RefCell<Option<Channel>>,
 
+        #[property(get, set, construct_only, type = Manager)]
         manager: RefCell<Option<Manager>>,
     }
 
@@ -112,45 +103,8 @@ pub mod imp {
         }
     }
 
-    impl ObjectImpl for ChannelItem {
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<Channel>("channel").build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "channel" => self.channel.borrow().as_ref().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let man = value
-                        .get::<Option<Manager>>()
-                        .expect("Property `manager` of `ChannelItem` has to be of type `Manager`");
-                    self.manager.replace(man);
-                }
-                "channel" => {
-                    let chan = value
-                        .get::<Option<Channel>>()
-                        .expect("Property `channel` of `ChannelItem` has to be of type `Channel`");
-                    self.channel.replace(chan);
-                }
-                _ => unimplemented!(),
-            }
-        }
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for ChannelItem {}
 
     impl WidgetImpl for ChannelItem {}
     impl BoxImpl for ChannelItem {}

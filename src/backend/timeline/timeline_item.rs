@@ -1,26 +1,22 @@
-use gdk::subclass::prelude::{ObjectSubclass, ObjectSubclassIsExt};
-use glib::subclass::{
-    prelude::{IsSubclassableExt, ObjectImpl},
-    types::IsSubclassable,
-};
-use gtk::{glib, prelude::*};
+use crate::prelude::*;
+use glib::subclass::types::IsSubclassable;
 
 glib::wrapper! {
+    /// A [TimelineItem] is anything that can be included in a [Timeline](super::Timeline).
     pub struct TimelineItem(ObjectSubclass<imp::TimelineItem>);
 }
 
 pub trait TimelineItemExt: 'static + std::marker::Sized + glib::prelude::ObjectExt {
+    /// Set if this item should show the header based on the previous item.
     fn update_show_header(&self, previous: Option<&TimelineItem>);
+    /// Set if this item should show the timestamp based on the next item.
     fn update_show_timestamp(&self, next: Option<&TimelineItem>);
 
-    // Time as [glib::DateTime]. Should not return `None`, but just in case.
     fn datetime(&self) -> Option<glib::DateTime> {
-        glib::DateTime::from_unix_utc((self.timestamp() / 1000).try_into().unwrap_or_default())
-            .ok()
-            .and_then(|d| d.to_local().ok())
+        self.property("datetime")
     }
 
-    // Days since 01.01.1970
+    /// Days since 01.01.1970
     fn day_timestamp(&self) -> u64 {
         self.timestamp() / (1000 * 60 * 60 * 24)
     }
@@ -100,14 +96,7 @@ where
 }
 
 mod imp {
-    use std::cell::Cell;
-
-    use gdk::{
-        glib::{ParamSpecBoolean, ParamSpecBoxed},
-        subclass::prelude::{ClassStruct, ObjectSubclassExt},
-    };
-    use glib::{subclass::types::ObjectSubclass, ParamSpec, ParamSpecUInt64, Value};
-    use once_cell::sync::Lazy;
+    use std::marker::PhantomData;
 
     use super::*;
 
@@ -138,12 +127,30 @@ mod imp {
         (klass.as_ref().update_show_timestamp)(this, next)
     }
 
-    #[derive(Debug, Default)]
+    #[derive(Debug, Default, glib::Properties)]
+    #[properties(wrapper_type = super::TimelineItem)]
     pub struct TimelineItem {
+        #[property(get, set, construct_only)]
         timestamp: Cell<u64>,
 
+        #[property(get, set)]
         show_header: Cell<bool>,
+        #[property(get, set)]
         show_timestamp: Cell<bool>,
+
+        #[property(get = Self::datetime)]
+        datetime: PhantomData<Option<glib::DateTime>>,
+    }
+
+    impl TimelineItem {
+        // Time as [glib::DateTime]. Should not return `None`, but just in case.
+        fn datetime(&self) -> Option<glib::DateTime> {
+            glib::DateTime::from_unix_utc(
+                (self.timestamp.get() / 1000).try_into().unwrap_or_default(),
+            )
+            .ok()
+            .and_then(|d| d.to_local().ok())
+        }
     }
 
     #[glib::object_subclass]
@@ -154,58 +161,6 @@ mod imp {
         type Class = TimelineItemClass;
     }
 
-    impl ObjectImpl for TimelineItem {
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecUInt64::builder("timestamp")
-                        .construct_only()
-                        .build(),
-                    ParamSpecBoxed::builder::<glib::DateTime>("datetime")
-                        .read_only()
-                        .build(),
-                    ParamSpecBoolean::builder("show-header").build(),
-                    ParamSpecBoolean::builder("show-timestamp").build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "timestamp" => self.timestamp.get().to_value(),
-                "datetime" => self.obj().datetime().to_value(),
-                "show-header" => self.show_header.get().to_value(),
-                "show-timestamp" => self.show_timestamp.get().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "timestamp" => {
-                    let obj = value
-                        .get::<u64>()
-                        .expect("Property `timestamp` of `TimelineItem` has to be of type `u64`");
-
-                    self.timestamp.set(obj);
-                }
-                "show-header" => {
-                    let obj = value.get::<bool>().expect(
-                        "Property `show-header` of `TimelineItem` has to be of type `bool`",
-                    );
-
-                    self.show_header.set(obj);
-                }
-                "show-timestamp" => {
-                    let obj = value.get::<bool>().expect(
-                        "Property `show-timestamp` of `TimelineItem` has to be of type `bool`",
-                    );
-
-                    self.show_timestamp.set(obj);
-                }
-                _ => unimplemented!(),
-            }
-        }
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for TimelineItem {}
 }

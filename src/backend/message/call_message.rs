@@ -1,10 +1,7 @@
-use crate::backend::timeline::TimelineItem;
-use std::cell::RefCell;
+use crate::prelude::*;
 
-use gdk::prelude::ObjectExt;
-use gio::subclass::prelude::ObjectSubclassIsExt;
-use glib::Object;
-use gtk::{gdk, gio, glib};
+use crate::backend::timeline::TimelineItem;
+
 use libsignal_service::content::CallMessage as PreCallMessage;
 
 use crate::backend::{Channel, Contact};
@@ -45,6 +42,7 @@ impl TryFrom<&PreCallMessage> for CallMessageType {
 }
 
 gtk::glib::wrapper! {
+    /// A CallMessage represents a call event of some type [CallMessageType].
     pub struct CallMessage(ObjectSubclass<imp::CallMessage>) @extends Message, DisplayMessage, TimelineItem;
 }
 
@@ -67,28 +65,10 @@ impl CallMessage {
         s.imp().call.swap(&RefCell::new(Some(call)));
         Some(s)
     }
-
-    pub fn call_type(&self) -> CallMessageType {
-        self.property("call-type")
-    }
 }
 
 mod imp {
     use super::*;
-    use gdk::prelude::ObjectExt;
-    use gdk::subclass::prelude::{ObjectImpl, ObjectSubclass, ObjectSubclassIsExt};
-    use gdk::{
-        gdk_pixbuf::{
-            glib::{ParamSpec, Value},
-            prelude::ToValue,
-        },
-        prelude::ParamSpecBuilderExt,
-    };
-    use glib::ParamSpecEnum;
-    use gtk::{glib, prelude::Cast};
-    use libsignal_service::content::CallMessage as PreCallMessage;
-    use once_cell::sync::Lazy;
-    use std::cell::RefCell;
 
     use crate::backend::message::{
         display_message::DisplayMessageImpl, DisplayMessage, MessageImpl,
@@ -96,12 +76,12 @@ mod imp {
     use crate::backend::timeline::{TimelineItem, TimelineItemImpl};
     use crate::backend::Message;
 
-    use super::CallMessageType;
-
-    #[derive(Default)]
+    #[derive(Default, glib::Properties)]
+    #[properties(wrapper_type = super::CallMessage)]
     pub struct CallMessage {
         pub(super) call: RefCell<Option<PreCallMessage>>,
 
+        #[property(get, set, construct_only, default = CallMessageType::default(), builder(CallMessageType::default()))]
         pub(super) call_type: RefCell<CallMessageType>,
     }
 
@@ -141,35 +121,6 @@ mod imp {
 
     impl MessageImpl for CallMessage {}
 
-    impl ObjectImpl for CallMessage {
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![ParamSpecEnum::builder("call-type")
-                    .default_value(CallMessageType::default())
-                    .construct_only()
-                    .build()]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "call-type" => self.call_type.borrow().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "call-type" => {
-                    let obj = value.get::<CallMessageType>().expect(
-                        "Property `call-type` of `CallMessage` has to be of type `CallMessageType`",
-                    );
-
-                    self.call_type.replace(obj);
-                }
-                _ => unimplemented!(),
-            }
-        }
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for CallMessage {}
 }

@@ -1,10 +1,9 @@
-use crate::backend::Manager;
-use glib::{prelude::ObjectExt, Object};
-use gtk::glib;
+use crate::prelude::*;
 
 use super::Window;
 
 glib::wrapper! {
+    /// Window displaying linked devices (if the device is in primary mode).
     pub struct LinkedDevicesWindow(ObjectSubclass<imp::LinkedDevicesWindow>)
         @extends adw::Dialog, gtk::Widget,
         @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
@@ -18,46 +17,31 @@ impl LinkedDevicesWindow {
             .property("window", parent)
             .build()
     }
-
-    fn manager(&self) -> Manager {
-        self.property("manager")
-    }
-
-    fn window(&self) -> Window {
-        self.property("window")
-    }
 }
 
 pub mod imp {
-    use adw::prelude::WidgetExt;
-    use adw::prelude::*;
-    use adw::subclass::prelude::*;
-    use gdk::glib::clone;
-    use gdk::prelude::ParamSpecBuilderExt;
-    use gdk::prelude::ToValue;
-    use glib::{subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
-    use gtk::glib;
+    use crate::prelude::*;
+
+    use glib::subclass::InitializingObject;
     use gtk::CompositeTemplate;
-    use once_cell::sync::Lazy;
-    use std::cell::RefCell;
+
     use url::Url;
 
-    use crate::backend::Manager;
-    use crate::gspawn;
     use crate::gui::error_dialog::ErrorDialog;
-    use crate::gui::utility::Utility;
     use crate::gui::Window;
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate, Default, glib::Properties)]
+    #[properties(wrapper_type = super::LinkedDevicesWindow)]
     #[template(resource = "/ui/linked_devices_window.ui")]
     pub struct LinkedDevicesWindow {
-        // TODO: Port to AlertDialog
         #[template_child]
         add_device_dialog: TemplateChild<adw::AlertDialog>,
         #[template_child]
         entry_device_url: TemplateChild<adw::EntryRow>,
 
+        #[property(get, set, construct_only, type = Manager)]
         manager: RefCell<Option<Manager>>,
+        #[property(get, set, construct_only, type = Window)]
         window: RefCell<Option<Window>>,
     }
 
@@ -118,54 +102,8 @@ pub mod imp {
         }
     }
 
-    impl ObjectImpl for LinkedDevicesWindow {
-        fn constructed(&self) {
-            log::trace!("Constructed LinkedDevicesWindow");
-            self.parent_constructed();
-        }
-
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<Window>("window")
-                        .construct_only()
-                        .build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "window" => self.window.borrow().as_ref().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let man = value.get::<Option<Manager>>().expect(
-                        "Property `manager` of `LinkedDevicesWindow` has to be of type `Manager`",
-                    );
-
-                    self.manager.replace(man);
-                }
-                "window" => {
-                    let win = value.get::<Option<Window>>().expect(
-                        "Property `window` of `LinkedDevicesWindow` has to be of type `Window`",
-                    );
-
-                    self.window.replace(win);
-                }
-                _ => unimplemented!(),
-            }
-        }
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for LinkedDevicesWindow {}
 
     impl WidgetImpl for LinkedDevicesWindow {}
     impl AdwDialogImpl for LinkedDevicesWindow {}

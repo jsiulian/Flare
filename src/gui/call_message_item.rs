@@ -1,12 +1,12 @@
-use gdk::glib::subclass::types::ObjectSubclassIsExt;
-use glib::Object;
-use gtk::glib;
-use gtk::prelude::*;
+use crate::prelude::*;
+
+use glib::subclass::types::ObjectSubclassIsExt;
 
 use crate::backend::message::{CallMessage, CallMessageType};
 use crate::backend::Contact;
 
 gtk::glib::wrapper! {
+    /// A widget to display call events.
     pub struct CallMessageItem(ObjectSubclass<imp::CallMessageItem>)
         @extends gtk::Box,gtk::Widget;
 }
@@ -31,33 +31,27 @@ impl CallMessageItem {
         obj.imp().icon.set_icon_name(Some(icon_name));
         obj
     }
-
-    pub fn message(&self) -> CallMessage {
-        self.property("message")
-    }
 }
 
 pub mod imp {
-    use std::cell::RefCell;
+    use crate::prelude::*;
 
-    use glib::{subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
-    use gtk::glib;
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
-    use once_cell::sync::Lazy;
+    use glib::subclass::InitializingObject;
+    use gtk::CompositeTemplate;
 
-    use crate::{
-        backend::{message::CallMessage, Manager},
-        gui::utility::Utility,
-    };
+    use crate::backend::{message::CallMessage, Manager};
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate, Default, glib::Properties)]
+    #[properties(wrapper_type = super::CallMessageItem)]
     #[template(resource = "/ui/call_message_item.ui")]
     pub struct CallMessageItem {
         #[template_child]
         pub icon: TemplateChild<gtk::Image>,
 
+        #[property(get, set)]
         message: RefCell<Option<CallMessage>>,
 
+        #[property(get, set, construct_only, type = Manager)]
         manager: RefCell<Option<Manager>>,
     }
 
@@ -77,49 +71,8 @@ pub mod imp {
         }
     }
 
-    impl ObjectImpl for CallMessageItem {
-        fn constructed(&self) {
-            self.parent_constructed();
-        }
-
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<CallMessage>("message").build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "message" => self.message.borrow().as_ref().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let man = value.get::<Option<Manager>>().expect(
-                        "Property `manager` of `CallMessageItem` has to be of type `Manager`",
-                    );
-                    self.manager.replace(man);
-                }
-                "message" => {
-                    let msg = value.get::<Option<CallMessage>>().expect(
-                        "Property `message` of `CallMessageItem` has to be of type `Message`",
-                    );
-                    self.message.replace(msg);
-                }
-                _ => unimplemented!(),
-            }
-        }
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for CallMessageItem {}
 
     impl WidgetImpl for CallMessageItem {}
     impl BoxImpl for CallMessageItem {}

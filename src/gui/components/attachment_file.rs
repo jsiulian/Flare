@@ -1,8 +1,8 @@
 use crate::gui::attachment::Attachment;
-use glib::Object;
-use gtk::glib;
+use crate::prelude::*;
 
 gtk::glib::wrapper! {
+    /// Attachment widget displaying a file.
     pub struct AttachmentFile(ObjectSubclass<imp::AttachmentFile>)
         @extends gtk::Widget, Attachment;
 }
@@ -17,11 +17,11 @@ impl AttachmentFile {
 }
 
 pub mod imp {
+    use crate::gui::{attachment::Attachment, attachment::AttachmentImpl};
+    use crate::prelude::*;
 
-    use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
     use glib::subclass::InitializingObject;
-    use gtk::glib;
-    use gtk::{prelude::*, subclass::prelude::*, CompositeTemplate};
+    use gtk::CompositeTemplate;
 
     #[derive(CompositeTemplate, Default)]
     #[template(resource = "/ui/components/attachment_file.ui")]

@@ -1,14 +1,13 @@
-use gdk::prelude::Cast;
-use gdk::subclass::prelude::ObjectSubclassIsExt;
-use glib::{clone, Object};
-use gtk::prelude::{MediaStreamExt, ObjectExt, SettingsExt};
-use gtk::{glib, prelude::WidgetExt, Widget};
+use crate::prelude::*;
+
+use gtk::Widget;
 
 use crate::config::BASE_ID;
 use crate::gio::Settings;
 use crate::gui::attachment::Attachment;
 
 gtk::glib::wrapper! {
+    /// Audio message UI.
     pub struct AttachmentAudio(ObjectSubclass<imp::AttachmentAudio>)
         @extends gtk::Widget, Attachment;
 }
@@ -49,10 +48,9 @@ impl AttachmentAudio {
 }
 
 pub mod imp {
-    use glib::subclass::InitializingObject;
-    use gtk::prelude::{ButtonExt, Cast, WidgetExt};
-    use gtk::{glib, Button, Grid, MediaControls};
-    use gtk::{subclass::prelude::*, CompositeTemplate};
+    use crate::prelude::*;
+
+    use gtk::{Button, CompositeTemplate, Grid, MediaControls};
 
     use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
 

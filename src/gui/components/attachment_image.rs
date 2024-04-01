@@ -1,14 +1,14 @@
-use glib::Object;
-use gtk::glib;
+use crate::prelude::*;
 
 use crate::gui::attachment::Attachment;
 
 gtk::glib::wrapper! {
-    pub struct AttachmentPhoto(ObjectSubclass<imp::AttachmentPhoto>)
+    /// Attachment displaying an image.
+    pub struct AttachmentImage(ObjectSubclass<imp::AttachmentImage>)
         @extends gtk::Widget, Attachment;
 }
 
-impl AttachmentPhoto {
+impl AttachmentImage {
     pub fn new(attachment: &crate::backend::Attachment) -> Self {
         log::trace!("Initializing `Attachment`");
         Object::builder::<Self>()
@@ -18,24 +18,24 @@ impl AttachmentPhoto {
 }
 
 pub mod imp {
+    use crate::prelude::*;
+
     use glib::subclass::InitializingObject;
-    use gtk::prelude::WidgetExt;
-    use gtk::{glib, Picture};
-    use gtk::{subclass::prelude::*, CompositeTemplate};
+    use gtk::{CompositeTemplate, Picture};
 
     use crate::gui::{attachment::Attachment, attachment::AttachmentImpl, utility::Utility};
 
     #[derive(CompositeTemplate, Default)]
-    #[template(resource = "/ui/components/attachment_photo.ui")]
-    pub struct AttachmentPhoto {
+    #[template(resource = "/ui/components/attachment_image.ui")]
+    pub struct AttachmentImage {
         #[template_child]
         picture: TemplateChild<Picture>,
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for AttachmentPhoto {
-        const NAME: &'static str = "FlAttachmentPhoto";
-        type Type = super::AttachmentPhoto;
+    impl ObjectSubclass for AttachmentImage {
+        const NAME: &'static str = "FlAttachmentImage";
+        type Type = super::AttachmentImage;
         type ParentType = Attachment;
 
         fn class_init(klass: &mut Self::Class) {
@@ -48,7 +48,7 @@ pub mod imp {
         }
     }
 
-    impl ObjectImpl for AttachmentPhoto {
+    impl ObjectImpl for AttachmentImage {
         fn constructed(&self) {
             self.parent_constructed();
         }
@@ -58,6 +58,6 @@ pub mod imp {
         }
     }
 
-    impl WidgetImpl for AttachmentPhoto {}
-    impl AttachmentImpl for AttachmentPhoto {}
+    impl WidgetImpl for AttachmentImage {}
+    impl AttachmentImpl for AttachmentImage {}
 }

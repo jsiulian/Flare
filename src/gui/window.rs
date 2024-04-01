@@ -1,10 +1,7 @@
-use gdk::{gio, glib, prelude::SettingsExt, subclass::prelude::*};
-use glib::Object;
-use gtk::prelude::*;
-
-use crate::backend::Manager;
+use crate::prelude::*;
 
 glib::wrapper! {
+    /// The main application window.
     pub struct Window(ObjectSubclass<imp::Window>)
         @extends adw::ApplicationWindow, gtk::ApplicationWindow, adw::Window, gtk::Window, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -72,27 +69,20 @@ impl Window {
         }
     }
 
-    fn manager(&self) -> Manager {
-        self.property("manager")
-    }
-
     pub(crate) fn settings(&self) -> gio::Settings {
         self.imp().settings.clone()
     }
 }
 
 pub mod imp {
-    use std::{cell::RefCell, env, path::PathBuf};
+    use crate::prelude::*;
+    use std::{env, path::PathBuf};
 
-    use adw::{prelude::*, subclass::prelude::*, AboutDialog};
-    use adw::{AlertDialog, EntryRow, ResponseAppearance};
-    use gdk::gio::Cancellable;
-    use gdk::glib::{BindingFlags, BoxedAnyObject, Propagation};
-    use gio::{Settings, SimpleAction, SimpleActionGroup};
-    use glib::{clone, subclass::InitializingObject, ParamSpec, ParamSpecObject, Value};
-    use gtk::{gio, glib};
+    use adw::{AboutDialog, AlertDialog, EntryRow, ResponseAppearance};
+    use gio::{Cancellable, Settings, SimpleAction, SimpleActionGroup};
+    use glib::subclass::InitializingObject;
+    use glib::{BindingFlags, BoxedAnyObject, Propagation};
     use gtk::{Builder, CompositeTemplate, ShortcutsWindow};
-    use once_cell::sync::Lazy;
 
     use crate::backend::{Channel, SetupResult};
     use crate::gui::channel_info_dialog::ChannelInfoDialog;
@@ -101,7 +91,6 @@ pub mod imp {
     use crate::{
         backend::Manager,
         config::BASE_ID,
-        gspawn,
         gui::{
             channel_list::ChannelList, channel_messages::ChannelMessages,
             error_dialog::ErrorDialog, preferences_window::PreferencesWindow,
@@ -109,8 +98,9 @@ pub mod imp {
         },
     };
 
-    #[derive(CompositeTemplate)]
+    #[derive(CompositeTemplate, glib::Properties)]
     #[template(resource = "/ui/window.ui")]
+    #[properties(wrapper_type = super::Window)]
     pub struct Window {
         #[template_child]
         split_view: TemplateChild<adw::NavigationSplitView>,
@@ -123,9 +113,10 @@ pub mod imp {
         #[template_child]
         new_channel_dialog: TemplateChild<NewChannelDialog>,
 
-        manager: RefCell<Option<Manager>>,
-
         pub(super) settings: gio::Settings,
+
+        #[property(get, set, type = Manager)]
+        manager: RefCell<Option<Manager>>,
     }
 
     impl Default for Window {
@@ -146,6 +137,9 @@ pub mod imp {
     impl Window {
         fn setup_actions(&self) {
             log::trace!("Setting up window actions");
+
+            // Global window actions.
+
             log::trace!("Setting up preferences-window action");
             let obj = self.obj();
             let action_settings = SimpleAction::new("settings", None);
@@ -175,6 +169,7 @@ pub mod imp {
                 }));
                 dialog.present(&obj);
             }));
+
             log::trace!("Setting up unlink action");
             let action_unlink = SimpleAction::new("unlink", None);
             action_unlink.connect_activate(clone!(@weak obj => move |_, _| {
@@ -236,10 +231,11 @@ pub mod imp {
                         if let Some(man) = obj.imp().manager.borrow().as_ref() {
                             let token = entry_token.text();
                             let captcha = entry_captcha.text();
-                            gspawn!(clone!(@weak man => async move {
+                            gspawn!(clone!(@weak man, @weak obj => async move {
                                 if let Err(e) = man.submit_recaptcha_challenge(&token, &captcha).await {
-                                    // TODO: Show error dialog?
                                     log::error!("Failed to submit recaptcha: {}", e);
+                                    let dialog = ErrorDialog::new(e, &obj);
+                                    dialog.present(&obj);
                                 }
                             }));
                         }
@@ -247,15 +243,17 @@ pub mod imp {
                 }));
                 dialog.present(&obj);
             }));
+
             log::trace!("Setting up sync-contacts action");
             let action_sync_contacts = SimpleAction::new("sync-contacts", None);
             action_sync_contacts.connect_activate(clone!(@weak obj => move |_, _| {
                 log::trace!("User requested to synchronize contacts");
                 if let Some(man) = obj.imp().manager.borrow().as_ref() {
-                    gspawn!(clone!(@weak man => async move {
+                    gspawn!(clone!(@weak man, @weak obj => async move {
                         if let Err(e) = man.request_contacts_sync().await {
-                            // TODO: Show error dialog?
                             log::error!("Failed to synchronize contacts: {}", e);
+                            let dialog = ErrorDialog::new(e, &obj);
+                            dialog.present(&obj);
                         }
                     }));
                 };
@@ -347,6 +345,8 @@ pub mod imp {
             actions.add_action(&action_channel_information);
             actions.add_action(&action_channel_clear_messages);
 
+            // Channel messages actions.
+
             let action_activate_input = SimpleAction::new("activate-input", None);
             action_activate_input.connect_activate(
                 clone!(@strong self.channel_messages as channel_messages => move |_, _| {
@@ -363,6 +363,8 @@ pub mod imp {
             obj.insert_action_group("channel-messages", Some(&actions));
             actions.add_action(&action_activate_input);
             actions.add_action(&action_load_more);
+
+            // Channel list actions.
 
             let action_activate_channel =
                 SimpleAction::new("activate-channel", Some(&i32::static_variant_type()));
@@ -390,10 +392,9 @@ pub mod imp {
         fn setup_active_window_handler(&self) {
             let obj = self.obj();
             obj.connect_is_active_notify(clone!(
-                @weak self as w => move |window| {
-                    w.channel_list.set_active(window.is_active())
-                }),
-            );
+            @weak self as w => move |window| {
+                w.channel_list.set_active(window.is_active())
+            }));
         }
 
         // Requires the manager to be set up. Therefore, postponed.
@@ -464,6 +465,7 @@ pub mod imp {
             crate::gui::error_dialog::ErrorDialog::ensure_type();
             crate::backend::timeline::TimelineItem::ensure_type();
             crate::gui::new_channel_dialog::NewChannelDialog::ensure_type();
+
             Self::bind_template(klass);
             Self::bind_template_callbacks(klass);
             crate::gui::utility::Utility::bind_template_callbacks(klass);
@@ -474,6 +476,7 @@ pub mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for Window {
         fn constructed(&self) {
             log::trace!("Constructed window");
@@ -532,32 +535,6 @@ pub mod imp {
                     dialog.present(&obj);
                 }
             }));
-        }
-
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> =
-                Lazy::new(|| vec![ParamSpecObject::builder::<Manager>("manager").build()]);
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let obj = value
-                        .get::<Option<Manager>>()
-                        .expect("Property `manager` of `Window` has to be of type `Manager`");
-
-                    self.manager.replace(obj);
-                }
-                _ => unimplemented!(),
-            }
         }
     }
 

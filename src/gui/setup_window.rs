@@ -1,12 +1,13 @@
-use crate::backend::{Manager, Server, SetupResult};
-use gdk::glib::subclass::types::ObjectSubclassIsExt;
-use glib::{prelude::ObjectExt, Object};
-use gtk::glib;
+use crate::prelude::*;
+
+use crate::backend::{Server, SetupResult};
+use glib::subclass::types::ObjectSubclassIsExt;
 use libsignal_service::configuration::SignalServers;
 
 use super::Window;
 
 glib::wrapper! {
+    /// The [SetupWindow] introduces Flare and lets the user link the device or register it as a primary device.
     pub struct SetupWindow(ObjectSubclass<imp::SetupWindow>)
         @extends adw::Dialog, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
@@ -25,14 +26,6 @@ impl SetupWindow {
     pub fn handle_setup_result(&self, result: &mut SetupResult) {
         self.imp().handle_setup_result(result)
     }
-
-    fn manager(&self) -> Manager {
-        self.property("manager")
-    }
-
-    pub fn window(&self) -> Window {
-        self.property("window")
-    }
 }
 
 fn servers() -> Vec<Server> {
@@ -49,30 +42,28 @@ fn servers() -> Vec<Server> {
 }
 
 pub mod imp {
-    use adw::prelude::AdwDialogExt;
-    use adw::prelude::ComboRowExt;
+    use crate::prelude::*;
+
     use adw::subclass::dialog::AdwDialogImplExt;
-    use adw::subclass::prelude::*;
     use adw::Toast;
+    use gdk_pixbuf::Pixbuf;
+    use gio::{ListStore, MemoryInputStream};
+    use glib::{subclass::InitializingObject, Bytes};
+    use gtk::{CompositeTemplate, PropertyExpression};
+
     use futures::channel::oneshot::Sender;
-    use gdk::gdk_pixbuf::Pixbuf;
-    use gdk::gio::ListStore;
     use gettextrs::gettext;
-    use gio::MemoryInputStream;
-    use glib::{subclass::InitializingObject, Bytes, ParamSpec, ParamSpecObject, Value};
-    use gtk::{gdk, gio, glib, PropertyExpression};
-    use gtk::{prelude::*, CompositeTemplate};
-    use libsignal_service::configuration::SignalServers;
-    use libsignal_service::prelude::phonenumber::PhoneNumber;
-    use once_cell::sync::Lazy;
-    use std::cell::RefCell;
+
     use std::str::FromStr;
 
-    use crate::backend::{Manager, Server, SetupDecision, SetupResult};
-    use crate::gui::utility::Utility;
+    use libsignal_service::configuration::SignalServers;
+    use libsignal_service::prelude::phonenumber::PhoneNumber;
+
+    use crate::backend::{Server, SetupDecision, SetupResult};
     use crate::gui::Window;
 
-    #[derive(CompositeTemplate, Default)]
+    #[derive(CompositeTemplate, Default, glib::Properties)]
+    #[properties(wrapper_type = super::SetupWindow)]
     #[template(resource = "/ui/setup_window.ui")]
     pub struct SetupWindow {
         #[template_child]
@@ -114,8 +105,10 @@ pub mod imp {
         #[template_child]
         dropdown_link_server: TemplateChild<adw::ComboRow>,
 
+        #[property(get, set, construct_only, type = Manager)]
         manager: RefCell<Option<Manager>>,
 
+        #[property(get, set, construct_only, type = Window)]
         window: RefCell<Option<Window>>,
 
         decision_callback: RefCell<Option<Sender<SetupDecision>>>,
@@ -308,53 +301,12 @@ pub mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for SetupWindow {
         fn constructed(&self) {
             log::trace!("Constructed SetupWindow");
             self.setup_servers_dropdown();
             self.parent_constructed();
-        }
-
-        fn properties() -> &'static [ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![
-                    ParamSpecObject::builder::<Manager>("manager")
-                        .construct_only()
-                        .build(),
-                    ParamSpecObject::builder::<Window>("window")
-                        .construct_only()
-                        .build(),
-                ]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
-            match pspec.name() {
-                "manager" => self.manager.borrow().as_ref().to_value(),
-                "window" => self.window.borrow().as_ref().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
-        fn set_property(&self, _id: usize, value: &Value, pspec: &ParamSpec) {
-            match pspec.name() {
-                "manager" => {
-                    let man = value
-                        .get::<Option<Manager>>()
-                        .expect("Property `manager` of `SetupWindow` has to be of type `Manager`");
-
-                    self.manager.replace(man);
-                }
-                "window" => {
-                    let win = value
-                        .get::<Option<Window>>()
-                        .expect("Property `window` of `SetupWindow` has to be of type `Window`");
-
-                    self.window.replace(win);
-                }
-                _ => unimplemented!(),
-            }
         }
     }
 

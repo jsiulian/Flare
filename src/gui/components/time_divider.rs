@@ -1,10 +1,7 @@
-use adw::subclass::prelude::*;
-use gdk::glib::Object;
-use gtk::{gdk, glib, prelude::*, CompositeTemplate};
-
-use crate::backend::message::TextMessage;
+use crate::prelude::*;
 
 glib::wrapper! {
+    /// Divider shown between messages of different days.
     pub struct TimeDivider(ObjectSubclass<imp::TimeDivider>)
         @extends gtk::Box, gtk::Widget, @implements gtk::Accessible;
 }
@@ -16,23 +13,35 @@ impl Default for TimeDivider {
 }
 
 mod imp {
-    use gdk::glib::subclass::Signal;
+    use crate::prelude::*;
+
+    use std::marker::PhantomData;
+
     use glib::subclass::InitializingObject;
     use gtk::subclass::box_::BoxImpl;
-    use once_cell::sync::Lazy;
 
-    use crate::{
-        backend::timeline::{TimelineItem, TimelineItemExt},
-        gui::utility::Utility,
-    };
+    use gtk::CompositeTemplate;
 
-    use super::*;
+    use crate::backend::timeline::TimelineItem;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, CompositeTemplate, glib::Properties)]
+    #[properties(wrapper_type = super::TimeDivider)]
     #[template(resource = "/ui/components/time_divider.ui")]
     pub struct TimeDivider {
         #[template_child]
         label_date: TemplateChild<gtk::Label>,
+
+        #[property(set = Self::set_item)]
+        item: PhantomData<TimelineItem>,
+    }
+
+    impl TimeDivider {
+        fn set_item(&self, item: Option<TimelineItem>) {
+            let formatted = item
+                .and_then(|v| v.datetime())
+                .and_then(|d| Utility::format_date_human(&d));
+            self.label_date.set_text(&formatted.unwrap_or_default());
+        }
     }
 
     #[glib::object_subclass]
@@ -50,46 +59,8 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for TimeDivider {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecObject::builder::<TimelineItem>("item")
-                    .write_only()
-                    .build()]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            match pspec.name() {
-                "item" => {
-                    let v = value
-                        .get::<Option<TimelineItem>>()
-                        .expect("TimeDivider to only get TimelineItem");
-
-                    let formatted = v
-                        .and_then(|v| v.datetime())
-                        .and_then(|d| Utility::format_date_human(&d));
-                    self.label_date.set_text(&formatted.unwrap_or_default());
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, _pspec: &glib::ParamSpec) -> glib::Value {
-            unimplemented!();
-        }
-
-        fn signals() -> &'static [Signal] {
-            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder("reply")
-                    .param_types([TextMessage::static_type()])
-                    .build()]
-            });
-            SIGNALS.as_ref()
-        }
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for TimeDivider {}
 
     impl WidgetImpl for TimeDivider {}
     impl BoxImpl for TimeDivider {}
