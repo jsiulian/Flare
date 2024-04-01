@@ -93,10 +93,10 @@
               '';
             in
             with pkgs;
-            pkgs.mkShell {
+            pkgs.mkShell.override { stdenv = pkgs.stdenvAdapters.useMoldLinker pkgs.clangStdenv; } {
               src = ./.;
               buildInputs = self.packages.${system}.default.buildInputs;
-              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb clippy sysprof cargo-deny ] ++ [ run run-gdb check i18n prof ];
+              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb clippy sysprof cargo-deny mold-wrapped ] ++ [ run run-gdb check i18n prof ];
               shellHook = ''
                 # Required for the application findings settings.
                 export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
