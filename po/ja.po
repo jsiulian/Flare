@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-17 18:47+0100\n"
-"PO-Revision-Date: 2024-03-30 06:01+0000\n"
+"PO-Revision-Date: 2024-04-02 05:01+0000\n"
 "Last-Translator: maboroshin <maboroshin@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ja/>\n"
@@ -116,7 +116,7 @@ msgstr "メッセージを入力"
 #: data/resources/ui/channel_messages.blp:255
 msgctxt "tooltip"
 msgid "Message input"
-msgstr "メセージの入力"
+msgstr "メッセージの入力"
 
 #: data/resources/ui/channel_messages.blp:267
 msgctxt "accessibility"
@@ -337,6 +337,15 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare は、非公式の Signal "
+"クライアントです。Flareはまだ安定しておらず、バグが発生することがあります。"
+"バグが起きたら<a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
+"issues\">問題報告所</a>を参照し、新規の問題であれば新たに問題 (issue) "
+"を開いてください。また、サードパーティのアプリですので、Flare は公式の "
+"Signal アプリと同水準のセキュリティとプライバシーの安全性を保証することはでき"
+"ません。もし強固なセキュリティが必要であれば Flare を使用しないでください。"
+"詳細は<a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/"
+"README.md#security\">README</a> をご覧ください。"
 
 #: data/resources/ui/setup_window.blp:65 data/resources/ui/setup_window.blp:72
 msgid "Setup Primary Device or Link Device?"
@@ -448,11 +457,11 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:311
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "クリップボードにコピー"
 
 #: data/resources/ui/setup_window.blp:344
 msgid "Continue"
-msgstr ""
+msgstr "続行"
 
 #: data/resources/ui/setup_window.blp:361
 msgid ""
@@ -468,7 +477,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:376
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "キャプチャ"
 
 #: data/resources/ui/setup_window.blp:389
 msgid ""
@@ -481,7 +490,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:423
 #: data/resources/ui/setup_window.blp:448
 msgid "Confirm"
-msgstr ""
+msgstr "確認"
 
 #: data/resources/ui/setup_window.blp:439
 msgid "Insert the verification code you received from Signal here."
@@ -501,7 +510,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:506
 msgid "Known Bugs"
-msgstr ""
+msgstr "既知のバグ"
 
 #: data/resources/ui/setup_window.blp:511
 msgid ""
@@ -528,17 +537,17 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "ショートカットを表示"
 
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "設定を開く"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
@@ -548,17 +557,17 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "メニューを開く"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "ウィンドウを閉じる"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "チャンネル"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
@@ -568,27 +577,27 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "チャンネルを検索"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "添付ファイルをアップロード"
 
 #: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "入力欄にフォーカス"
 
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr ""
+msgstr "メッセージをさらに読み込む"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:133
 msgid "Submit Captcha"
-msgstr ""
+msgstr "キャプチャを送信"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -602,67 +611,69 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "トークン"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "送信"
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
-msgstr ""
+msgstr "メッセージ"
 
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "絵文字を挿入"
 
 #: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "絵文字を挿入"
 
 #: data/resources/ui/window.blp:24
 msgid "Channel list"
-msgstr ""
+msgstr "チャンネル一覧"
 
 #: data/resources/ui/window.blp:37
+#, fuzzy
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "会話を追加"
 
 #: data/resources/ui/window.blp:48 data/resources/ui/window.blp:91
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "メニュー"
 
 #: data/resources/ui/window.blp:78
 msgid "Chat"
-msgstr ""
+msgstr "チャット"
 
 #: data/resources/ui/window.blp:112
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: data/resources/ui/window.blp:138
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "連絡先を同期"
 
 #: data/resources/ui/window.blp:143
 msgid "Keybindings"
-msgstr ""
+msgstr "キー割り当て"
 
 #: data/resources/ui/window.blp:148
+#, fuzzy
 msgid "About"
-msgstr ""
+msgstr "情報"
 
 #: data/resources/ui/window.blp:153
 msgid "Quit"
-msgstr ""
+msgstr "終了"
 
 #: data/resources/ui/window.blp:167
 msgid "Clear Messages"
-msgstr ""
+msgstr "メッセージを消去"
 
 #: src/backend/channel.rs:614
 msgid "Note to self"
@@ -670,31 +681,31 @@ msgstr ""
 
 #: src/backend/manager.rs:420
 msgid "You"
-msgstr ""
+msgstr "あなた"
 
 #: src/backend/message/call_message.rs:119
 msgid "Incoming call"
-msgstr ""
+msgstr "着信"
 
 #: src/backend/message/call_message.rs:120
 msgid "Outgoing call"
-msgstr ""
+msgstr "発信"
 
 #: src/backend/message/call_message.rs:121
 msgid "Call started"
-msgstr ""
+msgstr "通話を開始しました"
 
 #: src/backend/message/call_message.rs:122
 msgid "Call ended"
-msgstr ""
+msgstr "通話を終了しました"
 
 #: src/backend/message/call_message.rs:123
 msgid "Call declined"
-msgstr ""
+msgstr "通話を拒否しました"
 
 #: src/backend/message/call_message.rs:124
 msgid "Unanswered call"
-msgstr ""
+msgstr "不在着信"
 
 #. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
 #: src/backend/message/reaction_message.rs:69
@@ -709,34 +720,30 @@ msgstr ""
 #: src/backend/message/text_message.rs:374
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "画像を送信"
 
 #: src/backend/message/text_message.rs:377
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "動画を送信"
 
 #: src/backend/message/text_message.rs:381
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ボイスメッセージを送信"
 
 #: src/backend/message/text_message.rs:387
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ファイルを送信"
 
 #: src/error.rs:88
 msgid "I/O Error."
-msgstr ""
+msgstr "I/Oエラー。"
 
 #: src/error.rs:93
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "インターネットへの接続できないようです。"
 
 #: src/error.rs:98
 msgid "Something glib-related failed."
@@ -760,28 +767,28 @@ msgstr ""
 
 #: src/error.rs:118
 msgid "Sending a message failed."
-msgstr ""
+msgstr "メッセージの送信に失敗しました。"
 
 #: src/error.rs:123
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "メッセージの受信に失敗しました。"
 
 #: src/error.rs:128
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
-msgstr ""
+msgstr "Signalバックエンドに予期しない問題が起きました。後で再試行してください。"
 
 #: src/error.rs:133
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "アプリの設定が間違っているようです。"
 
 #: src/error.rs:138
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "アプリの一部がクラッシュしました。"
 
 #: src/error.rs:148
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "インターネット接続を確認してください。"
 
 #: src/error.rs:153
 msgid "Please delete the database and relink the device."
@@ -839,11 +846,11 @@ msgstr ""
 
 #: src/gui/utility.rs:133
 msgid "Today"
-msgstr ""
+msgstr "今日"
 
 #: src/gui/utility.rs:135
 msgid "Yesterday"
-msgstr ""
+msgstr "昨日"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
@@ -863,7 +870,7 @@ msgstr ""
 
 #: src/gui/window.rs:309 src/gui/window.rs:315
 msgid "Remove Messages"
-msgstr ""
+msgstr "メッセージを除去"
 
 #: src/gui/window.rs:310
 msgid "This will remove all locally stored messages from this channel"
