@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 13:37+0200\n"
-"PO-Revision-Date: 2024-03-30 06:01+0000\n"
+"PO-Revision-Date: 2024-04-03 14:01+0000\n"
 "Last-Translator: jerekulmala <jerekmailj@gmail.com>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/fi/>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +46,6 @@ msgid "Reset Session"
 msgstr "Nollaa istunto"
 
 #: data/resources/ui/channel_info_dialog.blp:128
-#, fuzzy
 msgctxt "accessibility"
 msgid "Clear Messages"
 msgstr "Tyhjennä viestit"
@@ -231,9 +230,8 @@ msgid "Open with…"
 msgstr "Avaa sovelluksella…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
-#, fuzzy
 msgid "New Chat"
-msgstr "Keskustelut"
+msgstr "Uusi keskustelu"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
@@ -241,21 +239,20 @@ msgid "Menu"
 msgstr "Valikko"
 
 #: data/resources/ui/new_channel_dialog.blp:35
-#, fuzzy
 msgid "Search Contacts"
-msgstr "Synkronoi kontaktit"
+msgstr "Hae kontakteista"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Lajittele kontaktit:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Etunimi"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Sukunimi"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -719,7 +716,7 @@ msgstr "Keskustelut"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "kirjoittaa"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
@@ -747,7 +744,7 @@ msgstr "Muistiinpano itselle"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Tuntematon kontakti"
 
 #: src/backend/manager.rs:442
 msgid "You"
@@ -870,7 +867,7 @@ msgstr "Tarkista internetyhteytesi."
 
 #: src/error.rs:156
 msgid "Please delete the database and relink the device."
-msgstr "Poista tietokanta ja yhdistä laite uudelleen."
+msgstr "Poista tietokanta ja linkitä laite uudelleen."
 
 #: src/error.rs:163
 msgid "The database path at {} is no folder."
@@ -888,7 +885,7 @@ msgstr "Ei koskaan"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Luonnos"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -968,7 +965,7 @@ msgstr "Chattaa kavereidesi kanssa Signalissa"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "viestittely;chat;signal;"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:13
 msgid "Julian Schmidhuber"
@@ -976,15 +973,14 @@ msgstr ""
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
-#, fuzzy
 msgid ""
 "Flare is an unofficial app for Signal. It is still in development and "
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
-"Flare on epävirallinen sovellus jonka avulla voit keskustella kavereidesi "
-"kanssa Signalissa Linuxilla. Se on vielä kehityksessä ja siinä ei ole yhtä "
-"paljon ominaisuuksia kuin virallisissa Signal sovelluksissa."
+"Flare on epävirallinen Signal-sovellus. Se on vielä kehityksessä ja siinä ei "
+"ole yhtä paljon ominaisuuksia kuin virallisissa Signal sovelluksissa. "
+"Lisätietoja löydät projektin suunnitelmasta."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -1061,7 +1057,7 @@ msgstr "Lähetä viesti painamalla Enter-näppäintä"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
-msgstr ""
+msgstr "Kuinka lajitella kontaktit, kuten etunimen tai sukunimen perusteella"
 
 #~ msgid "Channel Information"
 #~ msgstr "Kanavan tiedot"
