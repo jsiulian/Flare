@@ -88,5 +88,5 @@ src/main.rs
 src/utils.rs
 
 data/de.schmidhuberj.Flare.desktop.in.in
-data/de.schmidhuberj.Flare.metainfo.xml
+data/de.schmidhuberj.Flare.metainfo.xml.in
 data/de.schmidhuberj.Flare.gschema.xml

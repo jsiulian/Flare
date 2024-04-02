@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-17 18:47+0100\n"
+"POT-Creation-Date: 2024-04-02 13:37+0200\n"
 "PO-Revision-Date: 2023-09-01 18:55+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/flare/flare/el/>\n"
@@ -22,50 +22,50 @@ msgstr ""
 msgid "translator-credits"
 msgstr "Yiannis Ioannides"
 
-#: data/resources/ui/channel_info_dialog.blp:13
-#: data/resources/ui/window.blp:162
-msgid "Channel Information"
-msgstr "Πληροφορίες καναλιού"
-
-#: data/resources/ui/channel_info_dialog.blp:23
-#: data/resources/ui/setup_window.blp:372
+#: data/resources/ui/channel_info_dialog.blp:50
+#: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
 msgstr ""
 
-#: data/resources/ui/channel_info_dialog.blp:30
+#: data/resources/ui/channel_info_dialog.blp:66
+msgid "Description"
+msgstr ""
+
+#: data/resources/ui/channel_info_dialog.blp:76
 #, fuzzy
 msgid "Disappearing Messages"
 msgstr "Καθαρισμός μηνυμάτων"
 
-#: data/resources/ui/channel_info_dialog.blp:37
-msgid "Description"
-msgstr ""
-
-#: data/resources/ui/channel_info_dialog.blp:45
+#: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
 msgstr "Επαναφορά συνεδρίας"
 
-#: data/resources/ui/channel_info_dialog.blp:48
+#: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
 msgstr "Επαναφορά συνεδρίας"
 
-#: data/resources/ui/channel_info_dialog.blp:54
-#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:481
-#: data/resources/ui/submit_captcha_dialog.blp:28
-msgid "Close"
-msgstr "Κλείσιμο"
+#: data/resources/ui/channel_info_dialog.blp:128
+#, fuzzy
+msgctxt "accessibility"
+msgid "Clear Messages"
+msgstr "Καθαρισμός μηνυμάτων"
+
+#: data/resources/ui/channel_info_dialog.blp:149
+#, fuzzy
+msgid "Clear Messages"
+msgstr "Καθαρισμός μηνυμάτων"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
 msgstr "Εκτός σύνδεσης"
 
-#: data/resources/ui/channel_list.blp:18
+#: data/resources/ui/channel_list.blp:20
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: data/resources/ui/channel_list.blp:21 data/resources/ui/window.blp:60
+#: data/resources/ui/channel_list.blp:23 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Αναζήτηση"
@@ -78,58 +78,58 @@ msgstr "Χωρίς επιλεγμένο κανάλι"
 msgid "Select a channel"
 msgstr "Επιλέξτε κανάλι"
 
-#: data/resources/ui/channel_messages.blp:178
+#: data/resources/ui/channel_messages.blp:181
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Αφαιρέστε την απάντηση"
 
-#: data/resources/ui/channel_messages.blp:181
+#: data/resources/ui/channel_messages.blp:184
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Αφαίρεση απάντησης"
 
-#: data/resources/ui/channel_messages.blp:201
+#: data/resources/ui/channel_messages.blp:204
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Αφαιρέστε ένα συνημμένο"
 
-#: data/resources/ui/channel_messages.blp:204
+#: data/resources/ui/channel_messages.blp:207
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Αφαίρεση συνημμένου"
 
-#: data/resources/ui/channel_messages.blp:225
+#: data/resources/ui/channel_messages.blp:228
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Προσθέστε ένα συνημμένο"
 
-#: data/resources/ui/channel_messages.blp:233
+#: data/resources/ui/channel_messages.blp:236
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Πρόσθεση συνημμένου"
 
-#: data/resources/ui/channel_messages.blp:249
+#: data/resources/ui/channel_messages.blp:252
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Προσθήκη μηνύματος"
 
-#: data/resources/ui/channel_messages.blp:255
+#: data/resources/ui/channel_messages.blp:258
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Προσθήκη μηνύματος"
 
-#: data/resources/ui/channel_messages.blp:267
+#: data/resources/ui/channel_messages.blp:270
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Αποστολή"
 
-#: data/resources/ui/channel_messages.blp:271
+#: data/resources/ui/channel_messages.blp:274
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Αποστολή"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
-#: data/resources/ui/window.blp:128
+#: data/resources/ui/window.blp:166
 msgid "Clear messages"
 msgstr "Καθαρισμός μηνυμάτων"
 
@@ -143,7 +143,7 @@ msgstr ""
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
-#: data/resources/ui/linked_devices_window.blp:52 src/gui/window.rs:314
+#: data/resources/ui/linked_devices_window.blp:50 src/gui/window.rs:309
 msgid "Cancel"
 msgstr "Ακύρωση"
 
@@ -151,7 +151,7 @@ msgstr "Ακύρωση"
 msgid "Clear"
 msgstr "Καθαρισμός"
 
-#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:117
+#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
 msgid "Unlink"
 msgstr "Αποσύνδεση"
 
@@ -181,31 +181,36 @@ msgstr "Σφάλμα"
 msgid "Please consider reporting this error."
 msgstr "Παρακαλώ αναφέρετε αυτό το σφάλμα."
 
+#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
+#: data/resources/ui/submit_captcha_dialog.blp:28
+msgid "Close"
+msgstr "Κλείσιμο"
+
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
 msgstr "Αναφορά"
 
-#: data/resources/ui/linked_devices_window.blp:15
-#: data/resources/ui/window.blp:122
+#: data/resources/ui/linked_devices_window.blp:13
+#: data/resources/ui/window.blp:160
 #, fuzzy
 msgid "Linked Devices"
 msgstr "Σύνδεση συσκευής"
 
-#: data/resources/ui/linked_devices_window.blp:33
+#: data/resources/ui/linked_devices_window.blp:31
 #, fuzzy
 msgid "Add Linked Device"
 msgstr "Σύνδεση συσκευής"
 
-#: data/resources/ui/linked_devices_window.blp:34
+#: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
 msgstr ""
 
-#: data/resources/ui/linked_devices_window.blp:44
+#: data/resources/ui/linked_devices_window.blp:42
 #, fuzzy
 msgid "Device URL"
 msgstr "Όνομα συσκευής"
 
-#: data/resources/ui/linked_devices_window.blp:53
+#: data/resources/ui/linked_devices_window.blp:51
 #, fuzzy
 msgid "Add Device"
 msgstr "Σύνδεση συσκευής"
@@ -229,6 +234,32 @@ msgstr "Αποθήκευση ως…"
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
 msgstr "Άνοιγμα με…"
+
+#: data/resources/ui/new_channel_dialog.blp:14
+msgid "New Chat"
+msgstr ""
+
+#: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
+msgctxt "accessibility"
+msgid "Menu"
+msgstr "Μενού"
+
+#: data/resources/ui/new_channel_dialog.blp:35
+#, fuzzy
+msgid "Search Contacts"
+msgstr "Αναζήτηση στα κανάλια"
+
+#: data/resources/ui/new_channel_dialog.blp:71
+msgid "List Contacts By:"
+msgstr ""
+
+#: data/resources/ui/new_channel_dialog.blp:73
+msgid "First Name"
+msgstr ""
+
+#: data/resources/ui/new_channel_dialog.blp:78
+msgid "Surname"
+msgstr ""
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -327,22 +358,22 @@ msgstr ""
 "Μπορεί να μην είναι δυνατή η αποστολή μηνυμάτων με νέες γραμμές σε πλήκτρα "
 "αφής που δεν επιτρέπουν το συνδυασμό \"Control + Enter\""
 
-#: data/resources/ui/setup_window.blp:20 data/resources/ui/setup_window.blp:27
+#: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:44
+#: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
 msgstr ""
 
 #. Translators: Flare name in metainfo.
-#: data/resources/ui/setup_window.blp:53
+#: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
-#: data/de.schmidhuberj.Flare.metainfo.xml:8
+#: data/de.schmidhuberj.Flare.metainfo.xml.in:8
 msgid "Flare"
 msgstr "Flare"
 
-#: data/resources/ui/setup_window.blp:56
+#: data/resources/ui/setup_window.blp:53
 msgid ""
 "Flare is an unofficial Signal client. Note that Flare is not stable and "
 "there are bugs to be expected. If you are experiencing any bugs, consult the "
@@ -355,47 +386,46 @@ msgid ""
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:65 data/resources/ui/setup_window.blp:72
+#: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:88 data/resources/ui/setup_window.blp:320
-#: data/resources/ui/setup_window.blp:327
+#: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
+#: data/resources/ui/setup_window.blp:324
 #, fuzzy
 msgid "Primary Device"
 msgstr "Σύνδεση συσκευής"
 
-#: data/resources/ui/setup_window.blp:101
-#: data/resources/ui/setup_window.blp:156
-#: data/resources/ui/setup_window.blp:163
-#: data/resources/ui/setup_window.blp:180
+#: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
+#: data/resources/ui/setup_window.blp:160
+#: data/resources/ui/setup_window.blp:177
 msgid "Link Device"
 msgstr "Σύνδεση συσκευής"
 
-#: data/resources/ui/setup_window.blp:108
+#: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:120
+#: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:129
+#: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:134
+#: data/resources/ui/setup_window.blp:131
 msgid ""
 "Flare can be an application linked to your primary device, similar to the "
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:143
+#: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:148
+#: data/resources/ui/setup_window.blp:145
 msgid ""
 "Flare can act as a primary device, similar to the official Signal "
 "applications on Android or IOS. This mode is currently not supported by "
@@ -404,27 +434,27 @@ msgid ""
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:197
+#: data/resources/ui/setup_window.blp:194
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:207
+#: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
 msgstr "Όνομα συσκευής"
 
-#: data/resources/ui/setup_window.blp:211
-#: data/resources/ui/setup_window.blp:380
+#: data/resources/ui/setup_window.blp:208
+#: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:214
-#: data/resources/ui/setup_window.blp:383
+#: data/resources/ui/setup_window.blp:211
+#: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:220
+#: data/resources/ui/setup_window.blp:217
 msgid ""
 "The next page will show a QR code which has to be scanned from the primary "
 "device. Note that you only have a timeframe of about one minute to scan the "
@@ -432,34 +462,34 @@ msgid ""
 "QR code."
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:228
-#: data/resources/ui/setup_window.blp:240
-#: data/resources/ui/setup_window.blp:294
+#: data/resources/ui/setup_window.blp:225
+#: data/resources/ui/setup_window.blp:237
+#: data/resources/ui/setup_window.blp:291
 msgid "Link device"
 msgstr "Σύνδεση συσκευής"
 
-#: data/resources/ui/setup_window.blp:245
+#: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
 msgstr "Ανίχνευση κωδικού"
 
-#: data/resources/ui/setup_window.blp:246
+#: data/resources/ui/setup_window.blp:243
 msgid "Scan this code with another Signal app logged into your account."
 msgstr "Ανιχνεύστε τον κωδικό με κάποια άλλη ήδη συνδεδεμένη εφαρμογή Signal."
 
-#: data/resources/ui/setup_window.blp:273
+#: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
 msgstr "Σύνδεσμος χωρίς ανίχνευση"
 
-#: data/resources/ui/setup_window.blp:283
+#: data/resources/ui/setup_window.blp:280
 #, fuzzy
 msgid "Manual linking"
 msgstr "Χειρωνακτική Σύνδεση"
 
-#: data/resources/ui/setup_window.blp:299
+#: data/resources/ui/setup_window.blp:296
 msgid "Manual Linking"
 msgstr "Χειρωνακτική Σύνδεση"
 
-#: data/resources/ui/setup_window.blp:300
+#: data/resources/ui/setup_window.blp:297
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
@@ -467,15 +497,15 @@ msgstr ""
 "Αν η συσκευή σαν δεν μπορεί να ανιχνεύσει τον QR κωδικό, μπορείτε να "
 "εισάγετε μόνοι σας εδώ τον σύνδεσμο που παρέχεται"
 
-#: data/resources/ui/setup_window.blp:311
+#: data/resources/ui/setup_window.blp:308
 msgid "Copy to clipboard"
 msgstr "Αντιγραφή στο πρόχειρο"
 
-#: data/resources/ui/setup_window.blp:344
+#: data/resources/ui/setup_window.blp:341
 msgid "Continue"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:361
+#: data/resources/ui/setup_window.blp:358
 msgid ""
 "For registering as a primary device, Flare will need your phone number and a "
 "completion of the captcha. Please give the phone number in international "
@@ -486,60 +516,60 @@ msgid ""
 "so please proceed fast."
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:376
+#: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
 msgstr "Captcha"
 
-#: data/resources/ui/setup_window.blp:389
+#: data/resources/ui/setup_window.blp:386
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:398
-#: data/resources/ui/setup_window.blp:406
-#: data/resources/ui/setup_window.blp:423
-#: data/resources/ui/setup_window.blp:448
+#: data/resources/ui/setup_window.blp:395
+#: data/resources/ui/setup_window.blp:403
+#: data/resources/ui/setup_window.blp:420
+#: data/resources/ui/setup_window.blp:445
 msgid "Confirm"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:439
+#: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:456
-#: data/resources/ui/setup_window.blp:464
+#: data/resources/ui/setup_window.blp:453
+#: data/resources/ui/setup_window.blp:461
 msgid "Finished"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:497
+#: data/resources/ui/setup_window.blp:494
 msgid ""
 "Flare is almost ready, it is waiting for contacts to finish syncing. This "
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:506
+#: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:511
+#: data/resources/ui/setup_window.blp:508
 msgid ""
 "Make sure to not send any messages while the messages are still received by "
 "Flare, this makes sure that all required information is received. We are "
-"trying to fix this problem. Furthermore, Flare is currently using excessive "
-"amounts of memory after a while. This is due to some memory leak which has "
-"not yet been found. We also try to resolve this. For a full list of bugs, "
+"trying to fix this problem. Furthermore, sending to contacts you have not "
+"yet received messages from can lead to rate limiting. Make sure to receive a "
+"message from a contact before you send too many. For a full list of bugs, "
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:521
+#: data/resources/ui/setup_window.blp:518
 msgid "Contact"
 msgstr ""
 
-#: data/resources/ui/setup_window.blp:526
+#: data/resources/ui/setup_window.blp:523
 msgid ""
 "Want to leave some feedback about Flare, or just talk a little bit? Our <a "
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
@@ -607,7 +637,7 @@ msgid "Load more messages"
 msgstr "Λήψη περισσότερων μηνυμάτων"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
-#: data/resources/ui/window.blp:133
+#: data/resources/ui/window.blp:171
 msgid "Submit Captcha"
 msgstr "Υποβολή captcha"
 
@@ -649,134 +679,130 @@ msgctxt "tooltip"
 msgid "Insert emoji"
 msgstr "Εισαγωγή emoji"
 
-#: data/resources/ui/window.blp:24
+#: data/resources/ui/window.blp:25
 #, fuzzy
 msgid "Channel list"
 msgstr "Κανάλια"
 
-#: data/resources/ui/window.blp:37
+#: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
 msgstr "Προσθήκη συνομιλίας"
 
-#: data/resources/ui/window.blp:48 data/resources/ui/window.blp:91
-msgctxt "accessibility"
-msgid "Menu"
-msgstr "Μενού"
-
-#: data/resources/ui/window.blp:78
+#: data/resources/ui/window.blp:79
 msgid "Chat"
 msgstr ""
 
-#: data/resources/ui/window.blp:112
+#: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
+msgid "is typing"
+msgstr ""
+
+#: data/resources/ui/window.blp:150
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: data/resources/ui/window.blp:138
+#: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
 msgstr ""
 
-#: data/resources/ui/window.blp:143
+#: data/resources/ui/window.blp:181
 msgid "Keybindings"
 msgstr "Δεσμοί κλειδιών"
 
-#: data/resources/ui/window.blp:148
+#: data/resources/ui/window.blp:186
 msgid "About"
 msgstr "Σχετικά"
 
-#: data/resources/ui/window.blp:153
+#: data/resources/ui/window.blp:191
 msgid "Quit"
 msgstr ""
 
-#: data/resources/ui/window.blp:167
-#, fuzzy
-msgid "Clear Messages"
-msgstr "Καθαρισμός μηνυμάτων"
-
-#: src/backend/channel.rs:614
+#: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
 msgstr "Σημειώσεις Προς Εμένα"
 
-#: src/backend/manager.rs:420
+#: src/backend/contact.rs:193 src/backend/contact.rs:275
+msgid "Unknown contact"
+msgstr ""
+
+#: src/backend/manager.rs:442
 msgid "You"
 msgstr "Εσείς"
 
-#: src/backend/message/call_message.rs:119
+#: src/backend/message/call_message.rs:100
 msgid "Incoming call"
 msgstr ""
 
-#: src/backend/message/call_message.rs:120
+#: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
 msgstr ""
 
-#: src/backend/message/call_message.rs:121
+#: src/backend/message/call_message.rs:102
 msgid "Call started"
 msgstr ""
 
-#: src/backend/message/call_message.rs:122
+#: src/backend/message/call_message.rs:103
 msgid "Call ended"
 msgstr ""
 
-#: src/backend/message/call_message.rs:123
+#: src/backend/message/call_message.rs:104
 msgid "Call declined"
 msgstr ""
 
-#: src/backend/message/call_message.rs:124
+#: src/backend/message/call_message.rs:105
 #, fuzzy
 msgid "Unanswered call"
 msgstr "Απάντηση κλήσης."
 
-#. Translators: When receiving a reaction message in a group, this will be the text to format the notification. Do not translate the text in {}.
-#: src/backend/message/reaction_message.rs:69
+#: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
 msgstr "Ο/Η {sender} αντέδρασε με {emoji} σε ένα μήνυμα."
 
-#. Translators: When receiving a reaction message in a 1-to-1 channel (the body, the sender will be in the notification title and is not included in the translation), this will be the text to format the notification. Do not translate the text in {}.
-#: src/backend/message/reaction_message.rs:75
+#: src/backend/message/reaction_message.rs:80
 msgid "Reacted {emoji} to a message."
 msgstr "Αντέδρασε με {emoji} σε ένα μήνυμα."
 
-#: src/backend/message/text_message.rs:374
+#: src/backend/message/text_message.rs:381
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Έστειλε μια εικόνα"
 msgstr[1] "Έστειλε {} εικόνες"
 
-#: src/backend/message/text_message.rs:377
+#: src/backend/message/text_message.rs:383
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Έστειλε ένα βίντεο"
 msgstr[1] "Έστειλε {} βίντεο"
 
-#: src/backend/message/text_message.rs:381
+#: src/backend/message/text_message.rs:386
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
 msgstr[0] "Έστειλε ένα φωνητικό μήνυμα"
 msgstr[1] "Έστειλε {} φωνητικά μηνύματα"
 
-#: src/backend/message/text_message.rs:387
+#: src/backend/message/text_message.rs:391
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Έστειλε ένα αρχείο"
 msgstr[1] "Έστειλε {} αρχεία"
 
-#: src/error.rs:88
+#: src/error.rs:91
 msgid "I/O Error."
 msgstr "Σφάλμα εισόδου-εξόδου."
 
-#: src/error.rs:93
+#: src/error.rs:96
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Δεν υπάρχει διαθέσιμη σύνδεση στο διαδίκτυο."
 
-#: src/error.rs:98
+#: src/error.rs:101
 msgid "Something glib-related failed."
 msgstr "Σφάλμα σχετικό με το πρωτόκολλο glib."
 
-#: src/error.rs:103
+#: src/error.rs:106
 msgid "The communication with Libsecret failed."
 msgstr "Σφάλμα επικοινωνίας με το πρωτόκολλο Libsecret."
 
-#: src/error.rs:108
+#: src/error.rs:111
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -784,7 +810,7 @@ msgstr ""
 "Η βάση δεδομένων backend απέτυχε. Παρακαλώ επανεκκινήστε την εφαρμογή ή "
 "διαγράψτε τη βάση δεδομένων και συνδέστε ξανά την εφαρμογή."
 
-#: src/error.rs:113
+#: src/error.rs:116
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -792,120 +818,124 @@ msgstr ""
 "Δεν φαίνεται να είστε εξουσιοδοτημένος με το Signal. Διαγράψτε τη βάση "
 "δεδομένων και συνδέστε ξανά την εφαρμογή."
 
-#: src/error.rs:118
+#: src/error.rs:121
 msgid "Sending a message failed."
 msgstr "Η αποστολή μηνύματος απέτυχε."
 
-#: src/error.rs:123
+#: src/error.rs:126
 msgid "Receiving a message failed."
 msgstr "Η λήψη μηνύματος απέτυχε."
 
-#: src/error.rs:128
+#: src/error.rs:131
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 "Κάτι απροσδόκητο συνέβη με το backend του Signal. Προσπαθήστε ξανά αργότερα."
 
-#: src/error.rs:133
+#: src/error.rs:136
 msgid "The application seems to be misconfigured."
 msgstr "Η εφαρμογή φαίνεται να είναι λάθος ρυθμισμένη."
 
-#: src/error.rs:138
+#: src/error.rs:141
 msgid "A part of the application crashed."
 msgstr "Ένα μέρος της εφαρμογής κατέρρευσε."
 
-#: src/error.rs:148
+#: src/error.rs:151
 msgid "Please check your internet connection."
 msgstr "Παρακαλώ ελέγξτε τη σύνδεση διαδικτύου."
 
-#: src/error.rs:153
+#: src/error.rs:156
 msgid "Please delete the database and relink the device."
 msgstr "Παρακαλώ διαγράψτε τη βάση δεδομένων και επανασυνδέστε τη συσκευή."
 
-#: src/error.rs:160
+#: src/error.rs:163
 msgid "The database path at {} is no folder."
 msgstr "Ο προορισμός της βάσης δεδομένων στο {} δεν είναι φάκελος."
 
-#: src/error.rs:165
+#: src/error.rs:168
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Παρακαλώ επανεκκινήστε την εφαρμογή με καταγραφή και αναφέρετε αυτό το "
 "πρόβλημα."
 
-#: src/gui/channel_info_dialog.rs:105
+#: src/gui/channel_info_dialog.rs:197
 msgid "Never"
 msgstr ""
 
-#: src/gui/preferences_window.rs:30
+#: src/gui/channel_item.rs:63
+msgid "Draft"
+msgstr ""
+
+#: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
 msgstr "Αναμονή καινούργιων μηνυμάτων κατά το κλείσιμο του παραθύρου"
 
-#: src/gui/preferences_window.rs:58
+#: src/gui/preferences_window.rs:99
 msgid "Background permission"
 msgstr "Άδεια λειτουργίας στο παρασκήνιο"
 
-#: src/gui/preferences_window.rs:59
+#: src/gui/preferences_window.rs:100
 msgid "Use settings to remove permissions"
 msgstr "Χρήση ρυθμίσεων για την κατάργηση δικαιωμάτων"
 
-#: src/gui/setup_window.rs:44
+#: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
 msgstr ""
 
-#: src/gui/setup_window.rs:48
+#: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
 msgstr ""
 
-#: src/gui/setup_window.rs:137
+#: src/gui/setup_window.rs:129
 msgid "Copied to clipboard"
 msgstr "Αντιγράφτηκε στο πρόχειρο"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:97 src/gui/utility.rs:121
+#: src/gui/utility.rs:102 src/gui/utility.rs:126
 msgid "%H:%M"
 msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:100
+#: src/gui/utility.rs:105
 msgid "%Y-%m-%d %H:%M"
 msgstr "%Y-%m-%d %H:%M"
 
-#: src/gui/utility.rs:133
+#: src/gui/utility.rs:138
 msgid "Today"
 msgstr ""
 
-#: src/gui/utility.rs:135
+#: src/gui/utility.rs:141
 msgid "Yesterday"
 msgstr ""
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:141
+#: src/gui/utility.rs:147
 #, fuzzy
 msgid "%Y-%m-%d"
 msgstr "%Y-%m-%d %H:%M"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
-#: src/gui/utility.rs:145
+#: src/gui/utility.rs:151
 msgid "%a., %e. %b"
 msgstr ""
 
-#: src/gui/utility.rs:152
+#: src/gui/utility.rs:159
 #, fuzzy
 msgid "Attachment"
 msgstr "Συνημμένα"
 
-#: src/gui/window.rs:309 src/gui/window.rs:315
+#: src/gui/window.rs:304 src/gui/window.rs:310
 #, fuzzy
 msgid "Remove Messages"
 msgstr "Λήψη μηνυμάτων"
 
-#: src/gui/window.rs:310
+#: src/gui/window.rs:305
 #, fuzzy
 msgid "This will remove all locally stored messages from this channel"
 msgstr ""
@@ -914,7 +944,7 @@ msgstr ""
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
-#: data/de.schmidhuberj.Flare.metainfo.xml:10
+#: data/de.schmidhuberj.Flare.metainfo.xml.in:10
 msgid "Chat with your friends on Signal"
 msgstr "Συνομιλήστε με τους φίλους σας στο Signal"
 
@@ -922,69 +952,24 @@ msgstr "Συνομιλήστε με τους φίλους σας στο Signal"
 msgid "messaging;chat;signal;"
 msgstr ""
 
+#: data/de.schmidhuberj.Flare.metainfo.xml.in:13
+msgid "Julian Schmidhuber"
+msgstr ""
+
 #. Translators: Description of Flare in metainfo.
-#: data/de.schmidhuberj.Flare.metainfo.xml:26
+#: data/de.schmidhuberj.Flare.metainfo.xml.in:29
+#, fuzzy
 msgid ""
-"Flare is an unofficial app that lets you chat with your friends on Signal "
-"from Linux. It is still in development and doesn't include as many features "
-"as the official Signal applications."
+"Flare is an unofficial app for Signal. It is still in development and "
+"doesn't include all the features that the official Signal apps do. More "
+"information can be found on its feature roadmap."
 msgstr ""
 "Το Flare είναι μια ανεπίσημη εφαρμογή που σας επιτρέπει να συνομιλείτε με "
 "τους φίλους σας μέσω Signal στα Linux. Είναι ακόμη υπό ανάπτυξη και δεν "
 "συμπεριλαμβάνει κάποια χαρακτηριστικά που έχουν οι επίσημες εφαρμογές."
 
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:31
-msgid "Linking device"
-msgstr "Σύνδεση συσκευής"
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:35
-msgid "Sending messages"
-msgstr "Αποστολή μηνυμάτων"
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:39
-msgid "Receiving messages"
-msgstr "Λήψη μηνυμάτων"
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:43
-msgid "Replying to a message"
-msgstr "Απάντηση σε μήνυμα"
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:47
-msgid "Reacting to a message"
-msgstr "Αντίδραση σε μήνυμα"
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:51
-msgid "Attachments"
-msgstr "Συνημμένα"
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:55
-msgid "Encrypted storage"
-msgstr "Κρυπτογραφημένος αποθηκευτικός χώρος"
-
-#. Translators: Description of Flare in metainfo: Features
-#: data/de.schmidhuberj.Flare.metainfo.xml:59
-msgid "Notifications, optionally in the background"
-msgstr "Γνωστοποιήσεις, προαιρετικά στο παρασκήνιο"
-
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:64
-msgid ""
-"More features are planned, blocked, or not-planned. Consult the README for "
-"more information about them."
-msgstr ""
-"Περισσότερες λειτουργίες είναι προγραμματισμένες, μπλοκαρισμένες ή μη "
-"σχεδιασμένες. Αναφερθείτε στο README για περισσότερες πληροφορίες σχετικά με "
-"τα παραπάνω."
-
-#. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml:68
+#: data/de.schmidhuberj.Flare.metainfo.xml.in:33
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -997,7 +982,7 @@ msgstr ""
 "Αναφερθείτε στο README για περισσότερες πληροφορίες σχετικά με το θέμα "
 "ασφάλειας."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml:554
+#: data/de.schmidhuberj.Flare.metainfo.xml.in:600
 msgid "Overview of the application"
 msgstr "Επισκόπηση της εφαρμογής"
 
@@ -1056,6 +1041,45 @@ msgstr "Μηνύματα είναι επιλέξιμα"
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
 msgstr "Στείλτε μήνυμα αφού πατήσετε Enter"
+
+#: data/de.schmidhuberj.Flare.gschema.xml:63
+msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
+msgstr ""
+
+#~ msgid "Channel Information"
+#~ msgstr "Πληροφορίες καναλιού"
+
+#~ msgid "Linking device"
+#~ msgstr "Σύνδεση συσκευής"
+
+#~ msgid "Sending messages"
+#~ msgstr "Αποστολή μηνυμάτων"
+
+#~ msgid "Receiving messages"
+#~ msgstr "Λήψη μηνυμάτων"
+
+#~ msgid "Replying to a message"
+#~ msgstr "Απάντηση σε μήνυμα"
+
+#~ msgid "Reacting to a message"
+#~ msgstr "Αντίδραση σε μήνυμα"
+
+#~ msgid "Attachments"
+#~ msgstr "Συνημμένα"
+
+#~ msgid "Encrypted storage"
+#~ msgstr "Κρυπτογραφημένος αποθηκευτικός χώρος"
+
+#~ msgid "Notifications, optionally in the background"
+#~ msgstr "Γνωστοποιήσεις, προαιρετικά στο παρασκήνιο"
+
+#~ msgid ""
+#~ "More features are planned, blocked, or not-planned. Consult the README "
+#~ "for more information about them."
+#~ msgstr ""
+#~ "Περισσότερες λειτουργίες είναι προγραμματισμένες, μπλοκαρισμένες ή μη "
+#~ "σχεδιασμένες. Αναφερθείτε στο README για περισσότερες πληροφορίες σχετικά "
+#~ "με τα παραπάνω."
 
 #~ msgid "Dowload images automatically"
 #~ msgstr "Αυτόματη λήψη εικόνων"
