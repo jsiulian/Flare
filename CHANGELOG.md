@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.2] - 2024-04-02
+
 ### Added
 
 - Withdraw notification when message has been read.
@@ -554,7 +556,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.14.1...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.14.2...master
+[0.14.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.14.1...0.14.2
 [0.14.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.14.0...0.14.1
 [0.14.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.13.0...0.14.0
 [0.13.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.12.0...0.13.0
