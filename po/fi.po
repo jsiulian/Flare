@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 13:37+0200\n"
-"PO-Revision-Date: 2024-04-03 14:01+0000\n"
+"PO-Revision-Date: 2024-04-04 16:01+0000\n"
 "Last-Translator: jerekulmala <jerekmailj@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/fi/>\n"
@@ -244,7 +244,7 @@ msgstr "Hae kontakteista"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr "Lajittele kontaktit:"
+msgstr "Lajitteluperuste:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
