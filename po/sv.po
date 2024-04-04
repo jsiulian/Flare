@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-02 13:37+0200\n"
-"PO-Revision-Date: 2024-01-22 19:01+0000\n"
+"PO-Revision-Date: 2024-04-04 16:01+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/sv/>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -46,10 +46,9 @@ msgid "Reset Session"
 msgstr "Återställ session"
 
 #: data/resources/ui/channel_info_dialog.blp:128
-#, fuzzy
 msgctxt "accessibility"
 msgid "Clear Messages"
-msgstr "Radera meddelanden"
+msgstr "Rensa meddelanden"
 
 #: data/resources/ui/channel_info_dialog.blp:149
 msgid "Clear Messages"
@@ -231,9 +230,8 @@ msgid "Open with…"
 msgstr "Öppna med…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
-#, fuzzy
 msgid "New Chat"
-msgstr "Chatt"
+msgstr "Ny chatt"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
@@ -241,21 +239,20 @@ msgid "Menu"
 msgstr "Meny"
 
 #: data/resources/ui/new_channel_dialog.blp:35
-#, fuzzy
 msgid "Search Contacts"
-msgstr "Synkronisera kontakter"
+msgstr "Sök kontakter"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Lista kontakter efter:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Förnamn"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Efternamn"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -575,7 +572,6 @@ msgid "Known Bugs"
 msgstr "Kända buggar"
 
 #: data/resources/ui/setup_window.blp:508
-#, fuzzy
 msgid ""
 "Make sure to not send any messages while the messages are still received by "
 "Flare, this makes sure that all required information is received. We are "
@@ -587,11 +583,12 @@ msgid ""
 msgstr ""
 "Se till att inte skicka några meddelanden medan meddelandena fortfarande tas "
 "emot av Flare, detta säkerställer att all nödvändig information tas emot. Vi "
-"försöker lösa det här problemet. Dessutom använder Flare för närvarande "
-"överdrivna mängder minne efter ett tag. Detta beror på en minnesläcka som "
-"ännu inte har hittats. Vi försöker också lösa detta. För en fullständig "
-"lista över buggar, besök <a href=\"https://gitlab.com/schmiddi-on-mobile/"
-"flare/-/issues/?label_name%5B%5D=bug\">problemspåraren</a> ."
+"försöker åtgärda det här problemet. Dessutom kan sändning till kontakter som "
+"du ännu inte har fått meddelanden från leda till hastighetsbegränsning. Se "
+"till att få ett meddelande från en kontakt innan du skickar för många. För "
+"en fullständig lista över buggar, besök <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">problemspåraren</"
+"a> ."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
@@ -724,7 +721,7 @@ msgstr "Chatt"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "skriver"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
@@ -752,7 +749,7 @@ msgstr "Anteckning till mig själv"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Okänd kontakt"
 
 #: src/backend/manager.rs:442
 msgid "You"
@@ -890,7 +887,7 @@ msgstr "Aldrig"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Utkast"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -974,19 +971,18 @@ msgstr "meddelanden;chatt;signal;"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:13
 msgid "Julian Schmidhuber"
-msgstr ""
+msgstr "Julian Schmidhuber"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
-#, fuzzy
 msgid ""
 "Flare is an unofficial app for Signal. It is still in development and "
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
-"Flare är en inofficiell app som låter dig chatta med dina vänner på Signal "
-"från Linux. Den är fortfarande under utveckling och innehåller inte lika "
-"många funktioner som de officiella Signal-applikationerna."
+"Flare är en inofficiell app för Signal. Den är fortfarande under utveckling "
+"och innehåller inte alla funktioner som de officiella Signal-apparna gör. "
+"Mer information finns på framtida roadmap."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -1062,7 +1058,7 @@ msgstr "Skicka ett meddelande när Enter-tangenten trycks ned"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
-msgstr ""
+msgstr "Hur man sorterar kontakter, t.ex. med \"förnamn\" eller \"efternamn\""
 
 #~ msgid "Channel Information"
 #~ msgstr "Kanalinformation"
