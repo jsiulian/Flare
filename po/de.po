@@ -51,7 +51,6 @@ msgid "Reset Session"
 msgstr "Setze Verbindung zurück"
 
 #: data/resources/ui/channel_info_dialog.blp:128
-#, fuzzy
 msgctxt "accessibility"
 msgid "Clear Messages"
 msgstr "Nachrichten löschen"
@@ -236,9 +235,8 @@ msgid "Open with…"
 msgstr "Öffnen mit…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
-#, fuzzy
 msgid "New Chat"
-msgstr "Chat"
+msgstr "Neuer Chat"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
@@ -246,21 +244,20 @@ msgid "Menu"
 msgstr "Menü"
 
 #: data/resources/ui/new_channel_dialog.blp:35
-#, fuzzy
 msgid "Search Contacts"
-msgstr "Kontakte synchronisieren"
+msgstr "Kontakte suchen"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Kontakte auflisten nach:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Vorname"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Nachname"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -586,7 +583,6 @@ msgid "Known Bugs"
 msgstr "Bekannte Fehler"
 
 #: data/resources/ui/setup_window.blp:508
-#, fuzzy
 msgid ""
 "Make sure to not send any messages while the messages are still received by "
 "Flare, this makes sure that all required information is received. We are "
@@ -598,11 +594,12 @@ msgid ""
 msgstr ""
 "Senden Sie keine Nachrichten, solange noch Nachrichten von Flare empfangen "
 "werden, sonst könnten dafür erforderliche Daten fehlen. Wir arbeiten an "
-"einer Lösung für dieses Problem. Flare verwendet aufgrund eines noch nicht "
-"gefundenen Speicherlecks nach einer Weile viel Arbeitsspeicher. Auch daran "
-"wird bereits gearbeitet. Eine volle Liste an bekannten Problemen finden Sie "
-"auf dem <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
-"label_name%5B%5D=bug\">Bugtracker</a>."
+"einer Lösung für dieses Problem. Außerdem kann das Senden an Kontakte, von "
+"denen Sie noch keine Nachrichten erhalten haben, zu einer Ratenbegrenzung "
+"führen. Stellen Sie sicher, dass Sie eine Nachricht von einem Kontakt "
+"erhalten, bevor Sie zu viele Nachrichten senden. Eine Liste aller bekannten "
+"Problemen finden Sie im <a href=\"https://gitlab.com/schmiddi-on-mobile/"
+"flare/-/issues/?label_name%5B%5D=bug\">Bugtracker</a>."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
@@ -736,7 +733,7 @@ msgstr "Chat"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "schreibt"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
@@ -764,7 +761,7 @@ msgstr "Notiz an mich"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Unbekannter Kontakt"
 
 #: src/backend/manager.rs:442
 msgid "You"
@@ -903,7 +900,7 @@ msgstr "Nie"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Entwurf"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -988,15 +985,13 @@ msgstr "messaging;chat;signal;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
-#, fuzzy
 msgid ""
 "Flare is an unofficial app for Signal. It is still in development and "
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
-"Flare ist eine inoffizielle Anwendung, mit der Sie von Linux aus mit Ihren "
-"Freunden über Signal chatten können. Sie befindet sich noch in der "
-"Entwicklung und bietet nicht so viele Funktionen wie die offiziellen Signal-"
+"Flare ist eine inoffizielle Anwendung für Signal. Sie befindet sich noch in "
+"der Entwicklung und bietet nicht alle Funktionen der offiziellen Signal-"
 "Anwendungen."
 
 #. Translators: Description of Flare in metainfo: Security note
@@ -1075,6 +1070,10 @@ msgstr "Eine Nachricht senden, wenn die Eingabetaste gedrückt wird"
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
 msgstr ""
+
+#: data/de.schmidhuberj.Flare.metainfo.xml.in:13
+msgid "Julian Schmidhuber"
+msgstr "Julian Schmidhuber"
 
 #~ msgid "Channel Information"
 #~ msgstr "Kanalinformationen"
