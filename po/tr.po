@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-05 10:41+0200\n"
-"PO-Revision-Date: 2024-02-09 07:02+0000\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/tr/>\n"
+"PO-Revision-Date: 2024-04-06 20:01+0000\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -48,7 +48,6 @@ msgid "Reset Session"
 msgstr "Oturumu Sıfırla"
 
 #: data/resources/ui/channel_info_dialog.blp:128
-#, fuzzy
 msgctxt "accessibility"
 msgid "Clear Messages"
 msgstr "İletileri Temizle"
@@ -233,9 +232,8 @@ msgid "Open with…"
 msgstr "Birlikte Aç…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
-#, fuzzy
 msgid "New Chat"
-msgstr "Sohbet"
+msgstr "Yeni Sohbet"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
@@ -243,21 +241,20 @@ msgid "Menu"
 msgstr "Menü"
 
 #: data/resources/ui/new_channel_dialog.blp:35
-#, fuzzy
 msgid "Search Contacts"
-msgstr "Kişileri Eşzamanla"
+msgstr "Kişileri Ara"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Kişileri Sıralama Ölçütü:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Adı"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Soyadı"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -685,7 +682,7 @@ msgstr "Sohbet"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "yazıyor"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
@@ -713,7 +710,7 @@ msgstr "Kendime not"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Bilinmeyen kişi"
 
 #: src/backend/manager.rs:442
 msgid "You"
@@ -853,7 +850,7 @@ msgstr "Asla"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Taslak"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -1021,7 +1018,7 @@ msgstr "Enter tuşuna basıldığında ileti gönder"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
-msgstr ""
+msgstr "Kişilerin nasıl sıralanacağı, \"adı\" ya da \"soyadı\""
 
 #~ msgid "Channel Information"
 #~ msgstr "Kanal Bilgileri"
