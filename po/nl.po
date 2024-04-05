@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 13:37+0200\n"
+"POT-Creation-Date: 2024-04-05 10:41+0200\n"
 "PO-Revision-Date: 2024-03-17 11:01+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
@@ -976,10 +976,6 @@ msgstr "Voer gesprekken met uw Signal-vrienden"
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
 msgstr "messaging;chat;signal;berichten;gesprekken;"
-
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:13
-msgid "Julian Schmidhuber"
-msgstr ""
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29

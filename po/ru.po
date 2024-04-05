@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 13:37+0200\n"
+"POT-Creation-Date: 2024-04-05 10:41+0200\n"
 "PO-Revision-Date: 2024-04-03 14:01+0000\n"
 "Last-Translator: Богдан Venture <bogdanventura123@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/"
-"schmiddi-on-mobile/flare/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/schmiddi-on-"
+"mobile/flare/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -949,10 +949,6 @@ msgstr "Общайтесь с друзьями в Signal"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:13
-msgid "Julian Schmidhuber"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo.

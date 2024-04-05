@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 13:37+0200\n"
+"POT-Creation-Date: 2024-04-05 10:41+0200\n"
 "PO-Revision-Date: 2024-04-02 05:01+0000\n"
 "Last-Translator: maboroshin <maboroshin@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/schmiddi-on-"
@@ -918,10 +918,6 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:13
-msgid "Julian Schmidhuber"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo.

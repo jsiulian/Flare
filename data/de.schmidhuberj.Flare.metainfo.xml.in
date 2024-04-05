@@ -10,7 +10,7 @@
   <summary>Chat with your friends on Signal</summary>
   <launchable type="desktop-id">@app-id@.desktop</launchable>
   <content_rating type="oars-1.1"/>
-  <developer_name>Julian Schmidhuber</developer_name>
+  <developer_name translatable="no">Julian Schmidhuber</developer_name>
   <developer id="mobile.schmidhuberj.de">
     <name>Julian Schmidhuber</name>
   </developer>

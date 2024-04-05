@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 13:37+0200\n"
+"POT-Creation-Date: 2024-04-05 10:41+0200\n"
 "PO-Revision-Date: 2024-04-04 16:01+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/"
-"schmiddi-on-mobile/flare/sv/>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/schmiddi-on-"
+"mobile/flare/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -969,10 +969,6 @@ msgstr "Chatta med dina vänner på Signal"
 msgid "messaging;chat;signal;"
 msgstr "meddelanden;chatt;signal;"
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:13
-msgid "Julian Schmidhuber"
-msgstr "Julian Schmidhuber"
-
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
 msgid ""
@@ -1059,6 +1055,9 @@ msgstr "Skicka ett meddelande när Enter-tangenten trycks ned"
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
 msgstr "Hur man sorterar kontakter, t.ex. med \"förnamn\" eller \"efternamn\""
+
+#~ msgid "Julian Schmidhuber"
+#~ msgstr "Julian Schmidhuber"
 
 #~ msgid "Channel Information"
 #~ msgstr "Kanalinformation"

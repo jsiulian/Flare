@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 13:37+0200\n"
+"POT-Creation-Date: 2024-04-05 10:41+0200\n"
 "PO-Revision-Date: 2024-04-04 16:01+0000\n"
 "Last-Translator: joanisc <joan.iscmail@gmail.com>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/"
-"schmiddi-on-mobile/flare/ca/>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/schmiddi-on-"
+"mobile/flare/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -135,7 +135,8 @@ msgstr "Neteja els missatges"
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
-msgstr "Aquesta opció esborrarà tots els missatges desats i tancarà l'aplicació"
+msgstr ""
+"Aquesta opció esborrarà tots els missatges desats i tancarà l'aplicació"
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
@@ -550,9 +551,9 @@ msgstr ""
 "solucionar aquest problema. A més, enviar missatges a contactes dels quals "
 "encara no heu rebut missatges pot comportar una limitació de la tarifa. "
 "Assegureu-vos de rebre un missatge d'un contacte abans d'enviar-ne massa. "
-"Per obtenir una llista completa d'errors, visiteu el <a href=\"https://gitlab"
-".com/schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">seguiment de "
-"problemes</a> ."
+"Per obtenir una llista completa d'errors, visiteu el <a href=\"https://"
+"gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
+"label_name%5B%5D=bug\">seguiment de problemes</a> ."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
@@ -643,10 +644,11 @@ msgid ""
 "Note that the captcha is only valid for about one minute."
 msgstr ""
 "Envia un repte Captcha. El testimoni es pot obtenir a partir del missatge "
-"d'error que es va mostrar a Flare. El captcha s'ha d'omplir <a href=\"https"
-"://signalcaptchas.org/challenge/generate.html\">en aquest lloc web</a> i "
-"l'enllaç per obrir Signal s'ha d'enganxar a l'entrada corresponent. Tingueu "
-"en compte que el captcha només és vàlid durant un minut aproximadament."
+"d'error que es va mostrar a Flare. El captcha s'ha d'omplir <a "
+"href=\"https://signalcaptchas.org/challenge/generate.html\">en aquest lloc "
+"web</a> i l'enllaç per obrir Signal s'ha d'enganxar a l'entrada "
+"corresponent. Tingueu en compte que el captcha només és vàlid durant un "
+"minut aproximadament."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
@@ -926,10 +928,6 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
-
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:13
-msgid "Julian Schmidhuber"
 msgstr ""
 
 #. Translators: Description of Flare in metainfo.

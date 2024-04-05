@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 13:37+0200\n"
+"POT-Creation-Date: 2024-04-05 10:41+0200\n"
 "PO-Revision-Date: 2024-04-03 14:01+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/"
-"schmiddi-on-mobile/flare/fr/>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/schmiddi-on-"
+"mobile/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -592,8 +592,8 @@ msgstr ""
 "écrire à des contacts desquels vous n’avez pas encore reçu de messages peut "
 "créer des limitations. Assurez-vous de recevoir un message d’un contact "
 "avant d’en envoyer trop. Pour une liste complète des bogues, référez-vous au "
-"<a href=\"https ://gitlab.com/schmiddi-on-mobile/flare/-/issues/ "
-"?label_name%5B%5D=bug\">fil des signalements</a>."
+"<a href=\"https ://gitlab.com/schmiddi-on-mobile/flare/-/issues/ ?"
+"label_name%5B%5D=bug\">fil des signalements</a>."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
@@ -979,10 +979,6 @@ msgstr "Discutez avec vos amis sur Signal"
 msgid "messaging;chat;signal;"
 msgstr "messagerie ;chat ;signal ;discussion ;"
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:13
-msgid "Julian Schmidhuber"
-msgstr "Julian Schmidhuber"
-
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
 msgid ""
@@ -1071,6 +1067,9 @@ msgstr "Envoyer un message quand la touche « Entrée » est appuyée"
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
 msgstr "Comment trier les contacts, par ex. par « prénom » ou « nom »"
+
+#~ msgid "Julian Schmidhuber"
+#~ msgstr "Julian Schmidhuber"
 
 #~ msgid "Channel Information"
 #~ msgstr "Informations sur la conversation"
