@@ -620,5 +620,9 @@
     <control>pointing</control>
     <control>touch</control>
   </supports>
+  <branding>
+    <color type="primary" scheme_preference="light">#ffa348</color>
+    <color type="primary" scheme_preference="dark">#154b8e</color>
+  </branding>
 </component>
 
