@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-05 10:41+0200\n"
-"PO-Revision-Date: 2024-03-06 13:01+0000\n"
-"Last-Translator: Davide <davide.ferracin@protonmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/it/>\n"
+"PO-Revision-Date: 2024-04-12 17:34+0000\n"
+"Last-Translator: Ubu <UbuTransl8s@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -188,32 +188,28 @@ msgstr "Chiudi"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "Segnala"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
-#, fuzzy
 msgid "Linked Devices"
-msgstr "Collega il dispositivo"
+msgstr "Dispositivi collegati"
 
 #: data/resources/ui/linked_devices_window.blp:31
-#, fuzzy
 msgid "Add Linked Device"
-msgstr "Collega il dispositivo"
+msgstr "Ricollega un dispositivo"
 
 #: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Inserire URL del dispositivo da collegare."
 
 #: data/resources/ui/linked_devices_window.blp:42
-#, fuzzy
 msgid "Device URL"
-msgstr "Nome del dispositivo"
+msgstr "URL del dispositivo"
 
 #: data/resources/ui/linked_devices_window.blp:51
-#, fuzzy
 msgid "Add Device"
-msgstr "Collega il dispositivo"
+msgstr "Aggiungi dispositivo"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
@@ -221,23 +217,23 @@ msgstr "Rispondi"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "Rimuovi"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "Salva come…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "Apri con…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
-msgstr ""
+msgstr "Nuova conversazione"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
@@ -245,21 +241,20 @@ msgid "Menu"
 msgstr "Menù"
 
 #: data/resources/ui/new_channel_dialog.blp:35
-#, fuzzy
 msgid "Search Contacts"
-msgstr "Seleziona nei canali"
+msgstr "Cerca contatti"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Ordina i contatti per:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Nome"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Cognome"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -267,37 +262,35 @@ msgstr "Informazioni Generali"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "Scarica automaticamente gli allegati"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "Gli allegati selezionati verranno automaticamente scaricati"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Immagini"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Video"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "File"
 
 #: data/resources/ui/preferences_window.blp:26
-#, fuzzy
 msgid "Voice Messages"
-msgstr "Cancella messaggi"
+msgstr "Messaggi vocali"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
 msgstr "Notifiche"
 
 #: data/resources/ui/preferences_window.blp:32
-#, fuzzy
 msgid "Notifications for new messages"
-msgstr "Carica altri messaggi"
+msgstr "Notifiche per i nuovi messaggi"
 
 #: data/resources/ui/preferences_window.blp:35
 #, fuzzy
@@ -305,14 +298,12 @@ msgid "Send Notifications"
 msgstr "Invia notifiche"
 
 #: data/resources/ui/preferences_window.blp:39
-#, fuzzy
 msgid "Send Notifications on Reactions"
-msgstr "Invia notifiche"
+msgstr "Invia notifiche per le reazioni"
 
 #: data/resources/ui/preferences_window.blp:44
-#, fuzzy
 msgid "Background Notifications"
-msgstr "Invia notifiche"
+msgstr ""
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
