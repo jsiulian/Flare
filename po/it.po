@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-05 10:41+0200\n"
 "PO-Revision-Date: 2024-04-12 17:34+0000\n"
-"Last-Translator: Ubu <UbuTransl8s@users.noreply.hosted.weblate.org>\n"
+"Last-Translator: fedetrifo06 <fefe.trifo@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/it/>\n"
 "Language: it\n"
@@ -46,15 +46,13 @@ msgid "Reset Session"
 msgstr "Ripristina la sessione"
 
 #: data/resources/ui/channel_info_dialog.blp:128
-#, fuzzy
 msgctxt "accessibility"
 msgid "Clear Messages"
-msgstr "Cancella messaggi"
+msgstr "Cancella i messaggi"
 
 #: data/resources/ui/channel_info_dialog.blp:149
-#, fuzzy
 msgid "Clear Messages"
-msgstr "Cancella messaggi"
+msgstr "Cancella i messaggi"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
@@ -293,9 +291,8 @@ msgid "Notifications for new messages"
 msgstr "Notifiche per i nuovi messaggi"
 
 #: data/resources/ui/preferences_window.blp:35
-#, fuzzy
 msgid "Send Notifications"
-msgstr "Invia notifiche"
+msgstr "Invia le notifiche"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
