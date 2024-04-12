@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-05 10:41+0200\n"
-"PO-Revision-Date: 2024-04-12 17:34+0000\n"
+"PO-Revision-Date: 2024-04-13 18:01+0000\n"
 "Last-Translator: fedetrifo06 <fefe.trifo@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/it/>\n"
@@ -300,15 +300,15 @@ msgstr "Invia notifiche per le reazioni"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr ""
+msgstr "Notifiche in background"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "Ricevi notifiche mentre l'app è chiusa"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Compatibile con dispositivi mobili"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -316,39 +316,46 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Potresti voler cambiare queste impostazioni per una migliore esperienza su "
+"dispositivi touch e mobili. I valori predefiniti sono scielti per l'uso su "
+"dispositivi desktop."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Messagio di Testo Selezionabile"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
+"Il testo selezionabile può interferire con le gesture dello swipe sui touch-"
+"screen"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "Premi \"Invio\" per Inviare il Messaggio"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"Potrebbe non essere possibile inviare messaggi con interruzioni di riga "
+"sulle tastiere touch non consentendo \"Control + Invio\""
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Benvenuto su Flare"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Configura Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #: data/resources/ui/setup_window.blp:53
 msgid ""
@@ -365,13 +372,12 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Imposta un Dispositivo Primario o Colega un Dispostivo?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
-#, fuzzy
 msgid "Primary Device"
-msgstr "Collega il dispositivo"
+msgstr "Dispositivo Primario"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
@@ -381,15 +387,15 @@ msgstr "Collega il dispositivo"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "Dispositivo Primario o Dispositivo Collegato?"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Puoi usare Flare sia come dispositivio primario che secondario."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Dispositivo Collegato (Raccomandato)"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
@@ -400,7 +406,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Dispositivo Primario (Disabilitato)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -416,6 +422,8 @@ msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Per collegare un dispositivo secondario, Flare avrà bisogno di un nome per "
+"il disposivito che verrà mostrato nell'applicazione ufficiale."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
@@ -424,12 +432,12 @@ msgstr "Nome del dispositivo"
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "Impostazioni Sviluppatore"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
-msgstr ""
+msgstr "Server di Signal"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -442,7 +450,6 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
-#, fuzzy
 msgid "Link device"
 msgstr "Collega il dispositivo"
 
@@ -481,7 +488,7 @@ msgstr "Copia negli appunti"
 
 #: data/resources/ui/setup_window.blp:341
 msgid "Continue"
-msgstr ""
+msgstr "Continua"
 
 #: data/resources/ui/setup_window.blp:358
 msgid ""
@@ -497,7 +504,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/setup_window.blp:386
 msgid ""
@@ -510,7 +517,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:420
 #: data/resources/ui/setup_window.blp:445
 msgid "Confirm"
-msgstr ""
+msgstr "Conferma"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
@@ -519,7 +526,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
 msgid "Finished"
-msgstr ""
+msgstr "Finito"
 
 #: data/resources/ui/setup_window.blp:494
 msgid ""
@@ -530,7 +537,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "Problemi conosciuti"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -545,7 +552,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
-msgstr ""
+msgstr "Contatta"
 
 #: data/resources/ui/setup_window.blp:523
 msgid ""
@@ -582,7 +589,7 @@ msgstr "Apri il menù"
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Chiudi finestra"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
