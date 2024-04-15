@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixes
+
+- Metainfo not being translatable.
+
 ## [0.14.2] - 2024-04-02
 
 ### Added

@@ -18,6 +18,10 @@ desktop_file = i18n.merge_file(
   install_dir: join_paths(datadir, 'applications')
 )
 
+if desktop_file_validate.found()
+  test('Validate desktop file', desktop_file_validate, args: [desktop_file])
+endif
+
 # DBus services
 service_conf = configuration_data()
 service_conf.set('bindir', bindir)
@@ -36,13 +40,24 @@ appdata_conf = configuration_data()
 appdata_conf.set('base-id', base_id)
 appdata_conf.set('app-id', application_id)
 appdata_conf.set('gettext-package', gettext_package)
-appdata = configure_file(
-  input: '@0@.metainfo.xml.in'.format(base_id),
+appdata = i18n.merge_file(
+  input: configure_file(
+    input: '@0@.metainfo.xml.in.in'.format(base_id),
+    output: '@0@.metainfo.xml.in'.format(application_id),
+    configuration: appdata_conf,
+    install: true,
+    install_dir: datadir / 'metainfo'
+  ),
   output: '@0@.metainfo.xml'.format(application_id),
-  configuration: appdata_conf,
+  po_dir: podir,
   install: true,
-  install_dir: datadir / 'metainfo'
+  install_dir: join_paths(datadir, 'applications')
 )
+
+if appstreamcli.found()
+  test('Validate appstream file', appstreamcli,
+     args: ['validate', '--no-net', '--explain', appdata])
+ endif
 
 # Schemas
 install_data(
