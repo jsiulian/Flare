@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-05 10:41+0200\n"
-"PO-Revision-Date: 2024-04-09 08:01+0000\n"
+"PO-Revision-Date: 2024-04-17 09:03+0000\n"
 "Last-Translator: ThinkRoot <social@crism.ro>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ro/>\n"
@@ -372,6 +372,17 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare este un client pentru Signal neoficial. Rețineți că Flare nu este "
+"stabil și că este posibil să existe unele probleme. Dacă vă confruntați cu "
+"probleme, consultați <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
+"issues\">issue tracker</a> și deschideți o sesiune dacă aveți o problemă "
+"nouă. De asemenea, rețineți că, din cauza faptului că este o aplicație "
+"terță, Flare nu poate garanta același nivel de securitate și "
+"confidențialitate ca și aplicația oficială Signal. Dacă dumneavoastră sau "
+"cineva pe care trebuie să îl/o contactați necesită un nivel ridicat de "
+"securitate, nu utilizați Flare. Consultați <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README</a> "
+"pentru mai multe informații."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
@@ -407,10 +418,13 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare poate fi o aplicație legată de dispozitivul principal, similară cu "
+"Signal Desktop oficial. Acest mod a fost testat mai amplu și, în mare parte, "
+"funcționează."
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Dispozitiv primar (dezactivat)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -420,26 +434,34 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Dispozitiv principal (Dezactivat)Flare poate acționa ca dispozitiv "
+"principal, similar cu aplicațiile oficiale Signal de pe Android sau IOS. "
+"Acest mod nu este în prezent suportat de Flare, chiar dacă testele inițiale "
+"par să indice că funcționează. Dacă sunteți dispus să îl testați, puteți "
+"activa butonul de mai jos (iar dacă nu știți cum să faceți acest lucru, nu "
+"ar trebui să vă gândiți să testați suportul pentru dispozitiv primar)."
 
 #: data/resources/ui/setup_window.blp:194
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Pentru conectarea ca dispozitiv secundar, Flare va avea nevoie de un nume de "
+"dispozitiv care va fi afișat în aplicația oficială."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
-msgstr ""
+msgstr "Nume dispozitiv"
 
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "Opțiuni pentru dezvoltatori"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
-msgstr ""
+msgstr "Semnal servere"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -448,6 +470,10 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"Pagina următoare va afișa un cod QR care trebuie scanat de pe dispozitivul "
+"principal. Rețineți că aveți la dispoziție doar un interval de timp de "
+"aproximativ un minut pentru a scana codul, așa că vă rugăm să vă pregătiți "
+"deja aplicația oficială pentru scanarea codului QR."
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
