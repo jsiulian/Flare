@@ -45,13 +45,11 @@ appdata = i18n.merge_file(
     input: '@0@.metainfo.xml.in.in'.format(base_id),
     output: '@0@.metainfo.xml.in'.format(application_id),
     configuration: appdata_conf,
-    install: true,
-    install_dir: datadir / 'metainfo'
   ),
   output: '@0@.metainfo.xml'.format(application_id),
   po_dir: podir,
   install: true,
-  install_dir: join_paths(datadir, 'applications')
+  install_dir: datadir / 'metainfo'
 )
 
 if appstreamcli.found()
