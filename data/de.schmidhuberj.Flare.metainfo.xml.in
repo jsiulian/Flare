@@ -10,9 +10,9 @@
   <summary>Chat with your friends on Signal</summary>
   <launchable type="desktop-id">@app-id@.desktop</launchable>
   <content_rating type="oars-1.1"/>
-  <developer_name translatable="no">Julian Schmidhuber</developer_name>
+  <developer_name translate="no">Julian Schmidhuber</developer_name>
   <developer id="mobile.schmidhuberj.de">
-    <name>Julian Schmidhuber</name>
+    <name translate="no">Julian Schmidhuber</name>
   </developer>
   <translation type="gettext">@gettext-package@</translation>
   <update_contact>flatpak@schmidhuberj.de</update_contact>
@@ -39,7 +39,7 @@
 
   <releases>
     <release version="v0.14.2" date="2024-04-02">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>Withdraw notification when message has been read.</li>
@@ -58,7 +58,7 @@
       </description>
     </release>
     <release version="v0.14.1" date="2024-03-22">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>Revamped channel info dialog.</li>
@@ -66,7 +66,7 @@
       </description>
     </release>
     <release version="v0.14.0" date="2024-03-20">
-      <description translatable="no">
+      <description translate="no">
         <p>HOTFIX</p>
         <ul>
           <li>Groups not working for newly linked devices.</li>
@@ -86,7 +86,7 @@
       </description>
     </release>
     <release version="v0.13.0" date="2024-02-25">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>Avatars for contacts and groups.</li>
@@ -99,7 +99,7 @@
       </description>
     </release>
     <release version="v0.12.0" date="2024-02-11">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>Draft message for each chat.</li>
@@ -120,7 +120,7 @@
       </description>
     </release>
     <release version="v0.11.2" date="2024-01-04">
-      <description translatable="no">
+      <description translate="no">
         <p>HOTFIX</p>
         <ul>
           <li>Backend panic after suspend.</li>
@@ -132,7 +132,7 @@
       </description>
     </release>
     <release version="v0.11.1" date="2023-12-30">
-      <description translatable="no">
+      <description translate="no">
         <p>Fixed</p>
         <ul>
           <li>High memory usage due to having unused emoji pickers.</li>
@@ -144,7 +144,7 @@
       </description>
     </release>
     <release version="v0.11.0" date="2023-12-25">
-      <description translatable="no">
+      <description translate="no">
         <p>HOTFIX</p>
         <ul>
           <li>Contacts syncing.</li>
@@ -175,7 +175,7 @@
       </description>
     </release>
     <release version="v0.10.0" date="2023-08-28">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>Deleting messages of a channel locally.</li>
@@ -195,7 +195,7 @@
       </description>
     </release>
     <release version="v0.9.3" date="2023-08-17">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>Support for libspelling.</li>
@@ -207,7 +207,7 @@
       </description>
     </release>
     <release version="v0.9.2" date="2023-08-09">
-      <description translatable="no">
+      <description translate="no">
         <p>HOTFIX</p>
         <ul>
           <li>Fix linking being broken.</li>
@@ -219,7 +219,7 @@
       </description>
     </release>
     <release version="v0.9.1" date="2023-08-02">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>Notifications on reactions received (configurable).</li>
@@ -243,7 +243,7 @@
       </description>
     </release>
     <release version="v0.9.0" date="2023-07-10">
-      <description translatable="no">
+      <description translate="no">
         <p>Changed</p>
         <ul>
           <li>Added support for voice messages/audio files.</li>
@@ -262,7 +262,7 @@
       </description>
     </release>
     <release version="v0.8.2" date="2023-05-29">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>A &quot;pick emoji&quot; button for the text entry.</li>
@@ -278,7 +278,7 @@
       </description>
     </release>
     <release version="v0.8.1" date="2023-05-07">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>Button to show all channels.</li>
@@ -293,7 +293,7 @@
       </description>
     </release>
     <release version="v0.8.0" date="2023-05-03">
-      <description translatable="no">
+      <description translate="no">
         <p>Changed</p>
         <ul>
           <li>Rewrote the message list to be a ListView.</li>
@@ -310,7 +310,7 @@
       </description>
     </release>
     <release version="v0.7.2" date="2023-04-08">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>Message deletion.</li>
@@ -323,7 +323,7 @@
       </description>
     </release>
     <release version="v0.7.1" date="2023-04-01">
-      <description translatable="no">
+      <description translate="no">
         <p>HOTFIX</p>
         <ul>
           <li>Fix outgoing 1-to-1 messages stored incorrectly.</li>
@@ -331,7 +331,7 @@
       </description>
     </release>
     <release version="v0.7.0" date="2023-03-29">
-      <description translatable="no">
+      <description translate="no">
         <p>BREAKING</p>
         <ul>
           <li>Due to a new storage for data, a relink is required on first startup</li>
@@ -362,7 +362,7 @@
       </description>
     </release>
     <release version="v0.6.0" date="2023-01-13">
-      <description translatable="no">
+      <description translate="no">
         <p>Added</p>
         <ul>
         <li>Ability to receive messages in the background.</li>
@@ -375,7 +375,7 @@
       </description>
     </release>
     <release version="v0.5.7" date="2022-12-17">
-      <description translatable="no">
+      <description translate="no">
         <p>Fixed</p>
         <ul>
         <li>Fixed application freeze when there are many initial messages</li>
@@ -384,7 +384,7 @@
       </description>
     </release>
     <release version="v0.5.6" date="2022-12-03">
-      <description translatable="no">
+      <description translate="no">
         <p>Fixed</p>
         <ul>
         <li>Fixed memory leak.</li>
@@ -394,7 +394,7 @@
       </description>
     </release>
     <release version="v0.5.5" date="2022-11-16">
-      <description translatable="no">
+      <description translate="no">
         <p>HOTFIX</p>
         <ul>
         <li>Fix linking not working</li>
@@ -402,7 +402,7 @@
       </description>
     </release>
     <release version="v0.5.4" date="2022-11-15">
-      <description translatable="no">
+      <description translate="no">
         <p>Changed</p>
         <ul>
         <li>Slight UI update to channel list</li>
@@ -417,7 +417,7 @@
       </description>
     </release>
     <release version="v0.5.3" date="2022-10-27">
-      <description translatable="no">
+      <description translate="no">
         <p>HOTFIX:</p>
         <ul>
         <li>Updated certificate of Signal servers</li>
@@ -425,7 +425,7 @@
       </description>
     </release>
     <release version="v0.5.2" date="2022-10-16">
-      <description translatable="no">
+      <description translate="no">
         <p>Added:</p>
         <ul>
           <li>Pasting files and images into the text entry.</li>
@@ -444,7 +444,7 @@
       </description>
     </release>
     <release version="v0.5.1" date="2022-10-10">
-      <description translatable="no">
+      <description translate="no">
         <p>Added:</p>
         <ul>
           <li>Clickable links in text messages.</li>
@@ -465,7 +465,7 @@
       </description>
     </release>
     <release version="v0.5.0" date="2022-10-05">
-      <description translatable="no">
+      <description translate="no">
         <p>Added:</p>
         <ul>
           <li>Immediately sync contacts after linking, without application restart required.</li>
@@ -491,7 +491,7 @@
       </description>
     </release>
     <release version="v0.4.1" date="2022-09-20">
-      <description translatable="no">
+      <description translate="no">
         <p>Added:</p>
         <ul>
           <li>Button in the link window to copy link URL to clipboard.</li>
@@ -506,7 +506,7 @@
       </description>
     </release>
     <release version="v0.4.0" date="2022-09-16">
-      <description translatable="no">
+      <description translate="no">
         <p>Added:</p>
         <ul>
           <li>Accessibility (no idea how good it is).</li>
@@ -522,7 +522,7 @@
       </description>
     </release>
     <release version="v0.3.3" date="2022-09-05">
-      <description translatable="no">
+      <description translate="no">
         <p>Added:</p>
         <ul>
           <li>Keyboard shortcuts.</li>
@@ -539,57 +539,57 @@
       </description>
     </release>
     <release version="v0.3.2" date="2022-08-30">
-      <description translatable="no">
+      <description translate="no">
         <p>Hotfix for crash without libsecret set up.</p>
       </description>
     </release>
     <release version="v0.3.1" date="2022-08-25">
-      <description translatable="no">
+      <description translate="no">
         <p>Fix gschema not being installed.</p>
       </description>
     </release>
     <release version="v0.3.0" date="2022-08-25">
-      <description translatable="no">
+      <description translate="no">
         <p>Implemented device name for linking, added support for video attachment, configurable lazy-load attachments, bug fixes.</p>
       </description>
     </release>
     <release version="v0.2.1" date="2022-08-15">
-      <description translatable="no">
+      <description translate="no">
         <p>Hotfix for not beeing able to link and unlink the device.</p>
       </description>
     </release>
     <release version="v0.2.0" date="2022-08-07">
-      <description translatable="no">
+      <description translate="no">
         <p>UI updates, more translations, bug fixing.</p>
       </description>
     </release>
     <release version="v0.1.5" date="2022-07-23">
-      <description translatable="no">
+      <description translate="no">
         <p>Added ability to upload and download attachments, added ability to remove reply and attachments before sending, fixed some bugs mainly regarding reply messages.</p>
       </description>
     </release>
     <release version="v0.1.4" date="2022-07-16">
-      <description translatable="no">
+      <description translate="no">
         <p>Fixed many bugs, including wrong association for messages to channels, wrongly displayed channel names as "Note to self" and a few crashes.</p>
       </description>
     </release>
     <release version="v0.1.3" date="2022-07-10">
-      <description translatable="no">
+      <description translate="no">
         <p>Fix message receiving, sending attachments.</p>
       </description>
     </release>
     <release version="v0.1.2" date="2022-07-08">
-      <description translatable="no">
+      <description translate="no">
         <p>Bug fixing, error handling, russian and german translation, small UI updates.</p>
       </description>
     </release>
     <release version="v0.1.1" date="2022-07-05">
-      <description translatable="no">
+      <description translate="no">
         <p>Small UI changes, change of license.</p>
       </description>
     </release>
     <release version="v0.1.0" date="2022-06-20">
-      <description translatable="no">
+      <description translate="no">
         <p>Initial Release.</p>
       </description>
     </release>

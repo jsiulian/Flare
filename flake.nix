@@ -62,7 +62,7 @@
                     ]);
               };
               buildInputs = with pkgs; [ libadwaita_1_5 pkgs.protobuf pkgs.libsecret pkgs.gst_all_1.gstreamer pkgs.gst_all_1.gst-plugins-base pkgs.gst_all_1.gst-plugins-good pkgs.gst_all_1.gst-plugins-bad pkgs.gtksourceview5 pkgs.gtk4 ];
-              nativeBuildInputs = with pkgs; [ pkgs.appstream-glib blueprint-compiler-git pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib ];
+              nativeBuildInputs = with pkgs; [ pkgs.appstream blueprint-compiler-git pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib ];
 
               PROTOC = "${pkgs.protobuf}/bin/protoc";
 
