@@ -40,6 +40,15 @@
   <releases>
     <release version="v0.14.2" date="2024-04-02">
       <description translate="no">
+        <p>Fixes</p>
+        <ul>
+          <li>Metainfo not being translatable.</li>
+          <li>Crash when reacting with certain emojis.</li>
+        </ul>
+      </description>
+    </release>
+    <release version="v0.14.2" date="2024-04-02">
+      <description translate="no">
         <p>Added</p>
         <ul>
           <li>Withdraw notification when message has been read.</li>

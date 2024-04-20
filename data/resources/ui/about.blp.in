@@ -14,5 +14,5 @@ Adw.AboutDialog about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>Added</p> <ul> <li>Withdraw notification when message has been read.</li> </ul> <p>Fixed</p> <ul> <li>Failing to load groups and messages when started offline.</li> <li>Improve performance on startup.</li> <li>Sometimes the avatar and name showing for own messages.</li> </ul> <p>Chores</p> <ul> <li>Cleanup major parts of the code.</li> <li>Add developer documentation.</li> </ul>";
+  release-notes: "<p>Fixes</p> <ul> <li>Metainfo not being translatable.</li> <li>Crash when reacting with certain emojis.</li> </ul>";
 }
