@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-05 10:41+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-04-25 08:07+0000\n"
+"Last-Translator: Ahmed Mohammed <ira.traq@outlook.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -25,130 +27,131 @@ msgstr ""
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
-msgstr ""
+msgstr "رقم الهاتف"
 
 #: data/resources/ui/channel_info_dialog.blp:66
 msgid "Description"
-msgstr ""
+msgstr "الوصف"
 
 #: data/resources/ui/channel_info_dialog.blp:76
 msgid "Disappearing Messages"
-msgstr ""
+msgstr "الرسائل المختفية"
 
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "تصفير الجلسة"
 
 #: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
-msgstr ""
+msgstr "تصفير الجلسة"
 
 #: data/resources/ui/channel_info_dialog.blp:128
 msgctxt "accessibility"
 msgid "Clear Messages"
-msgstr ""
+msgstr "مسح الرسائل"
 
 #: data/resources/ui/channel_info_dialog.blp:149
 msgid "Clear Messages"
-msgstr ""
+msgstr "مسح الرسائل"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "غير متصل"
 
 #: data/resources/ui/channel_list.blp:20
 msgid "Search"
-msgstr ""
+msgstr "البحث"
 
 #: data/resources/ui/channel_list.blp:23 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "البحث"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "لم يتم تحديد قناة"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "اختر قناة"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "إزالة الرد"
 
 #: data/resources/ui/channel_messages.blp:184
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "إزالة رد"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "إزالة مرفق"
 
 #: data/resources/ui/channel_messages.blp:207
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "إزالة مرفق"
 
 #: data/resources/ui/channel_messages.blp:228
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "إضافة مرفق"
 
 #: data/resources/ui/channel_messages.blp:236
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "إضافة مرفق"
 
 #: data/resources/ui/channel_messages.blp:252
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "مُدخَل الرسالة"
 
 #: data/resources/ui/channel_messages.blp:258
 msgctxt "tooltip"
 msgid "Message input"
-msgstr ""
+msgstr "مُدخَل الرسالة"
 
 #: data/resources/ui/channel_messages.blp:270
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "إرسال"
 
 #: data/resources/ui/channel_messages.blp:274
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "إرسال"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
 msgid "Clear messages"
-msgstr ""
+msgstr "مسح الرسائل"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
+"سيمسح هذا جميع الرسائل المخزّنة محليًا. سيقوم هذا الفعل أيضًا بإغلاق التطبيق."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
 #: data/resources/ui/linked_devices_window.blp:50 src/gui/window.rs:309
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "امحُ"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
 msgid "Unlink"
-msgstr ""
+msgstr "إلغاء الربط"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -156,76 +159,78 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"سيقوم هذا الفعل بإلغاء ربط هذا الجهاز وحذف جميع البيانات المخزنة محليًا. "
+"سيتم أيضًا إغلاق التطبيق والسماح بإعادة الربط في حال فتحه مجددًا."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "إلغاء الربط وحذف جميع الرسائل"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "إلغاء الربط مع إبقاء الرسائل"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "خطأ"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "من فضلك، خذ بعين الإعتبار الإبلاغ عن هذا الخطأ."
 
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr ""
+msgstr "إغلاق"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "إبلاغ"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
 msgid "Linked Devices"
-msgstr ""
+msgstr "الأجهزة المرتبطة"
 
 #: data/resources/ui/linked_devices_window.blp:31
 msgid "Add Linked Device"
-msgstr ""
+msgstr "أضف جهازًا مرتبطًا"
 
 #: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "رجاءً قم بإدخال مسار الجهاز للربط."
 
 #: data/resources/ui/linked_devices_window.blp:42
 msgid "Device URL"
-msgstr ""
+msgstr "مسار الجهاز"
 
 #: data/resources/ui/linked_devices_window.blp:51
 msgid "Add Device"
-msgstr ""
+msgstr "إضافة جهاز"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr ""
+msgstr "رد"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "نسخ"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "حفظ باسم…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "فتح باستخدام…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
-msgstr ""
+msgstr "محادثة جديدة"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
@@ -342,7 +347,7 @@ msgstr ""
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:8
 msgid "Flare"
-msgstr ""
+msgstr "شرارة"
 
 #: data/resources/ui/setup_window.blp:53
 msgid ""
