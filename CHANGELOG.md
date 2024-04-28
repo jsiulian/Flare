@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixes
+
+- No notifications being sent when Flare is in the background for the last active channel.
+
 ## [0.14.3] - 2024-04-20
 
 ### Fixes

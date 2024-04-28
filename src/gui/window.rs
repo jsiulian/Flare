@@ -391,9 +391,11 @@ pub mod imp {
 
         fn setup_active_window_handler(&self) {
             let obj = self.obj();
-            obj.connect_is_active_notify(clone!(
-            @weak self as w => move |window| {
-                w.channel_list.set_active(window.is_active())
+            obj.connect_is_active_notify(clone!(@weak self as w => move |window| {
+                w.channel_list.set_active(window.is_active() && window.is_visible())
+            }));
+            obj.connect_visible_notify(clone!(@weak self as w => move |window| {
+                w.channel_list.set_active(window.is_active() && window.is_visible())
             }));
         }
 
