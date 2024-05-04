@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-05 10:41+0200\n"
-"PO-Revision-Date: 2024-03-17 11:01+0000\n"
+"PO-Revision-Date: 2024-05-05 08:17+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
 "flare/nl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.3\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -48,7 +48,6 @@ msgid "Reset Session"
 msgstr "Sessie resetten"
 
 #: data/resources/ui/channel_info_dialog.blp:128
-#, fuzzy
 msgctxt "accessibility"
 msgid "Clear Messages"
 msgstr "Berichten wissen"
@@ -233,9 +232,8 @@ msgid "Open with…"
 msgstr "Openen met…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
-#, fuzzy
 msgid "New Chat"
-msgstr "Gesprek"
+msgstr "Nieuw gesprek"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
@@ -243,21 +241,20 @@ msgid "Menu"
 msgstr "Menu"
 
 #: data/resources/ui/new_channel_dialog.blp:35
-#, fuzzy
 msgid "Search Contacts"
-msgstr "Contactpersonen synchroniseren"
+msgstr "Contacten zoeken"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Contacten sorteren op:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Voornaam"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Achternaam"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -579,7 +576,6 @@ msgid "Known Bugs"
 msgstr "Bekende problemen"
 
 #: data/resources/ui/setup_window.blp:508
-#, fuzzy
 msgid ""
 "Make sure to not send any messages while the messages are still received by "
 "Flare, this makes sure that all required information is received. We are "
@@ -591,12 +587,13 @@ msgid ""
 msgstr ""
 "Zorg ervoor dat u geen berichten verzendt terwijl de berichten nog door "
 "Flare worden ontvangen, dit zorgt ervoor dat alle benodigde informatie wordt "
-"ontvangen. We proberen dit probleem op te lossen. Bovendien gebruikt Flare "
-"momenteel na een tijdje over­matige hoeveel­heden geheugen. Dit komt door een "
-"geheugen­lek dat nog niet is gevonden. Wij proberen dit ook op te lossen. "
-"Voor een volledige lijst met problemen, bezoek de <a href=\"https://gitlab."
-"com/schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">probleem­"
-"tracker</a>."
+"ontvangen. We proberen dit probleem op te lossen. Bovendien kan het "
+"verzenden naar contacten van wie u nog geen berichten heeft ontvangen, "
+"leiden tot snelheids­beperkingen. Zorg ervoor dat u een bericht van een "
+"contact­persoon ontvangt voordat u er te veel verzendt. Voor een volledige "
+"lijst met problemen, bezoek de <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\""
+">probleem­tracker</a>."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
@@ -729,7 +726,7 @@ msgstr "Gesprek"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "is aan het typen"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
@@ -757,7 +754,7 @@ msgstr "Herinnering aan mezelf"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Onbekend contact"
 
 #: src/backend/manager.rs:442
 msgid "You"
@@ -894,7 +891,7 @@ msgstr "Nooit"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Concept"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -979,15 +976,14 @@ msgstr "messaging;chat;signal;berichten;gesprekken;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
-#, fuzzy
 msgid ""
 "Flare is an unofficial app for Signal. It is still in development and "
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
-"Flare is een onofficiële app waarmee u op Linux gesprekken met uw vrienden "
-"kunt voeren via Signal. Let op: de ontwikkeling is nog in volle gang en nog "
-"niet alle officiële functies zijn beschikbaar."
+"Flare is een onofficiële app voor Signal. Het is nog in ontwikkeling en "
+"bevat niet alle functies die de officiële Signal-apps bieden. Meer "
+"informatie is te vinden op de functie­routekaart."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -1065,6 +1061,8 @@ msgstr "Berichten versturen met entertoets"
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
 msgstr ""
+"Hoe contacten moeten worden gesorteerd; bĳvoorbeeld op ‘voornaam’ of "
+"‘achternaam’"
 
 #~ msgid "Channel Information"
 #~ msgstr "Kanaalinformatie"
