@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-05 10:41+0200\n"
-"PO-Revision-Date: 2024-04-06 20:01+0000\n"
-"Last-Translator: Даня Степанов <danastepanov393@gmail.com>\n"
+"PO-Revision-Date: 2024-05-05 08:17+0000\n"
+"Last-Translator: snowfire <wstorm88@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ru/>\n"
 "Language: ru\n"
@@ -17,11 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.3\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr "Давид Лапшин <ddaudix@gmail.com>"
+msgstr ""
+"Давид Лапшин <ddaudix@gmail.com>\n"
+"Сергей Антонов <wstorm88@gmail.com>"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
@@ -51,7 +53,6 @@ msgid "Clear Messages"
 msgstr "Очистить сообщения"
 
 #: data/resources/ui/channel_info_dialog.blp:149
-#, fuzzy
 msgid "Clear Messages"
 msgstr "Очистить сообщения"
 
@@ -80,7 +81,7 @@ msgstr "Выберите канал"
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr "Удалить ответ"
+msgstr "Удалить этот ответ"
 
 #: data/resources/ui/channel_messages.blp:184
 msgctxt "tooltip"
@@ -95,7 +96,7 @@ msgstr "Удалить вложение"
 #: data/resources/ui/channel_messages.blp:207
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr "Удалить вложение"
+msgstr "Удалить это вложение"
 
 #: data/resources/ui/channel_messages.blp:228
 msgctxt "accessibility"
@@ -105,7 +106,7 @@ msgstr "Добавить вложение"
 #: data/resources/ui/channel_messages.blp:236
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr "Добавить вложение"
+msgstr "Добавить это вложение"
 
 #: data/resources/ui/channel_messages.blp:252
 msgctxt "accessibility"
@@ -160,7 +161,7 @@ msgid ""
 "again."
 msgstr ""
 "Это отключит это устройство и удалит все локально сохраненные данные. Это "
-"также закроет приложение, чтобы его можно было повторно связать при "
+"также закроет приложение, чтобы его можно было повторно привязать при "
 "повторном открытии."
 
 #: data/resources/ui/dialog_unlink.blp:12
@@ -169,7 +170,7 @@ msgstr "Отвязать и удалить все сообщения"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr "Отвязать но оставить сообщения"
+msgstr "Отвязать, но оставить сообщения"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
@@ -190,28 +191,24 @@ msgstr "Пожаловаться"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
-#, fuzzy
 msgid "Linked Devices"
-msgstr "Привязать устройство"
+msgstr "Привязанные устройства"
 
 #: data/resources/ui/linked_devices_window.blp:31
-#, fuzzy
 msgid "Add Linked Device"
-msgstr "Привязать устройство"
+msgstr "Добавить привязанное устройство"
 
 #: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Пожалуйста, укажите URL привязываемого устройства."
 
 #: data/resources/ui/linked_devices_window.blp:42
-#, fuzzy
 msgid "Device URL"
-msgstr "Имя устройства"
+msgstr "URL устройства"
 
 #: data/resources/ui/linked_devices_window.blp:51
-#, fuzzy
 msgid "Add Device"
-msgstr "Привязать устройство"
+msgstr "Добавить устройство"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
@@ -235,7 +232,7 @@ msgstr "Открыть с помощью…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
-msgstr ""
+msgstr "Новый чат"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
@@ -243,80 +240,72 @@ msgid "Menu"
 msgstr "Меню"
 
 #: data/resources/ui/new_channel_dialog.blp:35
-#, fuzzy
 msgid "Search Contacts"
-msgstr "Поиск в каналах"
+msgstr "Поиск в контактах"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Упорядочить контакты по:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Имя"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Фамилия"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
 msgstr "Общее"
 
 #: data/resources/ui/preferences_window.blp:10
-#, fuzzy
 msgid "Automatically Download Attachments"
-msgstr "Автоматически загружать изображения"
+msgstr "Автоматически загружать вложения"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "Выбранные ниже типы вложений будут автоматически загружены"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Изображения"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Видео"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Файлы"
 
 #: data/resources/ui/preferences_window.blp:26
-#, fuzzy
 msgid "Voice Messages"
-msgstr "Получение сообщений"
+msgstr "Голосовые сообщения"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
 msgstr "Уведомления"
 
 #: data/resources/ui/preferences_window.blp:32
-#, fuzzy
 msgid "Notifications for new messages"
-msgstr "Уведомления для новых сообщений."
+msgstr "Уведомления о новых сообщениях"
 
 #: data/resources/ui/preferences_window.blp:35
-#, fuzzy
 msgid "Send Notifications"
 msgstr "Отправлять уведомления"
 
 #: data/resources/ui/preferences_window.blp:39
-#, fuzzy
 msgid "Send Notifications on Reactions"
 msgstr "Отправлять уведомления о реакциях"
 
 #: data/resources/ui/preferences_window.blp:44
-#, fuzzy
 msgid "Background Notifications"
-msgstr "Отправлять уведомления"
+msgstr "Отправлять фоновые уведомления"
 
 #: data/resources/ui/preferences_window.blp:45
-#, fuzzy
 msgid "Fetch notifications while the app is closed"
-msgstr "Отправлять уведомления при получении реакций"
+msgstr "Отправлять уведомления в фоновом режиме"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
@@ -337,32 +326,28 @@ msgid "Selectable Message Text"
 msgstr "Выбираемый текст сообщения"
 
 #: data/resources/ui/preferences_window.blp:57
-#, fuzzy
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr ""
-"Выделяемый текст может мешать жестам пролистывания на сенсорных экранах."
+msgstr "Выделяемый текст может мешать жестам пролистывания на сенсорных экранах"
 
 #: data/resources/ui/preferences_window.blp:61
-#, fuzzy
 msgid "Press “Enter” to Send Message"
 msgstr "Нажать \"Enter\" для отправки сообщения"
 
 #: data/resources/ui/preferences_window.blp:62
-#, fuzzy
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
-"Может быть, будет невозможно отправлять сообщения с переносом строки на "
-"сенсорной клавиатуре, не позволяющей использовать «Control + Enter»"
+"Возможно, не получится отправлять сообщения с переносом строки на сенсорной "
+"клавиатуре, не позволяющей использовать «Control + Enter»"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Добро пожаловать во Flare"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Настроить Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
@@ -383,16 +368,26 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare - неофициальный клиент Signal. Обратите внимание, что Flare не "
+"является стабильным, возможны ошибки. Если Вы испытываете какие-либо ошибки, "
+"обратитесь к <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\""
+"> баг-трекеру </a> и откройте проблему. Также обратите внимание, что из-за "
+"того, что Flare является сторонним приложением, Flare не может гарантировать "
+"такой же уровень безопасности и конфиденциальности, как официальные "
+"приложения Signal. Если Вам или кому-то, с кем Вам нужно связаться, "
+"требуется сильный уровень безопасности, не используйте Flare. "
+"Проконсультируйтесь с <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/"
+"-/blob/master/README.md#security\">README </a> для получения дополнительной "
+"информации."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Настроить основное устройство или привязать устройство?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
-#, fuzzy
 msgid "Primary Device"
-msgstr "Привязать устройство"
+msgstr "Основное устройство"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
@@ -402,15 +397,15 @@ msgstr "Привязать устройство"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "Основное устройство или привязанное устройство?"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Вы можете использовать Flare как основное устройство или как вторичное."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Привязанное устройство (рекомендуется)"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
@@ -418,10 +413,13 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare может быть приложением, связанным с Вашим основным устройством, как в "
+"Signal Desktop. Этот режим был более тщательно протестирован и в основном "
+"работает."
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Основное устройство (отключено)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -431,12 +429,19 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare может выступать в качестве основного устройства, как в официальных "
+"приложениях Signal на Android или IOS. Этот режим в настоящее время не "
+"поддерживается Flare, хотя первоначальные тесты, похоже, указывают на то, "
+"что он работает. Если Вы готовы протестировать его и знаете как это делать, "
+"то можете включить кнопку ниже."
 
 #: data/resources/ui/setup_window.blp:194
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Для подключения в качестве вторичного устройства Flare понадобится имя "
+"устройства, которое будет показано в официальном приложении."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
@@ -445,12 +450,12 @@ msgstr "Имя устройства"
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "Опции разработчика"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
-msgstr ""
+msgstr "Серверы Signal"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -459,12 +464,16 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"На следующей странице будет показан QR-код, который должен быть отсканирован "
+"с основного устройства. Обратите внимание, что у Вас есть только минута для "
+"сканирования кода, поэтому, пожалуйста, заранее подготовьте официальное "
+"приложение для сканирования QR-кода."
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
 msgid "Link device"
-msgstr "Привязка устройства"
+msgstr "Привязать устройство"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
@@ -481,9 +490,8 @@ msgid "Link without scanning"
 msgstr "Связать без сканирования"
 
 #: data/resources/ui/setup_window.blp:280
-#, fuzzy
 msgid "Manual linking"
-msgstr "Привазывание"
+msgstr "Привязать вручную"
 
 #: data/resources/ui/setup_window.blp:296
 msgid "Manual Linking"
@@ -503,7 +511,7 @@ msgstr "Скопировать в буфер обмена"
 
 #: data/resources/ui/setup_window.blp:341
 msgid "Continue"
-msgstr ""
+msgstr "Продолжить"
 
 #: data/resources/ui/setup_window.blp:358
 msgid ""
@@ -515,6 +523,13 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"Для регистрации в качестве основного устройства Flare понадобится Ваш номер "
+"телефона и завершение капчи. Пожалуйста, дайте номер телефона в "
+"международном формате E.164, включая ведущий «+» и код страны. Капча может "
+"быть завершена <a href=\"https://signalcaptchas.org/registration/generate."
+"html\"> здесь </a>, затем скопируйте ссылку «Открытый сигнал» и вставьте её "
+"в поле ниже. Обратите внимание, что эта капча действительна только в течение "
+"минуты, поэтому, пожалуйста, пройдите её быстро."
 
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -526,22 +541,24 @@ msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"После отправки этой информации вы получите SMS от Signal с кодом проверки. "
+"Вставьте этот код на следующей странице."
 
 #: data/resources/ui/setup_window.blp:395
 #: data/resources/ui/setup_window.blp:403
 #: data/resources/ui/setup_window.blp:420
 #: data/resources/ui/setup_window.blp:445
 msgid "Confirm"
-msgstr ""
+msgstr "Подтвердить"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Вставьте код проверки, который Вы получили от Signal."
 
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
 msgid "Finished"
-msgstr ""
+msgstr "Завершено"
 
 #: data/resources/ui/setup_window.blp:494
 msgid ""
@@ -549,10 +566,14 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare почти готов, он ждет завершения синхронизации контактов. Это может "
+"занять несколько секунд, Вы можете начать использовать Flare после "
+"синхронизации контактов. Несколько замечаний, прежде чем Вы начнёте "
+"использовать Flare:"
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "Известные недочёты"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -564,10 +585,18 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Убедитесь, что не отправляете сообщения, пока сообщения всё ещё принимаются "
+"Flare. Это гарантирует, что вся требуемая информация будет получена. Мы "
+"пытаемся решить эту проблему. Кроме того, отправка сообщений адресатам, от "
+"которых Вы ещё не получили сообщений, может привести к ограничению скорости "
+"отправки. Убедитесь, что Вы получили сообщение от адресата, прежде чем "
+"отправить ему слишком много данных. Для полного списка ошибок посетите <a "
+"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/"
+"?label_name%5B%5D=bug\"> баг-трекер </a>."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
-msgstr ""
+msgstr "Контакты"
 
 #: data/resources/ui/setup_window.blp:523
 msgid ""
@@ -575,6 +604,9 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"Хотите оставить некоторые отзывы о Флере или просто немного поговорить? Наша "
+"комната <a href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix </a> "
+"открыта для всех."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -665,9 +697,8 @@ msgid "Submit"
 msgstr "Отправить"
 
 #: data/resources/ui/text_entry.blp:13
-#, fuzzy
 msgid "Message"
-msgstr "Ввод сообщения"
+msgstr "Сообщение"
 
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
@@ -680,9 +711,8 @@ msgid "Insert emoji"
 msgstr "Вставить эмодзи"
 
 #: data/resources/ui/window.blp:25
-#, fuzzy
 msgid "Channel list"
-msgstr "Каналы"
+msgstr "Список каналов"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
@@ -691,11 +721,11 @@ msgstr "Добавить беседу"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "Чат"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "печатает"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
@@ -703,19 +733,19 @@ msgstr "Параметры"
 
 #: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Синхронизировать контакты"
 
 #: data/resources/ui/window.blp:181
 msgid "Keybindings"
-msgstr "Комбинации клавиш"
+msgstr "Назначения клавиш"
 
 #: data/resources/ui/window.blp:186
 msgid "About"
-msgstr "О Приложении"
+msgstr "О приложении"
 
 #: data/resources/ui/window.blp:191
 msgid "Quit"
-msgstr ""
+msgstr "Выйти"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
@@ -723,7 +753,7 @@ msgstr "Заметка для себя"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Неизвестный контакт"
 
 #: src/backend/manager.rs:442
 msgid "You"
@@ -731,28 +761,27 @@ msgstr "Вы"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "Входящий вызов"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "Исходящий вызов"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "Вызов начат"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr ""
+msgstr "Вызов окончен"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
-msgstr ""
+msgstr "Вызов отклонён"
 
 #: src/backend/message/call_message.rs:105
-#, fuzzy
 msgid "Unanswered call"
-msgstr "Звонок отвечен."
+msgstr "Неотвеченный звонок"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
@@ -777,18 +806,18 @@ msgstr[1] "Отправлено {} видео"
 #: src/backend/message/text_message.rs:386
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] "Отправил голосовое сообщение"
-msgstr[1] "Отправил {} голосовых сообщений"
+msgstr[0] "Отправлено голосовое сообщение"
+msgstr[1] "Отправлено {} голосовых сообщений"
 
 #: src/backend/message/text_message.rs:391
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] "Оправить файл"
-msgstr[1] "Отправить {} файлов"
+msgstr[0] "Отправлен файл"
+msgstr[1] "Отправлено {} файлов"
 
 #: src/error.rs:91
 msgid "I/O Error."
-msgstr "Ошибка I/O."
+msgstr "Ошибка ввода-вывода."
 
 #: src/error.rs:96
 msgid "There does not seem to be a connection to the internet available."
@@ -796,11 +825,11 @@ msgstr "Кажется нет подключения к Интернету."
 
 #: src/error.rs:101
 msgid "Something glib-related failed."
-msgstr "Что-то, связанное с glib, не удалось."
+msgstr "Не удалось выполнить что-то, связанное с glib."
 
 #: src/error.rs:106
 msgid "The communication with Libsecret failed."
-msgstr "Связь с Libsecret не удалась."
+msgstr "Связь с Libsecret не установлена."
 
 #: src/error.rs:111
 msgid ""
@@ -808,7 +837,7 @@ msgid ""
 "database and relink the application."
 msgstr ""
 "Сбой внутренней базы данных. Пожалуйста, перезапустите приложение или "
-"удалите базу данных и повторно свяжите приложение."
+"удалите базу данных и повторно привяжите приложение."
 
 #: src/error.rs:116
 msgid ""
@@ -816,21 +845,21 @@ msgid ""
 "relink the application."
 msgstr ""
 "Похоже вы не авторизованы в Signal. Пожалуйста, удалите базу данных и "
-"повторно свяжите приложение."
+"повторно привяжите приложение."
 
 #: src/error.rs:121
 msgid "Sending a message failed."
-msgstr "Отправка сообщения не удалась."
+msgstr "Не удалось отправить сообщение."
 
 #: src/error.rs:126
 msgid "Receiving a message failed."
-msgstr "Получение сообщения не удалась."
+msgstr "Не удалось получить сообщение."
 
 #: src/error.rs:131
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
-"Что-то неожиданное произошло с бэкендом signal. Пожалуйста, повторите "
+"Что-то неожиданное произошло с бэкендом Signal. Пожалуйста, повторите "
 "попытку позже."
 
 #: src/error.rs:136
@@ -839,7 +868,7 @@ msgstr "Кажется приложение неправильно настро�
 
 #: src/error.rs:141
 msgid "A part of the application crashed."
-msgstr "Часть приложения вылетела."
+msgstr "Произошёл сбой части приложения."
 
 #: src/error.rs:151
 msgid "Please check your internet connection."
@@ -860,11 +889,11 @@ msgstr ""
 
 #: src/gui/channel_info_dialog.rs:197
 msgid "Never"
-msgstr ""
+msgstr "Никогда"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Черновик"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -881,12 +910,12 @@ msgstr "Используйте настройки для удаления раз
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Production"
 
 #: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Staging"
 
 #: src/gui/setup_window.rs:129
 msgid "Copied to clipboard"
@@ -906,40 +935,36 @@ msgstr "%Y-%m-%d %H:%M"
 
 #: src/gui/utility.rs:138
 msgid "Today"
-msgstr ""
+msgstr "Сегодня"
 
 #: src/gui/utility.rs:141
 msgid "Yesterday"
-msgstr ""
+msgstr "Вчера"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
-#, fuzzy
 msgid "%Y-%m-%d"
-msgstr "%Y-%m-%d %H:%M"
+msgstr "%d-%m-%Y %H:%M"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:151
+#, fuzzy
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:159
-#, fuzzy
 msgid "Attachment"
-msgstr "Вложения"
+msgstr "Вложение"
 
 #: src/gui/window.rs:304 src/gui/window.rs:310
-#, fuzzy
 msgid "Remove Messages"
-msgstr "Получение сообщений"
+msgstr "Удалить сообщения"
 
 #: src/gui/window.rs:305
-#, fuzzy
 msgid "This will remove all locally stored messages from this channel"
-msgstr ""
-"Это удалит все сохранённые локально сообщения. Это также закроет приложение."
+msgstr "Это удалит все локально сохранённые сообщения из этого канала."
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
@@ -948,20 +973,21 @@ msgid "Chat with your friends on Signal"
 msgstr "Общайтесь с друзьями в Signal"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
+#, fuzzy
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "общение;чат;сигнал;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
-#, fuzzy
 msgid ""
 "Flare is an unofficial app for Signal. It is still in development and "
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
-"Flare это неофициальное приложение, позволяющее общаться с друзьями в Signal "
-"на Linux. Оно все еще находится в разработке и не включает в себя столько "
-"функций, сколько официальные приложения Signal."
+"Flare - неофициальное приложение, позволяющее общаться с друзьями в Signal "
+"на Linux. Оно всё ещё находится в разработке и не включает в себя все "
+"функции официального приложения Signal. Больше информации можно найти на "
+"дорожной карте."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -1023,7 +1049,7 @@ msgstr "Отправлять уведомления"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr "Работать в фоновом режиме при закрытии"
+msgstr "При закрытии окна работать в фоновом режиме"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
@@ -1039,7 +1065,7 @@ msgstr "Отправить сообщение когда клавиша Enter н
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
-msgstr "Капсировоат Контакт, на пружине, с «первой» или «фанат»"
+msgstr "Как сортировать контакты, например, по имени или фамилии"
 
 #~ msgid "Channel Information"
 #~ msgstr "Информация о канале"
