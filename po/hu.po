@@ -8,14 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-05 10:41+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-05-25 07:09+0000\n"
+"Last-Translator: Matee001 <azigazikovacs@gmail.com>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -24,24 +26,24 @@ msgstr ""
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefonszám"
 
 #: data/resources/ui/channel_info_dialog.blp:66
 msgid "Description"
-msgstr ""
+msgstr "Leírás"
 
 #: data/resources/ui/channel_info_dialog.blp:76
 msgid "Disappearing Messages"
-msgstr ""
+msgstr "Eltűnő üzenetek"
 
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Munkamenet visszaállítása"
 
 #: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
-msgstr ""
+msgstr "Munkamenet visszaállítása"
 
 #: data/resources/ui/channel_info_dialog.blp:128
 msgctxt "accessibility"
@@ -55,34 +57,34 @@ msgstr ""
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 #: data/resources/ui/channel_list.blp:20
 msgid "Search"
-msgstr ""
+msgstr "Keresés"
 
 #: data/resources/ui/channel_list.blp:23 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Keresés"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Nincs kiválasztva csatorna"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "Válassz ki egy csatornát"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "A válasz eltávolítása"
 
 #: data/resources/ui/channel_messages.blp:184
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Válasz eltávolítása"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "accessibility"
