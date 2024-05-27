@@ -33,4 +33,14 @@ impl Login1 {
             .args()
             .map(|a| *a.arg1())
     }
+
+    pub async fn await_suspend_wakeup(&self) -> ashpd::Result<()> {
+        log::trace!("Awaiting sleep change.");
+        while self.receive_sleep().await? {
+            log::trace!("Going to sleep. Do nothing.");
+        }
+
+        log::trace!("Waking up from suspend.");
+        Ok(())
+    }
 }

@@ -36,25 +36,6 @@ pub async fn await_online() {
     }
 }
 
-pub async fn await_suspend_wakeup() -> ashpd::Result<()> {
-    let login1 = crate::dbus::Login1::new().await?;
-
-    log::trace!("Awaiting sleep change.");
-    while login1.receive_sleep().await? {
-        log::trace!("Going to sleep. Do nothing.");
-    }
-
-    log::trace!("Waking up from suspend.");
-
-    Ok(())
-}
-
-pub async fn await_suspend_wakeup_online() -> ashpd::Result<()> {
-    await_suspend_wakeup().await?;
-    await_online().await;
-    Ok(())
-}
-
 pub fn format_profile_name(p: &ProfileName<String>) -> String {
     if let Some(family_name) = &p.family_name {
         format!("{} {}", p.given_name, family_name)
