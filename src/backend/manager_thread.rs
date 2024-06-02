@@ -12,7 +12,7 @@
 use std::{cell::OnceCell, ops::Bound};
 
 use futures::channel::{mpsc, oneshot};
-use futures::{join, select, FutureExt, SinkExt, StreamExt};
+use futures::{join, select, FutureExt, SinkExt, StreamExt, TryFutureExt};
 use libsignal_service::{
     configuration::SignalServers,
     content::ContentBody,
@@ -31,6 +31,7 @@ use presage::{
 use presage_store_sled::SledStore as Store;
 use url::Url;
 
+use crate::dbus::Login1;
 use crate::ApplicationError;
 
 const MESSAGE_BOUND: usize = 10;
@@ -570,10 +571,23 @@ async fn command_loop(
     'outer: loop {
         let msgs: Result<_, presage::Error<<Store as presage::store::Store>::Error>> =
             manager.receive_messages(ReceivingMode::Forever).await;
+        let login1 = Login1::new().await;
         match msgs {
             Ok(messages) => {
                 futures::pin_mut!(messages);
                 let mut next_msg = messages.next().fuse();
+                let mut await_suspend_online = login1
+                    .as_ref()
+                    .map(|l| {
+                        l.await_suspend_wakeup()
+                            .and_then(|_| async {
+                                crate::utils::await_online().await;
+                                Ok(())
+                            })
+                            .boxed()
+                    })
+                    .unwrap_or(futures::future::pending().boxed())
+                    .fuse();
                 loop {
                     select! {
                         // Receiving a message.
@@ -596,7 +610,7 @@ async fn command_loop(
                             }
                         },
                         // The network status changed; restart the loop to restart the signal websockets.
-                        _ = crate::utils::await_suspend_wakeup_online().fuse() => {
+                        _ = await_suspend_online  => {
                             log::trace!("Waking up from suspend. Restarting command loop.");
                             break;
                         },
