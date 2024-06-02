@@ -6,6 +6,7 @@ mod channel_item_compact;
 mod channel_list;
 mod channel_messages;
 mod components;
+mod device_info_item;
 mod error_dialog;
 mod linked_devices_window;
 mod message_item;

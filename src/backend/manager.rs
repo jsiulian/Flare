@@ -726,10 +726,10 @@ impl Manager {
         r
     }
 
-    pub async fn linked_devices(&self) -> Result<Vec<DeviceInfo>, PresageError> {
-        log::trace!("`Manager::linked_devices` start");
-        let r = self.internal().linked_devices().await;
-        log::trace!("`Manager::linked_devices` finished");
+    pub async fn devices(&self) -> Result<Vec<DeviceInfo>, PresageError> {
+        log::trace!("`Manager::devices` start");
+        let r = self.internal().devices().await;
+        log::trace!("`Manager::devices` finished");
         r
     }
 }

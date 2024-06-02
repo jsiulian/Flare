@@ -570,8 +570,10 @@ checksum = "8a0d04d43504c61aa6c7531f1871dd0d418d91130162063b789da00fd7057a5e"
 dependencies = [
  "android-tzdata",
  "iana-time-zone",
+ "js-sys",
  "num-traits",
  "serde",
+ "wasm-bindgen",
  "windows-targets 0.52.4",
 ]
 
@@ -974,6 +976,7 @@ version = "0.14.3"
 dependencies = [
  "ashpd",
  "blurhash",
+ "chrono",
  "env_logger",
  "err-derive",
  "futures",
@@ -2003,7 +2006,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=c072491aa3e2b604b45b9f2b764552b7d382898c#c072491aa3e2b604b45b9f2b764552b7d382898c"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=1e04a655c62271ffdfe70b053a6150e0cc2cb155#1e04a655c62271ffdfe70b053a6150e0cc2cb155"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -2038,7 +2041,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service-hyper"
 version = "0.1.0"
-source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=c072491aa3e2b604b45b9f2b764552b7d382898c#c072491aa3e2b604b45b9f2b764552b7d382898c"
+source = "git+https://github.com/whisperfish/libsignal-service-rs?rev=1e04a655c62271ffdfe70b053a6150e0cc2cb155#1e04a655c62271ffdfe70b053a6150e0cc2cb155"
 dependencies = [
  "async-trait",
  "async-tungstenite",
@@ -2758,7 +2761,7 @@ checksum = "94e851c7654eed9e68d7d27164c454961a616cf8c203d500607ef22c737b51bb"
 [[package]]
 name = "presage"
 version = "0.6.1"
-source = "git+https://github.com/Schmiddiii/presage?rev=de9c6d0df4fb5908586c9b06f74d5f2ce7078a9e#de9c6d0df4fb5908586c9b06f74d5f2ce7078a9e"
+source = "git+https://github.com/whisperfish/presage?rev=5bf74db260b67e2052c19ab1d1e0930483c7ceb4#5bf74db260b67e2052c19ab1d1e0930483c7ceb4"
 dependencies = [
  "base64",
  "futures",
@@ -2778,7 +2781,7 @@ dependencies = [
 [[package]]
 name = "presage-store-cipher"
 version = "0.1.0"
-source = "git+https://github.com/Schmiddiii/presage?rev=de9c6d0df4fb5908586c9b06f74d5f2ce7078a9e#de9c6d0df4fb5908586c9b06f74d5f2ce7078a9e"
+source = "git+https://github.com/whisperfish/presage?rev=5bf74db260b67e2052c19ab1d1e0930483c7ceb4#5bf74db260b67e2052c19ab1d1e0930483c7ceb4"
 dependencies = [
  "blake3",
  "chacha20poly1305",
@@ -2795,10 +2798,11 @@ dependencies = [
 [[package]]
 name = "presage-store-sled"
 version = "0.6.0-dev"
-source = "git+https://github.com/Schmiddiii/presage?rev=de9c6d0df4fb5908586c9b06f74d5f2ce7078a9e#de9c6d0df4fb5908586c9b06f74d5f2ce7078a9e"
+source = "git+https://github.com/whisperfish/presage?rev=5bf74db260b67e2052c19ab1d1e0930483c7ceb4#5bf74db260b67e2052c19ab1d1e0930483c7ceb4"
 dependencies = [
  "async-trait",
  "base64",
+ "chrono",
  "fs_extra",
  "log",
  "presage",

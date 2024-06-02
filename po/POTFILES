@@ -20,6 +20,7 @@ data/resources/ui/components/item_row.blp
 data/resources/ui/components/label.blp
 data/resources/ui/components/letter_divider.blp
 data/resources/ui/components/time_divider.blp
+data/resources/ui/device_info_item.blp
 data/resources/ui/dialog_clear_messages.blp
 data/resources/ui/dialog_unlink.blp
 data/resources/ui/error_dialog.blp
@@ -36,6 +37,7 @@ data/resources/ui/window.blp
 src/backend/attachment.rs
 src/backend/channel.rs
 src/backend/contact.rs
+src/backend/device_info.rs
 src/backend/dummy.rs
 src/backend/manager.rs
 src/backend/manager_thread.rs
@@ -73,6 +75,7 @@ src/gui/components/letter_divider.rs
 src/gui/components/mod.rs
 src/gui/components/selection.rs
 src/gui/components/time_divider.rs
+src/gui/device_info_item.rs
 src/gui/error_dialog.rs
 src/gui/linked_devices_window.rs
 src/gui/message_item.rs

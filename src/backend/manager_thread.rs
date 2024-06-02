@@ -81,7 +81,7 @@ enum Command {
     RegistrationType(oneshot::Sender<RegistrationType>),
     LinkSecondary(Url, oneshot::Sender<Result<(), Error>>),
     UnlinkSecondary(i64, oneshot::Sender<Result<(), Error>>),
-    LinkedDevices(oneshot::Sender<Result<Vec<DeviceInfo>, Error>>),
+    Devices(oneshot::Sender<Result<Vec<DeviceInfo>, Error>>),
     RequestContacts(oneshot::Sender<Result<(), Error>>),
     RetrieveProfileAvatarByUuid(
         Uuid,
@@ -425,11 +425,11 @@ impl ManagerThread {
         receiver.await.expect("Callback receiving failed")
     }
 
-    pub async fn linked_devices(&self) -> Result<Vec<DeviceInfo>, Error> {
+    pub async fn devices(&self) -> Result<Vec<DeviceInfo>, Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
             .clone()
-            .send(Command::LinkedDevices(sender))
+            .send(Command::Devices(sender))
             .await
             .expect("Command sending failed");
         receiver.await.expect("Callback receiving failed")
@@ -655,7 +655,7 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
         // XXX: Uuid should not be used anymore.
         // XXX: Don't use nil.
         Command::Uuid(callback) => callback
-            .send(manager.aci())
+            .send(manager.registration_data().aci())
             .expect("Callback sending failed"),
         Command::SubmitRecaptchaChallenge(token, captcha, callback) => callback
             .send(manager.submit_recaptcha_challenge(&token, &captcha).await)
@@ -710,8 +710,8 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
         Command::UnlinkSecondary(id, callback) => callback
             .send(manager.unlink_secondary(id).await)
             .expect("Callback sending failed"),
-        Command::LinkedDevices(callback) => callback
-            .send(manager.linked_devices().await)
+        Command::Devices(callback) => callback
+            .send(manager.devices().await)
             .expect("Callback sending failed"),
         Command::RequestContacts(callback) => callback
             .send(manager.request_contacts().await)
