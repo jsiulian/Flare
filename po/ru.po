@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2024-04-05 10:41+0200\n"
 "PO-Revision-Date: 2024-05-05 08:17+0000\n"
 "Last-Translator: snowfire <wstorm88@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/"
-"schmiddi-on-mobile/flare/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/schmiddi-on-"
+"mobile/flare/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -327,7 +327,8 @@ msgstr "Выбираемый текст сообщения"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr "Выделяемый текст может мешать жестам пролистывания на сенсорных экранах"
+msgstr ""
+"Выделяемый текст может мешать жестам пролистывания на сенсорных экранах"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
@@ -370,15 +371,15 @@ msgid ""
 msgstr ""
 "Flare - неофициальный клиент Signal. Обратите внимание, что Flare не "
 "является стабильным, возможны ошибки. Если Вы испытываете какие-либо ошибки, "
-"обратитесь к <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\""
-"> баг-трекеру </a> и откройте проблему. Также обратите внимание, что из-за "
-"того, что Flare является сторонним приложением, Flare не может гарантировать "
-"такой же уровень безопасности и конфиденциальности, как официальные "
-"приложения Signal. Если Вам или кому-то, с кем Вам нужно связаться, "
-"требуется сильный уровень безопасности, не используйте Flare. "
-"Проконсультируйтесь с <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/"
-"-/blob/master/README.md#security\">README </a> для получения дополнительной "
-"информации."
+"обратитесь к <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
+"issues\"> баг-трекеру </a> и откройте проблему. Также обратите внимание, что "
+"из-за того, что Flare является сторонним приложением, Flare не может "
+"гарантировать такой же уровень безопасности и конфиденциальности, как "
+"официальные приложения Signal. Если Вам или кому-то, с кем Вам нужно "
+"связаться, требуется сильный уровень безопасности, не используйте Flare. "
+"Проконсультируйтесь с <a href=\"https://gitlab.com/schmiddi-on-mobile/"
+"flare/-/blob/master/README.md#security\">README </a> для получения "
+"дополнительной информации."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
@@ -401,7 +402,8 @@ msgstr "Основное устройство или привязанное ус
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr "Вы можете использовать Flare как основное устройство или как вторичное."
+msgstr ""
+"Вы можете использовать Flare как основное устройство или как вторичное."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
@@ -591,8 +593,8 @@ msgstr ""
 "которых Вы ещё не получили сообщений, может привести к ограничению скорости "
 "отправки. Убедитесь, что Вы получили сообщение от адресата, прежде чем "
 "отправить ему слишком много данных. Для полного списка ошибок посетите <a "
-"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/"
-"?label_name%5B%5D=bug\"> баг-трекер </a>."
+"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
+"label_name%5B%5D=bug\"> баг-трекер </a>."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"

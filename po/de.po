@@ -1071,9 +1071,8 @@ msgstr "Eine Nachricht senden, wenn die Eingabetaste gedrückt wird"
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:13
-msgid "Julian Schmidhuber"
-msgstr "Julian Schmidhuber"
+#~ msgid "Julian Schmidhuber"
+#~ msgstr "Julian Schmidhuber"
 
 #~ msgid "Channel Information"
 #~ msgstr "Kanalinformationen"

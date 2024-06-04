@@ -591,9 +591,8 @@ msgstr ""
 "verzenden naar contacten van wie u nog geen berichten heeft ontvangen, "
 "leiden tot snelheids­beperkingen. Zorg ervoor dat u een bericht van een "
 "contact­persoon ontvangt voordat u er te veel verzendt. Voor een volledige "
-"lijst met problemen, bezoek de <a href=\"https://gitlab.com/"
-"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\""
-">probleem­tracker</a>."
+"lijst met problemen, bezoek de <a href=\"https://gitlab.com/schmiddi-on-"
+"mobile/flare/-/issues/?label_name%5B%5D=bug\">probleem­tracker</a>."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
