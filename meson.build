@@ -15,14 +15,15 @@ resources_path = '/de/schmidhuberj/Flare/'
 
 dependency('glib-2.0', version: '>= 2.66')
 dependency('gio-2.0', version: '>= 2.66')
-dependency('gtk4', version: '>= 4.0.0')
+dependency('gtk4', version: '>= 4.12.0')
+dependency('libadwaita-1', version: '>= 1.5')
 
 
-glib_compile_resources = find_program('glib-compile-resources', required: true)
-glib_compile_schemas = find_program('glib-compile-schemas', required: true)
+glib_compile_resources = find_program('glib-compile-resources', version: '>= 2.66', required: true)
+glib_compile_schemas = find_program('glib-compile-schemas', version: '>= 2.66', required: true)
 desktop_file_validate = find_program('desktop-file-validate', required: false)
 appstreamcli = find_program('appstreamcli', required: false)
-cargo = find_program('cargo', required: true)
+cargo = find_program('cargo', version: '>= 1.75', required: true)
 libspelling = dependency('libspelling-1', required: false)
 gtksourceview_dep = dependency('gtksourceview-5')
 
