@@ -105,6 +105,9 @@ pub mod imp {
         #[template_child]
         dropdown_link_server: TemplateChild<adw::ComboRow>,
 
+        #[template_child]
+        btn_primary: TemplateChild<gtk::Button>,
+
         #[property(get, set, construct_only, type = Manager)]
         manager: RefCell<Option<Manager>>,
 
@@ -282,6 +285,12 @@ pub mod imp {
             self.dropdown_primary_server.set_model(Some(&model));
             self.dropdown_link_server.set_model(Some(&model));
         }
+
+        fn setup_primary_device_button(&self) {
+            if std::env::var("FLARE_ENABLE_PRIMARY_DEVICE").is_ok() {
+                self.btn_primary.set_sensitive(true);
+            }
+        }
     }
 
     #[glib::object_subclass]
@@ -306,6 +315,7 @@ pub mod imp {
         fn constructed(&self) {
             log::trace!("Constructed SetupWindow");
             self.setup_servers_dropdown();
+            self.setup_primary_device_button();
             self.parent_constructed();
         }
     }
