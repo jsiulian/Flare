@@ -29,7 +29,7 @@ impl TryFrom<&PreCallMessage> for CallMessageType {
     fn try_from(p: &PreCallMessage) -> Result<Self, Self::Error> {
         if p.offer.is_some() {
             Ok(CallMessageType::Offer)
-        } else if p.hangup.is_some() || p.legacy_hangup.is_some() {
+        } else if p.hangup.is_some() {
             Ok(CallMessageType::Hangup)
         } else if p.answer.is_some() {
             Ok(CallMessageType::Answer)

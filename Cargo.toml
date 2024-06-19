@@ -29,9 +29,9 @@ tokio = { version = "1.37.0", features = ["rt", "macros", "rt-multi-thread", "ti
 regex = "1.10.4"
 lazy_static = "1.4.0"
 
-presage = { git = "https://github.com/Schmiddiii/presage", rev = "de9c6d0df4fb5908586c9b06f74d5f2ce7078a9e" }
-presage-store-sled = { git = "https://github.com/Schmiddiii/presage", rev = "de9c6d0df4fb5908586c9b06f74d5f2ce7078a9e" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "c072491aa3e2b604b45b9f2b764552b7d382898c" }
+presage = { git = "https://github.com/whisperfish/presage", rev = "5bf74db260b67e2052c19ab1d1e0930483c7ceb4"}
+presage-store-sled = { git = "https://github.com/whisperfish/presage", rev = "5bf74db260b67e2052c19ab1d1e0930483c7ceb4" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "1e04a655c62271ffdfe70b053a6150e0cc2cb155" }
 
 oo7 = { version = "0.3.0", default-features = false, features = ["native_crypto", "tokio"] }
 rand = "0.8.5"
@@ -50,6 +50,7 @@ sourceview5 = "0.8.0"
 libspelling = "0.2.0"
 blurhash = { version = "0.2.1", features = ["image", "gdk-pixbuf"] }
 image = "0.24.9"
+chrono = "0.4.37"
 
 phonenumber = { version = "0.3", optional = true }
 

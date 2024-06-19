@@ -12,25 +12,33 @@ glib::wrapper! {
 impl LinkedDevicesWindow {
     pub fn new(manager: Manager, parent: &Window) -> Self {
         log::trace!("Initializing link window");
-        Object::builder::<Self>()
+        let s = Object::builder::<Self>()
             .property("manager", &manager)
             .property("window", parent)
-            .build()
+            .build();
+        gspawn!(clone!(@weak s => async move {
+           s.imp().setup().await
+        }));
+        s
     }
 }
 
 pub mod imp {
+    use crate::backend::DeviceInfo;
+    use crate::gui::device_info_item::DeviceInfoItem;
     use crate::prelude::*;
 
+    use adw::{AlertDialog, ResponseAppearance};
     use glib::subclass::InitializingObject;
-    use gtk::CompositeTemplate;
+    use gtk::gio::ListStore;
+    use gtk::{CompositeTemplate, NoSelection, SignalListItemFactory, Widget};
 
     use url::Url;
 
     use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::Window;
 
-    #[derive(CompositeTemplate, Default, glib::Properties)]
+    #[derive(CompositeTemplate, glib::Properties)]
     #[properties(wrapper_type = super::LinkedDevicesWindow)]
     #[template(resource = "/ui/linked_devices_window.ui")]
     pub struct LinkedDevicesWindow {
@@ -39,14 +47,111 @@ pub mod imp {
         #[template_child]
         entry_device_url: TemplateChild<adw::EntryRow>,
 
+        #[template_child]
+        list_devices: TemplateChild<gtk::ListView>,
+        model_devices: RefCell<ListStore>,
+
         #[property(get, set, construct_only, type = Manager)]
         manager: RefCell<Option<Manager>>,
         #[property(get, set, construct_only, type = Window)]
         window: RefCell<Option<Window>>,
     }
 
+    impl Default for LinkedDevicesWindow {
+        fn default() -> Self {
+            Self {
+                add_device_dialog: Default::default(),
+                entry_device_url: Default::default(),
+                list_devices: Default::default(),
+                model_devices: RefCell::new(ListStore::new::<DeviceInfo>()),
+                manager: Default::default(),
+                window: Default::default(),
+            }
+        }
+    }
+
     #[gtk::template_callbacks]
     impl LinkedDevicesWindow {
+        pub(super) async fn setup(&self) {
+            self.list_devices
+                .set_model(Some(&NoSelection::new(Some::<gio::ListStore>(
+                    self.model_devices.borrow().clone(),
+                ))));
+
+            let factory = SignalListItemFactory::new();
+            let obj = self.obj();
+            factory.connect_setup(clone!(@weak obj => move |_, object| {
+                let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
+                let device_item = DeviceInfoItem::new();
+                list_item.set_child(Some(&device_item));
+                list_item.property_expression("item").bind(
+                    &device_item,
+                    "device-info",
+                    Widget::NONE,
+                );
+
+                device_item.connect_local(
+                    "unlink",
+                    false,
+                    clone!(@weak obj, @weak device_item => @default-return None, move |_| {
+                        if let Some(device) = device_item.device_info() {
+                            obj.imp().unlink(&device);
+                        }
+                        None
+                    }),
+                );
+            }));
+
+            self.list_devices.set_factory(Some(&factory));
+
+            self.reload().await;
+        }
+
+        fn unlink(&self, device: &DeviceInfo) {
+            let manager = self.obj().manager();
+            let obj = self.obj();
+            gspawn!(
+                clone!(@weak obj, @weak manager, @weak device => async move {
+                    let dialog = AlertDialog::new(
+                        Some(&gettextrs::gettext("Unlink Device?")),
+                        Some(&gettextrs::gettext("Are you sure you want to unlink {}?").replace("{}", &device.name()))
+                    );
+                    dialog
+                        .add_responses(&[
+                            ("unlink", &gettextrs::gettext("Unlink")),
+                            ("cancel", &gettextrs::gettext("Cancel"))
+                        ]);
+                    dialog.set_response_appearance("unlink", ResponseAppearance::Destructive);
+                    dialog.set_default_response(Some("cancel"));
+                    let response = dialog.choose_future(&obj).await;
+                    if response == "unlink" {
+                        log::debug!("Unlinking device: {} {}", device.id(), device.name());
+                        if let Err(e) = manager.unlink_secondary(device.id()).await {
+                            log::error!("Failed to unlink device: {}", e);
+                        }
+                        println!("Unlink {}", device.name());
+                        obj.imp().reload().await;
+                    }
+                })
+            );
+        }
+
+        async fn reload(&self) {
+            let manager = self.obj().manager();
+            let linked_devices = manager
+                .devices()
+                .await
+                .unwrap_or_default()
+                .into_iter()
+                .filter(|d| d.name.is_some())
+                .map(DeviceInfo::new)
+                .collect::<Vec<_>>();
+
+            let model = self.model_devices.borrow();
+            model.remove_all();
+            model.extend_from_slice(&linked_devices);
+        }
+
         #[template_callback]
         fn handle_add_linked_device(&self) {
             log::trace!("User asked to add device link. Presenting dialog.");

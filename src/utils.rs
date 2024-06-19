@@ -43,3 +43,9 @@ pub fn format_profile_name(p: &ProfileName<String>) -> String {
         p.given_name.clone()
     }
 }
+
+pub fn chrono_to_glib_datetime(chrono: chrono::DateTime<chrono::Utc>) -> Option<glib::DateTime> {
+    glib::DateTime::from_unix_utc(chrono.timestamp())
+        .ok()
+        .and_then(|d| d.to_local().ok())
+}

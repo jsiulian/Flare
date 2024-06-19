@@ -128,7 +128,7 @@ impl Utility {
     }
 
     // Should not really fail.
-    pub(super) fn format_date_human(date: &DateTime) -> Option<gtk::glib::GString> {
+    pub fn format_date_human(date: &DateTime) -> Option<gtk::glib::GString> {
         let now = DateTime::now_local().expect("Now to be representable as DateTime");
 
         let today = now.day_of_year() == date.day_of_year() && now.year() == date.year();

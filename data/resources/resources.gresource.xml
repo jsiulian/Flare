@@ -11,6 +11,7 @@
     <file preprocess="xml-stripblanks">ui/message_item.ui</file>
     <file preprocess="xml-stripblanks">ui/setup_window.ui</file>
     <file preprocess="xml-stripblanks">ui/linked_devices_window.ui</file>
+    <file preprocess="xml-stripblanks">ui/device_info_item.ui</file>
     <file preprocess="xml-stripblanks">ui/error_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/attachment.ui</file>
     <file preprocess="xml-stripblanks">ui/preferences_window.ui</file>
