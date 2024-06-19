@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-05 10:41+0200\n"
+"POT-Creation-Date: 2024-06-16 14:32+0200\n"
 "PO-Revision-Date: 2024-03-29 00:01+0000\n"
 "Last-Translator: Tiago Lucas Flach <tiagolucas9830@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/schmiddi-on-"
@@ -129,6 +129,20 @@ msgctxt "tooltip"
 msgid "Send"
 msgstr "Enviar"
 
+#: data/resources/ui/device_info_item.blp:34
+msgid "Linked:"
+msgstr ""
+
+#: data/resources/ui/device_info_item.blp:50
+msgid "Last Active:"
+msgstr ""
+
+#: data/resources/ui/device_info_item.blp:72
+#, fuzzy
+#| msgid "Link Device"
+msgid "Unlink Device"
+msgstr "Vincular Dispositivo"
+
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
 msgid "Clear messages"
@@ -144,7 +158,8 @@ msgstr ""
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
-#: data/resources/ui/linked_devices_window.blp:50 src/gui/window.rs:309
+#: data/resources/ui/linked_devices_window.blp:50
+#: src/gui/linked_devices_window.rs:122 src/gui/window.rs:309
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -153,6 +168,7 @@ msgid "Clear"
 msgstr "Limpar"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
+#: src/gui/linked_devices_window.rs:121
 msgid "Unlink"
 msgstr "Desvincular"
 
@@ -844,6 +860,16 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
+#: src/gui/linked_devices_window.rs:116
+#, fuzzy
+#| msgid "Link Device"
+msgid "Unlink Device?"
+msgstr "Vincular Dispositivo"
+
+#: src/gui/linked_devices_window.rs:117
+msgid "Are you sure you want to unlink {}?"
+msgstr ""
+
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
 msgstr ""
@@ -866,7 +892,7 @@ msgctxt "Signal Server"
 msgid "Staging"
 msgstr ""
 
-#: src/gui/setup_window.rs:129
+#: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
 msgstr ""
 
@@ -941,7 +967,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:600
+#: data/de.schmidhuberj.Flare.metainfo.xml.in:609
 msgid "Overview of the application"
 msgstr ""
 

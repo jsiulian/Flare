@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-05 10:41+0200\n"
+"POT-Creation-Date: 2024-06-16 14:32+0200\n"
 "PO-Revision-Date: 2024-02-27 18:59+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/schmiddi-on-"
@@ -127,6 +127,19 @@ msgctxt "tooltip"
 msgid "Send"
 msgstr "فرستادن"
 
+#: data/resources/ui/device_info_item.blp:34
+msgid "Linked:"
+msgstr ""
+
+#: data/resources/ui/device_info_item.blp:50
+msgid "Last Active:"
+msgstr ""
+
+#: data/resources/ui/device_info_item.blp:72
+#, fuzzy
+msgid "Unlink Device"
+msgstr "پیوند افزاره"
+
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
 msgid "Clear messages"
@@ -140,7 +153,8 @@ msgstr ""
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
-#: data/resources/ui/linked_devices_window.blp:50 src/gui/window.rs:309
+#: data/resources/ui/linked_devices_window.blp:50
+#: src/gui/linked_devices_window.rs:122 src/gui/window.rs:309
 msgid "Cancel"
 msgstr "لغو"
 
@@ -149,6 +163,7 @@ msgid "Clear"
 msgstr "پاک‌سازی"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
+#: src/gui/linked_devices_window.rs:121
 msgid "Unlink"
 msgstr "برداشتن پیوند"
 
@@ -830,6 +845,15 @@ msgstr "هرگز"
 msgid "Draft"
 msgstr ""
 
+#: src/gui/linked_devices_window.rs:116
+#, fuzzy
+msgid "Unlink Device?"
+msgstr "پیوند افزاره"
+
+#: src/gui/linked_devices_window.rs:117
+msgid "Are you sure you want to unlink {}?"
+msgstr ""
+
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
 msgstr ""
@@ -852,7 +876,7 @@ msgctxt "Signal Server"
 msgid "Staging"
 msgstr "روی صحنه"
 
-#: src/gui/setup_window.rs:129
+#: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
 msgstr ""
 
@@ -927,7 +951,7 @@ msgid ""
 "security."
 msgstr ""
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:600
+#: data/de.schmidhuberj.Flare.metainfo.xml.in:609
 msgid "Overview of the application"
 msgstr ""
 

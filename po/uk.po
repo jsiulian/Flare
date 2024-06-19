@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-05 10:41+0200\n"
+"POT-Creation-Date: 2024-06-16 14:32+0200\n"
 "PO-Revision-Date: 2024-06-17 14:09+0000\n"
 "Last-Translator: Roma <r.sg@ukr.net>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/"
-"schmiddi-on-mobile/flare/uk/>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/schmiddi-on-"
+"mobile/flare/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -127,6 +127,20 @@ msgctxt "tooltip"
 msgid "Send"
 msgstr "Надіслати"
 
+#: data/resources/ui/device_info_item.blp:34
+msgid "Linked:"
+msgstr ""
+
+#: data/resources/ui/device_info_item.blp:50
+msgid "Last Active:"
+msgstr ""
+
+#: data/resources/ui/device_info_item.blp:72
+#, fuzzy
+#| msgid "Link Device"
+msgid "Unlink Device"
+msgstr "Пов'язати пристрій"
+
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
 msgid "Clear messages"
@@ -141,7 +155,8 @@ msgstr ""
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
-#: data/resources/ui/linked_devices_window.blp:50 src/gui/window.rs:309
+#: data/resources/ui/linked_devices_window.blp:50
+#: src/gui/linked_devices_window.rs:122 src/gui/window.rs:309
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -150,6 +165,7 @@ msgid "Clear"
 msgstr "Очистити"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
+#: src/gui/linked_devices_window.rs:121
 msgid "Unlink"
 msgstr "Від'єднати"
 
@@ -374,9 +390,9 @@ msgstr ""
 "зверніть увагу, що оскільки Flare є стороннім додатком, він не може "
 "гарантувати такий же рівень безпеки і конфіденційності, як офіційні додатки "
 "Signal. Якщо вам або комусь, з ким вам потрібно зв'язатися, потрібен високий "
-"рівень безпеки, не використовуйте Flare. Зверніться до <a href=\"https"
-"://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README.md#security\""
-">README</a> для отримання додаткової інформації."
+"рівень безпеки, не використовуйте Flare. Зверніться до <a href=\"https://"
+"gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README."
+"md#security\">README</a> для отримання додаткової інформації."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
@@ -524,10 +540,10 @@ msgstr ""
 "Для реєстрації в якості основного пристрою Flare знадобиться ваш номер "
 "телефону та заповнення капчі. Будь ласка, вкажіть номер телефону в "
 "міжнародному форматі E.164, включаючи знак \"+\" та код країни. Капчу можна "
-"заповнити <a href=\"https://signalcaptchas.org/registration/generate.html\""
-">тут</a>, після чого скопіювати посилання \"Відкрити сигнал\" і вставити "
-"його в поле нижче. Зверніть увагу, що ця капча дійсна лише близько однієї "
-"хвилини, тому, будь ласка, дійте швидко."
+"заповнити <a href=\"https://signalcaptchas.org/registration/generate."
+"html\">тут</a>, після чого скопіювати посилання \"Відкрити сигнал\" і "
+"вставити його в поле нижче. Зверніть увагу, що ця капча дійсна лише близько "
+"однієї хвилини, тому, будь ласка, дійте швидко."
 
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -602,9 +618,9 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
-"Хочете залишити відгук про Flare або просто поговорити? Наша <a href=\"https"
-"://matrix.to/#/#flare-signal:matrix.org\">Matrix кімната</a> відкрита для "
-"всіх."
+"Хочете залишити відгук про Flare або просто поговорити? Наша <a "
+"href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix кімната</a> "
+"відкрита для всіх."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -681,8 +697,8 @@ msgid ""
 "Note that the captcha is only valid for about one minute."
 msgstr ""
 "Вирішіть капчу. Токен можна отримати з повідомлення про помилку, що "
-"відображається у Flare. Капчу необхідно розв'язати <a href=\"https"
-"://signalcaptchas.org/challenge/generate.html\"> на цьому вебсайті</a> і "
+"відображається у Flare. Капчу необхідно розв'язати <a href=\"https://"
+"signalcaptchas.org/challenge/generate.html\"> на цьому вебсайті</a> і "
 "посилання для відкриття Signal необхідно вставити у відповідний запис. "
 "Зверніть увагу, що капча дійсна тільки близько однієї хвилини."
 
@@ -898,6 +914,16 @@ msgstr "Ніколи"
 msgid "Draft"
 msgstr "Чернетка"
 
+#: src/gui/linked_devices_window.rs:116
+#, fuzzy
+#| msgid "Link Device"
+msgid "Unlink Device?"
+msgstr "Пов'язати пристрій"
+
+#: src/gui/linked_devices_window.rs:117
+msgid "Are you sure you want to unlink {}?"
+msgstr ""
+
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
 msgstr "Стежити за новими повідомленнями, коли закрито"
@@ -920,7 +946,7 @@ msgctxt "Signal Server"
 msgid "Staging"
 msgstr "Staging"
 
-#: src/gui/setup_window.rs:129
+#: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
 msgstr "Скопійовано в буфер обміну"
 
@@ -1003,7 +1029,7 @@ msgstr ""
 "обережні при роботі з конфіденційними даними. Подивіться README проєкту для "
 "отримання додаткової інформації про безпеку."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:600
+#: data/de.schmidhuberj.Flare.metainfo.xml.in:609
 msgid "Overview of the application"
 msgstr "Огляд програми"
 
