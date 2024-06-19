@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-02-28 22:02+0000\n"
-"Last-Translator: Julian 🇺🇦 <juliannfairfax@protonmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/de/>\n"
+"PO-Revision-Date: 2024-06-20 15:09+0000\n"
+"Last-Translator: Pascal Dietrich <pascal.1.dietrich@hotmail.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -133,17 +133,15 @@ msgstr "Senden"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "Gekoppelt:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "Zuletzt aktiv:"
 
 #: data/resources/ui/device_info_item.blp:72
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device"
-msgstr "Gerät koppeln"
+msgstr "Gerät entkoppeln"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
@@ -919,14 +917,12 @@ msgid "Draft"
 msgstr "Entwurf"
 
 #: src/gui/linked_devices_window.rs:116
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device?"
-msgstr "Gerät koppeln"
+msgstr "Gerät entkoppeln?"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Sind Sie sicher, dass sie {} entkoppeln wollen?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
