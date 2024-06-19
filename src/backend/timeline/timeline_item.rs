@@ -12,10 +12,6 @@ pub trait TimelineItemExt: 'static + std::marker::Sized + glib::prelude::ObjectE
     /// Set if this item should show the timestamp based on the next item.
     fn update_show_timestamp(&self, next: Option<&TimelineItem>);
 
-    fn datetime(&self) -> Option<glib::DateTime> {
-        self.property("datetime")
-    }
-
     /// Days since 01.01.1970
     fn day_timestamp(&self) -> u64 {
         self.timestamp() / (1000 * 60 * 60 * 24)
@@ -24,10 +20,6 @@ pub trait TimelineItemExt: 'static + std::marker::Sized + glib::prelude::ObjectE
     /// The timestamp in ms from 01.01.1970
     fn timestamp(&self) -> u64 {
         self.property("timestamp")
-    }
-
-    fn set_timestamp(&self, value: u64) {
-        self.set_property("timestamp", value)
     }
 
     fn show_header(&self) -> bool {

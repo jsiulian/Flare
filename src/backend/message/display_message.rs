@@ -51,13 +51,6 @@ impl DisplayMessage {
 
 pub trait DisplayMessageExt: 'static {
     fn textual_description(&self) -> Option<String>;
-
-    fn send_notification(&self)
-    where
-        Self: IsA<DisplayMessage>,
-    {
-        self.upcast_ref::<DisplayMessage>().send_notification()
-    }
 }
 
 impl<O: IsA<DisplayMessage>> DisplayMessageExt for O {
