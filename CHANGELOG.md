@@ -6,9 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Environmental variable to enable primary device mode option.
+- Linked devices window on primary device mode.
+
 ### Fixes
 
 - No notifications being sent when Flare is in the background for the last active channel.
+- Fix not working on systems without login1 D-Bus interface.
+- Primary device mode not working.
 
 ## [0.14.3] - 2024-04-20
 
