@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-06-30 21:09+0000\n"
+"PO-Revision-Date: 2024-07-03 12:09+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/hr/>\n"
@@ -22,16 +22,16 @@ msgstr ""
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr ""
+msgstr "Milo Ivir <mail@milotype.de>"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
-msgstr ""
+msgstr "Broj telefona"
 
 #: data/resources/ui/channel_info_dialog.blp:66
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 #: data/resources/ui/channel_info_dialog.blp:76
 msgid "Disappearing Messages"
@@ -40,20 +40,20 @@ msgstr ""
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Resetiraj sesiju"
 
 #: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
-msgstr ""
+msgstr "Resetiraj sesiju"
 
 #: data/resources/ui/channel_info_dialog.blp:128
 msgctxt "accessibility"
 msgid "Clear Messages"
-msgstr ""
+msgstr "Izbriši poruke"
 
 #: data/resources/ui/channel_info_dialog.blp:149
 msgid "Clear Messages"
-msgstr ""
+msgstr "Izbriši poruke"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
@@ -67,25 +67,25 @@ msgstr "Pretraga"
 #: data/resources/ui/channel_list.blp:23 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Pretraga"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Nijedan kanal nije odabran"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "Odaberi jedan kanal"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Ukloni odgovor"
 
 #: data/resources/ui/channel_messages.blp:184
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Ukloni odgovor"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "accessibility"
@@ -142,7 +142,7 @@ msgstr ""
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
 msgid "Clear messages"
-msgstr ""
+msgstr "Izbriši poruke"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
@@ -183,7 +183,7 @@ msgstr ""
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "Greška"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
@@ -694,7 +694,7 @@ msgstr ""
 
 #: data/resources/ui/window.blp:191
 msgid "Quit"
-msgstr ""
+msgstr "Zatvori aplikaciju"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
@@ -770,7 +770,7 @@ msgstr "Greška unosa/rezultata."
 
 #: src/error.rs:96
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "Čini se da ne postoji veza s internetom."
 
 #: src/error.rs:101
 msgid "Something glib-related failed."
@@ -815,7 +815,7 @@ msgstr ""
 
 #: src/error.rs:151
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Provjeri internetsku vezu."
 
 #: src/error.rs:156
 msgid "Please delete the database and relink the device."
