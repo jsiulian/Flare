@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-07-05 13:09+0000\n"
+"PO-Revision-Date: 2024-07-07 13:09+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/hr/>\n"
@@ -35,7 +35,7 @@ msgstr "Opis"
 
 #: data/resources/ui/channel_info_dialog.blp:76
 msgid "Disappearing Messages"
-msgstr ""
+msgstr "Poruke koje nestaju"
 
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
@@ -58,7 +58,7 @@ msgstr "Izbriši poruke"
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "Bez internetske veze"
 
 #: data/resources/ui/channel_list.blp:20
 msgid "Search"
@@ -174,6 +174,9 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Ovo će ukinuti vezu s ovim uređajem i ukloniti sve lokalno spremljene "
+"podatke. Ovo će također zatvoriti aplikaciju tako da se može ponovo povezati "
+"kada je ponovo otvoriš."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
@@ -320,7 +323,7 @@ msgstr "Dohvati obavijesti dok je aplikacija zatvorena"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Kompatibilnost s mobilnim uređajima"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -328,39 +331,45 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Ove se opcije mogu promijeniti za bolje iskustvo na dodirnim i mobilnim "
+"uređajima. Zadane vrijednosti tih postavki odabrane su za desktop uređaje."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Tekst poruke koji se može odabrati"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
+"Tekst koji se može odabrati može smetati pri pokretima prstiju na dodirnim "
+"ekranima"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "Pritisni „Enter” za slanje poruke"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"Možda neće biti moguće slati poruke s novim redcima na dodirnim tipkovnicama "
+"koje ne dopuštaju „Control + Enter”"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Flare dobrodošlica"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Postavljanje Flarea"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #: data/resources/ui/setup_window.blp:53
 msgid ""
@@ -374,33 +383,42 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare je neslužbeni Signal klijent. Imaj na umu da Flare nije stabilan i da "
+"će se pojavljivati greške. Ako naiđeš na greške pregledaj stranicu za <a "
+"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">praćenje "
+"problema</a>. Ako naiđeš na novi problem, prijavi ga. Također imaj na umu da "
+"se radi o aplikaciji treće strane, stoga Flare ne može jamčiti istu razinu "
+"sigurnosti i privatnosti kao službene Signal aplikacije. Ako ti ili netko "
+"koga moraš kontaktirati zahtijeva visoku razinu sigurnosti, nemoj koristiti "
+"Flare. Pogledaj <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/"
+"master/README.md#security\">README</a> datoteku projekta za više informacija."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Postaviti primarni uređaj ili povezati uređaj?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
 msgid "Primary Device"
-msgstr ""
+msgstr "Primarni uređaj"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
 #: data/resources/ui/setup_window.blp:177
 msgid "Link Device"
-msgstr ""
+msgstr "Poveži uređaj"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "Primarni uređaj ili povezati uređaj?"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Flare možeš koristiti kao primarni ili sekundarni uređaj."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Povezani uređaj (preporučeno)"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
@@ -408,10 +426,12 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare može biti aplikacija povezana s tvojim primarnim uređajem, slično "
+"službenom Signal Desktopu. Ovaj modus je opsežnije testiran i uglavnom radi."
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Primarni uređaj (deaktiviran)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -421,26 +441,33 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare može djelovati kao primarni uređaj, slično službenim Signal "
+"aplikacijama na Androidu ili IOS-u. Flare trenutačno ne podržava ovaj način "
+"rada, iako početni testovi pokazuju da radi. Ako ga žeiliš testirati označi "
+"donji gumb (ako ne znaš kako to učiniti, nemoj razmišljati o testiranju "
+"podrške za primarni uređaj)."
 
 #: data/resources/ui/setup_window.blp:194
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Za povezivanje kao sekundarni uređaj, Flare će trebati ime uređaja koji će "
+"se prikazati u službenoj aplikaciji."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
-msgstr ""
+msgstr "Ime uređaja"
 
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "Opcije za programere"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
-msgstr ""
+msgstr "Signal serveri"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -449,24 +476,29 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"Na sljedećoj stranici prikazat će se QR kod koji se mora snimiti s primarnog "
+"uređaja. Imaš samo cirka jednu minutu za snimanje koda, stoga već pripremi "
+"svoju službenu aplikaciju za snimanje QR koda."
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
 msgid "Link device"
-msgstr ""
+msgstr "Poveži uređaj"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
-msgstr ""
+msgstr "Snimi kôd"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
+"Snimi ovaj kod pomoću jedne druge Signal aplikacije koja je prijavljena na "
+"tvoj račun."
 
 #: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
-msgstr ""
+msgstr "Poveži bez snimanja koda"
 
 #: data/resources/ui/setup_window.blp:280
 msgid "Manual linking"
@@ -502,6 +534,13 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"Za registraciju kao primarni uređaj, Flare će trebati tvoj telefonski broj i "
+"rješavanje captcha zadatka. Upiši telefonski broj u međunarodnom formatu "
+"E.164, uključujući početni znak plus (+) i pozivni broj zemlje. Captcha se "
+"može riješiti <a href=\"https://signalcaptchas.org/registration/generate."
+"html\">ovdje</a>. Nakon toga kopiraj poveznicu „Otvori Signal” i umetni je u "
+"donje polje. Ovaj captcha zadatak vrijedi samo oko jednu minutu stoga "
+"nastavi brzo."
 
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -538,10 +577,14 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare je skoro spreman, čeka završetak sinkronizacije kontakata. Ovo može "
+"potrajati nekoliko sekundi. Možeš početi koristiti Flare nakon "
+"sinkronizacije kontakata. Nekoliko završnih napomena prije nego počneš "
+"koristiti Flare:"
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "Poznate greške"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -553,6 +596,13 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Ne šalji poruke dok ih Flare još uvijek prima, čime osiguravaš primanje svih "
+"potrebnih informacija. Pokušavamo riješiti taj problem. Nadalje, slanje "
+"poruka kontaktima od kojih još nisi primio/la poruke može dovesti do "
+"ograničenja stope. Provjeri jesi li primio/la poruku od jednog kontakta "
+"prije nego što pošalješ previše poruka. Potpuni popis problema se nalazi na "
+"stranici za <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/"
+"?label_name%5B%5D=bug\">praćenje problema</a> ."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
@@ -642,6 +692,11 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Pošalji Captcha zadatak. Token se može dobiti iz poruke o grešci koju je "
+"prikazao Flare. Captcha se mora ispuniti <a href=\"https://signalcaptchas."
+"org/challenge/generate.html\">na ovoj web stranici</a>, a poveznica za "
+"otvaranje Signala se mora umetnuti u odgovarajući unos. Captcha zadatak "
+"vrijedi samo oko jednu minutu."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
@@ -740,35 +795,39 @@ msgstr "Neodgovoreni poziv"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
-msgstr ""
+msgstr "{sender} je reagirao/la s {emoji} na poruku."
 
 #: src/backend/message/reaction_message.rs:80
 msgid "Reacted {emoji} to a message."
-msgstr ""
+msgstr "Reagirao/la je s {emoji} na poruku."
 
 #: src/backend/message/text_message.rs:381
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poslao/la je jednu sliku"
+msgstr[1] "Poslao/la je {} slike"
+msgstr[2] "Poslao/la je {} slika"
 
 #: src/backend/message/text_message.rs:383
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poslao/la je jedan video"
+msgstr[1] "Poslao/la je {} videa"
+msgstr[2] "Poslao/la je {} videa"
 
 #: src/backend/message/text_message.rs:386
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poslao/la je jednu govornu poruku"
+msgstr[1] "Poslao/la je {} govorne poruke"
+msgstr[2] "Poslao/la je {} govornih poruka"
 
 #: src/backend/message/text_message.rs:391
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poslao/la je jednu datoteku"
+msgstr[1] "Poslao/la je {} datoteke"
+msgstr[2] "Poslao/la je {} datoteka"
 
 #: src/error.rs:91
 msgid "I/O Error."
@@ -780,44 +839,49 @@ msgstr "Čini se da ne postoji veza s internetom."
 
 #: src/error.rs:101
 msgid "Something glib-related failed."
-msgstr ""
+msgstr "Nešto u vezi s glibom nije uspjelo."
 
 #: src/error.rs:106
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "Komunikacija s bibliotekom Libsecret nije uspjela."
 
 #: src/error.rs:111
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"Greška u pozadinskoj bazi podataka. Ponovo pokreni aplikaciju ili izbriši "
+"bazu podataka i ponovo poveži aplikaciju."
 
 #: src/error.rs:116
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"Čini se da nemaš ovlasti za Signal. Izbriši bazu podataka i ponovo poveži "
+"aplikaciju."
 
 #: src/error.rs:121
 msgid "Sending a message failed."
-msgstr ""
+msgstr "Slanje poruke nije uspjelo."
 
 #: src/error.rs:126
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "Primanje poruke nije uspjelo."
 
 #: src/error.rs:131
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"Nešto se neočekivano dogodilo s pozadinom signala. Pokušaj ponovo kasnije."
 
 #: src/error.rs:136
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "Čini se da je aplikacija nije pravilno konfigurirana."
 
 #: src/error.rs:141
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Dio aplikacije je prekinuo rad."
 
 #: src/error.rs:151
 msgid "Please check your internet connection."
@@ -825,15 +889,15 @@ msgstr "Provjeri internetsku vezu."
 
 #: src/error.rs:156
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "Izbriši bazu podataka i ponovo poveži uređaj."
 
 #: src/error.rs:163
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "Putanja baze podataka pri {} nije mapa."
 
 #: src/error.rs:168
 msgid "Please restart the application with logging and report this issue."
-msgstr ""
+msgstr "Ponovo pokreni aplikaciju s dnevnikom radnji i prijavi ovaj problem."
 
 #: src/gui/channel_info_dialog.rs:197
 msgid "Never"
@@ -841,41 +905,41 @@ msgstr "Nikada"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Skica"
 
 #: src/gui/linked_devices_window.rs:116
 msgid "Unlink Device?"
-msgstr ""
+msgstr "Odspojiti uređaj?"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Stvarno želiš odspojiti {}?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "Prati nove poruke dok je zatvoren"
 
 #: src/gui/preferences_window.rs:99
 msgid "Background permission"
-msgstr ""
+msgstr "Pozadinske dozvole"
 
 #: src/gui/preferences_window.rs:100
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "Koristi postavke za uklanjanje dozvola"
 
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Proizvodnja"
 
 #: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Priprema"
 
 #: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Kopirano u međuspremnik"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
@@ -938,6 +1002,9 @@ msgid ""
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
+"Flare je neslužbena aplikacija za Signal. Još uvijek se nalazi u stanju "
+"razvoja i ne uključuje sve značajke koje imaju službene Signal aplikacije. "
+"Više informacija se mogu pronaći na stranici plana razvoja."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -947,6 +1014,10 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Korištenje ove aplikacije će vjerojatno pogoršati tvoju sigurnost u "
+"usporedbi s korištenjem službenih Signal aplikacija. Koristi je s oprezom "
+"pri rukovanju osjetljivim podacima. Pogledaj README datoteku projekta za "
+"više informacija o sigurnosti."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:609
 msgid "Overview of the application"
@@ -969,6 +1040,8 @@ msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Ime uređaja prilikom povezivanja Flarea. Ovo zahtijeva ponovno povezivanje "
+"aplikacije."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
@@ -992,7 +1065,7 @@ msgstr "Pošalji obavijesti"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Pokreći u pozadini kada je zatvoren"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
@@ -1000,12 +1073,12 @@ msgstr "Pošalji obavijesti prilikom dohvaćanja reakcija"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Mogu li se poruke odabrati"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Pošalji poruku kada se pritisne tipka Enter"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
-msgstr ""
+msgstr "Kako razvrstati kontakte, npr. s „ime” ili „prezime”"
