@@ -15,7 +15,7 @@ Flare is an unofficial app that lets you chat with your friends on Signal from L
   <tr>
     <td>Flatpak</td>
     <td>
-      <a href='https://flathub.org/apps/details/de.schmidhuberj.Flare'><img width='130' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+      <a href='https://flathub.org/apps/details/de.schmidhuberj.Flare'><img width='130' alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en'/></a>
     </td>
   </tr>
   <tr>
