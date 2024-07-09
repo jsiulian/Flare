@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-03-04 10:01+0000\n"
-"Last-Translator: Koen <rd404eai@duck.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/pl/>\n"
+"PO-Revision-Date: 2024-07-10 16:09+0000\n"
+"Last-Translator: Jakub Załuska <jak.zaluska@gmail.com>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -47,14 +47,13 @@ msgid "Reset Session"
 msgstr "Odnów sesję"
 
 #: data/resources/ui/channel_info_dialog.blp:128
-#, fuzzy
 msgctxt "accessibility"
 msgid "Clear Messages"
 msgstr "Wyczyść wiadomości"
 
 #: data/resources/ui/channel_info_dialog.blp:149
 msgid "Clear Messages"
-msgstr ""
+msgstr "Wyczyść wiadomości"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
@@ -130,17 +129,15 @@ msgstr "Wyślij"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "Powiązane:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "Ostatnia aktywność:"
 
 #: data/resources/ui/device_info_item.blp:72
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device"
-msgstr "Urządzenie dodatkowe"
+msgstr "Rozłącz urządzenie"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
