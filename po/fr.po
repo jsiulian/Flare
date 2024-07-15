@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-04-09 08:01+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/fr/>\n"
+"PO-Revision-Date: 2024-07-16 16:09+0000\n"
+"Last-Translator: thibault tostain <thibault.tostain.01@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -128,17 +128,15 @@ msgstr "Envoyer"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "Relié.s :"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "Dernier actif :"
 
 #: data/resources/ui/device_info_item.blp:72
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device"
-msgstr "Lier l’appareil"
+msgstr "Délier l’appareil"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
@@ -918,11 +916,11 @@ msgstr "Brouillon"
 #, fuzzy
 #| msgid "Link Device"
 msgid "Unlink Device?"
-msgstr "Lier l’appareil"
+msgstr "Appareil délié ?"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Êtes vous sûr de vouloir délier ?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
