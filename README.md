@@ -61,7 +61,7 @@ If you plan to contribute code, please also review the [developer documentation]
 
 ## Code of Conduct
 
-This project follows [GNOME's Code of Conduct](https://wiki.gnome.org/Foundation/CodeOfConduct).
+This project follows [GNOME's Code of Conduct](https://conduct.gnome.org/).
 
 ## Donate
 
