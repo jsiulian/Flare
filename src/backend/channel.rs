@@ -221,7 +221,9 @@ impl Channel {
         let Some(uuid) = self.uuid() else {
             return Ok(());
         };
-        self.manager().send_session_reset(uuid, ts).await
+        self.manager()
+            .send_session_reset(ServiceAddress::new_aci(uuid), ts)
+            .await
     }
 
     /// Register a new message with the channel.
@@ -450,7 +452,7 @@ impl Channel {
         if let Some(found) = found {
             return found;
         }
-        let new = Contact::from_service_address(&ServiceAddress { uuid }, &self.manager());
+        let new = Contact::from_service_address(&ServiceAddress::new_aci(uuid), &self.manager());
         self.imp().participants.borrow_mut().push(new.clone());
         new
     }
@@ -461,7 +463,7 @@ impl Channel {
             let participants = group
                 .members
                 .into_iter()
-                .map(|m| ServiceAddress { uuid: m.uuid })
+                .map(|m| ServiceAddress::new_aci(m.uuid))
                 .map(|a| Contact::from_service_address(&a, &manager))
                 .collect::<Vec<_>>();
             for p in &participants {

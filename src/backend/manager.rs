@@ -467,7 +467,7 @@ impl Manager {
         if let Some(found) = found {
             return found;
         }
-        let contact = Contact::from_service_address(&ServiceAddress { uuid }, self);
+        let contact = Contact::from_service_address(&ServiceAddress::new_aci(uuid), self);
         Channel::from_contact_or_group(contact, group, self).await
     }
 
@@ -478,7 +478,7 @@ impl Manager {
             .map(|i| {
                 i.filter_map(|c| {
                     c.ok()
-                        .filter(|c| !c.blocked && !c.archived)
+                        .filter(|c| !c.archived)
                         .map(|c| Contact::from_contact(c, self))
                 })
                 .collect()
@@ -495,7 +495,6 @@ impl Manager {
             color: None,
             verified: Default::default(),
             profile_key: vec![],
-            blocked: false,
             expire_timer: 0,
             inbox_position: 0,
             archived: false,

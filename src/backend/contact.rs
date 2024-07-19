@@ -45,12 +45,8 @@ impl Contact {
     }
 
     pub fn is_blocked(&self) -> bool {
-        self.imp()
-            .contact
-            .borrow()
-            .as_ref()
-            .map(|c| c.blocked)
-            .unwrap_or_default()
+        // TODO: The blocked field got removed in https://github.com/whisperfish/libsignal-service-rs/pull/303
+        false
     }
 
     /// Query the profile name and avatar of the contact.
@@ -114,7 +110,7 @@ impl Contact {
             .contact
             .borrow()
             .as_ref()
-            .map(|c| ServiceAddress { uuid: c.uuid })
+            .map(|c| ServiceAddress::new_aci(c.uuid))
     }
 
     pub fn expire_timer(&self) -> u32 {

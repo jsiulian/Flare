@@ -29,9 +29,9 @@ tokio = { version = "1.37.0", features = ["rt", "macros", "rt-multi-thread", "ti
 regex = "1.10.4"
 lazy_static = "1.4.0"
 
-presage = { git = "https://github.com/whisperfish/presage", rev = "f93f2dee5b9f0ca3b30b545143194431d9136549"}
-presage-store-sled = { git = "https://github.com/whisperfish/presage", rev = "f93f2dee5b9f0ca3b30b545143194431d9136549" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "5a496fd" }
+presage = { git = "https://github.com/whisperfish/presage", rev = "e2392c42a0392397b9db782607fdd7ab2ea91b5f" }
+presage-store-sled = { git = "https://github.com/whisperfish/presage", rev = "e2392c42a0392397b9db782607fdd7ab2ea91b5f" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "1b591540b908112816be131d6baa6eafba2129cb" }
 
 oo7 = { version = "0.3.0", default-features = false, features = ["native_crypto", "tokio"] }
 rand = "0.8.5"
@@ -61,4 +61,4 @@ screenshot-setup = [ "screenshot" ]
 libspelling = []
 
 [patch.crates-io]
-curve25519-dalek = { git = 'https://github.com/signalapp/curve25519-dalek', tag = 'signal-curve25519-4.1.1' }
+curve25519-dalek = { git = 'https://github.com/signalapp/curve25519-dalek', tag = 'signal-curve25519-4.1.3' }

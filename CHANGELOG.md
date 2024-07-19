@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Linking the device being broken (fixed upstream).
+
 ### Added
 
 - Environmental variable to enable primary device mode option.
