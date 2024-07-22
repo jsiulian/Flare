@@ -38,7 +38,26 @@
   </description>
 
   <releases>
-    <release version="v0.14.2" date="2024-04-02">
+    <release version="v0.15.0" date="2024-07-22">
+      <description translate="no">
+        <p>HOTFIX</p>
+        <ul>
+          <li>Linking the device being broken (fixed upstream).</li>
+        </ul>
+        <p>Added</p>
+        <ul>
+          <li>Environmental variable to enable primary device mode option.</li>
+          <li>Linked devices window on primary device mode.</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>No notifications being sent when Flare is in the background for the last active channel.</li>
+          <li>Fix not working on systems without login1 D-Bus interface.</li>
+          <li>Primary device mode not working.</li>
+        </ul>
+      </description>
+    </release>
+    <release version="v0.14.3" date="2024-04-20">
       <description translate="no">
         <p>Fixes</p>
         <ul>
