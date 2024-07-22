@@ -17,30 +17,30 @@ opt-level = 3
 opt-level = 3
 
 [dependencies]
-gtk = { version = "0.8.1", package = "gtk4", features = ["v4_12"]}
+gtk = { version = "0.8.2", package = "gtk4", features = ["v4_12"]}
 adw = { version = "0.6.0", package = "libadwaita", features = ["v1_5"]}
 ashpd = { version = "0.8.1", default-features = false, features = [ "gtk4", "tokio" ]}
-zbus = { version = "4.1.2", default-features = false, features = [ "tokio" ]}
+zbus = { version = "4.4.0", default-features = false, features = [ "tokio" ]}
 
 gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
  
 futures = "0.3.30"
-tokio = { version = "1.37.0", features = ["rt", "macros", "rt-multi-thread", "time"] }
-regex = "1.10.4"
-lazy_static = "1.4.0"
+tokio = { version = "1.38.1", features = ["rt", "macros", "rt-multi-thread", "time"] }
+regex = "1.10.5"
+lazy_static = "1.5.0"
 
 presage = { git = "https://github.com/whisperfish/presage", rev = "e2392c42a0392397b9db782607fdd7ab2ea91b5f" }
 presage-store-sled = { git = "https://github.com/whisperfish/presage", rev = "e2392c42a0392397b9db782607fdd7ab2ea91b5f" }
 libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "1b591540b908112816be131d6baa6eafba2129cb" }
 
-oo7 = { version = "0.3.0", default-features = false, features = ["native_crypto", "tokio"] }
+oo7 = { version = "0.3.3", default-features = false, features = ["native_crypto", "tokio"] }
 rand = "0.8.5"
-url = "2.5.0"
+url = "2.5.2"
 once_cell = "1.19.0"
 
 qrcode-generator = "4.1.9"
 
-log = "0.4.21"
+log = "0.4.22"
 env_logger = "0.11.3"
 
 err-derive = "0.3.1"
@@ -48,9 +48,9 @@ err-derive = "0.3.1"
 tracing = { version = "0.1.40", features = ["log-always"] }
 sourceview5 = "0.8.0"
 libspelling = "0.2.0"
-blurhash = { version = "0.2.1", features = ["image", "gdk-pixbuf"] }
+blurhash = { version = "0.2.2", features = ["image", "gdk-pixbuf"] }
 image = "0.24.9"
-chrono = "0.4.37"
+chrono = "0.4.38"
 
 phonenumber = { version = "0.3", optional = true }
 
