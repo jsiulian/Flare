@@ -8,6 +8,7 @@ variables:
   BUILD_RELEASE: "build-release"
   MESON_DIST: "${BUILD_RELEASE}/meson-dist"
   PROJ_NAME_VERSION: "${CI_PROJECT_NAME}-${CI_COMMIT_TAG}"
+  RUSTFLAGS: "-Dwarnings"
 
 
 # flatpak, based on https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml
@@ -99,3 +100,26 @@ test:cargo-deny:
     - cargo deny check
   allow_failure: true
 
+test:cargo-fmt:
+  stage: quick-test
+  image: archlinux:base-devel
+  script:
+    - pacman -Syu rustup meson gtk4 git cmake libadwaita blueprint-compiler gtksourceview5 protobuf libspelling --noconfirm
+    - rustup default stable
+    - rustup component add rustfmt
+    - meson setup build
+    - meson compile -C build resources_gresource
+    - cargo fmt -- --check
+  allow_failure: true
+
+test:cargo-clippy:
+  stage: quick-test
+  image: archlinux:base-devel
+  script:
+    - pacman -Syu rustup meson gtk4 git cmake libadwaita blueprint-compiler gtksourceview5 protobuf libspelling --noconfirm
+    - rustup default stable
+    - rustup component add clippy
+    - meson setup build
+    - meson compile -C build resources_gresource
+    - cargo clippy --verbose
+  allow_failure: true
