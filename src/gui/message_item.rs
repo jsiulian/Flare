@@ -49,29 +49,49 @@ impl MessageItem {
 
     fn setup_actions(&self) {
         let action_reply = SimpleAction::new("reply", None);
-        action_reply.connect_activate(clone!(@weak self as s => move |_, _| {
-            s.imp().handle_reply();
-        }));
+        action_reply.connect_activate(clone!(
+            #[weak(rename_to = s)]
+            self,
+            move |_, _| {
+                s.imp().handle_reply();
+            }
+        ));
 
         let action_delete = SimpleAction::new("delete", None);
-        action_delete.connect_activate(clone!(@weak self as s => move |_, _| {
-            s.imp().handle_delete();
-        }));
+        action_delete.connect_activate(clone!(
+            #[weak(rename_to = s)]
+            self,
+            move |_, _| {
+                s.imp().handle_delete();
+            }
+        ));
 
         let action_copy = SimpleAction::new("copy", None);
-        action_copy.connect_activate(clone!(@weak self as s => move |_, _| {
-            s.imp().handle_copy();
-        }));
+        action_copy.connect_activate(clone!(
+            #[weak(rename_to = s)]
+            self,
+            move |_, _| {
+                s.imp().handle_copy();
+            }
+        ));
 
         let action_download = SimpleAction::new("download", None);
-        action_download.connect_activate(clone!(@weak self as s => move |_, _| {
-            s.get_pressed_attachment().imp().download();
-        }));
+        action_download.connect_activate(clone!(
+            #[weak(rename_to = s)]
+            self,
+            move |_, _| {
+                s.get_pressed_attachment().imp().download();
+            }
+        ));
 
         let action_open = SimpleAction::new("open", None);
-        action_open.connect_activate(clone!(@weak self as s => move |_, _| {
-            s.get_pressed_attachment().imp().open();
-        }));
+        action_open.connect_activate(clone!(
+            #[weak(rename_to = s)]
+            self,
+            move |_, _| {
+                s.get_pressed_attachment().imp().open();
+            }
+        ));
 
         let actions = SimpleActionGroup::new();
         self.insert_action_group("msg", Some(&actions));
@@ -100,11 +120,19 @@ impl MessageItem {
     fn setup_showheader(&self) {
         self.message().connect_notify_local(
             Some("show-header"),
-            clone!(@weak self as s => move |_, _| s.set_show_header()),
+            clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |_, _| s.set_show_header()
+            ),
         );
         self.connect_notify_local(
             Some("force-show-header"),
-            clone!(@weak self as s => move |_, _| s.set_show_header()),
+            clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |_, _| s.set_show_header()
+            ),
         );
         self.set_show_header();
     }
@@ -112,11 +140,19 @@ impl MessageItem {
     fn setup_showtimestamp(&self) {
         self.message().connect_notify_local(
             Some("show-timestamp"),
-            clone!(@weak self as s => move |_, _| s.set_show_timestamp()),
+            clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |_, _| s.set_show_timestamp()
+            ),
         );
         self.connect_notify_local(
             Some("force-show-timestamp"),
-            clone!(@weak self as s => move |_, _| s.set_show_timestamp()),
+            clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |_, _| s.set_show_timestamp()
+            ),
         );
         self.set_show_timestamp();
     }
@@ -205,9 +241,13 @@ impl MessageItem {
     fn setup_loaded(&self) {
         self.connect_notify_local(
             Some("shows-media-loading"),
-            clone!(@weak self as s => move |_, _| {
-                s.imp().box_attachments.remove_css_class("not-loaded");
-            }),
+            clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |_, _| {
+                    s.imp().box_attachments.remove_css_class("not-loaded");
+                }
+            ),
         );
     }
 }
@@ -325,10 +365,14 @@ pub mod imp {
             if let Some(msg) = &msg {
                 msg.connect_notify_local(
                     Some("reactions"),
-                    clone!(@weak obj => move |_, _| {
-                        log::trace!("MessageItem got reaction, updating `has-reaction`");
-                        obj.notify("has-reaction");
-                    }),
+                    clone!(
+                        #[weak]
+                        obj,
+                        move |_, _| {
+                            log::trace!("MessageItem got reaction, updating `has-reaction`");
+                            obj.notify("has-reaction");
+                        }
+                    ),
                 );
                 let attachments = msg.attachments();
                 let mut container = &self.box_attachments;
@@ -354,18 +398,27 @@ pub mod imp {
 
                         att.connect_notify_local(
                             Some("loaded"),
-                            clone!(@weak obj => move |_, _| {
-                                obj.notify("shows-media-loading")
-                            }),
+                            clone!(
+                                #[weak]
+                                obj,
+                                move |_, _| obj.notify("shows-media-loading")
+                            ),
                         );
 
                         att_widget.connect_local(
                             "pressed",
                             false,
-                            clone!(@weak obj, @weak att_widget as att => @default-return None, move |_| {
-                                obj.set_property("pressed-attachment", Some(att));
-                                None
-                            })
+                            clone!(
+                                #[weak]
+                                obj,
+                                #[weak(rename_to = att)]
+                                att_widget,
+                                #[upgrade_or_default]
+                                move |_| {
+                                    obj.set_property("pressed-attachment", Some(att));
+                                    None
+                                }
+                            ),
                         );
                         container.append(&att_widget);
                     }
@@ -393,18 +446,20 @@ pub mod imp {
             let (_, rectangle) = self.msg_menu.pointing_to();
             emoji_chooser.set_pointing_to(Some(&rectangle));
 
-            emoji_chooser.connect_emoji_picked(clone!(@weak obj => move |_, emoji| {
-                obj.imp().handle_react(emoji.to_owned());
-            }));
-            emoji_chooser.connect_local(
-                "closed",
-                false,
-                clone!(@weak obj => @default-return None, move |values| {
-                    let chooser = values[0].get::<EmojiChooser>().expect("Closed of EmojiChooser return value to be EmojiChooser");
-                    chooser.unparent();
-                    None
-                }),
-            );
+            emoji_chooser.connect_emoji_picked(clone!(
+                #[weak]
+                obj,
+                move |_, emoji| {
+                    obj.imp().handle_react(emoji.to_owned());
+                }
+            ));
+            emoji_chooser.connect_local("closed", false, move |values| {
+                let chooser = values[0]
+                    .get::<EmojiChooser>()
+                    .expect("Closed of EmojiChooser return value to be EmojiChooser");
+                chooser.unparent();
+                None
+            });
 
             self.message_bubble.attach(&emoji_chooser, 0, 2, 1, 1);
 
@@ -453,19 +508,25 @@ pub mod imp {
             );
 
             let obj = self.obj();
-            gspawn!(clone!(@strong msg, @strong obj => async move {
-                log::trace!("Sending message");
-                if let Err(e) = msg.send_reaction(emoji).await {
-                    let root = obj
-                        .root()
-                        .expect("`MessageItem` to have a root")
-                        .dynamic_cast::<crate::gui::Window>()
-                        .expect("Root of `ChannelMessages` to be a `Window`.");
-                    let dialog = ErrorDialog::new(e, &root);
-                    dialog.present(&root);
+            gspawn!(clone!(
+                #[strong]
+                msg,
+                #[strong]
+                obj,
+                async move {
+                    log::trace!("Sending message");
+                    if let Err(e) = msg.send_reaction(emoji).await {
+                        let root = obj
+                            .root()
+                            .expect("`MessageItem` to have a root")
+                            .dynamic_cast::<crate::gui::Window>()
+                            .expect("Root of `ChannelMessages` to be a `Window`.");
+                        let dialog = ErrorDialog::new(e, &root);
+                        dialog.present(Some(&root));
+                    }
+                    obj.notify("has-reaction");
                 }
-                obj.notify("has-reaction");
-            }));
+            ));
             obj.imp().msg_menu.popdown();
         }
 

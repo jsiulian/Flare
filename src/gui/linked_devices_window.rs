@@ -16,9 +16,11 @@ impl LinkedDevicesWindow {
             .property("manager", &manager)
             .property("window", parent)
             .build();
-        gspawn!(clone!(@weak s => async move {
-           s.imp().setup().await
-        }));
+        gspawn!(clone!(
+            #[weak]
+            s,
+            async move { s.imp().setup().await }
+        ));
         s
     }
 }
@@ -80,27 +82,38 @@ pub mod imp {
 
             let factory = SignalListItemFactory::new();
             let obj = self.obj();
-            factory.connect_setup(clone!(@weak obj => move |_, object| {
-                let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
-                let device_item = DeviceInfoItem::new();
-                list_item.set_child(Some(&device_item));
-                list_item.property_expression("item").bind(
-                    &device_item,
-                    "device-info",
-                    Widget::NONE,
-                );
+            factory.connect_setup(clone!(
+                #[weak]
+                obj,
+                move |_, object| {
+                    let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
+                    let device_item = DeviceInfoItem::new();
+                    list_item.set_child(Some(&device_item));
+                    list_item.property_expression("item").bind(
+                        &device_item,
+                        "device-info",
+                        Widget::NONE,
+                    );
 
-                device_item.connect_local(
-                    "unlink",
-                    false,
-                    clone!(@weak obj, @weak device_item => @default-return None, move |_| {
-                        if let Some(device) = device_item.device_info() {
-                            obj.imp().unlink(&device);
-                        }
-                        None
-                    }),
-                );
-            }));
+                    device_item.connect_local(
+                        "unlink",
+                        false,
+                        clone!(
+                            #[weak]
+                            obj,
+                            #[weak]
+                            device_item,
+                            #[upgrade_or_default]
+                            move |_| {
+                                if let Some(device) = device_item.device_info() {
+                                    obj.imp().unlink(&device);
+                                }
+                                None
+                            }
+                        ),
+                    );
+                }
+            ));
 
             self.list_devices.set_factory(Some(&factory));
 
@@ -110,17 +123,25 @@ pub mod imp {
         fn unlink(&self, device: &DeviceInfo) {
             let manager = self.obj().manager();
             let obj = self.obj();
-            gspawn!(
-                clone!(@weak obj, @weak manager, @weak device => async move {
+            gspawn!(clone!(
+                #[weak]
+                obj,
+                #[weak]
+                manager,
+                #[weak]
+                device,
+                async move {
                     let dialog = AlertDialog::new(
                         Some(&gettextrs::gettext("Unlink Device?")),
-                        Some(&gettextrs::gettext("Are you sure you want to unlink {}?").replace("{}", &device.name()))
+                        Some(
+                            &gettextrs::gettext("Are you sure you want to unlink {}?")
+                                .replace("{}", &device.name()),
+                        ),
                     );
-                    dialog
-                        .add_responses(&[
-                            ("unlink", &gettextrs::gettext("Unlink")),
-                            ("cancel", &gettextrs::gettext("Cancel"))
-                        ]);
+                    dialog.add_responses(&[
+                        ("unlink", &gettextrs::gettext("Unlink")),
+                        ("cancel", &gettextrs::gettext("Cancel")),
+                    ]);
                     dialog.set_response_appearance("unlink", ResponseAppearance::Destructive);
                     dialog.set_default_response(Some("cancel"));
                     let response = dialog.choose_future(&obj).await;
@@ -132,8 +153,8 @@ pub mod imp {
                         println!("Unlink {}", device.name());
                         obj.imp().reload().await;
                     }
-                })
-            );
+                }
+            ));
         }
 
         async fn reload(&self) {
@@ -156,7 +177,7 @@ pub mod imp {
         fn handle_add_linked_device(&self) {
             log::trace!("User asked to add device link. Presenting dialog.");
             self.entry_device_url.set_text("");
-            self.add_device_dialog.present(&self.obj().window());
+            self.add_device_dialog.present(Some(&self.obj().window()));
         }
 
         #[template_callback]
@@ -170,13 +191,17 @@ pub mod imp {
                 if let Ok(url) = Url::parse(&url) {
                     crate::trace!("User asked to add device link with URL {}.", url);
                     let manager = self.obj().manager();
-                    gspawn!(clone!(@weak obj => async move {
-                        if let Err(e) = manager.link_secondary(url).await {
-                            let root = obj.window();
-                            let dialog = ErrorDialog::new(e.into(), &root);
-                            dialog.present(&root);
+                    gspawn!(clone!(
+                        #[weak]
+                        obj,
+                        async move {
+                            if let Err(e) = manager.link_secondary(url).await {
+                                let root = obj.window();
+                                let dialog = ErrorDialog::new(e.into(), &root);
+                                dialog.present(Some(&root));
+                            }
                         }
-                    }));
+                    ));
                 }
             }
         }

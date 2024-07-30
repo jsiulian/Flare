@@ -13,7 +13,7 @@ impl NewChannelDialog {
     pub fn present_for_selection(&self, channels: &[Channel]) {
         self.imp().set_channels(channels);
         self.set_focus(Some(&self.imp().search_entry.get()));
-        self.present(&self.window());
+        self.present(Some(&self.window()));
     }
 
     fn settings(&self) -> gio::Settings {
@@ -106,29 +106,37 @@ pub mod imp {
 
         fn scroll_up(&self) {
             let obj = self.obj();
-            gspawn!(glib::clone!(@strong obj => async move  {
-                // Need to sleep a little to make sure the scrolled window saw the changed
-                // child.
-                glib::timeout_future(Duration::from_millis(50)).await;
-                let adjustment = obj.imp().scrolled_window.vadjustment();
-                adjustment.set_value(adjustment.lower());
-            }));
+            gspawn!(glib::clone!(
+                #[weak]
+                obj,
+                async move {
+                    // Need to sleep a little to make sure the scrolled window saw the changed
+                    // child.
+                    glib::timeout_future(Duration::from_millis(50)).await;
+                    let adjustment = obj.imp().scrolled_window.vadjustment();
+                    adjustment.set_value(adjustment.lower());
+                }
+            ));
         }
 
         /// By default, the search entry swallows the escape key. Close the popup instead like done everywhere else on escape.
         fn connect_quit_on_escape(&self) {
             let obj = self.obj();
             let key_events = gtk::EventControllerKey::new();
-            key_events.connect_key_pressed(
-                clone!(@weak obj => @default-return Propagation::Proceed, move |_, key, _, _| {
+            key_events.connect_key_pressed(clone!(
+                #[weak]
+                obj,
+                #[upgrade_or]
+                Propagation::Proceed,
+                move |_, key, _, _| {
                     if key == gdk::Key::Escape {
                         obj.close();
                         Propagation::Stop
                     } else {
                         Propagation::Proceed
                     }
-                }),
-            );
+                }
+            ));
             self.search_entry.add_controller(key_events);
         }
 
@@ -196,15 +204,18 @@ pub mod imp {
         fn setup_model(&self) {
             let model = self.model.borrow();
 
-            let filter_search =
-                CustomFilter::new(clone!(@strong self.search_entry as entry => move |obj| {
+            let filter_search = CustomFilter::new(clone!(
+                #[strong(rename_to = entry)]
+                self.search_entry,
+                move |obj| {
                     let search = entry.text().to_string();
                     let channel = obj
                         .downcast_ref::<Channel>()
                         .expect("The object needs to be of type `Channel`.");
                     let title = channel.title();
                     title.to_lowercase().contains(&search.to_lowercase())
-                }));
+                }
+            ));
             let filter_model =
                 FilterListModel::new(Some(model.clone()), Some(filter_search.clone()));
 
@@ -237,11 +248,13 @@ pub mod imp {
             self.list_channels
                 .set_model(Some(&NoSelection::new(Some(filter_model))));
 
-            self.list_channels.connect_activate(
-                clone!(@weak self as s => move |_list_view, position| {
+            self.list_channels.connect_activate(clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |_list_view, position| {
                     s.activate_row(position);
-                }),
-            );
+                }
+            ));
         }
 
         fn setup_actions(&self) {
@@ -251,15 +264,19 @@ pub mod imp {
                 Some(VariantTy::STRING),
                 &obj.sort_by().to_variant(),
             );
-            action_sort_on.connect_activate(clone!(@weak obj => move |action, target| {
-                let Some(target) = target.and_then(|t| t.str()) else {
-                    log::error!("NewChannelDialog action `sort-on` got invalid variant type");
-                    return;
-                };
-                action.set_state(&Variant::from(target));
-                obj.set_sort_by(target);
-                obj.imp().filter_changed();
-            }));
+            action_sort_on.connect_activate(clone!(
+                #[weak]
+                obj,
+                move |action, target| {
+                    let Some(target) = target.and_then(|t| t.str()) else {
+                        log::error!("NewChannelDialog action `sort-on` got invalid variant type");
+                        return;
+                    };
+                    action.set_state(&Variant::from(target));
+                    obj.set_sort_by(target);
+                    obj.imp().filter_changed();
+                }
+            ));
 
             let actions = SimpleActionGroup::new();
             obj.insert_action_group("new-chat-dialog", Some(&actions));

@@ -74,7 +74,11 @@ impl Channel {
             } else {
                 contact.connect_notify_local(
                     Some("title"),
-                    clone!(@weak s => move |_, _| s.notify("title")),
+                    clone!(
+                        #[weak]
+                        s,
+                        move |_, _| s.notify("title")
+                    ),
                 );
                 s.imp().contact.swap(&RefCell::new(Some(contact)));
             }
@@ -82,7 +86,11 @@ impl Channel {
             // Set from a contact.
             contact.connect_notify_local(
                 Some("title"),
-                clone!(@weak s => move |_, _| s.notify("title")),
+                clone!(
+                    #[weak]
+                    s,
+                    move |_, _| s.notify("title")
+                ),
             );
             s.imp().contact.swap(&RefCell::new(Some(contact)));
         }
@@ -515,11 +523,17 @@ impl Channel {
 
     pub fn add_user_typing(&self, notification: TypingNotification) {
         let _ = self.imp().typing.borrow_mut().insert(notification.clone());
-        gspawn!(clone!(@weak self as s, @strong notification => async move {
-            glib::timeout_future_seconds(TYPING_NOTIFICATION_DURATION_SECONDS).await;
-            s.imp().typing.borrow_mut().remove(&notification);
-            s.notify("is-typing");
-        }));
+        gspawn!(clone!(
+            #[weak(rename_to = s)]
+            self,
+            #[strong]
+            notification,
+            async move {
+                glib::timeout_future_seconds(TYPING_NOTIFICATION_DURATION_SECONDS).await;
+                s.imp().typing.borrow_mut().remove(&notification);
+                s.notify("is-typing");
+            }
+        ));
         self.notify("is-typing");
     }
 

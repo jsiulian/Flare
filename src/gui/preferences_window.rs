@@ -89,12 +89,16 @@ pub mod imp {
             let state = r.is_active();
             let app = gio::Application::default().unwrap();
             if state {
-                gspawn!(clone!(@weak obj => async move {
-                    match obj.request_background().await {
-                        Ok(_) => {},
-                        Err(err) => log::warn!("Failed to request background mode, {}", &err)
+                gspawn!(clone!(
+                    #[weak]
+                    obj,
+                    async move {
+                        match obj.request_background().await {
+                            Ok(_) => {}
+                            Err(err) => log::warn!("Failed to request background mode, {}", &err),
+                        }
                     }
-                }));
+                ));
             } else {
                 let title = gettext("Background permission");
                 let body = gettext("Use settings to remove permissions");

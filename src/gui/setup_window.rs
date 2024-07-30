@@ -234,7 +234,7 @@ pub mod imp {
             let obj = self.obj();
             match result {
                 SetupResult::Pending(callback) => {
-                    obj.present(&obj.window());
+                    obj.present(Some(&obj.window()));
                     self.decision_callback.replace(callback.take());
 
                     let win = obj.window();
