@@ -210,6 +210,8 @@ impl Manager {
         let mut captcha = captcha.as_ref().to_owned();
         if captcha.starts_with("signalcaptcha://") {
             log::trace!("Captcha is the full link. Remove unneeded thigs.");
+            // The warning is deactivated by default on newer Rust versions, and the applied fix does not even compile.
+            #[allow(clippy::assigning_clones)]
             if let Some((_, c)) = captcha.split_once(".challenge.") {
                 captcha = c.to_owned();
             } else {

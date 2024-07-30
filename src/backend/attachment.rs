@@ -89,8 +89,7 @@ impl Attachment {
             .property("file", &file)
             .property(
                 "name",
-                &file
-                    .basename()
+                file.basename()
                     .and_then(|f| f.file_name().map(|s| s.to_string_lossy().into_owned())),
             )
             .property("size", size)

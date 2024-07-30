@@ -414,7 +414,7 @@ impl Channel {
             manager.send_message(contact, data, timestamp).await?;
         } else {
             let context = self.imp().group_context.borrow().clone();
-            data.group_v2 = context.clone();
+            data.group_v2.clone_from(&context);
             // TODO: Can this be `None`?
             if let Some(key) = context.as_ref().and_then(|c| c.master_key.clone()) {
                 manager.send_message_to_group(key, data, timestamp).await?;

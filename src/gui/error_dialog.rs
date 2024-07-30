@@ -17,8 +17,8 @@ impl ErrorDialog {
         log::error!("ErrorDialog displaying error: {}", error);
         log::trace!("ErrorDialog full error: {:#?}", error);
         let s: Self = Object::builder::<Self>()
-            .property("body", &error.to_string())
-            .property("secondary-error", &error.more_information())
+            .property("body", error.to_string())
+            .property("secondary-error", error.more_information())
             .property("should-report", error.should_report())
             .property("window", parent)
             .build();
