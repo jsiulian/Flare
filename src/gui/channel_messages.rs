@@ -42,22 +42,38 @@ impl ChannelMessages {
     /// This furthermore loads the screen until is is completely filled.
     fn setup_autoscroll(&self) {
         let adj = self.imp().scrolled_window.vadjustment();
-        adj.connect_value_changed(clone!(@weak self as s => move |adj| {
-            s.set_sticky(adj.value() + adj.page_size() >= adj.upper());
-        }));
-        adj.connect_upper_notify(clone!(@weak self as s => move |_adj| {
-            if s.sticky() {
-                s.scroll_down();
+        adj.connect_value_changed(clone!(
+            #[weak(rename_to = s)]
+            self,
+            move |adj| {
+                s.set_sticky(adj.value() + adj.page_size() >= adj.upper());
             }
-        }));
-        adj.connect_changed(clone!(@weak self as s => move |_adj| {
-            s.load_if_screen_not_filled();
-        }));
+        ));
+        adj.connect_upper_notify(clone!(
+            #[weak(rename_to = s)]
+            self,
+            move |_adj| {
+                if s.sticky() {
+                    s.scroll_down();
+                }
+            }
+        ));
+        adj.connect_changed(clone!(
+            #[weak(rename_to = s)]
+            self,
+            move |_adj| {
+                s.load_if_screen_not_filled();
+            }
+        ));
         self.connect_notify_local(
             Some("active-channel"),
-            clone!(@weak self as s => move |_, _| {
-                s.load_if_screen_not_filled();
-            }),
+            clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |_, _| {
+                    s.load_if_screen_not_filled();
+                }
+            ),
         );
     }
 
@@ -74,13 +90,17 @@ impl ChannelMessages {
     }
 
     fn scroll_down(&self) {
-        crate::gspawn!(glib::clone!(@strong self as s => async move  {
-            // XXX: Need to sleep to prevent segfault: <https://gitlab.gnome.org/GNOME/gtk/-/issues/5763>
-            glib::timeout_future(std::time::Duration::from_millis(100)).await;
-            s.imp()
-                .scrolled_window
-                .emit_by_name::<bool>("scroll-child", &[&gtk::ScrollType::End, &false]);
-        }));
+        crate::gspawn!(glib::clone!(
+            #[strong(rename_to = s)]
+            self,
+            async move {
+                // XXX: Need to sleep to prevent segfault: <https://gitlab.gnome.org/GNOME/gtk/-/issues/5763>
+                glib::timeout_future(std::time::Duration::from_millis(100)).await;
+                s.imp()
+                    .scrolled_window
+                    .emit_by_name::<bool>("scroll-child", &[&gtk::ScrollType::End, &false]);
+            }
+        ));
     }
 
     pub fn clear_messages(&self) -> Result<(), ApplicationError> {
@@ -194,11 +214,17 @@ pub mod imp {
             let channel = self.active_channel.borrow();
             if let Some(channel) = channel.as_ref() {
                 let obj = self.obj();
-                gspawn!(glib::clone!(@weak channel, @weak obj => async move {
-                    obj.set_loading(true);
-                    channel.load_last(super::MESSAGES_REQUEST_LOAD).await;
-                    obj.set_loading(false);
-                }));
+                gspawn!(glib::clone!(
+                    #[weak]
+                    channel,
+                    #[weak]
+                    obj,
+                    async move {
+                        obj.set_loading(true);
+                        channel.load_last(super::MESSAGES_REQUEST_LOAD).await;
+                        obj.set_loading(false);
+                    }
+                ));
             } else {
                 log::warn!("More messages were requested while not being focused on a channel. This should not happen.");
             }
@@ -270,14 +296,18 @@ pub mod imp {
                         .expect("Root of `ChannelMessages` to be a `Window`."),
                 ),
                 None::<&gio::Cancellable>,
-                clone!(@strong chooser, @strong obj => move |file| {
-                    if let Ok(file) = file{
-                        log::trace!("User added an attachment");
-                        obj.imp().paste_file(file);
-                    } else {
-                        log::trace!("User did not upload a attachment");
+                clone!(
+                    #[strong]
+                    obj,
+                    move |file| {
+                        if let Ok(file) = file {
+                            log::trace!("User added an attachment");
+                            obj.imp().paste_file(file);
+                        } else {
+                            log::trace!("User did not upload a attachment");
+                        }
                     }
-                }),
+                ),
             );
         }
 
@@ -325,8 +355,16 @@ pub mod imp {
                 }
 
                 let obj = self.obj();
-                gspawn!(
-                    clone!(@strong msg, @strong channel, @strong attachments, @strong obj => async move {
+                gspawn!(clone!(
+                    #[strong]
+                    msg,
+                    #[strong]
+                    channel,
+                    #[strong]
+                    attachments,
+                    #[strong]
+                    obj,
+                    async move {
                         log::trace!("Adding attachments to message: {}", attachments.len());
                         for att in attachments {
                             if let Err(e) = msg.add_attachment(att).await {
@@ -336,7 +374,7 @@ pub mod imp {
                                     .dynamic_cast::<crate::gui::Window>()
                                     .expect("Root of `ChannelMessages` to be a `Window`.");
                                 let dialog = ErrorDialog::new(e, &root);
-                                dialog.present(&root);
+                                dialog.present(Some(&root));
                                 return;
                             }
                         }
@@ -348,10 +386,10 @@ pub mod imp {
                                 .dynamic_cast::<crate::gui::Window>()
                                 .expect("Root of `ChannelMessages` to be a `Window`.");
                             let dialog = ErrorDialog::new(e, &root);
-                            dialog.present(&root);
+                            dialog.present(Some(&root));
                         }
-                    })
-                );
+                    }
+                ));
             }
         }
 
@@ -375,30 +413,43 @@ pub mod imp {
         fn construct_list_view(&self) {
             let obj = self.obj();
             let factory = SignalListItemFactory::new();
-            factory.connect_setup(clone!(@weak obj => move |_, object| {
-                let widget = ItemRow::default();
-                widget.connect_local("reply", false, clone!(@weak obj => @default-return None, move |args| {
-                    let msg = args[1]
-                        .get::<Option<TextMessage>>()
-                        .expect("Type of signal `reply` of `ItemRow` to be `TextMessage`.");
-                    obj.set_reply_message(msg);
-                    obj.imp().text_entry.grab_focus();
-                    None
-                }));
-                let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
-                list_item.set_activatable(false);
-                list_item.set_selectable(false);
-                list_item.set_child(Some(&widget));
-                list_item.bind_property("item", &widget, "item").build();
-            }));
+            factory.connect_setup(clone!(
+                #[weak]
+                obj,
+                move |_, object| {
+                    let widget = ItemRow::default();
+                    widget.connect_local(
+                        "reply",
+                        false,
+                        clone!(
+                            #[weak]
+                            obj,
+                            #[upgrade_or_default]
+                            move |args| {
+                                let msg = args[1].get::<Option<TextMessage>>().expect(
+                                    "Type of signal `reply` of `ItemRow` to be `TextMessage`.",
+                                );
+                                obj.set_reply_message(msg);
+                                obj.imp().text_entry.grab_focus();
+                                None
+                            }
+                        ),
+                    );
+                    let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
+                    list_item.set_activatable(false);
+                    list_item.set_selectable(false);
+                    list_item.set_child(Some(&widget));
+                    list_item.bind_property("item", &widget, "item").build();
+                }
+            ));
 
             let header_factory = SignalListItemFactory::new();
-            header_factory.connect_setup(clone!(@weak obj => move |_, object| {
+            header_factory.connect_setup(move |_, object| {
                 let widget = TimeDivider::default();
                 let header_item = object.downcast_ref::<gtk::ListHeader>().unwrap();
                 header_item.set_child(Some(&widget));
                 header_item.bind_property("item", &widget, "item").build();
-            }));
+            });
 
             self.list_view.set_factory(Some(&factory));
             self.list_view.set_header_factory(Some(&header_factory));
@@ -431,13 +482,17 @@ pub mod imp {
             self.parent_constructed();
             self.obj().connect_notify_local(
                 Some("active-channel"),
-                clone!(@weak self as obj => move |_, _| {
-                    obj.obj().set_reply_message(None::<TextMessage>);
-                    if let Some(channel) = obj.active_channel.borrow().as_ref() {
-                        let draft = channel.property("draft");
-                        obj.text_entry.set_text(draft);
-                    };
-                }),
+                clone!(
+                    #[weak(rename_to = s)]
+                    self,
+                    move |_, _| {
+                        s.obj().set_reply_message(None::<TextMessage>);
+                        if let Some(channel) = s.active_channel.borrow().as_ref() {
+                            let draft = channel.property("draft");
+                            s.text_entry.set_text(draft);
+                        };
+                    }
+                ),
             );
             self.obj().setup_autoscroll();
             self.construct_list_view();

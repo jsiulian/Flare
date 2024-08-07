@@ -27,12 +27,15 @@ impl AttachmentVideo {
         if !Settings::new(BASE_ID).boolean("autodownload-videos") {
             attachment.connect_notify_local(
                 Some("loaded"),
-                glib::clone!(@weak obj => move |_, _| {
-                    if let Some(media_stream) = obj.imp().controls.media_stream(){
-                        media_stream.play();
+                glib::clone!(
+                    #[weak]
+                    obj,
+                    move |_, _| {
+                        if let Some(media_stream) = obj.imp().controls.media_stream() {
+                            media_stream.play();
+                        }
                     }
-
-                }),
+                ),
             );
         }
 

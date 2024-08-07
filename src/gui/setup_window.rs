@@ -195,6 +195,8 @@ pub mod imp {
         #[template_callback]
         fn handle_primary_decision_confirm(&self) {
             let mut captcha = self.entry_captch.text().to_string();
+            // The warning is deactivated by default on newer Rust versions, and the applied fix does not even compile.
+            #[allow(clippy::assigning_clones)]
             if let Some(c) = captcha.strip_prefix("signalcaptcha://") {
                 log::trace!("Captcha is the full link. Remove unneeded thigs.");
                 captcha = c.to_owned();
@@ -234,7 +236,7 @@ pub mod imp {
             let obj = self.obj();
             match result {
                 SetupResult::Pending(callback) => {
-                    obj.present(&obj.window());
+                    obj.present(Some(&obj.window()));
                     self.decision_callback.replace(callback.take());
 
                     let win = obj.window();

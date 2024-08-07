@@ -29,13 +29,18 @@ impl ItemRow {
             let handler = widget.connect_local(
                 "reply",
                 false,
-                clone!(@weak self as s => @default-return None, move |args| {
-                    let msg = args[1]
-                        .get::<TextMessage>()
-                        .expect("Type of signal `reply` of `MessageItem` to be `TextMessage`.");
-                    s.emit_by_name::<()>("reply", &[&msg]);
-                    None
-                }),
+                clone!(
+                    #[weak(rename_to = s)]
+                    self,
+                    #[upgrade_or_default]
+                    move |args| {
+                        let msg = args[1]
+                            .get::<TextMessage>()
+                            .expect("Type of signal `reply` of `MessageItem` to be `TextMessage`.");
+                        s.emit_by_name::<()>("reply", &[&msg]);
+                        None
+                    }
+                ),
             );
             self.set_handler(handler);
             Some(widget.dynamic_cast().unwrap())

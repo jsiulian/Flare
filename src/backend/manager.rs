@@ -210,6 +210,8 @@ impl Manager {
         let mut captcha = captcha.as_ref().to_owned();
         if captcha.starts_with("signalcaptcha://") {
             log::trace!("Captcha is the full link. Remove unneeded thigs.");
+            // The warning is deactivated by default on newer Rust versions, and the applied fix does not even compile.
+            #[allow(clippy::assigning_clones)]
             if let Some((_, c)) = captcha.split_once(".challenge.") {
                 captcha = c.to_owned();
             } else {
@@ -315,12 +317,16 @@ impl Manager {
         let (send_content, mut receive_content) = mpsc::unbounded();
         let (send_error, mut receive_error) = mpsc::channel(MESSAGE_BOUND);
 
-        gspawn!(clone!(@weak self as s => async move {
-            log::trace!("Awaiting for setup results");
-            while let Some(result) = setup_results_rx.next().await {
-                s.emit_by_name::<()>("setup-result", &[&BoxedAnyObject::new(result)]);
+        gspawn!(clone!(
+            #[weak(rename_to = s)]
+            self,
+            async move {
+                log::trace!("Awaiting for setup results");
+                while let Some(result) = setup_results_rx.next().await {
+                    s.emit_by_name::<()>("setup-result", &[&BoxedAnyObject::new(result)]);
+                }
             }
-        }));
+        ));
 
         let internal = ManagerThread::new(
             config_store,

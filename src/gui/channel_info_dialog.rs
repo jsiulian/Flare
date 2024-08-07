@@ -174,17 +174,25 @@ pub mod imp {
             if let Some(url) =
                 phone_number.and_then(|p| url::Url::parse(&format!("tel:{}", p)).ok())
             {
-                gspawn!(clone!(@weak obj => async move {
-                    let identifier = WindowIdentifier::from_native(&obj.native().unwrap()).await;
-                    tspawn!(async move {
-                        if let Err(e) = OpenFileRequest::default()
-                                            .identifier(identifier)
-                                            .send_uri(&url)
-                                            .await {
-                            log::error!("Failed to open phone number: {}", e);
-                        }
-                    }).await.expect("Failed to join tokio")
-                }));
+                gspawn!(clone!(
+                    #[weak]
+                    obj,
+                    async move {
+                        let identifier =
+                            WindowIdentifier::from_native(&obj.native().unwrap()).await;
+                        tspawn!(async move {
+                            if let Err(e) = OpenFileRequest::default()
+                                .identifier(identifier)
+                                .send_uri(&url)
+                                .await
+                            {
+                                log::error!("Failed to open phone number: {}", e);
+                            }
+                        })
+                        .await
+                        .expect("Failed to join tokio")
+                    }
+                ));
             } else {
                 log::warn!("Trying to open phone number even if it does not exist");
             }

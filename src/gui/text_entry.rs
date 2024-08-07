@@ -94,71 +94,100 @@ pub mod imp {
 
             // Send on enter
             let key_events = gtk::EventControllerKey::new();
-            key_events
-                .connect_key_pressed(clone!(@weak obj => @default-return Propagation::Proceed, move |_, key, _, modifier| {
-                let enter_pressed = key == gdk::Key::Return || key == gdk::Key::KP_Enter;
-                let should_send = enter_pressed && if obj.send_on_enter() {
-                    // shift+enter / ctrl+enter yields newline, enter sends
-                    !modifier.contains(gdk::ModifierType::CONTROL_MASK) && !modifier.contains(gdk::ModifierType::SHIFT_MASK)
-                } else {
-                    // enter / shift+enter yields newline, ctrl+enter sends
-                    modifier.contains(gdk::ModifierType::CONTROL_MASK)
-                };
-                if should_send {
-                    obj.emit_by_name::<()>("activate", &[]);
-                    Propagation::Stop
-                } else {
-                    Propagation::Proceed
+            key_events.connect_key_pressed(clone!(
+                #[weak]
+                obj,
+                #[upgrade_or]
+                Propagation::Proceed,
+                move |_, key, _, modifier| {
+                    let enter_pressed = key == gdk::Key::Return || key == gdk::Key::KP_Enter;
+                    let should_send = enter_pressed
+                        && if obj.send_on_enter() {
+                            // shift+enter / ctrl+enter yields newline, enter sends
+                            !modifier.contains(gdk::ModifierType::CONTROL_MASK)
+                                && !modifier.contains(gdk::ModifierType::SHIFT_MASK)
+                        } else {
+                            // enter / shift+enter yields newline, ctrl+enter sends
+                            modifier.contains(gdk::ModifierType::CONTROL_MASK)
+                        };
+                    if should_send {
+                        obj.emit_by_name::<()>("activate", &[]);
+                        Propagation::Stop
+                    } else {
+                        Propagation::Proceed
+                    }
                 }
-            }));
+            ));
             self.view.add_controller(key_events);
 
             // Paste files
-            self.view
-                .connect_paste_clipboard(clone!(@weak obj => move |entry| {
+            self.view.connect_paste_clipboard(clone!(
+                #[weak]
+                obj,
+                move |entry| {
                     let clipboard = obj.clipboard();
                     let formats = clipboard.formats();
 
                     // We only handle files and supported images.
-                    gspawn!(clone!(@weak entry => async move {
-                        if formats.contains_type(gio::File::static_type()) {
-                            entry.stop_signal_emission_by_name("paste-clipboard");
-                            match clipboard
-                                .read_value_future(gio::File::static_type(), Priority::DEFAULT)
-                                .await
-                            {
-                                Ok(value) => match value.get::<gio::File>() {
-                                    Ok(file) => {
-                                        obj.emit_by_name::<()>("paste-file", &[&file]);
-                                    }
-                                    Err(error) => log::warn!("Could not get file from value: {error:?}"),
-                                },
-                                Err(error) => log::warn!("Could not get file from the clipboard: {error:?}"),
-                            }
-                        } else if formats.contains_type(gdk::Texture::static_type()) {
-                            entry.stop_signal_emission_by_name("paste-clipboard");
-                            match clipboard
-                                .read_value_future(gdk::Texture::static_type(), Priority::DEFAULT)
-                                .await
-                            {
-                                Ok(value) => match value.get::<gdk::Texture>() {
-                                    Ok(texture) => {
-                                        obj.emit_by_name::<()>("paste-texture", &[&texture]);
-                                    }
-                                    Err(error) => log::warn!("Could not get file from value: {error:?}"),
-                                },
-                                Err(error) => log::warn!("Could not get file from the clipboard: {error:?}"),
+                    gspawn!(clone!(
+                        #[weak]
+                        entry,
+                        async move {
+                            if formats.contains_type(gio::File::static_type()) {
+                                entry.stop_signal_emission_by_name("paste-clipboard");
+                                match clipboard
+                                    .read_value_future(gio::File::static_type(), Priority::DEFAULT)
+                                    .await
+                                {
+                                    Ok(value) => match value.get::<gio::File>() {
+                                        Ok(file) => {
+                                            obj.emit_by_name::<()>("paste-file", &[&file]);
+                                        }
+                                        Err(error) => {
+                                            log::warn!("Could not get file from value: {error:?}")
+                                        }
+                                    },
+                                    Err(error) => log::warn!(
+                                        "Could not get file from the clipboard: {error:?}"
+                                    ),
+                                }
+                            } else if formats.contains_type(gdk::Texture::static_type()) {
+                                entry.stop_signal_emission_by_name("paste-clipboard");
+                                match clipboard
+                                    .read_value_future(
+                                        gdk::Texture::static_type(),
+                                        Priority::DEFAULT,
+                                    )
+                                    .await
+                                {
+                                    Ok(value) => match value.get::<gdk::Texture>() {
+                                        Ok(texture) => {
+                                            obj.emit_by_name::<()>("paste-texture", &[&texture]);
+                                        }
+                                        Err(error) => {
+                                            log::warn!("Could not get file from value: {error:?}")
+                                        }
+                                    },
+                                    Err(error) => log::warn!(
+                                        "Could not get file from the clipboard: {error:?}"
+                                    ),
+                                }
                             }
                         }
-                    }));
-                }));
+                    ));
+                }
+            ));
 
             // Updating property if empty.
             let buffer = sourceview5::Buffer::new(None);
             obj.imp().view.set_buffer(Some(&buffer));
-            buffer.connect_text_notify(clone!(@weak obj => move |_| {
-                obj.notify_is_empty();
-            }));
+            buffer.connect_text_notify(clone!(
+                #[weak]
+                obj,
+                move |_| {
+                    obj.notify_is_empty();
+                }
+            ));
 
             // Spell checking.
             #[cfg(feature = "libspelling")]

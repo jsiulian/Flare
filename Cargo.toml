@@ -17,9 +17,9 @@ opt-level = 3
 opt-level = 3
 
 [dependencies]
-gtk = { version = "0.8.2", package = "gtk4", features = ["v4_12"]}
-adw = { version = "0.6.0", package = "libadwaita", features = ["v1_5"]}
-ashpd = { version = "0.8.1", default-features = false, features = [ "gtk4", "tokio" ]}
+gtk = { version = "0.9.0", package = "gtk4", features = ["v4_12"]}
+adw = { version = "0.7.0", package = "libadwaita", features = ["v1_5"]}
+ashpd = { version = "0.9.1", default-features = false, features = [ "gtk4", "tokio" ]}
 zbus = { version = "4.4.0", default-features = false, features = [ "tokio" ]}
 
 gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
@@ -46,9 +46,9 @@ env_logger = "0.11.3"
 err-derive = "0.3.1"
 
 tracing = { version = "0.1.40", features = ["log-always"] }
-sourceview5 = "0.8.0"
-libspelling = "0.2.0"
-blurhash = { version = "0.2.2", features = ["image", "gdk-pixbuf"] }
+sourceview5 = "0.9.0"
+libspelling = "0.3.0"
+blurhash = { git = "https://github.com/Schmiddiii/blurhash-rs", rev = "e1f9bdc1976bcc0f7dc725ac3b4fdaa6c6bdffd7", features = ["image", "gdk-pixbuf"] }
 image = "0.24.9"
 chrono = "0.4.38"
 

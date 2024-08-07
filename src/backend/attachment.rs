@@ -89,8 +89,7 @@ impl Attachment {
             .property("file", &file)
             .property(
                 "name",
-                &file
-                    .basename()
+                file.basename()
                     .and_then(|f| f.file_name().map(|s| s.to_string_lossy().into_owned())),
             )
             .property("size", size)
@@ -115,11 +114,15 @@ impl Attachment {
             media_file.connect_closure(
                 "invalidate-size",
                 false,
-                glib::closure_local!(@watch obj => move |media_file: MediaFile| {
+                glib::closure_local!(
+                    #[watch]
+                    obj,
+                    move |media_file: MediaFile| {
                         obj.set_property("image", media_file.current_image());
                         obj.set_property("width", media_file.intrinsic_width() as u32);
                         obj.set_property("height", media_file.intrinsic_height() as u32);
-                }),
+                    }
+                ),
             );
         }
 

@@ -86,10 +86,13 @@ impl Selection {
 
         let imp = self.imp();
         let n_items = if let Some(ref model) = model {
-            let handler =
-                model.connect_items_changed(clone!(@weak self as obj => move |_, p, r, a| {
-                    obj.model_items_changed(p, r, a);
-                }));
+            let handler = model.connect_items_changed(clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |_, p, r, a| {
+                    s.model_items_changed(p, r, a);
+                }
+            ));
             imp.signal_handler.replace(Some(handler));
 
             model.n_items()

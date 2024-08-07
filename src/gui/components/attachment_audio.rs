@@ -27,12 +27,18 @@ impl AttachmentAudio {
                 if !Settings::new(BASE_ID).boolean("autodownload-voice-messages") {
                     attachment.connect_notify_local(
                         Some("loaded"),
-                        clone!(@weak play_button, @weak imp => move |_, _| {
-                            play_button.set_can_target(true);
-                            play_button.set_visible(true);
-                            imp.controls.set_width_request(250);
-                            imp.controls.media_stream().unwrap().play();
-                        }),
+                        clone!(
+                            #[weak]
+                            play_button,
+                            #[weak]
+                            imp,
+                            move |_, _| {
+                                play_button.set_can_target(true);
+                                play_button.set_visible(true);
+                                imp.controls.set_width_request(250);
+                                imp.controls.media_stream().unwrap().play();
+                            }
+                        ),
                     );
                     play_button.set_visible(false);
                 }

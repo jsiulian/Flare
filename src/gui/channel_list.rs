@@ -49,13 +49,17 @@ impl ChannelList {
     }
 
     pub fn scroll_up(&self) {
-        gspawn!(glib::clone!(@strong self as s => async move  {
-            // Need to sleep a little to make sure the scrolled window saw the changed
-            // child.
-            glib::timeout_future(Duration::from_millis(50)).await;
-            let adjustment = s.imp().scrolled_window.vadjustment();
-            adjustment.set_value(adjustment.lower());
-        }));
+        gspawn!(glib::clone!(
+            #[strong(rename_to = s)]
+            self,
+            async move {
+                // Need to sleep a little to make sure the scrolled window saw the changed
+                // child.
+                glib::timeout_future(Duration::from_millis(50)).await;
+                let adjustment = s.imp().scrolled_window.vadjustment();
+                adjustment.set_value(adjustment.lower());
+            }
+        ));
     }
 
     pub fn activate_row(&self, i: u32) -> bool {
@@ -198,13 +202,18 @@ pub mod imp {
                 manager.connect_local(
                     "channel",
                     false,
-                    clone!(@weak self as obj => @default-return None, move |args| {
-                        let channel = args[1]
-                            .get::<Channel>()
-                            .expect("Type of `channel` signal of `Manager` to be `Channel`");
-                        obj.obj().add_channel(channel);
-                        None
-                    }),
+                    clone!(
+                        #[weak(rename_to = s)]
+                        self,
+                        #[upgrade_or_default]
+                        move |args| {
+                            let channel = args[1]
+                                .get::<Channel>()
+                                .expect("Type of `channel` signal of `Manager` to be `Channel`");
+                            s.obj().add_channel(channel);
+                            None
+                        }
+                    ),
                 );
             }
             self.manager.replace(manager);
@@ -236,24 +245,31 @@ pub mod imp {
             let model = gtk::gio::ListStore::new::<Channel>();
 
             // Filter
-            let filter_search =
-                CustomFilter::new(clone!(@strong self.search_entry as entry => move |obj| {
+            let filter_search = CustomFilter::new(clone!(
+                #[strong(rename_to = entry)]
+                self.search_entry,
+                move |obj| {
                     let search = entry.text().to_string();
                     let channel = obj
                         .downcast_ref::<Channel>()
                         .expect("The object needs to be of type `Channel`.");
                     let title = channel.title();
                     title.to_lowercase().contains(&search.to_lowercase())
-                }));
+                }
+            ));
             let filter = EveryFilter::new();
-            let filter_empty = CustomFilter::new(clone!(@strong obj as o => move |obj| {
-                let channel = obj
-                    .downcast_ref::<Channel>()
-                    .expect("The object needs to be of type `Channel`.");
-                let has_message = channel.last_message().is_some();
-                let is_selected = Some(channel) == o.active_channel().as_ref();
-                has_message || is_selected
-            }));
+            let filter_empty = CustomFilter::new(clone!(
+                #[strong(rename_to = o)]
+                obj,
+                move |obj| {
+                    let channel = obj
+                        .downcast_ref::<Channel>()
+                        .expect("The object needs to be of type `Channel`.");
+                    let has_message = channel.last_message().is_some();
+                    let is_selected = Some(channel) == o.active_channel().as_ref();
+                    has_message || is_selected
+                }
+            ));
             filter.append(filter_search);
             filter.append(filter_empty);
             let filter_model = FilterListModel::new(Some(model.clone()), Some(filter.clone()));
@@ -316,11 +332,14 @@ pub mod imp {
             self.list.set_single_click_activate(true);
 
             // Activate on click.
-            self.list
-                .connect_activate(clone!(@weak self as obj => move |_list_view, position| {
-                    obj.obj().activate_row(position);
+            self.list.connect_activate(clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |_list_view, position| {
+                    s.obj().activate_row(position);
                     selection_model.set_selected_position(position);
-                }));
+                }
+            ));
         }
     }
 

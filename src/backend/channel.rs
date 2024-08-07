@@ -74,7 +74,11 @@ impl Channel {
             } else {
                 contact.connect_notify_local(
                     Some("title"),
-                    clone!(@weak s => move |_, _| s.notify("title")),
+                    clone!(
+                        #[weak]
+                        s,
+                        move |_, _| s.notify("title")
+                    ),
                 );
                 s.imp().contact.swap(&RefCell::new(Some(contact)));
             }
@@ -82,7 +86,11 @@ impl Channel {
             // Set from a contact.
             contact.connect_notify_local(
                 Some("title"),
-                clone!(@weak s => move |_, _| s.notify("title")),
+                clone!(
+                    #[weak]
+                    s,
+                    move |_, _| s.notify("title")
+                ),
             );
             s.imp().contact.swap(&RefCell::new(Some(contact)));
         }
@@ -406,7 +414,7 @@ impl Channel {
             manager.send_message(contact, data, timestamp).await?;
         } else {
             let context = self.imp().group_context.borrow().clone();
-            data.group_v2 = context.clone();
+            data.group_v2.clone_from(&context);
             // TODO: Can this be `None`?
             if let Some(key) = context.as_ref().and_then(|c| c.master_key.clone()) {
                 manager.send_message_to_group(key, data, timestamp).await?;
@@ -515,11 +523,17 @@ impl Channel {
 
     pub fn add_user_typing(&self, notification: TypingNotification) {
         let _ = self.imp().typing.borrow_mut().insert(notification.clone());
-        gspawn!(clone!(@weak self as s, @strong notification => async move {
-            glib::timeout_future_seconds(TYPING_NOTIFICATION_DURATION_SECONDS).await;
-            s.imp().typing.borrow_mut().remove(&notification);
-            s.notify("is-typing");
-        }));
+        gspawn!(clone!(
+            #[weak(rename_to = s)]
+            self,
+            #[strong]
+            notification,
+            async move {
+                glib::timeout_future_seconds(TYPING_NOTIFICATION_DURATION_SECONDS).await;
+                s.imp().typing.borrow_mut().remove(&notification);
+                s.notify("is-typing");
+            }
+        ));
         self.notify("is-typing");
     }
 

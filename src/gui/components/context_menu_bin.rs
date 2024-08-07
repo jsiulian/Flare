@@ -50,8 +50,10 @@ impl<O: IsA<ContextMenuBin>> ContextMenuBinExt for O {
             popover.unparent();
             popover.set_parent(obj);
             imp.signal_handler
-                .replace(Some(popover.connect_parent_notify(
-                    clone!(@weak obj => move |popover| {
+                .replace(Some(popover.connect_parent_notify(clone!(
+                    #[weak]
+                    obj,
+                    move |popover| {
                         if popover.parent().as_ref() != Some(obj.upcast_ref()) {
                             let imp = obj.imp();
                             if let Some(popover) = imp.popover.take() {
@@ -60,8 +62,8 @@ impl<O: IsA<ContextMenuBin>> ContextMenuBinExt for O {
                                 }
                             }
                         }
-                    }),
-                )));
+                    }
+                ))));
         }
 
         obj.imp().popover.replace(popover);
@@ -210,23 +212,28 @@ mod imp {
         fn constructed(&self) {
             let obj = self.obj();
 
-            self.long_press_gesture
-                .connect_pressed(clone!(@weak obj => move |gesture, x, y| {
+            self.long_press_gesture.connect_pressed(clone!(
+                #[weak]
+                obj,
+                move |gesture, x, y| {
                     gesture.set_state(gtk::EventSequenceState::Claimed);
                     gesture.reset();
                     obj.open_menu_at(x as i32, y as i32);
-                }));
+                }
+            ));
 
-            self.click_gesture.connect_released(
-                clone!(@weak obj => move |gesture, n_press, x, y| {
+            self.click_gesture.connect_released(clone!(
+                #[weak]
+                obj,
+                move |gesture, n_press, x, y| {
                     if n_press > 1 {
                         return;
                     }
 
                     gesture.set_state(gtk::EventSequenceState::Claimed);
                     obj.open_menu_at(x as i32, y as i32);
-                }),
-            );
+                }
+            ));
             self.parent_constructed();
         }
 

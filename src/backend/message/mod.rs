@@ -295,12 +295,8 @@ impl Message {
 
     // A unique ID of the message, built from the timestamp and sender.
     fn uid(&self) -> Option<String> {
-        let Some(data) = self.imp().data.borrow().clone() else {
-            return None;
-        };
-        let Some(timestamp) = data.timestamp else {
-            return None;
-        };
+        let data = self.imp().data.borrow().clone()?;
+        let timestamp = data.timestamp?;
         let sender_uuid = self.sender().uuid();
         Some(format!("{:x}{:x}", timestamp, sender_uuid))
     }

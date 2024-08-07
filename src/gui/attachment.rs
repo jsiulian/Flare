@@ -82,10 +82,14 @@ pub mod imp {
         pub fn load(&self) {
             let obj = self.obj();
 
-            gspawn!(clone!(@weak obj => async move {
-                let attachment = obj.attachment();
-                attachment.load().await
-            }));
+            gspawn!(clone!(
+                #[weak]
+                obj,
+                async move {
+                    let attachment = obj.attachment();
+                    attachment.load().await
+                }
+            ));
         }
 
         fn window(&self) -> crate::gui::window::Window {
@@ -106,18 +110,26 @@ pub mod imp {
             {
                 let obj = self.obj();
 
-                gspawn!(clone!(@weak obj => async move {
-                    let identifier = WindowIdentifier::from_native(&obj.native().unwrap()).await;
-                    tspawn!(async move {
-                        if let Err(e) = OpenFileRequest::default()
-                                            .ask(false)
-                                            .identifier(identifier)
-                                            .send_file(&file.as_fd())
-                                            .await {
-                            log::error!("Failed to open file: {}", e);
-                        }
-                    }).await.expect("Failed to join tokio")
-                }));
+                gspawn!(clone!(
+                    #[weak]
+                    obj,
+                    async move {
+                        let identifier =
+                            WindowIdentifier::from_native(&obj.native().unwrap()).await;
+                        tspawn!(async move {
+                            if let Err(e) = OpenFileRequest::default()
+                                .ask(false)
+                                .identifier(identifier)
+                                .send_file(&file.as_fd())
+                                .await
+                            {
+                                log::error!("Failed to open file: {}", e);
+                            }
+                        })
+                        .await
+                        .expect("Failed to join tokio")
+                    }
+                ));
             }
         }
 
@@ -146,20 +158,32 @@ pub mod imp {
                 chooser.save(
                     Some(&self.window()),
                     None::<&gio::Cancellable>,
-                    clone!(@weak chooser, @weak attachment, @weak obj => move |file| {
-                        if let Ok(file) = file {
-                            log::trace!("User downloads attachment");
-                            gspawn!(clone!(@weak attachment, @weak obj => async move {
-                                if let Err(e) = attachment.save_to_file(&file).await {
-                                    let root = obj.imp().window();
-                                    let dialog = ErrorDialog::new(e.into(), &root);
-                                    dialog.present(&root);
-                                }
-                            }));
-                        } else {
-                            log::trace!("User did not save a attachment");
+                    clone!(
+                        #[weak]
+                        attachment,
+                        #[weak]
+                        obj,
+                        move |file| {
+                            if let Ok(file) = file {
+                                log::trace!("User downloads attachment");
+                                gspawn!(clone!(
+                                    #[weak]
+                                    attachment,
+                                    #[weak]
+                                    obj,
+                                    async move {
+                                        if let Err(e) = attachment.save_to_file(&file).await {
+                                            let root = obj.imp().window();
+                                            let dialog = ErrorDialog::new(e.into(), &root);
+                                            dialog.present(Some(&root));
+                                        }
+                                    }
+                                ));
+                            } else {
+                                log::trace!("User did not save a attachment");
+                            }
                         }
-                    }),
+                    ),
                 );
                 log::trace!("Showing download popup");
             }
