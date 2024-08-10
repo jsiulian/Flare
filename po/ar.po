@@ -8,21 +8,21 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-04-25 08:07+0000\n"
-"Last-Translator: Ahmed Mohammed <ira.traq@outlook.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/ar/>\n"
+"PO-Revision-Date: 2024-08-11 11:09+0000\n"
+"Last-Translator: Moa'th <irondragondev@gmail.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.5.1-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr ""
+msgstr "رصيد المترجم"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
@@ -129,11 +129,11 @@ msgstr "إرسال"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "مرتبط:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "آخر تفاعل:"
 
 #: data/resources/ui/device_info_item.blp:72
 #, fuzzy
@@ -251,79 +251,79 @@ msgstr "محادثة جديدة"
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "القائمة"
 
 #: data/resources/ui/new_channel_dialog.blp:35
 msgid "Search Contacts"
-msgstr ""
+msgstr "بحث عن جهة اتصال"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "عرض جهات الاتصال حسب:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "الإسم الأول"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "اللقب"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "تنزيل المرفقات تلقائيًا"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "المرفقات المحددة سيتم تنزيلها تلقائيًا"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "الصور"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "المقاطع"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "الملفات"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Voice Messages"
-msgstr ""
+msgstr "الرسائل الصوتية"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr ""
+msgstr "الإشعارات"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr ""
+msgstr "الإشعارات للرسائل الجديدة"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr ""
+msgstr "ارسال الإشعارات"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr ""
+msgstr "ارسال الإشعارات عند التفاعل مع الرسالة"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr ""
+msgstr "الإشعارات في الخلفية"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "طلب الإشعارات والتطبيق مغلق"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "التوافق مع الجوال"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -331,32 +331,36 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"قد ترغب في تغيير هذه الخيارات لتناسب شاشات اللمس والجوالات، القيمة "
+"الإفتراضية لهذه الإعدادات مخصصة لتكون فعالة على الحاسوب."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "رسالة قابلة للتحديد"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr ""
+msgstr "النص القابل للتحديد قد يتعارض من إيماءات اللمس والسحب"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "اضغط \"Enter\" لإرسال الرسالة"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"قد لا تتمكن من ارسال رسائل على لوحة المفاتيح اللمس التي لا تدعم إنشاء سطر "
+"جديد بإختصار \"Control + Enter\""
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "أهلًا بك في فلير"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "تجهيز فلير"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
@@ -377,33 +381,41 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"فلير هو عميل غير رسمي لتطبيق Signal. يُرجى ملاحظة أن فلير غير مستقر وقد تواجه "
+"بعض الأخطاء. إذا كنت تواجه أي أخطاء، فراجع <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues\">متتبع المشكلات</a> وقم بفتح مشكلة جديدة "
+"إذا كنت تواجه مشكلة جديدة. كما يجب أن تعلم أنه نظرًا لكونه تطبيقًا من طرف ثالث،"
+" لا يمكن لفلير ضمان نفس مستوى الأمان والخصوصية الذي توفره تطبيقات Signal "
+"الرسمية. إذا كنت أنت أو شخص بحاجة للتواصل معه بحاجة إلى مستوى عالٍ من الأمان، "
+"فلا تستخدم فلير. راجع <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/"
+"-/blob/master/README.md#security\">ملف README</a> لمزيد من المعلومات."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "التعيين كجهاز رئيسي أو ربط الجهاز؟"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
 msgid "Primary Device"
-msgstr ""
+msgstr "تعيين كجهاز رئيسي"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
 #: data/resources/ui/setup_window.blp:177
 msgid "Link Device"
-msgstr ""
+msgstr "ربط الجهاز"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "التعيين كجهاز رئيسي أو ربط الجهاز؟"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "يمكنك استخدام فلير كجهاز رئيسي او ثانوي."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "الأجهزة المرتبطة (موصى به)"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
@@ -411,10 +423,12 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"يمكن استخدام فلير كتطبيق مرتبط بجهازك الرئيسي، كطريقة عمل تطبيق Signal "
+"الرسمي على الحاسوب. هذا الوضع مجرب ويعمل في الغالب."
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "جهاز رئيسي (معطّل)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -424,12 +438,18 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"يمكن لفلير ان يعمل كجهاز رئيسي، كما في تطبيقات Signal الرسمية على اندرويد و "
+"IOS. هذا الوضع غير مدعوم حاليًا من فلير، رغم ان الإختبارات الأولية تظهر انه "
+"يعمل. إذا كنت ترغب في تجربته، بإمكانك تفعيله من الزر التالي (في حال لم تكن "
+"تعرف طريقة التفعيل، يرجى عدم التفكير بتجربة \"التفعيل كجهاز رئيسي\")."
 
 #: data/resources/ui/setup_window.blp:194
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"للربط كجهاز ثانوي، فلير يحتاج إلى تسمية الجهاز وهذا الإسم سيظهر في التطبيق "
+"الرسمي."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
