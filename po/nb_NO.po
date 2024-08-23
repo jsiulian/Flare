@@ -8,59 +8,58 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2023-07-27 06:07+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
-"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/flare/"
-"flare/nb_NO/>\n"
+"PO-Revision-Date: 2024-08-24 09:37+0000\n"
+"Last-Translator: sunniva <schildkroteskoldpadda@gmail.com>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.7.1-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr "Allan Nordhøy <epost@anotheragency.no>"
+msgstr ""
+"Allan Nordhøy <epost@anotheragency.no>\n"
+"sunniva <turtle@turtle.garden>"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefonnummer"
 
 #: data/resources/ui/channel_info_dialog.blp:66
 msgid "Description"
-msgstr ""
+msgstr "Beskrivelse"
 
 #: data/resources/ui/channel_info_dialog.blp:76
-#, fuzzy
 msgid "Disappearing Messages"
-msgstr "Last inn flere bilder"
+msgstr "Forsvinnende meldinger"
 
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Tilbakestill sesjon"
 
 #: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
-msgstr ""
+msgstr "Tilbakestill sesjon"
 
 #: data/resources/ui/channel_info_dialog.blp:128
-#, fuzzy
 msgctxt "accessibility"
 msgid "Clear Messages"
-msgstr "Last inn flere bilder"
+msgstr "Fjern meldinger"
 
 #: data/resources/ui/channel_info_dialog.blp:149
-#, fuzzy
 msgid "Clear Messages"
-msgstr "Last inn flere bilder"
+msgstr "Fjern meldinger"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "Frakoblet"
 
 #: data/resources/ui/channel_list.blp:20
 msgid "Search"
@@ -73,7 +72,7 @@ msgstr "Søk"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Ingen kanal valgt"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
@@ -131,33 +130,28 @@ msgstr "Send"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "Tilknyttet:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "Sist aktiv:"
 
 #: data/resources/ui/device_info_item.blp:72
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device"
-msgstr "Tilknytt enhet"
+msgstr "Opphev forbindelse"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
-#, fuzzy
 msgid "Clear messages"
-msgstr "Last inn flere bilder"
+msgstr "Fjern meldinger"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
-#, fuzzy
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
-"Dette vil oppheve forbindelsen fra denne enheten og fjerne all lokalt lagret "
-"data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
-"åpner det på ny."
+"Dette vil slette alle meldinger lagret på enheten. Dette vil også lukke "
+"applikasjonen."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
@@ -168,7 +162,7 @@ msgstr "Avbryt"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr "Tøm"
+msgstr "Fjern"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
 #: src/gui/linked_devices_window.rs:121
@@ -181,19 +175,17 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
-"Dette vil oppheve forbindelsen fra denne enheten og fjerne all lokalt lagret "
-"data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
-"åpner det på ny."
+"Dette vil oppheve forbindelsen fra denne enheten og fjerne alle data lagret "
+"på enheten. Dette vil også lukke programmet slik at en ny forbindelse kan "
+"opprettes når applikasjonen er åpnet igjen."
 
 #: data/resources/ui/dialog_unlink.blp:12
-#, fuzzy
 msgid "Unlink and delete all messages"
-msgstr "Opphev lenking og slett alle meldinger"
+msgstr "Opphev forbindelse og slett alle meldinger"
 
 #: data/resources/ui/dialog_unlink.blp:13
-#, fuzzy
 msgid "Unlink but keep messages"
-msgstr "Opphev lenking, men behold meldinger"
+msgstr "Opphev forbindelse, men behold meldinger"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
@@ -201,7 +193,7 @@ msgstr "Feil"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr "Du bør rapportere denne feilen."
+msgstr "Du burde rapportere denne feilen hvis mulig."
 
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
 #: data/resources/ui/submit_captcha_dialog.blp:28
@@ -210,30 +202,26 @@ msgstr "Lukk"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "Rapportér"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
-#, fuzzy
 msgid "Linked Devices"
-msgstr "Tilknytt enhet"
+msgstr "Tilknyttede enheter"
 
 #: data/resources/ui/linked_devices_window.blp:31
-#, fuzzy
 msgid "Add Linked Device"
-msgstr "Tilknytt enhet"
+msgstr "Legg til tilknyttet enhet"
 
 #: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Vennligst oppgi URL-en til enheten som skal tilknyttes."
 
 #: data/resources/ui/linked_devices_window.blp:42
-#, fuzzy
 msgid "Device URL"
-msgstr "Enhetsnavn"
+msgstr "Enhets URL"
 
 #: data/resources/ui/linked_devices_window.blp:51
-#, fuzzy
 msgid "Add Device"
 msgstr "Tilknytt enhet"
 
@@ -243,23 +231,23 @@ msgstr "Svar"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "Kopiér"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "Lagre som…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "Åpne med…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
-msgstr ""
+msgstr "Ny samtale"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
@@ -267,21 +255,20 @@ msgid "Menu"
 msgstr "Meny"
 
 #: data/resources/ui/new_channel_dialog.blp:35
-#, fuzzy
 msgid "Search Contacts"
-msgstr "Velg en kanal"
+msgstr "Søk etter kontakter"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Liste kontakter etter:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Fornavn"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Etternavn"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -289,60 +276,55 @@ msgstr "Generelt"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "Last ned vedlegg automatisk"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "De valgte vedleggstypene skal automatisk lastes ned"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Bilder"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Videoer"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Filer"
 
 #: data/resources/ui/preferences_window.blp:26
-#, fuzzy
 msgid "Voice Messages"
-msgstr "Last inn flere bilder"
+msgstr "Talemeldinger"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr "Merknader"
+msgstr "Varslinger"
 
 #: data/resources/ui/preferences_window.blp:32
-#, fuzzy
 msgid "Notifications for new messages"
-msgstr "Last inn flere bilder"
+msgstr "Varslinger for nye meldinger"
 
 #: data/resources/ui/preferences_window.blp:35
-#, fuzzy
 msgid "Send Notifications"
-msgstr "Send merknader"
+msgstr "Send varslinger"
 
 #: data/resources/ui/preferences_window.blp:39
-#, fuzzy
 msgid "Send Notifications on Reactions"
-msgstr "Send merknader"
+msgstr "Send reageringsvarslinger"
 
 #: data/resources/ui/preferences_window.blp:44
-#, fuzzy
 msgid "Background Notifications"
-msgstr "Send merknader"
+msgstr "Varslinger i bakgrunnen"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "Hent varsler mens appen er lukket"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Mobilkompatibilitet"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -350,39 +332,46 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Disse innstillingene bør endres for å forbedre grensesnittet på enheter med "
+"berøringsskjermer og telefoner. De standarde verdiene av disse "
+"innstillingene er best til skrivebordsenheter."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Valgbar meldingstekst"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
+"Valgbar tekst kan forhindre skrolling og andre bevegelser på "
+"berøringsskjermer"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "Trykk på «Retur» for å sende melding"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"Det kan være umulig å sende meldinger med flere linjer med "
+"berøringstastaturer som ikke tillater «Ctrl + Retur»"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Velkommen til Flare"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Opprett Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #: data/resources/ui/setup_window.blp:53
 msgid ""
@@ -396,16 +385,24 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare er en uoffisiell Signal-klient. NB: Flare er ikke stabil og feil bør "
+"forventes. Dersom du støtter på en feil, burde du sjekke <a href=\"https"
+"://gitlab.com/schmiddi-on-mobile/flare/-/issues\">feilsporeren til "
+"prosjekten</a>, og åpne en feilrapport (en «issue») dersom du har støttet på "
+"en ny feil. Merk også godt at siden Flare er en tredjepartsapplikasjon, kan "
+"Flare ikke garantere like god sikkerhet og trygghet som de offisielle Signal-"
+"applikasjonene. Dersom du eller noen som du snakker med trenger en stor grad "
+"av sikkerhet, skal du ikke bruke Flare, jf. <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README-en</a>."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Opprett primær enhet eller tilknytt enhet?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
-#, fuzzy
 msgid "Primary Device"
-msgstr "Tilknytt enhet"
+msgstr "Primær enhet"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
@@ -415,15 +412,15 @@ msgstr "Tilknytt enhet"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "Primær enhet eller tilknytt enhet?"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Flare kan brukes som enten en primær enhet eller en sekundær enhet."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Tilknyttet enhet (Anbefalt)"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
@@ -431,10 +428,13 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare kan være en applikasjon som er knyttet til din primære enhet, slik som "
+"den offisielle Signal Desktop kan. Denne modusen har blitt testet grundigere "
+"og fungerer vanligvis."
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Primær enhet (Avslått)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -444,12 +444,20 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare kan fungere som en primær enhet, slik som de offisielle Signal-"
+"applikasjonene på Android eller IOS. Denne modusen er for øyeblikket ikke "
+"støttet av Flare, til tross for at innledende tester påviser at det "
+"fungerer. Dersom du er villig på å teste den, kan du aktivere knappen "
+"nedenfor (dersom du ikke vet hvordan det skal gjøres, burde du ikke engang "
+"tenke om å prøve støtte for primær enhet-modusen)."
 
 #: data/resources/ui/setup_window.blp:194
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"For tilknytting som sekundær enhet trenger Flare et enhetsnavn som skal "
+"vises i den offisielle applikasjonen."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
@@ -458,12 +466,12 @@ msgstr "Enhetsnavn"
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "Utvikleralternativer"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
-msgstr ""
+msgstr "Signal-servere"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -472,41 +480,45 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"Den neste siden skal vise en QR-kode som må skannes fra den primære enheten. "
+"NB: Du har en tidsramme av omtrent én minutt til skanning av koden, så burde "
+"du forberede din offisielle applikasjon til skanning av QR-koden."
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
-#, fuzzy
 msgid "Link device"
 msgstr "Tilknytt enhet"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
-msgstr ""
+msgstr "Skann koden"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
+"Skann denne koden med en annen Signal-applikasjon som er logget inn med din "
+"konto."
 
 #: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
-msgstr ""
+msgstr "Lenk uten skanning"
 
 #: data/resources/ui/setup_window.blp:280
-#, fuzzy
 msgid "Manual linking"
-msgstr "Sammenkobling"
+msgstr "Manuell tilknytting"
 
 #: data/resources/ui/setup_window.blp:296
-#, fuzzy
 msgid "Manual Linking"
-msgstr "Sammenkobling"
+msgstr "Manuell tilknytting"
 
 #: data/resources/ui/setup_window.blp:297
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Dersom enheten din ikke kan skanne QR-koden, kan du taste inn lenken oppgitt "
+"her for hånd"
 
 #: data/resources/ui/setup_window.blp:308
 #, fuzzy
@@ -515,7 +527,7 @@ msgstr "Kopier til utklippstavlen"
 
 #: data/resources/ui/setup_window.blp:341
 msgid "Continue"
-msgstr ""
+msgstr "Fortsett"
 
 #: data/resources/ui/setup_window.blp:358
 msgid ""
@@ -527,33 +539,42 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"Til registrering som primær enhet trenger Flare ditt telefonnummer og en "
+"fullført captcha. Vennligst oppgi telefonnummeret i internasjonalt E.164-"
+"format, som inkluderer «+»-en før nummeret og landsnummeret. Captchaen kan "
+"bli fullført på <a href=\"https://signalcaptchas.org/registration/generate."
+"html\">denne siden</a>: når du har fullført den, skal du kopiere «Open "
+"Signal»-lenken og lim den inn nedenfor. NB: Denne captchaen er kun gyldig i "
+"omtrent én minutt: vær rask!"
 
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/setup_window.blp:386
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"Etter at du har sendt inn disse opplysninger, skal du få en SMS fra Signal "
+"med en veriferingskode. Angi denne koden på den neste siden."
 
 #: data/resources/ui/setup_window.blp:395
 #: data/resources/ui/setup_window.blp:403
 #: data/resources/ui/setup_window.blp:420
 #: data/resources/ui/setup_window.blp:445
 msgid "Confirm"
-msgstr ""
+msgstr "Bekreft"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Angi veriferingskode som du har mottatt her."
 
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
 msgid "Finished"
-msgstr ""
+msgstr "Ferdig opprettet"
 
 #: data/resources/ui/setup_window.blp:494
 msgid ""
@@ -561,10 +582,13 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare er nesten klar til bruk, den venter på at kontaktene dine skal "
+"synkroniseres. Dette kan ta en liten stund; du kan begynne å bruke Flare "
+"etter at de er synkroniserte. Noen få notater før du begynner å bruke Flare:"
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "Visste feiler"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
