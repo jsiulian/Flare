@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-08-24 09:37+0000\n"
+"PO-Revision-Date: 2024-08-25 10:09+0000\n"
 "Last-Translator: sunniva <schildkroteskoldpadda@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/nb_NO/>\n"
@@ -481,8 +481,8 @@ msgid ""
 "QR code."
 msgstr ""
 "Den neste siden skal vise en QR-kode som må skannes fra den primære enheten. "
-"NB: Du har en tidsramme av omtrent én minutt til skanning av koden, så burde "
-"du forberede din offisielle applikasjon til skanning av QR-koden."
+"NB: Du har en tidsramme av omtrent ett minutt til skanning av koden, så "
+"burde du forberede din offisielle applikasjon til skanning av QR-koden."
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
@@ -521,7 +521,6 @@ msgstr ""
 "her for hånd"
 
 #: data/resources/ui/setup_window.blp:308
-#, fuzzy
 msgid "Copy to clipboard"
 msgstr "Kopier til utklippstavlen"
 
@@ -545,7 +544,7 @@ msgstr ""
 "bli fullført på <a href=\"https://signalcaptchas.org/registration/generate."
 "html\">denne siden</a>: når du har fullført den, skal du kopiere «Open "
 "Signal»-lenken og lim den inn nedenfor. NB: Denne captchaen er kun gyldig i "
-"omtrent én minutt: vær rask!"
+"omtrent ett minutt: vær rask!"
 
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -600,10 +599,19 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Vennligst ikke send meldinger mens meldingegenskaper blir fortsatt mottatt "
+"av Flare, slik at alle egenskaper blir mottatt. Vi forsøker å fikse denne "
+"feilen. Å sende meldinger til kontakter som du ikke ennå har mottatt "
+"meldinger fra kan attpåtil føre til rate-begrensing. For å se en liste over "
+"alle kjente feil i programmet, se <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\""
+">feilsporeren</a>.<!-- NB: Denne strengen er veldig uklar. Jeg har oversatt "
+"den slik at det betyr noe, men jeg har antatt en betydning fra den "
+"opprinnelige strengen.-->"
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: data/resources/ui/setup_window.blp:523
 msgid ""
@@ -611,9 +619,11 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"Vil du sende tilbakemeldinger om Flare, eller bare snakke litt? <a href="
+"\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix-rommet</a> vårt er "
+"åpent til alle."
 
 #: data/resources/ui/shortcuts.blp:11
-#, fuzzy
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Generelt"
@@ -621,28 +631,27 @@ msgstr "Generelt"
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr "Vis snarveier"
+msgstr "Vis tastatursnarveier"
 
 #: data/resources/ui/shortcuts.blp:19
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr "Innstillinger"
+msgstr "Åpne innstillinger"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr "Gå til «Om»-siden"
+msgstr "Åpne «Om»-siden"
 
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr "Åpne menyen"
+msgstr "Åpne hovedmeny"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Lukk vinduet"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
@@ -652,13 +661,12 @@ msgstr "Kanaler"
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr "Gå til kanal 1…9"
+msgstr "Åpne kanal 1…9"
 
 #: data/resources/ui/shortcuts.blp:48
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr "Velg en kanal"
+msgstr "Søk etter kanaler"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
@@ -668,17 +676,17 @@ msgstr "Last opp vedlegg"
 #: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr "Fokuser på neste tekstinntastingsboks"
+msgstr "Fokuser på tekstinntastingsboksen"
 
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr "Last inn flere bilder"
+msgstr "Last inn flere meldinger"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Send inn captcha"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -689,47 +697,49 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Send inn en captcha-utfordring. Tokenen kan hentes fra feilmeldingen som ble "
+"viset av Flare. Captchaen må fullføres <a href=\"https://signalcaptchas.org/"
+"challenge/generate.html\">på denne nettsiden</a> og «Open Signal»-lenken må "
+"limes inn her. NB: Captchaen er gyldig i kun ett minutt."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "Send inn"
 
 #: data/resources/ui/text_entry.blp:13
-#, fuzzy
 msgid "Message"
-msgstr "Meldingsinndata"
+msgstr "Melding"
 
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Sett inn en emoji"
 
 #: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Sett inn emoji"
 
 #: data/resources/ui/window.blp:25
-#, fuzzy
 msgid "Channel list"
-msgstr "Kanaler"
+msgstr "Kanalliste"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Legg til samtale"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "Samtale"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "skriver"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
@@ -737,12 +747,11 @@ msgstr "Innstillinger"
 
 #: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Synkronisér kontakter"
 
 #: data/resources/ui/window.blp:181
-#, fuzzy
 msgid "Keybindings"
-msgstr "Hurtigtaster"
+msgstr "Tastatursnarveier"
 
 #: data/resources/ui/window.blp:186
 msgid "About"
@@ -750,7 +759,7 @@ msgstr "Om"
 
 #: data/resources/ui/window.blp:191
 msgid "Quit"
-msgstr ""
+msgstr "Avslutt"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
@@ -758,7 +767,7 @@ msgstr "Selvpåminnelse"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Ukjent kontakt"
 
 #: src/backend/manager.rs:442
 msgid "You"
@@ -766,38 +775,35 @@ msgstr "Deg"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "Innkommende anrop"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "Utgående anrop"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "Anrop startet"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr ""
+msgstr "Anrop avsluttet"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
-msgstr ""
+msgstr "Anrop avvist"
 
 #: src/backend/message/call_message.rs:105
-#, fuzzy
 msgid "Unanswered call"
-msgstr "Besvarte et anrop."
+msgstr "Ubesvart anrop"
 
 #: src/backend/message/reaction_message.rs:72
-#, fuzzy
 msgid "{sender} reacted {emoji} to a message."
-msgstr "Last inn flere bilder"
+msgstr "{sender} reagerte {emoji} til en melding."
 
 #: src/backend/message/reaction_message.rs:80
-#, fuzzy
 msgid "Reacted {emoji} to a message."
-msgstr "Last inn flere bilder"
+msgstr "Reagerte {emoji} til en melding."
 
 #: src/backend/message/text_message.rs:381
 msgid "Sent an image"
@@ -828,14 +834,12 @@ msgid "I/O Error."
 msgstr "Inn/-utdatafeil."
 
 #: src/error.rs:96
-#, fuzzy
 msgid "There does not seem to be a connection to the internet available."
-msgstr "Mangler tilkobling til Internett."
+msgstr "Mangler internettilkobling."
 
 #: src/error.rs:101
-#, fuzzy
 msgid "Something glib-related failed."
-msgstr "Kunne ikke sende melding."
+msgstr "Noe gikk galt med glib."
 
 #: src/error.rs:106
 msgid "The communication with Libsecret failed."
@@ -866,10 +870,9 @@ msgid "Receiving a message failed."
 msgstr "Kunne ikke motta melding."
 
 #: src/error.rs:131
-#, fuzzy
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
-msgstr "Noe uventet gikk galt med Signal-bakenden. Prøv igjen senere."
+msgstr "Noe uventet gikk galt med Signal-serveren. Prøv igjen senere."
 
 #: src/error.rs:136
 msgid "The application seems to be misconfigured."
@@ -892,117 +895,106 @@ msgid "The database path at {} is no folder."
 msgstr "Databasestien {} er ikke en mappe."
 
 #: src/error.rs:168
-#, fuzzy
 msgid "Please restart the application with logging and report this issue."
-msgstr "Start programmet på ny etter at dette vinduet er lukket."
+msgstr ""
+"Vennligst start programmet på nytt med logging påslått og rapportér denne "
+"feilen."
 
 #: src/gui/channel_info_dialog.rs:197
 msgid "Never"
-msgstr ""
+msgstr "Aldri"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Utkast"
 
 #: src/gui/linked_devices_window.rs:116
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device?"
-msgstr "Tilknytt enhet"
+msgstr "Fjern enhet?"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Er du sikker på at du vil fjerne tilknytting til {}?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "Se etter nye meldinger mens lukket"
 
 #: src/gui/preferences_window.rs:99
 msgid "Background permission"
-msgstr ""
+msgstr "Bakgrunnstillatelse"
 
 #: src/gui/preferences_window.rs:100
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "Bruk innstillinger for å heve tillatelser"
 
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Produksjon"
 
 #: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Staging"
 
 #: src/gui/setup_window.rs:132
-#, fuzzy
 msgid "Copied to clipboard"
-msgstr "Kopier til utklippstavlen"
+msgstr "Kopierte til utklippstavlen"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:102 src/gui/utility.rs:126
-#, fuzzy
 msgid "%H:%M"
-msgstr "%H %M"
+msgstr "%H.%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:105
-#, fuzzy
 msgid "%Y-%m-%d %H:%M"
-msgstr "%d %m %y. %H %M"
+msgstr "%e. %b %Y %H.%M"
 
 #: src/gui/utility.rs:138
 msgid "Today"
-msgstr ""
+msgstr "I dag"
 
 #: src/gui/utility.rs:141
 msgid "Yesterday"
-msgstr ""
+msgstr "I går"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
-#, fuzzy
 msgid "%Y-%m-%d"
-msgstr "%d %m %y. %H %M"
+msgstr "%e. %b %Y"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:151
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:159
-#, fuzzy
 msgid "Attachment"
 msgstr "Vedlegg"
 
 #: src/gui/window.rs:304 src/gui/window.rs:310
-#, fuzzy
 msgid "Remove Messages"
-msgstr "Last inn flere bilder"
+msgstr "Fjern meldinger"
 
 #: src/gui/window.rs:305
-#, fuzzy
 msgid "This will remove all locally stored messages from this channel"
-msgstr ""
-"Dette vil oppheve forbindelsen fra denne enheten og fjerne all lokalt lagret "
-"data. Dette vil også lukke programmet slik at det kan forbindes igjen når du "
-"åpner det på ny."
+msgstr "Dette skal fjerne alle meldinger lagret på enheten fra denne kanalen."
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Snakke med vennene dine på Signal"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "messaging;chat;signal;samtale;snakke;meldinger;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
@@ -1011,6 +1003,9 @@ msgid ""
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
+"Flare er en uoffisiell app for Signal. Den blir fortsatt aktivt utviklet og "
+"inneholder ikke alle funksjonene som de offisielle Signal-appene har. Flere "
+"opplysninger kan finnes på Flares «feature roadmap»."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -1020,69 +1015,74 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"NB: Å bruke denne applikasjonen, skal nok forverre sikkerheten din "
+"sammenlignet med å bare bruke offisielle Signal-apper. Bruk forsiktig når du "
+"behandler sensitive opplysninger. Jamfør README-en til prosjekten for flere "
+"sikkerhetsopplysninger."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:609
-#, fuzzy
 msgid "Overview of the application"
-msgstr "En del av programmet krasjet."
+msgstr "Oversikt av applikasjonen"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Vindubredde"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Vinduhøyde"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Maksimere vinduet"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Enhetsnavn når Flare blir tilknyttet. Dersom dette blir endret, må "
+"applikasjon tilknyttes på nytt."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Last ned bilder automatisk"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Last ned videoer automatisk"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
-msgstr ""
+msgstr "Last ned talemeldinger automatisk"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "Last ned filer automatisk"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
-msgstr "Send merknader"
+msgstr "Send varslinger"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Kjør i bakgrunnen mens vinduet er lukket"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Send varslinger når reageringer mottas"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Kan meldinger velges"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Send melding når «Retur» trykkes"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
-msgstr ""
+msgstr "Hvordan kontakter skal sorteres, f.eks. etter fornavn eller etternavn"
 
 #, fuzzy
 #~ msgid "Linking device"
