@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
 "PO-Revision-Date: 2024-08-25 10:09+0000\n"
-"Last-Translator: sunniva <schildkroteskoldpadda@gmail.com>\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -549,7 +549,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr "Captcha"
+msgstr "CAPTCHA"
 
 #: data/resources/ui/setup_window.blp:386
 msgid ""
@@ -587,7 +587,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr "Visste feiler"
+msgstr "Kjente feil"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
