@@ -33,7 +33,7 @@ pub mod imp {
     use adw::{AlertDialog, ResponseAppearance};
     use glib::subclass::InitializingObject;
     use gtk::gio::ListStore;
-    use gtk::{CompositeTemplate, NoSelection, SignalListItemFactory, Widget};
+    use gtk::CompositeTemplate;
 
     use url::Url;
 
@@ -50,7 +50,7 @@ pub mod imp {
         entry_device_url: TemplateChild<adw::EntryRow>,
 
         #[template_child]
-        list_devices: TemplateChild<gtk::ListView>,
+        list_devices: TemplateChild<gtk::ListBox>,
         model_devices: RefCell<ListStore>,
 
         #[property(get, set, construct_only, type = Manager)]
@@ -75,47 +75,43 @@ pub mod imp {
     #[gtk::template_callbacks]
     impl LinkedDevicesWindow {
         pub(super) async fn setup(&self) {
-            self.list_devices
-                .set_model(Some(&NoSelection::new(Some::<gio::ListStore>(
-                    self.model_devices.borrow().clone(),
-                ))));
-
-            let factory = SignalListItemFactory::new();
             let obj = self.obj();
-            factory.connect_setup(clone!(
-                #[weak]
-                obj,
-                move |_, object| {
-                    let list_item = object.downcast_ref::<gtk::ListItem>().unwrap();
-                    let device_item = DeviceInfoItem::new();
-                    list_item.set_child(Some(&device_item));
-                    list_item.property_expression("item").bind(
-                        &device_item,
-                        "device-info",
-                        Widget::NONE,
-                    );
 
-                    device_item.connect_local(
-                        "unlink",
-                        false,
-                        clone!(
-                            #[weak]
-                            obj,
-                            #[weak]
-                            device_item,
-                            #[upgrade_or_default]
-                            move |_| {
-                                if let Some(device) = device_item.device_info() {
-                                    obj.imp().unlink(&device);
+            self.list_devices.bind_model(
+                Some(&*self.model_devices.borrow()),
+                clone!(
+                    #[weak]
+                    obj,
+                    #[upgrade_or_panic]
+                    move |item| {
+                        let device_item = DeviceInfoItem::new();
+                        device_item.set_device_info(
+                            item.dynamic_cast_ref::<DeviceInfo>()
+                                .expect("Device list to contain DeviceInfo items"),
+                        );
+
+                        device_item.connect_local(
+                            "unlink",
+                            false,
+                            clone!(
+                                #[weak]
+                                obj,
+                                #[weak]
+                                device_item,
+                                #[upgrade_or_default]
+                                move |_| {
+                                    if let Some(device) = device_item.device_info() {
+                                        obj.imp().unlink(&device);
+                                    }
+                                    None
                                 }
-                                None
-                            }
-                        ),
-                    );
-                }
-            ));
+                            ),
+                        );
 
-            self.list_devices.set_factory(Some(&factory));
+                        device_item.into()
+                    }
+                ),
+            );
 
             self.reload().await;
         }

@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Chores
+
+- Updated to GNOME 47.
+- Improved linked devices window UI.
+- Improved channel information UI.
+
 ## [0.15.2] - 2024-09-26
 
 ### HOTFIX

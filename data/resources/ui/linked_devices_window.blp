@@ -2,52 +2,81 @@ using Gtk 4.0;
 using Adw 1;
 
 template $FlLinkedDevicesWindow: Adw.Dialog {
-  can-focus: true;
-  content-height: 600;
-  content-width: 450;
+    can-focus: true;
+    content-height: 450;
+    content-width: 400;
 
-  Adw.ToolbarView {
-    [top]
-    Adw.HeaderBar {
-      title-widget: Adw.WindowTitle {
-        title: _("Linked Devices");
-      };
+    Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+            title-widget: Adw.WindowTitle {
+                title: _("Linked Devices");
+            };
+        }
 
-      Gtk.Button {
-        icon-name: "list-add-symbolic";
-        clicked => $handle_add_linked_device() swapped;
-      }
+        Gtk.ScrolledWindow {
+            hscrollbar-policy: never;
+
+            Gtk.Box {
+                orientation: vertical;
+                
+                Gtk.ListBox {
+                    styles [
+                        "boxed-list"
+                    ]
+
+                    selection-mode: none;
+                    margin-top: 6;
+                    margin-bottom: 6;
+                    margin-start: 6;
+                    margin-end: 6;
+
+                    Adw.ButtonRow {
+                        activated => $handle_add_linked_device() swapped;
+
+                        title: _("Link New Device");
+                        end-icon-name: "go-next-symbolic";
+                    }
+                }
+
+                Gtk.ListBox list_devices {
+                    styles [
+                        "boxed-list"
+                    ]
+
+                    selection-mode: none;
+                    margin-top: 6;
+                    margin-bottom: 6;
+                    margin-start: 6;
+                    margin-end: 6;
+                    valign: start;
+                }
+            }
+        }
     }
-
-    Gtk.ScrolledWindow {
-      hscrollbar-policy: never;
-
-      Gtk.ListView list_devices {}
-    }
-  }
 }
 
 Adw.AlertDialog add_device_dialog {
-  heading: _("Add Linked Device");
-  body: _("Please insert the URL of the device to link.");
-  default-response: "cancel";
-  close-response: "cancel";
+    heading: _("Add Linked Device");
+    body: _("Please insert the URL of the device to link.");
+    default-response: "cancel";
+    close-response: "cancel";
 
-  Gtk.ListBox {
-    styles [
-      "boxed-list"
-    ]
+    Gtk.ListBox {
+        styles [
+            "boxed-list"
+        ]
 
-    Adw.EntryRow entry_device_url {
-      title: _("Device URL");
-      changed => $handle_url_entry_changed() swapped;
+        Adw.EntryRow entry_device_url {
+            title: _("Device URL");
+            changed => $handle_url_entry_changed() swapped;
+        }
     }
-  }
 
-  response => $handle_add_linked_device_response() swapped;
+    response => $handle_add_linked_device_response() swapped;
 
-  responses [
-    cancel: _("Cancel"),
-    add-device: _("Add Device") suggested disabled,
-  ]
+    responses [
+        cancel: _("Cancel"),
+        add-device: _("Add Device") suggested disabled,
+    ]
 }
