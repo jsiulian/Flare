@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-08-30 03:09+0000\n"
+"PO-Revision-Date: 2024-08-31 09:09+0000\n"
 "Last-Translator: maboroshin <maboroshin@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ja/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.7.1-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -745,8 +745,9 @@ msgid "Quit"
 msgstr "終了"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
+#, fuzzy
 msgid "Note to self"
-msgstr ""
+msgstr "自分へのメモ"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
@@ -900,18 +901,19 @@ msgid "Background permission"
 msgstr "バックグラウンドの権限"
 
 #: src/gui/preferences_window.rs:100
+#, fuzzy
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "設定を使い権限を除去"
 
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "実稼働"
 
 #: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "ステージング"
 
 #: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
