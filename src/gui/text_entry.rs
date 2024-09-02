@@ -44,7 +44,7 @@ pub mod imp {
     use glib::subclass::{InitializingObject, Signal};
     use glib::{Priority, Propagation};
     use gtk::subclass::widget::WidgetImpl;
-    use gtk::{CompositeTemplate, TemplateChild, TextView};
+    use gtk::{CompositeTemplate, InputHints, TemplateChild, TextView};
 
     use std::cell::Cell;
     use std::marker::PhantomData;
@@ -201,6 +201,11 @@ pub mod imp {
 
                 adapter.set_enabled(true);
             }
+
+            // Set input hints
+            // For some reason, setting it via blueprint only sets the first hint, but not both at once.
+            self.view
+                .set_input_hints(InputHints::WORD_COMPLETION | InputHints::SPELLCHECK);
         }
 
         fn signals() -> &'static [Signal] {
