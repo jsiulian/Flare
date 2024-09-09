@@ -63,16 +63,6 @@ If you plan to contribute code, please also review the [developer documentation]
 
 This project follows [GNOME's Code of Conduct](https://conduct.gnome.org/).
 
-## Donate
-
-Please consider donating to [Signal](https://signal.org/donate/) first as they run the servers in use and therefore have a high cost of actually providing this free service.
-
-After you have already donated to them and still have money left, consider donating to this Monero address:
-
-```
-86oyawuujDNVpT7jjYghhPc8xZjGB1DwQ3NX4mVhqxXZdRXjMEq7SWU3spD8L8stmYgEWV5BrAdY7X1uCKzRdrYcDwLt8cB
-```
-
 ## Security
 
 To my knowledge, most data (see below) this application uses (contacts, linking credentials, ...) are stored encrypted in `~/.local/share/flare` (path will be different in Flatpaks). Messages sent and received by this application are stored equivalently.
