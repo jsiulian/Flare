@@ -206,55 +206,50 @@ pub mod imp {
             }
 
             let weeks = if time >= 60 * 60 * 24 * 7 {
-                Some(gettextrs::ngettext!(
-                    "{} week",
-                    "{} weeks",
-                    time / (60 * 60 * 24 * 7),
-                    time / (60 * 60 * 24 * 7)
-                ))
+                Some(
+                    gettextrs::ngettext("{} week", "{} weeks", time / (60 * 60 * 24 * 7))
+                        .replace("{}", &(time / (60 * 60 * 24 * 7)).to_string()),
+                )
             } else {
                 None
             };
             let time = time % (60 * 60 * 24 * 7);
 
             let days = if time >= 60 * 60 * 24 {
-                Some(gettextrs::ngettext!(
-                    "{} day",
-                    "{} days",
-                    time / (60 * 60 * 24),
-                    time / (60 * 60 * 24)
-                ))
+                Some(
+                    gettextrs::ngettext("{} day", "{} days", time / (60 * 60 * 24))
+                        .replace("{}", &(time / (60 * 60 * 24)).to_string()),
+                )
             } else {
                 None
             };
             let time = time % (60 * 60 * 24);
 
             let hours = if time >= 60 * 60 {
-                Some(gettextrs::ngettext!(
-                    "{} hour",
-                    "{} hours",
-                    time / (60 * 60),
-                    time / (60 * 60)
-                ))
+                Some(
+                    gettextrs::ngettext("{} hour", "{} hours", time / (60 * 60))
+                        .replace("{}", &(time / (60 * 60)).to_string()),
+                )
             } else {
                 None
             };
             let time = time % (60 * 60);
 
             let minutes = if time >= 60 {
-                Some(gettextrs::ngettext!(
-                    "{} minute",
-                    "{} minutes",
-                    time / 60,
-                    time / 60
-                ))
+                Some(
+                    gettextrs::ngettext("{} minute", "{} minutes", time / 60)
+                        .replace("{}", &(time / 60).to_string()),
+                )
             } else {
                 None
             };
             let time = time % 60;
 
             let seconds = if time != 0 {
-                Some(gettextrs::ngettext!("{} second", "{} seconds", time, time))
+                Some(
+                    gettextrs::ngettext("{} second", "{} seconds", time)
+                        .replace("{}", &time.to_string()),
+                )
             } else {
                 None
             };

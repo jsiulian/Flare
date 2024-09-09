@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use gtk::glib;
 use libsignal_service as lss;
 use lss::push_service::ServiceError;
@@ -7,11 +9,22 @@ const FAILED_TO_LOOK_UP_ADDRESS: &str = "failed to lookup address information";
 const NETWORK_UNREACHABLE: &str = " Network is unreachable";
 type PresageError = presage::Error<presage_store_sled::SledStoreError>;
 
-#[derive(Debug, err_derive::Error)]
+#[derive(Debug)]
 pub enum ConfigurationError {
-    #[error(display = "Provided path is not a folder")]
     DbPathNoFolder(std::path::PathBuf),
 }
+
+impl Display for ConfigurationError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            ConfigurationError::DbPathNoFolder(p) => {
+                writeln!(f, "provided path is not a folder {}", p.display())
+            }
+        }
+    }
+}
+
+impl std::error::Error for ConfigurationError {}
 
 #[derive(Debug)]
 pub enum ApplicationError {
