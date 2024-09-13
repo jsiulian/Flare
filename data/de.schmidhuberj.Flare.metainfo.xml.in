@@ -38,6 +38,24 @@
   </description>
 
   <releases>
+    <release version="v0.15.1" date="2024-09-13">
+      <description translate="no">
+        <p>Chores</p>
+        <ul>
+          <li>Update dependencies.</li>
+          <li>Add more checks to CI.</li>
+          <li>Fixed advisory errors.</li>
+        </ul>
+        <p>Added</p>
+        <ul>
+          <li>Text entry input hints.</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+          <li>Potential usage memory improvements.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.15.0" date="2024-07-22">
       <description translate="no">
         <p>HOTFIX</p>

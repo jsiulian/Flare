@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.1] - 2024-09-13
+
 ### Added
 
 - Text entry input hints.
@@ -594,7 +596,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.0...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.1...master
+[0.15.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.0...0.15.1
 [0.15.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.14.3...0.15.0
 [0.14.3]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.14.2...0.14.3
 [0.14.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.14.1...0.14.2

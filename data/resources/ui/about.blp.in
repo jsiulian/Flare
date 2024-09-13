@@ -14,5 +14,5 @@ Adw.AboutDialog about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>HOTFIX</p> <ul> <li>Linking the device being broken (fixed upstream).</li> </ul> <p>Added</p> <ul> <li>Environmental variable to enable primary device mode option.</li> <li>Linked devices window on primary device mode.</li> </ul> <p>Fixes</p> <ul> <li>No notifications being sent when Flare is in the background for the last active channel.</li> <li>Fix not working on systems without login1 D-Bus interface.</li> <li>Primary device mode not working.</li> </ul>";
+  release-notes: "<p>Added</p> <ul> <li>Text entry input hints.</li> </ul> <p>Fixed</p> <ul> <li>Potential usage memory improvements.</li> </ul> <p>Chores</p> <ul> <li>Update dependencies.</li> <li>Add more checks to CI.</li> <li>Fixed advisory errors.</li> </ul>";
 }
