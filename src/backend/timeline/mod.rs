@@ -4,7 +4,7 @@ use crate::prelude::*;
 
 pub use timeline_item::*;
 
-const TRIM_SIZE: usize = 10;
+const TRIM_SIZE: usize = 1;
 
 glib::wrapper! {
     /// The timeline stores ordered [TimelineItem]s (i.e. [Message](crate::backend::Message)s)

@@ -23,7 +23,7 @@ use crate::backend::message::{DisplayMessage, DisplayMessageExt};
 use crate::{dbus::Feedbackd, gspawn, tspawn, ApplicationError};
 
 const MESSAGE_BOUND: usize = 100;
-const MESSAGES_INITIAL_LOAD: usize = 10;
+const MESSAGES_INITIAL_LOAD: usize = 1;
 const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
 const SCHEMA_ATTRIBUTE: &str = "xdg:schema";
 const ATTRIBUTE_PASSWORD: (&str, &str) = ("type", "password");
