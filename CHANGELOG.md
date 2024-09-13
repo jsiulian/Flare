@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Text entry input hints.
+
+### Fixed
+
+- Potential usage memory improvements.
+
+### Chores
+
+- Update dependencies.
+- Add more checks to CI.
+- Fixed advisory errors.
+
 ## [0.15.0] - 2024-07-22
 
 ### HOTFIX
