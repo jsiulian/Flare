@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-04-13 18:01+0000\n"
-"Last-Translator: fedetrifo06 <fefe.trifo@gmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/it/>\n"
+"PO-Revision-Date: 2024-09-22 21:16+0000\n"
+"Last-Translator: Jimmy Scionti <jimmy.scionti@gmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -128,17 +128,15 @@ msgstr "Invia"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "Collegato:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "Ultimo attivo:"
 
 #: data/resources/ui/device_info_item.blp:72
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device"
-msgstr "Collega il dispositivo"
+msgstr "Scollegare dispositivo"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
