@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-08-25 10:09+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"PO-Revision-Date: 2024-09-22 21:16+0000\n"
+"Last-Translator: sunniva <schildkroteskoldpadda@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7.1-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -193,7 +193,7 @@ msgstr "Feil"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr "Du burde rapportere denne feilen hvis mulig."
+msgstr "Vennligst vurder å rapportere denne feilen."
 
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
 #: data/resources/ui/submit_captcha_dialog.blp:28
@@ -1005,7 +1005,7 @@ msgid ""
 msgstr ""
 "Flare er en uoffisiell app for Signal. Den blir fortsatt aktivt utviklet og "
 "inneholder ikke alle funksjonene som de offisielle Signal-appene har. Flere "
-"opplysninger kan finnes på Flares «feature roadmap»."
+"opplysninger kan finnes på Flares fremtidskart over funksjoner."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
