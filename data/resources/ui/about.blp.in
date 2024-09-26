@@ -14,5 +14,5 @@ Adw.AboutDialog about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>Added</p> <ul> <li>Text entry input hints.</li> </ul> <p>Fixed</p> <ul> <li>Potential usage memory improvements.</li> </ul> <p>Chores</p> <ul> <li>Update dependencies.</li> <li>Add more checks to CI.</li> <li>Fixed advisory errors.</li> </ul>";
+  release-notes: "<p>HOTFIX</p> <ul> <li>Fixed linking errors.</li> </ul> <p>Fixed</p> <ul> <li>Metainfo not up-to-date.</li> </ul>";
 }

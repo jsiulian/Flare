@@ -38,6 +38,18 @@
   </description>
 
   <releases>
+    <release version="v0.15.2" date="2024-09-26">
+      <description translate="no">
+        <p>HOTFIX</p>
+        <ul>
+          <li>Fixed linking errors.</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+          <li>Metainfo not up-to-date.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.15.1" date="2024-09-13">
       <description translate="no">
         <p>Chores</p>
