@@ -502,6 +502,7 @@ impl Manager {
             verified: Default::default(),
             profile_key: vec![],
             expire_timer: 0,
+            expire_timer_version: 0,
             inbox_position: 0,
             archived: false,
             avatar: None,

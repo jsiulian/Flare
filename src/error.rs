@@ -55,15 +55,17 @@ impl From<PresageError> for ApplicationError {
             {
                 ApplicationError::NoInternet
             }
-            p::Error::MessageSenderError(lss::sender::MessageSenderError::ServiceError(
-                ServiceError::SendError { reason: e },
-            )) if e.contains(FAILED_TO_LOOK_UP_ADDRESS) => ApplicationError::NoInternet,
+            p::Error::MessageSenderError(e) => match *e {
+                lss::sender::MessageSenderError::ServiceError(ServiceError::SendError {
+                    reason: e,
+                }) if e.contains(FAILED_TO_LOOK_UP_ADDRESS) => ApplicationError::NoInternet,
+                _ => ApplicationError::SendFailed(e),
+            },
             p::Error::ServiceError(ServiceError::SendError { reason: e })
                 if e.contains(FAILED_TO_LOOK_UP_ADDRESS) =>
             {
                 ApplicationError::NoInternet
             }
-            p::Error::MessageSenderError(e) => ApplicationError::SendFailed(Box::new(e)),
             _ => ApplicationError::Presage(Box::new(e)),
         }
     }
