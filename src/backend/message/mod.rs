@@ -193,7 +193,7 @@ impl Message {
                         &channel,
                         timestamp,
                         manager,
-                        message.delete.as_ref().unwrap().clone(),
+                        *message.delete.as_ref().unwrap(),
                     )
                     .upcast(),
                 )
@@ -228,7 +228,7 @@ impl Message {
                         &channel,
                         timestamp,
                         manager,
-                        message.delete.as_ref().unwrap().clone(),
+                        *message.delete.as_ref().unwrap(),
                     )
                     .upcast(),
                 )

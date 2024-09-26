@@ -33,7 +33,6 @@ impl DeletionMessage {
         self.imp()
             .deletion
             .borrow()
-            .clone()
             .expect("`DeletionMessage` to have a `Delete`")
     }
 
