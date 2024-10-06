@@ -1,9 +1,9 @@
 use std::cell::OnceCell;
 use std::path::Path;
 
-use gdk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
 use gtk::glib::{BoxedAnyObject, DateTime};
 use gtk::prelude::{Cast, FileExt};
+use gtk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
 use libsignal_service::content::CallMessage as PreCallMessage;
 use libsignal_service::models::Contact as LContact;
 use libsignal_service::prelude::AttachmentPointer;
@@ -14,6 +14,7 @@ use libsignal_service::proto::call_message::Hangup;
 use libsignal_service::proto::call_message::Offer;
 use libsignal_service::proto::data_message::Reaction;
 use libsignal_service::proto::GroupContextV2;
+use libsignal_service::push_service::DeviceInfo;
 use libsignal_service::sender::AttachmentSpec;
 use libsignal_service::Profile;
 use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
@@ -68,7 +69,6 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
             color: None,
             verified: Default::default(),
             profile_key: vec![],
-            blocked: false,
             expire_timer: 0,
             inbox_position: 0,
             archived: false,
@@ -81,7 +81,6 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
             color: None,
             verified: Default::default(),
             profile_key: vec![],
-            blocked: false,
             expire_timer: 0,
             inbox_position: 0,
             archived: false,
@@ -97,7 +96,6 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
             color: None,
             verified: Default::default(),
             profile_key: vec![0; 32],
-            blocked: false,
             expire_timer: 0,
             inbox_position: 0,
             archived: false,
@@ -110,7 +108,6 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
             color: None,
             verified: Default::default(),
             profile_key: vec![],
-            blocked: false,
             expire_timer: 0,
             inbox_position: 0,
             archived: false,
@@ -123,7 +120,6 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
             color: None,
             verified: Default::default(),
             profile_key: vec![],
-            blocked: false,
             expire_timer: 0,
             inbox_position: 0,
             archived: false,
@@ -242,6 +238,54 @@ impl super::Manager {
         context: GroupContextV2,
     ) -> Result<Option<Vec<u8>>, PresageError> {
         Ok(None)
+    }
+
+    #[cfg(feature = "screenshot")]
+    pub async fn devices(&self) -> Result<Vec<DeviceInfo>, PresageError> {
+        use chrono::{TimeDelta, Utc};
+
+        let now = Utc::now();
+        let base_time = now
+            .with_time(chrono::NaiveTime::from_hms_opt(13, 24, 0).unwrap())
+            .unwrap();
+
+        Ok(vec![
+            DeviceInfo {
+                id: 1,
+                name: Some("Flare (Desktop)".to_string()),
+                created: base_time - TimeDelta::days(10),
+                last_seen: base_time - TimeDelta::days(1),
+            },
+            DeviceInfo {
+                id: 2,
+                name: Some("Flare (PinePhone)".to_string()),
+                created: base_time - TimeDelta::days(7),
+                last_seen: base_time,
+            },
+            DeviceInfo {
+                id: 3,
+                name: Some("Flare (Another)".to_string()),
+                created: base_time - TimeDelta::days(7),
+                last_seen: base_time,
+            },
+            DeviceInfo {
+                id: 4,
+                name: Some("Flare (Another2)".to_string()),
+                created: base_time - TimeDelta::days(7),
+                last_seen: base_time,
+            },
+            DeviceInfo {
+                id: 5,
+                name: Some("Flare (Another3)".to_string()),
+                created: base_time - TimeDelta::days(7),
+                last_seen: base_time,
+            },
+        ])
+    }
+
+    #[cfg(feature = "screenshot")]
+    pub fn is_primary(&self) -> bool {
+        true
     }
 
     #[cfg(feature = "screenshot")]

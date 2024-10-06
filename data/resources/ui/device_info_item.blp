@@ -1,68 +1,11 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $FlDeviceInfoItem: Box {
-  accessibility {
-    labelled-by: label_name;
-  }
+template $FlDeviceInfoItem: Adw.ActionRow {
+  title: bind template.device-info as <$FlDeviceInfo>.name;
+  subtitle: bind $format_subtitle(template.device-info as <$FlDeviceInfo>.created, template.device-info as <$FlDeviceInfo>.last-seen) as <string>;
 
-  margin-bottom: 6;
-  margin-top: 6;
-  margin-start: 6;
-  margin-end: 6;
-  hexpand: false;
-  hexpand-set: true;
-  spacing: 6;
-  orientation: vertical;
-
-  Grid {
-    // Device name.
-    Label label_name {
-      styles [ "heading" ]
-      halign: start;
-      hexpand: true;
-      ellipsize: end;
-      label: bind template.device-info as <$FlDeviceInfo>.name;
-      layout {
-        row: 0;
-        column: 0;
-        column-span: 3;
-      }
-    }
-
-    Label {
-      label: _("Linked:");
-      halign: start;
-      margin-end: 6;
-      layout {
-        row: 1;
-        column: 0;
-      }
-    }
-    Label {
-      label: bind template.device-info as <$FlDeviceInfo>.created;
-      layout {
-        row: 1;
-        column: 1;
-      }
-    }
-    Label {
-      label: _("Last Active:");
-      halign: start;
-      margin-end: 6;
-      layout {
-        row: 2;
-        column: 0;
-      }
-    }
-    Label {
-      label: bind template.device-info as <$FlDeviceInfo>.last-seen;
-      layout {
-        row: 2;
-        column: 1;
-      }
-    }
-
+    [suffix]
     Button {
       styles [ "destructive-action" ]
       icon-name: "user-trash-symbolic";
@@ -71,12 +14,5 @@ template $FlDeviceInfoItem: Box {
       hexpand: true;
       tooltip-text: _("Unlink Device");
       clicked => $unlink() swapped;
-      layout {
-        row: 0;
-        column: 2;
-        row-span: 3;
-      }
     }
-
-  }
 }

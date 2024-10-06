@@ -732,11 +732,22 @@ impl Manager {
         r
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub async fn devices(&self) -> Result<Vec<DeviceInfo>, PresageError> {
         log::trace!("`Manager::devices` start");
         let r = self.internal().devices().await;
         log::trace!("`Manager::devices` finished");
         r
+    }
+
+    #[cfg(not(feature = "screenshot"))]
+    pub fn is_primary(&self) -> bool {
+        self.imp()
+            .internal
+            .borrow()
+            .as_ref()
+            .and_then(|r| r.registration_type())
+            == Some(presage::manager::RegistrationType::Primary)
     }
 }
 
@@ -804,13 +815,7 @@ mod imp {
 
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
-                "is-primary" => (self
-                    .internal
-                    .borrow()
-                    .as_ref()
-                    .and_then(|r| r.registration_type())
-                    == Some(presage::manager::RegistrationType::Primary))
-                .to_value(),
+                "is-primary" => self.obj().is_primary().to_value(),
                 _ => unimplemented!(),
             }
         }

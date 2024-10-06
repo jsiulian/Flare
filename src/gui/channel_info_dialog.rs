@@ -46,13 +46,7 @@ pub mod imp {
         #[template_child]
         row_description: TemplateChild<adw::ExpanderRow>,
         #[template_child]
-        button_reset_session: TemplateChild<gtk::Button>,
-        #[template_child]
-        button_clear_messages: TemplateChild<gtk::Button>,
-        #[template_child]
         group_phone_description: TemplateChild<adw::PreferencesGroup>,
-        #[template_child]
-        grid_buttons: TemplateChild<gtk::Grid>,
 
         #[property(get, set, construct_only, type = Channel)]
         channel: RefCell<Option<Channel>>,
@@ -123,38 +117,6 @@ pub mod imp {
 
             self.group_phone_description
                 .set_visible(self.row_phone.is_visible() || self.row_description.is_visible());
-
-            // Fill the list of active buttons such that. Each row has two buttons, except for possibly the last row which has one button spanning two columns.
-            // Firstly, define the list of buttons that are active.
-            let mut active_buttons = if channel.is_contact() {
-                vec![&self.button_reset_session, &self.button_clear_messages]
-            } else {
-                vec![&self.button_clear_messages]
-            };
-
-            // If there is an odd number of buttons, remove the last button which will have its own row.
-            let odd = active_buttons.len() % 2 == 1;
-            let final_button = if odd {
-                Some(active_buttons.remove(active_buttons.len() - 1))
-            } else {
-                None
-            };
-
-            // Insert the buttons at the correct positions.
-            for (i, button) in active_buttons.iter().enumerate() {
-                self.grid_buttons.attach(
-                    &TemplateChild::get(button),
-                    (i % 2) as i32,
-                    (i / 2) as i32,
-                    1,
-                    1,
-                );
-            }
-
-            if let Some(button) = final_button {
-                self.grid_buttons
-                    .attach(&button.get(), 0, active_buttons.len() as i32, 2, 1);
-            }
         }
 
         #[template_callback]

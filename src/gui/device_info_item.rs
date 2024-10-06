@@ -3,7 +3,7 @@ use crate::prelude::*;
 glib::wrapper! {
     /// An item modelling a device in the [crate::gui::LinkedDevicesWindow].
     pub struct DeviceInfoItem(ObjectSubclass<imp::DeviceInfoItem>)
-        @extends gtk::Box, gtk::Widget,
+        @extends adw::ActionRow, adw::PreferencesRow, gtk::ListBoxRow, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
             gtk::ConstraintTarget;
 }
@@ -41,13 +41,20 @@ pub mod imp {
         fn unlink(&self) {
             self.obj().emit_by_name::<()>("unlink", &[]);
         }
+
+        #[template_callback(function)]
+        fn format_subtitle(created: String, last_seen: String) -> String {
+            let created_format = gettextrs::gettext("Linked: {}").replace("{}", &created);
+            let last_seen_format = gettextrs::gettext("Last Seen: {}").replace("{}", &last_seen);
+            format!("{}\n{}", created_format, last_seen_format)
+        }
     }
 
     #[glib::object_subclass]
     impl ObjectSubclass for DeviceInfoItem {
         const NAME: &'static str = "FlDeviceInfoItem";
         type Type = super::DeviceInfoItem;
-        type ParentType = gtk::Box;
+        type ParentType = adw::ActionRow;
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
@@ -70,5 +77,7 @@ pub mod imp {
     }
 
     impl WidgetImpl for DeviceInfoItem {}
-    impl BoxImpl for DeviceInfoItem {}
+    impl ListBoxRowImpl for DeviceInfoItem {}
+    impl PreferencesRowImpl for DeviceInfoItem {}
+    impl ActionRowImpl for DeviceInfoItem {}
 }
