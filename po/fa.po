@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-02-27 18:59+0000\n"
+"PO-Revision-Date: 2024-10-14 05:16+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
-"Language-Team: Persian <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/fa/>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -34,7 +34,7 @@ msgstr "شرح"
 
 #: data/resources/ui/channel_info_dialog.blp:76
 msgid "Disappearing Messages"
-msgstr ""
+msgstr "پیام از بین رونده"
 
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
@@ -46,7 +46,6 @@ msgid "Reset Session"
 msgstr "بازنشانی نشست"
 
 #: data/resources/ui/channel_info_dialog.blp:128
-#, fuzzy
 msgctxt "accessibility"
 msgid "Clear Messages"
 msgstr "پاک‌سازی پیام‌ها"
@@ -129,16 +128,15 @@ msgstr "فرستادن"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "پیوسته:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "آخرین فعّالیت:"
 
 #: data/resources/ui/device_info_item.blp:72
-#, fuzzy
 msgid "Unlink Device"
-msgstr "پیوند افزاره"
+msgstr "برداشتن پیوند افزاره"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
@@ -201,27 +199,24 @@ msgstr "گزارش"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
-#, fuzzy
 msgid "Linked Devices"
-msgstr "پیوند افزاره"
+msgstr "افزاره‌های پیوسته"
 
 #: data/resources/ui/linked_devices_window.blp:31
-#, fuzzy
 msgid "Add Linked Device"
-msgstr "پیوند افزاره"
+msgstr "افزودن افزارهٔ پیوسته"
 
 #: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
 msgstr ""
 
 #: data/resources/ui/linked_devices_window.blp:42
-#, fuzzy
 msgid "Device URL"
-msgstr "نام افزاره"
+msgstr "نشانی افزاره"
 
 #: data/resources/ui/linked_devices_window.blp:51
 msgid "Add Device"
-msgstr ""
+msgstr "افزودن افزاره"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
@@ -244,9 +239,8 @@ msgid "Open with…"
 msgstr "گشودن با…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
-#, fuzzy
 msgid "New Chat"
-msgstr "گپ"
+msgstr "گپ جدید"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
@@ -254,9 +248,8 @@ msgid "Menu"
 msgstr "فهرست"
 
 #: data/resources/ui/new_channel_dialog.blp:35
-#, fuzzy
 msgid "Search Contacts"
-msgstr "همگام‌سازی آشنایان"
+msgstr "جست‌وجوی آشنایان"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
@@ -264,11 +257,11 @@ msgstr ""
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "نام"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "نام خانوادگی"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -295,9 +288,8 @@ msgid "Files"
 msgstr "پرونده‌ها"
 
 #: data/resources/ui/preferences_window.blp:26
-#, fuzzy
 msgid "Voice Messages"
-msgstr "پیام"
+msgstr "پیام صوتی"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
@@ -309,18 +301,16 @@ msgid "Notifications for new messages"
 msgstr "آگاهی‌ها"
 
 #: data/resources/ui/preferences_window.blp:35
-#, fuzzy
 msgid "Send Notifications"
-msgstr "آگاهی‌ها"
+msgstr "فرستادن آگاهی‌ها"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
 msgstr ""
 
 #: data/resources/ui/preferences_window.blp:44
-#, fuzzy
 msgid "Background Notifications"
-msgstr "آگاهی‌ها"
+msgstr "آگاهی‌های پس‌زمینه"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
@@ -339,7 +329,7 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "متن پیام گزینش‌پذیر"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
@@ -390,12 +380,11 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
 msgid "Primary Device"
-msgstr ""
+msgstr "افزارهٔ اصلی"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
 #: data/resources/ui/setup_window.blp:177
-#, fuzzy
 msgid "Link Device"
 msgstr "پیوند افزاره"
 
@@ -444,12 +433,12 @@ msgstr "نام افزاره"
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "گزینه‌های توسعه‌دهنده"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
-msgstr ""
+msgstr "کارسازهای سیگنال"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -546,7 +535,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "مشکلات شناخته"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -613,7 +602,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "جست‌وجو در کانال‌ها"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
@@ -628,7 +617,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr ""
+msgstr "بار کردن پیام‌های بیش‌تر"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
@@ -682,7 +671,7 @@ msgstr "گپ"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "در حال نوشتن"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
@@ -694,7 +683,7 @@ msgstr "همگام‌سازی آشنایان"
 
 #: data/resources/ui/window.blp:181
 msgid "Keybindings"
-msgstr ""
+msgstr "ترکیب کلیدها"
 
 #: data/resources/ui/window.blp:186
 msgid "About"
@@ -706,11 +695,11 @@ msgstr "خروج"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
-msgstr ""
+msgstr "یادداشت برای خود"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "آشنای ناشناس"
 
 #: src/backend/manager.rs:442
 msgid "You"
@@ -718,27 +707,27 @@ msgstr "شما"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "تماس ورودی"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "تماس خروجی"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "تماس آغاز شد"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr ""
+msgstr "تماس پایان یافت"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
-msgstr ""
+msgstr "تماس رد شد"
 
 #: src/backend/message/call_message.rs:105
 msgid "Unanswered call"
-msgstr ""
+msgstr "تماس بی‌پاسخ"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
@@ -774,7 +763,7 @@ msgstr[1] ""
 
 #: src/error.rs:91
 msgid "I/O Error."
-msgstr ""
+msgstr "خطای ورودی و خروجی."
 
 #: src/error.rs:96
 msgid "There does not seem to be a connection to the internet available."
@@ -782,7 +771,7 @@ msgstr ""
 
 #: src/error.rs:101
 msgid "Something glib-related failed."
-msgstr ""
+msgstr "چیزی مربوط به glib شکست خورد."
 
 #: src/error.rs:106
 msgid "The communication with Libsecret failed."
@@ -843,12 +832,11 @@ msgstr "هرگز"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "پیش‌نویس"
 
 #: src/gui/linked_devices_window.rs:116
-#, fuzzy
 msgid "Unlink Device?"
-msgstr "پیوند افزاره"
+msgstr "برداشتن پیوند افزاره؟"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
@@ -860,7 +848,7 @@ msgstr ""
 
 #: src/gui/preferences_window.rs:99
 msgid "Background permission"
-msgstr ""
+msgstr "اجازهٔ پس‌زمینه"
 
 #: src/gui/preferences_window.rs:100
 msgid "Use settings to remove permissions"
@@ -878,19 +866,19 @@ msgstr "روی صحنه"
 
 #: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "در تخته‌گیره رونوشت شد"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:102 src/gui/utility.rs:126
 msgid "%H:%M"
-msgstr ""
+msgstr "%OH:%OM"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:105
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%Oy-%Om-%Od %OH:%OM"
 
 #: src/gui/utility.rs:138
 msgid "Today"
@@ -904,7 +892,7 @@ msgstr "دیروز"
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Oy-%Om-%Od"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
@@ -918,7 +906,7 @@ msgstr "پیوست"
 
 #: src/gui/window.rs:304 src/gui/window.rs:310
 msgid "Remove Messages"
-msgstr ""
+msgstr "برداشتن پیام‌ها"
 
 #: src/gui/window.rs:305
 msgid "This will remove all locally stored messages from this channel"
@@ -965,7 +953,7 @@ msgstr "بلندای پنجره"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "وضعیت بیشینگی پنجره"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
@@ -975,11 +963,11 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "بارگیری خودکار تصویرها"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "بارگیری خودکار ویدیوها"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
@@ -987,7 +975,7 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "بارگیری خودکار پرونده‌ها"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
