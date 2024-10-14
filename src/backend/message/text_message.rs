@@ -332,7 +332,7 @@ mod imp {
     impl TextMessage {
         fn reactions(&self) -> String {
             let mut reaction_emojis: Vec<String> = Vec::new();
-            let mut reaction_counts: Vec<i32> = Vec::new()
+            let mut reaction_counts: Vec<i32> = Vec::new();
 
             // This counts the number of each emoji
             self.reactions
