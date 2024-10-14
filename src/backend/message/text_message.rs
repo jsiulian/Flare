@@ -335,18 +335,15 @@ mod imp {
             let mut reaction_counts: Vec<i32> = Vec::new();
 
             // This counts the number of each emoji
-            self.reactions
-                .borrow()
-                .values()
-                .for_each(|r|
-                    match reaction_emojis.iter().position(|e| e == r.emoji()) {
-                        Some(index) => reaction_counts[index] += 1,
-                        None => {
-                            reaction_emojis.push(r.emoji().to_string());
-                            reaction_counts.push(1);
-                        }
+            self.reactions.borrow().values().for_each(|r| {
+                match reaction_emojis.iter().position(|e| e == r.emoji()) {
+                    Some(index) => reaction_counts[index] += 1,
+                    None => {
+                        reaction_emojis.push(r.emoji().to_string());
+                        reaction_counts.push(1);
                     }
-                );
+                }
+            });
 
             // And this creates a string with the emojis and their counts
             reaction_emojis
