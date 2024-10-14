@@ -331,11 +331,36 @@ mod imp {
 
     impl TextMessage {
         fn reactions(&self) -> String {
+            let mut reaction_emojis: Vec<String> = Vec::new();
+            let mut reaction_counts: Vec<i32> = Vec::new()
+
+            // This counts the number of each emoji
             self.reactions
                 .borrow()
                 .values()
-                .map(|r| r.emoji())
-                .collect::<String>()
+                .for_each(|r|
+                    match reaction_emojis.iter().position(|e| e == r.emoji()) {
+                        Some(index) => reaction_counts[index] += 1,
+                        None => {
+                            reaction_emojis.push(r.emoji().to_string());
+                            reaction_counts.push(1);
+                        }
+                    }
+                );
+
+            // And this creates a string with the emojis and their counts
+            reaction_emojis
+                .iter()
+                .zip(reaction_counts.iter())
+                .map(|(emoji, &count)| {
+                    if count > 1 {
+                        format!("{}{}", emoji, count)
+                    } else {
+                        emoji.clone()
+                    }
+                })
+                .collect::<Vec<String>>()
+                .join(" ")
         }
 
         fn set_quote(&self, msg: &super::TextMessage) {
