@@ -8,27 +8,29 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-10-23 18:15+0000\n"
+"Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Kabyle <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/kab/>\n"
 "Language: kab\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr ""
+msgstr "ButterflyOfFire <butterflyoffire@protonmail.com>"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
-msgstr ""
+msgstr "Uṭṭun n tiliɣri"
 
 #: data/resources/ui/channel_info_dialog.blp:66
 msgid "Description"
-msgstr ""
+msgstr "Aglam"
 
 #: data/resources/ui/channel_info_dialog.blp:76
 msgid "Disappearing Messages"
@@ -55,16 +57,16 @@ msgstr ""
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "Beṛṛa n tuqqna"
 
 #: data/resources/ui/channel_list.blp:20
 msgid "Search"
-msgstr ""
+msgstr "Nadi"
 
 #: data/resources/ui/channel_list.blp:23 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Nadi"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
@@ -117,12 +119,12 @@ msgstr ""
 #: data/resources/ui/channel_messages.blp:270
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Azen"
 
 #: data/resources/ui/channel_messages.blp:274
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "Azen"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
@@ -152,11 +154,11 @@ msgstr ""
 #: data/resources/ui/linked_devices_window.blp:50
 #: src/gui/linked_devices_window.rs:122 src/gui/window.rs:309
 msgid "Cancel"
-msgstr ""
+msgstr "Sefsex"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "Sfeḍ"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
 #: src/gui/linked_devices_window.rs:121
@@ -180,7 +182,7 @@ msgstr ""
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "Tuccḍa"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
@@ -189,11 +191,11 @@ msgstr ""
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr ""
+msgstr "Mdel"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "Cetki fell-as"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
@@ -210,40 +212,40 @@ msgstr ""
 
 #: data/resources/ui/linked_devices_window.blp:42
 msgid "Device URL"
-msgstr ""
+msgstr "URL n yibenk"
 
 #: data/resources/ui/linked_devices_window.blp:51
 msgid "Add Device"
-msgstr ""
+msgstr "Rnu ibenk"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr ""
+msgstr "Tiririt"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "Kkes"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "Nɣel"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "Sekles am…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "Ldi s…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
-msgstr ""
+msgstr "Asqerdec amaynut"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Umuɣ"
 
 #: data/resources/ui/new_channel_dialog.blp:35
 msgid "Search Contacts"
@@ -255,15 +257,15 @@ msgstr ""
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Isem amenzu"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Isem"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "Amatu"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
@@ -275,15 +277,15 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Tugniwin"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Tividyutin"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Ifuyla"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Voice Messages"
@@ -291,7 +293,7 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr ""
+msgstr "Ilɣa"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
@@ -425,12 +427,12 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
-msgstr ""
+msgstr "Isem n yibenk"
 
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "Iɣewwaṛen n uneflay"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
@@ -483,7 +485,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:341
 msgid "Continue"
-msgstr ""
+msgstr "Kemmel"
 
 #: data/resources/ui/setup_window.blp:358
 msgid ""
@@ -499,7 +501,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/setup_window.blp:386
 msgid ""
@@ -512,7 +514,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:420
 #: data/resources/ui/setup_window.blp:445
 msgid "Confirm"
-msgstr ""
+msgstr "Sentem"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
@@ -521,7 +523,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
 msgid "Finished"
-msgstr ""
+msgstr "Ifukk"
 
 #: data/resources/ui/setup_window.blp:494
 msgid ""
@@ -547,7 +549,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
-msgstr ""
+msgstr "Anermes"
 
 #: data/resources/ui/setup_window.blp:523
 msgid ""
@@ -559,12 +561,12 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Amatu"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "Sken-d inegzumen"
 
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
@@ -579,17 +581,17 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "Ldi umuɣ"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Mdel asfaylu"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "Ibuda"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
@@ -641,7 +643,7 @@ msgstr ""
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
-msgstr ""
+msgstr "Izen"
 
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
@@ -651,7 +653,7 @@ msgstr ""
 #: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Ger imujit"
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
@@ -660,11 +662,11 @@ msgstr ""
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Rnu yiwen usqerdec"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "Asqerdec"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
@@ -672,7 +674,7 @@ msgstr ""
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
-msgstr ""
+msgstr "Iɣewwaṛen"
 
 #: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
@@ -680,15 +682,15 @@ msgstr ""
 
 #: data/resources/ui/window.blp:181
 msgid "Keybindings"
-msgstr ""
+msgstr "Inegzumen n unasiw"
 
 #: data/resources/ui/window.blp:186
 msgid "About"
-msgstr ""
+msgstr "Ɣef"
 
 #: data/resources/ui/window.blp:191
 msgid "Quit"
-msgstr ""
+msgstr "Tuffɣa"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
@@ -700,7 +702,7 @@ msgstr ""
 
 #: src/backend/manager.rs:442
 msgid "You"
-msgstr ""
+msgstr "Kečč·mm"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
@@ -825,11 +827,11 @@ msgstr ""
 
 #: src/gui/channel_info_dialog.rs:197
 msgid "Never"
-msgstr ""
+msgstr "Urǧin"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Arewway"
 
 #: src/gui/linked_devices_window.rs:116
 msgid "Unlink Device?"
@@ -869,7 +871,7 @@ msgstr ""
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:102 src/gui/utility.rs:126
 msgid "%H:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
@@ -879,17 +881,17 @@ msgstr ""
 
 #: src/gui/utility.rs:138
 msgid "Today"
-msgstr ""
+msgstr "Ass-a"
 
 #: src/gui/utility.rs:141
 msgid "Yesterday"
-msgstr ""
+msgstr "Iḍelli"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%d-%m-%Y"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
@@ -899,7 +901,7 @@ msgstr ""
 
 #: src/gui/utility.rs:159
 msgid "Attachment"
-msgstr ""
+msgstr "Taceqquft yeddan"
 
 #: src/gui/window.rs:304 src/gui/window.rs:310
 msgid "Remove Messages"
