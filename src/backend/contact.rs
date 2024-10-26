@@ -15,9 +15,9 @@ gtk::glib::wrapper! {
 }
 
 impl Contact {
-    pub(super) fn from_service_address(address: &ServiceAddress, manager: &Manager) -> Self {
+    pub(super) async fn from_service_address(address: &ServiceAddress, manager: &Manager) -> Self {
         log::trace!("Building a `Contact` from a `ServiceAddress`");
-        if let Ok(Some(contact)) = manager.get_contact_by_id(address.uuid) {
+        if let Ok(Some(contact)) = manager.get_contact_by_id(address.uuid).await {
             return Self::from_contact(contact, manager);
         }
         log::trace!("Not in the contact list");
@@ -29,10 +29,10 @@ impl Contact {
     }
 
     pub(super) fn from_contact(
-        contact: libsignal_service::models::Contact,
+        contact: presage::model::contacts::Contact,
         manager: &Manager,
     ) -> Self {
-        log::trace!("Building a `Contact` from a `libsignal_service::models::Contact`");
+        log::trace!("Building a `Contact` from a `presage::model::contacts::Contact`");
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
             .build();
@@ -60,15 +60,25 @@ impl Contact {
             let channel = self.channel();
 
             // Note: The profile key may be different if the contact is in a group or a 1-to-1 message.
-            if let Some(group) = channel.and_then(|c| c.group()) {
-                group
-                    .members
-                    .iter()
-                    .filter(|m| m.uuid == uuid)
-                    .map(|c| c.profile_key)
-                    .next()
+            if let Some(channel) = channel {
+                if let Some(group) = &*channel.group() {
+                    group
+                        .members
+                        .iter()
+                        .filter(|m| m.uuid == uuid)
+                        .map(|c| c.profile_key)
+                        .next()
+                } else {
+                    contact
+                        .as_ref()
+                        .and_then(|c| c.profile_key.clone().try_into().ok())
+                        .map(ProfileKey::create)
+                }
             } else {
-                contact.as_ref().and_then(|c| c.profile_key().ok())
+                contact
+                    .as_ref()
+                    .and_then(|c| c.profile_key.clone().try_into().ok())
+                    .map(ProfileKey::create)
             }
         };
 
@@ -110,7 +120,7 @@ impl Contact {
             .contact
             .borrow()
             .as_ref()
-            .map(|c| ServiceAddress::new_aci(c.uuid))
+            .map(|c| ServiceAddress::from_aci(c.uuid))
     }
 
     pub fn expire_timer(&self) -> u32 {
@@ -211,7 +221,7 @@ mod imp {
     #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::Contact)]
     pub struct Contact {
-        pub(super) contact: RefCell<Option<libsignal_service::models::Contact>>,
+        pub(super) contact: RefCell<Option<presage::model::contacts::Contact>>,
         pub(super) phonenumber: RefCell<Option<PhoneNumber>>,
         pub(super) uuid: RefCell<Option<Uuid>>,
         pub(super) profile: RefCell<Option<Profile>>,

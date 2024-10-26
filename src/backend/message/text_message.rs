@@ -78,7 +78,11 @@ impl TextMessage {
         };
 
         s.set_internal_data(Some(message));
-        s.prepare_format_body();
+        gspawn!(clone!(
+            #[strong]
+            s,
+            async move { s.prepare_format_body().await }
+        ));
         s
     }
 
@@ -86,7 +90,7 @@ impl TextMessage {
     pub(super) async fn init_data(&self, message: &DataMessage, manager: &Manager) {
         let obj = self.imp();
         self.set_internal_data(Some(message.clone()));
-        self.prepare_format_body();
+        self.prepare_format_body().await;
 
         // Load attachments in parallel.
         let attachment_futures = message
@@ -220,17 +224,19 @@ impl TextMessage {
         self.body().is_none() && self.attachments().is_empty()
     }
 
-    fn prepare_format_body(&self) {
-        let (body, attrs) = self.format_body();
+    async fn prepare_format_body(&self) {
+        let (body, attrs) = self.format_body().await;
         *self.imp().formatted_body.borrow_mut() = body;
         *self.imp().message_attributes.borrow_mut() = attrs;
+        self.notify_message_attributes();
+        self.notify_body();
     }
 
     /// Formats the message body based on its ranges, e.g. to insert mention names.
     ///
     /// Returns the resulting strings and an [AttrList] that can be used in labels to highlight areas.
     /// Be carefull when editing this function and note that Signal uses UTF-16 byte offsets, while Rust uses UTF-8 byte offsets.
-    fn format_body(&self) -> (Option<String>, AttrList) {
+    async fn format_body(&self) -> (Option<String>, AttrList) {
         let Some(body) = self.internal_data().and_then(|m| m.body) else {
             return (None, AttrList::new());
         };
@@ -266,7 +272,7 @@ impl TextMessage {
             let name = format!(
                 "{}{}",
                 MENTION_CHAR,
-                channel.participant_by_uuid(uuid).title()
+                channel.participant_by_uuid(uuid).await.title()
             );
             let to_add_body = String::from_utf16_lossy(&body_utf16[index_utf16..start]);
             result_utf8.push_str(&to_add_body);

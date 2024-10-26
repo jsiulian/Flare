@@ -6,13 +6,13 @@ use gio::Application;
 use gio::Settings;
 use libsignal_service::{
     content::ContentBody,
-    groups_v2::Group,
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
     push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
     Profile, ServiceAddress,
 };
 use oo7::Keyring;
+use presage::model::groups::Group;
 use presage::store::{ContentsStore, StateStore, Thread};
 use presage_store_sled::MigrationConflictStrategy;
 use rand::distributions::DistString;
@@ -110,8 +110,9 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationErr
         path,
         Some(&passphrase),
         MigrationConflictStrategy::BackupAndDrop,
-        presage_store_sled::OnNewIdentity::Trust,
-    )?);
+        presage::model::identity::OnNewIdentity::Trust,
+    )
+    .await?);
 
     if !path_store_version.exists() {
         log::info!("Creating file to specify the new store version.");
@@ -154,49 +155,39 @@ impl Manager {
         self.imp().feedbackd.borrow().clone()
     }
 
-    pub fn clear_registration(&self) -> Result<(), ApplicationError> {
+    pub async fn clear_registration(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing the manager");
-        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
-            config_store.clear_registration()?;
-        }
+        self.store().clear_registration().await?;
         Ok(())
     }
 
-    pub fn clear_messages(&self) -> Result<(), ApplicationError> {
+    pub async fn clear_messages(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing messages from the manager");
-        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
-            config_store.clear_messages()?;
-        }
+        self.store().clear_messages().await?;
         Ok(())
     }
 
-    pub fn clear_contacts(&self) -> Result<(), ApplicationError> {
+    pub async fn clear_contacts(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing contacts from the manager");
-        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
-            config_store.clear_contacts()?;
-        }
+        self.store().clear_contacts().await?;
         Ok(())
     }
 
-    pub fn clear_groups(&self) -> Result<(), ApplicationError> {
+    pub async fn clear_groups(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing groups from the manager");
-        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
-            config_store.clear_groups()?;
-        }
+        self.store().clear_groups().await?;
         Ok(())
     }
 
-    pub fn clear_channel_messages(&self, channel: &Channel) -> Result<(), ApplicationError> {
+    pub async fn clear_channel_messages(&self, channel: &Channel) -> Result<(), ApplicationError> {
         crate::trace!(
             "Clearing channel messages the manager for: {}",
             channel.title()
         );
-        if let Some(config_store) = self.imp().config_store.borrow_mut().as_mut() {
-            if let Some(thread) = channel.thread() {
-                config_store.clear_thread(&thread)?;
-            } else {
-                log::warn!("Was asked to clear a channel without an associated thread");
-            }
+        if let Some(thread) = channel.thread() {
+            self.store().clear_thread(&thread).await?;
+        } else {
+            log::warn!("Was asked to clear a channel without an associated thread");
         }
         Ok(())
     }
@@ -240,15 +231,10 @@ impl Manager {
             timestamp
         );
         let content = {
-            if let Some(config_store) = self.imp().config_store.borrow().as_ref() {
-                let content = config_store.message(thread, timestamp)?;
-                if let Some(content) = content {
-                    Ok::<_, ApplicationError>(Some(content))
-                } else {
-                    Ok(None)
-                }
+            let content = self.store().message(thread, timestamp).await?;
+            if let Some(content) = content {
+                Ok::<_, ApplicationError>(Some(content))
             } else {
-                log::warn!("Query message by id without config store being set up");
                 Ok(None)
             }
         }?;
@@ -473,14 +459,15 @@ impl Manager {
         if let Some(found) = found {
             return found;
         }
-        let contact = Contact::from_service_address(&ServiceAddress::new_aci(uuid), self);
+        let contact = Contact::from_service_address(&ServiceAddress::from_aci(uuid), self).await;
         Channel::from_contact_or_group(contact, group, self).await
     }
 
     #[cfg(not(feature = "screenshot"))]
-    pub fn list_contacts(&self) -> Vec<Contact> {
+    pub async fn list_contacts(&self) -> Vec<Contact> {
         self.store()
             .contacts()
+            .await
             .map(|i| {
                 i.filter_map(|c| {
                     c.ok()
@@ -493,7 +480,7 @@ impl Manager {
     }
 
     pub fn self_contact(&self) -> Contact {
-        let presage_contact = libsignal_service::models::Contact {
+        let presage_contact = presage::model::contacts::Contact {
             uuid: self.uuid(),
             // TODO: Get own phone number?
             phone_number: None,
@@ -516,7 +503,7 @@ impl Manager {
         let mut to_load = vec![];
 
         // Construct all channels in parallel.
-        let channels_futures = self.list_contacts().into_iter().map(|c| async move {
+        let channels_futures = self.list_contacts().await.into_iter().map(|c| async move {
             let channel = Channel::from_contact_or_group(c.clone(), &None, self).await;
             c.set_channel(Some(&channel));
             channel
@@ -537,7 +524,7 @@ impl Manager {
         // Note: Groups need channels to be finished initializing first due to loading participants; we cannot combine them.
 
         // TODO: Error handling?
-        if let Ok(groups) = self.store().groups() {
+        if let Ok(groups) = self.store().groups().await {
             // Construct all groups in parallel.
             let groups = groups
                 .into_iter()
@@ -675,12 +662,12 @@ impl Manager {
         Ok(r?)
     }
 
-    pub(super) fn get_contact_by_id(
+    pub(super) async fn get_contact_by_id(
         &self,
         id: Uuid,
-    ) -> Result<Option<libsignal_service::models::Contact>, ApplicationError> {
+    ) -> Result<Option<presage::model::contacts::Contact>, ApplicationError> {
         log::trace!("`Manager::get_contact_by_id` start");
-        let r = self.store().contact_by_id(&id);
+        let r = self.store().contact_by_id(&id).await;
         log::trace!("`Manager::get_contact_by_id` finished");
         Ok(r?)
     }

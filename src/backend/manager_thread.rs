@@ -16,7 +16,6 @@ use futures::{join, select, FutureExt, SinkExt, StreamExt, TryFutureExt};
 use libsignal_service::{
     configuration::SignalServers,
     content::ContentBody,
-    groups_v2::Group,
     prelude::{phonenumber, Content, ProfileKey, Uuid},
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
     push_service::DeviceInfo,
@@ -25,6 +24,7 @@ use libsignal_service::{
 };
 use presage::{
     manager::{ReceivingMode, Registered, RegistrationOptions, RegistrationType},
+    model::groups::Group,
     store::{ContentsStore, Thread},
     Manager,
 };
@@ -667,7 +667,7 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             .send(manager.retrieve_profile().await)
             .expect("Callback sending failed"),
         Command::GetGroupV2(master_key, callback) => callback
-            .send(manager.store().group(master_key))
+            .send(manager.store().group(master_key).await)
             .map_err(|_| ())
             .expect("Callback sending failed"),
         Command::SendSessionReset(recipient_address, timestamp, callback) => callback
@@ -699,7 +699,13 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             .expect("Callback sending failed"),
         Command::Messages(thread, range, callback) => {
             // XXX: Cannot format iterator.
-            let _ = callback.send(manager.messages(&thread, range));
+            let _ = callback.send(
+                manager
+                    .store()
+                    .messages(&thread, range)
+                    .await
+                    .map_err(presage::Error::Store),
+            );
         }
         Command::RegistrationType(callback) => callback
             .send(manager.registration_type())
