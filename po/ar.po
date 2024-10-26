@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-08-11 11:09+0000\n"
-"Last-Translator: Moa'th <irondragondev@gmail.com>\n"
+"PO-Revision-Date: 2024-10-27 13:00+0000\n"
+"Last-Translator: Ahmed Mohammed <iramosu@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ar/>\n"
 "Language: ar\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr "رصيد المترجم"
+msgstr "أحمد محمد <iramosu@protonmail.com>"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
@@ -40,20 +40,20 @@ msgstr "الرسائل المختفية"
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr "تصفير الجلسة"
+msgstr "صفِّر الجلسة"
 
 #: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
-msgstr "تصفير الجلسة"
+msgstr "صفِّر الجلسة"
 
 #: data/resources/ui/channel_info_dialog.blp:128
 msgctxt "accessibility"
 msgid "Clear Messages"
-msgstr "مسح الرسائل"
+msgstr "امحِ الرسائل"
 
 #: data/resources/ui/channel_info_dialog.blp:149
 msgid "Clear Messages"
-msgstr "مسح الرسائل"
+msgstr "امحِ الرسائل"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
@@ -62,50 +62,50 @@ msgstr "غير متصل"
 
 #: data/resources/ui/channel_list.blp:20
 msgid "Search"
-msgstr "البحث"
+msgstr "ابحث"
 
 #: data/resources/ui/channel_list.blp:23 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
-msgstr "البحث"
+msgstr "ابحث"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr "لم يتم تحديد قناة"
+msgstr "لم تحدد قناة"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr "اختر قناة"
+msgstr "حدد قناة"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr "إزالة الرد"
+msgstr "أزِل الرد"
 
 #: data/resources/ui/channel_messages.blp:184
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr "إزالة رد"
+msgstr "أزِل رد"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr "إزالة مرفق"
+msgstr "أزِل مرفقًا"
 
 #: data/resources/ui/channel_messages.blp:207
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr "إزالة مرفق"
+msgstr "أزِل مرفقًا"
 
 #: data/resources/ui/channel_messages.blp:228
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr "إضافة مرفق"
+msgstr "أضِف مرفقًا"
 
 #: data/resources/ui/channel_messages.blp:236
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr "إضافة مرفق"
+msgstr "أضِف مرفقًا"
 
 #: data/resources/ui/channel_messages.blp:252
 msgctxt "accessibility"
@@ -120,12 +120,12 @@ msgstr "مُدخَل الرسالة"
 #: data/resources/ui/channel_messages.blp:270
 msgctxt "accessibility"
 msgid "Send"
-msgstr "إرسال"
+msgstr "أرسِل"
 
 #: data/resources/ui/channel_messages.blp:274
 msgctxt "tooltip"
 msgid "Send"
-msgstr "إرسال"
+msgstr "أرسِل"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
@@ -133,32 +133,29 @@ msgstr "مرتبط:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr "آخر تفاعل:"
+msgstr "آخر نشاط:"
 
 #: data/resources/ui/device_info_item.blp:72
-#, fuzzy
-#| msgid "Linked Devices"
 msgid "Unlink Device"
-msgstr "الأجهزة المرتبطة"
+msgstr "ألغِ ربط الجهاز"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
 msgid "Clear messages"
-msgstr "مسح الرسائل"
+msgstr "امحِ الرسائل"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
-msgstr ""
-"سيمسح هذا جميع الرسائل المخزّنة محليًا. سيقوم هذا الفعل أيضًا بإغلاق التطبيق."
+msgstr "سيمحو هذا كل الرسائل المخزَّنة محليًا. سيغلق هذا الفعل أيضًا التطبيق."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
 #: data/resources/ui/linked_devices_window.blp:50
 #: src/gui/linked_devices_window.rs:122 src/gui/window.rs:309
 msgid "Cancel"
-msgstr "إلغاء"
+msgstr "ألغِ"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
@@ -167,7 +164,7 @@ msgstr "امحُ"
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
 #: src/gui/linked_devices_window.rs:121
 msgid "Unlink"
-msgstr "إلغاء الربط"
+msgstr "ألغِ الارتباط"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -175,16 +172,16 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
-"سيقوم هذا الفعل بإلغاء ربط هذا الجهاز وحذف جميع البيانات المخزنة محليًا. سيتم "
-"أيضًا إغلاق التطبيق والسماح بإعادة الربط في حال فتحه مجددًا."
+"سيلغي هذا الفعل ربط هذا الجهاز، وسيحذف كافة البيانات المخزنة محليًا. كما "
+"سيغلق التطبيق ويسمح بإعادة الربط في حال فتحه مجددًا."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr "إلغاء الربط وحذف جميع الرسائل"
+msgstr "ألغِ الربط واحذف جميع الرسائل"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr "إلغاء الربط مع إبقاء الرسائل"
+msgstr "ألغِ الربط مع إبقاء الرسائل"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
@@ -192,16 +189,16 @@ msgstr "خطأ"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr "من فضلك، خذ بعين الإعتبار الإبلاغ عن هذا الخطأ."
+msgstr "من فضلك، خذ بعين الاعتبار الإبلاغ عن هذا الخطأ."
 
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr "إغلاق"
+msgstr "أغلِق"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr "إبلاغ"
+msgstr "أبلِغ"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
@@ -214,7 +211,7 @@ msgstr "أضف جهازًا مرتبطًا"
 
 #: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
-msgstr "رجاءً قم بإدخال مسار الجهاز للربط."
+msgstr "رجاءً أدخِل مسار الجهاز للربط."
 
 #: data/resources/ui/linked_devices_window.blp:42
 msgid "Device URL"
@@ -222,7 +219,7 @@ msgstr "مسار الجهاز"
 
 #: data/resources/ui/linked_devices_window.blp:51
 msgid "Add Device"
-msgstr "إضافة جهاز"
+msgstr "أضِف جهازًا"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
@@ -230,19 +227,19 @@ msgstr "رد"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr "حذف"
+msgstr "احذف"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr "نسخ"
+msgstr "انسخ"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr "حفظ باسم…"
+msgstr "احفظ باسم…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr "فتح باستخدام…"
+msgstr "افتح باستخدام…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
@@ -255,15 +252,15 @@ msgstr "القائمة"
 
 #: data/resources/ui/new_channel_dialog.blp:35
 msgid "Search Contacts"
-msgstr "بحث عن جهة اتصال"
+msgstr "ابحث جهات اتصال"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr "عرض جهات الاتصال حسب:"
+msgstr "اعرض جهات الاتصال حسب:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr "الإسم الأول"
+msgstr "الاسم الأول"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
@@ -275,11 +272,11 @@ msgstr "عام"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr "تنزيل المرفقات تلقائيًا"
+msgstr "نزِّل المرفقات تلقائيًا"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr "المرفقات المحددة سيتم تنزيلها تلقائيًا"
+msgstr "المرفقات المحددة ستنزَّل تلقائيًا"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
@@ -287,7 +284,7 @@ msgstr "الصور"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr "المقاطع"
+msgstr "الفيديو"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
@@ -299,31 +296,31 @@ msgstr "الرسائل الصوتية"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr "الإشعارات"
+msgstr "التنبيهات"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr "الإشعارات للرسائل الجديدة"
+msgstr "التنبيهات للرسائل الجديدة"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr "ارسال الإشعارات"
+msgstr "أرسِل التنبيهات"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr "ارسال الإشعارات عند التفاعل مع الرسالة"
+msgstr "أرسِل التنبيهات عند التفاعل مع الرسالة"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr "الإشعارات في الخلفية"
+msgstr "التنبيهات في الخلفية"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr "طلب الإشعارات والتطبيق مغلق"
+msgstr "جلب التنبيهات أثناء إغلاق التطبيق"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr "التوافق مع الجوال"
+msgstr "التوافق مع المحمول"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -331,8 +328,8 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
-"قد ترغب في تغيير هذه الخيارات لتناسب شاشات اللمس والجوالات، القيمة "
-"الإفتراضية لهذه الإعدادات مخصصة لتكون فعالة على الحاسوب."
+"قد ترغب في تغيير هذه الخيارات لتناسب شاشات اللمس والمحمول. القيمة المبدئية "
+"لهذه التفضيلات مخصصة لتكون فعالة على الحاسوب."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
@@ -351,16 +348,16 @@ msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
-"قد لا تتمكن من ارسال رسائل على لوحة المفاتيح اللمس التي لا تدعم إنشاء سطر "
-"جديد بإختصار \"Control + Enter\""
+"قد يتعذر إرسال الرسائل على لوحة المفاتيح اللمس التي لا تدعم إنشاء سطر جديد "
+"باختصار \"Control + Enter\""
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr "أهلًا بك في فلير"
+msgstr "أهلًا بك في «شرارة»"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr "تجهيز فلير"
+msgstr "جهِّز «شرارة»"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
@@ -381,23 +378,23 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
-"فلير هو عميل غير رسمي لتطبيق Signal. يُرجى ملاحظة أن فلير غير مستقر وقد تواجه "
-"بعض الأخطاء. إذا كنت تواجه أي أخطاء، فراجع <a href=\"https://gitlab.com/"
-"schmiddi-on-mobile/flare/-/issues\">متتبع المشكلات</a> وقم بفتح مشكلة جديدة "
-"إذا كنت تواجه مشكلة جديدة. كما يجب أن تعلم أنه نظرًا لكونه تطبيقًا من طرف ثالث،"
-" لا يمكن لفلير ضمان نفس مستوى الأمان والخصوصية الذي توفره تطبيقات Signal "
+"«شرارة» هو عميل غير رسمي لتطبيق سيجنال. لاحظ بأن «شرارة» غير مستقر وقد تواجه "
+"بعض الأخطاء. إذا واجهت أي خطأ، فطالع <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues\">متتبع المشكلات</a> وافتح مشكلة جديدة إذا "
+"كنت المشكلة غير مذكورة. كما يجب أن تعلم أنه نظرًا لكونه تطبيقًا من طرف ثالث، "
+"لا يمكن لـ«شرارة» ضمان نفس مستوى الأمان والخصوصية الذي توفره تطبيقات سيجنال "
 "الرسمية. إذا كنت أنت أو شخص بحاجة للتواصل معه بحاجة إلى مستوى عالٍ من الأمان، "
-"فلا تستخدم فلير. راجع <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/"
-"-/blob/master/README.md#security\">ملف README</a> لمزيد من المعلومات."
+"فلا تستخدم «شرارة». راجع <a href=\"https://gitlab.com/schmiddi-on-mobile/"
+"flare/-/blob/master/README.md#security\">ملف README</a> لمزيد من المعلومات."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr "التعيين كجهاز رئيسي أو ربط الجهاز؟"
+msgstr "أأعيِّن كجهاز رئيسي أم أربط الجهاز؟"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
 msgid "Primary Device"
-msgstr "تعيين كجهاز رئيسي"
+msgstr "جهاز رئيسي"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
@@ -407,11 +404,11 @@ msgstr "ربط الجهاز"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr "التعيين كجهاز رئيسي أو ربط الجهاز؟"
+msgstr "أأعين كجهاز رئيسي أم أربط الجهاز؟"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr "يمكنك استخدام فلير كجهاز رئيسي او ثانوي."
+msgstr "يمكنك استخدام «شرارة» كجهاز رئيسي أو ثانوي."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
@@ -423,7 +420,7 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
-"يمكن استخدام فلير كتطبيق مرتبط بجهازك الرئيسي، كطريقة عمل تطبيق Signal "
+"يمكن استخدام «شرارة» كتطبيق مرتبط بجهازك الرئيسي بشكل مشابه لتطبيق سيجنال "
 "الرسمي على الحاسوب. هذا الوضع مجرب ويعمل في الغالب."
 
 #: data/resources/ui/setup_window.blp:140
@@ -438,32 +435,32 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
-"يمكن لفلير ان يعمل كجهاز رئيسي، كما في تطبيقات Signal الرسمية على اندرويد و "
-"IOS. هذا الوضع غير مدعوم حاليًا من فلير، رغم ان الإختبارات الأولية تظهر انه "
-"يعمل. إذا كنت ترغب في تجربته، بإمكانك تفعيله من الزر التالي (في حال لم تكن "
-"تعرف طريقة التفعيل، يرجى عدم التفكير بتجربة \"التفعيل كجهاز رئيسي\")."
+"يمكن لـ«شرارة» أن يعمل كجهاز رئيسي، كما في تطبيقات سيجنال الرسمية على "
+"أندرويد وآي أو إس. هذا الوضع غير مدعوم حاليًا من «شرارة»، رغم أن الاختبارات "
+"الأولية تظهر أنه يعمل. إذا رغبت بتجربته، فيمكنك تفعيله من الزر التالي (في "
+"حال لم تعرف طريقة التفعيل، يرجى عدم التفكير بتجربة «التفعيل كجهاز رئيسي»)."
 
 #: data/resources/ui/setup_window.blp:194
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
-"للربط كجهاز ثانوي، فلير يحتاج إلى تسمية الجهاز وهذا الإسم سيظهر في التطبيق "
-"الرسمي."
+"للربط كجهاز ثانوي فإن «شرارة» يحتاج إلى تسمية الجهاز، وهذا الاسم سيظهر في "
+"التطبيق الرسمي."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
-msgstr ""
+msgstr "اسم الجهاز"
 
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "خيارات المطور"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
-msgstr ""
+msgstr "خوادم سيجنال"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -477,11 +474,11 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
 msgid "Link device"
-msgstr ""
+msgstr "اربط الجهاز"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
-msgstr ""
+msgstr "امسح الرمز"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan this code with another Signal app logged into your account."
@@ -489,7 +486,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
-msgstr ""
+msgstr "اربط دون المسح"
 
 #: data/resources/ui/setup_window.blp:280
 msgid "Manual linking"
@@ -507,11 +504,11 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:308
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "انسخ إلى الحافظة"
 
 #: data/resources/ui/setup_window.blp:341
 msgid "Continue"
-msgstr ""
+msgstr "تابع"
 
 #: data/resources/ui/setup_window.blp:358
 msgid ""
@@ -527,7 +524,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "الكابتشا"
 
 #: data/resources/ui/setup_window.blp:386
 msgid ""
@@ -540,7 +537,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:420
 #: data/resources/ui/setup_window.blp:445
 msgid "Confirm"
-msgstr ""
+msgstr "أكِّد"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
@@ -549,7 +546,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
 msgid "Finished"
-msgstr ""
+msgstr "اكتمل"
 
 #: data/resources/ui/setup_window.blp:494
 msgid ""
@@ -560,7 +557,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "العلل المعروفة"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -587,67 +584,67 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "اعرض الاختصارات"
 
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "اذهب إلى الإعدادات"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "اذهب إلى صفحة «عَنْ»"
 
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "افتح القائمة"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "أغلق النافذة"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "القنوات"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "اذهب إلى القناة 1…9"
 
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "ابحث في القنوات"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "ارفع مرفقًا"
 
 #: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "ركز على صندوق مدخلة النص"
 
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr ""
+msgstr "حمِّل المزيد من الرسائل"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
 msgid "Submit Captcha"
-msgstr ""
+msgstr "سلِّم الكابتشا"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -661,134 +658,150 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "الأمارة"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "سلِّم"
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
-msgstr ""
+msgstr "الرسالة"
 
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "أدرِج إيموجي"
 
 #: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "أدرِج إيموجي"
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
-msgstr ""
+msgstr "قائمة القنوات"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "أضِف محادثة"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "المحادثة"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "يكتب"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
-msgstr ""
+msgstr "الإعدادات"
 
 #: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "زامن المراسلين"
 
 #: data/resources/ui/window.blp:181
 msgid "Keybindings"
-msgstr ""
+msgstr "ربط المفاتيح"
 
 #: data/resources/ui/window.blp:186
 msgid "About"
-msgstr ""
+msgstr "عَنْ"
 
 #: data/resources/ui/window.blp:191
 msgid "Quit"
-msgstr ""
+msgstr "أنهِ"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
-msgstr ""
+msgstr "ملاحظة شخصية"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "مراسل مجهول"
 
 #: src/backend/manager.rs:442
 msgid "You"
-msgstr ""
+msgstr "أنت"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "مكالمة واردة"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "مكالمة صادرة"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "بدأت المكالمة"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr ""
+msgstr "انتهت المكالمة"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
-msgstr ""
+msgstr "رفِضَّت المكالمة"
 
 #: src/backend/message/call_message.rs:105
 msgid "Unanswered call"
-msgstr ""
+msgstr "لم تُستجب المكالمة"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
-msgstr ""
+msgstr "تفاعَّل {sender} بـ{emoji} على الرسالة."
 
 #: src/backend/message/reaction_message.rs:80
 msgid "Reacted {emoji} to a message."
-msgstr ""
+msgstr "تفاعَّل بـ{emoji} على الرسالة."
 
 #: src/backend/message/text_message.rs:381
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "لم يرسل صورًا"
+msgstr[1] "أرسل صورة واحدة"
+msgstr[2] "أرسل صورتين"
+msgstr[3] "أرسل {} صور"
+msgstr[4] "أرسل {} صورة"
+msgstr[5] "أرسل {} صورة"
 
 #: src/backend/message/text_message.rs:383
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "لم يرسل فيديو"
+msgstr[1] "أرسل فيديو واحد"
+msgstr[2] "أرسل مقطعي فيديو"
+msgstr[3] "أرسل {} مقاطع فيديو"
+msgstr[4] "أرسل {} مقطع فيديو"
+msgstr[5] "أرسل {} مقطع فيديو"
 
 #: src/backend/message/text_message.rs:386
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "لم يرسل رسالة صوتية"
+msgstr[1] "أرسل رسالة صوتية واحدة"
+msgstr[2] "أرسل رسالتين صوتيتين"
+msgstr[3] "أرسل {} رسائل صوتية"
+msgstr[4] "أرسل {} رسالة صوتية"
+msgstr[5] "أرسل {} رسالة صوتية"
 
 #: src/backend/message/text_message.rs:391
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "لم يرسل ملفًا"
+msgstr[1] "أرسل ملفًا واحدًا"
+msgstr[2] "أرسل ملفين"
+msgstr[3] "أرسل {} ملفات"
+msgstr[4] "أرسل {} ملفًا"
+msgstr[5] "أرسل {} ملف"
 
 #: src/error.rs:91
 msgid "I/O Error."
-msgstr ""
+msgstr "خطأ I/O."
 
 #: src/error.rs:96
 msgid "There does not seem to be a connection to the internet available."
@@ -816,11 +829,11 @@ msgstr ""
 
 #: src/error.rs:121
 msgid "Sending a message failed."
-msgstr ""
+msgstr "تعذَّر إرسال الرسالة."
 
 #: src/error.rs:126
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "تعذَّر استلام الرسالة."
 
 #: src/error.rs:131
 msgid ""
@@ -853,17 +866,15 @@ msgstr ""
 
 #: src/gui/channel_info_dialog.rs:197
 msgid "Never"
-msgstr ""
+msgstr "أبدًا"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "مسودَّة"
 
 #: src/gui/linked_devices_window.rs:116
-#, fuzzy
-#| msgid "Linked Devices"
 msgid "Unlink Device?"
-msgstr "الأجهزة المرتبطة"
+msgstr "أألغِ ربط الجهاز؟"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
@@ -893,47 +904,47 @@ msgstr ""
 
 #: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "نُسِخَت إلى الحافظة"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:102 src/gui/utility.rs:126
 msgid "%H:%M"
-msgstr ""
+msgstr "%OH:%OM"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:105
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%Oy-%Om-%Od %OH:%OM"
 
 #: src/gui/utility.rs:138
 msgid "Today"
-msgstr ""
+msgstr "اليوم"
 
 #: src/gui/utility.rs:141
 msgid "Yesterday"
-msgstr ""
+msgstr "البارحة"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Oy-%Om-%Od"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:151
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%Oa.، %Oe. %Ob"
 
 #: src/gui/utility.rs:159
 msgid "Attachment"
-msgstr ""
+msgstr "المرفق"
 
 #: src/gui/window.rs:304 src/gui/window.rs:310
 msgid "Remove Messages"
-msgstr ""
+msgstr "أزِل الرسائل"
 
 #: src/gui/window.rs:305
 msgid "This will remove all locally stored messages from this channel"
@@ -943,11 +954,11 @@ msgstr ""
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "دردِش مع أصدقائك على سيجنال"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "مراسلة;دردشة;سيجنال;signal;flare;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
@@ -956,6 +967,9 @@ msgid ""
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
+"«شرارة» هو تطبيق غير رسمي لسيجنال. لا يزال التطبيق قيد التطوير وقد لا يتضمن "
+"جميع المزايا في تطبيقات سيجنال الرسمية. يمكن العثور على مزيد من المعلومات "
+"على صفحة مخطط المزايا لتطبيقنا."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -968,19 +982,19 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:609
 msgid "Overview of the application"
-msgstr ""
+msgstr "نظرة عامة عن التطبيق"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "عُرض النافذة"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "ارتفاع النافذة"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "حالة النافذة القصوى"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
@@ -990,39 +1004,39 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "نزِّل الصور تلقائيًا"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "نزِّل مقاطع الفيديو تلقائيًا"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
-msgstr ""
+msgstr "نزِّل الرسائل الصوتية تلقائيًا"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "نزِّل الملفات تلقائيًا"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
-msgstr ""
+msgstr "أرسِل تنبيهات"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "شغِّل بالخلفية عند الإغلاق"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "أرسل التنبيهات عند جلب التفاعلات"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "قابلية تحديد الرسائل"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "أرسِل رسالة عند ضغط مفتاح \"Enter\""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
