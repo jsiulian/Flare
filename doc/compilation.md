@@ -5,7 +5,7 @@ This document lists some of them.
 
 ## GNOME Builder
 
-You should be able to directly clone, compile and run Railway using [GNOME Builder](https://apps.gnome.org/Builder/). Note that if you installed GNOME Builder as a Flatpak, it cannot automatically install the dependencies Railway requires; you need to manually install them in that case using:
+You should be able to directly clone, compile and run Flare using [GNOME Builder](https://apps.gnome.org/Builder/). Note that if you installed GNOME Builder as a Flatpak, it cannot automatically install the dependencies Flare requires; you need to manually install them in that case using:
 
 ```bash
 flatpak remote-add --if-not-exists gnome-nightly https://nightly.gnome.org/gnome-nightly.flatpakrepo  # Add the GNOME nightly repository, see <https://wiki.gnome.org/Apps/Nightly>
