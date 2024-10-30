@@ -54,6 +54,7 @@ template $FlChannelMessages: Box {
         valign: end;
         margin-bottom: 7;
         margin-end: 7;
+        focus-on-click: false;
         clicked => $scroll_down() swapped;
         visible: bind $not(template.sticky) as <bool>;
       }
@@ -212,6 +213,7 @@ template $FlChannelMessages: Box {
 
               clicked => $remove_attachments() swapped;
               icon-name: "list-remove-symbolic";
+              focus-on-click: false;
             }
 
             Box box_attachments {
@@ -236,6 +238,7 @@ template $FlChannelMessages: Box {
               tooltip-text: C_("tooltip", "Add attachment");
               clicked => $add_attachment() swapped;
               icon-name: "mail-attachment-symbolic";
+              focus-on-click: false;
 
               ShortcutController {
                 scope: managed;
@@ -274,6 +277,7 @@ template $FlChannelMessages: Box {
               tooltip-text: C_("tooltip", "Send");
               valign: end;
               clicked => $send_message() swapped;
+              focus-on-click: false;
             }
           }
         }
