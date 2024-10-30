@@ -65,7 +65,7 @@ impl Message {
                     .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
                     .await;
 
-                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
 
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
@@ -103,7 +103,7 @@ impl Message {
                         &message.group_v2,
                     )
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -126,7 +126,7 @@ impl Message {
                 let channel = manager
                     .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -160,7 +160,7 @@ impl Message {
                         &message.group_v2,
                     )
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -181,7 +181,7 @@ impl Message {
                 let channel = manager
                     .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -216,7 +216,7 @@ impl Message {
                         &message.group_v2,
                     )
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -239,7 +239,7 @@ impl Message {
                 let channel = manager
                     .channel_from_uuid_or_group(metadata.sender.uuid, &None)
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid);
+                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -254,7 +254,7 @@ impl Message {
                 // TODO: typing message for group
                 let channel = manager.channel_from_uuid_or_group(uuid, &None).await;
 
-                let contact = channel.participant_by_uuid(uuid);
+                let contact = channel.participant_by_uuid(uuid).await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                 } else {

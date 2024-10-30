@@ -15,10 +15,10 @@ use glib::Bytes;
 use glib::{prelude::Cast, Object};
 
 use libsignal_service::{
-    groups_v2::Group,
     proto::{DataMessage, GroupContextV2},
     ServiceAddress,
 };
+use presage::model::groups::Group;
 use presage::store::Thread;
 
 gtk::glib::wrapper! {
@@ -186,8 +186,8 @@ impl Channel {
         self.imp().timeline.borrow().trim_old()
     }
 
-    pub fn clear_messages(&self) -> Result<(), ApplicationError> {
-        self.manager().clear_channel_messages(self)?;
+    pub async fn clear_messages(&self) -> Result<(), ApplicationError> {
+        self.manager().clear_channel_messages(self).await?;
         self.imp().timeline.borrow().clear();
         Ok(())
     }
@@ -203,8 +203,8 @@ impl Channel {
         self.imp().group_context.borrow().clone()
     }
 
-    pub fn group(&self) -> Option<Group> {
-        self.imp().group.borrow().clone()
+    pub fn group(&self) -> std::cell::Ref<'_, Option<Group>> {
+        self.imp().group.borrow()
     }
 
     pub fn contact(&self) -> Option<Contact> {
@@ -230,7 +230,7 @@ impl Channel {
             return Ok(());
         };
         self.manager()
-            .send_session_reset(ServiceAddress::new_aci(uuid), ts)
+            .send_session_reset(ServiceAddress::from_aci(uuid), ts)
             .await
     }
 
@@ -455,25 +455,29 @@ impl Channel {
         self.imp().participants.borrow().clone()
     }
 
-    pub fn participant_by_uuid(&self, uuid: Uuid) -> Contact {
+    pub async fn participant_by_uuid(&self, uuid: Uuid) -> Contact {
         let found = self.participants().into_iter().find(|c| c.uuid() == uuid);
         if let Some(found) = found {
             return found;
         }
-        let new = Contact::from_service_address(&ServiceAddress::new_aci(uuid), &self.manager());
+        let new =
+            Contact::from_service_address(&ServiceAddress::from_aci(uuid), &self.manager()).await;
         self.imp().participants.borrow_mut().push(new.clone());
         new
     }
 
     async fn initialize_participants(&self) {
         let manager = self.manager();
-        if let Some(group) = self.group() {
-            let participants = group
-                .members
-                .into_iter()
-                .map(|m| ServiceAddress::new_aci(m.uuid))
-                .map(|a| Contact::from_service_address(&a, &manager))
-                .collect::<Vec<_>>();
+        // Make sure to not hold reference accross await.
+        let members = { self.group().as_ref().map(|g| g.members.clone()) };
+        if let Some(members) = members {
+            let mut participants = Vec::with_capacity(members.len());
+            // XXX: Parallelize?
+            for p in &members {
+                let address = ServiceAddress::from_aci(p.uuid);
+                let contact = Contact::from_service_address(&address, &manager).await;
+                participants.push(contact);
+            }
             for p in &participants {
                 p.set_channel(Some(self));
                 p.update_profile_name_and_avatar().await;
@@ -551,8 +555,8 @@ impl Channel {
     pub fn name_parts(&self) -> (Option<String>, String) {
         if self.is_self() {
             (None, gettextrs::gettext("Note to self"))
-        } else if let Some(group) = self.group() {
-            (None, group.title)
+        } else if let Some(group) = &*self.group() {
+            (None, group.title.clone())
         } else if let Some(contact) = self.contact() {
             contact.name_parts()
         } else {
@@ -617,7 +621,8 @@ mod imp {
 
     use gdk::Paintable;
 
-    use libsignal_service::{groups_v2::Group, prelude::Uuid, proto::GroupContextV2};
+    use libsignal_service::{prelude::Uuid, proto::GroupContextV2};
+    use presage::model::groups::Group;
 
     #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::Channel)]

@@ -103,9 +103,9 @@ impl ChannelMessages {
         ));
     }
 
-    pub fn clear_messages(&self) -> Result<(), ApplicationError> {
+    pub async fn clear_messages(&self) -> Result<(), ApplicationError> {
         if let Some(channel) = self.active_channel() {
-            channel.clear_messages()?;
+            channel.clear_messages().await?;
         } else {
             log::warn!("Was asked to clear the messages with no currently active channel");
         }

@@ -50,8 +50,9 @@ impl From<PresageError> for ApplicationError {
                 ApplicationError::UnauthorizedSignal
             }
             p::Error::Store(e) => ApplicationError::Db(e),
-            p::Error::ServiceError(ServiceError::WsError { reason: e })
-                if e.contains(FAILED_TO_LOOK_UP_ADDRESS) || e.contains(NETWORK_UNREACHABLE) =>
+            p::Error::ServiceError(ServiceError::WsError(e))
+                if e.to_string().contains(FAILED_TO_LOOK_UP_ADDRESS)
+                    || e.to_string().contains(NETWORK_UNREACHABLE) =>
             {
                 ApplicationError::NoInternet
             }
