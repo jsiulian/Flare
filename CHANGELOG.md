@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Don't focus a few buttons when clicked, in order to keep on-screen keyboard open.
+- Add counts to reaction emojis.
+- Changed default reaction emoji list to match the one from Signal.
+
+### Chores
+
+- Updates to the backend, which should fix a few issues with Signal.
+
 ## [0.15.3] - 2024-10-07
 
 ### Chores
