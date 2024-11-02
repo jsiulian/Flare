@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.4] - 2024-11-02
+
 ### Changed
 
 - Don't focus a few buttons when clicked, in order to keep on-screen keyboard open.
@@ -624,7 +626,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.3...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.4...master
+[0.15.4]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.3...0.15.4
 [0.15.3]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.2...0.15.3
 [0.15.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.1...0.15.2
 [0.15.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.0...0.15.1
