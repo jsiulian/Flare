@@ -283,8 +283,8 @@ impl TextMessage {
             index_utf8 += to_add_body.len() + name.len();
             let index_end_highlight = index_utf8;
 
-            let mut highlight =
-                AttrColor::new_foreground(MENTION_COLOR.0, MENTION_COLOR.1, MENTION_COLOR.2);
+            let (red, green, blue) = MENTION_COLOR;
+            let mut highlight = AttrColor::new_foreground(red, green, blue);
             highlight.set_start_index(index_start_highlight as u32);
             highlight.set_end_index(index_end_highlight as u32);
             attrs.insert(highlight);
