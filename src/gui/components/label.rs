@@ -171,11 +171,11 @@ mod imp {
                                     let label = &obj.imp().label;
                                     let text =
                                         label.text().replace(OBJECT_REPLACEMENT_CHARACTER, "");
-                                    if let Some(bounds) = label.selection_bounds() {
+                                    if let Some((start, end)) = label.selection_bounds() {
                                         let selected_text: String = text
                                             .chars()
-                                            .skip(bounds.0 as usize)
-                                            .take((bounds.1 - bounds.0) as usize)
+                                            .skip(start as usize)
+                                            .take((end - start) as usize)
                                             .collect();
                                         let display = gdk::Display::default()
                                             .expect("there should be a display");
@@ -199,10 +199,10 @@ mod imp {
 
                                     let text =
                                         label.text().replace(OBJECT_REPLACEMENT_CHARACTER, "");
-                                    if let Some(bounds) = label.selection_bounds() {
+                                    if let Some((start, end)) = label.selection_bounds() {
                                         label.select_region(
-                                            bounds.0,
-                                            bounds.1.min(text.char_indices().count() as i32),
+                                            start,
+                                            end.min(text.char_indices().count() as i32),
                                         );
                                     };
                                     None
@@ -249,9 +249,9 @@ mod imp {
                     .indicators_size
                     .replace(Some((indicators_size.width(), indicators_size.height())));
 
-                if let Some(old_indicators_size) = old {
-                    if indicators_size.width() != old_indicators_size.0
-                        || indicators_size.height() != old_indicators_size.1
+                if let Some((old_indicators_width, old_indicators_height)) = old {
+                    if indicators_size.width() != old_indicators_width
+                        || indicators_size.height() != old_indicators_height
                     {
                         obj.update_label_attributes(&indicators_size);
                     }
