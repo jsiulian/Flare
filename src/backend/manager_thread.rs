@@ -18,9 +18,10 @@ use libsignal_service::{
     content::ContentBody,
     prelude::{phonenumber, Content, ProfileKey, Uuid},
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
+    protocol::ServiceId,
     push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
-    Profile, ServiceAddress,
+    Profile,
 };
 use presage::{
     manager::{ReceivingMode, Registered, RegistrationOptions, RegistrationType},
@@ -50,9 +51,9 @@ enum Command {
         [u8; 32],
         oneshot::Sender<Result<Option<Group>, <Store as presage::store::Store>::Error>>,
     ),
-    SendSessionReset(ServiceAddress, u64, oneshot::Sender<Result<(), Error>>),
+    SendSessionReset(ServiceId, u64, oneshot::Sender<Result<(), Error>>),
     SendMessage(
-        ServiceAddress,
+        ServiceId,
         Box<ContentBody>,
         u64,
         oneshot::Sender<Result<(), Error>>,
@@ -308,7 +309,7 @@ impl ManagerThread {
 
     pub async fn send_message(
         &self,
-        recipient_addr: impl Into<ServiceAddress>,
+        recipient_addr: impl Into<ServiceId>,
         message: impl Into<ContentBody>,
         timestamp: u64,
     ) -> Result<(), Error> {
@@ -328,7 +329,7 @@ impl ManagerThread {
 
     pub async fn send_session_reset(
         &self,
-        recipient_addr: impl Into<ServiceAddress>,
+        recipient_addr: impl Into<ServiceId>,
         timestamp: u64,
     ) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
@@ -655,7 +656,7 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
         // XXX: Uuid should not be used anymore.
         // XXX: Don't use nil.
         Command::Uuid(callback) => callback
-            .send(manager.registration_data().aci())
+            .send(manager.registration_data().service_ids.aci().into())
             .expect("Callback sending failed"),
         Command::SubmitRecaptchaChallenge(token, captcha, callback) => callback
             .send(manager.submit_recaptcha_challenge(&token, &captcha).await)

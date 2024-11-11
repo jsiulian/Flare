@@ -17,36 +17,36 @@ opt-level = 3
 opt-level = 3
 
 [dependencies]
-gtk = { version = "0.9.0", package = "gtk4", features = ["v4_12"]}
-adw = { version = "0.7.0", package = "libadwaita", features = ["v1_5"]}
-ashpd = { version = "0.9.1", default-features = false, features = [ "gtk4", "tokio" ]}
+gtk = { version = "0.9.3", package = "gtk4", features = ["v4_12"]}
+adw = { version = "0.7.1", package = "libadwaita", features = ["v1_5"]}
+ashpd = { version = "0.10.2", default-features = false, features = [ "gtk4", "tokio" ]}
 zbus = { version = "4.4.0", default-features = false, features = [ "tokio" ]}
 
-gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
+gettext-rs = { version = "0.7.2", features = ["gettext-system"] }
  
-futures = "0.3.30"
-tokio = { version = "1.38.1", features = ["rt", "macros", "rt-multi-thread", "time"] }
-regex = "1.10.5"
+futures = "0.3.31"
+tokio = { version = "1.41.1", features = ["rt", "macros", "rt-multi-thread", "time"] }
+regex = "1.11.1"
 lazy_static = "1.5.0"
 
-presage = { git = "https://github.com/whisperfish/presage", rev = "ff708a1" }
-presage-store-sled = { git = "https://github.com/whisperfish/presage", rev = "ff708a1" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "468fa6f84cce0db3bdf11609d165758291da99df" }
+presage = { git = "https://github.com/whisperfish/presage", rev = "426b156" }
+presage-store-sled = { git = "https://github.com/whisperfish/presage", rev = "426b156" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "6401dc34872a5f0c2fba32c1f136d98ccf3dd418" }
 
 oo7 = { version = "0.3.3", default-features = false, features = ["native_crypto", "tokio"] }
 rand = "0.8.5"
-url = "2.5.2"
-once_cell = "1.19.0"
+url = "2.5.3"
+once_cell = "1.20.2"
 
 qrcode-generator = "4.1.9"
 
 log = "0.4.22"
-env_logger = "0.11.3"
+env_logger = "0.11.5"
 
 tracing = { version = "0.1.40", features = ["log-always"] }
-sourceview5 = "0.9.0"
+sourceview5 = "0.9.1"
 libspelling = "0.3.0"
-blurhash = { git = "https://github.com/Schmiddiii/blurhash-rs", rev = "e1f9bdc1976bcc0f7dc725ac3b4fdaa6c6bdffd7", features = ["image", "gdk-pixbuf"] }
+blurhash = { git = "https://github.com/whisperfish/blurhash-rs", rev = "2135e10", features = ["gdk-pixbuf"] }
 image = "0.24.9"
 chrono = "0.4.38"
 

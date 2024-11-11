@@ -4,7 +4,7 @@ use gdk::Texture;
 use glib::Bytes;
 use libsignal_service::{
     prelude::{phonenumber::Mode, Uuid},
-    ServiceAddress,
+    protocol::ServiceId,
 };
 
 use super::Manager;
@@ -15,16 +15,16 @@ gtk::glib::wrapper! {
 }
 
 impl Contact {
-    pub(super) async fn from_service_address(address: &ServiceAddress, manager: &Manager) -> Self {
-        log::trace!("Building a `Contact` from a `ServiceAddress`");
-        if let Ok(Some(contact)) = manager.get_contact_by_id(address.uuid).await {
+    pub(super) async fn from_service_address(address: &ServiceId, manager: &Manager) -> Self {
+        log::trace!("Building a `Contact` from a `ServiceId`");
+        if let Ok(Some(contact)) = manager.get_contact_by_id(address.raw_uuid()).await {
             return Self::from_contact(contact, manager);
         }
         log::trace!("Not in the contact list");
         let s: Self = Object::builder::<Self>()
             .property("manager", manager)
             .build();
-        s.imp().uuid.swap(&RefCell::new(Some(address.uuid)));
+        s.imp().uuid.swap(&RefCell::new(Some(address.raw_uuid())));
         s
     }
 
@@ -109,18 +109,18 @@ impl Contact {
 
     pub fn uuid(&self) -> Uuid {
         if let Some(a) = self.address() {
-            a.uuid
+            a.raw_uuid()
         } else {
             (*self.imp().uuid.borrow()).unwrap_or_default()
         }
     }
 
-    pub(super) fn address(&self) -> Option<ServiceAddress> {
+    pub(super) fn address(&self) -> Option<ServiceId> {
         self.imp()
             .contact
             .borrow()
             .as_ref()
-            .map(|c| ServiceAddress::from_aci(c.uuid))
+            .map(|c| ServiceId::Aci(c.uuid.into()))
     }
 
     pub fn expire_timer(&self) -> u32 {

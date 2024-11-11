@@ -34,7 +34,7 @@ impl Login1 {
             .map(|a| *a.arg1())
     }
 
-    pub async fn await_suspend_wakeup(&self) -> ashpd::Result<()> {
+    pub async fn await_suspend_wakeup(&self) -> Result<(), zbus::Error> {
         log::trace!("Awaiting sleep change.");
         while self.receive_sleep().await? {
             log::trace!("Going to sleep. Do nothing.");

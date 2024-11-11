@@ -62,10 +62,12 @@ impl Message {
                 if message.reaction.is_none() && message.delete.is_none() =>
             {
                 let channel = manager
-                    .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
+                    .channel_from_uuid_or_group(metadata.sender.raw_uuid(), &message.group_v2)
                     .await;
 
-                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
+                let contact = channel
+                    .participant_by_uuid(metadata.sender.raw_uuid())
+                    .await;
 
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
@@ -99,11 +101,13 @@ impl Message {
                     .channel_from_uuid_or_group(
                         uuid.as_ref()
                             .map(|u| u.parse().expect("Failed to parse UUID"))
-                            .unwrap_or(metadata.sender.uuid),
+                            .unwrap_or(metadata.sender.raw_uuid()),
                         &message.group_v2,
                     )
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
+                let contact = channel
+                    .participant_by_uuid(metadata.sender.raw_uuid())
+                    .await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -124,9 +128,11 @@ impl Message {
             // A reaction message.
             ContentBody::DataMessage(message) if message.reaction.is_some() => {
                 let channel = manager
-                    .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
+                    .channel_from_uuid_or_group(metadata.sender.raw_uuid(), &message.group_v2)
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
+                let contact = channel
+                    .participant_by_uuid(metadata.sender.raw_uuid())
+                    .await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -156,11 +162,13 @@ impl Message {
                     .channel_from_uuid_or_group(
                         uuid.as_ref()
                             .map(|u| u.parse().expect("Failed to parse UUID"))
-                            .unwrap_or(metadata.sender.uuid),
+                            .unwrap_or(metadata.sender.raw_uuid()),
                         &message.group_v2,
                     )
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
+                let contact = channel
+                    .participant_by_uuid(metadata.sender.raw_uuid())
+                    .await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -179,9 +187,11 @@ impl Message {
             // A deletion message.
             ContentBody::DataMessage(message) if message.delete.is_some() => {
                 let channel = manager
-                    .channel_from_uuid_or_group(metadata.sender.uuid, &message.group_v2)
+                    .channel_from_uuid_or_group(metadata.sender.raw_uuid(), &message.group_v2)
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
+                let contact = channel
+                    .participant_by_uuid(metadata.sender.raw_uuid())
+                    .await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -212,11 +222,13 @@ impl Message {
                     .channel_from_uuid_or_group(
                         uuid.as_ref()
                             .map(|u| u.parse().expect("Failed to parse UUID"))
-                            .unwrap_or(metadata.sender.uuid),
+                            .unwrap_or(metadata.sender.raw_uuid()),
                         &message.group_v2,
                     )
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
+                let contact = channel
+                    .participant_by_uuid(metadata.sender.raw_uuid())
+                    .await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -237,9 +249,11 @@ impl Message {
             ContentBody::CallMessage(c) => {
                 // TODO: Group calls?
                 let channel = manager
-                    .channel_from_uuid_or_group(metadata.sender.uuid, &None)
+                    .channel_from_uuid_or_group(metadata.sender.raw_uuid(), &None)
                     .await;
-                let contact = channel.participant_by_uuid(metadata.sender.uuid).await;
+                let contact = channel
+                    .participant_by_uuid(metadata.sender.raw_uuid())
+                    .await;
                 if contact.is_blocked() {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
@@ -250,7 +264,7 @@ impl Message {
             // Typing messages.
             // Note that they are currently only implemented for contacts, this requires upstream updates to fix.
             ContentBody::TypingMessage(t) => {
-                let uuid = metadata.sender.uuid;
+                let uuid = metadata.sender.raw_uuid();
                 // TODO: typing message for group
                 let channel = manager.channel_from_uuid_or_group(uuid, &None).await;
 
