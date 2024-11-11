@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Chores
+
+- Updates to the backend, which should fix a few issues with Signal.
+
 ## [0.15.4] - 2024-11-02
 
 ### Changed

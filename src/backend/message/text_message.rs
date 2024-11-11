@@ -172,7 +172,7 @@ impl TextMessage {
             target_author_aci: self
                 .sender()
                 .address()
-                .map(|a| a.uuid)
+                .map(|a| a.raw_uuid())
                 .map(|u| u.to_string()),
             target_sent_timestamp: Some(self.timestamp()),
         };
@@ -371,7 +371,7 @@ mod imp {
                 let sender = msg.sender().address();
                 data.quote = Some(Quote {
                     id: Some(msg.timestamp()),
-                    author_aci: sender.as_ref().map(|a| a.uuid).map(|u| u.to_string()),
+                    author_aci: sender.as_ref().map(|a| a.raw_uuid()).map(|u| u.to_string()),
                     text: msg.body(),
                     ..Default::default()
                 });

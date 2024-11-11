@@ -7,9 +7,10 @@ use gio::Settings;
 use libsignal_service::{
     content::ContentBody,
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
+    protocol::ServiceId,
     push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
-    Profile, ServiceAddress,
+    Profile,
 };
 use oo7::Keyring;
 use presage::model::groups::Group;
@@ -459,7 +460,7 @@ impl Manager {
         if let Some(found) = found {
             return found;
         }
-        let contact = Contact::from_service_address(&ServiceAddress::from_aci(uuid), self).await;
+        let contact = Contact::from_service_address(&ServiceId::Aci(uuid.into()), self).await;
         Channel::from_contact_or_group(contact, group, self).await
     }
 
@@ -619,7 +620,7 @@ impl Manager {
 
     pub(super) async fn send_message(
         &self,
-        recipient_addr: impl Into<ServiceAddress> + std::clone::Clone,
+        recipient_addr: impl Into<ServiceId> + std::clone::Clone,
         message: impl Into<ContentBody>,
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
@@ -635,7 +636,7 @@ impl Manager {
 
     pub(super) async fn send_session_reset(
         &self,
-        recipient_addr: impl Into<ServiceAddress>,
+        recipient_addr: impl Into<ServiceId>,
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
         log::trace!("`Manager::send_session_reset` start");

@@ -16,7 +16,7 @@ use glib::{prelude::Cast, Object};
 
 use libsignal_service::{
     proto::{DataMessage, GroupContextV2},
-    ServiceAddress,
+    protocol::ServiceId,
 };
 use presage::model::groups::Group;
 use presage::store::Thread;
@@ -217,7 +217,7 @@ impl Channel {
             .borrow()
             .as_ref()
             .and_then(|c| c.address())
-            .map(|a| a.uuid)
+            .map(|a| a.raw_uuid())
     }
 
     pub async fn send_session_reset(&self) -> Result<(), ApplicationError> {
@@ -230,7 +230,7 @@ impl Channel {
             return Ok(());
         };
         self.manager()
-            .send_session_reset(ServiceAddress::from_aci(uuid), ts)
+            .send_session_reset(ServiceId::Aci(uuid.into()), ts)
             .await
     }
 
@@ -461,7 +461,7 @@ impl Channel {
             return found;
         }
         let new =
-            Contact::from_service_address(&ServiceAddress::from_aci(uuid), &self.manager()).await;
+            Contact::from_service_address(&ServiceId::Aci(uuid.into()), &self.manager()).await;
         self.imp().participants.borrow_mut().push(new.clone());
         new
     }
@@ -474,7 +474,7 @@ impl Channel {
             let mut participants = Vec::with_capacity(members.len());
             // XXX: Parallelize?
             for p in &members {
-                let address = ServiceAddress::from_aci(p.uuid);
+                let address = ServiceId::Aci(p.uuid.into());
                 let contact = Contact::from_service_address(&address, &manager).await;
                 participants.push(contact);
             }
@@ -758,7 +758,7 @@ mod imp {
                 .borrow()
                 .as_ref()
                 .and_then(|c| c.address())
-                .map(|a| a.uuid)
+                .map(|a| a.raw_uuid())
             {
                 uuid.hash(state);
             } else {

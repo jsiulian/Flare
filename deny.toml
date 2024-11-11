@@ -13,6 +13,7 @@ allow = [
     "Zlib",
     "ISC",
     "Unicode-DFS-2016",
+    "Unicode-3.0",
     "OpenSSL",
 ]
 
@@ -42,4 +43,4 @@ license-files = []
 multiple-versions = "allow"
 
 [sources.allow-org]
-github = ["whisperfish", "signalapp", "Schmiddiii"]
+github = ["whisperfish", "signalapp"]

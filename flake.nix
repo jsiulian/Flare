@@ -2,17 +2,13 @@
   description = "Chat with your friends on Signal";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.nixpkgs-gnome.url = "github:NixOS/nixpkgs/gnome";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  outputs = { self, nixpkgs, nixpkgs-gnome, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
     (flake-utils.lib.eachDefaultSystem
       (system:
         let
           pkgs = import nixpkgs {
-            inherit system;
-          };
-          pkgs-gnome = import nixpkgs-gnome {
             inherit system;
           };
 
@@ -25,10 +21,11 @@
               cargoDeps = rustPlatform.importCargoLock {
                 lockFile = ./Cargo.lock;
                 outputHashes = {
-                  "curve25519-dalek-4.1.1" = "sha256-p9Vx0lAaYILypsI4/RVsHZLOqZKaa4Wvf7DanLA38pc=";
-                  "libsignal-protocol-0.1.0" = "sha256-p4YzrtJaQhuMBTtquvS1m9llszfyTeDfl7+IXzRUFSE=";
-                  "libsignal-service-0.1.0" = "sha256-rXa/7AmCt03WvMPqrOxPkQlNrMvJQuodEkBuqYo9sFQ=";
-                  "presage-0.6.1" = "sha256-4rH/Yt//0EpF8KQQXkurX5m9tMrFRI2MaJ+IzddVUUU=";
+                  "curve25519-dalek-4.1.3" = "sha256-bPh7eEgcZnq9C3wmSnnYv0C4aAP+7pnwk9Io29GrI4A=";
+                  "libsignal-protocol-0.1.0" = "sha256-AdN8UHu0khgsog1btE++0J4BmdUC6wMpZzL7HPzhALQ=";
+                  "libsignal-service-0.1.0" = "sha256-pEWp8Um1QyppgdLxduzISdj0oXC8Dxte6LAYbOvBNUs=";
+                  "presage-0.7.0-dev" = "sha256-F8SuJkv/xe0zv92a70V5gHLoEbwM3DZIxZYuDBfYAus=";
+                  "blurhash-0.2.3" = "sha256-s1777+2O0D/VyKwlPUA53gho5sOP8pN610KqxEjugz0=";
                 };
               };
               src = let fs = lib.fileset; in fs.toSource {
@@ -43,8 +40,8 @@
                       ./flake.lock
                     ]);
               };
-              buildInputs = with pkgs; [ pkgs-gnome.libadwaita pkgs.protobuf pkgs.libsecret pkgs.gst_all_1.gstreamer pkgs.gst_all_1.gst-plugins-base pkgs.gst_all_1.gst-plugins-good pkgs.gst_all_1.gst-plugins-bad pkgs-gnome.gtksourceview5 pkgs-gnome.gtk4 pkgs.libspelling ];
-              nativeBuildInputs = with pkgs; [ pkgs.appstream pkgs.blueprint-compiler pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs-gnome.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs-gnome.glib ];
+              buildInputs = with pkgs; [ pkgs.libadwaita pkgs.protobuf pkgs.libsecret pkgs.gst_all_1.gstreamer pkgs.gst_all_1.gst-plugins-base pkgs.gst_all_1.gst-plugins-good pkgs.gst_all_1.gst-plugins-bad pkgs.gtksourceview5 pkgs.gtk4 pkgs.libspelling ];
+              nativeBuildInputs = with pkgs; [ pkgs.appstream pkgs.blueprint-compiler pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib ];
 
               PROTOC = "${pkgs.protobuf}/bin/protoc";
 
@@ -81,7 +78,7 @@
               nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb clippy sysprof cargo-deny mold-wrapped ] ++ [ run run-gdb check i18n prof ];
               shellHook = ''
                 # Required for the application findings settings.
-                export GSETTINGS_SCHEMA_DIR=${pkgs-gnome.gtk4}/share/gsettings-schemas/${pkgs-gnome.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
+                export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
                 # Required for prost, which by default ships its own protoc (at least in the version of one of our dependencies uses); overrides it to system-protobuf.
                 export PROTOC=${pkgs.protobuf}/bin/protoc
                 meson setup -Dprofile=development build
