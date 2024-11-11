@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.5] - 2024-11-11
+
 ### Chores
 
 - Updates to the backend, which should fix a few issues with Signal.
@@ -630,7 +632,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.4...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.5...master
+[0.15.5]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.4...0.15.5
 [0.15.4]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.3...0.15.4
 [0.15.3]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.2...0.15.3
 [0.15.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.1...0.15.2

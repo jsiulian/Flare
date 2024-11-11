@@ -38,6 +38,14 @@
   </description>
 
   <releases>
+    <release version="v0.15.5" date="2024-11-11">
+      <description translate="no">
+        <p>Chores</p>
+        <ul>
+        <li>Updates to the backend, which should fix a few issues with Signal.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.15.4" date="2024-11-02">
       <description translate="no">
         <p>Changed</p>

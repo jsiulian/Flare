@@ -14,5 +14,5 @@ Adw.AboutDialog about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>Changed</p> <ul> <li>Don't focus a few buttons when clicked, in order to keep on-screen keyboard open.</li> <li>Add counts to reaction emojis.</li> <li>Changed default reaction emoji list to match the one from Signal.</li> </ul> <p>Chores</p> <ul> <li>Updates to the backend, which should fix a few issues with Signal.</li> </ul>";
+  release-notes: "<h3>Chores</h3> <ul> <li>Updates to the backend, which should fix a few issues with Signal.</li> </ul>";
 }
