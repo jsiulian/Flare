@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed contact synchronization not working.
+
 ## [0.15.5] - 2024-11-11
 
 ### Chores

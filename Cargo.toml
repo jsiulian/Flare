@@ -29,9 +29,9 @@ tokio = { version = "1.41.1", features = ["rt", "macros", "rt-multi-thread", "ti
 regex = "1.11.1"
 lazy_static = "1.5.0"
 
-presage = { git = "https://github.com/whisperfish/presage", rev = "426b156" }
-presage-store-sled = { git = "https://github.com/whisperfish/presage", rev = "426b156" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "6401dc34872a5f0c2fba32c1f136d98ccf3dd418" }
+presage = { git = "https://github.com/whisperfish/presage", rev = "8b9af8ee4758c73550024bea8c715a893e9e4e47" }
+presage-store-sled = { git = "https://github.com/whisperfish/presage", rev = "8b9af8ee4758c73550024bea8c715a893e9e4e47" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "268e0c47e0924597b6379e6f1b5df58abd46d5ca" }
 
 oo7 = { version = "0.3.3", default-features = false, features = ["native_crypto", "tokio"] }
 rand = "0.8.5"

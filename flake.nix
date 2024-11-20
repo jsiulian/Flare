@@ -23,8 +23,8 @@
                 outputHashes = {
                   "curve25519-dalek-4.1.3" = "sha256-bPh7eEgcZnq9C3wmSnnYv0C4aAP+7pnwk9Io29GrI4A=";
                   "libsignal-protocol-0.1.0" = "sha256-AdN8UHu0khgsog1btE++0J4BmdUC6wMpZzL7HPzhALQ=";
-                  "libsignal-service-0.1.0" = "sha256-pEWp8Um1QyppgdLxduzISdj0oXC8Dxte6LAYbOvBNUs=";
-                  "presage-0.7.0-dev" = "sha256-F8SuJkv/xe0zv92a70V5gHLoEbwM3DZIxZYuDBfYAus=";
+                  "libsignal-service-0.1.0" = "sha256-KSj4Djm0yCP4WX1WnRF+ZbTb6kKeCSHNNPuonhnz4oU=";
+                  "presage-0.7.0-dev" = "sha256-3TyKaMtNUw85+dCvn0VWzJNyaWBeUd2wM8+wFHoTSuE=";
                   "blurhash-0.2.3" = "sha256-s1777+2O0D/VyKwlPUA53gho5sOP8pN610KqxEjugz0=";
                 };
               };
