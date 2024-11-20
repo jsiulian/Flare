@@ -38,6 +38,14 @@
   </description>
 
   <releases>
+    <release version="v0.15.6" date="2024-11-20">
+      <description translate="no">
+        <p>Fixed</p>
+        <ul>
+          <li>Fixed contact synchronization not working.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.15.5" date="2024-11-11">
       <description translate="no">
         <p>Chores</p>

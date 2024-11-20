@@ -14,5 +14,5 @@ Adw.AboutDialog about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<h3>Chores</h3> <ul> <li>Updates to the backend, which should fix a few issues with Signal.</li> </ul>";
+  release-notes: "<p>Fixed</p> <ul> <li>Fixed contact synchronization not working.</li> </ul>";
 }
