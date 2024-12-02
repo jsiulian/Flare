@@ -24,16 +24,15 @@ template $FlNewChannelDialog: Adw.Dialog {
         menu-model: primary_menu;
         icon-name: "view-more-symbolic";
       }
-
     }
 
     [top]
     Gtk.SearchBar {
       search-mode-enabled: true;
+
       Gtk.SearchEntry search_entry {
         hexpand: true;
         placeholder-text: _("Search Contacts");
-
         search-changed => $search_changed() swapped;
         activate => $search_activated() swapped;
       }
@@ -49,6 +48,7 @@ template $FlNewChannelDialog: Adw.Dialog {
           styles [
             "navigation-sidebar"
           ]
+
           vexpand: true;
         }
 
@@ -69,11 +69,13 @@ template $FlNewChannelDialog: Adw.Dialog {
 menu primary_menu {
   section {
     label: _("List Contacts By:");
+
     item {
       label: _("First Name");
       action: "new-chat-dialog.sort-on";
       target: "firstname";
     }
+
     item {
       label: _("Surname");
       action: "new-chat-dialog.sort-on";

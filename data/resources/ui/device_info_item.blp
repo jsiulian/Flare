@@ -5,14 +5,17 @@ template $FlDeviceInfoItem: Adw.ActionRow {
   title: bind template.device-info as <$FlDeviceInfo>.name;
   subtitle: bind $format_subtitle(template.device-info as <$FlDeviceInfo>.created, template.device-info as <$FlDeviceInfo>.last-seen) as <string>;
 
-    [suffix]
-    Button {
-      styles [ "destructive-action" ]
-      icon-name: "user-trash-symbolic";
-      halign: end;
-      valign: center;
-      hexpand: true;
-      tooltip-text: _("Unlink Device");
-      clicked => $unlink() swapped;
-    }
+  [suffix]
+  Button {
+    styles [
+      "destructive-action"
+    ]
+
+    icon-name: "user-trash-symbolic";
+    halign: end;
+    valign: center;
+    hexpand: true;
+    tooltip-text: _("Unlink Device");
+    clicked => $unlink() swapped;
+  }
 }

@@ -3,7 +3,9 @@ using Gtk 4.0;
 template $FlEmojiPicker: Box {
   hexpand: true;
   orientation: vertical;
-  layout-manager: GridLayout{};
+
+  layout-manager: GridLayout {};
+
   styles [
     "fl-emoji-picker",
     "heading"
@@ -62,7 +64,7 @@ template $FlEmojiPicker: Box {
       "flat",
       "circular",
     ]
-    
+
     layout {
       row: 0;
       column: 3;
@@ -71,7 +73,7 @@ template $FlEmojiPicker: Box {
     label: "😂";
     clicked => $button_react() swapped;
   }
-  
+
   Button {
     styles [
       "flat",

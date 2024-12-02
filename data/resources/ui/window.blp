@@ -37,7 +37,7 @@ template $FlWindow: Adw.ApplicationWindow {
             accessibility {
               label: C_("accessibility", "Add Conversation");
             }
-            
+
             tooltip-text: "Add Conversation";
             icon-name: "chat-message-new-symbolic";
             clicked => $handle_add_conversation_clicked() swapped;
@@ -83,7 +83,10 @@ template $FlWindow: Adw.ApplicationWindow {
         [top]
         Adw.HeaderBar {
           title-widget: Button {
-            styles ["flat"]
+            styles [
+              "flat"
+            ]
+
             sensitive: bind $is_some(channel_list.active-channel) as <bool>;
             visible: bind $is_some(channel_list.active-channel) as <bool>;
             action-name: "win.channel-information";
@@ -103,6 +106,7 @@ template $FlWindow: Adw.ApplicationWindow {
                 use-markup: true;
                 width-chars: 5;
                 label: bind channel_list.active-channel as <$FlChannel>.title;
+
                 styles [
                   "title",
                 ]
@@ -121,7 +125,7 @@ template $FlWindow: Adw.ApplicationWindow {
 
                 styles [
                   "subtitle-room",
-                  "accent" 
+                  "accent"
                 ]
               }
             };
@@ -139,10 +143,8 @@ template $FlWindow: Adw.ApplicationWindow {
 
 $FlNewChannelDialog new_channel_dialog {
   window: template;
-
   channel => $handle_new_channel() swapped;
 }
-
 
 menu menubar {
   section {

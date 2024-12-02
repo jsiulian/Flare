@@ -32,9 +32,9 @@ template $FlCallMessageItem: Box {
     styles [
       "dim-label",
     ]
+
     halign: center;
     selectable: false;
     label: bind $format_time_human(template.message as <$FlCallMessage>.datetime) as <string>;
   }
-  
 }
