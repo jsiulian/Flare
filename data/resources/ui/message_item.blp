@@ -84,6 +84,7 @@ template $FlMessageItem: $ContextMenuBin {
         row: 0;
         column: 1;
       }
+
       maximum-size: 400;
 
       child: Box reaction_grid {
@@ -96,7 +97,7 @@ template $FlMessageItem: $ContextMenuBin {
           styles [
             "message-bubble",
           ]
-          
+
           Label header {
             styles [
               "heading",
@@ -113,7 +114,6 @@ template $FlMessageItem: $ContextMenuBin {
               column: 0;
             }
           }
-          
 
           // Quote
           Grid {
@@ -121,6 +121,7 @@ template $FlMessageItem: $ContextMenuBin {
               row: 1;
               column: 0;
             }
+
             styles [
               "quote",
             ]
@@ -162,10 +163,9 @@ template $FlMessageItem: $ContextMenuBin {
                 column: 0;
               }
             }
-            
           }
 
-          Box box_attachments {            
+          Box box_attachments {
             layout {
               row: 2;
               column: 0;
@@ -220,9 +220,8 @@ template $FlMessageItem: $ContextMenuBin {
               timestamp: bind $format_time_human(template.message as <$FlTextMessage>.datetime) as <string>;
             }
           }
-          
+
           $FlMessageLabel label_message {
-            
             label: bind $markup_urls(template.message as <$FlTextMessage>.body) as <string>;
             attributes: bind template.message as <$FlTextMessage>.message-attributes;
 
@@ -230,9 +229,7 @@ template $FlMessageItem: $ContextMenuBin {
               timestamp: bind $format_time_human(template.message as <$FlTextMessage>.datetime) as <string>;
               visible: bind $not_empty(template.message as <$FlTextMessage>.body) as <bool>;
             };
-            
           }
-        
 
           // Pop-Down
           PopoverMenu msg_menu {
@@ -263,6 +260,6 @@ template $FlMessageItem: $ContextMenuBin {
           halign: start;
         }
       };
-    }    
+    }
   }
 }

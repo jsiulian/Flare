@@ -112,6 +112,14 @@ test:cargo-fmt:
     - cargo fmt -- --check
   allow_failure: true
 
+test:blueprint-fmt:
+  stage: quick-test
+  image: archlinux:base-devel
+  script:
+    - pacman -Syu blueprint-compiler --noconfirm
+    - blueprint-compiler format data/resources/ui
+  allow_failure: true
+
 test:cargo-clippy:
   stage: quick-test
   image: archlinux:base-devel

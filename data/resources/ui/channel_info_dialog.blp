@@ -2,121 +2,121 @@ using Gtk 4.0;
 using Adw 1;
 
 template $FlChannelInfoDialog: Adw.Dialog {
-    can-focus: true;
-    content-height: 600;
-    content-width: 450;
+  can-focus: true;
+  content-height: 600;
+  content-width: 450;
 
-    Adw.ToolbarView {
-        [top]
-        Adw.HeaderBar {}
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
 
-        Adw.Clamp {
-            orientation: horizontal;
-            tightening-threshold: 360;
-            maximum-size: 450;
+    Adw.Clamp {
+      orientation: horizontal;
+      tightening-threshold: 360;
+      maximum-size: 450;
 
-            Gtk.ScrolledWindow {
-                hscrollbar-policy: never;
+      Gtk.ScrolledWindow {
+        hscrollbar-policy: never;
 
-                Box {
-                    spacing: 5;
-                    margin-start: 12;
-                    margin-end: 12;
-                    margin-top: 12;
-                    margin-bottom: 12;
-                    orientation: vertical;
+        Box {
+          spacing: 5;
+          margin-start: 12;
+          margin-end: 12;
+          margin-top: 12;
+          margin-bottom: 12;
+          orientation: vertical;
 
-                    Adw.Avatar avatar {
-                        icon-name: "user-bookmarks-symbolic";
-                        size: 120;
-                    }
+          Adw.Avatar avatar {
+            icon-name: "user-bookmarks-symbolic";
+            size: 120;
+          }
 
-                    Gtk.Label {
-                        styles [
-                            "title-1"
-                        ]
+          Gtk.Label {
+            styles [
+              "title-1"
+            ]
 
-                        label: bind template.channel as <$FlChannel>.title;
-                        lines: 2;
-                        wrap: true;
-                        ellipsize: end;
-                        margin-bottom: 24;
-                    }
+            label: bind template.channel as <$FlChannel>.title;
+            lines: 2;
+            wrap: true;
+            ellipsize: end;
+            margin-bottom: 24;
+          }
 
-                    Adw.PreferencesGroup group_phone_description {
-                        margin-bottom: 18;
+          Adw.PreferencesGroup group_phone_description {
+            margin-bottom: 18;
 
-                        Adw.ActionRow row_phone {
-                            styles [
-                                "property"
-                            ]
+            Adw.ActionRow row_phone {
+              styles [
+                "property"
+              ]
 
-                            title: _("Phone Number");
+              title: _("Phone Number");
 
-                            [suffix]
-                            Gtk.Button {
-                                styles [
-                                    "flat"
-                                ]
+              [suffix]
+              Gtk.Button {
+                styles [
+                  "flat"
+                ]
 
-                                tooltip-text: "Open phone number";
-                                icon-name: "call-start-symbolic";
-                                valign: center;
-                                clicked => $open_phone_number() swapped;
-                            }
-                        }
-
-                        Adw.ExpanderRow row_description {
-                            styles [
-                                "property"
-                            ]
-
-                            title: _("Description");
-                        }
-                    }
-
-                    Adw.PreferencesGroup {
-                        margin-bottom: 18;
-
-                        Adw.ActionRow row_disappearing {
-                            styles [
-                                "property"
-                            ]
-
-                            title: _("Disappearing Messages");
-
-                            [suffix]
-                            Gtk.Image {
-                                icon-name: "appointment-missed-symbolic";
-                            }
-                        }
-                    }
-
-                    Gtk.ListBox {
-                        styles [
-                            "boxed-list"
-                        ]
-
-                        Adw.ButtonRow {
-                            title: _("Reset Session");
-                            start-icon-name: "view-refresh-symbolic";
-                            visible: bind template.channel as <$FlChannel>.is-contact;
-                            activated => $reset_session() swapped;
-                        }
-
-                        Adw.ButtonRow {
-                            styles [
-                                "destructive-action"
-                            ]
-
-                            title: _("Clear Messages");
-                            start-icon-name: "user-trash-symbolic";
-                            // Note: This uses the fact that the channel in `channel_messages` must be the same as in the info dialog as the info dialog can only be opened from there and the info dialog prevents any further interaction with the rest of the window.
-                            action-name: "win.channel-clear-messages";
-                        }
-                    }
-                }
+                tooltip-text: "Open phone number";
+                icon-name: "call-start-symbolic";
+                valign: center;
+                clicked => $open_phone_number() swapped;
+              }
             }
+
+            Adw.ExpanderRow row_description {
+              styles [
+                "property"
+              ]
+
+              title: _("Description");
+            }
+          }
+
+          Adw.PreferencesGroup {
+            margin-bottom: 18;
+
+            Adw.ActionRow row_disappearing {
+              styles [
+                "property"
+              ]
+
+              title: _("Disappearing Messages");
+
+              [suffix]
+              Gtk.Image {
+                icon-name: "appointment-missed-symbolic";
+              }
+            }
+          }
+
+          Gtk.ListBox {
+            styles [
+              "boxed-list"
+            ]
+
+            Adw.ButtonRow {
+              title: _("Reset Session");
+              start-icon-name: "view-refresh-symbolic";
+              visible: bind template.channel as <$FlChannel>.is-contact;
+              activated => $reset_session() swapped;
+            }
+
+            Adw.ButtonRow {
+              styles [
+                "destructive-action"
+              ]
+
+              title: _("Clear Messages");
+              start-icon-name: "user-trash-symbolic";
+              // Note: This uses the fact that the channel in `channel_messages` must be the same as in the info dialog as the info dialog can only be opened from there and the info dialog prevents any further interaction with the rest of the window.
+              action-name: "win.channel-clear-messages";
+            }
+          }
         }
+      }
     }
+  }
 }
