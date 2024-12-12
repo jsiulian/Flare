@@ -8,27 +8,29 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-12-12 16:00+0000\n"
+"Last-Translator: Integral <integral@member.fsf.org>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/schmiddi-on-mobile/flare/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr ""
+msgstr "Integral"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
-msgstr ""
+msgstr "手机号"
 
 #: data/resources/ui/channel_info_dialog.blp:66
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: data/resources/ui/channel_info_dialog.blp:76
 msgid "Disappearing Messages"
@@ -37,217 +39,218 @@ msgstr ""
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "重置会话"
 
 #: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
-msgstr ""
+msgstr "重置会话"
 
 #: data/resources/ui/channel_info_dialog.blp:128
 msgctxt "accessibility"
 msgid "Clear Messages"
-msgstr ""
+msgstr "清除消息"
 
 #: data/resources/ui/channel_info_dialog.blp:149
 msgid "Clear Messages"
-msgstr ""
+msgstr "清除消息"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "离线"
 
 #: data/resources/ui/channel_list.blp:20
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #: data/resources/ui/channel_list.blp:23 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "未选择频道"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "选择频道"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "移除回复"
 
 #: data/resources/ui/channel_messages.blp:184
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "移除回复"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "移除附件"
 
 #: data/resources/ui/channel_messages.blp:207
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "移除附件"
 
 #: data/resources/ui/channel_messages.blp:228
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "添加附件"
 
 #: data/resources/ui/channel_messages.blp:236
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "添加附件"
 
 #: data/resources/ui/channel_messages.blp:252
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "消息输入"
 
 #: data/resources/ui/channel_messages.blp:258
 msgctxt "tooltip"
 msgid "Message input"
-msgstr ""
+msgstr "消息输入"
 
 #: data/resources/ui/channel_messages.blp:270
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "发送"
 
 #: data/resources/ui/channel_messages.blp:274
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "发送"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "连接时间："
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "最后上线："
 
 #: data/resources/ui/device_info_item.blp:72
 msgid "Unlink Device"
-msgstr ""
+msgstr "断开设备连接"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
 msgid "Clear messages"
-msgstr ""
+msgstr "清除消息"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
-msgstr ""
+msgstr "这将清除所有本地存储的消息，也将关闭应用程序。"
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
 #: data/resources/ui/linked_devices_window.blp:50
 #: src/gui/linked_devices_window.rs:122 src/gui/window.rs:309
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "清除"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
 #: src/gui/linked_devices_window.rs:121
 msgid "Unlink"
-msgstr ""
+msgstr "断开连接"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
 "This will unlink this device and remove all locally saved data. This will "
 "also close the application such that it can be relinked when opening it "
 "again."
-msgstr ""
+msgstr "这将断开此设备的连接并删除所有本地保存的数据。这也将关闭应用程序，以便再次打"
+"开时可以重新连接。"
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "断开连接并删除所有消息"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "断开连接但保留消息"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "请考虑报告此错误。"
 
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "报告"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
 msgid "Linked Devices"
-msgstr ""
+msgstr "已连接的设备"
 
 #: data/resources/ui/linked_devices_window.blp:31
 msgid "Add Linked Device"
-msgstr ""
+msgstr "添加连接的设备"
 
 #: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "请输入要连接的设备的 URL。"
 
 #: data/resources/ui/linked_devices_window.blp:42
 msgid "Device URL"
-msgstr ""
+msgstr "设备 URL"
 
 #: data/resources/ui/linked_devices_window.blp:51
 msgid "Add Device"
-msgstr ""
+msgstr "添加设备"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr ""
+msgstr "回复"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "另存为…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "在应用程序中打开…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
-msgstr ""
+msgstr "新聊天"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "菜单"
 
 #: data/resources/ui/new_channel_dialog.blp:35
 msgid "Search Contacts"
-msgstr ""
+msgstr "搜索联系人"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
@@ -255,107 +258,108 @@ msgstr ""
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "名"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "姓"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "通用"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "自动下载附件"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "将自动下载以下附件类型"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "图像"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "视频"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "文件"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Voice Messages"
-msgstr ""
+msgstr "语音消息"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr ""
+msgstr "通知"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr ""
+msgstr "新消息通知"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr ""
+msgstr "发送通知"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr ""
+msgstr "收到回应时发送通知"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr ""
+msgstr "后台通知"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "在应用关闭时获取通知"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "移动设备兼容性"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
-msgstr ""
+msgstr "这些选项可能需要更改，以便在触摸和移动设备上获得更好的体验。 "
+"这些首选项的默认值适合桌面设备使用。"
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "可选中的消息文本"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr ""
+msgstr "可选文本可能会干扰触摸屏上的滑动手势"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "按回车键发送消息"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
-msgstr ""
+msgstr "在无法使用 \"Control + Enter\" 的触摸键盘上，可能无法发送带换行符的消息"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "欢迎使用 Flare"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "设置 Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #: data/resources/ui/setup_window.blp:53
 msgid ""
@@ -372,41 +376,42 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "设置主设备还是与已登录设备连接？"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
 msgid "Primary Device"
-msgstr ""
+msgstr "主设备"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
 #: data/resources/ui/setup_window.blp:177
 msgid "Link Device"
-msgstr ""
+msgstr "与已登录设备连接"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "主设备还是与已登录设备连接？"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "可以将 Flare 用作主设备或从设备。"
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "与已登录设备连接（推荐）"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
 "Flare can be an application linked to your primary device, similar to the "
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
-msgstr ""
+msgstr "Flare 可以与主设备连接使用，类似于官方的 Signal "
+"桌面版。这种模式经过更广泛的测试，大部分情况下都能正常使用。"
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "主设备（已禁用）"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -416,26 +421,29 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare 可以作为主设备使用，类似于 Android 或 iOS 上的官方 Signal 应用程序。"
+"Flare 目前不支持这种模式，尽管初步测试似乎表明可以工作。如果愿意测试，可以启"
+"用下面的按钮（如果不知道如何操作，就不应考虑测试主设备支持）。"
 
 #: data/resources/ui/setup_window.blp:194
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
-msgstr ""
+msgstr "要作为从设备连接，Flare 需要设备名称，该名称将显示在官方应用程序中。"
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
-msgstr ""
+msgstr "设备名称"
 
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "开发者选项"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
-msgstr ""
+msgstr "Signal 服务器"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -443,47 +451,48 @@ msgid ""
 "device. Note that you only have a timeframe of about one minute to scan the "
 "code, so please already prepare your official application for scanning the "
 "QR code."
-msgstr ""
+msgstr "下一页将显示二维码，必须用主设备扫描该二维码。请注意，只有大约一分钟的时间来"
+"扫码，因此请提前准备好扫描二维码的官方应用程序。"
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
 msgid "Link device"
-msgstr ""
+msgstr "连接设备"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
-msgstr ""
+msgstr "扫码"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan this code with another Signal app logged into your account."
-msgstr ""
+msgstr "使用登录您账户的另一个 Signal 应用扫描此二维码。"
 
 #: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
-msgstr ""
+msgstr "不通过扫码连接"
 
 #: data/resources/ui/setup_window.blp:280
 msgid "Manual linking"
-msgstr ""
+msgstr "手动连接"
 
 #: data/resources/ui/setup_window.blp:296
 msgid "Manual Linking"
-msgstr ""
+msgstr "手动连接"
 
 #: data/resources/ui/setup_window.blp:297
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
-msgstr ""
+msgstr "如果设备无法扫描二维码，可以手动输入此处提供的链接"
 
 #: data/resources/ui/setup_window.blp:308
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "复制到剪贴板"
 
 #: data/resources/ui/setup_window.blp:341
 msgid "Continue"
-msgstr ""
+msgstr "继续"
 
 #: data/resources/ui/setup_window.blp:358
 msgid ""
@@ -499,29 +508,29 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "验证码"
 
 #: data/resources/ui/setup_window.blp:386
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
-msgstr ""
+msgstr "提交此信息后您将收到一条来自 Signal 的验证码短信。请在下一页输入验证码。"
 
 #: data/resources/ui/setup_window.blp:395
 #: data/resources/ui/setup_window.blp:403
 #: data/resources/ui/setup_window.blp:420
 #: data/resources/ui/setup_window.blp:445
 msgid "Confirm"
-msgstr ""
+msgstr "确认"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "在此处输入从 Signal 收到的验证码。"
 
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
 msgid "Finished"
-msgstr ""
+msgstr "已完成"
 
 #: data/resources/ui/setup_window.blp:494
 msgid ""
@@ -529,10 +538,13 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare 已准备就绪，正在等待联系人完成同步。这可能需要几秒钟，"
+"一旦联系人完成同步就可以开始使用 Flare 了。在开始使用 Flare "
+"之前，请注意以下几点："
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "已知问题"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -555,71 +567,73 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"想对 Flare 提一些反馈意见，或者只是聊一聊？我们的 <a href=\"https://matrix."
+"to/#/#flare-signal:matrix.org\">Matrix 聊天室</a>向所有人开放。"
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "通用"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "显示快捷键"
 
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "转到设置"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "转到关于页面"
 
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "打开菜单"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "关闭窗口"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "频道"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "转到频道 1...9"
 
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "在频道中搜索"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "上传附件"
 
 #: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "聚焦文本输入框"
 
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr ""
+msgstr "加载更多消息"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
 msgid "Submit Captcha"
-msgstr ""
+msgstr "提交验证码"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -633,62 +647,62 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "令牌"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "提交"
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
-msgstr ""
+msgstr "消息"
 
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "插入表情"
 
 #: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "插入表情"
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
-msgstr ""
+msgstr "频道列表"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "添加对话"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "聊天"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "正在输入"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "同步联系人"
 
 #: data/resources/ui/window.blp:181
 msgid "Keybindings"
-msgstr ""
+msgstr "键位"
 
 #: data/resources/ui/window.blp:186
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: data/resources/ui/window.blp:191
 msgid "Quit"
-msgstr ""
+msgstr "退出"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
@@ -696,148 +710,144 @@ msgstr ""
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "未知联系人"
 
 #: src/backend/manager.rs:442
 msgid "You"
-msgstr ""
+msgstr "您"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "来电"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "呼出电话"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "通话已开始"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr ""
+msgstr "通话已结束"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
-msgstr ""
+msgstr "通话被拒绝"
 
 #: src/backend/message/call_message.rs:105
 msgid "Unanswered call"
-msgstr ""
+msgstr "未接电话"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
-msgstr ""
+msgstr "{sender} 对消息做出了 {emoji} 的回应。"
 
 #: src/backend/message/reaction_message.rs:80
 msgid "Reacted {emoji} to a message."
-msgstr ""
+msgstr "对消息做出了 {emoji} 的回应。"
 
 #: src/backend/message/text_message.rs:381
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "发送图像"
 
 #: src/backend/message/text_message.rs:383
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "发送视频"
 
 #: src/backend/message/text_message.rs:386
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "发送语音消息"
 
 #: src/backend/message/text_message.rs:391
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "发送文件"
 
 #: src/error.rs:91
 msgid "I/O Error."
-msgstr ""
+msgstr "I/O 错误。"
 
 #: src/error.rs:96
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "似乎无法连接互联网。"
 
 #: src/error.rs:101
 msgid "Something glib-related failed."
-msgstr ""
+msgstr "glib 相关错误。"
 
 #: src/error.rs:106
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "与 Libsecret 通信失败。"
 
 #: src/error.rs:111
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
-msgstr ""
+msgstr "后端数据库错误。请重新启动应用程序或删除数据库，然后重新连接应用。"
 
 #: src/error.rs:116
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
-msgstr ""
+msgstr "似乎未获得 Signal 授权。请删除数据库并重新连接应用程序。"
 
 #: src/error.rs:121
 msgid "Sending a message failed."
-msgstr ""
+msgstr "发送消息失败。"
 
 #: src/error.rs:126
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "接收消息失败。"
 
 #: src/error.rs:131
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
-msgstr ""
+msgstr "Signal 后端发生意外情况。请稍后重试。"
 
 #: src/error.rs:136
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "应用程序似乎配置错误。"
 
 #: src/error.rs:141
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "部分应用程序崩溃。"
 
 #: src/error.rs:151
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "请检查网络连接。"
 
 #: src/error.rs:156
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "请删除数据库并重新连接设备。"
 
 #: src/error.rs:163
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "数据库路径 {} 不是文件夹。"
 
 #: src/error.rs:168
 msgid "Please restart the application with logging and report this issue."
-msgstr ""
+msgstr "请重新启动应用程序并记录日志，然后报告此问题。"
 
 #: src/gui/channel_info_dialog.rs:197
 msgid "Never"
-msgstr ""
+msgstr "从不"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "草稿"
 
 #: src/gui/linked_devices_window.rs:116
 msgid "Unlink Device?"
-msgstr ""
+msgstr "断开设备连接？"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "确定要断开与 {} 的连接？"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -845,11 +855,11 @@ msgstr ""
 
 #: src/gui/preferences_window.rs:99
 msgid "Background permission"
-msgstr ""
+msgstr "后台权限"
 
 #: src/gui/preferences_window.rs:100
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "使用设置移除权限"
 
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
@@ -863,57 +873,57 @@ msgstr ""
 
 #: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "已复制到剪贴板"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:102 src/gui/utility.rs:126
 msgid "%H:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:105
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%Y-%m-%d %H:%M"
 
 #: src/gui/utility.rs:138
 msgid "Today"
-msgstr ""
+msgstr "今天"
 
 #: src/gui/utility.rs:141
 msgid "Yesterday"
-msgstr ""
+msgstr "昨天"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:151
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%m-%d %a"
 
 #: src/gui/utility.rs:159
 msgid "Attachment"
-msgstr ""
+msgstr "附件"
 
 #: src/gui/window.rs:304 src/gui/window.rs:310
 msgid "Remove Messages"
-msgstr ""
+msgstr "移除消息"
 
 #: src/gui/window.rs:305
 msgid "This will remove all locally stored messages from this channel"
-msgstr ""
+msgstr "这将删除该频道所有本地存储的消息"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "和朋友在 Signal 上聊天"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
@@ -925,7 +935,8 @@ msgid ""
 "Flare is an unofficial app for Signal. It is still in development and "
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
-msgstr ""
+msgstr "Flare 是非官方的 Signal 应用，仍在开发中且不包含官方 Signal "
+"应用程序的所有功能。更多信息请查看其功能开发计划。"
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -935,64 +946,66 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"请注意，与官方 Signal 应用程序相比，使用此应用可能会降低安全性。在处理敏感数"
+"据时请谨慎使用。有关安全性的更多信息，请参阅项目 README。"
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:609
 msgid "Overview of the application"
-msgstr ""
+msgstr "应用程序概览"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "窗口宽度"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "窗口高度"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "窗口是否最大化"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
-msgstr ""
+msgstr "连接 Flare 时的设备名称。这需要重新连接应用程序。"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "自动下载图像"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "自动下载视频"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
-msgstr ""
+msgstr "自动下载语音消息"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "自动下载文件"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
-msgstr ""
+msgstr "发送通知"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "关闭后在后台运行"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "收到回应时发送通知"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "消息是否可被选中"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "按回车键时发送消息"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
