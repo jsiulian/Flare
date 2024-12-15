@@ -8,20 +8,20 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-04-04 16:01+0000\n"
-"Last-Translator: jerekulmala <jerekmailj@gmail.com>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/fi/>\n"
+"PO-Revision-Date: 2024-12-16 19:00+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.9\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr ""
+msgstr "Jiri Grönroos"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
@@ -128,17 +128,15 @@ msgstr "Lähetä"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "Linkitetty:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "Viimeksi aktiivinen:"
 
 #: data/resources/ui/device_info_item.blp:72
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device"
-msgstr "Linkitä laite"
+msgstr "Poista laitteen linkitys"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
@@ -904,14 +902,12 @@ msgid "Draft"
 msgstr "Luonnos"
 
 #: src/gui/linked_devices_window.rs:116
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device?"
-msgstr "Linkitä laite"
+msgstr "Poistetaanko laitteen linkitys?"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Haluatko varmasti poistaa laitteen {} linkityksen?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
