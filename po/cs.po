@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-11-12 13:09+0000\n"
-"Last-Translator: Tadeáš Erban <tadysekerbosek@gmail.com>\n"
+"PO-Revision-Date: 2024-12-16 19:00+0000\n"
+"Last-Translator: mondstern <mondstern@monocles.de>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
 "flare/cs/>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.9\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -39,20 +39,20 @@ msgstr "Mizející zprávy"
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Obnovení relace"
 
 #: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
-msgstr ""
+msgstr "Obnovení relace"
 
 #: data/resources/ui/channel_info_dialog.blp:128
 msgctxt "accessibility"
 msgid "Clear Messages"
-msgstr ""
+msgstr "Vymazat zprávy"
 
 #: data/resources/ui/channel_info_dialog.blp:149
 msgid "Clear Messages"
-msgstr ""
+msgstr "Vymazat zprávy"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
@@ -94,22 +94,22 @@ msgstr "Odstranit přílohu"
 #: data/resources/ui/channel_messages.blp:207
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "Odstranění přílohy"
 
 #: data/resources/ui/channel_messages.blp:228
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "Přidání přílohy"
 
 #: data/resources/ui/channel_messages.blp:236
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "Přidat přílohu"
 
 #: data/resources/ui/channel_messages.blp:252
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "Zadávání zpráv"
 
 #: data/resources/ui/channel_messages.blp:258
 msgctxt "tooltip"
