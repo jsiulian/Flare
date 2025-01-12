@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-01-12 00:05+0000\n"
+"PO-Revision-Date: 2025-01-12 02:54+0000\n"
 "Last-Translator: Adam Naprstek <adam@naprstek.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
 "flare/cs/>\n"
@@ -337,8 +337,9 @@ msgid "Selectable Message Text"
 msgstr "Označitelný text zprávy"
 
 #: data/resources/ui/preferences_window.blp:57
+#, fuzzy
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr ""
+msgstr "Vybíravý text může zasahovat do gest na dotykovém zařízení"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
@@ -349,6 +350,8 @@ msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"Na dotykových klávesnicích může být nemožné posílat zprávy s novými linkami, "
+"jelikož není možné zmáčknout “Ctrl + Enter”"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
@@ -366,6 +369,7 @@ msgid "Flare"
 msgstr "Flare"
 
 #: data/resources/ui/setup_window.blp:53
+#, fuzzy
 msgid ""
 "Flare is an unofficial Signal client. Note that Flare is not stable and "
 "there are bugs to be expected. If you are experiencing any bugs, consult the "
@@ -377,10 +381,18 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare je neoficiální klient pro Signal. Mějte na paměti, že Flare není "
+"stabilní a mohou se vyskytnout chyby. Pokud narazíte na nějaké chyby, "
+"podívejte se na sledovač problémů a otevřete nové problémy, pokud narazíte "
+"na novou chybu. Také mějte na paměti, že vzhledem k tomu, že se jedná o "
+"aplikaci třetí strany, Flare nemůže zaručit stejnou úroveň bezpečnosti a "
+"soukromí jako oficiální aplikace Signal. Pokud vy nebo někdo, koho "
+"potřebujete kontaktovat, vyžaduje vysokou úroveň bezpečnosti, Flare "
+"nepoužívejte. Pro více informací se podívejte do README."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Nastavit primární zařízení nebo propojit nové zařízení?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
@@ -395,15 +407,15 @@ msgstr "Připojit zařízení"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "Primární zařízení nebo propojené zařízení?"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr "Můžete použít Flare jako hlavní nebo vedlejší zařízení"
+msgstr "Můžete použít Flare jako hlavní nebo vedlejší zařízení."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Propojené zařízení (Doporučováno)"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
@@ -414,7 +426,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Primární zařízení (Zablokováno)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -430,6 +442,8 @@ msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Pro propojení jako druhé zařízení, Flare bude potřebovat jméno zařízení, "
+"které je viditelné v aplikaci."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
@@ -452,24 +466,27 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"Další stránka zobrazí QR kód který musí být naskenován z primárního "
+"zařízení. Na skenování máte okolo minuty, připravte si prosím oficiální "
+"aplikaci."
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
 msgid "Link device"
-msgstr ""
+msgstr "Propojit zařízení"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
-msgstr ""
+msgstr "Naskenujte zařízení"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan this code with another Signal app logged into your account."
-msgstr ""
+msgstr "Naskenujte tento kód s jinou Signal aplikací připojenou do vás účtu."
 
 #: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
-msgstr ""
+msgstr "Propojit zařízení bez skenování"
 
 #: data/resources/ui/setup_window.blp:280
 msgid "Manual linking"
