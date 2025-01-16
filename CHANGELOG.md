@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Fix "Unauthorized" error when sending messages, and not receiving messages anymore.
+
 ## [0.15.6] - 2024-11-20
 
 ### Fixed

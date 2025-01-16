@@ -23,8 +23,9 @@ use libsignal_service::{
     sender::{AttachmentSpec, AttachmentUploadError},
     Profile,
 };
+use presage::model::messages::Received;
 use presage::{
-    manager::{ReceivingMode, Registered, RegistrationOptions, RegistrationType},
+    manager::{Registered, RegistrationOptions, RegistrationType},
     model::groups::Group,
     store::{ContentsStore, Thread},
     Manager,
@@ -571,7 +572,7 @@ async fn command_loop(
 ) {
     'outer: loop {
         let msgs: Result<_, presage::Error<<Store as presage::store::Store>::Error>> =
-            manager.receive_messages(ReceivingMode::Forever).await;
+            manager.receive_messages().await;
         let login1 = Login1::new().await;
         match msgs {
             Ok(messages) => {
@@ -594,9 +595,11 @@ async fn command_loop(
                         // Receiving a message.
                         msg = next_msg => {
                             if let Some(msg) = msg {
-                                if content.send(msg).await.is_err() {
-                                    log::info!("Failed to send message to `Manager`, exiting");
-                                    break 'outer;
+                                if let Received::Content(msg) = msg {
+                                    if content.send(*msg).await.is_err() {
+                                        log::info!("Failed to send message to `Manager`, exiting");
+                                        break 'outer;
+                                    }
                                 }
                             } else {
                                 log::error!("Message stream finished. Restarting command loop.");
