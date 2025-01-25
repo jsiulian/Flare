@@ -52,6 +52,7 @@ template $FlSetupWindow: Adw.Dialog {
               child: Gtk.Label {
                 label: _("Flare is an unofficial Signal client. Note that Flare is not stable and there are bugs to be expected. If you are experiencing any bugs, consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">issue tracker</a> and open issues if you are experiencing a new issue. Also note that due to being a third-party application, Flare cannot guarantee the same level of security and privacy as official Signal applications do. If you or someone you need to contact requires a strong level of security, do not use Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README</a> for more information.");
                 wrap: true;
+                xalign: 0;
                 use-markup: true;
               };
             }
@@ -116,6 +117,7 @@ template $FlSetupWindow: Adw.Dialog {
               Gtk.Label {
                 label: _("You can use Flare either as a primary or secondary device.");
                 wrap: true;
+                xalign: 0;
               }
 
               Gtk.Label {
@@ -130,6 +132,7 @@ template $FlSetupWindow: Adw.Dialog {
               Gtk.Label {
                 label: _("Flare can be an application linked to your primary device, similar to the official Signal Desktop. This mode has been more extensively tested and mostly works.");
                 wrap: true;
+                xalign: 0;
               }
 
               Gtk.Label {
@@ -144,6 +147,7 @@ template $FlSetupWindow: Adw.Dialog {
               Gtk.Label {
                 label: _("Flare can act as a primary device, similar to the official Signal applications on Android or IOS. This mode is currently not supported by Flare, even though initial tests seem to indicate that it works. If you are willing to test it, you may enable the button below (and if you don't know how to do that, you should not think about testing primary-device support).");
                 wrap: true;
+                xalign: 0;
               }
             }
           };
@@ -193,6 +197,7 @@ template $FlSetupWindow: Adw.Dialog {
               Gtk.Label {
                 label: _("For linking as a secondary device, Flare will need a device name that will be shown in the official application.");
                 wrap: true;
+                xalign: 0;
               }
 
               Gtk.ListBox {
@@ -216,6 +221,7 @@ template $FlSetupWindow: Adw.Dialog {
               Gtk.Label {
                 label: _("The next page will show a QR code which has to be scanned from the primary device. Note that you only have a timeframe of about one minute to scan the code, so please already prepare your official application for scanning the QR code.");
                 wrap: true;
+                xalign: 0;
               }
             }
           };
@@ -357,6 +363,7 @@ template $FlSetupWindow: Adw.Dialog {
               Gtk.Label {
                 label: _("For registering as a primary device, Flare will need your phone number and a completion of the captcha. Please give the phone number in international E.164-format, including the leading \"+\" and country code. The captcha can be completed <a href=\"https://signalcaptchas.org/registration/generate.html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into the below field. Note that this captcha is only valid for about one minute, so please proceed fast.");
                 wrap: true;
+                xalign: 0;
                 use-markup: true;
               }
 
@@ -385,6 +392,7 @@ template $FlSetupWindow: Adw.Dialog {
               Gtk.Label {
                 label: _("After submitting this information, you will get a SMS from Signal with a verification code. Insert this verification code on the next page.");
                 wrap: true;
+                xalign: 0;
                 use-markup: true;
               }
             }
@@ -434,6 +442,7 @@ template $FlSetupWindow: Adw.Dialog {
 
               Gtk.Label {
                 label: _("Insert the verification code you received from Signal here.");
+                xalign: 0;
               }
 
               Gtk.ListBox {
@@ -493,6 +502,7 @@ template $FlSetupWindow: Adw.Dialog {
               Gtk.Label {
                 label: _("Flare is almost ready, it is waiting for contacts to finish syncing. This may take a few seconds, you can start to use Flare once the contacts are synced. A few final notes before you start using Flare:");
                 wrap: true;
+                xalign: 0;
               }
 
               Gtk.Label {
@@ -507,6 +517,7 @@ template $FlSetupWindow: Adw.Dialog {
               Gtk.Label {
                 label: _("Make sure to not send any messages while the messages are still received by Flare, this makes sure that all required information is received. We are trying to fix this problem. Furthermore, sending to contacts you have not yet received messages from can lead to rate limiting. Make sure to receive a message from a contact before you send too many. For a full list of bugs, visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>.");
                 wrap: true;
+                xalign: 0;
                 use-markup: true;
               }
 
@@ -522,6 +533,7 @@ template $FlSetupWindow: Adw.Dialog {
               Gtk.Label {
                 label: _("Want to leave some feedback about Flare, or just talk a little bit? Our <a href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is open for everyone.");
                 wrap: true;
+                xalign: 0;
                 use-markup: true;
               }
             }
