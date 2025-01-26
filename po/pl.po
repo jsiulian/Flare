@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-07-10 16:09+0000\n"
-"Last-Translator: Jakub Załuska <jak.zaluska@gmail.com>\n"
+"PO-Revision-Date: 2025-01-27 22:03+0000\n"
+"Last-Translator: krzemyk <krzemyk.official@proton.me>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/pl/>\n"
 "Language: pl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -216,9 +216,8 @@ msgid "Please insert the URL of the device to link."
 msgstr "Podaj URL urządzenia, aby je połączyć."
 
 #: data/resources/ui/linked_devices_window.blp:42
-#, fuzzy
 msgid "Device URL"
-msgstr "Nazwa urządzenia"
+msgstr "URL urządzenia"
 
 #: data/resources/ui/linked_devices_window.blp:51
 msgid "Add Device"
@@ -246,28 +245,28 @@ msgstr "Otwórz za pomocą…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
-msgstr ""
+msgstr "Nowy Czat"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: data/resources/ui/new_channel_dialog.blp:35
 msgid "Search Contacts"
-msgstr ""
+msgstr "Szukaj Konktaktów"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Lista Kontaktów Według:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Imię"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Nazwisko"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
@@ -487,7 +486,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
 msgid "Link device"
-msgstr ""
+msgstr "Połącz urządzenie"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
@@ -553,22 +552,24 @@ msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"Po wysłaniu tych informacji, otrzymasz SMS od Signal'a z kodem "
+"weryfikacyjnym. Wprowadź ten kod weryfikacyjny na następnej stronie."
 
 #: data/resources/ui/setup_window.blp:395
 #: data/resources/ui/setup_window.blp:403
 #: data/resources/ui/setup_window.blp:420
 #: data/resources/ui/setup_window.blp:445
 msgid "Confirm"
-msgstr ""
+msgstr "Potwierdź"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Wprowadź tutaj kod weryfikacyjny, który otrzymałeś od Signal."
 
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
 msgid "Finished"
-msgstr ""
+msgstr "Zakończono"
 
 #: data/resources/ui/setup_window.blp:494
 msgid ""
@@ -576,10 +577,14 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare jest prawie gotowy, czeka na zakończenie synchronizacji kontaktów. "
+"Może to potrwać kilka sekund, możesz zacząć używać Flare, gdy kontakty "
+"zostaną zsynchronizowane. Kilka ostatnich uwag przed rozpoczęciem "
+"korzystania z Flare:"
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "Znane błędy"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -591,10 +596,18 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Upewnij się, że nie wysyłasz żadnych wiadomości, dopóki wiadomości nie "
+"zostaną odebrane przez Flare, aby upewnić się, że wszystkie wymagane "
+"informacje zostały odebrane. Pracujemy nad rozwiązaniem tego problemu. "
+"Ponadto wysyłanie wiadomości do kontaktów, od których jeszcze nie otrzymałeś "
+"wiadomości, może prowadzić do ograniczeń w wysyłaniu. Upewnij się, że "
+"otrzymałeś wiadomość od kontaktu, zanim wyślesz zbyt wiele wiadomości. Pełną "
+"listę błędów znajdziesz w <a href=\"https://gitlab.com/schmiddi-on-mobile/"
+"flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: data/resources/ui/setup_window.blp:523
 msgid ""
@@ -602,71 +615,74 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"Chcesz zostawić opinie o Flare lub po prostu porozmawiać? Nasz <a href="
+"\"https://matrix.to/#/#flare-signal:matrix.org\"> czat na Matrixie</a> jest "
+"otwarty dla każdego."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Ogólne"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "Pokaż skróty"
 
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "Przejdź do ustawień"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "Przejdź do strony \"O aplikacji\""
 
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "Otwórz menu"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Zamknij okno"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "Kanały"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "Przejdź do kanału 1…9"
 
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "Szukaj w kanałach"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "Wyślij załącznik"
 
 #: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "Skup się na polu wprowadzania tekstu"
 
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr ""
+msgstr "Wczytaj więcej wiadomości"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Prześlij Captcha"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -677,298 +693,312 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Prześlij Captcha. Token można uzyskać z komunikatu o błędzie, który został "
+"wyświetlony przez Flare. Captcha należy wypełnić <a href="
+"\"https://signalcaptchas.org/challenge/generate.html\">na tej stronie</a>, a "
+"link do otwarcia Signala należy wkleić do odpowiedniego pola. Należy "
+"pamiętać, że captcha jest ważna tylko przez około minutę."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "Prześlij"
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
-msgstr ""
+msgstr "Wiadomość"
 
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Wstaw emoji"
 
 #: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Wstaw emoji"
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
-msgstr ""
+msgstr "Lista kanałów"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Dodaj Rozmowę"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "Czat"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "pisze"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
-msgstr ""
+msgstr "Ustawienia"
 
 #: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Synchronizuj Kontakty"
 
 #: data/resources/ui/window.blp:181
 msgid "Keybindings"
-msgstr ""
+msgstr "Skróty klawiszowe"
 
 #: data/resources/ui/window.blp:186
 msgid "About"
-msgstr ""
+msgstr "O"
 
 #: data/resources/ui/window.blp:191
 msgid "Quit"
-msgstr ""
+msgstr "Wyjdź"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
-msgstr ""
+msgstr "Notatka dla siebie"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Nieznany kontakt"
 
 #: src/backend/manager.rs:442
 msgid "You"
-msgstr ""
+msgstr "Ty"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "Przychodzące połączenie"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "Wychodzące połączenie"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "Połączenie rozpoczęte"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr ""
+msgstr "Połączenie zakończone"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
-msgstr ""
+msgstr "Połączenie odrzucone"
 
 #: src/backend/message/call_message.rs:105
 msgid "Unanswered call"
-msgstr ""
+msgstr "Nieodebrane połączenie"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
-msgstr ""
+msgstr "{sender} zareagował {emoji} na wiadomość."
 
 #: src/backend/message/reaction_message.rs:80
 msgid "Reacted {emoji} to a message."
-msgstr ""
+msgstr "Zareagowano {emoji} na wiadomość."
 
 #: src/backend/message/text_message.rs:381
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Wyślij {} zdjęcie"
+msgstr[1] "Wyślij {} zdjęcia"
+msgstr[2] "Wyślij {} zdjęć"
 
 #: src/backend/message/text_message.rs:383
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Wyślij {} film"
+msgstr[1] "Wyślij {} filmy"
+msgstr[2] "Wyślij {} filmów"
 
 #: src/backend/message/text_message.rs:386
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Wyślij {} wiadomość głosową"
+msgstr[1] "Wyślij {} wiadomości głosowe"
+msgstr[2] "Wyślij {} wiadomości głosowych"
 
 #: src/backend/message/text_message.rs:391
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Wyślij {} plik"
+msgstr[1] "Wyślij {} pliki"
+msgstr[2] "Wyślij {} plików"
 
 #: src/error.rs:91
 msgid "I/O Error."
-msgstr ""
+msgstr "Błąd I/O."
 
 #: src/error.rs:96
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "Wygląda na to, że brak jest połączenia z internetem."
 
 #: src/error.rs:101
 msgid "Something glib-related failed."
-msgstr ""
+msgstr "Coś związanego z glib nie powiodło się."
 
 #: src/error.rs:106
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "Komunikacja z Libsecret nie powiodła się."
 
 #: src/error.rs:111
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"Baza danych nie działa. Proszę zrestartować aplikację lub usunąć bazę danych "
+"i ponownie połączyć aplikację."
 
 #: src/error.rs:116
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"Wygląda na to, że nie masz uprawnień do korzystania z Signal. Proszę usuń "
+"bazę danych i ponownie połącz aplikację."
 
 #: src/error.rs:121
 msgid "Sending a message failed."
-msgstr ""
+msgstr "Wysyłanie wiadomości nie powiodło się."
 
 #: src/error.rs:126
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "Odbieranie wiadomości nie powiodło się."
 
 #: src/error.rs:131
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"Wystąpił nieoczekiwany problem ze Signalem. Proszę spróbować ponownie "
+"później."
 
 #: src/error.rs:136
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "Wygląda na to, że aplikacja jest błędnie skonfigurowana."
 
 #: src/error.rs:141
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Część aplikacji uległa awarii."
 
 #: src/error.rs:151
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Proszę sprawdzić połączenie z internetem."
 
 #: src/error.rs:156
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "Proszę usunąć bazę danych i ponownie połączyć urządzenie."
 
 #: src/error.rs:163
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "Ścieżka do bazy danych w {} nie jest folderem."
 
 #: src/error.rs:168
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
+"Proszę zrestartować aplikację z włączonym logowaniem i zgłosić ten problem."
 
 #: src/gui/channel_info_dialog.rs:197
 msgid "Never"
-msgstr ""
+msgstr "Nigdy"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Szkic"
 
 #: src/gui/linked_devices_window.rs:116
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device?"
-msgstr "Urządzenie dodatkowe"
+msgstr "Odłączyć urządzenie?"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Czy na pewno chcesz odłączyć {}?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "Obserwuj nowe wiadomości podczas zamknięcia"
 
 #: src/gui/preferences_window.rs:99
 msgid "Background permission"
-msgstr ""
+msgstr "Uprawnienia w tle"
 
 #: src/gui/preferences_window.rs:100
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "Użyj ustawień, aby usunąć uprawnienia"
 
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Produkcja"
 
 #: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Środowisko testowe"
 
 #: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Skopiowano do schowka"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:102 src/gui/utility.rs:126
 msgid "%H:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:105
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%Y-%m-%d %H:%M"
 
 #: src/gui/utility.rs:138
 msgid "Today"
-msgstr ""
+msgstr "Dziś"
 
 #: src/gui/utility.rs:141
 msgid "Yesterday"
-msgstr ""
+msgstr "Wczoraj"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:151
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:159
-#, fuzzy
 msgid "Attachment"
-msgstr "Dodaj załącznik"
+msgstr "Załącznik"
 
 #: src/gui/window.rs:304 src/gui/window.rs:310
 msgid "Remove Messages"
-msgstr ""
+msgstr "Usuń wiadomości"
 
 #: src/gui/window.rs:305
 msgid "This will remove all locally stored messages from this channel"
 msgstr ""
+"To spowoduje usunięcie wszystkich lokalnie zapisanych wiadomości z tego "
+"kanału"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Pisz ze swoimi przyjaciółmi na Signalu"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "wiadomości;czat;signal;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
@@ -977,6 +1007,9 @@ msgid ""
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
+"Flare jest nieoficjalną aplikacją Signala. Jest wciąż w fazie rozwoju i nie "
+"zawiera wszystkich funkcji, które oferują oficjalne aplikacje Signala. "
+"Więcej informacji można znaleźć w jej planie rozwoju funkcji."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -986,68 +1019,75 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Należy pamiętać, że korzystanie z tej aplikacji prawdopodobnie pogorszy "
+"twoje bezpieczeństwo w porównaniu do korzystania z oficjalnych aplikacji "
+"Signala. Używaj jej ostrożnie, zwłaszcza przy przetwarzaniu wrażliwych "
+"danych. Zapoznaj się z plikiem README projektu, aby uzyskać więcej "
+"informacji na temat bezpieczeństwa."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:609
 msgid "Overview of the application"
-msgstr ""
+msgstr "Przegląd aplikacji"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Szerokość okna"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Wysokość okna"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Zmaksymalizowany stan okna"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Nazwa urządzenia podczas łączenia Flare. Wymaga to ponownego połączenia "
+"aplikacji."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Automatyczne pobieranie obrazów"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Automatyczne pobieranie filmów"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
-msgstr ""
+msgstr "Automatyczne pobieranie wiadomości głosowych"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "Automatyczne pobieranie plików"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
-msgstr ""
+msgstr "Wysyłaj powiadomienia"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Działaj w tle po zamknięciu"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Wysyłaj powiadomienia przy pobieraniu reakcji"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Czy wiadomości mogą być wybierane"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Wyślij wiadomość po naciśnięciu klawisza Enter"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
-msgstr ""
+msgstr "Jak sortować kontakty, np. według \"imienia\" lub \"nazwiska\""
 
 #~ msgid "Channel Information"
 #~ msgstr "Informacje o kanale"
