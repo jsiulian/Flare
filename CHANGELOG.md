@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Fix `409` error when linking the device.
+
 ## [0.15.7] - 2025-01-16
 
 ### HOTFIX
