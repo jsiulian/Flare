@@ -38,6 +38,14 @@
   </description>
 
   <releases>
+    <release version="v0.15.8" date="2025-01-30">
+      <description translate="no">
+        <p>HOTFIX</p>
+        <ul>
+          <li>Fix 409 error when linking the device.</li>
+        </ul>
+      </description>
+    </release>
     <release version="v0.15.7" date="2025-01-16">
       <description translate="no">
         <p>HOTFIX</p>

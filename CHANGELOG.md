@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.8] - 2025-01-30
+
 ### HOTFIX
 
 - Fix `409` error when linking the device.
@@ -648,7 +650,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.7...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.8...master
+[0.15.8]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.7...0.15.8
 [0.15.7]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.6...0.15.7
 [0.15.6]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.5...0.15.6
 [0.15.5]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.4...0.15.5
