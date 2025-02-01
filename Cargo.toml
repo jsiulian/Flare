@@ -45,7 +45,7 @@ env_logger = "0.11.5"
 
 tracing = { version = "0.1.40", features = ["log-always"] }
 sourceview5 = "0.9.1"
-libspelling = "0.3.0"
+libspelling = { version = "0.3.0", optional = true }
 blurhash = { git = "https://github.com/whisperfish/blurhash-rs", rev = "2135e10", features = ["gdk-pixbuf"] }
 image = "0.24.9"
 chrono = "0.4.38"
@@ -56,7 +56,7 @@ phonenumber = { version = "0.3", optional = true }
 default = []
 screenshot = [ "dep:phonenumber" ]
 screenshot-setup = [ "screenshot" ]
-libspelling = []
+libspelling = [ "dep:libspelling" ]
 
 [patch.crates-io]
 curve25519-dalek = { git = 'https://github.com/signalapp/curve25519-dalek', tag = 'signal-curve25519-4.1.3' }
