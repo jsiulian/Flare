@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-02-01 12:02+0000\n"
+"PO-Revision-Date: 2025-02-04 13:02+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/fi/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr "kääntäjien ansiot"
+msgstr "Jiri Grönroos"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
