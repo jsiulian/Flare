@@ -16,7 +16,7 @@ use oo7::Keyring;
 use presage::model::groups::Group;
 use presage::store::{ContentsStore, StateStore, Thread};
 use presage_store_sled::MigrationConflictStrategy;
-use rand::distributions::DistString;
+use rand::distr::SampleString;
 use url::Url;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
@@ -67,8 +67,8 @@ async fn encryption_password() -> Result<String, ApplicationError> {
         Ok(secret)
     } else {
         log::trace!("Password not found, creating password");
-        let distribution = rand::distributions::Standard {};
-        let secret = distribution.sample_string(&mut rand::thread_rng(), SECRET_LENGTH);
+        let distribution = rand::distr::StandardUniform {};
+        let secret = distribution.sample_string(&mut rand::rng(), SECRET_LENGTH);
         let secret_bytes = secret.as_bytes();
         log::trace!("Storing password");
         keyring
