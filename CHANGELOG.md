@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- Updated `libsignal-service-rs` to fix two upstream security issues:
+    - <https://github.com/whisperfish/libsignal-service-rs/security/advisories/GHSA-r58q-66g9-h6g8>
+    - <https://github.com/whisperfish/libsignal-service-rs/security/advisories/GHSA-hrrc-wpfw-5hj2>
+
 ### Fixed
 
 - Compilation without optional `libspelling` dependency.
