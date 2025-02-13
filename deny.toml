@@ -14,6 +14,7 @@ allow = [
     "ISC",
     "Unicode-3.0",
     "OpenSSL",
+    "NCSA"
 ]
 
 [[licenses.clarify]]
