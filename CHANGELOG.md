@@ -6,11 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.9] - 2025-02-13
+
 ### Security
 
 - Updated `libsignal-service-rs` to fix two upstream security issues:
-    - <https://github.com/whisperfish/libsignal-service-rs/security/advisories/GHSA-r58q-66g9-h6g8>
-    - <https://github.com/whisperfish/libsignal-service-rs/security/advisories/GHSA-hrrc-wpfw-5hj2>
+    - [GHSA-r58q-66g9-h6g8](https://github.com/whisperfish/libsignal-service-rs/security/advisories/GHSA-r58q-66g9-h6g8)
+    - [GHSA-r58q-66g9-h6g8](https://github.com/whisperfish/libsignal-service-rs/security/advisories/GHSA-hrrc-wpfw-5hj2)
 
 ### Fixed
 
@@ -660,7 +662,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.8...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.9...master
+[0.15.9]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.8...0.15.9
 [0.15.8]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.7...0.15.8
 [0.15.7]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.6...0.15.7
 [0.15.6]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.5...0.15.6
