@@ -62,7 +62,7 @@ template $FlChannelMessages: Box {
       // Message List
       ScrolledWindow scrolled_window {
         styles [
-          "undershoot-bottom"
+          "undershoot-bottom",
         ]
 
         vexpand: true;
@@ -95,7 +95,7 @@ template $FlChannelMessages: Box {
     Box {
       styles [
         "toolbar",
-        "message-input-bar"
+        "message-input-bar",
       ]
 
       orientation: horizontal;
@@ -111,14 +111,14 @@ template $FlChannelMessages: Box {
             vexpand-set: true;
 
             styles [
-              "currently-replied-box"
+              "currently-replied-box",
             ]
 
             visible: bind $is_some(template.reply-message) as <bool>;
 
             Image {
               styles [
-                "accent"
+                "accent",
               ]
 
               icon-name: "mail-reply-sender-symbolic";
@@ -127,7 +127,7 @@ template $FlChannelMessages: Box {
 
             Separator {
               styles [
-                "accent"
+                "accent",
               ]
 
               margin-start: 6;
@@ -186,7 +186,7 @@ template $FlChannelMessages: Box {
 
               styles [
                 "flat",
-                "circular"
+                "circular",
               ]
 
               valign: center;

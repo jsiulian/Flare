@@ -84,7 +84,7 @@ template $FlWindow: Adw.ApplicationWindow {
         Adw.HeaderBar {
           title-widget: Button {
             styles [
-              "flat"
+              "flat",
             ]
 
             sensitive: bind $is_some(channel_list.active-channel) as <bool>;
@@ -125,7 +125,7 @@ template $FlWindow: Adw.ApplicationWindow {
 
                 styles [
                   "subtitle-room",
-                  "accent"
+                  "accent",
                 ]
               }
             };

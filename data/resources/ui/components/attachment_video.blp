@@ -2,7 +2,7 @@ using Gtk 4.0;
 
 template $FlAttachmentVideo: $FlAttachmentBase {
   styles [
-    "attachment-video"
+    "attachment-video",
   ]
 
   Overlay video_overlay {
@@ -22,7 +22,7 @@ template $FlAttachmentVideo: $FlAttachmentBase {
       media-stream: bind template.attachment as <$FlAttachmentObject>.video;
 
       styles [
-        "osd"
+        "osd",
       ]
 
       halign: fill;

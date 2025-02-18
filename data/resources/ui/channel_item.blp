@@ -27,7 +27,7 @@ template $FlChannelItem: Box {
       // Channel name
       Label label-name {
         styles [
-          "heading"
+          "heading",
         ]
 
         label: bind template.channel as <$FlChannel>.title;
@@ -67,7 +67,7 @@ template $FlChannelItem: Box {
       label: bind $format_last_message(template.channel as <$FlChannel>.last-message as <$FlTextMessage>, template.channel as <$FlChannel>.is-typing as <bool>, template.channel as <$FlChannel>.draft as <string>) as <string>;
 
       styles [
-        "subtitle"
+        "subtitle",
       ]
     }
   }

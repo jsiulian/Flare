@@ -3,7 +3,7 @@ using Gtk 4.0;
 template $FlAttachmentImage: $FlAttachmentBase {
   Picture picture {
     styles [
-      "photo"
+      "photo",
     ]
 
     height-request: bind $resize_height(template.attachment as <$FlAttachmentObject>.width, template.attachment as <$FlAttachmentObject>.height) as <int>;

@@ -33,7 +33,7 @@ template $FlChannelInfoDialog: Adw.Dialog {
 
           Gtk.Label {
             styles [
-              "title-1"
+              "title-1",
             ]
 
             label: bind template.channel as <$FlChannel>.title;
@@ -48,7 +48,7 @@ template $FlChannelInfoDialog: Adw.Dialog {
 
             Adw.ActionRow row_phone {
               styles [
-                "property"
+                "property",
               ]
 
               title: _("Phone Number");
@@ -56,7 +56,7 @@ template $FlChannelInfoDialog: Adw.Dialog {
               [suffix]
               Gtk.Button {
                 styles [
-                  "flat"
+                  "flat",
                 ]
 
                 tooltip-text: "Open phone number";
@@ -68,7 +68,7 @@ template $FlChannelInfoDialog: Adw.Dialog {
 
             Adw.ExpanderRow row_description {
               styles [
-                "property"
+                "property",
               ]
 
               title: _("Description");
@@ -80,7 +80,7 @@ template $FlChannelInfoDialog: Adw.Dialog {
 
             Adw.ActionRow row_disappearing {
               styles [
-                "property"
+                "property",
               ]
 
               title: _("Disappearing Messages");
@@ -94,7 +94,7 @@ template $FlChannelInfoDialog: Adw.Dialog {
 
           Gtk.ListBox {
             styles [
-              "boxed-list"
+              "boxed-list",
             ]
 
             Adw.ButtonRow {
@@ -106,7 +106,7 @@ template $FlChannelInfoDialog: Adw.Dialog {
 
             Adw.ButtonRow {
               styles [
-                "destructive-action"
+                "destructive-action",
               ]
 
               title: _("Clear Messages");
