@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Hide some more "no internet" errors, as Flare should be able to handle those automatically.
+
 ## [0.15.9] - 2025-02-13
 
 ### Security

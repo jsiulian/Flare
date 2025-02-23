@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::{error::Error, fmt::Display};
 
 use gtk::glib;
 use libsignal_service as lss;
@@ -6,7 +6,8 @@ use lss::push_service::ServiceError;
 use presage as p;
 
 const FAILED_TO_LOOK_UP_ADDRESS: &str = "failed to lookup address information";
-const NETWORK_UNREACHABLE: &str = " Network is unreachable";
+const NETWORK_UNREACHABLE: &str = "Network is unreachable";
+const TIMED_OUT: &str = "timed out";
 type PresageError = presage::Error<presage_store_sled::SledStoreError>;
 
 #[derive(Debug)]
@@ -52,7 +53,13 @@ impl From<PresageError> for ApplicationError {
             p::Error::Store(e) => ApplicationError::Db(e),
             p::Error::ServiceError(ServiceError::WsError(e))
                 if e.to_string().contains(FAILED_TO_LOOK_UP_ADDRESS)
-                    || e.to_string().contains(NETWORK_UNREACHABLE) =>
+                    || e.to_string().contains(NETWORK_UNREACHABLE)
+                    || e.to_string().contains(TIMED_OUT)
+                    || e.source().is_some_and(|s| {
+                        s.to_string().contains(FAILED_TO_LOOK_UP_ADDRESS)
+                            || s.to_string().contains(NETWORK_UNREACHABLE)
+                            || s.to_string().contains(TIMED_OUT)
+                    }) =>
             {
                 ApplicationError::NoInternet
             }
