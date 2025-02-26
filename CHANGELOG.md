@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.11] - 2025-02-26
+
 ### HOTFIX
 
 - Compilation on aarch64.
@@ -676,7 +678,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.10...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.11...master
+[0.15.11]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.10...0.15.11
 [0.15.10]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.9...0.15.10
 [0.15.9]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.8...0.15.9
 [0.15.8]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.7...0.15.8
