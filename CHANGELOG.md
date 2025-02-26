@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Compilation on aarch64.
+
 ## [0.15.10] - 2025-02-26
 
 ### Fixed
