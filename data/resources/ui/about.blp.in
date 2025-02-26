@@ -14,5 +14,5 @@ Adw.AboutDialog about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>Security</p> <ul> <li>Updated libsignal-service-rs to fix two upstream security issues.</li> </ul> <p>Fixed</p> <ul> <li>Compilation without optional libspelling dependency.</li> </ul>";
+  release-notes: "<p>Fixed</p> <ul> <li>Hide some more no internet errors, as Flare should be able to handle those automatically.</li> </ul> <p>Chores</p> <ul> <li>Update all dependencies.</li> </ul>";
 }
