@@ -71,10 +71,21 @@ gtk::glib::wrapper! {
 impl Attachment {
     pub fn from_file(file: File, manager: &Manager) -> Self {
         log::trace!("Trying to build a Attachment from a file");
-        let mime = gio::content_type_guess(file.basename(), &[])
-            .0
-            .as_str()
-            .to_owned();
+        // For some reason, `gio::content_type_guess` returns `application/x-zerosize` for PNGs.
+        // Hardcode to return the correct content type.
+        let mime = if file
+            .basename()
+            .as_ref()
+            .and_then(|b| b.extension())
+            .is_some_and(|b| b == "png")
+        {
+            "image/png".to_string()
+        } else {
+            gio::content_type_guess(file.basename(), &[])
+                .0
+                .as_str()
+                .to_owned()
+        };
         let mut size = 0;
         if let Ok(file_info) = file.query_info(
             gio::FILE_ATTRIBUTE_STANDARD_SIZE,
