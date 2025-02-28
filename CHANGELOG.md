@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.12] - 2025-02-28
+
+### Fixed
+
+- PNG attachments are sent as files instead of images.
+
 ## [0.15.11] - 2025-02-26
 
 ### HOTFIX
