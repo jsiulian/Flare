@@ -25,7 +25,7 @@ cargo_options = [ '--manifest-path', meson.project_source_root() / 'Cargo.toml' 
 cargo_options += [ '--target-dir', meson.project_build_root() / 'target' ]
 
 if get_option('profile') == 'default'
-  cargo_options += [ '--release' ]
+  cargo_options += [ '--release', '--locked' ]
   rust_target = 'release'
   message('Building in release mode')
 elif get_option('profile') == 'screenshot'
