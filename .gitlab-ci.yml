@@ -2,6 +2,7 @@ stages:
   - quick-test
   - build
   - upload
+  - release
 
 variables:
   UPLOAD_URL_BASE: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${CI_PROJECT_NAME}/${CI_COMMIT_TAG}"
@@ -10,86 +11,13 @@ variables:
   PROJ_NAME_VERSION: "${CI_PROJECT_NAME}-${CI_COMMIT_TAG}"
   RUSTFLAGS: "-Dwarnings"
 
-
-# flatpak, based on https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml
-flatpak:
-  image: 'quay.io/gnome_infrastructure/gnome-runtime-images:gnome-master'
-  stage: build
-  interruptible: true
-  variables:
-    LANG: "C.UTF-8"
-    RUN_TESTS: "1"
-    MANIFEST_PATH: 'build-aux/de.schmidhuberj.Flare.Devel.json'
-    RUNTIME_REPO: 'https://nightly.gnome.org/gnome-nightly.flatpakrepo'
-    FLATPAK_MODULE: 'flare'
-    BUNDLE: "de.schmidhuberj.Flare.Devel.flatpak"
-    APP_ID: 'de.schmidhuberj.Flare.Devel'
-
-  script:
-    - flatpak --version
-    # Report the installed versions of the runtime
-    - flatpak info org.gnome.Platform
-    - flatpak info org.gnome.Sdk
-
-    # Print the date, since appstream depends on local timezone
-    - date && date -u
-
-    - >-
-      xvfb-run -a -s "-screen 0 1024x768x24" --
-      dbus-run-session
-      flatpak-builder --keep-build-dirs --user --disable-rofiles-fuse flatpak_app --repo=repo ${BRANCH:+--default-branch=$BRANCH} ${MANIFEST_PATH}
-
-    # Generate a Flatpak bundle
-    - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
-    - tar cf repo.tar repo/
-  artifacts:
-    name: 'Flatpak artifacts'
-    when: 'always'
-    paths:
-      - $BUNDLE
-      - 'repo.tar'
-      - '.flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/meson-log.txt'
-      - '.flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/testlog.txt'
-    reports:
-      junit: '.flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/testlog.junit.xml'
-    expire_in: 14 days
-# end flatpak
-
-i18n:
+test:i18n:
   stage: quick-test
   image: archlinux:base-devel
   script:
     - pacman -Syu fd --noconfirm
     - ./build-aux/test/i18n-strings-check.sh
   allow_failure: true
-
-build:
-  stage: build
-  image: archlinux:base-devel
-  rules:
-    - if: $CI_COMMIT_TAG
-  script:
-    - pacman -Syu rustup meson gtk4 git cmake libadwaita blueprint-compiler gtksourceview5 protobuf --noconfirm
-    - rustup default stable
-    - meson setup $BUILD_RELEASE
-    # Don't test, as Flatpak already builds it.
-    - meson dist --no-tests -C $BUILD_RELEASE
-  artifacts:
-    paths:
-      - ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz
-      - ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz.sha256sum
-    expire_in: 1 week
-
-
-upload:
-  stage: upload
-  image: curlimages/curl:latest
-  rules:
-    - if: $CI_COMMIT_TAG
-  script:
-    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz "${UPLOAD_URL_BASE}/${PROJ_NAME_VERSION}.tar.xz"'
-    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz.sha256sum "${UPLOAD_URL_BASE}/${PROJ_NAME_VERSION}.tar.xz.sha256sum"'
-
 
 test:cargo-deny:
   stage: quick-test
@@ -131,3 +59,99 @@ test:cargo-clippy:
     - meson compile -C build resources_gresource
     - cargo clippy --verbose
   allow_failure: true
+
+# flatpak, based on https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml
+flatpak:
+  image: "quay.io/gnome_infrastructure/gnome-runtime-images:gnome-master"
+  stage: build
+  interruptible: true
+  variables:
+    LANG: "C.UTF-8"
+    RUN_TESTS: "1"
+    MANIFEST_PATH: "build-aux/de.schmidhuberj.Flare.Devel.json"
+    RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
+    FLATPAK_MODULE: "flare"
+    BUNDLE: "de.schmidhuberj.Flare.Devel.flatpak"
+    APP_ID: "de.schmidhuberj.Flare.Devel"
+
+  script:
+    - flatpak --version
+    # Report the installed versions of the runtime
+    - flatpak info org.gnome.Platform
+    - flatpak info org.gnome.Sdk
+
+    # Print the date, since appstream depends on local timezone
+    - date && date -u
+
+    - >-
+      xvfb-run -a -s "-screen 0 1024x768x24" --
+      dbus-run-session
+      flatpak-builder --keep-build-dirs --user --disable-rofiles-fuse flatpak_app --repo=repo ${BRANCH:+--default-branch=$BRANCH} ${MANIFEST_PATH}
+
+    # Generate a Flatpak bundle
+    - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
+    - tar cf repo.tar repo/
+  artifacts:
+    name: "Flatpak artifacts"
+    when: "always"
+    paths:
+      - $BUNDLE
+      - "repo.tar"
+      - ".flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/meson-log.txt"
+      - ".flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/testlog.txt"
+    reports:
+      junit: ".flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/testlog.junit.xml"
+    expire_in: 14 days
+# end flatpak
+
+build:
+  stage: build
+  image: archlinux:base-devel
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - pacman -Syu rustup meson gtk4 git cmake libadwaita blueprint-compiler gtksourceview5 protobuf --noconfirm
+    - rustup default stable
+    - meson setup $BUILD_RELEASE
+    # Don't test, as Flatpak already builds it.
+    - meson dist --no-tests -C $BUILD_RELEASE
+  artifacts:
+    paths:
+      - ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz
+      - ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz.sha256sum
+    expire_in: 1 week
+
+upload:
+  stage: upload
+  image: curlimages/curl:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  dependencies:
+    - build
+  script:
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz "${UPLOAD_URL_BASE}/${PROJ_NAME_VERSION}.tar.xz"'
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${MESON_DIST}/${PROJ_NAME_VERSION}.tar.xz.sha256sum "${UPLOAD_URL_BASE}/${PROJ_NAME_VERSION}.tar.xz.sha256sum"'
+
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  dependencies:
+    - upload
+  script:
+    - echo "Creating GitLab Release for ${CI_COMMIT_TAG}"
+    - PREV_TAG=$(git describe --tags --abbrev=0 $(git rev-list --tags --skip=1 --max-count=1) 2>/dev/null || echo "")
+    - if [ -n "$PREV_TAG" ]; then git log --pretty=format:"- [%h](https://gitlab.com/${CI_PROJECT_PATH}/-/commit/%H) %s" ${PREV_TAG}..${CI_COMMIT_TAG} --no-merges > release_notes.md; else echo "Initial release" > release_notes.md; fi
+  release:
+    name: "Release ${CI_COMMIT_TAG}"
+    description: "$(cat release_notes.md)"
+    tag_name: "${CI_COMMIT_TAG}"
+    assets:
+      links:
+        - name: "${PROJ_NAME_VERSION}.tar.xz"
+          url: "${UPLOAD_URL_BASE}/${PROJ_NAME_VERSION}.tar.xz"
+          link_type: package
+        - name: "${PROJ_NAME_VERSION}.tar.xz.sha256sum"
+          url: "${UPLOAD_URL_BASE}/${PROJ_NAME_VERSION}.tar.xz.sha256sum"
+          link_type: other
