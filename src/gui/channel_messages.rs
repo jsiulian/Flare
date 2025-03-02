@@ -257,6 +257,19 @@ pub mod imp {
             let att_widget = backend_to_gui(&attachment);
             self.box_attachments.append(&att_widget);
             self.attachments.borrow_mut().push(attachment);
+
+            // Due to (probably) a bug in GTK, a picture takes up pretty much the entire application when inserted into the box, sometimes even with tons of whitespace below.
+            // Swapping `hexpand` off and on very quickly fixes this issue for some reason.
+            // See https://gitlab.com/schmiddi-on-mobile/flare/-/issues/56 and https://gitlab.com/schmiddi-on-mobile/flare/-/issues/253.
+            self.box_attachments.set_hexpand(true);
+            gspawn!(clone!(
+                #[strong(rename_to = box_attachments)]
+                self.box_attachments,
+                async move {
+                    glib::timeout_future(std::time::Duration::from_millis(5)).await;
+                    box_attachments.set_hexpand(false);
+                }
+            ));
         }
 
         #[template_callback]
