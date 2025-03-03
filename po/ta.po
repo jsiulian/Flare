@@ -8,160 +8,164 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-03-03 01:30+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
+"flare/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.3-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr ""
+msgstr "மொழிபெயர்ப்பாளர்-வரவு"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
-msgstr ""
+msgstr "தொலைபேசி எண்"
 
 #: data/resources/ui/channel_info_dialog.blp:66
 msgid "Description"
-msgstr ""
+msgstr "விவரம்"
 
 #: data/resources/ui/channel_info_dialog.blp:76
 msgid "Disappearing Messages"
-msgstr ""
+msgstr "காணாமல் போகும் செய்திகள்"
 
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "அமர்வு மீட்டமை"
 
 #: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
-msgstr ""
+msgstr "அமர்வு மீட்டமை"
 
 #: data/resources/ui/channel_info_dialog.blp:128
 msgctxt "accessibility"
 msgid "Clear Messages"
-msgstr ""
+msgstr "செய்திகளை அழிக்கவும்"
 
 #: data/resources/ui/channel_info_dialog.blp:149
 msgid "Clear Messages"
-msgstr ""
+msgstr "செய்திகளை அழிக்கவும்"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "இணையமில்லாமல்"
 
 #: data/resources/ui/channel_list.blp:20
 msgid "Search"
-msgstr ""
+msgstr "தேடல்"
 
 #: data/resources/ui/channel_list.blp:23 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "தேடல்"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "எந்த சேனலும் தேர்ந்தெடுக்கப்படவில்லை"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "ஒரு சேனலைத் தேர்ந்தெடுக்கவும்"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "பதிலை அகற்று"
 
 #: data/resources/ui/channel_messages.blp:184
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "பதிலை அகற்று"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "இணைப்பை அகற்று"
 
 #: data/resources/ui/channel_messages.blp:207
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "இணைப்பை அகற்று"
 
 #: data/resources/ui/channel_messages.blp:228
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "ஒரு இணைப்பைச் சேர்க்கவும்"
 
 #: data/resources/ui/channel_messages.blp:236
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "இணைப்பைச் சேர்க்கவும்"
 
 #: data/resources/ui/channel_messages.blp:252
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "செய்தி உள்ளீடு"
 
 #: data/resources/ui/channel_messages.blp:258
 msgctxt "tooltip"
 msgid "Message input"
-msgstr ""
+msgstr "செய்தி உள்ளீடு"
 
 #: data/resources/ui/channel_messages.blp:270
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "அனுப்பு"
 
 #: data/resources/ui/channel_messages.blp:274
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "அனுப்பு"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "இணைக்கப்பட்ட:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "கடைசியாக செயலில்:"
 
 #: data/resources/ui/device_info_item.blp:72
 msgid "Unlink Device"
-msgstr ""
+msgstr "சாதனத்தை இணைக்கவும்"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
 msgid "Clear messages"
-msgstr ""
+msgstr "செய்திகளை அழிக்கவும்"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
+"இது உள்நாட்டில் சேமிக்கப்பட்ட அனைத்து செய்திகளையும் அழிக்கும். இது பயன்பாட்டையும் "
+"மூடிவிடும்."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
 #: data/resources/ui/linked_devices_window.blp:50
 #: src/gui/linked_devices_window.rs:122 src/gui/window.rs:309
 msgid "Cancel"
-msgstr ""
+msgstr "ரத்துசெய்"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "தெளிவான"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
 #: src/gui/linked_devices_window.rs:121
 msgid "Unlink"
-msgstr ""
+msgstr "இணைக்கவும்"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -169,153 +173,155 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"இது இந்த சாதனத்தை அவிழ்த்து, உள்நாட்டில் சேமிக்கப்பட்ட அனைத்து தரவையும் அகற்றும். இது "
+"பயன்பாட்டை மீண்டும் திறக்கும்போது அதை மீண்டும் தொடங்கும்."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "எல்லா செய்திகளையும் திறந்து நீக்கவும்"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "அவிழ்த்து விடுங்கள், ஆனால் செய்திகளை வைத்திருங்கள்"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "பிழை"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "இந்த பிழையைப் புகாரளிப்பதைக் கவனியுங்கள்."
 
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr ""
+msgstr "மூடு"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "அறிக்கை"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
 msgid "Linked Devices"
-msgstr ""
+msgstr "இணைக்கப்பட்ட சாதனங்கள்"
 
 #: data/resources/ui/linked_devices_window.blp:31
 msgid "Add Linked Device"
-msgstr ""
+msgstr "இணைக்கப்பட்ட சாதனத்தைச் சேர்க்கவும்"
 
 #: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "இணைக்க சாதனத்தின் முகவரி ஐ செருகவும்."
 
 #: data/resources/ui/linked_devices_window.blp:42
 msgid "Device URL"
-msgstr ""
+msgstr "சாதன முகவரி"
 
 #: data/resources/ui/linked_devices_window.blp:51
 msgid "Add Device"
-msgstr ""
+msgstr "சாதனத்தைச் சேர்க்கவும்"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr ""
+msgstr "பதில்"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "நீக்கு"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "நகலெடு"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "சேமிக்கவும்…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "உடன் திறந்திருக்கும்…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
-msgstr ""
+msgstr "புதிய அரட்டை"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "பட்டியல்"
 
 #: data/resources/ui/new_channel_dialog.blp:35
 msgid "Search Contacts"
-msgstr ""
+msgstr "தொடர்புகளைத் தேடுங்கள்"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "வழங்கிய தொடர்புகளை பட்டியலிடுங்கள்:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "முதல் பெயர்"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "குடும்பப்பெயர்"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "பொது"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "இணைப்புகளை தானாக பதிவிறக்கவும்"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "கீழே தேர்ந்தெடுக்கப்பட்ட இணைப்பு வகைகள் தானாக பதிவிறக்கம் செய்யப்படும்"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "படங்கள்"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "வீடியோக்கள்"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "கோப்புகள்"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Voice Messages"
-msgstr ""
+msgstr "குரல் செய்திகள்"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr ""
+msgstr "அறிவிப்புகள்"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr ""
+msgstr "புதிய செய்திகளுக்கான அறிவிப்புகள்"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr ""
+msgstr "அறிவிப்புகளை அனுப்பவும்"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr ""
+msgstr "எதிர்வினைகள் குறித்த அறிவிப்புகளை அனுப்பவும்"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr ""
+msgstr "பின்னணி அறிவிப்புகள்"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "பயன்பாடு மூடப்படும் போது அறிவிப்புகளைப் பெறுங்கள்"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "மொபைல் பொருந்தக்கூடிய தன்மை"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -323,39 +329,43 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"தொடு மற்றும் மொபைல் சாதனங்களில் சிறந்த அனுபவத்திற்காக இந்த விருப்பங்கள் மாற்ற விரும்பலாம். "
+"அந்த விருப்பங்களின் இயல்புநிலை மதிப்புகள் டெச்க்டாப் சாதனங்களில் பயனுள்ளதாக இருக்கும்."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "தேர்ந்தெடுக்கக்கூடிய செய்தி உரை"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr ""
+msgstr "தேர்ந்தெடுக்கப்பட்ட உரை தொடுதிரை மீது ச்வைப்-வெரீடுகளில் தலையிடலாம்"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "செய்தி அனுப்ப “Enter” ஐ அழுத்தவும்"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"தொடு விசைப்பலகையில் புதிய வரியுடன் செய்திகளை “கட்டுப்பாடு + உள்ளிட” அனுமதிக்காமல் அனுப்"
+"ப முடியாது"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "விரிவடைய வரவேற்கிறோம்"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "விரிவடைய அமைக்கவும்"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:8
 msgid "Flare"
-msgstr ""
+msgstr "விரிவடைய"
 
 #: data/resources/ui/setup_window.blp:53
 msgid ""
@@ -369,33 +379,44 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"ஃப்ளேர் ஒரு அதிகாரப்பூர்வமற்ற சமிக்ஞை வாடிக்கையாளர். ஃப்ளேர் நிலையானது அல்ல என்பதையும், "
+"எதிர்பார்க்க வேண்டிய பிழைகள் உள்ளன என்பதையும் நினைவில் கொள்க. நீங்கள் ஏதேனும் பிழைகள் "
+"அனுபவிக்கிறீர்கள் என்றால், <a href = "
+"\"https://gitlab.com/schmiddi-on-mobile/flare/flare/-/issues\"> ஐ வெளியீடு "
+"டிராக்கர் </a> ஐ அணுகவும், புதிய சிக்கலை நீங்கள் சந்தித்தால் சிக்கல்களைத் திறக்கவும். மூன்றாம்"
+" தரப்பு பயன்பாடாக இருப்பதால், உத்தியோகபூர்வ சமிக்ஞை பயன்பாடுகள் செய்யும் அதே அளவிலான "
+"பாதுகாப்பு மற்றும் தனியுரிமைக்கு ஃபிளேர் பொறுப்பு அளிக்க முடியாது என்பதையும் நினைவில் "
+"கொள்க. நீங்கள் அல்லது நீங்கள் தொடர்பு கொள்ள வேண்டிய ஒருவருக்கு வலுவான பாதுகாப்பு "
+"தேவைப்பட்டால், விரிவடைய பயன்படுத்த வேண்டாம். மேலும் தகவலுக்கு <a href = \"https://"
+"gitlab.com/schmiddi-on-mobile/flare/-/blob/master/readme.md#security ஐ "
+"அணுகவும்."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "முதன்மை சாதனம் அல்லது இணைப்பு சாதனத்தை அமைக்கவா?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
 msgid "Primary Device"
-msgstr ""
+msgstr "முதன்மை சாதனம்"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
 #: data/resources/ui/setup_window.blp:177
 msgid "Link Device"
-msgstr ""
+msgstr "இணைப்பு சாதனம்"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "முதன்மை சாதனம் அல்லது இணைப்பு சாதனம்?"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "நீங்கள் ஒரு முதன்மை அல்லது இரண்டாம் நிலை சாதனமாக விரிவடையலாம்."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "இணைக்கப்பட்ட சாதனம் (பரிந்துரைக்கப்படுகிறது)"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
@@ -403,10 +424,13 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"ஃப்ளேர் அதிகாரப்பூர்வ சமிக்ஞை டெச்க்டாப்பைப் போலவே உங்கள் முதன்மை சாதனத்துடன் இணைக்கப்பட்ட "
+"பயன்பாடாக இருக்கலாம். இந்த பயன்முறை மிகவும் விரிவாக சோதிக்கப்பட்டு பெரும்பாலும் வேலை "
+"செய்கிறது."
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "முதன்மை சாதனம் (முடக்கப்பட்டது)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -416,26 +440,33 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"ஆண்ட்ராய்டு அல்லது ஐஇமு இல் உள்ள அதிகாரப்பூர்வ சமிக்ஞை பயன்பாடுகளைப் போலவே FLARE ஒரு "
+"முதன்மை சாதனமாக செயல்பட முடியும். ஆரம்ப சோதனைகள் அது செயல்படுவதைக் குறிக்கின்றன "
+"என்றாலும், இந்த பயன்முறை தற்போது விரிவடையாது. நீங்கள் அதைச் சோதிக்க விரும்பினால், நீங்கள் "
+"கீழே உள்ள பொத்தானை இயக்கலாம் (அதை எப்படி செய்வது என்று உங்களுக்குத் தெரியாவிட்டால், "
+"முதன்மை-சாதன ஆதரவைச் சோதிப்பது பற்றி நீங்கள் சிந்திக்கக்கூடாது)."
 
 #: data/resources/ui/setup_window.blp:194
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"இரண்டாம் நிலை சாதனமாக இணைக்க, ஃப்ளேருக்கு அதிகாரப்பூர்வ பயன்பாட்டில் காண்பிக்கப்படும் "
+"சாதனத்தின் பெயர் தேவைப்படும்."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
-msgstr ""
+msgstr "சாதன பெயர்"
 
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "உருவாக்குபவர் விருப்பங்கள்"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
-msgstr ""
+msgstr "சிக்னல் சேவையகங்கள்"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -444,46 +475,53 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"அடுத்த பக்கம் முதன்மை சாதனத்திலிருந்து ச்கேன் செய்யப்பட வேண்டிய QR குறியீட்டைக் காண்பிக்கும். "
+"குறியீட்டை ச்கேன் செய்ய உங்களுக்கு ஒரு மணித்துளி மட்டுமே காலக்கெடு உள்ளது என்பதை நினைவில் "
+"கொள்க, எனவே தயவுசெய்து QR குறியீட்டை ச்கேன் செய்வதற்கான உங்கள் அதிகாரப்பூர்வ விண்ணப்பத்தை "
+"ஏற்கனவே ஆயத்தம் செய்யுங்கள்."
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
 msgid "Link device"
-msgstr ""
+msgstr "இணைப்பு சாதனம்"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
-msgstr ""
+msgstr "குறியீட்டை ச்கேன் செய்யுங்கள்"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
+"உங்கள் கணக்கில் உள்நுழைந்த மற்றொரு சமிக்ஞை பயன்பாட்டுடன் இந்த குறியீட்டை ச்கேன் செய்யுங்கள்."
 
 #: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
-msgstr ""
+msgstr "ச்கேன் செய்யாமல் இணைக்கவும்"
 
 #: data/resources/ui/setup_window.blp:280
 msgid "Manual linking"
-msgstr ""
+msgstr "கையேடு இணைத்தல்"
 
 #: data/resources/ui/setup_window.blp:296
 msgid "Manual Linking"
-msgstr ""
+msgstr "கையேடு இணைத்தல்"
 
 #: data/resources/ui/setup_window.blp:297
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"உங்கள் சாதனத்தை QR குறியீட்டை ச்கேன் செய்ய முடியாவிட்டால், இங்கே வழங்கப்பட்ட இணைப்பை "
+"கைமுறையாக உள்ளிடலாம்"
 
 #: data/resources/ui/setup_window.blp:308
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "இடைநிலைப்பலகைக்கு நகலெடுக்கவும்"
 
 #: data/resources/ui/setup_window.blp:341
 msgid "Continue"
-msgstr ""
+msgstr "தொடரவும்"
 
 #: data/resources/ui/setup_window.blp:358
 msgid ""
@@ -495,33 +533,42 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"முதன்மை சாதனமாக பதிவு செய்ய, ஃப்ளேருக்கு உங்கள் தொலைபேசி எண் மற்றும் கேப்ட்சா நிறைவு "
+"தேவைப்படும். முன்னணி \"+\" மற்றும் நாட்டின் குறியீடு உள்ளிட்ட பன்னாட்டு E.164 வடிவத்தில் "
+"தொலைபேசி எண்ணைக் கொடுங்கள். கேப்ட்சாவை <a href = "
+"\"https://signalcaptchas.org/registration/generate.html\"> இங்கே </a> முடிக்க "
+"முடியும் </a>, பின்னர் \"திறந்த சமிக்ஞை\" இணைப்பை நகலெடுத்து கீழே உள்ள புலத்தில் ஒட்டவும்"
+". இந்த கேப்ட்சா சுமார் ஒரு மணித்துளி மட்டுமே செல்லுபடியாகும் என்பதை நினைவில் கொள்க, எனவே"
+" தயவுசெய்து வேகமாக தொடரவும்."
 
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "கேப்ட்சா"
 
 #: data/resources/ui/setup_window.blp:386
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"இந்த தகவலைச் சமர்ப்பித்த பிறகு, சரிபார்ப்புக் குறியீட்டைக் கொண்டு சிக்னலில் இருந்து ஒரு "
+"எச்எம்எச் கிடைக்கும். இந்த சரிபார்ப்பு குறியீட்டை அடுத்த பக்கத்தில் செருகவும்."
 
 #: data/resources/ui/setup_window.blp:395
 #: data/resources/ui/setup_window.blp:403
 #: data/resources/ui/setup_window.blp:420
 #: data/resources/ui/setup_window.blp:445
 msgid "Confirm"
-msgstr ""
+msgstr "உறுதிப்படுத்தவும்"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "சிக்னலில் இருந்து நீங்கள் பெற்ற சரிபார்ப்பு குறியீட்டை இங்கே செருகவும்."
 
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
 msgid "Finished"
-msgstr ""
+msgstr "முடிந்தது"
 
 #: data/resources/ui/setup_window.blp:494
 msgid ""
@@ -529,10 +576,13 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"ஃப்ளேர் கிட்டத்தட்ட தயாராக உள்ளது, தொடர்புகள் ஒத்திசைவை முடிக்கக் காத்திருக்கிறது. இதற்கு "
+"சில வினாடிகள் ஆகலாம், தொடர்புகள் ஒத்திசைக்கப்பட்டவுடன் நீங்கள் விரிவடைய ஆரம்பிக்கலாம். நீங்கள் "
+"விரிவடையத் தொடங்குவதற்கு முன் சில இறுதிக் குறிப்புகள்:"
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "அறியப்பட்ட பிழைகள்"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -544,10 +594,17 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"செய்திகள் இன்னும் விரிவடையும்போது எந்த செய்திகளையும் அனுப்பாமல் பார்த்துக் கொள்ளுங்கள், "
+"தேவையான அனைத்து தகவல்களும் பெறப்படுவதை இது உறுதி செய்கிறது. இந்த சிக்கலை சரிசெய்ய "
+"முயற்சிக்கிறோம். மேலும், நீங்கள் இதுவரை செய்திகளைப் பெறாத தொடர்புகளுக்கு அனுப்புவது "
+"விகிதத்தைக் கட்டுப்படுத்த வழிவகுக்கும். நீங்கள் பலவற்றை அனுப்புவதற்கு முன்பு ஒரு "
+"தொடர்பிலிருந்து ஒரு செய்தியைப் பெறுவதை உறுதிசெய்க. பிழைகளின் முழு பட்டியலுக்கு, <a "
+"href = \"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/"
+"?label_name%5B%5D=BUG\"> ஐ வெளியீடு டிராக்கர் </a> ஐப் பார்வையிடவும்."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
-msgstr ""
+msgstr "தொடர்பு"
 
 #: data/resources/ui/setup_window.blp:523
 msgid ""
@@ -555,71 +612,74 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"எரிப்பு பற்றி சில கருத்துக்களைத் தெரிவிக்க விரும்புகிறீர்களா, அல்லது கொஞ்சம் பேச வேண்டுமா"
+"? எங்கள் <a href = \"https://matrix.to/#/#flare-signal:matrix.org\"> மேட்ரிக்ச் "
+"அறை </a> அனைவருக்கும் திறந்திருக்கும்."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "பொது"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "குறுக்குவழிகளைக் காட்டு"
 
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "அமைப்புகளுக்குச் செல்லுங்கள்"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "பக்கத்திற்குச் செல்லுங்கள்"
 
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "திறந்த பட்டியல்"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "சாளரத்தை மூடு"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "சேனல்கள்"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "சேனல் 1 க்குச் செல்லுங்கள்… 9"
 
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "சேனல்களில் தேடுங்கள்"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "இணைப்பைப் பதிவேற்றவும்"
 
 #: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "உரை உள்ளீட்டு பெட்டியில் கவனம் செலுத்துங்கள்"
 
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr ""
+msgstr "மேலும் செய்திகளை ஏற்றவும்"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
 msgid "Submit Captcha"
-msgstr ""
+msgstr "கேப்ட்சாவை சமர்ப்பிக்கவும்"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -630,294 +690,306 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"கேப்ட்சா சவாலை சமர்ப்பிக்கவும். ஃப்ளேரிலிருந்து காட்டப்பட்ட பிழை செய்தியிலிருந்து "
+"கிள்ளாக்கைப் பெறலாம். இந்த இணையதளத்தில் </a> இல் கேப்ட்சாவை <a href = "
+"\"https://signalcaptchas.org/challenge/generate.html\"> நிரப்ப வேண்டும், மேலும் "
+"திறந்த சமிக்ஞைக்கான இணைப்பு தொடர்புடைய நுழைவுக்கு ஒட்டப்பட வேண்டும். கேப்ட்சா சுமார் ஒரு "
+"மணித்துளி மட்டுமே செல்லுபடியாகும் என்பதை நினைவில் கொள்க."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "கிள்ளாக்கு"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "சமர்ப்பிக்கவும்"
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
-msgstr ""
+msgstr "செய்தி"
 
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "ஒரு ஈமோசியை செருகவும்"
 
 #: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "ஈமோசியை செருகவும்"
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
-msgstr ""
+msgstr "சேனல் பட்டியல்"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "உரையாடலைச் சேர்க்கவும்"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "அரட்டை"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "தட்டச்சு செய்கிறது"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
-msgstr ""
+msgstr "அமைப்புகள்"
 
 #: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "தொடர்புகளை ஒத்திசைக்கவும்"
 
 #: data/resources/ui/window.blp:181
 msgid "Keybindings"
-msgstr ""
+msgstr "விசைப்பலகைகள்"
 
 #: data/resources/ui/window.blp:186
 msgid "About"
-msgstr ""
+msgstr "பற்றி"
 
 #: data/resources/ui/window.blp:191
 msgid "Quit"
-msgstr ""
+msgstr "வெளியேறு"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
-msgstr ""
+msgstr "தன்வய குறிப்பு"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "தெரியாத தொடர்பு"
 
 #: src/backend/manager.rs:442
 msgid "You"
-msgstr ""
+msgstr "நீங்கள்"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "உள்வரும் அழைப்பு"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "வெளிச்செல்லும் அழைப்பு"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "அழைப்பு தொடங்கியது"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr ""
+msgstr "அழைப்பு முடிந்தது"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
-msgstr ""
+msgstr "அழைப்பு மறுக்கப்பட்டது"
 
 #: src/backend/message/call_message.rs:105
 msgid "Unanswered call"
-msgstr ""
+msgstr "பதிலளிக்கப்படாத அழைப்பு"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
-msgstr ""
+msgstr "{sender} ஒரு செய்திக்கு {emoji rey எதிர்வினையாற்றினார்."
 
 #: src/backend/message/reaction_message.rs:80
 msgid "Reacted {emoji} to a message."
-msgstr ""
+msgstr "ஒரு செய்திக்கு {ஈமோசி your எதிர்வினை."
 
 #: src/backend/message/text_message.rs:381
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ஒரு படத்தை அனுப்பியது"
+msgstr[1] "அனுப்பப்பட்டது}} படங்கள்"
 
 #: src/backend/message/text_message.rs:383
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ஒரு வீடியோ அனுப்பப்பட்டது"
+msgstr[1] "அனுப்பப்பட்டது}} வீடியோக்கள்"
 
 #: src/backend/message/text_message.rs:386
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ஒரு குரல் செய்தி அனுப்பியது"
+msgstr[1] "அனுப்பப்பட்டது}} குரல் செய்திகள்"
 
 #: src/backend/message/text_message.rs:391
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ஒரு கோப்பு அனுப்பப்பட்டது"
+msgstr[1] "அனுப்பப்பட்டது}} கோப்புகள்"
 
 #: src/error.rs:91
 msgid "I/O Error."
-msgstr ""
+msgstr "I/o பிழை."
 
 #: src/error.rs:96
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "கிடைக்கக்கூடிய இணையத்துடன் இணைப்பு இருப்பதாகத் தெரியவில்லை."
 
 #: src/error.rs:101
 msgid "Something glib-related failed."
-msgstr ""
+msgstr "கிளிப் தொடர்பான ஒன்று தோல்வியடைந்தது."
 
 #: src/error.rs:106
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "லிப்செக்ரெட்டுடனான தொடர்பு தோல்வியடைந்தது."
 
 #: src/error.rs:111
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"பின்தளத்தில் தரவுத்தளம் தோல்வியடைந்தது. பயன்பாட்டை மறுதொடக்கம் செய்யுங்கள் அல்லது தரவுத்தளத்தை"
+" நீக்கி பயன்பாட்டை மறுபரிசீலனை செய்யுங்கள்."
 
 #: src/error.rs:116
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"நீங்கள் சமிக்ஞையுடன் அங்கீகரிக்கப்பட்டதாகத் தெரியவில்லை. தயவுசெய்து தரவுத்தளத்தை நீக்கி "
+"பயன்பாட்டை மறுபரிசீலனை செய்யுங்கள்."
 
 #: src/error.rs:121
 msgid "Sending a message failed."
-msgstr ""
+msgstr "ஒரு செய்தியை அனுப்புவது தோல்வியடைந்தது."
 
 #: src/error.rs:126
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "ஒரு செய்தியைப் பெறுவது தோல்வியடைந்தது."
 
 #: src/error.rs:131
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"சிக்னல் பின்தளத்தில் ஏதோ எதிர்பாராதது நடந்தது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்."
 
 #: src/error.rs:136
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "பயன்பாடு தவறாக கட்டமைக்கப்பட்டதாக தெரிகிறது."
 
 #: src/error.rs:141
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "விண்ணப்பத்தின் ஒரு பகுதி செயலிழந்தது."
 
 #: src/error.rs:151
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "உங்கள் இணைய இணைப்பை சரிபார்க்கவும்."
 
 #: src/error.rs:156
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "தயவுசெய்து தரவுத்தளத்தை நீக்கி சாதனத்தை மறுபரிசீலனை செய்யுங்கள்."
 
 #: src/error.rs:163
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "{At இல் உள்ள தரவுத்தள பாதை கோப்புறை இல்லை."
 
 #: src/error.rs:168
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
+"உள்நுழைவு மூலம் விண்ணப்பத்தை மறுதொடக்கம் செய்து இந்த சிக்கலைப் புகாரளிக்கவும்."
 
 #: src/gui/channel_info_dialog.rs:197
 msgid "Never"
-msgstr ""
+msgstr "ஒருபோதும்"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "வரைவு"
 
 #: src/gui/linked_devices_window.rs:116
 msgid "Unlink Device?"
-msgstr ""
+msgstr "சாதனத்தை இணைக்கவா?"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "நீங்கள் நிச்சயமாக {} ஐ இணைக்க விரும்புகிறீர்களா?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "மூடப்பட்டிருக்கும் போது புதிய செய்திகளைப் பாருங்கள்"
 
 #: src/gui/preferences_window.rs:99
 msgid "Background permission"
-msgstr ""
+msgstr "பின்னணி இசைவு"
 
 #: src/gui/preferences_window.rs:100
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "அனுமதிகளை அகற்ற அமைப்புகளைப் பயன்படுத்தவும்"
 
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "விளைவாக்கம்"
 
 #: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "ச்டேசிங்"
 
 #: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "இடைநிலைப்பலகைக்கு நகலெடுக்கப்பட்டது"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:102 src/gui/utility.rs:126
 msgid "%H:%M"
-msgstr ""
+msgstr "%எச்:%மீ"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:105
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%Y-%m-%d%h:%m"
 
 #: src/gui/utility.rs:138
 msgid "Today"
-msgstr ""
+msgstr "இன்று"
 
 #: src/gui/utility.rs:141
 msgid "Yesterday"
-msgstr ""
+msgstr "நேற்று"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:151
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:159
 msgid "Attachment"
-msgstr ""
+msgstr "இணைப்பு"
 
 #: src/gui/window.rs:304 src/gui/window.rs:310
 msgid "Remove Messages"
-msgstr ""
+msgstr "செய்திகளை அகற்று"
 
 #: src/gui/window.rs:305
 msgid "This will remove all locally stored messages from this channel"
 msgstr ""
+"இது இந்த சேனலில் இருந்து உள்நாட்டில் சேமிக்கப்பட்ட அனைத்து செய்திகளையும் அகற்றும்"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "உங்கள் நண்பர்களுடன் சிக்னலில் அரட்டையடிக்கவும்"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "செய்தியிடல்; அரட்டை; சமிக்ஞை;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
@@ -926,6 +998,9 @@ msgid ""
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
+"ஃப்ளேர் என்பது சமிக்ஞைக்கான அதிகாரப்பூர்வமற்ற பயன்பாடாகும். இது இன்னும் வளர்ச்சியில் உள்ளது "
+"மற்றும் அதிகாரப்பூர்வ சமிக்ஞை பயன்பாடுகள் செய்யும் அனைத்து அம்சங்களையும் சேர்க்கவில்லை. மேலும்"
+" தகவல்களை அதன் அம்ச சாலை வரைபடத்தில் காணலாம்."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -935,65 +1010,72 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"அதிகாரப்பூர்வ சமிக்ஞை பயன்பாடுகளைப் பயன்படுத்துவதை ஒப்பிடும்போது இந்த பயன்பாட்டைப் "
+"பயன்படுத்துவது உங்கள் பாதுகாப்பை மோசமாக்கும் என்பதை நினைவில் கொள்க. முக்கியமான தரவைக் "
+"கையாளும் போது கவனமாகப் பயன்படுத்தவும். பாதுகாப்பு பற்றிய கூடுதல் தகவலுக்கு திட்டங்கள் "
+"README ஐப் பாருங்கள்."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:609
 msgid "Overview of the application"
-msgstr ""
+msgstr "பயன்பாட்டின் கண்ணோட்டம்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "சாளர அகலம்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "விண்டர் உயரம்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "சாளர அதிகபட்ச நிலை"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"எரிப்பு இணைக்கும்போது சாதனத்தின் பெயர். இதற்கு பயன்பாடு மீண்டும் இணைக்கப்பட வேண்டும்."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "படங்களை தானாக பதிவிறக்கவும்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "வீடியோக்களை தானாக பதிவிறக்கவும்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
-msgstr ""
+msgstr "குரல் செய்திகளை தானாக பதிவிறக்கவும்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "கோப்புகளை தானாக பதிவிறக்கவும்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
-msgstr ""
+msgstr "அறிவிப்புகளை அனுப்பவும்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "மூடப்படும் போது பின்னணியில் இயக்கவும்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "எதிர்வினைகளை மீட்டெடுக்கும் போது அறிவிப்புகளை அனுப்பவும்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "செய்திகளைத் தேர்ந்தெடுக்கலாம்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Enter-key அழுத்தும் போது ஒரு செய்தியை அனுப்பவும்"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
 msgstr ""
+"தொடர்புகளை எவ்வாறு வரிசைப்படுத்துவது, எ.கா. \"முதல் பெயர்\" அல்லது \"குடும்பப்பெயர்\" "
+"உடன்"
