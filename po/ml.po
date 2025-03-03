@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-02-16 05:24+0000\n"
+"PO-Revision-Date: 2025-03-03 23:11+0000\n"
 "Last-Translator: Coding Otaku <contact@codingotaku.com>\n"
 "Language-Team: Malayalam <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ml/>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10\n"
+"X-Generator: Weblate 5.10.3-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr ""
+msgstr "പരിഭാക്ഷ-ക്രെഡിറ്റുകൾ"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
@@ -101,12 +101,12 @@ msgstr "അറ്റാച്മെന്റ് നീക്കംചെയ്�
 #: data/resources/ui/channel_messages.blp:228
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "ഒരു അറ്റാച്ചുമെന്റ് ചേർക്കുക"
 
 #: data/resources/ui/channel_messages.blp:236
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "അറ്റാച്ചുമെന്റ് ചേർക്കുക"
 
 #: data/resources/ui/channel_messages.blp:252
 #, fuzzy
@@ -142,12 +142,12 @@ msgstr "അവസാനം സജീവമായത്:"
 
 #: data/resources/ui/device_info_item.blp:72
 msgid "Unlink Device"
-msgstr ""
+msgstr "ഉപകരണം അൺലിങ്ക് ചെയ്യുക"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
 msgid "Clear messages"
-msgstr ""
+msgstr "സന്ദേശങ്ങൾ മായ്ക്കുക"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
@@ -160,16 +160,17 @@ msgstr ""
 #: data/resources/ui/linked_devices_window.blp:50
 #: src/gui/linked_devices_window.rs:122 src/gui/window.rs:309
 msgid "Cancel"
-msgstr ""
+msgstr "റദ്ദാക്കുക"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "മായ്ക്കുക"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
 #: src/gui/linked_devices_window.rs:121
+#, fuzzy
 msgid "Unlink"
-msgstr ""
+msgstr "അൺലിങ്ക് ചെയ്യുക"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -180,11 +181,11 @@ msgstr ""
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "അൺലിങ്കുന്നതിനുശേഷം എല്ലാ സന്ദേശങ്ങളും ഇല്ലാതാക്കുക"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "സന്ദേശങ്ങൾ മായ്ക്കാതെ അൺലിങ്ക് ചെയ്യുക"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
@@ -192,7 +193,7 @@ msgstr ""
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "ഈ പിശക് റിപ്പോർട്ടുചെയ്യുന്നത് പരിഗണിക്കുക."
 
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
 #: data/resources/ui/submit_captcha_dialog.blp:28
@@ -226,15 +227,15 @@ msgstr ""
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr ""
+msgstr "മറുപടി"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "ഇല്ലാതാക്കുക"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "പകർത്തുക"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
@@ -246,16 +247,16 @@ msgstr ""
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
-msgstr ""
+msgstr "പുതിയ ചാറ്റ്"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "മെനു"
 
 #: data/resources/ui/new_channel_dialog.blp:35
 msgid "Search Contacts"
-msgstr ""
+msgstr "കോൺടാക്റ്റുകൾ തിരയുക"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
