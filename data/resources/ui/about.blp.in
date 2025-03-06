@@ -14,5 +14,5 @@ Adw.AboutDialog about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>Fixed</p> <ul> <li>PNG attachments are sent as files instead of images.</li> </ul>";
+  release-notes: "<p>Fixed</p> <ul> <li>Fixed the attachment box being massive when attaching an image.</li> <li>Crash when starting Flare multiple times.</li> </ul> <p>Changed</p> <ul> <li>Let the notification deamon handle feedback.</li> </ul>";
 }
