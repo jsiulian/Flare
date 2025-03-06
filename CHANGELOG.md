@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.13] - 2025-03-06
+
 ### Fixed
 
 - Fixed the attachment box being massive when attaching an image.
@@ -693,7 +695,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.11...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.13...master
+[0.15.13]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.12...0.15.13
+[0.15.12]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.11...0.15.12
 [0.15.11]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.10...0.15.11
 [0.15.10]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.9...0.15.10
 [0.15.9]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.8...0.15.9
