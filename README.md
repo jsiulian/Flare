@@ -40,8 +40,6 @@ Flare is an unofficial app that lets you chat with your friends on Signal from L
 
 Flare uses the [libsecret](https://wiki.gnome.org/Projects/Libsecret) library to store credentials. To use the Flatpak, you must install libsecret as a system package.
 
-If you would like sound or vibration for Flare's notifications, install [feedbackd](https://source.puri.sm/Librem5/feedbackd) as a system package.
-
 ## Features
 
 Flare is an unofficial app for Signal. It is still in development and doesn't include all the features that the official Signal apps do. More information can be found on its [feature roadmap](https://gitlab.com/schmiddi-on-mobile/flare/-/wikis/Feature-roadmap).

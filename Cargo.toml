@@ -18,6 +18,7 @@ opt-level = 3
 
 [dependencies]
 gtk = { version = "0.9.5", package = "gtk4", features = ["v4_12"]}
+gio = { version = "0.20.9", features = ["v2_70"]}
 adw = { version = "0.7.1", package = "libadwaita", features = ["v1_5"]}
 ashpd = { version = "0.10.2", default-features = false, features = [ "gtk4", "tokio" ]}
 zbus = { version = "5.5.0", default-features = false, features = [ "tokio" ]}

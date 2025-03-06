@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed the attachment box being massive when attaching an image.
 
+### Changed
+
+- Let the notification deamon handle feedback.
+
 ## [0.15.12] - 2025-02-28
 
 ### Fixed

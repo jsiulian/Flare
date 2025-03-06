@@ -40,6 +40,7 @@ impl DisplayMessage {
         let notification = Notification::new(&notification_title);
         notification.set_body(Some(&notification_body));
         notification.set_icon(&icon);
+        notification.set_category(Some("im.received"));
 
         let manager = self.manager();
         let uid = self.uid();
