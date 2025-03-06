@@ -21,7 +21,7 @@ use url::Url;
 
 use super::{manager_thread::ManagerThread, Channel, Contact, Message};
 use crate::backend::message::{DisplayMessage, DisplayMessageExt};
-use crate::{dbus::Feedbackd, gspawn, tspawn, ApplicationError};
+use crate::{gspawn, tspawn, ApplicationError};
 
 const MESSAGE_BOUND: usize = 100;
 const MESSAGES_INITIAL_LOAD: usize = 1;
@@ -140,20 +140,12 @@ impl Manager {
             if let Some(application) = self.application() {
                 log::trace!("Sending a notification");
                 application.send_notification(id.as_deref(), notification);
-                if let Some(feedbackd) = self.feedbackd() {
-                    // Ignore errors creating feedback
-                    let _ = crate::tspawn!(async move { feedbackd.feedback().await }).await;
-                }
             }
         }
     }
 
     pub fn application(&self) -> Option<Application> {
         self.imp().application.borrow().clone()
-    }
-
-    pub fn feedbackd(&self) -> Option<Feedbackd> {
-        self.imp().feedbackd.borrow().clone()
     }
 
     pub async fn clear_registration(&self) -> Result<(), ApplicationError> {
@@ -280,7 +272,6 @@ impl Manager {
     /// This includes:
     /// - Setting up the configuration store.
     /// - Constructing the manager thread, reacting to any setup results or errors that happen.
-    /// - Initializing feedbackd.
     /// - Loading the stored channels.
     /// - Listening for messages or errors and propagating them to the correct channels.
     #[cfg(not(feature = "screenshot"))]
@@ -340,17 +331,7 @@ impl Manager {
             }
         }
 
-        log::trace!("Setup feedbackd");
-        let feedbackd = crate::tspawn!(async { Feedbackd::new().await })
-            .await
-            .map(|e| e.ok())
-            .ok()
-            .flatten();
-        if feedbackd.is_none() {
-            log::info!("Feedbackd not available, there will not be feedback for notifications");
-        }
         self.imp().internal.swap(&RefCell::new(internal));
-        self.imp().feedbackd.swap(&RefCell::new(feedbackd));
 
         // Check again if is primary, after setup is successful.
         self.notify("is-primary");
@@ -746,7 +727,6 @@ mod imp {
     use gio::{Application, Settings};
     use glib::{BoxedAnyObject, ParamSpec, ParamSpecBoolean, Value};
 
-    use crate::dbus::Feedbackd;
     use crate::{
         backend::{manager_thread::ManagerThread, Channel, Message},
         config::BASE_ID,
@@ -761,8 +741,6 @@ mod imp {
         pub(super) channels: RefCell<HashMap<u64, Channel>>,
         pub(super) settings: Settings,
         pub(super) application: RefCell<Option<Application>>,
-
-        pub(super) feedbackd: RefCell<Option<Feedbackd>>,
     }
 
     impl Default for Manager {
@@ -773,7 +751,6 @@ mod imp {
                 channels: Default::default(),
                 settings: Settings::new(BASE_ID),
                 application: Default::default(),
-                feedbackd: Default::default(),
             }
         }
     }
