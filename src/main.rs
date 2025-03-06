@@ -93,6 +93,7 @@ fn main() {
     if !app.is_remote() {
         build_ui(&app);
     }
+    gtk::init().expect("Failed to initialize GTK");
     sourceview5::init();
     app.run();
 }

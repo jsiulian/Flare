@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed the attachment box being massive when attaching an image.
+- Crash when starting Flare multiple times.
 
 ## [0.15.12] - 2025-02-28
 
