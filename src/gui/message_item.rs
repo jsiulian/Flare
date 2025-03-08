@@ -521,7 +521,7 @@ pub mod imp {
                             .expect("`MessageItem` to have a root")
                             .dynamic_cast::<crate::gui::Window>()
                             .expect("Root of `ChannelMessages` to be a `Window`.");
-                        let dialog = ErrorDialog::new(e, &root);
+                        let dialog = ErrorDialog::new(&e, &root);
                         dialog.present(Some(&root));
                     }
                     obj.notify("has-reaction");

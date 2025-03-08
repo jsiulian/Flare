@@ -174,7 +174,7 @@ pub mod imp {
                                     async move {
                                         if let Err(e) = attachment.save_to_file(&file).await {
                                             let root = obj.imp().window();
-                                            let dialog = ErrorDialog::new(e.into(), &root);
+                                            let dialog = ErrorDialog::new(&e.into(), &root);
                                             dialog.present(Some(&root));
                                         }
                                     }

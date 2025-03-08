@@ -12,7 +12,7 @@ glib::wrapper! {
 }
 
 impl ErrorDialog {
-    pub fn new(error: ApplicationError, parent: &impl IsA<gtk::Window>) -> Self {
+    pub fn new(error: &ApplicationError, parent: &impl IsA<gtk::Window>) -> Self {
         log::trace!("Initializing ErrorDialog");
         log::error!("ErrorDialog displaying error: {}", error);
         log::trace!("ErrorDialog full error: {:#?}", error);
