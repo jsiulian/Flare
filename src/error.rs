@@ -8,6 +8,8 @@ use presage as p;
 const FAILED_TO_LOOK_UP_ADDRESS: &str = "failed to lookup address information";
 const NETWORK_UNREACHABLE: &str = "Network is unreachable";
 const TIMED_OUT: &str = "timed out";
+const REQWEST_ERROR: &str = "reqwest error";
+
 type PresageError = presage::Error<presage_store_sled::SledStoreError>;
 
 #[derive(Debug)]
@@ -55,10 +57,12 @@ impl From<PresageError> for ApplicationError {
                 if e.to_string().contains(FAILED_TO_LOOK_UP_ADDRESS)
                     || e.to_string().contains(NETWORK_UNREACHABLE)
                     || e.to_string().contains(TIMED_OUT)
+                    || e.to_string().contains(REQWEST_ERROR)
                     || e.source().is_some_and(|s| {
                         s.to_string().contains(FAILED_TO_LOOK_UP_ADDRESS)
                             || s.to_string().contains(NETWORK_UNREACHABLE)
                             || s.to_string().contains(TIMED_OUT)
+                            || s.to_string().contains(REQWEST_ERROR)
                     }) =>
             {
                 ApplicationError::NoInternet

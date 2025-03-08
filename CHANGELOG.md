@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Ignore one more networking-related error.
+
 ## [0.15.13] - 2025-03-06
 
 ### Fixed
