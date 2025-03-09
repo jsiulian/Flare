@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.14] - 2025-03-09
+
 ### Fixed
 
 - Ignore one more networking-related error.
@@ -700,7 +702,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.13...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.14...master
+[0.15.14]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.13...0.15.14
 [0.15.13]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.12...0.15.13
 [0.15.12]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.11...0.15.12
 [0.15.11]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.10...0.15.11
