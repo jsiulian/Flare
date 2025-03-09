@@ -193,7 +193,7 @@ pub mod imp {
                         async move {
                             if let Err(e) = manager.link_secondary(url).await {
                                 let root = obj.window();
-                                let dialog = ErrorDialog::new(e.into(), &root);
+                                let dialog = ErrorDialog::new(&e.into(), &root);
                                 dialog.present(Some(&root));
                             }
                         }

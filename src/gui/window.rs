@@ -301,7 +301,7 @@ pub mod imp {
                                                         "Failed to submit recaptcha: {}",
                                                         e
                                                     );
-                                                    let dialog = ErrorDialog::new(e, &obj);
+                                                    let dialog = ErrorDialog::new(&e, &obj);
                                                     dialog.present(Some(&obj));
                                                 }
                                             }
@@ -331,7 +331,7 @@ pub mod imp {
                             async move {
                                 if let Err(e) = man.request_contacts_sync().await {
                                     log::error!("Failed to synchronize contacts: {}", e);
-                                    let dialog = ErrorDialog::new(e, &obj);
+                                    let dialog = ErrorDialog::new(&e, &obj);
                                     dialog.present(Some(&obj));
                                 }
                             }
@@ -426,7 +426,7 @@ pub mod imp {
                                             if let Err(e) =
                                                 obj.imp().channel_messages.clear_messages().await
                                             {
-                                                let dialog = ErrorDialog::new(e, &obj);
+                                                let dialog = ErrorDialog::new(&e, &obj);
                                                 dialog.present(Some(&obj));
                                             }
                                         }
@@ -692,8 +692,30 @@ pub mod imp {
                         ),
                     );
 
+                    manager.connect_local(
+                        "error",
+                        false,
+                        clone!(
+                            #[weak]
+                            obj,
+                            #[upgrade_or_default]
+                            move |r| {
+                                // r[0] is the manager
+                                let result = r[1]
+                                    .get::<BoxedAnyObject>()
+                                    .expect("Error to be BoxedAnyObject");
+                                let error: &ApplicationError = &mut result.borrow();
+
+                                let dialog = ErrorDialog::new(error, &obj);
+                                dialog.present(Some(&obj));
+
+                                None
+                            }
+                        ),
+                    );
+
                     if let Err(e) = manager.init(&path).await {
-                        let dialog = ErrorDialog::new(e, &obj);
+                        let dialog = ErrorDialog::new(&e, &obj);
                         dialog.present(Some(&obj));
                     }
                 }

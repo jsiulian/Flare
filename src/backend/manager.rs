@@ -355,7 +355,7 @@ impl Manager {
                     if error_opt.is_none() {
                         break 'outer;
                     }
-                    return Err(error_opt.unwrap());
+                    self.emit_by_name::<()>("error", &[&BoxedAnyObject::new(error_opt.unwrap())]);
                 }
                 // Receive messages.
                 msg_opt = receive_content.next().fuse() => {
@@ -799,6 +799,9 @@ mod imp {
                         .param_types([Channel::static_type()])
                         .build(),
                     Signal::builder("setup-result")
+                        .param_types([BoxedAnyObject::static_type()])
+                        .build(),
+                    Signal::builder("error")
                         .param_types([BoxedAnyObject::static_type()])
                         .build(),
                 ]
