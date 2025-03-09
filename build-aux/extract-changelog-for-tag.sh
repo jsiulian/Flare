@@ -7,9 +7,8 @@ fi
 
 CHANGELOG_FILE=$1
 CURRENT_TAG=$2
-PREVIOUS_TAG=$(git describe --tags --abbrev=0 "${CURRENT_TAG}"^)
 
-# Extract content between the two tags
-awk "/^## \[${CURRENT_TAG}\] - / {flag=1; next} /^## \[${PREVIOUS_TAG}\] - / {flag=0; exit} flag" "${CHANGELOG_FILE}" |
+# Extract content between the tag and the next occurance of "## [".
+awk "/^## \[${CURRENT_TAG}\] - / {flag=1; next} /^## \[/ && (flag==1) {flag=0; exit} flag" "${CHANGELOG_FILE}" |
   # Remove leading and trailing empty lines
   sed -e '1{/^$/d;}' -e '${/^$/d;}'
