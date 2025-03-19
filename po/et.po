@@ -8,160 +8,164 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-03-19 16:46+0000\n"
+"Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
-msgstr ""
+msgstr "Priit Jõerüüt 2025"
 
 #: data/resources/ui/channel_info_dialog.blp:50
 #: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefoninumber"
 
 #: data/resources/ui/channel_info_dialog.blp:66
 msgid "Description"
-msgstr ""
+msgstr "Kirjeldus"
 
 #: data/resources/ui/channel_info_dialog.blp:76
 msgid "Disappearing Messages"
-msgstr ""
+msgstr "Kaduvad sõnumid"
 
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr ""
+msgstr "Lähtesta sessioon"
 
 #: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
-msgstr ""
+msgstr "Lähtesta sessioon"
 
 #: data/resources/ui/channel_info_dialog.blp:128
 msgctxt "accessibility"
 msgid "Clear Messages"
-msgstr ""
+msgstr "Eemalda sõnumid"
 
 #: data/resources/ui/channel_info_dialog.blp:149
 msgid "Clear Messages"
-msgstr ""
+msgstr "Eemalda sõnumid"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "Pole võrgus"
 
 #: data/resources/ui/channel_list.blp:20
 msgid "Search"
-msgstr ""
+msgstr "Otsi"
 
 #: data/resources/ui/channel_list.blp:23 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Otsing"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Sa pole ühtegi kanalit valinud"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "Vali kanal"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Eemalda vastus"
 
 #: data/resources/ui/channel_messages.blp:184
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Eemalda vastus"
 
 #: data/resources/ui/channel_messages.blp:204
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "Eemalda manus"
 
 #: data/resources/ui/channel_messages.blp:207
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "Eemalda manus"
 
 #: data/resources/ui/channel_messages.blp:228
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "Lisa manus"
 
 #: data/resources/ui/channel_messages.blp:236
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "Lisa manus"
 
 #: data/resources/ui/channel_messages.blp:252
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "Sõnumi koostamine"
 
 #: data/resources/ui/channel_messages.blp:258
 msgctxt "tooltip"
 msgid "Message input"
-msgstr ""
+msgstr "Sõnumi koostamine"
 
 #: data/resources/ui/channel_messages.blp:270
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Saada"
 
 #: data/resources/ui/channel_messages.blp:274
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "Saada"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr ""
+msgstr "Seotud:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr ""
+msgstr "Viimati aktiivne:"
 
 #: data/resources/ui/device_info_item.blp:72
 msgid "Unlink Device"
-msgstr ""
+msgstr "Eemalda seotud seade"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:166
 msgid "Clear messages"
-msgstr ""
+msgstr "Kustuta sõnumid"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
+"Järgnevaga kustutad kõik kohalikus seadmes salvestatud sõnumid. Samaga "
+"pannakse rakendus ka kinni."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
 #: data/resources/ui/linked_devices_window.blp:50
 #: src/gui/linked_devices_window.rs:122 src/gui/window.rs:309
 msgid "Cancel"
-msgstr ""
+msgstr "Katkesta"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "Kustuta"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
 #: src/gui/linked_devices_window.rs:121
 msgid "Unlink"
-msgstr ""
+msgstr "Eemalda seos"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -169,101 +173,104 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Järgnevaga eemaldad selle seadme seosed sinu kasutakontoga ning kustutad "
+"kõik kohalikku seadmesse salvestatud andmed. Peale seda rakendus lõpetab töö "
+"ning uuesti avades saad soovi korral mõne muu kontoga seose luua."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "Eemalda seotud seade ja kustuta kõik sõnumid"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "Eemalda seotud seade, aga säilita sõnumid"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "Viga"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "Kui saad, siis palun anna meile sellest veast teada."
 
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr ""
+msgstr "Sulge"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "Teata veast"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
 msgid "Linked Devices"
-msgstr ""
+msgstr "Seotud seadmed"
 
 #: data/resources/ui/linked_devices_window.blp:31
 msgid "Add Linked Device"
-msgstr ""
+msgstr "Lisa uus seotud seade"
 
 #: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Palun sisesta uus seotava seadme võrguaadress."
 
 #: data/resources/ui/linked_devices_window.blp:42
 msgid "Device URL"
-msgstr ""
+msgstr "Seadme võrguaadress"
 
 #: data/resources/ui/linked_devices_window.blp:51
 msgid "Add Device"
-msgstr ""
+msgstr "Lisa seade"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr ""
+msgstr "Vasta"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "Kustuta"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "Kopeeri"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "Salvesta kui…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "Ava rakendusega…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
-msgstr ""
+msgstr "Uus vestlus"
 
 #: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Menüü"
 
 #: data/resources/ui/new_channel_dialog.blp:35
 msgid "Search Contacts"
-msgstr ""
+msgstr "Otsi kontaktide hulgast"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Kontaktide järjestuse alus:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Eesnimi"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "Perenimi"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "Üldised seadistused"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
@@ -373,6 +380,8 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
 msgstr ""
+"Kas soovid seadistada põhiseadmena (Primary Device) või seotud seadmena ("
+"Liked Device)?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
@@ -383,11 +392,11 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:160
 #: data/resources/ui/setup_window.blp:177
 msgid "Link Device"
-msgstr ""
+msgstr "Seo seade"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "Põhiseade või seotud seade?"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
@@ -395,7 +404,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Seotud seade (soovitatav)"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
@@ -403,6 +412,8 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Sarnaselt Signali ametliku töölauarakendusega võib ka Flare olla seotud sinu "
+"põhiseadmega. Seda režiimi on põhjalikult testitud ja ta üldjoontes toimib."
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
@@ -422,6 +433,7 @@ msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Sidumiseks teisese seadmena vajab Flare ametliku rakenduse jaoks seadme nime."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
@@ -449,7 +461,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
 msgid "Link device"
-msgstr ""
+msgstr "Seo seade"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
@@ -461,21 +473,23 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
-msgstr ""
+msgstr "Sidumine ilma skaneerimiseta"
 
 #: data/resources/ui/setup_window.blp:280
 msgid "Manual linking"
-msgstr ""
+msgstr "Käsitsi sidumine"
 
 #: data/resources/ui/setup_window.blp:296
 msgid "Manual Linking"
-msgstr ""
+msgstr "Käsitsi sidumine"
 
 #: data/resources/ui/setup_window.blp:297
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Kui sinu seadmega pole võimalik QR-koodi skaneerida, siis võid selle lingi "
+"käsitsi sisestada"
 
 #: data/resources/ui/setup_window.blp:308
 msgid "Copy to clipboard"
@@ -779,6 +793,8 @@ msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"Taustateenusena toimiv andmebaas on katki läinud. Palun käivita rakendus "
+"uuesti või kustuta andmebaas ja seo rakendus uuesti."
 
 #: src/error.rs:116
 msgid ""
@@ -813,7 +829,7 @@ msgstr ""
 
 #: src/error.rs:156
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "Palun kustuta andmekogu ja seo seade uuesti."
 
 #: src/error.rs:163
 msgid "The database path at {} is no folder."
@@ -833,11 +849,11 @@ msgstr ""
 
 #: src/gui/linked_devices_window.rs:116
 msgid "Unlink Device?"
-msgstr ""
+msgstr "Kas eemaldame seadme seotuse?"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Kas oled kindel, et soovid eemaldada {} seotud seadmena?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -957,6 +973,8 @@ msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Seadme nimi Flare'i sidumisel sinu kasutajakontoga. See eeldab uuesti "
+"sidumist."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
