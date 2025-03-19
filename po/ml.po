@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-03-03 23:11+0000\n"
+"PO-Revision-Date: 2025-03-19 16:46+0000\n"
 "Last-Translator: Coding Otaku <contact@codingotaku.com>\n"
 "Language-Team: Malayalam <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ml/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.3-dev\n"
+"X-Generator: Weblate 5.11-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -154,6 +154,7 @@ msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
+"ഇത് പ്രാദേശികമായി സംഭരിച്ച എല്ലാ സന്ദേശങ്ങളും മായ്ക്കും. ഇത് ആപ്ലിക്കേഷനും അടയ്ക്കും."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
@@ -178,6 +179,8 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"ഇത് ഈ ഉപകരണത്തിന് അൺനോട്ട് ചെയ്ത് പ്രാദേശികമായി സംരക്ഷിച്ച എല്ലാ ഡാറ്റയും നീക്കംചെയ്യും. ഇത് "
+"വീണ്ടും തുറക്കുമ്പോൾ അത് റിങ്ക് ചെയ്യാൻ കഴിയുന്ന ആപ്ലിക്കേഷനും ഇത് അടയ്ക്കും."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
@@ -189,7 +192,7 @@ msgstr "സന്ദേശങ്ങൾ മായ്ക്കാതെ അൺല�
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "പിശക്"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
@@ -198,32 +201,32 @@ msgstr "ഈ പിശക് റിപ്പോർട്ടുചെയ്യു�
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr ""
+msgstr "അടയ്ക്കുക"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "റിപ്പോർട്ടുചെയ്യുക"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:160
 msgid "Linked Devices"
-msgstr ""
+msgstr "ലിങ്കുചെയ്ത ഉപകരണങ്ങൾ"
 
 #: data/resources/ui/linked_devices_window.blp:31
 msgid "Add Linked Device"
-msgstr ""
+msgstr "ലിങ്കുചെയ്ത ഉപകരണം ചേർക്കുക"
 
 #: data/resources/ui/linked_devices_window.blp:32
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "ലിങ്ക് ചെയ്യുന്നതിന് ഉപകരണത്തിന്റെ URL ചേർക്കുക."
 
 #: data/resources/ui/linked_devices_window.blp:42
 msgid "Device URL"
-msgstr ""
+msgstr "ഉപകരണത്തിന്റെ URL"
 
 #: data/resources/ui/linked_devices_window.blp:51
 msgid "Add Device"
-msgstr ""
+msgstr "ഉപകരണം ചേർക്കുക"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
@@ -239,11 +242,11 @@ msgstr "പകർത്തുക"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "ഇതായി സംരക്ഷിക്കുക …"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "ഇതുപയോഗിച്ച് തുറക്കുക…"
 
 #: data/resources/ui/new_channel_dialog.blp:14
 msgid "New Chat"
@@ -260,71 +263,71 @@ msgstr "കോൺടാക്റ്റുകൾ തിരയുക"
 
 #: data/resources/ui/new_channel_dialog.blp:71
 msgid "List Contacts By:"
-msgstr ""
+msgstr "കോൺടാക്റ്റുകൾ പട്ടികപ്പെടുത്തുക:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "പേരിന്റെ ആദ്യഭാഗം"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
-msgstr ""
+msgstr "കുടുംബപ്പേര്"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "പൊതുവായവ"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "ഓട്ടോമാറ്റിക്കായി അറ്റാച്ചുമെന്റുകൾ ഡൗൺലോഡ് ചെയ്യുക"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "ചുവടെ തിരഞ്ഞെടുത്ത അറ്റാച്ച്മെന്റ് തരങ്ങൾ സ്വയമേവ ഡൗൺലോഡ് ചെയ്യപ്പെടും"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "ചിത്രങ്ങൾ"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "വീഡിയോകൾ"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "ഫയലുകൾ"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Voice Messages"
-msgstr ""
+msgstr "ശബ്ദ സന്ദേശങ്ങൾ"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr ""
+msgstr "അറിയിപ്പുകൾ"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr ""
+msgstr "പുതിയ സന്ദേശങ്ങൾക്കായുള്ള അറിയിപ്പുകൾ"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr ""
+msgstr "അറിയിപ്പുകൾ അയയ്ക്കുക"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr ""
+msgstr "പ്രതികരണങ്ങളെക്കുറിച്ചുള്ള അറിയിപ്പുകൾ അയയ്ക്കുക"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr ""
+msgstr "പശ്ചാത്തല അറിയിപ്പുകൾ"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "അപ്ലിക്കേഷൻ അടഞ്ഞിരിക്കുമ്പോൾ അറിയിപ്പുകൾ ലഭ്യമാക്കുക"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "മൊബൈലുമായുള്ള അനുയോജ്യത"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -332,6 +335,8 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"ടച്ച്, മൊബൈൽ ഉപകരണങ്ങളിൽ മികച്ച അനുഭവത്തിനായി ഈ ഓപ്ഷനുകൾ മാറ്റാം. ഡിഫോൾട്ട് ഓപ്ഷനുകൾ "
+"ഡെസ്ക്ടോപ്പ് ഉപകരണങ്ങളിൽ ഉപയോഗപ്രദമാകാൻ വേണ്ടി തിരഞ്ഞെടുത്തതാണ്."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
@@ -343,28 +348,30 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "സന്ദേശം അയയ്ക്കാൻ “എന്റർ” അമർത്തുക"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"\"കണ്ട്രോൾ + എന്റർ\" അനുവദിക്കാത്ത ടച്ച് കീബോർഡിൽ പുതിയ വരികൽ ഉള്ള സന്ദേശങ്ങൾ അയയ്ക്കാൻ "
+"കഴിഞ്ഞേക്കില്ല"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "ഫ്ലേറിലേക്ക് സ്വാഗതം"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "ഫ്ലേർ സജ്ജമാക്കുക"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:8
 msgid "Flare"
-msgstr ""
+msgstr "ഫ്ലേർ"
 
 #: data/resources/ui/setup_window.blp:53
 msgid ""
