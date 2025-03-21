@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-03-19 16:46+0000\n"
+"PO-Revision-Date: 2025-03-21 10:27+0000\n"
 "Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/et/>\n"
@@ -274,55 +274,55 @@ msgstr "Üldised seadistused"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "Laadi manused automaatselt alla"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "Manused laaditakse automaatselt alla siinvalitud tüüpide puhul"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Pildid"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Videod"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Failid"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Voice Messages"
-msgstr ""
+msgstr "Häälsõnumid"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr ""
+msgstr "Teavitused"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr ""
+msgstr "Uute sõnumite teavitused"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr ""
+msgstr "Saada teavitusi"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr ""
+msgstr "Saada teavitusi reageerimiste puhul"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr ""
+msgstr "Taustateavitused"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "Laadi teavitusi, kui rakendus on suletud"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Ühilduvus nutiseadmetes"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -330,39 +330,44 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Kui pruugid seda rakendust puute- või nutiseadmetes, siis need valikud "
+"võivad kasutatavust parandada. Vaikimisi väärtused on optimeeritud "
+"kasutuseks töölauarakendusena."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Sõnumi tekst on valitav"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr ""
+msgstr "Valitav tekst võib takistada viipamist puutetundlikul ekraanil"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "Saada sõnum sisestusklahviga"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"Kui nutiseadme puutetundlik klahvistik ei toeta „Ctrl+Sisestusklahv“ "
+"kombinatsiooni, siis võib seal olla keeruline reavahetust lisada"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Tere tulemast - see on Flare"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Seadista vestlusrakendus Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #: data/resources/ui/setup_window.blp:53
 msgid ""
@@ -386,13 +391,13 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
 msgid "Primary Device"
-msgstr ""
+msgstr "Põhiseade"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
 #: data/resources/ui/setup_window.blp:177
 msgid "Link Device"
-msgstr "Seo seade"
+msgstr "Seotud seade"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
@@ -400,7 +405,7 @@ msgstr "Põhiseade või seotud seade?"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Flare on kasutatav nii põhiseadmena kui seotud seadmena."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
@@ -417,7 +422,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Põhiseade (pole kasutusel)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -437,17 +442,17 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
-msgstr ""
+msgstr "Seadme nimi"
 
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
-msgstr ""
+msgstr "Arendaja valikud"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
-msgstr ""
+msgstr "Signali serverid"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -465,11 +470,13 @@ msgstr "Seo seade"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
-msgstr ""
+msgstr "Skaneeri koodi"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
+"Skaneeri seda koodi mõne muu Signali rakendusega, kus oled oma kontoga "
+"sisseloginud."
 
 #: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
@@ -493,11 +500,11 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:308
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopeeri lõikelauale"
 
 #: data/resources/ui/setup_window.blp:341
 msgid "Continue"
-msgstr ""
+msgstr "Jätka"
 
 #: data/resources/ui/setup_window.blp:358
 msgid ""
@@ -669,96 +676,96 @@ msgstr ""
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
-msgstr ""
+msgstr "Kanalite loend"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Lisa vestlus"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "Vestle"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "kirjutab"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
-msgstr ""
+msgstr "Seadistused"
 
 #: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Sünkroniseeri kontaktid"
 
 #: data/resources/ui/window.blp:181
 msgid "Keybindings"
-msgstr ""
+msgstr "Klahvide seosed"
 
 #: data/resources/ui/window.blp:186
 msgid "About"
-msgstr ""
+msgstr "Rakenduse teave"
 
 #: data/resources/ui/window.blp:191
 msgid "Quit"
-msgstr ""
+msgstr "Välju"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
-msgstr ""
+msgstr "Mäge iseendale"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Tundmatu kontakt"
 
 #: src/backend/manager.rs:442
 msgid "You"
-msgstr ""
+msgstr "Sina"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "Saabuv kõne"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "Väljuv kõne"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "Kõne algas"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr ""
+msgstr "Kõne lõppes"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
-msgstr ""
+msgstr "Kõnest keeldumine"
 
 #: src/backend/message/call_message.rs:105
 msgid "Unanswered call"
-msgstr ""
+msgstr "Vastamata kõne"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
-msgstr ""
+msgstr "Kasutaja {sender} reaktsioon sõnumile oli {emoji}."
 
 #: src/backend/message/reaction_message.rs:80
 msgid "Reacted {emoji} to a message."
-msgstr ""
+msgstr "Reaktsioon sõnumile oli {emoji}."
 
 #: src/backend/message/text_message.rs:381
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Saatis pildi"
+msgstr[1] "Saatis {} pilti"
 
 #: src/backend/message/text_message.rs:383
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Saatis video"
+msgstr[1] "Saatis {} videot"
 
 #: src/backend/message/text_message.rs:386
 msgid "Sent a voice message"
@@ -801,31 +808,34 @@ msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"Tundub, et sul hetkel puudub autentimine Signali teenustega. Palun kustuta "
+"andmebaas ja seo rakendus uuesti."
 
 #: src/error.rs:121
 msgid "Sending a message failed."
-msgstr ""
+msgstr "Sõnumit ei õnnestunud saata."
 
 #: src/error.rs:126
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "Sõnumit ei õnnestunud vastu võtta."
 
 #: src/error.rs:131
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"Midagi imelikku juhtus Signali taustateenusega. Palun proovi hiljem uuesti."
 
 #: src/error.rs:136
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "Rakendus tundub olema valesti seadistatud."
 
 #: src/error.rs:141
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Osa rakendusest jooksis kokku."
 
 #: src/error.rs:151
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Kontrolli oma internetiühenduse toimivust."
 
 #: src/error.rs:156
 msgid "Please delete the database and relink the device."
@@ -857,11 +867,11 @@ msgstr "Kas oled kindel, et soovid eemaldada {} seotud seadmena?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "Jälgi uusi sõnumeid ka suletuna"
 
 #: src/gui/preferences_window.rs:99
 msgid "Background permission"
-msgstr ""
+msgstr "Õigused taustal töötamiseks"
 
 #: src/gui/preferences_window.rs:100
 msgid "Use settings to remove permissions"
@@ -915,25 +925,25 @@ msgstr ""
 
 #: src/gui/utility.rs:159
 msgid "Attachment"
-msgstr ""
+msgstr "Manus"
 
 #: src/gui/window.rs:304 src/gui/window.rs:310
 msgid "Remove Messages"
-msgstr ""
+msgstr "Eemalda sõnumid"
 
 #: src/gui/window.rs:305
 msgid "This will remove all locally stored messages from this channel"
-msgstr ""
+msgstr "Järgnevaga kustutad kohalikust seadmest kõik selle kanali sõnumid"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Vestle oma sõrade ja tuttavatega Signalis"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "messaging;chat;signal;flare;vestlus;vestlused;sõnumid;krüptitud;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:29
@@ -942,6 +952,9 @@ msgid ""
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
+"Flare on mitteametlik rakendus suhtluseks Signali võrgus. Ta on hetkel "
+"arendusjärgus ja siin puudub osa ametlike Signali rakenduste "
+"funktsionaalsustest. Lisateavet näed meie tööplaanist."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:33
@@ -958,15 +971,15 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Akna laius"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Akna kõrgus"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Akna maksimaalne vaade"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
@@ -978,27 +991,27 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Laadi pildid automaatselt alla"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Laadi videod automaatselt alla"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
-msgstr ""
+msgstr "Laadi häälsõnumid automaatselt alla"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "Laadi failid automaatselt alla"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
-msgstr ""
+msgstr "Saada teavitusi"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Suletuna jätka taustal töötamist"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
