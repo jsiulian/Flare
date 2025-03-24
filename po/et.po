@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-03-23 07:43+0000\n"
+"PO-Revision-Date: 2025-03-24 11:52+0000\n"
 "Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/et/>\n"
@@ -381,6 +381,16 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare on mitteametlik Signali klient. Palun arvesta, et Flare pole veel "
+"stabiilne ja võib tekkida vigu. Kui midagi sellist märkad, siis <a href="
+"\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">palun vaata meie "
+"veahaldust</a> ja anna teada veast vaid siis, kui teda juba kirjas pole. "
+"Kuna tegemist on kolmanda osapoole rakendsuega, siis Flare ei saa "
+"garanteerida sama turvalisust, nagu Signali ametlikud rakendused seda "
+"teevad. Kui sina või suhtluse teine osapool vajab kõrget turvataset, siis "
+"Flare ei pruugi olla parim valik. Vastav lisateave leidub meie lähtekoodis "
+"<a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/"
+"README.md#security\">README</a> failis."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
@@ -432,6 +442,11 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Nii nagu ametlik Signali klient Androidis või iOS-is, oskab ka Flare toimida "
+"põhiseadmena. Kuigi testimine näitab, et kõik toimib, siis pole see "
+"funktsionaalsus ametlikult toetatud. Kui tahad katsetada, siis järgnevast "
+"nupust saad sellise võimaluse sisse lülitada (kui sa ei tea, kuidas seda "
+"teha, siis pigem ära katseta Flare'i põhiseadmena)."
 
 #: data/resources/ui/setup_window.blp:194
 msgid ""
@@ -461,6 +476,9 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"Järgneval lehel näed QR-koodi, mida pead skaneerima oma põhiseadmega. Palun "
+"arvetsa, et selleks on sul aega napp minut, seega säti oma ametlik rakendus "
+"skaneerimiseks juba valmis."
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
@@ -516,6 +534,13 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"Registreerimiseks põhiseadmena vajab Flare sinu telefoninumbrit ja pead "
+"lahendama robotilõksu. Palun sisesta telefoninumber rahvusvahelises E.164 "
+"vormingus, sealhulgas „+“ ja riigi kood kõige ees. Robotilõksu lahendamine "
+"<a href=\"https://signalcaptchas.org/registration/generate.html\">toimub "
+"siin</a> ning kui see on tehtud, siis kopeeri „Ava Signal“ link ning aseta "
+"see alltoodud väljale. Palun arvesta, et viimase tegevuse jaoks on aega napi "
+"minuti jagu ning pead tegutsema kiirelt."
 
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -552,10 +577,14 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare on praktiliselt töövalmis, vaid kontaktide sünkroniseerimine on "
+"lõpetamisel. Selleks võib kuluda mõni sekund ja peale sünkroniseerimist saad "
+"Flare'iga toimetama hakata. Enne, kui alustad Flare'i kasutamist, siis siin "
+"on viimased märkused:"
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "Teadaolevad vead"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -567,10 +596,19 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Palun ära saada sõnumeid enne, kui sõnumid on veel Flare'i poolt "
+"vastuvõtmisel - sellega tagad, et kõik vajalik (krüpto)teave on alati "
+"olemas. See viga on teada ning üritame talle lahendust leida. Lisaks võib "
+"kirjutamine kontaktidele, kellelt sa pole veel sõnumeid saanud, viia "
+"serveripoolsete piiranguteni. Seega palun alati vaata, et enne suurema "
+"sõnumisaju teelepanemist oleks ka teine osapool sulle midagi kirjutanud. "
+"Tervikliku vigade ning probleemde loendi leiad <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">meie "
+"veahaldusest</a>."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
-msgstr ""
+msgstr "Meie kontaktid"
 
 #: data/resources/ui/setup_window.blp:523
 msgid ""
@@ -578,6 +616,9 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"Soovid Flare'i kohta kirjutada tagasisidet või lihtsalt suhelda? Meie <a "
+"href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrixi jututuba</a> "
+"on kõigile avatud."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -642,7 +683,7 @@ msgstr "Laadi veel sõnumeid"
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Lahenda robotilõks"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -653,10 +694,16 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Palun lahenda see robotilõks. Alustamiseks saad tunnusloa Flare'i kuvatud "
+"veateatest. Robotilõksu lahendamine <a href="
+"\"https://signalcaptchas.org/registration/generate.html\">toimub siin</a> "
+"ning kui see on tehtud, siis kopeeri „Ava Signal“ link ning aseta see "
+"näidatud väljale. Palun arvesta, et robotilõksu positiivne vastus kehtib "
+"napi minuti jagu ning pead tegutsema kiirelt."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "Tunnusluba"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
