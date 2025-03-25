@@ -119,7 +119,7 @@ git tag $1
 
 
 echo "> You are all set now. Please still do the following things afterwards:"
-echo ">> Push the release using 'git push --follow-tags'."
+echo ">> Push the release using 'git push && git push --tags'."
 echo ">> Wait for CI to finish (will take approximately 30 minutes)."
 echo ">> Release the new version on Flathub."
 echo ">> Write a release message to the Matrix channel."
