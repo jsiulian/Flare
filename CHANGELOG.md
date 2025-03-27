@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Some channel names not displaying in the header bar, for example due to an ascii heart `<3`.
+
 ## [0.15.14] - 2025-03-09
 
 ### Fixed
