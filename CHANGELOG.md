@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.15] - 2025-04-01
+
 ### Fixed
 
 - Some channel names not displaying in the header bar, for example due to an ascii heart.
@@ -707,7 +709,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.14...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.15...master
+[0.15.15]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.14...0.15.15
 [0.15.14]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.13...0.15.14
 [0.15.13]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.12...0.15.13
 [0.15.12]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.11...0.15.12

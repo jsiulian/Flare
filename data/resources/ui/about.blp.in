@@ -14,5 +14,5 @@ Adw.AboutDialog about {
   // TODO: string[] is not supported by Blueprint, so artists need to be hardcoded
   copyright: "© 2022 Julian Schmidhuber";
   license-type: agpl_3_0_only;
-  release-notes: "<p>Fixed</p> <ul> <li>Ignore one more networking-related error.</li> <li>Don't stop receiving messages after an error occurred when receiving a message.</li> </ul>";
+  release-notes: "<p>Fixed</p> <ul> <li>Some channel names not displaying in the header bar, for example due to an ascii heart.</li> <li>Images sent not being downloadable for other people.</li> </ul>";
 }
