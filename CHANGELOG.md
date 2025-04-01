@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Some channel names not displaying in the header bar, for example due to an ascii heart `<3`.
+- Some channel names not displaying in the header bar, for example due to an ascii heart.
 - Images sent not being downloadable for other people.
 
 ## [0.15.14] - 2025-03-09
