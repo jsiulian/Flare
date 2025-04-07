@@ -10,6 +10,6 @@ template $FlAttachmentImage: $FlAttachmentBase {
     width-request: bind $resize_width(template.attachment as <$FlAttachmentObject>.width) as <int>;
     overflow: hidden;
     paintable: bind template.attachment as <$FlAttachmentObject>.image;
-    content-fit: cover;
+    content-fit: scale_down;
   }
 }

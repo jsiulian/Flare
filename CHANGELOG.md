@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Images as attachments being cut off in messages.
+
 ## [0.15.15] - 2025-04-01
 
 ### Fixed
