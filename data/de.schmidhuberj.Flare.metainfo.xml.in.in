@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="v0.15.16" date="2025-04-09">
+      <description translate="no">
+        <p>Fixed</p> <ul> <li>Images as attachments being cut off in messages.</li> </ul>
+      </description>
+    </release>
     <release version="v0.15.15" date="2025-04-01">
       <description translate="no">
         <p>Fixed</p> <ul> <li>Some channel names not displaying in the header bar, for example due to an ascii heart.</li> <li>Images sent not being downloadable for other people.</li> </ul>

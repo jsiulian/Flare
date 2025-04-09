@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.16] - 2025-04-09
+
 ### Fixed
 
 - Images as attachments being cut off in messages.
@@ -713,7 +715,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.15...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.16...master
+[0.15.16]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.15...0.15.16
 [0.15.15]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.14...0.15.15
 [0.15.14]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.13...0.15.14
 [0.15.13]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.12...0.15.13
