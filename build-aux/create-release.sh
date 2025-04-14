@@ -62,12 +62,6 @@ fi
 
 
 
-echo "> Updating about window."
-
-sed -i "s|release-notes: .*|release-notes: \"$changelog_newline\";|" data/resources/ui/about.blp.in
-
-
-
 echo "> Running the application"
 
 if command -v run 2>&1 > /dev/null; then

@@ -1,5 +1,4 @@
 subdir('icons')
-subdir('resources')
 
 # Desktop file
 desktop_conf = configuration_data()
@@ -66,3 +65,5 @@ install_data(
 # Compile schemas
 settings_schemas = [ '@0@.gschema.xml'.format(base_id) ]
 gnome.compile_schemas(depend_files: files(settings_schemas))
+
+subdir('resources')
