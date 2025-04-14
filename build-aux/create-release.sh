@@ -57,7 +57,7 @@ changelog_newline=$(echo $changelog)
 if ! grep -q "<release version=\"$1\"" "data/$app_id.metainfo.xml.in.in"; then
   # TODO: This does not format the release notes in the metainfo nicely.
   # Maybe run a formatter with the release notes?
-  sed -i "s|<releases>|<releases>\n    <release version=\"v$1\" date=\"$date\">\n      <description translate=\"no\">\n        $changelog_newline\n      </description>\n    </release>|" "data/$app_id.metainfo.xml.in.in"
+  sed -i "s|<releases>|<releases>\n    <release version=\"$1\" date=\"$date\">\n      <description translate=\"no\">\n        $changelog_newline\n      </description>\n    </release>|" "data/$app_id.metainfo.xml.in.in"
 fi
 
 
