@@ -1,6 +1,7 @@
 #!/bin/sh
 
 slug="flare"
+url_slug="$slug"
 app_id="de.schmidhuberj.Flare"
 gitlab_project_id="37464215"
 
@@ -42,7 +43,7 @@ echo "> Updating CHANGELOG.md."
 if ! grep -q "## \[$1\]" CHANGELOG.md; then
   sed -i "s/## \[Unreleased\]/## \[Unreleased\]\n\n## \[$1\] - $date/" CHANGELOG.md
 
-  sed -r -i "s|\[Unreleased\]: https://gitlab.com/schmiddi-on-mobile/$slug/-/compare/(.*)...master|\[Unreleased\]: https://gitlab.com/schmiddi-on-mobile/$slug/-/compare/$1...master\n[$1]: https://gitlab.com/schmiddi-on-mobile/$slug/-/compare/\1...$1|" CHANGELOG.md
+  sed -r -i "s|\[Unreleased\]: https://gitlab.com/schmiddi-on-mobile/$url_slug/-/compare/(.*)...master|\[Unreleased\]: https://gitlab.com/schmiddi-on-mobile/$url_slug/-/compare/$1...master\n[$1]: https://gitlab.com/schmiddi-on-mobile/$url_slug/-/compare/\1...$1|" CHANGELOG.md
 fi
 
 
@@ -136,7 +137,7 @@ git push && git push --tags
 
 echo "> Waiting for CI to finish. This will take approximately 30 minutes. You will be notified once CI is finished."
 
-until curl -I --fail "https://gitlab.com/api/v4/projects/${gitlab_project_id}/packages/generic/$slug/$1/$slug-$1.tar.xz" &> /dev/null; do
+until curl -I --fail "https://gitlab.com/api/v4/projects/${gitlab_project_id}/packages/generic/$url_slug/$1/$slug-$1.tar.xz" &> /dev/null; do
   # Try again in 2 minutes
   sleep 120
 done
