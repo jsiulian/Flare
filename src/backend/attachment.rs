@@ -229,6 +229,13 @@ impl Attachment {
             pointer.content_type.as_ref().unwrap_or(&"None".to_string())
         );
 
+        // For some reason, some webp stickers are sent with content type Some("").
+        // Also, some stickers mention the completely wrong file type (image/webp instead of image/png), but that should not matter as both are equally handled by gtk::Picture.
+        let mut pointer = pointer.clone();
+        if pointer.content_type == Some("".to_owned()) {
+            pointer.content_type = Some("image/webp".to_owned());
+        }
+
         let mut image = None;
         let blur_hash = pointer.blur_hash.clone();
         let name = pointer.file_name.clone().unwrap_or_else(|| {
@@ -271,7 +278,7 @@ impl Attachment {
             .property("height", height)
             .property("content-type", pointer.content_type.as_ref())
             .build();
-        *s.imp().pointer.borrow_mut() = Some(pointer.clone());
+        *s.imp().pointer.borrow_mut() = Some(pointer);
         s
     }
 
