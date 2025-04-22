@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Initial support for receiving stickers.
+
 ## [0.15.16] - 2025-04-09
 
 ### Fixed
