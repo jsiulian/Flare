@@ -160,8 +160,8 @@ done
 echo "> Detected open Flatpak PR to monitor: $pr_number. Depending on the current Flathub buildbot usage, the build can take a long time to complete. You will be notified once the build succeeds."
 
 comments=$(curl "https://api.github.com/repos/flathub/$app_id/issues/$pr_number/comments" 2> /dev/null)
-while ! echo "$comments" | grep "Build.*successful" &> /dev/null; do
-  if echo "$comments" | grep "Build.*failed" &> /dev/null; then
+while ! echo "$comments" | grep "build.*succeeded" &> /dev/null; do
+  if echo "$comments" | grep "build.*failed" &> /dev/null; then
     notify-send "Flathub build failed" "Please resolve manually."
     echo "! Flathub build failed. Please resolve manually."
     exit 1
