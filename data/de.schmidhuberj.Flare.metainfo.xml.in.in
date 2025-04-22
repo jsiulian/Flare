@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.16.0" date="2025-04-22">
+      <description translate="no">
+        <p>Added</p> <ul> <li>Initial support for receiving stickers.</li> </ul>
+      </description>
+    </release>
     <release version="0.15.16" date="2025-04-09">
       <description translate="no">
         <p>Fixed</p> <ul> <li>Images as attachments being cut off in messages.</li> </ul>
