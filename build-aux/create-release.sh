@@ -1,6 +1,7 @@
 #!/bin/sh
 
 slug="flare"
+url_slug="$slug"
 app_id="de.schmidhuberj.Flare"
 gitlab_project_id="37464215"
 
@@ -42,7 +43,7 @@ echo "> Updating CHANGELOG.md."
 if ! grep -q "## \[$1\]" CHANGELOG.md; then
   sed -i "s/## \[Unreleased\]/## \[Unreleased\]\n\n## \[$1\] - $date/" CHANGELOG.md
 
-  sed -r -i "s|\[Unreleased\]: https://gitlab.com/schmiddi-on-mobile/$slug/-/compare/(.*)...master|\[Unreleased\]: https://gitlab.com/schmiddi-on-mobile/$slug/-/compare/$1...master\n[$1]: https://gitlab.com/schmiddi-on-mobile/$slug/-/compare/\1...$1|" CHANGELOG.md
+  sed -r -i "s|\[Unreleased\]: https://gitlab.com/schmiddi-on-mobile/$url_slug/-/compare/(.*)...master|\[Unreleased\]: https://gitlab.com/schmiddi-on-mobile/$url_slug/-/compare/$1...master\n[$1]: https://gitlab.com/schmiddi-on-mobile/$url_slug/-/compare/\1...$1|" CHANGELOG.md
 fi
 
 
@@ -57,14 +58,8 @@ changelog_newline=$(echo $changelog)
 if ! grep -q "<release version=\"$1\"" "data/$app_id.metainfo.xml.in.in"; then
   # TODO: This does not format the release notes in the metainfo nicely.
   # Maybe run a formatter with the release notes?
-  sed -i "s|<releases>|<releases>\n    <release version=\"v$1\" date=\"$date\">\n      <description translate=\"no\">\n        $changelog_newline\n      </description>\n    </release>|" "data/$app_id.metainfo.xml.in.in"
+  sed -i "s|<releases>|<releases>\n    <release version=\"$1\" date=\"$date\">\n      <description translate=\"no\">\n        $changelog_newline\n      </description>\n    </release>|" "data/$app_id.metainfo.xml.in.in"
 fi
-
-
-
-echo "> Updating about window."
-
-sed -i "s|release-notes: .*|release-notes: \"$changelog_newline\";|" data/resources/ui/about.blp.in
 
 
 
@@ -142,7 +137,7 @@ git push && git push --tags
 
 echo "> Waiting for CI to finish. This will take approximately 30 minutes. You will be notified once CI is finished."
 
-until curl -I --fail "https://gitlab.com/api/v4/projects/${gitlab_project_id}/packages/generic/$slug/$1/$slug-$1.tar.xz" &> /dev/null; do
+until curl -I --fail "https://gitlab.com/api/v4/projects/${gitlab_project_id}/packages/generic/$url_slug/$1/$slug-$1.tar.xz" &> /dev/null; do
   # Try again in 2 minutes
   sleep 120
 done
@@ -165,8 +160,8 @@ done
 echo "> Detected open Flatpak PR to monitor: $pr_number. Depending on the current Flathub buildbot usage, the build can take a long time to complete. You will be notified once the build succeeds."
 
 comments=$(curl "https://api.github.com/repos/flathub/$app_id/issues/$pr_number/comments" 2> /dev/null)
-while ! echo "$comments" | grep "Build.*successful" &> /dev/null; do
-  if echo "$comments" | grep "Build.*failed" &> /dev/null; then
+while ! echo "$comments" | grep "build.*succeeded" &> /dev/null; do
+  if echo "$comments" | grep "build.*failed" &> /dev/null; then
     notify-send "Flathub build failed" "Please resolve manually."
     echo "! Flathub build failed. Please resolve manually."
     exit 1

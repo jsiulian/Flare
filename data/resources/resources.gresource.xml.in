@@ -17,7 +17,6 @@
     <file preprocess="xml-stripblanks">ui/preferences_window.ui</file>
     <file preprocess="xml-stripblanks">ui/shortcuts.ui</file>
     <file preprocess="xml-stripblanks">ui/text_entry.ui</file>
-    <file preprocess="xml-stripblanks">ui/about.ui</file>
     <file preprocess="xml-stripblanks">ui/dialog_unlink.ui</file>
     <file preprocess="xml-stripblanks">ui/dialog_clear_messages.ui</file>
     <file preprocess="xml-stripblanks">ui/call_message_item.ui</file>
@@ -41,6 +40,7 @@
     <file compressed="true">style.css</file>
     <file compressed="true">style-dark.css</file>
     <file compressed="true">style-hc.css</file>
+    <file preprocess="xml-stripblanks">@app-id@.metainfo.xml</file>
 
     <file preprocess="xml-stripblanks">icons/scalable/status/view-more-horizontal-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/phonelink2-symbolic.svg</file>

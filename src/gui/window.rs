@@ -75,10 +75,10 @@ impl Window {
 }
 
 pub mod imp {
-    use crate::prelude::*;
+    use crate::{config, prelude::*};
     use std::{env, path::PathBuf};
 
-    use adw::{AboutDialog, AlertDialog, EntryRow, ResponseAppearance};
+    use adw::{AlertDialog, EntryRow, ResponseAppearance};
     use gio::{Cancellable, Settings, SimpleAction, SimpleActionGroup};
     use glib::subclass::InitializingObject;
     use glib::{BindingFlags, BoxedAnyObject, Propagation};
@@ -352,17 +352,24 @@ pub mod imp {
             log::trace!("Setting up about-page action");
             let action_about = SimpleAction::new("about", None);
             action_about.connect_activate(clone!(
-                #[weak]
+                #[weak(rename_to = window)]
                 obj,
                 move |_, _| {
-                    let builder = Builder::from_resource("/ui/about.ui");
-                    let about: AboutDialog = builder
-                        .object("about")
-                        .expect("about.ui to have at least one object about");
-                    // TODO: Replace this in Blueprint when string[] is supported
-                    about.set_artists(&["David Lapshin <ddaudix@gmail.com>"]);
-                    about.add_link("GitLab", "https://gitlab.com/schmiddi-on-mobile/flare");
-                    about.present(Some(&obj));
+                    let about_dialog = adw::AboutDialog::from_appdata(
+                        &(config::RESOURCES_PATH.to_owned() + config::APP_ID + ".metainfo.xml"),
+                        Some(env!("CARGO_PKG_VERSION")),
+                    );
+
+                    about_dialog.set_comments(env!("CARGO_PKG_DESCRIPTION"));
+                    about_dialog.set_developers(
+                        &(env!("CARGO_PKG_AUTHORS").split(':').collect::<Vec<&str>>()),
+                    );
+                    // translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
+                    about_dialog.set_translator_credits(&gettextrs::gettext("translator-credits"));
+                    about_dialog.set_artists(&["David Lapshin <ddaudix@gmail.com>"]);
+                    about_dialog.add_link("GitLab", "https://gitlab.com/schmiddi-on-mobile/flare");
+
+                    about_dialog.present(Some(&window));
                 }
             ));
 
