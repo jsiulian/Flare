@@ -74,7 +74,10 @@ impl Message {
                     return None;
                 }
 
-                if message.body.is_none() && message.attachments.is_empty() {
+                if message.body.is_none()
+                    && message.attachments.is_empty()
+                    && message.sticker.is_none()
+                {
                     return None;
                 }
                 let s: TextMessage = Object::builder::<TextMessage>()
@@ -112,7 +115,10 @@ impl Message {
                     log::debug!("Got message from a blocked contact. Ignoring");
                     return None;
                 }
-                if message.body.is_none() && message.attachments.is_empty() {
+                if message.body.is_none()
+                    && message.attachments.is_empty()
+                    && message.sticker.is_none()
+                {
                     return None;
                 }
                 let s: TextMessage = Object::builder::<TextMessage>()

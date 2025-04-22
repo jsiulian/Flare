@@ -96,6 +96,7 @@ impl TextMessage {
         let attachment_futures = message
             .attachments
             .iter()
+            .chain(message.sticker.as_ref().and_then(|s| s.data.as_ref()))
             .map(|pointer| async move { Attachment::from_pointer(pointer, manager).await });
         let attachments = futures::future::join_all(attachment_futures).await;
         obj.attachments.swap(&RefCell::new(attachments));

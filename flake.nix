@@ -83,6 +83,15 @@
                 export PROTOC=${pkgs.protobuf}/bin/protoc
                 meson setup -Dprofile=development build
               '';
+
+              GDK_PIXBUF_MODULE_FILE="${pkgs.gnome._gdkPixbufCacheBuilder_DO_NOT_USE {
+                                extraLoaders = [
+                                  pkgs.libjxl
+                                  pkgs.librsvg
+                                  pkgs.webp-pixbuf-loader
+                                  pkgs.libheif.out
+                                ];
+                              }}";
             };
           apps.default = {
             type = "app";
