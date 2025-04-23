@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-03-19 16:46+0000\n"
+"PO-Revision-Date: 2025-04-24 19:01+0000\n"
 "Last-Translator: Coding Otaku <contact@codingotaku.com>\n"
 "Language-Team: Malayalam <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ml/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.11.1-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -340,11 +340,12 @@ msgstr ""
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "തിരഞ്ഞെടുക്കാവുന്ന സന്ദേശം"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
+"തിരഞ്ഞെടുക്കാവുന്ന സന്ദേശം ടച്ച് സ്ക്രീനുകളിലെ സ്വൈപ്പ്-ആംഗ്യങ്ങളെ തടസ്സപ്പെടുത്തിയേക്കാം"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
