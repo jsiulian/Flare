@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-04-24 19:01+0000\n"
+"PO-Revision-Date: 2025-05-05 05:55+0000\n"
 "Last-Translator: Coding Otaku <contact@codingotaku.com>\n"
 "Language-Team: Malayalam <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ml/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.1-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -389,30 +389,31 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "സജ്ജീകരിക്കേണ്ടത് പ്രാഥമിക ഉപകരണമോ അതോ ലിങ്ക് ഉപകരണമോ?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
 msgid "Primary Device"
-msgstr ""
+msgstr "പ്രാഥമിക ഉപകരണം"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
 #: data/resources/ui/setup_window.blp:177
 msgid "Link Device"
-msgstr ""
+msgstr "ലിങ്ക് ഉപകരണം"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr ""
+msgstr "പ്രാഥമിക ഉപകരണമോ ലിങ്ക് ഉപകരണമോ?"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
 msgstr ""
+"നിങ്ങള്ക്ക് ഫ്ലേർ ഒരു പ്രാഥമിക ഉപകരണമായും അല്ലെങ്കിൽ ലിങ്ക് ഉപകരണമായും ഉപയോഗിക്കാം."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "ലിങ്ക് ഉപകരണം (ശുപാർശ ചെയ്യുന്നത്)"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
@@ -420,10 +421,12 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"ഔദ്യോഗിക സിഗ്നൽ ഡെസ്ക്ടോപ്പിന് സമാനമായി നിങ്ങളുടെ പ്രാഥമിക ഉപകരണവുമായി ലിങ്കുചെയ്യാൻപറ്റിയ "
+"ഒരു ആപ്ലിക്കേഷനാണ് ഫ്ലേർ. ഈ മോഡ് വളരെ വിപുലമായി പരീക്ഷിച്ചതും അത്യാവശ്യം പ്രവർത്തിക്കുന്നതുമാണ്."
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "പ്രാഥമിക ഉപകരണം (പ്രവർത്തനരഹിതം)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
