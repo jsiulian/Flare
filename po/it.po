@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-01-19 19:20+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"PO-Revision-Date: 2025-05-22 19:46+0000\n"
+"Last-Translator: Raffaele Gualtieri <freccevolanti@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/it/>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -472,6 +472,10 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"La pagina successiva mostrerà un codice QR che deve essere scansionato dal "
+"dispositivo principale. Si noti che si ha a disposizione un tempo di circa "
+"un minuto per la scansione del codice, quindi si prega di preparare "
+"l'applicazione ufficiale per la scansione del codice QR."
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
@@ -506,6 +510,8 @@ msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Se il vostro dispositivo non è in grado di scansionare il codice QR, potete "
+"inserire manualmente il link fornito qui"
 
 #: data/resources/ui/setup_window.blp:308
 #, fuzzy
@@ -537,6 +543,9 @@ msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"Dopo aver inviato queste informazioni, riceverete un SMS da Signal con un "
+"codice di verifica. Inserite questo codice di verifica nella pagina "
+"successiva."
 
 #: data/resources/ui/setup_window.blp:395
 #: data/resources/ui/setup_window.blp:403
@@ -547,7 +556,7 @@ msgstr "Conferma"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Inserire qui il codice di verifica ricevuto da Signal."
 
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
@@ -560,6 +569,10 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare è quasi pronto, sta aspettando che i contatti finiscano di essere "
+"sincronizzati. Questa operazione potrebbe richiedere alcuni secondi; una "
+"volta sincronizzati i contatti, è possibile iniziare a utilizzare Flare. "
+"Alcune note finali prima di iniziare a usare Flare:"
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
