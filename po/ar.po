@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2024-12-09 05:00+0000\n"
-"Last-Translator: shetozz <a.teama3317@gmail.com>\n"
+"PO-Revision-Date: 2025-05-23 19:48+0000\n"
+"Last-Translator: Moa'th <irondragondev@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ar/>\n"
 "Language: ar\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -485,7 +485,7 @@ msgstr "امسح الرمز"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan this code with another Signal app logged into your account."
-msgstr ""
+msgstr "امسح الرمز التالي من تطبيق Signal اخر لتسجيل الدخول الى حسابك."
 
 #: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
@@ -493,17 +493,17 @@ msgstr "اربط دون المسح"
 
 #: data/resources/ui/setup_window.blp:280
 msgid "Manual linking"
-msgstr ""
+msgstr "الربط اليدوي"
 
 #: data/resources/ui/setup_window.blp:296
 msgid "Manual Linking"
-msgstr ""
+msgstr "الربط اليدوي"
 
 #: data/resources/ui/setup_window.blp:297
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
-msgstr ""
+msgstr "اذا لم يتمكن جهازك من مسح الرمز، قم بإدخال الرابط التالي يدويًا"
 
 #: data/resources/ui/setup_window.blp:308
 msgid "Copy to clipboard"
@@ -523,17 +523,25 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"التسجيل كحساب رئيسي، Flare سيحتاج الى رقم الجوال وإكمال اختبار التحقق. رجاءً "
+"قم بكتابة رقم الجوال بإستخدام الترميز العالمي E. 164، متضمنا علامة \"+\" "
+"ورمز الدولة في بداية الرقم. يمكن اكمال اختبار التحقق <a href="
+"\"https://signalcaptchas.org/registration/generate.html\">هنا</a>، بعدها قم "
+"بنسخ رابط \"افتح Signal\" الذي سيظهر وألصقه في الخانة ادناه. علامًا ان اختبار "
+"التحقق فعال حتى دقيقة واحدة فقط، يرجى اتمام العملية بسرعة."
 
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr "الكابتشا"
+msgstr "اختبار التحقق"
 
 #: data/resources/ui/setup_window.blp:386
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"بعد تسليم هذه البيانات، ستصلك رسالة نصية من Signal تحتوي على رمز التحقق. قم "
+"بإدخاله في الصفحة القادمة."
 
 #: data/resources/ui/setup_window.blp:395
 #: data/resources/ui/setup_window.blp:403
@@ -544,7 +552,7 @@ msgstr "أكِّد"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "ادخل رمز التحقق الذي وصلك من Signal هنا."
 
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
@@ -557,10 +565,13 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare أوشك على الإنتهاء، انه ينتظر ان تنتهي عملية اقتران جهات الاتصال. قد "
+"تأخذ هذه العملية بضع ثواني، بإمكانك استخدام Flare بمجرد انتهى عملية اقتران "
+"جهات الاتصال. بعض الملاحظات قبل ان تبدأ بإستخدام Flare :"
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr "العلل المعروفة"
+msgstr "المشاكل المعروفة"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -647,7 +658,7 @@ msgstr "حمِّل المزيد من الرسائل"
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
 msgid "Submit Captcha"
-msgstr "سلِّم الكابتشا"
+msgstr "سلِّم اختبار التحقق"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
