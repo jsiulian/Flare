@@ -201,7 +201,6 @@ impl MessageItem {
         }
         if self.message().body().is_some() && RE.is_match(self.message().body().unwrap().as_str()) {
             self.imp().message_bubble.add_css_class("emoji");
-            self.message().set_show_header(false);
         }
     }
 
