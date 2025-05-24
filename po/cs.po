@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-01-12 02:54+0000\n"
-"Last-Translator: Adam Naprstek <adam@naprstek.com>\n"
+"PO-Revision-Date: 2025-05-25 18:15+0000\n"
+"Last-Translator: Tadeáš Erban <tadysekerbosek@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
 "flare/cs/>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #: data/resources/ui/about.blp:13
 msgid "translator-credits"
@@ -39,11 +39,11 @@ msgstr "Mizející zprávy"
 #: data/resources/ui/channel_info_dialog.blp:100
 msgctxt "accessibility"
 msgid "Reset Session"
-msgstr "Obnovení relace"
+msgstr "Obnovit relaci"
 
 #: data/resources/ui/channel_info_dialog.blp:118
 msgid "Reset Session"
-msgstr "Obnovení relace"
+msgstr "Obnovit relaci"
 
 #: data/resources/ui/channel_info_dialog.blp:128
 msgctxt "accessibility"
@@ -74,7 +74,7 @@ msgstr "Nevybrán žádný kanál"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr "Vybrat kanál"
+msgstr "Vyberte kanál"
 
 #: data/resources/ui/channel_messages.blp:181
 msgctxt "accessibility"
@@ -94,27 +94,27 @@ msgstr "Odstranit přílohu"
 #: data/resources/ui/channel_messages.blp:207
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr "Odstranění přílohy"
+msgstr "Odstranit přílohu"
 
 #: data/resources/ui/channel_messages.blp:228
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr "Přidání přílohy"
+msgstr "Přiložit soubor"
 
 #: data/resources/ui/channel_messages.blp:236
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr "Přidat přílohu"
+msgstr "Přiložit soubor"
 
 #: data/resources/ui/channel_messages.blp:252
 msgctxt "accessibility"
 msgid "Message input"
-msgstr "Zadávání zpráv"
+msgstr "Vstupní pole zprávy"
 
 #: data/resources/ui/channel_messages.blp:258
 msgctxt "tooltip"
 msgid "Message input"
-msgstr "Zadávání zpráv"
+msgstr "Vstupní pole zprávy"
 
 #: data/resources/ui/channel_messages.blp:270
 msgctxt "accessibility"
@@ -128,11 +128,11 @@ msgstr "Odeslat"
 
 #: data/resources/ui/device_info_item.blp:34
 msgid "Linked:"
-msgstr "Napojeno:"
+msgstr "Propojeno:"
 
 #: data/resources/ui/device_info_item.blp:50
 msgid "Last Active:"
-msgstr "Naposledy aktivní:"
+msgstr "Aktivní naposledy:"
 
 #: data/resources/ui/device_info_item.blp:72
 msgid "Unlink Device"
@@ -163,7 +163,7 @@ msgstr "Vymazat"
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
 #: src/gui/linked_devices_window.rs:121
 msgid "Unlink"
-msgstr "Odpojit"
+msgstr "Odhlásit se"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -259,7 +259,7 @@ msgstr "Seřadit kontakty podle:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr "První jméno"
+msgstr "Křestní jméno"
 
 #: data/resources/ui/new_channel_dialog.blp:78
 msgid "Surname"
@@ -271,11 +271,11 @@ msgstr "Obecné"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr "Automaticky stáhnout přílohy"
+msgstr "Automaticky stahovat přílohy"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr "Přílohy vybrané níže budou staženy"
+msgstr "Níže vybrané druhy příloh budou automaticky stahovány"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
@@ -299,15 +299,15 @@ msgstr "Oznámení"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr "Oznámení nových zpráv"
+msgstr "Oznámení o nových zprávách"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr "Odeslat oznámení"
+msgstr "Posílat oznámení"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr "Poslat notifikaci při reakci"
+msgstr "Posílat oznámení o reakcích"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
@@ -323,35 +323,34 @@ msgid "Mobile Compatibility"
 msgstr "Kompatibilita s mobilním telefonem"
 
 #: data/resources/ui/preferences_window.blp:53
-#, fuzzy
 msgid ""
 "These options may want to be changed for a better experience on touch- and "
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
-"Pro lepší zážitek na mobilních a dotykových zařízení, by mohla být změněna "
-"některá nastavení. Výchozí nastavení je vybráno pro počítače."
+"Výchozí hodnoty nastavení jsou optimalizovány pro počítače. Na mobilních a "
+"dotykových zařízeních se dají změnit pro lepší uživatelskou zkušenost."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
 msgstr "Označitelný text zprávy"
 
 #: data/resources/ui/preferences_window.blp:57
-#, fuzzy
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr "Vybíravý text může zasahovat do gest na dotykovém zařízení"
+msgstr ""
+"Označitelný text může způsobovat problémy s gesty na dotykových obrazovkách"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr "Stiskněte \"Enter\" pro odeslání zprávy"
+msgstr "Stiskněte „Enter“ pro odeslání zprávy"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
-"Na dotykových klávesnicích může být nemožné posílat zprávy s novými linkami, "
-"jelikož není možné zmáčknout “Ctrl + Enter”"
+"Na dotykových klávesnicích, které neumožňují stisknout „CTRL + Enter“, se "
+"nemusí dát napsat nový řádek do zprávy"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
@@ -369,7 +368,6 @@ msgid "Flare"
 msgstr "Flare"
 
 #: data/resources/ui/setup_window.blp:53
-#, fuzzy
 msgid ""
 "Flare is an unofficial Signal client. Note that Flare is not stable and "
 "there are bugs to be expected. If you are experiencing any bugs, consult the "
@@ -382,32 +380,34 @@ msgid ""
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
 "Flare je neoficiální klient pro Signal. Mějte na paměti, že Flare není "
-"stabilní a mohou se vyskytnout chyby. Pokud narazíte na nějaké chyby, "
-"podívejte se na sledovač problémů a otevřete nové problémy, pokud narazíte "
-"na novou chybu. Také mějte na paměti, že vzhledem k tomu, že se jedná o "
-"aplikaci třetí strany, Flare nemůže zaručit stejnou úroveň bezpečnosti a "
-"soukromí jako oficiální aplikace Signal. Pokud vy nebo někdo, koho "
-"potřebujete kontaktovat, vyžaduje vysokou úroveň bezpečnosti, Flare "
-"nepoužívejte. Pro více informací se podívejte do README."
+"stabilní a dají se očekávat chyby. Pokud na nějakou narazíte, podívejte se "
+"na <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\""
+">bugtracker</a>, a pokud je nová, nahlaste ji. Také mějte na paměti, že "
+"vzhledem k tomu, že se jedná o aplikaci třetí strany, Flare nemůže zaručit "
+"stejnou úroveň bezpečnosti a soukromí jako oficiální aplikace Signal. Pokud "
+"vy nebo někdo, koho potřebujete kontaktovat, vyžaduje vysokou úroveň "
+"bezpečnosti, Flare nepoužívejte. Pro více informací se podívejte na <a href="
+"\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README.md#"
+"security\">README</a>."
 
 #: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
 msgid "Setup Primary Device or Link Device?"
-msgstr "Nastavit primární zařízení nebo propojit nové zařízení?"
+msgstr "Nastavit jako hlavní nebo vedlejší zařízení?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
 #: data/resources/ui/setup_window.blp:324
 msgid "Primary Device"
-msgstr "Primární zařízení"
+msgstr "Hlavní zařízení"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
 #: data/resources/ui/setup_window.blp:160
 #: data/resources/ui/setup_window.blp:177
 msgid "Link Device"
-msgstr "Připojit zařízení"
+msgstr "Vedlejší zařízení"
 
 #: data/resources/ui/setup_window.blp:105
 msgid "Primary Device or Link Device?"
-msgstr "Primární zařízení nebo propojené zařízení?"
+msgstr "Hlavní nebo vedlejší zařízení?"
 
 #: data/resources/ui/setup_window.blp:117
 msgid "You can use Flare either as a primary or secondary device."
@@ -415,7 +415,7 @@ msgstr "Můžete použít Flare jako hlavní nebo vedlejší zařízení."
 
 #: data/resources/ui/setup_window.blp:126
 msgid "Linked Device (Recommended)"
-msgstr "Propojené zařízení (Doporučováno)"
+msgstr "Vedlejší zařízení (Doporučováno)"
 
 #: data/resources/ui/setup_window.blp:131
 msgid ""
@@ -423,10 +423,12 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare můžete propojit se svým hlavním zařízením, podobně jako oficiální "
+"Signal pro počítače. Tento režim byl rozsáhleji testován a většinově funguje."
 
 #: data/resources/ui/setup_window.blp:140
 msgid "Primary Device (Disabled)"
-msgstr "Primární zařízení (Zablokováno)"
+msgstr "Hlavní zařízení (Zablokováno)"
 
 #: data/resources/ui/setup_window.blp:145
 msgid ""
@@ -436,6 +438,11 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare je podobně jako oficiální aplikace pro Android a iOS schopný se chovat "
+"jako primární zařízení. Tento režim ale není nyní podporován Flarem, i když "
+"prvotní testování naznačuje, že to funguje. Pokud jste ochotní to vyzkoušet, "
+"můžete povolit tlačítko níže. (A pokud nevíte jak, tak by jste raději neměli "
+"nad tímto testováním ani přemýšlet.)"
 
 #: data/resources/ui/setup_window.blp:194
 msgid ""
@@ -490,25 +497,27 @@ msgstr "Propojit zařízení bez skenování"
 
 #: data/resources/ui/setup_window.blp:280
 msgid "Manual linking"
-msgstr ""
+msgstr "Ruční propojení"
 
 #: data/resources/ui/setup_window.blp:296
 msgid "Manual Linking"
-msgstr ""
+msgstr "Ruční propojení"
 
 #: data/resources/ui/setup_window.blp:297
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Pokud vaše zařízení není schopno naskenovat QR kód, můžete zadat poskytnutý "
+"odkaz zde"
 
 #: data/resources/ui/setup_window.blp:308
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Zkopírovat do schránky"
 
 #: data/resources/ui/setup_window.blp:341
 msgid "Continue"
-msgstr ""
+msgstr "Pokračovat"
 
 #: data/resources/ui/setup_window.blp:358
 msgid ""
@@ -520,33 +529,42 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"Pro registraci jako primární zařízení bude Flare potřebovat vaše telefonní "
+"číslo, a aby jste splnili captchu. Prosím zadejte telefonní číslo v "
+"mezinárodním formátu E.164, včetně počátečního + a kódu země. Captcha může "
+"být splněna <a href=\"https://signalcaptchas.org/registration/generate.html\""
+">zde</a>, potom překopírujte odkaz „Otevřít Signal“ a vložte jej do "
+"textového pole níže. Mějte na pozoru, že tato captcha je platná pouze 1 "
+"munutu, takže buďte rychlí."
 
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/setup_window.blp:386
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"Po odeslání těchto informací dostanete SMS od Signalu s ověřovacím kódem. "
+"Tento kód zadejte na další stránce."
 
 #: data/resources/ui/setup_window.blp:395
 #: data/resources/ui/setup_window.blp:403
 #: data/resources/ui/setup_window.blp:420
 #: data/resources/ui/setup_window.blp:445
 msgid "Confirm"
-msgstr ""
+msgstr "Potvrdit"
 
 #: data/resources/ui/setup_window.blp:436
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Zadejte zde ověřovací kód, který jste dostali od Signalu."
 
 #: data/resources/ui/setup_window.blp:453
 #: data/resources/ui/setup_window.blp:461
 msgid "Finished"
-msgstr ""
+msgstr "Hotovo"
 
 #: data/resources/ui/setup_window.blp:494
 msgid ""
@@ -554,10 +572,13 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare je témčř připravená, pouze čeká, než se synchronizují kontakty. To "
+"může trvat pár sekund a až se synchronizace dokončí, můžete začít používat "
+"Flare. Pár poznámek na závěr než začnete používat Flare:"
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr ""
+msgstr "Známe chyby"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -662,7 +683,7 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "Odeslat"
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
