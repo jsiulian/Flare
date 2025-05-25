@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-05-22 19:46+0000\n"
-"Last-Translator: Raffaele Gualtieri <freccevolanti@gmail.com>\n"
+"PO-Revision-Date: 2025-05-25 18:15+0000\n"
+"Last-Translator: Raffaele Gualtieri <raffaelegual@tutamail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/it/>\n"
 "Language: it\n"
@@ -663,7 +663,7 @@ msgstr "Carica altri messaggi"
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Invia il Captcha"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -677,11 +677,11 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "Invia"
 
 #: data/resources/ui/text_entry.blp:13
 #, fuzzy
@@ -691,22 +691,21 @@ msgstr "Inserimento del messaggio"
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Inserisci un emoji"
 
 #: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Inserisci emoji"
 
 #: data/resources/ui/window.blp:25
-#, fuzzy
 msgid "Channel list"
-msgstr "Canali"
+msgstr "Lista Canali"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Aggiungi Conversazione"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
@@ -714,7 +713,7 @@ msgstr ""
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "sta scrivendo"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
@@ -722,7 +721,7 @@ msgstr "Impostazioni"
 
 #: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Sincronizza i Contatti"
 
 #: data/resources/ui/window.blp:181
 msgid "Keybindings"
@@ -742,7 +741,7 @@ msgstr "Nota per me"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Contatto Sconosciuto"
 
 #: src/backend/manager.rs:442
 msgid "You"
@@ -758,24 +757,23 @@ msgstr ""
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "Chiamata iniziata"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr ""
+msgstr "Chiamata terminata"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
-msgstr ""
+msgstr "Chiamata rifiutata"
 
 #: src/backend/message/call_message.rs:105
 msgid "Unanswered call"
-msgstr ""
+msgstr "Chiamata senza risposta"
 
 #: src/backend/message/reaction_message.rs:72
-#, fuzzy
 msgid "{sender} reacted {emoji} to a message."
-msgstr "Cancella messaggi"
+msgstr "{sender} ha reagito con {emoji} a un messaggio."
 
 #: src/backend/message/reaction_message.rs:80
 #, fuzzy
@@ -795,11 +793,10 @@ msgstr[0] "Ha inviato un video"
 msgstr[1] "Ha inviato {} video"
 
 #: src/backend/message/text_message.rs:386
-#, fuzzy
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] "Ha inviato un'immagine"
-msgstr[1] "Ha inviato {} immagini"
+msgstr[0] "Ha inviato un messaggio vocale"
+msgstr[1] "Ha inviato {} dei messaggi vocali"
 
 #: src/backend/message/text_message.rs:391
 msgid "Sent a file"
@@ -885,17 +882,15 @@ msgstr ""
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Bozza"
 
 #: src/gui/linked_devices_window.rs:116
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device?"
-msgstr "Collega il dispositivo"
+msgstr "Scollegare il dispositivo?"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Sei sicuro di voler scollegare {}?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -977,7 +972,7 @@ msgstr ""
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Chatta con i tuoi amici su Signal"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
@@ -999,6 +994,10 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Si noti che l'uso di questa applicazione probabilmente peggiora la sicurezza "
+"rispetto all'uso delle applicazioni ufficiali di Signal. Usare con cautela "
+"quando si gestiscono dati sensibili. Per ulteriori informazioni sulla "
+"sicurezza, consultare il README del progetto."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in:609
 #, fuzzy
@@ -1057,11 +1056,11 @@ msgstr ""
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Inviare un messaggio quando si preme il tasto Invio"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
-msgstr ""
+msgstr "Come ordinare i contatti, ad esempio con “nome” o “cognome”"
 
 #~ msgid "Channel Information"
 #~ msgstr "Informazioni sul canale"
