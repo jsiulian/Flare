@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-05-25 18:15+0000\n"
+"PO-Revision-Date: 2025-05-27 11:01+0000\n"
 "Last-Translator: Tadeáš Erban <tadysekerbosek@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
 "flare/cs/>\n"
@@ -314,7 +314,6 @@ msgid "Background Notifications"
 msgstr "Oznámení na pozadí"
 
 #: data/resources/ui/preferences_window.blp:45
-#, fuzzy
 msgid "Fetch notifications while the app is closed"
 msgstr "Posílat oznámení když je aplikace zavřená"
 
@@ -449,7 +448,7 @@ msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
-"Pro propojení jako druhé zařízení, Flare bude potřebovat jméno zařízení, "
+"Pro připojení jako vedlejší zařízení bude Flare potřebovat jméno zařízení, "
 "které je viditelné v aplikaci."
 
 #: data/resources/ui/setup_window.blp:204
@@ -473,23 +472,23 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
-"Další stránka zobrazí QR kód který musí být naskenován z primárního "
-"zařízení. Na skenování máte okolo minuty, připravte si prosím oficiální "
+"Další stránka zobrazí QR kód, který musí být naskenován z hlavního zařízení. "
+"Na skenování máte zhruba minutu, takže si k tomu prosím připravte oficiální "
 "aplikaci."
 
 #: data/resources/ui/setup_window.blp:225
 #: data/resources/ui/setup_window.blp:237
 #: data/resources/ui/setup_window.blp:291
 msgid "Link device"
-msgstr "Propojit zařízení"
+msgstr "Připojit zařízení"
 
 #: data/resources/ui/setup_window.blp:242
 msgid "Scan Code"
-msgstr "Naskenujte zařízení"
+msgstr "Naskenujte tento kód"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan this code with another Signal app logged into your account."
-msgstr "Naskenujte tento kód s jinou Signal aplikací připojenou do vás účtu."
+msgstr "Naskenujte tento kód s jinou aplikací Signal přidruženou k vašemu účtu."
 
 #: data/resources/ui/setup_window.blp:270
 msgid "Link without scanning"
@@ -529,13 +528,13 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
-"Pro registraci jako primární zařízení bude Flare potřebovat vaše telefonní "
+"Pro registraci jako hlavní zařízení bude Flare potřebovat vaše telefonní "
 "číslo, a aby jste splnili captchu. Prosím zadejte telefonní číslo v "
 "mezinárodním formátu E.164, včetně počátečního + a kódu země. Captcha může "
 "být splněna <a href=\"https://signalcaptchas.org/registration/generate.html\""
-">zde</a>, potom překopírujte odkaz „Otevřít Signal“ a vložte jej do "
-"textového pole níže. Mějte na pozoru, že tato captcha je platná pouze 1 "
-"munutu, takže buďte rychlí."
+">zde</a>, potom překopírujte odkaz „Otevřít Signal“ do textového pole níže. "
+"Mějte na pozoru, že tato captcha je platná pouze 1 minutu, takže buďte "
+"rychlí."
 
 #: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -572,13 +571,13 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
-"Flare je témčř připravená, pouze čeká, než se synchronizují kontakty. To "
+"Flare je téměř připravená, pouze čeká, než se synchronizují kontakty. To "
 "může trvat pár sekund a až se synchronizace dokončí, můžete začít používat "
 "Flare. Pár poznámek na závěr než začnete používat Flare:"
 
 #: data/resources/ui/setup_window.blp:503
 msgid "Known Bugs"
-msgstr "Známe chyby"
+msgstr "Známé chyby"
 
 #: data/resources/ui/setup_window.blp:508
 msgid ""
@@ -590,6 +589,12 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Dokud Flare nestáhne všechny nově přijaté zprávy, může být nebezpečné psát "
+"nové zprávy, jelikož mohou chybět některé vyžadované informace. Tento "
+"problém se snažíme vyřešit. Dále omezte kolik zpráv pošlete člověku, který "
+"vás ještě nekontaktoval, jelikož Signal vás za to může rychlostně omezit. "
+"Pro kompletní seznam chyb navštivte <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">bugtracker</a>."
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
@@ -665,7 +670,7 @@ msgstr ""
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Splnit captchu"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -676,6 +681,11 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Na vyřešení chybové hlášky, která vás sem navedla, je obsažen token, který "
+"vložte do prvního políčka. Dále splňte <a href="
+"\"https://signalcaptchas.org/challenge/generate.html\">na této stránce</a> "
+"captchu, čímž získáte odkaz na otevření Signalu, který zkopírujte a vložte "
+"do druhého políčka. Pozor, tato captcha je platná pouze minutu."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
