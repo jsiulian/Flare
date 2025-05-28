@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-16 14:32+0200\n"
-"PO-Revision-Date: 2025-05-27 11:01+0000\n"
+"PO-Revision-Date: 2025-05-29 14:22+0000\n"
 "Last-Translator: Tadeáš Erban <tadysekerbosek@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
 "flare/cs/>\n"
@@ -598,7 +598,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:518
 msgid "Contact"
-msgstr ""
+msgstr "Kontaktujte nás"
 
 #: data/resources/ui/setup_window.blp:523
 msgid ""
@@ -606,66 +606,69 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"Chcete zanechat zpětnou vazbu ohledně Flare nebo si jenom trochu popovídat? "
+"Naše <a href=\"https://matrix.to/#/#flare-signal:matrix.org\">místnost na "
+"Matrixu</a> je otevřená pro všechny."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Obecné"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "Ukázat klávesové zkratky"
 
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "Přejít do nastavení"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "Ukázat informace o aplikaci"
 
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "Otevřít nabídku"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Zavřít okno"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "Kanály"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "Přejít na kanál 1…9"
 
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "Hledat v kanálech"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "Nahrát přílohu"
 
 #: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "Označit políčko zadání zprávy"
 
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr ""
+msgstr "Načíst více zpráv"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:171
@@ -689,7 +692,7 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
@@ -697,273 +700,283 @@ msgstr "Odeslat"
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
-msgstr ""
+msgstr "Zpráva"
 
 #: data/resources/ui/text_entry.blp:40
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Vložit emotikonu"
 
 #: data/resources/ui/text_entry.blp:48
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Vložit emotikonu"
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
-msgstr ""
+msgstr "Seznam kanálů"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Nová konverzace"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "Konverzace"
 
 #: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "právě píše"
 
 #: data/resources/ui/window.blp:150
 msgid "Settings"
-msgstr ""
+msgstr "Nastavení"
 
 #: data/resources/ui/window.blp:176
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Synchronizovat kontakty"
 
 #: data/resources/ui/window.blp:181
 msgid "Keybindings"
-msgstr ""
+msgstr "Klávesové zkratky"
 
 #: data/resources/ui/window.blp:186
 msgid "About"
-msgstr ""
+msgstr "O aplikaci"
 
 #: data/resources/ui/window.blp:191
 msgid "Quit"
-msgstr ""
+msgstr "Ukončit"
 
 #: src/backend/channel.rs:537 src/backend/channel.rs:679
 msgid "Note to self"
-msgstr ""
+msgstr "Poznámka pro sebe"
 
 #: src/backend/contact.rs:193 src/backend/contact.rs:275
 msgid "Unknown contact"
-msgstr ""
+msgstr "Neznámý kontakt"
 
 #: src/backend/manager.rs:442
 msgid "You"
-msgstr ""
+msgstr "Vy"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "Příchozí hovor"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "Odchozí hovor"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "Začal hovor"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr ""
+msgstr "Hovor skončil"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
-msgstr ""
+msgstr "Hovor byl odmítnut"
 
 #: src/backend/message/call_message.rs:105
 msgid "Unanswered call"
-msgstr ""
+msgstr "Zmeškaný hovor"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
-msgstr ""
+msgstr "{sender} reagoval/a na zprávu s {emoji}."
 
 #: src/backend/message/reaction_message.rs:80
 msgid "Reacted {emoji} to a message."
-msgstr ""
+msgstr "Reagoval/a na zprávu s {emoji}."
 
 #: src/backend/message/text_message.rs:381
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poslal/a obrázek"
+msgstr[1] "Poslal/a {} obrázky"
+msgstr[2] "Poslal/a {} obrázků"
 
 #: src/backend/message/text_message.rs:383
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poslal/a video"
+msgstr[1] "Poslal/a {} videa"
+msgstr[2] "Poslal/a {} videí"
 
 #: src/backend/message/text_message.rs:386
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poslal/a hlasovou zprávu"
+msgstr[1] "Poslal/a {} hlasové zprávy"
+msgstr[2] "Poslal/a {} hlasových zpráv"
 
 #: src/backend/message/text_message.rs:391
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poslal/a soubor"
+msgstr[1] "Poslal/a {} soubory"
+msgstr[2] "Poslal/a {} souborů"
 
 #: src/error.rs:91
 msgid "I/O Error."
-msgstr ""
+msgstr "Chyba vstupu/výstupu."
 
 #: src/error.rs:96
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "Zdá se, že není dostupné připojení k internetu."
 
 #: src/error.rs:101
 msgid "Something glib-related failed."
-msgstr ""
+msgstr "Selhalo něco, co má co do činění s glib."
 
 #: src/error.rs:106
 msgid "The communication with Libsecret failed."
-msgstr ""
+msgstr "Selhala komunikace s libsecret."
 
 #: src/error.rs:111
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"Selhala databáze. Prosím restartujte aplikaci, nebo databázi smažte a "
+"aplikaci znovu připojte."
 
 #: src/error.rs:116
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"Přístup aplikace k Signalu byl zamítnut. Prosím smažte její databázi a "
+"zkuste ji znovu připojit."
 
 #: src/error.rs:121
 msgid "Sending a message failed."
-msgstr ""
+msgstr "Selhalo zaslání zprávy."
 
 #: src/error.rs:126
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "Selhalo přijetí zprávy."
 
 #: src/error.rs:131
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"Něco neočekávaného se stalo v knihovně zodpovědné za komunikaci se Signalem "
+"(presage). Zkuste to prosím později."
 
 #: src/error.rs:136
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "V konfiguraci aplikace je chyba."
 
 #: src/error.rs:141
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Součást aplikace spadla."
 
 #: src/error.rs:151
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Prosím zkontrolujte vaše připojení k internetu."
 
 #: src/error.rs:156
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "Prosím smažte databázi a aplikaci znovu připojte."
 
 #: src/error.rs:163
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "Cesta k databázi ({}) není složka."
 
 #: src/error.rs:168
 msgid "Please restart the application with logging and report this issue."
-msgstr ""
+msgstr "Prosím restartujte aplikaci s protokolováním a nahlaste tuto chybu."
 
 #: src/gui/channel_info_dialog.rs:197
 msgid "Never"
-msgstr ""
+msgstr "Nikdy"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Koncept"
 
 #: src/gui/linked_devices_window.rs:116
 msgid "Unlink Device?"
-msgstr ""
+msgstr "Odpojit zařízení?"
 
 #: src/gui/linked_devices_window.rs:117
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Jste si jistí, že chcete odpojit {}?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "Přijímat nové zprávy, i když je aplikace zavřená"
 
 #: src/gui/preferences_window.rs:99
 msgid "Background permission"
-msgstr ""
+msgstr "Oprávnění pro běh na pozadí"
 
 #: src/gui/preferences_window.rs:100
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "Použijte nastavení pro odebrání oprávnění"
 
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Produkční"
 
 #: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Testovací"
 
 #: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Zkopírovat do schránky"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:102 src/gui/utility.rs:126
 msgid "%H:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:105
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%d. %m. %Y v %H:%M"
 
 #: src/gui/utility.rs:138
 msgid "Today"
-msgstr ""
+msgstr "Dnes"
 
 #: src/gui/utility.rs:141
 msgid "Yesterday"
-msgstr ""
+msgstr "Včera"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%d.%m. %Y"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:151
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:159
 msgid "Attachment"
-msgstr ""
+msgstr "Příloha"
 
 #: src/gui/window.rs:304 src/gui/window.rs:310
 msgid "Remove Messages"
-msgstr ""
+msgstr "Vymazat zprávy"
 
 #: src/gui/window.rs:305
 msgid "This will remove all locally stored messages from this channel"
-msgstr ""
+msgstr "Toto odstraní všechny lokálně uložené zprávy z tohoto kanálu"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
