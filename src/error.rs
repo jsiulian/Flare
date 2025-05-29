@@ -130,7 +130,7 @@ impl std::fmt::Display for ApplicationError {
             ApplicationError::Libsecret(_) => writeln!(
                 f,
                 "{}",
-                gettext("The communication with Libsecret failed.")
+                gettext("The communication with libsecret failed.")
             ),
             ApplicationError::Db(_) => writeln!(
                 f,
