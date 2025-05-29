@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-16 14:32+0200\n"
+"POT-Creation-Date: 2025-05-29 16:21+0200\n"
 "PO-Revision-Date: 2024-06-20 15:09+0000\n"
 "Last-Translator: Roma <r.sg@ukr.net>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/"
-"schmiddi-on-mobile/flare/uk/>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/schmiddi-on-"
+"mobile/flare/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,38 +20,29 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.6-rc\n"
 
-#: data/resources/ui/about.blp:13
+#. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
+#: data/resources/ui/about.blp:13 src/gui/window.rs:368
 msgid "translator-credits"
 msgstr "mljoke <5h6yvkei5@mozmail.com>"
 
-#: data/resources/ui/channel_info_dialog.blp:50
-#: data/resources/ui/setup_window.blp:369
+#: data/resources/ui/channel_info_dialog.blp:54
+#: data/resources/ui/setup_window.blp:371
 msgid "Phone Number"
 msgstr "Номер телефону"
 
-#: data/resources/ui/channel_info_dialog.blp:66
+#: data/resources/ui/channel_info_dialog.blp:74
 msgid "Description"
 msgstr "Опис"
 
-#: data/resources/ui/channel_info_dialog.blp:76
+#: data/resources/ui/channel_info_dialog.blp:86
 msgid "Disappearing Messages"
 msgstr "Зникаючі повідомлення"
 
-#: data/resources/ui/channel_info_dialog.blp:100
-msgctxt "accessibility"
+#: data/resources/ui/channel_info_dialog.blp:101
 msgid "Reset Session"
 msgstr "Скинути сеанс"
 
-#: data/resources/ui/channel_info_dialog.blp:118
-msgid "Reset Session"
-msgstr "Скинути сеанс"
-
-#: data/resources/ui/channel_info_dialog.blp:128
-msgctxt "accessibility"
-msgid "Clear Messages"
-msgstr "Очистити повідомлення"
-
-#: data/resources/ui/channel_info_dialog.blp:149
+#: data/resources/ui/channel_info_dialog.blp:112
 msgid "Clear Messages"
 msgstr "Очистити повідомлення"
 
@@ -60,11 +51,11 @@ msgstr "Очистити повідомлення"
 msgid "Offline"
 msgstr "Офлайн"
 
-#: data/resources/ui/channel_list.blp:20
+#: data/resources/ui/channel_list.blp:23
 msgid "Search"
 msgstr "Пошук"
 
-#: data/resources/ui/channel_list.blp:23 data/resources/ui/window.blp:61
+#: data/resources/ui/channel_list.blp:26 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
 msgstr "Пошук"
@@ -77,70 +68,62 @@ msgstr "Канал не вибрано"
 msgid "Select a channel"
 msgstr "Виберіть канал"
 
-#: data/resources/ui/channel_messages.blp:181
+#: data/resources/ui/channel_messages.blp:182
 msgctxt "accessibility"
 msgid "Remove the reply"
 msgstr "Видалити цю відповідь"
 
-#: data/resources/ui/channel_messages.blp:184
+#: data/resources/ui/channel_messages.blp:185
 msgctxt "tooltip"
 msgid "Remove reply"
 msgstr "Видалити відповідь"
 
-#: data/resources/ui/channel_messages.blp:204
+#: data/resources/ui/channel_messages.blp:205
 msgctxt "accessibility"
 msgid "Remove an attachment"
 msgstr "Видалити вкладення"
 
-#: data/resources/ui/channel_messages.blp:207
+#: data/resources/ui/channel_messages.blp:208
 msgctxt "tooltip"
 msgid "Remove attachment"
 msgstr "Видалити це вкладення"
 
-#: data/resources/ui/channel_messages.blp:228
+#: data/resources/ui/channel_messages.blp:230
 msgctxt "accessibility"
 msgid "Add an attachment"
 msgstr "Додати вкладення"
 
-#: data/resources/ui/channel_messages.blp:236
+#: data/resources/ui/channel_messages.blp:238
 msgctxt "tooltip"
 msgid "Add attachment"
 msgstr "Додати це вкладення"
 
-#: data/resources/ui/channel_messages.blp:252
+#: data/resources/ui/channel_messages.blp:255
 msgctxt "accessibility"
 msgid "Message input"
 msgstr "Введення повідомлення"
 
-#: data/resources/ui/channel_messages.blp:258
+#: data/resources/ui/channel_messages.blp:261
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "Введення повідомлення"
 
-#: data/resources/ui/channel_messages.blp:270
+#: data/resources/ui/channel_messages.blp:273
 msgctxt "accessibility"
 msgid "Send"
 msgstr "Надіслати"
 
-#: data/resources/ui/channel_messages.blp:274
+#: data/resources/ui/channel_messages.blp:277
 msgctxt "tooltip"
 msgid "Send"
 msgstr "Надіслати"
 
-#: data/resources/ui/device_info_item.blp:34
-msgid "Linked:"
-msgstr "Пов'язано:"
-
-#: data/resources/ui/device_info_item.blp:50
-msgid "Last Active:"
-msgstr "Остання активність:"
-
-#: data/resources/ui/device_info_item.blp:72
+#: data/resources/ui/device_info_item.blp:18
 msgid "Unlink Device"
 msgstr "Від'єднати пристрій"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
-#: data/resources/ui/window.blp:166
+#: data/resources/ui/window.blp:168
 msgid "Clear messages"
 msgstr "Очистити повідомлення"
 
@@ -153,8 +136,8 @@ msgstr ""
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
-#: data/resources/ui/linked_devices_window.blp:50
-#: src/gui/linked_devices_window.rs:122 src/gui/window.rs:309
+#: data/resources/ui/linked_devices_window.blp:78
+#: src/gui/linked_devices_window.rs:139 src/gui/window.rs:416
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -162,8 +145,8 @@ msgstr "Скасувати"
 msgid "Clear"
 msgstr "Очистити"
 
-#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:155
-#: src/gui/linked_devices_window.rs:121
+#: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:157
+#: src/gui/linked_devices_window.rs:138
 msgid "Unlink"
 msgstr "Від'єднати"
 
@@ -193,7 +176,7 @@ msgstr "Помилка"
 msgid "Please consider reporting this error."
 msgstr "Будь ласка, повідомте про цю помилку."
 
-#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:478
+#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:482
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
 msgstr "Закрити"
@@ -203,23 +186,29 @@ msgid "Report"
 msgstr "Повідомити"
 
 #: data/resources/ui/linked_devices_window.blp:13
-#: data/resources/ui/window.blp:160
+#: data/resources/ui/window.blp:162
 msgid "Linked Devices"
 msgstr "Пов'язані пристрої"
 
-#: data/resources/ui/linked_devices_window.blp:31
+#: data/resources/ui/linked_devices_window.blp:36
+#, fuzzy
+#| msgid "Link Device"
+msgid "Link New Device"
+msgstr "Пов'язати пристрій"
+
+#: data/resources/ui/linked_devices_window.blp:59
 msgid "Add Linked Device"
 msgstr "Додати пов'язаний пристрій"
 
-#: data/resources/ui/linked_devices_window.blp:32
+#: data/resources/ui/linked_devices_window.blp:60
 msgid "Please insert the URL of the device to link."
 msgstr "Будь ласка, вставте URL-адресу пристрою для прив'язки."
 
-#: data/resources/ui/linked_devices_window.blp:42
+#: data/resources/ui/linked_devices_window.blp:70
 msgid "Device URL"
 msgstr "URL-адреса пристрою"
 
-#: data/resources/ui/linked_devices_window.blp:51
+#: data/resources/ui/linked_devices_window.blp:79
 msgid "Add Device"
 msgstr "Додати пристрій"
 
@@ -243,20 +232,20 @@ msgstr "Зберегти як…"
 msgid "Open with…"
 msgstr "Відкрити за допомогою…"
 
-#: data/resources/ui/new_channel_dialog.blp:14
+#: data/resources/ui/new_channel_dialog.blp:13
 msgid "New Chat"
 msgstr "Новий чат"
 
-#: data/resources/ui/new_channel_dialog.blp:20 data/resources/ui/window.blp:49
+#: data/resources/ui/new_channel_dialog.blp:19 data/resources/ui/window.blp:49
 msgctxt "accessibility"
 msgid "Menu"
 msgstr "Меню"
 
-#: data/resources/ui/new_channel_dialog.blp:35
+#: data/resources/ui/new_channel_dialog.blp:34
 msgid "Search Contacts"
 msgstr "Пошук контактів"
 
-#: data/resources/ui/new_channel_dialog.blp:71
+#: data/resources/ui/new_channel_dialog.blp:70
 msgid "List Contacts By:"
 msgstr "Впорядкувати контакти за:"
 
@@ -264,7 +253,7 @@ msgstr "Впорядкувати контакти за:"
 msgid "First Name"
 msgstr "Ім'я"
 
-#: data/resources/ui/new_channel_dialog.blp:78
+#: data/resources/ui/new_channel_dialog.blp:79
 msgid "Surname"
 msgstr "Прізвище"
 
@@ -365,7 +354,7 @@ msgstr "Налаштувати Flare"
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:8
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:8
 msgid "Flare"
 msgstr "Flare"
 
@@ -392,34 +381,30 @@ msgstr ""
 "gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README."
 "md#security\">README</a> для отримання додаткової інформації."
 
-#: data/resources/ui/setup_window.blp:62 data/resources/ui/setup_window.blp:69
+#: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
 msgstr "Налаштувати основний пристрій або пов'язати пристрій?"
 
-#: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:317
-#: data/resources/ui/setup_window.blp:324
+#: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:318
+#: data/resources/ui/setup_window.blp:325
 msgid "Primary Device"
 msgstr "Основний пристрій"
 
-#: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:153
-#: data/resources/ui/setup_window.blp:160
-#: data/resources/ui/setup_window.blp:177
+#: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:152
+#: data/resources/ui/setup_window.blp:159
+#: data/resources/ui/setup_window.blp:176
 msgid "Link Device"
 msgstr "Пов'язати пристрій"
 
-#: data/resources/ui/setup_window.blp:105
-msgid "Primary Device or Link Device?"
-msgstr "Основний пристрій чи пов'язаний пристрій?"
-
-#: data/resources/ui/setup_window.blp:117
+#: data/resources/ui/setup_window.blp:113
 msgid "You can use Flare either as a primary or secondary device."
 msgstr "Ви можете використовувати Flare як основний або додатковий пристрій."
 
-#: data/resources/ui/setup_window.blp:126
+#: data/resources/ui/setup_window.blp:123
 msgid "Linked Device (Recommended)"
 msgstr "Пов'язаний пристрій (рекомендовано)"
 
-#: data/resources/ui/setup_window.blp:131
+#: data/resources/ui/setup_window.blp:128
 msgid ""
 "Flare can be an application linked to your primary device, similar to the "
 "official Signal Desktop. This mode has been more extensively tested and "
@@ -429,11 +414,11 @@ msgstr ""
 "офіційного Signal Desktop. Цей режим був більш детально протестований і "
 "здебільшого працює."
 
-#: data/resources/ui/setup_window.blp:140
+#: data/resources/ui/setup_window.blp:138
 msgid "Primary Device (Disabled)"
 msgstr "Основний пристрій (вимкнено)"
 
-#: data/resources/ui/setup_window.blp:145
+#: data/resources/ui/setup_window.blp:143
 msgid ""
 "Flare can act as a primary device, similar to the official Signal "
 "applications on Android or IOS. This mode is currently not supported by "
@@ -447,7 +432,7 @@ msgstr ""
 "увімкнути кнопку нижче (а якщо ви не знаєте, як це зробити, не варто думати "
 "про тестування підтримки основного пристрою)."
 
-#: data/resources/ui/setup_window.blp:194
+#: data/resources/ui/setup_window.blp:193
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
@@ -460,12 +445,12 @@ msgid "Device Name"
 msgstr "Ім'я пристрою"
 
 #: data/resources/ui/setup_window.blp:208
-#: data/resources/ui/setup_window.blp:377
+#: data/resources/ui/setup_window.blp:379
 msgid "Developer Options"
 msgstr "Параметри розробника"
 
 #: data/resources/ui/setup_window.blp:211
-#: data/resources/ui/setup_window.blp:380
+#: data/resources/ui/setup_window.blp:382
 msgid "Signal Servers"
 msgstr "Сервери Signal"
 
@@ -481,35 +466,35 @@ msgstr ""
 "сканування коду, тому, будь ласка, вже зараз підготуйте свій офіційний "
 "додаток для сканування QR-коду."
 
-#: data/resources/ui/setup_window.blp:225
-#: data/resources/ui/setup_window.blp:237
-#: data/resources/ui/setup_window.blp:291
+#: data/resources/ui/setup_window.blp:226
+#: data/resources/ui/setup_window.blp:238
+#: data/resources/ui/setup_window.blp:292
 msgid "Link device"
 msgstr "Пов'язати пристрій"
 
-#: data/resources/ui/setup_window.blp:242
+#: data/resources/ui/setup_window.blp:243
 msgid "Scan Code"
 msgstr "Сканувати код"
 
-#: data/resources/ui/setup_window.blp:243
+#: data/resources/ui/setup_window.blp:244
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
 "Відскануйте цей код за допомогою іншого додатку Signal, в якому ви увійшли "
 "до свого облікового запису."
 
-#: data/resources/ui/setup_window.blp:270
+#: data/resources/ui/setup_window.blp:271
 msgid "Link without scanning"
 msgstr "Пов'язати без сканування"
 
-#: data/resources/ui/setup_window.blp:280
+#: data/resources/ui/setup_window.blp:281
 msgid "Manual linking"
 msgstr "Пов'язування вручну"
 
-#: data/resources/ui/setup_window.blp:296
+#: data/resources/ui/setup_window.blp:297
 msgid "Manual Linking"
 msgstr "Пов'язування вручну"
 
-#: data/resources/ui/setup_window.blp:297
+#: data/resources/ui/setup_window.blp:298
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
@@ -517,15 +502,15 @@ msgstr ""
 "Якщо ваш пристрій не може відсканувати QR-код, ви можете вручну ввести "
 "посилання, наведене тут"
 
-#: data/resources/ui/setup_window.blp:308
+#: data/resources/ui/setup_window.blp:309
 msgid "Copy to clipboard"
 msgstr "Копіювати в буфер обміну"
 
-#: data/resources/ui/setup_window.blp:341
+#: data/resources/ui/setup_window.blp:342
 msgid "Continue"
 msgstr "Продовжити"
 
-#: data/resources/ui/setup_window.blp:358
+#: data/resources/ui/setup_window.blp:359
 msgid ""
 "For registering as a primary device, Flare will need your phone number and a "
 "completion of the captcha. Please give the phone number in international "
@@ -543,12 +528,12 @@ msgstr ""
 "вставити його в поле нижче. Зверніть увагу, що ця капча дійсна лише близько "
 "однієї хвилини, тому, будь ласка, дійте швидко."
 
-#: data/resources/ui/setup_window.blp:373
+#: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
 msgstr "Капча"
 
-#: data/resources/ui/setup_window.blp:386
+#: data/resources/ui/setup_window.blp:388
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
@@ -556,23 +541,23 @@ msgstr ""
 "Після надсилання цієї інформації ви отримаєте SMS від Signal із кодом "
 "підтвердження. Вставте цей код підтвердження на наступній сторінці."
 
-#: data/resources/ui/setup_window.blp:395
-#: data/resources/ui/setup_window.blp:403
-#: data/resources/ui/setup_window.blp:420
-#: data/resources/ui/setup_window.blp:445
+#: data/resources/ui/setup_window.blp:398
+#: data/resources/ui/setup_window.blp:406
+#: data/resources/ui/setup_window.blp:423
+#: data/resources/ui/setup_window.blp:449
 msgid "Confirm"
 msgstr "Підтвердити"
 
-#: data/resources/ui/setup_window.blp:436
+#: data/resources/ui/setup_window.blp:439
 msgid "Insert the verification code you received from Signal here."
 msgstr "Введіть код підтвердження, який ви отримали від Signal."
 
-#: data/resources/ui/setup_window.blp:453
-#: data/resources/ui/setup_window.blp:461
+#: data/resources/ui/setup_window.blp:457
+#: data/resources/ui/setup_window.blp:465
 msgid "Finished"
 msgstr "Завершено"
 
-#: data/resources/ui/setup_window.blp:494
+#: data/resources/ui/setup_window.blp:498
 msgid ""
 "Flare is almost ready, it is waiting for contacts to finish syncing. This "
 "may take a few seconds, you can start to use Flare once the contacts are "
@@ -583,11 +568,11 @@ msgstr ""
 "контакти будуть синхронізовані. Кілька останніх зауважень перед початком "
 "використання Flare:"
 
-#: data/resources/ui/setup_window.blp:503
+#: data/resources/ui/setup_window.blp:508
 msgid "Known Bugs"
 msgstr "Відомі помилки"
 
-#: data/resources/ui/setup_window.blp:508
+#: data/resources/ui/setup_window.blp:513
 msgid ""
 "Make sure to not send any messages while the messages are still received by "
 "Flare, this makes sure that all required information is received. We are "
@@ -606,11 +591,11 @@ msgstr ""
 "списку помилок відвідайте <a href=\"https://gitlab.com/schmiddi-on-mobile/"
 "flare/-/issues/?label_name%5B%5D=bug\">баг-трекер </a>."
 
-#: data/resources/ui/setup_window.blp:518
+#: data/resources/ui/setup_window.blp:524
 msgid "Contact"
 msgstr "Контакти"
 
-#: data/resources/ui/setup_window.blp:523
+#: data/resources/ui/setup_window.blp:529
 msgid ""
 "Want to leave some feedback about Flare, or just talk a little bit? Our <a "
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
@@ -681,7 +666,7 @@ msgid "Load more messages"
 msgstr "Завантажити більше повідомлень"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
-#: data/resources/ui/window.blp:171
+#: data/resources/ui/window.blp:173
 msgid "Submit Captcha"
 msgstr "Надіслати капчу"
 
@@ -712,12 +697,12 @@ msgstr "Надіслати"
 msgid "Message"
 msgstr "Повідомлення"
 
-#: data/resources/ui/text_entry.blp:40
+#: data/resources/ui/text_entry.blp:41
 msgctxt "accessibility"
 msgid "Insert an emoji"
 msgstr "Вставити емодзі"
 
-#: data/resources/ui/text_entry.blp:48
+#: data/resources/ui/text_entry.blp:49
 msgctxt "tooltip"
 msgid "Insert emoji"
 msgstr "Вставити емодзі"
@@ -735,39 +720,39 @@ msgstr "Додати розмову"
 msgid "Chat"
 msgstr "Чат"
 
-#: data/resources/ui/window.blp:119 src/gui/channel_item.rs:59
+#: data/resources/ui/window.blp:123 src/gui/channel_item.rs:59
 msgid "is typing"
 msgstr "друкує"
 
-#: data/resources/ui/window.blp:150
+#: data/resources/ui/window.blp:152
 msgid "Settings"
 msgstr "Налаштування"
 
-#: data/resources/ui/window.blp:176
+#: data/resources/ui/window.blp:178
 msgid "Synchronize Contacts"
 msgstr "Синхронізувати контакти"
 
-#: data/resources/ui/window.blp:181
+#: data/resources/ui/window.blp:183
 msgid "Keybindings"
 msgstr "Налаштування клавіш"
 
-#: data/resources/ui/window.blp:186
+#: data/resources/ui/window.blp:188
 msgid "About"
 msgstr "Про додаток"
 
-#: data/resources/ui/window.blp:191
+#: data/resources/ui/window.blp:193
 msgid "Quit"
 msgstr "Вийти"
 
-#: src/backend/channel.rs:537 src/backend/channel.rs:679
+#: src/backend/channel.rs:557 src/backend/channel.rs:700
 msgid "Note to self"
 msgstr "Примітка для себе"
 
-#: src/backend/contact.rs:193 src/backend/contact.rs:275
+#: src/backend/contact.rs:199 src/backend/contact.rs:281
 msgid "Unknown contact"
 msgstr "Невідомий контакт"
 
-#: src/backend/manager.rs:442
+#: src/backend/manager.rs:416
 msgid "You"
 msgstr "Ви"
 
@@ -803,51 +788,53 @@ msgstr "{sender} відреагував {emoji} на повідомлення."
 msgid "Reacted {emoji} to a message."
 msgstr "Відреагував {emoji} на повідомлення."
 
-#: src/backend/message/text_message.rs:381
+#: src/backend/message/text_message.rs:410
 msgid "Sent an image"
 msgid_plural "Sent {} images"
 msgstr[0] "Надіслано зображення"
 msgstr[1] "Надіслано {} зображення"
 msgstr[2] "Надіслано {} зображень"
 
-#: src/backend/message/text_message.rs:383
+#: src/backend/message/text_message.rs:412
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
 msgstr[0] "Відео відправлено"
 msgstr[1] "Відправлено {} відео"
 msgstr[2] "Відправлено {} відео"
 
-#: src/backend/message/text_message.rs:386
+#: src/backend/message/text_message.rs:415
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
 msgstr[0] "Надіслано голосове повідомлення"
 msgstr[1] "Надіслано {} голосових повідомлень"
 msgstr[2] "Надіслано {} голосових повідомлень"
 
-#: src/backend/message/text_message.rs:391
+#: src/backend/message/text_message.rs:420
 msgid "Sent a file"
 msgid_plural "Sent {} files"
 msgstr[0] "Відправлено файл"
 msgstr[1] "Надіслано {} файли"
 msgstr[2] "Надіслано {} файлів"
 
-#: src/error.rs:91
+#: src/error.rs:118
 msgid "I/O Error."
 msgstr "Помилка введення/виведення."
 
-#: src/error.rs:96
+#: src/error.rs:123
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Здається, немає підключення до Інтернету."
 
-#: src/error.rs:101
+#: src/error.rs:128
 msgid "Something glib-related failed."
 msgstr "Щось пов'язане з glib закінчилося невдачею."
 
-#: src/error.rs:106
-msgid "The communication with Libsecret failed."
+#: src/error.rs:133
+#, fuzzy
+#| msgid "The communication with Libsecret failed."
+msgid "The communication with libsecret failed."
 msgstr "Не вдалося зв'язатися з Libsecret."
 
-#: src/error.rs:111
+#: src/error.rs:138
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -855,7 +842,7 @@ msgstr ""
 "Відбулася помилка бази даних бекенда. Будь ласка, перезапустіть програму або "
 "видаліть базу даних і переприв'яжіть програму."
 
-#: src/error.rs:116
+#: src/error.rs:143
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -863,60 +850,105 @@ msgstr ""
 "Здається, ви не авторизовані в Signal. Будь ласка, видаліть базу даних і "
 "переприв'яжіть додаток."
 
-#: src/error.rs:121
+#: src/error.rs:148
 msgid "Sending a message failed."
 msgstr "Не вдалося надіслати повідомлення."
 
-#: src/error.rs:126
+#: src/error.rs:153
 msgid "Receiving a message failed."
 msgstr "Не вдалося отримати повідомлення."
 
-#: src/error.rs:131
+#: src/error.rs:158
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 "Щось непередбачуване сталося з бекендом Signal. Будь ласка, спробуйте "
 "пізніше."
 
-#: src/error.rs:136
+#: src/error.rs:163
 msgid "The application seems to be misconfigured."
 msgstr "Здається, програма неправильно налаштована."
 
-#: src/error.rs:141
+#: src/error.rs:168
 msgid "A part of the application crashed."
 msgstr "Частина програми аварійно завершила роботу."
 
-#: src/error.rs:151
+#: src/error.rs:178
 msgid "Please check your internet connection."
 msgstr "Будь ласка, перевірте своє інтернет-з'єднання."
 
-#: src/error.rs:156
+#: src/error.rs:183
 msgid "Please delete the database and relink the device."
 msgstr "Будь ласка, видаліть базу даних і переприв'яжіть пристрій."
 
-#: src/error.rs:163
+#: src/error.rs:190
 msgid "The database path at {} is no folder."
 msgstr "Шлях до бази даних у {} не є папкою."
 
-#: src/error.rs:168
+#: src/error.rs:195
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Будь ласка, перезапустіть програму з журналюванням і повідомте про цю "
 "проблему."
 
-#: src/gui/channel_info_dialog.rs:197
+#: src/gui/channel_info_dialog.rs:167
 msgid "Never"
 msgstr "Ніколи"
+
+#: src/gui/channel_info_dialog.rs:172
+msgid "{} week"
+msgid_plural "{} weeks"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: src/gui/channel_info_dialog.rs:182
+msgid "{} day"
+msgid_plural "{} days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: src/gui/channel_info_dialog.rs:192
+msgid "{} hour"
+msgid_plural "{} hours"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: src/gui/channel_info_dialog.rs:202
+msgid "{} minute"
+msgid_plural "{} minutes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: src/gui/channel_info_dialog.rs:212
+msgid "{} second"
+msgid_plural "{} seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
 msgstr "Чернетка"
 
-#: src/gui/linked_devices_window.rs:116
+#: src/gui/device_info_item.rs:47
+#, fuzzy
+#| msgid "Linked:"
+msgid "Linked: {}"
+msgstr "Пов'язано:"
+
+#: src/gui/device_info_item.rs:48
+msgid "Last Seen: {}"
+msgstr ""
+
+#: src/gui/linked_devices_window.rs:131
 msgid "Unlink Device?"
 msgstr "Від'єднати пристрій?"
 
-#: src/gui/linked_devices_window.rs:117
+#: src/gui/linked_devices_window.rs:133
 msgid "Are you sure you want to unlink {}?"
 msgstr "Ви впевнені, що хочете від’єднати {}?"
 
@@ -924,11 +956,11 @@ msgstr "Ви впевнені, що хочете від’єднати {}?"
 msgid "Watch for new messages while closed"
 msgstr "Стежити за новими повідомленнями, коли закрито"
 
-#: src/gui/preferences_window.rs:99
+#: src/gui/preferences_window.rs:103
 msgid "Background permission"
 msgstr "Дозвіл на фонове використання"
 
-#: src/gui/preferences_window.rs:100
+#: src/gui/preferences_window.rs:104
 msgid "Use settings to remove permissions"
 msgstr "Використовуйте налаштування, щоб видалити дозволи"
 
@@ -975,6 +1007,7 @@ msgstr "%d %m %Y"
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:151
+#, c-format
 msgid "%a., %e. %b"
 msgstr "%a., %e. %b"
 
@@ -982,18 +1015,18 @@ msgstr "%a., %e. %b"
 msgid "Attachment"
 msgstr "Вкладення"
 
-#: src/gui/window.rs:304 src/gui/window.rs:310
+#: src/gui/window.rs:409 src/gui/window.rs:418
 msgid "Remove Messages"
 msgstr "Видалити повідомлення"
 
-#: src/gui/window.rs:305
+#: src/gui/window.rs:411
 msgid "This will remove all locally stored messages from this channel"
 msgstr ""
 "Це призведе до видалення всіх локально збережених повідомлень з цього каналу"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:10
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:10
 msgid "Chat with your friends on Signal"
 msgstr "Спілкуйтеся з друзями в Signal"
 
@@ -1002,7 +1035,7 @@ msgid "messaging;chat;signal;"
 msgstr "спілкування; чат; сигнал;"
 
 #. Translators: Description of Flare in metainfo.
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:29
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:29
 msgid ""
 "Flare is an unofficial app for Signal. It is still in development and "
 "doesn't include all the features that the official Signal apps do. More "
@@ -1013,7 +1046,7 @@ msgstr ""
 "інформації можна знайти на його дорожній карті функцій."
 
 #. Translators: Description of Flare in metainfo: Security note
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:33
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:33
 msgid ""
 "Please note that using this application will probably worsen your security "
 "compared to using official Signal applications. Use with care when handling "
@@ -1025,7 +1058,7 @@ msgstr ""
 "обережні при роботі з конфіденційними даними. Подивіться README проєкту для "
 "отримання додаткової інформації про безпеку."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in:609
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:792
 msgid "Overview of the application"
 msgstr "Огляд програми"
 
@@ -1088,3 +1121,17 @@ msgstr "Надіслати повідомлення при натисканні 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
 msgstr "Як сортувати контакти, наприклад, за \"іменем\" або \"прізвищем\""
+
+#~ msgctxt "accessibility"
+#~ msgid "Reset Session"
+#~ msgstr "Скинути сеанс"
+
+#~ msgctxt "accessibility"
+#~ msgid "Clear Messages"
+#~ msgstr "Очистити повідомлення"
+
+#~ msgid "Last Active:"
+#~ msgstr "Остання активність:"
+
+#~ msgid "Primary Device or Link Device?"
+#~ msgstr "Основний пристрій чи пов'язаний пристрій?"
