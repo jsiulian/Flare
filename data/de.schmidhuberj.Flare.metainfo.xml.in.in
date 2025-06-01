@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.16.2" date="2025-06-01">
+      <description translate="no">
+        <p>Fixed</p> <ul> <li>Some reactions not being displayed on official Signal applications.</li> </ul>
+      </description>
+    </release>
     <release version="0.16.1" date="2025-05-25">
       <description translate="no">
         <p>Fixed</p> <ul> <li>Emoji messages never showing their sender.</li> </ul>

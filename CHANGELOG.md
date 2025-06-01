@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.2] - 2025-06-01
+
 ### Fixed
 
 - Some reactions not being displayed on official Signal applications.
@@ -731,7 +733,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.16.1...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.16.2...master
+[0.16.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.16.1...0.16.2
 [0.16.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.16.0...0.16.1
 [0.16.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.16...0.16.0
 [0.15.16]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.15.15...0.15.16
