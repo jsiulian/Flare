@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Some reactions not being displayed on official Signal applications.
+
 ## [0.16.1] - 2025-05-25
 
 ### Fixed
