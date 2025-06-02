@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Mentions not being highlighted anymore.
+- Mentions in a reply message highlighting the quoted message.
+
 ## [0.16.2] - 2025-06-01
 
 ### Fixed

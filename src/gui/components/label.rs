@@ -16,7 +16,7 @@ impl MessageLabel {
     fn update_label_attributes(&self, indicators_size: &gtk::Requisition) {
         let imp = self.imp();
         if let Some(start_index) = imp.label.text().find(OBJECT_REPLACEMENT_CHARACTER) {
-            let attrs = pango::AttrList::new();
+            let attrs = imp.attributes.borrow().copy().unwrap();
             let width = indicators_size.width() + INDICATORS_SPACING;
             let height = indicators_size.height();
             let logical_rect = pango::Rectangle::new(
@@ -113,6 +113,8 @@ mod imp {
         pub(super) text: RefCell<String>,
         pub(super) indicators: RefCell<Option<MessageIndicators>>,
         pub(super) indicators_size: RefCell<Option<(i32, i32)>>,
+
+        pub(super) attributes: RefCell<pango::AttrList>,
 
         #[template_child]
         pub label: TemplateChild<gtk::Label>,
@@ -216,7 +218,11 @@ mod imp {
                         obj.set_indicators(i);
                     }
                 }
-                "attributes" => obj.imp().label.set_attributes(value.get().ok()),
+                "attributes" => {
+                    self.attributes
+                        .replace(value.get::<pango::AttrList>().unwrap());
+                    obj.update_label();
+                }
                 _ => unimplemented!(),
             }
         }

@@ -156,7 +156,7 @@ template $FlMessageItem: $ContextMenuBin {
               halign: start;
               use-markup: true;
               label: bind $attachment_placeholder($markup_urls(template.message as <$FlTextMessage>.quote as <$FlTextMessage>.body) as <string>) as <string>;
-              attributes: bind template.message as <$FlTextMessage>.message-attributes;
+              attributes: bind template.message as <$FlTextMessage>.quote as <$FlTextMessage>.message-attributes;
 
               layout {
                 row: 1;
