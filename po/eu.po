@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-06-13 10:01+0000\n"
+"PO-Revision-Date: 2025-06-14 18:05+0000\n"
 "Last-Translator: Ibai Oihanguren Sala <ibaios@disroot.org>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/eu/>\n"
@@ -27,28 +27,28 @@ msgstr "Ibai Oihanguren Sala"
 #: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/setup_window.blp:371
 msgid "Phone Number"
-msgstr ""
+msgstr "Telefono zenbakia"
 
 #: data/resources/ui/channel_info_dialog.blp:74
 msgid "Description"
-msgstr ""
+msgstr "Deskribapena"
 
 #: data/resources/ui/channel_info_dialog.blp:86
 msgid "Disappearing Messages"
-msgstr ""
+msgstr "Desagertzen diren mezuak"
 
 #: data/resources/ui/channel_info_dialog.blp:101
 msgid "Reset Session"
-msgstr ""
+msgstr "Berrezarri saioa"
 
 #: data/resources/ui/channel_info_dialog.blp:112
 msgid "Clear Messages"
-msgstr ""
+msgstr "Garbitu mezuak"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "Lineaz kanpo"
 
 #: data/resources/ui/channel_list.blp:23
 msgid "Search"
@@ -61,92 +61,93 @@ msgstr "Bilatu"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Ez da kanalik hautatu"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "Hautatu kanala"
 
 #: data/resources/ui/channel_messages.blp:182
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Ezabatu erantzuna"
 
 #: data/resources/ui/channel_messages.blp:185
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Ezabatu erantzuna"
 
 #: data/resources/ui/channel_messages.blp:205
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "Ezabatu eranskina"
 
 #: data/resources/ui/channel_messages.blp:208
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "Ezabatu eranskina"
 
 #: data/resources/ui/channel_messages.blp:230
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "Gehitu eranskina"
 
 #: data/resources/ui/channel_messages.blp:238
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "Gehitu eranskina"
 
 #: data/resources/ui/channel_messages.blp:255
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "Mezuen sarrera"
 
 #: data/resources/ui/channel_messages.blp:261
 msgctxt "tooltip"
 msgid "Message input"
-msgstr ""
+msgstr "Mezuen sarrera"
 
 #: data/resources/ui/channel_messages.blp:273
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Bidali"
 
 #: data/resources/ui/channel_messages.blp:277
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "Bidali"
 
 #: data/resources/ui/device_info_item.blp:18
 msgid "Unlink Device"
-msgstr ""
+msgstr "Askatu gailua"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:168
 msgid "Clear messages"
-msgstr ""
+msgstr "Garbitu mezuak"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
+"Lokalki gordetako mezu guztiak ezabatuko dira. Gainera, aplikazioa itxiko da."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
 #: data/resources/ui/linked_devices_window.blp:78
 #: src/gui/linked_devices_window.rs:139 src/gui/window.rs:416
 msgid "Cancel"
-msgstr ""
+msgstr "Utzi"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "Garbitu"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:157
 #: src/gui/linked_devices_window.rs:138
 msgid "Unlink"
-msgstr ""
+msgstr "Askatu"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -154,157 +155,160 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Gailu hau askatuko da, eta lokalki gordetako datu guztiak ezabatuko dira. "
+"Gainera, aplikazioa itxiko da, berriro irekitzean berriro kontu batera "
+"lotzeko aukera emanez."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "Askatu eta ezabatu mezu guztiak"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "Askatu baina gorde mezuak"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "Errorea"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "Mesedez, eman errore honen berri."
 
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:482
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr ""
+msgstr "Itxi"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "Berri eman"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:162
 msgid "Linked Devices"
-msgstr ""
+msgstr "Lotutako gailuak"
 
 #: data/resources/ui/linked_devices_window.blp:36
 msgid "Link New Device"
-msgstr ""
+msgstr "Lotu gailu berria"
 
 #: data/resources/ui/linked_devices_window.blp:59
 msgid "Add Linked Device"
-msgstr ""
+msgstr "Gehitu lotutako gailua"
 
 #: data/resources/ui/linked_devices_window.blp:60
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Idatzi lotu beharreko gailuaren URLa."
 
 #: data/resources/ui/linked_devices_window.blp:70
 msgid "Device URL"
-msgstr ""
+msgstr "Gailuaren URLa"
 
 #: data/resources/ui/linked_devices_window.blp:79
 msgid "Add Device"
-msgstr ""
+msgstr "Gehitu gailua"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr ""
+msgstr "Erantzun"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "Ezabatu"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "Kopiatu"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "Gorde honela…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "Ireki honekin…"
 
 #: data/resources/ui/new_channel_dialog.blp:13
 msgid "New Chat"
-msgstr ""
+msgstr "Txat berria"
 
 #: data/resources/ui/new_channel_dialog.blp:19 data/resources/ui/window.blp:49
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Menua"
 
 #: data/resources/ui/new_channel_dialog.blp:34
 msgid "Search Contacts"
-msgstr ""
+msgstr "Bilatu kontaktuak"
 
 #: data/resources/ui/new_channel_dialog.blp:70
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Zerrendatu kontaktuak honen arabera:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Izena"
 
 #: data/resources/ui/new_channel_dialog.blp:79
 msgid "Surname"
-msgstr ""
+msgstr "Abizena"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "Orokorra"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "Deskargatu eranskinak automatikoki"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "Jarraian aukeratutako eranskin motak automatikoki deskargatuko dira"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Irudiak"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Bideoak"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Fitxategiak"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Voice Messages"
-msgstr ""
+msgstr "Ahots mezuak"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr ""
+msgstr "Jakinarazpenak"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr ""
+msgstr "Mezu berrien jakinarazpenak"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr ""
+msgstr "Bidali jakinarazpenak"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr ""
+msgstr "Bidali jakinarazpenak erreakzioengatik"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr ""
+msgstr "Atzeko planoko jakinarazpenak"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "Eskuratu jakinarazpenak aplikazioa itxita dagoenean"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Mugikorrekin bateragarritasuna"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -312,39 +316,46 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Aukera hauek aldatu nahiko dituzu ukipen bidezko gailuekin edo gailu "
+"mugikorrekin esperientzia hobea izateko. Hobespen horien balio lehenetsiak "
+"mahaigaineko gailuetarako erabilgarri izateko aukeratu dira."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Mezuen testu hautagarria"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
 msgstr ""
+"Testu hautagarriak arazoak sor ditzake ukipen pantailetako irristatze-"
+"keinuekin"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "Sakatu \"Sartu\" mezua bidaltzeko"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"Baliteke mezuak bidaltzea ezinezkoa izatea lerro-jauziak daudenean "
+"\"Kontrol + Sartu\" egitea onartzen ez duten ukipen-teklatuetan"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Ongi etorri Flarera"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Konfiguratu Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #: data/resources/ui/setup_window.blp:53
 msgid ""
@@ -358,29 +369,39 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare Signal bezero ez ofiziala da. Kontuan izan Flare ez dela egonkorra, "
+"eta espero izatekoa dela akatsak edukitzea. Edozein errore jasanez gero, "
+"kontsultatu <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\""
+">arazoen aztarnaria</a> eta ireki txosten berria dagoeneko arazoaren berri "
+"eman ez bada. Gainera, kontuan izan hirugarrenen aplikazio bat denez, Flarek "
+"ezin duela Signal aplikazio ofizialek eskaintzen duten segurtasun eta "
+"pribatutasun maila bera bermatu. Zuk edo harremanetan jarri behar zarenak "
+"segurtasun maila zorrotza beharrezkoa baduzue, ez erabili Flare. Kontsultatu "
+"<a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/"
+"README.md#security\">README</a> orria informazio gehiagorako."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Gailu nagusia konfiguratu ala gailua lotu?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:318
 #: data/resources/ui/setup_window.blp:325
 msgid "Primary Device"
-msgstr ""
+msgstr "Gailu nagusia"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:152
 #: data/resources/ui/setup_window.blp:159
 #: data/resources/ui/setup_window.blp:176
 msgid "Link Device"
-msgstr ""
+msgstr "Lotu gailua"
 
 #: data/resources/ui/setup_window.blp:113
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Flare gailu nagusi gisa edo bigarren gailu gisa erabil dezakezu."
 
 #: data/resources/ui/setup_window.blp:123
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Lotutako gailua (gomendatua)"
 
 #: data/resources/ui/setup_window.blp:128
 msgid ""
@@ -388,10 +409,13 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare zure gailu nagusiari lotutako aplikazio gisa erabil dezakezu, Signal "
+"Desktop aplikazio ofiziala bezala. Modu hau gehiago probatu da, eta ia beti "
+"ondo funtzionatzen du."
 
 #: data/resources/ui/setup_window.blp:138
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Gailu nagusia (ezgaitua)"
 
 #: data/resources/ui/setup_window.blp:143
 msgid ""
@@ -401,26 +425,33 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare gailu nagusi gisa ezar daiteke, Android edo iOSerako Signal aplikazio "
+"ofizialak bezala. Flarek oraingoz ez du modu hau onartzen, hasierako probek "
+"funtzionatzen duela adierazten duten arren. Probatzeko asmoa baduzu, azpiko "
+"botoia gaitu dezakezu (eta ez badakizu hau nola egin, ez zenuke gailu "
+"nagusien sostengua probatzeko asmorik izan beharko)."
 
 #: data/resources/ui/setup_window.blp:193
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Bigarren gailu gisa lotzeko, Flarek gailuaren izena behar du, zeina "
+"aplikazio ofizialean azalduko den."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
-msgstr ""
+msgstr "Gailuaren izena"
 
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:379
 msgid "Developer Options"
-msgstr ""
+msgstr "Garatzaile aukerak"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:382
 msgid "Signal Servers"
-msgstr ""
+msgstr "Signal zerbitzariak"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -434,41 +465,43 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:238
 #: data/resources/ui/setup_window.blp:292
 msgid "Link device"
-msgstr ""
+msgstr "Lotu gailua"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan Code"
-msgstr ""
+msgstr "Eskaneatu kodea"
 
 #: data/resources/ui/setup_window.blp:244
 msgid "Scan this code with another Signal app logged into your account."
-msgstr ""
+msgstr "Eskaneatu kode hau zure saioa hasita daukazun Signal aplikazio batekin."
 
 #: data/resources/ui/setup_window.blp:271
 msgid "Link without scanning"
-msgstr ""
+msgstr "Lotu eskaneatu gabe"
 
 #: data/resources/ui/setup_window.blp:281
 msgid "Manual linking"
-msgstr ""
+msgstr "Lotu eskuz"
 
 #: data/resources/ui/setup_window.blp:297
 msgid "Manual Linking"
-msgstr ""
+msgstr "Lotu eskuz"
 
 #: data/resources/ui/setup_window.blp:298
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Zure gailuak ezin badu QR kodea eskaneatu, eskuz sar dezakezu hemengo esteka "
+"hau"
 
 #: data/resources/ui/setup_window.blp:309
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopiatu arbelera"
 
 #: data/resources/ui/setup_window.blp:342
 msgid "Continue"
-msgstr ""
+msgstr "Jarraitu"
 
 #: data/resources/ui/setup_window.blp:359
 msgid ""
@@ -484,7 +517,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/setup_window.blp:388
 msgid ""
@@ -497,7 +530,7 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:423
 #: data/resources/ui/setup_window.blp:449
 msgid "Confirm"
-msgstr ""
+msgstr "Berretsi"
 
 #: data/resources/ui/setup_window.blp:439
 msgid "Insert the verification code you received from Signal here."
@@ -532,7 +565,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:524
 msgid "Contact"
-msgstr ""
+msgstr "Kontaktua"
 
 #: data/resources/ui/setup_window.blp:529
 msgid ""
@@ -544,52 +577,52 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Orokorra"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "Erakutsi laster-teklak"
 
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "Joan ezarpenetara"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "Joan \"honi buruz\" orrira"
 
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "Ireki menua"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Itxi leihoa"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "Kanalak"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "Joan 1…9 kanalera"
 
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "Bilatu kanaletan"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "Igo eranskina"
 
 #: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
@@ -604,7 +637,7 @@ msgstr ""
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:173
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Bidali Captcha"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -622,70 +655,70 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "Bidali"
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
-msgstr ""
+msgstr "Mezua"
 
 #: data/resources/ui/text_entry.blp:41
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Txertatu emojia"
 
 #: data/resources/ui/text_entry.blp:49
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Txertatu emojia"
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
-msgstr ""
+msgstr "Kanalen zerrenda"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Gehitu elkarrizketa"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "Txata"
 
 #: data/resources/ui/window.blp:123 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "idazten ari da"
 
 #: data/resources/ui/window.blp:152
 msgid "Settings"
-msgstr ""
+msgstr "Ezarpenak"
 
 #: data/resources/ui/window.blp:178
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Sinkronizatu kontaktuak"
 
 #: data/resources/ui/window.blp:183
 msgid "Keybindings"
-msgstr ""
+msgstr "Lasterbideak"
 
 #: data/resources/ui/window.blp:188
 msgid "About"
-msgstr ""
+msgstr "Honi buruz"
 
 #: data/resources/ui/window.blp:193
 msgid "Quit"
-msgstr ""
+msgstr "Irten"
 
 #: src/backend/channel.rs:557 src/backend/channel.rs:700
 msgid "Note to self"
-msgstr ""
+msgstr "Neuretzako oharrak"
 
 #: src/backend/contact.rs:199 src/backend/contact.rs:281
 msgid "Unknown contact"
-msgstr ""
+msgstr "Kontaktu ezezaguna"
 
 #: src/backend/manager.rs:416
 msgid "You"
-msgstr ""
+msgstr "Zu"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
