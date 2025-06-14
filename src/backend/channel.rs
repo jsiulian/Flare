@@ -586,8 +586,7 @@ impl Channel {
 
     /// Mark all messages as read.
     pub fn mark_as_read(&self) -> Vec<String> {
-        let marked = self
-            .imp()
+        self.imp()
             .timeline
             .borrow()
             .iter_backwards()
@@ -602,8 +601,7 @@ impl Channel {
                 }
                 None
             })
-            .collect();
-        marked
+            .collect()
     }
 }
 
