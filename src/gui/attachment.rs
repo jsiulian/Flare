@@ -38,7 +38,7 @@ pub mod imp {
     use crate::prelude::*;
     use std::os::fd::AsFd;
 
-    use ashpd::{desktop::open_uri::OpenFileRequest, WindowIdentifier};
+    use ashpd::{WindowIdentifier, desktop::open_uri::OpenFileRequest};
     use gio::{File, Settings};
     use glib::subclass::{InitializingObject, Signal};
     use gtk::{CompositeTemplate, FileDialog};
@@ -212,9 +212,11 @@ pub mod imp {
     impl ObjectImpl for Attachment {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder("pressed")
-                    .param_types([crate::gui::attachment::Attachment::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("pressed")
+                        .param_types([crate::gui::attachment::Attachment::static_type()])
+                        .build(),
+                ]
             });
             SIGNALS.as_ref()
         }

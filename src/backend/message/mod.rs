@@ -11,25 +11,25 @@ pub use reaction_message::ReactionMessage;
 pub use text_message::TextMessage;
 
 use super::{
-    timeline::{TimelineItem, TimelineItemImpl},
     Contact, Manager,
+    timeline::{TimelineItem, TimelineItemImpl},
 };
-use crate::backend::{channel::TypingNotification, Channel};
+use crate::backend::{Channel, channel::TypingNotification};
 use crate::prelude::*;
 
 use glib::{
+    Object,
     subclass::{
         prelude::ObjectImpl,
         types::{IsSubclassable, ObjectSubclassIsExt},
     },
-    Object,
 };
 use std::cell::RefMut;
 
 use libsignal_service::proto::typing_message::Action;
 use libsignal_service::{
     content::ContentBody,
-    proto::{sync_message::Sent, DataMessage, SyncMessage},
+    proto::{DataMessage, SyncMessage, sync_message::Sent},
 };
 
 /// At least 4 minutes need to pass such that for two messages from the same sender, the second one will
@@ -400,7 +400,7 @@ where
 }
 
 mod imp {
-    use crate::backend::{timeline::TimelineItemExt, Manager};
+    use crate::backend::{Manager, timeline::TimelineItemExt};
 
     use super::*;
 

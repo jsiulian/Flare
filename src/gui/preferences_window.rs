@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-use ashpd::{desktop::background::BackgroundRequest, WindowIdentifier};
+use ashpd::{WindowIdentifier, desktop::background::BackgroundRequest};
 
 use gettextrs::gettext;
 

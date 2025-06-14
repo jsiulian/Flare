@@ -1,4 +1,4 @@
-use crate::backend::{timeline::TimelineItem, Channel, Contact};
+use crate::backend::{Channel, Contact, timeline::TimelineItem};
 use crate::prelude::*;
 
 use gdk_pixbuf::Pixbuf;
@@ -102,7 +102,7 @@ mod imp {
     use crate::prelude::*;
     use libsignal_service::content::Reaction;
 
-    use crate::backend::{message::MessageImpl, timeline::TimelineItemImpl, Message};
+    use crate::backend::{Message, message::MessageImpl, timeline::TimelineItemImpl};
 
     #[derive(Default)]
     pub struct ReactionMessage {

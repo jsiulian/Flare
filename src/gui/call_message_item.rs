@@ -2,8 +2,8 @@ use crate::prelude::*;
 
 use glib::subclass::types::ObjectSubclassIsExt;
 
-use crate::backend::message::{CallMessage, CallMessageType};
 use crate::backend::Contact;
+use crate::backend::message::{CallMessage, CallMessageType};
 
 gtk::glib::wrapper! {
     /// A widget to display call events.
@@ -39,7 +39,7 @@ pub mod imp {
     use glib::subclass::InitializingObject;
     use gtk::CompositeTemplate;
 
-    use crate::backend::{message::CallMessage, Manager};
+    use crate::backend::{Manager, message::CallMessage};
 
     #[derive(CompositeTemplate, Default, glib::Properties)]
     #[properties(wrapper_type = super::CallMessageItem)]

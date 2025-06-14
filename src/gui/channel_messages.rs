@@ -124,10 +124,10 @@ pub mod imp {
 
     use crate::backend::timeline::Timeline;
     use crate::gui::attachment::backend_to_gui;
-    use crate::gui::components::time_divider::TimeDivider;
     use crate::gui::components::ItemRow;
+    use crate::gui::components::time_divider::TimeDivider;
     use crate::{
-        backend::{message::TextMessage, Channel, Manager},
+        backend::{Channel, Manager, message::TextMessage},
         gui::{error_dialog::ErrorDialog, message_item::MessageItem, text_entry::TextEntry},
     };
 
@@ -226,7 +226,9 @@ pub mod imp {
                     }
                 ));
             } else {
-                log::warn!("More messages were requested while not being focused on a channel. This should not happen.");
+                log::warn!(
+                    "More messages were requested while not being focused on a channel. This should not happen."
+                );
             }
         }
 

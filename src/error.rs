@@ -112,61 +112,53 @@ use gettextrs::gettext;
 impl std::fmt::Display for ApplicationError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            ApplicationError::IOError(_) => writeln!(
-                f,
-                "{}",
-                gettext("I/O Error.")
-            ),
+            ApplicationError::IOError(_) => writeln!(f, "{}", gettext("I/O Error.")),
             ApplicationError::NoInternet => writeln!(
                 f,
                 "{}",
                 gettext("There does not seem to be a connection to the internet available.")
             ),
-            ApplicationError::Glib(_) => writeln!(
-                f,
-                "{}",
-                gettext("Something glib-related failed.")
-            ),
-            ApplicationError::Libsecret(_) => writeln!(
-                f,
-                "{}",
-                gettext("The communication with libsecret failed.")
-            ),
+            ApplicationError::Glib(_) => {
+                writeln!(f, "{}", gettext("Something glib-related failed."))
+            }
+            ApplicationError::Libsecret(_) => {
+                writeln!(f, "{}", gettext("The communication with libsecret failed."))
+            }
             ApplicationError::Db(_) => writeln!(
                 f,
                 "{}",
-                gettext("The backend database failed. Please restart the application or delete the database and relink the application.")
+                gettext(
+                    "The backend database failed. Please restart the application or delete the database and relink the application."
+                )
             ),
             ApplicationError::UnauthorizedSignal => writeln!(
                 f,
                 "{}",
-                gettext("You do not seem to be authorized with Signal. Please delete the database and relink the application.")
+                gettext(
+                    "You do not seem to be authorized with Signal. Please delete the database and relink the application."
+                )
             ),
-            ApplicationError::SendFailed(_) => writeln!(
-                f,
-                "{}",
-                gettext("Sending a message failed.")
-            ),
-            ApplicationError::ReceiveFailed(_) => writeln!(
-                f,
-                "{}",
-                gettext("Receiving a message failed.")
-            ),
+            ApplicationError::SendFailed(_) => {
+                writeln!(f, "{}", gettext("Sending a message failed."))
+            }
+            ApplicationError::ReceiveFailed(_) => {
+                writeln!(f, "{}", gettext("Receiving a message failed."))
+            }
             ApplicationError::Presage(_) => writeln!(
                 f,
                 "{}",
-                gettext("Something unexpected happened with the signal backend. Please retry later.")
+                gettext(
+                    "Something unexpected happened with the signal backend. Please retry later."
+                )
             ),
             ApplicationError::ConfigurationError(_) => writeln!(
                 f,
                 "{}",
                 gettext("The application seems to be misconfigured.")
             ),
-            ApplicationError::ManagerThreadPanic => writeln!(
-                f,
-                "{}",
-                gettext("A part of the application crashed.")
-            ),
+            ApplicationError::ManagerThreadPanic => {
+                writeln!(f, "{}", gettext("A part of the application crashed."))
+            }
         }
     }
 }

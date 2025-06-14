@@ -18,8 +18,8 @@ mod imp {
     use crate::prelude::*;
 
     use glib::subclass::InitializingObject;
-    use gtk::subclass::box_::BoxImpl;
     use gtk::CompositeTemplate;
+    use gtk::subclass::box_::BoxImpl;
 
     #[derive(Debug, Default, CompositeTemplate, glib::Properties)]
     #[properties(wrapper_type = super::LetterDivider)]

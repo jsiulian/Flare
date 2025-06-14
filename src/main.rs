@@ -21,13 +21,13 @@ mod prelude {
 
     pub use gtk::{gdk, gdk_pixbuf, gio, glib, pango};
 
-    pub use glib::{clone, Object};
+    pub use glib::{Object, clone};
     pub use once_cell::sync::Lazy;
     pub use std::cell::{Cell, RefCell};
 
+    pub use crate::ApplicationError;
     pub use crate::backend::Manager;
     pub use crate::gui::utility::Utility;
-    pub use crate::ApplicationError;
     pub use crate::{gspawn, tspawn};
 }
 

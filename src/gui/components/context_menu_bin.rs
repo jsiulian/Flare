@@ -1,5 +1,5 @@
 use adw::subclass::prelude::*;
-use gtk::{gdk, glib, glib::clone, prelude::*, CompositeTemplate};
+use gtk::{CompositeTemplate, gdk, glib, glib::clone, prelude::*};
 use log::debug;
 
 glib::wrapper! {
@@ -114,7 +114,7 @@ where
 mod imp {
     use std::cell::RefCell;
 
-    use glib::{subclass::InitializingObject, SignalHandlerId};
+    use glib::{SignalHandlerId, subclass::InitializingObject};
 
     use super::*;
 

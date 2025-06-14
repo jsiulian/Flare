@@ -44,11 +44,11 @@ fn servers() -> Vec<Server> {
 pub mod imp {
     use crate::prelude::*;
 
-    use adw::subclass::dialog::AdwDialogImplExt;
     use adw::Toast;
+    use adw::subclass::dialog::AdwDialogImplExt;
     use gdk_pixbuf::Pixbuf;
     use gio::{ListStore, MemoryInputStream};
-    use glib::{subclass::InitializingObject, Bytes};
+    use glib::{Bytes, subclass::InitializingObject};
     use gtk::{CompositeTemplate, PropertyExpression};
 
     use futures::channel::oneshot::Sender;

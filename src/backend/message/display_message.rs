@@ -93,13 +93,13 @@ mod imp {
     use crate::prelude::*;
 
     use glib::{
-        subclass::types::{ClassStruct, ObjectSubclass},
         ParamSpec, ParamSpecString,
+        subclass::types::{ClassStruct, ObjectSubclass},
     };
 
     use super::DisplayMessageExt;
     use crate::backend::timeline::{TimelineItem, TimelineItemImpl};
-    use crate::backend::{message::MessageImpl, Message};
+    use crate::backend::{Message, message::MessageImpl};
 
     #[repr(C)]
     pub struct DisplayMessageClass {
@@ -132,9 +132,11 @@ mod imp {
     impl ObjectImpl for DisplayMessage {
         fn properties() -> &'static [ParamSpec] {
             static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
-                vec![ParamSpecString::builder("textual-description")
-                    .read_only()
-                    .build()]
+                vec![
+                    ParamSpecString::builder("textual-description")
+                        .read_only()
+                        .build(),
+                ]
             });
 
             PROPERTIES.as_ref()

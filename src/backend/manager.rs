@@ -5,12 +5,12 @@ use std::{collections::HashMap, io::Write, ops::Bound, path::Path, time::Duratio
 use gio::Application;
 use gio::Settings;
 use libsignal_service::{
+    Profile,
     content::ContentBody,
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
     protocol::ServiceId,
     push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
-    Profile,
 };
 use oo7::Keyring;
 use presage::model::groups::Group;
@@ -19,9 +19,9 @@ use presage_store_sled::MigrationConflictStrategy;
 use rand::distr::SampleString;
 use url::Url;
 
-use super::{manager_thread::ManagerThread, Channel, Contact, Message};
+use super::{Channel, Contact, Message, manager_thread::ManagerThread};
 use crate::backend::message::{DisplayMessage, DisplayMessageExt};
-use crate::{gspawn, tspawn, ApplicationError};
+use crate::{ApplicationError, gspawn, tspawn};
 
 const MESSAGE_BOUND: usize = 100;
 const MESSAGES_INITIAL_LOAD: usize = 1;
@@ -277,7 +277,7 @@ impl Manager {
     #[cfg(not(feature = "screenshot"))]
     pub async fn init<P: AsRef<Path>>(&self, p: &P) -> Result<(), ApplicationError> {
         use futures::channel::{mpsc, oneshot};
-        use futures::{select, FutureExt, StreamExt};
+        use futures::{FutureExt, StreamExt, select};
         use gdk::glib::BoxedAnyObject;
 
         let config_store = config_store(p).await?;
@@ -728,7 +728,7 @@ mod imp {
     use glib::{BoxedAnyObject, ParamSpec, ParamSpecBoolean, Value};
 
     use crate::{
-        backend::{manager_thread::ManagerThread, Channel, Message},
+        backend::{Channel, Message, manager_thread::ManagerThread},
         config::BASE_ID,
     };
 

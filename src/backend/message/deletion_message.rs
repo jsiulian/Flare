@@ -42,7 +42,7 @@ impl DeletionMessage {
 }
 
 mod imp {
-    use crate::backend::{message::MessageImpl, timeline::TimelineItemImpl, Message};
+    use crate::backend::{Message, message::MessageImpl, timeline::TimelineItemImpl};
     use crate::prelude::*;
 
     use libsignal_service::proto::data_message::Delete;

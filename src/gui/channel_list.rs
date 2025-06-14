@@ -120,7 +120,7 @@ pub mod imp {
     };
 
     use crate::{
-        backend::{timeline::timeline_item::TimelineItemExt, Channel},
+        backend::{Channel, timeline::timeline_item::TimelineItemExt},
         gui::{channel_item::ChannelItem, components::Selection},
     };
 
