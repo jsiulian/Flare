@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### BREAKING
+
+- This release will require a relink of Flare.
+
 ## [0.16.3] - 2025-06-03
 
 ### Fixed

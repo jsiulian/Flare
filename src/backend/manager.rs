@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-use std::{collections::HashMap, io::Write, ops::Bound, path::Path, time::Duration};
+use std::{collections::HashMap, ops::Bound, path::Path, time::Duration};
 
 use gio::Application;
 use gio::Settings;
@@ -15,7 +15,6 @@ use libsignal_service::{
 use oo7::Keyring;
 use presage::model::groups::Group;
 use presage::store::{ContentsStore, StateStore, Thread};
-use presage_store_sled::MigrationConflictStrategy;
 use rand::distr::SampleString;
 use url::Url;
 
@@ -29,7 +28,6 @@ const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
 const SCHEMA_ATTRIBUTE: &str = "xdg:schema";
 const ATTRIBUTE_PASSWORD: (&str, &str) = ("type", "password");
 const SECRET_LENGTH: usize = 64;
-const STORE_VERSION_FILE: &str = "store_version";
 
 gtk::glib::wrapper! {
     /// The manager is the core of the logic of Flare.
@@ -39,8 +37,8 @@ gtk::glib::wrapper! {
     pub struct Manager(ObjectSubclass<imp::Manager>);
 }
 
-type StoreType = presage_store_sled::SledStore;
-type PresageError = presage::Error<presage_store_sled::SledStoreError>;
+type StoreType = presage_store_sqlite::SqliteStore;
+type PresageError = presage::Error<presage_store_sqlite::SqliteStoreError>;
 
 /// Query the encryption password from the keyring, storing one if none exists.
 async fn encryption_password() -> Result<String, ApplicationError> {
@@ -98,30 +96,29 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationErr
         ));
     }
 
-    let path_store_version = path.join(STORE_VERSION_FILE);
-    if path.exists() && !path_store_version.exists() {
-        log::info!("Migrating from old store to new store. Removing old store");
-        std::fs::remove_dir_all(path)?;
+    if !path.exists() {
+        if let Err(e) = std::fs::create_dir_all(path) {
+            return Err(ApplicationError::ConfigurationError(
+                crate::ConfigurationError::CannotCreateDbFolder(path.to_owned(), e),
+            ));
+        }
     }
 
     let passphrase = tspawn!(async { encryption_password().await })
         .await
         .expect("Failed tokio join")?;
-    let store = Ok(presage_store_sled::SledStore::open_with_passphrase(
-        path,
-        Some(&passphrase),
-        MigrationConflictStrategy::BackupAndDrop,
-        presage::model::identity::OnNewIdentity::Trust,
-    )
-    .await?);
+    let path = path.to_str().expect("Invalid sqlite store path").to_owned() + "db.sqlite";
 
-    if !path_store_version.exists() {
-        log::info!("Creating file to specify the new store version.");
-        let mut file = std::fs::File::create(path_store_version)?;
-        file.write_all(b"1")?;
-    }
-
-    store
+    Ok(tspawn!(async move {
+        presage_store_sqlite::SqliteStore::open_with_passphrase(
+            &path,
+            Some(&passphrase),
+            presage::model::identity::OnNewIdentity::Trust,
+        )
+        .await
+    })
+    .await
+    .expect("Failed tokio join")?)
 }
 
 impl Manager {
@@ -150,25 +147,37 @@ impl Manager {
 
     pub async fn clear_registration(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing the manager");
-        self.store().clear_registration().await?;
+        let mut store = self.store();
+        tspawn!(async move { store.clear_registration().await })
+            .await
+            .expect("Failed to spawn tokio")?;
         Ok(())
     }
 
     pub async fn clear_messages(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing messages from the manager");
-        self.store().clear_messages().await?;
+        let mut store = self.store();
+        tspawn!(async move { store.clear_messages().await })
+            .await
+            .expect("Failed to spawn tokio")?;
         Ok(())
     }
 
     pub async fn clear_contacts(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing contacts from the manager");
-        self.store().clear_contacts().await?;
+        let mut store = self.store();
+        tspawn!(async move { store.clear_contacts().await })
+            .await
+            .expect("Failed to spawn tokio")?;
         Ok(())
     }
 
     pub async fn clear_groups(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing groups from the manager");
-        self.store().clear_groups().await?;
+        let mut store = self.store();
+        tspawn!(async move { store.clear_groups().await })
+            .await
+            .expect("Failed to spawn tokio")?;
         Ok(())
     }
 
@@ -178,7 +187,10 @@ impl Manager {
             channel.title()
         );
         if let Some(thread) = channel.thread() {
-            self.store().clear_thread(&thread).await?;
+            let mut store = self.store();
+            tspawn!(async move { store.clear_thread(&thread).await })
+                .await
+                .expect("Failed to spawn tokio")?;
         } else {
             log::warn!("Was asked to clear a channel without an associated thread");
         }
@@ -207,9 +219,10 @@ impl Manager {
             token,
             captcha
         );
-        self.internal()
-            .submit_recaptcha_challenge(token, captcha)
-            .await?;
+        let internal = self.internal();
+        tspawn!(async move { internal.submit_recaptcha_challenge(token, captcha).await })
+            .await
+            .expect("Failed to spawn tokio")?;
         Ok(())
     }
 
@@ -224,7 +237,11 @@ impl Manager {
             timestamp
         );
         let content = {
-            let content = self.store().message(thread, timestamp).await?;
+            let store = self.store();
+            let thread = thread.clone();
+            let content = tspawn!(async move { store.message(&thread, timestamp).await })
+                .await
+                .expect("Failed to spawn tokio")?;
             if let Some(content) = content {
                 Ok::<_, ApplicationError>(Some(content))
             } else {
@@ -253,18 +270,23 @@ impl Manager {
         from: Option<u64>,
     ) -> Result<impl Iterator<Item = Content>, ApplicationError> {
         crate::trace!("Querying message by thread: {:?}, from {:?}", thread, from);
-        Ok(self
-            .internal()
-            .messages(
-                thread.clone(),
-                (
-                    Bound::Unbounded,
-                    from.map(Bound::Excluded).unwrap_or(Bound::Unbounded),
-                ),
-            )
-            .await?
-            .rev()
-            .filter_map(|o| o.ok()))
+        let internal = self.internal();
+        let thread = thread.clone();
+        Ok(tspawn!(async move {
+            internal
+                .messages(
+                    thread,
+                    (
+                        Bound::Unbounded,
+                        from.map(Bound::Excluded).unwrap_or(Bound::Unbounded),
+                    ),
+                )
+                .await
+        })
+        .await
+        .expect("Failed to spawn tokio")?
+        // .rev()
+        .filter_map(|o| o.ok()))
     }
 
     /// Asynchronously initialize the manager. This will never return unless there is an error.
@@ -447,9 +469,10 @@ impl Manager {
 
     #[cfg(not(feature = "screenshot"))]
     pub async fn list_contacts(&self) -> Vec<Contact> {
-        self.store()
-            .contacts()
+        let store = self.store();
+        tspawn!(async move { store.contacts().await })
             .await
+            .expect("Failed to spawn tokio")
             .map(|i| {
                 i.filter_map(|c| {
                     c.ok()
@@ -505,8 +528,12 @@ impl Manager {
 
         // Note: Groups need channels to be finished initializing first due to loading participants; we cannot combine them.
 
+        let store = self.store();
         // TODO: Error handling?
-        if let Ok(groups) = self.store().groups().await {
+        if let Ok(groups) = tspawn!(async move { store.groups().await })
+            .await
+            .expect("Failed to spawn tokio")
+        {
             // Construct all groups in parallel.
             let groups = groups
                 .into_iter()
@@ -553,7 +580,10 @@ impl Manager {
         master_key: [u8; 32],
     ) -> Result<Option<Group>, <StoreType as presage::store::Store>::Error> {
         log::trace!("`Manager::get_group_v2`start");
-        let r = self.internal().get_group_v2(master_key).await;
+        let internal = self.internal();
+        let r = tspawn!(async move { internal.get_group_v2(master_key).await })
+            .await
+            .expect("Failed to spawn tokio");
         log::trace!("`Manager::get_group_v2`finished");
         r
     }
@@ -565,10 +595,10 @@ impl Manager {
         profile_key: ProfileKey,
     ) -> Result<Profile, PresageError> {
         log::trace!("`Manager::retrieve_profile_by_uuid` start");
-        let r = self
-            .internal()
-            .retrieve_profile_by_uuid(uuid, profile_key)
-            .await;
+        let internal = self.internal();
+        let r = tspawn!(async move { internal.retrieve_profile_by_uuid(uuid, profile_key).await })
+            .await
+            .expect("Failed to spawn tokio");
         log::trace!("`Manager::retrieve_profile_by_uuid` finished");
         r
     }
@@ -580,10 +610,14 @@ impl Manager {
         profile_key: ProfileKey,
     ) -> Result<Option<Vec<u8>>, PresageError> {
         log::trace!("`Manager::retrieve_profile_avatar_by_uuid` start");
-        let r = self
-            .internal()
-            .retrieve_profile_avatar_by_uuid(uuid, profile_key)
-            .await;
+        let internal = self.internal();
+        let r = tspawn!(async move {
+            internal
+                .retrieve_profile_avatar_by_uuid(uuid, profile_key)
+                .await
+        })
+        .await
+        .expect("Failed to spawn tokio");
         log::trace!("`Manager::retrieve_profile_avatar_by_uuid` finished");
         r
     }
@@ -594,37 +628,45 @@ impl Manager {
         context: GroupContextV2,
     ) -> Result<Option<Vec<u8>>, PresageError> {
         log::trace!("`Manager::retrieve_group_avatar` start");
-        let r = self.internal().retrieve_group_avatar(context).await;
+        let internal = self.internal();
+        let r = tspawn!(async move { internal.retrieve_group_avatar(context).await })
+            .await
+            .expect("Failed to spawn tokio");
         log::trace!("`Manager::retrieve_group_avatar` finished");
         r
     }
 
     pub(super) async fn send_message(
         &self,
-        recipient_addr: impl Into<ServiceId> + std::clone::Clone,
+        recipient_addr: impl Into<ServiceId> + std::clone::Clone + Send + 'static,
         message: impl Into<ContentBody>,
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
         log::trace!("`Manager::send_message` start");
         let body = message.into();
-        let r = self
-            .internal()
-            .send_message(recipient_addr.clone(), body.clone(), timestamp)
-            .await;
+        let internal = self.internal();
+        let r = tspawn!(async move {
+            internal
+                .send_message(recipient_addr.clone(), body.clone(), timestamp)
+                .await
+        })
+        .await
+        .expect("Failed to spawn tokio");
         log::trace!("`Manager::send_message`finished");
         Ok(r?)
     }
 
     pub(super) async fn send_session_reset(
         &self,
-        recipient_addr: impl Into<ServiceId>,
+        recipient_addr: impl Into<ServiceId> + Send + 'static,
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
         log::trace!("`Manager::send_session_reset` start");
-        let r = self
-            .internal()
-            .send_session_reset(recipient_addr, timestamp)
-            .await;
+        let internal = self.internal();
+        let r =
+            tspawn!(async move { internal.send_session_reset(recipient_addr, timestamp).await })
+                .await
+                .expect("Failed to spawn tokio");
         log::trace!("`Manager::send_session_reset` finished");
         Ok(r?)
     }
@@ -636,10 +678,14 @@ impl Manager {
         timestamp: u64,
     ) -> Result<(), ApplicationError> {
         log::trace!("`Manager::send_message_to_group` start");
-        let r = self
-            .internal()
-            .send_message_to_group(group_key, message.clone(), timestamp)
-            .await;
+        let internal = self.internal();
+        let r = tspawn!(async move {
+            internal
+                .send_message_to_group(group_key, message.clone(), timestamp)
+                .await
+        })
+        .await
+        .expect("Failed to spawn tokio");
         log::trace!("`Manager::send_message_to_group` finish");
         Ok(r?)
     }
@@ -649,7 +695,10 @@ impl Manager {
         id: Uuid,
     ) -> Result<Option<presage::model::contacts::Contact>, ApplicationError> {
         log::trace!("`Manager::get_contact_by_id` start");
-        let r = self.store().contact_by_id(&id).await;
+        let store = self.store();
+        let r = tspawn!(async move { store.contact_by_id(&id).await })
+            .await
+            .expect("Failed to spawn tokio");
         log::trace!("`Manager::get_contact_by_id` finished");
         Ok(r?)
     }
@@ -659,7 +708,11 @@ impl Manager {
         attachment_pointer: &AttachmentPointer,
     ) -> Result<Vec<u8>, PresageError> {
         log::trace!("`Manager::get_attachment` start");
-        let r = self.internal().get_attachment(attachment_pointer).await;
+        let internal = self.internal();
+        let attachment_pointer = attachment_pointer.clone();
+        let r = tspawn!(async move { internal.get_attachment(&attachment_pointer).await })
+            .await
+            .expect("Failed to spawn tokio");
         log::trace!("`Manager::get_attachment` finished");
         r
     }
@@ -675,28 +728,40 @@ impl Manager {
         attachments: Vec<(AttachmentSpec, Vec<u8>)>,
     ) -> Result<Vec<Result<AttachmentPointer, AttachmentUploadError>>, PresageError> {
         log::trace!("`Manager::upload_attachment` start");
-        let r = self.internal().upload_attachments(attachments).await;
+        let internal = self.internal();
+        let r = tspawn!(async move { internal.upload_attachments(attachments).await })
+            .await
+            .expect("Failed to spawn tokio");
         log::trace!("`Manager::upload_attachment` finished");
         r
     }
 
     pub async fn request_contacts_sync(&self) -> Result<(), ApplicationError> {
         log::trace!("`Manager::request_contacts_sync` start");
-        let r = self.internal().request_contacts().await;
+        let internal = self.internal();
+        let r = tspawn!(async move { internal.request_contacts().await })
+            .await
+            .expect("Failed to spawn tokio");
         log::trace!("`Manager::request_contacts_sync` finished");
         Ok(r?)
     }
 
     pub async fn link_secondary(&self, url: Url) -> Result<(), PresageError> {
         log::trace!("`Manager::link_secondary` start");
-        let r = self.internal().link_secondary(url).await;
+        let internal = self.internal();
+        let r = tspawn!(async move { internal.link_secondary(url).await })
+            .await
+            .expect("Failed to spawn tokio");
         log::trace!("`Manager::link_secondary` finished");
         r
     }
 
     pub async fn unlink_secondary(&self, id: i64) -> Result<(), PresageError> {
         log::trace!("`Manager::unlink_secondary` start");
-        let r = self.internal().unlink_secondary(id).await;
+        let internal = self.internal();
+        let r = tspawn!(async move { internal.unlink_secondary(id).await })
+            .await
+            .expect("Failed to spawn tokio");
         log::trace!("`Manager::unlink_secondary` finished");
         r
     }
@@ -704,7 +769,10 @@ impl Manager {
     #[cfg(not(feature = "screenshot"))]
     pub async fn devices(&self) -> Result<Vec<DeviceInfo>, PresageError> {
         log::trace!("`Manager::devices` start");
-        let r = self.internal().devices().await;
+        let internal = self.internal();
+        let r = tspawn!(async move { internal.devices().await })
+            .await
+            .expect("Failed to spawn tokio");
         log::trace!("`Manager::devices` finished");
         r
     }
