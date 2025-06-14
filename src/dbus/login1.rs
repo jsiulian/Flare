@@ -1,5 +1,5 @@
 use futures::StreamExt;
-use zbus::{proxy, Connection};
+use zbus::{Connection, proxy};
 
 #[proxy(
     interface = "org.freedesktop.login1.Manager",

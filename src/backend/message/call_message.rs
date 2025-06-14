@@ -70,11 +70,11 @@ impl CallMessage {
 mod imp {
     use super::*;
 
+    use crate::backend::Message;
     use crate::backend::message::{
-        display_message::DisplayMessageImpl, DisplayMessage, MessageImpl,
+        DisplayMessage, MessageImpl, display_message::DisplayMessageImpl,
     };
     use crate::backend::timeline::{TimelineItem, TimelineItemImpl};
-    use crate::backend::Message;
 
     #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::CallMessage)]

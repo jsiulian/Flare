@@ -3,7 +3,7 @@ use crate::prelude::*;
 use gdk::Texture;
 use glib::Bytes;
 use libsignal_service::{
-    prelude::{phonenumber::Mode, Uuid},
+    prelude::{Uuid, phonenumber::Mode},
     protocol::ServiceId,
 };
 
@@ -213,8 +213,8 @@ mod imp {
     use std::marker::PhantomData;
 
     use gdk::Paintable;
-    use libsignal_service::prelude::phonenumber::{Mode, PhoneNumber};
     use libsignal_service::Profile;
+    use libsignal_service::prelude::phonenumber::{Mode, PhoneNumber};
 
     use crate::backend::{Channel, Manager};
 

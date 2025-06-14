@@ -1,7 +1,7 @@
 use crate::backend::{
+    Contact, Manager, Message,
     message::{DeletionMessage, DisplayMessage, MessageExt, ReactionMessage, TextMessage},
     timeline::{TimelineItem, TimelineItemExt},
-    Contact, Manager, Message,
 };
 use crate::prelude::*;
 
@@ -12,7 +12,7 @@ use std::{
 
 use gdk::Texture;
 use glib::Bytes;
-use glib::{prelude::Cast, Object};
+use glib::{Object, prelude::Cast};
 
 use libsignal_service::{
     proto::{DataMessage, GroupContextV2},
@@ -309,7 +309,9 @@ impl Channel {
                     log::warn!("Reaction message for a non-TextMessage");
                 }
             } else {
-                log::trace!("Message reacted to another message that could not be found yet. Inserting into pending reactions");
+                log::trace!(
+                    "Message reacted to another message that could not be found yet. Inserting into pending reactions"
+                );
                 let mut pending_reactions = self.imp().pending_reactions.borrow_mut();
                 let entry = pending_reactions
                     .entry(reaction.target_timestamp())
@@ -584,8 +586,7 @@ impl Channel {
 
     /// Mark all messages as read.
     pub fn mark_as_read(&self) -> Vec<String> {
-        let marked = self
-            .imp()
+        self.imp()
             .timeline
             .borrow()
             .iter_backwards()
@@ -600,17 +601,16 @@ impl Channel {
                 }
                 None
             })
-            .collect();
-        marked
+            .collect()
     }
 }
 
 mod imp {
     use super::TypingNotification;
     use crate::backend::{
+        Contact, Manager,
         message::{DisplayMessage, ReactionMessage, TextMessage},
         timeline::Timeline,
-        Contact, Manager,
     };
     use crate::prelude::*;
 
@@ -788,9 +788,11 @@ mod imp {
     impl ObjectImpl for Channel {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder("message")
-                    .param_types([DisplayMessage::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("message")
+                        .param_types([DisplayMessage::static_type()])
+                        .build(),
+                ]
             });
             SIGNALS.as_ref()
         }

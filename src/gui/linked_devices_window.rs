@@ -32,13 +32,13 @@ pub mod imp {
 
     use adw::{AlertDialog, ResponseAppearance};
     use glib::subclass::InitializingObject;
-    use gtk::gio::ListStore;
     use gtk::CompositeTemplate;
+    use gtk::gio::ListStore;
 
     use url::Url;
 
-    use crate::gui::error_dialog::ErrorDialog;
     use crate::gui::Window;
+    use crate::gui::error_dialog::ErrorDialog;
 
     #[derive(CompositeTemplate, glib::Properties)]
     #[properties(wrapper_type = super::LinkedDevicesWindow)]

@@ -38,8 +38,8 @@ pub mod imp {
 
     use gio::{SimpleAction, SimpleActionGroup};
     use glib::{
-        subclass::InitializingObject, subclass::Signal, types::StaticType, variant::ToVariant,
-        Propagation, Variant, VariantTy,
+        Propagation, Variant, VariantTy, subclass::InitializingObject, subclass::Signal,
+        types::StaticType, variant::ToVariant,
     };
     use gtk::{
         CompositeTemplate, CustomFilter, FilterChange, FilterListModel, NoSelection,
@@ -48,10 +48,10 @@ pub mod imp {
 
     use crate::backend::Channel;
     use crate::gspawn;
+    use crate::gui::Window;
     use crate::gui::channel_item_compact::ChannelItemCompact;
     use crate::gui::components::letter_divider::LetterDivider;
     use crate::gui::utility::Utility;
-    use crate::gui::Window;
 
     #[derive(CompositeTemplate, glib::Properties)]
     #[properties(wrapper_type = super::NewChannelDialog)]
@@ -312,9 +312,11 @@ pub mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder("channel")
-                    .param_types([Channel::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("channel")
+                        .param_types([Channel::static_type()])
+                        .build(),
+                ]
             });
             SIGNALS.as_ref()
         }

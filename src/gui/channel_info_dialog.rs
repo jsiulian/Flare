@@ -24,8 +24,8 @@ impl ChannelInfoDialog {
 
 pub mod imp {
     use crate::prelude::*;
-    use ashpd::desktop::open_uri::OpenFileRequest;
     use ashpd::WindowIdentifier;
+    use ashpd::desktop::open_uri::OpenFileRequest;
     use gtk::Align;
 
     use glib::subclass::InitializingObject;

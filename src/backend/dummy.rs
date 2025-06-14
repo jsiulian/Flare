@@ -4,25 +4,25 @@ use std::path::Path;
 use gtk::glib::{BoxedAnyObject, DateTime};
 use gtk::prelude::{Cast, FileExt};
 use gtk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
+use libsignal_service::Profile;
 use libsignal_service::content::CallMessage as PreCallMessage;
 use libsignal_service::models::Contact as LContact;
 use libsignal_service::prelude::AttachmentPointer;
 use libsignal_service::prelude::Content;
 use libsignal_service::prelude::ProfileKey;
 use libsignal_service::prelude::Uuid;
+use libsignal_service::proto::GroupContextV2;
 use libsignal_service::proto::call_message::Hangup;
 use libsignal_service::proto::call_message::Offer;
 use libsignal_service::proto::data_message::Reaction;
-use libsignal_service::proto::GroupContextV2;
 use libsignal_service::push_service::DeviceInfo;
 use libsignal_service::sender::AttachmentSpec;
-use libsignal_service::Profile;
 use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
 use presage::store::Thread;
 
 use super::{
-    message::{CallMessage, Message, MessageExt, ReactionMessage, TextMessage},
     Channel, Contact,
+    message::{CallMessage, Message, MessageExt, ReactionMessage, TextMessage},
 };
 use crate::{backend::SetupResult, error::ApplicationError};
 
@@ -368,13 +368,7 @@ impl super::Manager {
                 GROUP_ID,
                 25 + base_minute
             ),
-            msg!(
-                self,
-                "YAY!",
-                0,
-                GROUP_ID,
-                27 + base_minute
-            ),
+            msg!(self, "YAY!", 0, GROUP_ID, 27 + base_minute),
             call_msg!(
                 self,
                 PreCallMessage {
@@ -400,7 +394,13 @@ impl super::Manager {
                 3,
                 1 + base_minute
             ),
-            msg!(self, "You know, I'm something of a scientist myself", 4, 4, 2 + base_minute),
+            msg!(
+                self,
+                "You know, I'm something of a scientist myself",
+                4,
+                4,
+                2 + base_minute
+            ),
         ]
     }
 

@@ -1,9 +1,9 @@
 use crate::prelude::*;
 
 use libsignal_service::content::Reaction;
+use libsignal_service::proto::DataMessage;
 use libsignal_service::proto::body_range::AssociatedValue;
 use libsignal_service::proto::data_message::Delete;
-use libsignal_service::proto::DataMessage;
 use pango::{AttrColor, AttrList};
 
 use crate::backend::timeline::{TimelineItem, TimelineItemExt};
@@ -309,12 +309,12 @@ mod imp {
     use crate::backend::message::MessageExt;
     use crate::backend::timeline::TimelineItemExt;
     use crate::backend::{
-        message::{display_message::DisplayMessageImpl, DisplayMessage, MessageImpl},
         Attachment,
+        message::{DisplayMessage, MessageImpl, display_message::DisplayMessageImpl},
     };
     use crate::backend::{
-        timeline::{TimelineItem, TimelineItemImpl},
         Message,
+        timeline::{TimelineItem, TimelineItemImpl},
     };
 
     #[derive(Default, glib::Properties)]

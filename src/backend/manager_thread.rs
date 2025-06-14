@@ -12,29 +12,29 @@
 use std::{cell::OnceCell, ops::Bound};
 
 use futures::channel::{mpsc, oneshot};
-use futures::{join, select, FutureExt, SinkExt, StreamExt, TryFutureExt};
+use futures::{FutureExt, SinkExt, StreamExt, TryFutureExt, join, select};
 use libsignal_service::{
+    Profile,
     configuration::SignalServers,
     content::ContentBody,
-    prelude::{phonenumber, Content, ProfileKey, Uuid},
+    prelude::{Content, ProfileKey, Uuid, phonenumber},
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
     protocol::ServiceId,
     push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
-    Profile,
 };
 use presage::model::messages::Received;
 use presage::{
+    Manager,
     manager::{Registered, RegistrationOptions, RegistrationType},
     model::groups::Group,
     store::{ContentsStore, Thread},
-    Manager,
 };
 use presage_store_sled::SledStore as Store;
 use url::Url;
 
-use crate::dbus::Login1;
 use crate::ApplicationError;
+use crate::dbus::Login1;
 
 const MESSAGE_BOUND: usize = 10;
 const OFFLINE_SLEEP_TIMEOUT: u64 = 15;

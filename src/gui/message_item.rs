@@ -265,7 +265,7 @@ pub mod imp {
     use crate::{
         backend::message::TextMessage,
         gui::{
-            attachment::{backend_to_gui, Attachment},
+            attachment::{Attachment, backend_to_gui},
             components::*,
             error_dialog::ErrorDialog,
         },
@@ -568,9 +568,11 @@ pub mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder("reply")
-                    .param_types([TextMessage::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("reply")
+                        .param_types([TextMessage::static_type()])
+                        .build(),
+                ]
             });
             SIGNALS.as_ref()
         }

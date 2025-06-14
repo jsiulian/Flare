@@ -64,8 +64,8 @@ mod imp {
     use crate::{backend::message::TextMessage, prelude::*};
 
     use glib::{
-        subclass::{InitializingObject, Signal},
         SignalHandlerId,
+        subclass::{InitializingObject, Signal},
     };
     use gtk::CompositeTemplate;
 
@@ -97,9 +97,11 @@ mod imp {
     impl ObjectImpl for ItemRow {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecObject::builder::<TimelineItem>("item")
-                    .write_only()
-                    .build()]
+                vec![
+                    glib::ParamSpecObject::builder::<TimelineItem>("item")
+                        .write_only()
+                        .build(),
+                ]
             });
 
             PROPERTIES.as_ref()
@@ -117,7 +119,9 @@ mod imp {
                         if let Some(child) = obj.child() {
                             child.disconnect(handler);
                         } else {
-                            log::warn!("A handler was set for an item row, but no child registered. This should not happen.");
+                            log::warn!(
+                                "A handler was set for an item row, but no child registered. This should not happen."
+                            );
                         }
                     }
 
@@ -134,9 +138,11 @@ mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| -> Vec<Signal> {
-                vec![Signal::builder("reply")
-                    .param_types([TextMessage::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("reply")
+                        .param_types([TextMessage::static_type()])
+                        .build(),
+                ]
             });
             SIGNALS.as_ref()
         }
