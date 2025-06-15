@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-03-03 01:30+0000\n"
+"PO-Revision-Date: 2025-06-16 02:04+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
 "flare/ta/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.3-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -190,10 +190,8 @@ msgid "Linked Devices"
 msgstr "இணைக்கப்பட்ட சாதனங்கள்"
 
 #: data/resources/ui/linked_devices_window.blp:36
-#, fuzzy
-#| msgid "Link Device"
 msgid "Link New Device"
-msgstr "இணைப்பு சாதனம்"
+msgstr "புதிய சாதனத்தை இணைக்கவும்"
 
 #: data/resources/ui/linked_devices_window.blp:59
 msgid "Add Linked Device"
@@ -370,14 +368,15 @@ msgid ""
 msgstr ""
 "ஃப்ளேர் ஒரு அதிகாரப்பூர்வமற்ற சமிக்ஞை வாடிக்கையாளர். ஃப்ளேர் நிலையானது அல்ல என்பதையும், "
 "எதிர்பார்க்க வேண்டிய பிழைகள் உள்ளன என்பதையும் நினைவில் கொள்க. நீங்கள் ஏதேனும் பிழைகள் "
-"அனுபவிக்கிறீர்கள் என்றால், <a href = \"https://gitlab.com/schmiddi-on-mobile/flare/"
-"flare/-/issues\"> ஐ வெளியீடு டிராக்கர் </a> ஐ அணுகவும், புதிய சிக்கலை நீங்கள் "
-"சந்தித்தால் சிக்கல்களைத் திறக்கவும். மூன்றாம் தரப்பு பயன்பாடாக இருப்பதால், உத்தியோகபூர்வ "
-"சமிக்ஞை பயன்பாடுகள் செய்யும் அதே அளவிலான பாதுகாப்பு மற்றும் தனியுரிமைக்கு ஃபிளேர் "
-"பொறுப்பு அளிக்க முடியாது என்பதையும் நினைவில் கொள்க. நீங்கள் அல்லது நீங்கள் தொடர்பு கொள்ள "
-"வேண்டிய ஒருவருக்கு வலுவான பாதுகாப்பு தேவைப்பட்டால், விரிவடைய பயன்படுத்த வேண்டாம். "
-"மேலும் தகவலுக்கு <a href = \"https://gitlab.com/schmiddi-on-mobile/flare/-/"
-"blob/master/readme.md#security ஐ அணுகவும்."
+"அனுபவிக்கிறீர்கள் என்றால், <a href="
+"\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\"> ஐ வெளியீடு டிராக்கர் "
+"</a> ஐ அணுகவும், புதிய சிக்கலை நீங்கள் சந்தித்தால் சிக்கல்களைத் திறக்கவும். மூன்றாம் தரப்பு "
+"பயன்பாடாக இருப்பதால், உத்தியோகபூர்வ சமிக்ஞை பயன்பாடுகள் செய்யும் அதே அளவிலான பாதுகாப்பு "
+"மற்றும் தனியுரிமைக்கு ஃபிளேர் பொறுப்பு அளிக்க முடியாது என்பதையும் நினைவில் கொள்க. நீங்கள் "
+"அல்லது நீங்கள் தொடர்பு கொள்ள வேண்டிய ஒருவருக்கு வலுவான பாதுகாப்பு தேவைப்பட்டால், விரிவடை"
+"ய பயன்படுத்த வேண்டாம். மேலும் தகவலுக்கு <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/blob/master/README.md#security\">என்னைப்படி</a> ஐ "
+"அணுகவும்."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
@@ -517,13 +516,13 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
-"முதன்மை சாதனமாக பதிவு செய்ய, ஃப்ளேருக்கு உங்கள் தொலைபேசி எண் மற்றும் கேப்ட்சா நிறைவு "
+"முதன்மை சாதனமாகப் பதிவு செய்ய, ஃப்ளேருக்கு உங்கள் தொலைபேசி எண் மற்றும் கேப்ட்சா நிறைவு "
 "தேவைப்படும். முன்னணி \"+\" மற்றும் நாட்டின் குறியீடு உள்ளிட்ட பன்னாட்டு E.164 வடிவத்தில் "
-"தொலைபேசி எண்ணைக் கொடுங்கள். கேப்ட்சாவை <a href = \"https://signalcaptchas.org/"
-"registration/generate.html\"> இங்கே </a> முடிக்க முடியும் </a>, பின்னர் \"திறந்த "
-"சமிக்ஞை\" இணைப்பை நகலெடுத்து கீழே உள்ள புலத்தில் ஒட்டவும். இந்த கேப்ட்சா சுமார் ஒரு "
-"மணித்துளி மட்டுமே செல்லுபடியாகும் என்பதை நினைவில் கொள்க, எனவே தயவுசெய்து வேகமாக "
-"தொடரவும்."
+"தொலைபேசி எண்ணைக் கொடுங்கள். கேப்ட்சாவை <a href="
+"\"https://signalcaptchas.org/registration/generate.html\">இங்கே </a> முடிக்க "
+"முடியும், பின்னர் \"திறந்த சமிக்ஞை\" இணைப்பை நகலெடுத்து கீழே உள்ள புலத்தில் ஒட்டவும். இந்தக்"
+" கேப்ட்சா சுமார் ஒரு மணித்துளி மட்டுமே செல்லுபடியாகும் என்பதை நினைவில் கொள்க, எனவே "
+"தயவுசெய்து வேகமாகத் தொடரவும்."
 
 #: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -674,11 +673,11 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
-"கேப்ட்சா சவாலை சமர்ப்பிக்கவும். ஃப்ளேரிலிருந்து காட்டப்பட்ட பிழை செய்தியிலிருந்து "
-"கிள்ளாக்கைப் பெறலாம். இந்த இணையதளத்தில் </a> இல் கேப்ட்சாவை <a href = \"https://"
-"signalcaptchas.org/challenge/generate.html\"> நிரப்ப வேண்டும், மேலும் திறந்த "
-"சமிக்ஞைக்கான இணைப்பு தொடர்புடைய நுழைவுக்கு ஒட்டப்பட வேண்டும். கேப்ட்சா சுமார் ஒரு "
-"மணித்துளி மட்டுமே செல்லுபடியாகும் என்பதை நினைவில் கொள்க."
+"கேப்ட்சா சவாலைச் சமர்ப்பிக்கவும். ஃப்ளேரிலிருந்து காட்டப்பட்ட பிழை செய்தியிலிருந்து "
+"கிள்ளாக்கைப் பெறலாம். இந்த <a href="
+"\"https://signalcaptchas.org/challenge/generate.html\">இணையதளத்தில் </a> இல் "
+"கேப்ட்சாவை நிரப்ப வேண்டும், மேலும் திறந்த சமிக்ஞைக்கான இணைப்பு தொடர்புடைய நுழைவுக்கு ஒட்டப்"
+"பட வேண்டும். கேப்ட்சா சுமார் ஒரு மணித்துளி மட்டுமே செல்லுபடியாகும் என்பதை நினைவில் கொள்க."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
@@ -820,8 +819,6 @@ msgid "Something glib-related failed."
 msgstr "கிளிப் தொடர்பான ஒன்று தோல்வியடைந்தது."
 
 #: src/error.rs:133
-#, fuzzy
-#| msgid "The communication with Libsecret failed."
 msgid "The communication with libsecret failed."
 msgstr "லிப்செக்ரெட்டுடனான தொடர்பு தோல்வியடைந்தது."
 
@@ -885,46 +882,44 @@ msgstr "ஒருபோதும்"
 #: src/gui/channel_info_dialog.rs:172
 msgid "{} week"
 msgid_plural "{} weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} வாரம்"
+msgstr[1] "{} வாரங்கள்"
 
 #: src/gui/channel_info_dialog.rs:182
 msgid "{} day"
 msgid_plural "{} days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} நாள்"
+msgstr[1] "}} நாட்கள்"
 
 #: src/gui/channel_info_dialog.rs:192
 msgid "{} hour"
 msgid_plural "{} hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} மணி"
+msgstr[1] "{} மணிநேரம்"
 
 #: src/gui/channel_info_dialog.rs:202
 msgid "{} minute"
 msgid_plural "{} minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} மணித்துளி"
+msgstr[1] "{} நிமிடங்கள்"
 
 #: src/gui/channel_info_dialog.rs:212
 msgid "{} second"
 msgid_plural "{} seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "}} இரண்டாவது"
+msgstr[1] "}} விநாடிகள்"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
 msgstr "வரைவு"
 
 #: src/gui/device_info_item.rs:47
-#, fuzzy
-#| msgid "Linked:"
 msgid "Linked: {}"
-msgstr "இணைக்கப்பட்ட:"
+msgstr "இணைக்கப்பட்ட: {}"
 
 #: src/gui/device_info_item.rs:48
 msgid "Last Seen: {}"
-msgstr ""
+msgstr "கடைசியாக பார்த்தது: {}"
 
 #: src/gui/linked_devices_window.rs:131
 msgid "Unlink Device?"
