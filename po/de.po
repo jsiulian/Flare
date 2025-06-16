@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-06-14 18:05+0000\n"
+"PO-Revision-Date: 2025-06-17 04:39+0000\n"
 "Last-Translator: Yannick Krüssel <yannick@sequencode.dev>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/de/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.12.1\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -833,10 +833,8 @@ msgid "Something glib-related failed."
 msgstr "Etwas glib-bezogenes ist fehlgeschlagen."
 
 #: src/error.rs:133
-#, fuzzy
-#| msgid "The communication with Libsecret failed."
 msgid "The communication with libsecret failed."
-msgstr "Die Kommunikation mit Libsecret ist fehlgeschlagen."
+msgstr "Die Kommunikation mit libsecret ist fehlgeschlagen."
 
 #: src/error.rs:138
 msgid ""
@@ -900,46 +898,44 @@ msgstr "Nie"
 #: src/gui/channel_info_dialog.rs:172
 msgid "{} week"
 msgid_plural "{} weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Woche"
+msgstr[1] "Wochen"
 
 #: src/gui/channel_info_dialog.rs:182
 msgid "{} day"
 msgid_plural "{} days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tag"
+msgstr[1] "Tage"
 
 #: src/gui/channel_info_dialog.rs:192
 msgid "{} hour"
 msgid_plural "{} hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Stunde"
+msgstr[1] "Stunden"
 
 #: src/gui/channel_info_dialog.rs:202
 msgid "{} minute"
 msgid_plural "{} minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Minute"
+msgstr[1] "Minuten"
 
 #: src/gui/channel_info_dialog.rs:212
 msgid "{} second"
 msgid_plural "{} seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Sekunde"
+msgstr[1] "Sekunden"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
 msgstr "Entwurf"
 
 #: src/gui/device_info_item.rs:47
-#, fuzzy
-#| msgid "Linked:"
 msgid "Linked: {}"
-msgstr "Gekoppelt:"
+msgstr "Verlinkt: {}"
 
 #: src/gui/device_info_item.rs:48
 msgid "Last Seen: {}"
-msgstr ""
+msgstr "Zuletzt gesehen: {}"
 
 #: src/gui/linked_devices_window.rs:131
 msgid "Unlink Device?"
