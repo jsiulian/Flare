@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-05-05 05:55+0000\n"
+"PO-Revision-Date: 2025-06-25 13:01+0000\n"
 "Last-Translator: Coding Otaku <contact@codingotaku.com>\n"
-"Language-Team: Malayalam <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/ml/>\n"
+"Language-Team: Malayalam <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/ml/>\n"
 "Language: ml\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -416,26 +416,34 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"ആൻഡ്രോയിഡിലെയും ഐഒഎസിലെയും ഔദ്യോഗിക സിഗ്നൽ ആപ്ലിക്കേഷനുകൾക്ക് സമാനമായി ഫ്ലേറിന് ഒരു പ്രാഥമി"
+"ക ഉപകരണമായി പ്രവർത്തിക്കാൻ കഴിയും. പ്രാരംഭ പരിശോധനകൾ ഇത് പ്രവർത്തിക്കുന്നുവെന്ന് "
+"സൂചിപ്പിക്കുന്നുണ്ടെങ്കിലും ഈ മോഡിനെ നിലവിൽ ഫ്ലേർ പിന്തുണയ്ക്കുന്നില്ല. നിങ്ങൾ ഇത് പരീക്ഷിക്കാൻ "
+"തയ്യാറാണെങ്കിൽ, നിങ്ങൾക്ക് ചുവടെയുള്ള ബട്ടൺ പ്രവർത്തനക്ഷമമാക്കാം (അത് എങ്ങനെ ചെയ്യണമെന്ന് "
+"നിങ്ങൾക്ക് അറിയില്ലെങ്കിൽ, പ്രാഥമിക ഉപകരണ പിന്തുണ പരീക്ഷിക്കുന്നതിനെക്കുറിച്ച് നിങ്ങൾ "
+"ചിന്തിക്കരുത്)."
 
 #: data/resources/ui/setup_window.blp:193
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"ഒരു ദ്വിതീയ ഉപകരണമായി ലിങ്കുചെയ്യുന്നതിന്, ഔദ്യോഗിക ആപ്ലിക്കേഷനിൽ കാണിക്കാനായി ഒരു "
+"ഉപകരണത്തിന്റെ പേര് ഫ്ലേറിന് ആവശ്യമാണ്."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
-msgstr ""
+msgstr "ഉപകരണത്തിന്റെ പേര്"
 
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:379
 msgid "Developer Options"
-msgstr ""
+msgstr "ഡെവലപ്പർ ഓപ്ഷനുകൾ"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:382
 msgid "Signal Servers"
-msgstr ""
+msgstr "സിഗ്നൽ സെർവറുകൾ"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -444,46 +452,53 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"അടുത്ത പേജിൽ പ്രാഥമിക ഉപകരണത്തിൽ നിന്ന് സ്കാൻ ചെയ്യേണ്ട ഒരു ക്യുആർ കോഡ് കാണിക്കും. കോഡ് സ്കാൻ "
+"ചെയ്യുന്നതിന് നിങ്ങൾക്ക് ഏകദേശം ഒരു മിനിറ്റ് സമയപരിധി മാത്രമേ ഉള്ളൂവെന്ന് ശ്രദ്ധിക്കുക, അതിനാൽ "
+"ക്യുആർ കോഡ് സ്കാൻ ചെയ്യുന്നതിന് നിങ്ങളുടെ ഔദ്യോഗിക അപേക്ഷ ഇപ്പോൾത്തന്നെ തയ്യാറാക്കുക."
 
 #: data/resources/ui/setup_window.blp:226
 #: data/resources/ui/setup_window.blp:238
 #: data/resources/ui/setup_window.blp:292
 msgid "Link device"
-msgstr ""
+msgstr "ലിങ്ക് ഉപകരണം"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan Code"
-msgstr ""
+msgstr "കോഡ് സ്കാൻ ചെയ്യുക"
 
 #: data/resources/ui/setup_window.blp:244
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
+"നിങ്ങളുടെ അക്കൗണ്ടിലേക്ക് ലോഗിൻ ചെയ്ത മറ്റൊരു സിഗ്നൽ അപ്ലിക്കേഷൻ ഉപയോഗിച്ച് ഈ കോഡ് സ്കാൻ "
+"ചെയ്യുക."
 
 #: data/resources/ui/setup_window.blp:271
 msgid "Link without scanning"
-msgstr ""
+msgstr "സ്കാൻ ചെയ്യാതെ ലിങ്ക് ചെയ്യുക"
 
 #: data/resources/ui/setup_window.blp:281
 msgid "Manual linking"
-msgstr ""
+msgstr "സ്വയേമേവ ലിങ്ക് ചെയ്യുക"
 
 #: data/resources/ui/setup_window.blp:297
 msgid "Manual Linking"
-msgstr ""
+msgstr "സ്വമേധയാ ലിങ്ക് ചെയ്യുക"
 
 #: data/resources/ui/setup_window.blp:298
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"നിങ്ങളുടെ ഉപകരണത്തിന് QR കോഡ് സ്കാൻ ചെയ്യാൻ കഴിയുന്നില്ലെങ്കിൽ, ഇവിടെ നൽകിയിരിക്കുന്ന ലിങ്ക് "
+"നിങ്ങൾക്ക് സ്വമേധയാ നൽകാം"
 
 #: data/resources/ui/setup_window.blp:309
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "ക്ലിപ്പ് ബോർഡിലേക്ക് പകർത്തുക"
 
 #: data/resources/ui/setup_window.blp:342
 msgid "Continue"
-msgstr ""
+msgstr "തുടരുക"
 
 #: data/resources/ui/setup_window.blp:359
 msgid ""
@@ -498,8 +513,9 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
+#, fuzzy
 msgid "Captcha"
-msgstr ""
+msgstr "ക്യാപ്ച്ച"
 
 #: data/resources/ui/setup_window.blp:388
 msgid ""
@@ -512,16 +528,16 @@ msgstr ""
 #: data/resources/ui/setup_window.blp:423
 #: data/resources/ui/setup_window.blp:449
 msgid "Confirm"
-msgstr ""
+msgstr "സ്ഥിരീകരിക്കുക"
 
 #: data/resources/ui/setup_window.blp:439
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "സിഗ്നലിൽ നിന്ന് നിങ്ങൾക്ക് ലഭിച്ച സ്ഥിരീകരണ കോഡ് ഇവിടെ ചേർക്കുക."
 
 #: data/resources/ui/setup_window.blp:457
 #: data/resources/ui/setup_window.blp:465
 msgid "Finished"
-msgstr ""
+msgstr "പൂർത്തിയായി"
 
 #: data/resources/ui/setup_window.blp:498
 msgid ""
