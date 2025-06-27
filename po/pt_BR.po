@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2024-11-12 13:09+0000\n"
+"PO-Revision-Date: 2025-06-27 02:19+0000\n"
 "Last-Translator: LucasMZ <git@lucasmz.dev>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/pt_BR/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -193,10 +193,8 @@ msgid "Linked Devices"
 msgstr "Dispositivos vinculados"
 
 #: data/resources/ui/linked_devices_window.blp:36
-#, fuzzy
-#| msgid "Link Device"
 msgid "Link New Device"
-msgstr "Vincular dispositivo"
+msgstr "Vincular um novo dispositivo"
 
 #: data/resources/ui/linked_devices_window.blp:59
 msgid "Add Linked Device"
@@ -829,10 +827,8 @@ msgid "Something glib-related failed."
 msgstr "Algo relacionado à glib falhou."
 
 #: src/error.rs:133
-#, fuzzy
-#| msgid "The communication with Libsecret failed."
 msgid "The communication with libsecret failed."
-msgstr "A comunicação com a Libsecret falhou."
+msgstr "A comunicação com o libsecret falhou."
 
 #: src/error.rs:138
 msgid ""
@@ -898,46 +894,44 @@ msgstr "Nunca"
 #: src/gui/channel_info_dialog.rs:172
 msgid "{} week"
 msgid_plural "{} weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} semana"
+msgstr[1] "{} semanas"
 
 #: src/gui/channel_info_dialog.rs:182
 msgid "{} day"
 msgid_plural "{} days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} dia"
+msgstr[1] "{} dias"
 
 #: src/gui/channel_info_dialog.rs:192
 msgid "{} hour"
 msgid_plural "{} hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} hora"
+msgstr[1] "{} horas"
 
 #: src/gui/channel_info_dialog.rs:202
 msgid "{} minute"
 msgid_plural "{} minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} minuto"
+msgstr[1] "{} minutos"
 
 #: src/gui/channel_info_dialog.rs:212
 msgid "{} second"
 msgid_plural "{} seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} segundo"
+msgstr[1] "{} segundos"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
 msgstr "Rascunho"
 
 #: src/gui/device_info_item.rs:47
-#, fuzzy
-#| msgid "Linked:"
 msgid "Linked: {}"
-msgstr "Vinculado:"
+msgstr "Vinculados: {}"
 
 #: src/gui/device_info_item.rs:48
 msgid "Last Seen: {}"
-msgstr ""
+msgstr "Visto por último: {}"
 
 #: src/gui/linked_devices_window.rs:131
 msgid "Unlink Device?"
