@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-06-17 04:39+0000\n"
+"PO-Revision-Date: 2025-06-29 14:01+0000\n"
 "Last-Translator: Yannick Krüssel <yannick@sequencode.dev>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/de/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.1\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -27,7 +27,8 @@ msgstr ""
 "Julian Schmidhuber <translation@schmidhuberj.de>\n"
 "Jürgen Benvenuti <gastornis@posteo.org>, 2022\n"
 "Leo Moser <leomoser99@gmail.com>, 2023\n"
-"czarlie <flare-translate@cza.li>"
+"czarlie <flare-translate@cza.li>\n"
+"Yannick Krüssel <yannick@sequencode.dev>"
 
 #: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/setup_window.blp:371
