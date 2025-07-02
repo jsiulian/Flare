@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-06-29 14:01+0000\n"
+"PO-Revision-Date: 2025-07-03 23:01+0000\n"
 "Last-Translator: Yannick Krüssel <yannick@sequencode.dev>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/de/>\n"
@@ -1016,7 +1016,7 @@ msgstr "Nachrichten entfernen"
 #: src/gui/window.rs:411
 msgid "This will remove all locally stored messages from this channel"
 msgstr ""
-"Damit werden alle lokal gespeicherten Nachrichten aus diesem Kanal entfernt."
+"Damit werden alle lokal gespeicherten Nachrichten aus diesem Kanal entfernt"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
