@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2024-07-07 13:09+0000\n"
+"PO-Revision-Date: 2025-07-03 23:01+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/hr/>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -192,10 +192,8 @@ msgid "Linked Devices"
 msgstr "Povezani uređaji"
 
 #: data/resources/ui/linked_devices_window.blp:36
-#, fuzzy
-#| msgid "Link Device"
 msgid "Link New Device"
-msgstr "Poveži uređaj"
+msgstr "Poveži novi uređaj"
 
 #: data/resources/ui/linked_devices_window.blp:59
 msgid "Add Linked Device"
@@ -827,10 +825,8 @@ msgid "Something glib-related failed."
 msgstr "Nešto u vezi s glibom nije uspjelo."
 
 #: src/error.rs:133
-#, fuzzy
-#| msgid "The communication with Libsecret failed."
 msgid "The communication with libsecret failed."
-msgstr "Komunikacija s bibliotekom Libsecret nije uspjela."
+msgstr "Komunikacija s bibliotekom libsecret nije uspjela."
 
 #: src/error.rs:138
 msgid ""
@@ -893,51 +889,49 @@ msgstr "Nikada"
 #: src/gui/channel_info_dialog.rs:172
 msgid "{} week"
 msgid_plural "{} weeks"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{} tjedan"
+msgstr[1] "{} tjedna"
+msgstr[2] "{} tjedana"
 
 #: src/gui/channel_info_dialog.rs:182
 msgid "{} day"
 msgid_plural "{} days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{} dan"
+msgstr[1] "{} dana"
+msgstr[2] "{} dana"
 
 #: src/gui/channel_info_dialog.rs:192
 msgid "{} hour"
 msgid_plural "{} hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{} sat"
+msgstr[1] "{} sata"
+msgstr[2] "{} sati"
 
 #: src/gui/channel_info_dialog.rs:202
 msgid "{} minute"
 msgid_plural "{} minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{} minuta"
+msgstr[1] "{} minute"
+msgstr[2] "{} minuta"
 
 #: src/gui/channel_info_dialog.rs:212
 msgid "{} second"
 msgid_plural "{} seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{} sekunda"
+msgstr[1] "{} sekunde"
+msgstr[2] "{} sekundi"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
 msgstr "Skica"
 
 #: src/gui/device_info_item.rs:47
-#, fuzzy
-#| msgid "Linked:"
 msgid "Linked: {}"
-msgstr "Povezano:"
+msgstr "Povezano: {}"
 
 #: src/gui/device_info_item.rs:48
 msgid "Last Seen: {}"
-msgstr ""
+msgstr "Zadnje viđeno: {}"
 
 #: src/gui/linked_devices_window.rs:131
 msgid "Unlink Device?"
