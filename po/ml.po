@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-06-25 13:01+0000\n"
+"PO-Revision-Date: 2025-07-05 15:01+0000\n"
 "Last-Translator: Coding Otaku <contact@codingotaku.com>\n"
 "Language-Team: Malayalam <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ml/>\n"
@@ -522,6 +522,8 @@ msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"ഈ വിവരങ്ങൾ സമർപ്പിച്ച ശേഷം, നിങ്ങൾക്ക് ഒരു സ്ഥിരീകരണ കോഡുള്ള ഒരു എസ്എംഎസ് സിഗ്നലിൽ നിന്ന് "
+"ലഭിക്കും. അടുത്ത പേജിൽ ഈ സ്ഥിരീകരണ കോഡ് ചേർക്കുക."
 
 #: data/resources/ui/setup_window.blp:398
 #: data/resources/ui/setup_window.blp:406
@@ -548,7 +550,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:508
 msgid "Known Bugs"
-msgstr ""
+msgstr "അറിയാവുന്ന ബഗുകൾ"
 
 #: data/resources/ui/setup_window.blp:513
 msgid ""
@@ -563,7 +565,7 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:524
 msgid "Contact"
-msgstr ""
+msgstr "ബന്ധം"
 
 #: data/resources/ui/setup_window.blp:529
 msgid ""
@@ -575,17 +577,17 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "പൊതുവായ"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "കുറുക്കുവഴികൾ കാണിക്കുക"
 
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "ക്രമീകരണങ്ങളിലേക്ക് പോകുക"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
@@ -595,47 +597,48 @@ msgstr ""
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "മെനു തുറക്കുക"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "വിൻഡോ അടയ്ക്കുക"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "ചാനലുകൾ"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "ചാനൽ 1 ... 9 ലേക്ക് പോകുക"
 
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "ചാനലുകളിൽ തിരയുക"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "അറ്റാച്ചുമെന്റ് അപ്ലോഡുചെയ്യുക"
 
 #: data/resources/ui/shortcuts.blp:58
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "ടെക്സ്റ്റ് ഇൻപുട്ട് പെട്ടിയിൽ ശ്രദ്ധ കേന്ദ്രീകരിക്കുക"
 
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr ""
+msgstr "കൂടുതൽ സന്ദേശങ്ങൾ ലോഡുചെയ്യുക"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:173
 msgid "Submit Captcha"
-msgstr ""
+msgstr "കാപ്ച സമർപ്പിക്കുക"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -649,50 +652,50 @@ msgstr ""
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "ടോക്കൺ"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "സമർപ്പിക്കുക"
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
-msgstr ""
+msgstr "സന്ദേശം"
 
 #: data/resources/ui/text_entry.blp:41
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "ഒരു ഇമോജി ഉൾപ്പെടുത്തുക"
 
 #: data/resources/ui/text_entry.blp:49
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "ഇമോജി ഉൾപ്പെടുത്തുക"
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
-msgstr ""
+msgstr "ചാനൽ പട്ടിക"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "സംഭാഷണം ചേർക്കുക"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "സല്ലാപം"
 
 #: data/resources/ui/window.blp:123 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "ടൈപ്പ് ചെയ്യുന്നു"
 
 #: data/resources/ui/window.blp:152
 msgid "Settings"
-msgstr ""
+msgstr "ക്രമീകരണങ്ങൾ"
 
 #: data/resources/ui/window.blp:178
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "കോൺടാക്റ്റുകൾ സമന്വയിപ്പിക്കുക"
 
 #: data/resources/ui/window.blp:183
 msgid "Keybindings"
@@ -704,7 +707,7 @@ msgstr ""
 
 #: data/resources/ui/window.blp:193
 msgid "Quit"
-msgstr ""
+msgstr "ഉപേക്ഷിക്കുക"
 
 #: src/backend/channel.rs:557 src/backend/channel.rs:700
 msgid "Note to self"
@@ -712,19 +715,19 @@ msgstr ""
 
 #: src/backend/contact.rs:199 src/backend/contact.rs:281
 msgid "Unknown contact"
-msgstr ""
+msgstr "അജ്ഞാത കോൺടാക്റ്റ്"
 
 #: src/backend/manager.rs:416
 msgid "You"
-msgstr ""
+msgstr "നിങ്ങൾ"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "ഇങ്ങോട്ടൊരു വിളി വരുന്നു"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "പുറത്തേയ്ക്ക് വിളി പോകുന്നു"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
