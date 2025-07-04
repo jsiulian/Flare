@@ -723,15 +723,15 @@ msgstr "നിങ്ങൾ"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr "ഇങ്ങോട്ടൊരു വിളി വരുന്നു"
+msgstr "ഇങ്ങോട്ട് വിളി വരുന്നു"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr "പുറത്തേയ്ക്ക് വിളി പോകുന്നു"
+msgstr "പുറത്തേയ്ക്ക് കോൾ പോകുന്നു"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
-msgstr ""
+msgstr "കോൾ ആരംഭിച്ചു"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
