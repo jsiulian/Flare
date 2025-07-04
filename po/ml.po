@@ -735,7 +735,7 @@ msgstr "കോൾ ആരംഭിച്ചു"
 
 #: src/backend/message/call_message.rs:103
 msgid "Call ended"
-msgstr "വിളി അവസാനിപ്പിച്ചു"
+msgstr "കോൾ അവസാനിപ്പിച്ചു"
 
 #: src/backend/message/call_message.rs:104
 msgid "Call declined"
@@ -743,55 +743,55 @@ msgstr "കോൾ നിരസിച്ചു"
 
 #: src/backend/message/call_message.rs:105
 msgid "Unanswered call"
-msgstr ""
+msgstr "മറുപടി ലഭിക്കാത്ത കോൾ"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
-msgstr ""
+msgstr "{sender} ഒരു സന്ദേശത്തിലേക്ക് {emoji} പ്രതികരിച്ചു."
 
 #: src/backend/message/reaction_message.rs:80
 msgid "Reacted {emoji} to a message."
-msgstr ""
+msgstr "ഒരു സന്ദേശത്തിലേക്ക് {emoji} പ്രതികരിച്ചു."
 
 #: src/backend/message/text_message.rs:410
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ഒരു ചിത്രം അയച്ചു"
+msgstr[1] "{} ചിത്രങ്ങൾ അയച്ചു"
 
 #: src/backend/message/text_message.rs:412
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ഒരു വീഡിയോ അയച്ചു"
+msgstr[1] "{} വീഡിയോകൾ അയച്ചു"
 
 #: src/backend/message/text_message.rs:415
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ഒരു വോയ്സ് സന്ദേശം അയച്ചു"
+msgstr[1] "{} വോയ്സ് സന്ദേശങ്ങൾ അയച്ചു"
 
 #: src/backend/message/text_message.rs:420
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ഒരു ഫയൽ അയച്ചു"
+msgstr[1] "{} ഫയലുകൾ അയച്ചു"
 
 #: src/error.rs:118
 msgid "I/O Error."
-msgstr ""
+msgstr "I / o പിശക്."
 
 #: src/error.rs:123
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "ഇന്റർനെറ്റിലേക്കുള്ള കണക്ഷൻ ലഭ്യമാണെന്ന് തോന്നുന്നില്ല."
 
 #: src/error.rs:128
 msgid "Something glib-related failed."
-msgstr ""
+msgstr "glib-ഉമായി ബന്ധപ്പെട്ട എന്തോ പരാജയപ്പെട്ടു."
 
 #: src/error.rs:133
 msgid "The communication with libsecret failed."
-msgstr ""
+msgstr "Libfesecret-ഉമായുള്ള ആശയവിനിമയം പരാജയപ്പെട്ടു."
 
 #: src/error.rs:138
 msgid ""
