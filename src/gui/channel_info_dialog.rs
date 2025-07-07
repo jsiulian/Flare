@@ -133,8 +133,7 @@ pub mod imp {
             let channel = self.channel.borrow();
             let phone_number = channel.as_ref().and_then(|c| c.phone_number());
 
-            if let Some(url) =
-                phone_number.and_then(|p| url::Url::parse(&format!("tel:{}", p)).ok())
+            if let Some(url) = phone_number.and_then(|p| url::Url::parse(&format!("tel:{p}")).ok())
             {
                 gspawn!(clone!(
                     #[weak]

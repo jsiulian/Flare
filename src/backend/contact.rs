@@ -149,7 +149,7 @@ impl Contact {
                 ("", "") => None,
                 ("", about) => Some(about.to_string()),
                 (emoji, "") => Some(emoji.to_string()),
-                (emoji, about) => Some(format!("{} {}", emoji, about)),
+                (emoji, about) => Some(format!("{emoji} {about}")),
             }
         })
     }

@@ -358,7 +358,7 @@ mod imp {
                 .zip(reaction_counts.iter())
                 .map(|(emoji, &count)| {
                     if count > 1 {
-                        format!("{}{}", emoji, count)
+                        format!("{emoji}{count}")
                     } else {
                         emoji.clone()
                     }

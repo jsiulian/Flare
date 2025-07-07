@@ -46,7 +46,7 @@ pub mod imp {
         fn format_subtitle(created: String, last_seen: String) -> String {
             let created_format = gettextrs::gettext("Linked: {}").replace("{}", &created);
             let last_seen_format = gettextrs::gettext("Last Seen: {}").replace("{}", &last_seen);
-            format!("{}\n{}", created_format, last_seen_format)
+            format!("{created_format}\n{last_seen_format}")
         }
     }
 

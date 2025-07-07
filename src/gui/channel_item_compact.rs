@@ -49,9 +49,9 @@ pub mod imp {
             );
 
             let format = if let Some(part1) = part1 {
-                format!("{} <b>{}</b>", part1, part2)
+                format!("{part1} <b>{part2}</b>")
             } else {
-                format!("<b>{}</b>", part2)
+                format!("<b>{part2}</b>")
             };
             self.label_name.set_markup(&format);
 

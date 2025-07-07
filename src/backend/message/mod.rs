@@ -318,7 +318,7 @@ impl Message {
         let data = self.imp().data.borrow().clone()?;
         let timestamp = data.timestamp?;
         let sender_uuid = self.sender().uuid();
-        Some(format!("{:x}{:x}", timestamp, sender_uuid))
+        Some(format!("{timestamp:x}{sender_uuid:x}"))
     }
 
     fn set_internal_data(&self, data: Option<DataMessage>) {
