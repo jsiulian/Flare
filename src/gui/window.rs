@@ -19,8 +19,8 @@ impl Window {
         app.set_accels_for_action("channel-messages.load-more", &["<Control>l"]);
         for i in 1..=9 {
             app.set_accels_for_action(
-                &format!("channel-list.activate-channel({})", i),
-                &[&format!("<Control>{}", i)],
+                &format!("channel-list.activate-channel({i})"),
+                &[&format!("<Control>{i}")],
             );
         }
         app.set_accels_for_action("channel-list.toggle-search", &["<Control>f"]);

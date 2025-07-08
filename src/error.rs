@@ -166,17 +166,17 @@ impl std::fmt::Display for ApplicationError {
 impl ApplicationError {
     pub fn more_information(&self) -> String {
         match self {
-            ApplicationError::IOError(e) => format!("{:#?}", e),
+            ApplicationError::IOError(e) => format!("{e:#?}"),
             ApplicationError::NoInternet => gettext("Please check your internet connection."),
-            ApplicationError::Glib(e) => format!("{:#?}", e),
-            ApplicationError::Libsecret(e) => format!("{:#?}", e),
-            ApplicationError::Db(e) => format!("{:#?}", e),
+            ApplicationError::Glib(e) => format!("{e:#?}"),
+            ApplicationError::Libsecret(e) => format!("{e:#?}"),
+            ApplicationError::Db(e) => format!("{e:#?}"),
             ApplicationError::UnauthorizedSignal => {
                 gettext("Please delete the database and relink the device.")
             }
-            ApplicationError::SendFailed(e) => format!("{:#?}", e),
-            ApplicationError::ReceiveFailed(e) => format!("{:#?}", e),
-            ApplicationError::Presage(e) => format!("{:#?}", e),
+            ApplicationError::SendFailed(e) => format!("{e:#?}"),
+            ApplicationError::ReceiveFailed(e) => format!("{e:#?}"),
+            ApplicationError::Presage(e) => format!("{e:#?}"),
             ApplicationError::ConfigurationError(e) => match e {
                 ConfigurationError::DbPathNoFolder(p) => {
                     let s = gettext("The database path at {} is no folder.");
