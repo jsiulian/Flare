@@ -703,6 +703,19 @@ impl Manager {
         Ok(r?)
     }
 
+    pub(super) async fn get_profile_key_by_uuid(
+        &self,
+        id: Uuid,
+    ) -> Result<Option<libsignal_service::prelude::ProfileKey>, ApplicationError> {
+        log::trace!("`Manager::get_profile_key_by_uuid` start");
+        let store = self.store();
+        let r = tspawn!(async move { store.profile_key(&id).await })
+            .await
+            .expect("Failed to spawn tokio");
+        log::trace!("`Manager::get_profile_key_by_uuid` finished");
+        Ok(r?)
+    }
+
     pub(super) async fn get_attachment(
         &self,
         attachment_pointer: &AttachmentPointer,

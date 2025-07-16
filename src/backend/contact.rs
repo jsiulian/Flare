@@ -55,7 +55,7 @@ impl Contact {
         let manager = self.manager();
         let uuid = self.uuid();
 
-        let profile_key = {
+        let mut profile_key = {
             let contact = obj.contact.borrow();
             let channel = self.channel();
 
@@ -82,6 +82,10 @@ impl Contact {
             }
         };
 
+        if profile_key.is_none() {
+            profile_key = manager.get_profile_key_by_uuid(uuid).await.ok().flatten();
+        }
+
         if let Some(key) = profile_key {
             // TODO: Error handling?
             let profile = manager.retrieve_profile_by_uuid(uuid, key).await.ok();
@@ -89,21 +93,27 @@ impl Contact {
             self.notify("title");
 
             // Avatar
-            let Some(avatar) = manager
+            match manager
                 .retrieve_profile_avatar_by_uuid(uuid, key)
                 .await
-                .ok()
-                .flatten()
-                .and_then(|b| Texture::from_bytes(&Bytes::from_owned(b)).ok())
-            else {
-                log::debug!(
-                    "Failed to fetch avatar for {}; they may not have a profile picture set",
-                    self.title()
-                );
-                return;
-            };
-
-            self.set_avatar(avatar);
+                .map(|b| b.and_then(|b| Texture::from_bytes(&Bytes::from_owned(b)).ok()))
+            {
+                Ok(Some(avatar)) => {
+                    self.set_avatar(avatar);
+                }
+                Ok(None) => {
+                    log::debug!(
+                        "Failed to parse avatar data for {}; they may not have a profile picture set.",
+                        self.title()
+                    );
+                }
+                Err(e) => {
+                    log::debug!(
+                        "Failed to fetch avatar for {}; they may not have a profile picture set: {e:#?}",
+                        self.title()
+                    );
+                }
+            }
         }
     }
 
