@@ -10,12 +10,6 @@ edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-# Optimize presage-store-cipher, as otherwise opening the store takes 6 seconds.
-[profile.dev.package.presage-store-cipher]
-opt-level = 3
-[profile.dev.package.sha2]
-opt-level = 3
-
 [dependencies]
 gtk = { version = "0.9.6", package = "gtk4", features = ["v4_12"]}
 gio = { version = "0.20.9", features = ["v2_70"]}
@@ -30,9 +24,9 @@ tokio = { version = "1.44.0", features = ["rt", "macros", "rt-multi-thread", "ti
 regex = "1.11.1"
 lazy_static = "1.5.0"
 
-presage = { git = "https://github.com/whisperfish/presage", rev = "3f55d5fd96f0d1b43e217837179727f4f49cdeda" }
-presage-store-sled = { git = "https://github.com/whisperfish/presage", rev = "3f55d5fd96f0d1b43e217837179727f4f49cdeda" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "f94d55bf8d742699024c26ca3965e85fc9946e23" }
+presage = { git = "https://github.com/whisperfish/presage", rev = "123c1f926e359c21b34d099279ee8a92462ce96d" }
+presage-store-sqlite = { git = "https://github.com/whisperfish/presage", rev = "123c1f926e359c21b34d099279ee8a92462ce96d" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "68d5d835edf40b3ad0d0386965a779c18fd40ae8" }
 
 oo7 = { version = "0.4.1", default-features = false, features = ["native_crypto", "tokio"] }
 rand = "0.9.0"

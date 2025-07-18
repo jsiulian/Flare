@@ -30,7 +30,7 @@ use presage::{
     model::groups::Group,
     store::{ContentsStore, Thread},
 };
-use presage_store_sled::SledStore as Store;
+use presage_store_sqlite::SqliteStore as Store;
 use url::Url;
 
 use crate::ApplicationError;
@@ -75,7 +75,7 @@ enum Command {
         (Bound<u64>, Bound<u64>),
         oneshot::Sender<
             Result<
-                <presage_store_sled::SledStore as presage::store::ContentsStore>::MessagesIter,
+                <presage_store_sqlite::SqliteStore as presage::store::ContentsStore>::MessagesIter,
                 Error,
             >,
         >,
@@ -396,8 +396,10 @@ impl ManagerThread {
         &self,
         thread: Thread,
         range: (Bound<u64>, Bound<u64>),
-    ) -> Result<<presage_store_sled::SledStore as presage::store::ContentsStore>::MessagesIter, Error>
-    {
+    ) -> Result<
+        <presage_store_sqlite::SqliteStore as presage::store::ContentsStore>::MessagesIter,
+        Error,
+    > {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
             .clone()

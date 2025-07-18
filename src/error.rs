@@ -10,11 +10,12 @@ const NETWORK_UNREACHABLE: &str = "Network is unreachable";
 const TIMED_OUT: &str = "timed out";
 const REQWEST_ERROR: &str = "reqwest error";
 
-type PresageError = presage::Error<presage_store_sled::SledStoreError>;
+type PresageError = presage::Error<presage_store_sqlite::SqliteStoreError>;
 
 #[derive(Debug)]
 pub enum ConfigurationError {
     DbPathNoFolder(std::path::PathBuf),
+    CannotCreateDbFolder(std::path::PathBuf, std::io::Error),
 }
 
 impl Display for ConfigurationError {
@@ -22,6 +23,14 @@ impl Display for ConfigurationError {
         match self {
             ConfigurationError::DbPathNoFolder(p) => {
                 writeln!(f, "provided path is not a folder {}", p.display())
+            }
+            ConfigurationError::CannotCreateDbFolder(p, e) => {
+                writeln!(
+                    f,
+                    "cannot create the database folder {}: {}",
+                    p.display(),
+                    e
+                )
             }
         }
     }
@@ -35,7 +44,7 @@ pub enum ApplicationError {
     NoInternet,
     Glib(glib::Error),
     Libsecret(oo7::Error),
-    Db(presage_store_sled::SledStoreError),
+    Db(presage_store_sqlite::SqliteStoreError),
     UnauthorizedSignal,
     // MessageSenderError is pretty big, put into `Box` to move it to the heap.
     SendFailed(Box<libsignal_service::sender::MessageSenderError>),
@@ -101,8 +110,8 @@ impl From<glib::Error> for ApplicationError {
     }
 }
 
-impl From<presage_store_sled::SledStoreError> for ApplicationError {
-    fn from(e: presage_store_sled::SledStoreError) -> Self {
+impl From<presage_store_sqlite::SqliteStoreError> for ApplicationError {
+    fn from(e: presage_store_sqlite::SqliteStoreError) -> Self {
         ApplicationError::Db(e)
     }
 }
@@ -181,6 +190,13 @@ impl ApplicationError {
                 ConfigurationError::DbPathNoFolder(p) => {
                     let s = gettext("The database path at {} is no folder.");
                     s.replace("{}", &p.to_string_lossy())
+                }
+                ConfigurationError::CannotCreateDbFolder(p, e) => {
+                    let s = gettext(
+                        "The database path at {path} is cannot be created due to error {error}.",
+                    );
+                    s.replace("{path}", &p.to_string_lossy())
+                        .replace("{error}", &e.to_string())
                 }
             },
             ApplicationError::ManagerThreadPanic => {
