@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - This release will require a relink of Flare.
 
+### HOTFIX
+
+- Many contacts being displayed only by their phone number or 'Unknown Contact', as well as not having a profile picture set.
+
 ## [0.16.3] - 2025-06-03
 
 ### Fixed
