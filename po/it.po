@@ -8,9 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-08-10 12:01+0000\n"
-"Last-Translator: Marco Ramazzotti "
-"<cuordilava@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2025-08-13 21:02+0000\n"
+"Last-Translator: Angelo Schirinzi <Odi-3@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/it/>\n"
 "Language: it\n"
@@ -681,6 +680,11 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Invia una sfida Captcha. Il token può essere ottenuto dal messaggio di "
+"errore mostrato da Flare. Il captcha deve essere compilato <a href="
+"\"https://signalcaptchas.org/challenge/generate.html\">su questo sito web</"
+"a> e il collegamento per aprire Signal deve essere incollato nella voce "
+"corrispondente. Nota che il captcha è valido solo per circa un minuto."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
@@ -691,9 +695,8 @@ msgid "Submit"
 msgstr "Invia"
 
 #: data/resources/ui/text_entry.blp:13
-#, fuzzy
 msgid "Message"
-msgstr "Inserimento del messaggio"
+msgstr "Messaggio"
 
 #: data/resources/ui/text_entry.blp:41
 msgctxt "accessibility"
@@ -716,7 +719,7 @@ msgstr "Aggiungi Conversazione"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "Chat"
 
 #: data/resources/ui/window.blp:123 src/gui/channel_item.rs:59
 msgid "is typing"
@@ -756,11 +759,11 @@ msgstr "Tu"
 
 #: src/backend/message/call_message.rs:100
 msgid "Incoming call"
-msgstr ""
+msgstr "Chiamata in entrata"
 
 #: src/backend/message/call_message.rs:101
 msgid "Outgoing call"
-msgstr ""
+msgstr "Chiamata in uscita"
 
 #: src/backend/message/call_message.rs:102
 msgid "Call started"
@@ -783,9 +786,8 @@ msgid "{sender} reacted {emoji} to a message."
 msgstr "{sender} ha reagito con {emoji} a un messaggio."
 
 #: src/backend/message/reaction_message.rs:80
-#, fuzzy
 msgid "Reacted {emoji} to a message."
-msgstr "Cancella messaggi"
+msgstr "Ha reagito con {emoji} a un messaggio."
 
 #: src/backend/message/text_message.rs:410
 msgid "Sent an image"
@@ -820,15 +822,12 @@ msgid "There does not seem to be a connection to the internet available."
 msgstr "Non sembra essere disponibile una connessione a Internet."
 
 #: src/error.rs:128
-#, fuzzy
 msgid "Something glib-related failed."
-msgstr "L'invio di un messaggio non è riuscito."
+msgstr "Qualcosa relativo a glib è fallito."
 
 #: src/error.rs:133
-#, fuzzy
-#| msgid "The communication with Libsecret failed."
 msgid "The communication with libsecret failed."
-msgstr "La comunicazione con Libsecret è fallita."
+msgstr "La comunicazione con libsecret è fallita."
 
 #: src/error.rs:138
 msgid ""
@@ -881,57 +880,54 @@ msgid "The database path at {} is no folder."
 msgstr "Il percorso della base di dati in {} non è una cartella."
 
 #: src/error.rs:195
-#, fuzzy
 msgid "Please restart the application with logging and report this issue."
-msgstr "Riavvia l'applicazione dopo la chiusura di questa finestra."
+msgstr "Riavvia l'applicazione con il logging e segnala questo problema."
 
 #: src/gui/channel_info_dialog.rs:167
 msgid "Never"
-msgstr ""
+msgstr "Mai"
 
 #: src/gui/channel_info_dialog.rs:172
 msgid "{} week"
 msgid_plural "{} weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} settimana"
+msgstr[1] "{} settimane"
 
 #: src/gui/channel_info_dialog.rs:182
 msgid "{} day"
 msgid_plural "{} days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} giorno"
+msgstr[1] "{} giorni"
 
 #: src/gui/channel_info_dialog.rs:192
 msgid "{} hour"
 msgid_plural "{} hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} ora"
+msgstr[1] "{} ore"
 
 #: src/gui/channel_info_dialog.rs:202
 msgid "{} minute"
 msgid_plural "{} minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} minuto"
+msgstr[1] "{} minuti"
 
 #: src/gui/channel_info_dialog.rs:212
 msgid "{} second"
 msgid_plural "{} seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} secondo"
+msgstr[1] "{} secondi"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
 msgstr "Bozza"
 
 #: src/gui/device_info_item.rs:47
-#, fuzzy
-#| msgid "Linked:"
 msgid "Linked: {}"
-msgstr "Collegato:"
+msgstr "Collegato: {}"
 
 #: src/gui/device_info_item.rs:48
 msgid "Last Seen: {}"
-msgstr ""
+msgstr "Ultima visualizzazione: {}"
 
 #: src/gui/linked_devices_window.rs:131
 msgid "Unlink Device?"
