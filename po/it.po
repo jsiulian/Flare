@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-08-13 21:02+0000\n"
+"PO-Revision-Date: 2025-09-03 20:01+0000\n"
 "Last-Translator: Angelo Schirinzi <Odi-3@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/it/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13.1-rc\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -939,30 +939,29 @@ msgstr "Sei sicuro di voler scollegare {}?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "Controlla nuovi messaggi quando chiuso"
 
 #: src/gui/preferences_window.rs:103
 msgid "Background permission"
-msgstr ""
+msgstr "Permesso in background"
 
 #: src/gui/preferences_window.rs:104
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "Usa le impostazioni per rimuovere i permessi"
 
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Produzione"
 
 #: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Test/Staging"
 
 #: src/gui/setup_window.rs:132
-#, fuzzy
 msgid "Copied to clipboard"
-msgstr "Copia negli appunti"
+msgstr "Copiato negli appunti"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
@@ -995,17 +994,15 @@ msgstr "%Y-%m-%d"
 #: src/gui/utility.rs:151
 #, c-format
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:159
-#, fuzzy
 msgid "Attachment"
-msgstr "Allegati"
+msgstr "Allegato"
 
 #: src/gui/window.rs:409 src/gui/window.rs:418
-#, fuzzy
 msgid "Remove Messages"
-msgstr "Cancella messaggi"
+msgstr "Rimuovi messaggi"
 
 #: src/gui/window.rs:411
 #, fuzzy
