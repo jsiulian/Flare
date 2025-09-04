@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-09-03 20:01+0000\n"
+"PO-Revision-Date: 2025-09-05 18:01+0000\n"
 "Last-Translator: Angelo Schirinzi <Odi-3@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/it/>\n"
@@ -1005,11 +1005,9 @@ msgid "Remove Messages"
 msgstr "Rimuovi messaggi"
 
 #: src/gui/window.rs:411
-#, fuzzy
 msgid "This will remove all locally stored messages from this channel"
 msgstr ""
-"Questo cancellerà tutti i messaggi memorizzati localmente. Questo chiuderà "
-"anche l'applicazione."
+"Questo rimuoverà tutti i messaggi memorizzati localmente da questo canale"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
@@ -1019,7 +1017,7 @@ msgstr "Chatta con i tuoi amici su Signal"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "messaggistica;chat;signal;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:29
@@ -1028,6 +1026,9 @@ msgid ""
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
+"Flare è un'app non ufficiale per Signal. È ancora in fase di sviluppo e non "
+"include tutte le funzionalità delle app Signal ufficiali. Maggiori "
+"informazioni sono disponibili nella roadmap delle funzionalità."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:33
@@ -1043,43 +1044,44 @@ msgstr ""
 "sicurezza, consultare il README del progetto."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:792
-#, fuzzy
 msgid "Overview of the application"
-msgstr "Una parte dell'applicazione si è arrestata in modo anomalo."
+msgstr "Panoramica dell'applicazione"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Larghezza finestra"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Altezza finestra"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Stato finestra massimizzata"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Il nome del dispositivo quando si collega Flare. Questo richiede che "
+"l'applicazione venga ricollegata."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Scarica automaticamente le immagini"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Scarica automaticamente i video"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
-msgstr ""
+msgstr "Scarica automaticamente i messaggi vocali"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "Scarica automaticamente i file"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
@@ -1087,15 +1089,15 @@ msgstr "Invia notifiche"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Esegui in background quando chiuso"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Invia notifiche quando si ricevono reazioni"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "I messaggi possono essere selezionati"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
