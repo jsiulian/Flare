@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-07-05 15:01+0000\n"
+"PO-Revision-Date: 2025-09-21 07:01+0000\n"
 "Last-Translator: Coding Otaku <contact@codingotaku.com>\n"
 "Language-Team: Malayalam <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ml/>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
 msgid "translator-credits"
-msgstr "പരിഭാക്ഷ-ക്രെഡിറ്റുകൾ"
+msgstr "പരിഭാഷകർക്കുള്ള കടപ്പാട്"
 
 #: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/setup_window.blp:371
@@ -60,12 +60,10 @@ msgid "Search"
 msgstr "തിരയുക"
 
 #: data/resources/ui/channel_messages.blp:21
-#, fuzzy
 msgid "No Channel Selected"
 msgstr "ചാനൽ തിരഞ്ഞെടുത്തിട്ടില്ല"
 
 #: data/resources/ui/channel_messages.blp:22
-#, fuzzy
 msgid "Select a channel"
 msgstr "ഒരു ചാനൽ തിരഞ്ഞെടുക്കുക"
 
@@ -100,13 +98,11 @@ msgid "Add attachment"
 msgstr "അറ്റാച്ചുമെന്റ് ചേർക്കുക"
 
 #: data/resources/ui/channel_messages.blp:255
-#, fuzzy
 msgctxt "accessibility"
 msgid "Message input"
-msgstr "സന്ദേശം എഴുതുക"
+msgstr "സന്തേശപെട്ടി"
 
 #: data/resources/ui/channel_messages.blp:261
-#, fuzzy
 msgctxt "tooltip"
 msgid "Message input"
 msgstr "സന്ദേശം എഴുതുക"
@@ -149,7 +145,6 @@ msgstr "മായ്ക്കുക"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:157
 #: src/gui/linked_devices_window.rs:138
-#, fuzzy
 msgid "Unlink"
 msgstr "അൺലിങ്ക് ചെയ്യുക"
 
@@ -159,8 +154,8 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
-"ഇത് ഈ ഉപകരണത്തിന് അൺനോട്ട് ചെയ്ത് പ്രാദേശികമായി സംരക്ഷിച്ച എല്ലാ ഡാറ്റയും നീക്കംചെയ്യും. ഇത് "
-"വീണ്ടും തുറക്കുമ്പോൾ അത് റിങ്ക് ചെയ്യാൻ കഴിയുന്ന ആപ്ലിക്കേഷനും ഇത് അടയ്ക്കും."
+"ഇത് ഈ ഉപകരണം അൺലിങ്ക് ചെയ്യുകയും പ്രാദേശികമായി സംരക്ഷിച്ച എല്ലാ ഡാറ്റയും നീക്കം ചെയ്യുകയും "
+"ചെയ്യും. വീണ്ടും തുറക്കുമ്പോൾ വീണ്ടും ലിങ്കുചെയ്യാൻ കഴിയുന്ന തരത്തിൽ ഇത് ആപ്ലിക്കേഷൻ അടയ്ക്കും."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
@@ -193,10 +188,8 @@ msgid "Linked Devices"
 msgstr "ലിങ്കുചെയ്ത ഉപകരണങ്ങൾ"
 
 #: data/resources/ui/linked_devices_window.blp:36
-#, fuzzy
-#| msgid "Link Device"
 msgid "Link New Device"
-msgstr "ലിങ്ക് ഉപകരണം"
+msgstr "പുതിയ ഉപകരണം ലിങ്ക് ചെയ്യുക"
 
 #: data/resources/ui/linked_devices_window.blp:59
 msgid "Add Linked Device"
@@ -513,7 +506,6 @@ msgstr ""
 
 #: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
-#, fuzzy
 msgid "Captcha"
 msgstr "ക്യാപ്ച്ച"
 
@@ -547,6 +539,9 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"ഫ്ലെയർ തയ്യാറാകുന്നു, കോൺടാക്റ്റുകൾ സമന്വയിപ്പിക്കുന്നത് പൂർത്തിയാക്കാൻ ഇത് കാത്തിരിക്കുന്നു. ഇതിന് "
+"കുറച്ച് സമയം എടുത്തേക്കാം, കോൺടാക്റ്റുകൾ സമന്വയിപ്പിച്ചതിനു ശേക്ഷം നിങ്ങൾക്ക് ഫ്ലെയർ ഉപയോഗിക്കാം"
+". നിങ്ങൾ ഫ്ലെയർ ഉപയോഗിക്കുന്നതിനുമുമ്പ് മുമ്പ് അറിയേണ്ട കാര്യങ്ങൾ:"
 
 #: data/resources/ui/setup_window.blp:508
 msgid "Known Bugs"
@@ -562,6 +557,13 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"ഫ്ലെയറിന് സന്ദേശങ്ങൾ ലഭിക്കുമ്പോൾ പുതിയ സന്ദേശങ്ങളൊന്നും അയക്കരുത്, ആവശ്യമായ എല്ലാ വിവരങ്ങളും "
+"ലഭിച്ചിട്ടുണ്ടെന്ന് ആദ്യം ഉറപ്പാക്കുക. ഈ പ്രശ്നം പരിഹരിക്കാൻ ഞങ്ങൾ ശ്രമിക്കുന്നുണ്ട്. അതിലുപരി, "
+"നിങ്ങൾക്ക് ഇതുവരെ സന്ദേശങ്ങൾ ലഭിച്ചിട്ടില്ലാത്ത കോൺടാക്റ്റുകളിലേക്ക് സന്ദേശം അയയ്ക്കുന്നത് നിരക്ക് "
+"പരിമിതപ്പെടുത്തുന്നതിലേക്ക് നയിച്ചേക്കാം. നിങ്ങൾ വളരെയധികം സന്ദേശങ്ങൾ അയയ്ക്കുന്നതിന് മുമ്പ് ആ "
+"കോൺടാക്റ്റിൽ നിന്ന് ഒരു സന്ദേശമെങ്കിലും സ്വീകരിച്ചെന്ന് ഉറപ്പാക്കുക. ബഗുകളുടെ പൂർണ്ണ ലിസ്റ്റിനായി"
+", <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/"
+"?label_name%5B%5D=bug\">ഇഷ്യു ട്രാക്കർ</a> സന്ദർശിക്കുക."
 
 #: data/resources/ui/setup_window.blp:524
 msgid "Contact"
@@ -573,6 +575,9 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"ഫ്ലെയറിനെക്കുറിച്ച് ചില ഫീഡ് ബാക്ക് നൽകാൻ ആഗ്രഹിക്കുന്നുണ്ടോ, അല്ലെങ്കിൽ അൽപ്പം സംസാരിക്കണോ? "
+"ഞങ്ങളുടെ <a href=\"https://matrix.to/#/#flare-signal:matrix.org\">മാട്രിക്സ് റൂം</"
+"a> എല്ലാവർക്കും തുറന്നിരിക്കുന്നു."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -592,7 +597,7 @@ msgstr "ക്രമീകരണങ്ങളിലേക്ക് പോകു�
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "എബൌട്ട് പേജിലേക്ക് പോകുക"
 
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
@@ -625,7 +630,6 @@ msgid "Upload attachment"
 msgstr "അറ്റാച്ചുമെന്റ് അപ്ലോഡുചെയ്യുക"
 
 #: data/resources/ui/shortcuts.blp:58
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Focus the text input box"
 msgstr "ടെക്സ്റ്റ് ഇൻപുട്ട് പെട്ടിയിൽ ശ്രദ്ധ കേന്ദ്രീകരിക്കുക"
@@ -649,6 +653,11 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"ഒരു കാപ്ച വെല്ലുവിളി സമർപ്പിക്കുക. ഫ്ലേരിൽ നിന്ന് പ്രദർശിപ്പിച്ച പിശക് സന്ദേശത്തിൽ നിന്ന് ടോക്"
+"കൺ ലഭിക്കും. ക്യാപ്ച <a href="
+"\"https://signalcaptchas.org/challenge/generate.html\">ഈ വെബ്സൈറ്റിൽ</a> "
+"സമർപ്പിക്കുക, സിഗ്നൽ ഓപ്പൺ ചെയ്യേണ്ട ലിങ്കും അവിടെ സമർപ്പിക്കേണ്ടി വരും. ഒരു മിനിറ്റിന് "
+"മാത്രമേ കാപ്ച സാധുതയുള്ളൂ എന്നത് ശ്രദ്ധിക്കുക."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
@@ -699,11 +708,11 @@ msgstr "കോൺടാക്റ്റുകൾ സമന്വയിപ്പ�
 
 #: data/resources/ui/window.blp:183
 msgid "Keybindings"
-msgstr ""
+msgstr "കീ കൈലിംഗുകൾ"
 
 #: data/resources/ui/window.blp:188
 msgid "About"
-msgstr ""
+msgstr "ഫ്ലെയറിനെ കുറിച്ച്"
 
 #: data/resources/ui/window.blp:193
 msgid "Quit"
@@ -711,7 +720,7 @@ msgstr "ഉപേക്ഷിക്കുക"
 
 #: src/backend/channel.rs:557 src/backend/channel.rs:700
 msgid "Note to self"
-msgstr ""
+msgstr "സ്വന്തം കുറിപ്പുകൾ"
 
 #: src/backend/contact.rs:199 src/backend/contact.rs:281
 msgid "Unknown contact"
@@ -798,49 +807,57 @@ msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"ബാക്കെൻഡ് ഡാറ്റാബേസ് പരാജയപ്പെട്ടു. ദയവായി അപ്ലിക്കേഷൻ പുനരാരംഭിക്കുക അല്ലെങ്കിൽ ഡാറ്റാബേസ് "
+"ഇല്ലാതാക്കി അപ്ലിക്കേഷൻ വീണ്ടും ലിങ്ക് ചെയ്യുക."
 
 #: src/error.rs:143
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"സിഗ്നൽ ഉപയോഗിക്കാൻ നിങ്ങൾക്ക് അംഗീകാരമുണ്ടെന്നു തോന്നുന്നില്ല. ഡാറ്റാബേസ് ഇല്ലാതാക്കി അപ്ലിക്കേ"
+"ഷൻ വീണ്ടും ലിങ്ക് ചെയ്യുക."
 
 #: src/error.rs:148
 msgid "Sending a message failed."
-msgstr ""
+msgstr "ഒരു സന്ദേശം അയയ്ക്കുന്നത് പരാജയപ്പെട്ടു."
 
 #: src/error.rs:153
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "ഒരു സന്ദേശം ലഭിക്കുന്നത് പരാജയപ്പെട്ടു."
 
 #: src/error.rs:158
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"സിഗ്നൽ ബാക്കെൻ അപ്രതീക്ഷിതമായി എന്തോ സംഭവിച്ചു. ദയവായി അല്പസമയത്തിനു ശേക്ഷം വീണ്ടും "
+"ശ്രമിക്കുക."
 
 #: src/error.rs:163
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "അപ്ലിക്കേഷന്റെ ക്രമീകരണങ്ങൾ തെറ്റാണെന്ന് തോന്നുന്നു."
 
 #: src/error.rs:168
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "ആപ്ലിക്കേഷന്റെ ഒരു ഭാഗം തകർന്നു."
 
 #: src/error.rs:178
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കുക."
 
 #: src/error.rs:183
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "ഡാറ്റാബേസ് ഇല്ലാതാക്കി ഉപകരണം വീണ്ടും ലിങ്ക് ചെയ്യുക."
 
 #: src/error.rs:190
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "{} എന്ന ഡാറ്റാബേസ് പാത ഒരു ഫോൾഡറല്ല."
 
 #: src/error.rs:195
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
+"ദയവായി ലോഗിംഗ് പ്രവർത്തനക്ഷമമാക്കി അപ്ലിക്കേഷൻ പുനരാരംഭിച്ചതിനു ശേക്ഷം ഈ പ്രശ്നം "
+"റിപ്പോർട്ടുചെയ്യുക."
 
 #: src/gui/channel_info_dialog.rs:167
 msgid "Never"
@@ -849,79 +866,78 @@ msgstr ""
 #: src/gui/channel_info_dialog.rs:172
 msgid "{} week"
 msgid_plural "{} weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} ആഴ്ച"
+msgstr[1] "{} ആഴ്ചകൾ"
 
 #: src/gui/channel_info_dialog.rs:182
 msgid "{} day"
 msgid_plural "{} days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} ദിവസം"
+msgstr[1] "{} ദിവസങ്ങൾ"
 
 #: src/gui/channel_info_dialog.rs:192
 msgid "{} hour"
 msgid_plural "{} hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} മണിക്കൂർ"
+msgstr[1] "{} മണിക്കൂറുകൾ"
 
 #: src/gui/channel_info_dialog.rs:202
 msgid "{} minute"
 msgid_plural "{} minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} നിമിഷം"
+msgstr[1] "{} നിമിഷങ്ങൾ"
 
 #: src/gui/channel_info_dialog.rs:212
 msgid "{} second"
 msgid_plural "{} seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} സെക്കൻഡ്"
+msgstr[1] "{} സെക്കൻഡുകൾ"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
 msgstr ""
 
 #: src/gui/device_info_item.rs:47
-#, fuzzy
 msgid "Linked: {}"
-msgstr "ലിങ്കുചെയ്തത്:"
+msgstr "ലിങ്കുചെയ്തത്: {}"
 
 #: src/gui/device_info_item.rs:48
 msgid "Last Seen: {}"
-msgstr ""
+msgstr "അവസാനം കണ്ടത്: {}"
 
 #: src/gui/linked_devices_window.rs:131
 msgid "Unlink Device?"
-msgstr ""
+msgstr "ഉപകരണം അൺലിങ്ക് ചെയ്യണോ?"
 
 #: src/gui/linked_devices_window.rs:133
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "{} അൺലിങ്ക് ചെയ്യണമെന്ന് തീർച്ചയാണോ?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "അടച്ചിരിക്കുമ്പോൾ പുതിയ സന്ദേശങ്ങൾക്കായി ശ്രദ്ധിക്കുക"
 
 #: src/gui/preferences_window.rs:103
 msgid "Background permission"
-msgstr ""
+msgstr "പശ്ചാത്തല അനുമതി"
 
 #: src/gui/preferences_window.rs:104
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "അനുമതികൾ നീക്കംചെയ്യാൻ ക്രമീകരണങ്ങൾ ഉപയോഗിക്കുക"
 
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "പ്രൊഡക്ഷൻ"
 
 #: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "സ്റ്റേജിംഗ്"
 
 #: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "ക്ലിപ്ബോർഡിലേക്ക് പകർത്തി"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
