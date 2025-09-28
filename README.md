@@ -32,7 +32,7 @@ Flare is an unofficial app that lets you chat with your friends on Signal from L
   </tr>
   <tr>
     <td>Self Compile</td>
-    <td>See [Compilation](https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/CONTRIBUTING.md#compilation).</td>
+    <td>See [Compilation](https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/doc/compilation.md).</td>
   </tr>
 </table>
 
