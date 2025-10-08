@@ -23,8 +23,9 @@ test:cargo-deny:
   stage: quick-test
   image: archlinux:base-devel
   script:
-    - pacman -Syu rustup cargo-deny --noconfirm
+    - pacman -Syu rustup --noconfirm
     - rustup default stable
+    - cargo install --locked cargo-deny
     - cargo deny check
   allow_failure: true
 

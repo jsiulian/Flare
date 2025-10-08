@@ -24,10 +24,10 @@ impl Selection {
     fn find_item_position(&self, chat: &Channel, start_pos: u32, end_pos: u32) -> u32 {
         if let Some(model) = self.model() {
             for pos in start_pos..end_pos {
-                if let Some(item) = model.item(pos).and_downcast_ref::<Channel>() {
-                    if item == chat {
-                        return pos;
-                    }
+                if let Some(item) = model.item(pos).and_downcast_ref::<Channel>()
+                    && item == chat
+                {
+                    return pos;
                 }
             }
         }

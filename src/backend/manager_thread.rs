@@ -522,10 +522,10 @@ async fn setup_manager(
                     )
                 );
                 // Request contact sync directly after linking.
-                if let Ok(manager) = &mut manager {
-                    if let Err(e) = manager.request_contacts().await {
-                        log::error!("Failed to sync contacts after linking: {}", e);
-                    }
+                if let Ok(manager) = &mut manager
+                    && let Err(e) = manager.request_contacts().await
+                {
+                    log::error!("Failed to sync contacts after linking: {}", e);
                 }
                 setup_sender
                     .send(SetupResult::Finished)
@@ -597,11 +597,10 @@ async fn command_loop(
                         // Receiving a message.
                         msg = next_msg => {
                             if let Some(msg) = msg {
-                                if let Received::Content(msg) = msg {
-                                    if content.send(*msg).await.is_err() {
+                                if let Received::Content(msg) = msg &&
+                                    content.send(*msg).await.is_err() {
                                         log::info!("Failed to send message to `Manager`, exiting");
                                         break 'outer;
-                                    }
                                 }
                             } else {
                                 log::error!("Message stream finished. Restarting command loop.");

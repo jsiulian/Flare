@@ -9,11 +9,13 @@ allow = [
     "BSD-2-Clause",
 
     "AGPL-3.0",
+    "AGPL-3.0-only",
 
     "Zlib",
     "ISC",
     "Unicode-3.0",
-    "NCSA"
+    "NCSA",
+    "MPL-2.0"
 ]
 
 [[licenses.clarify]]
@@ -25,17 +27,22 @@ license-files = [
 
 [[licenses.clarify]]
 name = "presage"
-expression = "AGPL-3.0"
+expression = "AGPL-3.0-only"
 license-files = []
 
 [[licenses.clarify]]
 name = "presage-store-sled"
-expression = "AGPL-3.0"
+expression = "AGPL-3.0-only"
 license-files = []
 
 [[licenses.clarify]]
 name = "presage-store-cipher"
-expression = "AGPL-3.0"
+expression = "AGPL-3.0-only"
+license-files = []
+
+[[licenses.clarify]]
+name = "sourceview5"
+expression = "MIT"
 license-files = []
 
 [bans]
@@ -47,7 +54,6 @@ github = ["whisperfish", "signalapp"]
 [advisories]
 ignore = [
     "RUSTSEC-2024-0388", # Unmaintained "derivative", but used with "libsignal-service"; cannot do much about it right now.
-    "RUSTSEC-2024-0384", # Unmaintained "instant", but used by "parking_lot"; cannot do much about it right now.
-    "RUSTSEC-2024-0381", # Unmaintained "pqcrypto-kyber", but used by "libsignal-protocol"; canot do much about it right now.
     "RUSTSEC-2024-0436", # Unmaintained "paste", but used by "image"; cannot do much about it right now.
+    "RUSTSEC-2024-0370", # unmaintained "proc-macro-error"; cannot do much about it right now.
 ]

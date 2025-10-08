@@ -252,19 +252,18 @@ impl Channel {
             crate::trace!("Channel {} got new message: {}", self.title(), body);
             if let Some(quote) = message.quote_timestamp() {
                 log::trace!("Message claims to have a quote");
-                if let Some(thread) = self.thread() {
-                    if let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await {
-                        if let Some(quoted_msg) = quoted_msg.dynamic_cast_ref::<TextMessage>() {
-                            crate::trace!(
-                                "Message {} quotes other message {}",
-                                body,
-                                quoted_msg
-                                    .property::<Option<String>>("body")
-                                    .unwrap_or_default()
-                            );
-                            message.set_quote(quoted_msg);
-                        }
-                    }
+                if let Some(thread) = self.thread()
+                    && let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await
+                    && let Some(quoted_msg) = quoted_msg.dynamic_cast_ref::<TextMessage>()
+                {
+                    crate::trace!(
+                        "Message {} quotes other message {}",
+                        body,
+                        quoted_msg
+                            .property::<Option<String>>("body")
+                            .unwrap_or_default()
+                    );
+                    message.set_quote(quoted_msg);
                 }
             }
 
@@ -476,7 +475,7 @@ impl Channel {
             let mut participants = Vec::with_capacity(members.len());
             // XXX: Parallelize?
             for p in &members {
-                let address = ServiceId::Aci(p.uuid.into());
+                let address = ServiceId::Aci(p.aci);
                 let contact = Contact::from_service_address(&address, &manager).await;
                 participants.push(contact);
             }
@@ -594,10 +593,10 @@ impl Channel {
             .map_while(|m| {
                 let message = m.dynamic_cast::<Message>().unwrap();
                 // We can stop at first read message
-                if message.mark_as_read() {
-                    if let Some(uid) = message.uid() {
-                        return Some(uid);
-                    }
+                if message.mark_as_read()
+                    && let Some(uid) = message.uid()
+                {
+                    return Some(uid);
                 }
                 None
             })
@@ -621,7 +620,7 @@ mod imp {
 
     use gdk::Paintable;
 
-    use libsignal_service::{prelude::Uuid, proto::GroupContextV2};
+    use libsignal_service::{prelude::Uuid, proto::GroupContextV2, protocol::ServiceId};
     use presage::model::groups::Group;
 
     #[derive(Default, glib::Properties)]
@@ -764,16 +763,14 @@ mod imp {
             } else {
                 None::<Uuid>.hash(state)
             }
-            if let Some(uuids) = self
-                .group
-                .borrow()
-                .as_ref()
-                .map(|g| &g.members)
-                .map(|m| m.iter().map(|c| c.uuid).collect::<Vec<Uuid>>())
-            {
+            if let Some(uuids) = self.group.borrow().as_ref().map(|g| &g.members).map(|m| {
+                m.iter()
+                    .map(|c| ServiceId::Aci(c.aci))
+                    .collect::<Vec<ServiceId>>()
+            }) {
                 uuids.hash(state);
             } else {
-                None::<Uuid>.hash(state)
+                None::<ServiceId>.hash(state)
             }
         }
     }

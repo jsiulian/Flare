@@ -96,12 +96,12 @@ async fn config_store<P: AsRef<Path>>(p: &P) -> Result<StoreType, ApplicationErr
         ));
     }
 
-    if !path.exists() {
-        if let Err(e) = std::fs::create_dir_all(path) {
-            return Err(ApplicationError::ConfigurationError(
-                crate::ConfigurationError::CannotCreateDbFolder(path.to_owned(), e),
-            ));
-        }
+    if !path.exists()
+        && let Err(e) = std::fs::create_dir_all(path)
+    {
+        return Err(ApplicationError::ConfigurationError(
+            crate::ConfigurationError::CannotCreateDbFolder(path.to_owned(), e),
+        ));
     }
 
     let passphrase = tspawn!(async { encryption_password().await })
@@ -133,11 +133,11 @@ impl Manager {
     }
 
     pub async fn send_notification(&self, id: Option<String>, notification: &gio::Notification) {
-        if self.imp().settings.boolean("notifications") {
-            if let Some(application) = self.application() {
-                log::trace!("Sending a notification");
-                application.send_notification(id.as_deref(), notification);
-            }
+        if self.imp().settings.boolean("notifications")
+            && let Some(application) = self.application()
+        {
+            log::trace!("Sending a notification");
+            application.send_notification(id.as_deref(), notification);
         }
     }
 
@@ -346,11 +346,11 @@ impl Manager {
             Err(_e) => log::trace!("Manager setup successful"),
         }
 
-        if internal.is_none() {
-            if let Some(error_opt) = receive_error.next().await {
-                log::error!("Got error after linking device: {}", error_opt);
-                return Err(error_opt);
-            }
+        if internal.is_none()
+            && let Some(error_opt) = receive_error.next().await
+        {
+            log::error!("Got error after linking device: {}", error_opt);
+            return Err(error_opt);
         }
 
         self.imp().internal.swap(&RefCell::new(internal));
@@ -474,12 +474,8 @@ impl Manager {
             .await
             .expect("Failed to spawn tokio")
             .map(|i| {
-                i.filter_map(|c| {
-                    c.ok()
-                        .filter(|c| !c.archived)
-                        .map(|c| Contact::from_contact(c, self))
-                })
-                .collect()
+                i.filter_map(|c| c.ok().map(|c| Contact::from_contact(c, self)))
+                    .collect()
             })
             .unwrap_or_default()
     }
@@ -490,13 +486,11 @@ impl Manager {
             // TODO: Get own phone number?
             phone_number: None,
             name: "".to_string(),
-            color: None,
             verified: Default::default(),
             profile_key: vec![],
             expire_timer: 0,
             expire_timer_version: 0,
             inbox_position: 0,
-            archived: false,
             avatar: None,
         };
         Contact::from_contact(presage_contact, self)
@@ -703,16 +697,16 @@ impl Manager {
         Ok(r?)
     }
 
-    pub(super) async fn get_profile_key_by_uuid(
+    pub(super) async fn get_profile_key_by_id(
         &self,
-        id: Uuid,
+        id: ServiceId,
     ) -> Result<Option<libsignal_service::prelude::ProfileKey>, ApplicationError> {
-        log::trace!("`Manager::get_profile_key_by_uuid` start");
+        log::trace!("`Manager::get_profile_key_by_id` start");
         let store = self.store();
         let r = tspawn!(async move { store.profile_key(&id).await })
             .await
             .expect("Failed to spawn tokio");
-        log::trace!("`Manager::get_profile_key_by_uuid` finished");
+        log::trace!("`Manager::get_profile_key_by_id` finished");
         Ok(r?)
     }
 

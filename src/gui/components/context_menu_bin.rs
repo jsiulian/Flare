@@ -56,10 +56,10 @@ impl<O: IsA<ContextMenuBin>> ContextMenuBinExt for O {
                     move |popover| {
                         if popover.parent().as_ref() != Some(obj.upcast_ref()) {
                             let imp = obj.imp();
-                            if let Some(popover) = imp.popover.take() {
-                                if let Some(signal_handler) = imp.signal_handler.take() {
-                                    popover.disconnect(signal_handler)
-                                }
+                            if let Some(popover) = imp.popover.take()
+                                && let Some(signal_handler) = imp.signal_handler.take()
+                            {
+                                popover.disconnect(signal_handler)
                             }
                         }
                     }

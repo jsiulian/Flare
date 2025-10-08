@@ -53,6 +53,7 @@ impl Contact {
     pub async fn update_profile_name_and_avatar(&self) {
         let obj = self.imp();
         let manager = self.manager();
+        let address = self.address();
         let uuid = self.uuid();
 
         let mut profile_key = {
@@ -65,7 +66,7 @@ impl Contact {
                     group
                         .members
                         .iter()
-                        .filter(|m| m.uuid == uuid)
+                        .filter(|m| Some(ServiceId::Aci(m.aci)) == address)
                         .map(|c| c.profile_key)
                         .next()
                 } else {
@@ -82,8 +83,10 @@ impl Contact {
             }
         };
 
-        if profile_key.is_none() {
-            profile_key = manager.get_profile_key_by_uuid(uuid).await.ok().flatten();
+        if profile_key.is_none()
+            && let Some(address) = address
+        {
+            profile_key = manager.get_profile_key_by_id(address).await.ok().flatten();
         }
 
         if let Some(key) = profile_key {
