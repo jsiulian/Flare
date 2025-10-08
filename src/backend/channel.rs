@@ -252,19 +252,18 @@ impl Channel {
             crate::trace!("Channel {} got new message: {}", self.title(), body);
             if let Some(quote) = message.quote_timestamp() {
                 log::trace!("Message claims to have a quote");
-                if let Some(thread) = self.thread() {
-                    if let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await {
-                        if let Some(quoted_msg) = quoted_msg.dynamic_cast_ref::<TextMessage>() {
-                            crate::trace!(
-                                "Message {} quotes other message {}",
-                                body,
-                                quoted_msg
-                                    .property::<Option<String>>("body")
-                                    .unwrap_or_default()
-                            );
-                            message.set_quote(quoted_msg);
-                        }
-                    }
+                if let Some(thread) = self.thread()
+                    && let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await
+                    && let Some(quoted_msg) = quoted_msg.dynamic_cast_ref::<TextMessage>()
+                {
+                    crate::trace!(
+                        "Message {} quotes other message {}",
+                        body,
+                        quoted_msg
+                            .property::<Option<String>>("body")
+                            .unwrap_or_default()
+                    );
+                    message.set_quote(quoted_msg);
                 }
             }
 
@@ -476,7 +475,7 @@ impl Channel {
             let mut participants = Vec::with_capacity(members.len());
             // XXX: Parallelize?
             for p in &members {
-                let address = ServiceId::Aci(p.aci.into());
+                let address = ServiceId::Aci(p.aci);
                 let contact = Contact::from_service_address(&address, &manager).await;
                 participants.push(contact);
             }
@@ -594,10 +593,10 @@ impl Channel {
             .map_while(|m| {
                 let message = m.dynamic_cast::<Message>().unwrap();
                 // We can stop at first read message
-                if message.mark_as_read() {
-                    if let Some(uid) = message.uid() {
-                        return Some(uid);
-                    }
+                if message.mark_as_read()
+                    && let Some(uid) = message.uid()
+                {
+                    return Some(uid);
                 }
                 None
             })
