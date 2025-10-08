@@ -474,12 +474,8 @@ impl Manager {
             .await
             .expect("Failed to spawn tokio")
             .map(|i| {
-                i.filter_map(|c| {
-                    c.ok()
-                        .filter(|c| !c.archived)
-                        .map(|c| Contact::from_contact(c, self))
-                })
-                .collect()
+                i.filter_map(|c| c.ok().map(|c| Contact::from_contact(c, self)))
+                    .collect()
             })
             .unwrap_or_default()
     }
@@ -490,13 +486,11 @@ impl Manager {
             // TODO: Get own phone number?
             phone_number: None,
             name: "".to_string(),
-            color: None,
             verified: Default::default(),
             profile_key: vec![],
             expire_timer: 0,
             expire_timer_version: 0,
             inbox_position: 0,
-            archived: false,
             avatar: None,
         };
         Contact::from_contact(presage_contact, self)
@@ -703,16 +697,16 @@ impl Manager {
         Ok(r?)
     }
 
-    pub(super) async fn get_profile_key_by_uuid(
+    pub(super) async fn get_profile_key_by_id(
         &self,
-        id: Uuid,
+        id: ServiceId,
     ) -> Result<Option<libsignal_service::prelude::ProfileKey>, ApplicationError> {
-        log::trace!("`Manager::get_profile_key_by_uuid` start");
+        log::trace!("`Manager::get_profile_key_by_id` start");
         let store = self.store();
         let r = tspawn!(async move { store.profile_key(&id).await })
             .await
             .expect("Failed to spawn tokio");
-        log::trace!("`Manager::get_profile_key_by_uuid` finished");
+        log::trace!("`Manager::get_profile_key_by_id` finished");
         Ok(r?)
     }
 

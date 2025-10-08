@@ -476,7 +476,7 @@ impl Channel {
             let mut participants = Vec::with_capacity(members.len());
             // XXX: Parallelize?
             for p in &members {
-                let address = ServiceId::Aci(p.uuid.into());
+                let address = ServiceId::Aci(p.aci.into());
                 let contact = Contact::from_service_address(&address, &manager).await;
                 participants.push(contact);
             }
@@ -621,7 +621,7 @@ mod imp {
 
     use gdk::Paintable;
 
-    use libsignal_service::{prelude::Uuid, proto::GroupContextV2};
+    use libsignal_service::{prelude::Uuid, proto::GroupContextV2, protocol::ServiceId};
     use presage::model::groups::Group;
 
     #[derive(Default, glib::Properties)]
@@ -764,16 +764,14 @@ mod imp {
             } else {
                 None::<Uuid>.hash(state)
             }
-            if let Some(uuids) = self
-                .group
-                .borrow()
-                .as_ref()
-                .map(|g| &g.members)
-                .map(|m| m.iter().map(|c| c.uuid).collect::<Vec<Uuid>>())
-            {
+            if let Some(uuids) = self.group.borrow().as_ref().map(|g| &g.members).map(|m| {
+                m.iter()
+                    .map(|c| ServiceId::Aci(c.aci))
+                    .collect::<Vec<ServiceId>>()
+            }) {
                 uuids.hash(state);
             } else {
-                None::<Uuid>.hash(state)
+                None::<ServiceId>.hash(state)
             }
         }
     }
