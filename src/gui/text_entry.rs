@@ -47,7 +47,6 @@ pub mod imp {
     use gtk::{CompositeTemplate, InputHints, TemplateChild, TextView};
 
     use std::cell::Cell;
-    use std::marker::PhantomData;
 
     #[derive(CompositeTemplate, Default, glib::Properties)]
     #[template(resource = "/ui/text_entry.ui")]
@@ -58,8 +57,8 @@ pub mod imp {
 
         #[property(get, set)]
         send_on_enter: Cell<bool>,
-        #[property(get = Self::is_empty)]
-        _is_empty: PhantomData<bool>,
+        #[property(get, set)]
+        is_empty: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -180,12 +179,22 @@ pub mod imp {
 
             // Updating property if empty.
             let buffer = sourceview5::Buffer::new(None);
-            obj.imp().view.set_buffer(Some(&buffer));
+            let view = &obj.imp().view;
+            view.set_buffer(Some(&buffer));
             buffer.connect_text_notify(clone!(
                 #[weak]
                 obj,
                 move |_| {
-                    obj.notify_is_empty();
+                    let (start, end) = obj.buffer().bounds();
+                    obj.set_is_empty(start == end)
+                }
+            ));
+            view.connect_preedit_changed(clone!(
+                #[weak]
+                obj,
+                move |_, preedit| {
+                    let (start, end) = obj.buffer().bounds();
+                    obj.set_is_empty(preedit.is_empty() && start == end)
                 }
             ));
 
@@ -206,6 +215,9 @@ pub mod imp {
             // For some reason, setting it via blueprint only sets the first hint, but not both at once.
             self.view
                 .set_input_hints(InputHints::WORD_COMPLETION | InputHints::SPELLCHECK);
+
+            // For some reason, setting via `default = true` in property does not work.
+            self.obj().set_is_empty(true);
         }
 
         fn signals() -> &'static [Signal] {
@@ -231,11 +243,4 @@ pub mod imp {
         }
     }
     impl BoxImpl for TextEntry {}
-
-    impl TextEntry {
-        fn is_empty(&self) -> bool {
-            let (start, end) = self.obj().buffer().bounds();
-            start == end
-        }
-    }
 }
