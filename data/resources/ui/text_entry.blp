@@ -8,7 +8,7 @@ template $FlTextEntry: Box {
         "dim-label",
       ]
 
-      visible: bind $is_empty(view.buffer.text as <string>) as <bool>;
+      visible: bind template.is-empty;
       can-target: false;
       text: _("Message");
       text-overflow: ellipsize_end;
