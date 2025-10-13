@@ -9,6 +9,8 @@ cargo vendor | sed 's/^directory = ".*"/directory = "vendor"/g' > $DIST/.cargo/c
 mv vendor "$DIST"
 
 # presage-store-sqlite requires .sqlx folder to compile.
-cp -r $MESON_BUILD_ROOT/cargo-home/git/checkouts/presage*/*/.sqlx "$DIST/vendor/presage-store-sqlite"
+git clone "https://github.com/whisperfish/presage.git" --depth 1
+cp -r presage/.sqlx "$DIST/vendor/presage-store-sqlite"
+rm -rf presage
 
 echo "Finished Vendor"
