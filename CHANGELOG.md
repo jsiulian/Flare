@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.1] - 2025-10-13
+
 ### Fixed
 
 - Implemented preedit, which made sending single-word messages harder if using autocompletion.
@@ -755,7 +757,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.0...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.1...master
+[0.17.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.0...0.17.1
 [0.17.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.16.3...0.17.0
 [0.16.3]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.16.2...0.16.3
 [0.16.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.16.1...0.16.2

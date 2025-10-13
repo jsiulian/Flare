@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.17.1" date="2025-10-13">
+      <description translate="no">
+        <p>Fixed</p> <ul> <li>Implemented preedit, which made sending single-word messages harder if using autocompletion.</li> <li>Restarted the backend after the network changed, which could fix issues with sending messages directly after the network changing.</li> </ul>
+      </description>
+    </release>
     <release version="0.17.0" date="2025-07-18">
       <description translate="no">
         <p>BREAKING</p> <ul> <li>This release will require a relink of Flare.</li> </ul> <p>HOTFIX</p> <ul> <li>Many contacts being displayed only by their phone number or 'Unknown Contact', as well as not having a profile picture set.</li> </ul>
