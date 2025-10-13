@@ -22,20 +22,6 @@ pub fn is_flatpak() -> bool {
     file.query_exists(gio::Cancellable::NONE)
 }
 
-pub async fn is_online() -> bool {
-    log::trace!("Checking online status");
-    tokio::net::TcpStream::connect("detectportal.firefox.com:80")
-        .await
-        .is_ok()
-}
-
-pub async fn await_online() {
-    while !is_online().await {
-        log::trace!("Currently offline. Waiting two seconds");
-        tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-    }
-}
-
 pub fn format_profile_name(p: &ProfileName<String>) -> String {
     if let Some(family_name) = &p.family_name {
         format!("{} {}", p.given_name, family_name)

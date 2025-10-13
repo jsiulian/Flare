@@ -12,7 +12,8 @@
 use std::{cell::OnceCell, ops::Bound};
 
 use futures::channel::{mpsc, oneshot};
-use futures::{FutureExt, SinkExt, StreamExt, TryFutureExt, join, select};
+use futures::{FutureExt, SinkExt, StreamExt, join, select};
+use gio::prelude::NetworkMonitorExt;
 use libsignal_service::{
     Profile,
     configuration::SignalServers,
@@ -34,7 +35,7 @@ use presage_store_sqlite::SqliteStore as Store;
 use url::Url;
 
 use crate::ApplicationError;
-use crate::dbus::Login1;
+use crate::prelude::*;
 
 const MESSAGE_BOUND: usize = 10;
 const OFFLINE_SLEEP_TIMEOUT: u64 = 15;
@@ -575,23 +576,23 @@ async fn command_loop(
     'outer: loop {
         let msgs: Result<_, presage::Error<<Store as presage::store::Store>::Error>> =
             manager.receive_messages().await;
-        let login1 = Login1::new().await;
+
+        let (need_loop_restart_sender, mut need_loop_restart_receiver) = mpsc::unbounded();
+        let network_monitor = gio::NetworkMonitor::default();
+        network_monitor.connect_network_available_notify(clone!(
+            #[strong]
+            need_loop_restart_sender,
+            move |m| {
+                if m.is_network_available() {
+                    let _ = need_loop_restart_sender.unbounded_send(());
+                }
+            }
+        ));
+
         match msgs {
             Ok(messages) => {
                 futures::pin_mut!(messages);
                 let mut next_msg = messages.next().fuse();
-                let mut await_suspend_online = login1
-                    .as_ref()
-                    .map(|l| {
-                        l.await_suspend_wakeup()
-                            .and_then(|_| async {
-                                crate::utils::await_online().await;
-                                Ok(())
-                            })
-                            .boxed()
-                    })
-                    .unwrap_or(futures::future::pending().boxed())
-                    .fuse();
                 loop {
                     select! {
                         // Receiving a message.
@@ -615,8 +616,8 @@ async fn command_loop(
                             }
                         },
                         // The network status changed; restart the loop to restart the signal websockets.
-                        _ = await_suspend_online  => {
-                            log::trace!("Waking up from suspend. Restarting command loop.");
+                        _ = need_loop_restart_receiver.next() => {
+                            log::trace!("Network changed. Restarting command loop.");
                             break;
                         },
                         complete => {
