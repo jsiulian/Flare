@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Implemented preedit, which made sending single-word messages harder if using autocompletion.
+- Restarted the backend after the network changed, which could fix issues with sending messages directly after the network changing.
 
 ## [0.17.0] - 2025-07-18
 

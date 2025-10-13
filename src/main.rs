@@ -8,7 +8,6 @@ use self::config::{APP_ID, BASE_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_BYTES,
 use crate::prelude::*;
 
 mod backend;
-mod dbus;
 mod error;
 mod gui;
 mod hash_log;
