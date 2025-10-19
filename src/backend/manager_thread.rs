@@ -9,6 +9,7 @@
 //! to those of [presage::Manager]. The other way is with a separate channel which has to be given to [ManagerThread]
 //! when it is constructed.
 
+use std::sync::Arc;
 use std::{cell::OnceCell, ops::Bound};
 
 use futures::channel::{mpsc, oneshot};
@@ -32,6 +33,7 @@ use presage::{
     store::{ContentsStore, Thread},
 };
 use presage_store_sqlite::SqliteStore as Store;
+use tokio::sync::RwLock;
 use url::Url;
 
 use crate::ApplicationError;
@@ -181,10 +183,10 @@ impl ManagerThread {
                     // XXX: Make sure the initial sync is finished (requires upstream presage changes).
                     // See https://github.com/whisperfish/presage/pull/212.
                     let manager_receive = setup_manager(config_store, setup_callback).await;
-                    if let Ok(mut manager_receive) = manager_receive {
+                    if let Ok(manager_receive) = manager_receive {
                         log::trace!("Starting command loop");
                         drop(error_callback);
-                        command_loop(&mut manager_receive, receiver, content, error).await;
+                        command_loop(manager_receive, receiver, content, error).await;
                     } else {
                         let e = manager_receive.err().unwrap();
                         log::trace!("Got error: {}", e);
@@ -568,117 +570,146 @@ async fn setup_manager(
 
 /// The command loop where messages are received and commands from the UI thread are executed.
 async fn command_loop(
-    manager: &mut Manager<Store, Registered>,
+    manager: Manager<Store, Registered>,
     mut receiver: mpsc::Receiver<Command>,
     mut content: mpsc::UnboundedSender<Content>,
     mut error: mpsc::Sender<ApplicationError>,
 ) {
-    'outer: loop {
-        let msgs: Result<_, presage::Error<<Store as presage::store::Store>::Error>> =
-            manager.receive_messages().await;
+    let manager = Arc::new(RwLock::new(manager));
+    let local = tokio::task::LocalSet::new();
+    local.run_until(async move {
+        'outer: loop {
+            let msgs: Result<_, presage::Error<<Store as presage::store::Store>::Error>> = manager
+                .write()
+                .await
+                .receive_messages()
+                .await;
 
-        let (need_loop_restart_sender, mut need_loop_restart_receiver) = mpsc::unbounded();
-        let network_monitor = gio::NetworkMonitor::default();
-        network_monitor.connect_network_available_notify(clone!(
-            #[strong]
-            need_loop_restart_sender,
-            move |m| {
-                if m.is_network_available() {
-                    let _ = need_loop_restart_sender.unbounded_send(());
-                }
-            }
-        ));
-
-        match msgs {
-            Ok(messages) => {
-                futures::pin_mut!(messages);
-                let mut next_msg = messages.next().fuse();
-                loop {
-                    select! {
-                        // Receiving a message.
-                        msg = next_msg => {
-                            if let Some(msg) = msg {
-                                if let Received::Content(msg) = msg &&
-                                    content.send(*msg).await.is_err() {
-                                        log::info!("Failed to send message to `Manager`, exiting");
-                                        break 'outer;
-                                }
-                            } else {
-                                log::error!("Message stream finished. Restarting command loop.");
-                                break;
-                            }
-                            next_msg = messages.next().fuse();
-                        },
-                        // Receiving a command.
-                        cmd = receiver.next() => {
-                            if let Some(cmd) = cmd {
-                                handle_command(manager, cmd).await;
-                            }
-                        },
-                        // The network status changed; restart the loop to restart the signal websockets.
-                        _ = need_loop_restart_receiver.next() => {
-                            log::trace!("Network changed. Restarting command loop.");
-                            break;
-                        },
-                        complete => {
-                            log::trace!("Command loop complete. Restarting command loop.");
-                            break
-                        },
+            let (need_loop_restart_sender, mut need_loop_restart_receiver) = mpsc::unbounded();
+            let network_monitor = gio::NetworkMonitor::default();
+            network_monitor.connect_network_available_notify(clone!(
+                #[strong]
+                need_loop_restart_sender,
+                move |m| {
+                    if m.is_network_available() {
+                        let _ = need_loop_restart_sender.unbounded_send(());
                     }
                 }
-            }
-            Err(e) => {
-                log::error!("Got error receiving: {}, {:?}", e, e);
-                let e = e.into();
-                // Don't send no-internet errors, Flare is able to handle them automatically.
-                if !matches!(e, ApplicationError::NoInternet) {
-                    error.send(e).await.expect("Callback sending failed");
-                }
+            ));
 
-                // Handle all commands while sleeping; this ensures Flare can start up without internet.
-                loop {
-                    select! {
-                        cmd = receiver.next().fuse() => {
-                            if let Some(cmd) = cmd {
-                                handle_command(manager, cmd).await;
+            match msgs {
+                Ok(messages) => {
+                    futures::pin_mut!(messages);
+                    let mut next_msg = messages.next().fuse();
+                    loop {
+                        select! {
+                            // Receiving a message.
+                            msg = next_msg => {
+                                if let Some(msg) = msg {
+                                    if let Received::Content(msg) = msg &&
+                                        content.send(*msg).await.is_err() {
+                                            log::info!("Failed to send message to `Manager`, exiting");
+                                            break 'outer;
+                                    }
+                                } else {
+                                    log::error!("Message stream finished. Restarting command loop.");
+                                    break;
+                                }
+                                next_msg = messages.next().fuse();
+                            },
+                            // Receiving a command.
+                            cmd = receiver.next() => {
+                                if let Some(cmd) = cmd {
+                                    tokio::task::spawn_local(handle_command(manager.clone(), cmd));
+                                }
+                            },
+                            // The network status changed; restart the loop to restart the signal websockets.
+                            _ = need_loop_restart_receiver.next() => {
+                                log::trace!("Network changed. Restarting command loop.");
+                                break;
+                            },
+                            complete => {
+                                log::trace!("Command loop complete. Restarting command loop.");
+                                break
+                            },
+                        }
+                    }
+                }
+                Err(e) => {
+                    log::error!("Got error receiving: {}, {:?}", e, e);
+                    let e = e.into();
+                    // Don't send no-internet errors, Flare is able to handle them automatically.
+                    if !matches!(e, ApplicationError::NoInternet) {
+                        error.send(e).await.expect("Callback sending failed");
+                    }
+
+                    // Handle all commands while sleeping; this ensures Flare can start up without internet.
+                    loop {
+                        select! {
+                            cmd = receiver.next().fuse() => {
+                                if let Some(cmd) = cmd {
+                                    tokio::task::spawn_local(handle_command(manager.clone(), cmd));
+                                }
+                            },
+                            _ = tokio::time::sleep(std::time::Duration::from_secs(OFFLINE_SLEEP_TIMEOUT)).fuse() => {
+                                break;
                             }
-                        },
-                        _ = tokio::time::sleep(std::time::Duration::from_secs(OFFLINE_SLEEP_TIMEOUT)).fuse() => {
-                            break;
                         }
                     }
                 }
             }
+            log::debug!("Websocket closed, trying again");
         }
-        log::debug!("Websocket closed, trying again");
-    }
     log::info!("Exiting `ManagerThread::command_loop`");
+    }).await;
 }
 
-async fn handle_command(manager: &mut Manager<Store, Registered>, command: Command) {
+async fn handle_command(manager: Arc<RwLock<Manager<Store, Registered>>>, command: Command) {
     log::trace!("Got command: {:#?}", command);
     match command {
         // XXX: Uuid should not be used anymore.
         // XXX: Don't use nil.
         Command::Uuid(callback) => callback
-            .send(manager.registration_data().service_ids.aci().into())
+            .send(
+                manager
+                    .read()
+                    .await
+                    .registration_data()
+                    .service_ids
+                    .aci()
+                    .into(),
+            )
             .expect("Callback sending failed"),
         Command::SubmitRecaptchaChallenge(token, captcha, callback) => callback
-            .send(manager.submit_recaptcha_challenge(&token, &captcha).await)
+            .send(
+                manager
+                    .read()
+                    .await
+                    .submit_recaptcha_challenge(&token, &captcha)
+                    .await,
+            )
             .expect("Callback sending failed"),
         Command::RetrieveProfileByUuid(uuid, profile_key, callback) => callback
-            .send(manager.retrieve_profile_by_uuid(uuid, profile_key).await)
+            .send(
+                manager
+                    .write()
+                    .await
+                    .retrieve_profile_by_uuid(uuid, profile_key)
+                    .await,
+            )
             .expect("Callback sending failed"),
         Command::RetrieveProfile(callback) => callback
-            .send(manager.retrieve_profile().await)
+            .send(manager.write().await.retrieve_profile().await)
             .expect("Callback sending failed"),
         Command::GetGroupV2(master_key, callback) => callback
-            .send(manager.store().group(master_key).await)
+            .send(manager.read().await.store().group(master_key).await)
             .map_err(|_| ())
             .expect("Callback sending failed"),
         Command::SendSessionReset(recipient_address, timestamp, callback) => callback
             .send(
                 manager
+                    .write()
+                    .await
                     .send_session_reset(&recipient_address, timestamp)
                     .await,
             )
@@ -686,6 +717,8 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
         Command::SendMessage(recipient_address, message, timestamp, callback) => callback
             .send(
                 manager
+                    .write()
+                    .await
                     .send_message(recipient_address, *message, timestamp)
                     .await,
             )
@@ -693,20 +726,24 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
         Command::SendMessageToGroup(group_key, message, timestamp, callback) => callback
             .send(
                 manager
+                    .write()
+                    .await
                     .send_message_to_group(&group_key[..], *message, timestamp)
                     .await,
             )
             .expect("Callback sending failed"),
         Command::GetAttachment(attachment, callback) => callback
-            .send(manager.get_attachment(&attachment).await)
+            .send(manager.read().await.get_attachment(&attachment).await)
             .expect("Callback sending failed"),
         Command::UploadAttachments(attachments, callback) => callback
-            .send(manager.upload_attachments(attachments).await)
+            .send(manager.read().await.upload_attachments(attachments).await)
             .expect("Callback sending failed"),
         Command::Messages(thread, range, callback) => {
             // XXX: Cannot format iterator.
             let _ = callback.send(
                 manager
+                    .read()
+                    .await
                     .store()
                     .messages(&thread, range)
                     .await
@@ -714,29 +751,31 @@ async fn handle_command(manager: &mut Manager<Store, Registered>, command: Comma
             );
         }
         Command::RegistrationType(callback) => callback
-            .send(manager.registration_type())
+            .send(manager.read().await.registration_type())
             .expect("Callback sending failed"),
         Command::LinkSecondary(url, callback) => callback
-            .send(manager.link_secondary(url).await)
+            .send(manager.write().await.link_secondary(url).await)
             .expect("Callback sending failed"),
         Command::UnlinkSecondary(id, callback) => callback
-            .send(manager.unlink_secondary(id).await)
+            .send(manager.read().await.unlink_secondary(id).await)
             .expect("Callback sending failed"),
         Command::Devices(callback) => callback
-            .send(manager.devices().await)
+            .send(manager.read().await.devices().await)
             .expect("Callback sending failed"),
         Command::RequestContacts(callback) => callback
-            .send(manager.request_contacts().await)
+            .send(manager.write().await.request_contacts().await)
             .expect("Callback sending failed"),
         Command::RetrieveProfileAvatarByUuid(uuid, profile_key, callback) => callback
             .send(
                 manager
+                    .write()
+                    .await
                     .retrieve_profile_avatar_by_uuid(uuid, profile_key)
                     .await,
             )
             .expect("Callback sending failed"),
         Command::RetrieveGroupAvatar(context, callback) => callback
-            .send(manager.retrieve_group_avatar(context).await)
+            .send(manager.write().await.retrieve_group_avatar(context).await)
             .expect("Callback sending failed"),
     }
 }
