@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.17.2" date="2025-10-21">
+      <description translate="no">
+        <p>HOTFIX</p> <ul> <li>Fixed linking the device.</li> </ul> <p>Fixed</p> <ul> <li>Downloading large/many attachments and switching to another chat would require a long time to load the messages in the new chat.</li> </ul>
+      </description>
+    </release>
     <release version="0.17.1" date="2025-10-13">
       <description translate="no">
         <p>Fixed</p> <ul> <li>Implemented preedit, which made sending single-word messages harder if using autocompletion.</li> <li>Restarted the backend after the network changed, which could fix issues with sending messages directly after the network changing.</li> </ul>
