@@ -40,7 +40,7 @@
   <releases>
     <release version="0.17.2" date="2025-10-21">
       <description translate="no">
-        <p>HOTFIX</p> <ul> <li>Fixed linking the device.</li> </ul> <p>Fixed</p> <ul> <li>Downloading large/many attachments and switching to another chat would require a long time to load the messages in the new chat.</li> </ul>
+        <p>HOTFIX</p> <ul> <li>Fixed linking the device.</li> <li>Fixed groups not showing up on startup.</li> </ul> <p>Fixed</p> <ul> <li>Downloading large/many attachments and switching to another chat would require a long time to load the messages in the new chat.</li> </ul>
       </description>
     </release>
     <release version="0.17.1" date="2025-10-13">
