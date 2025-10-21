@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Fixed linking the device.
+
+### Fixed
+
+- Downloading large/many attachments and switching to another chat would require a long time to load the messages in the new chat.
+
 ## [0.17.1] - 2025-10-13
 
 ### Fixed
