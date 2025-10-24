@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2024-06-27 21:10+0000\n"
+"PO-Revision-Date: 2025-10-25 10:02+0000\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.14.1-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -120,10 +120,8 @@ msgid "Send"
 msgstr "Gönder"
 
 #: data/resources/ui/device_info_item.blp:18
-#, fuzzy
-#| msgid "Link Device"
 msgid "Unlink Device"
-msgstr "Aygıt Bağla"
+msgstr "Aygıt Bağını Kaldır"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:168
@@ -195,10 +193,8 @@ msgid "Linked Devices"
 msgstr "Ağlı Aygıtlar"
 
 #: data/resources/ui/linked_devices_window.blp:36
-#, fuzzy
-#| msgid "Link Device"
 msgid "Link New Device"
-msgstr "Aygıt Bağla"
+msgstr "Yeni Aygıt Bağla"
 
 #: data/resources/ui/linked_devices_window.blp:59
 msgid "Add Linked Device"
@@ -376,6 +372,15 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare, resmi olmayan bir Signal istemcisidir. Flare kararlı olmayabilir ve "
+"hatalar içerebilir. Hata ile karşılaşırsanız, <a href="
+"\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">sorun izleyiciyi</"
+"a> inceleyin ve karşılaştığınız sorunun bildirilmemişse sorunu bildirin. "
+"Ayrıca, Flare üçüncü taraf uygulama olduğu için resmi Signal uygulamalarıyla "
+"aynı düzeyde güvenlik ve gizlilik garantisi verememektedir. Siz ya da "
+"iletişim kurmanız gereken kişi yüksek düzeyde güvenlik gerektiriyorsa Flare "
+"kullanmayın. Daha çok bilgi için bkz: <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README</a>."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
@@ -406,6 +411,8 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare, resmi Signal Desktop'a benzer şekilde, ana aygıtınıza bağlı uygulama "
+"olabilir. Bu kip daha kapsamlı sınanmıştır ve çoğunlukla çalışmaktadır."
 
 #: data/resources/ui/setup_window.blp:138
 msgid "Primary Device (Disabled)"
@@ -419,12 +426,19 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare, Android ya da IOS resmi Signal uygulamalarına benzer şekilde birincil "
+"aygıt olarak işlev görebilir. İlk sınamalar bu kipin çalıştığını gösterse "
+"de, Flare şu anda bu kipi desteklememektedir. Bu kipi sınamak isterseniz, "
+"aşağıdaki düğmeyi etkinleştirebilirsiniz (bunu nasıl yapacağınızı "
+"bilmiyorsanız, birincil aygıt desteğini sınaması yapmayın)."
 
 #: data/resources/ui/setup_window.blp:193
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"İkincil aygıt olarak bağlanmak için Flare resmi uygulamada gösterilecek "
+"aygıt adına gereksinir."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
@@ -447,6 +461,9 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"Sonraki sayfada, birincil aygıttan taranması gereken QR kodu gösterilecek. "
+"Kodu taramak için yaklaşık bir dakika süreniz olacak. Lütfen QR kodunu "
+"taramak için resmi uygulamanızı şimdiden hazırlayın."
 
 #: data/resources/ui/setup_window.blp:226
 #: data/resources/ui/setup_window.blp:238
@@ -501,6 +518,14 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"Birincil aygıt olarak kaydolmak için Flare, telefon numaranızı ve güvenlik "
+"doğrulamasını tamamlamanızı isteyecek. Lütfen telefon numarasını, başındaki "
+"“+” ve ülke kodunu da dahil ederek uluslararası E.164 biçiminde girin. "
+"Güvenlik doğrulamasını <a href="
+"\"https://signalcaptchas.org/registration/generate.html\">burada</a> "
+"doldurulabilir, ardından “Open Signal” bağlantısını kopyalayıp aşağıdaki "
+"alana yapıştırın. Bu güvenlik doğrulaması sadece bir dakika kadar "
+"geçerlidir. Bu yüzden lütfen hızlıca devam edin."
 
 #: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -512,6 +537,8 @@ msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"Bu bilgileri gönderdikten sonra, Signal'da doğrulama kodu içeren SMS "
+"alacaksınız. Doğrulama kodunu sonraki sayfaya girin."
 
 #: data/resources/ui/setup_window.blp:398
 #: data/resources/ui/setup_window.blp:406
@@ -554,6 +581,13 @@ msgid ""
 "visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"İletiler Flare tarafından alınırken herhangi bir ileti göndermeyin, bu "
+"şekilde gerekli tüm bilgilerin alındığından emin olabilirsiniz. Bu sorunu "
+"gidermeye çalışıyoruz. Ayrıca, henüz ileti almadığınız kişilere ileti "
+"göndermeniz hız sınırlamasına neden olabilir. Çok fazlaileti göndermeden "
+"önce, ilgili kişiden ileti aldığınızdan emin olun. Hataların tam listesi "
+"için <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/"
+"?label_name%5B%5D=bug\">sorun izleyiciyi</a> ziyaret edin."
 
 #: data/resources/ui/setup_window.blp:524
 msgid "Contact"
@@ -565,6 +599,9 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"Flare hakkında geri bildirimde bulunmak ya da sadece biraz sohbet etmek "
+"isterseniz <a href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix "
+"odamız</a> herkese açıktır."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -786,8 +823,6 @@ msgid "Something glib-related failed."
 msgstr "Glib ile ilgili bir şey başarısız oldu."
 
 #: src/error.rs:133
-#, fuzzy
-#| msgid "The communication with Libsecret failed."
 msgid "The communication with libsecret failed."
 msgstr "Libsecret ile iletişim başarısız oldu."
 
@@ -854,32 +889,32 @@ msgstr "Asla"
 #: src/gui/channel_info_dialog.rs:172
 msgid "{} week"
 msgid_plural "{} weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} hafta"
+msgstr[1] "{} hafta"
 
 #: src/gui/channel_info_dialog.rs:182
 msgid "{} day"
 msgid_plural "{} days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} gün"
+msgstr[1] "{} gün"
 
 #: src/gui/channel_info_dialog.rs:192
 msgid "{} hour"
 msgid_plural "{} hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} saat"
+msgstr[1] "{} saat"
 
 #: src/gui/channel_info_dialog.rs:202
 msgid "{} minute"
 msgid_plural "{} minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} dakika"
+msgstr[1] "{} dakika"
 
 #: src/gui/channel_info_dialog.rs:212
 msgid "{} second"
 msgid_plural "{} seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} saniye"
+msgstr[1] "{} saniye"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
@@ -887,11 +922,11 @@ msgstr "Taslak"
 
 #: src/gui/device_info_item.rs:47
 msgid "Linked: {}"
-msgstr ""
+msgstr "Bağlı: {}"
 
 #: src/gui/device_info_item.rs:48
 msgid "Last Seen: {}"
-msgstr ""
+msgstr "Son Görülme: {}"
 
 #: src/gui/linked_devices_window.rs:131
 msgid "Unlink Device?"
@@ -899,7 +934,7 @@ msgstr "Aygıt Bağı Kaldırılsın Mı?"
 
 #: src/gui/linked_devices_window.rs:133
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "{} bağını kaldırmak istediğine emin misin?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -984,15 +1019,14 @@ msgstr "mesajlaşma;iletişim;sohbet;signal;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:29
-#, fuzzy
 msgid ""
 "Flare is an unofficial app for Signal. It is still in development and "
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
-"Flare, Linux'tan Signal kullanan arkadaşlarınızla sohbet etmenizi sağlayan "
-"resmi olmayan bir uygulamadır. Halen geliştirme aşamasındadır ve resmi "
-"Signal uygulamaları kadar çok özellik içermez."
+"Flare, Signal için resmi olmayan bir uygulamadır. Geliştirme aşamasındadır "
+"ve resmi Signal uygulamalarının sahip olduğu tüm özellikleri içermemektedir. "
+"Daha çok bilgiyi özellik yol haritasında bulabilirsiniz."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:33
