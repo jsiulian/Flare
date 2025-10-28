@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-29 16:21+0200\n"
-"PO-Revision-Date: 2025-09-21 07:01+0000\n"
+"PO-Revision-Date: 2025-10-29 11:07+0000\n"
 "Last-Translator: Coding Otaku <contact@codingotaku.com>\n"
 "Language-Team: Malayalam <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/ml/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.14.1-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -364,6 +364,14 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"ഫ്ലെയർ ഒരു അനൗദ്യോഗിക സിഗ്നൽ ക്ലയൻ്റാണ്. ഫ്ലെയർ സ്ഥിരതയുള്ളതല്ലെന്നും ബഗുകൾ പ്രതീക്ഷിക്കാമെന്നും ശ്രദ്ധിക്കുക. നിങ്ങൾക്ക്"
+" എന്തെങ്കിലും ബഗുകൾ അനുഭവപ്പെടുന്നുണ്ടെങ്കിൽ, <a href="
+"\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">ഇഷ്യൂ ട്രാക്കർ</a> "
+"പരിശോധിക്കുകയും പുതിയ പ്രശ്‌നം നേരിടുന്നുണ്ടെങ്കിൽ പ്രശ്‌നങ്ങൾ തുറക്കുകയും ചെയ്യുക. ഒരു മൂന്നാം കക്ഷി ആപ്ലിക്കേഷൻ ആയതിനാൽ, "
+"ഔദ്യോഗിക സിഗ്നൽ ആപ്ലിക്കേഷനുകൾ ചെയ്യുന്ന അതേ നിലവാരത്തിലുള്ള സുരക്ഷയും സ്വകാര്യതയും ഫ്ലെയർ-ന് ഉറപ്പുനൽകാൻ കഴിയില്ല "
+"എന്നതും ശ്രദ്ധിക്കുക. നിങ്ങൾക്കോ നിങ്ങൾ ബന്ധപ്പെടേണ്ട മറ്റൊരാൾക്കോ ശക്തമായ സുരക്ഷ ആവശ്യമാണെങ്കിൽ, ഫ്ലേർ ഉപയോഗിക്കരുത്"
+". കൂടുതൽ വിവരങ്ങൾക്ക് <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/"
+"master/README.md#security\">README</a> കാണുക."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
@@ -503,6 +511,11 @@ msgid ""
 "the below field. Note that this captcha is only valid for about one minute, "
 "so please proceed fast."
 msgstr ""
+"ഒരു പ്രാഥമിക ഉപകരണമായി രജിസ്റ്റർ ചെയ്യുന്നതിന്, ഫ്ലേറിന് നിങ്ങളുടെ ഫോൺ നമ്പറും ക്യാപ്‌ചയുടെ പൂർത്തീകരണവും ആവശ്യമാണ്. "
+"മീൻപിൽ \"+\" ചേർത്ത് രാജ്യ കോഡ് ഉൾപ്പെടെ അന്താരാഷ്ട്ര E.164 ഫോർമാറ്റിൽ ഫോൺ നമ്പർ നൽകുക. ക്യാപ്‌ച <a href="
+"\"https://signalcaptchas.org/registration/generate.html\">ഇവിടെ</a> പൂർത്തിയാക്കാം, "
+"തുടർന്ന് \"ഓപ്പൺ സിഗ്നൽ\" ലിങ്ക് പകർത്തി താഴെയുള്ള ഫീൽഡിൽ ഒട്ടിക്കുക. ഈ ക്യാപ്‌ചയ്‌ക്ക് ഏകദേശം ഒരു മിനിറ്റ് മാത്രമേ "
+"സാധുതയുള്ളൂ എന്ന കാര്യം ശ്രദ്ധിക്കുക, അതിനാൽ വേഗത്തിൽ തുടരുക."
 
 #: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -861,7 +874,7 @@ msgstr ""
 
 #: src/gui/channel_info_dialog.rs:167
 msgid "Never"
-msgstr ""
+msgstr "ഒരിക്കലും"
 
 #: src/gui/channel_info_dialog.rs:172
 msgid "{} week"
@@ -895,7 +908,7 @@ msgstr[1] "{} സെക്കൻഡുകൾ"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "ഡ്രാഫ്റ്റ്"
 
 #: src/gui/device_info_item.rs:47
 msgid "Linked: {}"
@@ -943,56 +956,57 @@ msgstr "ക്ലിപ്ബോർഡിലേക്ക് പകർത്ത�
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:102 src/gui/utility.rs:126
 msgid "%H:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:105
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%Y-%m-%d %H:%M"
 
 #: src/gui/utility.rs:138
 msgid "Today"
-msgstr ""
+msgstr "ഇന്ന്"
 
 #: src/gui/utility.rs:141
 msgid "Yesterday"
-msgstr ""
+msgstr "ഇന്നലെ"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:151
 #, c-format
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:159
 msgid "Attachment"
-msgstr ""
+msgstr "അറ്റാച്ച്മെൻ്റ്"
 
 #: src/gui/window.rs:409 src/gui/window.rs:418
 msgid "Remove Messages"
-msgstr ""
+msgstr "സന്ദേശങ്ങൾ നീക്കം ചെയ്യുക"
 
 #: src/gui/window.rs:411
 msgid "This will remove all locally stored messages from this channel"
 msgstr ""
+"ഇത് ഈ ചാനലിന് പുറത്ത് സംഭരിച്ചിരിക്കുന്ന എല്ലാ സന്ദേശങ്ങളും നീക്കം ചെയ്യും"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:6
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "സിഗ്നൽ ഉപയോഗിച്ച് നിങ്ങളുടെ സുഹൃത്തുക്കളുമായി സംസാരിക്കുക"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:15
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "സന്ദേശങ്ങൾ;സംസാരങ്ങൾ;സിഗ്നൽ;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:29
@@ -1001,6 +1015,8 @@ msgid ""
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
+"സിഗ്നലിനു വേണ്ടിയുള്ള ഒരു അനൗദ്യോഗിക ആപ്പാണ് ഫ്ലെയർ. ഇത് എപ്പളോഴും വികസിപ്പിച്ചുകൊണ്ടിരിക്കുകയാണ്, ഔദ്യോഗിക സിഗ്നൽ ആപ്പു"
+"കൾ ചെയ്യുന്ന എല്ലാ ഫീച്ചറുകളും ഇതിൽ ഉൾപ്പെടുന്നില്ല. കൂടുതൽ വിവരങ്ങൾ അതിൻ്റെ ഫീച്ചർ റോഡ്മാപ്പിൽ കാണാം."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:33
@@ -1010,68 +1026,73 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"ഔദ്യോഗിക സിഗ്നൽ ആപ്ലിക്കേഷനുകളെ അപേക്ഷിച്ച് ഈ ആപ്ലിക്കേഷൻ ഉപയോഗിക്കുന്നത് നിങ്ങളുടെ സുരക്ഷയെ കൂടുതൽ വഷളാക്കുമെന്ന് "
+"ദയവായി ശ്രദ്ധിക്കുക. സെൻസിറ്റീവ് ഡാറ്റ കൈകാര്യം ചെയ്യുമ്പോൾ ശ്രദ്ധയോടെ ഉപയോഗിക്കുക. സുരക്ഷയെ കുറിച്ചുള്ള കൂടുതൽ "
+"വിവരങ്ങൾക്ക് പ്രോജക്ടിന്റെ README നോക്കുക."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:792
 msgid "Overview of the application"
-msgstr ""
+msgstr "ആപ്ലിക്കേഷൻ്റെ അവലോകനം"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "ജാലകത്തിന്റെ വീതി"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "ജാലകത്തിന്റെ ഉയരം"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "ജാലകം മാക്സിമൈസ് ചെയ്ത അവസ്ഥ"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"ഫ്ലെയർ ലിങ്ക് ചെയ്യുമ്പോൾ ഉപയോഗിക്കേണ്ട ഉപകരണത്തിൻ്റെ പേര്. ഇത് മാറ്റുമ്പോൾ ആപ്ലിക്കേഷൻ വീണ്ടും ലിങ്ക് ചെയ്യണം."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "ചിത്രങ്ങൾ സ്വയമേവ ഡൗൺലോഡ് ചെയ്യുക"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "വീഡിയോകൾ സ്വയമേവ ഡൗൺലോഡ് ചെയ്യുക"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
-msgstr ""
+msgstr "ശബ്ദ സന്ദേശങ്ങൾ സ്വയമേവ ഡൗൺലോഡ് ചെയ്യുക"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "ഫയലുകൾ സ്വയമേവ ഡൗൺലോഡ് ചെയ്യുക"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
-msgstr ""
+msgstr "അറിയിപ്പുകൾ അയയ്‌ക്കുക"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "അടയ്ക്കുമ്പോൾ പശ്ചാത്തലത്തിൽ പ്രവർത്തിപ്പിക്കുക"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "പ്രതികരണങ്ങൾ വീണ്ടെടുക്കുമ്പോൾ അറിയിപ്പുകൾ അയയ്‌ക്കുക"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "സന്ദേശങ്ങൾ സെലക്ട് ചെയ്യാം"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "എൻ്റർ കീ അമർത്തുമ്പോൾ ഒരു സന്ദേശം അയയ്ക്കുക"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
 msgstr ""
+"കോൺടാക്റ്റുകൾ എങ്ങനെ അടുക്കാം, ഉദാ \"ആദ്യ നാമം\" അല്ലെങ്കിൽ \"കുടുംബപ്പേര്\""
 
 #~ msgctxt "accessibility"
 #~ msgid "Reset Session"
