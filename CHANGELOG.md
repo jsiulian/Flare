@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Fixed unlinking the device not working.
+- Fixed the store not actually being encrypted.
+
 ## [0.17.3] - 2025-11-12
 
 ### HOTFIX
