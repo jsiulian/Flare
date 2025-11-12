@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.3] - 2025-11-12
+
 ### HOTFIX
 
 - Fixed captchas for many sent messages.
@@ -772,7 +774,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.2...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.3...master
+[0.17.3]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.2...0.17.3
 [0.17.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.1...0.17.2
 [0.17.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.0...0.17.1
 [0.17.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.16.3...0.17.0

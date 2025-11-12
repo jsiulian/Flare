@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.17.3" date="2025-11-12">
+      <description translate="no">
+        <p>HOTFIX</p> <ul> <li>Fixed captchas for many sent messages.</li> </ul>
+      </description>
+    </release>
     <release version="0.17.2" date="2025-10-21">
       <description translate="no">
         <p>HOTFIX</p> <ul> <li>Fixed linking the device.</li> <li>Fixed groups not showing up on startup.</li> </ul> <p>Fixed</p> <ul> <li>Downloading large/many attachments and switching to another chat would require a long time to load the messages in the new chat.</li> </ul>
