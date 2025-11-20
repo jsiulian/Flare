@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 14:14+0100\n"
-"PO-Revision-Date: 2025-05-30 16:09+0000\n"
-"Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
-"Language-Team: Estonian <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/et/>\n"
+"PO-Revision-Date: 2025-11-21 19:51+0000\n"
+"Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -570,7 +570,6 @@ msgid "Known Bugs"
 msgstr "Teadaolevad vead"
 
 #: data/resources/ui/setup_window.blp:513
-#, fuzzy
 msgid ""
 "Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
 "or only with the phone number. After receiving messages from those contacts "
@@ -581,15 +580,16 @@ msgid ""
 "many. For a full list of bugs, visit the <a href=\"https://gitlab.com/"
 "schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
-"Palun ära saada sõnumeid enne, kui sõnumid on veel Flare'i poolt "
-"vastuvõtmisel - sellega tagad, et kõik vajalik (krüpto)teave on alati "
-"olemas. See viga on teada ning üritame talle lahendust leida. Lisaks võib "
-"kirjutamine kontaktidele, kellelt sa pole veel sõnumeid saanud, viia "
-"serveripoolsete piiranguteni. Seega palun alati vaata, et enne suurema "
-"sõnumisaju teelepanemist oleks ka teine osapool sulle midagi kirjutanud. "
-"Tervikliku vigade ning probleemde loendi leiad <a href=\"https://gitlab.com/"
-"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">meie veahaldusest</"
-"a>."
+"Johtuvalt kasutatava muu arenduse veast kuvatakse enamus sünkroonitud "
+"kontakte kui „Tundmatu kontakt“ või ainult telefoninumbrina. Peale temalt "
+"sõnumite saamist ja rakenduse käivitamist peaks ka nime näha olema. Kui sa "
+"piisavalt sagedasti sõnumeid ei vaheta, siis võib nimi jälle kaduda. Lisaks "
+"võib kirjutamine kontaktidele, kellelt sa pole veel sõnumeid saanud, viia "
+"serveripoolsete päringute piiranguteni. Seega palun alati vaata, et enne "
+"suurema sõnumisaju teelepanemist oleks ka teine osapool sulle midagi "
+"kirjutanud. Tervikliku vigade ning probleemde loendi leiad <a href=\"https://"
+"gitlab.com/schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">meie "
+"veahaldusest</a>."
 
 #: data/resources/ui/setup_window.blp:524
 msgid "Contact"
@@ -880,9 +880,8 @@ msgid "The database path at {} is no folder."
 msgstr "Andmebaasi asukoht {} pole kaust."
 
 #: src/error.rs:196
-#, fuzzy
 msgid "The database path at {path} is cannot be created due to error {error}."
-msgstr "Andmebaasi asukoht {} pole kaust."
+msgstr "Andmebaasi asukohta {path} pole võimalik luua vea tõttu: {error}."
 
 #: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
