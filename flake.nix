@@ -11,6 +11,13 @@
           pkgs = import nixpkgs {
             inherit system;
           };
+          gettext-patched = pkgs.gettext.overrideAttrs (prev: self: rec {
+            version = "0.23";
+            src = pkgs.fetchurl {
+              url = "mirror://gnu/gettext/${self.pname}-${version}.tar.gz";
+              hash = "sha256-lF3XACoC3XEIrQUQYC4TQWtB0yeJjPhSIgG8avEJB6Y=";
+            };
+          });
 
           name = "flare";
         in
@@ -41,7 +48,7 @@
                     ]);
               };
               buildInputs = with pkgs; [ pkgs.libadwaita pkgs.protobuf pkgs.libsecret pkgs.gst_all_1.gstreamer pkgs.gst_all_1.gst-plugins-base pkgs.gst_all_1.gst-plugins-good pkgs.gst_all_1.gst-plugins-bad pkgs.gtksourceview5 pkgs.gtk4 pkgs.libspelling pkgs.openssl ];
-              nativeBuildInputs = with pkgs; [ pkgs.appstream pkgs.blueprint-compiler pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib pkgs.openssl ];
+              nativeBuildInputs = with pkgs; [ pkgs.appstream pkgs.blueprint-compiler pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib pkgs.openssl gettext-patched ];
 
               PROTOC = "${pkgs.protobuf}/bin/protoc";
 
@@ -81,6 +88,7 @@
                 export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
                 # Required for prost, which by default ships its own protoc (at least in the version of one of our dependencies uses); overrides it to system-protobuf.
                 export PROTOC=${pkgs.protobuf}/bin/protoc
+                export PATH=${gettext-patched}/bin:$PATH
                 meson setup -Dprofile=development build
               '';
 
@@ -89,9 +97,10 @@
                                   pkgs.libjxl
                                   pkgs.librsvg
                                   pkgs.webp-pixbuf-loader
-                                  pkgs.libheif.out
+                                  pkgs.libheif.lib
                                 ];
                               }}";
+
             };
           apps.default = {
             type = "app";
