@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-29 16:21+0200\n"
+"POT-Creation-Date: 2025-11-20 14:14+0100\n"
 "PO-Revision-Date: 2025-07-03 23:01+0000\n"
 "Last-Translator: Yannick Krüssel <yannick@sequencode.dev>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/"
-"schmiddi-on-mobile/flare/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/schmiddi-on-"
+"mobile/flare/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -359,7 +359,7 @@ msgstr "Flare einrichten"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
-#: data/de.schmidhuberj.Flare.desktop.in.in:5
+#: data/de.schmidhuberj.Flare.desktop.in.in:4
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:8
 msgid "Flare"
 msgstr "Flare"
@@ -377,15 +377,15 @@ msgid ""
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
 "Flare ist ein inoffizieller Signal-Client. Das heißt, Flare ist nicht "
-"unbedingt zuverlässig und kann Bugs haben. Auf dem <a href=\"https://gitlab."
-"com/schmiddi-on-mobile/flare/-/issues\">Bugtracker</a> können Sie nach Bugs "
-"suchen oder Issues für neue Bugs erstellen. Da Flare Drittsoftware ist, kann "
-"nicht garantiert werden, dass dieselben Sicherheits- und Privatsphäre-"
-"Standards eingehalten werden wie mit offiziellen Signal-Clients. Sollten Sie "
-"oder jemand, den Sie kontaktieren, ein hohes Level an Sicherheit benötigen, "
-"sollten Sie Flare nicht benutzen. Weitere Informationen im <a href=\"https://"
-"gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README."
-"md#security\">README (Englischsprachig)</a>."
+"unbedingt zuverlässig und kann Bugs haben. Auf dem <a href=\"https://"
+"gitlab.com/schmiddi-on-mobile/flare/-/issues\">Bugtracker</a> können Sie "
+"nach Bugs suchen oder Issues für neue Bugs erstellen. Da Flare Drittsoftware "
+"ist, kann nicht garantiert werden, dass dieselben Sicherheits- und "
+"Privatsphäre-Standards eingehalten werden wie mit offiziellen Signal-"
+"Clients. Sollten Sie oder jemand, den Sie kontaktieren, ein hohes Level an "
+"Sicherheit benötigen, sollten Sie Flare nicht benutzen. Weitere "
+"Informationen im <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
+"blob/master/README.md#security\">README (Englischsprachig)</a>."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
@@ -523,10 +523,10 @@ msgid ""
 "For registering as a primary device, Flare will need your phone number and a "
 "completion of the captcha. Please give the phone number in international "
 "E.164-format, including the leading \"+\" and country code. The captcha can "
-"be completed <a href=\"https://signalcaptchas.org/registration/generate."
-"html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into "
-"the below field. Note that this captcha is only valid for about one minute, "
-"so please proceed fast."
+"be completed <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">here</a>, afterwards copy the \"Open Signal\" link and paste "
+"it into the below field. Note that this captcha is only valid for about one "
+"minute, so please proceed fast."
 msgstr ""
 "Um Flare als Hauptgerät zu verwenden, geben Sie Ihre Telefonnummer an und "
 "bearbeiten Sie das CAPTCA. Die Telefonnummer sollte im internationalen E.164-"
@@ -581,14 +581,16 @@ msgid "Known Bugs"
 msgstr "Bekannte Fehler"
 
 #: data/resources/ui/setup_window.blp:513
+#, fuzzy
 msgid ""
-"Make sure to not send any messages while the messages are still received by "
-"Flare, this makes sure that all required information is received. We are "
-"trying to fix this problem. Furthermore, sending to contacts you have not "
-"yet received messages from can lead to rate limiting. Make sure to receive a "
-"message from a contact before you send too many. For a full list of bugs, "
-"visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
-"label_name%5B%5D=bug\">issue tracker</a>."
+"Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
+"or only with the phone number. After receiving messages from those contacts "
+"and restarting, their name should populate. Their display names may be lost "
+"over time though if you don't regularly exchange messages. Furthermore, "
+"sending to contacts you have not yet received messages from can lead to rate "
+"limiting. Make sure to receive a message from a contact before you send too "
+"many. For a full list of bugs, visit the <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
 "Senden Sie keine Nachrichten, solange noch Nachrichten von Flare empfangen "
 "werden, sonst könnten dafür erforderliche Daten fehlen. Wir arbeiten an "
@@ -610,8 +612,8 @@ msgid ""
 "open for everyone."
 msgstr ""
 "Möchtest du uns Feedback über Flare geben, oder halt ein bisschen zusammen "
-"sprechen? Unser <a href=\"https://matrix.to/#/#flare-signal:matrix."
-"org\">Matrix Raum</a> ist für alle offen."
+"sprechen? Unser <a href=\"https://matrix.to/#/#flare-"
+"signal:matrix.org\">Matrix Raum</a> ist für alle offen."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -753,39 +755,39 @@ msgstr "Info"
 msgid "Quit"
 msgstr "Beenden"
 
-#: src/backend/channel.rs:557 src/backend/channel.rs:700
+#: src/backend/channel.rs:558 src/backend/channel.rs:699
 msgid "Note to self"
 msgstr "Notiz an mich"
 
-#: src/backend/contact.rs:199 src/backend/contact.rs:281
+#: src/backend/contact.rs:212 src/backend/contact.rs:294
 msgid "Unknown contact"
 msgstr "Unbekannter Kontakt"
 
-#: src/backend/manager.rs:416
+#: src/backend/manager.rs:438
 msgid "You"
 msgstr "Du"
 
-#: src/backend/message/call_message.rs:100
+#: src/backend/message/call_message.rs:95
 msgid "Incoming call"
 msgstr "Eingehender Anruf"
 
-#: src/backend/message/call_message.rs:101
+#: src/backend/message/call_message.rs:96
 msgid "Outgoing call"
 msgstr "Abgehender Anruf"
 
-#: src/backend/message/call_message.rs:102
+#: src/backend/message/call_message.rs:97
 msgid "Call started"
 msgstr "Anruf gestartet"
 
-#: src/backend/message/call_message.rs:103
+#: src/backend/message/call_message.rs:98
 msgid "Call ended"
 msgstr "Anruf beendet"
 
-#: src/backend/message/call_message.rs:104
+#: src/backend/message/call_message.rs:99
 msgid "Call declined"
 msgstr "Anruf abgelehnt"
 
-#: src/backend/message/call_message.rs:105
+#: src/backend/message/call_message.rs:100
 msgid "Unanswered call"
 msgstr "Anruf wurde nicht beantwortet"
 
@@ -821,23 +823,23 @@ msgid_plural "Sent {} files"
 msgstr[0] "Hat eine Datei gesendet"
 msgstr[1] "Hat {} Dateien gesendet"
 
-#: src/error.rs:118
+#: src/error.rs:124
 msgid "I/O Error."
 msgstr "Ein-/Ausgabefehler."
 
-#: src/error.rs:123
+#: src/error.rs:128
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Es scheint keine Internetverbindung vorhanden zu sein."
 
-#: src/error.rs:128
+#: src/error.rs:131
 msgid "Something glib-related failed."
 msgstr "Etwas glib-bezogenes ist fehlgeschlagen."
 
-#: src/error.rs:133
+#: src/error.rs:134
 msgid "The communication with libsecret failed."
 msgstr "Die Kommunikation mit libsecret ist fehlgeschlagen."
 
-#: src/error.rs:138
+#: src/error.rs:140
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -845,7 +847,7 @@ msgstr ""
 "In der Datenbank ist ein Fehler aufgetreten. Bitte starte die Anwendung neu "
 "oder lösche die Datenbank und kopple die Anwendung erneut."
 
-#: src/error.rs:143
+#: src/error.rs:147
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -853,74 +855,79 @@ msgstr ""
 "Du scheinst nicht von Signal autorisiert zu sein. Bitte lösche die Datenbank "
 "und kopple die Anwendung erneut."
 
-#: src/error.rs:148
+#: src/error.rs:151
 msgid "Sending a message failed."
 msgstr "Nachricht konnte nicht gesendet werden."
 
-#: src/error.rs:153
+#: src/error.rs:154
 msgid "Receiving a message failed."
 msgstr "Nachricht konnte nicht empfangen werden."
 
-#: src/error.rs:158
+#: src/error.rs:160
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 "Etwas Unerwartetes ist mit Signal passiert. Bitte versuche es später wieder."
 
-#: src/error.rs:163
+#: src/error.rs:166
 msgid "The application seems to be misconfigured."
 msgstr "Die Anwendung scheint falsch konfiguriert zu sein."
 
-#: src/error.rs:168
+#: src/error.rs:169
 msgid "A part of the application crashed."
 msgstr "Ein Teil der Anwendung ist abgestürzt."
 
-#: src/error.rs:178
+#: src/error.rs:179
 msgid "Please check your internet connection."
 msgstr "Bitte prüfe deine Internetverbindung."
 
-#: src/error.rs:183
+#: src/error.rs:184
 msgid "Please delete the database and relink the device."
 msgstr "Bitte lösche die Datenbank und kopple das Gerät erneut."
 
-#: src/error.rs:190
+#: src/error.rs:191
 msgid "The database path at {} is no folder."
 msgstr "Der Datenbankpfad bei {} ist kein Ordner."
 
-#: src/error.rs:195
+#: src/error.rs:196
+#, fuzzy
+msgid "The database path at {path} is cannot be created due to error {error}."
+msgstr "Der Datenbankpfad bei {} ist kein Ordner."
+
+#: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Bitte starte die Anwendung neu mit Protokollierung und melde dieses Problem."
 
-#: src/gui/channel_info_dialog.rs:167
+#: src/gui/channel_info_dialog.rs:166
 msgid "Never"
 msgstr "Nie"
 
-#: src/gui/channel_info_dialog.rs:172
+#: src/gui/channel_info_dialog.rs:171
 msgid "{} week"
 msgid_plural "{} weeks"
 msgstr[0] "Woche"
 msgstr[1] "Wochen"
 
-#: src/gui/channel_info_dialog.rs:182
+#: src/gui/channel_info_dialog.rs:181
 msgid "{} day"
 msgid_plural "{} days"
 msgstr[0] "Tag"
 msgstr[1] "Tage"
 
-#: src/gui/channel_info_dialog.rs:192
+#: src/gui/channel_info_dialog.rs:191
 msgid "{} hour"
 msgid_plural "{} hours"
 msgstr[0] "Stunde"
 msgstr[1] "Stunden"
 
-#: src/gui/channel_info_dialog.rs:202
+#: src/gui/channel_info_dialog.rs:201
 msgid "{} minute"
 msgid_plural "{} minutes"
 msgstr[0] "Minute"
 msgstr[1] "Minuten"
 
-#: src/gui/channel_info_dialog.rs:212
+#: src/gui/channel_info_dialog.rs:211
 msgid "{} second"
 msgid_plural "{} seconds"
 msgstr[0] "Sekunde"
@@ -1019,12 +1026,12 @@ msgstr ""
 "Damit werden alle lokal gespeicherten Nachrichten aus diesem Kanal entfernt"
 
 #. Translators: Flare summary in metainfo.
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
+#: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:10
 msgid "Chat with your friends on Signal"
 msgstr "Chatte mit deinen Freunden auf Signal"
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:15
+#: data/de.schmidhuberj.Flare.desktop.in.in:14
 msgid "messaging;chat;signal;"
 msgstr "messaging;chat;signal;"
 
@@ -1052,7 +1059,7 @@ msgstr ""
 "verschlechtert. Seien Sie vorsichtig im Umgang mit sensiblen Daten. In der "
 "README des Projekts finden Sie weitere Informationen zur Sicherheit."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:792
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:822
 msgid "Overview of the application"
 msgstr "Übersicht der Anwendung"
 

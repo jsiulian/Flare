@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-29 16:21+0200\n"
+"POT-Creation-Date: 2025-11-20 14:14+0100\n"
 "PO-Revision-Date: 2025-06-16 02:04+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
@@ -349,7 +349,7 @@ msgstr "விரிவடைய அமைக்கவும்"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
-#: data/de.schmidhuberj.Flare.desktop.in.in:5
+#: data/de.schmidhuberj.Flare.desktop.in.in:4
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:8
 msgid "Flare"
 msgstr "விரிவடைய"
@@ -368,15 +368,14 @@ msgid ""
 msgstr ""
 "ஃப்ளேர் ஒரு அதிகாரப்பூர்வமற்ற சமிக்ஞை வாடிக்கையாளர். ஃப்ளேர் நிலையானது அல்ல என்பதையும், "
 "எதிர்பார்க்க வேண்டிய பிழைகள் உள்ளன என்பதையும் நினைவில் கொள்க. நீங்கள் ஏதேனும் பிழைகள் "
-"அனுபவிக்கிறீர்கள் என்றால், <a href="
-"\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\"> ஐ வெளியீடு டிராக்கர் "
-"</a> ஐ அணுகவும், புதிய சிக்கலை நீங்கள் சந்தித்தால் சிக்கல்களைத் திறக்கவும். மூன்றாம் தரப்பு "
-"பயன்பாடாக இருப்பதால், உத்தியோகபூர்வ சமிக்ஞை பயன்பாடுகள் செய்யும் அதே அளவிலான பாதுகாப்பு "
-"மற்றும் தனியுரிமைக்கு ஃபிளேர் பொறுப்பு அளிக்க முடியாது என்பதையும் நினைவில் கொள்க. நீங்கள் "
-"அல்லது நீங்கள் தொடர்பு கொள்ள வேண்டிய ஒருவருக்கு வலுவான பாதுகாப்பு தேவைப்பட்டால், விரிவடை"
-"ய பயன்படுத்த வேண்டாம். மேலும் தகவலுக்கு <a href=\"https://gitlab.com/"
-"schmiddi-on-mobile/flare/-/blob/master/README.md#security\">என்னைப்படி</a> ஐ "
-"அணுகவும்."
+"அனுபவிக்கிறீர்கள் என்றால், <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
+"issues\"> ஐ வெளியீடு டிராக்கர் </a> ஐ அணுகவும், புதிய சிக்கலை நீங்கள் சந்தித்தால் "
+"சிக்கல்களைத் திறக்கவும். மூன்றாம் தரப்பு பயன்பாடாக இருப்பதால், உத்தியோகபூர்வ சமிக்ஞை "
+"பயன்பாடுகள் செய்யும் அதே அளவிலான பாதுகாப்பு மற்றும் தனியுரிமைக்கு ஃபிளேர் பொறுப்பு "
+"அளிக்க முடியாது என்பதையும் நினைவில் கொள்க. நீங்கள் அல்லது நீங்கள் தொடர்பு கொள்ள வேண்டிய "
+"ஒருவருக்கு வலுவான பாதுகாப்பு தேவைப்பட்டால், விரிவடைய பயன்படுத்த வேண்டாம். மேலும் "
+"தகவலுக்கு <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/"
+"README.md#security\">என்னைப்படி</a> ஐ அணுகவும்."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
@@ -511,18 +510,18 @@ msgid ""
 "For registering as a primary device, Flare will need your phone number and a "
 "completion of the captcha. Please give the phone number in international "
 "E.164-format, including the leading \"+\" and country code. The captcha can "
-"be completed <a href=\"https://signalcaptchas.org/registration/generate."
-"html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into "
-"the below field. Note that this captcha is only valid for about one minute, "
-"so please proceed fast."
+"be completed <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">here</a>, afterwards copy the \"Open Signal\" link and paste "
+"it into the below field. Note that this captcha is only valid for about one "
+"minute, so please proceed fast."
 msgstr ""
 "முதன்மை சாதனமாகப் பதிவு செய்ய, ஃப்ளேருக்கு உங்கள் தொலைபேசி எண் மற்றும் கேப்ட்சா நிறைவு "
 "தேவைப்படும். முன்னணி \"+\" மற்றும் நாட்டின் குறியீடு உள்ளிட்ட பன்னாட்டு E.164 வடிவத்தில் "
-"தொலைபேசி எண்ணைக் கொடுங்கள். கேப்ட்சாவை <a href="
-"\"https://signalcaptchas.org/registration/generate.html\">இங்கே </a> முடிக்க "
-"முடியும், பின்னர் \"திறந்த சமிக்ஞை\" இணைப்பை நகலெடுத்து கீழே உள்ள புலத்தில் ஒட்டவும். இந்தக்"
-" கேப்ட்சா சுமார் ஒரு மணித்துளி மட்டுமே செல்லுபடியாகும் என்பதை நினைவில் கொள்க, எனவே "
-"தயவுசெய்து வேகமாகத் தொடரவும்."
+"தொலைபேசி எண்ணைக் கொடுங்கள். கேப்ட்சாவை <a href=\"https://signalcaptchas.org/"
+"registration/generate.html\">இங்கே </a> முடிக்க முடியும், பின்னர் \"திறந்த "
+"சமிக்ஞை\" இணைப்பை நகலெடுத்து கீழே உள்ள புலத்தில் ஒட்டவும். இந்தக் கேப்ட்சா சுமார் ஒரு "
+"மணித்துளி மட்டுமே செல்லுபடியாகும் என்பதை நினைவில் கொள்க, எனவே தயவுசெய்து வேகமாகத் "
+"தொடரவும்."
 
 #: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -568,14 +567,16 @@ msgid "Known Bugs"
 msgstr "அறியப்பட்ட பிழைகள்"
 
 #: data/resources/ui/setup_window.blp:513
+#, fuzzy
 msgid ""
-"Make sure to not send any messages while the messages are still received by "
-"Flare, this makes sure that all required information is received. We are "
-"trying to fix this problem. Furthermore, sending to contacts you have not "
-"yet received messages from can lead to rate limiting. Make sure to receive a "
-"message from a contact before you send too many. For a full list of bugs, "
-"visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
-"label_name%5B%5D=bug\">issue tracker</a>."
+"Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
+"or only with the phone number. After receiving messages from those contacts "
+"and restarting, their name should populate. Their display names may be lost "
+"over time though if you don't regularly exchange messages. Furthermore, "
+"sending to contacts you have not yet received messages from can lead to rate "
+"limiting. Make sure to receive a message from a contact before you send too "
+"many. For a full list of bugs, visit the <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
 "செய்திகள் இன்னும் விரிவடையும்போது எந்த செய்திகளையும் அனுப்பாமல் பார்த்துக் கொள்ளுங்கள், "
 "தேவையான அனைத்து தகவல்களும் பெறப்படுவதை இது உறுதி செய்கிறது. இந்த சிக்கலை சரிசெய்ய "
@@ -674,10 +675,10 @@ msgid ""
 "Note that the captcha is only valid for about one minute."
 msgstr ""
 "கேப்ட்சா சவாலைச் சமர்ப்பிக்கவும். ஃப்ளேரிலிருந்து காட்டப்பட்ட பிழை செய்தியிலிருந்து "
-"கிள்ளாக்கைப் பெறலாம். இந்த <a href="
-"\"https://signalcaptchas.org/challenge/generate.html\">இணையதளத்தில் </a> இல் "
-"கேப்ட்சாவை நிரப்ப வேண்டும், மேலும் திறந்த சமிக்ஞைக்கான இணைப்பு தொடர்புடைய நுழைவுக்கு ஒட்டப்"
-"பட வேண்டும். கேப்ட்சா சுமார் ஒரு மணித்துளி மட்டுமே செல்லுபடியாகும் என்பதை நினைவில் கொள்க."
+"கிள்ளாக்கைப் பெறலாம். இந்த <a href=\"https://signalcaptchas.org/challenge/"
+"generate.html\">இணையதளத்தில் </a> இல் கேப்ட்சாவை நிரப்ப வேண்டும், மேலும் திறந்த "
+"சமிக்ஞைக்கான இணைப்பு தொடர்புடைய நுழைவுக்கு ஒட்டப்பட வேண்டும். கேப்ட்சா சுமார் ஒரு "
+"மணித்துளி மட்டுமே செல்லுபடியாகும் என்பதை நினைவில் கொள்க."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
@@ -738,39 +739,39 @@ msgstr "பற்றி"
 msgid "Quit"
 msgstr "வெளியேறு"
 
-#: src/backend/channel.rs:557 src/backend/channel.rs:700
+#: src/backend/channel.rs:558 src/backend/channel.rs:699
 msgid "Note to self"
 msgstr "தன்வய குறிப்பு"
 
-#: src/backend/contact.rs:199 src/backend/contact.rs:281
+#: src/backend/contact.rs:212 src/backend/contact.rs:294
 msgid "Unknown contact"
 msgstr "தெரியாத தொடர்பு"
 
-#: src/backend/manager.rs:416
+#: src/backend/manager.rs:438
 msgid "You"
 msgstr "நீங்கள்"
 
-#: src/backend/message/call_message.rs:100
+#: src/backend/message/call_message.rs:95
 msgid "Incoming call"
 msgstr "உள்வரும் அழைப்பு"
 
-#: src/backend/message/call_message.rs:101
+#: src/backend/message/call_message.rs:96
 msgid "Outgoing call"
 msgstr "வெளிச்செல்லும் அழைப்பு"
 
-#: src/backend/message/call_message.rs:102
+#: src/backend/message/call_message.rs:97
 msgid "Call started"
 msgstr "அழைப்பு தொடங்கியது"
 
-#: src/backend/message/call_message.rs:103
+#: src/backend/message/call_message.rs:98
 msgid "Call ended"
 msgstr "அழைப்பு முடிந்தது"
 
-#: src/backend/message/call_message.rs:104
+#: src/backend/message/call_message.rs:99
 msgid "Call declined"
 msgstr "அழைப்பு மறுக்கப்பட்டது"
 
-#: src/backend/message/call_message.rs:105
+#: src/backend/message/call_message.rs:100
 msgid "Unanswered call"
 msgstr "பதிலளிக்கப்படாத அழைப்பு"
 
@@ -806,23 +807,23 @@ msgid_plural "Sent {} files"
 msgstr[0] "ஒரு கோப்பு அனுப்பப்பட்டது"
 msgstr[1] "அனுப்பப்பட்டது}} கோப்புகள்"
 
-#: src/error.rs:118
+#: src/error.rs:124
 msgid "I/O Error."
 msgstr "I/o பிழை."
 
-#: src/error.rs:123
+#: src/error.rs:128
 msgid "There does not seem to be a connection to the internet available."
 msgstr "கிடைக்கக்கூடிய இணையத்துடன் இணைப்பு இருப்பதாகத் தெரியவில்லை."
 
-#: src/error.rs:128
+#: src/error.rs:131
 msgid "Something glib-related failed."
 msgstr "கிளிப் தொடர்பான ஒன்று தோல்வியடைந்தது."
 
-#: src/error.rs:133
+#: src/error.rs:134
 msgid "The communication with libsecret failed."
 msgstr "லிப்செக்ரெட்டுடனான தொடர்பு தோல்வியடைந்தது."
 
-#: src/error.rs:138
+#: src/error.rs:140
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -830,7 +831,7 @@ msgstr ""
 "பின்தளத்தில் தரவுத்தளம் தோல்வியடைந்தது. பயன்பாட்டை மறுதொடக்கம் செய்யுங்கள் அல்லது "
 "தரவுத்தளத்தை நீக்கி பயன்பாட்டை மறுபரிசீலனை செய்யுங்கள்."
 
-#: src/error.rs:143
+#: src/error.rs:147
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -838,72 +839,77 @@ msgstr ""
 "நீங்கள் சமிக்ஞையுடன் அங்கீகரிக்கப்பட்டதாகத் தெரியவில்லை. தயவுசெய்து தரவுத்தளத்தை நீக்கி "
 "பயன்பாட்டை மறுபரிசீலனை செய்யுங்கள்."
 
-#: src/error.rs:148
+#: src/error.rs:151
 msgid "Sending a message failed."
 msgstr "ஒரு செய்தியை அனுப்புவது தோல்வியடைந்தது."
 
-#: src/error.rs:153
+#: src/error.rs:154
 msgid "Receiving a message failed."
 msgstr "ஒரு செய்தியைப் பெறுவது தோல்வியடைந்தது."
 
-#: src/error.rs:158
+#: src/error.rs:160
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr "சிக்னல் பின்தளத்தில் ஏதோ எதிர்பாராதது நடந்தது. தயவுசெய்து மீண்டும் முயற்சிக்கவும்."
 
-#: src/error.rs:163
+#: src/error.rs:166
 msgid "The application seems to be misconfigured."
 msgstr "பயன்பாடு தவறாக கட்டமைக்கப்பட்டதாக தெரிகிறது."
 
-#: src/error.rs:168
+#: src/error.rs:169
 msgid "A part of the application crashed."
 msgstr "விண்ணப்பத்தின் ஒரு பகுதி செயலிழந்தது."
 
-#: src/error.rs:178
+#: src/error.rs:179
 msgid "Please check your internet connection."
 msgstr "உங்கள் இணைய இணைப்பை சரிபார்க்கவும்."
 
-#: src/error.rs:183
+#: src/error.rs:184
 msgid "Please delete the database and relink the device."
 msgstr "தயவுசெய்து தரவுத்தளத்தை நீக்கி சாதனத்தை மறுபரிசீலனை செய்யுங்கள்."
 
-#: src/error.rs:190
+#: src/error.rs:191
 msgid "The database path at {} is no folder."
 msgstr "{At இல் உள்ள தரவுத்தள பாதை கோப்புறை இல்லை."
 
-#: src/error.rs:195
+#: src/error.rs:196
+#, fuzzy
+msgid "The database path at {path} is cannot be created due to error {error}."
+msgstr "{At இல் உள்ள தரவுத்தள பாதை கோப்புறை இல்லை."
+
+#: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
 msgstr "உள்நுழைவு மூலம் விண்ணப்பத்தை மறுதொடக்கம் செய்து இந்த சிக்கலைப் புகாரளிக்கவும்."
 
-#: src/gui/channel_info_dialog.rs:167
+#: src/gui/channel_info_dialog.rs:166
 msgid "Never"
 msgstr "ஒருபோதும்"
 
-#: src/gui/channel_info_dialog.rs:172
+#: src/gui/channel_info_dialog.rs:171
 msgid "{} week"
 msgid_plural "{} weeks"
 msgstr[0] "{} வாரம்"
 msgstr[1] "{} வாரங்கள்"
 
-#: src/gui/channel_info_dialog.rs:182
+#: src/gui/channel_info_dialog.rs:181
 msgid "{} day"
 msgid_plural "{} days"
 msgstr[0] "{} நாள்"
 msgstr[1] "}} நாட்கள்"
 
-#: src/gui/channel_info_dialog.rs:192
+#: src/gui/channel_info_dialog.rs:191
 msgid "{} hour"
 msgid_plural "{} hours"
 msgstr[0] "{} மணி"
 msgstr[1] "{} மணிநேரம்"
 
-#: src/gui/channel_info_dialog.rs:202
+#: src/gui/channel_info_dialog.rs:201
 msgid "{} minute"
 msgid_plural "{} minutes"
 msgstr[0] "{} மணித்துளி"
 msgstr[1] "{} நிமிடங்கள்"
 
-#: src/gui/channel_info_dialog.rs:212
+#: src/gui/channel_info_dialog.rs:211
 msgid "{} second"
 msgid_plural "{} seconds"
 msgstr[0] "}} இரண்டாவது"
@@ -1001,12 +1007,12 @@ msgid "This will remove all locally stored messages from this channel"
 msgstr "இது இந்த சேனலில் இருந்து உள்நாட்டில் சேமிக்கப்பட்ட அனைத்து செய்திகளையும் அகற்றும்"
 
 #. Translators: Flare summary in metainfo.
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
+#: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:10
 msgid "Chat with your friends on Signal"
 msgstr "உங்கள் நண்பர்களுடன் சிக்னலில் அரட்டையடிக்கவும்"
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:15
+#: data/de.schmidhuberj.Flare.desktop.in.in:14
 msgid "messaging;chat;signal;"
 msgstr "செய்தியிடல்; அரட்டை; சமிக்ஞை;"
 
@@ -1034,7 +1040,7 @@ msgstr ""
 "கையாளும் போது கவனமாகப் பயன்படுத்தவும். பாதுகாப்பு பற்றிய கூடுதல் தகவலுக்கு திட்டங்கள் "
 "README ஐப் பாருங்கள்."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:792
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:822
 msgid "Overview of the application"
 msgstr "பயன்பாட்டின் கண்ணோட்டம்"
 

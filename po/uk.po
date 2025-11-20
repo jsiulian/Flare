@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-29 16:21+0200\n"
+"POT-Creation-Date: 2025-11-20 14:14+0100\n"
 "PO-Revision-Date: 2024-06-20 15:09+0000\n"
 "Last-Translator: Roma <r.sg@ukr.net>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/schmiddi-on-"
@@ -192,7 +192,6 @@ msgstr "Пов'язані пристрої"
 
 #: data/resources/ui/linked_devices_window.blp:36
 #, fuzzy
-#| msgid "Link Device"
 msgid "Link New Device"
 msgstr "Пов'язати пристрій"
 
@@ -353,7 +352,7 @@ msgstr "Налаштувати Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
-#: data/de.schmidhuberj.Flare.desktop.in.in:5
+#: data/de.schmidhuberj.Flare.desktop.in.in:4
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:8
 msgid "Flare"
 msgstr "Flare"
@@ -378,8 +377,8 @@ msgstr ""
 "гарантувати такий же рівень безпеки і конфіденційності, як офіційні додатки "
 "Signal. Якщо вам або комусь, з ким вам потрібно зв'язатися, потрібен високий "
 "рівень безпеки, не використовуйте Flare. Зверніться до <a href=\"https://"
-"gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README."
-"md#security\">README</a> для отримання додаткової інформації."
+"gitlab.com/schmiddi-on-mobile/flare/-/blob/master/"
+"README.md#security\">README</a> для отримання додаткової інформації."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
@@ -515,18 +514,18 @@ msgid ""
 "For registering as a primary device, Flare will need your phone number and a "
 "completion of the captcha. Please give the phone number in international "
 "E.164-format, including the leading \"+\" and country code. The captcha can "
-"be completed <a href=\"https://signalcaptchas.org/registration/generate."
-"html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into "
-"the below field. Note that this captcha is only valid for about one minute, "
-"so please proceed fast."
+"be completed <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">here</a>, afterwards copy the \"Open Signal\" link and paste "
+"it into the below field. Note that this captcha is only valid for about one "
+"minute, so please proceed fast."
 msgstr ""
 "Для реєстрації в якості основного пристрою Flare знадобиться ваш номер "
 "телефону та заповнення капчі. Будь ласка, вкажіть номер телефону в "
 "міжнародному форматі E.164, включаючи знак \"+\" та код країни. Капчу можна "
-"заповнити <a href=\"https://signalcaptchas.org/registration/generate."
-"html\">тут</a>, після чого скопіювати посилання \"Відкрити сигнал\" і "
-"вставити його в поле нижче. Зверніть увагу, що ця капча дійсна лише близько "
-"однієї хвилини, тому, будь ласка, дійте швидко."
+"заповнити <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">тут</a>, після чого скопіювати посилання \"Відкрити сигнал\" "
+"і вставити його в поле нижче. Зверніть увагу, що ця капча дійсна лише "
+"близько однієї хвилини, тому, будь ласка, дійте швидко."
 
 #: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -573,14 +572,16 @@ msgid "Known Bugs"
 msgstr "Відомі помилки"
 
 #: data/resources/ui/setup_window.blp:513
+#, fuzzy
 msgid ""
-"Make sure to not send any messages while the messages are still received by "
-"Flare, this makes sure that all required information is received. We are "
-"trying to fix this problem. Furthermore, sending to contacts you have not "
-"yet received messages from can lead to rate limiting. Make sure to receive a "
-"message from a contact before you send too many. For a full list of bugs, "
-"visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
-"label_name%5B%5D=bug\">issue tracker</a>."
+"Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
+"or only with the phone number. After receiving messages from those contacts "
+"and restarting, their name should populate. Their display names may be lost "
+"over time though if you don't regularly exchange messages. Furthermore, "
+"sending to contacts you have not yet received messages from can lead to rate "
+"limiting. Make sure to receive a message from a contact before you send too "
+"many. For a full list of bugs, visit the <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
 "Переконайтеся, що не надсилаєте повідомлення, поки повідомлення все ще "
 "приймаються Flare. Це гарантує, що вся необхідна інформація буде отримана. "
@@ -744,39 +745,39 @@ msgstr "Про додаток"
 msgid "Quit"
 msgstr "Вийти"
 
-#: src/backend/channel.rs:557 src/backend/channel.rs:700
+#: src/backend/channel.rs:558 src/backend/channel.rs:699
 msgid "Note to self"
 msgstr "Примітка для себе"
 
-#: src/backend/contact.rs:199 src/backend/contact.rs:281
+#: src/backend/contact.rs:212 src/backend/contact.rs:294
 msgid "Unknown contact"
 msgstr "Невідомий контакт"
 
-#: src/backend/manager.rs:416
+#: src/backend/manager.rs:438
 msgid "You"
 msgstr "Ви"
 
-#: src/backend/message/call_message.rs:100
+#: src/backend/message/call_message.rs:95
 msgid "Incoming call"
 msgstr "Вхідний дзвінок"
 
-#: src/backend/message/call_message.rs:101
+#: src/backend/message/call_message.rs:96
 msgid "Outgoing call"
 msgstr "Вихідний дзвінок"
 
-#: src/backend/message/call_message.rs:102
+#: src/backend/message/call_message.rs:97
 msgid "Call started"
 msgstr "Дзвінок розпочато"
 
-#: src/backend/message/call_message.rs:103
+#: src/backend/message/call_message.rs:98
 msgid "Call ended"
 msgstr "Дзвінок завершено"
 
-#: src/backend/message/call_message.rs:104
+#: src/backend/message/call_message.rs:99
 msgid "Call declined"
 msgstr "Дзвінок відхилено"
 
-#: src/backend/message/call_message.rs:105
+#: src/backend/message/call_message.rs:100
 msgid "Unanswered call"
 msgstr "Не прийнятий дзвінок"
 
@@ -816,25 +817,24 @@ msgstr[0] "Відправлено файл"
 msgstr[1] "Надіслано {} файли"
 msgstr[2] "Надіслано {} файлів"
 
-#: src/error.rs:118
+#: src/error.rs:124
 msgid "I/O Error."
 msgstr "Помилка введення/виведення."
 
-#: src/error.rs:123
+#: src/error.rs:128
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Здається, немає підключення до Інтернету."
 
-#: src/error.rs:128
+#: src/error.rs:131
 msgid "Something glib-related failed."
 msgstr "Щось пов'язане з glib закінчилося невдачею."
 
-#: src/error.rs:133
+#: src/error.rs:134
 #, fuzzy
-#| msgid "The communication with Libsecret failed."
 msgid "The communication with libsecret failed."
 msgstr "Не вдалося зв'язатися з Libsecret."
 
-#: src/error.rs:138
+#: src/error.rs:140
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -842,7 +842,7 @@ msgstr ""
 "Відбулася помилка бази даних бекенда. Будь ласка, перезапустіть програму або "
 "видаліть базу даних і переприв'яжіть програму."
 
-#: src/error.rs:143
+#: src/error.rs:147
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -850,80 +850,85 @@ msgstr ""
 "Здається, ви не авторизовані в Signal. Будь ласка, видаліть базу даних і "
 "переприв'яжіть додаток."
 
-#: src/error.rs:148
+#: src/error.rs:151
 msgid "Sending a message failed."
 msgstr "Не вдалося надіслати повідомлення."
 
-#: src/error.rs:153
+#: src/error.rs:154
 msgid "Receiving a message failed."
 msgstr "Не вдалося отримати повідомлення."
 
-#: src/error.rs:158
+#: src/error.rs:160
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 "Щось непередбачуване сталося з бекендом Signal. Будь ласка, спробуйте "
 "пізніше."
 
-#: src/error.rs:163
+#: src/error.rs:166
 msgid "The application seems to be misconfigured."
 msgstr "Здається, програма неправильно налаштована."
 
-#: src/error.rs:168
+#: src/error.rs:169
 msgid "A part of the application crashed."
 msgstr "Частина програми аварійно завершила роботу."
 
-#: src/error.rs:178
+#: src/error.rs:179
 msgid "Please check your internet connection."
 msgstr "Будь ласка, перевірте своє інтернет-з'єднання."
 
-#: src/error.rs:183
+#: src/error.rs:184
 msgid "Please delete the database and relink the device."
 msgstr "Будь ласка, видаліть базу даних і переприв'яжіть пристрій."
 
-#: src/error.rs:190
+#: src/error.rs:191
 msgid "The database path at {} is no folder."
 msgstr "Шлях до бази даних у {} не є папкою."
 
-#: src/error.rs:195
+#: src/error.rs:196
+#, fuzzy
+msgid "The database path at {path} is cannot be created due to error {error}."
+msgstr "Шлях до бази даних у {} не є папкою."
+
+#: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Будь ласка, перезапустіть програму з журналюванням і повідомте про цю "
 "проблему."
 
-#: src/gui/channel_info_dialog.rs:167
+#: src/gui/channel_info_dialog.rs:166
 msgid "Never"
 msgstr "Ніколи"
 
-#: src/gui/channel_info_dialog.rs:172
+#: src/gui/channel_info_dialog.rs:171
 msgid "{} week"
 msgid_plural "{} weeks"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/gui/channel_info_dialog.rs:182
+#: src/gui/channel_info_dialog.rs:181
 msgid "{} day"
 msgid_plural "{} days"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/gui/channel_info_dialog.rs:192
+#: src/gui/channel_info_dialog.rs:191
 msgid "{} hour"
 msgid_plural "{} hours"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/gui/channel_info_dialog.rs:202
+#: src/gui/channel_info_dialog.rs:201
 msgid "{} minute"
 msgid_plural "{} minutes"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/gui/channel_info_dialog.rs:212
+#: src/gui/channel_info_dialog.rs:211
 msgid "{} second"
 msgid_plural "{} seconds"
 msgstr[0] ""
@@ -936,7 +941,6 @@ msgstr "Чернетка"
 
 #: src/gui/device_info_item.rs:47
 #, fuzzy
-#| msgid "Linked:"
 msgid "Linked: {}"
 msgstr "Пов'язано:"
 
@@ -1025,12 +1029,12 @@ msgstr ""
 "Це призведе до видалення всіх локально збережених повідомлень з цього каналу"
 
 #. Translators: Flare summary in metainfo.
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
+#: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:10
 msgid "Chat with your friends on Signal"
 msgstr "Спілкуйтеся з друзями в Signal"
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:15
+#: data/de.schmidhuberj.Flare.desktop.in.in:14
 msgid "messaging;chat;signal;"
 msgstr "спілкування; чат; сигнал;"
 
@@ -1058,7 +1062,7 @@ msgstr ""
 "обережні при роботі з конфіденційними даними. Подивіться README проєкту для "
 "отримання додаткової інформації про безпеку."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:792
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:822
 msgid "Overview of the application"
 msgstr "Огляд програми"
 

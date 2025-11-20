@@ -51,8 +51,6 @@ src/backend/mod.rs
 src/backend/server.rs
 src/backend/timeline/mod.rs
 src/backend/timeline/timeline_item.rs
-src/dbus/login1.rs
-src/dbus/mod.rs
 src/error.rs
 src/gui/attachment.rs
 src/gui/call_message_item.rs

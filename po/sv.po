@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-29 16:21+0200\n"
+"POT-Creation-Date: 2025-11-20 14:14+0100\n"
 "PO-Revision-Date: 2024-06-20 15:09+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/schmiddi-on-"
@@ -192,7 +192,6 @@ msgstr "Länkade enheter"
 
 #: data/resources/ui/linked_devices_window.blp:36
 #, fuzzy
-#| msgid "Link Device"
 msgid "Link New Device"
 msgstr "Länka enhet"
 
@@ -353,7 +352,7 @@ msgstr "Ställ in Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
-#: data/de.schmidhuberj.Flare.desktop.in.in:5
+#: data/de.schmidhuberj.Flare.desktop.in.in:4
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:8
 msgid "Flare"
 msgstr "Flare"
@@ -377,9 +376,9 @@ msgstr ""
 "problem. Observera också att Flare inte kan garantera samma nivå av säkerhet "
 "och sekretess som officiella Signal-applikationer, eftersom det är en "
 "tredjepartsapplikation. Om du eller någon du behöver kontakta kräver en "
-"stark säkerhetsnivå, använd inte Flare. Konsultera <a href=\"https://gitlab."
-"com/schmiddi-on-mobile/flare/-/blob/master/README.md#security\">README</a> "
-"för mer information."
+"stark säkerhetsnivå, använd inte Flare. Konsultera <a href=\"https://"
+"gitlab.com/schmiddi-on-mobile/flare/-/blob/master/"
+"README.md#security\">README</a> för mer information."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
@@ -513,10 +512,10 @@ msgid ""
 "For registering as a primary device, Flare will need your phone number and a "
 "completion of the captcha. Please give the phone number in international "
 "E.164-format, including the leading \"+\" and country code. The captcha can "
-"be completed <a href=\"https://signalcaptchas.org/registration/generate."
-"html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into "
-"the below field. Note that this captcha is only valid for about one minute, "
-"so please proceed fast."
+"be completed <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">here</a>, afterwards copy the \"Open Signal\" link and paste "
+"it into the below field. Note that this captcha is only valid for about one "
+"minute, so please proceed fast."
 msgstr ""
 "För att registrera dig som en primär enhet behöver Flare ditt telefonnummer "
 "och en komplettering av captcha. Vänligen ange telefonnumret i "
@@ -571,14 +570,16 @@ msgid "Known Bugs"
 msgstr "Kända buggar"
 
 #: data/resources/ui/setup_window.blp:513
+#, fuzzy
 msgid ""
-"Make sure to not send any messages while the messages are still received by "
-"Flare, this makes sure that all required information is received. We are "
-"trying to fix this problem. Furthermore, sending to contacts you have not "
-"yet received messages from can lead to rate limiting. Make sure to receive a "
-"message from a contact before you send too many. For a full list of bugs, "
-"visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
-"label_name%5B%5D=bug\">issue tracker</a>."
+"Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
+"or only with the phone number. After receiving messages from those contacts "
+"and restarting, their name should populate. Their display names may be lost "
+"over time though if you don't regularly exchange messages. Furthermore, "
+"sending to contacts you have not yet received messages from can lead to rate "
+"limiting. Make sure to receive a message from a contact before you send too "
+"many. For a full list of bugs, visit the <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
 "Se till att inte skicka några meddelanden medan meddelandena fortfarande tas "
 "emot av Flare, detta säkerställer att all nödvändig information tas emot. Vi "
@@ -678,10 +679,10 @@ msgid ""
 "Note that the captcha is only valid for about one minute."
 msgstr ""
 "Skicka in en Captcha-utmaning. Token kan erhållas från felmeddelandet som "
-"visades från Flare. Captcha måste fyllas i <a href=\"https://signalcaptchas."
-"org/challenge/generate.html\">på denna webbplats</a> och länken för att "
-"öppna Signal måste klistras in i motsvarande post. Observera att captcha "
-"bara är giltig i ungefär en minut."
+"visades från Flare. Captcha måste fyllas i <a href=\"https://"
+"signalcaptchas.org/challenge/generate.html\">på denna webbplats</a> och "
+"länken för att öppna Signal måste klistras in i motsvarande post. Observera "
+"att captcha bara är giltig i ungefär en minut."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
@@ -742,39 +743,39 @@ msgstr "Om"
 msgid "Quit"
 msgstr "Avsluta"
 
-#: src/backend/channel.rs:557 src/backend/channel.rs:700
+#: src/backend/channel.rs:558 src/backend/channel.rs:699
 msgid "Note to self"
 msgstr "Anteckning till mig själv"
 
-#: src/backend/contact.rs:199 src/backend/contact.rs:281
+#: src/backend/contact.rs:212 src/backend/contact.rs:294
 msgid "Unknown contact"
 msgstr "Okänd kontakt"
 
-#: src/backend/manager.rs:416
+#: src/backend/manager.rs:438
 msgid "You"
 msgstr "Dig"
 
-#: src/backend/message/call_message.rs:100
+#: src/backend/message/call_message.rs:95
 msgid "Incoming call"
 msgstr "Inkommande samtal"
 
-#: src/backend/message/call_message.rs:101
+#: src/backend/message/call_message.rs:96
 msgid "Outgoing call"
 msgstr "Utgående samtal"
 
-#: src/backend/message/call_message.rs:102
+#: src/backend/message/call_message.rs:97
 msgid "Call started"
 msgstr "Samtal startat"
 
-#: src/backend/message/call_message.rs:103
+#: src/backend/message/call_message.rs:98
 msgid "Call ended"
 msgstr "Samtal avslutat"
 
-#: src/backend/message/call_message.rs:104
+#: src/backend/message/call_message.rs:99
 msgid "Call declined"
 msgstr "Samtal avböjdes"
 
-#: src/backend/message/call_message.rs:105
+#: src/backend/message/call_message.rs:100
 msgid "Unanswered call"
 msgstr "Obesvarat samtal"
 
@@ -810,25 +811,24 @@ msgid_plural "Sent {} files"
 msgstr[0] "Skickade en fil"
 msgstr[1] "Skickade {} filer"
 
-#: src/error.rs:118
+#: src/error.rs:124
 msgid "I/O Error."
 msgstr "I/O Fel."
 
-#: src/error.rs:123
+#: src/error.rs:128
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Det verkar inte finnas någon anslutning till internet tillgänglig."
 
-#: src/error.rs:128
+#: src/error.rs:131
 msgid "Something glib-related failed."
 msgstr "Något glib-relaterat misslyckades."
 
-#: src/error.rs:133
+#: src/error.rs:134
 #, fuzzy
-#| msgid "The communication with Libsecret failed."
 msgid "The communication with libsecret failed."
 msgstr "Kommunikationen med Libsecret misslyckades."
 
-#: src/error.rs:138
+#: src/error.rs:140
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -836,7 +836,7 @@ msgstr ""
 "Backend-databasen misslyckades. Starta om applikationen eller ta bort "
 "databasen och länka om programmet."
 
-#: src/error.rs:143
+#: src/error.rs:147
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -844,73 +844,78 @@ msgstr ""
 "Du verkar inte vara auktoriserad med Signal. Ta bort databasen och länka om "
 "applikationen."
 
-#: src/error.rs:148
+#: src/error.rs:151
 msgid "Sending a message failed."
 msgstr "Att skicka ett meddelande misslyckades."
 
-#: src/error.rs:153
+#: src/error.rs:154
 msgid "Receiving a message failed."
 msgstr "Mottagning av meddelande misslyckades."
 
-#: src/error.rs:158
+#: src/error.rs:160
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr "Något oväntat hände med signal backend. Försök igen senare."
 
-#: src/error.rs:163
+#: src/error.rs:166
 msgid "The application seems to be misconfigured."
 msgstr "Applikationen verkar vara felkonfigurerad."
 
-#: src/error.rs:168
+#: src/error.rs:169
 msgid "A part of the application crashed."
 msgstr "En del av applikationen kraschade."
 
-#: src/error.rs:178
+#: src/error.rs:179
 msgid "Please check your internet connection."
 msgstr "Vänligen kontrollera din internetuppkoppling."
 
-#: src/error.rs:183
+#: src/error.rs:184
 msgid "Please delete the database and relink the device."
 msgstr "Vänligen radera databasen och länka enheten igen."
 
-#: src/error.rs:190
+#: src/error.rs:191
 msgid "The database path at {} is no folder."
 msgstr "Databassökvägen vid {} är ingen mapp."
 
-#: src/error.rs:195
+#: src/error.rs:196
+#, fuzzy
+msgid "The database path at {path} is cannot be created due to error {error}."
+msgstr "Databassökvägen vid {} är ingen mapp."
+
+#: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
 "Vänligen starta om applikationen med loggning och rapportera detta problem."
 
-#: src/gui/channel_info_dialog.rs:167
+#: src/gui/channel_info_dialog.rs:166
 msgid "Never"
 msgstr "Aldrig"
 
-#: src/gui/channel_info_dialog.rs:172
+#: src/gui/channel_info_dialog.rs:171
 msgid "{} week"
 msgid_plural "{} weeks"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/gui/channel_info_dialog.rs:182
+#: src/gui/channel_info_dialog.rs:181
 msgid "{} day"
 msgid_plural "{} days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/gui/channel_info_dialog.rs:192
+#: src/gui/channel_info_dialog.rs:191
 msgid "{} hour"
 msgid_plural "{} hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/gui/channel_info_dialog.rs:202
+#: src/gui/channel_info_dialog.rs:201
 msgid "{} minute"
 msgid_plural "{} minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/gui/channel_info_dialog.rs:212
+#: src/gui/channel_info_dialog.rs:211
 msgid "{} second"
 msgid_plural "{} seconds"
 msgstr[0] ""
@@ -922,7 +927,6 @@ msgstr "Utkast"
 
 #: src/gui/device_info_item.rs:47
 #, fuzzy
-#| msgid "Linked:"
 msgid "Linked: {}"
 msgstr "Länkad:"
 
@@ -1010,12 +1014,12 @@ msgid "This will remove all locally stored messages from this channel"
 msgstr "Detta tar bort alla lokalt lagrade meddelanden från den här kanalen"
 
 #. Translators: Flare summary in metainfo.
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
+#: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:10
 msgid "Chat with your friends on Signal"
 msgstr "Chatta med dina vänner på Signal"
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:15
+#: data/de.schmidhuberj.Flare.desktop.in.in:14
 msgid "messaging;chat;signal;"
 msgstr "meddelanden;chatt;signal;"
 
@@ -1043,7 +1047,7 @@ msgstr ""
 "applikationer. Var försiktig när du hanterar känsliga uppgifter. Titta på "
 "projektens README för mer information om säkerhet."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:792
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:822
 msgid "Overview of the application"
 msgstr "Översikt över applikationen"
 

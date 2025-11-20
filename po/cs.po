@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-29 16:21+0200\n"
+"POT-Creation-Date: 2025-11-20 14:14+0100\n"
 "PO-Revision-Date: 2025-05-30 16:09+0000\n"
 "Last-Translator: Tadeáš Erban <tada@boobs.institute>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
@@ -348,7 +348,7 @@ msgstr "Nastavit Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
-#: data/de.schmidhuberj.Flare.desktop.in.in:5
+#: data/de.schmidhuberj.Flare.desktop.in.in:4
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:8
 msgid "Flare"
 msgstr "Flare"
@@ -373,8 +373,8 @@ msgstr ""
 "zaručit stejnou úroveň bezpečnosti a soukromí jako oficiální aplikace "
 "Signal. Pokud vy nebo někdo, koho potřebujete kontaktovat, vyžaduje vysokou "
 "úroveň bezpečnosti, Flare nepoužívejte. Pro více informací se podívejte na "
-"<a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README."
-"md#security\">README</a>."
+"<a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/"
+"README.md#security\">README</a>."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
@@ -506,18 +506,18 @@ msgid ""
 "For registering as a primary device, Flare will need your phone number and a "
 "completion of the captcha. Please give the phone number in international "
 "E.164-format, including the leading \"+\" and country code. The captcha can "
-"be completed <a href=\"https://signalcaptchas.org/registration/generate."
-"html\">here</a>, afterwards copy the \"Open Signal\" link and paste it into "
-"the below field. Note that this captcha is only valid for about one minute, "
-"so please proceed fast."
+"be completed <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">here</a>, afterwards copy the \"Open Signal\" link and paste "
+"it into the below field. Note that this captcha is only valid for about one "
+"minute, so please proceed fast."
 msgstr ""
 "Pro registraci jako hlavní zařízení bude Flare potřebovat vaše telefonní "
 "číslo, a aby jste splnili captchu. Prosím zadejte telefonní číslo v "
 "mezinárodním formátu E.164, včetně počátečního + a kódu země. Captcha může "
-"být splněna <a href=\"https://signalcaptchas.org/registration/generate."
-"html\">zde</a>, potom překopírujte odkaz „Otevřít Signal“ do textového pole "
-"níže. Mějte na pozoru, že tato captcha je platná pouze 1 minutu, takže buďte "
-"rychlí."
+"být splněna <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">zde</a>, potom překopírujte odkaz „Otevřít Signal“ do "
+"textového pole níže. Mějte na pozoru, že tato captcha je platná pouze 1 "
+"minutu, takže buďte rychlí."
 
 #: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
@@ -563,14 +563,16 @@ msgid "Known Bugs"
 msgstr "Známé chyby"
 
 #: data/resources/ui/setup_window.blp:513
+#, fuzzy
 msgid ""
-"Make sure to not send any messages while the messages are still received by "
-"Flare, this makes sure that all required information is received. We are "
-"trying to fix this problem. Furthermore, sending to contacts you have not "
-"yet received messages from can lead to rate limiting. Make sure to receive a "
-"message from a contact before you send too many. For a full list of bugs, "
-"visit the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
-"label_name%5B%5D=bug\">issue tracker</a>."
+"Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
+"or only with the phone number. After receiving messages from those contacts "
+"and restarting, their name should populate. Their display names may be lost "
+"over time though if you don't regularly exchange messages. Furthermore, "
+"sending to contacts you have not yet received messages from can lead to rate "
+"limiting. Make sure to receive a message from a contact before you send too "
+"many. For a full list of bugs, visit the <a href=\"https://gitlab.com/"
+"schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
 "Dokud Flare nestáhne všechny nově přijaté zprávy, může být nebezpečné psát "
 "nové zprávy, jelikož mohou chybět některé vyžadované informace. Tento "
@@ -732,39 +734,39 @@ msgstr "O aplikaci"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: src/backend/channel.rs:557 src/backend/channel.rs:700
+#: src/backend/channel.rs:558 src/backend/channel.rs:699
 msgid "Note to self"
 msgstr "Poznámka pro sebe"
 
-#: src/backend/contact.rs:199 src/backend/contact.rs:281
+#: src/backend/contact.rs:212 src/backend/contact.rs:294
 msgid "Unknown contact"
 msgstr "Neznámý kontakt"
 
-#: src/backend/manager.rs:416
+#: src/backend/manager.rs:438
 msgid "You"
 msgstr "Vy"
 
-#: src/backend/message/call_message.rs:100
+#: src/backend/message/call_message.rs:95
 msgid "Incoming call"
 msgstr "Příchozí hovor"
 
-#: src/backend/message/call_message.rs:101
+#: src/backend/message/call_message.rs:96
 msgid "Outgoing call"
 msgstr "Odchozí hovor"
 
-#: src/backend/message/call_message.rs:102
+#: src/backend/message/call_message.rs:97
 msgid "Call started"
 msgstr "Začal hovor"
 
-#: src/backend/message/call_message.rs:103
+#: src/backend/message/call_message.rs:98
 msgid "Call ended"
 msgstr "Hovor skončil"
 
-#: src/backend/message/call_message.rs:104
+#: src/backend/message/call_message.rs:99
 msgid "Call declined"
 msgstr "Hovor byl odmítnut"
 
-#: src/backend/message/call_message.rs:105
+#: src/backend/message/call_message.rs:100
 msgid "Unanswered call"
 msgstr "Zmeškaný hovor"
 
@@ -804,23 +806,23 @@ msgstr[0] "Poslal/a soubor"
 msgstr[1] "Poslal/a {} soubory"
 msgstr[2] "Poslal/a {} souborů"
 
-#: src/error.rs:118
+#: src/error.rs:124
 msgid "I/O Error."
 msgstr "Chyba vstupu/výstupu."
 
-#: src/error.rs:123
+#: src/error.rs:128
 msgid "There does not seem to be a connection to the internet available."
 msgstr "Zdá se, že není dostupné připojení k internetu."
 
-#: src/error.rs:128
+#: src/error.rs:131
 msgid "Something glib-related failed."
 msgstr "Selhalo něco, co má co do činění s glib."
 
-#: src/error.rs:133
+#: src/error.rs:134
 msgid "The communication with libsecret failed."
 msgstr "Selhala komunikace s libsecret."
 
-#: src/error.rs:138
+#: src/error.rs:140
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
@@ -828,7 +830,7 @@ msgstr ""
 "Selhala databáze. Prosím restartujte aplikaci, nebo databázi smažte a "
 "aplikaci znovu připojte."
 
-#: src/error.rs:143
+#: src/error.rs:147
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
@@ -836,78 +838,83 @@ msgstr ""
 "Přístup aplikace k Signalu byl zamítnut. Prosím smažte její databázi a "
 "zkuste ji znovu připojit."
 
-#: src/error.rs:148
+#: src/error.rs:151
 msgid "Sending a message failed."
 msgstr "Selhalo zaslání zprávy."
 
-#: src/error.rs:153
+#: src/error.rs:154
 msgid "Receiving a message failed."
 msgstr "Selhalo přijetí zprávy."
 
-#: src/error.rs:158
+#: src/error.rs:160
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
 "Něco neočekávaného se stalo v knihovně zodpovědné za komunikaci se Signalem "
 "(presage). Zkuste to prosím později."
 
-#: src/error.rs:163
+#: src/error.rs:166
 msgid "The application seems to be misconfigured."
 msgstr "V konfiguraci aplikace je chyba."
 
-#: src/error.rs:168
+#: src/error.rs:169
 msgid "A part of the application crashed."
 msgstr "Součást aplikace spadla."
 
-#: src/error.rs:178
+#: src/error.rs:179
 msgid "Please check your internet connection."
 msgstr "Prosím zkontrolujte vaše připojení k internetu."
 
-#: src/error.rs:183
+#: src/error.rs:184
 msgid "Please delete the database and relink the device."
 msgstr "Prosím smažte databázi a aplikaci znovu připojte."
 
-#: src/error.rs:190
+#: src/error.rs:191
 msgid "The database path at {} is no folder."
 msgstr "Cesta k databázi ({}) není složka."
 
-#: src/error.rs:195
+#: src/error.rs:196
+#, fuzzy
+msgid "The database path at {path} is cannot be created due to error {error}."
+msgstr "Cesta k databázi ({}) není složka."
+
+#: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
 msgstr "Prosím restartujte aplikaci s protokolováním a nahlaste tuto chybu."
 
-#: src/gui/channel_info_dialog.rs:167
+#: src/gui/channel_info_dialog.rs:166
 msgid "Never"
 msgstr "Nikdy"
 
-#: src/gui/channel_info_dialog.rs:172
+#: src/gui/channel_info_dialog.rs:171
 msgid "{} week"
 msgid_plural "{} weeks"
 msgstr[0] "1 týden"
 msgstr[1] "{} týdny"
 msgstr[2] "{} týdnů"
 
-#: src/gui/channel_info_dialog.rs:182
+#: src/gui/channel_info_dialog.rs:181
 msgid "{} day"
 msgid_plural "{} days"
 msgstr[0] "1 den"
 msgstr[1] "{} dny"
 msgstr[2] "{} dnů"
 
-#: src/gui/channel_info_dialog.rs:192
+#: src/gui/channel_info_dialog.rs:191
 msgid "{} hour"
 msgid_plural "{} hours"
 msgstr[0] "1 hodina"
 msgstr[1] "{} hodiny"
 msgstr[2] "{} hodin"
 
-#: src/gui/channel_info_dialog.rs:202
+#: src/gui/channel_info_dialog.rs:201
 msgid "{} minute"
 msgid_plural "{} minutes"
 msgstr[0] "1 minuta"
 msgstr[1] "{} minuty"
 msgstr[2] "{} minut"
 
-#: src/gui/channel_info_dialog.rs:212
+#: src/gui/channel_info_dialog.rs:211
 msgid "{} second"
 msgid_plural "{} seconds"
 msgstr[0] "1 sekunda"
@@ -1006,12 +1013,12 @@ msgid "This will remove all locally stored messages from this channel"
 msgstr "Toto odstraní všechny lokálně uložené zprávy z tohoto kanálu"
 
 #. Translators: Flare summary in metainfo.
-#: data/de.schmidhuberj.Flare.desktop.in.in:6
+#: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:10
 msgid "Chat with your friends on Signal"
 msgstr "Pište si s kamarády přes Signal"
 
-#: data/de.schmidhuberj.Flare.desktop.in.in:15
+#: data/de.schmidhuberj.Flare.desktop.in.in:14
 msgid "messaging;chat;signal;"
 msgstr "chat;signal;zprávy;komunikace;"
 
@@ -1039,7 +1046,7 @@ msgstr ""
 "používejte s opatrností. Pro více informací o bezpečnosti si přečtěte README "
 "projektu."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:792
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:822
 msgid "Overview of the application"
 msgstr "Přehled o aplikaci"
 
@@ -1102,8 +1109,8 @@ msgstr "Odeslat zprávu při stisknutí klávesy enter"
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
 msgstr ""
-"Jak řadit kontakty, podle křestního jména (\"firstname\") nebo příjmení ("
-"\"surname\")"
+"Jak řadit kontakty, podle křestního jména (\"firstname\") nebo příjmení "
+"(\"surname\")"
 
 #~ msgctxt "accessibility"
 #~ msgid "Reset Session"
