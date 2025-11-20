@@ -8,20 +8,15 @@ use crate::backend::{Channel, Contact};
 
 use super::{DisplayMessage, Manager, Message};
 
-#[derive(Debug, Hash, Eq, PartialEq, Clone, Copy, glib::Enum)]
+#[derive(Debug, Hash, Eq, PartialEq, Clone, Copy, glib::Enum, Default)]
 #[repr(u32)]
 #[enum_type(name = "FlCallMessageType")]
 pub enum CallMessageType {
+    #[default]
     Offer,
     Answer,
     Hangup,
     Busy,
-}
-
-impl Default for CallMessageType {
-    fn default() -> Self {
-        Self::Offer
-    }
 }
 
 impl TryFrom<&PreCallMessage> for CallMessageType {
