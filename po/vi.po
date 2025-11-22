@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 14:14+0100\n"
-"PO-Revision-Date: 2025-11-22 05:38+0000\n"
+"PO-Revision-Date: 2025-11-23 06:51+0000\n"
 "Last-Translator: Loc Huynh <huynhloc.contact@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/vi/>\n"
@@ -35,118 +35,120 @@ msgstr "Mô Tả"
 
 #: data/resources/ui/channel_info_dialog.blp:86
 msgid "Disappearing Messages"
-msgstr ""
+msgstr "Tin Nhắn Biến Mất"
 
 #: data/resources/ui/channel_info_dialog.blp:101
 msgid "Reset Session"
-msgstr ""
+msgstr "Đặt Lại Phiên"
 
 #: data/resources/ui/channel_info_dialog.blp:112
 msgid "Clear Messages"
-msgstr ""
+msgstr "Xóa Tin Nhắn"
 
 #: data/resources/ui/channel_list.blp:10
 #: data/resources/ui/channel_messages.blp:15
 msgid "Offline"
-msgstr ""
+msgstr "Ngoại Tuyến"
 
 #: data/resources/ui/channel_list.blp:23
 msgid "Search"
-msgstr ""
+msgstr "Tìm kiếm"
 
 #: data/resources/ui/channel_list.blp:26 data/resources/ui/window.blp:61
 msgctxt "accessibility"
 msgid "Search"
-msgstr ""
+msgstr "Tìm Kiếm"
 
 #: data/resources/ui/channel_messages.blp:21
 msgid "No Channel Selected"
-msgstr ""
+msgstr "Không Có Kênh Nào Được Chọn"
 
 #: data/resources/ui/channel_messages.blp:22
 msgid "Select a channel"
-msgstr ""
+msgstr "Chọn một kênh"
 
 #: data/resources/ui/channel_messages.blp:182
 msgctxt "accessibility"
 msgid "Remove the reply"
-msgstr ""
+msgstr "Xóa câu trả lời"
 
 #: data/resources/ui/channel_messages.blp:185
 msgctxt "tooltip"
 msgid "Remove reply"
-msgstr ""
+msgstr "Xóa câu trả lời"
 
 #: data/resources/ui/channel_messages.blp:205
 msgctxt "accessibility"
 msgid "Remove an attachment"
-msgstr ""
+msgstr "Xóa phần đính kèm"
 
 #: data/resources/ui/channel_messages.blp:208
 msgctxt "tooltip"
 msgid "Remove attachment"
-msgstr ""
+msgstr "Xóa tệp đính kèm"
 
 #: data/resources/ui/channel_messages.blp:230
 msgctxt "accessibility"
 msgid "Add an attachment"
-msgstr ""
+msgstr "Thêm tệp đính kèm"
 
 #: data/resources/ui/channel_messages.blp:238
 msgctxt "tooltip"
 msgid "Add attachment"
-msgstr ""
+msgstr "Thêm tệp đính kèm"
 
 #: data/resources/ui/channel_messages.blp:255
 msgctxt "accessibility"
 msgid "Message input"
-msgstr ""
+msgstr "Nhập tin nhắn"
 
 #: data/resources/ui/channel_messages.blp:261
 msgctxt "tooltip"
 msgid "Message input"
-msgstr ""
+msgstr "Nhập tin nhắn"
 
 #: data/resources/ui/channel_messages.blp:273
 msgctxt "accessibility"
 msgid "Send"
-msgstr ""
+msgstr "Gửi"
 
 #: data/resources/ui/channel_messages.blp:277
 msgctxt "tooltip"
 msgid "Send"
-msgstr ""
+msgstr "Gửi"
 
 #: data/resources/ui/device_info_item.blp:18
 msgid "Unlink Device"
-msgstr ""
+msgstr "Hủy Liên Kết Thiết Bị"
 
 #: data/resources/ui/dialog_clear_messages.blp:5
 #: data/resources/ui/window.blp:168
 msgid "Clear messages"
-msgstr ""
+msgstr "Xóa tin nhắn"
 
 #: data/resources/ui/dialog_clear_messages.blp:6
 msgid ""
 "This will clear all locally stored messages. This will also close the "
 "application."
 msgstr ""
+"Điều này sẽ xóa tất cả các tin nhắn được lưu trữ cục bộ. Điều này cũng sẽ "
+"đóng ứng dụng."
 
 #: data/resources/ui/dialog_clear_messages.blp:11
 #: data/resources/ui/dialog_unlink.blp:11
 #: data/resources/ui/linked_devices_window.blp:78
 #: src/gui/linked_devices_window.rs:139 src/gui/window.rs:416
 msgid "Cancel"
-msgstr ""
+msgstr "Hủy"
 
 #: data/resources/ui/dialog_clear_messages.blp:12
 msgid "Clear"
-msgstr ""
+msgstr "Xóa"
 
 #: data/resources/ui/dialog_unlink.blp:5 data/resources/ui/window.blp:157
 #: src/gui/linked_devices_window.rs:138
 msgid "Unlink"
-msgstr ""
+msgstr "Hủy Liên Kết"
 
 #: data/resources/ui/dialog_unlink.blp:6
 msgid ""
@@ -154,157 +156,160 @@ msgid ""
 "also close the application such that it can be relinked when opening it "
 "again."
 msgstr ""
+"Thao tác này sẽ hủy liên kết thiết bị này và xóa tất cả dữ liệu đã lưu cục "
+"bộ. Thao tác này cũng sẽ đóng ứng dụng sao cho có thể liên kết lại khi mở "
+"lại."
 
 #: data/resources/ui/dialog_unlink.blp:12
 msgid "Unlink and delete all messages"
-msgstr ""
+msgstr "Hủy liên kết và xóa tất cả tin nhắn"
 
 #: data/resources/ui/dialog_unlink.blp:13
 msgid "Unlink but keep messages"
-msgstr ""
+msgstr "Hủy liên kết nhưng vẫn giữ tin nhắn"
 
 #: data/resources/ui/error_dialog.blp:5
 msgid "Error"
-msgstr ""
+msgstr "Lỗi"
 
 #: data/resources/ui/error_dialog.blp:26
 msgid "Please consider reporting this error."
-msgstr ""
+msgstr "Vui lòng xem xét việc báo cáo lỗi này."
 
 #: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:482
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
-msgstr ""
+msgstr "Đóng"
 
 #: data/resources/ui/error_dialog.blp:44
 msgid "Report"
-msgstr ""
+msgstr "Báo Cáo"
 
 #: data/resources/ui/linked_devices_window.blp:13
 #: data/resources/ui/window.blp:162
 msgid "Linked Devices"
-msgstr ""
+msgstr "Thiết Bị Được Liên Kết"
 
 #: data/resources/ui/linked_devices_window.blp:36
 msgid "Link New Device"
-msgstr ""
+msgstr "Liên Kết Thiết Bị Mới"
 
 #: data/resources/ui/linked_devices_window.blp:59
 msgid "Add Linked Device"
-msgstr ""
+msgstr "Thêm Thiết Bị Được Liên Kết"
 
 #: data/resources/ui/linked_devices_window.blp:60
 msgid "Please insert the URL of the device to link."
-msgstr ""
+msgstr "Vui lòng chèn URL của thiết bị để liên kết."
 
 #: data/resources/ui/linked_devices_window.blp:70
 msgid "Device URL"
-msgstr ""
+msgstr "URL Thiết Bị"
 
 #: data/resources/ui/linked_devices_window.blp:79
 msgid "Add Device"
-msgstr ""
+msgstr "Thêm Thiết Bị"
 
 #: data/resources/ui/message_item.blp:13
 msgid "Reply"
-msgstr ""
+msgstr "Phản Hồi"
 
 #: data/resources/ui/message_item.blp:20
 msgid "Delete"
-msgstr ""
+msgstr "Xóa"
 
 #: data/resources/ui/message_item.blp:28
 msgid "Copy"
-msgstr ""
+msgstr "Sao Chép"
 
 #: data/resources/ui/message_item.blp:37
 msgid "Save as…"
-msgstr ""
+msgstr "Lưu dưới dạng…"
 
 #: data/resources/ui/message_item.blp:45
 msgid "Open with…"
-msgstr ""
+msgstr "Mở bằng…"
 
 #: data/resources/ui/new_channel_dialog.blp:13
 msgid "New Chat"
-msgstr ""
+msgstr "Trò Chuyện Mới"
 
 #: data/resources/ui/new_channel_dialog.blp:19 data/resources/ui/window.blp:49
 msgctxt "accessibility"
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: data/resources/ui/new_channel_dialog.blp:34
 msgid "Search Contacts"
-msgstr ""
+msgstr "Tìm Kiếm Danh Bạ"
 
 #: data/resources/ui/new_channel_dialog.blp:70
 msgid "List Contacts By:"
-msgstr ""
+msgstr "Liệt Kê Địa Chỉ Liên Hệ Theo:"
 
 #: data/resources/ui/new_channel_dialog.blp:73
 msgid "First Name"
-msgstr ""
+msgstr "Tên Đầu Tiên"
 
 #: data/resources/ui/new_channel_dialog.blp:79
 msgid "Surname"
-msgstr ""
+msgstr "Họ"
 
 #: data/resources/ui/preferences_window.blp:6
 msgid "General"
-msgstr ""
+msgstr "Chung"
 
 #: data/resources/ui/preferences_window.blp:10
 msgid "Automatically Download Attachments"
-msgstr ""
+msgstr "Tự Động Tải Xuống Tệp Đính Kèm"
 
 #: data/resources/ui/preferences_window.blp:11
 msgid "Attachment types selected below will be automatically downloaded"
-msgstr ""
+msgstr "Các loại tệp đính kèm được chọn bên dưới sẽ được tự động tải xuống"
 
 #: data/resources/ui/preferences_window.blp:14
 msgid "Images"
-msgstr ""
+msgstr "Hình Ảnh"
 
 #: data/resources/ui/preferences_window.blp:18
 msgid "Videos"
-msgstr ""
+msgstr "Video"
 
 #: data/resources/ui/preferences_window.blp:22
 msgid "Files"
-msgstr ""
+msgstr "Tệp"
 
 #: data/resources/ui/preferences_window.blp:26
 msgid "Voice Messages"
-msgstr ""
+msgstr "Tin Nhắn Thoại"
 
 #: data/resources/ui/preferences_window.blp:31
 msgid "Notifications"
-msgstr ""
+msgstr "Thông Báo"
 
 #: data/resources/ui/preferences_window.blp:32
 msgid "Notifications for new messages"
-msgstr ""
+msgstr "Thông báo cho tin nhắn mới"
 
 #: data/resources/ui/preferences_window.blp:35
 msgid "Send Notifications"
-msgstr ""
+msgstr "Gửi Thông Báo"
 
 #: data/resources/ui/preferences_window.blp:39
 msgid "Send Notifications on Reactions"
-msgstr ""
+msgstr "Gửi Thông Báo về Phản Ứng"
 
 #: data/resources/ui/preferences_window.blp:44
 msgid "Background Notifications"
-msgstr ""
+msgstr "Thông Báo Nền"
 
 #: data/resources/ui/preferences_window.blp:45
 msgid "Fetch notifications while the app is closed"
-msgstr ""
+msgstr "Tìm nạp thông báo khi đóng ứng dụng"
 
 #: data/resources/ui/preferences_window.blp:52
 msgid "Mobile Compatibility"
-msgstr ""
+msgstr "Khả Năng Tương Thích Với Thiết Bị Di Động"
 
 #: data/resources/ui/preferences_window.blp:53
 msgid ""
@@ -312,39 +317,44 @@ msgid ""
 "mobile devices. The default values of those preferences are chosen to be "
 "useful on desktop devices."
 msgstr ""
+"Các tùy chọn này có thể muốn được thay đổi để có trải nghiệm tốt hơn trên "
+"thiết bị cảm ứng và di động. Giá trị mặc định của các tùy chọn đó được chọn "
+"để hữu ích trên thiết bị máy tính để bàn."
 
 #: data/resources/ui/preferences_window.blp:56
 msgid "Selectable Message Text"
-msgstr ""
+msgstr "Văn Bản Tin Nhắn Có Thể Lựa Chọn"
 
 #: data/resources/ui/preferences_window.blp:57
 msgid "Selectable text can interfere with swipe-gestures on touch-screens"
-msgstr ""
+msgstr "Văn bản có thể chọn có thể cản trở cử chỉ vuốt trên màn hình cảm ứng"
 
 #: data/resources/ui/preferences_window.blp:61
 msgid "Press “Enter” to Send Message"
-msgstr ""
+msgstr "Nhấn “Enter” để Gửi Tin Nhắn"
 
 #: data/resources/ui/preferences_window.blp:62
 msgid ""
 "It may not be possible to send messages with newlines on touch keyboards not "
 "allowing “Control + Enter”"
 msgstr ""
+"Có thể không gửi được tin nhắn có dòng mới trên bàn phím cảm ứng không cho "
+"phép “Control + Enter”"
 
 #: data/resources/ui/setup_window.blp:17 data/resources/ui/setup_window.blp:24
 msgid "Welcome to Flare"
-msgstr ""
+msgstr "Chào mừng đến với Flare"
 
 #: data/resources/ui/setup_window.blp:41
 msgid "Set Up Flare"
-msgstr ""
+msgstr "Thiết Lập Flare"
 
 #. Translators: Flare name in metainfo.
 #: data/resources/ui/setup_window.blp:50
 #: data/de.schmidhuberj.Flare.desktop.in.in:4
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:8
 msgid "Flare"
-msgstr ""
+msgstr "Flare"
 
 #: data/resources/ui/setup_window.blp:53
 msgid ""
@@ -358,29 +368,38 @@ msgid ""
 "Flare. Consult the <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
+"Flare là ứng dụng khách Signal không chính thức. Lưu ý rằng Flare không ổn "
+"định và có thể có lỗi. Nếu bạn gặp bất kỳ lỗi nào, hãy tham khảo <a href="
+"\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">trình theo dõi vấn "
+"đề</a> và mở các vấn đề nếu bạn gặp phải sự cố mới. Cũng lưu ý rằng do là "
+"ứng dụng của bên thứ ba, Flare không thể đảm bảo mức độ bảo mật và quyền "
+"riêng tư như các ứng dụng Signal chính thức. Nếu bạn hoặc ai đó bạn cần liên "
+"hệ yêu cầu mức độ bảo mật cao, đừng sử dụng Flare. Hãy tham khảo <a href="
+"\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README.md#"
+"security\">README</a> để biết thêm thông tin."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
-msgstr ""
+msgstr "Thiết Lập Thiết Bị Chính hoặc Thiết Bị Liên Kết?"
 
 #: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:318
 #: data/resources/ui/setup_window.blp:325
 msgid "Primary Device"
-msgstr ""
+msgstr "Thiết Bị Chính"
 
 #: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:152
 #: data/resources/ui/setup_window.blp:159
 #: data/resources/ui/setup_window.blp:176
 msgid "Link Device"
-msgstr ""
+msgstr "Liên Kết Thiết Bị"
 
 #: data/resources/ui/setup_window.blp:113
 msgid "You can use Flare either as a primary or secondary device."
-msgstr ""
+msgstr "Bạn có thể sử dụng Flare làm thiết bị chính hoặc phụ."
 
 #: data/resources/ui/setup_window.blp:123
 msgid "Linked Device (Recommended)"
-msgstr ""
+msgstr "Thiết Bị Được Liên Kết (Được Khuyến Nghị)"
 
 #: data/resources/ui/setup_window.blp:128
 msgid ""
@@ -388,10 +407,13 @@ msgid ""
 "official Signal Desktop. This mode has been more extensively tested and "
 "mostly works."
 msgstr ""
+"Flare có thể là một ứng dụng được liên kết với thiết bị chính của bạn, tương "
+"tự như Signal Desktop chính thức. Chế độ này đã được thử nghiệm rộng rãi hơn "
+"và hầu hết đều hoạt động."
 
 #: data/resources/ui/setup_window.blp:138
 msgid "Primary Device (Disabled)"
-msgstr ""
+msgstr "Thiết Bị Chính (Đã Tắt)"
 
 #: data/resources/ui/setup_window.blp:143
 msgid ""
@@ -401,26 +423,34 @@ msgid ""
 "willing to test it, you may enable the button below (and if you don't know "
 "how to do that, you should not think about testing primary-device support)."
 msgstr ""
+"Flare có thể hoạt động như một thiết bị chính, tương tự như các ứng dụng "
+"Signal chính thức trên Android hoặc iOS. Chế độ này hiện không được Flare hỗ "
+"trợ, mặc dù các thử nghiệm ban đầu dường như cho thấy nó hoạt động. Nếu bạn "
+"sẵn sàng thử nghiệm nó, bạn có thể kích hoạt nút bên dưới (và nếu bạn không "
+"biết cách thực hiện điều đó, bạn không nên nghĩ đến việc thử nghiệm hỗ trợ "
+"thiết bị chính)."
 
 #: data/resources/ui/setup_window.blp:193
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
 msgstr ""
+"Để liên kết dưới dạng thiết bị phụ, Flare sẽ cần tên thiết bị hiển thị trong "
+"ứng dụng chính thức."
 
 #: data/resources/ui/setup_window.blp:204
 msgid "Device Name"
-msgstr ""
+msgstr "Tên Thiết Bị"
 
 #: data/resources/ui/setup_window.blp:208
 #: data/resources/ui/setup_window.blp:379
 msgid "Developer Options"
-msgstr ""
+msgstr "Tùy Chọn Nhà Phát Triển"
 
 #: data/resources/ui/setup_window.blp:211
 #: data/resources/ui/setup_window.blp:382
 msgid "Signal Servers"
-msgstr ""
+msgstr "Máy Chủ Signal"
 
 #: data/resources/ui/setup_window.blp:217
 msgid ""
@@ -429,46 +459,52 @@ msgid ""
 "code, so please already prepare your official application for scanning the "
 "QR code."
 msgstr ""
+"Trang tiếp theo sẽ hiển thị mã QR phải được quét từ thiết bị chính. Lưu ý "
+"rằng bạn chỉ có khoảng thời gian khoảng một phút để quét mã, vì vậy vui lòng "
+"chuẩn bị sẵn đơn đăng ký chính thức để quét mã QR."
 
 #: data/resources/ui/setup_window.blp:226
 #: data/resources/ui/setup_window.blp:238
 #: data/resources/ui/setup_window.blp:292
 msgid "Link device"
-msgstr ""
+msgstr "Liên kết thiết bị"
 
 #: data/resources/ui/setup_window.blp:243
 msgid "Scan Code"
-msgstr ""
+msgstr "Quét Mã"
 
 #: data/resources/ui/setup_window.blp:244
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
+"Quét mã này bằng ứng dụng Signal khác đã đăng nhập vào tài khoản của bạn."
 
 #: data/resources/ui/setup_window.blp:271
 msgid "Link without scanning"
-msgstr ""
+msgstr "Liên kết mà không cần quét"
 
 #: data/resources/ui/setup_window.blp:281
 msgid "Manual linking"
-msgstr ""
+msgstr "Liên kết thủ công"
 
 #: data/resources/ui/setup_window.blp:297
 msgid "Manual Linking"
-msgstr ""
+msgstr "Liên Kết Thủ Công"
 
 #: data/resources/ui/setup_window.blp:298
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
+"Nếu thiết bị của bạn không quét được mã QR, bạn có thể nhập thủ công liên "
+"kết được cung cấp tại đây"
 
 #: data/resources/ui/setup_window.blp:309
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Sao chép vào bộ nhớ tạm"
 
 #: data/resources/ui/setup_window.blp:342
 msgid "Continue"
-msgstr ""
+msgstr "Tiếp Tục"
 
 #: data/resources/ui/setup_window.blp:359
 msgid ""
@@ -480,33 +516,43 @@ msgid ""
 "it into the below field. Note that this captcha is only valid for about one "
 "minute, so please proceed fast."
 msgstr ""
+"Để đăng ký làm thiết bị chính, Flare sẽ cần số điện thoại của bạn và hoàn "
+"thành hình ảnh xác thực. Vui lòng cung cấp số điện thoại theo định dạng quốc "
+"tế E.164, bao gồm dấu \"+\" ở đầu và mã quốc gia. Bạn có thể hoàn thành hình "
+"ảnh xác thực <a href="
+"\"https://signalcaptchas.org/registration/generate.html\">tại đây</a>, sau "
+"đó sao chép liên kết \"Open Signal\" và dán vào trường bên dưới. Lưu ý rằng "
+"hình ảnh xác thực này chỉ có hiệu lực trong khoảng một phút, vì vậy hãy tiến "
+"hành nhanh chóng."
 
 #: data/resources/ui/setup_window.blp:375
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: data/resources/ui/setup_window.blp:388
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
 msgstr ""
+"Sau khi gửi thông tin này, bạn sẽ nhận được SMS từ Signal kèm theo mã xác "
+"minh. Chèn mã xác minh này vào trang tiếp theo."
 
 #: data/resources/ui/setup_window.blp:398
 #: data/resources/ui/setup_window.blp:406
 #: data/resources/ui/setup_window.blp:423
 #: data/resources/ui/setup_window.blp:449
 msgid "Confirm"
-msgstr ""
+msgstr "Xác Nhận"
 
 #: data/resources/ui/setup_window.blp:439
 msgid "Insert the verification code you received from Signal here."
-msgstr ""
+msgstr "Chèn mã xác minh bạn nhận được từ Signal vào đây."
 
 #: data/resources/ui/setup_window.blp:457
 #: data/resources/ui/setup_window.blp:465
 msgid "Finished"
-msgstr ""
+msgstr "Hoàn Thành"
 
 #: data/resources/ui/setup_window.blp:498
 msgid ""
@@ -514,10 +560,14 @@ msgid ""
 "may take a few seconds, you can start to use Flare once the contacts are "
 "synced. A few final notes before you start using Flare:"
 msgstr ""
+"Flare gần như đã sẵn sàng, nó đang chờ các liên hệ đồng bộ hóa xong. Quá "
+"trình này có thể mất vài giây, bạn có thể bắt đầu sử dụng Flare sau khi danh "
+"bạ được đồng bộ hóa. Một số lưu ý cuối cùng trước khi bạn bắt đầu sử dụng "
+"Flare:"
 
 #: data/resources/ui/setup_window.blp:508
 msgid "Known Bugs"
-msgstr ""
+msgstr "Lỗi Đã Biết"
 
 #: data/resources/ui/setup_window.blp:513
 msgid ""
@@ -530,10 +580,19 @@ msgid ""
 "many. For a full list of bugs, visit the <a href=\"https://gitlab.com/"
 "schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
+"Do lỗi ngược dòng, hầu hết các liên hệ được đồng bộ hóa đều hiển thị dưới "
+"dạng \"Liên hệ không xác định\" hoặc chỉ hiển thị số điện thoại. Sau khi "
+"nhận được tin nhắn từ những liên hệ đó và khởi động lại, tên của họ sẽ xuất "
+"hiện. Tuy nhiên, tên hiển thị của họ có thể bị mất theo thời gian nếu bạn "
+"không thường xuyên trao đổi tin nhắn. Hơn nữa, việc gửi đến các liên hệ mà "
+"bạn chưa nhận được tin nhắn có thể dẫn đến giới hạn tốc độ. Đảm bảo nhận "
+"được tin nhắn từ một liên hệ trước khi bạn gửi quá nhiều. Để biết danh sách "
+"đầy đủ các lỗi, hãy truy cập <a href=\"https://gitlab.com/schmiddi-on-mobile/"
+"flare/-/issues/?label_name%5B%5D=bug\">trình theo dõi vấn đề</a>."
 
 #: data/resources/ui/setup_window.blp:524
 msgid "Contact"
-msgstr ""
+msgstr "Liên Hệ"
 
 #: data/resources/ui/setup_window.blp:529
 msgid ""
@@ -541,71 +600,74 @@ msgid ""
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
+"Bạn muốn để lại một số phản hồi về Flare, hay chỉ nói một chút? <a href="
+"\"https://matrix.to/#/#flare-signal:matrix.org\">Phòng Matrix</a> của chúng "
+"tôi mở cửa cho tất cả mọi người."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Chung"
 
 #: data/resources/ui/shortcuts.blp:14
 msgctxt "shortcut window"
 msgid "Show shortcuts"
-msgstr ""
+msgstr "Hiển thị phím tắt"
 
 #: data/resources/ui/shortcuts.blp:19
 msgctxt "shortcut window"
 msgid "Go to settings"
-msgstr ""
+msgstr "Đi tới cài đặt"
 
 #: data/resources/ui/shortcuts.blp:24
 msgctxt "shortcut window"
 msgid "Go to about page"
-msgstr ""
+msgstr "Tới trang giới thiệu"
 
 #: data/resources/ui/shortcuts.blp:29
 msgctxt "shortcut window"
 msgid "Open menu"
-msgstr ""
+msgstr "Mở menu"
 
 #: data/resources/ui/shortcuts.blp:34
 msgctxt "shortcut window"
 msgid "Close window"
-msgstr ""
+msgstr "Đóng cửa sổ"
 
 #: data/resources/ui/shortcuts.blp:40
 msgctxt "shortcut window"
 msgid "Channels"
-msgstr ""
+msgstr "Kênh"
 
 #: data/resources/ui/shortcuts.blp:43
 msgctxt "shortcut window"
 msgid "Go to channel 1…9"
-msgstr ""
+msgstr "Chuyển đến kênh 1…9"
 
 #: data/resources/ui/shortcuts.blp:48
 msgctxt "shortcut window"
 msgid "Search in channels"
-msgstr ""
+msgstr "Tìm kiếm trong các kênh"
 
 #: data/resources/ui/shortcuts.blp:53
 msgctxt "shortcut window"
 msgid "Upload attachment"
-msgstr ""
+msgstr "Tải lên tệp đính kèm"
 
 #: data/resources/ui/shortcuts.blp:58
 msgctxt "shortcut window"
 msgid "Focus the text input box"
-msgstr ""
+msgstr "Tập trung vào hộp nhập văn bản"
 
 #: data/resources/ui/shortcuts.blp:63
 msgctxt "shortcut window"
 msgid "Load more messages"
-msgstr ""
+msgstr "Tải thêm tin nhắn"
 
 #: data/resources/ui/submit_captcha_dialog.blp:5
 #: data/resources/ui/window.blp:173
 msgid "Submit Captcha"
-msgstr ""
+msgstr "Gửi Captcha"
 
 #. Translators: Do not translate tags around "on this website".
 #: data/resources/ui/submit_captcha_dialog.blp:7
@@ -616,332 +678,339 @@ msgid ""
 "a> and the link to open Signal must be pasted to the corresponding entry. "
 "Note that the captcha is only valid for about one minute."
 msgstr ""
+"Gửi thử thách Captcha. Mã thông báo có thể được lấy từ thông báo lỗi được "
+"hiển thị từ Flare. Bạn phải điền hình ảnh xác thực <a href="
+"\"https://signalcaptchas.org/challenge/generate.html\">trên trang web này</"
+"a> và liên kết để mở Signal phải được dán vào mục tương ứng. Lưu ý rằng hình "
+"ảnh xác thực chỉ có hiệu lực trong khoảng một phút."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: data/resources/ui/submit_captcha_dialog.blp:29
 msgid "Submit"
-msgstr ""
+msgstr "Nộp"
 
 #: data/resources/ui/text_entry.blp:13
 msgid "Message"
-msgstr ""
+msgstr "Tin Nhắn"
 
 #: data/resources/ui/text_entry.blp:41
 msgctxt "accessibility"
 msgid "Insert an emoji"
-msgstr ""
+msgstr "Chèn biểu tượng cảm xúc"
 
 #: data/resources/ui/text_entry.blp:49
 msgctxt "tooltip"
 msgid "Insert emoji"
-msgstr ""
+msgstr "Chèn biểu tượng cảm xúc"
 
 #: data/resources/ui/window.blp:25
 msgid "Channel list"
-msgstr ""
+msgstr "Danh sách kênh"
 
 #: data/resources/ui/window.blp:38
 msgctxt "accessibility"
 msgid "Add Conversation"
-msgstr ""
+msgstr "Thêm Cuộc Trò Chuyện"
 
 #: data/resources/ui/window.blp:79
 msgid "Chat"
-msgstr ""
+msgstr "Trò Chuyện"
 
 #: data/resources/ui/window.blp:123 src/gui/channel_item.rs:59
 msgid "is typing"
-msgstr ""
+msgstr "đang gõ"
 
 #: data/resources/ui/window.blp:152
 msgid "Settings"
-msgstr ""
+msgstr "Cài Đặt"
 
 #: data/resources/ui/window.blp:178
 msgid "Synchronize Contacts"
-msgstr ""
+msgstr "Đồng Bộ Hóa Danh Bạ"
 
 #: data/resources/ui/window.blp:183
 msgid "Keybindings"
-msgstr ""
+msgstr "Tổ Hợp Phím"
 
 #: data/resources/ui/window.blp:188
 msgid "About"
-msgstr ""
+msgstr "Về"
 
 #: data/resources/ui/window.blp:193
 msgid "Quit"
-msgstr ""
+msgstr "Thoát"
 
 #: src/backend/channel.rs:558 src/backend/channel.rs:699
 msgid "Note to self"
-msgstr ""
+msgstr "Lưu ý cho bản thân"
 
 #: src/backend/contact.rs:212 src/backend/contact.rs:294
 msgid "Unknown contact"
-msgstr ""
+msgstr "Địa chỉ liên hệ không xác định"
 
 #: src/backend/manager.rs:438
 msgid "You"
-msgstr ""
+msgstr "Bạn"
 
 #: src/backend/message/call_message.rs:95
 msgid "Incoming call"
-msgstr ""
+msgstr "Cuộc gọi đến"
 
 #: src/backend/message/call_message.rs:96
 msgid "Outgoing call"
-msgstr ""
+msgstr "Cuộc gọi đi"
 
 #: src/backend/message/call_message.rs:97
 msgid "Call started"
-msgstr ""
+msgstr "Cuộc gọi đã bắt đầu"
 
 #: src/backend/message/call_message.rs:98
 msgid "Call ended"
-msgstr ""
+msgstr "Cuộc gọi đã kết thúc"
 
 #: src/backend/message/call_message.rs:99
 msgid "Call declined"
-msgstr ""
+msgstr "Cuộc gọi bị từ chối"
 
 #: src/backend/message/call_message.rs:100
 msgid "Unanswered call"
-msgstr ""
+msgstr "Cuộc gọi không được trả lời"
 
 #: src/backend/message/reaction_message.rs:72
 msgid "{sender} reacted {emoji} to a message."
-msgstr ""
+msgstr "{sender} đã phản hồi {emoji} với tin nhắn."
 
 #: src/backend/message/reaction_message.rs:80
 msgid "Reacted {emoji} to a message."
-msgstr ""
+msgstr "Đã phản ứng {emoji} với tin nhắn."
 
 #: src/backend/message/text_message.rs:410
 msgid "Sent an image"
 msgid_plural "Sent {} images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Đã gửi {} hình ảnh"
 
 #: src/backend/message/text_message.rs:412
 msgid "Sent an video"
 msgid_plural "Sent {} videos"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Đã gửi {} video"
 
 #: src/backend/message/text_message.rs:415
 msgid "Sent a voice message"
 msgid_plural "Sent {} voice messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Đã gửi {} tin nhắn thoại"
 
 #: src/backend/message/text_message.rs:420
 msgid "Sent a file"
 msgid_plural "Sent {} files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Đã gửi tệp {}"
 
 #: src/error.rs:124
 msgid "I/O Error."
-msgstr ""
+msgstr "Lỗi Vào/Ra."
 
 #: src/error.rs:128
 msgid "There does not seem to be a connection to the internet available."
-msgstr ""
+msgstr "Dường như không có kết nối Internet."
 
 #: src/error.rs:131
 msgid "Something glib-related failed."
-msgstr ""
+msgstr "Một cái gì đó liên quan đến glib đã thất bại."
 
 #: src/error.rs:134
 msgid "The communication with libsecret failed."
-msgstr ""
+msgstr "Giao tiếp với libsecret không thành công."
 
 #: src/error.rs:140
 msgid ""
 "The backend database failed. Please restart the application or delete the "
 "database and relink the application."
 msgstr ""
+"Cơ sở dữ liệu phụ trợ không thành công. Vui lòng khởi động lại ứng dụng hoặc "
+"xóa cơ sở dữ liệu và liên kết lại ứng dụng."
 
 #: src/error.rs:147
 msgid ""
 "You do not seem to be authorized with Signal. Please delete the database and "
 "relink the application."
 msgstr ""
+"Có vẻ như bạn không được ủy quyền với Signal. Vui lòng xóa cơ sở dữ liệu và "
+"liên kết lại ứng dụng."
 
 #: src/error.rs:151
 msgid "Sending a message failed."
-msgstr ""
+msgstr "Gửi tin nhắn không thành công."
 
 #: src/error.rs:154
 msgid "Receiving a message failed."
-msgstr ""
+msgstr "Nhận được tin nhắn không thành công."
 
 #: src/error.rs:160
 msgid ""
 "Something unexpected happened with the signal backend. Please retry later."
 msgstr ""
+"Đã xảy ra điều gì đó bất ngờ với phần phụ trợ signal. Vui lòng thử lại sau."
 
 #: src/error.rs:166
 msgid "The application seems to be misconfigured."
-msgstr ""
+msgstr "Ứng dụng này dường như bị định cấu hình sai."
 
 #: src/error.rs:169
 msgid "A part of the application crashed."
-msgstr ""
+msgstr "Một phần của ứng dụng bị lỗi."
 
 #: src/error.rs:179
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Vui lòng kiểm tra kết nối internet của bạn."
 
 #: src/error.rs:184
 msgid "Please delete the database and relink the device."
-msgstr ""
+msgstr "Vui lòng xóa cơ sở dữ liệu và liên kết lại thiết bị."
 
 #: src/error.rs:191
 msgid "The database path at {} is no folder."
-msgstr ""
+msgstr "Đường dẫn cơ sở dữ liệu tại {} không có thư mục."
 
 #: src/error.rs:196
 msgid "The database path at {path} is cannot be created due to error {error}."
-msgstr ""
+msgstr "Không thể tạo đường dẫn cơ sở dữ liệu tại {path} do lỗi {error}."
 
 #: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
 msgstr ""
+"Vui lòng khởi động lại ứng dụng bằng cách ghi nhật ký và báo cáo sự cố này."
 
 #: src/gui/channel_info_dialog.rs:166
 msgid "Never"
-msgstr ""
+msgstr "Không Bao Giờ"
 
 #: src/gui/channel_info_dialog.rs:171
 msgid "{} week"
 msgid_plural "{} weeks"
-msgstr[0] ""
+msgstr[0] "{} tuần"
 
 #: src/gui/channel_info_dialog.rs:181
 msgid "{} day"
 msgid_plural "{} days"
-msgstr[0] ""
+msgstr[0] "{} ngày"
 
 #: src/gui/channel_info_dialog.rs:191
 msgid "{} hour"
 msgid_plural "{} hours"
-msgstr[0] ""
+msgstr[0] "{} giờ"
 
 #: src/gui/channel_info_dialog.rs:201
 msgid "{} minute"
 msgid_plural "{} minutes"
-msgstr[0] ""
+msgstr[0] "{} phút"
 
 #: src/gui/channel_info_dialog.rs:211
 msgid "{} second"
 msgid_plural "{} seconds"
-msgstr[0] ""
+msgstr[0] "{} giây"
 
 #: src/gui/channel_item.rs:63
 msgid "Draft"
-msgstr ""
+msgstr "Bản Nháp"
 
 #: src/gui/device_info_item.rs:47
 msgid "Linked: {}"
-msgstr ""
+msgstr "Đã liên kết: {}"
 
 #: src/gui/device_info_item.rs:48
 msgid "Last Seen: {}"
-msgstr ""
+msgstr "Nhìn Thấy Lần Cuối: {}"
 
 #: src/gui/linked_devices_window.rs:131
 msgid "Unlink Device?"
-msgstr ""
+msgstr "Hủy Liên Kết Thiết Bị?"
 
 #: src/gui/linked_devices_window.rs:133
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Bạn có chắc chắn muốn hủy liên kết {} không?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
-msgstr ""
+msgstr "Theo dõi tin nhắn mới khi đóng"
 
 #: src/gui/preferences_window.rs:103
 msgid "Background permission"
-msgstr ""
+msgstr "Quyền nền"
 
 #: src/gui/preferences_window.rs:104
 msgid "Use settings to remove permissions"
-msgstr ""
+msgstr "Sử dụng cài đặt để xóa quyền"
 
 #: src/gui/setup_window.rs:34
 msgctxt "Signal Server"
 msgid "Production"
-msgstr ""
+msgstr "Sản Xuất"
 
 #: src/gui/setup_window.rs:38
 msgctxt "Signal Server"
 msgid "Staging"
-msgstr ""
+msgstr "Dàn Dựng"
 
 #: src/gui/setup_window.rs:132
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Đã sao chép vào bảng nhớ tạm"
 
 #. How to format time. Should probably be %H:%M (meaning print hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:102 src/gui/utility.rs:126
 msgid "%H:%M"
-msgstr ""
+msgstr "%H:%M"
 
 #. How to format a date with time. Should probably be similar to %Y-%m-%d %H:%M (meaning print year, month from 01-12, day from 01-31 (each separated by -), hours from 00-23, then a :,
 #. then minutes from 00-59). For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:105
 msgid "%Y-%m-%d %H:%M"
-msgstr ""
+msgstr "%Y-%m-%d %H:%M"
 
 #: src/gui/utility.rs:138
 msgid "Today"
-msgstr ""
+msgstr "Hôm Nay"
 
 #: src/gui/utility.rs:141
 msgid "Yesterday"
-msgstr ""
+msgstr "Hôm Qua"
 
 #. How to format a human-readable date including the year. Should probably be similar to %Y-%m-%d (meaning print year, month from 01-12, day from 01-31 (each separated by -)).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:147
 msgid "%Y-%m-%d"
-msgstr ""
+msgstr "%Y-%m-%d"
 
 #. How to format a human-readable date excluding the year. Should probably be similar to "%a., %d. %b" (meaning print abbreviated weekday, day from 1-31 and abbreviated month name).
 #. For a full list of supported identifiers, see <https://docs.gtk.org/glib/method.DateTime.format.html>
 #: src/gui/utility.rs:151
 #, c-format
 msgid "%a., %e. %b"
-msgstr ""
+msgstr "%a., %e. %b"
 
 #: src/gui/utility.rs:159
 msgid "Attachment"
-msgstr ""
+msgstr "Tệp Đính Kèm"
 
 #: src/gui/window.rs:409 src/gui/window.rs:418
 msgid "Remove Messages"
-msgstr ""
+msgstr "Xóa Tin Nhắn"
 
 #: src/gui/window.rs:411
 msgid "This will remove all locally stored messages from this channel"
-msgstr ""
+msgstr "Thao tác này sẽ xóa tất cả tin nhắn được lưu trữ cục bộ khỏi kênh này"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:10
 msgid "Chat with your friends on Signal"
-msgstr ""
+msgstr "Trò chuyện với bạn bè trên Signal"
 
 #: data/de.schmidhuberj.Flare.desktop.in.in:14
 msgid "messaging;chat;signal;"
-msgstr ""
+msgstr "messaging;chat;signal;"
 
 #. Translators: Description of Flare in metainfo.
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:29
@@ -950,6 +1019,9 @@ msgid ""
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
+"Flare là một ứng dụng không chính thức của Signal. Nó vẫn đang được phát "
+"triển và không bao gồm tất cả các tính năng mà ứng dụng Signal chính thức "
+"cung cấp. Thông tin thêm có thể được tìm thấy trên lộ trình tính năng của nó."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:33
@@ -959,65 +1031,71 @@ msgid ""
 "sensitive data. Look at the projects README for more information about "
 "security."
 msgstr ""
+"Xin lưu ý rằng việc sử dụng ứng dụng này có thể sẽ làm giảm mức độ bảo mật "
+"của bạn so với việc sử dụng các ứng dụng Signal chính thức. Sử dụng cẩn thận "
+"khi xử lý dữ liệu nhạy cảm. Xem các dự án README để biết thêm thông tin về "
+"bảo mật."
 
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:822
 msgid "Overview of the application"
-msgstr ""
+msgstr "Tổng quan về ứng dụng"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:6
 msgid "Window width"
-msgstr ""
+msgstr "Chiều rộng cửa sổ"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:10
 msgid "Window height"
-msgstr ""
+msgstr "Chiều cao cửa sổ"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:14
 msgid "Window maximized state"
-msgstr ""
+msgstr "Trạng thái tối đa hóa cửa sổ"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:19
 msgid ""
 "The device name when linking Flare. This requires the application to be re-"
 "linked."
 msgstr ""
+"Tên thiết bị khi liên kết Flare. Điều này yêu cầu ứng dụng phải được liên "
+"kết lại."
 
 #: data/de.schmidhuberj.Flare.gschema.xml:24
 msgid "Automatically download images"
-msgstr ""
+msgstr "Tự động tải hình ảnh"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:28
 msgid "Automatically download videos"
-msgstr ""
+msgstr "Tự động tải xuống video"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:32
 msgid "Automatically download voice messages"
-msgstr ""
+msgstr "Tự động tải xuống tin nhắn thoại"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:36
 msgid "Automatically download files"
-msgstr ""
+msgstr "Tự động tải tập tin"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:41
 msgid "Send notifications"
-msgstr ""
+msgstr "Gửi thông báo"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:45
 msgid "Run in background when closed"
-msgstr ""
+msgstr "Chạy ở chế độ nền khi đóng"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:49
 msgid "Send notifications when retrieving reactions"
-msgstr ""
+msgstr "Gửi thông báo khi truy xuất phản ứng"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:54
 msgid "Can messages be selected"
-msgstr ""
+msgstr "Có thể chọn tin nhắn không"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr ""
+msgstr "Gửi tin nhắn khi nhấn phím Enter"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
-msgstr ""
+msgstr "Cách sắp xếp liên hệ, ví dụ: với \"tên\" hoặc \"họ\""
