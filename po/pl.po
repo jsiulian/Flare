@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 14:14+0100\n"
 "PO-Revision-Date: 2025-11-24 20:51+0000\n"
-"Last-Translator: Karol Putyra <karol23145@gmail.com>\n"
+"Last-Translator: krzemyk <krzemyk.official@proton.me>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/pl/>\n"
 "Language: pl\n"
@@ -739,7 +739,7 @@ msgstr "Skróty klawiszowe"
 
 #: data/resources/ui/window.blp:188
 msgid "About"
-msgstr "O"
+msgstr "O aplikacji"
 
 #: data/resources/ui/window.blp:193
 msgid "Quit"
