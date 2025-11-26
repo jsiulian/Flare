@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 14:14+0100\n"
-"PO-Revision-Date: 2025-10-29 11:07+0000\n"
+"PO-Revision-Date: 2025-11-27 05:00+0000\n"
 "Last-Translator: Coding Otaku <contact@codingotaku.com>\n"
-"Language-Team: Malayalam <https://hosted.weblate.org/projects/schmiddi-on-"
-"mobile/flare/ml/>\n"
+"Language-Team: Malayalam <https://hosted.weblate.org/projects/"
+"schmiddi-on-mobile/flare/ml/>\n"
 "Language: ml\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14.1-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -563,7 +563,6 @@ msgid "Known Bugs"
 msgstr "അറിയാവുന്ന ബഗുകൾ"
 
 #: data/resources/ui/setup_window.blp:513
-#, fuzzy
 msgid ""
 "Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
 "or only with the phone number. After receiving messages from those contacts "
@@ -574,13 +573,13 @@ msgid ""
 "many. For a full list of bugs, visit the <a href=\"https://gitlab.com/"
 "schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
-"ഫ്ലെയറിന് സന്ദേശങ്ങൾ ലഭിക്കുമ്പോൾ പുതിയ സന്ദേശങ്ങളൊന്നും അയക്കരുത്, ആവശ്യമായ എല്ലാ വിവരങ്ങളും "
-"ലഭിച്ചിട്ടുണ്ടെന്ന് ആദ്യം ഉറപ്പാക്കുക. ഈ പ്രശ്നം പരിഹരിക്കാൻ ഞങ്ങൾ ശ്രമിക്കുന്നുണ്ട്. അതിലുപരി, "
-"നിങ്ങൾക്ക് ഇതുവരെ സന്ദേശങ്ങൾ ലഭിച്ചിട്ടില്ലാത്ത കോൺടാക്റ്റുകളിലേക്ക് സന്ദേശം അയയ്ക്കുന്നത് നിരക്ക് "
-"പരിമിതപ്പെടുത്തുന്നതിലേക്ക് നയിച്ചേക്കാം. നിങ്ങൾ വളരെയധികം സന്ദേശങ്ങൾ അയയ്ക്കുന്നതിന് മുമ്പ് ആ "
-"കോൺടാക്റ്റിൽ നിന്ന് ഒരു സന്ദേശമെങ്കിലും സ്വീകരിച്ചെന്ന് ഉറപ്പാക്കുക. ബഗുകളുടെ പൂർണ്ണ "
-"ലിസ്റ്റിനായി, <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
-"label_name%5B%5D=bug\">ഇഷ്യു ട്രാക്കർ</a> സന്ദർശിക്കുക."
+"ഒരു അപ്‌സ്‌ട്രീം ബഗ് കാരണം, മിക്ക സമന്വയിപ്പിച്ച കോൺടാക്‌റ്റുകളും ചില സമയത്ത് \"അജ്ഞാത കോൺടാക്‌റ്റ്\"-ഓ അല്ലെങ്കിൽ ഫോൺ "
+"നമ്പർ മാത്രമോ പ്രദർശിപ്പിക്കുന്നു. ആ കോൺടാക്റ്റുകളിൽ നിന്ന് സന്ദേശങ്ങൾ സ്വീകരിച്ച് ആപ്പ് പുനരാരംഭിച്ച ശേഷം, അവരുടെ പേര്"
+" പോപ്പുലേറ്റ് ചെയ്യും. നിങ്ങൾ പതിവായി സന്ദേശങ്ങൾ കൈമാറുന്നില്ലെങ്കിൽ, കാലക്രമേണ അവരുടെ ഡിസ്പ്ലേ പേരുകൾ നഷ്‌ടപ്പെട്ടേക്കാം. "
+"കൂടാതെ, നിങ്ങൾക്ക് ഇതുവരെ സന്ദേശങ്ങൾ ലഭിച്ചിട്ടില്ലാത്ത കോൺടാക്റ്റുകളിലേക്ക് അയയ്ക്കുന്നത് നിരക്ക് പരിമിതപ്പെടുത്തുന്നതിന് "
+"ഇടയാക്കും. നിങ്ങൾ വളരെയധികം അയയ്‌ക്കുന്നതിന് മുമ്പ് ഒരു കോൺടാക്റ്റിൽ നിന്ന് ഒരു സന്ദേശം ലഭിക്കുന്നുണ്ടെന്ന് ഉറപ്പാക്കുക. "
+"ബഗുകളുടെ പൂർണ്ണമായ ലിസ്റ്റിനായി, <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
+"issues/?label_name%5B%5D=bug\">ഇഷ്യൂ ട്രാക്കർ</a> സന്ദർശിക്കുക."
 
 #: data/resources/ui/setup_window.blp:524
 msgid "Contact"
@@ -870,9 +869,9 @@ msgid "The database path at {} is no folder."
 msgstr "{} എന്ന ഡാറ്റാബേസ് പാത ഒരു ഫോൾഡറല്ല."
 
 #: src/error.rs:196
-#, fuzzy
 msgid "The database path at {path} is cannot be created due to error {error}."
-msgstr "{} എന്ന ഡാറ്റാബേസ് പാത ഒരു ഫോൾഡറല്ല."
+msgstr ""
+"{error} എന്ന പിയ്ഷക് കരണം {path} എന്ന ഡാറ്റാബേസ് പാത ഉണ്ടാക്കാൻ പറ്റുന്നില്ല."
 
 #: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
