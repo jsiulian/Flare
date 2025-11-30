@@ -154,28 +154,19 @@ impl Manager {
         Ok(())
     }
 
+    pub async fn clear_contents(&self) -> Result<(), ApplicationError> {
+        log::trace!("Clearing the manager content");
+        let mut store = self.store();
+        tspawn!(async move { store.clear_contents().await })
+            .await
+            .expect("Failed to spawn tokio")?;
+        Ok(())
+    }
+
     pub async fn clear_messages(&self) -> Result<(), ApplicationError> {
         log::trace!("Clearing messages from the manager");
         let mut store = self.store();
         tspawn!(async move { store.clear_messages().await })
-            .await
-            .expect("Failed to spawn tokio")?;
-        Ok(())
-    }
-
-    pub async fn clear_contacts(&self) -> Result<(), ApplicationError> {
-        log::trace!("Clearing contacts from the manager");
-        let mut store = self.store();
-        tspawn!(async move { store.clear_contacts().await })
-            .await
-            .expect("Failed to spawn tokio")?;
-        Ok(())
-    }
-
-    pub async fn clear_groups(&self) -> Result<(), ApplicationError> {
-        log::trace!("Clearing groups from the manager");
-        let mut store = self.store();
-        tspawn!(async move { store.clear_groups().await })
             .await
             .expect("Failed to spawn tokio")?;
         Ok(())

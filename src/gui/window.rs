@@ -213,40 +213,40 @@ pub mod imp {
                                     if let Some(man) = obj.imp().manager.borrow().as_ref() {
                                         gspawn!(clone!(
                                             #[strong]
-                                            man,
-                                            async move {
-                                                if let Err(e) = man.clear_registration().await {
-                                                    log::error!("Failed to clear db: {}", e);
-                                                }
-                                            }
-                                        ));
-                                    }
-                                    log::trace!("Closing the window after unlink");
-                                    obj.kill();
-                                } else if response == "unlink-delete" {
-                                    log::info!("Unlinking device");
-                                    if let Some(man) = obj.imp().manager.borrow().as_ref() {
-                                        gspawn!(clone!(
+                                            obj,
                                             #[strong]
                                             man,
                                             async move {
                                                 if let Err(e) = man.clear_registration().await {
                                                     log::error!("Failed to clear db: {}", e);
                                                 }
-                                                if let Err(e) = man.clear_contacts().await {
-                                                    log::error!("Failed to clear db: {}", e);
-                                                }
-                                                if let Err(e) = man.clear_groups().await {
-                                                    log::error!("Failed to clear db: {}", e);
-                                                }
-                                                if let Err(e) = man.clear_messages().await {
-                                                    log::error!("Failed to clear db: {}", e);
-                                                }
+
+                                                log::trace!("Closing the window after unlink");
+                                                obj.kill();
                                             }
                                         ));
                                     }
-                                    log::trace!("Closing the window after unlink");
-                                    obj.kill();
+                                } else if response == "unlink-delete" {
+                                    log::info!("Unlinking device");
+                                    if let Some(man) = obj.imp().manager.borrow().as_ref() {
+                                        gspawn!(clone!(
+                                            #[strong]
+                                            obj,
+                                            #[strong]
+                                            man,
+                                            async move {
+                                                if let Err(e) = man.clear_registration().await {
+                                                    log::error!("Failed to clear db: {}", e);
+                                                }
+                                                if let Err(e) = man.clear_contents().await {
+                                                    log::error!("Failed to clear db: {}", e);
+                                                }
+
+                                                log::trace!("Closing the window after unlink");
+                                                obj.kill();
+                                            }
+                                        ));
+                                    }
                                 }
                             }
                         ),
