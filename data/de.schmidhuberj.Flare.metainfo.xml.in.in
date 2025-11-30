@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.17.4" date="2025-11-30">
+      <description translate="no">
+        <p>HOTFIX</p> <ul> <li>Fixed unlinking the device not working.</li> <li>Fixed the store not actually being encrypted.</li> </ul>
+      </description>
+    </release>
     <release version="0.17.3" date="2025-11-12">
       <description translate="no">
         <p>HOTFIX</p> <ul> <li>Fixed captchas for many sent messages.</li> </ul>
