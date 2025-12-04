@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.17.5" date="2025-12-04">
+      <description translate="no">
+        <p>Fix</p> <ul> <li>Fixed avatars not being properly cached anymore.</li> </ul>
+      </description>
+    </release>
     <release version="0.17.4" date="2025-11-30">
       <description translate="no">
         <p>HOTFIX</p> <ul> <li>Fixed unlinking the device not working.</li> <li>Fixed the store not actually being encrypted.</li> </ul>

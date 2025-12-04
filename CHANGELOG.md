@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.5] - 2025-12-04
+
 ### Fix
 
 - Fixed avatars not being properly cached anymore.
@@ -785,7 +787,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.4...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.5...master
+[0.17.5]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.4...0.17.5
 [0.17.4]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.3...0.17.4
 [0.17.3]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.2...0.17.3
 [0.17.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.1...0.17.2
