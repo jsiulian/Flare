@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fix
+
+- Fixed avatars not being properly cached anymore.
+
 ## [0.17.4] - 2025-11-30
 
 ### HOTFIX
