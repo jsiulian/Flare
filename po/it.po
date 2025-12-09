@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 14:14+0100\n"
-"PO-Revision-Date: 2025-09-05 18:01+0000\n"
+"PO-Revision-Date: 2025-12-10 21:00+0000\n"
 "Last-Translator: Angelo Schirinzi <Odi-3@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/schmiddi-on-"
 "mobile/flare/it/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13.1-rc\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -574,7 +574,6 @@ msgid "Known Bugs"
 msgstr "Problemi conosciuti"
 
 #: data/resources/ui/setup_window.blp:513
-#, fuzzy
 msgid ""
 "Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
 "or only with the phone number. After receiving messages from those contacts "
@@ -585,14 +584,16 @@ msgid ""
 "many. For a full list of bugs, visit the <a href=\"https://gitlab.com/"
 "schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
-"Assicurati di non inviare messaggi mentre Flare sta ancora ricevendo "
-"messaggi, questo garantisce che tutte le informazioni necessarie vengano "
-"ricevute. Stiamo cercando di risolvere questo problema. Inoltre, inviare "
-"messaggi a contatti da cui non hai ancora ricevuto messaggi può portare a "
-"limitazioni di frequenza. Assicurati di ricevere un messaggio da un contatto "
+"A causa di un bug a monte, la maggior parte dei contatti sincronizzati viene "
+"visualizzata come \"Contatto sconosciuto\" o solo con il numero di telefono. "
+"Dopo aver ricevuto messaggi da tali contatti e aver riavviato, il loro nome "
+"dovrebbe apparire. Tuttavia, i loro nomi potrebbero andare persi nel tempo "
+"se non si scambiano messaggi regolarmente. Inoltre, l'invio di messaggi a "
+"contatti da cui non si sono ancora ricevuti messaggi può portare a "
+"limitazioni di velocità. Assicurati di ricevere un messaggio da un contatto "
 "prima di inviarne troppi. Per un elenco completo dei bug, visita il <a "
-"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
-"label_name%5B%5D=bug\">tracker dei problemi</a>."
+"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/"
+"?label_name%5B%5D=bug\">tracker dei problemi</a>."
 
 #: data/resources/ui/setup_window.blp:524
 msgid "Contact"
@@ -882,9 +883,10 @@ msgid "The database path at {} is no folder."
 msgstr "Il percorso della base di dati in {} non è una cartella."
 
 #: src/error.rs:196
-#, fuzzy
 msgid "The database path at {path} is cannot be created due to error {error}."
-msgstr "Il percorso della base di dati in {} non è una cartella."
+msgstr ""
+"Il percorso del database {path} non può essere creato a causa dell'errore "
+"{error}."
 
 #: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
