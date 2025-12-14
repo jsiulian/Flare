@@ -8,7 +8,8 @@ use crate::backend::message::{CallMessage, CallMessageType};
 gtk::glib::wrapper! {
     /// A widget to display call events.
     pub struct CallMessageItem(ObjectSubclass<imp::CallMessageItem>)
-        @extends gtk::Box,gtk::Widget;
+        @extends gtk::Box,gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl CallMessageItem {

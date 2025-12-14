@@ -13,7 +13,8 @@ glib::wrapper! {
     /// - [AttachmentVideo]
     /// - [AttachmentFile]
     pub struct Attachment(ObjectSubclass<imp::Attachment>)
-        @extends gtk::Widget;
+        @extends gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget, gtk::Box;
 }
 
 pub fn backend_to_gui(attachment: &crate::backend::Attachment) -> Attachment {

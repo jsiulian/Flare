@@ -3,7 +3,8 @@ use crate::prelude::*;
 glib::wrapper! {
     /// A divider between chats starting with different letters in the new chat dialog.
     pub struct LetterDivider(ObjectSubclass<imp::LetterDivider>)
-        @extends gtk::Box, gtk::Widget, @implements gtk::Accessible;
+        @extends gtk::Box, gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl Default for LetterDivider {

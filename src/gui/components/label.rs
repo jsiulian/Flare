@@ -9,7 +9,8 @@ const INDICATORS_SPACING: i32 = 6;
 glib::wrapper! {
     /// A Label which allows indicators to be placed in-line.
     pub struct MessageLabel(ObjectSubclass<imp::MessageLabel>)
-        @extends gtk::Widget;
+        @extends gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl MessageLabel {

@@ -140,7 +140,7 @@ pub mod imp {
                     ]);
                     dialog.set_response_appearance("unlink", ResponseAppearance::Destructive);
                     dialog.set_default_response(Some("cancel"));
-                    let response = dialog.choose_future(&obj).await;
+                    let response = dialog.choose_future(Some(&obj)).await;
                     if response == "unlink" {
                         log::debug!("Unlinking device: {} {}", device.id(), device.name());
                         if let Err(e) = manager.unlink_secondary(device.id()).await {

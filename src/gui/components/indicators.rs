@@ -3,7 +3,8 @@ use crate::prelude::*;
 glib::wrapper! {
     /// Message indicators, currently including the message timestamp.
     pub struct MessageIndicators(ObjectSubclass<imp::MessageIndicators>)
-        @extends gtk::Widget;
+        @extends gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl MessageIndicators {

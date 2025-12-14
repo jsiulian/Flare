@@ -13,7 +13,8 @@ use crate::{
 glib::wrapper! {
     /// A row in the channel messages holding e.g. a [MessageItem].
     pub struct ItemRow(ObjectSubclass<imp::ItemRow>)
-        @extends gtk::Widget, adw::Bin, @implements gtk::Accessible;
+        @extends gtk::Widget, adw::Bin,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl Default for ItemRow {

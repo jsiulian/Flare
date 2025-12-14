@@ -4,7 +4,8 @@ use crate::prelude::*;
 gtk::glib::wrapper! {
     /// Attachment widget displaying a file.
     pub struct AttachmentFile(ObjectSubclass<imp::AttachmentFile>)
-        @extends gtk::Widget, Attachment;
+        @extends gtk::Widget, Attachment,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl AttachmentFile {

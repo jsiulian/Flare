@@ -5,7 +5,7 @@ glib::wrapper! {
     pub struct DeviceInfoItem(ObjectSubclass<imp::DeviceInfoItem>)
         @extends adw::ActionRow, adw::PreferencesRow, gtk::ListBoxRow, gtk::Widget,
         @implements gtk::gio::ActionGroup, gtk::gio::ActionMap, gtk::Accessible, gtk::Buildable,
-            gtk::ConstraintTarget;
+            gtk::ConstraintTarget, gtk::Actionable;
 }
 
 impl DeviceInfoItem {
