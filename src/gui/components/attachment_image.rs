@@ -5,7 +5,8 @@ use crate::gui::attachment::Attachment;
 gtk::glib::wrapper! {
     /// Attachment displaying an image.
     pub struct AttachmentImage(ObjectSubclass<imp::AttachmentImage>)
-        @extends gtk::Widget, Attachment;
+        @extends gtk::Widget, Attachment,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl AttachmentImage {

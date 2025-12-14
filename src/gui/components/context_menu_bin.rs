@@ -5,7 +5,8 @@ use log::debug;
 glib::wrapper! {
     /// A Bin widget that adds a context menu.
     pub struct ContextMenuBin(ObjectSubclass<imp::ContextMenuBin>)
-        @extends gtk::Widget, adw::Bin, @implements gtk::Accessible;
+        @extends gtk::Widget, adw::Bin,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl ContextMenuBin {

@@ -9,7 +9,8 @@ use crate::gui::attachment::Attachment;
 gtk::glib::wrapper! {
     /// Audio message UI.
     pub struct AttachmentAudio(ObjectSubclass<imp::AttachmentAudio>)
-        @extends gtk::Widget, Attachment;
+        @extends gtk::Widget, Attachment,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl AttachmentAudio {

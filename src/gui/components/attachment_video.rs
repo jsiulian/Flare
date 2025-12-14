@@ -8,7 +8,8 @@ use crate::gui::attachment::Attachment;
 glib::wrapper! {
     /// Attachment displaying videos
     pub struct AttachmentVideo(ObjectSubclass<imp::AttachmentVideo>)
-        @extends gtk::Widget, Attachment;
+        @extends gtk::Widget, Attachment,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl AttachmentVideo {

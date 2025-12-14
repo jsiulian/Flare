@@ -419,7 +419,7 @@ pub mod imp {
                     confirmation_dialog
                         .set_response_appearance("remove", ResponseAppearance::Destructive);
                     confirmation_dialog.choose(
-                        &obj,
+                        Some(&obj),
                         None::<&Cancellable>,
                         clone!(
                             #[weak]

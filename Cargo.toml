@@ -11,39 +11,39 @@ edition = "2024"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-gtk = { version = "0.9.6", package = "gtk4", features = ["v4_12"]}
-gio = { version = "0.20.9", features = ["v2_70"]}
-adw = { version = "0.7.1", package = "libadwaita", features = ["v1_5"]}
-ashpd = { version = "0.11.0", default-features = false, features = [ "gtk4", "tokio" ]}
-zbus = { version = "5.5.0", default-features = false, features = [ "tokio" ]}
+gtk = { version = "0.10.3", package = "gtk4", features = ["v4_12"]}
+gio = { version = "0.21.5", features = ["v2_70"]}
+adw = { version = "0.8.1", package = "libadwaita", features = ["v1_5"]}
+ashpd = { version = "0.12.0", default-features = false, features = [ "gtk4", "tokio" ]}
+zbus = { version = "5.12.0", default-features = false, features = [ "tokio" ]}
 
-gettext-rs = { version = "0.7.2", features = ["gettext-system"] }
+gettext-rs = { version = "0.7.7", features = ["gettext-system"] }
  
 futures = "0.3.31"
-tokio = { version = "1.44.0", features = ["rt", "macros", "rt-multi-thread", "time"] }
-regex = "1.11.1"
+tokio = { version = "1.48.0", features = ["rt", "macros", "rt-multi-thread", "time"] }
+regex = "1.12.2"
 lazy_static = "1.5.0"
 
-presage = { git = "https://github.com/whisperfish/presage.git", rev = "194148f88ccf595c089474294bc3ff685b4e1b00" }
-presage-store-sqlite = { git = "https://github.com/whisperfish/presage.git", rev = "194148f88ccf595c089474294bc3ff685b4e1b00" }
-libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs.git", rev = "0a3bea3fb81599590bf3a54dc00f0a93f36f56e6" }
+presage = { git = "https://github.com/whisperfish/presage.git", rev = "66b56a7765cae7cfb83a610469562045902eb4c1" }
+presage-store-sqlite = { git = "https://github.com/whisperfish/presage.git", rev = "66b56a7765cae7cfb83a610469562045902eb4c1" }
+libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs.git", rev = "abad1634f91dba01baefc55b2a6196be00635b55" }
 
-oo7 = { version = "0.4.1", default-features = false, features = ["native_crypto", "tokio"] }
-rand = "0.9.0"
-url = "2.5.4"
-once_cell = "1.20.3"
+oo7 = { version = "0.5.0", default-features = false, features = ["native_crypto", "tokio"] }
+rand = "0.9.2"
+url = "2.5.7"
+once_cell = "1.21.3"
 
 qrcode-generator = "5.0.0"
 
-log = "0.4.26"
-env_logger = "0.11.6"
+log = "0.4.29"
+env_logger = "0.11.8"
 
-tracing = { version = "0.1.41", features = ["log-always"] }
-sourceview5 = "0.9.1"
-libspelling = { version = "0.3.0", optional = true }
-blurhash = { git = "https://github.com/whisperfish/blurhash-rs", rev = "2135e10", features = ["gdk-pixbuf"] }
-image = "0.25.5"
-chrono = "0.4.40"
+tracing = { version = "0.1.43", features = ["log-always"] }
+sourceview5 = "0.10.0"
+libspelling = { version = "0.4.1", optional = true }
+blurhash = { git = "https://github.com/Schmiddiii/blurhash-rs", rev = "a46af692e783f81f4ac752c91ef13847521c5352", features = ["gdk-pixbuf"] }
+image = "0.25.9"
+chrono = "0.4.42"
 
 phonenumber = { version = "0.3", optional = true }
 

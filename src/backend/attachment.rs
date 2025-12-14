@@ -81,7 +81,7 @@ impl Attachment {
         {
             "image/png".to_string()
         } else {
-            gio::content_type_guess(file.basename(), &[])
+            gio::content_type_guess(file.basename(), None)
                 .0
                 .as_str()
                 .to_owned()
@@ -200,7 +200,7 @@ impl Attachment {
         (
             AttachmentSpec {
                 content_type: self.content_type().unwrap_or_else(|| {
-                    gio::content_type_guess(file.basename(), &bytes)
+                    gio::content_type_guess(file.basename(), Some(&*bytes))
                         .0
                         .as_str()
                         .to_owned()
