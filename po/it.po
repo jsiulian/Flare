@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 14:14+0100\n"
-"PO-Revision-Date: 2025-12-10 21:00+0000\n"
-"Last-Translator: Angelo Schirinzi <Odi-3@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2025-12-17 16:00+0000\n"
+"Last-Translator: Davide Ariel Rossolato <arielrossolato@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/schmiddi-on-"
 "mobile/flare/it/>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.15.1-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -411,7 +411,7 @@ msgid ""
 msgstr ""
 "Flare può essere un'applicazione collegata al tuo dispositivo principale, "
 "simile al Signal Desktop ufficiale. Questa modalità è stata testata più "
-"ampiamente e funziona per lo più."
+"ampiamente e per lo più funziona."
 
 #: data/resources/ui/setup_window.blp:138
 msgid "Primary Device (Disabled)"
