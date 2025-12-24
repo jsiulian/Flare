@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 14:14+0100\n"
-"PO-Revision-Date: 2025-10-30 19:02+0000\n"
-"Last-Translator: Fraxinus Acer <yasson2008@ya.ru>\n"
+"PO-Revision-Date: 2025-12-25 17:00+0000\n"
+"Last-Translator: Ilnur Sultanov <ilnur.sultanow@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/schmiddi-on-"
 "mobile/flare/ru/>\n"
 "Language: ru\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.14.1-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -481,7 +481,7 @@ msgstr "Сканировать код"
 #: data/resources/ui/setup_window.blp:244
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
-"Сканируйте этот код с другого приложения Signal, где выполнен вход в ваш "
+"Просканируйте этот код с другого приложения Signal, где выполнен вход в ваш "
 "аккаунт."
 
 #: data/resources/ui/setup_window.blp:271
@@ -490,7 +490,7 @@ msgstr "Связать без сканирования"
 
 #: data/resources/ui/setup_window.blp:281
 msgid "Manual linking"
-msgstr "Привязать вручную"
+msgstr "Ручная привязка"
 
 #: data/resources/ui/setup_window.blp:297
 msgid "Manual Linking"
@@ -501,8 +501,8 @@ msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
 msgstr ""
-"Если ваше устройство не может сканировать QR-код, вы можете ввести ссылку, "
-"представленную здесь"
+"Если ваше устройство не может сканировать QR-код, вы можете вручную ввести "
+"ссылку, представленную здесь"
 
 #: data/resources/ui/setup_window.blp:309
 msgid "Copy to clipboard"
@@ -933,20 +933,19 @@ msgstr "Черновик"
 
 #: src/gui/device_info_item.rs:47
 msgid "Linked: {}"
-msgstr ""
+msgstr "Связаны: {}"
 
 #: src/gui/device_info_item.rs:48
 msgid "Last Seen: {}"
-msgstr ""
+msgstr "Последний раз был в сети: {}"
 
 #: src/gui/linked_devices_window.rs:131
-#, fuzzy
 msgid "Unlink Device?"
-msgstr "Привязать устройство"
+msgstr "Отвязать устройство?"
 
 #: src/gui/linked_devices_window.rs:133
 msgid "Are you sure you want to unlink {}?"
-msgstr ""
+msgstr "Вы уверены, что хотите отвязать {}?"
 
 #: src/gui/preferences_window.rs:25
 msgid "Watch for new messages while closed"
@@ -1017,7 +1016,7 @@ msgstr "Удалить сообщения"
 
 #: src/gui/window.rs:411
 msgid "This will remove all locally stored messages from this channel"
-msgstr "Это удалит все локально сохранённые сообщения из этого канала."
+msgstr "Это удалит все локально сохранённые сообщения из этого канала"
 
 #. Translators: Flare summary in metainfo.
 #: data/de.schmidhuberj.Flare.desktop.in.in:5
@@ -1037,10 +1036,9 @@ msgid ""
 "doesn't include all the features that the official Signal apps do. More "
 "information can be found on its feature roadmap."
 msgstr ""
-"Flare - неофициальное приложение, позволяющее общаться с друзьями в Signal "
-"на Linux. Оно всё ещё находится в разработке и не включает в себя все "
-"функции официального приложения Signal. Больше информации можно найти на "
-"дорожной карте."
+"Flare - это неофициальное приложение для Signal. Оно всё ещё находится в "
+"разработке и не включает в себя все функции официального приложения Signal. "
+"Больше информации можно найти на дорожной карте приложения."
 
 #. Translators: Description of Flare in metainfo: Security note
 #: data/de.schmidhuberj.Flare.metainfo.xml.in.in:33
@@ -1114,7 +1112,7 @@ msgstr "Можно ли выбирать сообщения"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:58
 msgid "Send a message when the Enter-key is pressed"
-msgstr "Отправить сообщение когда клавиша Enter нажата"
+msgstr "Отправить сообщение, когда нажата клавиша Enter"
 
 #: data/de.schmidhuberj.Flare.gschema.xml:63
 msgid "How to sort contacts, e.g with \"firstname\" or \"surname\""
