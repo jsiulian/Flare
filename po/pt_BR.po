@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 14:14+0100\n"
-"PO-Revision-Date: 2025-06-27 02:19+0000\n"
-"Last-Translator: LucasMZ <git@lucasmz.dev>\n"
+"PO-Revision-Date: 2025-12-31 21:01+0000\n"
+"Last-Translator: John Peter Sa <johnppetersa@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "schmiddi-on-mobile/flare/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -17,14 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
 msgid "translator-credits"
 msgstr ""
 "Filipe Motta <luizfilipemotta@gmail.com>\n"
-"Ronaldo V. Lobato <contact@rvlobato.com>"
+"Ronaldo V. Lobato <contact@rvlobato.com>\n"
+"John Peter Sa <johnppetersa@gmail.com>"
 
 #: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/setup_window.blp:371
@@ -574,7 +575,6 @@ msgid "Known Bugs"
 msgstr "Problemas conhecidos"
 
 #: data/resources/ui/setup_window.blp:513
-#, fuzzy
 msgid ""
 "Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
 "or only with the phone number. After receiving messages from those contacts "
@@ -585,15 +585,16 @@ msgid ""
 "many. For a full list of bugs, visit the <a href=\"https://gitlab.com/"
 "schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">issue tracker</a>."
 msgstr ""
-"Assegure-se de não enviar nenhuma mensagem enquanto as mensagens ainda "
-"estiverem sendo recebidas pelo Flare, isso garante que toda a informação "
-"necessária seja recebida. Nós estamos tentando consertar esse problema. Além "
-"disso, enviar mensagens para contatos dos quais você ainda não tenha "
-"recebido mensagens pode levar a uma limitação de velocidade de fluxo. "
-"Assegure-se de receber uma mensagem de um contato antes de enviar várias "
-"mensagens a ele. Para uma lista completa de problemas, visite o <a "
-"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
-"label_name%5B%5D=bug\">rastreador de problemas</a>."
+"Devido a um bug no código-fonte, a maioria dos contatos sincronizados "
+"aparece como \"Contato Desconhecido\" ou apenas com o número de telefone. "
+"Após receber mensagens desses contatos e reiniciar o aplicativo, o nome "
+"deles deve aparecer. No entanto, os nomes de exibição podem ser perdidos com "
+"o tempo se você não trocar mensagens regularmente. Além disso, enviar "
+"mensagens para contatos dos quais você ainda não recebeu mensagens pode "
+"levar à limitação de taxa. Certifique-se de receber uma mensagem de um "
+"contato antes de enviar muitas mensagens. Para obter uma lista completa de "
+"bugs, visite o <a href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/"
+"issues/?label_name%5B%5D=bug\">rastreador de problemas</a>."
 
 #: data/resources/ui/setup_window.blp:524
 msgid "Contact"
@@ -884,9 +885,10 @@ msgid "The database path at {} is no folder."
 msgstr "O caminho da base de dados em {} não é uma pasta."
 
 #: src/error.rs:196
-#, fuzzy
 msgid "The database path at {path} is cannot be created due to error {error}."
-msgstr "O caminho da base de dados em {} não é uma pasta."
+msgstr ""
+"O caminho do banco de dados em {path} não pode ser criado devido ao erro "
+"{error}."
 
 #: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
