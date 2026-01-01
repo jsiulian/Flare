@@ -143,10 +143,15 @@ pub mod imp {
                     let response = dialog.choose_future(Some(&obj)).await;
                     if response == "unlink" {
                         log::debug!("Unlinking device: {} {}", device.id(), device.name());
-                        if let Err(e) = manager.unlink_secondary(device.id()).await {
+                        if let Err(e) = manager
+                            .unlink_secondary(
+                                DeviceId::try_from(device.id())
+                                    .expect("DeviceInfo to only hold valid device IDs"),
+                            )
+                            .await
+                        {
                             log::error!("Failed to unlink device: {}", e);
                         }
-                        println!("Unlink {}", device.name());
                         obj.imp().reload().await;
                     }
                 }

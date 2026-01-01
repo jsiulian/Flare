@@ -754,7 +754,7 @@ impl Manager {
         r
     }
 
-    pub async fn unlink_secondary(&self, id: i64) -> Result<(), PresageError> {
+    pub async fn unlink_secondary(&self, id: DeviceId) -> Result<(), PresageError> {
         log::trace!("`Manager::unlink_secondary` start");
         let internal = self.internal();
         let r = tspawn!(async move { internal.unlink_secondary(id).await })

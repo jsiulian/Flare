@@ -85,7 +85,7 @@ enum Command {
     ),
     RegistrationType(oneshot::Sender<RegistrationType>),
     LinkSecondary(Url, oneshot::Sender<Result<(), Error>>),
-    UnlinkSecondary(i64, oneshot::Sender<Result<(), Error>>),
+    UnlinkSecondary(DeviceId, oneshot::Sender<Result<(), Error>>),
     Devices(oneshot::Sender<Result<Vec<DeviceInfo>, Error>>),
     RequestContacts(oneshot::Sender<Result<(), Error>>),
     RetrieveProfileAvatarByUuid(
@@ -422,7 +422,7 @@ impl ManagerThread {
         receiver.await.expect("Callback receiving failed")
     }
 
-    pub async fn unlink_secondary(&self, id: i64) -> Result<(), Error> {
+    pub async fn unlink_secondary(&self, id: DeviceId) -> Result<(), Error> {
         let (sender, receiver) = oneshot::channel();
         self.command_sender
             .clone()
