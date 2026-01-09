@@ -8,18 +8,18 @@ gtk::glib::wrapper! {
 impl DeviceInfo {
     pub fn new(info: libsignal_service::push_service::DeviceInfo) -> DeviceInfo {
         Object::builder::<Self>()
-            .property("id", info.id)
+            .property("id", u8::from(info.id))
             .property("name", info.name)
             .property(
                 "created",
-                crate::utils::chrono_to_glib_datetime(info.created)
-                    .map(|d| Utility::format_date_human(&d))
+                crate::utils::chrono_to_glib_datetime(info.created_at)
+                    .and_then(|d| Utility::format_date_human(&d))
                     .unwrap_or_default(),
             )
             .property(
                 "last-seen",
                 crate::utils::chrono_to_glib_datetime(info.last_seen)
-                    .map(|d| Utility::format_date_human(&d))
+                    .and_then(|d| Utility::format_date_human(&d))
                     .unwrap_or_default(),
             )
             .build()
@@ -33,7 +33,7 @@ mod imp {
     #[properties(wrapper_type=super::DeviceInfo)]
     pub struct DeviceInfo {
         #[property(get, set)]
-        id: RefCell<i64>,
+        id: RefCell<u8>,
         #[property(get, set)]
         name: RefCell<String>,
         #[property(get, set)]
