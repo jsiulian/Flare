@@ -10,6 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed some messages not being received anymore, since some time 2026-01-13.
 
+### Changed
+
+- Enabled the primary device mode in the setup menu.
+
+### Fixed
+
+- Fixed some bugs with the device being in primary mode.
+
 ## [0.17.5] - 2025-12-04
 
 ### Fix
