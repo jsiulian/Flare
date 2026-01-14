@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.0] - 2026-01-14
+
 ### HOTFIX
 
 - Fixed some messages not being received anymore, since some time 2026-01-13.
@@ -799,7 +801,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.5...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.0...master
+[0.18.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.5...0.18.0
 [0.17.5]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.4...0.17.5
 [0.17.4]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.3...0.17.4
 [0.17.3]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.2...0.17.3

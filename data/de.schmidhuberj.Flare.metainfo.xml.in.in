@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.18.0" date="2026-01-14">
+      <description translate="no">
+        <p>HOTFIX</p> <ul> <li>Fixed some messages not being received anymore, since some time 2026-01-13.</li> </ul> <p>Changed</p> <ul> <li>Enabled the primary device mode in the setup menu.</li> </ul> <p>Fixed</p> <ul> <li>Fixed some bugs with the device being in primary mode.</li> </ul>
+      </description>
+    </release>
     <release version="0.17.5" date="2025-12-04">
       <description translate="no">
         <p>Fix</p> <ul> <li>Fixed avatars not being properly cached anymore.</li> </ul>
