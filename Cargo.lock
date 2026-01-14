@@ -2468,7 +2468,7 @@ dependencies = [
 [[package]]
 name = "libsignal-service"
 version = "0.1.0"
-source = "git+https://github.com/Schmiddiii/libsignal-service-rs?rev=4fd14a0cd200f2c4cf9cf8ff723535b9243d44bc#4fd14a0cd200f2c4cf9cf8ff723535b9243d44bc"
+source = "git+https://github.com/Schmiddiii/libsignal-service-rs?rev=7fae2239b707f8ef391c083da90a6485455fdb24#7fae2239b707f8ef391c083da90a6485455fdb24"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -3268,7 +3268,7 @@ dependencies = [
 [[package]]
 name = "presage"
 version = "0.8.0-dev"
-source = "git+https://github.com/Schmiddiii/presage?rev=4e0b16c56f8cda4674a377b8528d75d11f55c0fc#4e0b16c56f8cda4674a377b8528d75d11f55c0fc"
+source = "git+https://github.com/Schmiddiii/presage?rev=3fbaea8d9dc4384f1edda959039c1a918eb3dc08#3fbaea8d9dc4384f1edda959039c1a918eb3dc08"
 dependencies = [
  "base64",
  "bytes",
@@ -3289,7 +3289,7 @@ dependencies = [
 [[package]]
 name = "presage-store-sqlite"
 version = "0.8.0-dev"
-source = "git+https://github.com/Schmiddiii/presage?rev=4e0b16c56f8cda4674a377b8528d75d11f55c0fc#4e0b16c56f8cda4674a377b8528d75d11f55c0fc"
+source = "git+https://github.com/Schmiddiii/presage?rev=3fbaea8d9dc4384f1edda959039c1a918eb3dc08#3fbaea8d9dc4384f1edda959039c1a918eb3dc08"
 dependencies = [
  "async-trait",
  "bytes",

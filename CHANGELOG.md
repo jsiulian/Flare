@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Fixed some messages not being received anymore, since some time 2026-01-13.
+
 ## [0.17.5] - 2025-12-04
 
 ### Fix
