@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-19 13:15+0100\n"
-"PO-Revision-Date: 2025-11-21 19:51+0000\n"
+"PO-Revision-Date: 2026-01-20 13:01+0000\n"
 "Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/schmiddi-on-"
 "mobile/flare/et/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -414,20 +414,10 @@ msgstr ""
 "põhiseadmega. Seda režiimi on põhjalikult testitud ja ta üldjoontes toimib."
 
 #: data/resources/ui/setup_window.blp:136
-#, fuzzy
-#| msgid "Primary Device (Disabled)"
 msgid "Primary Device (Experimental)"
-msgstr "Põhiseade (pole kasutusel)"
+msgstr "Põhiseade (katseline)"
 
 #: data/resources/ui/setup_window.blp:141
-#, fuzzy
-#| msgid ""
-#| "Flare can act as a primary device, similar to the official Signal "
-#| "applications on Android or IOS. This mode is currently not supported by "
-#| "Flare, even though initial tests seem to indicate that it works. If you "
-#| "are willing to test it, you may enable the button below (and if you don't "
-#| "know how to do that, you should not think about testing primary-device "
-#| "support)."
 msgid ""
 "Flare can act as a primary device, similar to the official Signal "
 "applications on Android or IOS. This mode is currently experimental in "
@@ -437,10 +427,11 @@ msgid ""
 "which cannot yet be done in Flare)."
 msgstr ""
 "Nii nagu ametlik Signali klient Androidis või iOS-is, oskab ka Flare toimida "
-"põhiseadmena. Kuigi testimine näitab, et kõik toimib, siis pole see "
-"funktsionaalsus ametlikult toetatud. Kui tahad katsetada, siis järgnevast "
-"nupust saad sellise võimaluse sisse lülitada (kui sa ei tea, kuidas seda "
-"teha, siis pigem ära katseta Flare'i põhiseadmena)."
+"põhiseadmena. See funktsionaalsus on Flare'is hetkel veel katseline. Kui "
+"võtad Flare'i kasutusele põhiseadmena, siis tungivalt soovitame, et seod oma "
+"konto ka Signali ametliku töölauarakendusega - sealt saad kohendada profiili "
+"nime ja tunnuspilti ning alustada vestlust teiste kasutajatega (kumbagi ei "
+"saa veel Flare'is teha)."
 
 #: data/resources/ui/setup_window.blp:191
 msgid ""
