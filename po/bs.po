@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-19 13:15+0100\n"
-"PO-Revision-Date: 2026-01-18 15:02+0000\n"
+"PO-Revision-Date: 2026-01-20 13:01+0000\n"
 "Last-Translator: pacavarn <nahadster@gmail.com>\n"
 "Language-Team: Bosnian <https://hosted.weblate.org/projects/schmiddi-on-"
 "mobile/flare/bs/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -416,20 +416,10 @@ msgstr ""
 "uglavnom radi."
 
 #: data/resources/ui/setup_window.blp:136
-#, fuzzy
-#| msgid "Primary Device (Disabled)"
 msgid "Primary Device (Experimental)"
-msgstr "Primarni uređaj (onemogućen)"
+msgstr "Primarni uređaj (eksperimentalno)"
 
 #: data/resources/ui/setup_window.blp:141
-#, fuzzy
-#| msgid ""
-#| "Flare can act as a primary device, similar to the official Signal "
-#| "applications on Android or IOS. This mode is currently not supported by "
-#| "Flare, even though initial tests seem to indicate that it works. If you "
-#| "are willing to test it, you may enable the button below (and if you don't "
-#| "know how to do that, you should not think about testing primary-device "
-#| "support)."
 msgid ""
 "Flare can act as a primary device, similar to the official Signal "
 "applications on Android or IOS. This mode is currently experimental in "
@@ -439,10 +429,11 @@ msgid ""
 "which cannot yet be done in Flare)."
 msgstr ""
 "Flare može djelovati kao primarni uređaj, slično službenim Signal "
-"aplikacijama na Androidu ili iOS-u. Ovaj način rada trenutno nije podržan od "
-"strane Flare-a, iako početni testovi pokazuju da radi. Ako ste voljni da ga "
-"testirate, možete omogućiti dugme ispod (a ako ne znate kako to učiniti, ne "
-"biste trebali razmišljati o testiranju podrške za primarni uređaj)."
+"aplikacijama na Androidu ili iOS-u. Ovaj način rada je trenutno "
+"eksperimentalan u Flareu. Preporučuje se povezivanje službene Signal Desktop "
+"aplikacije nakon postavljanja Flarea kao primarnog uređaja kako biste "
+"postavili ime profila i avatar te pokrenuli razgovore s drugim ljudima "
+"(oboje se još ne može uraditi u Flareu)."
 
 #: data/resources/ui/setup_window.blp:191
 msgid ""
