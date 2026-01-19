@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-20 14:14+0100\n"
+"POT-Creation-Date: 2026-01-19 13:15+0100\n"
 "PO-Revision-Date: 2025-12-12 04:00+0000\n"
 "Last-Translator: Loc Huynh <huynhloc.contact@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/schmiddi-on-"
@@ -27,7 +27,7 @@ msgstr ""
 "Loc Huynh <https://github.com/hthienloc>"
 
 #: data/resources/ui/channel_info_dialog.blp:54
-#: data/resources/ui/setup_window.blp:371
+#: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
 msgstr "Số điện thoại"
 
@@ -178,7 +178,7 @@ msgstr "Lỗi"
 msgid "Please consider reporting this error."
 msgstr "Vui lòng xem xét việc báo cáo lỗi này."
 
-#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:482
+#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:480
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
 msgstr "Đóng"
@@ -371,39 +371,39 @@ msgid ""
 "blob/master/README.md#security\">README</a> for more information."
 msgstr ""
 "Flare là ứng dụng khách Signal không chính thức. Lưu ý rằng Flare không ổn "
-"định và có thể có lỗi. Nếu bạn gặp bất kỳ lỗi nào, hãy tham khảo <a href="
-"\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">trình theo dõi vấn "
-"đề</a> và mở các vấn đề nếu bạn gặp phải sự cố mới. Cũng lưu ý rằng do là "
-"ứng dụng của bên thứ ba, Flare không thể đảm bảo mức độ bảo mật và quyền "
+"định và có thể có lỗi. Nếu bạn gặp bất kỳ lỗi nào, hãy tham khảo <a "
+"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues\">trình theo dõi "
+"vấn đề</a> và mở các vấn đề nếu bạn gặp phải sự cố mới. Cũng lưu ý rằng do "
+"là ứng dụng của bên thứ ba, Flare không thể đảm bảo mức độ bảo mật và quyền "
 "riêng tư như các ứng dụng Signal chính thức. Nếu bạn hoặc ai đó bạn cần liên "
-"hệ yêu cầu mức độ bảo mật cao, đừng sử dụng Flare. Hãy tham khảo <a href="
-"\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/README.md#"
-"security\">README</a> để biết thêm thông tin."
+"hệ yêu cầu mức độ bảo mật cao, đừng sử dụng Flare. Hãy tham khảo <a "
+"href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/blob/master/"
+"README.md#security\">README</a> để biết thêm thông tin."
 
 #: data/resources/ui/setup_window.blp:63 data/resources/ui/setup_window.blp:70
 msgid "Setup Primary Device or Link Device?"
 msgstr "Thiết lập thiết bị chính hoặc thiết bị liên kết?"
 
-#: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:318
-#: data/resources/ui/setup_window.blp:325
+#: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:316
+#: data/resources/ui/setup_window.blp:323
 msgid "Primary Device"
 msgstr "Thiết bị chính"
 
-#: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:152
-#: data/resources/ui/setup_window.blp:159
-#: data/resources/ui/setup_window.blp:176
+#: data/resources/ui/setup_window.blp:96 data/resources/ui/setup_window.blp:150
+#: data/resources/ui/setup_window.blp:157
+#: data/resources/ui/setup_window.blp:174
 msgid "Link Device"
 msgstr "Liên kết thiết bị"
 
-#: data/resources/ui/setup_window.blp:113
+#: data/resources/ui/setup_window.blp:111
 msgid "You can use Flare either as a primary or secondary device."
 msgstr "Bạn có thể sử dụng Flare làm thiết bị chính hoặc phụ."
 
-#: data/resources/ui/setup_window.blp:123
+#: data/resources/ui/setup_window.blp:121
 msgid "Linked Device (Recommended)"
 msgstr "Thiết Bị Được Liên Kết (Được Khuyến Nghị)"
 
-#: data/resources/ui/setup_window.blp:128
+#: data/resources/ui/setup_window.blp:126
 msgid ""
 "Flare can be an application linked to your primary device, similar to the "
 "official Signal Desktop. This mode has been more extensively tested and "
@@ -413,17 +413,28 @@ msgstr ""
 "tự như Signal Desktop chính thức. Chế độ này đã được thử nghiệm rộng rãi hơn "
 "và hầu hết đều hoạt động."
 
-#: data/resources/ui/setup_window.blp:138
-msgid "Primary Device (Disabled)"
+#: data/resources/ui/setup_window.blp:136
+#, fuzzy
+#| msgid "Primary Device (Disabled)"
+msgid "Primary Device (Experimental)"
 msgstr "Thiết bị chính (Đã tắt)"
 
-#: data/resources/ui/setup_window.blp:143
+#: data/resources/ui/setup_window.blp:141
+#, fuzzy
+#| msgid ""
+#| "Flare can act as a primary device, similar to the official Signal "
+#| "applications on Android or IOS. This mode is currently not supported by "
+#| "Flare, even though initial tests seem to indicate that it works. If you "
+#| "are willing to test it, you may enable the button below (and if you don't "
+#| "know how to do that, you should not think about testing primary-device "
+#| "support)."
 msgid ""
 "Flare can act as a primary device, similar to the official Signal "
-"applications on Android or IOS. This mode is currently not supported by "
-"Flare, even though initial tests seem to indicate that it works. If you are "
-"willing to test it, you may enable the button below (and if you don't know "
-"how to do that, you should not think about testing primary-device support)."
+"applications on Android or IOS. This mode is currently experimental in "
+"Flare. It is strongly recommended to link the official Signal Desktop "
+"application after setting up Flare as a primary device to set up your "
+"profile name and avatar, and to initialize chats with other people (both of "
+"which cannot yet be done in Flare)."
 msgstr ""
 "Flare có thể hoạt động như một thiết bị chính, tương tự như các ứng dụng "
 "Signal chính thức trên Android hoặc iOS. Chế độ này hiện không được Flare hỗ "
@@ -432,7 +443,7 @@ msgstr ""
 "biết cách thực hiện điều đó, bạn không nên nghĩ đến việc thử nghiệm hỗ trợ "
 "thiết bị chính)."
 
-#: data/resources/ui/setup_window.blp:193
+#: data/resources/ui/setup_window.blp:191
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
@@ -440,21 +451,21 @@ msgstr ""
 "Để liên kết dưới dạng thiết bị phụ, Flare sẽ cần tên thiết bị hiển thị trong "
 "ứng dụng chính thức."
 
-#: data/resources/ui/setup_window.blp:204
+#: data/resources/ui/setup_window.blp:202
 msgid "Device Name"
 msgstr "Tên thiết bị"
 
-#: data/resources/ui/setup_window.blp:208
-#: data/resources/ui/setup_window.blp:379
+#: data/resources/ui/setup_window.blp:206
+#: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
 msgstr "Tùy chọn nhà phát triển"
 
-#: data/resources/ui/setup_window.blp:211
-#: data/resources/ui/setup_window.blp:382
+#: data/resources/ui/setup_window.blp:209
+#: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
 msgstr "Máy chủ Signal"
 
-#: data/resources/ui/setup_window.blp:217
+#: data/resources/ui/setup_window.blp:215
 msgid ""
 "The next page will show a QR code which has to be scanned from the primary "
 "device. Note that you only have a timeframe of about one minute to scan the "
@@ -465,34 +476,34 @@ msgstr ""
 "rằng bạn chỉ có khoảng thời gian khoảng một phút để quét mã, vì vậy vui lòng "
 "chuẩn bị sẵn đơn đăng ký chính thức để quét mã QR."
 
-#: data/resources/ui/setup_window.blp:226
-#: data/resources/ui/setup_window.blp:238
-#: data/resources/ui/setup_window.blp:292
+#: data/resources/ui/setup_window.blp:224
+#: data/resources/ui/setup_window.blp:236
+#: data/resources/ui/setup_window.blp:290
 msgid "Link device"
 msgstr "Liên kết thiết bị"
 
-#: data/resources/ui/setup_window.blp:243
+#: data/resources/ui/setup_window.blp:241
 msgid "Scan Code"
 msgstr "Quét mã"
 
-#: data/resources/ui/setup_window.blp:244
+#: data/resources/ui/setup_window.blp:242
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
 "Quét mã này bằng ứng dụng Signal khác đã đăng nhập vào tài khoản của bạn."
 
-#: data/resources/ui/setup_window.blp:271
+#: data/resources/ui/setup_window.blp:269
 msgid "Link without scanning"
 msgstr "Liên kết mà không cần quét"
 
-#: data/resources/ui/setup_window.blp:281
+#: data/resources/ui/setup_window.blp:279
 msgid "Manual linking"
 msgstr "Liên kết thủ công"
 
-#: data/resources/ui/setup_window.blp:297
+#: data/resources/ui/setup_window.blp:295
 msgid "Manual Linking"
 msgstr "Liên kết thủ công"
 
-#: data/resources/ui/setup_window.blp:298
+#: data/resources/ui/setup_window.blp:296
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
@@ -500,15 +511,15 @@ msgstr ""
 "Nếu thiết bị của bạn không quét được mã QR, bạn có thể nhập thủ công liên "
 "kết được cung cấp tại đây"
 
-#: data/resources/ui/setup_window.blp:309
+#: data/resources/ui/setup_window.blp:307
 msgid "Copy to clipboard"
 msgstr "Sao chép vào bộ nhớ tạm"
 
-#: data/resources/ui/setup_window.blp:342
+#: data/resources/ui/setup_window.blp:340
 msgid "Continue"
 msgstr "Tiếp tục"
 
-#: data/resources/ui/setup_window.blp:359
+#: data/resources/ui/setup_window.blp:357
 msgid ""
 "For registering as a primary device, Flare will need your phone number and a "
 "completion of the captcha. Please give the phone number in international "
@@ -521,18 +532,17 @@ msgstr ""
 "Để đăng ký làm thiết bị chính, Flare sẽ cần số điện thoại của bạn và hoàn "
 "thành hình ảnh xác thực. Vui lòng cung cấp số điện thoại theo định dạng quốc "
 "tế E.164, bao gồm dấu \"+\" ở đầu và mã quốc gia. Bạn có thể hoàn thành hình "
-"ảnh xác thực <a href="
-"\"https://signalcaptchas.org/registration/generate.html\">tại đây</a>, sau "
-"đó sao chép liên kết \"Open Signal\" và dán vào trường bên dưới. Lưu ý rằng "
-"hình ảnh xác thực này chỉ có hiệu lực trong khoảng một phút, vì vậy hãy tiến "
-"hành nhanh chóng."
+"ảnh xác thực <a href=\"https://signalcaptchas.org/registration/"
+"generate.html\">tại đây</a>, sau đó sao chép liên kết \"Open Signal\" và dán "
+"vào trường bên dưới. Lưu ý rằng hình ảnh xác thực này chỉ có hiệu lực trong "
+"khoảng một phút, vì vậy hãy tiến hành nhanh chóng."
 
-#: data/resources/ui/setup_window.blp:375
+#: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
 msgstr "Captcha"
 
-#: data/resources/ui/setup_window.blp:388
+#: data/resources/ui/setup_window.blp:386
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
@@ -540,23 +550,23 @@ msgstr ""
 "Sau khi gửi thông tin này, bạn sẽ nhận được SMS từ Signal kèm theo mã xác "
 "minh. Chèn mã xác minh này vào trang tiếp theo."
 
-#: data/resources/ui/setup_window.blp:398
-#: data/resources/ui/setup_window.blp:406
-#: data/resources/ui/setup_window.blp:423
-#: data/resources/ui/setup_window.blp:449
+#: data/resources/ui/setup_window.blp:396
+#: data/resources/ui/setup_window.blp:404
+#: data/resources/ui/setup_window.blp:421
+#: data/resources/ui/setup_window.blp:447
 msgid "Confirm"
 msgstr "Xác nhận"
 
-#: data/resources/ui/setup_window.blp:439
+#: data/resources/ui/setup_window.blp:437
 msgid "Insert the verification code you received from Signal here."
 msgstr "Chèn mã xác minh bạn nhận được từ Signal vào đây."
 
-#: data/resources/ui/setup_window.blp:457
-#: data/resources/ui/setup_window.blp:465
+#: data/resources/ui/setup_window.blp:455
+#: data/resources/ui/setup_window.blp:463
 msgid "Finished"
 msgstr "Hoàn thành"
 
-#: data/resources/ui/setup_window.blp:498
+#: data/resources/ui/setup_window.blp:496
 msgid ""
 "Flare is almost ready, it is waiting for contacts to finish syncing. This "
 "may take a few seconds, you can start to use Flare once the contacts are "
@@ -567,11 +577,11 @@ msgstr ""
 "bạ được đồng bộ hóa. Một số lưu ý cuối cùng trước khi bạn bắt đầu sử dụng "
 "Flare:"
 
-#: data/resources/ui/setup_window.blp:508
+#: data/resources/ui/setup_window.blp:506
 msgid "Known Bugs"
 msgstr "Lỗi đã biết"
 
-#: data/resources/ui/setup_window.blp:513
+#: data/resources/ui/setup_window.blp:511
 msgid ""
 "Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
 "or only with the phone number. After receiving messages from those contacts "
@@ -592,19 +602,19 @@ msgstr ""
 "đầy đủ các lỗi, hãy truy cập <a href=\"https://gitlab.com/schmiddi-on-mobile/"
 "flare/-/issues/?label_name%5B%5D=bug\">trình theo dõi vấn đề</a>."
 
-#: data/resources/ui/setup_window.blp:524
+#: data/resources/ui/setup_window.blp:522
 msgid "Contact"
 msgstr "Liên hệ"
 
-#: data/resources/ui/setup_window.blp:529
+#: data/resources/ui/setup_window.blp:527
 msgid ""
 "Want to leave some feedback about Flare, or just talk a little bit? Our <a "
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
 "open for everyone."
 msgstr ""
-"Bạn muốn để lại một số phản hồi về Flare, hay chỉ nói một chút? <a href="
-"\"https://matrix.to/#/#flare-signal:matrix.org\">Phòng Matrix</a> của chúng "
-"tôi mở cửa cho tất cả mọi người."
+"Bạn muốn để lại một số phản hồi về Flare, hay chỉ nói một chút? <a "
+"href=\"https://matrix.to/#/#flare-signal:matrix.org\">Phòng Matrix</a> của "
+"chúng tôi mở cửa cho tất cả mọi người."
 
 #: data/resources/ui/shortcuts.blp:11
 msgctxt "shortcut window"
@@ -681,10 +691,10 @@ msgid ""
 "Note that the captcha is only valid for about one minute."
 msgstr ""
 "Gửi thử thách Captcha. Mã thông báo có thể được lấy từ thông báo lỗi được "
-"hiển thị từ Flare. Bạn phải điền hình ảnh xác thực <a href="
-"\"https://signalcaptchas.org/challenge/generate.html\">trên trang web này</"
-"a> và liên kết để mở Signal phải được dán vào mục tương ứng. Lưu ý rằng hình "
-"ảnh xác thực chỉ có hiệu lực trong khoảng một phút."
+"hiển thị từ Flare. Bạn phải điền hình ảnh xác thực <a href=\"https://"
+"signalcaptchas.org/challenge/generate.html\">trên trang web này</a> và liên "
+"kết để mở Signal phải được dán vào mục tương ứng. Lưu ý rằng hình ảnh xác "
+"thực chỉ có hiệu lực trong khoảng một phút."
 
 #: data/resources/ui/submit_captcha_dialog.blp:16
 msgid "Token"
@@ -753,7 +763,7 @@ msgstr "Lưu ý cho bản thân"
 msgid "Unknown contact"
 msgstr "Địa chỉ liên hệ không xác định"
 
-#: src/backend/manager.rs:438
+#: src/backend/manager.rs:429
 msgid "You"
 msgstr "Bạn"
 
@@ -1038,7 +1048,7 @@ msgstr ""
 "khi xử lý dữ liệu nhạy cảm. Xem các dự án README để biết thêm thông tin về "
 "bảo mật."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:822
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:837
 msgid "Overview of the application"
 msgstr "Tổng quan về ứng dụng"
 

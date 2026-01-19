@@ -7,18 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-20 14:14+0100\n"
+"POT-Creation-Date: 2026-01-19 13:15+0100\n"
 "PO-Revision-Date: 2025-11-27 05:00+0000\n"
 "Last-Translator: Roma <roma.shulha@gmail.com>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/"
-"schmiddi-on-mobile/flare/uk/>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/schmiddi-on-"
+"mobile/flare/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural="
-"(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? "
-"1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.15-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
@@ -27,7 +26,7 @@ msgid "translator-credits"
 msgstr "mljoke <5h6yvkei5@mozmail.com>"
 
 #: data/resources/ui/channel_info_dialog.blp:54
-#: data/resources/ui/setup_window.blp:371
+#: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
 msgstr "Номер телефону"
 
@@ -177,7 +176,7 @@ msgstr "Помилка"
 msgid "Please consider reporting this error."
 msgstr "Будь ласка, повідомте про цю помилку."
 
-#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:482
+#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:480
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
 msgstr "Закрити"
@@ -384,26 +383,26 @@ msgstr ""
 msgid "Setup Primary Device or Link Device?"
 msgstr "Налаштувати основний пристрій або пов'язати пристрій?"
 
-#: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:318
-#: data/resources/ui/setup_window.blp:325
+#: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:316
+#: data/resources/ui/setup_window.blp:323
 msgid "Primary Device"
 msgstr "Основний пристрій"
 
-#: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:152
-#: data/resources/ui/setup_window.blp:159
-#: data/resources/ui/setup_window.blp:176
+#: data/resources/ui/setup_window.blp:96 data/resources/ui/setup_window.blp:150
+#: data/resources/ui/setup_window.blp:157
+#: data/resources/ui/setup_window.blp:174
 msgid "Link Device"
 msgstr "Пов'язати пристрій"
 
-#: data/resources/ui/setup_window.blp:113
+#: data/resources/ui/setup_window.blp:111
 msgid "You can use Flare either as a primary or secondary device."
 msgstr "Ви можете використовувати Flare як основний або додатковий пристрій."
 
-#: data/resources/ui/setup_window.blp:123
+#: data/resources/ui/setup_window.blp:121
 msgid "Linked Device (Recommended)"
 msgstr "Пов'язаний пристрій (рекомендовано)"
 
-#: data/resources/ui/setup_window.blp:128
+#: data/resources/ui/setup_window.blp:126
 msgid ""
 "Flare can be an application linked to your primary device, similar to the "
 "official Signal Desktop. This mode has been more extensively tested and "
@@ -413,17 +412,28 @@ msgstr ""
 "офіційного Signal Desktop. Цей режим був більш детально протестований і "
 "здебільшого працює."
 
-#: data/resources/ui/setup_window.blp:138
-msgid "Primary Device (Disabled)"
+#: data/resources/ui/setup_window.blp:136
+#, fuzzy
+#| msgid "Primary Device (Disabled)"
+msgid "Primary Device (Experimental)"
 msgstr "Основний пристрій (вимкнено)"
 
-#: data/resources/ui/setup_window.blp:143
+#: data/resources/ui/setup_window.blp:141
+#, fuzzy
+#| msgid ""
+#| "Flare can act as a primary device, similar to the official Signal "
+#| "applications on Android or IOS. This mode is currently not supported by "
+#| "Flare, even though initial tests seem to indicate that it works. If you "
+#| "are willing to test it, you may enable the button below (and if you don't "
+#| "know how to do that, you should not think about testing primary-device "
+#| "support)."
 msgid ""
 "Flare can act as a primary device, similar to the official Signal "
-"applications on Android or IOS. This mode is currently not supported by "
-"Flare, even though initial tests seem to indicate that it works. If you are "
-"willing to test it, you may enable the button below (and if you don't know "
-"how to do that, you should not think about testing primary-device support)."
+"applications on Android or IOS. This mode is currently experimental in "
+"Flare. It is strongly recommended to link the official Signal Desktop "
+"application after setting up Flare as a primary device to set up your "
+"profile name and avatar, and to initialize chats with other people (both of "
+"which cannot yet be done in Flare)."
 msgstr ""
 "Flare може діяти як основний пристрій, подібно до офіційних додатків Signal "
 "на Android або IOS. Наразі Flare не підтримує цей режим, хоча попередні "
@@ -431,7 +441,7 @@ msgstr ""
 "увімкнути кнопку нижче (а якщо ви не знаєте, як це зробити, не варто думати "
 "про тестування підтримки основного пристрою)."
 
-#: data/resources/ui/setup_window.blp:193
+#: data/resources/ui/setup_window.blp:191
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
@@ -439,21 +449,21 @@ msgstr ""
 "Для прив'язки в якості додаткового пристрою Flare знадобиться ім'я пристрою, "
 "яке буде показано в офіційному додатку."
 
-#: data/resources/ui/setup_window.blp:204
+#: data/resources/ui/setup_window.blp:202
 msgid "Device Name"
 msgstr "Ім'я пристрою"
 
-#: data/resources/ui/setup_window.blp:208
-#: data/resources/ui/setup_window.blp:379
+#: data/resources/ui/setup_window.blp:206
+#: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
 msgstr "Параметри розробника"
 
-#: data/resources/ui/setup_window.blp:211
-#: data/resources/ui/setup_window.blp:382
+#: data/resources/ui/setup_window.blp:209
+#: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
 msgstr "Сервери Signal"
 
-#: data/resources/ui/setup_window.blp:217
+#: data/resources/ui/setup_window.blp:215
 msgid ""
 "The next page will show a QR code which has to be scanned from the primary "
 "device. Note that you only have a timeframe of about one minute to scan the "
@@ -465,35 +475,35 @@ msgstr ""
 "сканування коду, тому, будь ласка, вже зараз підготуйте свій офіційний "
 "додаток для сканування QR-коду."
 
-#: data/resources/ui/setup_window.blp:226
-#: data/resources/ui/setup_window.blp:238
-#: data/resources/ui/setup_window.blp:292
+#: data/resources/ui/setup_window.blp:224
+#: data/resources/ui/setup_window.blp:236
+#: data/resources/ui/setup_window.blp:290
 msgid "Link device"
 msgstr "Пов'язати пристрій"
 
-#: data/resources/ui/setup_window.blp:243
+#: data/resources/ui/setup_window.blp:241
 msgid "Scan Code"
 msgstr "Сканувати код"
 
-#: data/resources/ui/setup_window.blp:244
+#: data/resources/ui/setup_window.blp:242
 msgid "Scan this code with another Signal app logged into your account."
 msgstr ""
 "Відскануйте цей код за допомогою іншого додатку Signal, в якому ви увійшли "
 "до свого облікового запису."
 
-#: data/resources/ui/setup_window.blp:271
+#: data/resources/ui/setup_window.blp:269
 msgid "Link without scanning"
 msgstr "Пов'язати без сканування"
 
-#: data/resources/ui/setup_window.blp:281
+#: data/resources/ui/setup_window.blp:279
 msgid "Manual linking"
 msgstr "Пов'язування вручну"
 
-#: data/resources/ui/setup_window.blp:297
+#: data/resources/ui/setup_window.blp:295
 msgid "Manual Linking"
 msgstr "Пов'язування вручну"
 
-#: data/resources/ui/setup_window.blp:298
+#: data/resources/ui/setup_window.blp:296
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
@@ -501,15 +511,15 @@ msgstr ""
 "Якщо ваш пристрій не може відсканувати QR-код, ви можете вручну ввести "
 "посилання, наведене тут"
 
-#: data/resources/ui/setup_window.blp:309
+#: data/resources/ui/setup_window.blp:307
 msgid "Copy to clipboard"
 msgstr "Копіювати в буфер обміну"
 
-#: data/resources/ui/setup_window.blp:342
+#: data/resources/ui/setup_window.blp:340
 msgid "Continue"
 msgstr "Продовжити"
 
-#: data/resources/ui/setup_window.blp:359
+#: data/resources/ui/setup_window.blp:357
 msgid ""
 "For registering as a primary device, Flare will need your phone number and a "
 "completion of the captcha. Please give the phone number in international "
@@ -527,12 +537,12 @@ msgstr ""
 "і вставити його в поле нижче. Зверніть увагу, що ця капча дійсна лише "
 "близько однієї хвилини, тому, будь ласка, дійте швидко."
 
-#: data/resources/ui/setup_window.blp:375
+#: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
 msgstr "Капча"
 
-#: data/resources/ui/setup_window.blp:388
+#: data/resources/ui/setup_window.blp:386
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
@@ -540,23 +550,23 @@ msgstr ""
 "Після надсилання цієї інформації ви отримаєте SMS від Signal із кодом "
 "підтвердження. Вставте цей код підтвердження на наступній сторінці."
 
-#: data/resources/ui/setup_window.blp:398
-#: data/resources/ui/setup_window.blp:406
-#: data/resources/ui/setup_window.blp:423
-#: data/resources/ui/setup_window.blp:449
+#: data/resources/ui/setup_window.blp:396
+#: data/resources/ui/setup_window.blp:404
+#: data/resources/ui/setup_window.blp:421
+#: data/resources/ui/setup_window.blp:447
 msgid "Confirm"
 msgstr "Підтвердити"
 
-#: data/resources/ui/setup_window.blp:439
+#: data/resources/ui/setup_window.blp:437
 msgid "Insert the verification code you received from Signal here."
 msgstr "Введіть код підтвердження, який ви отримали від Signal."
 
-#: data/resources/ui/setup_window.blp:457
-#: data/resources/ui/setup_window.blp:465
+#: data/resources/ui/setup_window.blp:455
+#: data/resources/ui/setup_window.blp:463
 msgid "Finished"
 msgstr "Завершено"
 
-#: data/resources/ui/setup_window.blp:498
+#: data/resources/ui/setup_window.blp:496
 msgid ""
 "Flare is almost ready, it is waiting for contacts to finish syncing. This "
 "may take a few seconds, you can start to use Flare once the contacts are "
@@ -567,11 +577,11 @@ msgstr ""
 "контакти будуть синхронізовані. Кілька останніх зауважень перед початком "
 "використання Flare:"
 
-#: data/resources/ui/setup_window.blp:508
+#: data/resources/ui/setup_window.blp:506
 msgid "Known Bugs"
 msgstr "Відомі помилки"
 
-#: data/resources/ui/setup_window.blp:513
+#: data/resources/ui/setup_window.blp:511
 msgid ""
 "Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
 "or only with the phone number. After receiving messages from those contacts "
@@ -593,11 +603,11 @@ msgstr ""
 "переглянути повний список помилок, відвідайте <a href=\"https://gitlab.com/"
 "schmiddi-on-mobile/flare/-/issues/?label_name%5B%5D=bug\">трекер проблем</a>."
 
-#: data/resources/ui/setup_window.blp:524
+#: data/resources/ui/setup_window.blp:522
 msgid "Contact"
 msgstr "Контакти"
 
-#: data/resources/ui/setup_window.blp:529
+#: data/resources/ui/setup_window.blp:527
 msgid ""
 "Want to leave some feedback about Flare, or just talk a little bit? Our <a "
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
@@ -754,7 +764,7 @@ msgstr "Примітка для себе"
 msgid "Unknown contact"
 msgstr "Невідомий контакт"
 
-#: src/backend/manager.rs:438
+#: src/backend/manager.rs:429
 msgid "You"
 msgstr "Ви"
 
@@ -887,7 +897,8 @@ msgstr "Шлях до бази даних у {} не є папкою."
 
 #: src/error.rs:196
 msgid "The database path at {path} is cannot be created due to error {error}."
-msgstr "Шлях до бази даних {path} не може бути створений через помилку {error}."
+msgstr ""
+"Шлях до бази даних {path} не може бути створений через помилку {error}."
 
 #: src/error.rs:203
 msgid "Please restart the application with logging and report this issue."
@@ -1060,7 +1071,7 @@ msgstr ""
 "обережні при роботі з конфіденційними даними. Подивіться README проєкту для "
 "отримання додаткової інформації про безпеку."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:822
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:837
 msgid "Overview of the application"
 msgstr "Огляд програми"
 

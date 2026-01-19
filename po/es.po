@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-20 14:14+0100\n"
+"POT-Creation-Date: 2026-01-19 13:15+0100\n"
 "PO-Revision-Date: 2025-07-11 07:01+0000\n"
 "Last-Translator: Dan Armenta <danarmenta32@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/schmiddi-on-"
@@ -27,7 +27,7 @@ msgstr ""
 "Sergio Varela <sergiovg01@outlook.com>"
 
 #: data/resources/ui/channel_info_dialog.blp:54
-#: data/resources/ui/setup_window.blp:371
+#: data/resources/ui/setup_window.blp:369
 msgid "Phone Number"
 msgstr "Número de teléfono"
 
@@ -178,7 +178,7 @@ msgstr "Error"
 msgid "Please consider reporting this error."
 msgstr "Por favor considera reportar este error."
 
-#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:482
+#: data/resources/ui/error_dialog.blp:43 data/resources/ui/setup_window.blp:480
 #: data/resources/ui/submit_captcha_dialog.blp:28
 msgid "Close"
 msgstr "Cerrar"
@@ -390,26 +390,26 @@ msgstr ""
 msgid "Setup Primary Device or Link Device?"
 msgstr "¿Dispositivo principal o de enlace?"
 
-#: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:318
-#: data/resources/ui/setup_window.blp:325
+#: data/resources/ui/setup_window.blp:85 data/resources/ui/setup_window.blp:316
+#: data/resources/ui/setup_window.blp:323
 msgid "Primary Device"
 msgstr "Dispositivo principal"
 
-#: data/resources/ui/setup_window.blp:98 data/resources/ui/setup_window.blp:152
-#: data/resources/ui/setup_window.blp:159
-#: data/resources/ui/setup_window.blp:176
+#: data/resources/ui/setup_window.blp:96 data/resources/ui/setup_window.blp:150
+#: data/resources/ui/setup_window.blp:157
+#: data/resources/ui/setup_window.blp:174
 msgid "Link Device"
 msgstr "Vincular Dispositivo"
 
-#: data/resources/ui/setup_window.blp:113
+#: data/resources/ui/setup_window.blp:111
 msgid "You can use Flare either as a primary or secondary device."
 msgstr "Puede utilizar Flare como dispositivo principal o secundario."
 
-#: data/resources/ui/setup_window.blp:123
+#: data/resources/ui/setup_window.blp:121
 msgid "Linked Device (Recommended)"
 msgstr "Dispositivo vinculado (recomendado)"
 
-#: data/resources/ui/setup_window.blp:128
+#: data/resources/ui/setup_window.blp:126
 msgid ""
 "Flare can be an application linked to your primary device, similar to the "
 "official Signal Desktop. This mode has been more extensively tested and "
@@ -419,17 +419,28 @@ msgstr ""
 "al Signal Desktop oficial. Este modo se ha probado de forma más exhaustiva y "
 "funciona en la mayoría de los casos."
 
-#: data/resources/ui/setup_window.blp:138
-msgid "Primary Device (Disabled)"
+#: data/resources/ui/setup_window.blp:136
+#, fuzzy
+#| msgid "Primary Device (Disabled)"
+msgid "Primary Device (Experimental)"
 msgstr "Dispositivo principal (desactivado)"
 
-#: data/resources/ui/setup_window.blp:143
+#: data/resources/ui/setup_window.blp:141
+#, fuzzy
+#| msgid ""
+#| "Flare can act as a primary device, similar to the official Signal "
+#| "applications on Android or IOS. This mode is currently not supported by "
+#| "Flare, even though initial tests seem to indicate that it works. If you "
+#| "are willing to test it, you may enable the button below (and if you don't "
+#| "know how to do that, you should not think about testing primary-device "
+#| "support)."
 msgid ""
 "Flare can act as a primary device, similar to the official Signal "
-"applications on Android or IOS. This mode is currently not supported by "
-"Flare, even though initial tests seem to indicate that it works. If you are "
-"willing to test it, you may enable the button below (and if you don't know "
-"how to do that, you should not think about testing primary-device support)."
+"applications on Android or IOS. This mode is currently experimental in "
+"Flare. It is strongly recommended to link the official Signal Desktop "
+"application after setting up Flare as a primary device to set up your "
+"profile name and avatar, and to initialize chats with other people (both of "
+"which cannot yet be done in Flare)."
 msgstr ""
 "Flare puede actuar como dispositivo principal, de forma similar a las "
 "aplicaciones oficiales de Signal en Android o IOS. Actualmente, Flare no "
@@ -438,7 +449,7 @@ msgstr ""
 "continuación (y si no sabes cómo hacerlo, no deberías pensar en probar la "
 "compatibilidad con dispositivos primarios)."
 
-#: data/resources/ui/setup_window.blp:193
+#: data/resources/ui/setup_window.blp:191
 msgid ""
 "For linking as a secondary device, Flare will need a device name that will "
 "be shown in the official application."
@@ -446,21 +457,21 @@ msgstr ""
 "Para la vinculación como dispositivo secundario, Flare necesitará un nombre "
 "de dispositivo que se mostrará en la aplicación oficial."
 
-#: data/resources/ui/setup_window.blp:204
+#: data/resources/ui/setup_window.blp:202
 msgid "Device Name"
 msgstr "Nombre del Dispositivo"
 
-#: data/resources/ui/setup_window.blp:208
-#: data/resources/ui/setup_window.blp:379
+#: data/resources/ui/setup_window.blp:206
+#: data/resources/ui/setup_window.blp:377
 msgid "Developer Options"
 msgstr "Opciones de desarrollador"
 
-#: data/resources/ui/setup_window.blp:211
-#: data/resources/ui/setup_window.blp:382
+#: data/resources/ui/setup_window.blp:209
+#: data/resources/ui/setup_window.blp:380
 msgid "Signal Servers"
 msgstr "Servidores de Signal"
 
-#: data/resources/ui/setup_window.blp:217
+#: data/resources/ui/setup_window.blp:215
 msgid ""
 "The next page will show a QR code which has to be scanned from the primary "
 "device. Note that you only have a timeframe of about one minute to scan the "
@@ -472,33 +483,33 @@ msgstr ""
 "aproximadamente para escanear el código, así que prepare ya su aplicación "
 "oficial para escanear el código QR."
 
-#: data/resources/ui/setup_window.blp:226
-#: data/resources/ui/setup_window.blp:238
-#: data/resources/ui/setup_window.blp:292
+#: data/resources/ui/setup_window.blp:224
+#: data/resources/ui/setup_window.blp:236
+#: data/resources/ui/setup_window.blp:290
 msgid "Link device"
 msgstr "Vincular dispositivo"
 
-#: data/resources/ui/setup_window.blp:243
+#: data/resources/ui/setup_window.blp:241
 msgid "Scan Code"
 msgstr "Escanear código"
 
-#: data/resources/ui/setup_window.blp:244
+#: data/resources/ui/setup_window.blp:242
 msgid "Scan this code with another Signal app logged into your account."
 msgstr "Escanea este código con otra aplicación Signal conectada a tu cuenta."
 
-#: data/resources/ui/setup_window.blp:271
+#: data/resources/ui/setup_window.blp:269
 msgid "Link without scanning"
 msgstr "Enlazar sin escanear"
 
-#: data/resources/ui/setup_window.blp:281
+#: data/resources/ui/setup_window.blp:279
 msgid "Manual linking"
 msgstr "Vincular manualmente"
 
-#: data/resources/ui/setup_window.blp:297
+#: data/resources/ui/setup_window.blp:295
 msgid "Manual Linking"
 msgstr "Enlace manual"
 
-#: data/resources/ui/setup_window.blp:298
+#: data/resources/ui/setup_window.blp:296
 msgid ""
 "If your device can't scan the QR code, you can manually enter the link "
 "provided here"
@@ -506,15 +517,15 @@ msgstr ""
 "Si su dispositivo no puede escanear el código QR, puede introducir "
 "manualmente el enlace que se proporciona aquí"
 
-#: data/resources/ui/setup_window.blp:309
+#: data/resources/ui/setup_window.blp:307
 msgid "Copy to clipboard"
 msgstr "Copiar al portapapeles"
 
-#: data/resources/ui/setup_window.blp:342
+#: data/resources/ui/setup_window.blp:340
 msgid "Continue"
 msgstr "Continuar"
 
-#: data/resources/ui/setup_window.blp:359
+#: data/resources/ui/setup_window.blp:357
 msgid ""
 "For registering as a primary device, Flare will need your phone number and a "
 "completion of the captcha. Please give the phone number in international "
@@ -532,12 +543,12 @@ msgstr ""
 "el campo de abajo. Tenga en cuenta que este captcha solo es válido durante "
 "aproximadamente un minuto, así que proceda rápido."
 
-#: data/resources/ui/setup_window.blp:375
+#: data/resources/ui/setup_window.blp:373
 #: data/resources/ui/submit_captcha_dialog.blp:20
 msgid "Captcha"
 msgstr "Captcha"
 
-#: data/resources/ui/setup_window.blp:388
+#: data/resources/ui/setup_window.blp:386
 msgid ""
 "After submitting this information, you will get a SMS from Signal with a "
 "verification code. Insert this verification code on the next page."
@@ -546,23 +557,23 @@ msgstr ""
 "de verificación. Introduce este código de verificación en la página "
 "siguiente."
 
-#: data/resources/ui/setup_window.blp:398
-#: data/resources/ui/setup_window.blp:406
-#: data/resources/ui/setup_window.blp:423
-#: data/resources/ui/setup_window.blp:449
+#: data/resources/ui/setup_window.blp:396
+#: data/resources/ui/setup_window.blp:404
+#: data/resources/ui/setup_window.blp:421
+#: data/resources/ui/setup_window.blp:447
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: data/resources/ui/setup_window.blp:439
+#: data/resources/ui/setup_window.blp:437
 msgid "Insert the verification code you received from Signal here."
 msgstr "Introduzca aquí el código de verificación que ha recibido de Signal."
 
-#: data/resources/ui/setup_window.blp:457
-#: data/resources/ui/setup_window.blp:465
+#: data/resources/ui/setup_window.blp:455
+#: data/resources/ui/setup_window.blp:463
 msgid "Finished"
 msgstr "Terminado"
 
-#: data/resources/ui/setup_window.blp:498
+#: data/resources/ui/setup_window.blp:496
 msgid ""
 "Flare is almost ready, it is waiting for contacts to finish syncing. This "
 "may take a few seconds, you can start to use Flare once the contacts are "
@@ -573,11 +584,11 @@ msgstr ""
 "Flare una vez que los contactos estén sincronizados. Algunas notas finales "
 "antes de empezar a utilizar Flare:"
 
-#: data/resources/ui/setup_window.blp:508
+#: data/resources/ui/setup_window.blp:506
 msgid "Known Bugs"
 msgstr "Errores conocidos"
 
-#: data/resources/ui/setup_window.blp:513
+#: data/resources/ui/setup_window.blp:511
 #, fuzzy
 msgid ""
 "Due to an upstream bug, most synced contacts display as \"Unknown Contact\" "
@@ -598,11 +609,11 @@ msgstr ""
 "href=\"https://gitlab.com/schmiddi-on-mobile/flare/-/issues/?"
 "label_name%5B%5D=bug\">rastreador de problemas</a>."
 
-#: data/resources/ui/setup_window.blp:524
+#: data/resources/ui/setup_window.blp:522
 msgid "Contact"
 msgstr "Contacto"
 
-#: data/resources/ui/setup_window.blp:529
+#: data/resources/ui/setup_window.blp:527
 msgid ""
 "Want to leave some feedback about Flare, or just talk a little bit? Our <a "
 "href=\"https://matrix.to/#/#flare-signal:matrix.org\">Matrix room</a> is "
@@ -759,7 +770,7 @@ msgstr "Notas privadas"
 msgid "Unknown contact"
 msgstr "Contacto desconocido"
 
-#: src/backend/manager.rs:438
+#: src/backend/manager.rs:429
 msgid "You"
 msgstr "Tú"
 
@@ -1057,7 +1068,7 @@ msgstr ""
 "Utilízala con cuidado cuando manejes datos sensibles. Mira el README del "
 "proyecto para más información sobre seguridad."
 
-#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:822
+#: data/de.schmidhuberj.Flare.metainfo.xml.in.in:837
 msgid "Overview of the application"
 msgstr "Descripción general de la aplicación"
 
