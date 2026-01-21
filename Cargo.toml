@@ -24,8 +24,8 @@ tokio = { version = "1.48.0", features = ["rt", "macros", "rt-multi-thread", "ti
 regex = "1.12.2"
 lazy_static = "1.5.0"
 
-presage = { git = "https://github.com/Schmiddiii/presage", rev = "3fbaea8d9dc4384f1edda959039c1a918eb3dc08" }
-presage-store-sqlite = { git = "https://github.com/Schmiddiii/presage", rev = "3fbaea8d9dc4384f1edda959039c1a918eb3dc08" }
+presage = { git = "https://github.com/Schmiddiii/presage", rev = "211c9d56dcbbb14096271f36807117c38b6c9e9d" }
+presage-store-sqlite = { git = "https://github.com/Schmiddiii/presage", rev = "211c9d56dcbbb14096271f36807117c38b6c9e9d" }
 libsignal-service = { git = "https://github.com/Schmiddiii/libsignal-service-rs", rev = "7fae2239b707f8ef391c083da90a6485455fdb24" }
 
 oo7 = { version = "0.5.0", default-features = false, features = ["native_crypto", "tokio"] }

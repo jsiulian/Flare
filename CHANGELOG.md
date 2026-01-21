@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Fixed errors migrating from 0.17.5 to 0.18.0.
+
 ## [0.18.0] - 2026-01-14
 
 ### HOTFIX
