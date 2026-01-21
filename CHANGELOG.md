@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.1] - 2026-01-21
+
 ### HOTFIX
 
 - Fixed errors migrating from 0.17.5 to 0.18.0.
@@ -805,7 +807,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.0...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.1...master
+[0.18.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.0...0.18.1
 [0.18.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.5...0.18.0
 [0.17.5]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.4...0.17.5
 [0.17.4]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.17.3...0.17.4
