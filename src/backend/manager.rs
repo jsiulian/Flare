@@ -9,8 +9,8 @@ use libsignal_service::{
     content::ContentBody,
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
     protocol::ServiceId,
-    push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
+    websocket::account::DeviceInfo,
 };
 use oo7::Keyring;
 use presage::model::groups::Group;

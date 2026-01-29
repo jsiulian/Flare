@@ -22,8 +22,8 @@ use libsignal_service::{
     prelude::{Content, ProfileKey, Uuid, phonenumber},
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
     protocol::ServiceId,
-    push_service::DeviceInfo,
     sender::{AttachmentSpec, AttachmentUploadError},
+    websocket::account::DeviceInfo,
 };
 use presage::model::messages::Received;
 use presage::{
