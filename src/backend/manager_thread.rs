@@ -601,6 +601,27 @@ async fn command_loop(
                 Ok(messages) => {
                     futures::pin_mut!(messages);
                     let mut next_msg = messages.next().fuse();
+
+                    loop {
+                        let msg = next_msg.await;
+                        if let Some(msg) = msg {
+                            if matches!(&msg, Received::QueueEmpty) {
+                                log::info!("Got queue empty signal from presage; start to allow commands.");
+                                break;
+                            } else if let Received::Content(msg) = msg &&
+                                content.send(*msg).await.is_err() {
+                                    log::info!("Failed to send message to `Manager`, exiting");
+                                    break 'outer;
+                            }
+                        } else {
+                            log::error!("Message stream finished. Restarting command loop.");
+                            break;
+                        }
+                        next_msg = messages.next().fuse();
+                    }
+
+                    let mut next_msg = messages.next().fuse();
+
                     loop {
                         select! {
                             // Receiving a message.
