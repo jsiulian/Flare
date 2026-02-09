@@ -6,7 +6,7 @@ gtk::glib::wrapper! {
 }
 
 impl DeviceInfo {
-    pub fn new(info: libsignal_service::push_service::DeviceInfo) -> DeviceInfo {
+    pub fn new(info: libsignal_service::websocket::account::DeviceInfo) -> DeviceInfo {
         Object::builder::<Self>()
             .property("id", u8::from(info.id))
             .property("name", info.name)
