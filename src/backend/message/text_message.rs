@@ -175,6 +175,11 @@ impl TextMessage {
                 .address()
                 .map(|a| a.raw_uuid())
                 .map(|u| u.to_string()),
+            target_author_aci_binary: self
+                .sender()
+                .address()
+                .map(|a| a.raw_uuid())
+                .map(|u| u.into_bytes().into()),
             target_sent_timestamp: Some(self.timestamp()),
         };
         self.react_sender_reaction(self.manager().uuid(), reaction_struct.clone());
