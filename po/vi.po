@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-19 13:15+0100\n"
-"PO-Revision-Date: 2025-12-12 04:00+0000\n"
+"PO-Revision-Date: 2026-02-13 05:09+0000\n"
 "Last-Translator: Loc Huynh <huynhloc.contact@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/schmiddi-on-"
 "mobile/flare/vi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -414,20 +414,10 @@ msgstr ""
 "và hầu hết đều hoạt động."
 
 #: data/resources/ui/setup_window.blp:136
-#, fuzzy
-#| msgid "Primary Device (Disabled)"
 msgid "Primary Device (Experimental)"
-msgstr "Thiết bị chính (Đã tắt)"
+msgstr "Thiết bị chính (Thử nghiệm)"
 
 #: data/resources/ui/setup_window.blp:141
-#, fuzzy
-#| msgid ""
-#| "Flare can act as a primary device, similar to the official Signal "
-#| "applications on Android or IOS. This mode is currently not supported by "
-#| "Flare, even though initial tests seem to indicate that it works. If you "
-#| "are willing to test it, you may enable the button below (and if you don't "
-#| "know how to do that, you should not think about testing primary-device "
-#| "support)."
 msgid ""
 "Flare can act as a primary device, similar to the official Signal "
 "applications on Android or IOS. This mode is currently experimental in "
@@ -437,11 +427,11 @@ msgid ""
 "which cannot yet be done in Flare)."
 msgstr ""
 "Flare có thể hoạt động như một thiết bị chính, tương tự như các ứng dụng "
-"Signal chính thức trên Android hoặc iOS. Chế độ này hiện không được Flare hỗ "
-"trợ, mặc dù các thử nghiệm ban đầu dường như cho thấy nó hoạt động. Nếu bạn "
-"sẵn sàng thử nghiệm nó, bạn có thể kích hoạt nút bên dưới (và nếu bạn không "
-"biết cách thực hiện điều đó, bạn không nên nghĩ đến việc thử nghiệm hỗ trợ "
-"thiết bị chính)."
+"Signal chính thức trên Android hoặc iOS. Chế độ này hiện đang được thử "
+"nghiệm trong Flare. Bạn nên liên kết ứng dụng Signal Desktop chính thức sau "
+"khi thiết lập Flare làm thiết bị chính để thiết lập tên hồ sơ và hình đại "
+"diện của mình cũng như để bắt đầu trò chuyện với người khác (cả hai điều này "
+"đều chưa thể thực hiện được trong Flare)."
 
 #: data/resources/ui/setup_window.blp:191
 msgid ""
