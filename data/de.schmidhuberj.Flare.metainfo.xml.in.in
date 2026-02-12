@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.18.2" date="2026-02-12">
+      <description translate="no">
+        <p>Chores</p> <ul> <li>Update backend crates.</li> </ul>
+      </description>
+    </release>
     <release version="0.18.1" date="2026-01-21">
       <description translate="no">
         <p>HOTFIX</p> <ul> <li>Fixed errors migrating from 0.17.5 to 0.18.0.</li> </ul>
