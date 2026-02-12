@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Chores
+
+- Update backend crates.
+
 ## [0.18.1] - 2026-01-21
 
 ### HOTFIX
