@@ -615,7 +615,7 @@ async fn command_loop(
                             }
                         } else {
                             log::error!("Message stream finished. Restarting command loop.");
-                            break;
+                            continue 'outer;
                         }
                         next_msg = messages.next().fuse();
                     }

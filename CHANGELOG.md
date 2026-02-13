@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Fix crash of the backend when there is an error receiving messages.
+
 ## [0.18.2] - 2026-02-12
 
 ### Chores
