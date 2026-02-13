@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.18.3" date="2026-02-13">
+      <description translate="no">
+        <p>HOTFIX</p> <ul> <li>Fix crash of the backend when there is an error receiving messages.</li> </ul>
+      </description>
+    </release>
     <release version="0.18.2" date="2026-02-12">
       <description translate="no">
         <p>Chores</p> <ul> <li>Update backend crates.</li> </ul>
