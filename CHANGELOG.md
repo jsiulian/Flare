@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.4] - 2026-02-18
+
 ### HOTFIX
 
 - Potential fix for receiving messages deadlocking at startup sometimes.
@@ -823,7 +825,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.3...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.4...master
+[0.18.4]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.3...0.18.4
 [0.18.3]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.2...0.18.3
 [0.18.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.1...0.18.2
 [0.18.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.0...0.18.1
