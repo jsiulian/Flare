@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Potential fix for receiving messages deadlocking at startup sometimes.
+
 ## [0.18.3] - 2026-02-13
 
 ### HOTFIX
