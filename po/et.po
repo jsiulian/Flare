@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-19 13:15+0100\n"
-"PO-Revision-Date: 2026-01-20 13:01+0000\n"
+"PO-Revision-Date: 2026-02-21 15:09+0000\n"
 "Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/schmiddi-on-"
 "mobile/flare/et/>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
 msgid "translator-credits"
-msgstr "Priit Jõerüüt 2025"
+msgstr "Priit Jõerüüt 2025-2026"
 
 #: data/resources/ui/channel_info_dialog.blp:54
 #: data/resources/ui/setup_window.blp:369
