@@ -4,6 +4,7 @@ use std::{collections::HashMap, ops::Bound, path::Path, time::Duration};
 
 use gio::Application;
 use gio::Settings;
+use libsignal_service::protocol::DeviceId;
 use libsignal_service::{
     Profile,
     content::ContentBody,
@@ -439,7 +440,7 @@ impl Manager {
 
     pub(super) async fn channel_from_uuid_or_group(
         &self,
-        uuid: Uuid,
+        uuid: ServiceId,
         group: &Option<GroupContextV2>,
     ) -> Channel {
         let found = if group.is_some() {
@@ -454,7 +455,7 @@ impl Manager {
         if let Some(found) = found {
             return found;
         }
-        let contact = Contact::from_service_address(&ServiceId::Aci(uuid.into()), self).await;
+        let contact = Contact::from_service_address(&uuid, self).await;
         Channel::from_contact_or_group(contact, group, self).await
     }
 
@@ -677,7 +678,7 @@ impl Manager {
 
     pub(super) async fn get_contact_by_id(
         &self,
-        id: Uuid,
+        id: ServiceId,
     ) -> Result<Option<presage::model::contacts::Contact>, ApplicationError> {
         log::trace!("`Manager::get_contact_by_id` start");
         let store = self.store();

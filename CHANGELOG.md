@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Fix for Flare not starting anymore. This was caused by changes from Signal servers.
+
 ## [0.18.4] - 2026-02-18
 
 ### HOTFIX

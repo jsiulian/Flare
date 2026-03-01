@@ -17,7 +17,7 @@ gtk::glib::wrapper! {
 impl Contact {
     pub(super) async fn from_service_address(address: &ServiceId, manager: &Manager) -> Self {
         log::trace!("Building a `Contact` from a `ServiceId`");
-        if let Ok(Some(contact)) = manager.get_contact_by_id(address.raw_uuid()).await {
+        if let Ok(Some(contact)) = manager.get_contact_by_id(*address).await {
             return Self::from_contact(contact, manager);
         }
         log::trace!("Not in the contact list");
