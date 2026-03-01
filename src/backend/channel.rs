@@ -211,13 +211,12 @@ impl Channel {
         self.imp().contact.borrow().clone()
     }
 
-    pub fn uuid(&self) -> Option<Uuid> {
+    pub fn uuid(&self) -> Option<ServiceId> {
         self.imp()
             .contact
             .borrow()
             .as_ref()
             .and_then(|c| c.address())
-            .map(|a| a.raw_uuid())
     }
 
     pub async fn send_session_reset(&self) -> Result<(), ApplicationError> {
@@ -229,9 +228,7 @@ impl Channel {
         let Some(uuid) = self.uuid() else {
             return Ok(());
         };
-        self.manager()
-            .send_session_reset(ServiceId::Aci(uuid.into()), ts)
-            .await
+        self.manager().send_session_reset(uuid, ts).await
     }
 
     /// Register a new message with the channel.

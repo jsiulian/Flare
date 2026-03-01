@@ -15,6 +15,7 @@ use std::{cell::OnceCell, ops::Bound};
 use futures::channel::{mpsc, oneshot};
 use futures::{FutureExt, SinkExt, StreamExt, join, select};
 use gio::prelude::NetworkMonitorExt;
+use libsignal_service::protocol::DeviceId;
 use libsignal_service::{
     Profile,
     configuration::SignalServers,

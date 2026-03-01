@@ -145,7 +145,7 @@ pub mod imp {
                         log::debug!("Unlinking device: {} {}", device.id(), device.name());
                         if let Err(e) = manager
                             .unlink_secondary(
-                                DeviceId::try_from(device.id())
+                                libsignal_service::protocol::DeviceId::try_from(device.id())
                                     .expect("DeviceInfo to only hold valid device IDs"),
                             )
                             .await
