@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.5] - 2026-03-01
+
 ### HOTFIX
 
 - Fix for Flare not starting anymore. This was caused by changes from Signal servers.
@@ -829,7 +831,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.4...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.5...master
+[0.18.5]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.4...0.18.5
 [0.18.4]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.3...0.18.4
 [0.18.3]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.2...0.18.3
 [0.18.2]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.1...0.18.2
