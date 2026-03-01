@@ -23,9 +23,8 @@ test:cargo-deny:
   stage: quick-test
   image: archlinux:base-devel
   script:
-    - pacman -Syu rustup --noconfirm
+    - pacman -Syu rustup cargo-deny --noconfirm
     - rustup default stable
-    - cargo install --locked cargo-deny
     - cargo deny check
   allow_failure: true
 
@@ -50,7 +49,7 @@ test:blueprint-fmt:
   allow_failure: true
 
 test:cargo-clippy:
-  stage: quick-test
+  stage: build # Even though this is more of a test than a build, this still takes ages and is more efficient to do in parallel with building.
   image: archlinux:base-devel
   script:
     - pacman -Syu rustup meson gtk4 git cmake libadwaita blueprint-compiler gtksourceview5 protobuf libspelling --noconfirm
@@ -74,7 +73,7 @@ flatpak:
     FLATPAK_MODULE: "flare"
     BUNDLE: "de.schmidhuberj.Flare.Devel.flatpak"
     APP_ID: "de.schmidhuberj.Flare.Devel"
-
+    CCACHE_DIR: ".ccache"
   script:
     - flatpak --version
     # Report the installed versions of the runtime
@@ -87,7 +86,7 @@ flatpak:
     - >-
       xvfb-run -a -s "-screen 0 1024x768x24" --
       dbus-run-session
-      flatpak-builder --keep-build-dirs --user --disable-rofiles-fuse flatpak_app --repo=repo ${BRANCH:+--default-branch=$BRANCH} ${MANIFEST_PATH}
+      flatpak-builder --ccache --keep-build-dirs --user --disable-rofiles-fuse flatpak_app --repo=repo ${BRANCH:+--default-branch=$BRANCH} ${MANIFEST_PATH}
 
     # Generate a Flatpak bundle
     - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
@@ -103,6 +102,10 @@ flatpak:
     reports:
       junit: ".flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/testlog.junit.xml"
     expire_in: 14 days
+  cache:
+    paths:
+      - .flatpak-builder/cache
+      - .ccache
 # end flatpak
 
 build:
