@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Automatically focus the channel input when activating a channel.
+
 ## [0.18.7] - 2026-03-02
 
 ### HOTFIX
