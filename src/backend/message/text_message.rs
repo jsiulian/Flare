@@ -271,10 +271,16 @@ impl TextMessage {
         for r in ranges {
             let start = r.start() as usize;
             let end = start + r.length() as usize;
-            let Some(AssociatedValue::MentionAci(u)) = r.associated_value else {
+            let uuid = match r.associated_value {
+                Some(AssociatedValue::MentionAci(u)) => u.parse().ok(),
+                Some(AssociatedValue::MentionAciBinary(u)) => {
+                    u.try_into().ok().map(Uuid::from_bytes)
+                }
+                _ => None,
+            };
+            let Some(uuid) = uuid else {
                 continue;
             };
-            let Ok(uuid) = u.parse() else { continue };
             let name = format!(
                 "{}{}",
                 MENTION_CHAR,
