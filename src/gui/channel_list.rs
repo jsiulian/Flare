@@ -74,6 +74,7 @@ impl ChannelList {
             }
             self.set_active_channel(Some(channel));
             self.set_active(true);
+            obj.selection_model.borrow().set_selected_position(i);
             true
         } else {
             false
@@ -337,7 +338,6 @@ pub mod imp {
                 self,
                 move |_list_view, position| {
                     s.obj().activate_row(position);
-                    selection_model.set_selected_position(position);
                 }
             ));
         }
