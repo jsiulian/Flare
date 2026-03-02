@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.18.7" date="2026-03-02">
+      <description translate="no">
+        <p>HOTFIX</p> <ul> <li>Fix receive loop constantly restarting due to errors from the Signal servers.</li> </ul>
+      </description>
+    </release>
     <release version="0.18.6" date="2026-03-01">
       <description translate="no">
         <p>HOTFIX</p> <ul> <li>Fix compilation on aarch64.</li> </ul>
