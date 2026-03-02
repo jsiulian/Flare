@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Automatically focus the channel input when activating a channel.
 
+### Fixed
+
+- Reactions not showing up when loading a channel multiple times.
+
 ## [0.18.7] - 2026-03-02
 
 ### HOTFIX
