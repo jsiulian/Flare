@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Fix receive loop constantly restarting due to errors from the Signal servers.
+
 ## [0.18.6] - 2026-03-01
 
 ### HOTFIX
