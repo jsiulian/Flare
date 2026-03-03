@@ -266,13 +266,13 @@ impl Channel {
 
             // Apply pending reactions.
             let id = message.timestamp();
-            if let Some(reactions) = self.imp().pending_reactions.borrow_mut().remove(&id) {
+            if let Some(reactions) = self.imp().pending_reactions.borrow_mut().get(&id) {
                 log::trace!(
                     "Adding pending reactions to message: {:?}",
                     reactions.iter().map(|r| r.emoji()).collect::<Vec<_>>()
                 );
                 for reaction in reactions {
-                    message.react(&reaction);
+                    message.react(reaction);
                 }
             }
         }

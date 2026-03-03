@@ -189,6 +189,8 @@ pub mod imp {
             if let Some(old) = old {
                 old.trim_old();
             }
+
+            self.obj().focus_input();
         }
 
         #[template_callback(function)]

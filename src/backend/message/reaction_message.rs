@@ -49,7 +49,14 @@ impl ReactionMessage {
     }
 
     pub fn target_uuid(&self) -> Uuid {
-        Uuid::parse_str(self.reaction().target_author_aci()).expect("`Reaction` Uuid to be valid")
+        let reaction = self.reaction();
+        reaction
+            .target_author_aci_binary
+            .as_ref()
+            .and_then(|t| t.clone().try_into().ok())
+            .map(Uuid::from_bytes)
+            .or(Uuid::parse_str(reaction.target_author_aci()).ok())
+            .expect("Reaction to have a valid target UUID")
     }
 
     /// Send a notification for the reaction.
