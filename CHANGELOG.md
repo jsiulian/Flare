@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reactions not showing up when loading a channel multiple times.
 - Sometimes mentions not being displayed in the text.
 - Activating channels with a keyboard shortcut not displaying the channel as activated in the channel list.
+- Some reactions not being received.
 
 ## [0.18.7] - 2026-03-02
 
