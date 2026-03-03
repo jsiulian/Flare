@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### HOTFIX
+
+- Fix deadlock receiving messages.
+
 ### Changed
 
 - Automatically focus the channel input when activating a channel.
