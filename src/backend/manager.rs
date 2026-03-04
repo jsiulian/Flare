@@ -1,6 +1,6 @@
 use crate::prelude::*;
 
-use std::{collections::HashMap, ops::Bound, path::Path, time::Duration};
+use std::{collections::HashMap, ops::Bound, path::Path};
 
 use gio::Application;
 use gio::Settings;
@@ -25,7 +25,6 @@ use crate::{ApplicationError, gspawn, tspawn};
 
 const MESSAGE_BOUND: usize = 100;
 const MESSAGES_INITIAL_LOAD: usize = 1;
-const INIT_CHANNELS_SLEEP_SECS: u64 = 10;
 const SCHEMA_ATTRIBUTE: &str = "xdg:schema";
 const ATTRIBUTE_PASSWORD: (&str, &str) = ("type", "password");
 const SECRET_LENGTH: usize = 64;
@@ -350,20 +349,11 @@ impl Manager {
         // Check again if is primary, after setup is successful.
         self.notify("is-primary");
 
-        let mut channels_init = self.init_channels().await;
-
         crate::info!("Own uuid: {:?}", self.uuid());
         log::debug!("Start receiving messages");
         'outer: loop {
-            // On setup, it takes a while for channels to sync. Therefore try multiple times until there are channels.
-            let mut init_channels_sleep =
-                gtk::glib::timeout_future(Duration::from_secs(INIT_CHANNELS_SLEEP_SECS)).fuse();
+            use presage::model::messages::Received;
             select! {
-                () = &mut init_channels_sleep => {
-                    if !channels_init {
-                        channels_init = self.init_channels().await;
-                    }
-                }
                 // Receive errors.
                 error_opt = receive_error.next().fuse() => {
                     if error_opt.is_none() {
@@ -373,37 +363,51 @@ impl Manager {
                 }
                 // Receive messages.
                 msg_opt = receive_content.next().fuse() => {
-                    if msg_opt.is_none() {
-                        break 'outer;
-                    }
-                    let msg = msg_opt.unwrap();
-                    let message = Message::from_content(msg, self).await;
-                    if message.is_none() {
-                        log::trace!("Manager ignoring empty message");
-                        continue;
-                    }
-                    let message = message.unwrap();
-
-                    let channel = message.channel();
-                    let channel = {
-                        let channels = self.imp().channels.borrow();
-                        crate::debug!("Got from channel: {}", channel.property::<String>("title"));
-                        if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
-                            log::debug!("Message from a already existing channel");
-                            stored_channel.clone()
-                        } else {
-                            drop(channels);
-                            log::debug!("Got a message from a new channel");
-                            self.emit_by_name::<()>("channel", &[&channel]);
-                            let mut channels_mut = self.imp().channels.borrow_mut();
-                            channels_mut.insert(channel.internal_hash(), channel.clone());
-                            channel
+                    match msg_opt {
+                        None => { break 'outer },
+                        Some(Received::QueueEmpty) => {
+                            if !self.imp().finished_setup.get() {
+                                self.imp().finished_setup.set(true);
+                                self.init_channels().await;
+                                self.notify("finished-setup");
+                            }
+                        },
+                        Some(Received::Contacts) => {
+                            log::trace!("Received contacts");
                         }
-                    };
-                    if channel.new_message(message).await.is_err() {
-                        break 'outer;
+                        Some(Received::Content(msg)) => {
+                            let message = Message::from_content(*msg, self).await;
+                            if message.is_none() {
+                                log::trace!("Manager ignoring empty message");
+                                continue;
+                            }
+                            let message = message.unwrap();
+
+                            self.imp().last_message_datetime.replace(message.property("datetime"));
+                            self.notify("last-message-datetime");
+
+                            let channel = message.channel();
+                            let channel = {
+                                let channels = self.imp().channels.borrow();
+                                crate::debug!("Got from channel: {}", channel.property::<String>("title"));
+                                if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
+                                    log::debug!("Message from a already existing channel");
+                                    stored_channel.clone()
+                                } else {
+                                    drop(channels);
+                                    log::debug!("Got a message from a new channel");
+                                    self.emit_by_name::<()>("channel", &[&channel]);
+                                    let mut channels_mut = self.imp().channels.borrow_mut();
+                                    channels_mut.insert(channel.internal_hash(), channel.clone());
+                                    channel
+                                }
+                            };
+                            if channel.new_message(message).await.is_err() {
+                                break 'outer;
+                            }
+                            log::debug!("Emitting message");
+                        }
                     }
-                    log::debug!("Emitting message");
                 }
                 complete => break,
             };
@@ -791,7 +795,7 @@ mod imp {
     use crate::prelude::*;
     use std::collections::HashMap;
 
-    use gio::{Application, Settings};
+    use gio::{Application, Settings, glib::DateTime};
     use glib::{BoxedAnyObject, ParamSpec, ParamSpecBoolean, Value};
 
     use crate::{
@@ -806,6 +810,8 @@ mod imp {
         pub(in super::super) channels: RefCell<HashMap<u64, Channel>>,
         #[cfg(not(feature = "screenshot"))]
         pub(super) channels: RefCell<HashMap<u64, Channel>>,
+        pub(super) finished_setup: Cell<bool>,
+        pub(super) last_message_datetime: RefCell<Option<DateTime>>,
         pub(super) settings: Settings,
         pub(super) application: RefCell<Option<Application>>,
     }
@@ -816,6 +822,8 @@ mod imp {
                 internal: Default::default(),
                 config_store: Default::default(),
                 channels: Default::default(),
+                finished_setup: Default::default(),
+                last_message_datetime: Default::default(),
                 settings: Settings::new(BASE_ID),
                 application: Default::default(),
             }
@@ -840,14 +848,25 @@ mod imp {
 
     impl ObjectImpl for Manager {
         fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<ParamSpec>> =
-                Lazy::new(|| vec![ParamSpecBoolean::builder("is-primary").read_only().build()]);
+            static PROPERTIES: Lazy<Vec<ParamSpec>> = Lazy::new(|| {
+                vec![
+                    ParamSpecBoolean::builder("is-primary").read_only().build(),
+                    ParamSpecBoolean::builder("finished-setup")
+                        .read_only()
+                        .build(),
+                    ParamSpecBoolean::builder("last-message-datetime")
+                        .read_only()
+                        .build(),
+                ]
+            });
             PROPERTIES.as_ref()
         }
 
         fn property(&self, _id: usize, pspec: &ParamSpec) -> Value {
             match pspec.name() {
                 "is-primary" => self.obj().is_primary().to_value(),
+                "finished-setup" => self.finished_setup.get().to_value(),
+                "last-message-datetime" => self.last_message_datetime.borrow().to_value(),
                 _ => unimplemented!(),
             }
         }

@@ -103,6 +103,11 @@ pub mod imp {
     #[properties(wrapper_type = super::Window)]
     pub struct Window {
         #[template_child]
+        stack: TemplateChild<gtk::Stack>,
+        #[template_child]
+        status_page_startup: TemplateChild<adw::StatusPage>,
+
+        #[template_child]
         split_view: TemplateChild<adw::NavigationSplitView>,
         #[template_child]
         pub(super) channel_list: TemplateChild<ChannelList>,
@@ -122,6 +127,8 @@ pub mod imp {
     impl Default for Window {
         fn default() -> Self {
             Self {
+                stack: Default::default(),
+                status_page_startup: Default::default(),
                 split_view: Default::default(),
                 channel_list: Default::default(),
                 subtitle_label: Default::default(),
@@ -720,6 +727,37 @@ pub mod imp {
                             }
                         ),
                     );
+
+                    manager.connect_notify_local(
+                        Some("finished-setup"),
+                        clone!(
+                            #[weak]
+                            obj,
+                            #[upgrade_or_default]
+                            move |_, _| {
+                                obj.imp().stack.set_visible_child_name("main");
+                            }
+                        ),
+                    );
+
+                    manager
+                        .bind_property(
+                            "last-message-datetime",
+                            &obj.imp().status_page_startup.get(),
+                            "description",
+                        )
+                        .transform_to(|_, datetime: Option<glib::DateTime>| {
+                            if let Some(datetime) = datetime {
+                                Some(gettextrs::gettext("Loading messages from: {date}").replace(
+                                    "{date}",
+                                    &Utility::format_date_human(&datetime).unwrap_or_default(),
+                                ))
+                            } else {
+                                Some(gettextrs::gettext("Preparing to receive messages"))
+                            }
+                        })
+                        .flags(BindingFlags::SYNC_CREATE)
+                        .build();
 
                     if let Err(e) = manager.init(&path).await {
                         let dialog = ErrorDialog::new(&e, &obj);

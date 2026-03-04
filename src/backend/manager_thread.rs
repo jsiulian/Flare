@@ -20,7 +20,7 @@ use libsignal_service::{
     Profile,
     configuration::SignalServers,
     content::ContentBody,
-    prelude::{Content, ProfileKey, Uuid, phonenumber},
+    prelude::{ProfileKey, Uuid, phonenumber},
     proto::{AttachmentPointer, DataMessage, GroupContextV2},
     protocol::ServiceId,
     sender::{AttachmentSpec, AttachmentUploadError},
@@ -169,7 +169,7 @@ impl ManagerThread {
         config_store: Store,
         setup_callback: futures::channel::mpsc::Sender<SetupResult>,
         error_callback: futures::channel::oneshot::Sender<Error>,
-        content: mpsc::UnboundedSender<Content>,
+        content: mpsc::UnboundedSender<Received>,
         error: mpsc::Sender<ApplicationError>,
     ) -> Option<Self> {
         let (mut sender, receiver) = mpsc::channel(MESSAGE_BOUND);
@@ -573,7 +573,7 @@ async fn setup_manager(
 async fn command_loop(
     manager: Manager<Store, Registered>,
     mut receiver: mpsc::Receiver<Command>,
-    mut content: mpsc::UnboundedSender<Content>,
+    mut content: mpsc::UnboundedSender<Received>,
     mut error: mpsc::Sender<ApplicationError>,
 ) {
     let manager = Arc::new(RwLock::new(manager));
@@ -608,11 +608,13 @@ async fn command_loop(
                         if let Some(msg) = msg {
                             if matches!(&msg, Received::QueueEmpty) {
                                 log::info!("Got queue empty signal from presage; start to allow commands.");
+                                if content.send(msg).await.is_err() {
+                                    log::info!("Failed to send message to `Manager`, exiting")
+                                }
                                 break;
-                            } else if let Received::Content(msg) = msg &&
-                                content.send(*msg).await.is_err() {
-                                    log::info!("Failed to send message to `Manager`, exiting");
-                                    break 'outer;
+                            } else if content.send(msg).await.is_err() {
+                                log::info!("Failed to send message to `Manager`, exiting");
+                                break 'outer;
                             }
                         } else {
                             log::error!("Message stream finished. Restarting command loop.");
@@ -628,10 +630,9 @@ async fn command_loop(
                             // Receiving a message.
                             msg = next_msg => {
                                 if let Some(msg) = msg {
-                                    if let Received::Content(msg) = msg &&
-                                        content.send(*msg).await.is_err() {
-                                            log::info!("Failed to send message to `Manager`, exiting");
-                                            break 'outer;
+                                    if content.send(msg).await.is_err() {
+                                        log::info!("Failed to send message to `Manager`, exiting");
+                                        break 'outer;
                                     }
                                 } else {
                                     log::error!("Message stream finished. Restarting command loop.");

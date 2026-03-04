@@ -15,129 +15,163 @@ template $FlWindow: Adw.ApplicationWindow {
     }
   }
 
-  Adw.NavigationSplitView split_view {
-    min-sidebar-width: 300;
-    max-sidebar-width: 400;
-    sidebar-width-fraction: 0.25;
-    notify::show-content => $handle_show_content() swapped;
+  Gtk.Stack stack {
+    Gtk.StackPage {
+      name: "loading";
 
-    sidebar: Adw.NavigationPage {
-      title: _("Channel list");
-      tag: "channel-list";
-
-      Adw.ToolbarView {
+      child: Adw.ToolbarView {
         [top]
         Adw.HeaderBar {
           title-widget: Adw.WindowTitle {
             title: "Flare";
           };
 
-          [start]
+          [end]
           Gtk.Button {
-            accessibility {
-              label: C_("accessibility", "Add Conversation");
-            }
-
-            tooltip-text: "Add Conversation";
-            icon-name: "chat-message-new-symbolic";
-            clicked => $handle_add_conversation_clicked() swapped;
-          }
-
-          [end]
-          MenuButton {
-            accessibility {
-              label: C_("accessibility", "Menu");
-            }
-
-            tooltip-text: "Menu";
-            menu-model: menubar;
-            primary: true;
-            icon-name: "open-menu-symbolic";
-          }
-
-          [end]
-          ToggleButton {
-            accessibility {
-              label: C_("accessibility", "Search");
-            }
-
-            tooltip-text: "Search";
-            icon-name: "system-search-symbolic";
-            active: bind channel_list.search-enabled no-sync-create;
-            clicked => $handle_search_clicked() swapped;
+            tooltip-text: "About Flare";
+            icon-name: "info-outline-symbolic";
+            action-name: "win.about";
           }
         }
 
-        content: $FlChannelList channel_list {
-          notify::active-channel => $handle_go_forward() swapped;
-          manager: bind template.manager;
-        };
-      }
-    };
-
-    content: Adw.NavigationPage {
-      title: _("Chat");
-      tag: "chat";
-
-      Adw.ToolbarView {
-        [top]
-        Adw.HeaderBar {
-          title-widget: Button {
-            styles [
-              "flat",
-            ]
-
-            sensitive: bind $is_some(channel_list.active-channel) as <bool>;
-            visible: bind $is_some(channel_list.active-channel) as <bool>;
-            action-name: "win.channel-information";
-
-            child: Box {
-              name: "room_title";
-              orientation: vertical;
-              halign: center;
-              valign: center;
-
-              Label title_label {
-                focusable: true;
-                ellipsize: end;
-                halign: center;
-                wrap: false;
-                single-line-mode: true;
-                use-markup: false;
-                width-chars: 5;
-                label: bind channel_list.active-channel as <$FlChannel>.title;
-
-                styles [
-                  "title",
-                ]
-              }
-
-              Label subtitle_label {
-                focusable: true;
-                ellipsize: end;
-                halign: center;
-                wrap: false;
-                single-line-mode: true;
-                use-markup: true;
-                visible: bind channel_list.active-channel as <$FlChannel>.is-typing;
-                label: _("is typing");
-                tooltip-markup: bind channel_list.active-channel as <$FlChannel>.description;
-
-                styles [
-                  "subtitle-room",
-                  "accent",
-                ]
-              }
-            };
+        Adw.StatusPage status_page_startup {
+          paintable: Adw.SpinnerPaintable {
+            widget: template;
           };
-        }
 
-        content: $FlChannelMessages channel_messages {
-          manager: bind template.manager;
-          active-channel: bind channel_list.active-channel;
+          title: _("Loading Messages");
+        }
+      };
+    }
+
+    Gtk.StackPage {
+      name: "main";
+
+      child: Adw.NavigationSplitView split_view {
+        min-sidebar-width: 300;
+        max-sidebar-width: 400;
+        sidebar-width-fraction: 0.25;
+        notify::show-content => $handle_show_content() swapped;
+
+        sidebar: Adw.NavigationPage {
+          title: _("Channel list");
+          tag: "channel-list";
+
+          Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              title-widget: Adw.WindowTitle {
+                title: "Flare";
+              };
+
+              [start]
+              Gtk.Button {
+                accessibility {
+                  label: C_("accessibility", "Add Conversation");
+                }
+
+                tooltip-text: "Add Conversation";
+                icon-name: "chat-message-new-symbolic";
+                clicked => $handle_add_conversation_clicked() swapped;
+              }
+
+              [end]
+              MenuButton {
+                accessibility {
+                  label: C_("accessibility", "Menu");
+                }
+
+                tooltip-text: "Menu";
+                menu-model: menubar;
+                primary: true;
+                icon-name: "open-menu-symbolic";
+              }
+
+              [end]
+              ToggleButton {
+                accessibility {
+                  label: C_("accessibility", "Search");
+                }
+
+                tooltip-text: "Search";
+                icon-name: "system-search-symbolic";
+                active: bind channel_list.search-enabled no-sync-create;
+                clicked => $handle_search_clicked() swapped;
+              }
+            }
+
+            content: $FlChannelList channel_list {
+              notify::active-channel => $handle_go_forward() swapped;
+              manager: bind template.manager;
+            };
+          }
         };
-      }
-    };
+
+        content: Adw.NavigationPage {
+          title: _("Chat");
+          tag: "chat";
+
+          Adw.ToolbarView {
+            [top]
+            Adw.HeaderBar {
+              title-widget: Button {
+                styles [
+                  "flat",
+                ]
+
+                sensitive: bind $is_some(channel_list.active-channel) as <bool>;
+                visible: bind $is_some(channel_list.active-channel) as <bool>;
+                action-name: "win.channel-information";
+
+                child: Box {
+                  name: "room_title";
+                  orientation: vertical;
+                  halign: center;
+                  valign: center;
+
+                  Label title_label {
+                    focusable: true;
+                    ellipsize: end;
+                    halign: center;
+                    wrap: false;
+                    single-line-mode: true;
+                    use-markup: false;
+                    width-chars: 5;
+                    label: bind channel_list.active-channel as <$FlChannel>.title;
+
+                    styles [
+                      "title",
+                    ]
+                  }
+
+                  Label subtitle_label {
+                    focusable: true;
+                    ellipsize: end;
+                    halign: center;
+                    wrap: false;
+                    single-line-mode: true;
+                    use-markup: true;
+                    visible: bind channel_list.active-channel as <$FlChannel>.is-typing;
+                    label: _("is typing");
+                    tooltip-markup: bind channel_list.active-channel as <$FlChannel>.description;
+
+                    styles [
+                      "subtitle-room",
+                      "accent",
+                    ]
+                  }
+                };
+              };
+            }
+
+            content: $FlChannelMessages channel_messages {
+              manager: bind template.manager;
+              active-channel: bind channel_list.active-channel;
+            };
+          }
+        };
+      };
+    }
   }
 }
 
