@@ -37,8 +37,11 @@ unsafe impl<T: AttachmentImpl> IsSubclassable<T> for Attachment {
 
 pub mod imp {
     use crate::prelude::*;
+
+    #[cfg(target_os = "linux")]
     use std::os::fd::AsFd;
 
+    #[cfg(target_os = "linux")]
     use ashpd::{WindowIdentifier, desktop::open_uri::OpenFileRequest};
     use gio::{File, Settings};
     use glib::subclass::{InitializingObject, Signal};
@@ -103,6 +106,8 @@ pub mod imp {
 
         pub fn open(&self) {
             log::trace!("User requested to open attachment");
+
+            #[cfg(target_os = "linux")]
             if let Some(file) = self
                 .attachment
                 .borrow()
@@ -110,7 +115,6 @@ pub mod imp {
                 .and_then(|a| a.open_file())
             {
                 let obj = self.obj();
-
                 gspawn!(clone!(
                     #[weak]
                     obj,
@@ -131,6 +135,15 @@ pub mod imp {
                         .expect("Failed to join tokio")
                     }
                 ));
+            }
+
+            #[cfg(not(target_os = "linux"))]
+            if let Some(uri) = self.attachment.borrow().as_ref().and_then(|a| a.uri()) {
+                if let Err(e) =
+                    gio::AppInfo::launch_default_for_uri(&uri, gio::AppLaunchContext::NONE)
+                {
+                    log::error!("Failed to open file: {}", e);
+                }
             }
         }
 

@@ -38,7 +38,9 @@ pkgdatadir = datadir / meson.project_name()
 iconsdir = datadir / 'icons'
 podir = meson.project_source_root() / 'po'
 gettext_package = meson.project_name()
-dbusdir = datadir / 'dbus-1' / 'services'
+if host_machine.system() != 'darwin'
+  dbusdir = datadir / 'dbus-1' / 'services'
+endif
 
 if get_option('profile') == 'development'
   profile = 'Devel'
@@ -73,5 +75,5 @@ subdir('src')
 gnome.post_install(
   gtk_update_icon_cache: true,
   glib_compile_schemas: true,
-  update_desktop_database: true,
+  update_desktop_database: host_machine.system() != 'darwin',
 )

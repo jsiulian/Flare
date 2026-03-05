@@ -10,3 +10,9 @@ data/resources/ui/about.blp
 result
 .nixos-test-history
 *.syscap
+
+pkg
+build
+.DS_Store
+claude.md
+plan.md

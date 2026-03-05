@@ -13,6 +13,7 @@ use libsignal_service::{
     sender::{AttachmentSpec, AttachmentUploadError},
     websocket::account::DeviceInfo,
 };
+#[cfg(target_os = "linux")]
 use oo7::Keyring;
 use presage::model::groups::Group;
 use presage::store::{ContentsStore, StateStore, Thread};
@@ -41,6 +42,7 @@ type StoreType = presage_store_sqlite::SqliteStore;
 type PresageError = presage::Error<presage_store_sqlite::SqliteStoreError>;
 
 /// Query the encryption password from the keyring, storing one if none exists.
+#[cfg(target_os = "linux")]
 async fn encryption_password() -> Result<String, ApplicationError> {
     let keyring = Keyring::new().await?;
     keyring.unlock().await?;
@@ -78,6 +80,33 @@ async fn encryption_password() -> Result<String, ApplicationError> {
             )
             .await?;
         Ok(secret)
+    }
+}
+
+/// Query the encryption password from the macOS Keychain, storing one if none exists.
+#[cfg(target_os = "macos")]
+async fn encryption_password() -> Result<String, ApplicationError> {
+    use security_framework::passwords::{get_generic_password, set_generic_password};
+
+    log::trace!("Looking up password from macOS Keychain");
+    match get_generic_password("Flare", crate::config::BASE_ID) {
+        Ok(bytes) => {
+            log::trace!("Password found");
+            Ok(String::from_utf8_lossy(&bytes).into_owned())
+        }
+        Err(e) if e.code() == -25300 /* errSecItemNotFound */ => {
+            log::trace!("Password not found, creating password");
+            let distribution = rand::distr::StandardUniform {};
+            let secret = distribution.sample_string(&mut rand::rng(), SECRET_LENGTH);
+            log::trace!("Storing password in Keychain");
+            set_generic_password("Flare", crate::config::BASE_ID, secret.as_bytes())
+                .map_err(ApplicationError::Keychain)?;
+            Ok(secret)
+        }
+        Err(e) => {
+            log::error!("Keychain access failed (code {}): {}", e.code(), e);
+            Err(ApplicationError::Keychain(e))
+        }
     }
 }
 

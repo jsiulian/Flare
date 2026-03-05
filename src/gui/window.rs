@@ -689,13 +689,11 @@ pub mod imp {
                 async move {
                     log::trace!("Constructing path for configuration");
                     let path = PathBuf::from(env::var("FLARE_DATA_PATH").unwrap_or_else(|_| {
-                        env::var("XDG_DATA_HOME")
-                            .map(|s| s + "/flare/")
-                            .unwrap_or_else(|_| {
-                                env::var("HOME")
-                                    .map(|s| s + "/.local/share/flare/")
-                                    .expect("Could not find $HOME")
-                            })
+                        dirs::data_dir()
+                            .expect("Could not determine data directory")
+                            .join("flare")
+                            .to_string_lossy()
+                            .into_owned()
                     }));
                     log::trace!("Setup manager for Window");
                     let manager = Manager::new(obj.property::<gio::Application>("application"));

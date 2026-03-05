@@ -43,7 +43,10 @@ pub enum ApplicationError {
     IOError(std::io::Error),
     NoInternet,
     Glib(glib::Error),
+    #[cfg(target_os = "linux")]
     Libsecret(oo7::Error),
+    #[cfg(target_os = "macos")]
+    Keychain(security_framework::base::Error),
     Db(presage_store_sqlite::SqliteStoreError),
     UnauthorizedSignal,
     // MessageSenderError is pretty big, put into `Box` to move it to the heap.
@@ -99,9 +102,17 @@ impl From<std::io::Error> for ApplicationError {
     }
 }
 
+#[cfg(target_os = "linux")]
 impl From<oo7::Error> for ApplicationError {
     fn from(e: oo7::Error) -> Self {
         ApplicationError::Libsecret(e)
+    }
+}
+
+#[cfg(target_os = "macos")]
+impl From<security_framework::base::Error> for ApplicationError {
+    fn from(e: security_framework::base::Error) -> Self {
+        ApplicationError::Keychain(e)
     }
 }
 
@@ -137,8 +148,13 @@ impl std::fmt::Display for ApplicationError {
             ApplicationError::Glib(_) => {
                 writeln!(f, "{}", gettext("Something glib-related failed."))
             }
+            #[cfg(target_os = "linux")]
             ApplicationError::Libsecret(_) => {
                 writeln!(f, "{}", gettext("The communication with libsecret failed."))
+            }
+            #[cfg(target_os = "macos")]
+            ApplicationError::Keychain(_) => {
+                writeln!(f, "{}", gettext("The communication with the macOS Keychain failed."))
             }
             ApplicationError::Db(_) => writeln!(
                 f,
@@ -188,7 +204,10 @@ impl ApplicationError {
             ApplicationError::IOError(e) => format!("{e:#?}"),
             ApplicationError::NoInternet => gettext("Please check your internet connection."),
             ApplicationError::Glib(e) => format!("{e:#?}"),
+            #[cfg(target_os = "linux")]
             ApplicationError::Libsecret(e) => format!("{e:#?}"),
+            #[cfg(target_os = "macos")]
+            ApplicationError::Keychain(e) => format!("{e:#?}"),
             ApplicationError::Db(e) => format!("{e:#?}"),
             ApplicationError::UnauthorizedSignal => {
                 gettext("Please delete the database and relink the device.")
@@ -223,7 +242,10 @@ impl ApplicationError {
             ApplicationError::IOError(_) => false,
             ApplicationError::NoInternet => false,
             ApplicationError::Glib(_) => true,
+            #[cfg(target_os = "linux")]
             ApplicationError::Libsecret(_) => false,
+            #[cfg(target_os = "macos")]
+            ApplicationError::Keychain(_) => false,
             ApplicationError::Db(_) => true,
             ApplicationError::UnauthorizedSignal => false,
             ApplicationError::SendFailed(_) => true,

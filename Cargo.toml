@@ -14,11 +14,9 @@ edition = "2024"
 gtk = { version = "0.10.3", package = "gtk4", features = ["v4_12"]}
 gio = { version = "0.21.5", features = ["v2_70"]}
 adw = { version = "0.8.1", package = "libadwaita", features = ["v1_8"]}
-ashpd = { version = "0.12.0", default-features = false, features = [ "gtk4", "tokio" ]}
-zbus = { version = "5.12.0", default-features = false, features = [ "tokio" ]}
 
 gettext-rs = { version = "0.7.7", features = ["gettext-system"] }
- 
+
 futures = "0.3.31"
 tokio = { version = "1.48.0", features = ["rt", "macros", "rt-multi-thread", "time"] }
 regex = "1.12.2"
@@ -28,12 +26,24 @@ presage = { git = "https://github.com/Schmiddiii/presage", rev = "1dbd863bc3e9f4
 presage-store-sqlite = { git = "https://github.com/Schmiddiii/presage", rev = "1dbd863bc3e9f467ae2002bc915ce122423ccc3c", default-features = false}
 libsignal-service = { git = "https://github.com/whisperfish/libsignal-service-rs", rev = "3d07d8df33482b2d191c075fdc2b750738a89384", default-features = false, features = ["phonenumber"] }
 
-oo7 = { version = "0.5.0", default-features = false, features = ["native_crypto", "tokio"] }
 rand = "0.9.2"
+dirs = "5"
 url = "2.5.7"
 once_cell = "1.21.3"
 
 qrcode-generator = "5.0.0"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+oo7 = { version = "0.5.0", default-features = false, features = ["native_crypto", "tokio"] }
+ashpd = { version = "0.12.0", default-features = false, features = ["gtk4", "tokio"] }
+zbus = { version = "5.12.0", default-features = false, features = ["tokio"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+security-framework = "2"
+cacao = { version = "0.4.0-beta2", optional = true }
+objc = { version = "0.2.7", optional = true }
+objc_id = { version = "0.1.1", optional = true }
+hex = "0.4"
 
 log = "0.4.29"
 env_logger = "0.11.8"
@@ -65,6 +75,7 @@ opt-level = 3
 
 [features]
 default = []
+cacao-gui = [ "dep:cacao", "dep:objc", "dep:objc_id" ]
 screenshot = [ "dep:phonenumber" ]
 screenshot-setup = [ "screenshot" ]
 libspelling = [ "dep:libspelling" ]

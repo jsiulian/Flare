@@ -1,7 +1,8 @@
 use crate::prelude::*;
 
+#[cfg(target_os = "linux")]
 use ashpd::{WindowIdentifier, desktop::background::BackgroundRequest};
-
+#[cfg(target_os = "linux")]
 use gettextrs::gettext;
 
 glib::wrapper! {
@@ -17,6 +18,7 @@ impl PreferencesWindow {
         Object::builder::<Self>().build()
     }
 
+    #[cfg(target_os = "linux")]
     async fn request_background(&self) -> ashpd::Result<()> {
         let identifier = WindowIdentifier::from_native(&self.native().unwrap()).await;
         tspawn!(async move {
@@ -35,6 +37,13 @@ impl PreferencesWindow {
         })
         .await
         .expect("Failed to join tokio")?;
+        Ok(())
+    }
+
+    // TODO: implement for other platforms
+    #[cfg(not(target_os = "linux"))]
+    async fn request_background(&self) -> Result<(), ()> {
+        log::warn!("Background mode is not supported on this platform");
         Ok(())
     }
 }
@@ -95,7 +104,7 @@ pub mod imp {
                     async move {
                         match obj.request_background().await {
                             Ok(_) => {}
-                            Err(err) => log::warn!("Failed to request background mode, {}", &err),
+                            Err(err) => log::warn!("Failed to request background mode, {:?}", &err),
                         }
                     }
                 ));

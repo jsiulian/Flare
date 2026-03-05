@@ -51,7 +51,7 @@
     <file preprocess="xml-stripblanks">icons/scalable/status/call-outgoing-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/call-start-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/call-stop-symbolic.svg</file>  
-    <file preprocess="xml-stripblanks">icons/scalable/status/chat-message-new-symbolic.svg</file>  
+    <file preprocess="xml-stripblanks">icons/scalable/status/chat-message-new-symbolic.svg</file>
   </gresource>
 </gresources>
 
