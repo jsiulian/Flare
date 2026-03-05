@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Decreased message spacing for messages sent in quick succession.
+- Improved message loading spinner.
 
 ## [0.18.8] - 2026-03-03
 
