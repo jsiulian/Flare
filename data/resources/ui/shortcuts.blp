@@ -1,68 +1,62 @@
 using Gtk 4.0;
+using Adw 1;
 
-ShortcutsWindow help_overlay {
-  modal: true;
+Adw.ShortcutsDialog help_overlay {
+  Adw.ShortcutsSection {
+    title: C_("shortcut window", "General");
 
-  ShortcutsSection {
-    section-name: "shortcuts";
-    max-height: 10;
-
-    ShortcutsGroup {
-      title: C_("shortcut window", "General");
-
-      ShortcutsShortcut {
-        title: C_("shortcut window", "Show shortcuts");
-        accelerator: "<Ctrl>&question";
-      }
-
-      ShortcutsShortcut {
-        title: C_("shortcut window", "Go to settings");
-        accelerator: "<Ctrl>&comma";
-      }
-
-      ShortcutsShortcut {
-        title: C_("shortcut window", "Go to about page");
-        accelerator: "F1";
-      }
-
-      ShortcutsShortcut {
-        title: C_("shortcut window", "Open menu");
-        accelerator: "F10";
-      }
-
-      ShortcutsShortcut {
-        title: C_("shortcut window", "Close window");
-        accelerator: "<Ctrl>&q";
-      }
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Show shortcuts");
+      accelerator: "<Ctrl>&question";
     }
 
-    ShortcutsGroup {
-      title: C_("shortcut window", "Channels");
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Go to settings");
+      accelerator: "<Ctrl>&comma";
+    }
 
-      ShortcutsShortcut {
-        title: C_("shortcut window", "Go to channel 1…9");
-        accelerator: "<Ctrl>&1...9";
-      }
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Go to about page");
+      accelerator: "F1";
+    }
 
-      ShortcutsShortcut {
-        title: C_("shortcut window", "Search in channels");
-        accelerator: "<Ctrl>&f";
-      }
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Open menu");
+      accelerator: "F10";
+    }
 
-      ShortcutsShortcut {
-        title: C_("shortcut window", "Upload attachment");
-        accelerator: "<Ctrl>&plus";
-      }
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Close window");
+      accelerator: "<Ctrl>&q";
+    }
+  }
 
-      ShortcutsShortcut {
-        title: C_("shortcut window", "Focus the text input box");
-        accelerator: "<Ctrl>&i";
-      }
+  Adw.ShortcutsSection {
+    title: C_("shortcut window", "Channels");
 
-      ShortcutsShortcut {
-        title: C_("shortcut window", "Load more messages");
-        accelerator: "<Ctrl>&l";
-      }
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Go to channel 1…9");
+      accelerator: "<Ctrl>&1...9";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Search in channels");
+      accelerator: "<Ctrl>&f";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Upload attachment");
+      accelerator: "<Ctrl>&plus";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Focus the text input box");
+      accelerator: "<Ctrl>&i";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Load more messages");
+      accelerator: "<Ctrl>&l";
     }
   }
 }

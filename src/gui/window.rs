@@ -82,7 +82,7 @@ pub mod imp {
     use gio::{Cancellable, Settings, SimpleAction, SimpleActionGroup};
     use glib::subclass::InitializingObject;
     use glib::{BindingFlags, BoxedAnyObject, Propagation};
-    use gtk::{Builder, CompositeTemplate, ShortcutsWindow};
+    use gtk::{Builder, CompositeTemplate};
 
     use crate::backend::{Channel, SetupResult};
     use crate::gui::channel_info_dialog::ChannelInfoDialog;
@@ -348,13 +348,17 @@ pub mod imp {
             ));
 
             let action_show_help_overlay = SimpleAction::new("show-help-overlay", None);
-            action_show_help_overlay.connect_activate(|_, _| {
-                let builder = Builder::from_resource("/ui/shortcuts.ui");
-                let shortcuts_window: ShortcutsWindow = builder
-                    .object("help_overlay")
-                    .expect("shortcuts.ui to have at least one object help_overlay");
-                shortcuts_window.present();
-            });
+            action_show_help_overlay.connect_activate(clone!(
+                #[weak]
+                obj,
+                move |_, _| {
+                    let builder = Builder::from_resource("/ui/shortcuts.ui");
+                    let shortcuts_window: adw::ShortcutsDialog = builder
+                        .object("help_overlay")
+                        .expect("shortcuts.ui to have at least one object help_overlay");
+                    shortcuts_window.present(Some(&obj));
+                }
+            ));
 
             log::trace!("Setting up about-page action");
             let action_about = SimpleAction::new("about", None);
