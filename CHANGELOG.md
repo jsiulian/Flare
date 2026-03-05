@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Startup screen when loading messages.
 
+### Changed
+
+- Decreased message spacing for messages sent in quick succession.
+
 ## [0.18.8] - 2026-03-03
 
 ### HOTFIX

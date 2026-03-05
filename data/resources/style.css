@@ -18,7 +18,11 @@
 }
 
 .message-item {
-  margin: 5px 0 ;
+  margin: 2px 0;
+}
+
+.message-item.has-timestamp {
+  margin-bottom: 5pt;
 }
 
 .message-item.from-self .message-bubble {
