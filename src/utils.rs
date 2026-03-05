@@ -17,6 +17,7 @@ macro_rules! tspawn {
     };
 }
 
+#[cfg(target_os = "linux")]
 pub fn is_flatpak() -> bool {
     let file = gio::File::for_path("/.flatpak-info");
     file.query_exists(gio::Cancellable::NONE)

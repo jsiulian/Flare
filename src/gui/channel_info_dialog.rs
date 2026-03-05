@@ -24,7 +24,9 @@ impl ChannelInfoDialog {
 
 pub mod imp {
     use crate::prelude::*;
+    #[cfg(target_os = "linux")]
     use ashpd::WindowIdentifier;
+    #[cfg(target_os = "linux")]
     use ashpd::desktop::open_uri::OpenFileRequest;
     use gtk::Align;
 
@@ -129,12 +131,14 @@ pub mod imp {
 
         #[template_callback]
         fn open_phone_number(&self) {
+            #[cfg(target_os = "linux")]
             let obj = self.obj();
             let channel = self.channel.borrow();
             let phone_number = channel.as_ref().and_then(|c| c.phone_number());
 
             if let Some(url) = phone_number.and_then(|p| url::Url::parse(&format!("tel:{p}")).ok())
             {
+                #[cfg(target_os = "linux")]
                 gspawn!(clone!(
                     #[weak]
                     obj,
@@ -154,6 +158,13 @@ pub mod imp {
                         .expect("Failed to join tokio")
                     }
                 ));
+
+                #[cfg(not(target_os = "linux"))]
+                if let Err(e) =
+                    gio::AppInfo::launch_default_for_uri(url.as_str(), gio::AppLaunchContext::NONE)
+                {
+                    log::error!("Failed to open phone number: {}", e);
+                }
             } else {
                 log::warn!("Trying to open phone number even if it does not exist");
             }
