@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Decreased message spacing for messages sent in quick succession.
 - Improved message loading spinner.
 - Ported to the Adwaita shortcuts dialog, instead of the deprecated GTK one.
+- Added some padding between attachments and the message label.
 
 ## [0.18.8] - 2026-03-03
 

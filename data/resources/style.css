@@ -164,6 +164,9 @@ video controls {
 	border-bottom: 1px solid @light_3;
 }
 
+.has-attachment messagelabel {
+  margin-top: 6pt;
+}
 .message-item:not(.has-header) .media-overlay {
 	margin-top: -9px;
 	border-top-left-radius: 16px;
