@@ -472,6 +472,11 @@ impl Manager {
         channel
     }
 
+    pub fn channel_from_thread(&self, thread: Thread) -> Option<Channel> {
+        let known_channels = self.imp().channels.borrow_mut();
+        known_channels.get(&thread).cloned()
+    }
+
     #[cfg(not(feature = "screenshot"))]
     pub async fn list_contacts(&self) -> Vec<Contact> {
         let store = self.store();

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Startup screen when loading messages.
+- Clicking on a notification now brings up the channel the notification came from.
 
 ### Changed
 

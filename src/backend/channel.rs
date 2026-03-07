@@ -591,6 +591,28 @@ impl Channel {
             })
             .collect()
     }
+
+    pub fn notification_variant(&self) -> (u8, Vec<u8>) {
+        let thread = self.thread();
+        match thread {
+            Thread::Contact(u) => (0, u.service_id_binary()),
+            Thread::Group(g) => (1, g.into()),
+        }
+    }
+
+    pub fn from_notification_variant((kind, data): (u8, Vec<u8>)) -> Thread {
+        match kind {
+            0 => Thread::Contact(
+                ServiceId::parse_from_service_id_binary(&data)
+                    .expect("Notification variant for contact to be a service ID"),
+            ),
+            1 => Thread::Group(
+                data.try_into()
+                    .expect("Notification variant for groups to have the correct number of bytes"),
+            ),
+            _ => unreachable!("Unexpected notification variant type"),
+        }
+    }
 }
 
 mod imp {

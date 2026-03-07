@@ -41,6 +41,10 @@ impl DisplayMessage {
         notification.set_body(Some(&notification_body));
         notification.set_icon(&icon);
         notification.set_category(Some("im.received"));
+        notification.set_default_action_and_target_value(
+            "app.notification-clicked",
+            Some(&channel.notification_variant().to_variant()),
+        );
 
         let manager = self.manager();
         let uid = self.uid();
