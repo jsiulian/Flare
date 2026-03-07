@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved message loading spinner.
 - Ported to the Adwaita shortcuts dialog, instead of the deprecated GTK one.
 - Added some padding between attachments and the message label.
+- Made the UI for reactions more compact.
 
 ## [0.18.8] - 2026-03-03
 

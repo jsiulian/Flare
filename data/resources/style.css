@@ -39,10 +39,10 @@
 }
 .reaction {
   background-color: @bubble_bg_color;
-  border: 1px solid @accent_bg_color;
+  border: 1px solid @window_bg_color;
   border-radius: 16px;
-  padding: 6px 9px;
-  margin-top: 5px;
+  padding: 3px 6px;
+  margin-top: -6px;
 }
 
 .quote {
