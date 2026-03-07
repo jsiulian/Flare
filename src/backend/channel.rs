@@ -5,10 +5,7 @@ use crate::backend::{
 };
 use crate::prelude::*;
 
-use std::{
-    collections::hash_map::DefaultHasher,
-    hash::{Hash, Hasher},
-};
+use std::hash::Hash;
 
 use gdk::Texture;
 use glib::Bytes;
@@ -115,71 +112,73 @@ impl Channel {
         s
     }
 
-    pub fn thread(&self) -> Option<Thread> {
+    pub fn thread(&self) -> Thread {
         if let Some(key) = self
             .group_context()
             .and_then(|c| c.master_key)
             .and_then(|k| <[u8; 32]>::try_from(k).ok())
         {
-            Some(Thread::Group(key))
+            Thread::Group(key)
         } else {
-            Some(Thread::Contact(self.uuid()?))
+            Thread::Contact(
+                self.uuid()
+                    .expect("Channel to either be a key or have a UUID"),
+            )
         }
     }
 
     /// Load the specified number of message from the end of the message queue.
     pub async fn load_last(&self, number: usize) {
-        if let Some(thread) = self.thread() {
-            let mut results = vec![];
-            let manager = self.manager();
+        let thread = self.thread();
+        let mut results = vec![];
+        let manager = self.manager();
 
-            let first_timestamp = self
-                .imp()
-                .timeline
-                .borrow()
-                .iter_forwards()
-                .filter(|i| i.is::<DisplayMessage>())
-                .map(|m| m.timestamp())
-                .next();
-            crate::trace!(
-                "Loading {} last messages for channel: {} (Thread: {:?}). Needed earlier then {:?}",
-                number,
-                self.title(),
-                thread,
-                first_timestamp
-            );
-            let iter = manager.messages(&thread, first_timestamp).await;
-            if iter.is_err() {
-                log::error!("Failed to load last messages: {}", iter.err().unwrap());
-                return;
-            }
-
-            for content in iter.unwrap() {
-                let msg = Message::from_content(content, &manager).await;
-                if let Some(msg) = msg {
-                    if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
-                        results.insert(0, msg.clone());
-                    }
-
-                    let _ = self.do_new_message(&msg).await;
-                }
-
-                if results.len() == number {
-                    break;
-                }
-            }
-
-            self.imp().timeline.borrow().prepend(
-                results
-                    .into_iter()
-                    .map(|i| {
-                        i.dynamic_cast::<TimelineItem>()
-                            .expect("A 'DisplayMessage' to be a 'TimelineItem'")
-                    })
-                    .collect(),
-            );
-            self.notify("last-message");
+        let first_timestamp = self
+            .imp()
+            .timeline
+            .borrow()
+            .iter_forwards()
+            .filter(|i| i.is::<DisplayMessage>())
+            .map(|m| m.timestamp())
+            .next();
+        crate::trace!(
+            "Loading {} last messages for channel: {} (Thread: {:?}). Needed earlier then {:?}",
+            number,
+            self.title(),
+            thread,
+            first_timestamp
+        );
+        let iter = manager.messages(&thread, first_timestamp).await;
+        if iter.is_err() {
+            log::error!("Failed to load last messages: {}", iter.err().unwrap());
+            return;
         }
+
+        for content in iter.unwrap() {
+            let msg = Message::from_content(content, &manager).await;
+            if let Some(msg) = msg {
+                if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
+                    results.insert(0, msg.clone());
+                }
+
+                let _ = self.do_new_message(&msg).await;
+            }
+
+            if results.len() == number {
+                break;
+            }
+        }
+
+        self.imp().timeline.borrow().prepend(
+            results
+                .into_iter()
+                .map(|i| {
+                    i.dynamic_cast::<TimelineItem>()
+                        .expect("A 'DisplayMessage' to be a 'TimelineItem'")
+                })
+                .collect(),
+        );
+        self.notify("last-message");
     }
 
     pub fn trim_old(&self) {
@@ -190,13 +189,6 @@ impl Channel {
         self.manager().clear_channel_messages(self).await?;
         self.imp().timeline.borrow().clear();
         Ok(())
-    }
-
-    /// The hash of internal data; used by the manager to cache channels.
-    pub(super) fn internal_hash(&self) -> u64 {
-        let mut hasher = DefaultHasher::new();
-        self.imp().hash(&mut hasher);
-        hasher.finish()
     }
 
     pub(super) fn group_context(&self) -> Option<GroupContextV2> {
@@ -249,8 +241,8 @@ impl Channel {
             crate::trace!("Channel {} got new message: {}", self.title(), body);
             if let Some(quote) = message.quote_timestamp() {
                 log::trace!("Message claims to have a quote");
-                if let Some(thread) = self.thread()
-                    && let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await
+                let thread = self.thread();
+                if let Ok(Some(quoted_msg)) = self.manager().message(&thread, quote).await
                     && let Some(quoted_msg) = quoted_msg.dynamic_cast_ref::<TextMessage>()
                 {
                     crate::trace!(
@@ -617,7 +609,7 @@ mod imp {
 
     use gdk::Paintable;
 
-    use libsignal_service::{prelude::Uuid, proto::GroupContextV2, protocol::ServiceId};
+    use libsignal_service::proto::GroupContextV2;
     use presage::model::groups::Group;
 
     #[derive(Default, glib::Properties)]
@@ -744,31 +736,6 @@ mod imp {
 
         fn is_typing(&self) -> bool {
             !self.typing.borrow().is_empty()
-        }
-    }
-
-    impl std::hash::Hash for Channel {
-        fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
-            if let Some(uuid) = self
-                .contact
-                .borrow()
-                .as_ref()
-                .and_then(|c| c.address())
-                .map(|a| a.raw_uuid())
-            {
-                uuid.hash(state);
-            } else {
-                None::<Uuid>.hash(state)
-            }
-            if let Some(uuids) = self.group.borrow().as_ref().map(|g| &g.members).map(|m| {
-                m.iter()
-                    .map(|c| ServiceId::Aci(c.aci))
-                    .collect::<Vec<ServiceId>>()
-            }) {
-                uuids.hash(state);
-            } else {
-                None::<ServiceId>.hash(state)
-            }
         }
     }
 
