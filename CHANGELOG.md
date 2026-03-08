@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.19.0] - 2026-03-08
+
 ### Added
 
 - Startup screen when loading messages.
@@ -878,7 +880,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.8...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.19.0...master
+[0.19.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.8...0.19.0
 [0.18.8]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.7...0.18.8
 [0.18.7]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.6...0.18.7
 [0.18.6]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.5...0.18.6

@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.19.0" date="2026-03-08">
+      <description translate="no">
+        <p>Added</p> <ul> <li>Startup screen when loading messages.</li> <li>Clicking on a notification now brings up the channel the notification came from.</li> </ul> <p>Removed</p> <ul> <li>Temporarily disabled registering as a primary device due to it being broken upstream. It will be enabled again once upstream fixed the issue.</li> </ul> <p>Changed</p> <ul> <li>Decreased message spacing for messages sent in quick succession.</li> <li>Improved message loading spinner.</li> <li>Ported to the Adwaita shortcuts dialog, instead of the deprecated GTK one.</li> <li>Added some padding between attachments and the message label.</li> <li>Made the UI for reactions more compact.</li> </ul>
+      </description>
+    </release>
     <release version="0.18.8" date="2026-03-03">
       <description translate="no">
         <p>HOTFIX</p> <ul> <li>Fix deadlock receiving messages.</li> </ul> <p>Changed</p> <ul> <li>Automatically focus the channel input when activating a channel.</li> </ul> <p>Fixed</p> <ul> <li>Reactions not showing up when loading a channel multiple times.</li> <li>Sometimes mentions not being displayed in the text.</li> <li>Activating channels with a keyboard shortcut not displaying the channel as activated in the channel list.</li> <li>Some reactions not being received.</li> </ul>
