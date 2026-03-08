@@ -214,6 +214,7 @@ impl Manager {
         Ok(())
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub async fn message(
         &self,
         thread: &Thread,
@@ -698,6 +699,7 @@ impl Manager {
         Ok(r?)
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub(super) async fn get_contact_by_id(
         &self,
         id: ServiceId,
@@ -711,6 +713,7 @@ impl Manager {
         Ok(r?)
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub(super) async fn get_profile_key_by_id(
         &self,
         id: ServiceId,
@@ -826,9 +829,12 @@ mod imp {
         pub(super) internal: RefCell<Option<ManagerThread>>,
         pub(super) config_store: RefCell<Option<super::StoreType>>,
         #[cfg(feature = "screenshot")]
-        pub(in super::super) channels: RefCell<HashMap<u64, Channel>>,
+        pub(in super::super) channels: RefCell<HashMap<Thread, Channel>>,
         #[cfg(not(feature = "screenshot"))]
         pub(super) channels: RefCell<HashMap<Thread, Channel>>,
+        #[cfg(feature = "screenshot")]
+        pub(in super::super) finished_setup: Cell<bool>,
+        #[cfg(not(feature = "screenshot"))]
         pub(super) finished_setup: Cell<bool>,
         pub(super) last_message_datetime: RefCell<Option<DateTime>>,
         pub(super) settings: Settings,

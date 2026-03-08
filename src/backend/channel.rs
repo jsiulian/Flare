@@ -122,7 +122,7 @@ impl Channel {
         } else {
             Thread::Contact(
                 self.uuid()
-                    .expect("Channel to either be a key or have a UUID"),
+                    .expect("Channel to either have a group key or have a UUID"),
             )
         }
     }
