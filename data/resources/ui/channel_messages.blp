@@ -35,12 +35,14 @@ template $FlChannelMessages: Box {
     hexpand: true;
     orientation: vertical;
 
-    Spinner {
-      spinning: true;
-      visible: bind template.loading;
-    }
-
     Overlay {
+      [overlay]
+      Adw.Spinner {
+        margin-top: 6;
+        visible: bind template.loading;
+        valign: start;
+      }
+
       [overlay]
       Button {
         styles [

@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Startup screen when loading messages.
+- Clicking on a notification now brings up the channel the notification came from.
+
+### Removed
+
+- Temporarily disabled registering as a primary device due to it being broken upstream.
+  It will be enabled again once upstream fixed the issue.
+
+### Changed
+
+- Decreased message spacing for messages sent in quick succession.
+- Improved message loading spinner.
+- Ported to the Adwaita shortcuts dialog, instead of the deprecated GTK one.
+- Added some padding between attachments and the message label.
+- Made the UI for reactions more compact.
+
 ## [0.18.8] - 2026-03-03
 
 ### HOTFIX

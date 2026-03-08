@@ -6,7 +6,6 @@ use gtk::prelude::{Cast, FileExt};
 use gtk::{prelude::ObjectExt, subclass::prelude::ObjectSubclassIsExt};
 use libsignal_service::Profile;
 use libsignal_service::content::CallMessage as PreCallMessage;
-use libsignal_service::models::Contact as LContact;
 use libsignal_service::prelude::AttachmentPointer;
 use libsignal_service::prelude::Content;
 use libsignal_service::prelude::ProfileKey;
@@ -15,19 +14,23 @@ use libsignal_service::proto::GroupContextV2;
 use libsignal_service::proto::call_message::Hangup;
 use libsignal_service::proto::call_message::Offer;
 use libsignal_service::proto::data_message::Reaction;
-use libsignal_service::push_service::DeviceInfo;
+use libsignal_service::protocol::DeviceId;
 use libsignal_service::sender::AttachmentSpec;
-use libsignal_service::{groups_v2::Group, sender::AttachmentUploadError};
+use libsignal_service::sender::AttachmentUploadError;
+use libsignal_service::websocket::account::DeviceInfo;
+use presage::model::contacts::Contact as LContact;
+use presage::model::groups::Group;
 use presage::store::Thread;
 
 use super::{
     Channel, Contact,
     message::{CallMessage, Message, MessageExt, ReactionMessage, TextMessage},
 };
+use crate::backend::timeline::timeline_item::TimelineItemExt;
 use crate::{backend::SetupResult, error::ApplicationError};
 
 const GROUP_ID: usize = 5;
-type PresageError = presage::Error<presage_store_sled::SledStoreError>;
+type PresageError = presage::Error<presage_store_sqlite::SqliteStoreError>;
 
 macro_rules! msg {
     ($s:expr, $m:expr, $i:expr, $j:expr, $t:expr) => {
@@ -66,25 +69,23 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
             uuid: Uuid::from_u128(0),
             phone_number: None,
             name: "".to_string(),
-            color: None,
             verified: Default::default(),
-            profile_key: vec![],
+            profile_key: vec![0; 32],
             expire_timer: 0,
             inbox_position: 0,
-            archived: false,
             avatar: None,
+            expire_timer_version: 0,
         },
         LContact {
             uuid: Uuid::from_u128(1),
             phone_number: None,
             name: "Postmarket OS Linux Mobile User".to_string(),
-            color: None,
             verified: Default::default(),
-            profile_key: vec![],
+            profile_key: vec![0; 32],
             expire_timer: 0,
             inbox_position: 0,
-            archived: false,
             avatar: None,
+            expire_timer_version: 0,
         },
         LContact {
             uuid: Uuid::from_u128(2),
@@ -93,37 +94,34 @@ pub fn dummy_presage_contacts() -> Vec<LContact> {
                     .expect("Developer to have a valid phone number"),
             ),
             name: "Developer".to_string(),
-            color: None,
             verified: Default::default(),
             profile_key: vec![0; 32],
             expire_timer: 0,
             inbox_position: 0,
-            archived: false,
             avatar: None,
+            expire_timer_version: 0,
         },
         LContact {
             uuid: Uuid::from_u128(3),
             phone_number: None,
-            name: "Thanos".to_string(),
-            color: None,
+            name: "Admrial Ackbar".to_string(),
             verified: Default::default(),
-            profile_key: vec![],
+            profile_key: vec![0; 32],
             expire_timer: 0,
             inbox_position: 0,
-            archived: false,
             avatar: None,
+            expire_timer_version: 0,
         },
         LContact {
             uuid: Uuid::from_u128(4),
             phone_number: None,
-            name: "Norman Osborn".to_string(),
-            color: None,
+            name: "Agent Smith".to_string(),
             verified: Default::default(),
-            profile_key: vec![],
+            profile_key: vec![0; 32],
             expire_timer: 0,
             inbox_position: 0,
-            archived: false,
             avatar: None,
+            expire_timer_version: 0,
         },
     ]
 }
@@ -134,6 +132,9 @@ impl super::Manager {
         log::trace!("Init manager for screenshots");
         self.init_channels().await;
         self.setup_receive_message_loop().await?;
+
+        self.imp().finished_setup.set(true);
+        self.notify("finished-setup");
 
         #[cfg(feature = "screenshot-setup")]
         {
@@ -168,7 +169,7 @@ impl super::Manager {
 
         for msg in self.dummy_messages().await {
             self.emit_by_name::<()>("message", &[&msg]);
-            if let Some(stored_channel) = channels.get(&msg.channel().internal_hash()) {
+            if let Some(stored_channel) = channels.get(&msg.channel().thread()) {
                 log::debug!("Message from a already existing channel");
                 let _ = stored_channel.new_message(msg).await;
             }
@@ -179,6 +180,19 @@ impl super::Manager {
     #[cfg(feature = "screenshot")]
     pub fn profile_name(&self) -> String {
         "You".to_string()
+    }
+
+    #[cfg(feature = "screenshot")]
+    pub async fn message(
+        &self,
+        thread: &Thread,
+        timestamp: u64,
+    ) -> Result<Option<Message>, ApplicationError> {
+        Ok(self
+            .dummy_messages()
+            .await
+            .into_iter()
+            .find(|m| m.timestamp() == timestamp))
     }
 
     #[cfg(feature = "screenshot")]
@@ -209,6 +223,7 @@ impl super::Manager {
             ),
             about_emoji: Some("🤯️".to_string()),
             avatar: None,
+            unrestricted_unidentified_access: false,
         })
     }
 
@@ -233,6 +248,28 @@ impl super::Manager {
     }
 
     #[cfg(feature = "screenshot")]
+    pub(super) async fn get_profile_key_by_id(
+        &self,
+        id: libsignal_service::protocol::ServiceId,
+    ) -> Result<Option<libsignal_service::prelude::ProfileKey>, ApplicationError> {
+        Ok(dummy_presage_contacts()
+            .into_iter()
+            .find(|c| c.uuid == id.raw_uuid())
+            .and_then(|c| c.profile_key.try_into().ok())
+            .map(|p| ProfileKey { bytes: p }))
+    }
+
+    #[cfg(feature = "screenshot")]
+    pub(super) async fn get_contact_by_id(
+        &self,
+        id: libsignal_service::protocol::ServiceId,
+    ) -> Result<Option<presage::model::contacts::Contact>, ApplicationError> {
+        Ok(dummy_presage_contacts()
+            .into_iter()
+            .find(|c| c.uuid == id.raw_uuid()))
+    }
+
+    #[cfg(feature = "screenshot")]
     pub(super) async fn retrieve_group_avatar(
         &self,
         context: GroupContextV2,
@@ -251,33 +288,38 @@ impl super::Manager {
 
         Ok(vec![
             DeviceInfo {
-                id: 1,
+                id: DeviceId::new(1).unwrap(),
+                registration_id: 0,
                 name: Some("Flare (Desktop)".to_string()),
-                created: base_time - TimeDelta::days(10),
+                created_at: base_time - TimeDelta::days(10),
                 last_seen: base_time - TimeDelta::days(1),
             },
             DeviceInfo {
-                id: 2,
+                id: DeviceId::new(2).unwrap(),
+                registration_id: 0,
                 name: Some("Flare (PinePhone)".to_string()),
-                created: base_time - TimeDelta::days(7),
+                created_at: base_time - TimeDelta::days(7),
                 last_seen: base_time,
             },
             DeviceInfo {
-                id: 3,
+                id: DeviceId::new(3).unwrap(),
+                registration_id: 0,
                 name: Some("Flare (Another)".to_string()),
-                created: base_time - TimeDelta::days(7),
+                created_at: base_time - TimeDelta::days(7),
                 last_seen: base_time,
             },
             DeviceInfo {
-                id: 4,
+                id: DeviceId::new(4).unwrap(),
+                registration_id: 0,
                 name: Some("Flare (Another2)".to_string()),
-                created: base_time - TimeDelta::days(7),
+                created_at: base_time - TimeDelta::days(7),
                 last_seen: base_time,
             },
             DeviceInfo {
-                id: 5,
+                id: DeviceId::new(5).unwrap(),
+                registration_id: 0,
                 name: Some("Flare (Another3)".to_string()),
-                created: base_time - TimeDelta::days(7),
+                created_at: base_time - TimeDelta::days(7),
                 last_seen: base_time,
             },
         ])
@@ -305,14 +347,14 @@ impl super::Manager {
 
         let msg_replied = msg!(
             self,
-            "Flare 0.13.0 was now released. This release brings avatars (took only 1.5 years)! (And a few fixes) Now everyone can see my glorious profile picture, which is the icon of Flare btw.",
+            "Flare 0.19.0 was now released. This release will now show a loading screen on startup while it receives messages. Besides that, there have also been many minor UI changes, like a reduced spacing between reactions and their corresponding mesages, as well as a decreased spacing between messages sent shortly after another.",
             2,
             GROUP_ID,
             18 + base_minute
         );
         let msg_reply = msg!(
             self,
-            "Nice, I always wanted avatars.",
+            "Updating now! The UI changes already look good in the screenshots.",
             1,
             GROUP_ID,
             20 + base_minute
@@ -332,9 +374,10 @@ impl super::Manager {
                 26 + base_minute,
                 &self,
                 Reaction {
-                    emoji: Some("🎉🚀🫥️".to_string()),
+                    emoji: Some("🎉🚀".to_string()),
                     remove: Some(false),
                     target_author_aci: None,
+                    target_author_aci_binary: None,
                     target_sent_timestamp: None,
                 },
             ));
@@ -356,51 +399,16 @@ impl super::Manager {
             msg_reply,
             msg!(
                 self,
-                "Hey, why don't I have an avatar set?",
+                "Indeed, the new release looks magnificent.",
                 1,
                 GROUP_ID,
                 24 + base_minute
             ),
-            msg!(
-                self,
-                "It was already hard enough to set my profile picture for this screenshot, I won't add another picture for you.",
-                2,
-                GROUP_ID,
-                25 + base_minute
-            ),
+            msg!(self, "Glad you like it.", 2, GROUP_ID, 25 + base_minute),
             msg!(self, "YAY!", 0, GROUP_ID, 27 + base_minute),
-            call_msg!(
-                self,
-                PreCallMessage {
-                    offer: Some(Offer::default()),
-                    ..Default::default()
-                },
-                2,
-                base_minute - 100
-            ),
-            call_msg!(
-                self,
-                PreCallMessage {
-                    hangup: Some(Hangup::default()),
-                    ..Default::default()
-                },
-                2,
-                base_minute - 99
-            ),
-            msg!(
-                self,
-                "Perfectly balanced, as all things should be.",
-                3,
-                3,
-                1 + base_minute
-            ),
-            msg!(
-                self,
-                "You know, I'm something of a scientist myself",
-                4,
-                4,
-                2 + base_minute
-            ),
+            msg!(self, "Greetings", 2, 2, base_minute - 100),
+            msg!(self, "It's a trap!", 3, 3, 1 + base_minute),
+            msg!(self, "Hello, Mr. Anderson", 4, 4, 2 + base_minute),
         ]
     }
 
@@ -411,6 +419,7 @@ impl super::Manager {
             let contact = Contact::from_contact(c, self);
             let channel = Channel::from_contact_or_group(contact.clone(), &None, self).await;
             contact.set_channel(Some(&channel));
+            contact.update_profile_name_and_avatar().await;
             result.push(contact);
         }
         result
@@ -430,14 +439,24 @@ impl super::Manager {
                     disappearing_messages_timer: None,
                     access_control: None,
                     revision: 0,
-                    members: vec![],
+                    members: dummy_presage_contacts()
+                        .into_iter()
+                        .map(|c| presage::model::groups::Member {
+                            aci: c.uuid.into(),
+                            role: libsignal_service::groups_v2::Role::Unknown,
+                            profile_key: ProfileKey {
+                                bytes: c.profile_key.try_into().unwrap_or_default(),
+                            },
+                            joined_at_revision: 0,
+                        })
+                        .collect(),
                     pending_members: vec![],
                     requesting_members: vec![],
                     invite_link_password: vec![],
                     description: None,
                 },
                 &GroupContextV2 {
-                    master_key: Some(vec![2]),
+                    master_key: Some(vec![2; 32]),
                     revision: None,
                     group_change: None,
                 },
@@ -453,7 +472,8 @@ impl super::Manager {
         for channel in self.dummy_channels().await {
             self.emit_by_name::<()>("channel", &[&channel]);
             let mut channels = self.imp().channels.borrow_mut();
-            channels.insert(channel.internal_hash(), channel);
+            channel.initialize_avatar().await;
+            channels.insert(channel.thread(), channel);
         }
     }
 }

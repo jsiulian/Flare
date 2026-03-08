@@ -1,4 +1,7 @@
-use crate::prelude::*;
+use gio::SimpleAction;
+use presage::store::Thread;
+
+use crate::{backend::Channel, prelude::*};
 
 glib::wrapper! {
     /// The main application window.
@@ -24,9 +27,30 @@ impl Window {
             );
         }
         app.set_accels_for_action("channel-list.toggle-search", &["<Control>f"]);
-        Object::builder::<Self>()
+
+        let window = Object::builder::<Self>()
             .property("application", app)
-            .build()
+            .build();
+
+        let action_notification_clicked = SimpleAction::new(
+            "notification-clicked",
+            Some(&<(u8, Vec<u8>)>::static_variant_type()),
+        );
+        action_notification_clicked.connect_activate(clone!(
+            #[weak]
+            window,
+            move |_, variant| {
+                let variant: (u8, Vec<u8>) = variant
+                    .expect("Notification-clicked action to have attached data")
+                    .get()
+                    .expect("Variant of notification is of unexpected type");
+                let thread = Channel::from_notification_variant(variant);
+                window.activate_channel(thread);
+            }
+        ));
+        app.add_action(&action_notification_clicked);
+
+        window
     }
 
     // Closes the window, even if hide-on-close is set.
@@ -69,6 +93,13 @@ impl Window {
         }
     }
 
+    fn activate_channel(&self, thread: Thread) {
+        let channel = self
+            .property::<Manager>("manager")
+            .channel_from_thread(thread);
+        self.imp().channel_list.set_active_channel(channel);
+    }
+
     pub(crate) fn settings(&self) -> gio::Settings {
         self.imp().settings.clone()
     }
@@ -82,7 +113,7 @@ pub mod imp {
     use gio::{Cancellable, Settings, SimpleAction, SimpleActionGroup};
     use glib::subclass::InitializingObject;
     use glib::{BindingFlags, BoxedAnyObject, Propagation};
-    use gtk::{Builder, CompositeTemplate, ShortcutsWindow};
+    use gtk::{Builder, CompositeTemplate};
 
     use crate::backend::{Channel, SetupResult};
     use crate::gui::channel_info_dialog::ChannelInfoDialog;
@@ -348,13 +379,17 @@ pub mod imp {
             ));
 
             let action_show_help_overlay = SimpleAction::new("show-help-overlay", None);
-            action_show_help_overlay.connect_activate(|_, _| {
-                let builder = Builder::from_resource("/ui/shortcuts.ui");
-                let shortcuts_window: ShortcutsWindow = builder
-                    .object("help_overlay")
-                    .expect("shortcuts.ui to have at least one object help_overlay");
-                shortcuts_window.present();
-            });
+            action_show_help_overlay.connect_activate(clone!(
+                #[weak]
+                obj,
+                move |_, _| {
+                    let builder = Builder::from_resource("/ui/shortcuts.ui");
+                    let shortcuts_window: adw::ShortcutsDialog = builder
+                        .object("help_overlay")
+                        .expect("shortcuts.ui to have at least one object help_overlay");
+                    shortcuts_window.present(Some(&obj));
+                }
+            ));
 
             log::trace!("Setting up about-page action");
             let action_about = SimpleAction::new("about", None);

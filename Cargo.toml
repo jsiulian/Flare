@@ -13,7 +13,7 @@ edition = "2024"
 [dependencies]
 gtk = { version = "0.10.3", package = "gtk4", features = ["v4_12"]}
 gio = { version = "0.21.5", features = ["v2_70"]}
-adw = { version = "0.8.1", package = "libadwaita", features = ["v1_5"]}
+adw = { version = "0.8.1", package = "libadwaita", features = ["v1_8"]}
 ashpd = { version = "0.12.0", default-features = false, features = [ "gtk4", "tokio" ]}
 zbus = { version = "5.12.0", default-features = false, features = [ "tokio" ]}
 

@@ -18,7 +18,11 @@
 }
 
 .message-item {
-  margin: 5px 0 ;
+  margin: 2px 0;
+}
+
+.message-item.has-timestamp {
+  margin-bottom: 5pt;
 }
 
 .message-item.from-self .message-bubble {
@@ -35,10 +39,10 @@
 }
 .reaction {
   background-color: @bubble_bg_color;
-  border: 1px solid @accent_bg_color;
+  border: 1px solid @window_bg_color;
   border-radius: 16px;
-  padding: 6px 9px;
-  margin-top: 5px;
+  padding: 3px 6px;
+  margin-top: -6px;
 }
 
 .quote {
@@ -160,6 +164,9 @@ video controls {
 	border-bottom: 1px solid @light_3;
 }
 
+.has-attachment messagelabel {
+  margin-top: 6pt;
+}
 .message-item:not(.has-header) .media-overlay {
 	margin-top: -9px;
 	border-top-left-radius: 16px;

@@ -85,6 +85,7 @@ template $FlSetupWindow: Adw.Dialog {
                 label: _("Primary Device");
                 halign: end;
                 hexpand: true;
+                sensitive: false;
                 clicked => $handle_decision_to_decision_primary() swapped;
               }
 
@@ -133,12 +134,19 @@ template $FlSetupWindow: Adw.Dialog {
                   "heading",
                 ]
 
-                label: _("Primary Device (Experimental)");
+                label: _("Primary Device (Currently Broken)");
                 wrap: true;
               }
 
               Gtk.Label {
                 label: _("Flare can act as a primary device, similar to the official Signal applications on Android or IOS. This mode is currently experimental in Flare. It is strongly recommended to link the official Signal Desktop application after setting up Flare as a primary device to set up your profile name and avatar, and to initialize chats with other people (both of which cannot yet be done in Flare).");
+                wrap: true;
+                xalign: 0;
+              }
+
+              Gtk.Label {
+                label: _("Setting up Flare as a primary device is currently broken. Please downgrade Flare to version 0.18.1 temporarily to register, and afterwards update to the latest version to use Flare. See <a href=\"https://github.com/whisperfish/presage/issues/371\">this issue</a> for more information.");
+                use-markup: true;
                 wrap: true;
                 xalign: 0;
               }

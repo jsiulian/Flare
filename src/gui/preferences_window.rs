@@ -27,7 +27,7 @@ impl PreferencesWindow {
                 .auto_start(true)
                 .identifier(identifier)
                 .command(&["flare", "--gapplication-service"])
-                .dbus_activatable(false)
+                .dbus_activatable(true)
                 .send()
                 .await
                 // Drop the result, otherwise it would be dropped in the glib thread. Due to dropping requiring tokio, this would panic.

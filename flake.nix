@@ -29,10 +29,11 @@
                 lockFile = ./Cargo.lock;
                 outputHashes = {
                   "curve25519-dalek-4.1.3" = "sha256-bPh7eEgcZnq9C3wmSnnYv0C4aAP+7pnwk9Io29GrI4A=";
-                  "libsignal-protocol-0.1.0" = "sha256-AdN8UHu0khgsog1btE++0J4BmdUC6wMpZzL7HPzhALQ=";
-                  "libsignal-service-0.1.0" = "sha256-yjlLolKHl58J4/6yYq4XKe5A86A7plP8hD5vW/nhIfI=";
-                  "presage-0.7.0-dev" = "sha256-ToKexf6Rj1YzXCZtfbBa9Z9ndJM3fYkVYUE9QKvBUdI=";
-                  "blurhash-0.2.3" = "sha256-s1777+2O0D/VyKwlPUA53gho5sOP8pN610KqxEjugz0=";
+                  "libsignal-protocol-0.1.0" = "sha256-k0V5wnHGUwE76mZlG/2kWRWVgpvTgGDt9JuxdsoJZ7Y=";
+                  "libsignal-service-0.1.0" = "sha256-ZPNGklQZ0MOvusi51TrbSfBqvMWrjIhEC0q6TU8wB6Y=";
+                  "presage-0.8.0-dev" = "sha256-TFLfo8zDWgRVWG64StlOQGDzSn3WeLk1XHmA1AeIHdw=";
+                  "blurhash-0.2.3" = "sha256-vxNhcWGAIjVwzAb3Y/0cDJxrq43cF/tnoiWTPmMNFN4=";
+                  "spqr-1.4.0" = "sha256-2jZGm9ePg431jvjqBXU7d1NJ00TPIKtwsfdspme1okM=";
                 };
               };
               src = let fs = lib.fileset; in fs.toSource {
@@ -48,7 +49,7 @@
                     ]);
               };
               buildInputs = with pkgs; [ pkgs.libadwaita pkgs.protobuf pkgs.libsecret pkgs.gst_all_1.gstreamer pkgs.gst_all_1.gst-plugins-base pkgs.gst_all_1.gst-plugins-good pkgs.gst_all_1.gst-plugins-bad pkgs.gtksourceview5 pkgs.gtk4 pkgs.libspelling pkgs.openssl ];
-              nativeBuildInputs = with pkgs; [ pkgs.appstream pkgs.blueprint-compiler pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib pkgs.openssl gettext-patched ];
+              nativeBuildInputs = with pkgs; [ pkgs.appstream pkgs.blueprint-compiler pkgs.desktop-file-utils pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.wrapGAppsHook4 pkgs.rustPlatform.cargoSetupHook cargo rustc pkgs.glib pkgs.openssl pkgs.perl gettext-patched ];
 
               PROTOC = "${pkgs.protobuf}/bin/protoc";
 
@@ -82,7 +83,7 @@
             pkgs.mkShell.override { stdenv = pkgs.stdenvAdapters.useMoldLinker pkgs.clangStdenv; } {
               src = ./.;
               buildInputs = self.packages.${system}.default.buildInputs;
-              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb clippy sysprof cargo-deny mold-wrapped md4c ] ++ [ run run-gdb check i18n prof ];
+              nativeBuildInputs = with pkgs; self.packages.${system}.default.nativeBuildInputs ++ [ gdb clippy sysprof cargo-deny mold md4c ] ++ [ run run-gdb check i18n prof ];
               shellHook = ''
                 # Required for the application findings settings.
                 export GSETTINGS_SCHEMA_DIR=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}/glib-2.0/schemas/:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas/:./build/data/
@@ -123,10 +124,10 @@
                       boot.loader.efi.canTouchEfiVariables = true;
 
                       services.xserver.enable = true;
-                      services.xserver.displayManager.gdm.enable = true;
-                      services.xserver.desktopManager.gnome.enable = true;
-                      services.xserver.displayManager.autoLogin.enable = true;
-                      services.xserver.displayManager.autoLogin.user = "alice";
+                      services.displayManager.gdm.enable = true;
+                      services.desktopManager.gnome.enable = true;
+                      services.displayManager.autoLogin.enable = true;
+                      services.displayManager.autoLogin.user = "alice";
 
                       virtualisation.qemu.options = [ "-device VGA,edid=on,xres=1920,yres=1080" ]; # Source: https://wiki.archlinux.org/title/QEMU
 
@@ -147,7 +148,7 @@
                           serviceConfig = {
                             ExecStart = [
                               ""
-                              "${pkgs.gnome.gnome-shell}/bin/gnome-shell"
+                              "${pkgs.gnome-shell}/bin/gnome-shell"
                             ];
                           };
                         };

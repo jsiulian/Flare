@@ -235,6 +235,11 @@ impl MessageItem {
         let visible = self.message().show_timestamp() || self.property("force-show-timestamp");
         self.imp().timestamp.set_visible(visible);
         self.imp().timestamp_img.set_visible(visible);
+        if visible {
+            self.add_css_class("has-timestamp");
+        } else {
+            self.remove_css_class("has-timestamp");
+        }
     }
 
     fn setup_loaded(&self) {

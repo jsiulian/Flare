@@ -177,14 +177,11 @@ impl Manager {
             "Clearing channel messages the manager for: {}",
             channel.title()
         );
-        if let Some(thread) = channel.thread() {
-            let mut store = self.store();
-            tspawn!(async move { store.clear_thread(&thread).await })
-                .await
-                .expect("Failed to spawn tokio")?;
-        } else {
-            log::warn!("Was asked to clear a channel without an associated thread");
-        }
+        let thread = channel.thread();
+        let mut store = self.store();
+        tspawn!(async move { store.clear_thread(&thread).await })
+            .await
+            .expect("Failed to spawn tokio")?;
         Ok(())
     }
 
@@ -217,6 +214,7 @@ impl Manager {
         Ok(())
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub async fn message(
         &self,
         thread: &Thread,
@@ -374,6 +372,7 @@ impl Manager {
                         },
                         Some(Received::Contacts) => {
                             log::trace!("Received contacts");
+                            self.init_channels().await;
                         }
                         Some(Received::Content(msg)) => {
                             let message = Message::from_content(*msg, self).await;
@@ -390,7 +389,7 @@ impl Manager {
                             let channel = {
                                 let channels = self.imp().channels.borrow();
                                 crate::debug!("Got from channel: {}", channel.property::<String>("title"));
-                                if let Some(stored_channel) = channels.get(&channel.internal_hash()) {
+                                if let Some(stored_channel) = channels.get(&channel.thread()) {
                                     log::debug!("Message from a already existing channel");
                                     stored_channel.clone()
                                 } else {
@@ -398,7 +397,7 @@ impl Manager {
                                     log::debug!("Got a message from a new channel");
                                     self.emit_by_name::<()>("channel", &[&channel]);
                                     let mut channels_mut = self.imp().channels.borrow_mut();
-                                    channels_mut.insert(channel.internal_hash(), channel.clone());
+                                    channels_mut.insert(channel.thread(), channel.clone());
                                     channel
                                 }
                             };
@@ -447,20 +446,36 @@ impl Manager {
         uuid: ServiceId,
         group: &Option<GroupContextV2>,
     ) -> Channel {
-        let found = if group.is_some() {
-            self.available_channels()
-                .into_iter()
-                .find(|c| &c.group_context() == group)
+        let thread = if let Some(group) = group {
+            Thread::Group(
+                group
+                    .master_key()
+                    .try_into()
+                    .expect("Group master key to have the correct length"),
+            )
         } else {
-            self.available_channels()
-                .into_iter()
-                .find(|c| c.uuid() == Some(uuid))
+            Thread::Contact(uuid)
         };
-        if let Some(found) = found {
-            return found;
-        }
+
         let contact = Contact::from_service_address(&uuid, self).await;
-        Channel::from_contact_or_group(contact, group, self).await
+        let channel = Channel::from_contact_or_group(contact, group, self).await;
+        channel.initialize_avatar().await;
+
+        let mut known_channels = self.imp().channels.borrow_mut();
+        known_channels.entry(thread).or_insert_with(|| {
+            log::trace!("Got a contact from the storage");
+            self.emit_by_name::<()>("channel", &[&channel]);
+            channel.clone()
+        });
+
+        // No need to initialize avatar or last messages in here, will be done when initializing contacts.
+
+        channel
+    }
+
+    pub fn channel_from_thread(&self, thread: Thread) -> Option<Channel> {
+        let known_channels = self.imp().channels.borrow_mut();
+        known_channels.get(&thread).cloned()
     }
 
     #[cfg(not(feature = "screenshot"))]
@@ -510,9 +525,11 @@ impl Manager {
             let mut known_channels = self.imp().channels.borrow_mut();
             to_load.extend(loaded_channels.clone());
             for channel in loaded_channels {
-                log::trace!("Got a contact from the storage");
-                self.emit_by_name::<()>("channel", &[&channel]);
-                known_channels.insert(channel.internal_hash(), channel);
+                known_channels.entry(channel.thread()).or_insert_with(|| {
+                    log::trace!("Got a contact from the storage");
+                    self.emit_by_name::<()>("channel", &[&channel]);
+                    channel
+                });
             }
         }
 
@@ -548,8 +565,10 @@ impl Manager {
                 let mut known_channels = self.imp().channels.borrow_mut();
                 to_load.extend(loaded_channels.clone());
                 for channel in loaded_channels {
-                    self.emit_by_name::<()>("channel", &[&channel]);
-                    known_channels.insert(channel.internal_hash(), channel);
+                    known_channels.entry(channel.thread()).or_insert_with(|| {
+                        self.emit_by_name::<()>("channel", &[&channel]);
+                        channel
+                    });
                 }
             }
         }
@@ -680,6 +699,7 @@ impl Manager {
         Ok(r?)
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub(super) async fn get_contact_by_id(
         &self,
         id: ServiceId,
@@ -693,6 +713,7 @@ impl Manager {
         Ok(r?)
     }
 
+    #[cfg(not(feature = "screenshot"))]
     pub(super) async fn get_profile_key_by_id(
         &self,
         id: ServiceId,
@@ -802,14 +823,18 @@ mod imp {
         backend::{Channel, Message, manager_thread::ManagerThread},
         config::BASE_ID,
     };
+    use presage::store::Thread;
 
     pub struct Manager {
         pub(super) internal: RefCell<Option<ManagerThread>>,
         pub(super) config_store: RefCell<Option<super::StoreType>>,
         #[cfg(feature = "screenshot")]
-        pub(in super::super) channels: RefCell<HashMap<u64, Channel>>,
+        pub(in super::super) channels: RefCell<HashMap<Thread, Channel>>,
         #[cfg(not(feature = "screenshot"))]
-        pub(super) channels: RefCell<HashMap<u64, Channel>>,
+        pub(super) channels: RefCell<HashMap<Thread, Channel>>,
+        #[cfg(feature = "screenshot")]
+        pub(in super::super) finished_setup: Cell<bool>,
+        #[cfg(not(feature = "screenshot"))]
         pub(super) finished_setup: Cell<bool>,
         pub(super) last_message_datetime: RefCell<Option<DateTime>>,
         pub(super) settings: Settings,
