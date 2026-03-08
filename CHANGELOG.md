@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Startup screen when loading messages.
 - Clicking on a notification now brings up the channel the notification came from.
 
+### Removed
+
+- Temporarily disabled registering as a primary device due to it being broken upstream.
+  It will be enabled again once upstream fixed the issue.
+
 ### Changed
 
 - Decreased message spacing for messages sent in quick succession.
