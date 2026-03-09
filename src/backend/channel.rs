@@ -161,6 +161,10 @@ impl Channel {
                     results.insert(0, msg.clone());
                 }
 
+                // Mark message from storage as already read.
+                // TODO: Mark as read instead using sync messages, and store read state in DB.
+                msg.mark_as_read();
+
                 let _ = self.do_new_message(&msg).await;
             }
 
@@ -228,10 +232,15 @@ impl Channel {
     /// - Add a quote to the message if needed.
     /// - Cache pending reactions and apply them for the correct message.
     /// - Delete a message in the current channel.
+    /// - Mark the message as read if the current channel is active.
     pub(super) async fn do_new_message(
         &self,
         message: &Message,
     ) -> Result<(), gtk::glib::error::BoolError> {
+        if self.property("is-active") {
+            message.mark_as_read();
+        }
+
         if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
             let body = message
                 .body()

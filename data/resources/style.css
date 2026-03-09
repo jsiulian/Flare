@@ -237,3 +237,8 @@ button.scroll-to-bottom {
 .image-text-button label {
   font-weight: bold;
 }
+
+unread-indicator {
+  background-color: @accent_bg_color;
+  border-radius: 6px;
+}

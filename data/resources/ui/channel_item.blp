@@ -3,7 +3,7 @@ using Adw 1;
 
 template $FlChannelItem: Box {
   accessibility {
-    labelled-by: label-name;
+    labelled-by: label_name;
   }
 
   margin-bottom: 6;
@@ -25,7 +25,7 @@ template $FlChannelItem: Box {
 
     Box {
       // Channel name
-      Label label-name {
+      Label label_name {
         styles [
           "heading",
         ]
@@ -53,22 +53,35 @@ template $FlChannelItem: Box {
       }
     }
 
-    Label label_last_message {
-      halign: start;
-      height-request: 36;
-      xalign: 0;
-      yalign: 0;
-      wrap: true;
-      ellipsize: end;
-      lines: 2;
-      use-markup: true;
-      wrap-mode: word_char;
-      natural-wrap-mode: none;
-      label: bind $format_last_message(template.channel as <$FlChannel>.last-message as <$FlTextMessage>, template.channel as <$FlChannel>.is-typing as <bool>, template.channel as <$FlChannel>.draft as <string>) as <string>;
+    Box {
+      Label label_last_message {
+        halign: start;
+        height-request: 36;
+        xalign: 0;
+        yalign: 0;
+        wrap: true;
+        ellipsize: end;
+        lines: 2;
+        use-markup: true;
+        wrap-mode: word_char;
+        natural-wrap-mode: none;
+        label: bind $format_last_message(template.channel as <$FlChannel>.last-message as <$FlTextMessage>, template.channel as <$FlChannel>.is-typing as <bool>, template.channel as <$FlChannel>.draft as <string>) as <string>;
 
-      styles [
-        "subtitle",
-      ]
+        styles [
+          "subtitle",
+        ]
+      }
+
+      Adw.Bin indicator {
+        css-name: "unread-indicator";
+        visible: bind $not(template.channel as <$FlChannel>.last-message as <$FlMessage>.read as <string>) as <bool>;
+        valign: center;
+        halign: end;
+        hexpand: true;
+        height-request: 9;
+        width-request: 9;
+        margin-start: 3;
+      }
     }
   }
 }

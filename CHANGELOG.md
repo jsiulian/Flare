@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Unread indicator in the channel list.
+
 ## [0.19.1] - 2026-03-09
 
 ### HOTFIX

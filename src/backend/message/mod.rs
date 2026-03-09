@@ -341,6 +341,7 @@ impl Message {
         let read = *this.read.borrow();
         if !read {
             this.read.replace(true);
+            self.notify("read");
             return true;
         }
         false
