@@ -16,9 +16,14 @@ pub const KEY_DOWNLOAD_VIDEOS: &str = "flare.download_videos";
 pub const KEY_DOWNLOAD_FILES: &str = "flare.download_files";
 pub const KEY_DOWNLOAD_VOICE: &str = "flare.download_voice";
 pub const KEY_MESSAGES_SELECTABLE: &str = "flare.messages_selectable";
+pub const KEY_RUN_IN_BACKGROUND: &str = "flare.run_in_background";
 
 pub fn send_on_enter() -> bool {
     alert::user_default_bool(KEY_SEND_ON_ENTER).unwrap_or(true)
+}
+
+pub fn run_in_background() -> bool {
+    alert::user_default_bool(KEY_RUN_IN_BACKGROUND).unwrap_or(true)
 }
 
 pub fn notifications_enabled() -> bool {
@@ -284,6 +289,8 @@ pub struct PreferencesDelegate {
     messages_selectable_sw: NativeToggle,
     send_on_enter_label: Label,
     send_on_enter_sw: NativeToggle,
+    background_label: Label,
+    background_sw: NativeToggle,
 }
 
 impl Default for PreferencesDelegate {
@@ -326,6 +333,8 @@ impl Default for PreferencesDelegate {
             messages_selectable_sw: NativeToggle::new(KEY_MESSAGES_SELECTABLE, false),
             send_on_enter_label: Label::new(),
             send_on_enter_sw: NativeToggle::new(KEY_SEND_ON_ENTER, true),
+            background_label: Label::new(),
+            background_sw: NativeToggle::new(KEY_RUN_IN_BACKGROUND, true),
         }
     }
 }
@@ -387,6 +396,7 @@ impl WindowDelegate for PreferencesDelegate {
             .set_text("Selectable Message Text");
         self.send_on_enter_label
             .set_text("Press \u{201C}Enter\u{201D} to Send Message");
+        self.background_label.set_text("Run in Background");
 
         self.notifications_info.set_text(
             "For full notification control, open System Settings \u{2192} \
@@ -420,6 +430,7 @@ impl WindowDelegate for PreferencesDelegate {
             &self.compat_desc,
             &self.messages_selectable_label,
             &self.send_on_enter_label,
+            &self.background_label,
         ] {
             self.content.add_subview(label);
         }
@@ -432,6 +443,7 @@ impl WindowDelegate for PreferencesDelegate {
             &self.notif_reactions_sw,
             &self.messages_selectable_sw,
             &self.send_on_enter_sw,
+            &self.background_sw,
         ] {
             self.content.add_subview(&sw.container);
         }
@@ -605,6 +617,12 @@ impl WindowDelegate for PreferencesDelegate {
             self.messages_selectable_label.bottom,
             ROW_GAP
         ));
+        c.extend(row!(
+            self.background_label,
+            self.background_sw,
+            self.send_on_enter_label.bottom,
+            ROW_GAP
+        ));
 
         LayoutConstraint::activate(&c);
         window.set_content_view(&self.content);
@@ -616,6 +634,12 @@ pub struct PreferencesWindow(pub Option<Window<PreferencesDelegate>>);
 impl PreferencesWindow {
     pub fn show(&self) {
         if let Some(ref w) = self.0 {
+            // Center the preferences window before showing it so it doesn't appear in a corner.
+            unsafe {
+                use objc::{msg_send, sel, sel_impl};
+                let win = &*w.objc as *const _ as *mut objc::runtime::Object;
+                let _: () = msg_send![win, center];
+            }
             w.show();
         }
     }

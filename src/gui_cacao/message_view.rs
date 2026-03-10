@@ -144,6 +144,7 @@ use crate::core::message::CoreMessage;
 
 use super::app::{AppMessage, FlareApp};
 use super::menu_action::attach_message_context_menu;
+use super::preferences_window;
 
 const MSG_OUT_ROW: &str = "MsgOutCell";
 const MSG_IN_ROW: &str = "MsgInCell";
@@ -156,13 +157,16 @@ pub type ReactionList = Vec<String>;
 pub enum MessageItem {
     Outgoing(CoreMessage, ReactionList),
     Incoming(CoreMessage, ReactionList),
+    Call(CoreMessage),
     DateDivider(String),
 }
 
 impl MessageItem {
     pub fn timestamp(&self) -> u64 {
         match self {
-            MessageItem::Outgoing(m, _) | MessageItem::Incoming(m, _) => m.timestamp,
+            MessageItem::Outgoing(m, _) | MessageItem::Incoming(m, _) | MessageItem::Call(m) => {
+                m.timestamp
+            }
             MessageItem::DateDivider(_) => 0,
         }
     }
@@ -232,7 +236,10 @@ pub fn build_message_items(messages: Vec<CoreMessage>) -> Vec<MessageItem> {
                     .collect()
             })
             .unwrap_or_default();
-        if msg.is_outgoing {
+
+        if msg.is_call {
+            items.push(MessageItem::Call(msg));
+        } else if msg.is_outgoing {
             items.push(MessageItem::Outgoing(msg, reactions));
         } else {
             items.push(MessageItem::Incoming(msg, reactions));
@@ -242,41 +249,68 @@ pub fn build_message_items(messages: Vec<CoreMessage>) -> Vec<MessageItem> {
     items
 }
 
-/// Scroll an NSTableView to its last row.
-fn scroll_to_bottom(view: &ListView) {
+/// Check if the NSTableView is scrolled to the bottom (within a small threshold).
+fn is_scrolled_to_bottom(view: &ListView) -> bool {
     use objc::{class, msg_send, sel, sel_impl};
     let table = view
         .objc
         .get(|obj| obj as *const _ as *mut objc::runtime::Object);
     unsafe {
-        // Force layout so row geometry is up to date after reloadData.
         let enclosing_scroll: *mut objc::runtime::Object = msg_send![table, enclosingScrollView];
-        if !enclosing_scroll.is_null() {
-            let _: () = msg_send![enclosing_scroll, layoutSubtreeIfNeeded];
+        if enclosing_scroll.is_null() {
+            return true;
         }
+        let clip_view: *mut objc::runtime::Object = msg_send![enclosing_scroll, contentView];
+        if clip_view.is_null() {
+            return true;
+        }
+        let document_view: *mut objc::runtime::Object = msg_send![enclosing_scroll, documentView];
+        if document_view.is_null() {
+            return true;
+        }
+        let doc_rect: NSRect = msg_send![document_view, frame];
+        let clip_rect: NSRect = msg_send![clip_view, frame];
+        let clip_bounds: NSRect = msg_send![clip_view, bounds];
+        let doc_height = doc_rect.h;
+        let clip_height = clip_rect.h;
+        let content_offset = clip_bounds.y;
+        // Consider "at bottom" if within 50 pixels of the bottom
+        (content_offset + clip_height >= doc_height - 50.0)
+    }
+}
+
+/// Scroll an NSTableView to its last row, only if already scrolled to bottom or forced.
+fn scroll_to_bottom(view: &ListView, force: bool) {
+    use objc::{msg_send, sel, sel_impl};
+    let table = view
+        .objc
+        .get(|obj| obj as *const _ as *mut objc::runtime::Object);
+
+    // Only scroll if forced (e.g., new outgoing message) or user is already at bottom
+    if !force && !is_scrolled_to_bottom(view) {
+        return;
+    }
+
+    unsafe {
         let count: usize = msg_send![table, numberOfRows];
         if count > 0 {
-            // Tell the table to recalculate all row heights now that geometry is final.
-            note_height_changed(table, count);
             let _: () = msg_send![table, scrollRowToVisible: (count - 1) as isize];
         }
+    }
+}
 
-        // Schedule a deferred reload+scroll for the next run-loop iteration.
-        // On first load, the table's column width might not be settled yet,
-        // causing wrong row heights. The deferred reload + height invalidation
-        // fixes bubbles extending beyond their cell bounds.
-        let table_usize = table as usize;
-        cacao::utils::async_main_thread(move || {
-            let t = table_usize as *mut objc::runtime::Object;
-            let _: () = msg_send![t, reloadData];
-            let c: usize = msg_send![t, numberOfRows];
-            if c > 0 {
-                // Now that the table has its final geometry, invalidate all row heights
-                // so automatic row sizing recomputes with the correct column width.
-                note_height_changed(t, c);
-                let _: () = msg_send![t, scrollRowToVisible: (c - 1) as isize];
-            }
-        });
+/// Scroll to a specific row index.
+fn scroll_to_message_index(view: &ListView, index: usize) {
+    use objc::{msg_send, sel, sel_impl};
+    let table = view
+        .objc
+        .get(|obj| obj as *const _ as *mut objc::runtime::Object);
+
+    unsafe {
+        let count: usize = msg_send![table, numberOfRows];
+        if count > 0 && index < count {
+            let _: () = msg_send![table, scrollRowToVisible: index as isize];
+        }
     }
 }
 
@@ -294,8 +328,24 @@ fn note_height_changed(table: *mut objc::runtime::Object, count: usize) {
     }
 }
 
+/// Insert new row at end without full reload - for smooth animation.
+fn insert_new_row(view: &ListView) {
+    use objc::{class, msg_send, sel, sel_impl};
+    let ptr = view
+        .objc
+        .get(|obj| obj as *const _ as *mut objc::runtime::Object);
+    unsafe {
+        let count: usize = msg_send![ptr, numberOfRows];
+        if count == 0 {
+            return;
+        }
+        let idx = count - 1;
+        let set: *mut objc::runtime::Object = msg_send![class!(NSIndexSet), indexSetWithIndex: idx];
+        let _: () = msg_send![ptr, insertRowsAtIndexes: set withAnimation: 1];
+    }
+}
+
 /// Reload the ListView without holding a borrow on its ObjcProperty.
-/// Cacao's `ListView::reload()` uses `with_mut` (borrow_mut), but `reloadData`
 /// synchronously re-enters `item_for` → `dequeue` which calls `get` (borrow)
 /// on the same RefCell, causing a panic. We avoid this by extracting the
 /// raw pointer first, releasing the borrow, then sending the message.
@@ -350,9 +400,9 @@ fn rebuild_row_attachments(items: &[MessageItem]) {
         *guard = items
             .iter()
             .map(|item| match item {
-                MessageItem::Outgoing(m, _) | MessageItem::Incoming(m, _) => {
-                    m.attachments.first().cloned()
-                }
+                MessageItem::Outgoing(m, _)
+                | MessageItem::Incoming(m, _)
+                | MessageItem::Call(m) => m.attachments.first().cloned(),
                 MessageItem::DateDivider(_) => None,
             })
             .collect();
@@ -361,9 +411,9 @@ fn rebuild_row_attachments(items: &[MessageItem]) {
         *guard = items
             .iter()
             .map(|item| match item {
-                MessageItem::Outgoing(m, _) | MessageItem::Incoming(m, _) => {
-                    m.body.as_deref().and_then(first_url_from_text)
-                }
+                MessageItem::Outgoing(m, _)
+                | MessageItem::Incoming(m, _)
+                | MessageItem::Call(m) => m.body.as_deref().and_then(first_url_from_text),
                 MessageItem::DateDivider(_) => None,
             })
             .collect();
@@ -741,6 +791,25 @@ fn apply_body_text(label: &Label, text: &str, outgoing: bool) {
     });
 }
 
+/// Apply the "Selectable Message Text" preference to a label by toggling the
+/// underlying NSTextField's selectable state.
+fn apply_label_selectable(label: &Label) {
+    use cacao::objc_access::ObjcAccess;
+    let selectable = preferences_window::messages_selectable();
+    label.with_backing_obj_mut(|obj| unsafe {
+        use objc::{msg_send, sel, sel_impl};
+        let field: *mut objc::runtime::Object = obj as *const _ as *mut objc::runtime::Object;
+        let on = if selectable {
+            objc::runtime::YES
+        } else {
+            objc::runtime::NO
+        };
+        // NSTextField: allow selection and editing attributes when selectable is enabled.
+        let _: () = msg_send![field, setSelectable: on];
+        let _: () = msg_send![field, setAllowsEditingTextAttributes: on];
+    });
+}
+
 /// Extract the first URL from text using find_url_byte_ranges, prepending https:// for www. links.
 fn first_url_from_text(text: &str) -> Option<String> {
     let ranges = find_url_byte_ranges(text);
@@ -979,6 +1048,7 @@ impl ViewDelegate for OutgoingRow {
         self.body_label.set_text_color(Color::Label);
         self.body_label
             .set_line_break_mode(LineBreakMode::WrapWords);
+        apply_label_selectable(&self.body_label);
         self.delivery_label.set_font(&Font::system(10.));
         // White text on blue bubble background
         self.delivery_label.set_text_color(Color::SystemWhite);
@@ -1154,7 +1224,6 @@ pub struct IncomingRow {
     pub reactions_label: Label,
     pub react_button: Button,
     image_height: Option<LayoutConstraint>,
-    image_width: Option<LayoutConstraint>,
     video_height: Option<LayoutConstraint>,
     audio_height: Option<LayoutConstraint>,
     file_height: Option<LayoutConstraint>,
@@ -1176,7 +1245,6 @@ impl Default for IncomingRow {
             reactions_label: Label::new(),
             react_button: Button::new(""),
             image_height: None,
-            image_width: None,
             video_height: None,
             audio_height: None,
             file_height: None,
@@ -1304,6 +1372,7 @@ impl ViewDelegate for IncomingRow {
         self.body_label.set_text_color(Color::Label);
         self.body_label
             .set_line_break_mode(LineBreakMode::WrapWords);
+        apply_label_selectable(&self.body_label);
         self.reactions_label
             .set_font(&cacao::text::Font::system(14.));
         self.reactions_label.set_hidden(true);
@@ -1482,6 +1551,72 @@ impl ViewDelegate for IncomingRow {
     }
 }
 
+// — Call message row —
+
+const CALL_ROW: &str = "CallCell";
+
+#[derive(Default, Debug)]
+pub struct CallRow {
+    pub container: View,
+    pub icon: Label,
+    pub text: Label,
+}
+
+impl CallRow {
+    pub fn configure_with(&mut self, msg: &CoreMessage) {
+        let call_text = msg.body.clone().unwrap_or_else(|| "Call".to_string());
+        self.text.set_text(&call_text);
+    }
+}
+
+impl ViewDelegate for CallRow {
+    const NAME: &'static str = "CallRow";
+
+    fn did_load(&mut self, view: View) {
+        use cacao::text::Font;
+        self.container.set_background_color(Color::SystemGray5);
+
+        self.icon.set_text("📞");
+        self.icon.set_font(&Font::system(14.));
+        self.text.set_text_color(Color::SystemGray);
+        self.text.set_font(&Font::system(12.));
+
+        self.container.add_subview(&self.icon);
+        self.container.add_subview(&self.text);
+        view.add_subview(&self.container);
+
+        LayoutConstraint::activate(&[
+            self.container.center_x.constraint_equal_to(&view.center_x),
+            self.container.top.constraint_equal_to(&view.top).offset(4.),
+            self.container
+                .bottom
+                .constraint_equal_to(&view.bottom)
+                .offset(-4.),
+            self.container
+                .height
+                .constraint_greater_than_or_equal_to_constant(28.),
+            self.icon
+                .leading
+                .constraint_equal_to(&self.container.leading)
+                .offset(12.),
+            self.icon
+                .center_y
+                .constraint_equal_to(&self.container.center_y),
+            self.text
+                .leading
+                .constraint_equal_to(&self.icon.trailing)
+                .offset(6.),
+            self.text
+                .trailing
+                .constraint_equal_to(&self.container.trailing)
+                .offset(-12.),
+            self.text
+                .center_y
+                .constraint_equal_to(&self.container.center_y),
+        ]);
+    }
+}
+
 // — Date divider row —
 
 #[derive(Default, Debug)]
@@ -1529,8 +1664,6 @@ pub struct MessageListDelegate {
     pub view: Option<ListView>,
     items: RefCell<Vec<MessageItem>>,
     selected_row: RefCell<Option<usize>>,
-    /// Row index captured when a context menu action fires (clickedRow may reset after menu closes).
-    last_context_row: RefCell<Option<usize>>,
 }
 
 impl Default for MessageListDelegate {
@@ -1539,33 +1672,47 @@ impl Default for MessageListDelegate {
             view: None,
             items: RefCell::new(Vec::new()),
             selected_row: RefCell::new(None),
-            last_context_row: RefCell::new(None),
         }
     }
 }
 
 impl MessageListDelegate {
     pub fn set_messages(&self, messages: Vec<CoreMessage>) {
+        // Reverse so oldest is at top, newest at bottom (like normal chat)
+        let messages: Vec<_> = messages.into_iter().rev().collect();
         let items = build_message_items(messages);
         rebuild_row_attachments(&items);
         *self.items.borrow_mut() = items;
         if let Some(view) = &self.view {
             reload_listview(view);
-            scroll_to_bottom(view);
+            // Scroll to last row (newest message)
+            let ptr = view
+                .objc
+                .get(|obj| obj as *const _ as *mut objc::runtime::Object);
+            unsafe {
+                use objc::{msg_send, sel, sel_impl};
+                let count: usize = msg_send![ptr, numberOfRows];
+                if count > 0 {
+                    let _: () = msg_send![ptr, scrollRowToVisible: (count - 1) as isize];
+                }
+            }
         }
     }
 
     pub fn add_message(&self, message: CoreMessage) {
         let is_reaction = message.is_reaction;
+        let is_outgoing = message.is_outgoing;
+        let reaction_target_ts = message.reaction_target_ts;
+
         {
             let mut items = self.items.borrow_mut();
 
             if message.is_reaction {
                 // Reactions update an existing message — no new row, no date divider
-                if let Some(ts) = message.reaction_target_ts {
+                if let Some(ts) = reaction_target_ts {
                     let sender = message.sender_name.clone();
                     let emoji = message.body.as_deref().unwrap_or("").to_string();
-                    for item in items.iter_mut().rev() {
+                    for (idx, item) in items.iter_mut().enumerate().rev() {
                         match item {
                             MessageItem::Outgoing(m, reactions)
                             | MessageItem::Incoming(m, reactions)
@@ -1611,9 +1758,32 @@ impl MessageListDelegate {
             rebuild_row_attachments(&items);
         }
         if let Some(view) = &self.view {
-            reload_listview(view);
             if !is_reaction {
-                scroll_to_bottom(view);
+                reload_listview(view);
+                scroll_to_bottom(view, is_outgoing);
+            } else {
+                // For reactions: reload just the affected row to avoid scroll jump
+                if let Some(ts) = reaction_target_ts {
+                    let items = self.items.borrow();
+                    if let Some(idx) = items.iter().position(|item| match item {
+                        MessageItem::Outgoing(m, _)
+                        | MessageItem::Incoming(m, _)
+                        | MessageItem::Call(m) => m.timestamp == ts,
+                        MessageItem::DateDivider(_) => false,
+                    }) {
+                        let ptr = view
+                            .objc
+                            .get(|obj| obj as *const _ as *mut objc::runtime::Object);
+                        unsafe {
+                            use objc::{class, msg_send, sel, sel_impl};
+                            let index_set: *mut objc::runtime::Object =
+                                msg_send![class!(NSIndexSet), indexSetWithIndex: idx];
+                            let col_set: *mut objc::runtime::Object =
+                                msg_send![class!(NSIndexSet), indexSetWithIndex: 0];
+                            let _: () = msg_send![ptr, reloadDataForRowIndexes: index_set columnIndexes: col_set];
+                        }
+                    }
+                }
             }
         }
     }
@@ -1655,7 +1825,9 @@ impl MessageListDelegate {
         let idx = self.effective_row()?;
         let items = self.items.borrow();
         match items.get(idx) {
-            Some(MessageItem::Outgoing(m, _) | MessageItem::Incoming(m, _)) => m.body.clone(),
+            Some(
+                MessageItem::Outgoing(m, _) | MessageItem::Incoming(m, _) | MessageItem::Call(m),
+            ) => m.body.clone(),
             _ => None,
         }
     }
@@ -1664,18 +1836,9 @@ impl MessageListDelegate {
         let idx = self.effective_row()?;
         let items = self.items.borrow();
         match items.get(idx) {
-            Some(MessageItem::Outgoing(m, _) | MessageItem::Incoming(m, _)) => Some(m.clone()),
-            _ => None,
-        }
-    }
-
-    pub fn selected_attachment(&self) -> Option<libsignal_service::proto::AttachmentPointer> {
-        let idx = self.effective_row()?;
-        let items = self.items.borrow();
-        match items.get(idx) {
-            Some(MessageItem::Outgoing(m, _) | MessageItem::Incoming(m, _)) => {
-                m.attachments.first().cloned()
-            }
+            Some(
+                MessageItem::Outgoing(m, _) | MessageItem::Incoming(m, _) | MessageItem::Call(m),
+            ) => Some(m.clone()),
             _ => None,
         }
     }
@@ -1684,9 +1847,9 @@ impl MessageListDelegate {
         {
             let mut items = self.items.borrow_mut();
             items.retain(|item| match item {
-                MessageItem::Outgoing(m, _) | MessageItem::Incoming(m, _) => {
-                    m.timestamp != timestamp
-                }
+                MessageItem::Outgoing(m, _)
+                | MessageItem::Incoming(m, _)
+                | MessageItem::Call(m) => m.timestamp != timestamp,
                 MessageItem::DateDivider(_) => true,
             });
             rebuild_row_attachments(&items);
@@ -1703,6 +1866,7 @@ impl ListViewDelegate for MessageListDelegate {
     fn did_load(&mut self, view: ListView) {
         view.register(MSG_OUT_ROW, OutgoingRow::default);
         view.register(MSG_IN_ROW, IncomingRow::default);
+        view.register(CALL_ROW, CallRow::default);
         view.register(DATE_ROW, DateDividerRow::default);
         // Let NSTableView determine row heights from the view layout so
         // image bubbles can grow to their full size.
@@ -1756,6 +1920,13 @@ impl ListViewDelegate for MessageListDelegate {
                         .dequeue::<IncomingRow>(MSG_IN_ROW);
                     if let Some(delegate) = &mut view.delegate {
                         delegate.configure_with(msg, reactions);
+                    }
+                    view.into_row()
+                }
+                Some(MessageItem::Call(msg)) => {
+                    let mut view = self.view.as_ref().unwrap().dequeue::<CallRow>(CALL_ROW);
+                    if let Some(delegate) = &mut view.delegate {
+                        delegate.configure_with(msg);
                     }
                     view.into_row()
                 }

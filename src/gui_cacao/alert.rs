@@ -1,7 +1,7 @@
-use std::ffi::CString;
-use std::path::PathBuf;
 use objc::runtime::Object;
 use objc::{class, msg_send, sel, sel_impl};
+use std::ffi::CString;
+use std::path::PathBuf;
 
 unsafe fn nsstring(s: &str) -> *mut Object {
     let cs = CString::new(s).unwrap_or_default();
@@ -48,6 +48,47 @@ pub fn info(title: &str, message: &str) {
         let _: () = msg_send![alert, setInformativeText: ns_msg];
 
         let _: i64 = msg_send![alert, runModal];
+    }
+}
+
+/// Show a modal NSAlert with an error message and optional Report button.
+/// Returns "report" if Report button clicked, "ok" if OK button clicked, or None on cancel.
+pub fn error_with_report(title: &str, message: &str, show_report: bool) -> Option<String> {
+    unsafe {
+        let cls = class!(NSAlert);
+        let alert: *mut Object = msg_send![cls, new];
+
+        let ns_title = nsstring(title);
+        let _: () = msg_send![alert, setMessageText: ns_title];
+
+        let ns_msg = nsstring(message);
+        let _: () = msg_send![alert, setInformativeText: ns_msg];
+
+        // NSAlertSecondButtonReturn = 1001
+        if show_report {
+            let ns_report = nsstring("Report");
+            let _: *mut Object = msg_send![alert, addButtonWithTitle: ns_report];
+        }
+
+        let ns_ok = nsstring("OK");
+        let _: *mut Object = msg_send![alert, addButtonWithTitle: ns_ok];
+
+        let response: i64 = msg_send![alert, runModal];
+        if show_report && response == 1001 {
+            Some("report".to_string())
+        } else {
+            Some("ok".to_string())
+        }
+    }
+}
+
+/// Open a URL in the default browser (for Report button).
+pub fn open_url(url: &str) {
+    unsafe {
+        let ns_url = nsstring(url);
+        let nsworkspace = class!(NSWorkspace);
+        let shared: *mut Object = msg_send![nsworkspace, sharedWorkspace];
+        let _: () = msg_send![shared, openURL: ns_url];
     }
 }
 

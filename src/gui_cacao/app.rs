@@ -57,6 +57,9 @@ pub enum AppMessage {
     DeleteSelectedMessage,
     MessageDeleted(u64),
     TypingCleared(ChannelId),
+    FocusSearch,
+    ShowHelp,
+    ShowAbout,
 }
 
 pub struct FlareApp {
@@ -84,7 +87,9 @@ impl AppDelegate for FlareApp {
             Menu::new(
                 "",
                 vec![
-                    MenuItem::About("Flare".to_string()),
+                    MenuItem::new("About Flare").action(|| {
+                        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::ShowAbout);
+                    }),
                     MenuItem::Separator,
                     MenuItem::new("Preferences...").key(",").action(|| {
                         App::<FlareApp, AppMessage>::dispatch_main(AppMessage::OpenPreferences);
@@ -136,6 +141,9 @@ impl AppDelegate for FlareApp {
                     MenuItem::Paste,
                     MenuItem::SelectAll,
                     MenuItem::Separator,
+                    MenuItem::new("Find").key("f").action(|| {
+                        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::FocusSearch);
+                    }),
                     MenuItem::new("Copy Message")
                         .key("c")
                         .modifiers(&[EventModifierFlag::Control, EventModifierFlag::Command])
@@ -144,6 +152,20 @@ impl AppDelegate for FlareApp {
                                 AppMessage::CopySelectedMessage,
                             );
                         }),
+                ],
+            ),
+            Menu::new(
+                "Help",
+                vec![
+                    MenuItem::new("Keyboard Shortcuts").key("?").action(|| {
+                        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::ShowHelp);
+                    }),
+                    MenuItem::Separator,
+                    MenuItem::new("Report a Problem...").action(|| {
+                        super::alert::open_url(
+                            "https://gitlab.com/schmiddi-on-mobile/flare/-/issues",
+                        );
+                    }),
                 ],
             ),
             Menu::new(
@@ -271,13 +293,20 @@ impl Dispatcher for FlareApp {
                     if let Some(ref channel_id) = message.channel_id {
                         let is_active = self.window.is_active_channel(channel_id);
                         if !is_active && super::preferences_window::notifications_enabled() {
-                            let title = &message.sender_name;
-                            let body = message.body.as_deref().unwrap_or("New message");
-                            super::notifications::post_notification(
-                                title,
-                                body,
-                                &channel_id_to_str(channel_id),
-                            );
+                            // Respect the separate "notify on reactions" toggle.
+                            if message.is_reaction
+                                && !super::preferences_window::notifications_reactions_enabled()
+                            {
+                                // Skip notification for reactions when disabled.
+                            } else {
+                                let title = &message.sender_name;
+                                let body = message.body.as_deref().unwrap_or("New message");
+                                super::notifications::post_notification(
+                                    title,
+                                    body,
+                                    &channel_id_to_str(channel_id),
+                                );
+                            }
                         }
                     }
                 }
@@ -372,7 +401,10 @@ impl Dispatcher for FlareApp {
                 self.window.clear_current_channel_messages();
             }
             AppMessage::BackendActionFailed(err) => {
-                alert::info("Action Failed", &err);
+                let result = alert::error_with_report("Action Failed", &err, true);
+                if result == Some("report".to_string()) {
+                    alert::open_url("https://gitlab.com/schmiddi-on-mobile/flare/-/issues");
+                }
             }
             AppMessage::ReactToMessage(emoji) => {
                 self.window.handle_react(&emoji);
@@ -409,6 +441,9 @@ impl Dispatcher for FlareApp {
             AppMessage::FocusInput => {
                 self.window.focus_input();
             }
+            AppMessage::FocusSearch => {
+                self.window.focus_search();
+            }
             AppMessage::DeleteSelectedMessage => {
                 self.window.delete_selected_message();
             }
@@ -417,6 +452,26 @@ impl Dispatcher for FlareApp {
             }
             AppMessage::TypingCleared(channel_id) => {
                 self.window.clear_typing(channel_id);
+            }
+            AppMessage::ShowHelp => {
+                super::alert::info(
+                    "Keyboard shortcuts",
+                    "Cmd+F  Find (focus search)\nCmd+N  New conversation\nCmd+1–9  Activate conversation\nCmd+L  Load more messages\nCmd+I  Focus message input\nCtrl+Cmd+C  Copy selected message",
+                );
+            }
+            AppMessage::ShowAbout => {
+                let version = env!("CARGO_PKG_VERSION");
+                let description = env!("CARGO_PKG_DESCRIPTION");
+                super::alert::info(
+                    "About Flare",
+                    &format!(
+                        "Flare – Chat with your friends on Signal\n\n\
+Version: {version}\n\n\
+{description}\n\n\
+Flare is an unofficial app for Signal. It is still in development and doesn't include all the features that the official Signal apps do.\n\n\
+Please note that using this application will probably worsen your security compared to using official Signal applications. Use with care when handling sensitive data."
+                    ),
+                );
             }
         }
     }

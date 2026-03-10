@@ -94,39 +94,6 @@ pub unsafe fn make_menu_item(
     item
 }
 
-// ── Emoji handler class (reuses the same callback mechanism) ─────────────
-
-static EMOJI_BTN_CLASS_ONCE: std::sync::Once = std::sync::Once::new();
-static mut EMOJI_BTN_CLASS: *const objc::runtime::Class = std::ptr::null();
-
-extern "C" fn emoji_btn_perform(this: &Object, _cmd: Sel, _sender: *const Object) {
-    unsafe {
-        let ptr: usize = *this.get_ivar(CALLBACK_PTR);
-        if ptr != 0 {
-            let callback = &*(ptr as *const Callback);
-            callback();
-        }
-    }
-}
-
-fn register_emoji_btn_class() -> *const objc::runtime::Class {
-    EMOJI_BTN_CLASS_ONCE.call_once(|| unsafe {
-        let superclass = class!(NSObject);
-        let mut decl = objc::declare::ClassDecl::new("RSTEmojiButtonHandler", superclass).unwrap();
-        decl.add_ivar::<usize>(CALLBACK_PTR);
-        decl.add_method(
-            sel!(perform:),
-            emoji_btn_perform as extern "C" fn(&Object, Sel, *const Object),
-        );
-        decl.add_method(
-            sel!(validateMenuItem:),
-            validate_menu_item as extern "C" fn(&Object, Sel, *const Object) -> objc::runtime::BOOL,
-        );
-        EMOJI_BTN_CLASS = decl.register();
-    });
-    unsafe { EMOJI_BTN_CLASS }
-}
-
 /// Attach a context menu to an NSTableView (or any NSView) with Copy Message, Reply, and Delete.
 pub fn attach_message_context_menu(
     view_obj: *mut Object,

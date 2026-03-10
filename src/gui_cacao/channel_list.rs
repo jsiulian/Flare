@@ -213,9 +213,8 @@ impl ViewDelegate for ChannelRow {
                 .trailing
                 .constraint_equal_to(&view.trailing)
                 .offset(-12.),
-            self.badge
-                .width
-                .constraint_greater_than_or_equal_to_constant(18.),
+            // Make badge a circle: width = height (18)
+            self.badge.width.constraint_equal_to_constant(18.),
             self.badge.height.constraint_equal_to_constant(18.),
         ]);
     }
@@ -280,6 +279,9 @@ impl ChannelListDelegate {
             view.reload();
         }
         self.reselect_active();
+        if self.active_channel_id.borrow().is_none() && !self.visible_channels.borrow().is_empty() {
+            self.activate_channel_at_index(0);
+        }
     }
 
     /// Programmatically select channel at 0-based index in the visible list.
