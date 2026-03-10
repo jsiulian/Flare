@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Unread indicator in the channel list.
+- When activating a channel with unread messages, jump to the first one and highlight it with a small animation.
 
 ## [0.19.1] - 2026-03-09
 

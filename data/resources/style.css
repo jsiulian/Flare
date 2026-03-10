@@ -242,3 +242,26 @@ unread-indicator {
   background-color: @accent_bg_color;
   border-radius: 6px;
 }
+
+/* Animations when one wants to visibly draw focus to a message. */
+.attention-animation:not(.from-self) .message-bubble {
+  animation: attention-background-not-self 0.25s ease alternate;
+  animation-iteration-count: 4;
+}
+
+@keyframes attention-background-not-self {
+  to {
+   background: mix(@window_bg_color, @window_fg_color, .4);
+  }
+}
+
+.attention-animation.from-self .message-bubble {
+  animation: attention-background-self 0.25s ease alternate;
+  animation-iteration-count: 4;
+}
+
+@keyframes attention-background-self {
+  to {
+   background: alpha(@accent_bg_color, 0.7);
+  }
+}

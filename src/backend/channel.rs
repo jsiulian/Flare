@@ -1,6 +1,9 @@
 use crate::backend::{
     Contact, Manager, Message,
-    message::{DeletionMessage, DisplayMessage, MessageExt, ReactionMessage, TextMessage},
+    message::{
+        DeletionMessage, DisplayMessage, DisplayMessageExt, MessageExt, ReactionMessage,
+        TextMessage,
+    },
     timeline::{TimelineItem, TimelineItemExt},
 };
 use crate::prelude::*;
@@ -237,7 +240,7 @@ impl Channel {
         &self,
         message: &Message,
     ) -> Result<(), gtk::glib::error::BoolError> {
-        if self.property("is-active") {
+        if self.property("is-active") || message.sender().is_self() {
             message.mark_as_read();
         }
 
@@ -581,8 +584,29 @@ impl Channel {
         self.set_property("is-active", active);
     }
 
+    fn first_unread_message(&self) -> Option<DisplayMessage> {
+        self.imp()
+            .timeline
+            .borrow()
+            .iter_backwards()
+            .filter(|i| i.is::<DisplayMessage>())
+            .map_while(|m| {
+                let message = m.dynamic_cast::<DisplayMessage>().unwrap();
+                // We can stop at first read message
+                if !message.property::<bool>("read") {
+                    return Some(message);
+                }
+                None
+            })
+            .last()
+    }
+
     /// Mark all messages as read.
-    pub fn mark_as_read(&self) -> Vec<String> {
+    pub fn mark_as_read(&self) -> Vec<Message> {
+        if let Some(first_unread) = self.first_unread_message() {
+            first_unread.flash_requires_attention();
+        }
+
         self.imp()
             .timeline
             .borrow()
@@ -591,10 +615,8 @@ impl Channel {
             .map_while(|m| {
                 let message = m.dynamic_cast::<Message>().unwrap();
                 // We can stop at first read message
-                if message.mark_as_read()
-                    && let Some(uid) = message.uid()
-                {
-                    return Some(uid);
+                if message.mark_as_read() {
+                    return Some(message);
                 }
                 None
             })
