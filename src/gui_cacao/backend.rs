@@ -293,6 +293,7 @@ async fn run_message_loop(
                                         reaction_target_ts: Some(target_ts),
                                         is_receipt: false,
                                         is_call: false,
+                                        call_type: None,
                                         is_typing: false,
                                         attachments: vec![],
                                         quote: None,
@@ -371,7 +372,9 @@ async fn run_message_loop(
                         cmd = commands.next().fuse() => {
                             match cmd {
                                 Some(BackendCommand::LoadMessages(channel_id)) => {
-                                    let msgs = load_messages_with_images(&manager, &store, &channel_id, 50, 0).await;
+                                    log::trace!("LoadMessages called for channel");
+                                    let msgs = load_messages_with_images(&manager, &store, &channel_id, 100, 0).await;
+                                    log::trace!("Loaded {} messages, first ts={:?}", msgs.len(), msgs.first().map(|m| m.timestamp));
                                     App::<FlareApp, AppMessage>::dispatch_main(
                                         AppMessage::MessagesLoaded(channel_id, msgs),
                                     );
@@ -483,6 +486,7 @@ async fn send_message(
                 reaction_target_ts: None,
                 is_receipt: false,
                 is_call: false,
+                call_type: None,
                 is_typing: false,
                 attachments: vec![],
                 quote,
@@ -627,6 +631,7 @@ async fn send_attachment(
                 reaction_target_ts: None,
                 is_receipt: false,
                 is_call: false,
+                call_type: None,
                 is_typing: false,
                 // Keep attachment pointers so double-click open works like receive-side.
                 attachments: attachment_pointers.clone(),

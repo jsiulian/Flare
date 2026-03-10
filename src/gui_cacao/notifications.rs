@@ -1,14 +1,26 @@
 /// macOS UNUserNotificationCenter integration.
 /// Posts a notification when a message arrives in a non-active channel,
 /// and withdraws notifications when that channel is opened.
-
 use std::ffi::CString;
+use std::sync::atomic::{AtomicPtr, Ordering};
+
+static NOTIFICATION_CALLBACK: AtomicPtr<std::ffi::c_void> = AtomicPtr::new(std::ptr::null_mut());
 
 unsafe fn nsstring(s: &str) -> *mut objc::runtime::Object {
     use objc::{class, msg_send, sel, sel_impl};
     let cs = CString::new(s).unwrap_or_default();
     let obj: *mut objc::runtime::Object = msg_send![class!(NSString), alloc];
     msg_send![obj, initWithUTF8String: cs.as_ptr()]
+}
+
+/// Callback type for notification clicks: takes the channel identifier string.
+pub type NotificationCallback = Box<dyn Fn(String) + Send + Sync>;
+
+/// Set the callback to be invoked when a notification is clicked.
+/// The callback receives the channel identifier that was passed to post_notification.
+pub fn set_click_callback(callback: NotificationCallback) {
+    let boxed = Box::into_raw(Box::new(callback));
+    NOTIFICATION_CALLBACK.store(boxed as *mut _, Ordering::SeqCst);
 }
 
 /// Returns true when running inside a proper .app bundle.
@@ -92,8 +104,7 @@ pub fn remove_notifications(identifier: &str) {
             msg_send![class!(UNUserNotificationCenter), currentNotificationCenter];
         // Build NSArray with a single identifier string
         let id_str = nsstring(identifier);
-        let arr: *mut objc::runtime::Object =
-            msg_send![class!(NSArray), arrayWithObject: id_str];
+        let arr: *mut objc::runtime::Object = msg_send![class!(NSArray), arrayWithObject: id_str];
         let _: () = msg_send![center, removeDeliveredNotificationsWithIdentifiers: arr];
         let _: () = msg_send![center, removePendingNotificationRequestsWithIdentifiers: arr];
     }

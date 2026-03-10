@@ -2,6 +2,7 @@ use libsignal_service::prelude::Content;
 use libsignal_service::protocol::ServiceId;
 use presage::store::{ContentsStore, Thread};
 use presage_store_sqlite::SqliteStore as Store;
+use std::cmp::Reverse;
 
 use super::channel::ChannelId;
 
@@ -27,6 +28,43 @@ pub struct QuoteData {
 }
 
 #[derive(Debug, Clone)]
+pub enum CallType {
+    Offer,    // Incoming/outgoing call
+    Answer,   // Call started
+    Hangup,   // Call ended
+    Busy,     // Declined/missed
+}
+
+impl CallType {
+    pub fn from_call_message(cm: &libsignal_service::content::CallMessage) -> Option<Self> {
+        if cm.offer.is_some() {
+            Some(CallType::Offer)
+        } else if cm.hangup.is_some() {
+            Some(CallType::Hangup)
+        } else if cm.answer.is_some() {
+            Some(CallType::Answer)
+        } else if cm.busy.is_some() {
+            Some(CallType::Busy)
+        } else {
+            None
+        }
+    }
+
+    pub fn display_text(&self, is_outgoing: bool) -> String {
+        match self {
+            CallType::Offer => {
+                if is_outgoing { "Outgoing call".to_string() } else { "Incoming call".to_string() }
+            }
+            CallType::Answer => "Call started".to_string(),
+            CallType::Hangup => "Call ended".to_string(),
+            CallType::Busy => {
+                if is_outgoing { "Unanswered call".to_string() } else { "Call declined".to_string() }
+            }
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
 pub struct CoreMessage {
     pub channel_id: Option<ChannelId>,
     pub sender: ServiceId,
@@ -38,6 +76,7 @@ pub struct CoreMessage {
     pub reaction_target_ts: Option<u64>,
     pub is_receipt: bool,
     pub is_call: bool,
+    pub call_type: Option<CallType>,
     pub is_typing: bool,
     pub reaction_remove: bool,
     pub attachments: Vec<libsignal_service::proto::AttachmentPointer>,
@@ -97,6 +136,7 @@ impl CoreMessage {
                         reaction_target_ts: r.target_sent_timestamp,
                         is_receipt: false,
                         is_call: false,
+                        call_type: None,
                         is_typing: false,
                         attachments: vec![],
                         quote: None,
@@ -136,6 +176,7 @@ impl CoreMessage {
                     reaction_target_ts: None,
                     is_receipt: false,
                     is_call: false,
+                    call_type: None,
                     is_typing: false,
                     attachments: dm.attachments.clone(),
                     quote,
@@ -200,6 +241,7 @@ impl CoreMessage {
                         reaction_target_ts,
                         is_receipt: false,
                         is_call: false,
+                        call_type: None,
                         is_typing: false,
                         attachments: dm.attachments.clone(),
                         quote: sync_quote,
@@ -211,25 +253,28 @@ impl CoreMessage {
                 }
                 None
             }
-            ContentBody::CallMessage(_) => {
+            ContentBody::CallMessage(cm) => {
                 let channel_id = if let ServiceId::Aci(aci) = sender {
                     let uuid: libsignal_service::prelude::Uuid = aci.into();
                     Some(ChannelId::Contact(uuid))
                 } else {
                     None
                 };
+                let call_type = CallType::from_call_message(cm);
+                let body = call_type.as_ref().map(|ct| ct.display_text(false));
                 Some(Self {
                     channel_id,
                     sender,
                     sender_name,
                     timestamp,
-                    body: Some("[Call]".to_string()),
+                    body,
                     is_outgoing: false,
                     is_reaction: false,
                     reaction_remove: false,
                     reaction_target_ts: None,
                     is_receipt: false,
                     is_call: true,
+                    call_type,
                     is_typing: false,
                     attachments: vec![],
                     quote: None,
@@ -266,6 +311,7 @@ impl CoreMessage {
                     reaction_target_ts: None,
                     is_receipt: false,
                     is_call: false,
+                    call_type: None,
                     is_typing: true,
                     attachments: vec![],
                     quote: None,
@@ -294,6 +340,7 @@ impl CoreMessage {
                     reaction_target_ts: None,
                     is_receipt: true,
                     is_call: false,
+                    call_type: None,
                     is_typing: false,
                     attachments: vec![],
                     quote: None,
@@ -337,19 +384,15 @@ pub async fn load_messages(
 ) -> Vec<CoreMessage> {
     let thread = thread_for_channel(channel_id);
     let mut messages = match store.messages(&thread, ..).await {
-        Ok(messages) => messages
-            .filter_map(|r| r.ok())
-            .filter_map(|content| CoreMessage::from_content(&content))
-            .filter(|m| !m.is_receipt && !m.is_typing)
-            .collect::<Vec<_>>()
-            .into_iter()
-            .rev()
-            .skip(offset)
-            .take(count)
-            .collect::<Vec<_>>()
-            .into_iter()
-            .rev()
-            .collect::<Vec<_>>(),
+        Ok(messages) => {
+            let mut msgs: Vec<_> = messages
+                .filter_map(|r| r.ok())
+                .filter_map(|content| CoreMessage::from_content(&content))
+                .filter(|m| !m.is_receipt && !m.is_typing)
+                .collect();
+            msgs.sort_by_key(|m| Reverse(m.timestamp));
+            msgs.into_iter().skip(offset).take(count).collect()
+        }
         Err(e) => {
             log::error!("Failed to load messages: {:?}", e);
             Vec::new()

@@ -32,7 +32,7 @@ async fn last_message_for_thread(store: &Store, thread: &Thread) -> Option<CoreM
             .filter_map(|r| r.ok())
             .filter_map(|content| CoreMessage::from_content(&content))
             .filter(|m| !m.is_receipt && !m.is_typing && !m.is_reaction)
-            .last(),
+            .max_by_key(|m| m.timestamp),
         Err(_) => None,
     }
 }

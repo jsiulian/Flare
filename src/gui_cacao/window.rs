@@ -1254,6 +1254,20 @@ impl FlareWindow {
         }
     }
 
+    pub fn focus_search(&self) {
+        if let Some(ref w) = self.0 {
+            let d = w.delegate.as_ref().unwrap();
+            d.search_field.objc.get(|obj| unsafe {
+                use objc::{msg_send, sel, sel_impl};
+                let obj = obj as *const _ as *mut objc::runtime::Object;
+                let win: *mut objc::runtime::Object = msg_send![obj, window];
+                if !win.is_null() {
+                    let _: bool = msg_send![win, makeFirstResponder: obj];
+                }
+            });
+        }
+    }
+
     pub fn delete_selected_message(&self) {
         if let Some(ref w) = self.0 {
             let d = w.delegate.as_ref().unwrap();

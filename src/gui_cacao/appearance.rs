@@ -32,5 +32,3 @@ pub fn apply_visual_effect(view: &View, material: i32) {
 
 /// NSVisualEffectMaterial constants
 pub const MATERIAL_SIDEBAR: i32 = 7;
-pub const MATERIAL_CONTENT_BACKGROUND: i32 = 14;
-pub const MATERIAL_WINDOW_BACKGROUND: i32 = 2; // NSVisualEffectMaterialWindowBackground
