@@ -538,9 +538,11 @@ impl Channel {
                 glib::timeout_future_seconds(TYPING_NOTIFICATION_DURATION_SECONDS).await;
                 s.imp().typing.borrow_mut().remove(&notification);
                 s.notify("is-typing");
+                s.notify("typing-label");
             }
         ));
         self.notify("is-typing");
+        self.notify("typing-label");
     }
 
     pub fn remove_user_typing(&self, contact: Contact) {
@@ -550,6 +552,7 @@ impl Channel {
         }
         drop(typing);
         self.notify("is-typing");
+        self.notify("typing-label");
     }
 
     /// Split up the name into first names (if available) and last name.
@@ -656,7 +659,7 @@ mod imp {
     use crate::prelude::*;
 
     use std::{
-        collections::{HashMap, HashSet},
+        collections::{BTreeSet, HashMap, HashSet},
         marker::PhantomData,
     };
 
@@ -704,6 +707,8 @@ mod imp {
         pub(super) description: PhantomData<Option<String>>,
         #[property(get = Self::is_typing)]
         pub(super) is_typing: PhantomData<bool>,
+        #[property(get = Self::typing_label)]
+        pub(super) typing_label: PhantomData<String>,
 
         #[property(get, set, construct_only, type = Manager)]
         pub(super) manager: RefCell<Option<Manager>>,
@@ -789,6 +794,23 @@ mod imp {
 
         fn is_typing(&self) -> bool {
             !self.typing.borrow().is_empty()
+        }
+
+        fn typing_label(&self) -> String {
+            if self.is_self() {
+                gettextrs::gettext("is typing")
+            } else {
+                let contacts: BTreeSet<String> = self
+                    .typing
+                    .borrow()
+                    .iter()
+                    .map(|n| n.sender.title())
+                    .collect();
+                let num_typing = contacts.len();
+                let joined = contacts.into_iter().collect::<Vec<_>>().join(", ");
+                gettextrs::ngettext("{} is typing", "{} are typing", num_typing as u32)
+                    .replace("{}", &joined)
+            }
         }
     }
 

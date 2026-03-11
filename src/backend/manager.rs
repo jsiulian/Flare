@@ -478,6 +478,27 @@ impl Manager {
         known_channels.get(&thread).cloned()
     }
 
+    pub fn channel_from_group_id(&self, id: &[u8]) -> Option<Channel> {
+        self.imp()
+            .channels
+            .borrow()
+            .iter()
+            .filter_map(|(thread, value)| {
+                if let Thread::Group(key) = thread {
+                    Some((key, value))
+                } else {
+                    None
+                }
+            })
+            .find(|(master_key, _value)| {
+                GroupSecretParams::derive_from_master_key(GroupMasterKey::new(**master_key))
+                    .get_group_identifier()
+                    == id
+            })
+            .map(|(_master_key, value)| value)
+            .cloned()
+    }
+
     #[cfg(not(feature = "screenshot"))]
     pub async fn list_contacts(&self) -> Vec<Contact> {
         let store = self.store();
