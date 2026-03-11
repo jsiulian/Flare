@@ -56,7 +56,7 @@ pub mod imp {
             if is_typing {
                 self.label_last_message.add_css_class("accent");
                 self.label_last_message.remove_css_class("dim-label");
-                gettextrs::gettext("is typing")
+                self.obj().channel().typing_label()
             } else if !draft.is_empty() {
                 format!(
                     "<span font-weight='500'>{}:</span> {}",

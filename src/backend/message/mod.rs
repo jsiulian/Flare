@@ -270,10 +270,20 @@ impl Message {
             // Typing messages.
             // Note that they are currently only implemented for contacts, this requires upstream updates to fix.
             ContentBody::TypingMessage(t) => {
-                // TODO: typing message for group
-                let channel = manager
-                    .channel_from_uuid_or_group(metadata.sender, &None)
-                    .await;
+                let channel = if let Some(id) = &t.group_id {
+                    manager.channel_from_group_id(id)
+                } else {
+                    Some(
+                        manager
+                            .channel_from_uuid_or_group(metadata.sender, &None)
+                            .await,
+                    )
+                };
+
+                let Some(channel) = channel else {
+                    log::warn!("Got typing message from channel that cannot be found; aborting");
+                    return None;
+                };
 
                 let contact = channel
                     .participant_by_uuid(metadata.sender.raw_uuid())

@@ -152,7 +152,7 @@ template $FlWindow: Adw.ApplicationWindow {
                     single-line-mode: true;
                     use-markup: true;
                     visible: bind channel_list.active-channel as <$FlChannel>.is-typing;
-                    label: _("is typing");
+                    label: bind channel_list.active-channel as <$FlChannel>.typing-label;
                     tooltip-markup: bind channel_list.active-channel as <$FlChannel>.description;
 
                     styles [
