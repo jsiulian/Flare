@@ -307,6 +307,18 @@ impl Message {
                 if !read_arr.is_empty() =>
             {
                 log::trace!("Got currently unhandled read-message");
+                for r in read_arr {
+                    let Some(timestamp) = r.timestamp else {
+                        continue;
+                    };
+                    let Some(sender_uuid) = r.parse_sender_aci().map(Uuid::from) else {
+                        continue;
+                    };
+                    // Note: Matches the implementation of Message:uid.
+                    let notification_id = format!("{timestamp:x}{sender_uuid:x}");
+                    manager.withdraw_notification(&notification_id);
+                }
+
                 None
             }
             ContentBody::SynchronizeMessage(SyncMessage {
