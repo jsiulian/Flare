@@ -32,6 +32,7 @@ impl MessageItem {
         s.setup_emoji();
         s.setup_loaded();
         s.setup_text();
+        s.setup_requires_attention();
         s
     }
 
@@ -250,6 +251,29 @@ impl MessageItem {
                 self,
                 move |_, _| {
                     s.imp().box_attachments.remove_css_class("not-loaded");
+                }
+            ),
+        );
+    }
+
+    pub fn setup_requires_attention(&self) {
+        let message = self.message();
+        message.connect_notify_local(
+            Some("requires-attention"),
+            clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |m, _| {
+                    if m.property("requires-attention") {
+                        s.add_css_class("attention-animation");
+                        let _ = gtk::prelude::WidgetExt::activate_action(
+                            &s,
+                            "listitem.scroll-to",
+                            None,
+                        );
+                    } else {
+                        s.remove_css_class("attention-animation");
+                    }
                 }
             ),
         );

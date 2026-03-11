@@ -317,7 +317,7 @@ impl Message {
     }
 
     // A unique ID of the message, built from the timestamp and sender.
-    fn uid(&self) -> Option<String> {
+    pub fn uid(&self) -> Option<String> {
         let data = self.imp().data.borrow().clone()?;
         let timestamp = data.timestamp?;
         let sender_uuid = self.sender().uuid();
@@ -341,6 +341,7 @@ impl Message {
         let read = *this.read.borrow();
         if !read {
             this.read.replace(true);
+            self.notify("read");
             return true;
         }
         false

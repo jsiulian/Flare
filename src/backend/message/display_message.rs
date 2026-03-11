@@ -56,11 +56,24 @@ impl DisplayMessage {
 
 pub trait DisplayMessageExt: 'static {
     fn textual_description(&self) -> Option<String>;
+    fn flash_requires_attention(&self);
 }
 
 impl<O: IsA<DisplayMessage>> DisplayMessageExt for O {
     fn textual_description(&self) -> Option<String> {
         imp::display_message_textual_description(self.upcast_ref())
+    }
+
+    fn flash_requires_attention(&self) {
+        self.set_property("requires-attention", true);
+        gspawn!(clone!(
+            #[strong(rename_to = s)]
+            self,
+            async move {
+                glib::timeout_future_seconds(2).await;
+                s.set_property("requires-attention", false);
+            }
+        ));
     }
 }
 
@@ -96,6 +109,7 @@ where
 mod imp {
     use crate::prelude::*;
 
+    use gio::glib::ParamSpecBoolean;
     use glib::{
         ParamSpec, ParamSpecString,
         subclass::types::{ClassStruct, ObjectSubclass},
@@ -123,7 +137,9 @@ mod imp {
     }
 
     #[derive(Debug, Default)]
-    pub struct DisplayMessage {}
+    pub struct DisplayMessage {
+        pub(super) requires_attention: Cell<bool>,
+    }
 
     #[glib::object_subclass]
     impl ObjectSubclass for DisplayMessage {
@@ -140,19 +156,28 @@ mod imp {
                     ParamSpecString::builder("textual-description")
                         .read_only()
                         .build(),
+                    ParamSpecBoolean::builder("requires-attention").build(),
                 ]
             });
 
             PROPERTIES.as_ref()
         }
 
-        fn set_property(&self, _id: usize, _value: &glib::Value, _pspec: &glib::ParamSpec) {
-            unimplemented!()
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            match pspec.name() {
+                "requires-attention" => self.requires_attention.set(
+                    value
+                        .get()
+                        .expect("requires-attention parameter to be boolean"),
+                ),
+                _ => unimplemented!(),
+            }
         }
 
         fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
                 "textual-description" => self.obj().textual_description().to_value(),
+                "requires-attention" => self.requires_attention.get().to_value(),
                 _ => unimplemented!(),
             }
         }

@@ -1,6 +1,9 @@
 use crate::backend::{
     Contact, Manager, Message,
-    message::{DeletionMessage, DisplayMessage, MessageExt, ReactionMessage, TextMessage},
+    message::{
+        DeletionMessage, DisplayMessage, DisplayMessageExt, MessageExt, ReactionMessage,
+        TextMessage,
+    },
     timeline::{TimelineItem, TimelineItemExt},
 };
 use crate::prelude::*;
@@ -161,6 +164,10 @@ impl Channel {
                     results.insert(0, msg.clone());
                 }
 
+                // Mark message from storage as already read.
+                // TODO: Mark as read instead using sync messages, and store read state in DB.
+                msg.mark_as_read();
+
                 let _ = self.do_new_message(&msg).await;
             }
 
@@ -228,10 +235,15 @@ impl Channel {
     /// - Add a quote to the message if needed.
     /// - Cache pending reactions and apply them for the correct message.
     /// - Delete a message in the current channel.
+    /// - Mark the message as read if the current channel is active.
     pub(super) async fn do_new_message(
         &self,
         message: &Message,
     ) -> Result<(), gtk::glib::error::BoolError> {
+        if self.property("is-active") || message.sender().is_self() {
+            message.mark_as_read();
+        }
+
         if let Some(message) = message.dynamic_cast_ref::<TextMessage>() {
             let body = message
                 .body()
@@ -572,8 +584,29 @@ impl Channel {
         self.set_property("is-active", active);
     }
 
+    fn first_unread_message(&self) -> Option<DisplayMessage> {
+        self.imp()
+            .timeline
+            .borrow()
+            .iter_backwards()
+            .filter(|i| i.is::<DisplayMessage>())
+            .map_while(|m| {
+                let message = m.dynamic_cast::<DisplayMessage>().unwrap();
+                // We can stop at first read message
+                if !message.property::<bool>("read") {
+                    return Some(message);
+                }
+                None
+            })
+            .last()
+    }
+
     /// Mark all messages as read.
-    pub fn mark_as_read(&self) -> Vec<String> {
+    pub fn mark_as_read(&self) -> Vec<Message> {
+        if let Some(first_unread) = self.first_unread_message() {
+            first_unread.flash_requires_attention();
+        }
+
         self.imp()
             .timeline
             .borrow()
@@ -582,10 +615,8 @@ impl Channel {
             .map_while(|m| {
                 let message = m.dynamic_cast::<Message>().unwrap();
                 // We can stop at first read message
-                if message.mark_as_read()
-                    && let Some(uid) = message.uid()
-                {
-                    return Some(uid);
+                if message.mark_as_read() {
+                    return Some(message);
                 }
                 None
             })
