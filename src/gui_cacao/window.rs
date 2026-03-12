@@ -25,9 +25,20 @@ use super::channel_list::{new_search_field, ChannelListDelegate, SearchField};
 use super::contact_picker::ContactPickerWindow;
 use super::message_view::MessageListDelegate;
 use super::text_field_action::TextFieldActionHandler;
+use super::text_field_paste::setup_paste_handler;
 use super::toolbar::{create_toolbar, FlareToolbar};
 
-/// Set the first height constraint on a view to the given constant.
+/// Represents a pending attachment waiting to be sent
+struct PendingAttachment {
+    path: std::path::PathBuf,
+}
+
+impl PendingAttachment {
+    fn new(path: std::path::PathBuf) -> Self {
+        Self { path }
+    }
+}
+
 fn set_height_constraint(view: &impl ObjcAccess, height: f64) {
     view.with_backing_obj_mut(|obj| unsafe {
         use objc::{msg_send, sel, sel_impl};
@@ -84,6 +95,9 @@ pub struct FlareWindowDelegate {
     reply_close_button: Button,
     input_bar: View,
     attach_button: Button,
+    attachment_preview_bar: View,
+    attachment_label: Label,
+    attachment_clear_button: Button,
     emoji_button: Button,
     input_field: TextField,
     send_button: Button,
@@ -105,6 +119,7 @@ pub struct FlareWindowDelegate {
     contact_picker: ContactPickerWindow,
     drafts: RefCell<HashMap<ChannelId, String>>,
     current_reply: RefCell<Option<CoreMessage>>,
+    pending_attachments: RefCell<Vec<PendingAttachment>>,
 }
 
 impl FlareWindowDelegate {
@@ -141,6 +156,9 @@ impl FlareWindowDelegate {
             reply_close_button: Button::new("✕"),
             input_bar: View::new(),
             attach_button: Button::new("+"),
+            attachment_preview_bar: View::new(),
+            attachment_label: Label::new(),
+            attachment_clear_button: Button::new("Clear"),
             emoji_button: Button::new(""),
             input_field: TextField::new(),
             send_button: Button::new("Send"),
@@ -156,6 +174,7 @@ impl FlareWindowDelegate {
             input_action_handler: None,
             drafts: RefCell::new(HashMap::new()),
             current_reply: RefCell::new(None),
+            pending_attachments: RefCell::new(Vec::new()),
         }
     }
 
@@ -169,6 +188,82 @@ impl FlareWindowDelegate {
         ] {
             view.set_hidden(!std::ptr::eq(view, visible));
         }
+    }
+
+    fn add_pending_attachment(&self, path: std::path::PathBuf) {
+        // Check if this is a file attachment (not an image)
+        let extension = path
+            .extension()
+            .and_then(|e| e.to_str())
+            .map(|e| e.to_lowercase())
+            .unwrap_or_default();
+
+        let is_file = !matches!(
+            extension.as_str(),
+            "jpg" | "jpeg" | "png" | "gif" | "heic" | "webp"
+        );
+
+        if is_file {
+            // "Send alone" rule: file attachments clear other attachments
+            // First send any existing pending attachments
+            self.send_pending_attachments();
+        }
+
+        let attachment = PendingAttachment::new(path);
+        self.pending_attachments.borrow_mut().push(attachment);
+        self.update_attachment_preview_bar();
+    }
+
+    fn send_pending_attachments(&self) {
+        let channel_id = self.current_channel.borrow().clone();
+        if let Some(channel_id) = channel_id {
+            let attachments: Vec<_> = self.pending_attachments.borrow_mut().drain(..).collect();
+            for attachment in attachments {
+                if let Some(tx) = self.backend_state.command_tx.lock().unwrap().as_ref() {
+                    let _ = tx.unbounded_send(BackendCommand::SendAttachment(
+                        channel_id.clone(),
+                        attachment.path,
+                    ));
+                }
+            }
+        }
+        self.clear_attachment_preview_bar();
+    }
+
+    fn update_attachment_preview_bar(&self) {
+        let attachments = self.pending_attachments.borrow();
+        if attachments.is_empty() {
+            self.attachment_preview_bar.set_hidden(true);
+            self.attachment_label.set_hidden(true);
+            self.attachment_clear_button.set_hidden(true);
+            set_height_constraint(&self.attachment_preview_bar, 0.0);
+        } else {
+            self.attachment_preview_bar.set_hidden(false);
+            self.attachment_label.set_hidden(false);
+            self.attachment_clear_button.set_hidden(false);
+            set_height_constraint(&self.attachment_preview_bar, 40.0);
+
+            // Show filenames
+            let names: Vec<String> = attachments
+                .iter()
+                .map(|a| {
+                    a.path
+                        .file_name()
+                        .and_then(|n| n.to_str())
+                        .unwrap_or("attachment")
+                        .to_string()
+                })
+                .collect();
+            self.attachment_label.set_text(&names.join(", "));
+        }
+    }
+
+    fn clear_attachment_preview_bar(&self) {
+        self.pending_attachments.borrow_mut().clear();
+        self.attachment_preview_bar.set_hidden(true);
+        self.attachment_label.set_hidden(true);
+        self.attachment_clear_button.set_hidden(true);
+        set_height_constraint(&self.attachment_preview_bar, 0.0);
     }
 }
 
@@ -227,8 +322,6 @@ fn set_button_sf_symbol(btn: &Button, name: &str) {
         }
     });
 }
-
-impl FlareWindowDelegate {}
 
 use super::appearance::{apply_visual_effect, MATERIAL_SIDEBAR};
 
@@ -398,6 +491,12 @@ impl WindowDelegate for FlareWindowDelegate {
         });
         set_button_sf_symbol(&self.attach_button, "paperclip");
 
+        // Clear attachments button
+        self.attachment_clear_button.set_action(move |_| {
+            App::<FlareApp, AppMessage>::dispatch_main(AppMessage::ClearAttachments);
+        });
+        make_button_borderless(&self.attachment_clear_button);
+
         // Emoji button — opens native macOS emoji picker
         // Note: The IMK error "messaging the mach port for IMKCFRunLoopWakeUpReliable" may appear
         // if the input field isn't focused - this is a benign macOS-level warning.
@@ -423,6 +522,8 @@ impl WindowDelegate for FlareWindowDelegate {
             }));
         });
         self.input_action_handler = action_handler_cell.into_inner();
+
+        setup_paste_handler(&self.input_field);
 
         // Thin separator above input bar
         apply_separator_color(&self.input_separator);
@@ -526,6 +627,9 @@ impl WindowDelegate for FlareWindowDelegate {
         self.detail.add_subview(&self.typing_label);
         self.detail.add_subview(&self.input_separator);
         self.detail.add_subview(&self.reply_bar);
+        self.detail.add_subview(&self.attachment_preview_bar);
+        self.detail.add_subview(&self.attachment_label);
+        self.detail.add_subview(&self.attachment_clear_button);
         self.detail.add_subview(&self.input_bar);
 
         LayoutConstraint::activate(&[
@@ -623,6 +727,44 @@ impl WindowDelegate for FlareWindowDelegate {
                 .bottom
                 .constraint_equal_to(&self.input_bar.top),
             self.reply_bar.height.constraint_equal_to_constant(0.0),
+            // Attachment preview bar (hidden by default)
+            self.attachment_preview_bar
+                .leading
+                .constraint_equal_to(&self.detail.leading),
+            self.attachment_preview_bar
+                .trailing
+                .constraint_equal_to(&self.detail.trailing),
+            self.attachment_preview_bar
+                .bottom
+                .constraint_equal_to(&self.input_bar.top),
+            self.attachment_preview_bar
+                .height
+                .constraint_equal_to_constant(0.0),
+            // Attachment label
+            self.attachment_label
+                .leading
+                .constraint_equal_to(&self.detail.leading)
+                .offset(12.0),
+            self.attachment_label
+                .trailing
+                .constraint_equal_to(&self.detail.trailing)
+                .offset(-12.0),
+            self.attachment_label
+                .bottom
+                .constraint_equal_to(&self.input_bar.top)
+                .offset(-8.0),
+            // Attachment clear button (hidden by default)
+            self.attachment_clear_button
+                .trailing
+                .constraint_equal_to(&self.detail.trailing)
+                .offset(-8.0),
+            self.attachment_clear_button
+                .bottom
+                .constraint_equal_to(&self.input_bar.top)
+                .offset(-8.0),
+            self.attachment_clear_button
+                .height
+                .constraint_equal_to_constant(24.0),
             // Input bar
             self.input_bar
                 .leading
@@ -644,6 +786,8 @@ impl WindowDelegate for FlareWindowDelegate {
         self.typing_label.set_hidden(true);
         self.input_separator.set_hidden(true);
         self.reply_bar.set_hidden(true);
+        self.attachment_preview_bar.set_hidden(true);
+        self.attachment_clear_button.set_hidden(true);
         self.input_bar.set_hidden(true);
 
         self.search_field.set_placeholder_text("Search");
@@ -1148,14 +1292,44 @@ impl FlareWindow {
     pub fn handle_attach(&self) {
         if let Some(ref w) = self.0 {
             let d = w.delegate.as_ref().unwrap();
-            let channel_id = d.current_channel.borrow().clone();
-            if let Some(channel_id) = channel_id {
-                if let Some(path) = super::alert::pick_file() {
-                    if let Some(tx) = d.backend_state.command_tx.lock().unwrap().as_ref() {
-                        let _ = tx.unbounded_send(BackendCommand::SendAttachment(channel_id, path));
-                    }
+            if let Some(_channel_id) = d.current_channel.borrow().clone() {
+                let paths = super::alert::pick_files();
+                for path in paths {
+                    d.add_pending_attachment(path);
                 }
             }
+        }
+    }
+
+    pub fn handle_paste_file(&self, path: String) {
+        if let Some(ref w) = self.0 {
+            let d = w.delegate.as_ref().unwrap();
+            if let Some(_channel_id) = d.current_channel.borrow().clone() {
+                let path = std::path::PathBuf::from(path);
+                d.add_pending_attachment(path);
+            }
+        }
+    }
+
+    pub fn handle_paste_image(&self, data: Vec<u8>, filename: String) {
+        if let Some(ref w) = self.0 {
+            let d = w.delegate.as_ref().unwrap();
+            if let Some(_channel_id) = d.current_channel.borrow().clone() {
+                let temp_dir = std::env::temp_dir();
+                let path = temp_dir.join(&filename);
+                if let Err(e) = std::fs::write(&path, &data) {
+                    log::error!("Failed to write pasted image to temp file: {}", e);
+                    return;
+                }
+                d.add_pending_attachment(path);
+            }
+        }
+    }
+
+    pub fn handle_clear_attachments(&self) {
+        if let Some(ref w) = self.0 {
+            let d = w.delegate.as_ref().unwrap();
+            d.clear_attachment_preview_bar();
         }
     }
 
@@ -1186,27 +1360,30 @@ impl FlareWindow {
             let d = w.delegate.as_ref().unwrap();
             let text = d.input_field.get_value();
             let text = text.trim().to_string();
-            if text.is_empty() {
-                return;
-            }
             let channel_id = d.current_channel.borrow().clone();
             if let Some(channel_id) = channel_id {
-                let reply = d.current_reply.borrow_mut().take();
-                let quote = reply.map(|m| crate::core::message::QuoteData {
-                    ts: m.timestamp,
-                    text: m.body.clone(),
-                });
-                if let Some(tx) = d.backend_state.command_tx.lock().unwrap().as_ref() {
-                    let _ = tx.unbounded_send(BackendCommand::SendMessage(
-                        channel_id.clone(),
-                        text,
-                        quote,
-                    ));
+                // Send pending attachments first (they clear the attachment bar)
+                d.send_pending_attachments();
+
+                // Then send text message if there's text
+                if !text.is_empty() {
+                    let reply = d.current_reply.borrow_mut().take();
+                    let quote = reply.map(|m| crate::core::message::QuoteData {
+                        ts: m.timestamp,
+                        text: m.body.clone(),
+                    });
+                    if let Some(tx) = d.backend_state.command_tx.lock().unwrap().as_ref() {
+                        let _ = tx.unbounded_send(BackendCommand::SendMessage(
+                            channel_id.clone(),
+                            text,
+                            quote,
+                        ));
+                    }
+                    d.reply_bar.set_hidden(true);
+                    set_height_constraint(&d.reply_bar, 0.0);
+                    d.drafts.borrow_mut().remove(&channel_id);
+                    d.input_field.set_text("");
                 }
-                d.reply_bar.set_hidden(true);
-                set_height_constraint(&d.reply_bar, 0.0);
-                d.drafts.borrow_mut().remove(&channel_id);
-                d.input_field.set_text("");
             }
         }
     }

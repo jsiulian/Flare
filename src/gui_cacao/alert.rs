@@ -154,3 +154,50 @@ pub fn pick_file() -> Option<PathBuf> {
         cstr.to_str().ok().map(PathBuf::from)
     }
 }
+
+/// Show a modal NSOpenPanel and return the selected file paths.
+pub fn pick_files() -> Vec<PathBuf> {
+    unsafe {
+        let cls = class!(NSOpenPanel);
+        let panel: *mut Object = msg_send![cls, openPanel];
+
+        let _: () = msg_send![panel, setCanChooseFiles: objc::runtime::YES];
+        let _: () = msg_send![panel, setCanChooseDirectories: objc::runtime::NO];
+        let _: () = msg_send![panel, setAllowsMultipleSelection: objc::runtime::YES];
+
+        // NSModalResponseOK = 1
+        let response: i64 = msg_send![panel, runModal];
+        if response != 1 {
+            return Vec::new();
+        }
+
+        let urls: *mut Object = msg_send![panel, URLs];
+        if urls.is_null() {
+            return Vec::new();
+        }
+
+        let count: usize = msg_send![urls, count];
+        let mut paths = Vec::new();
+
+        for i in 0..count {
+            let url: *mut Object = msg_send![urls, objectAtIndex: i];
+            if url.is_null() {
+                continue;
+            }
+            let path: *mut Object = msg_send![url, path];
+            if path.is_null() {
+                continue;
+            }
+            let utf8: *const i8 = msg_send![path, UTF8String];
+            if utf8.is_null() {
+                continue;
+            }
+            let cstr = std::ffi::CStr::from_ptr(utf8);
+            if let Some(s) = cstr.to_str().ok() {
+                paths.push(PathBuf::from(s));
+            }
+        }
+
+        paths
+    }
+}

@@ -60,6 +60,9 @@ pub enum AppMessage {
     FocusSearch,
     ShowHelp,
     ShowAbout,
+    PasteFile(String),
+    PasteImage(Vec<u8>, String),
+    ClearAttachments,
 }
 
 pub struct FlareApp {
@@ -252,7 +255,7 @@ impl AppDelegate for FlareApp {
     }
 
     fn should_terminate_after_last_window_closed(&self) -> bool {
-        true
+        !super::preferences_window::run_in_background()
     }
 }
 
@@ -342,6 +345,15 @@ impl Dispatcher for FlareApp {
             }
             AppMessage::AttachButtonPressed => {
                 self.window.handle_attach();
+            }
+            AppMessage::PasteFile(path) => {
+                self.window.handle_paste_file(path);
+            }
+            AppMessage::PasteImage(data, filename) => {
+                self.window.handle_paste_image(data, filename);
+            }
+            AppMessage::ClearAttachments => {
+                self.window.handle_clear_attachments();
             }
             AppMessage::LoadMorePressed => {
                 self.window.handle_load_more();
