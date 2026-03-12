@@ -384,16 +384,7 @@ pub mod imp {
                     async move {
                         log::trace!("Adding attachments to message: {}", attachments.len());
                         for att in attachments {
-                            if let Err(e) = msg.add_attachment(att).await {
-                                let root = obj
-                                    .root()
-                                    .expect("`ChannelMessages` to have a root")
-                                    .dynamic_cast::<crate::gui::Window>()
-                                    .expect("Root of `ChannelMessages` to be a `Window`.");
-                                let dialog = ErrorDialog::new(&e, &root);
-                                dialog.present(Some(&root));
-                                return;
-                            }
+                            msg.add_attachment(att);
                         }
                         log::trace!("Sending message");
                         if let Err(e) = channel.send_message(msg.upcast()).await {

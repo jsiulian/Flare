@@ -243,6 +243,15 @@ unread-indicator {
   border-radius: 6px;
 }
 
+/* Message bubble coloring for pending and error messages */
+.message-item.pending .message-bubble {
+  background-color: yellow;
+}
+
+.message-item.error .message-bubble {
+  background-color: red;
+}
+
 /* Animations when one wants to visibly draw focus to a message. */
 .attention-animation:not(.from-self) .message-bubble {
   animation: attention-background-not-self 0.25s ease alternate;

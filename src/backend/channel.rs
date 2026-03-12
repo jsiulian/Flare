@@ -428,18 +428,9 @@ impl Channel {
     /// Send a message to the channel and add it to the channel.
     pub async fn send_message(&self, msg: Message) -> Result<(), crate::ApplicationError> {
         msg.mark_as_read();
-        crate::debug!(
-            "Sending a message {} to channel {} (timestamp {})",
-            msg.property::<Option<String>>("body")
-                .unwrap_or_else(|| "(empty)".to_owned()),
-            self.title(),
-            msg.timestamp()
-        );
-        if let Some(data) = msg.internal_data() {
-            self.send_internal_message(data, msg.timestamp()).await?;
-        }
+        msg.set_pending(true);
 
-        log::trace!("Inserting successfully sent message to message list");
+        log::trace!("Inserting pending sent message to message list");
         if let Some(msg) = msg.dynamic_cast_ref::<DisplayMessage>() {
             self.imp().timeline.borrow().append(
                 msg.clone()
@@ -447,6 +438,32 @@ impl Channel {
                     .expect("A 'DisplayMessage' to be a 'TimelineItem'"),
             );
         }
+
+        if let Some(text_msg) = msg.dynamic_cast_ref::<TextMessage>() {
+            log::trace!("Uploading attachments of text message");
+            if let Err(e) = text_msg.upload_attachments().await {
+                msg.set_pending(false);
+                msg.set_error(true);
+                return Err(e);
+            }
+        }
+
+        crate::debug!(
+            "Sending a message {} to channel {} (timestamp {})",
+            msg.property::<Option<String>>("body")
+                .unwrap_or_else(|| "(empty)".to_owned()),
+            self.title(),
+            msg.timestamp()
+        );
+        if let Some(data) = msg.internal_data()
+            && let Err(e) = self.send_internal_message(data, msg.timestamp()).await
+        {
+            msg.set_pending(false);
+            msg.set_error(true);
+            return Err(e);
+        }
+
+        msg.set_pending(false);
 
         self.notify("last-message");
         self.emit_by_name::<()>("message", &[&msg]);

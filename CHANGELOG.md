@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - When activating a channel with unread messages, jump to the first one and highlight it with a small animation.
 - Typing messages for groups.
 - Don't notify on messages read on other devices.
+- Messages are now immediately sent, and will be styled while they are sending or when they failed to send.
 
 ## [0.19.1] - 2026-03-09
 

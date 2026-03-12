@@ -33,6 +33,7 @@ impl MessageItem {
         s.setup_loaded();
         s.setup_text();
         s.setup_requires_attention();
+        s.setup_pending_and_error();
         s
     }
 
@@ -277,6 +278,41 @@ impl MessageItem {
                 }
             ),
         );
+        message.notify("requires-attention");
+    }
+
+    pub fn setup_pending_and_error(&self) {
+        let message = self.message();
+        message.connect_notify_local(
+            Some("pending"),
+            clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |m, _| {
+                    if m.property("pending") {
+                        s.add_css_class("pending");
+                    } else {
+                        s.remove_css_class("pending");
+                    }
+                }
+            ),
+        );
+        message.connect_notify_local(
+            Some("error"),
+            clone!(
+                #[weak(rename_to = s)]
+                self,
+                move |m, _| {
+                    if m.property("error") {
+                        s.add_css_class("error");
+                    } else {
+                        s.remove_css_class("error");
+                    }
+                }
+            ),
+        );
+        message.notify("pending");
+        message.notify("error");
     }
 }
 

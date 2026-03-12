@@ -439,6 +439,10 @@ mod imp {
         channel: RefCell<Option<Channel>>,
         #[property(get, set, construct_only)]
         pub(super) read: RefCell<bool>,
+        #[property(get, set)]
+        pub(super) pending: RefCell<bool>,
+        #[property(get, set)]
+        pub(super) error: RefCell<bool>,
 
         pub(super) data: RefCell<Option<DataMessage>>,
 
