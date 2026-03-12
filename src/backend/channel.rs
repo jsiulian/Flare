@@ -529,7 +529,11 @@ impl Channel {
     }
 
     pub fn add_user_typing(&self, notification: TypingNotification) {
-        let _ = self.imp().typing.borrow_mut().insert(notification.clone());
+        let _ = self
+            .imp()
+            .typing
+            .borrow_mut()
+            .insert(notification.sender.uuid(), notification.clone());
         gspawn!(clone!(
             #[weak(rename_to = s)]
             self,
@@ -537,9 +541,16 @@ impl Channel {
             notification,
             async move {
                 glib::timeout_future_seconds(TYPING_NOTIFICATION_DURATION_SECONDS).await;
-                s.imp().typing.borrow_mut().remove(&notification);
-                s.notify("is-typing");
-                s.notify("typing-label");
+
+                let mut typing = s.imp().typing.borrow_mut();
+                if typing.get(&notification.sender.uuid()).map(|t| t.timestamp)
+                    == Some(notification.timestamp)
+                {
+                    typing.remove(&notification.sender.uuid());
+                    drop(typing);
+                    s.notify("is-typing");
+                    s.notify("typing-label");
+                }
             }
         ));
         self.notify("is-typing");
@@ -548,9 +559,7 @@ impl Channel {
 
     pub fn remove_user_typing(&self, contact: Contact) {
         let mut typing = self.imp().typing.borrow_mut();
-        if let Some(el) = typing.iter().find(|t| t.sender == contact).cloned() {
-            typing.remove(&el);
-        }
+        typing.remove(&contact.uuid());
         drop(typing);
         self.notify("is-typing");
         self.notify("typing-label");
@@ -660,7 +669,7 @@ mod imp {
     use crate::prelude::*;
 
     use std::{
-        collections::{BTreeSet, HashMap, HashSet},
+        collections::{BTreeSet, HashMap},
         marker::PhantomData,
     };
 
@@ -679,7 +688,7 @@ mod imp {
         pub(super) participants: RefCell<Vec<Contact>>,
 
         pub(super) pending_reactions: RefCell<HashMap<u64, Vec<ReactionMessage>>>,
-        pub(super) typing: RefCell<HashSet<TypingNotification>>,
+        pub(super) typing: RefCell<HashMap<Uuid, TypingNotification>>,
 
         #[property(name = "avatar", get = Self::avatar)]
         pub(super) group_avatar: RefCell<Option<Paintable>>,
@@ -804,7 +813,7 @@ mod imp {
                 let contacts: BTreeSet<String> = self
                     .typing
                     .borrow()
-                    .iter()
+                    .values()
                     .map(|n| n.sender.title())
                     .collect();
                 let num_typing = contacts.len();
