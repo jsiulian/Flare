@@ -11,6 +11,7 @@ mod menu_action;
 mod message_view;
 mod preferences_window;
 mod text_field_action;
+mod text_field_paste;
 mod toolbar;
 mod window;
 
