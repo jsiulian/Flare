@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-03-12
+
 ### Added
 
 - Unread indicator in the channel list.
@@ -894,7 +896,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed cargo clippy.
 - Updated presage to official repository.
 
-[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.19.1...master
+[Unreleased]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.20.0...master
+[0.20.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.19.1...0.20.0
 [0.19.1]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.19.0...0.19.1
 [0.19.0]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.8...0.19.0
 [0.18.8]: https://gitlab.com/schmiddi-on-mobile/flare/-/compare/0.18.7...0.18.8

@@ -38,6 +38,11 @@
   </description>
 
   <releases>
+    <release version="0.20.0" date="2026-03-12">
+      <description translate="no">
+        <p>Added</p> <ul> <li>Unread indicator in the channel list.</li> <li>When activating a channel with unread messages, jump to the first one and highlight it with a small animation.</li> <li>Typing messages for groups.</li> <li>Don't notify on messages read on other devices.</li> <li>Messages are now immediately sent, and will be styled while they are sending or when they failed to send.</li> </ul>
+      </description>
+    </release>
     <release version="0.19.1" date="2026-03-09">
       <description translate="no">
         <p>HOTFIX</p> <ul> <li>Fixed linking, which was broken since a few days ago.</li> </ul>
