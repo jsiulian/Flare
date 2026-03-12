@@ -49,6 +49,7 @@ pub enum ApplicationError {
     // MessageSenderError is pretty big, put into `Box` to move it to the heap.
     SendFailed(Box<libsignal_service::sender::MessageSenderError>),
     ReceiveFailed(libsignal_service::push_service::ServiceError),
+    FailedAttachmentUpload(libsignal_service::sender::AttachmentUploadError),
     // PresageError is pretty big, put into `Box` to move it to the heap.
     Presage(Box<PresageError>),
     ConfigurationError(ConfigurationError),
@@ -116,6 +117,12 @@ impl From<presage_store_sqlite::SqliteStoreError> for ApplicationError {
     }
 }
 
+impl From<libsignal_service::sender::AttachmentUploadError> for ApplicationError {
+    fn from(value: libsignal_service::sender::AttachmentUploadError) -> Self {
+        ApplicationError::FailedAttachmentUpload(value)
+    }
+}
+
 use gettextrs::gettext;
 
 impl std::fmt::Display for ApplicationError {
@@ -153,6 +160,9 @@ impl std::fmt::Display for ApplicationError {
             ApplicationError::ReceiveFailed(_) => {
                 writeln!(f, "{}", gettext("Receiving a message failed."))
             }
+            ApplicationError::FailedAttachmentUpload(_) => {
+                writeln!(f, "{}", gettext("Failed to upload an attachment"))
+            }
             ApplicationError::Presage(_) => writeln!(
                 f,
                 "{}",
@@ -185,6 +195,9 @@ impl ApplicationError {
             }
             ApplicationError::SendFailed(e) => format!("{e:#?}"),
             ApplicationError::ReceiveFailed(e) => format!("{e:#?}"),
+            ApplicationError::FailedAttachmentUpload(e) => {
+                format!("{e:#?}")
+            }
             ApplicationError::Presage(e) => format!("{e:#?}"),
             ApplicationError::ConfigurationError(e) => match e {
                 ConfigurationError::DbPathNoFolder(p) => {
@@ -215,6 +228,7 @@ impl ApplicationError {
             ApplicationError::UnauthorizedSignal => false,
             ApplicationError::SendFailed(_) => true,
             ApplicationError::ReceiveFailed(_) => true,
+            ApplicationError::FailedAttachmentUpload(_) => true,
             ApplicationError::Presage(_) => true,
             ApplicationError::ConfigurationError(_) => true,
             ApplicationError::ManagerThreadPanic => true,

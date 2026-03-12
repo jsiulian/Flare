@@ -79,6 +79,29 @@ template $FlMessageItem: $ContextMenuBin {
       }
     }
 
+    Adw.Spinner {
+      visible: bind template.message as <$FlTextMessage>.pending;
+      tooltip-text: _("This message is currently being sent");
+      valign: center;
+
+      layout {
+        row: 0;
+        column: 0;
+      }
+    }
+
+    Gtk.Image {
+      icon-name: "dialog-error-symbolic";
+      tooltip-text: _("Sending this message failed");
+      visible: bind template.message as <$FlTextMessage>.error;
+      valign: center;
+
+      layout {
+        row: 0;
+        column: 0;
+      }
+    }
+
     Adw.Clamp {
       layout {
         row: 0;

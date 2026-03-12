@@ -203,26 +203,33 @@ impl TextMessage {
         self.imp().attachments.borrow().clone()
     }
 
-    /// Adds the attachment to the message by uploading it and adding the resulting attachment pointer to the internal data.
-    pub async fn add_attachment(
-        &self,
-        attachment: Attachment,
-    ) -> Result<(), crate::ApplicationError> {
+    /// Adds the attachment to the message, but does not yet upload it.
+    pub fn add_attachment(&self, attachment: Attachment) {
         log::trace!("Adding a attachment to a message");
-        let manager = self.manager();
-        let upload_data = attachment.as_upload_attachment().await;
         self.imp().attachments.borrow_mut().push(attachment);
-        log::trace!("Uploading the attachment");
-        let upload_attachments_result = manager.upload_attachments(vec![upload_data]).await?;
+    }
 
-        let pointer = upload_attachments_result
-            .first()
-            .expect("At least one attachment pointer should be available")
-            .as_ref()
-            .expect("Failed to upload attachments");
-        if let Some(data) = self.internal_data_mut().as_mut() {
-            data.attachments.push(pointer.clone());
+    // Uploads all attachments.
+    pub async fn upload_attachments(&self) -> Result<(), crate::ApplicationError> {
+        let manager = self.manager();
+        let attachments = self.imp().attachments.borrow().clone();
+        let attachments_futures = attachments.iter().map(|a| a.as_upload_attachment());
+        let attachments = futures::future::join_all(attachments_futures).await;
+        if attachments.is_empty() {
+            return Ok(());
         }
+
+        log::trace!("Uploading {} attachment(s)", attachments.len());
+        let upload_attachments_result = manager
+            .upload_attachments(attachments)
+            .await?
+            .into_iter()
+            .collect::<Result<Vec<_>, _>>()?;
+
+        if let Some(data) = self.internal_data_mut().as_mut() {
+            data.attachments = upload_attachments_result;
+        }
+
         Ok(())
     }
 
