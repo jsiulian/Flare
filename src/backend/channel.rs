@@ -427,6 +427,7 @@ impl Channel {
 
     /// Send a message to the channel and add it to the channel.
     pub async fn send_message(&self, msg: Message) -> Result<(), crate::ApplicationError> {
+        msg.mark_as_read();
         crate::debug!(
             "Sending a message {} to channel {} (timestamp {})",
             msg.property::<Option<String>>("body")

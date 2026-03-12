@@ -102,11 +102,8 @@ impl ChannelList {
         let Some(channel) = self.active_channel() else {
             return;
         };
-        let Some(application) = self.manager().application() else {
-            return;
-        };
         for uid in channel.mark_as_read().iter().flat_map(|m| m.uid()) {
-            application.withdraw_notification(&uid);
+            self.manager().withdraw_notification(&uid);
         }
     }
 }

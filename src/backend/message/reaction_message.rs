@@ -103,9 +103,7 @@ impl ReactionMessage {
 
         let manager = self.manager();
         let uid = self.uid();
-        crate::gspawn!(async move {
-            manager.send_notification(uid, &notification).await;
-        });
+        manager.send_notification(uid, &notification);
     }
 }
 

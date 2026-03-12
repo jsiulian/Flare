@@ -132,12 +132,37 @@ impl Manager {
         self.imp().settings.clone()
     }
 
-    pub async fn send_notification(&self, id: Option<String>, notification: &gio::Notification) {
+    pub fn send_notification(&self, id: Option<String>, notification: &gio::Notification) {
         if self.imp().settings.boolean("notifications")
             && let Some(application) = self.application()
         {
-            log::trace!("Sending a notification");
-            application.send_notification(id.as_deref(), notification);
+            if self.property("finished-setup") {
+                log::trace!("Sending a notification");
+                application.send_notification(id.as_deref(), notification);
+            } else {
+                log::trace!("Adding notification to the pending list");
+                self.imp()
+                    .pending_notifications
+                    .borrow_mut()
+                    .push((id, notification.clone()));
+            }
+        }
+    }
+
+    pub fn withdraw_notification(&self, id: &str) {
+        if self.imp().settings.boolean("notifications")
+            && let Some(application) = self.application()
+        {
+            if self.property("finished-setup") {
+                log::trace!("Withdrawing notification");
+                application.withdraw_notification(id);
+            } else {
+                log::trace!("Adding notification to the pending list");
+                self.imp()
+                    .pending_notifications
+                    .borrow_mut()
+                    .retain(|(s, _)| Some(id) != s.as_deref());
+            }
         }
     }
 
@@ -368,6 +393,14 @@ impl Manager {
                                 self.imp().finished_setup.set(true);
                                 self.init_channels().await;
                                 self.notify("finished-setup");
+
+                                if let Some(application) = self.application() {
+                                    let mut pending_notifications = self.imp().pending_notifications.borrow_mut();
+                                    for (id, notification) in &*pending_notifications {
+                                        application.send_notification(id.as_deref(), notification);
+                                    }
+                                    pending_notifications.clear();
+                                }
                             }
                         },
                         Some(Received::Contacts) => {
@@ -837,7 +870,7 @@ mod imp {
     use crate::prelude::*;
     use std::collections::HashMap;
 
-    use gio::{Application, Settings, glib::DateTime};
+    use gio::{Application, Notification, Settings, glib::DateTime};
     use glib::{BoxedAnyObject, ParamSpec, ParamSpecBoolean, Value};
 
     use crate::{
@@ -857,6 +890,7 @@ mod imp {
         pub(in super::super) finished_setup: Cell<bool>,
         #[cfg(not(feature = "screenshot"))]
         pub(super) finished_setup: Cell<bool>,
+        pub(super) pending_notifications: RefCell<Vec<(Option<String>, Notification)>>,
         pub(super) last_message_datetime: RefCell<Option<DateTime>>,
         pub(super) settings: Settings,
         pub(super) application: RefCell<Option<Application>>,
@@ -869,6 +903,7 @@ mod imp {
                 config_store: Default::default(),
                 channels: Default::default(),
                 finished_setup: Default::default(),
+                pending_notifications: Default::default(),
                 last_message_datetime: Default::default(),
                 settings: Settings::new(BASE_ID),
                 application: Default::default(),
