@@ -56,6 +56,7 @@ pub enum AppMessage {
     FocusInput,
     DeleteSelectedMessage,
     MessageDeleted(u64),
+    ReloadChannel(ChannelId),
     TypingCleared(ChannelId),
     FocusSearch,
     ShowHelp,
@@ -63,6 +64,7 @@ pub enum AppMessage {
     PasteFile(String),
     PasteImage(Vec<u8>, String),
     ClearAttachments,
+    DownloadAttachment(ChannelId, u64, libsignal_service::proto::AttachmentPointer),
 }
 
 pub struct FlareApp {
@@ -355,6 +357,13 @@ impl Dispatcher for FlareApp {
             AppMessage::ClearAttachments => {
                 self.window.handle_clear_attachments();
             }
+            AppMessage::DownloadAttachment(channel_id, timestamp, pointer) => {
+                self.window.send_command(super::backend::BackendCommand::DownloadAttachment(
+                    channel_id,
+                    timestamp,
+                    pointer,
+                ));
+            }
             AppMessage::LoadMorePressed => {
                 self.window.handle_load_more();
             }
@@ -461,6 +470,9 @@ impl Dispatcher for FlareApp {
             }
             AppMessage::MessageDeleted(timestamp) => {
                 self.window.remove_message(timestamp);
+            }
+            AppMessage::ReloadChannel(channel_id) => {
+                self.window.reload_channel(channel_id);
             }
             AppMessage::TypingCleared(channel_id) => {
                 self.window.clear_typing(channel_id);

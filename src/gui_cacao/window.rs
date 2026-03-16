@@ -11,6 +11,7 @@ use cacao::input::TextField;
 use cacao::layout::{Layout, LayoutConstraint};
 use cacao::listview::ListView;
 use cacao::text::Label;
+use cacao::text::LineBreakMode;
 use cacao::view::View;
 
 use cacao::objc_access::ObjcAccess;
@@ -86,6 +87,7 @@ pub struct FlareWindowDelegate {
     conversation_header: Label,
     detail_header_sep: View,
     detail_placeholder: Label,
+    load_more_bar: View,
     load_more_button: Button,
     message_list: ListView<MessageListDelegate>,
     typing_label: Label,
@@ -147,6 +149,7 @@ impl FlareWindowDelegate {
             conversation_header: Label::new(),
             detail_header_sep: View::new(),
             detail_placeholder: Label::new(),
+            load_more_bar: View::new(),
             load_more_button: Button::new("Load More"),
             message_list: ListView::with(MessageListDelegate::default()),
             typing_label: Label::new(),
@@ -242,6 +245,9 @@ impl FlareWindowDelegate {
             self.attachment_label.set_hidden(false);
             self.attachment_clear_button.set_hidden(false);
             set_height_constraint(&self.attachment_preview_bar, 40.0);
+            set_view_alpha(&self.attachment_preview_bar, 0.15);
+            self.attachment_label
+                .set_line_break_mode(LineBreakMode::TruncateTail);
 
             // Show filenames
             let names: Vec<String> = attachments
@@ -281,8 +287,26 @@ fn apply_separator_color(view: &View) {
     });
 }
 
+/// Set a view's background color with alpha (0.0-1.0).
+fn set_view_alpha(view: &View, alpha: f64) {
+    use cacao::objc_access::ObjcAccess;
+    view.with_backing_obj_mut(|obj| unsafe {
+        use objc::{class, msg_send, sel, sel_impl};
+        let _: () = msg_send![obj, setWantsLayer: true];
+        let layer: *mut objc::runtime::Object = msg_send![obj, layer];
+        let ns_color: *mut objc::runtime::Object = msg_send![
+            class!(NSColor),
+            colorWithWhite: 0.85 alpha: alpha
+        ];
+        let cg: *mut objc::runtime::Object = msg_send![ns_color, CGColor];
+        let _: () = msg_send![layer, setBackgroundColor: cg];
+        let _: () = msg_send![layer, setOpaque: false];
+    });
+}
+
 /// Remove button border so it appears as a plain text link.
 fn make_button_borderless(btn: &Button) {
+    use cacao::objc_access::ObjcAccess;
     btn.objc.get(|obj| unsafe {
         use objc::{msg_send, sel, sel_impl};
         let obj = obj as *const _ as *mut objc::runtime::Object;
@@ -478,8 +502,14 @@ impl WindowDelegate for FlareWindowDelegate {
         self.load_more_button.set_action(move |_| {
             App::<FlareApp, AppMessage>::dispatch_main(AppMessage::LoadMorePressed);
         });
-        // Make load-more look like a plain text link
         make_button_borderless(&self.load_more_button);
+        // Clip subviews so button doesn't bleed outside bar when height=0
+        self.load_more_bar.with_backing_obj_mut(|obj| unsafe {
+            use objc::{msg_send, sel, sel_impl};
+            let _: () = msg_send![obj, setWantsLayer: objc::runtime::YES];
+            let layer: *mut objc::runtime::Object = msg_send![obj, layer];
+            let _: () = msg_send![layer, setMasksToBounds: objc::runtime::YES];
+        });
 
         self.typing_label.set_font(&Font::system(12.));
         self.typing_label.set_text_color(Color::SystemGray);
@@ -619,11 +649,13 @@ impl WindowDelegate for FlareWindowDelegate {
             self.send_button.height.constraint_equal_to_constant(36.0),
         ]);
 
+        self.load_more_bar.add_subview(&self.load_more_button);
+
         self.detail.add_subview(&self.conversation_header);
         self.detail.add_subview(&self.detail_header_sep);
         self.detail.add_subview(&self.detail_placeholder);
-        self.detail.add_subview(&self.load_more_button);
         self.detail.add_subview(&self.message_list);
+        self.detail.add_subview(&self.load_more_bar);
         self.detail.add_subview(&self.typing_label);
         self.detail.add_subview(&self.input_separator);
         self.detail.add_subview(&self.reply_bar);
@@ -668,15 +700,26 @@ impl WindowDelegate for FlareWindowDelegate {
             self.detail_placeholder
                 .center_y
                 .constraint_equal_to(&self.detail.center_y),
-            // Load more button (below header sep when visible)
+            // Load more bar — transparent overlay at top of message list (like attachment_preview_bar)
+            self.load_more_bar
+                .top
+                .constraint_equal_to(&self.detail_header_sep.bottom),
+            self.load_more_bar
+                .leading
+                .constraint_equal_to(&self.detail.leading),
+            self.load_more_bar
+                .trailing
+                .constraint_equal_to(&self.detail.trailing),
+            self.load_more_bar
+                .height
+                .constraint_equal_to_constant(0.0),
             self.load_more_button
                 .center_x
-                .constraint_equal_to(&self.detail.center_x),
+                .constraint_equal_to(&self.load_more_bar.center_x),
             self.load_more_button
-                .top
-                .constraint_equal_to(&self.detail_header_sep.bottom)
-                .offset(4.0),
-            // Message list
+                .center_y
+                .constraint_equal_to(&self.load_more_bar.center_y),
+            // Message list — starts just below header sep, load_more_bar overlays on top
             self.message_list
                 .leading
                 .constraint_equal_to(&self.detail.leading),
@@ -685,8 +728,7 @@ impl WindowDelegate for FlareWindowDelegate {
                 .constraint_equal_to(&self.detail.trailing),
             self.message_list
                 .top
-                .constraint_equal_to(&self.load_more_button.bottom)
-                .offset(2.0),
+                .constraint_equal_to(&self.detail_header_sep.bottom),
             self.message_list
                 .bottom
                 .constraint_equal_to(&self.typing_label.top),
@@ -747,21 +789,19 @@ impl WindowDelegate for FlareWindowDelegate {
                 .offset(12.0),
             self.attachment_label
                 .trailing
-                .constraint_equal_to(&self.detail.trailing)
-                .offset(-12.0),
-            self.attachment_label
-                .bottom
-                .constraint_equal_to(&self.input_bar.top)
+                .constraint_equal_to(&self.attachment_clear_button.leading)
                 .offset(-8.0),
+            self.attachment_label
+                .center_y
+                .constraint_equal_to(&self.attachment_preview_bar.center_y),
             // Attachment clear button (hidden by default)
             self.attachment_clear_button
                 .trailing
                 .constraint_equal_to(&self.detail.trailing)
                 .offset(-8.0),
             self.attachment_clear_button
-                .bottom
-                .constraint_equal_to(&self.input_bar.top)
-                .offset(-8.0),
+                .center_y
+                .constraint_equal_to(&self.attachment_preview_bar.center_y),
             self.attachment_clear_button
                 .height
                 .constraint_equal_to_constant(24.0),
@@ -781,7 +821,7 @@ impl WindowDelegate for FlareWindowDelegate {
         // Initially hide chat-specific elements
         self.conversation_header.set_hidden(true);
         self.detail_header_sep.set_hidden(true);
-        self.load_more_button.set_hidden(true);
+        set_height_constraint(&self.load_more_bar, 0.0);
         self.message_list.set_hidden(true);
         self.typing_label.set_hidden(true);
         self.input_separator.set_hidden(true);
@@ -1060,7 +1100,9 @@ impl FlareWindow {
             d.conversation_header.set_hidden(false);
             d.detail_header_sep.set_hidden(false);
             d.detail_placeholder.set_hidden(true);
-            d.load_more_button.set_hidden(count < 50);
+            let show_load_more = count >= 50;
+            set_height_constraint(&d.load_more_bar, if show_load_more { 28.0 } else { 0.0 });
+            set_view_alpha(&d.load_more_bar, 0.15);
             d.message_list.set_hidden(false);
             d.typing_label.set_hidden(true);
             set_height_constraint(&d.typing_label, 0.0);
@@ -1089,7 +1131,9 @@ impl FlareWindow {
         if let Some(ref w) = self.0 {
             let d = w.delegate.as_ref().unwrap();
             let added = messages.len();
-            d.load_more_button.set_hidden(added < 50);
+            let show_load_more = added >= 50;
+            set_height_constraint(&d.load_more_bar, if show_load_more { 28.0 } else { 0.0 });
+            set_view_alpha(&d.load_more_bar, 0.15);
             *d.loaded_message_count.borrow_mut() += added;
             if let Some(ref delegate) = d.message_list.delegate {
                 delegate.prepend_messages(messages);
@@ -1179,7 +1223,7 @@ impl FlareWindow {
                     let _ =
                         tx.unbounded_send(BackendCommand::LoadOlderMessages(channel_id, offset));
                 }
-                d.load_more_button.set_hidden(true);
+                set_height_constraint(&d.load_more_bar, 0.0);
             }
         }
     }
@@ -1469,6 +1513,19 @@ impl FlareWindow {
             let d = w.delegate.as_ref().unwrap();
             if let Some(ref delegate) = d.message_list.delegate {
                 delegate.remove_message(timestamp);
+            }
+        }
+    }
+
+    pub fn reload_channel(&self, channel_id: ChannelId) {
+        if let Some(ref w) = self.0 {
+            let d = w.delegate.as_ref().unwrap();
+            let current = d.current_channel.borrow().clone();
+            if current == Some(channel_id.clone()) {
+                // Reload messages for this channel
+                if let Some(tx) = d.backend_state.command_tx.lock().unwrap().as_ref() {
+                    let _ = tx.unbounded_send(BackendCommand::LoadMessages(channel_id));
+                }
             }
         }
     }

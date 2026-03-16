@@ -26,6 +26,7 @@ pub enum BackendCommand {
     ClearAllMessages,
     ClearChannelMessages(ChannelId),
     OpenAttachment(libsignal_service::proto::AttachmentPointer),
+    DownloadAttachment(ChannelId, u64, libsignal_service::proto::AttachmentPointer),
     DeleteMessage(ChannelId, u64),
 }
 
@@ -354,6 +355,9 @@ async fn run_message_loop(
                                 }
                                 Some(BackendCommand::OpenAttachment(pointer)) => {
                                     open_attachment(&manager, pointer).await;
+                                }
+                                Some(BackendCommand::DownloadAttachment(channel_id, timestamp, pointer)) => {
+                                    download_attachment(&manager, &store, &channel_id, timestamp, pointer).await;
                                 }
                                 Some(BackendCommand::DeleteMessage(channel_id, timestamp)) => {
                                     delete_message(&mut store, &channel_id, timestamp).await;
@@ -761,6 +765,38 @@ async fn open_attachment(
                 let workspace: *mut objc::runtime::Object = msg_send![class!(NSWorkspace), sharedWorkspace];
                 let _: bool = msg_send![workspace, openURL: ns_url];
             }
+        }
+    }
+}
+
+async fn download_attachment(
+    manager: &presage::Manager<Store, Registered>,
+    store: &Store,
+    channel_id: &ChannelId,
+    timestamp: u64,
+    pointer: libsignal_service::proto::AttachmentPointer,
+) {
+    // Determine type and use appropriate cache function
+    let cached_path = if is_image_attachment(&pointer) {
+        cache_image_attachment(manager, &pointer).await
+    } else if is_video_attachment(&pointer) {
+        cache_attachment(manager, &pointer).await
+    } else if is_audio_attachment(&pointer) {
+        cache_attachment(manager, &pointer).await
+    } else {
+        cache_attachment(manager, &pointer).await
+    };
+
+    match cached_path {
+        Some(path) => {
+            log::info!("Downloaded/cached attachment to: {:?}", path);
+            App::<FlareApp, AppMessage>::dispatch_main(AppMessage::ReloadChannel(channel_id.clone()));
+        }
+        None => {
+            log::error!("Failed to download attachment");
+            App::<FlareApp, AppMessage>::dispatch_main(AppMessage::BackendActionFailed(
+                "Download failed".to_string(),
+            ));
         }
     }
 }

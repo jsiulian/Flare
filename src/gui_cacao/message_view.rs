@@ -1872,6 +1872,13 @@ impl ListViewDelegate for MessageListDelegate {
         // image bubbles can grow to their full size.
         view.set_uses_automatic_row_heights(true);
 
+        // Cacao's ScrollView sets setDrawsBackground:NO by default, making the
+        // list transparent. Re-enable it so the message area has an opaque background.
+        view.scrollview.objc.with_mut(|obj| unsafe {
+            use objc::{msg_send, sel, sel_impl};
+            let _: () = msg_send![obj, setDrawsBackground: objc::runtime::YES];
+        });
+
         let view_ptr = view
             .objc
             .get(|obj| obj as *const _ as *mut objc::runtime::Object);
