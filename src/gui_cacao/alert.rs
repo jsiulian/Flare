@@ -3,6 +3,8 @@ use objc::{class, msg_send, sel, sel_impl};
 use std::ffi::CString;
 use std::path::PathBuf;
 
+use cacao::geometry::Rect;
+
 unsafe fn nsstring(s: &str) -> *mut Object {
     let cs = CString::new(s).unwrap_or_default();
     let cls = class!(NSString);
@@ -235,4 +237,133 @@ pub fn pick_files() -> Vec<PathBuf> {
 
         paths
     }
+}
+
+/// Show a modal dialog for submitting captcha.
+/// Returns Some((token, captcha)) if submitted, None if cancelled.
+pub fn submit_captcha() -> Option<(String, String)> {
+    unsafe {
+        let cls = class!(NSAlert);
+        let alert: *mut Object = msg_send![cls, new];
+
+        let ns_title = nsstring("Submit Captcha");
+        let _: () = msg_send![alert, setMessageText: ns_title];
+
+        let body = "Submit a Captcha challenge. The token can be obtained from the error message that was displayed from Flare. The captcha must be filled out on signalcaptchas.org and the link to open Signal must be pasted to the corresponding entry. Note that the captcha is only valid for about one minute.";
+        let ns_body = nsstring(body);
+        let _: () = msg_send![alert, setInformativeText: ns_body];
+
+        let ns_submit = nsstring("Submit");
+        let _: *mut Object = msg_send![alert, addButtonWithTitle: ns_submit];
+
+        let ns_cancel = nsstring("Cancel");
+        let _: *mut Object = msg_send![alert, addButtonWithTitle: ns_cancel];
+
+        // Create accessory view with text fields
+        let accessory = create_accessory_view();
+        let _: () = msg_send![alert, setAccessoryView: accessory];
+
+        // Center the alert on screen
+        if let Some(key_window) = get_key_window() {
+            let _: () = msg_send![key_window, center];
+        }
+
+        let response: i64 = msg_send![alert, runModal];
+
+        if response == 1000 {
+            // Submit button (first button)
+            let token = get_text_field_value(accessory, 1);
+            let captcha = get_text_field_value(accessory, 2);
+            if !token.is_empty() && !captcha.is_empty() {
+                Some((token, captcha))
+            } else {
+                None
+            }
+        } else {
+            None
+        }
+    }
+}
+
+unsafe fn create_accessory_view() -> *mut Object {
+    let container: *mut Object = msg_send![class!(NSView), new];
+
+    // Token field (created with new, no autorelease needed)
+    let token_label = create_label("Token:");
+    let token_field = create_text_field();
+
+    // Captcha field
+    let captcha_label = create_label("Captcha:");
+    let captcha_field = create_text_field();
+
+    // Add subviews (container retains them)
+    let _: () = msg_send![container, addSubview: token_label];
+    let _: () = msg_send![container, addSubview: token_field];
+    let _: () = msg_send![container, addSubview: captcha_label];
+    let _: () = msg_send![container, addSubview: captcha_field];
+
+    // Layout: stacked vertically
+    let width: f64 = 300.0;
+    let label_height: f64 = 20.0;
+    let field_height: f64 = 24.0;
+    let padding: f64 = 20.0;
+
+    // Token label
+    let token_label_frame = Rect::new(padding, 80.0, 80.0, label_height);
+    let _: () = msg_send![token_label, setFrame: token_label_frame];
+
+    // Token field
+    let token_field_frame = Rect::new(padding + 85.0, 76.0, width - 85.0 - padding, field_height);
+    let _: () = msg_send![token_field, setFrame: token_field_frame];
+
+    // Captcha label
+    let captcha_label_frame = Rect::new(padding, 45.0, 80.0, label_height);
+    let _: () = msg_send![captcha_label, setFrame: captcha_label_frame];
+
+    // Captcha field
+    let captcha_field_frame = Rect::new(padding + 85.0, 41.0, width - 85.0 - padding, field_height);
+    let _: () = msg_send![captcha_field, setFrame: captcha_field_frame];
+
+    // Set container size
+    let container_frame = Rect::new(0.0, 0.0, width, 110.0);
+    let _: () = msg_send![container, setFrame: container_frame];
+
+    // Tag fields for retrieval (1 and 2)
+    let _: () = msg_send![token_field, setTag: 1];
+    let _: () = msg_send![captcha_field, setTag: 2];
+
+    container
+}
+
+unsafe fn create_label(text: &str) -> *mut Object {
+    let ns_text = nsstring(text);
+    let label: *mut Object = msg_send![class!(NSTextField), labelWithString: ns_text];
+    let font: *mut Object = msg_send![class!(NSFont), systemFontOfSize: 13.0];
+    let _: () = msg_send![label, setFont: font];
+    label
+}
+
+unsafe fn create_text_field() -> *mut Object {
+    let field: *mut Object = msg_send![class!(NSTextField), new];
+    let _: () = msg_send![field, setBezeled: objc::runtime::YES];
+    let _: () = msg_send![field, setBezelStyle: 1i32]; // NSTextFieldRoundedBezel
+    let _: () = msg_send![field, setEditable: objc::runtime::YES];
+    let _: () = msg_send![field, setSelectable: objc::runtime::YES];
+    let _: () = msg_send![field, setDrawsBackground: objc::runtime::YES];
+    field
+}
+
+unsafe fn get_text_field_value(container: *mut Object, tag: u32) -> String {
+    let view: *mut Object = msg_send![container, viewWithTag: tag as i32];
+    if view.is_null() {
+        return String::new();
+    }
+    let value: *mut Object = msg_send![view, stringValue];
+    if value.is_null() {
+        return String::new();
+    }
+    let c_str: *const std::os::raw::c_char = msg_send![value, UTF8String];
+    let bytes = std::slice::from_raw_parts(c_str as *const u8, 4096);
+    let end = bytes.iter().position(|&b| b == 0).unwrap_or(bytes.len());
+    String::from_utf8_lossy(&bytes[..end]).to_string()
 }

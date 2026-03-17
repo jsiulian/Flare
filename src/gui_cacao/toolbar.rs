@@ -28,16 +28,25 @@ fn build_hamburger_menu() -> usize {
         }
 
         add_item!("Settings", AppMessage::OpenPreferences);
+        let sep: *mut Object = msg_send![class!(NSMenuItem), separatorItem];
+        let _: () = msg_send![menu, addItem: sep];
+
         add_item!("Synchronize Contacts", AppMessage::SyncContacts);
-        add_item!("Linked Devices", AppMessage::OpenLinkedDevices);
-        add_item!("Clear Messages\u{2026}", AppMessage::ClearAllMessages);
+        add_item!("Submit Captcha", AppMessage::SubmitCaptcha);
 
         let sep: *mut Object = msg_send![class!(NSMenuItem), separatorItem];
         let _: () = msg_send![menu, addItem: sep];
 
-        add_item!("Unlink Device\u{2026}", AppMessage::UnlinkDevice);
+        add_item!("Clear All Messages", AppMessage::ClearAllMessages);
+        add_item!("Clear Conversation Messages", AppMessage::ClearChannelMessages);
+
+        let sep: *mut Object = msg_send![class!(NSMenuItem), separatorItem];
+        let _: () = msg_send![menu, addItem: sep];
+
+        add_item!("Linked Devices", AppMessage::OpenLinkedDevices);
+        add_item!("Unlink Device", AppMessage::UnlinkDevice);
         add_item!(
-            "Unlink and Delete Data\u{2026}",
+            "Unlink and Delete Data",
             AppMessage::UnlinkDeviceAndDelete
         );
 

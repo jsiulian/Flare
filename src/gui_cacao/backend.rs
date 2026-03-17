@@ -28,6 +28,7 @@ pub enum BackendCommand {
     OpenAttachment(libsignal_service::proto::AttachmentPointer),
     DownloadAttachment(ChannelId, u64, libsignal_service::proto::AttachmentPointer),
     DeleteMessage(ChannelId, u64),
+    SubmitCaptcha(String, String),
 }
 
 pub struct BackendState {
@@ -362,6 +363,16 @@ async fn run_message_loop(
                                 Some(BackendCommand::DeleteMessage(channel_id, timestamp)) => {
                                     delete_message(&mut store, &channel_id, timestamp).await;
                                 }
+                                Some(BackendCommand::SubmitCaptcha(token, captcha)) => {
+                                    match manager.submit_recaptcha_challenge(&token, &captcha).await {
+                                        Ok(()) => {
+                                            log::info!("Captcha submitted successfully");
+                                        }
+                                        Err(e) => {
+                                            log::error!("Failed to submit captcha: {}", e);
+                                        }
+                                    }
+                                }
                                 None => break,
                             }
                         }
@@ -408,6 +419,9 @@ async fn run_message_loop(
                                 }
                                 Some(BackendCommand::DeleteMessage(channel_id, timestamp)) => {
                                     delete_message(&mut store, &channel_id, timestamp).await;
+                                }
+                                Some(BackendCommand::SubmitCaptcha(_token, _captcha)) => {
+                                    log::warn!("Cannot submit captcha: manager not available");
                                 }
                                 _ => {}
                             }
