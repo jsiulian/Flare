@@ -626,12 +626,7 @@ pub struct PreferencesWindow(pub Option<Window<PreferencesDelegate>>);
 impl PreferencesWindow {
     pub fn show(&self) {
         if let Some(ref w) = self.0 {
-            // Center the preferences window before showing it so it doesn't appear in a corner.
-            unsafe {
-                use objc::{msg_send, sel, sel_impl};
-                let win = &*w.objc as *const _ as *mut objc::runtime::Object;
-                let _: () = msg_send![win, center];
-            }
+            super::center_window(w);
             w.show();
         }
     }

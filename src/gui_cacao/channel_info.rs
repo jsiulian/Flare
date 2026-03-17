@@ -37,22 +37,50 @@ impl WindowDelegate for ChannelInfoDelegate {
         self.type_label.set_font(&Font::system(13.));
         self.type_label.set_text_color(Color::SystemGray);
         self.members_label.set_font(&Font::system(13.));
-        self.members_label.set_line_break_mode(LineBreakMode::WrapWords);
+        self.members_label
+            .set_line_break_mode(LineBreakMode::WrapWords);
 
         self.content.add_subview(&self.title_label);
         self.content.add_subview(&self.type_label);
         self.content.add_subview(&self.members_label);
 
         LayoutConstraint::activate(&[
-            self.title_label.top.constraint_equal_to(&self.content.top).offset(24.),
-            self.title_label.leading.constraint_equal_to(&self.content.leading).offset(24.),
-            self.title_label.trailing.constraint_equal_to(&self.content.trailing).offset(-24.),
-            self.type_label.top.constraint_equal_to(&self.title_label.bottom).offset(8.),
-            self.type_label.leading.constraint_equal_to(&self.content.leading).offset(24.),
-            self.type_label.trailing.constraint_equal_to(&self.content.trailing).offset(-24.),
-            self.members_label.top.constraint_equal_to(&self.type_label.bottom).offset(16.),
-            self.members_label.leading.constraint_equal_to(&self.content.leading).offset(24.),
-            self.members_label.trailing.constraint_equal_to(&self.content.trailing).offset(-24.),
+            self.title_label
+                .top
+                .constraint_equal_to(&self.content.top)
+                .offset(24.),
+            self.title_label
+                .leading
+                .constraint_equal_to(&self.content.leading)
+                .offset(24.),
+            self.title_label
+                .trailing
+                .constraint_equal_to(&self.content.trailing)
+                .offset(-24.),
+            self.type_label
+                .top
+                .constraint_equal_to(&self.title_label.bottom)
+                .offset(8.),
+            self.type_label
+                .leading
+                .constraint_equal_to(&self.content.leading)
+                .offset(24.),
+            self.type_label
+                .trailing
+                .constraint_equal_to(&self.content.trailing)
+                .offset(-24.),
+            self.members_label
+                .top
+                .constraint_equal_to(&self.type_label.bottom)
+                .offset(16.),
+            self.members_label
+                .leading
+                .constraint_equal_to(&self.content.leading)
+                .offset(24.),
+            self.members_label
+                .trailing
+                .constraint_equal_to(&self.content.trailing)
+                .offset(-24.),
         ]);
 
         window.set_content_view(&self.content);
@@ -64,12 +92,18 @@ pub struct ChannelInfoWindow(pub Option<Window<ChannelInfoDelegate>>);
 impl ChannelInfoWindow {
     pub fn show_for_channel(&self, channel: &CoreChannel) {
         if let Some(ref w) = self.0 {
+            super::center_window(w);
             let d = w.delegate.as_ref().unwrap();
             d.title_label.set_text(&channel.title);
-            let kind = if channel.is_group { "Group conversation" } else { "Direct message" };
+            let kind = if channel.is_group {
+                "Group conversation"
+            } else {
+                "Direct message"
+            };
             d.type_label.set_text(kind);
             if channel.is_group && !channel.members.is_empty() {
-                d.members_label.set_text(&format!("Members: {}", channel.members.join(", ")));
+                d.members_label
+                    .set_text(&format!("Members: {}", channel.members.join(", ")));
                 d.members_label.set_hidden(false);
             } else if channel.is_group {
                 d.members_label.set_text("Group conversation");

@@ -45,7 +45,7 @@ const OFFLINE_SLEEP_TIMEOUT: u64 = 15;
 
 type Error = presage::Error<<Store as presage::store::Store>::Error>;
 
-// TODO: Reconsider ignoring in the future, but probably does not make any huge difference.
+// TODO: Reconsider ignoring in the future.
 #[allow(clippy::large_enum_variant)]
 enum Command {
     Uuid(oneshot::Sender<Uuid>),
