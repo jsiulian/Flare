@@ -51,6 +51,7 @@ pub enum AppMessage {
     SetReply(CoreMessage),
     ClearReply,
     RetrySetup,
+    SubmitCaptcha,
     AppQuit,
     ReceiptsReceived(Vec<u64>, bool),
     ActivateChannel(usize),
@@ -114,25 +115,31 @@ impl AppDelegate for FlareApp {
                 vec![
                     MenuItem::CloseWindow,
                     MenuItem::Separator,
-                    MenuItem::new("Sync Contacts").action(|| {
+                    MenuItem::new("Synchronize Contacts").action(|| {
                         App::<FlareApp, AppMessage>::dispatch_main(AppMessage::SyncContacts);
                     }),
-                    MenuItem::Separator,
-                    MenuItem::new("Unlink Device...").action(|| {
-                        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::UnlinkDevice);
+                    MenuItem::new("Submit Captcha").action(|| {
+                        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::SubmitCaptcha);
                     }),
-                    MenuItem::new("Unlink and Delete Data...").action(|| {
+                    MenuItem::Separator,
+                    MenuItem::new("Clear All Messages").action(|| {
+                        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::ClearAllMessages);
+                    }),
+                    MenuItem::new("Clear Conversation Messages").action(|| {
                         App::<FlareApp, AppMessage>::dispatch_main(
-                            AppMessage::UnlinkDeviceAndDelete,
+                            AppMessage::ClearChannelMessages,
                         );
                     }),
                     MenuItem::Separator,
-                    MenuItem::new("Clear All Messages...").action(|| {
-                        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::ClearAllMessages);
+                    MenuItem::new("Linked Devices").action(|| {
+                        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::OpenLinkedDevices);
                     }),
-                    MenuItem::new("Clear Conversation Messages...").action(|| {
+                    MenuItem::new("Unlink Device").action(|| {
+                        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::UnlinkDevice);
+                    }),
+                    MenuItem::new("Unlink and Delete Data").action(|| {
                         App::<FlareApp, AppMessage>::dispatch_main(
-                            AppMessage::ClearChannelMessages,
+                            AppMessage::UnlinkDeviceAndDelete,
                         );
                     }),
                 ],
@@ -352,9 +359,9 @@ impl Dispatcher for FlareApp {
                 unsafe {
                     use objc::runtime::Object;
                     use objc::{class, msg_send, sel};
-                    
+
                     let pasteboard: *mut objc::runtime::Object = msg_send![class!(NSPasteboard), generalPasteboard];
-                    
+
                     // First: get types available on pasteboard
                     let types: *mut objc::runtime::Object = msg_send![pasteboard, types];
                     if types.is_null() {
@@ -363,16 +370,16 @@ impl Dispatcher for FlareApp {
                         let _: () = msg_send![app, sendAction: sel!(paste:) to: std::ptr::null::<()>() from: std::ptr::null::<()>()];
                         return;
                     }
-                    
+
                     // Check if it responds to count
                     let type_count: usize = msg_send![types, count];
                     log::trace!("Pasteboard has {} types", type_count);
-                    
+
                     // Try reading file URLs - this is the proper way to get files from pasteboard
                     let url_class: *mut objc::runtime::Object = msg_send![class!(NSURL), class];
                     let url_arr: *mut objc::runtime::Object = msg_send![class!(NSArray), arrayWithObject: url_class];
                     let url_results: *mut objc::runtime::Object = msg_send![pasteboard, readObjectsForClasses: url_arr options: std::ptr::null::<objc::runtime::Object>()];
-                    
+
                     if !url_results.is_null() {
                         let url_count: usize = msg_send![url_results, count];
                         log::trace!("Got {} URLs from pasteboard", url_count);
@@ -400,12 +407,12 @@ impl Dispatcher for FlareApp {
                             }
                         }
                     }
-                    
+
                     // Try reading NSString - might contain file path as plain text
                     let string_class: *mut objc::runtime::Object = msg_send![class!(NSString), class];
                     let arr: *mut objc::runtime::Object = msg_send![class!(NSArray), arrayWithObject: string_class];
                     let str_results: *mut objc::runtime::Object = msg_send![pasteboard, readObjectsForClasses: arr options: std::ptr::null::<objc::runtime::Object>()];
-                    
+
                     if !str_results.is_null() {
                         let str_count: usize = msg_send![str_results, count];
                         log::trace!("Got {} strings from pasteboard", str_count);
@@ -418,7 +425,7 @@ impl Dispatcher for FlareApp {
                                         let bytes = std::slice::from_raw_parts(c_str as *const u8, 4096);
                                         let end = bytes.iter().position(|&b| b == 0).unwrap_or(bytes.len());
                                         let path_string = String::from_utf8_lossy(&bytes[..end]).to_string();
-                                        
+
                                         if path_string.starts_with('/') && std::path::Path::new(&path_string).exists() {
                                             paths.push(path_string);
                                         }
@@ -431,12 +438,12 @@ impl Dispatcher for FlareApp {
                                 }
                             }
                     }
-                    
+
                     // Try NSImage
                     let img_class: *mut objc::runtime::Object = msg_send![class!(NSImage), class];
                     let img_arr: *mut objc::runtime::Object = msg_send![class!(NSArray), arrayWithObject: img_class];
                     let img_results: *mut objc::runtime::Object = msg_send![pasteboard, readObjectsForClasses: img_arr options: std::ptr::null::<objc::runtime::Object>()];
-                    
+
                     if !img_results.is_null() {
                         let img_count: usize = msg_send![img_results, count];
                         log::trace!("Got {} images from pasteboard", img_count);
@@ -464,7 +471,7 @@ impl Dispatcher for FlareApp {
                             }
                         }
                     }
-                    
+
                     // Fallback
                     log::trace!("No supported content found, doing normal paste");
                     let app: *mut objc::runtime::Object = msg_send![class!(NSApplication), sharedApplication];
@@ -546,6 +553,11 @@ impl Dispatcher for FlareApp {
             }
             AppMessage::ClearChannelMessages => {
                 self.window.clear_current_channel_messages();
+            }
+            AppMessage::SubmitCaptcha => {
+                if let Some((token, captcha)) = alert::submit_captcha() {
+                    self.window.send_command(super::backend::BackendCommand::SubmitCaptcha(token, captcha));
+                }
             }
             AppMessage::BackendActionFailed(err) => {
                 let result = alert::error_with_report("Action Failed", &err, true);
