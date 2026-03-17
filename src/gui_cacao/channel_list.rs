@@ -57,7 +57,7 @@ fn initials_for(title: &str) -> String {
     }
 }
 
-// — Search field delegate —
+// Search field delegate
 
 #[derive(Debug, Default)]
 pub struct SearchFieldDelegate;
@@ -79,7 +79,7 @@ pub fn new_search_field() -> SearchField {
     field
 }
 
-// — Channel row —
+// Channel row
 
 #[derive(Default, Debug)]
 pub struct ChannelRow {
@@ -220,7 +220,7 @@ impl ViewDelegate for ChannelRow {
     }
 }
 
-// — List delegate —
+// List delegate
 
 pub struct ChannelListDelegate {
     view: Option<ListView>,

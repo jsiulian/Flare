@@ -1,8 +1,8 @@
 use std::cell::RefCell;
 use std::sync::Arc;
 
-use cacao::appkit::App;
 use cacao::appkit::window::{Window, WindowConfig, WindowDelegate, WindowStyle};
+use cacao::appkit::App;
 use cacao::color::Color;
 use cacao::geometry::Rect;
 use cacao::input::{TextField, TextFieldDelegate};
@@ -18,7 +18,7 @@ use super::backend::{BackendCommand, BackendState};
 
 const CONTACT_ROW: &str = "ContactPickerRow";
 
-// — Search field delegate —
+// Search field delegate
 
 #[derive(Debug, Default)]
 pub struct ContactSearchFieldDelegate;
@@ -27,9 +27,9 @@ impl TextFieldDelegate for ContactSearchFieldDelegate {
     const NAME: &'static str = "ContactSearchField";
 
     fn text_did_change(&self, value: &str) {
-        App::<FlareApp, AppMessage>::dispatch_main(
-            AppMessage::ContactPickerSearch(value.to_string()),
-        );
+        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::ContactPickerSearch(
+            value.to_string(),
+        ));
     }
 
     fn text_did_end_editing(&self, _value: &str) {}
@@ -41,7 +41,7 @@ fn new_contact_search_field() -> ContactSearchField {
     TextField::with(ContactSearchFieldDelegate)
 }
 
-// — Row —
+// Row
 
 #[derive(Default, Debug)]
 pub struct ContactPickerRow {
@@ -57,14 +57,23 @@ impl ViewDelegate for ContactPickerRow {
 
         LayoutConstraint::activate(&[
             self.title.top.constraint_equal_to(&view.top).offset(8.),
-            self.title.bottom.constraint_equal_to(&view.bottom).offset(-8.),
-            self.title.leading.constraint_equal_to(&view.leading).offset(12.),
-            self.title.trailing.constraint_equal_to(&view.trailing).offset(-12.),
+            self.title
+                .bottom
+                .constraint_equal_to(&view.bottom)
+                .offset(-8.),
+            self.title
+                .leading
+                .constraint_equal_to(&view.leading)
+                .offset(12.),
+            self.title
+                .trailing
+                .constraint_equal_to(&view.trailing)
+                .offset(-12.),
         ]);
     }
 }
 
-// — List delegate —
+// List delegate
 
 pub struct ContactListDelegate {
     view: Option<ListView>,
@@ -131,7 +140,11 @@ impl ListViewDelegate for ContactListDelegate {
     }
 
     fn item_for(&self, row: usize) -> ListViewRow {
-        let mut view = self.view.as_ref().unwrap().dequeue::<ContactPickerRow>(CONTACT_ROW);
+        let mut view = self
+            .view
+            .as_ref()
+            .unwrap()
+            .dequeue::<ContactPickerRow>(CONTACT_ROW);
         if let Some(delegate) = &mut view.delegate {
             let contacts = self.filtered.borrow();
             if let Some(channel) = contacts.get(row) {
@@ -154,7 +167,7 @@ impl ListViewDelegate for ContactListDelegate {
     }
 }
 
-// — Window delegate —
+// Window delegate
 
 pub struct ContactPickerDelegate {
     content: View,
@@ -193,23 +206,41 @@ impl WindowDelegate for ContactPickerDelegate {
         self.content.add_subview(&self.no_results);
 
         LayoutConstraint::activate(&[
-            self.search_field.top.constraint_equal_to(&self.content.top).offset(8.),
-            self.search_field.leading.constraint_equal_to(&self.content.leading).offset(8.),
-            self.search_field.trailing.constraint_equal_to(&self.content.trailing).offset(-8.),
+            self.search_field
+                .top
+                .constraint_equal_to(&self.content.top)
+                .offset(8.),
+            self.search_field
+                .leading
+                .constraint_equal_to(&self.content.leading)
+                .offset(8.),
+            self.search_field
+                .trailing
+                .constraint_equal_to(&self.content.trailing)
+                .offset(-8.),
             self.search_field.height.constraint_equal_to_constant(24.),
-            self.list.top.constraint_equal_to(&self.search_field.bottom).offset(4.),
+            self.list
+                .top
+                .constraint_equal_to(&self.search_field.bottom)
+                .offset(4.),
             self.list.bottom.constraint_equal_to(&self.content.bottom),
             self.list.leading.constraint_equal_to(&self.content.leading),
-            self.list.trailing.constraint_equal_to(&self.content.trailing),
-            self.no_results.center_x.constraint_equal_to(&self.content.center_x),
-            self.no_results.center_y.constraint_equal_to(&self.content.center_y),
+            self.list
+                .trailing
+                .constraint_equal_to(&self.content.trailing),
+            self.no_results
+                .center_x
+                .constraint_equal_to(&self.content.center_x),
+            self.no_results
+                .center_y
+                .constraint_equal_to(&self.content.center_y),
         ]);
 
         window.set_content_view(&self.content);
     }
 }
 
-// — Public window wrapper —
+// Public window wrapper
 
 pub struct ContactPickerWindow(pub Option<Window<ContactPickerDelegate>>);
 
@@ -264,6 +295,9 @@ impl ContactPickerWindow {
             WindowStyle::Resizable,
         ]);
         config.initial_dimensions = Rect::new(0.0, 0.0, 320.0, 480.0);
-        Self(Some(Window::with(config, ContactPickerDelegate::new(backend_state))))
+        Self(Some(Window::with(
+            config,
+            ContactPickerDelegate::new(backend_state),
+        )))
     }
 }

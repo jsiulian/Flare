@@ -18,7 +18,7 @@ use cacao::objc_access::ObjcAccess;
 use cacao::text::{Font, Label, LineBreakMode, TextAlign};
 use cacao::view::{View, ViewDelegate};
 
-// ── Hover tracking for react buttons ──────────────────────────────────────
+// Hover tracking for react buttons
 
 #[repr(C)]
 #[derive(Clone, Copy)]
@@ -359,7 +359,7 @@ pub fn reload_listview(view: &ListView) {
     }
 }
 
-// ── Receipt status tracking ──────────────────────────────────────────────
+// Receipt status tracking
 
 /// 0 = sent only, 1 = delivered, 2 = read/viewed
 static RECEIPT_STATUS: once_cell::sync::Lazy<Mutex<HashMap<u64, u8>>> =
@@ -385,7 +385,7 @@ fn receipt_indicator(ts: u64) -> &'static str {
     }
 }
 
-// ── Per-row attachment index for double-click ────────────────────────────
+// Per-row attachment index for double-click
 
 use std::sync::Mutex;
 /// Maps row index → attachment pointer. Rebuilt whenever items change.
@@ -850,7 +850,7 @@ fn format_time(ts: u64) -> String {
         .unwrap_or_default()
 }
 
-// — Outgoing message row (blue bubble, right-aligned) —
+// Outgoing message row (blue bubble, right-aligned)
 
 #[derive(Debug)]
 pub struct OutgoingRow {
@@ -1209,7 +1209,7 @@ impl ViewDelegate for OutgoingRow {
     }
 }
 
-// — Incoming message row (gray bubble, left-aligned) —
+// Incoming message row (gray bubble, left-aligned)
 
 #[derive(Debug)]
 pub struct IncomingRow {
@@ -1551,7 +1551,7 @@ impl ViewDelegate for IncomingRow {
     }
 }
 
-// — Call message row —
+// Call message row
 
 const CALL_ROW: &str = "CallCell";
 
@@ -1617,7 +1617,7 @@ impl ViewDelegate for CallRow {
     }
 }
 
-// — Date divider row —
+// Date divider row
 
 #[derive(Default, Debug)]
 pub struct DateDividerRow {
@@ -1655,9 +1655,9 @@ impl ViewDelegate for DateDividerRow {
     }
 }
 
-// — Reaction row —
+// Reaction row
 
-// — List delegate —
+// List delegate
 
 #[derive(Debug)]
 pub struct MessageListDelegate {

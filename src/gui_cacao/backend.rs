@@ -858,7 +858,7 @@ async fn fetch_devices(manager: &presage::Manager<Store, Registered>) {
     }
 }
 
-// ── Attachment image cache ─────────────────────────────────────────────────
+// Attachment image cache
 
 /// Returns the local cache directory for attachment images, creating it if needed.
 fn attachment_cache_dir() -> std::path::PathBuf {
