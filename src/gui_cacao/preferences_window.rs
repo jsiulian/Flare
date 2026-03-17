@@ -54,12 +54,7 @@ pub fn messages_selectable() -> bool {
     alert::user_default_bool(KEY_MESSAGES_SELECTABLE).unwrap_or(false)
 }
 
-// ---------------------------------------------------------------------------
-// Native NSSwitch wrapper (macOS 10.15+)
-// ---------------------------------------------------------------------------
-
-// Global registry for NSSwitch action callbacks.
-// Each NSSwitch stores its index into this table as an associated object.
+// Native NSSwitch wrapper
 static TOGGLE_CALLBACKS: std::sync::Mutex<Vec<Box<dyn Fn(bool) + Send + Sync>>> =
     std::sync::Mutex::new(Vec::new());
 
@@ -253,10 +248,7 @@ fn set_switch_enabled(raw_ptr: usize, enabled: bool) {
     }
 }
 
-// ---------------------------------------------------------------------------
 // Preferences delegate
-// ---------------------------------------------------------------------------
-
 pub struct PreferencesDelegate {
     content: View,
     title: Label,

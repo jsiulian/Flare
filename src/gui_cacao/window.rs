@@ -26,7 +26,6 @@ use super::channel_list::{new_search_field, ChannelListDelegate, SearchField};
 use super::contact_picker::ContactPickerWindow;
 use super::message_view::MessageListDelegate;
 use super::text_field_action::TextFieldActionHandler;
-use super::text_field_paste::setup_paste_handler;
 use super::toolbar::{create_toolbar, FlareToolbar};
 
 /// Represents a pending attachment waiting to be sent
@@ -273,7 +272,7 @@ impl FlareWindowDelegate {
     }
 }
 
-// ── Appearance helpers ────────────────────────────────────────────────────
+// Appearance helpers
 
 /// Set a view's CALayer background to NSColor.separatorColor (1pt divider).
 fn apply_separator_color(view: &View) {
@@ -553,8 +552,6 @@ impl WindowDelegate for FlareWindowDelegate {
         });
         self.input_action_handler = action_handler_cell.into_inner();
 
-        setup_paste_handler(&self.input_field);
-
         // Thin separator above input bar
         apply_separator_color(&self.input_separator);
 
@@ -710,9 +707,7 @@ impl WindowDelegate for FlareWindowDelegate {
             self.load_more_bar
                 .trailing
                 .constraint_equal_to(&self.detail.trailing),
-            self.load_more_bar
-                .height
-                .constraint_equal_to_constant(0.0),
+            self.load_more_bar.height.constraint_equal_to_constant(0.0),
             self.load_more_button
                 .center_x
                 .constraint_equal_to(&self.load_more_bar.center_x),
@@ -1346,11 +1341,17 @@ impl FlareWindow {
     }
 
     pub fn handle_paste_file(&self, path: String) {
+        self.handle_paste_files(vec![path]);
+    }
+
+    pub fn handle_paste_files(&self, paths: Vec<String>) {
         if let Some(ref w) = self.0 {
             let d = w.delegate.as_ref().unwrap();
             if let Some(_channel_id) = d.current_channel.borrow().clone() {
-                let path = std::path::PathBuf::from(path);
-                d.add_pending_attachment(path);
+                for path in paths {
+                    let path = std::path::PathBuf::from(path);
+                    d.add_pending_attachment(path);
+                }
             }
         }
     }

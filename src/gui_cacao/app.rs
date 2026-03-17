@@ -2,6 +2,7 @@ use cacao::appkit::menu::{Menu, MenuItem};
 use cacao::appkit::{App, AppDelegate};
 use cacao::events::EventModifierFlag;
 use cacao::notification_center::Dispatcher;
+use objc::{class, msg_send, sel, sel_impl};
 
 use super::alert;
 
@@ -63,6 +64,7 @@ pub enum AppMessage {
     ShowAbout,
     PasteFile(String),
     PasteImage(Vec<u8>, String),
+    CheckPasteClipboard,
     ClearAttachments,
     DownloadAttachment(ChannelId, u64, libsignal_service::proto::AttachmentPointer),
 }
@@ -143,7 +145,9 @@ impl AppDelegate for FlareApp {
                     MenuItem::Separator,
                     MenuItem::Cut,
                     MenuItem::Copy,
-                    MenuItem::Paste,
+                    MenuItem::new("Paste").key("v").action(|| {
+                        App::<FlareApp, AppMessage>::dispatch_main(AppMessage::CheckPasteClipboard);
+                    }),
                     MenuItem::SelectAll,
                     MenuItem::Separator,
                     MenuItem::new("Find").key("f").action(|| {
@@ -344,6 +348,129 @@ impl Dispatcher for FlareApp {
             }
             AppMessage::SendButtonPressed => {
                 self.window.handle_send();
+            }
+            AppMessage::CheckPasteClipboard => {
+                unsafe {
+                    use objc::runtime::Object;
+                    use objc::{class, msg_send, sel};
+                    
+                    let pasteboard: *mut objc::runtime::Object = msg_send![class!(NSPasteboard), generalPasteboard];
+                    
+                    // First: get types available on pasteboard
+                    let types: *mut objc::runtime::Object = msg_send![pasteboard, types];
+                    if types.is_null() {
+                        log::trace!("Pasteboard has no types");
+                        let app: *mut objc::runtime::Object = msg_send![class!(NSApplication), sharedApplication];
+                        let _: () = msg_send![app, sendAction: sel!(paste:) to: std::ptr::null::<()>() from: std::ptr::null::<()>()];
+                        return;
+                    }
+                    
+                    // Check if it responds to count
+                    let type_count: usize = msg_send![types, count];
+                    log::trace!("Pasteboard has {} types", type_count);
+                    
+                    // Try reading file URLs - this is the proper way to get files from pasteboard
+                    let url_class: *mut objc::runtime::Object = msg_send![class!(NSURL), class];
+                    let url_arr: *mut objc::runtime::Object = msg_send![class!(NSArray), arrayWithObject: url_class];
+                    let url_results: *mut objc::runtime::Object = msg_send![pasteboard, readObjectsForClasses: url_arr options: std::ptr::null::<objc::runtime::Object>()];
+                    
+                    if !url_results.is_null() {
+                        let url_count: usize = msg_send![url_results, count];
+                        log::trace!("Got {} URLs from pasteboard", url_count);
+                        if url_count > 0 {
+                            let mut paths: Vec<String> = Vec::new();
+                            for i in 0..url_count {
+                                let url: *mut objc::runtime::Object = msg_send![url_results, objectAtIndex: i];
+                                if !url.is_null() {
+                                    let path: *mut objc::runtime::Object = msg_send![url, path];
+                                    if !path.is_null() {
+                                        let c_str: *const std::os::raw::c_char = msg_send![path, UTF8String];
+                                        let bytes = std::slice::from_raw_parts(c_str as *const u8, 4096);
+                                        let end = bytes.iter().position(|&b| b == 0).unwrap_or(bytes.len());
+                                        let path_string = String::from_utf8_lossy(&bytes[..end]).to_string();
+                                        if std::path::Path::new(&path_string).exists() {
+                                            paths.push(path_string);
+                                        }
+                                    }
+                                }
+                            }
+                            if !paths.is_empty() {
+                                log::trace!("File URLs from pasteboard: {:?}", paths);
+                                self.window.handle_paste_files(paths);
+                                return;
+                            }
+                        }
+                    }
+                    
+                    // Try reading NSString - might contain file path as plain text
+                    let string_class: *mut objc::runtime::Object = msg_send![class!(NSString), class];
+                    let arr: *mut objc::runtime::Object = msg_send![class!(NSArray), arrayWithObject: string_class];
+                    let str_results: *mut objc::runtime::Object = msg_send![pasteboard, readObjectsForClasses: arr options: std::ptr::null::<objc::runtime::Object>()];
+                    
+                    if !str_results.is_null() {
+                        let str_count: usize = msg_send![str_results, count];
+                        log::trace!("Got {} strings from pasteboard", str_count);
+                            if str_count > 0 {
+                                let mut paths: Vec<String> = Vec::new();
+                                for i in 0..str_count {
+                                    let s: *mut objc::runtime::Object = msg_send![str_results, objectAtIndex: i];
+                                    if !s.is_null() {
+                                        let c_str: *const std::os::raw::c_char = msg_send![s, UTF8String];
+                                        let bytes = std::slice::from_raw_parts(c_str as *const u8, 4096);
+                                        let end = bytes.iter().position(|&b| b == 0).unwrap_or(bytes.len());
+                                        let path_string = String::from_utf8_lossy(&bytes[..end]).to_string();
+                                        
+                                        if path_string.starts_with('/') && std::path::Path::new(&path_string).exists() {
+                                            paths.push(path_string);
+                                        }
+                                    }
+                                }
+                                if !paths.is_empty() {
+                                    log::trace!("File paths from pasteboard: {:?}", paths);
+                                    self.window.handle_paste_files(paths);
+                                    return;
+                                }
+                            }
+                    }
+                    
+                    // Try NSImage
+                    let img_class: *mut objc::runtime::Object = msg_send![class!(NSImage), class];
+                    let img_arr: *mut objc::runtime::Object = msg_send![class!(NSArray), arrayWithObject: img_class];
+                    let img_results: *mut objc::runtime::Object = msg_send![pasteboard, readObjectsForClasses: img_arr options: std::ptr::null::<objc::runtime::Object>()];
+                    
+                    if !img_results.is_null() {
+                        let img_count: usize = msg_send![img_results, count];
+                        log::trace!("Got {} images from pasteboard", img_count);
+                        if img_count > 0 {
+                            let first_img: *mut objc::runtime::Object = msg_send![img_results, firstObject];
+                            if !first_img.is_null() {
+                                let tiff: *mut objc::runtime::Object = msg_send![first_img, TIFFRepresentation];
+                                if !tiff.is_null() {
+                                    let bitmap: *mut objc::runtime::Object = msg_send![class!(NSBitmapImageRep), imageRepWithData: tiff];
+                                    if !bitmap.is_null() {
+                                        let png: *mut objc::runtime::Object = msg_send![bitmap, representationUsingType: 4 properties: std::ptr::null::<objc::runtime::Object>()];
+                                        if !png.is_null() {
+                                            let len: usize = msg_send![png, length];
+                                            if len > 0 {
+                                                let bytes: *const std::ffi::c_void = msg_send![png, bytes];
+                                                let data = std::slice::from_raw_parts(bytes as *const u8, len).to_vec();
+                                                let filename = format!("clipboard_{}.png", std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_millis());
+                                                log::trace!("Got image from pasteboard, {} bytes", len);
+                                                self.window.handle_paste_image(data, filename);
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Fallback
+                    log::trace!("No supported content found, doing normal paste");
+                    let app: *mut objc::runtime::Object = msg_send![class!(NSApplication), sharedApplication];
+                    let _: () = msg_send![app, sendAction: sel!(paste:) to: std::ptr::null::<()>() from: std::ptr::null::<()>()];
+                }
             }
             AppMessage::AttachButtonPressed => {
                 self.window.handle_attach();
