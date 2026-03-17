@@ -29,6 +29,11 @@ pub fn confirm(title: &str, message: &str, confirm_label: &str, cancel_label: &s
         let ns_cancel = nsstring(cancel_label);
         let _: *mut Object = msg_send![alert, addButtonWithTitle: ns_cancel];
 
+        // Center the alert on screen
+        if let Some(key_window) = get_key_window() {
+            let _: () = msg_send![key_window, center];
+        }
+
         // NSAlertFirstButtonReturn = 1000
         let response: i64 = msg_send![alert, runModal];
         response == 1000
@@ -46,6 +51,11 @@ pub fn info(title: &str, message: &str) {
 
         let ns_msg = nsstring(message);
         let _: () = msg_send![alert, setInformativeText: ns_msg];
+
+        // Center the alert on screen
+        if let Some(key_window) = get_key_window() {
+            let _: () = msg_send![key_window, center];
+        }
 
         let _: i64 = msg_send![alert, runModal];
     }
@@ -73,6 +83,11 @@ pub fn error_with_report(title: &str, message: &str, show_report: bool) -> Optio
         let ns_ok = nsstring("OK");
         let _: *mut Object = msg_send![alert, addButtonWithTitle: ns_ok];
 
+        // Center the alert on screen
+        if let Some(key_window) = get_key_window() {
+            let _: () = msg_send![key_window, center];
+        }
+
         let response: i64 = msg_send![alert, runModal];
         if show_report && response == 1001 {
             Some("report".to_string())
@@ -89,6 +104,16 @@ pub fn open_url(url: &str) {
         let nsworkspace = class!(NSWorkspace);
         let shared: *mut Object = msg_send![nsworkspace, sharedWorkspace];
         let _: () = msg_send![shared, openURL: ns_url];
+    }
+}
+
+unsafe fn get_key_window() -> Option<*mut Object> {
+    let app: *mut Object = msg_send![class!(NSApplication), sharedApplication];
+    let key_window: *mut Object = msg_send![app, keyWindow];
+    if key_window.is_null() {
+        None
+    } else {
+        Some(key_window)
     }
 }
 
@@ -129,6 +154,11 @@ pub fn pick_file() -> Option<PathBuf> {
         let _: () = msg_send![panel, setCanChooseDirectories: objc::runtime::NO];
         let _: () = msg_send![panel, setAllowsMultipleSelection: objc::runtime::NO];
 
+        // Center the panel on screen
+        if let Some(key_window) = get_key_window() {
+            let _: () = msg_send![key_window, center];
+        }
+
         // NSModalResponseOK = 1
         let response: i64 = msg_send![panel, runModal];
         if response != 1 {
@@ -164,6 +194,11 @@ pub fn pick_files() -> Vec<PathBuf> {
         let _: () = msg_send![panel, setCanChooseFiles: objc::runtime::YES];
         let _: () = msg_send![panel, setCanChooseDirectories: objc::runtime::NO];
         let _: () = msg_send![panel, setAllowsMultipleSelection: objc::runtime::YES];
+
+        // Center the panel on screen
+        if let Some(key_window) = get_key_window() {
+            let _: () = msg_send![key_window, center];
+        }
 
         // NSModalResponseOK = 1
         let response: i64 = msg_send![panel, runModal];

@@ -616,10 +616,9 @@ impl Manager {
             }
         }
 
-        // Note: Groups need channels to be finished initializing first due to loading participants; we cannot combine them.
+        // Groups need channels to be finished initializing first due to loading participants.
 
         let store = self.store();
-        // TODO: Error handling?
         if let Ok(groups) = tspawn!(async move { store.groups().await })
             .await
             .expect("Failed to spawn tokio")

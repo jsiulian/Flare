@@ -37,12 +37,30 @@ impl ViewDelegate for DeviceRow {
 
         LayoutConstraint::activate(&[
             self.name.top.constraint_equal_to(&view.top).offset(6.),
-            self.name.leading.constraint_equal_to(&view.leading).offset(12.),
-            self.name.trailing.constraint_equal_to(&view.trailing).offset(-12.),
-            self.detail.top.constraint_equal_to(&self.name.bottom).offset(2.),
-            self.detail.leading.constraint_equal_to(&view.leading).offset(12.),
-            self.detail.trailing.constraint_equal_to(&view.trailing).offset(-12.),
-            self.detail.bottom.constraint_equal_to(&view.bottom).offset(-6.),
+            self.name
+                .leading
+                .constraint_equal_to(&view.leading)
+                .offset(12.),
+            self.name
+                .trailing
+                .constraint_equal_to(&view.trailing)
+                .offset(-12.),
+            self.detail
+                .top
+                .constraint_equal_to(&self.name.bottom)
+                .offset(2.),
+            self.detail
+                .leading
+                .constraint_equal_to(&view.leading)
+                .offset(12.),
+            self.detail
+                .trailing
+                .constraint_equal_to(&view.trailing)
+                .offset(-12.),
+            self.detail
+                .bottom
+                .constraint_equal_to(&view.bottom)
+                .offset(-6.),
         ]);
     }
 }
@@ -55,7 +73,8 @@ impl DeviceRow {
             entry.name.clone()
         };
         self.name.set_text(&display_name);
-        self.detail.set_text(&format!("Last seen: {}", entry.last_seen));
+        self.detail
+            .set_text(&format!("Last seen: {}", entry.last_seen));
     }
 }
 
@@ -132,12 +151,22 @@ impl WindowDelegate for LinkedDevicesDelegate {
         self.content.add_subview(&self.device_list);
 
         LayoutConstraint::activate(&[
-            self.status_label.center_x.constraint_equal_to(&self.content.center_x),
-            self.status_label.center_y.constraint_equal_to(&self.content.center_y),
-            self.device_list.leading.constraint_equal_to(&self.content.leading),
-            self.device_list.trailing.constraint_equal_to(&self.content.trailing),
+            self.status_label
+                .center_x
+                .constraint_equal_to(&self.content.center_x),
+            self.status_label
+                .center_y
+                .constraint_equal_to(&self.content.center_y),
+            self.device_list
+                .leading
+                .constraint_equal_to(&self.content.leading),
+            self.device_list
+                .trailing
+                .constraint_equal_to(&self.content.trailing),
             self.device_list.top.constraint_equal_to(&self.content.top),
-            self.device_list.bottom.constraint_equal_to(&self.content.bottom),
+            self.device_list
+                .bottom
+                .constraint_equal_to(&self.content.bottom),
         ]);
 
         self.device_list.set_hidden(true);
@@ -150,6 +179,7 @@ pub struct LinkedDevicesWindow(pub Option<Window<LinkedDevicesDelegate>>);
 impl LinkedDevicesWindow {
     pub fn show(&self) {
         if let Some(ref w) = self.0 {
+            super::center_window(w);
             w.show();
         }
     }

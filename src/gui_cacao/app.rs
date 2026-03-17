@@ -219,8 +219,7 @@ impl AppDelegate for FlareApp {
             }),
         ]);
 
-        // Fix "Copy Message" in the Edit menu: cacao may leave it with no direct target,
-        // causing macOS auto-validation to grey it out. Replace target/action with our handler.
+        // Fix "Copy Message" in Edit menu — cacao may not set target, causing macOS to grey it out.
         unsafe {
             use super::menu_action::create_action_handler;
             use objc::runtime::Object;

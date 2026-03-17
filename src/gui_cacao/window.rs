@@ -207,7 +207,6 @@ impl FlareWindowDelegate {
 
         if is_file {
             // "Send alone" rule: file attachments clear other attachments
-            // First send any existing pending attachments
             self.send_pending_attachments();
         }
 
@@ -526,9 +525,7 @@ impl WindowDelegate for FlareWindowDelegate {
         });
         make_button_borderless(&self.attachment_clear_button);
 
-        // Emoji button — opens native macOS emoji picker
-        // Note: The IMK error "messaging the mach port for IMKCFRunLoopWakeUpReliable" may appear
-        // if the input field isn't focused - this is a benign macOS-level warning.
+        // Emoji button — opens native macOS emoji picker (benign IMK warning may appear if not focused)
         set_button_sf_symbol(&self.emoji_button, "face.smiling");
         self.emoji_button.set_action(move |_| {
             unsafe {
@@ -974,6 +971,7 @@ impl FlareWindow {
                 use objc::{class, msg_send, sel, sel_impl};
                 use std::ffi::CString;
                 let win = &*w.objc as *const _ as *mut objc::runtime::Object;
+                let _: () = msg_send![win, center];
                 let name_cs = CString::new("FlareMainWindow").unwrap_or_default();
                 let ns_str: *mut objc::runtime::Object = {
                     let s: *mut objc::runtime::Object = msg_send![class!(NSString), alloc];
@@ -1407,10 +1405,8 @@ impl FlareWindow {
             let text = text.trim().to_string();
             let channel_id = d.current_channel.borrow().clone();
             if let Some(channel_id) = channel_id {
-                // Send pending attachments first (they clear the attachment bar)
+                // Send pending attachments first (they clear the attachment bar), then send text
                 d.send_pending_attachments();
-
-                // Then send text message if there's text
                 if !text.is_empty() {
                     let reply = d.current_reply.borrow_mut().take();
                     let quote = reply.map(|m| crate::core::message::QuoteData {
@@ -1424,11 +1420,11 @@ impl FlareWindow {
                             quote,
                         ));
                     }
-                    d.reply_bar.set_hidden(true);
-                    set_height_constraint(&d.reply_bar, 0.0);
-                    d.drafts.borrow_mut().remove(&channel_id);
-                    d.input_field.set_text("");
                 }
+                d.reply_bar.set_hidden(true);
+                set_height_constraint(&d.reply_bar, 0.0);
+                d.drafts.borrow_mut().remove(&channel_id);
+                d.input_field.set_text("");
             }
         }
     }
