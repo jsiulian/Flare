@@ -6,7 +6,38 @@ use std::cmp::Reverse;
 
 use super::channel::ChannelId;
 
-fn format_attachment(att: &libsignal_service::proto::AttachmentPointer) -> String {
+#[derive(Debug, Clone)]
+pub struct CoreAttachment {
+    pub content_type: Option<String>,
+    pub file_name: Option<String>,
+    pub size: Option<u32>,
+    pub width: Option<u32>,
+    pub height: Option<u32>,
+    pub blur_hash: Option<String>,
+    pub digest: Option<Vec<u8>>,
+}
+
+impl From<&libsignal_service::proto::AttachmentPointer> for CoreAttachment {
+    fn from(pointer: &libsignal_service::proto::AttachmentPointer) -> Self {
+        Self {
+            content_type: pointer.content_type.clone(),
+            file_name: pointer.file_name.clone(),
+            size: pointer.size,
+            width: pointer.width,
+            height: pointer.height,
+            blur_hash: pointer.blur_hash.clone(),
+            digest: pointer.digest.clone(),
+        }
+    }
+}
+
+impl From<libsignal_service::proto::AttachmentPointer> for CoreAttachment {
+    fn from(pointer: libsignal_service::proto::AttachmentPointer) -> Self {
+        Self::from(&pointer)
+    }
+}
+
+fn format_attachment(att: &CoreAttachment) -> String {
     let name = att.file_name.as_deref().unwrap_or("");
     let ct = att.content_type.as_deref().unwrap_or("");
     let icon = if ct.starts_with("image/") { "🖼" }
@@ -17,7 +48,7 @@ fn format_attachment(att: &libsignal_service::proto::AttachmentPointer) -> Strin
     else { format!("{} Attachment", icon) }
 }
 
-fn format_attachments(atts: &[libsignal_service::proto::AttachmentPointer]) -> String {
+fn format_attachments(atts: &[CoreAttachment]) -> String {
     atts.iter().map(format_attachment).collect::<Vec<_>>().join("\n")
 }
 
@@ -79,7 +110,7 @@ pub struct CoreMessage {
     pub call_type: Option<CallType>,
     pub is_typing: bool,
     pub reaction_remove: bool,
-    pub attachments: Vec<libsignal_service::proto::AttachmentPointer>,
+    pub attachments: Vec<CoreAttachment>,
     pub quote: Option<QuoteData>,
     /// Path to a locally-cached image file for the first image attachment, if downloaded.
     pub image_path: Option<std::path::PathBuf>,
@@ -151,7 +182,8 @@ impl CoreMessage {
                     Some(QuoteData { ts, text: q.text.clone() })
                 });
                 let body = if !dm.attachments.is_empty() {
-                    let att_text = format_attachments(&dm.attachments);
+                    let core_atts: Vec<CoreAttachment> = dm.attachments.iter().map(CoreAttachment::from).collect();
+                    let att_text = format_attachments(&core_atts);
                     if let Some(text) = &dm.body {
                         Some(format!("{}\n{}", text, att_text))
                     } else {
@@ -178,7 +210,7 @@ impl CoreMessage {
                     is_call: false,
                     call_type: None,
                     is_typing: false,
-                    attachments: dm.attachments.clone(),
+                    attachments: dm.attachments.iter().map(CoreAttachment::from).collect(),
                     quote,
                     image_path: None,
                     video_path: None,
@@ -211,7 +243,8 @@ impl CoreMessage {
                     let body = if dm.reaction.is_some() {
                         dm.reaction.as_ref().and_then(|r| r.emoji.clone())
                     } else if !dm.attachments.is_empty() {
-                        let att_text = format_attachments(&dm.attachments);
+                        let core_atts: Vec<CoreAttachment> = dm.attachments.iter().map(CoreAttachment::from).collect();
+                        let att_text = format_attachments(&core_atts);
                         if let Some(text) = &dm.body {
                             Some(format!("{}\n{}", text, att_text))
                         } else {
@@ -243,7 +276,7 @@ impl CoreMessage {
                         is_call: false,
                         call_type: None,
                         is_typing: false,
-                        attachments: dm.attachments.clone(),
+                        attachments: dm.attachments.iter().map(CoreAttachment::from).collect(),
                         quote: sync_quote,
                         image_path: None,
                         video_path: None,

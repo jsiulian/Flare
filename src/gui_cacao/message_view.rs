@@ -402,7 +402,17 @@ fn rebuild_row_attachments(items: &[MessageItem]) {
             .map(|item| match item {
                 MessageItem::Outgoing(m, _)
                 | MessageItem::Incoming(m, _)
-                | MessageItem::Call(m) => m.attachments.first().cloned(),
+                | MessageItem::Call(m) => m.attachments.first().map(|a| {
+                    let mut pointer = libsignal_service::proto::AttachmentPointer::default();
+                    pointer.content_type = a.content_type.clone();
+                    pointer.file_name = a.file_name.clone();
+                    pointer.size = a.size;
+                    pointer.width = a.width;
+                    pointer.height = a.height;
+                    pointer.blur_hash = a.blur_hash.clone();
+                    pointer.digest = a.digest.clone();
+                    pointer
+                }),
                 MessageItem::DateDivider(_) => None,
             })
             .collect();
