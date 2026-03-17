@@ -7,7 +7,7 @@ use presage::store::{ContentsStore, StateStore, Thread};
 use presage_store_sqlite::SqliteStore as Store;
 
 use crate::core::channel::{load_channels, ChannelId};
-use crate::core::message::{load_messages, resolve_sender_name, CoreMessage};
+use crate::core::message::{load_messages, resolve_sender_name, CoreMessage, CoreAttachment};
 use crate::core::setup::{SetupDecision, SetupResult};
 use crate::core::store::config_store;
 
@@ -651,8 +651,7 @@ async fn send_attachment(
                 is_call: false,
                 call_type: None,
                 is_typing: false,
-                // Keep attachment pointers so double-click open works like receive-side.
-                attachments: attachment_pointers.clone(),
+                attachments: attachment_pointers.iter().map(CoreAttachment::from).collect(),
                 quote: None,
                 image_path,
                 video_path: None,
@@ -790,15 +789,16 @@ async fn download_attachment(
     timestamp: u64,
     pointer: libsignal_service::proto::AttachmentPointer,
 ) {
+    let attachment = CoreAttachment::from(&pointer);
     // Determine type and use appropriate cache function
-    let cached_path = if is_image_attachment(&pointer) {
-        cache_image_attachment(manager, &pointer).await
-    } else if is_video_attachment(&pointer) {
-        cache_attachment(manager, &pointer).await
-    } else if is_audio_attachment(&pointer) {
-        cache_attachment(manager, &pointer).await
+    let cached_path = if is_image_attachment(&attachment) {
+        cache_image_attachment(manager, &attachment).await
+    } else if is_video_attachment(&attachment) {
+        cache_attachment(manager, &attachment).await
+    } else if is_audio_attachment(&attachment) {
+        cache_attachment(manager, &attachment).await
     } else {
-        cache_attachment(manager, &pointer).await
+        cache_attachment(manager, &attachment).await
     };
 
     match cached_path {
@@ -896,10 +896,10 @@ fn ext_for_content_type(ct: &str) -> &'static str {
 /// Download and cache an image attachment. Returns the local file path.
 async fn cache_image_attachment(
     manager: &presage::Manager<Store, Registered>,
-    pointer: &libsignal_service::proto::AttachmentPointer,
+    attachment: &crate::core::message::CoreAttachment,
 ) -> Option<std::path::PathBuf> {
-    let digest = pointer.digest.as_deref()?;
-    let ct = pointer.content_type.as_deref().unwrap_or("image/jpeg");
+    let digest = attachment.digest.as_ref()?;
+    let ct = attachment.content_type.as_deref().unwrap_or("image/jpeg");
     let ext = ext_for_content_type(ct);
     let key = hex::encode(digest);
     let path = attachment_cache_dir().join(format!("{}.{}", key, ext));
@@ -909,7 +909,18 @@ async fn cache_image_attachment(
         return Some(path);
     }
 
-    match manager.get_attachment(pointer).await {
+    let pointer = libsignal_service::proto::AttachmentPointer {
+        content_type: attachment.content_type.clone(),
+        file_name: attachment.file_name.clone(),
+        size: attachment.size,
+        width: attachment.width,
+        height: attachment.height,
+        blur_hash: attachment.blur_hash.clone(),
+        digest: attachment.digest.clone(),
+        ..Default::default()
+    };
+
+    match manager.get_attachment(&pointer).await {
         Ok(data) => {
             if let Err(e) = std::fs::write(&path, &data) {
                 log::warn!("Failed to write attachment cache: {}", e);
@@ -925,24 +936,24 @@ async fn cache_image_attachment(
 }
 
 /// Returns true if the attachment is a displayable image type.
-fn is_image_attachment(pointer: &libsignal_service::proto::AttachmentPointer) -> bool {
-    pointer.content_type
+fn is_image_attachment(attachment: &crate::core::message::CoreAttachment) -> bool {
+    attachment.content_type
         .as_deref()
         .map(|ct| ct.starts_with("image/"))
         .unwrap_or(false)
 }
 
 /// Returns true if the attachment is a video type.
-fn is_video_attachment(pointer: &libsignal_service::proto::AttachmentPointer) -> bool {
-    pointer.content_type
+fn is_video_attachment(attachment: &crate::core::message::CoreAttachment) -> bool {
+    attachment.content_type
         .as_deref()
         .map(|ct| ct.starts_with("video/"))
         .unwrap_or(false)
 }
 
 /// Returns true if the attachment is an audio type.
-fn is_audio_attachment(pointer: &libsignal_service::proto::AttachmentPointer) -> bool {
-    pointer.content_type
+fn is_audio_attachment(attachment: &crate::core::message::CoreAttachment) -> bool {
+    attachment.content_type
         .as_deref()
         .map(|ct| ct.starts_with("audio/"))
         .unwrap_or(false)
@@ -951,21 +962,33 @@ fn is_audio_attachment(pointer: &libsignal_service::proto::AttachmentPointer) ->
 /// Download and cache a non-image attachment (video, audio, or file).
 async fn cache_attachment(
     manager: &presage::Manager<Store, Registered>,
-    pointer: &libsignal_service::proto::AttachmentPointer,
+    attachment: &crate::core::message::CoreAttachment,
 ) -> Option<std::path::PathBuf> {
-    let filename = pointer.file_name.clone().unwrap_or_else(|| "attachment".to_string());
+    let filename = attachment.file_name.clone().unwrap_or_else(|| "attachment".to_string());
     let ext = std::path::Path::new(&filename)
         .extension()
         .and_then(|e| e.to_str())
         .unwrap_or("bin")
         .to_string();
-    let key = format!("{}_{}", filename, pointer.size.unwrap_or(0));
+    let key = format!("{}_{}", filename, attachment.size.unwrap_or(0));
     let safe_key = key.replace(|c: char| !c.is_alphanumeric(), "_");
     let path = attachment_cache_dir().join(format!("{}.{}", safe_key, ext));
     if path.exists() {
         return Some(path);
     }
-    match manager.get_attachment(pointer).await {
+
+    let pointer = libsignal_service::proto::AttachmentPointer {
+        content_type: attachment.content_type.clone(),
+        file_name: attachment.file_name.clone(),
+        size: attachment.size,
+        width: attachment.width,
+        height: attachment.height,
+        blur_hash: attachment.blur_hash.clone(),
+        digest: attachment.digest.clone(),
+        ..Default::default()
+    };
+
+    match manager.get_attachment(&pointer).await {
         Ok(data) => {
             use std::io::Write;
             match std::fs::File::create(&path).and_then(|mut f| f.write_all(&data)) {
