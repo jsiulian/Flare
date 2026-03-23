@@ -666,15 +666,30 @@ fn show_emoji_picker_for_row(sender: *mut objc::runtime::Object) {
     }
 }
 
-/// Set bubble background via CALayer directly (bypasses cacao's ivar mechanism
-/// which requires the layer to be ready at layout time).
-fn apply_bubble_style(bubble: &View, outgoing: bool) {
-    bubble.set_background_color(if outgoing {
-        Color::SystemBlue
+fn set_bubble_style(bubble: &View, outgoing: bool) {
+    let (r, g, b, a) = if outgoing {
+        preferences_window::bubble_outgoing_color()
     } else {
-        Color::SystemGray6
+        preferences_window::bubble_incoming_color()
+    };
+    let color = Color::rgba(
+        (r * 255.0) as u8,
+        (g * 255.0) as u8,
+        (b * 255.0) as u8,
+        (a * 255.0) as u8,
+    );
+    bubble.set_background_color(color);
+
+    use cacao::foundation::YES;
+    use cacao::objc_access::ObjcAccess;
+    bubble.with_backing_obj_mut(|obj| unsafe {
+        use objc::{msg_send, sel, sel_impl};
+        let layer: *mut objc::runtime::Object = msg_send![obj, layer];
+        if !layer.is_null() {
+            let _: () = msg_send![layer, setCornerRadius: 16.0];
+            let _: () = msg_send![layer, setMasksToBounds: YES];
+        }
     });
-    bubble.layer.set_corner_radius(16.0);
 }
 
 /// Set the constant on a stored LayoutConstraint (the image height/width constraint).
@@ -933,7 +948,6 @@ impl OutgoingRow {
             format!("{} {}", time_str, indicator)
         });
         self.react_button.set_hidden(true);
-        apply_bubble_style(&self.bubble, true);
         if let (Some(hc), Some(wc)) = (&self.image_height, &self.image_width) {
             if let Some(ref path) = msg.image_path {
                 let image = Image::with_contents_of_file(&path.to_string_lossy());
@@ -1088,6 +1102,7 @@ impl ViewDelegate for OutgoingRow {
         self.bubble.add_subview(&self.file_label);
         self.bubble.add_subview(&self.delivery_label);
         view.add_subview(&self.bubble);
+        set_bubble_style(&self.bubble, true);
         view.add_subview(&self.reactions_label);
         view.add_subview(&self.react_button);
         install_hover_tracking(&view, &self.react_button);
@@ -1287,7 +1302,6 @@ impl IncomingRow {
         apply_body_text(&self.body_label, &body_text, false);
         self.time_label.set_text(&format_time(msg.timestamp));
         self.react_button.set_hidden(true);
-        apply_bubble_style(&self.bubble, false);
         if let Some(ref c) = self.image_height {
             if let Some(ref path) = msg.image_path {
                 let image = Image::with_contents_of_file(&path.to_string_lossy());
@@ -1412,6 +1426,7 @@ impl ViewDelegate for IncomingRow {
         self.bubble.add_subview(&self.time_label);
         view.add_subview(&self.sender_label);
         view.add_subview(&self.bubble);
+        set_bubble_style(&self.bubble, false);
         view.add_subview(&self.reactions_label);
         view.add_subview(&self.react_button);
         install_hover_tracking(&view, &self.react_button);
@@ -1703,6 +1718,8 @@ impl MessageListDelegate {
                 use objc::{msg_send, sel, sel_impl};
                 let count: usize = msg_send![ptr, numberOfRows];
                 if count > 0 {
+                    // Force layout first, then scroll
+                    let _: () = msg_send![ptr, layoutSubtreeIfNeeded];
                     let _: () = msg_send![ptr, scrollRowToVisible: (count - 1) as isize];
                 }
             }

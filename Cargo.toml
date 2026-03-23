@@ -43,6 +43,7 @@ security-framework = "2"
 cacao = { version = "0.4.0-beta2", optional = true }
 objc = { version = "0.2.7", optional = true }
 objc_id = { version = "0.1.1", optional = true }
+dispatch = "0.2"
 hex = "0.4"
 
 log = "0.4.29"

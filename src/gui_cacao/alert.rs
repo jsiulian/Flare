@@ -146,6 +146,55 @@ pub fn set_user_default_bool(key: &str, value: bool) {
     }
 }
 
+/// Read a color (RGBA hex string) from NSUserDefaults.
+/// Returns (r, g, b, a) components as f64 in [0, 1].
+pub fn user_default_color(key: &str) -> Option<(f64, f64, f64, f64)> {
+    unsafe {
+        let cls = class!(NSUserDefaults);
+        let defaults: *mut Object = msg_send![cls, standardUserDefaults];
+        let ns_key = nsstring(key);
+        let obj: *mut Object = msg_send![defaults, objectForKey: ns_key];
+        if obj.is_null() {
+            return None;
+        }
+        let ns_str: *mut Object = msg_send![obj, description];
+        let len: usize = msg_send![ns_str, lengthOfBytesUsingEncoding: 4i64]; // NSASCIIStringEncoding
+        let mut buffer = vec![0u8; len];
+        let _: usize =
+            msg_send![ns_str, getCString: buffer.as_mut_ptr() maxLength: len encoding: 4i64];
+
+        // Parse hex string like "#RRGGBBAA" or "RRGGBBAA"
+        let hex_str = std::str::from_utf8(&buffer).ok()?;
+        let hex_str = hex_str.trim_start_matches('#');
+        if hex_str.len() < 8 {
+            return None;
+        }
+        let r = u8::from_str_radix(&hex_str[0..2], 16).ok()? as f64 / 255.0;
+        let g = u8::from_str_radix(&hex_str[2..4], 16).ok()? as f64 / 255.0;
+        let b = u8::from_str_radix(&hex_str[4..6], 16).ok()? as f64 / 255.0;
+        let a = u8::from_str_radix(&hex_str[6..8], 16).ok()? as f64 / 255.0;
+        Some((r, g, b, a))
+    }
+}
+
+/// Write a color (RGBA hex string) to NSUserDefaults.
+pub fn set_user_default_color(key: &str, r: f64, g: f64, b: f64, a: f64) {
+    let r = (r.clamp(0.0, 1.0) * 255.0) as u8;
+    let g = (g.clamp(0.0, 1.0) * 255.0) as u8;
+    let b = (b.clamp(0.0, 1.0) * 255.0) as u8;
+    let a = (a.clamp(0.0, 1.0) * 255.0) as u8;
+    let hex_str = format!("#{:02X}{:02X}{:02X}{:02X}", r, g, b, a);
+
+    unsafe {
+        let cls = class!(NSUserDefaults);
+        let defaults: *mut Object = msg_send![cls, standardUserDefaults];
+        let ns_key = nsstring(key);
+        let ns_val = nsstring(&hex_str);
+        let _: () = msg_send![defaults, setObject: ns_val forKey: ns_key];
+        let _: () = msg_send![defaults, synchronize];
+    }
+}
+
 /// Show a modal NSOpenPanel and return the selected file path, if any.
 pub fn pick_file() -> Option<PathBuf> {
     unsafe {

@@ -1212,6 +1212,7 @@ dependencies = [
  "cacao",
  "chrono",
  "dirs",
+ "dispatch",
  "env_logger",
  "futures",
  "gettext-rs",

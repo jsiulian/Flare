@@ -17,6 +17,8 @@ pub const KEY_DOWNLOAD_FILES: &str = "flare.download_files";
 pub const KEY_DOWNLOAD_VOICE: &str = "flare.download_voice";
 pub const KEY_MESSAGES_SELECTABLE: &str = "flare.messages_selectable";
 pub const KEY_RUN_IN_BACKGROUND: &str = "flare.run_in_background";
+pub const KEY_BUBBLE_OUTGOING_COLOR: &str = "flare.bubble_outgoing_color";
+pub const KEY_BUBBLE_INCOMING_COLOR: &str = "flare.bubble_incoming_color";
 
 pub fn send_on_enter() -> bool {
     alert::user_default_bool(KEY_SEND_ON_ENTER).unwrap_or(true)
@@ -52,6 +54,17 @@ pub fn download_voice() -> bool {
 
 pub fn messages_selectable() -> bool {
     alert::user_default_bool(KEY_MESSAGES_SELECTABLE).unwrap_or(false)
+}
+
+/// Returns (r, g, b, a) for outgoing bubble color. Default: SystemBlue
+pub fn bubble_outgoing_color() -> (f64, f64, f64, f64) {
+    alert::user_default_color(KEY_BUBBLE_OUTGOING_COLOR).unwrap_or((0.0, 0.478, 1.0, 1.0))
+    // SystemBlue
+}
+
+/// Returns (r, g, b, a) for incoming bubble color. Default: Dark gray
+pub fn bubble_incoming_color() -> (f64, f64, f64, f64) {
+    alert::user_default_color(KEY_BUBBLE_INCOMING_COLOR).unwrap_or((0.3, 0.3, 0.3, 1.0))
 }
 
 // Native NSSwitch wrapper
@@ -369,6 +382,7 @@ impl WindowDelegate for PreferencesDelegate {
                 "These options affect usability on different devices. \
                  Defaults are chosen for desktop use.",
             ),
+            // (&self.color_desc, "Choose colors for outgoing and incoming message bubbles."),
         ] {
             label.set_text(text);
             label.set_line_break_mode(LineBreakMode::WrapWords);
@@ -389,6 +403,8 @@ impl WindowDelegate for PreferencesDelegate {
         self.send_on_enter_label
             .set_text("Press \u{201C}Enter\u{201D} to Send Message");
         self.background_label.set_text("Run in Background");
+        // self.outgoing_color_label.set_text("Outgoing Messages");
+        // self.incoming_color_label.set_text("Incoming Messages");
 
         self.notifications_info.set_text(
             "For full notification control, open System Settings \u{2192} \
@@ -423,6 +439,11 @@ impl WindowDelegate for PreferencesDelegate {
             &self.messages_selectable_label,
             &self.send_on_enter_label,
             &self.background_label,
+            // Color section disabled for now
+            // &self.color_header,
+            // &self.color_desc,
+            // &self.outgoing_color_label,
+            // &self.incoming_color_label,
         ] {
             self.content.add_subview(label);
         }
