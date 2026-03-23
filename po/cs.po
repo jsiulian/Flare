@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flare\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-19 13:15+0100\n"
-"PO-Revision-Date: 2025-05-30 16:09+0000\n"
-"Last-Translator: Tadeáš Erban <tada@boobs.institute>\n"
+"PO-Revision-Date: 2026-03-24 19:09+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/schmiddi-on-mobile/"
 "flare/cs/>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #. translators: One per line: How you want to be credited as a, e.g. by the name you use, and optionally an email address ("Edgar Allan Poe <edgar@poe.com>")
 #: data/resources/ui/about.blp:13 src/gui/window.rs:368
@@ -409,10 +409,8 @@ msgstr ""
 "Signal pro počítače. Tento režim byl rozsáhleji testován a většinově funguje."
 
 #: data/resources/ui/setup_window.blp:136
-#, fuzzy
-#| msgid "Primary Device (Disabled)"
 msgid "Primary Device (Experimental)"
-msgstr "Hlavní zařízení (Zablokováno)"
+msgstr "Hlavní zařízení (experimentální)"
 
 #: data/resources/ui/setup_window.blp:141
 #, fuzzy
