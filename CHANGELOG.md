@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added context information in the empty channel list.
+- Application no longer prompts to select a channel when none are available.
+- Wrapped channel list strings for i18n.
+- Removed incorrect flow promise from the onboarding prompt.
+
 ## [0.20.0] - 2026-03-12
 
 ### Added

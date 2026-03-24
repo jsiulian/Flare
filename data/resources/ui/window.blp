@@ -167,6 +167,7 @@ template $FlWindow: Adw.ApplicationWindow {
             content: $FlChannelMessages channel_messages {
               manager: bind template.manager;
               active-channel: bind channel_list.active-channel;
+              has-channels: bind channel_list.has-channels;
             };
           }
         };

@@ -16,14 +16,22 @@ template $FlChannelMessages: Box {
     revealed: bind $not($network_monitor() as <$GNetworkMonitor>.network-available) as <bool>;
   }
 
-  // Status Page
+  // Shown when there are no channels at all
+  Adw.StatusPage no_channels_page {
+    icon-name: "de.schmidhuberj.Flare-symbolic";
+    vexpand: true;
+    hexpand: true;
+    visible: bind $not(template.has-channels) as <bool>;
+  }
+
+  // Shown when there are channels but none is selected
   Adw.StatusPage {
     title: _("No Channel Selected");
     description: _("Select a channel");
     icon-name: "system-search-symbolic";
     vexpand: true;
     hexpand: true;
-    visible: bind $is_none(template.active-channel) as <bool>;
+    visible: bind $and($is_none(template.active-channel) as <bool>, template.has-channels) as <bool>;
   }
 
   Box {

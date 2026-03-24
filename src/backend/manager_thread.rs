@@ -525,7 +525,15 @@ async fn setup_manager(
                         tx_link,
                     )
                 );
-                // Request contact sync directly after linking.
+                // Contact sync in current implementation might not
+                // be operational. The application does not handle this well.
+                // ex.: https://github.com/whisperfish/presage/issues/320
+                //      https://github.com/hoehermann/purple-presage/issues/40
+                // Most importantly, the method was never reliable:
+                // ex.: https://github.com/AsamK/signal-cli/issues/1293
+                // Working implementations of the protocol appear to rely mostly
+                // on SyncStorage with shared master key besides SyncMessage.
+                // https://signal.miraheze.org/wiki/Storage_Service
                 if let Ok(manager) = &mut manager
                     && let Err(e) = manager.request_contacts().await
                 {

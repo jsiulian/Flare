@@ -47,11 +47,55 @@ template $FlChannelList: Box {
   }
 
   Adw.StatusPage {
-    title: "No Conversations";
-    description: "Add a conversation";
+    title: _("No Conversations");
+    description: _("Waiting for messages");
     icon-name: "chat-message-new-symbolic";
     hexpand: true;
     vexpand: true;
     visible: bind $uint_equal(list.model as <$SidebarSelection>.n-items, 0) as <bool>;
+  }
+
+  Box {
+    orientation: vertical;
+    spacing: 4;
+    margin-start: 12;
+    margin-end: 12;
+    margin-bottom: 12;
+    visible: bind $uint_equal(list.model as <$SidebarSelection>.n-items, 0) as <bool>;
+
+    styles [
+      "card",
+    ]
+
+    Box {
+      orientation: horizontal;
+      spacing: 8;
+
+      Image {
+        icon-name: "dialog-information-symbolic";
+        pixel-size: 16;
+        valign: start;
+        margin-top: 12;
+        margin-start: 12;
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label {
+        label: _("Conversations you start or receive after linking this device will appear here");
+        wrap: true;
+        xalign: 0;
+        hexpand: true;
+        margin-top: 12;
+        margin-bottom: 12;
+        margin-end: 12;
+
+        styles [
+          "dim-label",
+        ]
+      }
+    }
   }
 }
