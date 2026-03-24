@@ -116,6 +116,7 @@ pub mod imp {
         CompositeTemplate, CustomFilter, CustomSorter, EveryFilter, FilterChange, FilterListModel,
         SignalListItemFactory, SortListModel, Widget,
     };
+    use std::marker::PhantomData;
 
     use crate::{
         backend::{Channel, timeline::timeline_item::TimelineItemExt},
@@ -132,7 +133,6 @@ pub mod imp {
         pub(super) list: TemplateChild<gtk::ListView>,
         #[template_child]
         pub(super) search_entry: TemplateChild<gtk::SearchEntry>,
-
         pub(super) model: RefCell<gio::ListStore>,
         pub(super) sorter: RefCell<gtk::CustomSorter>,
         pub(super) filter: RefCell<gtk::EveryFilter>,
@@ -144,6 +144,8 @@ pub mod imp {
         active_channel: RefCell<Option<Channel>>,
         #[property(get, set)]
         search_enabled: Cell<bool>,
+        #[property(get = Self::has_channels)]
+        has_channels: PhantomData<bool>,
     }
 
     impl Default for ChannelList {
@@ -161,12 +163,17 @@ pub mod imp {
                 manager: Default::default(),
                 active_channel: Default::default(),
                 search_enabled: Default::default(),
+                has_channels: PhantomData,
             }
         }
     }
 
     #[gtk::template_callbacks]
     impl ChannelList {
+        fn has_channels(&self) -> bool {
+            self.model.borrow().n_items() > 0
+        }
+
         #[template_callback]
         fn search_changed(&self) {
             self.filter_changed();
@@ -310,6 +317,14 @@ pub mod imp {
             // Selection
             let selection_model = Selection::new(sort_model.into());
             self.list.get().set_model(Some(&selection_model));
+
+            model.connect_items_changed(clone!(
+                #[weak]
+                obj,
+                move |_, _, _, _| {
+                    obj.notify("has-channels");
+                }
+            ));
 
             self.model.replace(model);
             self.sorter.replace(sorter);

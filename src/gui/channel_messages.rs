@@ -144,10 +144,14 @@ pub mod imp {
         #[template_child]
         pub(super) list_view: TemplateChild<gtk::ListView>,
         #[template_child]
+        no_channels_page: TemplateChild<adw::StatusPage>,
+        #[template_child]
         button_send: TemplateChild<gtk::Button>,
 
         attachments: RefCell<Vec<crate::backend::Attachment>>,
 
+        #[property(get, set)]
+        has_channels: Cell<bool>,
         #[property(get, set = Self::set_active_channel)]
         active_channel: RefCell<Option<Channel>>,
         #[property(get, set, nullable)]
