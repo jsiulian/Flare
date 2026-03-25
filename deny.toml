@@ -60,4 +60,8 @@ ignore = [
     "RUSTSEC-2024-0436", # Unmaintained "paste", but used by "image"; cannot do much about it right now.
     "RUSTSEC-2025-0141", # Unmaintained "bincode"; cannot do much about it, and we only (transitively) use an old version that is considered complete.
     "RUSTSEC-2023-0089", # Unmaintained "atomic-polyfill"; can't do much about it right now.
+    "RUSTSEC-2026-0069", # Security issue in "hpke-rs", but can't update.
+    "RUSTSEC-2026-0070", # Security issue in "hpke-rs", but can't update.
+    "RUSTSEC-2026-0071", # Security issue in "hpke-rs", but can't update.
+    "RUSTSEC-2026-0074", # Security issue in "libcrux-sha3", but can't update.
 ]
