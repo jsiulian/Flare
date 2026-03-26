@@ -294,6 +294,8 @@ fn scroll_to_bottom(view: &ListView, force: bool) {
     unsafe {
         let count: usize = msg_send![table, numberOfRows];
         if count > 0 {
+            // Force layout so the table knows its content size before scrolling
+            let _: () = msg_send![table, layoutSubtreeIfNeeded];
             let _: () = msg_send![table, scrollRowToVisible: (count - 1) as isize];
         }
     }
