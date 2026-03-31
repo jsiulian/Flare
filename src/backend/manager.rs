@@ -41,6 +41,75 @@ gtk::glib::wrapper! {
 type StoreType = presage_store_sqlite::SqliteStore;
 type PresageError = presage::Error<presage_store_sqlite::SqliteStoreError>;
 
+/// Query the encryption password from the Windows Credential Manager, storing one if none exists.
+#[cfg(target_os = "windows")]
+async fn encryption_password() -> Result<String, ApplicationError> {
+    use windows::{
+        Win32::{Foundation::*, Security::Credentials::*},
+        core::*,
+    };
+
+    let target_name = "Flare: Encryption password";
+    let mut cred: PCREDENTIALW = std::ptr::null_mut();
+
+    unsafe {
+        if CredReadW(
+            PCWSTR::from_raw(
+                target_name
+                    .encode_utf16()
+                    .chain(Some(0))
+                    .collect::<Vec<_>>()
+                    .as_ptr(),
+            ),
+            CRED_TYPE_GENERIC,
+            0,
+            &mut cred,
+        )
+        .as_bool()
+        {
+            let secret = String::from_utf16_lossy(std::slice::from_raw_parts(
+                (*cred).CredentialBlob,
+                (*cred).CredentialBlobSize as usize / 2,
+            ));
+            CredFree(cred as *mut _);
+            Ok(secret)
+        } else {
+            let secret =
+                rand::distr::StandardUniform {}.sample_string(&mut rand::rng(), SECRET_LENGTH);
+            let secret_bytes = secret.as_bytes();
+
+            let credential = CREDENTIALW {
+                Flags: 0,
+                Type: CRED_TYPE_GENERIC,
+                TargetName: PCWSTR::from_raw(
+                    target_name
+                        .encode_utf16()
+                        .chain(Some(0))
+                        .collect::<Vec<_>>()
+                        .as_ptr(),
+                ),
+                Comment: PCWSTR::null(),
+                LastWritten: FILETIME::default(),
+                CredentialBlobSize: secret_bytes.len() as u32,
+                CredentialBlob: secret_bytes.as_ptr() as *mut u8,
+                Persist: CRED_PERSIST_ENTERPRISE,
+                AttributeCount: 0,
+                Attributes: std::ptr::null_mut(),
+                TargetAlias: PCWSTR::null(),
+                UserName: PCWSTR::null(),
+            };
+
+            if CredWriteW(&credential, 0).as_bool() {
+                Ok(secret)
+            } else {
+                Err(ApplicationError::Keychain(
+                    std::io::Error::last_os_error().into(),
+                ))
+            }
+        }
+    }
+}
+
 /// Query the encryption password from the keyring, storing one if none exists.
 #[cfg(target_os = "linux")]
 async fn encryption_password() -> Result<String, ApplicationError> {
