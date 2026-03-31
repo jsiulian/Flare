@@ -15,9 +15,8 @@ config = configure_file(
 )
 # Copy the config.rs output to the source directory.
 run_command(
-  'cp',
-  meson.project_build_root() / 'src' / 'config.rs',
-  meson.project_source_root() / 'src' / 'config.rs',
+  'bash', '-c',
+  'cp "' + meson.project_build_root() / 'src' / 'config.rs' + '" "' + meson.project_source_root() / 'src' / 'config.rs' + '"',
   check: true
 )
 
@@ -58,11 +57,17 @@ cargo_build = custom_target(
   install_dir: bindir,
   depends: resources,
   command: [
-    'env',
-    cargo_env,
-    cargo, 'build',
-    cargo_options,
-    '&&',
-    'cp', 'target' / rust_target / meson.project_name(), '@OUTPUT@',
+    'bash', '-c',
+    ' '.join([
+      'env',
+      cargo_env[0],
+      cargo.full_path(),
+      'build',
+    ] + cargo_options + [
+      '&&',
+      'cp',
+      'target' / rust_target / meson.project_name(),
+      '@OUTPUT@',
+    ])
   ]
 )
