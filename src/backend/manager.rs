@@ -61,15 +61,15 @@ async fn encryption_password() -> Result<String, ApplicationError> {
                     .collect::<Vec<_>>()
                     .as_ptr(),
             ),
-            CRED_TYPE_GENERIC,
+            CRED_TYPE_GENERIC.0 as u32,
             0,
             &mut cred,
         )
         .as_bool()
         {
             let secret = String::from_utf16_lossy(std::slice::from_raw_parts(
-                (*cred).CredentialBlob,
-                (*cred).CredentialBlobSize as usize / 2,
+                (*credential).CredentialBlob,
+                (*credential).CredentialBlobSize as usize / 2,
             ));
             CredFree(cred as *mut _);
             Ok(secret)
@@ -79,24 +79,24 @@ async fn encryption_password() -> Result<String, ApplicationError> {
             let secret_bytes = secret.as_bytes();
 
             let credential = CREDENTIALW {
-                Flags: 0,
+                Flags: CRED_FLAGS(0),
                 Type: CRED_TYPE_GENERIC,
-                TargetName: PCWSTR::from_raw(
+                TargetName: PWSTR::from_raw(
                     target_name
                         .encode_utf16()
                         .chain(Some(0))
                         .collect::<Vec<_>>()
-                        .as_ptr(),
+                        .as_ptr() as *mut u16,
                 ),
-                Comment: PCWSTR::null(),
+                Comment: PWSTR::null(),
                 LastWritten: FILETIME::default(),
                 CredentialBlobSize: secret_bytes.len() as u32,
                 CredentialBlob: secret_bytes.as_ptr() as *mut u8,
                 Persist: CRED_PERSIST_ENTERPRISE,
                 AttributeCount: 0,
                 Attributes: std::ptr::null_mut(),
-                TargetAlias: PCWSTR::null(),
-                UserName: PCWSTR::null(),
+                TargetAlias: PWSTR::null(),
+                UserName: PWSTR::null(),
             };
 
             if CredWriteW(&credential, 0).as_bool() {
