@@ -50,7 +50,7 @@ async fn encryption_password() -> Result<String, ApplicationError> {
     };
 
     let target_name = "Flare: Encryption password";
-    let mut cred: PCREDENTIALW = std::ptr::null_mut();
+    let mut cred: *mut CREDENTIALW = std::ptr::null_mut();
 
     unsafe {
         if CredReadW(
@@ -65,47 +65,49 @@ async fn encryption_password() -> Result<String, ApplicationError> {
             0,
             &mut cred,
         )
-        .as_bool()
+        .is_ok()
         {
             let secret = String::from_utf16_lossy(std::slice::from_raw_parts(
-                (*credential).CredentialBlob,
-                (*credential).CredentialBlobSize as usize / 2,
+                (*cred).CredentialBlob as *const u16,
+                (*cred).CredentialBlobSize as usize / 2,
             ));
             CredFree(cred as *mut _);
-            Ok(secret)
+            return Ok(secret);
+        }
+
+        let secret = rand::distr::StandardUniform {}.sample_string(&mut rand::rng(), SECRET_LENGTH);
+        let secret_bytes = secret.as_bytes();
+
+        let credential = CREDENTIALW {
+            Flags: CRED_FLAGS(0),
+            Type: CRED_TYPE_GENERIC,
+            TargetName: PWSTR::from_raw(
+                target_name
+                    .encode_utf16()
+                    .chain(Some(0))
+                    .collect::<Vec<_>>()
+                    .as_ptr() as *mut u16,
+            ),
+            Comment: PWSTR::null(),
+            LastWritten: FILETIME::default(),
+            CredentialBlobSize: secret_bytes.len() as u32,
+            CredentialBlob: secret_bytes.as_ptr() as *mut u8,
+            Persist: CRED_PERSIST_ENTERPRISE,
+            AttributeCount: 0,
+            Attributes: std::ptr::null_mut(),
+            TargetAlias: PWSTR::null(),
+            UserName: PWSTR::null(),
+        };
+
+        if CredWriteW(&credential, 0).is_ok() {
+            return Ok(secret);
         } else {
-            let secret =
-                rand::distr::StandardUniform {}.sample_string(&mut rand::rng(), SECRET_LENGTH);
-            let secret_bytes = secret.as_bytes();
-
-            let credential = CREDENTIALW {
-                Flags: CRED_FLAGS(0),
-                Type: CRED_TYPE_GENERIC,
-                TargetName: PWSTR::from_raw(
-                    target_name
-                        .encode_utf16()
-                        .chain(Some(0))
-                        .collect::<Vec<_>>()
-                        .as_ptr() as *mut u16,
-                ),
-                Comment: PWSTR::null(),
-                LastWritten: FILETIME::default(),
-                CredentialBlobSize: secret_bytes.len() as u32,
-                CredentialBlob: secret_bytes.as_ptr() as *mut u8,
-                Persist: CRED_PERSIST_ENTERPRISE,
-                AttributeCount: 0,
-                Attributes: std::ptr::null_mut(),
-                TargetAlias: PWSTR::null(),
-                UserName: PWSTR::null(),
-            };
-
-            if CredWriteW(&credential, 0).as_bool() {
-                Ok(secret)
-            } else {
-                Err(ApplicationError::Keychain(
-                    std::io::Error::last_os_error().into(),
-                ))
-            }
+            //let e = std::io::Error::last_os_error();
+            //log::error!("Keychain access failed: {}", e);
+            return Err(ApplicationError::Keychain);
+            /*return Err(ApplicationError::ConfigurationError(
+                crate::ConfigurationError::KeychainError(std::io::Error::last_os_error()),
+            ));*/
         }
     }
 }

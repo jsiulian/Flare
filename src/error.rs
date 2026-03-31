@@ -47,6 +47,8 @@ pub enum ApplicationError {
     Libsecret(oo7::Error),
     #[cfg(target_os = "macos")]
     Keychain(security_framework::base::Error),
+    #[cfg(target_os = "windows")]
+    Keychain, //(security_framework::base::Error),
     Db(presage_store_sqlite::SqliteStoreError),
     UnauthorizedSignal,
     // MessageSenderError is pretty big, put into `Box` to move it to the heap.
@@ -154,8 +156,18 @@ impl std::fmt::Display for ApplicationError {
             }
             #[cfg(target_os = "macos")]
             ApplicationError::Keychain(_) => {
-                writeln!(f, "{}", gettext("The communication with the macOS Keychain failed."))
+                writeln!(
+                    f,
+                    "{}",
+                    gettext("The communication with the macOS Keychain failed.")
+                )
             }
+            #[cfg(target_os = "windows")]
+            ApplicationError::Keychain => writeln!(
+                f,
+                "{}",
+                gettext("The communication with the Windows Keychain failed.")
+            ),
             ApplicationError::Db(_) => writeln!(
                 f,
                 "{}",
@@ -208,6 +220,8 @@ impl ApplicationError {
             ApplicationError::Libsecret(e) => format!("{e:#?}"),
             #[cfg(target_os = "macos")]
             ApplicationError::Keychain(e) => format!("{e:#?}"),
+            #[cfg(target_os = "windows")]
+            ApplicationError::Keychain => gettext("Error with Windows keychain."),
             ApplicationError::Db(e) => format!("{e:#?}"),
             ApplicationError::UnauthorizedSignal => {
                 gettext("Please delete the database and relink the device.")
@@ -246,6 +260,8 @@ impl ApplicationError {
             ApplicationError::Libsecret(_) => false,
             #[cfg(target_os = "macos")]
             ApplicationError::Keychain(_) => false,
+            #[cfg(target_os = "windows")]
+            ApplicationError::Keychain => false,
             ApplicationError::Db(_) => true,
             ApplicationError::UnauthorizedSignal => false,
             ApplicationError::SendFailed(_) => true,
