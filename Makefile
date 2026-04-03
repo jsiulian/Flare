@@ -4,15 +4,19 @@
 #   make                  — Linux release build
 #   make macos            — macOS release build (GTK)
 #   make native           — macOS native cacao build (no GTK needed)
+#   make windows          — Windows/MSYS2 release build (GTK)
 #   make debug            — Linux debug build
 #   make debug macos      — macOS GTK debug build
 #   make debug native     — macOS native cacao debug build
+#   make debug windows    — Windows/MSYS2 GTK debug build
 #   make run              — Linux release build + launch
 #   make run macos        — macOS GTK release build + launch
 #   make run native       — macOS native cacao build + launch
+#   make run windows      — Windows/MSYS2 release build + launch
 #   make debug run        — Linux debug build + launch
 #   make debug run macos  — macOS GTK debug build + launch
 #   make debug run native — macOS native cacao debug build + launch
+#   make debug run windows — Windows/MSYS2 GTK debug build + launch
 #   make app              — macOS release build + Finder-launchable .app bundle
 #   make debug app        — same with a debug binary
 #   make clean            — Remove all build artifacts and logs
@@ -40,8 +44,15 @@ MESON_BUILD      = meson compile -C $(BUILD_DIR)
 # macOS: gettext headers are not on the default pkg-config path
 MACOS_PKG_CONFIG = PKG_CONFIG_PATH="$$(brew --prefix gettext)/lib/pkgconfig:$$PKG_CONFIG_PATH"
 
+# Windows/MSYS2: ensure MinGW64 paths are set
+WINDOWS_ENV      = PKG_CONFIG_PATH="/mingw64/lib/pkgconfig:$$PKG_CONFIG_PATH" \
+                   PATH="/mingw64/bin:$$PATH"
+
 RUN_CMD          = GSETTINGS_SCHEMA_DIR=$(BUILD_DIR)/data/ RUST_LOG=flare=trace \
                    $(BUILD_DIR)/target/$(RUST_TARGET)/flare
+
+WINDOWS_RUN_CMD  = GSETTINGS_SCHEMA_DIR=$(BUILD_DIR)/data/ RUST_LOG=flare=trace \
+                   $(BUILD_DIR)/target/$(RUST_TARGET)/flare.exe
 
 # Native cacao GUI (macOS only)
 NATIVE_CARGO_BUILD = cargo build --features cacao-gui
@@ -53,7 +64,7 @@ NATIVE_BINARY = target/release/flare
 endif
 NATIVE_RUN_CMD = RUST_LOG=flare=trace $(NATIVE_BINARY)
 
-.PHONY: all linux macos native debug run app clean check-deps
+.PHONY: all linux macos native windows debug run app clean check-deps check-deps-windows
 
 # Dependency check — runs before every build target (not clean)
 check-deps:
@@ -68,9 +79,17 @@ check-deps:
 	   [ -d "$$HOME/.local/share/icons/Adwaita" ]; } || \
 	  { echo "ERROR: adwaita-icon-theme not found. Install: brew install adwaita-icon-theme  OR  sudo apt install adwaita-icon-theme"; exit 1; }
 
+check-deps-windows:
+	@command -v meson    >/dev/null 2>&1 || { echo "ERROR: meson not found. Run: pacman -S mingw-w64-x86_64-meson"; exit 1; }
+	@command -v cargo    >/dev/null 2>&1 || { echo "ERROR: cargo not found. Run: pacman -S mingw-w64-x86_64-rust"; exit 1; }
+	@command -v blueprint-compiler >/dev/null 2>&1 || { echo "ERROR: blueprint-compiler not found. Run: pacman -S mingw-w64-x86_64-blueprint-compiler"; exit 1; }
+	@pkg-config --exists gtk4         2>/dev/null || { echo "ERROR: gtk4 not found. Run: pacman -S mingw-w64-x86_64-gtk4"; exit 1; }
+	@pkg-config --exists libadwaita-1 2>/dev/null || { echo "ERROR: libadwaita not found. Run: pacman -S mingw-w64-x86_64-libadwaita"; exit 1; }
+	@pkg-config --exists gtksourceview-5 2>/dev/null || { echo "ERROR: gtksourceview-5 not found. Run: pacman -S mingw-w64-x86_64-gtksourceview5"; exit 1; }
+
 all: check-deps linux
 
-# linux/macos skip their build when 'run' is in goals — run handles it
+# linux/macos/windows skip their build when 'run' is in goals — run handles it
 linux: check-deps
 ifeq ($(filter run,$(MAKECMDGOALS)),)
 	$(MESON_SETUP)
@@ -83,6 +102,14 @@ macos: check-deps
 ifeq ($(filter run,$(MAKECMDGOALS)),)
 	$(MACOS_PKG_CONFIG) $(MESON_SETUP)
 	$(MACOS_PKG_CONFIG) $(MESON_BUILD)
+else
+	@:
+endif
+
+windows: check-deps-windows
+ifeq ($(filter run,$(MAKECMDGOALS)),)
+	$(WINDOWS_ENV) $(MESON_SETUP)
+	$(WINDOWS_ENV) $(MESON_BUILD)
 else
 	@:
 endif
@@ -102,7 +129,7 @@ check-deps-native:
 debug: check-deps
 # Treat `app` and `native` as platform goals too so `make debug app` doesn't
 # fall back to the linux build path.
-ifeq ($(filter linux macos native run app,$(MAKECMDGOALS)),)
+ifeq ($(filter linux macos native windows run app,$(MAKECMDGOALS)),)
 	$(MAKE) --no-print-directory linux PROFILE=$(PROFILE)
 else
 	@:
@@ -117,6 +144,10 @@ else ifeq ($(filter macos,$(MAKECMDGOALS)),macos)
 	$(MACOS_PKG_CONFIG) $(MESON_SETUP)
 	$(MACOS_PKG_CONFIG) $(MESON_BUILD)
 	$(RUN_CMD)
+else ifeq ($(filter windows,$(MAKECMDGOALS)),windows)
+	$(WINDOWS_ENV) $(MESON_SETUP)
+	$(WINDOWS_ENV) $(MESON_BUILD)
+	$(WINDOWS_RUN_CMD)
 else
 	$(MESON_SETUP)
 	$(MESON_BUILD)
